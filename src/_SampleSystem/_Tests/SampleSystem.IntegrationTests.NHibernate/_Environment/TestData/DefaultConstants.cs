@@ -1,4 +1,4 @@
-﻿namespace SampleSystem.IntegrationTests.__Support.TestData;
+﻿namespace SampleSystem.IntegrationTests._Environment.TestData;
 
 public static class DefaultConstants
 {

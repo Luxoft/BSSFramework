@@ -4,7 +4,7 @@ using Framework.AutomationCore.RootServiceProviderContainer;
 using Framework.Core;
 using Framework.Infrastructure.JsonConverter;
 
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 

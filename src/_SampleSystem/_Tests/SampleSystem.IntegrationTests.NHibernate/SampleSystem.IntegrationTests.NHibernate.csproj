@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Anch.Testing.Xunit" />
     <PackageReference Include="FluentMigrator" />
     <PackageReference Include="FluentMigrator.Extensions.SqlServer" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
@@ -17,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="__Support\*\**\*.sql">
+    <Content Include="_Environment\*\**\*.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -29,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="appsettings.json">
+    <None Update="testAppSettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageVersion Include="Anch.Testing" Version="3.4.1" />
     <PackageVersion Include="Anch.Testing.Database" Version="3.4.1" />
+    <PackageVersion Include="Anch.Testing.Xunit" Version="3.4.1" />
     <PackageVersion Include="CommandLineParser" Version="2.9.1" />
     <PackageVersion Include="Dapper" Version="2.1.72" />
     <PackageVersion Include="Dapper.Contrib" Version="2.0.78" />

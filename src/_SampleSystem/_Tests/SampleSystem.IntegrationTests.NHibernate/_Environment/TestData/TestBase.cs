@@ -6,11 +6,11 @@ using Framework.AutomationCore.ServiceEnvironment;
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.BLL;
-using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
-using SampleSystem.IntegrationTests.__Support.WebApi;
+using SampleSystem.IntegrationTests._Environment.TestData.Helpers;
+using SampleSystem.IntegrationTests._Environment.WebApi;
 using SampleSystem.WebApiCore.Controllers.Main;
 
-namespace SampleSystem.IntegrationTests.__Support.TestData;
+namespace SampleSystem.IntegrationTests._Environment.TestData;
 
 public class TestBase(IServiceProvider rootServiceProvider) : IntegrationTestBase<ISampleSystemBLLContext>(rootServiceProvider), IAsyncLifetime
 {

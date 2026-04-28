@@ -5,13 +5,14 @@ using Framework.Core;
 using Framework.Database;
 
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 
 using Anch.SecuritySystem;
 using Anch.SecuritySystem.Validation;
 
 using Framework.AutomationCore.RootServiceProviderContainer;
+
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 

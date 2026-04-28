@@ -5,7 +5,7 @@ using Framework.Notification.Domain;
 
 using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.Models.Custom;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests.Subscriptions_Metadata;
 

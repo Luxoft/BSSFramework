@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.Domain.Employee;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.Security;
 
 namespace SampleSystem.IntegrationTests;

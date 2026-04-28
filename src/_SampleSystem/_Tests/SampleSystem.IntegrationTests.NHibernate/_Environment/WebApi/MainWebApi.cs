@@ -3,7 +3,7 @@ using Framework.AutomationCore.WebApi;
 
 using SampleSystem.WebApiCore.Controllers.Main;
 
-namespace SampleSystem.IntegrationTests.__Support.WebApi;
+namespace SampleSystem.IntegrationTests._Environment.WebApi;
 
 public class MainWebApi(IServiceProvider serviceProvider) : WebApiBase(serviceProvider)
 {

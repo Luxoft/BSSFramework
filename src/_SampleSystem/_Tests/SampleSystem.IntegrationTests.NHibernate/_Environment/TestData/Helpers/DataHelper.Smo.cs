@@ -2,7 +2,7 @@
 
 using Microsoft.SqlServer.Management.Smo;
 
-namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers;
+namespace SampleSystem.IntegrationTests._Environment.TestData.Helpers;
 
 public partial class DataHelper
 {

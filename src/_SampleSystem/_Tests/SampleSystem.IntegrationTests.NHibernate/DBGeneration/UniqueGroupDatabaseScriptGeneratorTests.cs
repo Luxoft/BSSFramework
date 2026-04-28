@@ -4,7 +4,7 @@ using Framework.Database.NHibernate.DBGenerator;
 using Microsoft.SqlServer.Management.Smo;
 
 using SampleSystem.DbGenerate.NHibernate;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 using Index = Microsoft.SqlServer.Management.Smo.Index;
 

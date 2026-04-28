@@ -5,7 +5,7 @@ using Framework.Database;
 using Anch.SecuritySystem.UserSource;
 
 using SampleSystem.Domain.Employee;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 

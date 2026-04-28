@@ -1,7 +1,7 @@
 ﻿using Framework.AutomationCore.RootServiceProviderContainer;
 
 using SampleSystem.Domain.EnversBug1676;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 

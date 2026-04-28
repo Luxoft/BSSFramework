@@ -6,7 +6,7 @@ using Framework.Application;
 using Framework.Database;
 
 using SampleSystem.Domain.Employee;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 

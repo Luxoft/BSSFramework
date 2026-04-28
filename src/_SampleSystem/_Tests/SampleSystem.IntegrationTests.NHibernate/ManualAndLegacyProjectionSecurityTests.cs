@@ -1,7 +1,7 @@
 ﻿using SampleSystem.Domain.Projections;
 using SampleSystem.Generated.DTO;
 using SampleSystem.Domain.ManualProjections;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
 

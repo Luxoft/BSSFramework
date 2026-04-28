@@ -1,4 +1,6 @@
 ﻿using Anch.Core;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.Testing;
 
 using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Directories;
@@ -6,10 +8,7 @@ using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.MU;
 using SampleSystem.Generated.DTO;
 
-using Anch.SecuritySystem;
-using Anch.SecuritySystem.Testing;
-
-namespace SampleSystem.IntegrationTests.__Support.TestData;
+namespace SampleSystem.IntegrationTests._Environment.TestData;
 
 public class SampleSystemTestPermission : TestPermission
 {

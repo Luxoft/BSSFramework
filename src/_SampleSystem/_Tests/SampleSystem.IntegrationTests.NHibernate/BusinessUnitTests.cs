@@ -11,7 +11,7 @@ using Framework.AutomationCore.Utils;
 using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Enums;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
 

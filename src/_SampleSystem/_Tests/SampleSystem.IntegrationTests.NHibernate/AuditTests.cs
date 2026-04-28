@@ -6,7 +6,7 @@ using Framework.Database.Domain;
 using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.WebApiCore.Controllers.Audit;
 using SampleSystem.WebApiCore.Controllers.Main;
 

@@ -14,7 +14,7 @@ using SampleSystem.Domain.MU;
 using SampleSystem.Generated.DTO;
 using SampleSystem.WebApiCore.Controllers.Main;
 
-namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers;
+namespace SampleSystem.IntegrationTests._Environment.TestData.Helpers;
 
 public partial class DataHelper
 {

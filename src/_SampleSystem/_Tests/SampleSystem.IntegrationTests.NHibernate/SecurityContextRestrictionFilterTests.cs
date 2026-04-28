@@ -3,11 +3,12 @@ using Framework.Database;
 
 using SampleSystem.Domain.BU;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 
 using Anch.SecuritySystem;
 using Anch.SecuritySystem.Validation;
+
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 

@@ -3,7 +3,7 @@
 using Framework.Core;
 
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
 

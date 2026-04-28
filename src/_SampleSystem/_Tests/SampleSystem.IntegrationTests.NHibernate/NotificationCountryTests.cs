@@ -4,7 +4,7 @@ using Framework.Database;
 
 using SampleSystem.Domain.Directories;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 

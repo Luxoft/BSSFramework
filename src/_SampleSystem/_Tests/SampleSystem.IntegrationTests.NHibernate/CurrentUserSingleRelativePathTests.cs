@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Employee;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 

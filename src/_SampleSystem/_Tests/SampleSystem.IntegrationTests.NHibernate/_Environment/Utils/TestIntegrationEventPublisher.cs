@@ -1,6 +1,6 @@
 ﻿using Bss.Platform.Events.Abstractions;
 
-namespace SampleSystem.IntegrationTests.__Support.Utils;
+namespace SampleSystem.IntegrationTests._Environment.Utils;
 
 public class TestIntegrationEventPublisher : IIntegrationEventPublisher
 {

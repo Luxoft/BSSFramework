@@ -1,6 +1,6 @@
 ﻿using Framework.AutomationCore.RootServiceProviderContainer;
 
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests.NH;
 

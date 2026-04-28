@@ -6,7 +6,7 @@ using Framework.Core;
 
 using SampleSystem.Domain.Directories;
 using SampleSystem.Domain.Projections;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 

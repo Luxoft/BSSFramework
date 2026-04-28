@@ -8,9 +8,10 @@ using Anch.SecuritySystem;
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.Domain.Employee;
-using SampleSystem.IntegrationTests.__Support.TestData;
 
 using Anch.SecuritySystem.AccessDenied;
+
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 

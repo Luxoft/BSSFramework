@@ -2,7 +2,7 @@
 using Framework.Database;
 
 using SampleSystem.Domain.Directories;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel;
 
 namespace SampleSystem.IntegrationTests;

@@ -7,11 +7,12 @@ using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.MU;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 
 using Anch.SecuritySystem.Notification;
 using Anch.SecuritySystem.Notification.Domain;
+
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 

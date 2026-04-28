@@ -5,10 +5,11 @@ using Framework.Database;
 using Anch.SecuritySystem;
 
 using SampleSystem.Domain.Employee;
-using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 
 using Anch.SecuritySystem.AccessDenied;
+
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 

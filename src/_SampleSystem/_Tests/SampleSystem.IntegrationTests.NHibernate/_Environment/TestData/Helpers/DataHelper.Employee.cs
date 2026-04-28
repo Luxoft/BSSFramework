@@ -1,7 +1,8 @@
-﻿using Framework.AutomationCore.RootServiceProviderContainer;
+﻿using Anch.SecuritySystem.UserSource;
+
+using Framework.AutomationCore.RootServiceProviderContainer;
 using Framework.AutomationCore.Utils;
 using Framework.Core;
-
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,9 +10,7 @@ using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;
 
-using Anch.SecuritySystem.UserSource;
-
-namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers;
+namespace SampleSystem.IntegrationTests._Environment.TestData.Helpers;
 
 public partial class DataHelper
 {

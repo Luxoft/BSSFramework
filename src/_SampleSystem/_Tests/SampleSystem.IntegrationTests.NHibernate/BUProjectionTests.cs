@@ -3,7 +3,7 @@ using Framework.Database;
 
 using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Inline;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
 
 namespace SampleSystem.IntegrationTests;

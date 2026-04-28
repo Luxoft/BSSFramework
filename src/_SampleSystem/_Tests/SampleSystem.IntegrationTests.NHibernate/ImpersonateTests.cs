@@ -1,4 +1,4 @@
-﻿using SampleSystem.IntegrationTests.__Support.TestData;
+﻿using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;

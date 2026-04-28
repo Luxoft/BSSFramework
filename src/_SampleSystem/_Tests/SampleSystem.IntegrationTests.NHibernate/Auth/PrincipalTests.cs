@@ -1,11 +1,12 @@
 ﻿using Framework.Authorization.Generated.DTO;
 using Framework.BLL.Exceptions;
 
-using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 using Anch.SecuritySystem;
+
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 using DelegateToItemModelStrictDTO = Framework.Authorization.Generated.DTO.DelegateToItemModelStrictDTO;
 

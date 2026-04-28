@@ -1,8 +1,8 @@
 ﻿using Framework.AutomationCore.WebApi;
 
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
-namespace SampleSystem.IntegrationTests.__Support.WebApi;
+namespace SampleSystem.IntegrationTests._Environment.WebApi;
 
 public class IntegrationWebApi(IServiceProvider serviceProvider) : IntegrationWebApiBase(serviceProvider)
 {

@@ -4,7 +4,7 @@ using Anch.SecuritySystem;
 
 using SampleSystem.Domain.IntegrationVersions;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.WebApiCore.Controllers.Integration;
 
 namespace SampleSystem.IntegrationTests;

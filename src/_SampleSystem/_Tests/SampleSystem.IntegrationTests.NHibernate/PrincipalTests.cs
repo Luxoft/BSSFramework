@@ -3,9 +3,9 @@ using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
 using Framework.Core;
 
-using SampleSystem.IntegrationTests.__Support.TestData;
-
 using Anch.SecuritySystem;
+
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;

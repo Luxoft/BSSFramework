@@ -10,10 +10,11 @@ using SampleSystem.Domain.Directories;
 using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.MU;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 
 using Anch.SecuritySystem;
+
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 

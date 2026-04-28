@@ -1,30 +1,31 @@
-﻿using Framework.AutomationCore.Settings;
+﻿using Anch.Core;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.Services;
+using Anch.SecuritySystem.Testing;
+
+using Framework.AutomationCore.Settings;
 
 using Microsoft.Extensions.Options;
 
 using SampleSystem.Domain.Enums;
 using SampleSystem.Domain.Inline;
-using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
+using SampleSystem.IntegrationTests._Environment.TestData.Helpers;
 using SampleSystem.ServiceEnvironment;
 
-using Anch.SecuritySystem;
-using Anch.SecuritySystem.Services;
-using Anch.SecuritySystem.Testing;
-
-namespace SampleSystem.IntegrationTests.__Support.TestData;
+namespace SampleSystem.IntegrationTests._Environment.TestData;
 
 public class TestDataInitializer(
     SampleSystemInitializer mainInitializer,
     RootAuthManager authManager,
     DataHelper dataHelper,
     IOptions<AutomationFrameworkSettings> settings,
-    IRootImpersonateService rootImpersonateService)
+    IRootImpersonateService rootImpersonateService) : IInitializer
 {
-    public async Task InitializeAsync(CancellationToken cancellationToken) =>
+    public async Task Initialize(CancellationToken cancellationToken) =>
         await rootImpersonateService
-            .WithImpersonateAsync(nameof(TestDataInitializer), async () => await this.InitializeAsyncInternal(cancellationToken));
+            .WithImpersonateAsync(nameof(TestDataInitializer), async () => await this.InitializeInternal(cancellationToken));
 
-    public async Task InitializeAsyncInternal(CancellationToken cancellationToken)
+    public async Task InitializeInternal(CancellationToken cancellationToken)
     {
         await mainInitializer.InitializeAsync(cancellationToken);
 

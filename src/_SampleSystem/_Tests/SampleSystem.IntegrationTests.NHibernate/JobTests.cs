@@ -3,7 +3,7 @@ using Framework.AutomationCore.ServiceEnvironment;
 using Framework.Database;
 
 using SampleSystem.Domain;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.ServiceEnvironment.Jobs;
 
 namespace SampleSystem.IntegrationTests;

@@ -32,19 +32,39 @@ namespace SampleSystem.IntegrationTests._Environment;
 
 public class NHibTestEnvironment : ITestEnvironment
 {
-    public IServiceProvider BuildServiceProvider(IServiceCollection services)
+    private readonly IConfiguration configuration;
+
+    private readonly AutomationFrameworkSettings settings = new();
+
+    private readonly TestDatabaseSettings databaseSettings;
+
+    public NHibTestEnvironment()
     {
-        var configuration = new ConfigurationBuilder().AddJsonFile("testAppSettings.json", false, true).Build();
+        var settingsFileName = "testAppSettings.json";
 
-        var automationFrameworkSettings = new AutomationFrameworkSettings();
-        configuration.Bind(nameof(AutomationFrameworkSettings), automationFrameworkSettings);
+        this.configuration = new ConfigurationBuilder()
+                             .SetBasePath(Directory.GetCurrentDirectory())
+                             .AddJsonFile(settingsFileName, false, true)
+                             .AddJsonFile($"{Environment.MachineName}.{settingsFileName}", true)
+                             .AddEnvironmentVariables(nameof(SampleSystem)).Build();
 
-        var defaultConnectionString = configuration.GetConnectionString("DefaultConnection")
+        this.configuration.Bind(this.settings);
+
+        var defaultConnectionString = this.configuration.GetConnectionString("DefaultConnection")
                                       ?? throw new InvalidOperationException("DefaultConnection string is not configured.");
 
-        return services.AddSingleton<IConfiguration>(configuration)
+        this.databaseSettings = new TestDatabaseSettings { InitMode = this.settings.DatabaseInitMode, DefaultConnectionString = new(defaultConnectionString) };
+    }
 
-                       .AddGeneralDependencyInjection(configuration, new HostingEnvironment(), s => s.AddExtensions(new SampleSystemNHibernateExtension()))
+    public bool AllowParallelization => this.settings.TestsParallelize;
+
+    public IServiceProvider BuildServiceProvider(IServiceCollection services)
+    {
+        services.AddOptions<AutomationFrameworkSettings>();
+
+        return services.AddSingleton(this.configuration)
+
+                       .AddGeneralDependencyInjection(this.configuration, new HostingEnvironment(), s => s.AddExtensions(new SampleSystemNHibernateExtension()))
 
                        .AddSingleton<SampleSystemInitializer>()
 
@@ -66,14 +86,9 @@ public class NHibTestEnvironment : ITestEnvironment
                                                   .SetProvider<MssqlDatabaseTestingProvider>()
                                                   .SetEmptySchemaInitializer<EmptySchemaInitializer>()
                                                   .SetTestDataInitializer<TestDataInitializer>()
-                                                  .SetSettings(
-                                                      new TestDatabaseSettings
-                                                      {
-                                                          InitMode = automationFrameworkSettings.DatabaseInitMode,
-                                                          DefaultConnectionString = new(defaultConnectionString)
-                                                      })
+                                                  .SetSettings(this.databaseSettings)
                                                   .RebindActualConnection<IDefaultConnectionStringSource>(connectionString =>
-                                                      new ManualDefaultConnectionStringSource(connectionString.Value)))
+                                                          new ManualDefaultConnectionStringSource(connectionString.Value)))
 
                        .AddValidator<DuplicateServiceUsageValidator>()
                        .BuildServiceProvider(new ServiceProviderOptions { ValidateScopes = true, ValidateOnBuild = true });

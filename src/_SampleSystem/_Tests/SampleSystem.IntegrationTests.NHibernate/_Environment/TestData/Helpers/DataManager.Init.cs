@@ -4,7 +4,7 @@ using SampleSystem.BLL;
 
 namespace SampleSystem.IntegrationTests._Environment.TestData.Helpers;
 
-public partial class DataHelper(IServiceProvider rootServiceProvider) : IRootServiceProviderContainer<ISampleSystemBLLContext>
+public partial class DataManager(IServiceProvider rootServiceProvider) : IRootServiceProviderContainer<ISampleSystemBLLContext>
 {
     private Guid GetGuid(Guid? id)
     {

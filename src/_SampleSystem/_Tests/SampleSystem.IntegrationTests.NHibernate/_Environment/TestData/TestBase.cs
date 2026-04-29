@@ -18,7 +18,7 @@ public class TestBase(IServiceProvider rootServiceProvider) : IntegrationTestBas
 
     public MainAuditWebApi MainAuditWebApi => new(this.RootServiceProvider);
 
-    protected DataHelper DataHelper => this.RootServiceProvider.GetRequiredService<DataHelper>();
+    protected DataManager DataManager => this.RootServiceProvider.GetRequiredService<DataManager>();
 
     protected RootAuthManager AuthManager => this.RootServiceProvider.GetRequiredService<RootAuthManager>();
 

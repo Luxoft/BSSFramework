@@ -29,11 +29,11 @@ public class SecurityContextRestrictionFilterTests(IServiceProvider rootServiceP
 
     protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
-        this.employee = this.DataHelper.SaveEmployee(login: this.employeeLogin);
+        this.employee = this.DataManager.SaveEmployee(login: this.employeeLogin);
 
-        this.defaultBu = this.DataHelper.SaveBusinessUnit();
+        this.defaultBu = this.DataManager.SaveBusinessUnit();
 
-        this.buWithAllowedFilter = this.DataHelper.SaveBusinessUnit(allowedForFilterRole: true);
+        this.buWithAllowedFilter = this.DataManager.SaveBusinessUnit(allowedForFilterRole: true);
     }
 
     [Fact]

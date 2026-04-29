@@ -36,15 +36,15 @@ public class ExtraQueryableSecurityPathTests(IServiceProvider rootServiceProvide
 
     protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
-        this.bu1Ident = this.DataHelper.SaveBusinessUnit();
+        this.bu1Ident = this.DataManager.SaveBusinessUnit();
 
-        this.bu2Ident = this.DataHelper.SaveBusinessUnit();
+        this.bu2Ident = this.DataManager.SaveBusinessUnit();
 
-        this.loc1Ident = this.DataHelper.SaveLocation(name: "Loc 1 (ExtraQueryableSecurityPathTests)");
+        this.loc1Ident = this.DataManager.SaveLocation(name: "Loc 1 (ExtraQueryableSecurityPathTests)");
 
-        this.loc2Ident = this.DataHelper.SaveLocation(name: "Loc 2 (ExtraQueryableSecurityPathTests)");
+        this.loc2Ident = this.DataManager.SaveLocation(name: "Loc 2 (ExtraQueryableSecurityPathTests)");
 
-        this.TestEmployee = this.DataHelper.SaveEmployee(login: "EQSP SecurityTester");
+        this.TestEmployee = this.DataManager.SaveEmployee(login: "EQSP SecurityTester");
 
         await this.AuthManager.For(this.TestEmployee.Id).SetRoleAsync(
             [
@@ -53,11 +53,11 @@ public class ExtraQueryableSecurityPathTests(IServiceProvider rootServiceProvide
             ],
             ct);
 
-        this.TestEmp1 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu1Ident, location: this.loc1Ident);
+        this.TestEmp1 = this.DataManager.SaveEmployee(coreBusinessUnit: this.bu1Ident, location: this.loc1Ident);
 
-        this.TestEmp2 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu2Ident, location: this.loc1Ident);
+        this.TestEmp2 = this.DataManager.SaveEmployee(coreBusinessUnit: this.bu2Ident, location: this.loc1Ident);
 
-        this.TestEmp3 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu2Ident, location: this.loc2Ident);
+        this.TestEmp3 = this.DataManager.SaveEmployee(coreBusinessUnit: this.bu2Ident, location: this.loc2Ident);
     }
 
     [Fact]

@@ -22,7 +22,7 @@ public class PrincipalTests(IServiceProvider rootServiceProvider) : TestBase(roo
     {
         // Arrange
         var authorizationController = this.GetAuthControllerEvaluator();
-        var currentUser = this.DataHelper.GetCurrentEmployee();
+        var currentUser = this.DataManager.GetCurrentEmployee();
 
         var businessRoleIdentity = authorizationController.Evaluate(c => c.GetSimpleBusinessRoleByName(SampleSystemSecurityRole.SecretariatNotification.Name)).Identity;
 
@@ -45,7 +45,7 @@ public class PrincipalTests(IServiceProvider rootServiceProvider) : TestBase(roo
     {
         // Arrange
         var authorizationController = this.GetAuthControllerEvaluator();
-        var currentUser = this.DataHelper.GetCurrentEmployee();
+        var currentUser = this.DataManager.GetCurrentEmployee();
 
         var businessRoleIdentity = authorizationController.Evaluate(c => c.GetSimpleBusinessRoleByName(SampleSystemSecurityRole.SecretariatNotification.Name)).Identity;
 
@@ -71,7 +71,7 @@ public class PrincipalTests(IServiceProvider rootServiceProvider) : TestBase(roo
     public void SavePrincipal_CheckPrincipalChanges()
     {
         // Arrange
-        var currentUser = this.DataHelper.GetCurrentEmployee();
+        var currentUser = this.DataManager.GetCurrentEmployee();
 
         var principalStrict = new PrincipalStrictDTO { Name = Name };
         this.GetAuthControllerEvaluator().Evaluate(c => c.SavePrincipal(principalStrict));
@@ -94,7 +94,7 @@ public class PrincipalTests(IServiceProvider rootServiceProvider) : TestBase(roo
     public void PermissionDelegate_CheckChanges()
     {
         // Arrange
-        var currentUser = this.DataHelper.GetCurrentEmployee();
+        var currentUser = this.DataManager.GetCurrentEmployee();
 
         var businessRoleIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRoleByName(SampleSystemSecurityRole.SecretariatNotification.Name)).Identity;
 

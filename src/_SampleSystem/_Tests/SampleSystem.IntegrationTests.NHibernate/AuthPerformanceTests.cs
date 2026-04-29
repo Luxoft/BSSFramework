@@ -23,13 +23,13 @@ public class AuthPerformanceTests(IServiceProvider rootServiceProvider) : TestBa
 
     protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
-        var genLoc = Enumerable.Range(0, Limit).ToList(i => this.DataHelper.SaveLocation());
+        var genLoc = Enumerable.Range(0, Limit).ToList(i => this.DataManager.SaveLocation());
 
-        var genEmployee = Enumerable.Range(0, Limit).ToList(i => this.DataHelper.SaveEmployee());
+        var genEmployee = Enumerable.Range(0, Limit).ToList(i => this.DataManager.SaveEmployee());
 
-        var genBu = Enumerable.Range(0, Limit).ToList(i => this.DataHelper.SaveBusinessUnit());
+        var genBu = Enumerable.Range(0, Limit).ToList(i => this.DataManager.SaveBusinessUnit());
 
-        var genMbu = Enumerable.Range(0, Limit).ToList(i => this.DataHelper.SaveManagementUnit());
+        var genMbu = Enumerable.Range(0, Limit).ToList(i => this.DataManager.SaveManagementUnit());
 
         var genObjects = this.EvaluateWrite(ctx =>
                                             {

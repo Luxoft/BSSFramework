@@ -23,9 +23,9 @@ public class SecurityRuleTests(IServiceProvider rootServiceProvider) : TestBase(
         // Arrange
         var testSecurityRule = SecurityRole.Administrator.Except(DomainSecurityRule.CurrentUser);
 
-        var testOtherEmployeeId = this.DataHelper.SaveEmployee().Id;
+        var testOtherEmployeeId = this.DataManager.SaveEmployee().Id;
 
-        var currentEmployeeId = this.DataHelper.GetCurrentEmployee().Id;
+        var currentEmployeeId = this.DataManager.GetCurrentEmployee().Id;
 
         var testObjectIdents = await this.EvaluateAsync(
             DBSessionMode.Write,

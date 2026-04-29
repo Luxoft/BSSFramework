@@ -16,7 +16,7 @@ public class CurrentUserSourceTests(IServiceProvider rootServiceProvider) : Test
     {
         // Arrange
         var randomName = TextRandomizer.RandomString(10);
-        var employeeId = this.DataHelper.SaveEmployee(login: randomName).Id;
+        var employeeId = this.DataManager.SaveEmployee(login: randomName).Id;
 
         // Act
         var result = this.Evaluate(

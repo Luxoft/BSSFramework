@@ -34,7 +34,7 @@ public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(root
          */
 
         // Arrange
-        this.DataHelper.SaveEmployee(Guid.NewGuid(), age: 10);
+        this.DataManager.SaveEmployee(Guid.NewGuid(), age: 10);
         CoreDatabaseUtil.ExecuteSql(
             this.DatabaseContext.Main.ConnectionString,
             "INSERT INTO [app].[Employee] ([id], age) VALUES (NewId(), null)");
@@ -54,7 +54,7 @@ public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(root
     {
         // Arrange
         var employeeController = this.MainWebApi.Employee;
-        var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
+        var employeeIdentity = this.DataManager.SaveEmployee(Guid.NewGuid());
 
         // Act
         var employees = employeeController.Evaluate(c => c.GetSimpleEmployees());
@@ -72,7 +72,7 @@ public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(root
 
         foreach (var pin in new[] { 123, 456 })
         {
-            var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
+            var employeeIdentity = this.DataManager.SaveEmployee(Guid.NewGuid());
             var employee = employeeController.Evaluate(c => c.GetSimpleEmployee(employeeIdentity));
             employee.Pin = pin;
             employeeController.Evaluate(c => c.SaveEmployee(employee.ToStrict()));
@@ -107,7 +107,7 @@ public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(root
 
         foreach (var item in idToPinMap)
         {
-            var employeeIdentity = this.DataHelper.SaveEmployee(item.Key);
+            var employeeIdentity = this.DataManager.SaveEmployee(item.Key);
             var employee = employeeController.Evaluate(c => c.GetSimpleEmployee(employeeIdentity));
             employee.Pin = item.Value;
             employeeController.Evaluate(c => c.SaveEmployee(employee.ToStrict()));
@@ -148,7 +148,7 @@ public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(root
 
         foreach (var item in idToPinMap)
         {
-            var employeeIdentity = this.DataHelper.SaveEmployee(item.Key);
+            var employeeIdentity = this.DataManager.SaveEmployee(item.Key);
             var employee = employeeController.Evaluate(c => c.GetSimpleEmployee(employeeIdentity));
             employee.Pin = item.Value;
             employeeController.Evaluate(c => c.SaveEmployee(employee.ToStrict()));
@@ -179,7 +179,7 @@ public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(root
 
         foreach (var pin in new[] { 123, 456 })
         {
-            var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
+            var employeeIdentity = this.DataManager.SaveEmployee(Guid.NewGuid());
             var employee = employeeController.Evaluate(c => c.GetSimpleEmployee(employeeIdentity));
             employee.Pin = pin;
             employeeController.Evaluate(c => c.SaveEmployee(employee.ToStrict()));
@@ -199,7 +199,7 @@ public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(root
     public void ForceDomainTypeEvent_ForceEmployeeSaveEvent_ContainsEventEmployee()
     {
         // Arrange
-        var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
+        var employeeIdentity = this.DataManager.SaveEmployee(Guid.NewGuid());
 
         var configFacade = this.GetConfigurationControllerEvaluator();
 
@@ -228,7 +228,7 @@ public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(root
         // Arrange
         var employeeController = this.MainWebApi.Employee;
 
-        var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
+        var employeeIdentity = this.DataManager.SaveEmployee(Guid.NewGuid());
         var employeeVersion = employeeController.Evaluate(c => c.GetSimpleEmployee(employeeIdentity)).Version;
 
         this.ClearNotifications();
@@ -264,7 +264,7 @@ public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(root
     {
         // Arrange
         var employeeController = this.MainWebApi.Employee;
-        var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
+        var employeeIdentity = this.DataManager.SaveEmployee(Guid.NewGuid());
         var employeeVersion = employeeController.Evaluate(c => c.GetSimpleEmployee(employeeIdentity)).Version;
 
         this.ClearNotifications();
@@ -298,7 +298,7 @@ public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(root
     {
         // Arrange
         var employeeController = this.MainWebApi.Employee;
-        var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
+        var employeeIdentity = this.DataManager.SaveEmployee(Guid.NewGuid());
         var employeeVersion = employeeController.Evaluate(c => c.GetSimpleEmployee(employeeIdentity)).Version;
 
         this.ClearIntegrationEvents();
@@ -329,7 +329,7 @@ public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(root
     {
         // Arrange
         var employeeController = this.MainWebApi.Employee;
-        var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
+        var employeeIdentity = this.DataManager.SaveEmployee(Guid.NewGuid());
 
         // Act
         var ex = Record.Exception(

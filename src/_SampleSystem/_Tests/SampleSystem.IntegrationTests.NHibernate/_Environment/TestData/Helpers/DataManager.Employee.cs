@@ -12,7 +12,7 @@ using SampleSystem.Generated.DTO;
 
 namespace SampleSystem.IntegrationTests._Environment.TestData.Helpers;
 
-public partial class DataHelper
+public partial class DataManager
 {
     public EmployeeIdentityDTO SaveEmployee(
             Guid? id = null,

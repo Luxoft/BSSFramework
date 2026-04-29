@@ -13,7 +13,7 @@ public class ManagmentUnitFluentMappingTests(IServiceProvider rootServiceProvide
     public void CheckBusinessUnitSecondaryAccess_HasAccess()
     {
         // Arrange
-        var employeeId = this.DataHelper.SaveEmployee();
+        var employeeId = this.DataManager.SaveEmployee();
 
         this.Evaluate(
                       DBSessionMode.Write,

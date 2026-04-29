@@ -19,7 +19,7 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
         var generator = new DbGeneratorTest();
 
         var tableName = "Employee";
-        var table = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
+        var table = this.DataManager.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 
         var baseIndexName = "IX_Employee_coreBusinessUnitId";
         var newIndexName = "IX_Employee_coreBusinessUnitId_inc";
@@ -47,7 +47,7 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
                                                                   this.DatabaseContext.Main.Password),
                                 skipFrameworkDatabases: true);
 
-        var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
+        var changedTable = this.DataManager.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 
         // Assert
         var indexes = changedTable.Indexes.ToList();
@@ -62,7 +62,7 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
         var generator = new DbGeneratorTest();
 
         var tableName = "Employee";
-        var table = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
+        var table = this.DataManager.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 
         var ignoredIndexName = "IX_Employee_hRDepartmentId";
 
@@ -78,7 +78,7 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
                                                                   this.DatabaseContext.Main.Password),
                                 ignoredIndexes: [ignoredIndexName],
                                 skipFrameworkDatabases: true);
-        var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
+        var changedTable = this.DataManager.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 
         // Assert
         Assert.DoesNotContain(changedTable.Indexes, x => x.Name == ignoredIndexName);
@@ -99,7 +99,7 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
                                                                   this.DatabaseContext.Main.Password),
                                 skipFrameworkDatabases: true);
 
-        var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, "Employee");
+        var changedTable = this.DataManager.GetTable(this.DatabaseContext.Main.DatabaseName, "Employee");
 
         // Assert
         Assert.DoesNotContain(changedTable.Indexes, x => x.Name == "IX_ChildEntity_parentId");

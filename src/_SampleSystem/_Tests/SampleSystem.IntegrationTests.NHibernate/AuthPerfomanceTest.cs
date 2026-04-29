@@ -34,13 +34,13 @@ public class AuthPerformanceTest(IServiceProvider rootServiceProvider) : TestBas
 
     protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
-        this.fbuSource = [null, .. Enumerable.Range(0, Size - 1).Select(_ => (BusinessUnitIdentityDTO?)this.DataHelper.SaveBusinessUnit())];
+        this.fbuSource = [null, .. Enumerable.Range(0, Size - 1).Select(_ => (BusinessUnitIdentityDTO?)this.DataManager.SaveBusinessUnit())];
 
-        this.mbuSource = [null, .. Enumerable.Range(0, Size - 1).Select(_ => (ManagementUnitIdentityDTO?)this.DataHelper.SaveManagementUnit())];
+        this.mbuSource = [null, .. Enumerable.Range(0, Size - 1).Select(_ => (ManagementUnitIdentityDTO?)this.DataManager.SaveManagementUnit())];
 
-        this.locationSource = [null, .. Enumerable.Range(0, Size - 1).Select(_ => (LocationIdentityDTO?)this.DataHelper.SaveLocation())];
+        this.locationSource = [null, .. Enumerable.Range(0, Size - 1).Select(_ => (LocationIdentityDTO?)this.DataManager.SaveLocation())];
 
-        this.employeeSource = [null, this.DataHelper.SaveEmployee()];
+        this.employeeSource = [null, this.DataManager.SaveEmployee()];
 
         await this.AuthManager.For(PrincipalName).CreatePrincipalAsync(ct);
 

@@ -16,28 +16,28 @@ public class BUProjectionTests(IServiceProvider rootServiceProvider) : TestBase(
 
     protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
-        var buTypeId = this.DataHelper.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
+        var buTypeId = this.DataManager.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
 
-        var luxoftBuId = this.DataHelper.SaveBusinessUnit(
+        var luxoftBuId = this.DataManager.SaveBusinessUnit(
                                                           id: DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_ID,
                                                           name: DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_NAME,
                                                           type: buTypeId);
 
-        var costBuId = this.DataHelper.SaveBusinessUnit(
+        var costBuId = this.DataManager.SaveBusinessUnit(
                                                         id: DefaultConstants.BUSINESS_UNIT_PARENT_CC_ID,
                                                         name: DefaultConstants.BUSINESS_UNIT_PARENT_CC_NAME,
                                                         type: buTypeId,
                                                         parent: luxoftBuId);
 
-        var profitBuId = this.DataHelper.SaveBusinessUnit(
+        var profitBuId = this.DataManager.SaveBusinessUnit(
                                                           id: DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID,
                                                           name: DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME,
                                                           type: buTypeId,
                                                           parent: luxoftBuId);
 
-        var empId1 = this.DataHelper.SaveEmployee(login: TestEmployee0Login, coreBusinessUnit: costBuId, nameEng: new Fio { FirstName = "AA" });
-        var empId2 = this.DataHelper.SaveEmployee(login: TestEmployee1Login, coreBusinessUnit: costBuId, nameEng: new Fio { FirstName = "BB" });
-        var empId3 = this.DataHelper.SaveEmployee(login: TestEmployee2Login, coreBusinessUnit: profitBuId, nameEng: new Fio { FirstName = "CC" });
+        var empId1 = this.DataManager.SaveEmployee(login: TestEmployee0Login, coreBusinessUnit: costBuId, nameEng: new Fio { FirstName = "AA" });
+        var empId2 = this.DataManager.SaveEmployee(login: TestEmployee1Login, coreBusinessUnit: costBuId, nameEng: new Fio { FirstName = "BB" });
+        var empId3 = this.DataManager.SaveEmployee(login: TestEmployee2Login, coreBusinessUnit: profitBuId, nameEng: new Fio { FirstName = "CC" });
 
         this.Evaluate(
                       DBSessionMode.Write,

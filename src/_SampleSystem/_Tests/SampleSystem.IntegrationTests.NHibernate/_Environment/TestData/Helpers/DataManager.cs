@@ -16,7 +16,7 @@ using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests._Environment.TestData.Helpers;
 
-public partial class DataHelper
+public partial class DataManager
 {
     public CountryIdentityDTO SaveCountry(
             Guid? id = null,

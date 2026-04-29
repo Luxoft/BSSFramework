@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace SampleSystem.IntegrationTests._Environment.TestData.Helpers;
 
-public partial class DataHelper
+public partial class DataManager
 {
     public List<ITryResult<SubscriptionHeader>> ProcessSubscription<T>(T? prev, T? next)
 

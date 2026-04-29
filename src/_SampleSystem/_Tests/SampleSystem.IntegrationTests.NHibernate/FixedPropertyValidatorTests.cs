@@ -42,7 +42,7 @@ public class FixedPropertyValidatorTests(IServiceProvider rootServiceProvider) :
         var ex = Record.Exception(() =>
         {
             var dto = testImmutableObjController.Evaluate(c => c.GetRichTestImmutableObj(identity));
-            dto.TestImmutableRefProperty = this.DataHelper.GetCurrentEmployee();
+            dto.TestImmutableRefProperty = this.DataManager.GetCurrentEmployee();
             testImmutableObjController.Evaluate(c => c.SaveTestImmutableObj(dto.ToStrict()));
         });
 

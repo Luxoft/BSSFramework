@@ -18,29 +18,29 @@ public class EmployeeProjectionTests(IServiceProvider rootServiceProvider) : Tes
 
     protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
-        var buTypeId = this.DataHelper.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
+        var buTypeId = this.DataManager.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
 
-        var luxoftBuId = this.DataHelper.SaveBusinessUnit(
+        var luxoftBuId = this.DataManager.SaveBusinessUnit(
                                                           id: DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_ID,
                                                           name: DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_NAME,
                                                           type: buTypeId);
 
-        var costBuId = this.DataHelper.SaveBusinessUnit(
+        var costBuId = this.DataManager.SaveBusinessUnit(
                                                         id: DefaultConstants.BUSINESS_UNIT_PARENT_CC_ID,
                                                         name: DefaultConstants.BUSINESS_UNIT_PARENT_CC_NAME,
                                                         type: buTypeId,
                                                         parent: luxoftBuId);
 
-        var profitBuId = this.DataHelper.SaveBusinessUnit(
+        var profitBuId = this.DataManager.SaveBusinessUnit(
                                                           id: DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID,
                                                           name: DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME,
                                                           type: buTypeId,
                                                           parent: luxoftBuId);
 
-        this.DataHelper.SaveEmployee(login: ProjectionPrincipalName, coreBusinessUnit: costBuId);
-        this.DataHelper.SaveEmployee(login: TestEmployee1Login, coreBusinessUnit: costBuId);
-        this.DataHelper.SaveEmployee(login: TestEmployee2Login, coreBusinessUnit: profitBuId);
-        this.DataHelper.SaveEmployee(login: TestEmployee3Login, coreBusinessUnit: costBuId);
+        this.DataManager.SaveEmployee(login: ProjectionPrincipalName, coreBusinessUnit: costBuId);
+        this.DataManager.SaveEmployee(login: TestEmployee1Login, coreBusinessUnit: costBuId);
+        this.DataManager.SaveEmployee(login: TestEmployee2Login, coreBusinessUnit: profitBuId);
+        this.DataManager.SaveEmployee(login: TestEmployee3Login, coreBusinessUnit: costBuId);
 
         await this.AuthManager.For(ProjectionPrincipalName).SetRoleAsync(
             new SampleSystemTestPermission(
@@ -56,7 +56,7 @@ public class EmployeeProjectionTests(IServiceProvider rootServiceProvider) : Tes
     public void EmployeeProjectionTest()
     {
         // Arrange
-        var identity = this.DataHelper.SaveEmployee(Guid.NewGuid());
+        var identity = this.DataManager.SaveEmployee(Guid.NewGuid());
         var controller = this.GetControllerEvaluator<EmployeeQueryController>();
 
         // Act
@@ -122,7 +122,7 @@ public class EmployeeProjectionTests(IServiceProvider rootServiceProvider) : Tes
 
         foreach (var login in logins)
         {
-            this.DataHelper.SaveEmployee(login: login);
+            this.DataManager.SaveEmployee(login: login);
         }
 
         var expected = logins.Reverse().ToArray(Maybe.Return);

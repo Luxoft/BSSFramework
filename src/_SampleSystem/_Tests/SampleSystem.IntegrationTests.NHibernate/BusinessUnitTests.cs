@@ -29,20 +29,20 @@ public class BusinessUnitTests(IServiceProvider rootServiceProvider) : TestBase(
 
     protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
-        var buTypeId = this.DataHelper.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
+        var buTypeId = this.DataManager.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
 
-        var luxoftBuId = this.DataHelper.SaveBusinessUnit(
+        var luxoftBuId = this.DataManager.SaveBusinessUnit(
             id: DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_ID,
             name: DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_NAME,
             type: buTypeId);
 
-        this.DataHelper.SaveBusinessUnit(
+        this.DataManager.SaveBusinessUnit(
             id: DefaultConstants.BUSINESS_UNIT_PARENT_CC_ID,
             name: DefaultConstants.BUSINESS_UNIT_PARENT_CC_NAME,
             type: buTypeId,
             parent: luxoftBuId);
 
-        this.DataHelper.SaveBusinessUnit(
+        this.DataManager.SaveBusinessUnit(
             id: DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID,
             name: DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME,
             type: buTypeId,
@@ -114,8 +114,8 @@ public class BusinessUnitTests(IServiceProvider rootServiceProvider) : TestBase(
     public void LoadTreeWithMiddlePermission_RootParentLoadedWithViewMode()
     {
         // Arrange
-        var parentBu = this.DataHelper.SaveBusinessUnit(parentIsNeeded: false);
-        var childBu = this.DataHelper.SaveBusinessUnit(parent: parentBu);
+        var parentBu = this.DataManager.SaveBusinessUnit(parentIsNeeded: false);
+        var childBu = this.DataManager.SaveBusinessUnit(parent: parentBu);
 
         this.ClearIntegrationEvents();
 
@@ -162,9 +162,9 @@ public class BusinessUnitTests(IServiceProvider rootServiceProvider) : TestBase(
 
     private void CreateBigBuTree()
     {
-        var buAccountId = this.DataHelper.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_ACCOUNT_ID);
+        var buAccountId = this.DataManager.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_ACCOUNT_ID);
 
-        this.DataHelper
+        this.DataManager
             .EvaluateWrite(context =>
             {
                 var period = new Period(

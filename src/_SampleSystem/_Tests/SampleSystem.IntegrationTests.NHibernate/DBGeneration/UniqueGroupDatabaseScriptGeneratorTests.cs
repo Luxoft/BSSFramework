@@ -20,7 +20,7 @@ public class UniqueGroupDatabaseScriptGeneratorTests(IServiceProvider rootServic
 
         var tableName = "RoleRoleDegreeLink";
 
-        var table = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
+        var table = this.DataManager.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 
         var indexName = "unilink_RoleRoleDegreeLink";
 
@@ -42,7 +42,7 @@ public class UniqueGroupDatabaseScriptGeneratorTests(IServiceProvider rootServic
                 this.DatabaseContext.Main.Password),
             skipFrameworkDatabases: true);
 
-        var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
+        var changedTable = this.DataManager.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 
         //  changedTable.Indexes.Refresh();
         var indexes = changedTable.Indexes.ToList();

@@ -10,10 +10,10 @@ public class ValidationTests(IServiceProvider rootServiceProvider) : TestBase(ro
     public void ValidateByDB_ValidationException()
     {
         // Arrange
-        this.DataHelper.SaveEmployee("John Doe", "JD");
+        this.DataManager.SaveEmployee("John Doe", "JD");
 
         // Act
-        var ex = Record.Exception(() => this.DataHelper.SaveEmployee("John Doe", "JD"));
+        var ex = Record.Exception(() => this.DataManager.SaveEmployee("John Doe", "JD"));
 
         // Assert
         Assert.IsType<ValidationException>(ex);
@@ -25,7 +25,7 @@ public class ValidationTests(IServiceProvider rootServiceProvider) : TestBase(ro
         // Arrange
 
         // Act
-        var ex = Record.Exception(() => this.DataHelper.SaveEmployee(pin: 1234));
+        var ex = Record.Exception(() => this.DataManager.SaveEmployee(pin: 1234));
 
         // Assert
         var validationException = Assert.IsType<ValidationException>(ex);
@@ -37,10 +37,10 @@ public class ValidationTests(IServiceProvider rootServiceProvider) : TestBase(ro
     {
         // Arrange
         var externalId = new Random().Next();
-        this.DataHelper.SaveEmployee(externalId: externalId);
+        this.DataManager.SaveEmployee(externalId: externalId);
 
         // Act
-        var ex = Record.Exception(() => this.DataHelper.SaveEmployee(externalId: externalId));
+        var ex = Record.Exception(() => this.DataManager.SaveEmployee(externalId: externalId));
 
         // Assert
         var validationException = Assert.IsType<ValidationException>(ex);
@@ -52,10 +52,10 @@ public class ValidationTests(IServiceProvider rootServiceProvider) : TestBase(ro
     {
         // Arrange
         var pin = new Random().Next();
-        this.DataHelper.SaveEmployee(pin: pin);
+        this.DataManager.SaveEmployee(pin: pin);
 
         // Act
-        var ex = Record.Exception(() => this.DataHelper.SaveEmployee(pin: pin));
+        var ex = Record.Exception(() => this.DataManager.SaveEmployee(pin: pin));
 
         // Assert
         var validationException = Assert.IsType<ValidationException>(ex);
@@ -70,7 +70,7 @@ public class ValidationTests(IServiceProvider rootServiceProvider) : TestBase(ro
         var invalidDate = DateTime.MinValue;
 
         // Act
-        Action call = () => this.DataHelper.SaveEmployee(externalId: externalId, nonValidateVirtualProp: invalidDate);
+        Action call = () => this.DataManager.SaveEmployee(externalId: externalId, nonValidateVirtualProp: invalidDate);
 
         // Assert
         call();
@@ -84,7 +84,7 @@ public class ValidationTests(IServiceProvider rootServiceProvider) : TestBase(ro
         var invalidDate = DateTime.MinValue;
 
         // Act
-        var ex = Record.Exception(() => this.DataHelper.SaveEmployee(externalId: externalId, validateVirtualProp: invalidDate));
+        var ex = Record.Exception(() => this.DataManager.SaveEmployee(externalId: externalId, validateVirtualProp: invalidDate));
 
         // Assert
         var validationException = Assert.IsType<ValidationException>(ex);

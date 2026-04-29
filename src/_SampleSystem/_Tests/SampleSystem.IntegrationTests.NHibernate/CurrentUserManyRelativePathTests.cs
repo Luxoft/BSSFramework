@@ -19,7 +19,7 @@ public class CurrentUserManyRelativePathTests(IServiceProvider rootServiceProvid
     {
         this.testEmployeeIdents =
 
-            Enumerable.Range(0, 3).Select(_ => this.DataHelper.SaveEmployee().Id).ToArray();
+            Enumerable.Range(0, 3).Select(_ => this.DataManager.SaveEmployee().Id).ToArray();
 
         this.testObj = this.EvaluateWrite(
             ctx =>

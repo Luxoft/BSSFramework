@@ -19,7 +19,7 @@ public class NhibArrayContainsTest(IServiceProvider rootServiceProvider) : TestB
     {
         // Arrange
         var name = TextRandomizer.UniqueString("BusinessUnit");
-        var bu = this.DataHelper.SaveBusinessUnit(name: name);
+        var bu = this.DataManager.SaveBusinessUnit(name: name);
 
         var arr1 = new[] { bu.Id };
         var arr2 = new[] { BusinessUnitStatus.Current };

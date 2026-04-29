@@ -18,7 +18,7 @@ public class SecurityPathTests(IServiceProvider rootServiceProvider) : TestBase(
     public void SecurityPathWithContext_EmployeeWithoutContextRestrictions_EmployeeShouldHaveAccess()
     {
         // Arrange
-        var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
+        var employeeIdentity = this.DataManager.SaveEmployee(Guid.NewGuid());
 
         // Act
         var result = this.Evaluate(

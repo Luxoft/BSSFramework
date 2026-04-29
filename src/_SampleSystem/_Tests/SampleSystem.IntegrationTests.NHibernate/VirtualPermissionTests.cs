@@ -18,9 +18,9 @@ public class VirtualPermissionTests(IServiceProvider rootServiceProvider) : Test
                      .Select(
                          userLogin =>
                          {
-                             var buId = this.DataHelper.SaveBusinessUnit().Id;
+                             var buId = this.DataManager.SaveBusinessUnit().Id;
 
-                             var employeeId = this.DataHelper.SaveEmployee(login: userLogin).Id;
+                             var employeeId = this.DataManager.SaveEmployee(login: userLogin).Id;
 
                              this.Evaluate(
                                  DBSessionMode.Write,

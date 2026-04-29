@@ -64,7 +64,7 @@ public class RestrictionRoleTests(IServiceProvider rootServiceProvider) : TestBa
     public void TryCreatePermissionWithCorrectSecurityContext_PermissionCreated()
     {
         // Arrange
-        var businessUnit = this.DataHelper.SaveBusinessUnit();
+        var businessUnit = this.DataManager.SaveBusinessUnit();
 
         // Act
         var action = () =>
@@ -81,7 +81,7 @@ public class RestrictionRoleTests(IServiceProvider rootServiceProvider) : TestBa
     public void TryCreatePermissionWithInvalidSecurityContext_ExceptionRaised()
     {
         // Arrange
-        var location = this.DataHelper.SaveLocation();
+        var location = this.DataManager.SaveLocation();
 
         // Act
         var ex = Record.Exception(() =>
@@ -167,7 +167,7 @@ public class RestrictionRoleTests(IServiceProvider rootServiceProvider) : TestBa
     public void TryCreatePermissionWithoutRequiredSecurityContext_ExceptionRaised()
     {
         // Arrange
-        var location = this.DataHelper.SaveLocation();
+        var location = this.DataManager.SaveLocation();
 
         // Act
         var ex = Record.Exception(() => this.AuthManager.For().SetRole(

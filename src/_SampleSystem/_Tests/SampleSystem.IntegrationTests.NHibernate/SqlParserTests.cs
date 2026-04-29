@@ -78,22 +78,22 @@ public class SqlParserTests(IServiceProvider rootServiceProvider) : TestBase(roo
         var employeeController = this.MainWebApi.Employee;
         var hRDepartmentController = this.GetControllerEvaluator<HRDepartmentController>();
 
-        var buTypeId = this.DataHelper.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
+        var buTypeId = this.DataManager.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
 
-        var luxoftBuId = this.DataHelper.SaveBusinessUnit(
+        var luxoftBuId = this.DataManager.SaveBusinessUnit(
                                                           id: DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_ID,
                                                           name: DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_NAME,
                                                           type: buTypeId);
 
-        var costBuId = this.DataHelper.SaveBusinessUnit(
+        var costBuId = this.DataManager.SaveBusinessUnit(
                                                         id: DefaultConstants.BUSINESS_UNIT_PARENT_CC_ID,
                                                         name: DefaultConstants.BUSINESS_UNIT_PARENT_CC_NAME,
                                                         type: buTypeId,
                                                         parent: luxoftBuId);
 
-        var location = this.DataHelper.SaveLocation(name: "testLocation");
+        var location = this.DataManager.SaveLocation(name: "testLocation");
 
-        var employeeIdentity = this.DataHelper.SaveEmployee(login: "value", coreBusinessUnit: costBuId, location: location);
+        var employeeIdentity = this.DataManager.SaveEmployee(login: "value", coreBusinessUnit: costBuId, location: location);
 
         var fullEmployee = employeeController.Evaluate(c => c.GetFullEmployee(employeeIdentity));
 

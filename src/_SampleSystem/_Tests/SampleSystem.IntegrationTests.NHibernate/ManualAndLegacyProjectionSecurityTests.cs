@@ -22,17 +22,17 @@ public class ManualAndLegacyProjectionSecurityTests(IServiceProvider rootService
 
     protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
-        this.bu1Ident = this.DataHelper.SaveBusinessUnit();
+        this.bu1Ident = this.DataManager.SaveBusinessUnit();
 
-        this.bu2Ident = this.DataHelper.SaveBusinessUnit();
+        this.bu2Ident = this.DataManager.SaveBusinessUnit();
 
-        this.DataHelper.SaveEmployee(login: TestEmployeeLogin);
+        this.DataManager.SaveEmployee(login: TestEmployeeLogin);
 
         await this.AuthManager.For(TestEmployeeLogin).SetRoleAsync(new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident), ct);
 
-        this.TestEmp1 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu1Ident);
+        this.TestEmp1 = this.DataManager.SaveEmployee(coreBusinessUnit: this.bu1Ident);
 
-        this.TestEmp2 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu2Ident);
+        this.TestEmp2 = this.DataManager.SaveEmployee(coreBusinessUnit: this.bu2Ident);
     }
 
     [Fact]

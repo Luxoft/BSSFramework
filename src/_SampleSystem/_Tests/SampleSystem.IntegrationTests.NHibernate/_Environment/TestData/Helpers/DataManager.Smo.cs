@@ -4,7 +4,7 @@ using Microsoft.SqlServer.Management.Smo;
 
 namespace SampleSystem.IntegrationTests._Environment.TestData.Helpers;
 
-public partial class DataHelper
+public partial class DataManager
 {
     public Table GetTable(string databaseName, string tableName, string schema = "app")
     {

@@ -77,7 +77,7 @@ public class NHibTestEnvironment : ITestEnvironment
 
                        .AddTestControllers([typeof(EmployeeController).Assembly])
 
-                       .AddSingleton<DataHelper>()
+                       .AddSingleton<DataManager>()
 
                        .AddSingleton<EmptySchemaInitializer>()
                        .AddSingleton<TestDataInitializer>()

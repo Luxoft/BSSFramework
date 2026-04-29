@@ -46,19 +46,19 @@ public class GetNotificationPrincipalsByHierarchicalContextTests(IServiceProvide
 
     protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
-        this.rootBusinessUnit = this.DataHelper.SaveBusinessUnit(id: DefaultConstants.BUSINESS_UNIT_PARENT_CC_ID);
-        this.child_1_0_BusinessUnit = this.DataHelper.SaveBusinessUnit(parent: this.rootBusinessUnit);
-        this.child_1_1_BusinessUnit = this.DataHelper.SaveBusinessUnit(parent: this.child_1_0_BusinessUnit);
-        this.child_2_0_BusinessUnit = this.DataHelper.SaveBusinessUnit(parent: this.rootBusinessUnit);
-        this.child_2_1_BusinessUnit = this.DataHelper.SaveBusinessUnit(parent: this.child_2_0_BusinessUnit);
+        this.rootBusinessUnit = this.DataManager.SaveBusinessUnit(id: DefaultConstants.BUSINESS_UNIT_PARENT_CC_ID);
+        this.child_1_0_BusinessUnit = this.DataManager.SaveBusinessUnit(parent: this.rootBusinessUnit);
+        this.child_1_1_BusinessUnit = this.DataManager.SaveBusinessUnit(parent: this.child_1_0_BusinessUnit);
+        this.child_2_0_BusinessUnit = this.DataManager.SaveBusinessUnit(parent: this.rootBusinessUnit);
+        this.child_2_1_BusinessUnit = this.DataManager.SaveBusinessUnit(parent: this.child_2_0_BusinessUnit);
 
-        this.rootManagementUnit = this.DataHelper.SaveManagementUnit(id: DefaultConstants.MANAGEMENT_UNIT_PARENT_COMPANY_ID);
-        this.child_1_0_ManagementUnit = this.DataHelper.SaveManagementUnit(parent: this.rootManagementUnit);
-        this.child_1_1_ManagementUnit = this.DataHelper.SaveManagementUnit(parent: this.child_1_0_ManagementUnit);
-        this.child_2_0_ManagementUnit = this.DataHelper.SaveManagementUnit(parent: this.rootManagementUnit);
-        this.child_2_1_ManagementUnit = this.DataHelper.SaveManagementUnit(parent: this.child_2_0_ManagementUnit);
+        this.rootManagementUnit = this.DataManager.SaveManagementUnit(id: DefaultConstants.MANAGEMENT_UNIT_PARENT_COMPANY_ID);
+        this.child_1_0_ManagementUnit = this.DataManager.SaveManagementUnit(parent: this.rootManagementUnit);
+        this.child_1_1_ManagementUnit = this.DataManager.SaveManagementUnit(parent: this.child_1_0_ManagementUnit);
+        this.child_2_0_ManagementUnit = this.DataManager.SaveManagementUnit(parent: this.rootManagementUnit);
+        this.child_2_1_ManagementUnit = this.DataManager.SaveManagementUnit(parent: this.child_2_0_ManagementUnit);
 
-        this.rootEmployee = this.DataHelper.SaveEmployee();
+        this.rootEmployee = this.DataManager.SaveEmployee();
     }
 
     [Fact]

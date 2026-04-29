@@ -20,7 +20,7 @@ public class WrongSecurityMessageTests(IServiceProvider rootServiceProvider) : T
     private static readonly Guid TestPrincipalId = Guid.NewGuid();
 
     protected override async ValueTask InitializeAsync(CancellationToken ct) =>
-        this.DataHelper.SaveEmployee(login: TestPrincipalName, id: TestPrincipalId);
+        this.DataManager.SaveEmployee(login: TestPrincipalName, id: TestPrincipalId);
 
     [Fact]
     public void UseWrongSecurityMode_ErrorMessageCorrected() => this.UseSecurityRule_WithoutSecurity_ErrorMessageCorrected(SecurityRule.Edit);

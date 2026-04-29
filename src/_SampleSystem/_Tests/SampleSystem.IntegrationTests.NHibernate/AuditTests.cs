@@ -268,7 +268,7 @@ public class AuditTests(IServiceProvider rootServiceProvider) : TestBase(rootSer
         this.AuthManager.For(testUser).LoginAs();
 
         // Act
-        var newBu = this.DataHelper.SaveBusinessUnit();
+        var newBu = this.DataManager.SaveBusinessUnit();
 
         // Assert
 

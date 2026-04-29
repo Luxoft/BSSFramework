@@ -8,7 +8,7 @@ public class WebApiTests(IServiceProvider rootServiceProvider) : TestBase(rootSe
     public void WebApi_CallMethod()
     {
         // Arrange
-        var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
+        var employeeIdentity = this.DataManager.SaveEmployee(Guid.NewGuid());
 
         var employeeController = this.MainWebApi.Employee;
 

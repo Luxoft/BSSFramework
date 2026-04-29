@@ -10,13 +10,13 @@ public class UniqueGroupTests(IServiceProvider rootServiceProvider) : TestBase(r
     public void UniqueGroup_NonUniqueEntityCreated_ErrorUsesCustomName()
     {
         // Arrange
-        var role = this.DataHelper.SaveEmployeeRole();
-        var roleDegree = this.DataHelper.SaveEmployeeRoleDegree();
+        var role = this.DataManager.SaveEmployeeRole();
+        var roleDegree = this.DataManager.SaveEmployeeRoleDegree();
 
-        this.DataHelper.SaveRoleRoleDegreeLink(role, roleDegree);
+        this.DataManager.SaveRoleRoleDegreeLink(role, roleDegree);
 
         // Act
-        var ex = Record.Exception(() => this.DataHelper.SaveRoleRoleDegreeLink(role, roleDegree));
+        var ex = Record.Exception(() => this.DataManager.SaveRoleRoleDegreeLink(role, roleDegree));
 
         // Assert
         var uniqueViolationException = Assert.IsType<UniqueViolationConstraintDALException>(ex);

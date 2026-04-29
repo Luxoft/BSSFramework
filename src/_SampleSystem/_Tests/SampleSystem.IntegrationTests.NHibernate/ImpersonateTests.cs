@@ -1,9 +1,9 @@
-﻿using SampleSystem.IntegrationTests.__Support.TestData;
+﻿using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
-public class ImpersonateTests : TestBase
+public class ImpersonateTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public async Task SaveDataWithImpersonate_ImpersonateWork()

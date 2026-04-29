@@ -5,23 +5,21 @@ using Framework.Database;
 using Anch.SecuritySystem;
 
 using SampleSystem.Domain;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class CurrentUserManyRelativePathTests : TestBase
+public class CurrentUserManyRelativePathTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private Guid[] testEmployeeIdents;
 
     private Guid testObj;
 
-    public CurrentUserManyRelativePathTests()
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
         this.testEmployeeIdents =
 
-            Enumerable.Range(0, 3).Select(
-                          _ => { return this.DataHelper.SaveEmployee().Id; })
-                      .ToArray();
+            Enumerable.Range(0, 3).Select(_ => this.DataManager.SaveEmployee().Id).ToArray();
 
         this.testObj = this.EvaluateWrite(
             ctx =>
@@ -32,7 +30,7 @@ public class CurrentUserManyRelativePathTests : TestBase
 
                 foreach (var testEmployeeIdent in this.testEmployeeIdents)
                 {
-                    var testEmployee = ctx.Logics.Employee.GetById(testEmployeeIdent, true);
+                    var testEmployee = ctx.Logics.Employee.GetById(testEmployeeIdent, true)!;
 
                     new TestRelativeEmployeeChildObject(parentObj) { Employee = testEmployee };
                 }

@@ -3,12 +3,12 @@ using Framework.AutomationCore.ServiceEnvironment;
 using Framework.Database;
 
 using SampleSystem.Domain;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.ServiceEnvironment.Jobs;
 
 namespace SampleSystem.IntegrationTests;
 
-public class JobTests : TestBase
+public class JobTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public async Task InvokeJobs_JobObjectsCreated()

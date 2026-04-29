@@ -1,11 +1,11 @@
 ﻿using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
-public class FixedPropertyValidatorTests : TestBase
+public class FixedPropertyValidatorTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void PrimitiveImmutablePropertyChanged_RaisedValidationError()
@@ -16,17 +16,18 @@ public class FixedPropertyValidatorTests : TestBase
                                                                                        new TestImmutableObjStrictDTO { TestImmutablePrimitiveProperty = "AAA" }));
 
         // Act
-        Action changePropertyAction = () =>
-                                      {
-                                          var dto = testImmutableObjController.Evaluate(c => c.GetRichTestImmutableObj(identity));
-                                          dto.TestImmutablePrimitiveProperty = "BBB";
-                                          testImmutableObjController.Evaluate(c => c.SaveTestImmutableObj(dto.ToStrict()));
-                                      };
+        var ex = Record.Exception(() =>
+        {
+            var dto = testImmutableObjController.Evaluate(c => c.GetRichTestImmutableObj(identity));
+            dto.TestImmutablePrimitiveProperty = "BBB";
+            testImmutableObjController.Evaluate(c => c.SaveTestImmutableObj(dto.ToStrict()));
+        });
 
         // Assert
+        var validationException = Assert.IsType<Framework.Validation.ValidationException>(ex);
         Assert.Equal(
             $"{nameof(TestImmutableObj.TestImmutablePrimitiveProperty)} field in {nameof(TestImmutableObj)} can't be changed",
-            Assert.Throws<Framework.Validation.ValidationException>(changePropertyAction).Message);
+            validationException.Message);
     }
 
     [Fact]
@@ -38,17 +39,18 @@ public class FixedPropertyValidatorTests : TestBase
         var identity = testImmutableObjController.Evaluate(c => c.SaveTestImmutableObj(new TestImmutableObjStrictDTO { }));
 
         // Act
-        Action changePropertyAction = () =>
-                                      {
-                                          var dto = testImmutableObjController.Evaluate(c => c.GetRichTestImmutableObj(identity));
-                                          dto.TestImmutableRefProperty = this.DataHelper.GetCurrentEmployee();
-                                          testImmutableObjController.Evaluate(c => c.SaveTestImmutableObj(dto.ToStrict()));
-                                      };
+        var ex = Record.Exception(() =>
+        {
+            var dto = testImmutableObjController.Evaluate(c => c.GetRichTestImmutableObj(identity));
+            dto.TestImmutableRefProperty = this.DataManager.GetCurrentEmployee();
+            testImmutableObjController.Evaluate(c => c.SaveTestImmutableObj(dto.ToStrict()));
+        });
 
         // Assert
-            Assert.Equal(
+        var validationException = Assert.IsType<Framework.Validation.ValidationException>(ex);
+        Assert.Equal(
             $"{nameof(TestImmutableObj.TestImmutableRefProperty)} field in {nameof(TestImmutableObj)} can't be changed",
-            Assert.Throws<Framework.Validation.ValidationException>(changePropertyAction).Message);
+            validationException.Message);
     }
 
     [Fact]
@@ -73,12 +75,13 @@ public class FixedPropertyValidatorTests : TestBase
         var identity = integrationTestImmutableObjController.Evaluate(c => c.SaveTestImmutableObj(new TestImmutableObjIntegrationRichDTO { TestImmutablePrimitiveProperty = "AAA", Id = Guid.NewGuid() }));
 
         // Act
-        Action changePropertyAction = () => integrationTestImmutableObjController.Evaluate(c => c.SaveTestImmutableObj(new TestImmutableObjIntegrationRichDTO { TestImmutablePrimitiveProperty = "BBB", Id = identity.Id }));
+        var ex = Record.Exception(() => integrationTestImmutableObjController.Evaluate(c => c.SaveTestImmutableObj(new TestImmutableObjIntegrationRichDTO { TestImmutablePrimitiveProperty = "BBB", Id = identity.Id })));
 
         // Assert
+        var validationException = Assert.IsType<Framework.Validation.ValidationException>(ex);
         Assert.Equal(
             $"{nameof(TestImmutableObj.TestImmutablePrimitiveProperty)} field in {nameof(TestImmutableObj)} can't be changed",
-            Assert.Throws<Framework.Validation.ValidationException>(changePropertyAction).Message);
+            validationException.Message);
     }
 
 }

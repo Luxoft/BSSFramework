@@ -3,59 +3,60 @@
 using Framework.Core;
 
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
 
 namespace SampleSystem.IntegrationTests;
 
-public class EmployeeProjectionTests : TestBase
+public class EmployeeProjectionTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private const string ProjectionPrincipalName = "Projection Tester";
     private const string TestEmployee1Login = "Test Employee 1";
     private const string TestEmployee2Login = "Test Employee 2";
     private const string TestEmployee3Login = "Test Employee 3";
 
-    public EmployeeProjectionTests()
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
-        var buTypeId = this.DataHelper.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
+        var buTypeId = this.DataManager.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
 
-        var luxoftBuId = this.DataHelper.SaveBusinessUnit(
+        var luxoftBuId = this.DataManager.SaveBusinessUnit(
                                                           id: DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_ID,
                                                           name: DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_NAME,
                                                           type: buTypeId);
 
-        var costBuId = this.DataHelper.SaveBusinessUnit(
+        var costBuId = this.DataManager.SaveBusinessUnit(
                                                         id: DefaultConstants.BUSINESS_UNIT_PARENT_CC_ID,
                                                         name: DefaultConstants.BUSINESS_UNIT_PARENT_CC_NAME,
                                                         type: buTypeId,
                                                         parent: luxoftBuId);
 
-        var profitBuId = this.DataHelper.SaveBusinessUnit(
+        var profitBuId = this.DataManager.SaveBusinessUnit(
                                                           id: DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID,
                                                           name: DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME,
                                                           type: buTypeId,
                                                           parent: luxoftBuId);
 
-        this.DataHelper.SaveEmployee(login: ProjectionPrincipalName, coreBusinessUnit: costBuId);
-        this.DataHelper.SaveEmployee(login: TestEmployee1Login, coreBusinessUnit: costBuId);
-        this.DataHelper.SaveEmployee(login: TestEmployee2Login, coreBusinessUnit: profitBuId);
-        this.DataHelper.SaveEmployee(login: TestEmployee3Login, coreBusinessUnit: costBuId);
+        this.DataManager.SaveEmployee(login: ProjectionPrincipalName, coreBusinessUnit: costBuId);
+        this.DataManager.SaveEmployee(login: TestEmployee1Login, coreBusinessUnit: costBuId);
+        this.DataManager.SaveEmployee(login: TestEmployee2Login, coreBusinessUnit: profitBuId);
+        this.DataManager.SaveEmployee(login: TestEmployee3Login, coreBusinessUnit: costBuId);
 
-        this.AuthManager.For(ProjectionPrincipalName).SetRole(
+        await this.AuthManager.For(ProjectionPrincipalName).SetRoleAsync(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SeManager,
-                new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)));
+                new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)),
+            ct);
 
-        this.AuthManager.For(TestEmployee1Login).SetRole(SampleSystemSecurityRole.TestRole1);
-        this.AuthManager.For(TestEmployee3Login).SetRole(SampleSystemSecurityRole.TestRole2);
+        await this.AuthManager.For(TestEmployee1Login).SetRoleAsync(SampleSystemSecurityRole.TestRole1, ct);
+        await this.AuthManager.For(TestEmployee3Login).SetRoleAsync(SampleSystemSecurityRole.TestRole2, ct);
     }
 
     [Fact]
     public void EmployeeProjectionTest()
     {
         // Arrange
-        var identity = this.DataHelper.SaveEmployee(Guid.NewGuid());
+        var identity = this.DataManager.SaveEmployee(Guid.NewGuid());
         var controller = this.GetControllerEvaluator<EmployeeQueryController>();
 
         // Act
@@ -121,7 +122,7 @@ public class EmployeeProjectionTests : TestBase
 
         foreach (var login in logins)
         {
-            this.DataHelper.SaveEmployee(login: login);
+            this.DataManager.SaveEmployee(login: login);
         }
 
         var expected = logins.Reverse().ToArray(Maybe.Return);

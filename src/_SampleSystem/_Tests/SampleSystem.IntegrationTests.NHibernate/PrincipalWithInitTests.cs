@@ -5,47 +5,51 @@ using Framework.Core;
 using Framework.Database;
 
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 
 using Anch.SecuritySystem;
 using Anch.SecuritySystem.Validation;
 
+using Framework.AutomationCore.RootServiceProviderContainer;
+
+using SampleSystem.IntegrationTests._Environment.TestData;
+
 namespace SampleSystem.IntegrationTests;
 
-public class PrincipalWithInitTests : TestBase
+public class PrincipalWithInitTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private const string TestPrincipalName = "Duplicate Permission Tester";
 
     private Period testPeriod;
 
-    public PrincipalWithInitTests()
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
         this.testPeriod = this.TimeProvider.GetCurrentMonth();
 
-        var buTypeId = this.DataHelper.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
+        var buTypeId = this.DataManager.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
 
-        var luxoftBuId = this.DataHelper.SaveBusinessUnit(
+        var luxoftBuId = this.DataManager.SaveBusinessUnit(
                                                           id: DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_ID,
                                                           name: DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_NAME,
                                                           type: buTypeId);
 
-        var costBuId = this.DataHelper.SaveBusinessUnit(
+        var costBuId = this.DataManager.SaveBusinessUnit(
                                                         id: DefaultConstants.BUSINESS_UNIT_PARENT_CC_ID,
                                                         name: DefaultConstants.BUSINESS_UNIT_PARENT_CC_NAME,
                                                         type: buTypeId,
                                                         parent: luxoftBuId);
 
-        var profitBuId = this.DataHelper.SaveBusinessUnit(
+        var profitBuId = this.DataManager.SaveBusinessUnit(
                                                           id: DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID,
                                                           name: DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME,
                                                           type: buTypeId,
                                                           parent: luxoftBuId);
 
-        this.AuthManager.For(TestPrincipalName).SetRole(
+        await this.AuthManager.For(TestPrincipalName).SetRoleAsync(
             new SampleSystemTestPermission(
             SampleSystemSecurityRole.TestPerformance,
-            new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)) { Period = new PermissionPeriod(this.testPeriod.StartDate, this.testPeriod.EndDate) });
+            new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)) { Period = new PermissionPeriod(this.testPeriod.StartDate, this.testPeriod.EndDate) },
+            ct);
     }
 
     [Fact]
@@ -98,6 +102,8 @@ public class PrincipalWithInitTests : TestBase
                    };
 
         // Assert
-        Assert.Contains(expectedErrorMessage, Assert.Throws<SecuritySystemValidationException>(call).Message);
+        var ex = Record.Exception(() => call());
+        var validationException = Assert.IsType<SecuritySystemValidationException>(ex);
+        Assert.Contains(expectedErrorMessage, validationException.Message);
     }
 }

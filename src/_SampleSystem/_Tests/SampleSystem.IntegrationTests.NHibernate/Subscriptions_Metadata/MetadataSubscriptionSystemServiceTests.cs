@@ -5,13 +5,16 @@ using Framework.Notification.Domain;
 
 using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.Models.Custom;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests.Subscriptions_Metadata;
 
-public sealed class MetadataSubscriptionSystemServiceTests : TestBase
+public sealed class MetadataSubscriptionSystemServiceTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
-    public MetadataSubscriptionSystemServiceTests() => this.GetNotifications().Clear();
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
+    {
+        this.GetNotifications().Clear();
+    }
 
     [Fact]
     public void SubscriptionFromMetadataShouldBeSent()
@@ -20,7 +23,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         var employee = this.CreateEmployee();
 
         // Act
-        var results = this.DataHelper.ProcessSubscription(employee, employee);
+        var results = this.DataManager.ProcessSubscription(employee, employee);
         var errors = results.GetErrors().ToList();
 
         var expectedNotifications = this.GetNotifications()
@@ -36,11 +39,11 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
     public void RazorTemplateImpl_SubscriptionFromMetadataShouldBeSent()
     {
         // Arrange
-        var employee = this.DataHelper.SaveEmployee("Chuck Norris");
+        var employee = this.DataManager.SaveEmployee("Chuck Norris");
         var message = @"String.Concat it is good choice for Chuck Norris.";
 
         // Act
-        var results = this.DataHelper.ProcessSubscription(employee, employee);
+        var results = this.DataManager.ProcessSubscription(employee, employee);
         var errors = results.GetErrors().ToList();
 
         var expectedNotifications = this.GetNotifications()
@@ -64,7 +67,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         var message = $"<h2>Hi there!!!</h2>{Environment.NewLine}My test employee Name:  John Doe {Environment.NewLine}Date: 21 Oct 2015";
 
         // Act
-        var results = this.DataHelper.ProcessSubscription(employee, employee);
+        var results = this.DataManager.ProcessSubscription(employee, employee);
         var errors = results.GetErrors().ToList();
 
         var expectedNotifications = this.GetNotifications()
@@ -88,7 +91,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         var content = Encoding.UTF8.GetBytes("Hello world!");
 
         // Act
-        this.DataHelper.ProcessSubscription(employee, employee);
+        this.DataManager.ProcessSubscription(employee, employee);
 
         var expectedNotifications = this.GetNotifications()
                                         .Where(n => n.From == "Attachment@luxoft.com");
@@ -112,7 +115,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         var content = "Hello world!  John Doe ";
 
         // Act
-        this.DataHelper.ProcessSubscription(employee, employee);
+        this.DataManager.ProcessSubscription(employee, employee);
 
         var expectedNotifications = this.GetNotifications().Where(n => n.From == "AttachmentTemplateEvaluator@luxoft.com");
 
@@ -135,7 +138,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         var messageTemplate = @"<html><head><title></title></head><body> John Doe <br/><img src=""cid:testId@luxoft.com""/></body></html>";
 
         // Act
-        this.DataHelper.ProcessSubscription(employee, employee);
+        this.DataManager.ProcessSubscription(employee, employee);
 
         var expectedNotifications = this.GetNotifications()
                                         .Where(n => n.From == "InlineAttach@luxoft.com");
@@ -153,7 +156,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
         // Arrange
 
         // Act
-        this.DataHelper.ProcessSubscription(null, new DateModel { Year = 2019 });
+        this.DataManager.ProcessSubscription(null, new DateModel { Year = 2019 });
 
         var expectedNotifications = this.GetNotifications()
                                         .Where(n => n.From == "DateModelCreateSampleSystem@luxoft.com");
@@ -164,7 +167,7 @@ public sealed class MetadataSubscriptionSystemServiceTests : TestBase
 
     private Employee CreateEmployee()
     {
-        var employee = this.DataHelper.SaveEmployee("John Doe");
+        var employee = this.DataManager.SaveEmployee("John Doe");
         return employee;
     }
 

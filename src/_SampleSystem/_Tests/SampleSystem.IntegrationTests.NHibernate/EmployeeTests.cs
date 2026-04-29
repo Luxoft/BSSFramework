@@ -11,17 +11,19 @@ using Framework.Database.NHibernate.Sessions;
 
 using Anch.SecuritySystem;
 
+using Framework.AutomationCore.RootServiceProviderContainer;
+
 using Microsoft.Extensions.DependencyInjection;
 
 using NHibernate.Impl;
 
 using SampleSystem.Domain.Employee;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class EmployeeTests : TestBase
+public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void GetEmployeeFromDB_FilterByAge_ReturnNotNulRecords()
@@ -32,7 +34,7 @@ public class EmployeeTests : TestBase
          */
 
         // Arrange
-        this.DataHelper.SaveEmployee(Guid.NewGuid(), age: 10);
+        this.DataManager.SaveEmployee(Guid.NewGuid(), age: 10);
         CoreDatabaseUtil.ExecuteSql(
             this.DatabaseContext.Main.ConnectionString,
             "INSERT INTO [app].[Employee] ([id], age) VALUES (NewId(), null)");
@@ -52,7 +54,7 @@ public class EmployeeTests : TestBase
     {
         // Arrange
         var employeeController = this.MainWebApi.Employee;
-        var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
+        var employeeIdentity = this.DataManager.SaveEmployee(Guid.NewGuid());
 
         // Act
         var employees = employeeController.Evaluate(c => c.GetSimpleEmployees());
@@ -70,7 +72,7 @@ public class EmployeeTests : TestBase
 
         foreach (var pin in new[] { 123, 456 })
         {
-            var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
+            var employeeIdentity = this.DataManager.SaveEmployee(Guid.NewGuid());
             var employee = employeeController.Evaluate(c => c.GetSimpleEmployee(employeeIdentity));
             employee.Pin = pin;
             employeeController.Evaluate(c => c.SaveEmployee(employee.ToStrict()));
@@ -105,7 +107,7 @@ public class EmployeeTests : TestBase
 
         foreach (var item in idToPinMap)
         {
-            var employeeIdentity = this.DataHelper.SaveEmployee(item.Key);
+            var employeeIdentity = this.DataManager.SaveEmployee(item.Key);
             var employee = employeeController.Evaluate(c => c.GetSimpleEmployee(employeeIdentity));
             employee.Pin = item.Value;
             employeeController.Evaluate(c => c.SaveEmployee(employee.ToStrict()));
@@ -146,7 +148,7 @@ public class EmployeeTests : TestBase
 
         foreach (var item in idToPinMap)
         {
-            var employeeIdentity = this.DataHelper.SaveEmployee(item.Key);
+            var employeeIdentity = this.DataManager.SaveEmployee(item.Key);
             var employee = employeeController.Evaluate(c => c.GetSimpleEmployee(employeeIdentity));
             employee.Pin = item.Value;
             employeeController.Evaluate(c => c.SaveEmployee(employee.ToStrict()));
@@ -177,7 +179,7 @@ public class EmployeeTests : TestBase
 
         foreach (var pin in new[] { 123, 456 })
         {
-            var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
+            var employeeIdentity = this.DataManager.SaveEmployee(Guid.NewGuid());
             var employee = employeeController.Evaluate(c => c.GetSimpleEmployee(employeeIdentity));
             employee.Pin = pin;
             employeeController.Evaluate(c => c.SaveEmployee(employee.ToStrict()));
@@ -197,7 +199,7 @@ public class EmployeeTests : TestBase
     public void ForceDomainTypeEvent_ForceEmployeeSaveEvent_ContainsEventEmployee()
     {
         // Arrange
-        var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
+        var employeeIdentity = this.DataManager.SaveEmployee(Guid.NewGuid());
 
         var configFacade = this.GetConfigurationControllerEvaluator();
 
@@ -226,7 +228,7 @@ public class EmployeeTests : TestBase
         // Arrange
         var employeeController = this.MainWebApi.Employee;
 
-        var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
+        var employeeIdentity = this.DataManager.SaveEmployee(Guid.NewGuid());
         var employeeVersion = employeeController.Evaluate(c => c.GetSimpleEmployee(employeeIdentity)).Version;
 
         this.ClearNotifications();
@@ -262,7 +264,7 @@ public class EmployeeTests : TestBase
     {
         // Arrange
         var employeeController = this.MainWebApi.Employee;
-        var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
+        var employeeIdentity = this.DataManager.SaveEmployee(Guid.NewGuid());
         var employeeVersion = employeeController.Evaluate(c => c.GetSimpleEmployee(employeeIdentity)).Version;
 
         this.ClearNotifications();
@@ -296,7 +298,7 @@ public class EmployeeTests : TestBase
     {
         // Arrange
         var employeeController = this.MainWebApi.Employee;
-        var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
+        var employeeIdentity = this.DataManager.SaveEmployee(Guid.NewGuid());
         var employeeVersion = employeeController.Evaluate(c => c.GetSimpleEmployee(employeeIdentity)).Version;
 
         this.ClearIntegrationEvents();
@@ -327,15 +329,16 @@ public class EmployeeTests : TestBase
     {
         // Arrange
         var employeeController = this.MainWebApi.Employee;
-        var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
+        var employeeIdentity = this.DataManager.SaveEmployee(Guid.NewGuid());
 
         // Act
-        var call = new Action(
+        var ex = Record.Exception(
             () => employeeController.Evaluate(
                 c => c.UpdateEmployee(new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = Maybe.Return("1234") })));
 
         // Assert
-        Assert.Equal($"Object '{nameof(Employee)}' was updated or deleted by another transaction", Assert.Throws<StaleDomainObjectStateException>(call).Message);
+        var staleDomainObjectStateException = Assert.IsType<StaleDomainObjectStateException>(ex);
+        Assert.Equal($"Object '{nameof(Employee)}' was updated or deleted by another transaction", staleDomainObjectStateException.Message);
     }
 
     [Fact]

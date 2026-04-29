@@ -5,18 +5,18 @@ using Framework.Database;
 using Anch.SecuritySystem.UserSource;
 
 using SampleSystem.Domain.Employee;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class CurrentUserSourceTests : TestBase
+public class CurrentUserSourceTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void TryGetCurrentUserWithEmployee_CurrentUserResolved()
     {
         // Arrange
         var randomName = TextRandomizer.RandomString(10);
-        var employeeId = this.DataHelper.SaveEmployee(login: randomName).Id;
+        var employeeId = this.DataManager.SaveEmployee(login: randomName).Id;
 
         // Act
         var result = this.Evaluate(
@@ -40,16 +40,14 @@ public class CurrentUserSourceTests : TestBase
         var randomName = TextRandomizer.RandomString(10);
 
         // Act
-        var action = () =>
-        {
+        var ex = Record.Exception(() =>
             this.Evaluate(
                 DBSessionMode.Read,
                 randomName,
-                ctx => ctx.CurrentEmployeeSource.CurrentUser.Id);
-        };
+                ctx => ctx.CurrentEmployeeSource.CurrentUser.Id));
 
         // Assert
-        var exception = Assert.Throws<UserSourceException>(action);
-        Assert.Equal($"{nameof(Employee)} \"{randomName}\" not found", exception.Message);
+        var userSourceException = Assert.IsType<UserSourceException>(ex);
+        Assert.Equal($"{nameof(Employee)} \"{randomName}\" not found", userSourceException.Message);
     }
 }

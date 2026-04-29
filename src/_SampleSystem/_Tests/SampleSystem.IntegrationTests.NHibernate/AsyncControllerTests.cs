@@ -1,10 +1,10 @@
 ﻿using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
-public class AsyncControllerTests : TestBase
+public class AsyncControllerTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public async Task TestSaveLocation_LocationSaved()
@@ -34,8 +34,9 @@ public class AsyncControllerTests : TestBase
         var saveDto = new LocationStrictDTO { Name = Guid.NewGuid().ToString(), CloseDate = 30, Code = 12345 };
 
         // Act
-        Func<Task> saveTask = () => asyncControllerEvaluator.EvaluateAsync(c => c.AsyncSaveLocationWithWriteException(saveDto, default));
+        var ex = await Record.ExceptionAsync(() => asyncControllerEvaluator.EvaluateAsync(c => c.AsyncSaveLocationWithWriteException(saveDto, default)));
 
-        await Assert.ThrowsAsync<InvalidOperationException>(saveTask);
+        // Assert
+        Assert.IsType<InvalidOperationException>(ex);
     }
 }

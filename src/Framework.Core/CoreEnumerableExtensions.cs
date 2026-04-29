@@ -58,20 +58,16 @@ public static class CoreEnumerableExtensions
 
     public static bool SequenceEqual<TSource, TOther>(this IEnumerable<TSource> first, IEnumerable<TOther> second, Func<TSource, TOther, bool> compareFunc)
     {
-        using (var enumerator1 = first.GetEnumerator())
+        using var enumerator1 = first.GetEnumerator();
+        using var enumerator2 = second.GetEnumerator();
+        while (enumerator1.MoveNext())
         {
-            using (var enumerator2 = second.GetEnumerator())
-            {
-                while (enumerator1.MoveNext())
-                {
-                    if (!enumerator2.MoveNext() || !compareFunc(enumerator1.Current, enumerator2.Current))
-                        return false;
-                }
-
-                if (enumerator2.MoveNext())
-                    return false;
-            }
+            if (!enumerator2.MoveNext() || !compareFunc(enumerator1.Current, enumerator2.Current))
+                return false;
         }
+
+        if (enumerator2.MoveNext())
+            return false;
 
         return true;
     }
@@ -97,24 +93,20 @@ public static class CoreEnumerableExtensions
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (func == null) throw new ArgumentNullException(nameof(func));
 
-        using (var sourceEnumerator = source.GetEnumerator())
+        using var sourceEnumerator = source.GetEnumerator();
+        if (sourceEnumerator.MoveNext())
         {
-            if (sourceEnumerator.MoveNext())
+            do
             {
-                do
-                {
-                    yield return sourceEnumerator.Current;
-                } while (sourceEnumerator.MoveNext());
-            }
-            else
+                yield return sourceEnumerator.Current;
+            } while (sourceEnumerator.MoveNext());
+        }
+        else
+        {
+            using var otherEnumerator = func().GetEnumerator();
+            while (otherEnumerator.MoveNext())
             {
-                using (var otherEnumerator = func().GetEnumerator())
-                {
-                    while (otherEnumerator.MoveNext())
-                    {
-                        yield return otherEnumerator.Current;
-                    }
-                }
+                yield return otherEnumerator.Current;
             }
         }
     }
@@ -141,10 +133,8 @@ public static class CoreEnumerableExtensions
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (func == null) throw new ArgumentNullException(nameof(func));
 
-        using (var enumerator = source.GetEnumerator())
-        {
-            return enumerator.MoveNext() ? enumerator.Current : func();
-        }
+        using var enumerator = source.GetEnumerator();
+        return enumerator.MoveNext() ? enumerator.Current : func();
     }
 
     public static void Override<T>(this ICollection<T> source, IEnumerable<T> newItems)
@@ -169,15 +159,13 @@ public static class CoreEnumerableExtensions
             throw new ArgumentNullException(nameof(emptyExceptionHandler));
         }
 
-        using (var enumerator = source.GetEnumerator())
+        using var enumerator = source.GetEnumerator();
+        if (!enumerator.MoveNext())
         {
-            if (!enumerator.MoveNext())
-            {
-                throw emptyExceptionHandler();
-            }
-
-            return enumerator.Current;
+            throw emptyExceptionHandler();
         }
+
+        return enumerator.Current;
     }
 
 
@@ -226,12 +214,10 @@ public static class CoreEnumerableExtensions
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (size < 1) throw new ArgumentException("count");
 
-        using (var enumerator = source.GetEnumerator())
+        using var enumerator = source.GetEnumerator();
+        while (enumerator.MoveNext())
         {
-            while (enumerator.MoveNext())
-            {
-                yield return enumerator.InnerSplit(size).ToList();
-            }
+            yield return enumerator.InnerSplit(size).ToList();
         }
     }
 
@@ -406,31 +392,29 @@ public static class CoreEnumerableExtensions
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (equalityComparer == null) throw new ArgumentNullException(nameof(equalityComparer));
 
-        using (var enumerator = source.GetEnumerator())
+        using var enumerator = source.GetEnumerator();
+        if (enumerator.MoveNext())
         {
-            if (enumerator.MoveNext())
-            {
-                if (!equalityComparer.Equals(enumerator.Current, expectedElement))
-                {
-                    if (raiseIfNotEquals)
-                    {
-                        throw new ArgumentException("Unexpected first element", nameof(source));
-                    }
-
-                    yield return enumerator.Current;
-                }
-
-                while (enumerator.MoveNext())
-                {
-                    yield return enumerator.Current;
-                }
-            }
-            else
+            if (!equalityComparer.Equals(enumerator.Current, expectedElement))
             {
                 if (raiseIfNotEquals)
                 {
-                    throw new ArgumentException("EmptyCollection", nameof(source));
+                    throw new ArgumentException("Unexpected first element", nameof(source));
                 }
+
+                yield return enumerator.Current;
+            }
+
+            while (enumerator.MoveNext())
+            {
+                yield return enumerator.Current;
+            }
+        }
+        else
+        {
+            if (raiseIfNotEquals)
+            {
+                throw new ArgumentException("EmptyCollection", nameof(source));
             }
         }
     }

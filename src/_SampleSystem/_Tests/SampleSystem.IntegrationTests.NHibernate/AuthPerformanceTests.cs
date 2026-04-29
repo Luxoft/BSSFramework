@@ -4,15 +4,16 @@ using Framework.Core;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.TestDeserializedAuth;
-using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 using Anch.SecuritySystem;
 
+using SampleSystem.IntegrationTests._Environment.TestData;
+
 namespace SampleSystem.IntegrationTests;
 
-public class AuthPerformanceTests : TestBase
+public class AuthPerformanceTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private const string TestUser = "TestUser";
 
@@ -20,15 +21,15 @@ public class AuthPerformanceTests : TestBase
 
     private const int SplitBy = 25;
 
-    public AuthPerformanceTests()
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
-        var genLoc = Enumerable.Range(0, Limit).ToList(i => this.DataHelper.SaveLocation());
+        var genLoc = Enumerable.Range(0, Limit).ToList(i => this.DataManager.SaveLocation());
 
-        var genEmployee = Enumerable.Range(0, Limit).ToList(i => this.DataHelper.SaveEmployee());
+        var genEmployee = Enumerable.Range(0, Limit).ToList(i => this.DataManager.SaveEmployee());
 
-        var genBu = Enumerable.Range(0, Limit).ToList(i => this.DataHelper.SaveBusinessUnit());
+        var genBu = Enumerable.Range(0, Limit).ToList(i => this.DataManager.SaveBusinessUnit());
 
-        var genMbu = Enumerable.Range(0, Limit).ToList(i => this.DataHelper.SaveManagementUnit());
+        var genMbu = Enumerable.Range(0, Limit).ToList(i => this.DataManager.SaveManagementUnit());
 
         var genObjects = this.EvaluateWrite(ctx =>
                                             {

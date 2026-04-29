@@ -8,13 +8,14 @@ using Anch.SecuritySystem;
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.Domain.Employee;
-using SampleSystem.IntegrationTests.__Support.TestData;
 
 using Anch.SecuritySystem.AccessDenied;
 
+using SampleSystem.IntegrationTests._Environment.TestData;
+
 namespace SampleSystem.IntegrationTests;
 
-public class SecurityRuleTests : TestBase
+public class SecurityRuleTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public async Task ApplyExceptRule_CurrentUserExcepted()
@@ -22,9 +23,9 @@ public class SecurityRuleTests : TestBase
         // Arrange
         var testSecurityRule = SecurityRole.Administrator.Except(DomainSecurityRule.CurrentUser);
 
-        var testOtherEmployeeId = this.DataHelper.SaveEmployee().Id;
+        var testOtherEmployeeId = this.DataManager.SaveEmployee().Id;
 
-        var currentEmployeeId = this.DataHelper.GetCurrentEmployee().Id;
+        var currentEmployeeId = this.DataManager.GetCurrentEmployee().Id;
 
         var testObjectIdents = await this.EvaluateAsync(
             DBSessionMode.Write,
@@ -63,16 +64,17 @@ public class SecurityRuleTests : TestBase
         var testSecurityRule = DomainSecurityRule.AccessDenied.WithOverrideAccessDeniedMessage(faultMessage);
 
         // Act
-        var action = () => this.Evaluate(
-                         DBSessionMode.Read,
-                         ctx =>
-                         {
-                             var bll = ctx.Logics.EmployeeFactory.Create(testSecurityRule);
+        var ex = Record.Exception(() => this.Evaluate(
+            DBSessionMode.Read,
+            ctx =>
+            {
+                var bll = ctx.Logics.EmployeeFactory.Create(testSecurityRule);
 
-                             bll.CheckAccess(ctx.CurrentEmployeeSource.CurrentUser);
-                         });
+                bll.CheckAccess(ctx.CurrentEmployeeSource.CurrentUser);
+            }));
 
         // Assert
-        Assert.Equal(faultMessage, Assert.Throws<AccessDeniedException>(action).Message);
+        var accessDeniedException = Assert.IsType<AccessDeniedException>(ex);
+        Assert.Equal(faultMessage, accessDeniedException.Message);
     }
 }

@@ -7,15 +7,16 @@ using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.MU;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 
 using Anch.SecuritySystem.Notification;
 using Anch.SecuritySystem.Notification.Domain;
 
+using SampleSystem.IntegrationTests._Environment.TestData;
+
 namespace SampleSystem.IntegrationTests;
 
-public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
+public class GetNotificationPrincipalsByHierarchicalContextTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private BusinessUnitIdentityDTO rootBusinessUnit;
 
@@ -43,21 +44,21 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
 
     private string searchNotificationEmployeeLogin2 = nameof(searchNotificationEmployeeLogin2);
 
-    public GetNotificationPrincipalsByHierarchicalContextTests()
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
-        this.rootBusinessUnit = this.DataHelper.SaveBusinessUnit(id: DefaultConstants.BUSINESS_UNIT_PARENT_CC_ID);
-        this.child_1_0_BusinessUnit = this.DataHelper.SaveBusinessUnit(parent: this.rootBusinessUnit);
-        this.child_1_1_BusinessUnit = this.DataHelper.SaveBusinessUnit(parent: this.child_1_0_BusinessUnit);
-        this.child_2_0_BusinessUnit = this.DataHelper.SaveBusinessUnit(parent: this.rootBusinessUnit);
-        this.child_2_1_BusinessUnit = this.DataHelper.SaveBusinessUnit(parent: this.child_2_0_BusinessUnit);
+        this.rootBusinessUnit = this.DataManager.SaveBusinessUnit(id: DefaultConstants.BUSINESS_UNIT_PARENT_CC_ID);
+        this.child_1_0_BusinessUnit = this.DataManager.SaveBusinessUnit(parent: this.rootBusinessUnit);
+        this.child_1_1_BusinessUnit = this.DataManager.SaveBusinessUnit(parent: this.child_1_0_BusinessUnit);
+        this.child_2_0_BusinessUnit = this.DataManager.SaveBusinessUnit(parent: this.rootBusinessUnit);
+        this.child_2_1_BusinessUnit = this.DataManager.SaveBusinessUnit(parent: this.child_2_0_BusinessUnit);
 
-        this.rootManagementUnit = this.DataHelper.SaveManagementUnit(id: DefaultConstants.MANAGEMENT_UNIT_PARENT_COMPANY_ID);
-        this.child_1_0_ManagementUnit = this.DataHelper.SaveManagementUnit(parent: this.rootManagementUnit);
-        this.child_1_1_ManagementUnit = this.DataHelper.SaveManagementUnit(parent: this.child_1_0_ManagementUnit);
-        this.child_2_0_ManagementUnit = this.DataHelper.SaveManagementUnit(parent: this.rootManagementUnit);
-        this.child_2_1_ManagementUnit = this.DataHelper.SaveManagementUnit(parent: this.child_2_0_ManagementUnit);
+        this.rootManagementUnit = this.DataManager.SaveManagementUnit(id: DefaultConstants.MANAGEMENT_UNIT_PARENT_COMPANY_ID);
+        this.child_1_0_ManagementUnit = this.DataManager.SaveManagementUnit(parent: this.rootManagementUnit);
+        this.child_1_1_ManagementUnit = this.DataManager.SaveManagementUnit(parent: this.child_1_0_ManagementUnit);
+        this.child_2_0_ManagementUnit = this.DataManager.SaveManagementUnit(parent: this.rootManagementUnit);
+        this.child_2_1_ManagementUnit = this.DataManager.SaveManagementUnit(parent: this.child_2_0_ManagementUnit);
 
-        this.rootEmployee = this.DataHelper.SaveEmployee();
+        this.rootEmployee = this.DataManager.SaveEmployee();
     }
 
     [Fact]

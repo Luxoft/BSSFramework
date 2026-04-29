@@ -9,24 +9,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" />
-    <PackageReference Include="Dapper.Contrib" />
-
-    <PackageReference Include="Anch.DependencyInjection" />
+    <PackageReference Include="Anch.Testing" />
+    <PackageReference Include="Anch.SecuritySystem.Testing" />
+    <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" />
 
     <PackageReference Include="MartinCostello.SqlLocalDb" />
-
-    <PackageReference Include="Microsoft.Extensions.Configuration" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
-    <PackageReference Include="Microsoft.Extensions.Options" />
-    <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.DependencyInjection\Framework.DependencyInjection.csproj" />
+    <ProjectReference Include="..\..\Anch.Testing.Database.Mssql\Anch.Testing.Database.Mssql.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure\Framework.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

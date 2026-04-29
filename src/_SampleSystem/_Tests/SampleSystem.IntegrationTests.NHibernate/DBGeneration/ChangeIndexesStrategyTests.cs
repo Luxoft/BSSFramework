@@ -1,15 +1,16 @@
-﻿using Framework.Database.NHibernate.DBGenerator;
+﻿using Framework.AutomationCore.RootServiceProviderContainer;
+using Framework.Database.NHibernate.DBGenerator;
 
 using Microsoft.SqlServer.Management.Smo;
 
 using SampleSystem.DbGenerate.NHibernate;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 using Index = Microsoft.SqlServer.Management.Smo.Index;
 
 namespace SampleSystem.IntegrationTests.DBGeneration;
 
-public class ChangeIndexesStrategyTests : TestBase
+public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void GenerateLocal_ColumnHasIndexWithIncludedColumns_PreventsDefaultIndexFromGeneration()
@@ -18,7 +19,7 @@ public class ChangeIndexesStrategyTests : TestBase
         var generator = new DbGeneratorTest();
 
         var tableName = "Employee";
-        var table = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
+        var table = this.DataManager.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 
         var baseIndexName = "IX_Employee_coreBusinessUnitId";
         var newIndexName = "IX_Employee_coreBusinessUnitId_inc";
@@ -46,10 +47,10 @@ public class ChangeIndexesStrategyTests : TestBase
                                                                   this.DatabaseContext.Main.Password),
                                 skipFrameworkDatabases: true);
 
-        var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
+        var changedTable = this.DataManager.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 
         // Assert
-        var indexes = changedTable.Indexes.Cast<Index>().ToList();
+        var indexes = changedTable.Indexes.ToList();
         Assert.Contains(indexes, x => x.Name == newIndexName);
         Assert.DoesNotContain(indexes, x => x.Name == baseIndexName);
     }
@@ -61,7 +62,7 @@ public class ChangeIndexesStrategyTests : TestBase
         var generator = new DbGeneratorTest();
 
         var tableName = "Employee";
-        var table = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
+        var table = this.DataManager.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 
         var ignoredIndexName = "IX_Employee_hRDepartmentId";
 
@@ -77,10 +78,10 @@ public class ChangeIndexesStrategyTests : TestBase
                                                                   this.DatabaseContext.Main.Password),
                                 ignoredIndexes: [ignoredIndexName],
                                 skipFrameworkDatabases: true);
-        var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
+        var changedTable = this.DataManager.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 
         // Assert
-        Assert.DoesNotContain(changedTable.Indexes.Cast<Index>(), x => x.Name == ignoredIndexName);
+        Assert.DoesNotContain(changedTable.Indexes, x => x.Name == ignoredIndexName);
     }
 
     [Fact]
@@ -98,9 +99,9 @@ public class ChangeIndexesStrategyTests : TestBase
                                                                   this.DatabaseContext.Main.Password),
                                 skipFrameworkDatabases: true);
 
-        var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, "Employee");
+        var changedTable = this.DataManager.GetTable(this.DatabaseContext.Main.DatabaseName, "Employee");
 
         // Assert
-        Assert.DoesNotContain(changedTable.Indexes.Cast<Index>(), x => x.Name == "IX_ChildEntity_parentId");
+        Assert.DoesNotContain(changedTable.Indexes, x => x.Name == "IX_ChildEntity_parentId");
     }
 }

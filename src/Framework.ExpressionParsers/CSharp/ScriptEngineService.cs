@@ -160,7 +160,7 @@ public class ScriptEngineService
         }
 
         var currentResult = new List<char>();
-        Func<string> returnFunc = () =>
+        var returnFunc = () =>
                                   {
                                       var result = new string(currentResult.ToArray());
                                       currentResult.Clear();

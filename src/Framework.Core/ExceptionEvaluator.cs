@@ -9,10 +9,8 @@ public static class ExceptionEvaluator
         if (selector == null) throw new ArgumentNullException(nameof(selector));
         if (getAggregateException == null) throw new ArgumentNullException(nameof(getAggregateException));
 
-        using (var enumerator = source.GetEnumerator())
-        {
-            return enumerator.Evaluate(selector, [], getAggregateException);
-        }
+        using var enumerator = source.GetEnumerator();
+        return enumerator.Evaluate(selector, [], getAggregateException);
     }
 
     private static TResult Evaluate<TSource, TResult>(this IEnumerator<TSource> source, Func<TSource, TResult> selector, IEnumerable<Exception> exceptions, Func<IEnumerable<Exception>, Exception> getAggregateException)

@@ -1,13 +1,13 @@
 ﻿using SampleSystem.Domain.Projections;
 using SampleSystem.Generated.DTO;
 using SampleSystem.Domain.ManualProjections;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
 
 namespace SampleSystem.IntegrationTests;
 
-public class ManualAndLegacyProjectionSecurityTests : TestBase
+public class ManualAndLegacyProjectionSecurityTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private const string TestEmployeeLogin = "MALProjection SecurityTester";
 
@@ -20,19 +20,19 @@ public class ManualAndLegacyProjectionSecurityTests : TestBase
 
     private BusinessUnitIdentityDTO bu2Ident;
 
-    public ManualAndLegacyProjectionSecurityTests()
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
-        this.bu1Ident = this.DataHelper.SaveBusinessUnit();
+        this.bu1Ident = this.DataManager.SaveBusinessUnit();
 
-        this.bu2Ident = this.DataHelper.SaveBusinessUnit();
+        this.bu2Ident = this.DataManager.SaveBusinessUnit();
 
-        this.DataHelper.SaveEmployee(login: TestEmployeeLogin);
+        this.DataManager.SaveEmployee(login: TestEmployeeLogin);
 
-        this.AuthManager.For(TestEmployeeLogin).SetRole(new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident));
+        await this.AuthManager.For(TestEmployeeLogin).SetRoleAsync(new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident), ct);
 
-        this.TestEmp1 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu1Ident);
+        this.TestEmp1 = this.DataManager.SaveEmployee(coreBusinessUnit: this.bu1Ident);
 
-        this.TestEmp2 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu2Ident);
+        this.TestEmp2 = this.DataManager.SaveEmployee(coreBusinessUnit: this.bu2Ident);
     }
 
     [Fact]

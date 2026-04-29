@@ -2,7 +2,6 @@
 using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 
 using Microsoft.Extensions.Options;
-using Microsoft.SqlServer.Management.Smo;
 
 namespace Framework.AutomationCore.Utils.DatabaseUtils;
 
@@ -33,7 +32,7 @@ public abstract class TestDatabaseGenerator(
     }
 
     public virtual void DropAllDatabases() =>
-        this.DatabaseContext.Server.Databases.Cast<Database>()
+        this.DatabaseContext.Server.Databases
             .Where(x => x.Name.Equals(this.DatabaseContext.Main.InitialCatalog))
             .ToList()
             .ForEach(x => x.Drop());

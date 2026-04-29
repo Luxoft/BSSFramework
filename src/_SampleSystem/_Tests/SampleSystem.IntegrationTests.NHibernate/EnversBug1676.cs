@@ -1,11 +1,11 @@
 ﻿using Framework.AutomationCore.RootServiceProviderContainer;
 
 using SampleSystem.Domain.EnversBug1676;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class EnversBug1676 : TestBase
+public class EnversBug1676(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void OneToOneMapping()

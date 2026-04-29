@@ -10,14 +10,15 @@ using SampleSystem.Domain.Directories;
 using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.MU;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 
 using Anch.SecuritySystem;
 
+using SampleSystem.IntegrationTests._Environment.TestData;
+
 namespace SampleSystem.IntegrationTests;
 
-public class AuthPerformanceTest : TestBase
+public class AuthPerformanceTest(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private IReadOnlyCollection<BusinessUnitIdentityDTO?> fbuSource;
 
@@ -31,19 +32,19 @@ public class AuthPerformanceTest : TestBase
 
     private static readonly int Size = 5;
 
-    public AuthPerformanceTest()
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
-        this.fbuSource = [null, .. Enumerable.Range(0, Size - 1).Select(_ => (BusinessUnitIdentityDTO?)this.DataHelper.SaveBusinessUnit())];
+        this.fbuSource = [null, .. Enumerable.Range(0, Size - 1).Select(_ => (BusinessUnitIdentityDTO?)this.DataManager.SaveBusinessUnit())];
 
-        this.mbuSource = [null, .. Enumerable.Range(0, Size - 1).Select(_ => (ManagementUnitIdentityDTO?)this.DataHelper.SaveManagementUnit())];
+        this.mbuSource = [null, .. Enumerable.Range(0, Size - 1).Select(_ => (ManagementUnitIdentityDTO?)this.DataManager.SaveManagementUnit())];
 
-        this.locationSource = [null, .. Enumerable.Range(0, Size - 1).Select(_ => (LocationIdentityDTO?)this.DataHelper.SaveLocation())];
+        this.locationSource = [null, .. Enumerable.Range(0, Size - 1).Select(_ => (LocationIdentityDTO?)this.DataManager.SaveLocation())];
 
-        this.employeeSource = [null, this.DataHelper.SaveEmployee()];
+        this.employeeSource = [null, this.DataManager.SaveEmployee()];
 
-        this.AuthManager.For(PrincipalName).CreatePrincipal();
+        await this.AuthManager.For(PrincipalName).CreatePrincipalAsync(ct);
 
-        this.GeneratePermission();
+        await this.GeneratePermissionAsync(ct);
     }
 
     [Fact]
@@ -66,7 +67,7 @@ public class AuthPerformanceTest : TestBase
         Assert.Equal(findCount, authPerfCount);
     }
 
-    private void GeneratePermission()
+    private async ValueTask GeneratePermissionAsync(CancellationToken ct)
     {
         var request = from fbu in this.fbuSource
 
@@ -78,7 +79,7 @@ public class AuthPerformanceTest : TestBase
 
                       select new SampleSystemTestPermission(SampleSystemSecurityRole.TestPerformance, fbu, mbu, location, employee).ToManagedPermission();
 
-        this.AuthManager.For(PrincipalName).SetRole(request.ToArray());
+        await this.AuthManager.For(PrincipalName).SetRoleAsync([.. request], ct);
     }
 
     private async Task<int> GenerateAuthPerformanceObject() =>
@@ -92,7 +93,7 @@ public class AuthPerformanceTest : TestBase
                 var empRep = sp.GetRequiredService<IRepositoryFactory<Employee>>().Create();
                 var testObjRep = sp.GetRequiredService<IRepositoryFactory<AuthPerformanceObject>>().Create();
 
-                int count = 0;
+                var count = 0;
                 foreach (var fbu in this.fbuSource.Take(Size - 3))
                 {
                     foreach (var mbu in this.mbuSource.Take(Size - 3))

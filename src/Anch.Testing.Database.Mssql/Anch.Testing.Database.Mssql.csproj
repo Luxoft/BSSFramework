@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Anch.Testing.Database.Mssql</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Anch.Testing.Database" />
+  </ItemGroup>
+
+</Project>

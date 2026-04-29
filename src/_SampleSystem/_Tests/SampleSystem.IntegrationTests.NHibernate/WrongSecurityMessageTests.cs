@@ -5,20 +5,22 @@ using Framework.Database;
 using Anch.SecuritySystem;
 
 using SampleSystem.Domain.Employee;
-using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 
 using Anch.SecuritySystem.AccessDenied;
 
+using SampleSystem.IntegrationTests._Environment.TestData;
+
 namespace SampleSystem.IntegrationTests;
 
-public class WrongSecurityMessageTests : TestBase
+public class WrongSecurityMessageTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private static readonly string TestPrincipalName = TextRandomizer.RandomString(10);
 
     private static readonly Guid TestPrincipalId = Guid.NewGuid();
 
-    public WrongSecurityMessageTests() => this.DataHelper.SaveEmployee(login: TestPrincipalName, id: TestPrincipalId);
+    protected override async ValueTask InitializeAsync(CancellationToken ct) =>
+        this.DataManager.SaveEmployee(login: TestPrincipalName, id: TestPrincipalId);
 
     [Fact]
     public void UseWrongSecurityMode_ErrorMessageCorrected() => this.UseSecurityRule_WithoutSecurity_ErrorMessageCorrected(SecurityRule.Edit);
@@ -34,14 +36,15 @@ public class WrongSecurityMessageTests : TestBase
         //Arrange
 
         // Act
-        var action = () => this.Evaluate(
-                         DBSessionMode.Read,
-                         TestPrincipalName,
-                         ctx => ctx.Logics.EmployeeFactory.Create(securityRule).CheckAccess(ctx.CurrentEmployeeSource.CurrentUser));
+        var ex = Record.Exception(() => this.Evaluate(
+            DBSessionMode.Read,
+            TestPrincipalName,
+            ctx => ctx.Logics.EmployeeFactory.Create(securityRule).CheckAccess(ctx.CurrentEmployeeSource.CurrentUser)));
 
         // Assert
+        var accessDeniedException = Assert.IsType<AccessDeniedException>(ex);
         Assert.Equal(
             $"You have no permissions to access object with type = '{nameof(Employee)}' (id = '{TestPrincipalId}', securityRule = '{securityRule}')",
-            Assert.Throws<AccessDeniedException>(action).Message);
+            accessDeniedException.Message);
     }
 }

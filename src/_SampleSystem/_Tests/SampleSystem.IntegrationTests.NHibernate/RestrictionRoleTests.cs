@@ -6,15 +6,16 @@ using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Directories;
 using SampleSystem.Domain.Employee;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.Main;
 using Anch.SecuritySystem;
 using Anch.SecuritySystem.Validation;
 
+using SampleSystem.IntegrationTests._Environment.TestData;
+
 namespace SampleSystem.IntegrationTests;
 
-public class RestrictionRoleTests : TestBase
+public class RestrictionRoleTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void GetRestrictionObjectsWithRestrictionRole_RestrictionApplied()
@@ -63,7 +64,7 @@ public class RestrictionRoleTests : TestBase
     public void TryCreatePermissionWithCorrectSecurityContext_PermissionCreated()
     {
         // Arrange
-        var businessUnit = this.DataHelper.SaveBusinessUnit();
+        var businessUnit = this.DataManager.SaveBusinessUnit();
 
         // Act
         var action = () =>
@@ -80,17 +81,18 @@ public class RestrictionRoleTests : TestBase
     public void TryCreatePermissionWithInvalidSecurityContext_ExceptionRaised()
     {
         // Arrange
-        var location = this.DataHelper.SaveLocation();
+        var location = this.DataManager.SaveLocation();
 
         // Act
-        var action = () =>
-                         this.AuthManager.For().SetRole(
-                             new SampleSystemTestPermission(
-                                 SampleSystemSecurityRole.RestrictionRole,
-                                 location: location));
+        var ex = Record.Exception(() =>
+            this.AuthManager.For().SetRole(
+                new SampleSystemTestPermission(
+                    SampleSystemSecurityRole.RestrictionRole,
+                    location: location)));
 
         // Assert
-        Assert.Contains($"Invalid SecurityContextType: {nameof(Location)}", Assert.Throws<SecuritySystemValidationException>(action).Message);
+        var validationException = Assert.IsType<SecuritySystemValidationException>(ex);
+        Assert.Contains($"Invalid SecurityContextType: {nameof(Location)}", validationException.Message);
     }
 
     [Fact]
@@ -165,15 +167,16 @@ public class RestrictionRoleTests : TestBase
     public void TryCreatePermissionWithoutRequiredSecurityContext_ExceptionRaised()
     {
         // Arrange
-        var location = this.DataHelper.SaveLocation();
+        var location = this.DataManager.SaveLocation();
 
         // Act
-        var action = () => this.AuthManager.For().SetRole(
-                         new SampleSystemTestPermission(SampleSystemSecurityRole.RequiredRestrictionRole, location: location));
+        var ex = Record.Exception(() => this.AuthManager.For().SetRole(
+            new SampleSystemTestPermission(SampleSystemSecurityRole.RequiredRestrictionRole, location: location)));
 
         // Assert
+        var validationException = Assert.IsType<SecuritySystemValidationException>(ex);
         Assert.Contains(
             $"{nameof(Framework.Authorization.Domain.Permission)} must contain the required contexts: {nameof(BusinessUnit)}",
-            Assert.Throws<SecuritySystemValidationException>(action).Message);
+            validationException.Message);
     }
 }

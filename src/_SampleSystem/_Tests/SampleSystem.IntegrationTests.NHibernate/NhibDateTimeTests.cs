@@ -1,19 +1,13 @@
 ﻿using Framework.AutomationCore.RootServiceProviderContainer;
 
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
-public class NhibDateTimeTests : TestBase
+public class NhibDateTimeTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
-    private DateTime prevDateTime;
-
-    public NhibDateTimeTests() => this.prevDateTime = this.TimeProvider.GetLocalNow().DateTime;
-
-    protected override void BeforeCleanup() => this.SetCurrentDateTime(this.prevDateTime);
-
     [Fact]
     public void CreateObject_CreatedDateOverride()
     {

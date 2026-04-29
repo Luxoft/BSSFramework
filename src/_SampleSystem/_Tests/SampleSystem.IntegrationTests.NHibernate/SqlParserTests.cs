@@ -4,12 +4,12 @@ using Framework.Database.DALExceptions;
 using SampleSystem.Domain;
 using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.HRDepartment;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
-public class SqlParserTests : TestBase
+public class SqlParserTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void SaveNullIntoNotNullProperty_RequiredConstraintDALException()
@@ -18,10 +18,11 @@ public class SqlParserTests : TestBase
         var testObject = new SqlParserTestObj();
 
         // Act
-        Action action = () => this.EvaluateWrite(context => { context.Logics.SqlParserTestObj.Save(testObject); });
+        var ex = Record.Exception(() => this.EvaluateWrite(context => { context.Logics.SqlParserTestObj.Save(testObject); }));
 
         // Assert
-        Assert.Contains("The field \'notNullColumn\' of type SqlParserTestObj must be initialized", Assert.Throws<RequiredConstraintDALException>(action).Message);
+        var requiredConstraintException = Assert.IsType<RequiredConstraintDALException>(ex);
+        Assert.Contains("The field \'notNullColumn\' of type SqlParserTestObj must be initialized", requiredConstraintException.Message);
     }
 
     [Fact]
@@ -32,15 +33,16 @@ public class SqlParserTests : TestBase
         var testObject2 = new SqlParserTestObj { UniqueColumn = "1", NotNullColumn = "2" };
 
         // Act
-        Action action = () => this.EvaluateWrite(
-                                                 context =>
-                                                 {
-                                                     context.Logics.SqlParserTestObj.Save(testObject1);
-                                                     context.Logics.SqlParserTestObj.Save(testObject2);
-                                                 });
+        var ex = Record.Exception(() => this.EvaluateWrite(
+            context =>
+            {
+                context.Logics.SqlParserTestObj.Save(testObject1);
+                context.Logics.SqlParserTestObj.Save(testObject2);
+            }));
 
         // Assert
-        Assert.Contains("SqlParserTestObj with same:\'UniqueColumn\' already exists", Assert.Throws<UniqueViolationConstraintDALException>(action).Message);
+        var uniqueViolationException = Assert.IsType<UniqueViolationConstraintDALException>(ex);
+        Assert.Contains("SqlParserTestObj with same:\'UniqueColumn\' already exists", uniqueViolationException.Message);
     }
 
     [Fact]
@@ -58,14 +60,15 @@ public class SqlParserTests : TestBase
                            });
 
         // Act
-        Action action = () => this.EvaluateWrite(
-                                                 context =>
-                                                 {
-                                                     context.Logics.SqlParserTestObj.Remove(testObject);
-                                                 });
+        var ex = Record.Exception(() => this.EvaluateWrite(
+            context =>
+            {
+                context.Logics.SqlParserTestObj.Remove(testObject);
+            }));
 
         // Assert
-        Assert.Contains($"{nameof(SqlParserTestObj)} cannot be removed because it is used in {nameof(SqlParserTestObjContainer)}", Assert.Throws<RemoveLinkedObjectsDALException>(action).Message);
+        var removeLinkedObjectsException = Assert.IsType<RemoveLinkedObjectsDALException>(ex);
+        Assert.Contains($"{nameof(SqlParserTestObj)} cannot be removed because it is used in {nameof(SqlParserTestObjContainer)}", removeLinkedObjectsException.Message);
     }
 
     [Fact]
@@ -75,29 +78,30 @@ public class SqlParserTests : TestBase
         var employeeController = this.MainWebApi.Employee;
         var hRDepartmentController = this.GetControllerEvaluator<HRDepartmentController>();
 
-        var buTypeId = this.DataHelper.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
+        var buTypeId = this.DataManager.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
 
-        var luxoftBuId = this.DataHelper.SaveBusinessUnit(
+        var luxoftBuId = this.DataManager.SaveBusinessUnit(
                                                           id: DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_ID,
                                                           name: DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_NAME,
                                                           type: buTypeId);
 
-        var costBuId = this.DataHelper.SaveBusinessUnit(
+        var costBuId = this.DataManager.SaveBusinessUnit(
                                                         id: DefaultConstants.BUSINESS_UNIT_PARENT_CC_ID,
                                                         name: DefaultConstants.BUSINESS_UNIT_PARENT_CC_NAME,
                                                         type: buTypeId,
                                                         parent: luxoftBuId);
 
-        var location = this.DataHelper.SaveLocation(name: "testLocation");
+        var location = this.DataManager.SaveLocation(name: "testLocation");
 
-        var employeeIdentity = this.DataHelper.SaveEmployee(login: "value", coreBusinessUnit: costBuId, location: location);
+        var employeeIdentity = this.DataManager.SaveEmployee(login: "value", coreBusinessUnit: costBuId, location: location);
 
         var fullEmployee = employeeController.Evaluate(c => c.GetFullEmployee(employeeIdentity));
 
         // Act
-        Action action = () => hRDepartmentController.Evaluate(c => c.RemoveHRDepartment(fullEmployee.HRDepartment.Identity));
+        var ex = Record.Exception(() => hRDepartmentController.Evaluate(c => c.RemoveHRDepartment(fullEmployee.HRDepartment.Identity)));
 
         // Assert
-        Assert.Equal($"{nameof(HRDepartment)} cannot be removed because it is used in {nameof(Employee)}", Assert.Throws<RemoveLinkedObjectsDALException>(action).Message);
+        var removeLinkedObjectsException = Assert.IsType<RemoveLinkedObjectsDALException>(ex);
+        Assert.Equal($"{nameof(HRDepartment)} cannot be removed because it is used in {nameof(Employee)}", removeLinkedObjectsException.Message);
     }
 }

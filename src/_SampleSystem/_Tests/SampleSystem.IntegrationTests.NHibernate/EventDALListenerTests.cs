@@ -2,11 +2,11 @@
 using Framework.Database;
 
 using SampleSystem.EventMetadata;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class EventDALListenerTests : TestBase
+public class EventDALListenerTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public async Task Employee_SendCustomEventOperation_ExceptionNotThrow()

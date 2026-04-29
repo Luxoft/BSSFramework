@@ -3,15 +3,16 @@ using Framework.Database;
 
 using SampleSystem.Domain.BU;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 
 using Anch.SecuritySystem;
 using Anch.SecuritySystem.Validation;
 
+using SampleSystem.IntegrationTests._Environment.TestData;
+
 namespace SampleSystem.IntegrationTests;
 
-public class SecurityContextRestrictionFilterTests : TestBase
+public class SecurityContextRestrictionFilterTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private static readonly SecurityRole DefaultSecurityRole = SampleSystemSecurityRole.DefaultRole;
 
@@ -26,13 +27,13 @@ public class SecurityContextRestrictionFilterTests : TestBase
 
     private BusinessUnitIdentityDTO buWithAllowedFilter;
 
-    public SecurityContextRestrictionFilterTests()
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
-        this.employee = this.DataHelper.SaveEmployee(login: this.employeeLogin);
+        this.employee = this.DataManager.SaveEmployee(login: this.employeeLogin);
 
-        this.defaultBu = this.DataHelper.SaveBusinessUnit();
+        this.defaultBu = this.DataManager.SaveBusinessUnit();
 
-        this.buWithAllowedFilter = this.DataHelper.SaveBusinessUnit(allowedForFilterRole: true);
+        this.buWithAllowedFilter = this.DataManager.SaveBusinessUnit(allowedForFilterRole: true);
     }
 
     [Fact]
@@ -41,14 +42,15 @@ public class SecurityContextRestrictionFilterTests : TestBase
         // Arrange
 
         // Act
-        var action = () => this.AuthManager.For(this.employee.Id).SetRole(
-                         new SampleSystemTestPermission(SampleSystemSecurityRole.WithRestrictionFilterRole)
-                         {
-                             BusinessUnit = this.defaultBu
-                         });
+        var ex = Record.Exception(() => this.AuthManager.For(this.employee.Id).SetRole(
+            new SampleSystemTestPermission(SampleSystemSecurityRole.WithRestrictionFilterRole)
+            {
+                BusinessUnit = this.defaultBu
+            }));
 
         // Assert
-        Assert.Contains($"SecurityContext: '{this.defaultBu.Id}' denied by filter", Assert.Throws<SecuritySystemValidationException>(action).Message);
+        var validationException = Assert.IsType<SecuritySystemValidationException>(ex);
+        Assert.Contains($"SecurityContext: '{this.defaultBu.Id}' denied by filter", validationException.Message);
     }
 
     [Fact]

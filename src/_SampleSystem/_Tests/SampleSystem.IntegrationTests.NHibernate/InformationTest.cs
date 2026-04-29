@@ -3,11 +3,11 @@ using Framework.Database;
 
 using SampleSystem.Domain.Employee;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class InformationTest : TestBase
+public class InformationTest(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void CreateAndRemoveInformation_ContainsIntegrationEvents()

@@ -2,12 +2,12 @@
 using Framework.Database;
 
 using SampleSystem.Domain.Directories;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel;
 
 namespace SampleSystem.IntegrationTests;
 
-public class SubscriptionCustomNotPersistentModelTests : TestBase
+public class SubscriptionCustomNotPersistentModelTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void CustomNotPersistentNotificationModel_Always_ShouldNotThrowException()

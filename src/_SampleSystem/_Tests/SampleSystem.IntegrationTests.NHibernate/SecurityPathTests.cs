@@ -7,18 +7,18 @@ using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.Domain.Employee;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.Security;
 
 namespace SampleSystem.IntegrationTests;
 
-public class SecurityPathTests : TestBase
+public class SecurityPathTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void SecurityPathWithContext_EmployeeWithoutContextRestrictions_EmployeeShouldHaveAccess()
     {
         // Arrange
-        var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
+        var employeeIdentity = this.DataManager.SaveEmployee(Guid.NewGuid());
 
         // Act
         var result = this.Evaluate(

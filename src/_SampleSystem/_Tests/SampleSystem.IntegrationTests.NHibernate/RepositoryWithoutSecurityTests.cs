@@ -1,9 +1,9 @@
-﻿using SampleSystem.IntegrationTests.__Support.TestData;
+﻿using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
-public class RepositoryWithoutSecurityTests : TestBase
+public class RepositoryWithoutSecurityTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public async Task GetDataFromUnsecurityRepository_DataLoaded()
@@ -27,9 +27,9 @@ public class RepositoryWithoutSecurityTests : TestBase
         var controllerEvaluator = this.GetControllerEvaluator<NoSecurityController>();
 
         // Act
-        Func<Task> saveAction = () => controllerEvaluator.EvaluateAsync(c => c.TestFaultSave(default));
+        var ex = await Record.ExceptionAsync(() => controllerEvaluator.EvaluateAsync(c => c.TestFaultSave(default)));
 
         // Assert
-        await Assert.ThrowsAsync<ArgumentOutOfRangeException>(saveAction);
+        Assert.IsType<ArgumentOutOfRangeException>(ex);
     }
 }

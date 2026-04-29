@@ -151,7 +151,7 @@ public static partial class CoreDatabaseUtil
     }
 
 
-    public static void Drop(this Server server, Database database)
+    public static void Drop(this Server server, Microsoft.SqlServer.Management.Smo.Database database)
     {
         try
         {
@@ -190,7 +190,7 @@ public static partial class CoreDatabaseUtil
 
     private static void Create(Server server, IDatabaseItem database)
     {
-        var db = new Database(server, database.DatabaseName);
+        var db = new Microsoft.SqlServer.Management.Smo.Database(server, database.DatabaseName);
         if (!string.IsNullOrEmpty(database.DatabaseCollation))
         {
             db.Collation = database.DatabaseCollation;

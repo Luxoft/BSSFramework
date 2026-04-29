@@ -3,24 +3,24 @@ using Framework.Database;
 
 using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Enums;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.Security;
 
 namespace SampleSystem.IntegrationTests;
 
-public class VirtualPermissionTests : TestBase
+public class VirtualPermissionTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private (string UserLogin, Guid BuId, Guid EmployeeId)[] Datas;
 
 
-    public VirtualPermissionTests() =>
+    protected override async ValueTask InitializeAsync(CancellationToken ct) =>
         this.Datas = new[] { "testEmployeeLogin", "otherTestEmployeeLogin" }
                      .Select(
                          userLogin =>
                          {
-                             var buId = this.DataHelper.SaveBusinessUnit().Id;
+                             var buId = this.DataManager.SaveBusinessUnit().Id;
 
-                             var employeeId = this.DataHelper.SaveEmployee(login: userLogin).Id;
+                             var employeeId = this.DataManager.SaveEmployee(login: userLogin).Id;
 
                              this.Evaluate(
                                  DBSessionMode.Write,

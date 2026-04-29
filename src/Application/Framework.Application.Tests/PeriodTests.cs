@@ -41,10 +41,10 @@ public class PeriodTests
         var service = new FinancialYearCalculator(new FinancialYearServiceSettings());
 
         // Act
-        Action action = () => service.GetFinancialYear(2017, month);
+        var ex = Record.Exception(() => service.GetFinancialYear(2017, month));
 
         // Assert
-        Assert.Throws<ArgumentOutOfRangeException>(action);
+        Assert.IsType<ArgumentOutOfRangeException>(ex);
     }
 
     /// <summary>
@@ -61,9 +61,9 @@ public class PeriodTests
         var service = new FinancialYearCalculator(new FinancialYearServiceSettings());
 
         // Act
-        Action action = () => service.GetFinancialYear(year, month);
+        var ex = Record.Exception(() => service.GetFinancialYear(year, month));
 
         // Assert
-        Assert.Throws<ArgumentOutOfRangeException>(action);
+        Assert.IsType<ArgumentOutOfRangeException>(ex);
     }
 }

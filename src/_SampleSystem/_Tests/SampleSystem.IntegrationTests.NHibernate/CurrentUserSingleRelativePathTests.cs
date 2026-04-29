@@ -9,15 +9,15 @@ using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Employee;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class CurrentUserSingleRelativePathTests : TestBase
+public class CurrentUserSingleRelativePathTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private Guid[] testObjectIdents;
 
-    public CurrentUserSingleRelativePathTests() =>
+    protected override async ValueTask InitializeAsync(CancellationToken ct) =>
         this.testObjectIdents = this.Evaluate(
             DBSessionMode.Write,
             ctx =>

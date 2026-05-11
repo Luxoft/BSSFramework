@@ -191,7 +191,6 @@
     <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
   </Folder>
-  <Project Path="Anch.Testing.Database.Mssql/Anch.Testing.Database.Mssql.csproj" />
   
   <Project Path="Framework.Core/Framework.Core.csproj" />
   <Project Path="Framework.DependencyInjection/Framework.DependencyInjection.csproj" />

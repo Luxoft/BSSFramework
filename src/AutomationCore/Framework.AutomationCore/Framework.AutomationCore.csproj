@@ -10,14 +10,15 @@
 
   <ItemGroup>
     <PackageReference Include="Anch.Testing" />
+    <PackageReference Include="Anch.Testing.Database" />
     <PackageReference Include="Anch.SecuritySystem.Testing" />
+
     <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" />
 
     <PackageReference Include="MartinCostello.SqlLocalDb" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Anch.Testing.Database.Mssql\Anch.Testing.Database.Mssql.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure\Framework.Infrastructure.csproj" />
   </ItemGroup>
 

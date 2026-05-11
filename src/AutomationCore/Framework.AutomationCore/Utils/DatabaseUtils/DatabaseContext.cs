@@ -25,7 +25,7 @@ public class DatabaseContext : IDatabaseContext
     public DatabaseContext(
         IDefaultConnectionStringSource defaultConnectionStringSource,
         IOptions<AutomationFrameworkSettings> settings)
-    : this(defaultConnectionStringSource, settings.Value)
+        : this(defaultConnectionStringSource, settings.Value)
     {
     }
 
@@ -56,7 +56,7 @@ public class DatabaseContext : IDatabaseContext
         }
 
         this.Server = new Server(new ServerConnection(new SqlConnection(
-            CoreDatabaseUtil.CutInitialCatalog(this.Main.ConnectionString))));
+                                                          CoreDatabaseUtil.CutInitialCatalog(this.Main.ConnectionString))));
     }
 
     public Server Server
@@ -85,5 +85,3 @@ public class DatabaseContext : IDatabaseContext
 
     private static readonly Regex DataSourceRegex = new("Data Source=([^;]*)", RegexOptions.Compiled | RegexOptions.NonBacktracking);
 }
-
-

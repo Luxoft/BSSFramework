@@ -19,8 +19,8 @@ public class DatabaseItem : IDatabaseItem
         this.builder = new SqlConnectionStringBuilder(connectionString);
         initialCatalog ??= this.builder.InitialCatalog;
         this.DatabaseName = randomizeDatabaseName
-            ? $"{initialCatalog}{TextRandomizer.RandomString(5)}"
-            : initialCatalog;
+                                ? $"{initialCatalog}{TextRandomizer.RandomString(5)}"
+                                : initialCatalog;
 
         var fileName = $"{this.InstanceName}_{this.DatabaseName}_{TextRandomizer.RandomString(5)}";
 
@@ -39,8 +39,6 @@ public class DatabaseItem : IDatabaseItem
     public string UserId => this.builder.UserID;
 
     public string Password => this.builder.Password;
-
-    public bool IntegratedSecurity => this.builder.IntegratedSecurity;
 
     public string ConnectionString => this.builder.ConnectionString;
 

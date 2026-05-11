@@ -1,17 +1,11 @@
-﻿using Anch.DependencyInjection;
-using Anch.Testing;
-using Anch.Testing.Database;
-using Anch.Testing.Database.DependencyInjection;
-using Anch.Testing.Database.Mssql;
+﻿using Anch.Testing.Database.DependencyInjection;
 using Anch.Testing.Xunit;
 
 using Bss.Platform.Events.Abstractions;
 
 using Framework.Application.Jobs;
+using Framework.AutomationCore;
 using Framework.AutomationCore.ServiceEnvironment;
-using Framework.AutomationCore.Settings;
-using Framework.Database;
-using Framework.Database.ConnectionStringSource;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,67 +24,34 @@ using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests._Environment;
 
-public class NHibTestEnvironment : ITestEnvironment
+public class NHibTestEnvironment : BssTestEnvironment
 {
-    private readonly IConfiguration configuration;
+    private const string SettingsFileName = "testAppSettings.json";
+    protected override IConfiguration Configuration { get; } = new ConfigurationBuilder()
+                                                               .SetBasePath(Directory.GetCurrentDirectory())
+                                                               .AddJsonFile(SettingsFileName, false, true)
+                                                               .AddJsonFile($"{Environment.MachineName}.{SettingsFileName}", true)
+                                                               .AddEnvironmentVariables(nameof(SampleSystem)).Build();
+    protected override void InitInitializers(IDatabaseTestingSetup setup) =>
 
-    private readonly AutomationFrameworkSettings settings = new();
+        setup.SetEmptySchemaInitializer<EmptySchemaInitializer>()
+             .SetTestDataInitializer<TestDataInitializer>();
 
-    private readonly TestDatabaseSettings databaseSettings;
 
-    public NHibTestEnvironment()
-    {
-        var settingsFileName = "testAppSettings.json";
+    protected override void InitServices(IServiceCollection services) =>
 
-        this.configuration = new ConfigurationBuilder()
-                             .SetBasePath(Directory.GetCurrentDirectory())
-                             .AddJsonFile(settingsFileName, false, true)
-                             .AddJsonFile($"{Environment.MachineName}.{settingsFileName}", true)
-                             .AddEnvironmentVariables(nameof(SampleSystem)).Build();
+        services.AddGeneralDependencyInjection(this.Configuration, new HostingEnvironment(), s => s.AddExtensions(new SampleSystemNHibernateExtension()))
 
-        this.configuration.Bind(this.settings);
+                .AddSingleton<SampleSystemInitializer>()
 
-        var defaultConnectionString = this.configuration.GetConnectionString("DefaultConnection")
-                                      ?? throw new InvalidOperationException("DefaultConnection string is not configured.");
+                .AddIntegrationTests()
 
-        this.databaseSettings = new TestDatabaseSettings { InitMode = this.settings.DatabaseInitMode, DefaultConnectionString = new(defaultConnectionString) };
-    }
+                .AddScoped<IIntegrationEventPublisher, TestIntegrationEventPublisher>()
 
-    public bool AllowParallelization => this.settings.TestsParallelize;
+                .AddSingleton(new JobImpersonateData("sampleSystemTestJob"))
+                .AddJobs([typeof(SampleJob).Assembly])
 
-    public IServiceProvider BuildServiceProvider(IServiceCollection services)
-    {
-        services.AddOptions<AutomationFrameworkSettings>();
+                .AddTestControllers([typeof(EmployeeController).Assembly])
 
-        return services.AddSingleton(this.configuration)
-
-                       .AddGeneralDependencyInjection(this.configuration, new HostingEnvironment(), s => s.AddExtensions(new SampleSystemNHibernateExtension()))
-
-                       .AddSingleton<SampleSystemInitializer>()
-
-                       .AddIntegrationTests()
-
-                       .AddScoped<IIntegrationEventPublisher, TestIntegrationEventPublisher>()
-
-                       .AddSingleton(new JobImpersonateData("sampleSystemTestJob"))
-                       .AddJobs([typeof(SampleJob).Assembly])
-
-                       .AddTestControllers([typeof(EmployeeController).Assembly])
-
-                       .AddSingleton<DataManager>()
-
-                       .AddSingleton<EmptySchemaInitializer>()
-                       .AddSingleton<TestDataInitializer>()
-
-                       .AddDatabaseTesting(dts => dts
-                                                  .SetProvider<MssqlDatabaseTestingProvider>()
-                                                  .SetEmptySchemaInitializer<EmptySchemaInitializer>()
-                                                  .SetTestDataInitializer<TestDataInitializer>()
-                                                  .SetSettings(this.databaseSettings)
-                                                  .RebindActualConnection<IDefaultConnectionStringSource>(connectionString =>
-                                                          new ManualDefaultConnectionStringSource(connectionString.Value)))
-
-                       .AddValidator<DuplicateServiceUsageValidator>()
-                       .BuildServiceProvider(new ServiceProviderOptions { ValidateScopes = true, ValidateOnBuild = true });
-    }
+                .AddSingleton<DataManager>();
 }

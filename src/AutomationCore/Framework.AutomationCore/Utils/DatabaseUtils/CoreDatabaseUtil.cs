@@ -201,24 +201,24 @@ public static partial class CoreDatabaseUtil
         var fileGroup = new FileGroup(db, "PRIMARY");
 
         var dataFile = new DataFile(
-            fileGroup,
-            database.DatabaseName,
-            database.SourceDataPath)
-        {
-            Size = 5.5 * 1024.0, GrowthType = FileGrowthType.KB, Growth = 1.0 * 1024.0
-        };
+                       fileGroup,
+                       database.DatabaseName,
+                       database.SourceDataPath)
+                       {
+                           Size = 5.5 * 1024.0, GrowthType = FileGrowthType.KB, Growth = 1.0 * 1024.0
+                       };
 
         fileGroup.Files.Add(dataFile);
 
         db.FileGroups.Add(fileGroup);
 
         var logFile = new LogFile(
-            db,
-            database.DatabaseName + "_log",
-            database.SourceLogPath)
-        {
-            Size = 1.0 * 1024.0, GrowthType = FileGrowthType.Percent, Growth = 10.0
-        };
+                      db,
+                      database.DatabaseName + "_log",
+                      database.SourceLogPath)
+                      {
+                          Size = 1.0 * 1024.0, GrowthType = FileGrowthType.Percent, Growth = 10.0
+                      };
 
         db.LogFiles.Add(logFile);
 

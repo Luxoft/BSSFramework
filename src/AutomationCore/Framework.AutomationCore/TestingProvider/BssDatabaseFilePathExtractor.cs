@@ -2,16 +2,18 @@
 
 using Anch.Testing.Database.ConnectionStringManagement;
 
-namespace Anch.Testing.Database.Mssql;
+namespace Framework.AutomationCore.TestingProvider;
 
-public class MssqlDatabaseFilePathExtractor : IDatabaseFilePathExtractor
+public class BssDatabaseFilePathExtractor : IDatabaseFilePathExtractor
 {
     public string Extract(TestDatabaseConnectionString connectionString)
     {
+        throw new NotImplementedException();
+
         var builder = new DbConnectionStringBuilder
-        {
-            ConnectionString = connectionString.Value
-        };
+                      {
+                          ConnectionString = connectionString.Value
+                      };
 
         if (!builder.TryGetValue("Data Source", out var value))
             throw new InvalidOperationException("Data Source is missing.");

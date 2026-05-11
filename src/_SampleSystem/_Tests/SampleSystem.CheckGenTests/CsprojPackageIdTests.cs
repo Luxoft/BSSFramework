@@ -118,15 +118,9 @@ public class CsprojValidationTests
             .ToHashSet(StringComparer.OrdinalIgnoreCase);
     }
 
-    private static string ToRelativePath(string root, string file)
-    {
-        return NormalizePath(Path.GetRelativePath(root, file));
-    }
+    private static string ToRelativePath(string root, string file) => NormalizePath(Path.GetRelativePath(root, file));
 
-    private static string NormalizePath(string path)
-    {
-        return path.Replace('\\', '/').TrimStart('/');
-    }
+    private static string NormalizePath(string path) => path.Replace('\\', '/').TrimStart('/');
 
     private static string FindSolutionRoot()
     {

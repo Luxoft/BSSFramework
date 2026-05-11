@@ -11,10 +11,7 @@ namespace SampleSystem.IntegrationTests.Subscriptions_Metadata;
 
 public sealed class MetadataSubscriptionSystemServiceTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
-    protected override async ValueTask InitializeAsync(CancellationToken ct)
-    {
-        this.GetNotifications().Clear();
-    }
+    protected override async ValueTask InitializeAsync(CancellationToken ct) => this.GetNotifications().Clear();
 
     [Fact]
     public void SubscriptionFromMetadataShouldBeSent()

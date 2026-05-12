@@ -12,9 +12,9 @@ namespace Framework.Database.NHibernate.DBGenerator.ScriptGeneratorBuilder.Impl;
 
 internal class MigrationDBScriptGeneratorBuilder : IMigrationScriptGeneratorBuilder
 {
-    private List<IMigrationScriptReader> readers = [];
+    private readonly List<IMigrationScriptReader> readers = [];
 
-    public bool IsFreezed { get; internal set; }
+    public bool IsFrozen { get; internal set; }
 
     public string TableName { get; set; } = "ExecutedScripts";
 

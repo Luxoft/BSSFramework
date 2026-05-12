@@ -11,7 +11,7 @@ namespace Framework.Database.NHibernate.DBGenerator;
 public class DBGenerator(MappingSettings settings)
 {
     protected virtual void Init(
-            DatascriptGeneratorBuilder builder,
+            DataScriptGeneratorBuilder builder,
             DatabaseScriptGeneratorMode mode = DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript,
             ICollection<string>? ignoredIndexes = null)
     {
@@ -73,7 +73,7 @@ public class DBGenerator(MappingSettings settings)
 
         this.FilterMetadata(metadata);
 
-        var builder = new DatascriptGeneratorBuilder(mode);
+        var builder = new DataScriptGeneratorBuilder(mode);
 
         this.Init(builder, generatorMode, ignoredIndexes);
 

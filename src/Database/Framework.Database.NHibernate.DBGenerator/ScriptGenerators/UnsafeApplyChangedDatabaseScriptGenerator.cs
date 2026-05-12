@@ -14,7 +14,7 @@ public class TryCreateDatabaseScriptGenerator(IDatabaseScriptGenerator source) :
 {
     public IDatabaseScriptResult GenerateScript(IDatabaseScriptGeneratorContext context)
     {
-        IDatabaseScriptResult tryCreateDatabase = null;
+        IDatabaseScriptResult? tryCreateDatabase = null;
 
         var prevMode = context.SqlDatabaseFactory.Server.ConnectionContext.SqlExecutionModes;
 
@@ -46,7 +46,7 @@ public class UnsafeApplyChangedDatabaseScriptGenerator : IDatabaseScriptGenerato
 {
     private readonly IDatabaseScriptGenerator source;
     private readonly bool copyData;
-    private readonly string[] copyDataForTables;
+    private readonly string[]? copyDataForTables;
 
     private readonly bool removeSchemaDatabase;
 
@@ -61,7 +61,7 @@ public class UnsafeApplyChangedDatabaseScriptGenerator : IDatabaseScriptGenerato
             IDatabaseScriptGenerator source,
             bool copyData,
             bool removeSchemaDatabase,
-            string[] copyDataForTables = null)
+            string[]? copyDataForTables = null)
     {
         this.source = source;
         this.copyData = copyData;

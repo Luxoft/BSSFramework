@@ -78,5 +78,5 @@ class MainDBScriptGeneratorBuilder : DatabaseScriptGeneratorContainer, IMainDBSc
 
     }
 
-    public bool IsFreezed { get; internal set; }
+    public bool IsFrozen { get; internal set; }
 }

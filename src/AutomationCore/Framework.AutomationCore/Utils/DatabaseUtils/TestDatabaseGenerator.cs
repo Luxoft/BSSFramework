@@ -1,92 +1,92 @@
-﻿using Framework.AutomationCore.Settings;
-using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
+﻿//using Framework.AutomationCore.Settings;
+//using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 
-using Microsoft.Extensions.Options;
+//using Microsoft.Extensions.Options;
 
-namespace Framework.AutomationCore.Utils.DatabaseUtils;
+//namespace Framework.AutomationCore.Utils.DatabaseUtils;
 
-public abstract class TestDatabaseGenerator(
-    IDatabaseContext databaseContext,
-    IOptions<AutomationFrameworkSettings> settings) : ITestDatabaseGenerator
-{
-    public virtual IEnumerable<string> TestServers => [];
+//public abstract class TestDatabaseGenerator(
+//    IDatabaseContext databaseContext,
+//    IOptions<AutomationFrameworkSettings> settings) : ITestDatabaseGenerator
+//{
+//    public virtual IEnumerable<string> TestServers => [];
 
-    public IDatabaseContext DatabaseContext { get; } = databaseContext;
+//    public IDatabaseContext DatabaseContext { get; } = databaseContext;
 
-    private readonly AutomationFrameworkSettings settings = settings.Value;
+//    private readonly AutomationFrameworkSettings settings = settings.Value;
 
-    public void CreateLocalDb()
-    {
-        if (this.settings.UseLocalDb && !CoreDatabaseUtil.LocalDbInstanceExists(this.DatabaseContext.Main.InstanceName))
-        {
-            CoreDatabaseUtil.CreateLocalDb(this.DatabaseContext.Main.InstanceName);
-        }
-    }
+//    public void CreateLocalDb()
+//    {
+//        if (this.settings.UseLocalDb && !CoreDatabaseUtil.LocalDbInstanceExists(this.DatabaseContext.Main.InstanceName))
+//        {
+//            CoreDatabaseUtil.CreateLocalDb(this.DatabaseContext.Main.InstanceName);
+//        }
+//    }
 
-    public virtual void DeleteLocalDb()
-    {
-        if (this.settings.UseLocalDb)
-        {
-            CoreDatabaseUtil.DeleteLocalDb(this.DatabaseContext.Main.InstanceName);
-        }
-    }
+//    public virtual void DeleteLocalDb()
+//    {
+//        if (this.settings.UseLocalDb)
+//        {
+//            CoreDatabaseUtil.DeleteLocalDb(this.DatabaseContext.Main.InstanceName);
+//        }
+//    }
 
-    public virtual void DropAllDatabases() =>
-        this.DatabaseContext.Server.Databases
-            .Where(x => x.Name.Equals(this.DatabaseContext.Main.InitialCatalog))
-            .ToList()
-            .ForEach(x => x.Drop());
+//    public virtual void DropAllDatabases() =>
+//        this.DatabaseContext.Server.Databases
+//            .Where(x => x.Name.Equals(this.DatabaseContext.Main.InitialCatalog))
+//            .ToList()
+//            .ForEach(x => x.Drop());
 
-    public virtual void ExecuteInsertsForDatabases() =>
-        CoreDatabaseUtil.ExecuteSqlFromFolder(
-            this.DatabaseContext.Main.ConnectionString,
-            @"__Support\Scripts",
-            this.DatabaseContext.Main.DatabaseName);
+//    public virtual void ExecuteInsertsForDatabases() =>
+//        CoreDatabaseUtil.ExecuteSqlFromFolder(
+//            this.DatabaseContext.Main.ConnectionString,
+//            @"__Support\Scripts",
+//            this.DatabaseContext.Main.DatabaseName);
 
-    public void DeleteDetachedFiles()
-    {
-        if (!Directory.Exists(this.settings.DbDataDirectory))
-        {
-            return;
-        }
+//    public void DeleteDetachedFiles()
+//    {
+//        if (!Directory.Exists(this.settings.BackupPath))
+//        {
+//            return;
+//        }
 
-        Directory.GetFiles(this.settings.DbDataDirectory)
-                 .Where(i => i.Contains(this.DatabaseContext.Main.InstanceName))
-                 .ToList()
-                 .ForEach(File.Delete);
-    }
+//        Directory.GetFiles(this.settings.BackupPath)
+//                 .Where(i => i.Contains(this.DatabaseContext.Main.InstanceName))
+//                 .ToList()
+//                 .ForEach(File.Delete);
+//    }
 
-    public virtual void CheckServerAllowed()
-    {
-        if (this.DatabaseContext.Server.NetName.Equals(System.Environment.MachineName, StringComparison.InvariantCultureIgnoreCase))
-        {
-            return;
-        }
+//    public virtual void CheckServerAllowed()
+//    {
+//        if (this.DatabaseContext.Server.NetName.Equals(System.Environment.MachineName, StringComparison.InvariantCultureIgnoreCase))
+//        {
+//            return;
+//        }
 
-        if (!this.TestServers.Select(s => s.ToUpper())
-                 .ToList()
-                 .Contains(this.DatabaseContext.Server.NetName.ToUpper()))
-        {
-            throw new Exception(
-                $"Server name {this.DatabaseContext.Server.NetName} is not specified in allowed list of test servers: {string.Join(", ", this.TestServers.Select(s => s.ToUpper()).ToList())}");
-        }
-    }
+//        if (!this.TestServers.Select(s => s.ToUpper())
+//                 .ToList()
+//                 .Contains(this.DatabaseContext.Server.NetName.ToUpper()))
+//        {
+//            throw new Exception(
+//                $"Server name {this.DatabaseContext.Server.NetName} is not specified in allowed list of test servers: {string.Join(", ", this.TestServers.Select(s => s.ToUpper()).ToList())}");
+//        }
+//    }
 
-    public async Task CheckAndCreateDetachedFilesAsync()
-    {
-        if (!new FileInfo(this.DatabaseContext.Main.CopyDataPath).Exists)
-        {
-            this.DatabaseContext.ReCreate();
-            await this.GenerateDatabasesAsync();
-            this.ExecuteInsertsForDatabases();
-            await this.GenerateTestDataAsync();
-            this.DatabaseContext.CopyDetachedFiles();
-        }
-    }
+//    public async Task CheckAndCreateDetachedFilesAsync()
+//    {
+//        if (!new FileInfo(this.DatabaseContext.Main.CopyDataPath).Exists)
+//        {
+//            this.DatabaseContext.ReCreate();
+//            await this.GenerateDatabasesAsync();
+//            this.ExecuteInsertsForDatabases();
+//            await this.GenerateTestDataAsync();
+//            this.DatabaseContext.CopyDetachedFiles();
+//        }
+//    }
 
-    public abstract Task GenerateDatabasesAsync();
+//    public abstract Task GenerateDatabasesAsync();
 
-    public abstract Task GenerateTestDataAsync();
+//    public abstract Task GenerateTestDataAsync();
 
-    public virtual Task CheckTestDatabaseAsync() => Task.CompletedTask;
-}
+//    public virtual Task CheckTestDatabaseAsync() => Task.CompletedTask;
+//}

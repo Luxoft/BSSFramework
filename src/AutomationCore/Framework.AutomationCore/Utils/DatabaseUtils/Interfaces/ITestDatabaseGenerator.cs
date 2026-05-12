@@ -1,28 +1,28 @@
-﻿namespace Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
+﻿//namespace Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 
-public interface ITestDatabaseGenerator
-{
-    IEnumerable<string> TestServers { get; }
+//public interface ITestDatabaseGenerator
+//{
+//    IEnumerable<string> TestServers { get; }
 
-    IDatabaseContext DatabaseContext { get; }
+//    IDatabaseContext DatabaseContext { get; }
 
-    void CreateLocalDb();
+//    void CreateLocalDb();
 
-    void DeleteLocalDb();
+//    void DeleteLocalDb();
 
-    void DropAllDatabases();
+//    void DropAllDatabases();
 
-    void ExecuteInsertsForDatabases();
+//    void ExecuteInsertsForDatabases();
 
-    Task GenerateDatabasesAsync();
+//    Task GenerateDatabasesAsync();
 
-    void DeleteDetachedFiles();
+//    void DeleteDetachedFiles();
 
-    Task CheckAndCreateDetachedFilesAsync();
+//    Task CheckAndCreateDetachedFilesAsync();
 
-    Task CheckTestDatabaseAsync();
+//    Task CheckTestDatabaseAsync();
 
-    void CheckServerAllowed();
+//    void CheckServerAllowed();
 
-    Task GenerateTestDataAsync();
-}
+//    Task GenerateTestDataAsync();
+//}

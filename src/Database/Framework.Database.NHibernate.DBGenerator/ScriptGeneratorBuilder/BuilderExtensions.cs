@@ -12,7 +12,7 @@ static class BuilderExtensions
             this IDatabaseScriptGenerator scriptGenerator,
             bool copyData,
             bool removeSchemaDatabase,
-            string[] copyDataForTables = null) =>
+            string[]? copyDataForTables = null) =>
         new UnsafeApplyChangedDatabaseScriptGenerator(scriptGenerator, copyData, removeSchemaDatabase, copyDataForTables);
 
     internal static void ValidateOneSet<T>(this T currentValue, T nextValue, string propertyName) where T : class
@@ -25,7 +25,7 @@ static class BuilderExtensions
 
     public static void ValidateConfigurate(this IConfigurable source)
     {
-        if (source.IsFreezed)
+        if (source.IsFrozen)
         {
             throw new ArgumentException("Can't changed values. Object in freeze status");
         }

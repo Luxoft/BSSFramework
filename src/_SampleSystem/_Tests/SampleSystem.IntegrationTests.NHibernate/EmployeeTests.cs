@@ -12,6 +12,7 @@ using Framework.Database.NHibernate.Sessions;
 using Anch.SecuritySystem;
 
 using Framework.AutomationCore.RootServiceProviderContainer;
+using Framework.AutomationCore.TestingProvider;
 
 using Microsoft.Extensions.DependencyInjection;
 

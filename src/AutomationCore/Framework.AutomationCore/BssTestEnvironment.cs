@@ -20,7 +20,8 @@ public abstract class BssTestEnvironment : ITestEnvironment
 {
     protected abstract IConfiguration Configuration { get; }
 
-    private AutomationFrameworkSettings Settings => field ??= new AutomationFrameworkSettings().Self(this.Configuration.Bind);
+    private AutomationFrameworkSettings Settings =>
+        field ??= new AutomationFrameworkSettings().Self(this.Configuration.GetSection(nameof(AutomationFrameworkSettings)).Bind);
 
     protected virtual string DefaultConnectionStringName => "DefaultConnection";
 
@@ -45,7 +46,7 @@ public abstract class BssTestEnvironment : ITestEnvironment
 
     public IServiceProvider BuildServiceProvider(IServiceCollection services)
     {
-        services.AddOptions<AutomationFrameworkSettings>();
+        services.AddOptions<AutomationFrameworkSettings>().Bind(this.Configuration.GetSection(nameof(AutomationFrameworkSettings)));
 
         return services.AddSingleton(this.Configuration)
 

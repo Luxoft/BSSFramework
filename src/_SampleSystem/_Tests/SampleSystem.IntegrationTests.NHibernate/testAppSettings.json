@@ -1,8 +1,8 @@
 ﻿{
   "AutomationFrameworkSettings": {
     "IntegrationTestUserName": "IntegrationTestRootUser",
-    "TestRunMode": "DefaultRunModeOnEmptyDatabase",
-    "TestRunServerRootFolder": "/var/opt/mssql/",
+    "DatabaseInitMode": "RebuildSnapshot",
+    "BackupPath": "/var/opt/mssql/",
     "UseLocalDb": false,
     "TestsParallelize": true
   },

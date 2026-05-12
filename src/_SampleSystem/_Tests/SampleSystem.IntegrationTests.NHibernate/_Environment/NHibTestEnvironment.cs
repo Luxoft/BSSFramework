@@ -31,7 +31,7 @@ public class NHibTestEnvironment : BssTestEnvironment
                                                                .SetBasePath(Directory.GetCurrentDirectory())
                                                                .AddJsonFile(SettingsFileName, false, true)
                                                                .AddJsonFile($"{Environment.MachineName}.{SettingsFileName}", true)
-                                                               .AddEnvironmentVariables(nameof(SampleSystem)).Build();
+                                                               .AddEnvironmentVariables($"{nameof(SampleSystem)}_").Build();
     protected override void InitInitializers(IDatabaseTestingSetup setup) =>
 
         setup.SetEmptySchemaInitializer<EmptySchemaInitializer>()

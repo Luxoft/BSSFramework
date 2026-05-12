@@ -1,12 +1,12 @@
-﻿using Microsoft.SqlServer.Management.Smo;
+﻿//using Microsoft.SqlServer.Management.Smo;
 
-namespace Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
+//namespace Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 
-public interface IDatabaseContext
-{
-    public DatabaseItem Main { get; }
+//public interface IDatabaseContext
+//{
+//    public DatabaseItem Main { get; }
 
-    public Dictionary<string, DatabaseItem> Secondary { get; }
+//    public Dictionary<string, DatabaseItem> Secondary { get; }
 
-    public Server Server { get; }
-}
+//    public Server Server { get; }
+//}

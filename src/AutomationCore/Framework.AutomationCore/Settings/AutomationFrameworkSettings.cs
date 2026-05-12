@@ -14,11 +14,7 @@ public class AutomationFrameworkSettings
 
     public string DatabaseCollation { get; set; } = "";
 
-    public string TestRunServerRootFolder { get; set; } = null!;
-
-    public string DbDataDirectory => Path.Combine(this.TestRunServerRootFolder, "data");
-
-    public string TempFolder => Path.Combine(this.TestRunServerRootFolder, "temp");
+    public string BackupPath { get; set; } = null!;
 
     public string[] SecondaryDatabases { get; set; } = [];
 

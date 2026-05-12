@@ -4,13 +4,16 @@ namespace Framework.Database.NHibernate.DBGenerator.ScriptGeneratorBuilder.Contr
 
 public interface IConfigurable
 {
-    bool IsFreezed { get; }
+    bool IsFrozen { get; }
 }
 
 public interface IMigrationScriptGeneratorBuilder : IConfigurable
 {
     IMigrationScriptGeneratorBuilder WithDatabase(string databaseName);
+
     IMigrationScriptGeneratorBuilder WithTable(string tableName);
+
     IMigrationScriptGeneratorBuilder WithCustom(IMigrationScriptReader source);
+
     IMigrationScriptGeneratorBuilder WithFolder(string directoryPath);
 }

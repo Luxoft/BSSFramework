@@ -3,7 +3,7 @@
 using Framework.Application.FinancialYear;
 using Framework.AutomationCore.ServiceEnvironment.Services;
 using Framework.AutomationCore.Settings;
-using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
+//using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 
 //using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 
@@ -23,7 +23,7 @@ public static class RootServiceProviderContainerExtensions
 
         public IFinancialYearService FinancialYearService => rootServiceProviderContainer.RootServiceProvider.GetRequiredService<IFinancialYearService>();
 
-        public IDatabaseContext DatabaseContext => rootServiceProviderContainer.RootServiceProvider.GetRequiredService<IDatabaseContext>();
+        //public IDatabaseContext DatabaseContext => rootServiceProviderContainer.RootServiceProvider.GetRequiredService<IDatabaseContext>();
 
         public void SetCurrentDateTime(DateTime newDateTime) => rootServiceProviderContainer.RootServiceProvider.GetRequiredService<IntegrationTestTimeProvider>().SetCurrentDateTime(newDateTime);
 

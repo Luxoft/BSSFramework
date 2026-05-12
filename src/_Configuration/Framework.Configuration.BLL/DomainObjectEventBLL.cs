@@ -8,8 +8,8 @@ public partial class DomainObjectEventBLL
     public QueueProcessingState GetProcessingState() =>
         new()
         {
-            UnprocessedCount = this.GetUnsecureQueryable().Count<DomainObjectEvent>(mod => mod.Status != QueueProgressStatus.Processed),
+            UnprocessedCount = this.GetUnsecureQueryable().Count(mod => mod.Status != QueueProgressStatus.Processed),
 
-            LastProcessedItemDateTime = this.GetUnsecureQueryable().Where<DomainObjectEvent>(mod => mod.Status == QueueProgressStatus.Processed).Max(mod => mod.ProcessDate)
+            LastProcessedItemDateTime = this.GetUnsecureQueryable().Where(mod => mod.Status == QueueProgressStatus.Processed).Max(mod => mod.ProcessDate)
         };
 }

@@ -1,4 +1,6 @@
-﻿//using System.Text.RegularExpressions;
+﻿
+
+//using System.Text.RegularExpressions;
 
 //using Framework.AutomationCore.Settings;
 //using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
@@ -9,7 +11,25 @@
 //using Microsoft.SqlServer.Management.Common;
 //using Microsoft.SqlServer.Management.Smo;
 
-//namespace Framework.AutomationCore.Utils.DatabaseUtils;
+using Anch.Testing.Database.ConnectionStringManagement;
+
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Framework.AutomationCore.Utils.DatabaseUtils;
+
+public interface IDatabaseContext
+{
+    TestDatabaseConnectionString ConnectionString { get; }
+
+    IReadOnlyList<IDatabaseContext> Children { get; }
+}
+
+public class DatabaseContext(ITestConnectionStringProvider connectionStringProvider, [FromKeyedServices(nameof(IDatabaseContext.Children))]IEnumerable<IDatabaseContext> children) : IDatabaseContext
+{
+    public TestDatabaseConnectionString ConnectionString => connectionStringProvider.Actual;
+
+    public IReadOnlyList<IDatabaseContext> Children { get; } = children.ToList();
+}
 
 //public class DatabaseContext : IDatabaseContext
 //{

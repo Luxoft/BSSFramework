@@ -1,5 +1,4 @@
-﻿using Anch.DependencyInjection;
-using Anch.Testing.Database.ConnectionStringManagement;
+﻿using Anch.Testing.Database.ConnectionStringManagement;
 using Anch.Testing.Database.DependencyInjection;
 
 using Microsoft.Extensions.DependencyInjection;

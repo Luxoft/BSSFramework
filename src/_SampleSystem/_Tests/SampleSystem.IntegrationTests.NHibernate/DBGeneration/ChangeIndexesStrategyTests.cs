@@ -1,4 +1,5 @@
 ﻿using Framework.AutomationCore.RootServiceProviderContainer;
+using Framework.AutomationCore.Utils.DatabaseUtils;
 using Framework.Database.NHibernate.DBGenerator;
 
 using Microsoft.SqlServer.Management.Smo;
@@ -19,7 +20,7 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
         var generator = new DbGeneratorTest();
 
         var tableName = "Employee";
-        var table = this.DataManager.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
+        var table = this.DataManager.GetTable(this.DatabaseContext.ConnectionString.InitialCatalog, tableName);
 
         var baseIndexName = "IX_Employee_coreBusinessUnitId";
         var newIndexName = "IX_Employee_coreBusinessUnitId_inc";
@@ -30,24 +31,21 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
         var newIndex = new Index(table, newIndexName);
         var column = new IndexedColumn(newIndex, "coreBusinessUnitId");
         newIndex.IndexedColumns.Add(column);
-        var includedColumn = new IndexedColumn(newIndex, "roleId")
-                             {
-                                     IsIncluded = true
-                             };
+        var includedColumn = new IndexedColumn(newIndex, "roleId") { IsIncluded = true };
         newIndex.IndexedColumns.Add(includedColumn);
 
         newIndex.Create();
 
         // Act
         generator.GenerateAllDB(
-                                this.DatabaseContext.Main.DataSource,
-                                this.DatabaseContext.Main.DatabaseName,
-                                credential: DbUserCredential.Create(
-                                                                  this.DatabaseContext.Main.UserId,
-                                                                  this.DatabaseContext.Main.Password),
-                                skipFrameworkDatabases: true);
+            this.DatabaseContext.ConnectionString.DataSource,
+            this.DatabaseContext.ConnectionString.InitialCatalog,
+            credential: DbUserCredential.Create(
+                this.DatabaseContext.ConnectionString.UserId,
+                this.DatabaseContext.ConnectionString.Password),
+            skipFrameworkDatabases: true);
 
-        var changedTable = this.DataManager.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
+        var changedTable = this.DataManager.GetTable(this.DatabaseContext.ConnectionString.InitialCatalog, tableName);
 
         // Assert
         var indexes = changedTable.Indexes.ToList();
@@ -62,7 +60,7 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
         var generator = new DbGeneratorTest();
 
         var tableName = "Employee";
-        var table = this.DataManager.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
+        var table = this.DataManager.GetTable(this.DatabaseContext.ConnectionString.DataSource, tableName);
 
         var ignoredIndexName = "IX_Employee_hRDepartmentId";
 
@@ -71,14 +69,14 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
 
         // Act
         generator.GenerateAllDB(
-                                this.DatabaseContext.Main.DataSource,
-                                this.DatabaseContext.Main.DatabaseName,
-                                credential: DbUserCredential.Create(
-                                                                  this.DatabaseContext.Main.UserId,
-                                                                  this.DatabaseContext.Main.Password),
-                                ignoredIndexes: [ignoredIndexName],
-                                skipFrameworkDatabases: true);
-        var changedTable = this.DataManager.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
+            this.DatabaseContext.ConnectionString.DataSource,
+            this.DatabaseContext.ConnectionString.InitialCatalog,
+            credential: DbUserCredential.Create(
+                this.DatabaseContext.ConnectionString.UserId,
+                this.DatabaseContext.ConnectionString.Password),
+            ignoredIndexes: [ignoredIndexName],
+            skipFrameworkDatabases: true);
+        var changedTable = this.DataManager.GetTable(this.DatabaseContext.ConnectionString.InitialCatalog, tableName);
 
         // Assert
         Assert.DoesNotContain(changedTable.Indexes, x => x.Name == ignoredIndexName);
@@ -92,14 +90,14 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
 
         // Act
         generator.GenerateAllDB(
-                                this.DatabaseContext.Main.DataSource,
-                                this.DatabaseContext.Main.DatabaseName,
-                                credential: DbUserCredential.Create(
-                                                                  this.DatabaseContext.Main.UserId,
-                                                                  this.DatabaseContext.Main.Password),
-                                skipFrameworkDatabases: true);
+            this.DatabaseContext.ConnectionString.DataSource,
+            this.DatabaseContext.ConnectionString.InitialCatalog,
+            credential: DbUserCredential.Create(
+                this.DatabaseContext.ConnectionString.UserId,
+                this.DatabaseContext.ConnectionString.Password),
+            skipFrameworkDatabases: true);
 
-        var changedTable = this.DataManager.GetTable(this.DatabaseContext.Main.DatabaseName, "Employee");
+        var changedTable = this.DataManager.GetTable(this.DatabaseContext.ConnectionString.InitialCatalog, "Employee");
 
         // Assert
         Assert.DoesNotContain(changedTable.Indexes, x => x.Name == "IX_ChildEntity_parentId");

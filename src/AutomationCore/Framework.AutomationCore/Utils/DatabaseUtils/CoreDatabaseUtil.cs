@@ -1,17 +1,61 @@
-﻿//using System.Collections.Specialized;
-//using System.Data;
-//using System.Text.RegularExpressions;
+﻿using System.Collections.Specialized;
+using System.Data;
+using System.Text.RegularExpressions;
 
-//using Anch.Core;
+using MartinCostello.SqlLocalDb;
 
-//using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
+using Microsoft.Data.SqlClient;
+using Microsoft.SqlServer.Management.Smo;
 
-//using MartinCostello.SqlLocalDb;
+namespace Framework.AutomationCore.Utils.DatabaseUtils;
 
-//using Microsoft.Data.SqlClient;
-//using Microsoft.SqlServer.Management.Smo;
+public static class ExecuteSqlExtensions
+{
+    public static void ExecuteSql(this IDatabaseContext databaseContext, string sqlFileOrText)
+    {
+        using var sqlCollection = new SqlConnection(databaseContext.ConnectionString.Value);
 
-//namespace Framework.AutomationCore.Utils.DatabaseUtils;
+        sqlCollection.ExecuteSql(sqlFileOrText);
+    }
+
+    public static void ExecuteSql(this SqlConnection connection, string sqlFileOrText)
+    {
+        string sql;
+
+        if (sqlFileOrText.EndsWith(".sql", StringComparison.InvariantCultureIgnoreCase))
+        {
+            using (var stream = File.OpenRead(sqlFileOrText))
+            {
+                var reader = new StreamReader(stream);
+                sql = reader.ReadToEnd();
+            }
+        }
+        else
+        {
+            sql = sqlFileOrText;
+        }
+
+        var regex = new Regex("^GO(\r\n|\n|\r)", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+        string[] lines = regex.Split(sql).Select(z => z.Replace("$Database", connection.Database)).ToArray();
+
+        using (var cmd = connection.CreateCommand())
+        {
+            cmd.Connection = connection;
+
+            foreach (var line in lines)
+            {
+                if (line.Length > 0)
+                {
+                    cmd.CommandText = line;
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandTimeout = 30;
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+    }
+}
 
 //public static partial class CoreDatabaseUtil
 //{
@@ -73,44 +117,6 @@
 
 //            ExecuteSql(connection, "exec sp_msforeachtable \"ALTER TABLE ? WITH CHECK CHECK CONSTRAINT all\"");
 //            connection.Close();
-//        }
-//    }
-
-//    public static void ExecuteSql(SqlConnection connection, string sqlFileOrText)
-//    {
-//        string sql;
-
-//        if (sqlFileOrText.EndsWith(".sql", StringComparison.InvariantCultureIgnoreCase))
-//        {
-//            using (var stream = File.OpenRead(sqlFileOrText))
-//            {
-//                var reader = new StreamReader(stream);
-//                sql = reader.ReadToEnd();
-//            }
-//        }
-//        else
-//        {
-//            sql = sqlFileOrText;
-//        }
-
-//        var regex = new Regex("^GO(\r\n|\n|\r)", RegexOptions.Multiline | RegexOptions.IgnoreCase);
-//        string[] lines = regex.Split(sql).Select(z => z.Replace("$Database", connection.Database)).ToArray();
-
-//        using (var cmd = connection.CreateCommand())
-//        {
-//            cmd.Connection = connection;
-
-//            foreach (var line in lines)
-//            {
-//                if (line.Length > 0)
-//                {
-//                    cmd.CommandText = line;
-//                    cmd.CommandType = CommandType.Text;
-//                    cmd.CommandTimeout = 30;
-
-//                    cmd.ExecuteNonQuery();
-//                }
-//            }
 //        }
 //    }
 
@@ -204,9 +210,11 @@
 //                       fileGroup,
 //                       database.DatabaseName,
 //                       database.SourceDataPath)
-//                       {
-//                           Size = 5.5 * 1024.0, GrowthType = FileGrowthType.KB, Growth = 1.0 * 1024.0
-//                       };
+//        {
+//            Size = 5.5 * 1024.0,
+//            GrowthType = FileGrowthType.KB,
+//            Growth = 1.0 * 1024.0
+//        };
 
 //        fileGroup.Files.Add(dataFile);
 
@@ -216,9 +224,11 @@
 //                      db,
 //                      database.DatabaseName + "_log",
 //                      database.SourceLogPath)
-//                      {
-//                          Size = 1.0 * 1024.0, GrowthType = FileGrowthType.Percent, Growth = 10.0
-//                      };
+//        {
+//            Size = 1.0 * 1024.0,
+//            GrowthType = FileGrowthType.Percent,
+//            Growth = 10.0
+//        };
 
 //        db.LogFiles.Add(logFile);
 

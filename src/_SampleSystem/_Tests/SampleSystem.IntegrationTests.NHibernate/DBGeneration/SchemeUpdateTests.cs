@@ -13,7 +13,7 @@ public class SchemeUpdateTests(IServiceProvider rootServiceProvider) : TestBase(
         // Arrange
 
         // Act
-        var ex = Record.Exception(() => UseSchemeUpdateTest.UseSchemeUpdate(this.DatabaseContext.Main.ConnectionString));
+        var ex = Record.Exception(() => UseSchemeUpdateTest.UseSchemeUpdate(this.DatabaseContext.ConnectionString.Value));
 
         // Assert
         Assert.Null(ex);

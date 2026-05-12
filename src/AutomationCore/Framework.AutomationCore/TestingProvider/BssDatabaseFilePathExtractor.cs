@@ -1,6 +1,7 @@
 ﻿using System.Data.Common;
 
 using Anch.Testing.Database.ConnectionStringManagement;
+using Microsoft.Data.SqlClient;
 
 namespace Framework.AutomationCore.TestingProvider;
 
@@ -10,8 +11,8 @@ public class BssDatabaseFilePathExtractor : IDatabaseFilePathExtractor
     {
         throw new NotImplementedException();
 
-        var builder = new DbConnectionStringBuilder
-                      {
+        var builder = new SqlConnectionStringBuilder
+        {
                           ConnectionString = connectionString.Value
                       };
 

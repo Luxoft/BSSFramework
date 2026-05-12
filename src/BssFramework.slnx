@@ -9,7 +9,6 @@
   </Folder>
   <Folder Name="/AutomationCore/">
     <Project Path="AutomationCore/Framework.AutomationCore.Legacy/Framework.AutomationCore.Legacy.csproj" />
-    <Project Path="AutomationCore/Framework.AutomationCore.Xunit/Framework.AutomationCore.Xunit.csproj" />
     <Project Path="AutomationCore/Framework.AutomationCore/Framework.AutomationCore.csproj" />
   </Folder>
   

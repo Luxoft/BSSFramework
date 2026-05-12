@@ -1,4 +1,5 @@
 ﻿using Framework.AutomationCore.RootServiceProviderContainer;
+using Framework.AutomationCore.Utils.DatabaseUtils;
 using Framework.Database.NHibernate.DBGenerator;
 
 using Microsoft.SqlServer.Management.Smo;
@@ -20,7 +21,7 @@ public class UniqueGroupDatabaseScriptGeneratorTests(IServiceProvider rootServic
 
         var tableName = "RoleRoleDegreeLink";
 
-        var table = this.DataManager.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
+        var table = this.DataManager.GetTable(this.DatabaseContext.ConnectionString.DataSource, tableName);
 
         var indexName = "unilink_RoleRoleDegreeLink";
 
@@ -35,14 +36,14 @@ public class UniqueGroupDatabaseScriptGeneratorTests(IServiceProvider rootServic
 
         // Act
         generator.GenerateAllDB(
-            this.DatabaseContext.Main.DataSource,
-            this.DatabaseContext.Main.DatabaseName,
+            this.DatabaseContext.ConnectionString.DataSource,
+            this.DatabaseContext.ConnectionString.InitialCatalog,
             credential: DbUserCredential.Create(
-                this.DatabaseContext.Main.UserId,
-                this.DatabaseContext.Main.Password),
+                this.DatabaseContext.ConnectionString.UserId,
+                this.DatabaseContext.ConnectionString.Password),
             skipFrameworkDatabases: true);
 
-        var changedTable = this.DataManager.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
+        var changedTable = this.DataManager.GetTable(this.DatabaseContext.ConnectionString.InitialCatalog, tableName);
 
         //  changedTable.Indexes.Refresh();
         var indexes = changedTable.Indexes.ToList();

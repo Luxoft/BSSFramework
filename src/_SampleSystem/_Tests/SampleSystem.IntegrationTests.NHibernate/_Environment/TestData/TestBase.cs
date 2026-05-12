@@ -2,6 +2,7 @@
 
 using Framework.AutomationCore;
 using Framework.AutomationCore.ServiceEnvironment;
+using Framework.AutomationCore.Utils.DatabaseUtils;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,9 +15,11 @@ namespace SampleSystem.IntegrationTests._Environment.TestData;
 
 public class TestBase(IServiceProvider rootServiceProvider) : IntegrationTestBase<ISampleSystemBLLContext>(rootServiceProvider), IAsyncLifetime
 {
-    public MainWebApi MainWebApi => new(this.RootServiceProvider);
+    protected MainWebApi MainWebApi => new(this.RootServiceProvider);
 
-    public MainAuditWebApi MainAuditWebApi => new(this.RootServiceProvider);
+    protected MainAuditWebApi MainAuditWebApi => new(this.RootServiceProvider);
+
+    protected IDatabaseContext DatabaseContext => this.RootServiceProvider.GetRequiredService<IDatabaseContext>();
 
     protected DataManager DataManager => this.RootServiceProvider.GetRequiredService<DataManager>();
 

@@ -27,20 +27,22 @@ namespace SampleSystem.IntegrationTests._Environment;
 public class NHibTestEnvironment : BssTestEnvironment
 {
     private const string SettingsFileName = "testAppSettings.json";
-    protected override IConfiguration Configuration { get; } = new ConfigurationBuilder()
-                                                               .SetBasePath(Directory.GetCurrentDirectory())
-                                                               .AddJsonFile(SettingsFileName, false, true)
-                                                               .AddJsonFile($"{Environment.MachineName}.{SettingsFileName}", true)
-                                                               .AddEnvironmentVariables($"{nameof(SampleSystem)}_").Build();
+
+    protected override IConfiguration GetRootConfiguration() => new ConfigurationBuilder()
+                                                                .SetBasePath(Directory.GetCurrentDirectory())
+                                                                .AddJsonFile(SettingsFileName, false, true)
+                                                                .AddJsonFile($"{Environment.MachineName}.{SettingsFileName}", true)
+                                                                .AddEnvironmentVariables($"{nameof(SampleSystem)}_").Build();
+
     protected override void InitInitializers(IDatabaseTestingSetup setup) =>
 
         setup.SetEmptySchemaInitializer<EmptySchemaInitializer>()
              .SetTestDataInitializer<TestDataInitializer>();
 
 
-    protected override void InitServices(IServiceCollection services) =>
+    protected override void InitServices(IServiceCollection services, IConfiguration configuration) =>
 
-        services.AddGeneralDependencyInjection(this.Configuration, new HostingEnvironment(), s => s.AddExtensions(new SampleSystemNHibernateExtension()))
+        services.AddGeneralDependencyInjection(configuration, new HostingEnvironment(), s => s.AddExtensions(new SampleSystemNHibernateExtension()))
 
                 .AddSingleton<SampleSystemInitializer>()
 

@@ -20,7 +20,7 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
 
     private string? defaultConnectionString;
 
-    private string defaultConnectionStringName = "DefaultConnection";
+    private DefaultConnectionStringSettings defaultConnectionStringSettings = DefaultConnectionStringSettings.Default;
 
     public bool AddDefaultListener { get; set; } = true;
 
@@ -77,7 +77,7 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
 
     public IDatabaseSetup SetDefaultConnectionStringName(string connectionStringName)
     {
-        this.defaultConnectionStringName = connectionStringName;
+        this.defaultConnectionStringSettings = new (connectionStringName);
 
         return this;
     }
@@ -111,7 +111,7 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
         }
         else
         {
-            services.AddSingleton(new DefaultConnectionStringSettings(this.defaultConnectionStringName));
+            services.AddSingleton(this.defaultConnectionStringSettings);
             services.AddSingleton<IDefaultConnectionStringSource, DefaultConnectionStringSource>();
         }
 

@@ -2,12 +2,11 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
-    <Anch>3.4.6</Anch>
+    <Anch>3.5.2</Anch>
     <BssPlatform>[1.6.2]</BssPlatform>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Anch.Testing" Version="$(Anch)" />
-    <PackageVersion Include="Anch.Testing.Database" Version="$(Anch)" />
+    <PackageVersion Include="Anch.Testing.Database.Configuration" Version="$(Anch)" />
     <PackageVersion Include="Anch.Testing.Xunit" Version="$(Anch)" />
     <PackageVersion Include="Anch.Core" Version="$(Anch)" />
     <PackageVersion Include="Anch.DependencyInjection" Version="$(Anch)" />

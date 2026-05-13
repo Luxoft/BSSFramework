@@ -4,6 +4,13 @@ namespace Framework.AutomationCore.Utils.DatabaseUtils;
 
 public static class SqlServerExtensions
 {
+    public static void DetachDatabase(this Server server, string databaseName)
+    {
+        server.SetModeRestrictedUser(databaseName);
+
+        server.DetachDatabase(databaseName, false);
+    }
+
     private static Table? GetTable(this Server server, string databaseName, string tableName)
     {
         var database = server.GetDatabase(databaseName);

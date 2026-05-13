@@ -6,7 +6,7 @@ namespace Framework.AutomationCore.Utils.DatabaseUtils;
 
 public static class TestDatabaseConnectionStringExtensions
 {
-    extension(TestDatabaseConnectionString connectionString)
+    extension(TestConnectionString connectionString)
     {
         public string UserId => connectionString.GetFromBuilder(v => v.UserID);
 

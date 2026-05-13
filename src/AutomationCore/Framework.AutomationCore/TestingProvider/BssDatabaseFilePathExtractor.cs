@@ -1,29 +1,18 @@
-﻿using System.Data.Common;
+﻿using Anch.Testing.Database.ConnectionStringManagement;
 
-using Anch.Testing.Database.ConnectionStringManagement;
+using Framework.AutomationCore.Settings;
+
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Options;
 
 namespace Framework.AutomationCore.TestingProvider;
 
-public class BssDatabaseFilePathExtractor : IDatabaseFilePathExtractor
+public class BssDatabaseFilePathExtractor(IOptions<AutomationFrameworkSettings> settings) : IDatabaseFilePathExtractor
 {
-    public string Extract(TestDatabaseConnectionString connectionString)
+    public string Extract(TestConnectionString connectionString)
     {
-        throw new NotImplementedException();
+        var builder = new SqlConnectionStringBuilder { ConnectionString = connectionString.Value };
 
-        var builder = new SqlConnectionStringBuilder
-        {
-                          ConnectionString = connectionString.Value
-                      };
-
-        if (!builder.TryGetValue("Data Source", out var value))
-            throw new InvalidOperationException("Data Source is missing.");
-
-        var dataSource = value?.ToString();
-
-        if (string.IsNullOrWhiteSpace(dataSource))
-            throw new InvalidOperationException("Data Source is empty.");
-
-        return dataSource;
+        return Path.Combine(settings.Value.BackupPath, $"{builder.InitialCatalog}.mdf");
     }
 }

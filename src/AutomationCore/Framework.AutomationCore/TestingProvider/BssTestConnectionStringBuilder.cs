@@ -5,11 +5,11 @@ using Microsoft.Data.SqlClient;
 
 namespace Framework.AutomationCore.TestingProvider;
 
-public class BssTestDatabaseConnectionStringBuilder(TestDatabaseSettings databaseSettings) : ITestDatabaseConnectionStringBuilder
+public class BssTestConnectionStringBuilder(TestDatabaseSettings databaseSettings) : ITestConnectionStringBuilder
 {
-    public TestDatabaseConnectionString AddPostfix(string postfix)
+    public TestConnectionString AddPostfix(string postfix)
     {
-        var builder = new SqlConnectionStringBuilder { ConnectionString = databaseSettings.DefaultConnectionString.Value };
+        var builder = new SqlConnectionStringBuilder { ConnectionString = databaseSettings.MainConnectionString.Value };
 
         var initialCatalog = builder.InitialCatalog;
 
@@ -27,6 +27,6 @@ public class BssTestDatabaseConnectionStringBuilder(TestDatabaseSettings databas
 
         builder.InitialCatalog = newDataSource;
 
-        return new TestDatabaseConnectionString(builder.ConnectionString);
+        return new TestConnectionString(builder.ConnectionString);
     }
 }

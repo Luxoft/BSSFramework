@@ -17,5 +17,5 @@ public class MsSqlServerSource(TestDatabaseSettings testDatabaseSettings) : IMsS
         }
     } = new(
         new ServerConnection(
-            new SqlConnection(new SqlConnectionStringBuilder(testDatabaseSettings.DefaultConnectionString.Value) { InitialCatalog = "" }.ConnectionString)));
+            new SqlConnection(new SqlConnectionStringBuilder(testDatabaseSettings.MainConnectionString.Value) { InitialCatalog = "" }.ConnectionString)));
 }

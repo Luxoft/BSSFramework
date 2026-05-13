@@ -19,14 +19,17 @@ namespace Framework.AutomationCore.Utils.DatabaseUtils;
 
 public interface IDatabaseContext
 {
-    TestDatabaseConnectionString ConnectionString { get; }
+    TestConnectionString ConnectionString { get; }
 
     IReadOnlyList<IDatabaseContext> Children { get; }
 }
 
-public class DatabaseContext(ITestConnectionStringProvider connectionStringProvider, [FromKeyedServices(nameof(IDatabaseContext.Children))]IEnumerable<IDatabaseContext> children) : IDatabaseContext
+public class DatabaseContext(
+    IActualTestConnectionStringSource actualTestConnectionStringSource,
+    [FromKeyedServices(nameof(IDatabaseContext.Children))]
+    IEnumerable<IDatabaseContext> children) : IDatabaseContext
 {
-    public TestDatabaseConnectionString ConnectionString => connectionStringProvider.Actual;
+    public TestConnectionString ConnectionString => actualTestConnectionStringSource.ActualConnectionString;
 
     public IReadOnlyList<IDatabaseContext> Children { get; } = children.ToList();
 }

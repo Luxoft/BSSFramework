@@ -11,7 +11,7 @@ public class BssDatabaseTestingProvider : IDatabaseTestingProvider
 {
     public void AddServices(IServiceCollection services) =>
         services.AddSingleton<IDatabaseFilePathExtractor, BssDatabaseFilePathExtractor>()
-                .AddSingleton<ITestConnectionStringBuilder, BssTestConnectionStringBuilder>()
+                .AddSingleton<ITestConnectionStringFactory, BssTestConnectionStringFactory>()
                 .AddSingleton<IDatabaseManager, BssDatabaseManager>()
 
                 .AddSingleton<IMsSqlServerSource, MsSqlServerSource>()

@@ -2,15 +2,13 @@
 
 using Framework.AutomationCore.Utils.DatabaseUtils;
 
-//using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
 using Framework.Database.NHibernate.DBGenerator;
 
 using SampleSystem.DbGenerate.NHibernate;
 
 namespace SampleSystem.IntegrationTests._Environment;
 
-public class EmptySchemaInitializer(IDatabaseContext databaseContext)
-    : IInitializer
+public class EmptySchemaInitializer(IDatabaseContext databaseContext) : IInitializer
 {
     public async Task Initialize(CancellationToken cancellationToken)
     {

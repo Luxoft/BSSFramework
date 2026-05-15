@@ -1,7 +1,5 @@
 ﻿using Anch.Testing.Database.ConnectionStringManagement;
 
-using Framework.AutomationCore.Settings;
-
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Options;
 

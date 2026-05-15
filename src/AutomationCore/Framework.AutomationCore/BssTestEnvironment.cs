@@ -4,11 +4,10 @@ using Anch.Testing.Database;
 using Anch.Testing.Database.Configuration;
 using Anch.Testing.Database.ConnectionStringManagement;
 using Anch.Testing.Database.DependencyInjection;
-
 using Framework.AutomationCore.ServiceEnvironment;
-using Framework.AutomationCore.Settings;
 using Framework.AutomationCore.TestingProvider;
 using Framework.Core;
+using Framework.Database.ConnectionStringSource;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,7 +17,9 @@ namespace Framework.AutomationCore;
 public abstract class BssTestEnvironment : ConfigurationTestEnvironment
 {
     private AutomationFrameworkSettings Settings =>
-        field ??= new AutomationFrameworkSettings().Self(this.MainConfiguration.GetSection(nameof(AutomationFrameworkSettings)).Bind);
+        field ??= new AutomationFrameworkSettings().Self(this.RawConfiguration.GetSection(nameof(AutomationFrameworkSettings)).Bind);
+
+    protected override string ConnectionStringName { get; } = DefaultConnectionStringSettings.Default.Name;
 
     protected override DatabaseInitMode DatabaseInitMode => this.Settings.DatabaseInitMode;
 
@@ -32,6 +33,7 @@ public abstract class BssTestEnvironment : ConfigurationTestEnvironment
 
     protected sealed override void InitDatabase(IDatabaseTestingSetup dts) =>
         dts.SetProvider<BssDatabaseTestingProvider>()
+           .SetTestDataInitializer<BssDatabaseSnapshotInitializer>()
            .Self(this.SetInitializers)
            .SetParallelization(this.Settings.TestsParallelize);
 

@@ -28,7 +28,7 @@ public class NHibTestEnvironment : BssTestEnvironment
 {
     private const string SettingsFileName = "testAppSettings.json";
 
-    protected override IConfiguration MainConfiguration { get; } = new ConfigurationBuilder()
+    protected override IConfiguration RawConfiguration { get; } = new ConfigurationBuilder()
                                                                    .SetBasePath(Directory.GetCurrentDirectory())
                                                                    .AddJsonFile(SettingsFileName, false, true)
                                                                    .AddJsonFile($"{Environment.MachineName}.{SettingsFileName}", true)

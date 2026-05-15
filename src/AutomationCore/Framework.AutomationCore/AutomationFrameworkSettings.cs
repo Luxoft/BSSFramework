@@ -1,6 +1,6 @@
 ﻿using Anch.Testing.Database;
 
-namespace Framework.AutomationCore.Settings;
+namespace Framework.AutomationCore;
 
 public class AutomationFrameworkSettings
 {

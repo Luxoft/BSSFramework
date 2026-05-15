@@ -1,4 +1,5 @@
 ﻿using Anch.Testing.Database;
+using Anch.Testing.Database.ConnectionStringManagement;
 
 using Microsoft.Data.SqlClient;
 using Microsoft.SqlServer.Management.Common;
@@ -6,7 +7,7 @@ using Microsoft.SqlServer.Management.Smo;
 
 namespace Framework.AutomationCore.TestingProvider;
 
-public class MsSqlServerSource(TestDatabaseSettings testDatabaseSettings) : IMsSqlServerSource
+public class MsSqlServerSource(IActualTestConnectionStringSource actualTestConnectionStringSource) : IMsSqlServerSource
 {
     public Server Server
     {
@@ -17,5 +18,6 @@ public class MsSqlServerSource(TestDatabaseSettings testDatabaseSettings) : IMsS
         }
     } = new(
         new ServerConnection(
-            new SqlConnection(new SqlConnectionStringBuilder(testDatabaseSettings.MainConnectionString.Value) { InitialCatalog = "" }.ConnectionString)));
+            new SqlConnection(
+                new SqlConnectionStringBuilder(actualTestConnectionStringSource.ActualConnectionString.Value) { InitialCatalog = "" }.ConnectionString)));
 }

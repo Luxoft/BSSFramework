@@ -5,7 +5,6 @@ using Anch.DependencyInjection;
 
 using Framework.Application.Jobs;
 using Framework.AutomationCore.ServiceEnvironment.Services;
-using Framework.AutomationCore.Settings;
 using Framework.Infrastructure.Middleware;
 using Framework.Infrastructure.WebApiExceptionExpander;
 

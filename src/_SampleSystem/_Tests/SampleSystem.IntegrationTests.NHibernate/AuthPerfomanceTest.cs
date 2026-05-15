@@ -67,7 +67,7 @@ public class AuthPerformanceTest(IServiceProvider rootServiceProvider) : TestBas
         Assert.Equal(findCount, authPerfCount);
     }
 
-    private async ValueTask GeneratePermissionAsync(CancellationToken ct)
+    private async Task GeneratePermissionAsync(CancellationToken ct)
     {
         var request = from fbu in this.fbuSource
 

@@ -2,8 +2,7 @@
 using Anch.SecuritySystem;
 using Anch.SecuritySystem.Services;
 using Anch.SecuritySystem.Testing;
-
-using Framework.AutomationCore.Settings;
+using Framework.AutomationCore;
 
 using Microsoft.Extensions.Options;
 

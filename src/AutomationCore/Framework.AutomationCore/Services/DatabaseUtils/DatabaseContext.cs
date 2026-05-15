@@ -15,7 +15,7 @@ using Anch.Testing.Database.ConnectionStringManagement;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.AutomationCore.Utils.DatabaseUtils;
+namespace Framework.AutomationCore.Services.DatabaseUtils;
 
 public interface IDatabaseContext
 {

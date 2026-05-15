@@ -1,7 +1,7 @@
 ﻿using Anch.Testing.Database.ConnectionStringManagement;
 using Anch.Testing.Database.DependencyInjection;
 
-using Framework.AutomationCore.Utils.DatabaseUtils;
+using Framework.AutomationCore.Services.DatabaseUtils;
 
 using Microsoft.Extensions.DependencyInjection;
 

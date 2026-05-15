@@ -1,7 +1,7 @@
 ﻿using System.Collections.Specialized;
 using Anch.Testing.Database.ConnectionStringManagement;
 
-using Framework.AutomationCore.Utils.DatabaseUtils;
+using Framework.AutomationCore.Services.DatabaseUtils;
 
 namespace Framework.AutomationCore.TestingProvider;
 

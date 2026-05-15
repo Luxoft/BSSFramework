@@ -1,5 +1,4 @@
 ﻿using Framework.Application;
-using Framework.AutomationCore.Utils;
 using Framework.Database;
 
 using Anch.SecuritySystem;
@@ -8,6 +7,8 @@ using SampleSystem.Domain.Employee;
 using SampleSystem.Security;
 
 using Anch.SecuritySystem.AccessDenied;
+
+using Framework.AutomationCore.Services;
 
 using SampleSystem.IntegrationTests._Environment.TestData;
 

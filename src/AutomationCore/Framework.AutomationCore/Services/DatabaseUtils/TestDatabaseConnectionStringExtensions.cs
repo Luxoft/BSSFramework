@@ -2,7 +2,7 @@
 
 using Microsoft.Data.SqlClient;
 
-namespace Framework.AutomationCore.Utils.DatabaseUtils;
+namespace Framework.AutomationCore.Services.DatabaseUtils;
 
 public static class TestDatabaseConnectionStringExtensions
 {

@@ -2,7 +2,7 @@
 
 using Framework.AutomationCore;
 using Framework.AutomationCore.ServiceEnvironment;
-using Framework.AutomationCore.Utils.DatabaseUtils;
+using Framework.AutomationCore.Services.DatabaseUtils;
 
 using Microsoft.Extensions.DependencyInjection;
 

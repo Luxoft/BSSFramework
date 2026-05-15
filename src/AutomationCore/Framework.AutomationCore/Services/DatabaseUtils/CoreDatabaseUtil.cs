@@ -1,13 +1,9 @@
-﻿using System.Collections.Specialized;
-using System.Data;
+﻿using System.Data;
 using System.Text.RegularExpressions;
 
-using MartinCostello.SqlLocalDb;
-
 using Microsoft.Data.SqlClient;
-using Microsoft.SqlServer.Management.Smo;
 
-namespace Framework.AutomationCore.Utils.DatabaseUtils;
+namespace Framework.AutomationCore.Services.DatabaseUtils;
 
 public static class ExecuteSqlExtensions
 {

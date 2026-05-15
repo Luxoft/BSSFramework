@@ -1,7 +1,6 @@
 ﻿using Anch.Core;
 
-using Framework.AutomationCore.Utils.DatabaseUtils;
-
+using Framework.AutomationCore.Services.DatabaseUtils;
 using Framework.Database.NHibernate.DBGenerator;
 
 using SampleSystem.DbGenerate.NHibernate;

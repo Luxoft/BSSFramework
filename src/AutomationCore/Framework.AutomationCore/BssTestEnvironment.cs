@@ -16,6 +16,8 @@ namespace Framework.AutomationCore;
 
 public abstract class BssTestEnvironment : ConfigurationTestEnvironment
 {
+    private readonly DatabaseRandomizePostfix databaseRandomizePostfix = DatabaseRandomizePostfix.Create();
+
     private AutomationFrameworkSettings Settings =>
         field ??= new AutomationFrameworkSettings().Self(this.RawConfiguration.GetSection(nameof(AutomationFrameworkSettings)).Bind);
 
@@ -41,9 +43,29 @@ public abstract class BssTestEnvironment : ConfigurationTestEnvironment
     {
         services.AddOptions<AutomationFrameworkSettings>().Bind(actualConfiguration.GetSection(nameof(AutomationFrameworkSettings)));
 
-        return services.Self(v => this.InitializeServices(v, actualConfiguration))
+        return services.AddSingleton(this.databaseRandomizePostfix)
+                       .Self(v => this.InitializeServices(v, actualConfiguration))
                        .AddIntegrationTests()
                        .Pipe(this.InternalBuildServiceProvider);
+    }
+
+    protected override TestConnectionString GetActualConnectionString(ServiceProviderBuildContext buildContext)
+    {
+        if (buildContext.Index.IsMain)
+        {
+            var dbSettings = new TestDatabaseSettings
+                             {
+                                 RawConnectionString = this.RawConnectionString,
+                                 InitMode = this.DatabaseInitMode,
+                                 RemoveDatabaseOnFailure = this.RemoveDatabaseOnFailure
+                             };
+
+            return new BssTestConnectionStringFactory(dbSettings, this.Settings, this.databaseRandomizePostfix).Create("");
+        }
+        else
+        {
+            return base.GetActualConnectionString(buildContext);
+        }
     }
 
     protected virtual IServiceProvider InternalBuildServiceProvider(IServiceCollection services) => services.BuildDefaultServiceProvider();

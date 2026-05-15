@@ -4,12 +4,13 @@ using Anch.Core;
 
 using Framework.Application;
 using Framework.Application.Events;
-using Framework.AutomationCore.Utils.DatabaseUtils;
 using Framework.Configuration.Generated.DTO;
 using Framework.Database;
 using Framework.Database.NHibernate.Sessions;
 
 using Anch.SecuritySystem;
+
+using Framework.AutomationCore.Services.DatabaseUtils;
 
 using Microsoft.Extensions.DependencyInjection;
 

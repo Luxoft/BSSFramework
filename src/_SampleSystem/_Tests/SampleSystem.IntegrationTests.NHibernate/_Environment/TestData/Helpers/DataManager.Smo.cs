@@ -1,6 +1,4 @@
-﻿using Framework.AutomationCore.RootServiceProviderContainer;
-
-using Microsoft.SqlServer.Management.Smo;
+﻿using Microsoft.SqlServer.Management.Smo;
 
 namespace SampleSystem.IntegrationTests._Environment.TestData.Helpers;
 

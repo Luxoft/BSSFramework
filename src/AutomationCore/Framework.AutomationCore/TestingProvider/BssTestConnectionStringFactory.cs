@@ -5,24 +5,15 @@ using Microsoft.Data.SqlClient;
 
 namespace Framework.AutomationCore.TestingProvider;
 
-public class BssTestConnectionStringFactory(TestDatabaseSettings databaseSettings, AutomationFrameworkSettings automationFrameworkSettings, DatabaseRandomizePostfix databaseRandomizePostfix)
+public class BssTestConnectionStringFactory(TestDatabaseSettings databaseSettings)
     : ITestConnectionStringFactory
 {
     public TestConnectionString Create(string postfix)
     {
         var builder = new SqlConnectionStringBuilder { ConnectionString = databaseSettings.RawConnectionString.Value };
 
-        var baseInitialCatalog = builder.InitialCatalog;
-
-        builder.InitialCatalog = baseInitialCatalog + postfix;
-
-        if (automationFrameworkSettings.UseLocalDb)
-        {
-            builder.DataSource = $"(localdb)\\{baseInitialCatalog}_{databaseRandomizePostfix.Value}";
-        }
+        builder.InitialCatalog += postfix;
 
         return new TestConnectionString(builder.ConnectionString);
     }
 }
-
-public class Loca

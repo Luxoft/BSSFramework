@@ -1,5 +1,4 @@
-﻿using Framework.AutomationCore.RootServiceProviderContainer;
-using Framework.AutomationCore.Services.DatabaseUtils;
+﻿using Framework.AutomationCore;
 using Framework.Database.NHibernate.DBGenerator;
 
 using Microsoft.SqlServer.Management.Smo;

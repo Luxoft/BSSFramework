@@ -1,9 +1,7 @@
 ﻿{
   "AutomationFrameworkSettings": {
-    "IntegrationTestUserName": "IntegrationTestRootUser",
     "DatabaseInitMode": "RebuildSnapshot",
     "BackupPath": "/var/opt/mssql/",
-    "UseLocalDb": false,
     "TestsParallelize": true
   },
 

@@ -8,9 +8,7 @@ public class AutomationFrameworkSettings
 
     public DatabaseInitMode DatabaseInitMode { get; set; } = DatabaseInitMode.RebuildSnapshot;
 
-    public bool UseLocalDb { get; set; }
-
-    public bool TestsParallelize { get; set; }
+    public bool TestsParallelize { get; set; } = true;
 
     public string DatabaseCollation { get; set; } = "";
 

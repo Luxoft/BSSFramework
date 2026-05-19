@@ -1,13 +1,14 @@
 ﻿using Anch.Testing.Database.ConnectionStringManagement;
-
 using Microsoft.Data.SqlClient;
 
-namespace Framework.AutomationCore.Services.DatabaseUtils;
+namespace Framework.AutomationCore;
 
-public static class TestDatabaseConnectionStringExtensions
+public static class TestConnectionStringExtensions
 {
     extension(TestConnectionString connectionString)
     {
+        public bool IsLocalDb => connectionString.DataSource.StartsWith("(localdb)\\", StringComparison.OrdinalIgnoreCase);
+
         public string UserId => connectionString.GetFromBuilder(v => v.UserID);
 
         public string Password => connectionString.GetFromBuilder(v => v.Password);

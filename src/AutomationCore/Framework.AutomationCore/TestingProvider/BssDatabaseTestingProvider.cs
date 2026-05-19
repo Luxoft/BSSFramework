@@ -10,7 +10,7 @@ namespace Framework.AutomationCore.TestingProvider;
 public class BssDatabaseTestingProvider : IDatabaseTestingProvider
 {
     public void AddServices(IServiceCollection services) =>
-        services.AddSingleton<IDatabaseFilePathExtractor, BssDatabaseFilePathExtractor>()
+        services.AddSingleton<IDatabaseFileInfoExtractor, BssDatabaseFileInfoExtractor>()
                 .AddSingleton<ITestConnectionStringFactory, BssTestConnectionStringFactory>()
                 .AddSingleton<IDatabaseManager, BssDatabaseManager>()
 

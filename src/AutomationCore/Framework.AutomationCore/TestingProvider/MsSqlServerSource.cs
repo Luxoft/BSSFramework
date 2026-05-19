@@ -1,5 +1,4 @@
-﻿using Anch.Testing.Database;
-using Anch.Testing.Database.ConnectionStringManagement;
+﻿using Anch.Testing.Database.ConnectionStringManagement;
 
 using Microsoft.Data.SqlClient;
 using Microsoft.SqlServer.Management.Common;

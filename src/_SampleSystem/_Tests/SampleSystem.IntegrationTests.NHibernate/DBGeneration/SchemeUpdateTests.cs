@@ -1,6 +1,4 @@
-﻿using Framework.AutomationCore.RootServiceProviderContainer;
-
-using SampleSystem.DbGenerate.NHibernate;
+﻿using SampleSystem.DbGenerate.NHibernate;
 using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests.DBGeneration;

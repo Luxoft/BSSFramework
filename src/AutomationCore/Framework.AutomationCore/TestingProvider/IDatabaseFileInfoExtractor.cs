@@ -4,5 +4,5 @@ namespace Framework.AutomationCore.TestingProvider;
 
 public interface IDatabaseFileInfoExtractor
 {
-    MsSqlDatabaseFileInfo Extract(TestConnectionString connectionString);
+    DatabaseFileInfo Extract(TestConnectionString connectionString);
 }

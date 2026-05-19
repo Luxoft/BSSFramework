@@ -7,7 +7,7 @@ namespace Framework.AutomationCore.TestingProvider;
 
 public class BssDatabaseFileInfoExtractor(IOptions<AutomationFrameworkSettings> settings) : IDatabaseFileInfoExtractor
 {
-    public MsSqlDatabaseFileInfo Extract(TestConnectionString connectionString)
+    public DatabaseFileInfo Extract(TestConnectionString connectionString)
     {
         var builder = new SqlConnectionStringBuilder { ConnectionString = connectionString.Value };
 
@@ -15,6 +15,6 @@ public class BssDatabaseFileInfoExtractor(IOptions<AutomationFrameworkSettings> 
 
         var logPath = Path.Combine(settings.Value.BackupPath, $"{builder.InitialCatalog}_log.ldf");
 
-        return new MsSqlDatabaseFileInfo(dbPath, logPath);
+        return new DatabaseFileInfo(dbPath, logPath);
     }
 }

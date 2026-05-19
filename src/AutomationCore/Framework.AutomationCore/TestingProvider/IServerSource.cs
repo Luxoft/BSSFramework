@@ -2,7 +2,7 @@
 
 namespace Framework.AutomationCore.TestingProvider;
 
-public interface IMsSqlServerSource
+public interface IServerSource
 {
     Server Server { get; }
 }

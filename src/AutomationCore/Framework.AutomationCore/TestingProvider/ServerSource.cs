@@ -6,7 +6,7 @@ using Microsoft.SqlServer.Management.Smo;
 
 namespace Framework.AutomationCore.TestingProvider;
 
-public class MsSqlServerSource(IActualTestConnectionStringSource actualTestConnectionStringSource) : IMsSqlServerSource
+public class ServerSource(IActualTestConnectionStringSource actualTestConnectionStringSource) : IServerSource
 {
     public Server Server
     {

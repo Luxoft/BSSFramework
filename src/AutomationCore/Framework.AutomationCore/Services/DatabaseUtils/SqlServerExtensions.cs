@@ -40,6 +40,6 @@ public static class SqlServerExtensions
     private static void SetModeMultiUser(this Server server, Microsoft.SqlServer.Management.Smo.Database database)
         => server.ConnectionContext.SqlConnectionObject.ExecuteSql($"ALTER DATABASE [{database.Name}] SET MULTI_USER");
 
-    private static Microsoft.SqlServer.Management.Smo.Database? GetDatabase(this Server server, string name) =>
+    public static Microsoft.SqlServer.Management.Smo.Database? GetDatabase(this Server server, string name) =>
         server.Databases.Contains(name) ? server.Databases[name] : null;
 }

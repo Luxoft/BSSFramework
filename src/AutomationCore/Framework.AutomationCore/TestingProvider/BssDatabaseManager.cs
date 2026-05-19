@@ -1,35 +1,43 @@
 ﻿using System.Collections.Specialized;
+
 using Anch.Testing.Database.ConnectionStringManagement;
 
+using Framework.AutomationCore.Services.DatabaseUtils;
+
+using Microsoft.Extensions.Options;
 using Microsoft.SqlServer.Management.Smo;
 
 namespace Framework.AutomationCore.TestingProvider;
 
 public class BssDatabaseManager(
-    IMsSqlServerSource sqlServerSource,
-    AutomationFrameworkSettings automationFrameworkSettings,
+    IServerSource serverSource,
+    IOptions<AutomationFrameworkSettings> automationFrameworkSettingsOptions,
     IDatabaseFileInfoExtractor fileInfoExtractor) : IDatabaseManager
 {
     public ValueTask CreateEmpty(TestConnectionString connectionString, CancellationToken ct)
     {
-        var db = new Microsoft.SqlServer.Management.Smo.Database(sqlServerSource.Server, connectionString.InitialCatalog);
+        ct.ThrowIfCancellationRequested();
 
-        if (!string.IsNullOrEmpty(automationFrameworkSettings.DatabaseCollation))
+        if (!string.IsNullOrEmpty(automationFrameworkSettingsOptions.Value.BackupPath)
+            && !Directory.Exists(automationFrameworkSettingsOptions.Value.BackupPath))
         {
-            db.Collation = automationFrameworkSettings.DatabaseCollation;
+            Directory.CreateDirectory(automationFrameworkSettingsOptions.Value.BackupPath);
         }
-
-        CheckDirectoryAndCreateIfNotExists(automationFrameworkSettings.BackupPath);
-
-        var fileGroup = new FileGroup(db, "PRIMARY");
 
         var fileInfo = fileInfoExtractor.Extract(connectionString);
 
+        var db = new Microsoft.SqlServer.Management.Smo.Database(serverSource.Server, connectionString.InitialCatalog);
+
+        if (!string.IsNullOrEmpty(automationFrameworkSettingsOptions.Value.DatabaseCollation))
+        {
+            db.Collation = automationFrameworkSettingsOptions.Value.DatabaseCollation;
+        }
+
+        var fileGroup = new FileGroup(db, "PRIMARY");
+
         var dataFile = new DataFile(fileGroup, connectionString.InitialCatalog, fileInfo.DbPath)
                        {
-                           Size = 5.5 * 1024.0,
-                           GrowthType = FileGrowthType.KB,
-                           Growth = 1.0 * 1024.0
+                           Size = 5.5 * 1024.0, GrowthType = FileGrowthType.KB, Growth = 1.0 * 1024.0
                        };
 
         fileGroup.Files.Add(dataFile);
@@ -38,9 +46,7 @@ public class BssDatabaseManager(
 
         var logFile = new LogFile(db, connectionString.InitialCatalog + "_log", fileInfo.LogPath)
                       {
-                          Size = 1.0 * 1024.0,
-                          GrowthType = FileGrowthType.Percent,
-                          Growth = 10.0
+                          Size = 1.0 * 1024.0, GrowthType = FileGrowthType.Percent, Growth = 10.0
                       };
 
         db.LogFiles.Add(logFile);
@@ -56,7 +62,16 @@ public class BssDatabaseManager(
 
         var fileInfo = fileInfoExtractor.Extract(connectionString);
 
-        return new(File.Exists(fileInfo.DbPath) && new FileInfo(fileInfo.DbPath).Length > 0);
+        if (serverSource.Server.GetDatabase(connectionString.InitialCatalog) is { } db)
+        {
+            db.Validate(fileInfo);
+
+            return new(true);
+        }
+        else
+        {
+            return new(fileInfo.IsExists);
+        }
     }
 
     public ValueTask Remove(TestConnectionString connectionString, CancellationToken ct)
@@ -65,107 +80,84 @@ public class BssDatabaseManager(
 
         var fileInfo = fileInfoExtractor.Extract(connectionString);
 
+        if (serverSource.Server.GetDatabase(connectionString.InitialCatalog) is { } db)
+        {
+            db.Validate(fileInfo);
+
+            serverSource.Server.DetachDatabase(db.Name);
+            //db.Drop();
+        }
+
         if (File.Exists(fileInfo.DbPath))
         {
-            sqlServerSource.Server.DetachDatabase(connectionString.InitialCatalog, false);
-
             File.Delete(fileInfo.DbPath);
+        }
+
+        if (File.Exists(fileInfo.LogPath))
+        {
             File.Delete(fileInfo.LogPath);
         }
 
         return ValueTask.CompletedTask;
     }
 
-    public ValueTask Copy(
+    public ValueTask Copy(TestConnectionString from, TestConnectionString to, bool force, CancellationToken ct) =>
+        this.CopyMove(from, to, force, move: false, ct);
+
+    public ValueTask Move(TestConnectionString from, TestConnectionString to, bool force, CancellationToken ct) =>
+        this.CopyMove(from, to, force, move: true, ct);
+
+    private ValueTask CopyMove(
         TestConnectionString from,
         TestConnectionString to,
         bool force,
+        bool move,
         CancellationToken ct)
     {
         ct.ThrowIfCancellationRequested();
 
         var sourceFileInfo = fileInfoExtractor.Extract(from);
-        var destinationFileInfo = fileInfoExtractor.Extract(to);
+        var targetFileInfo = fileInfoExtractor.Extract(to);
 
-        if (!File.Exists(sourceFileInfo.DbPath))
+        if (serverSource.Server.GetDatabase(from.InitialCatalog) is { } sourceDb)
         {
-            throw new FileNotFoundException("Source database file not found.", sourceFileInfo.DbPath);
+            sourceDb.Validate(sourceFileInfo);
+
+            serverSource.Server.DetachDatabase(from.InitialCatalog);
+        }
+        else if (!sourceFileInfo.IsExists)
+        {
+            throw new InvalidOperationException("Source database not found.");
         }
 
-        var destinationExists = File.Exists(destinationFileInfo.DbPath);
-
-        if (destinationExists && !force)
+        if (serverSource.Server.GetDatabase(to.InitialCatalog) is { } targetDb)
         {
-            throw new IOException($"Destination file already exists: {destinationFileInfo.DbPath}");
-        }
+            targetDb.Validate(targetFileInfo);
 
-        var directory = Path.GetDirectoryName(destinationFileInfo.DbPath);
-
-        if (!string.IsNullOrEmpty(directory))
-        {
-            Directory.CreateDirectory(directory);
-        }
-
-        if (destinationExists)
-        {
-            sqlServerSource.Server.DetachDatabase(to.InitialCatalog, false);
-        }
-
-        File.Copy(sourceFileInfo.DbPath, destinationFileInfo.DbPath, overwrite: force);
-        File.Copy(sourceFileInfo.LogPath, destinationFileInfo.LogPath, overwrite: force);
-
-        sqlServerSource.Server.AttachDatabase(to.InitialCatalog, new StringCollection { destinationFileInfo.DbPath, destinationFileInfo.LogPath });
-
-        return ValueTask.CompletedTask;
-    }
-
-    public ValueTask Move(
-        TestConnectionString from,
-        TestConnectionString to,
-        bool force,
-        CancellationToken ct)
-    {
-        ct.ThrowIfCancellationRequested();
-
-        var sourceFileInfo = fileInfoExtractor.Extract(from);
-        var destinationFileInfo = fileInfoExtractor.Extract(to);
-
-        if (!File.Exists(sourceFileInfo.DbPath))
-        {
-            throw new FileNotFoundException("Source database file not found.", sourceFileInfo.DbPath);
-        }
-
-        var destinationExists = File.Exists(destinationFileInfo.DbPath);
-
-        if (destinationExists)
-        {
-            if (!force)
+            if (force)
             {
-                throw new IOException($"Destination file already exists: {destinationFileInfo.DbPath}");
+                serverSource.Server.DetachDatabase(targetDb.Name);
+                //targetDb.Drop();
             }
-
-            File.Delete(destinationFileInfo.DbPath);
-            File.Delete(destinationFileInfo.LogPath);
+            else
+            {
+                throw new InvalidOperationException("Target database already exists.");
+            }
         }
 
-        var directory = Path.GetDirectoryName(destinationFileInfo.DbPath);
-
-        if (!string.IsNullOrEmpty(directory))
+        if (move)
         {
-            Directory.CreateDirectory(directory);
+            File.Move(sourceFileInfo.DbPath, targetFileInfo.DbPath, overwrite: force);
+            File.Move(sourceFileInfo.LogPath, targetFileInfo.LogPath, overwrite: force);
+        }
+        else
+        {
+            File.Copy(sourceFileInfo.DbPath, targetFileInfo.DbPath, overwrite: force);
+            File.Copy(sourceFileInfo.LogPath, targetFileInfo.LogPath, overwrite: force);
         }
 
-        File.Move(sourceFileInfo.DbPath, destinationFileInfo.DbPath);
-        File.Move(sourceFileInfo.LogPath, destinationFileInfo.LogPath);
+        serverSource.Server.AttachDatabase(to.InitialCatalog, new StringCollection { targetFileInfo.DbPath, targetFileInfo.LogPath });
 
         return ValueTask.CompletedTask;
-    }
-
-    private static void CheckDirectoryAndCreateIfNotExists(string path)
-    {
-        if (!Directory.Exists(path))
-        {
-            Directory.CreateDirectory(path!);
-        }
     }
 }

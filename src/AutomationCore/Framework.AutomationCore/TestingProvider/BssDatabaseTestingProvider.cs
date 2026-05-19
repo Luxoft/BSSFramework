@@ -14,7 +14,5 @@ public class BssDatabaseTestingProvider : IDatabaseTestingProvider
                 .AddSingleton<ITestConnectionStringFactory, BssTestConnectionStringFactory>()
                 .AddSingleton<IDatabaseManager, BssDatabaseManager>()
 
-                .AddSingleton<IMsSqlServerSource, MsSqlServerSource>()
-
                 .AddSingleton<IDatabaseContext, DatabaseContext>();
 }

@@ -20,7 +20,7 @@ public class UniqueGroupDatabaseScriptGeneratorTests(IServiceProvider rootServic
 
         var tableName = "RoleRoleDegreeLink";
 
-        var table = this.DataManager.GetTable(this.DatabaseContext.ConnectionString.DataSource, tableName);
+        var table = this.DataManager.GetTable(this.ActualConnectionString.DataSource, tableName);
 
         var indexName = "unilink_RoleRoleDegreeLink";
 
@@ -35,14 +35,14 @@ public class UniqueGroupDatabaseScriptGeneratorTests(IServiceProvider rootServic
 
         // Act
         generator.GenerateAllDB(
-            this.DatabaseContext.ConnectionString.DataSource,
-            this.DatabaseContext.ConnectionString.InitialCatalog,
+            this.ActualConnectionString.DataSource,
+            this.ActualConnectionString.InitialCatalog,
             credential: DbUserCredential.Create(
-                this.DatabaseContext.ConnectionString.UserId,
-                this.DatabaseContext.ConnectionString.Password),
+                this.ActualConnectionString.UserId,
+                this.ActualConnectionString.Password),
             skipFrameworkDatabases: true);
 
-        var changedTable = this.DataManager.GetTable(this.DatabaseContext.ConnectionString.InitialCatalog, tableName);
+        var changedTable = this.DataManager.GetTable(this.ActualConnectionString.InitialCatalog, tableName);
 
         //  changedTable.Indexes.Refresh();
         var indexes = changedTable.Indexes.ToList();

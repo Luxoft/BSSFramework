@@ -11,7 +11,7 @@ public class SchemeUpdateTests(IServiceProvider rootServiceProvider) : TestBase(
         // Arrange
 
         // Act
-        var ex = Record.Exception(() => UseSchemeUpdateTest.UseSchemeUpdate(this.DatabaseContext.ConnectionString.Value));
+        var ex = Record.Exception(() => UseSchemeUpdateTest.UseSchemeUpdate(this.ActualConnectionString.Value));
 
         // Assert
         Assert.Null(ex);

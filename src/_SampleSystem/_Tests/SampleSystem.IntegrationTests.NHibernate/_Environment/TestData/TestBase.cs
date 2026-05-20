@@ -1,8 +1,8 @@
 ﻿using Anch.SecuritySystem.Testing;
+using Anch.Testing.Database.ConnectionStringManagement;
 
 using Framework.AutomationCore;
 using Framework.AutomationCore.ServiceEnvironment;
-using Framework.AutomationCore.Services.DatabaseUtils;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,7 +19,9 @@ public class TestBase(IServiceProvider rootServiceProvider) : IntegrationTestBas
 
     protected MainAuditWebApi MainAuditWebApi => new(this.RootServiceProvider);
 
-    protected IDatabaseContext DatabaseContext => this.RootServiceProvider.GetRequiredService<IDatabaseContext>();
+    protected TestConnectionString ActualConnectionString =>
+
+        field ??= this.RootServiceProvider.GetRequiredService<IActualTestConnectionStringSource>().ActualConnectionString;
 
     protected DataManager DataManager => this.RootServiceProvider.GetRequiredService<DataManager>();
 

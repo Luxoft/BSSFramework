@@ -19,7 +19,7 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
         var generator = new DbGeneratorTest();
 
         var tableName = "Employee";
-        var table = this.DataManager.GetTable(this.DatabaseContext.ConnectionString.InitialCatalog, tableName);
+        var table = this.DataManager.GetTable(this.ActualConnectionString.InitialCatalog, tableName);
 
         var baseIndexName = "IX_Employee_coreBusinessUnitId";
         var newIndexName = "IX_Employee_coreBusinessUnitId_inc";
@@ -37,14 +37,14 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
 
         // Act
         generator.GenerateAllDB(
-            this.DatabaseContext.ConnectionString.DataSource,
-            this.DatabaseContext.ConnectionString.InitialCatalog,
+            this.ActualConnectionString.DataSource,
+            this.ActualConnectionString.InitialCatalog,
             credential: DbUserCredential.Create(
-                this.DatabaseContext.ConnectionString.UserId,
-                this.DatabaseContext.ConnectionString.Password),
+                this.ActualConnectionString.UserId,
+                this.ActualConnectionString.Password),
             skipFrameworkDatabases: true);
 
-        var changedTable = this.DataManager.GetTable(this.DatabaseContext.ConnectionString.InitialCatalog, tableName);
+        var changedTable = this.DataManager.GetTable(this.ActualConnectionString.InitialCatalog, tableName);
 
         // Assert
         var indexes = changedTable.Indexes.ToList();
@@ -59,7 +59,7 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
         var generator = new DbGeneratorTest();
 
         var tableName = "Employee";
-        var table = this.DataManager.GetTable(this.DatabaseContext.ConnectionString.DataSource, tableName);
+        var table = this.DataManager.GetTable(this.ActualConnectionString.DataSource, tableName);
 
         var ignoredIndexName = "IX_Employee_hRDepartmentId";
 
@@ -68,14 +68,14 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
 
         // Act
         generator.GenerateAllDB(
-            this.DatabaseContext.ConnectionString.DataSource,
-            this.DatabaseContext.ConnectionString.InitialCatalog,
+            this.ActualConnectionString.DataSource,
+            this.ActualConnectionString.InitialCatalog,
             credential: DbUserCredential.Create(
-                this.DatabaseContext.ConnectionString.UserId,
-                this.DatabaseContext.ConnectionString.Password),
+                this.ActualConnectionString.UserId,
+                this.ActualConnectionString.Password),
             ignoredIndexes: [ignoredIndexName],
             skipFrameworkDatabases: true);
-        var changedTable = this.DataManager.GetTable(this.DatabaseContext.ConnectionString.InitialCatalog, tableName);
+        var changedTable = this.DataManager.GetTable(this.ActualConnectionString.InitialCatalog, tableName);
 
         // Assert
         Assert.DoesNotContain(changedTable.Indexes, x => x.Name == ignoredIndexName);
@@ -89,14 +89,14 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
 
         // Act
         generator.GenerateAllDB(
-            this.DatabaseContext.ConnectionString.DataSource,
-            this.DatabaseContext.ConnectionString.InitialCatalog,
+            this.ActualConnectionString.DataSource,
+            this.ActualConnectionString.InitialCatalog,
             credential: DbUserCredential.Create(
-                this.DatabaseContext.ConnectionString.UserId,
-                this.DatabaseContext.ConnectionString.Password),
+                this.ActualConnectionString.UserId,
+                this.ActualConnectionString.Password),
             skipFrameworkDatabases: true);
 
-        var changedTable = this.DataManager.GetTable(this.DatabaseContext.ConnectionString.InitialCatalog, "Employee");
+        var changedTable = this.DataManager.GetTable(this.ActualConnectionString.InitialCatalog, "Employee");
 
         // Assert
         Assert.DoesNotContain(changedTable.Indexes, x => x.Name == "IX_ChildEntity_parentId");

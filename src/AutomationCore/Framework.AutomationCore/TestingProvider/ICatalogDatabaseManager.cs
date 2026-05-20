@@ -1,6 +1,4 @@
-﻿using Anch.Testing.Database.ConnectionStringManagement;
-
-namespace Framework.AutomationCore.TestingProvider;
+﻿namespace Framework.AutomationCore.TestingProvider;
 
 public interface INativeDatabaseManager
 {

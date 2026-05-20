@@ -34,7 +34,7 @@ public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(root
 
         // Arrange
         this.DataManager.SaveEmployee(Guid.NewGuid(), age: 10);
-        this.DatabaseContext.ExecuteSql("INSERT INTO [app].[Employee] ([id], age) VALUES (NewId(), null)");
+        this.ActualConnectionString.ExecuteSql("INSERT INTO [app].[Employee] ([id], age) VALUES (NewId(), null)");
 
         // Act, IntegrationNamespace
         var actual = this.Evaluate(

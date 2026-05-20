@@ -1,15 +1,17 @@
 ﻿using System.Data;
 using System.Text.RegularExpressions;
 
+using Anch.Testing.Database.ConnectionStringManagement;
+
 using Microsoft.Data.SqlClient;
 
 namespace Framework.AutomationCore.Services.DatabaseUtils;
 
 public static class ExecuteSqlExtensions
 {
-    public static void ExecuteSql(this IDatabaseContext databaseContext, string sqlFileOrText)
+    public static void ExecuteSql(this TestConnectionString connectionString, string sqlFileOrText)
     {
-        using var sqlCollection = new SqlConnection(databaseContext.ConnectionString.Value);
+        using var sqlCollection = new SqlConnection(connectionString.Value);
 
         sqlCollection.ExecuteSql(sqlFileOrText);
     }

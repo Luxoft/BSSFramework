@@ -1,6 +1,4 @@
-﻿using Anch.Testing.Xunit;
-
-using Framework.AutomationCore.Extensions;
+﻿using Framework.AutomationCore.Extensions;
 using Framework.Database.NHibernate.DBGenerator;
 
 
@@ -11,8 +9,8 @@ namespace SampleSystem.IntegrationTests.DBGeneration;
 
 public class GenerateDBTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
-    [AnchFact]
-    public async Task GenerateDB_SecondTime_ShouldNotFail(CancellationToken ct)
+    [Fact]
+    public void GenerateDB_SecondTime_ShouldNotFail()
     {
         // Arrange
         var generator = new DbGeneratorTest();

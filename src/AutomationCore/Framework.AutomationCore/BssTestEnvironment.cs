@@ -36,7 +36,6 @@ public abstract class BssTestEnvironment : ConfigurationTestEnvironment
         services.AddOptions<AutomationFrameworkSettings>().Bind(actualConfiguration.GetSection(nameof(AutomationFrameworkSettings)));
 
         return services
-               .AddSingleton<IServerSource, ServerSource>()
                .Self(v => this.InitializeServices(v, actualConfiguration))
                .AddIntegrationTests()
                .Pipe(this.InternalBuildServiceProvider);

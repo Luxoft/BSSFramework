@@ -12,6 +12,7 @@ public class BssDatabaseTestingProvider : IDatabaseTestingProvider
                 .AddSingleton<IDatabaseManager, BssDatabaseManager>()
                 .AddSingleton<INativeDatabaseManager, NativeDatabaseManager>()
                 .AddSingleton<IDatabaseCatalogResolver, DatabaseCatalogResolver>()
+                .AddSingleton<ISqlServerFactory, SqlServerFactory>()
 
                 .AddSingleton<IDatabaseFileInfoResolver, DatabaseFileInfoResolver>();
 }

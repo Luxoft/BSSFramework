@@ -1,11 +1,10 @@
 ﻿using Framework.AutomationCore.RootServiceProviderContainer;
-using Framework.AutomationCore.TestingProvider;
 
 using SampleSystem.BLL;
 
 namespace SampleSystem.IntegrationTests._Environment.TestData.Helpers;
 
-public partial class DataManager(IServiceProvider rootServiceProvider, IServerSource sqlServerSource) : IRootServiceProviderContainer<ISampleSystemBLLContext>
+public partial class DataManager(IServiceProvider rootServiceProvider) : IRootServiceProviderContainer<ISampleSystemBLLContext>
 {
     private Guid GetGuid(Guid? id)
     {

@@ -8,14 +8,18 @@ using Microsoft.SqlServer.Management.Smo;
 namespace Framework.AutomationCore.TestingProvider;
 
 public class NativeDatabaseManager(
-    IServerSource serverSource,
+    ISqlServerFactory sqlServerFactory,
     IOptions<AutomationFrameworkSettings> automationFrameworkSettingsOptions,
     IDatabaseFileInfoResolver databaseFileInfoResolver) : INativeDatabaseManager
 {
     public ValueTask CreateEmpty(string initialCatalog, CancellationToken ct)
     {
         ct.ThrowIfCancellationRequested();
-        var db = new Microsoft.SqlServer.Management.Smo.Database(serverSource.Server, initialCatalog);
+
+        var fileInfo = databaseFileInfoResolver.Resolve(initialCatalog);
+        var sqlServer = sqlServerFactory.Create();
+
+        var db = new Microsoft.SqlServer.Management.Smo.Database(sqlServer, initialCatalog);
 
         if (!string.IsNullOrEmpty(automationFrameworkSettingsOptions.Value.DatabaseCollation))
         {
@@ -23,8 +27,6 @@ public class NativeDatabaseManager(
         }
 
         var fileGroup = new FileGroup(db, "PRIMARY");
-
-        var fileInfo = databaseFileInfoResolver.Resolve(initialCatalog);
 
         var dataFile = new DataFile(fileGroup, Path.GetFileNameWithoutExtension(fileInfo.DbPath), fileInfo.DbPath)
                        {
@@ -53,9 +55,12 @@ public class NativeDatabaseManager(
 
     public ValueTask<bool> Exists(string initialCatalog, CancellationToken ct)
     {
-        var fileInfo = databaseFileInfoResolver.Resolve(initialCatalog);
+        ct.ThrowIfCancellationRequested();
 
-        if (serverSource.Server.GetDatabase(initialCatalog) is { } db)
+        var fileInfo = databaseFileInfoResolver.Resolve(initialCatalog);
+        var sqlServer = sqlServerFactory.Create();
+
+        if (sqlServer.Databases[initialCatalog] is { } db)
         {
             db.Validate(fileInfo);
 
@@ -72,12 +77,13 @@ public class NativeDatabaseManager(
         ct.ThrowIfCancellationRequested();
 
         var fileInfo = databaseFileInfoResolver.Resolve(initialCatalog);
+        var sqlServer = sqlServerFactory.Create();
 
-        if (serverSource.Server.GetDatabase(initialCatalog) is { } db)
+        if (sqlServer.Databases[initialCatalog] is { } db)
         {
             db.Validate(fileInfo);
 
-            serverSource.Server.DetachDatabase(db.Name);
+            sqlServer.DetachDatabase(db.Name);
         }
 
         if (File.Exists(fileInfo.DbPath))
@@ -109,23 +115,24 @@ public class NativeDatabaseManager(
 
         var sourceFileInfo = databaseFileInfoResolver.Resolve(sourceInitialCatalog);
         var targetFileInfo = databaseFileInfoResolver.Resolve(targetInitialCatalog);
+        var sqlServer = sqlServerFactory.Create();
 
-        if (serverSource.Server.GetDatabase(sourceInitialCatalog) is { } sourceDb)
+        if (sqlServer.Databases[sourceInitialCatalog] is { } sourceDb)
         {
             sourceDb.Validate(sourceFileInfo);
 
-            serverSource.Server.DetachDatabase(sourceInitialCatalog);
+            sqlServer.DetachDatabase(sourceInitialCatalog);
         }
         else if (!sourceFileInfo.IsExists)
         {
             throw new InvalidOperationException("Source database not found.");
         }
 
-        if (serverSource.Server.GetDatabase(targetInitialCatalog) is { } targetDb)
+        if (sqlServer.Databases[targetInitialCatalog] is { } targetDb)
         {
             targetDb.Validate(targetFileInfo);
 
-            serverSource.Server.DetachDatabase(targetDb.Name);
+            sqlServer.DetachDatabase(targetDb.Name);
         }
 
         if (move)
@@ -139,7 +146,7 @@ public class NativeDatabaseManager(
             File.Copy(sourceFileInfo.LogPath, targetFileInfo.LogPath, true);
         }
 
-        serverSource.Server.AttachDatabase(targetInitialCatalog, new StringCollection { targetFileInfo.DbPath, targetFileInfo.LogPath });
+        sqlServer.AttachDatabase(targetInitialCatalog, new StringCollection { targetFileInfo.DbPath, targetFileInfo.LogPath });
 
         return ValueTask.CompletedTask;
     }

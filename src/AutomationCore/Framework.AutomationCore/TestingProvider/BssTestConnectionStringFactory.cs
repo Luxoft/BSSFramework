@@ -5,14 +5,16 @@ using Microsoft.Data.SqlClient;
 
 namespace Framework.AutomationCore.TestingProvider;
 
-public class BssTestConnectionStringFactory(TestDatabaseSettings databaseSettings)
-    : ITestConnectionStringFactory
+public class BssTestConnectionStringFactory(TestDatabaseSettings databaseSettings) : ITestConnectionStringFactory
 {
     public TestConnectionString Create(string postfix)
     {
         var builder = new SqlConnectionStringBuilder { ConnectionString = databaseSettings.RawConnectionString.Value };
 
-        builder.InitialCatalog += postfix;
+        if (!string.IsNullOrWhiteSpace(postfix))
+        {
+            builder.InitialCatalog += "_" + postfix;
+        }
 
         return new TestConnectionString(builder.ConnectionString);
     }

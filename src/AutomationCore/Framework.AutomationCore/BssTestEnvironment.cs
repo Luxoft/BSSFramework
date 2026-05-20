@@ -1,10 +1,11 @@
 ﻿using Anch.Core;
+using Anch.Testing;
 using Anch.Testing.Database;
 using Anch.Testing.Database.Configuration;
 using Anch.Testing.Database.DependencyInjection;
-
+using Framework.AutomationCore.Extensions;
 using Framework.AutomationCore.ServiceEnvironment;
-using Framework.AutomationCore.TestingProvider;
+using Framework.AutomationCore.Services;
 using Framework.Core;
 using Framework.Database.ConnectionStringSource;
 
@@ -36,6 +37,7 @@ public abstract class BssTestEnvironment : ConfigurationTestEnvironment
         services.AddOptions<AutomationFrameworkSettings>().Bind(actualConfiguration.GetSection(nameof(AutomationFrameworkSettings)));
 
         return services
+               .AddEnvironmentHook<BssCleanupTestEnvironmentHook>(EnvironmentHookType.After)
                .Self(v => this.InitializeServices(v, actualConfiguration))
                .AddIntegrationTests()
                .Pipe(this.InternalBuildServiceProvider);

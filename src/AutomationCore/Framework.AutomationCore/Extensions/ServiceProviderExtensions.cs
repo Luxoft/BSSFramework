@@ -1,8 +1,7 @@
 ﻿using Anch.DependencyInjection;
-
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.AutomationCore;
+namespace Framework.AutomationCore.Extensions;
 
 public static class ServiceProviderExtensions
 {

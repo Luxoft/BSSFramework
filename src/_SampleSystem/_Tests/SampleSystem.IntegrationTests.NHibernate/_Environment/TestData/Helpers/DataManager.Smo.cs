@@ -1,6 +1,5 @@
 ﻿using Anch.Testing;
-
-using Framework.AutomationCore.TestingProvider;
+using Framework.AutomationCore.Services;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.SqlServer.Management.Smo;

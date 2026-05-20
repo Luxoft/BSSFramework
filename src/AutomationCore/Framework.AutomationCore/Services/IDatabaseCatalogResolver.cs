@@ -1,6 +1,6 @@
 ﻿using Anch.Testing.Database.ConnectionStringManagement;
 
-namespace Framework.AutomationCore.TestingProvider;
+namespace Framework.AutomationCore.Services;
 
 public interface IDatabaseCatalogResolver
 {

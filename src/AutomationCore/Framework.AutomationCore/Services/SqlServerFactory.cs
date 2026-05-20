@@ -4,7 +4,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
 
-namespace Framework.AutomationCore.TestingProvider;
+namespace Framework.AutomationCore.Services;
 
 public class SqlServerFactory(IActualTestConnectionStringSource actualTestConnectionStringSource) : ISqlServerFactory
 {

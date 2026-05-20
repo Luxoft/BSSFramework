@@ -1,6 +1,6 @@
 ﻿using Microsoft.SqlServer.Management.Smo;
 
-namespace Framework.AutomationCore.TestingProvider;
+namespace Framework.AutomationCore.Services;
 
 public interface ISqlServerFactory
 {

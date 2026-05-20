@@ -1,8 +1,10 @@
 ﻿using Anch.Testing.Database.ConnectionStringManagement;
 
+using Framework.AutomationCore.Extensions;
+
 using Microsoft.Extensions.Options;
 
-namespace Framework.AutomationCore.TestingProvider;
+namespace Framework.AutomationCore.Services;
 
 public class DatabaseCatalogResolver(
     IOptions<AutomationFrameworkSettings> automationFrameworkSettingsOptions,

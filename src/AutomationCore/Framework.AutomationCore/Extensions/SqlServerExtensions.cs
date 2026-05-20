@@ -1,6 +1,6 @@
 ﻿using Microsoft.SqlServer.Management.Smo;
 
-namespace Framework.AutomationCore.Services.DatabaseUtils;
+namespace Framework.AutomationCore.Extensions;
 
 public static class SqlServerExtensions
 {

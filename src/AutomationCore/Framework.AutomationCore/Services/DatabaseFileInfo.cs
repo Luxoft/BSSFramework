@@ -1,4 +1,4 @@
-﻿namespace Framework.AutomationCore.TestingProvider;
+﻿namespace Framework.AutomationCore.Services;
 
 public record DatabaseFileInfo(string DbPath, string LogPath)
 {

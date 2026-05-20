@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 
-namespace Framework.AutomationCore.TestingProvider;
+namespace Framework.AutomationCore.Services;
 
 public class DatabaseFileInfoResolver(IOptions<AutomationFrameworkSettings> settings) : IDatabaseFileInfoResolver
 {

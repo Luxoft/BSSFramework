@@ -1,4 +1,4 @@
-﻿using Framework.AutomationCore;
+﻿using Framework.AutomationCore.Extensions;
 using Framework.Database.NHibernate.DBGenerator;
 
 using Microsoft.SqlServer.Management.Smo;

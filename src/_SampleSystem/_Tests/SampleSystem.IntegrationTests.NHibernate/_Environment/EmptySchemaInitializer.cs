@@ -1,7 +1,7 @@
 ﻿using Anch.Core;
 using Anch.Testing.Database.ConnectionStringManagement;
 
-using Framework.AutomationCore;
+using Framework.AutomationCore.Extensions;
 using Framework.Database.NHibernate.DBGenerator;
 
 using SampleSystem.DbGenerate.NHibernate;

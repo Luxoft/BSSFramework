@@ -10,8 +10,6 @@ using Framework.Database.NHibernate.Sessions;
 
 using Anch.SecuritySystem;
 
-using Framework.AutomationCore.Services.DatabaseUtils;
-
 using Microsoft.Extensions.DependencyInjection;
 
 using NHibernate.Impl;
@@ -19,6 +17,7 @@ using NHibernate.Impl;
 using SampleSystem.Domain.Employee;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests._Environment.TestData;
+using Framework.AutomationCore.Extensions;
 
 namespace SampleSystem.IntegrationTests;
 

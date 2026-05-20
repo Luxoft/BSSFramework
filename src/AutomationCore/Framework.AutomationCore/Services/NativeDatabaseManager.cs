@@ -1,12 +1,10 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Specialized;
-
-using Framework.AutomationCore.Services.DatabaseUtils;
-
+using Framework.AutomationCore.Extensions;
 using Microsoft.Extensions.Options;
 using Microsoft.SqlServer.Management.Smo;
 
-namespace Framework.AutomationCore.TestingProvider;
+namespace Framework.AutomationCore.Services;
 
 public class NativeDatabaseManager(
     ISqlServerFactory sqlServerFactory,
@@ -19,7 +17,10 @@ public class NativeDatabaseManager(
     {
         var server = this.serverCache.GetOrAdd(initialCatalog, _ => sqlServerFactory.Create());
 
-        server.Refresh();
+        lock (server)
+        {
+            server.Refresh();
+        }
 
         return server;
     }
@@ -123,16 +124,26 @@ public class NativeDatabaseManager(
 
         var sourceFileInfo = databaseFileInfoResolver.Resolve(sourceInitialCatalog);
         var targetFileInfo = databaseFileInfoResolver.Resolve(targetInitialCatalog);
-        var sourceSqlServer = this.GetServer(sourceInitialCatalog);
         var targetSqlServer = this.GetServer(targetInitialCatalog);
 
-        if (sourceSqlServer.Databases[sourceInitialCatalog] is { } sourceDb)
+        if (targetSqlServer.Databases[sourceInitialCatalog] is not null)
         {
-            sourceDb.Validate(sourceFileInfo);
+            var sourceSqlServer = this.GetServer(sourceInitialCatalog);
 
-            sourceSqlServer.DetachDatabase(sourceInitialCatalog);
+            lock (sourceSqlServer)
+            {
+                sourceSqlServer.Refresh();
+
+                if (sourceSqlServer.Databases[sourceInitialCatalog] is { } sourceDb)
+                {
+                    sourceDb.Validate(sourceFileInfo);
+
+                    sourceSqlServer.DetachDatabase(sourceInitialCatalog);
+                }
+            }
         }
-        else if (!sourceFileInfo.IsExists)
+
+        if (!sourceFileInfo.IsExists)
         {
             throw new InvalidOperationException("Source database not found.");
         }

@@ -1,9 +1,8 @@
 ﻿using Anch.Core;
 using Anch.Testing.Database.ConnectionStringManagement;
-
 using Microsoft.Extensions.Options;
 
-namespace Framework.AutomationCore.TestingProvider;
+namespace Framework.AutomationCore.Services;
 
 public class BssDatabaseManager(
     IOptions<AutomationFrameworkSettings> automationFrameworkSettingsOptions,

@@ -1,9 +1,10 @@
-﻿using Anch.Core;
-using Anch.Testing.Xunit;
+﻿using Anch.Testing.Xunit;
 
-using Microsoft.Extensions.DependencyInjection;
+using Framework.AutomationCore.Extensions;
+using Framework.Database.NHibernate.DBGenerator;
 
-using SampleSystem.IntegrationTests._Environment;
+
+using SampleSystem.DbGenerate.NHibernate;
 using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests.DBGeneration;
@@ -14,10 +15,15 @@ public class GenerateDBTests(IServiceProvider rootServiceProvider) : TestBase(ro
     public async Task GenerateDB_SecondTime_ShouldNotFail(CancellationToken ct)
     {
         // Arrange
-        var initializer = rootServiceProvider.GetRequiredService<IServiceProxyFactory>().Create<EmptySchemaInitializer>();
+        var generator = new DbGeneratorTest();
 
         // Act
-        var ex = await Record.ExceptionAsync(() => initializer.Initialize(ct));
+        var ex = Record.Exception(() => generator.GenerateAllDB(
+                                      this.ActualConnectionString.DataSource,
+                                      this.ActualConnectionString.InitialCatalog,
+                                      credential: DbUserCredential.Create(
+                                          this.ActualConnectionString.UserId,
+                                          this.ActualConnectionString.Password)));
 
         // Assert
         Assert.Null(ex);

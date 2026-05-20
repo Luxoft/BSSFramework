@@ -13,6 +13,7 @@ using SampleSystem.Generated.DTO;
 using SampleSystem.Security;
 
 using Anch.SecuritySystem;
+using Anch.Testing.Xunit;
 
 using SampleSystem.IntegrationTests._Environment.TestData;
 
@@ -47,8 +48,8 @@ public class AuthPerformanceTest(IServiceProvider rootServiceProvider) : TestBas
         await this.GeneratePermissionAsync(ct);
     }
 
-    [Fact]
-    public async Task LoadGenerateAuthPerformanceObjects_CountEquals()
+    [AnchFact]
+    public async Task LoadGenerateAuthPerformanceObjects_CountEquals(CancellationToken ct)
     {
         // Arrange
         var authPerfCount = await this.GenerateAuthPerformanceObject();

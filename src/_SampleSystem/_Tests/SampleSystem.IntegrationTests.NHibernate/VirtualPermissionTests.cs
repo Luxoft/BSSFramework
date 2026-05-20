@@ -1,6 +1,8 @@
 ﻿using Framework.Application;
 using Framework.Database;
 
+using Anch.Testing.Xunit;
+
 using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Enums;
 using SampleSystem.IntegrationTests._Environment.TestData;
@@ -64,8 +66,8 @@ public class VirtualPermissionTests(IServiceProvider rootServiceProvider) : Test
         Assert.Equal(this.Datas[0].BuId, Assert.Single(accessToBuList));
     }
 
-    [Fact]
-    public  async Task VirtualPermission_EmployeeWithLink_ResolvedByAccessors()
+    [AnchFact]
+    public async Task VirtualPermission_EmployeeWithLink_ResolvedByAccessors(CancellationToken ct)
     {
         // Arrange
 
@@ -79,7 +81,7 @@ public class VirtualPermissionTests(IServiceProvider rootServiceProvider) : Test
                     var bu = ctx.Logics.BusinessUnit.GetById(this.Datas[0].BuId, true)!;
 
                     var accessorData = await ctx.SecurityService.GetSecurityProvider<BusinessUnit>(SampleSystemSecurityRole.SeManager)
-                                                .GetAccessorDataAsync(bu);
+                                                .GetAccessorDataAsync(bu, ct);
 
                     return ctx.SecurityAccessorResolver.Resolve(accessorData);
                 });
@@ -88,8 +90,8 @@ public class VirtualPermissionTests(IServiceProvider rootServiceProvider) : Test
         Assert.Contains(this.Datas[0].UserLogin, accessorList);
     }
 
-    [Fact]
-    public async Task VirtualPermission_EmployeeWithMyLink_AccessGranted()
+    [AnchFact]
+    public async Task VirtualPermission_EmployeeWithMyLink_AccessGranted(CancellationToken ct)
     {
         // Arrange
 
@@ -104,15 +106,15 @@ public class VirtualPermissionTests(IServiceProvider rootServiceProvider) : Test
                     var bu = ctx.Logics.BusinessUnit.GetById(this.Datas[1].BuId)!;
 
                     return await ctx.SecurityService.GetSecurityProvider<BusinessUnit>(SampleSystemSecurityRole.SeManager)
-                              .HasAccessAsync(bu);
+                              .HasAccessAsync(bu, ct);
                 });
 
         // Assert
         Assert.True(hasAccess);
     }
 
-    [Fact]
-    public async Task VirtualPermission_EmployeeWithNotMyLink_AccessDenied()
+    [AnchFact]
+    public async Task VirtualPermission_EmployeeWithNotMyLink_AccessDenied(CancellationToken ct)
     {
         // Arrange
 
@@ -127,15 +129,15 @@ public class VirtualPermissionTests(IServiceProvider rootServiceProvider) : Test
                     var bu = ctx.Logics.BusinessUnit.GetById(this.Datas[0].BuId)!;
 
                     return await ctx.SecurityService.GetSecurityProvider<BusinessUnit>(SampleSystemSecurityRole.SeManager)
-                              .HasAccessAsync(bu);
+                              .HasAccessAsync(bu, ct);
                 });
 
         // Assert
         Assert.False(hasAccess);
     }
 
-    [Fact]
-    public async Task VirtualPermission_NoNameWithoutLink_AccessDenied()
+    [AnchFact]
+    public async Task VirtualPermission_NoNameWithoutLink_AccessDenied(CancellationToken ct)
     {
         // Arrange
 
@@ -147,7 +149,7 @@ public class VirtualPermissionTests(IServiceProvider rootServiceProvider) : Test
                 "Noname",
                 async ctx =>
                 {
-                    return await ctx.Authorization.SecuritySystem.HasAccessAsync(SampleSystemSecurityRole.SeManager);
+                    return await ctx.Authorization.SecuritySystem.HasAccessAsync(SampleSystemSecurityRole.SeManager, ct);
                 });
 
         // Assert

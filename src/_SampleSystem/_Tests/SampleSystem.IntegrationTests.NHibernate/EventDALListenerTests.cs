@@ -1,6 +1,8 @@
 ﻿using Framework.Application;
 using Framework.Database;
 
+using Anch.Testing.Xunit;
+
 using SampleSystem.EventMetadata;
 using SampleSystem.IntegrationTests._Environment.TestData;
 
@@ -8,8 +10,8 @@ namespace SampleSystem.IntegrationTests;
 
 public class EventDALListenerTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
-    [Fact]
-    public async Task Employee_SendCustomEventOperation_ExceptionNotThrow()
+    [AnchFact]
+    public async Task Employee_SendCustomEventOperation_ExceptionNotThrow(CancellationToken ct)
     {
         //Arrange
 
@@ -19,7 +21,7 @@ public class EventDALListenerTests(IServiceProvider rootServiceProvider) : TestB
             ctx => ctx.OperationSender.Send(
                 ctx.CurrentEmployeeSource.CurrentUser,
                 SampleSystemEventOperation.CustomAction,
-                CancellationToken.None));
+                ct));
 
         // Assert
         await action();

@@ -1,12 +1,14 @@
-﻿using SampleSystem.IntegrationTests._Environment.TestData;
+﻿using Anch.Testing.Xunit;
+
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
 public class RepositoryControllerTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
-    [Fact]
-    public async Task TestLoadFromRepository_CurrentEmployeeLoaded()
+    [AnchFact]
+    public async Task TestLoadFromRepository_CurrentEmployeeLoaded(CancellationToken ct)
     {
         // Arrange
         var repositoryController = this.GetControllerEvaluator<TestRepositoryController>();
@@ -14,9 +16,9 @@ public class RepositoryControllerTests(IServiceProvider rootServiceProvider) : T
         var employeeController = this.GetControllerEvaluator<EmployeeAsyncController>();
 
         // Act
-        var result = await repositoryController.EvaluateAsync(c => c.LoadPair(default));
+        var result = await repositoryController.EvaluateAsync(c => c.LoadPair(ct));
 
-        var currentEmployee = await employeeController.EvaluateAsync(c => c.GetCurrentEmployee(default));
+        var currentEmployee = await employeeController.EvaluateAsync(c => c.GetCurrentEmployee(ct));
 
         // Assert
         Assert.Contains(currentEmployee.Identity, result.Employees);

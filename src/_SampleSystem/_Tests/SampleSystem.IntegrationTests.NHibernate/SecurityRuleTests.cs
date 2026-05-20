@@ -4,6 +4,7 @@ using Framework.BLL;
 using Framework.Database;
 
 using Anch.SecuritySystem;
+using Anch.Testing.Xunit;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,8 +18,8 @@ namespace SampleSystem.IntegrationTests;
 
 public class SecurityRuleTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
-    [Fact]
-    public async Task ApplyExceptRule_CurrentUserExcepted()
+    [AnchFact]
+    public async Task ApplyExceptRule_CurrentUserExcepted(CancellationToken ct)
     {
         // Arrange
         var testSecurityRule = SecurityRole.Administrator.Except(DomainSecurityRule.CurrentUser);
@@ -35,8 +36,8 @@ public class SecurityRuleTests(IServiceProvider rootServiceProvider) : TestBase(
 
                 var employeeRep = ctx.ServiceProvider.GetRequiredKeyedService<IRepository<Employee>>(nameof(SecurityRule.Disabled));
 
-                var testObj1 = new TestExceptObject { Employee = await employeeRep.LoadAsync(testOtherEmployeeId) };
-                var testObj2 = new TestExceptObject { Employee = await employeeRep.LoadAsync(currentEmployeeId) };
+                var testObj1 = new TestExceptObject { Employee = await employeeRep.LoadAsync(testOtherEmployeeId, ct) };
+                var testObj2 = new TestExceptObject { Employee = await employeeRep.LoadAsync(currentEmployeeId, ct) };
                 bll.Save([testObj1, testObj2]);
 
                 return new[] { testObj1.Id, testObj2.Id };

@@ -1,12 +1,14 @@
-﻿using SampleSystem.IntegrationTests._Environment.TestData;
+﻿using Anch.Testing.Xunit;
+
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
 public class ImpersonateTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
-    [Fact]
-    public async Task SaveDataWithImpersonate_ImpersonateWork()
+    [AnchFact]
+    public async Task SaveDataWithImpersonate_ImpersonateWork(CancellationToken ct)
     {
         // Arrange
         var testImpersonateLogin = Guid.NewGuid().ToString();
@@ -14,9 +16,9 @@ public class ImpersonateTests(IServiceProvider rootServiceProvider) : TestBase(r
         var controllerEvaluator = this.GetControllerEvaluator<ImpersonateController>();
 
         // Act
-        var testObj = await controllerEvaluator.EvaluateAsync(c => c.TestSave(testImpersonateLogin, default));
+        var testObj = await controllerEvaluator.EvaluateAsync(c => c.TestSave(testImpersonateLogin, ct));
 
-        var fullList = await controllerEvaluator.EvaluateAsync(c => c.GetFullList(default));
+        var fullList = await controllerEvaluator.EvaluateAsync(c => c.GetFullList(ct));
 
         // Assert
         var savedObject = Assert.Single(fullList, obj => obj.Id == testObj.Id);

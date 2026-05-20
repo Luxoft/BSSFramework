@@ -1,33 +1,35 @@
-﻿using SampleSystem.IntegrationTests._Environment.TestData;
+﻿using Anch.Testing.Xunit;
+
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
 public class RepositoryWithoutSecurityTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
-    [Fact]
-    public async Task GetDataFromUnsecurityRepository_DataLoaded()
+    [AnchFact]
+    public async Task GetDataFromUnsecurityRepository_DataLoaded(CancellationToken ct)
     {
         // Arrange
         var controllerEvaluator = this.GetControllerEvaluator<NoSecurityController>();
 
         // Act
-        var testObj = await controllerEvaluator.EvaluateAsync(c => c.TestSave(default));
+        var testObj = await controllerEvaluator.EvaluateAsync(c => c.TestSave(ct));
 
-        var fullList = await controllerEvaluator.EvaluateAsync(c => c.GetFullList(default));
+        var fullList = await controllerEvaluator.EvaluateAsync(c => c.GetFullList(ct));
 
         // Assert
         Assert.Contains(testObj, fullList);
     }
 
-    [Fact]
-    public async Task GetDataFromUnsecurityRepository_TryLoadWithSecurity_DataLoadFaileds()
+    [AnchFact]
+    public async Task GetDataFromUnsecurityRepository_TryLoadWithSecurity_DataLoadFaileds(CancellationToken ct)
     {
         // Arrange
         var controllerEvaluator = this.GetControllerEvaluator<NoSecurityController>();
 
         // Act
-        var ex = await Record.ExceptionAsync(() => controllerEvaluator.EvaluateAsync(c => c.TestFaultSave(default)));
+        var ex = await Record.ExceptionAsync(() => controllerEvaluator.EvaluateAsync(c => c.TestFaultSave(ct)));
 
         // Assert
         Assert.IsType<ArgumentOutOfRangeException>(ex);

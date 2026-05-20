@@ -1,7 +1,7 @@
 ﻿using Framework.Core;
 using Framework.Infrastructure.WebApiExceptionExpander;
 
-namespace Framework.AutomationCore.ServiceEnvironment;
+namespace Framework.AutomationCore.Services;
 
 /// <inheritdoc />
 public class TestWebApiExceptionExpander(IExceptionExpander exceptionExpander) : IWebApiExceptionExpander

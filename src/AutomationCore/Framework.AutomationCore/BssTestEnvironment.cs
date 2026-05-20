@@ -3,8 +3,8 @@ using Anch.Testing;
 using Anch.Testing.Database;
 using Anch.Testing.Database.Configuration;
 using Anch.Testing.Database.DependencyInjection;
+
 using Framework.AutomationCore.Extensions;
-using Framework.AutomationCore.ServiceEnvironment;
 using Framework.AutomationCore.Services;
 using Framework.Core;
 using Framework.Database.ConnectionStringSource;
@@ -29,6 +29,7 @@ public abstract class BssTestEnvironment : ConfigurationTestEnvironment
 
     protected sealed override void InitDatabase(IDatabaseTestingSetup dts) =>
         dts.SetProvider<BssDatabaseTestingProvider>()
+           .SetDatabaseSnapshotInitializer<BssDatabaseSnapshotInitializer>()
            .Self(this.SetInitializers)
            .SetParallelization(this.Settings.TestsParallelize);
 

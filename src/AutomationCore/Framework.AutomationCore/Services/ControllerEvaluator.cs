@@ -16,7 +16,7 @@ using Anch.SecuritySystem;
 using Anch.SecuritySystem.Services;
 using Anch.SecuritySystem.Testing;
 
-namespace Framework.AutomationCore.ServiceEnvironment;
+namespace Framework.AutomationCore.Services;
 
 public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvider, UserCredential? customUserCredential = null)
     where TController : ControllerBase

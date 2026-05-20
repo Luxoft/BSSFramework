@@ -4,7 +4,7 @@ using Framework.Database;
 using Anch.SecuritySystem;
 using Anch.SecuritySystem.Testing;
 
-namespace Framework.AutomationCore.ServiceEnvironment.Services;
+namespace Framework.AutomationCore.Services;
 
 public class BssTestingEvaluator<TService>(IServiceEvaluator<TService> serviceEvaluator) : ITestingEvaluator<TService>
     where TService : notnull

@@ -9,6 +9,9 @@ using Framework.Database;
 using Framework.Database.NHibernate.Sessions;
 
 using Anch.SecuritySystem;
+using Anch.Testing.Xunit;
+
+using Framework.AutomationCore.Extensions;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,14 +20,13 @@ using NHibernate.Impl;
 using SampleSystem.Domain.Employee;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests._Environment.TestData;
-using Framework.AutomationCore.Extensions;
 
 namespace SampleSystem.IntegrationTests;
 
 public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
-    [Fact]
-    public void GetEmployeeFromDB_FilterByAge_ReturnNotNulRecords()
+    [AnchFact]
+    public async Task GetEmployeeFromDB_FilterByAge_ReturnNotNulRecords(CancellationToken ct)
     {
         /*
          * дефект в старых версих nhibernate.
@@ -33,7 +35,7 @@ public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(root
 
         // Arrange
         this.DataManager.SaveEmployee(Guid.NewGuid(), age: 10);
-        this.ActualConnectionString.ExecuteSql("INSERT INTO [app].[Employee] ([id], age) VALUES (NewId(), null)");
+        await this.ActualConnectionString.ExecuteSqlAsync("INSERT INTO [app].[Employee] ([id], age) VALUES (NewId(), null)", ct);
 
         // Act, IntegrationNamespace
         var actual = this.Evaluate(

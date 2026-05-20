@@ -2,8 +2,7 @@
 using Anch.Testing.Database.ConnectionStringManagement;
 
 using Framework.AutomationCore;
-using Framework.AutomationCore.ServiceEnvironment;
-
+using Framework.AutomationCore.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.BLL;

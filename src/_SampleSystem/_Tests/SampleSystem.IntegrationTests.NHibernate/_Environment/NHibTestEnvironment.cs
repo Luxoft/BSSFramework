@@ -5,7 +5,7 @@ using Bss.Platform.Events.Abstractions;
 
 using Framework.Application.Jobs;
 using Framework.AutomationCore;
-using Framework.AutomationCore.ServiceEnvironment;
+using Framework.AutomationCore.Extensions;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +21,7 @@ using SampleSystem.ServiceEnvironment.Jobs;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 [assembly: AnchTestFramework<NHibTestEnvironment>]
+[assembly: CollectionBehavior(DisableTestParallelization = true)]
 
 namespace SampleSystem.IntegrationTests._Environment;
 

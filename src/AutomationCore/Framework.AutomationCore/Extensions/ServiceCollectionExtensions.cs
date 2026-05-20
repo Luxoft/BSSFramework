@@ -2,9 +2,11 @@
 
 using Anch.Core;
 using Anch.DependencyInjection;
+using Anch.SecuritySystem.Testing;
+using Anch.SecuritySystem.Testing.DependencyInjection;
 
 using Framework.Application.Jobs;
-using Framework.AutomationCore.ServiceEnvironment.Services;
+using Framework.AutomationCore.Services;
 using Framework.Infrastructure.Middleware;
 using Framework.Infrastructure.WebApiExceptionExpander;
 
@@ -12,32 +14,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-using Anch.SecuritySystem;
-using Anch.SecuritySystem.Testing;
-using Anch.SecuritySystem.Testing.DependencyInjection;
+namespace Framework.AutomationCore.Extensions;
 
-//using Framework.AutomationCore.Utils.DatabaseUtils;
-//using Framework.AutomationCore.Utils.DatabaseUtils.Interfaces;
-
-namespace Framework.AutomationCore.ServiceEnvironment;
-
-public static class ServiceProviderExtensions
+public static class ServiceCollectionExtensions
 {
-    extension(IServiceProvider rootServiceProvider)
-    {
-        public async Task RunJob<TJob>(CancellationToken cancellationToken = default)
-            where TJob : IJob =>
-            await rootServiceProvider.GetRequiredService<IJobServiceEvaluatorFactory>().RunJob<TJob>(cancellationToken);
-
-        public ControllerEvaluator<TController> GetDefaultControllerEvaluator<TController>(UserCredential? userCredential = null)
-            where TController : ControllerBase
-        {
-            var controllerEvaluator = rootServiceProvider.GetRequiredService<ControllerEvaluator<TController>>();
-
-            return userCredential == null ? controllerEvaluator : controllerEvaluator.WithImpersonate(userCredential);
-        }
-    }
-
     extension(IServiceCollection services)
     {
         public IServiceCollection AddTestControllers(
@@ -72,10 +52,7 @@ public static class ServiceProviderExtensions
                 services.Configure(setup);
             }
 
-            return services//.AddSingleton<IDatabaseContext, DatabaseContext>()
-
-
-                           .AddSingleton<IntegrationTestTimeProvider>()
+            return services.AddSingleton<IntegrationTestTimeProvider>()
                            .ReplaceSingletonFrom<TimeProvider, IntegrationTestTimeProvider>()
 
                            .AddScoped<TestWebApiCurrentMethodResolver>()
@@ -86,7 +63,12 @@ public static class ServiceProviderExtensions
 
                            .AddSecuritySystemTesting(b => b.SetEvaluator(typeof(BssTestingEvaluator<>))
                                                            .SetTestRootUserInfo(sp => sp.GetRequiredService<IOptions<AutomationFrameworkSettings>>()
-                                                                                        .Pipe(options => new TestRootUserInfo(options.Value.IntegrationTestUserName))));
+                                                                                        .Pipe(options => new TestRootUserInfo(
+                                                                                                  options.Value.IntegrationTestUserName))));
         }
     }
+
+    public static IServiceProvider BuildDefaultServiceProvider(this IServiceCollection services) =>
+        services.AddValidator<DuplicateServiceUsageValidator>()
+                .BuildServiceProvider(new ServiceProviderOptions { ValidateScopes = true, ValidateOnBuild = true });
 }

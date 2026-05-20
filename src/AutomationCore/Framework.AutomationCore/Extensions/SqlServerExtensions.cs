@@ -4,9 +4,9 @@ namespace Framework.AutomationCore.Extensions;
 
 public static class SqlServerExtensions
 {
-    public static void DetachDatabase(this Server server, string databaseName)
+    public static async Task DetachDatabaseAsync(this Server server, string databaseName, CancellationToken ct)
     {
-        server.SetModeRestrictedUser(databaseName);
+        await server.SetModeRestrictedUserAsync(databaseName, ct);
 
         server.DetachDatabase(databaseName, false);
     }
@@ -20,7 +20,7 @@ public static class SqlServerExtensions
 
     public static long TableRowCount(this Server server, string databaseName, string tableName) => server.GetTable(databaseName, tableName)?.RowCount ?? 0;
 
-    private static void SetModeRestrictedUser(this Server server, string databaseName)
+    private static async Task SetModeRestrictedUserAsync(this Server server, string databaseName, CancellationToken ct)
     {
         if (server.GetDatabase(databaseName) == null)
         {
@@ -33,12 +33,12 @@ public static class SqlServerExtensions
         }
         catch (FailedOperationException)
         {
-            server.ConnectionContext.SqlConnectionObject.ExecuteSql($"ALTER DATABASE [{databaseName}] SET RESTRICTED_USER WITH ROLLBACK IMMEDIATE");
+            await server.ConnectionContext.SqlConnectionObject.ExecuteSqlAsync($"ALTER DATABASE [{databaseName}] SET RESTRICTED_USER WITH ROLLBACK IMMEDIATE", ct);
         }
     }
 
-    private static void SetModeMultiUser(this Server server, Microsoft.SqlServer.Management.Smo.Database database)
-        => server.ConnectionContext.SqlConnectionObject.ExecuteSql($"ALTER DATABASE [{database.Name}] SET MULTI_USER");
+    private static async Task SetModeMultiUserAsync(this Server server, Microsoft.SqlServer.Management.Smo.Database database, CancellationToken ct)
+        => await server.ConnectionContext.SqlConnectionObject.ExecuteSqlAsync($"ALTER DATABASE [{database.Name}] SET MULTI_USER", ct);
 
     public static Microsoft.SqlServer.Management.Smo.Database? GetDatabase(this Server server, string name) =>
         server.Databases.Contains(name) ? server.Databases[name] : null;

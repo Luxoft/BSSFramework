@@ -1,4 +1,4 @@
-﻿namespace Framework.AutomationCore.ServiceEnvironment.Services;
+﻿namespace Framework.AutomationCore.Services;
 
 /// <summary>
 /// Реализация класса <see cref="TimeProvider"/> для интеграционных тестов

@@ -11,6 +11,7 @@
   <ItemGroup>
     <PackageReference Include="Anch.Testing.Database.Configuration" />
     <PackageReference Include="Anch.SecuritySystem.Testing" />
+    <PackageReference Include="Anch.Threading" />
 
     <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" />
 

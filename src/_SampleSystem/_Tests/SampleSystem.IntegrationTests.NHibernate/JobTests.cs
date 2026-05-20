@@ -1,5 +1,5 @@
 ﻿using Framework.Application;
-using Framework.AutomationCore.ServiceEnvironment;
+using Framework.AutomationCore.Extensions;
 using Framework.Database;
 
 using SampleSystem.Domain;

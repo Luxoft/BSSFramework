@@ -1,6 +1,10 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Specialized;
+
+using Anch.Threading;
+
 using Framework.AutomationCore.Extensions;
+
 using Microsoft.Extensions.Options;
 using Microsoft.SqlServer.Management.Smo;
 
@@ -11,26 +15,26 @@ public class NativeDatabaseManager(
     IOptions<AutomationFrameworkSettings> automationFrameworkSettingsOptions,
     IDatabaseFileInfoResolver databaseFileInfoResolver) : INativeDatabaseManager
 {
-    private readonly ConcurrentDictionary<string, Server> serverCache = [];
+    private readonly ConcurrentDictionary<string, (Server, AsyncLocker)> serverCache = [];
 
-    private Server GetServer(string initialCatalog)
+    private async Task<(Server, AsyncLocker)> GetServerAsync(string initialCatalog, CancellationToken ct)
     {
-        var server = this.serverCache.GetOrAdd(initialCatalog, _ => sqlServerFactory.Create());
+        var (server, locker) = this.serverCache.GetOrAdd(initialCatalog, _ => (sqlServerFactory.Create(), new AsyncLocker()));
 
-        lock (server)
+        using (await locker.CreateScope(ct))
         {
             server.Refresh();
         }
 
-        return server;
+        return (server, locker);
     }
 
-    public ValueTask CreateEmpty(string initialCatalog, CancellationToken ct)
+    public async ValueTask CreateEmpty(string initialCatalog, CancellationToken ct)
     {
         ct.ThrowIfCancellationRequested();
 
         var fileInfo = databaseFileInfoResolver.Resolve(initialCatalog);
-        var sqlServer = this.GetServer(initialCatalog);
+        var (sqlServer, _) = await this.GetServerAsync(initialCatalog, ct);
 
         var db = new Microsoft.SqlServer.Management.Smo.Database(sqlServer, initialCatalog);
 
@@ -58,41 +62,39 @@ public class NativeDatabaseManager(
         db.LogFiles.Add(logFile);
 
         db.Create();
-
-        return ValueTask.CompletedTask;
     }
 
-    public ValueTask<bool> Exists(string initialCatalog, CancellationToken ct)
+    public async ValueTask<bool> Exists(string initialCatalog, CancellationToken ct)
     {
         ct.ThrowIfCancellationRequested();
 
         var fileInfo = databaseFileInfoResolver.Resolve(initialCatalog);
-        var sqlServer = this.GetServer(initialCatalog);
+        var (sqlServer, _) = await this.GetServerAsync(initialCatalog, ct);
 
         if (sqlServer.Databases[initialCatalog] is { } db)
         {
             db.Validate(fileInfo);
 
-            return new(true);
+            return true;
         }
         else
         {
-            return new(fileInfo.IsExists);
+            return fileInfo.IsExists;
         }
     }
 
-    public ValueTask Remove(string initialCatalog, CancellationToken ct)
+    public async ValueTask Remove(string initialCatalog, CancellationToken ct)
     {
         ct.ThrowIfCancellationRequested();
 
         var fileInfo = databaseFileInfoResolver.Resolve(initialCatalog);
-        var sqlServer = this.GetServer(initialCatalog);
+        var (sqlServer, _) = await this.GetServerAsync(initialCatalog, ct);
 
         if (sqlServer.Databases[initialCatalog] is { } db)
         {
             db.Validate(fileInfo);
 
-            sqlServer.DetachDatabase(db.Name);
+            await sqlServer.DetachDatabaseAsync(db.Name, ct);
         }
 
         if (File.Exists(fileInfo.DbPath))
@@ -104,8 +106,6 @@ public class NativeDatabaseManager(
         {
             File.Delete(fileInfo.LogPath);
         }
-
-        return ValueTask.CompletedTask;
     }
 
     public ValueTask Copy(string sourceInitialCatalog, string targetInitialCatalog, CancellationToken ct) =>
@@ -114,23 +114,17 @@ public class NativeDatabaseManager(
     public ValueTask Move(string sourceInitialCatalog, string targetInitialCatalog, CancellationToken ct) =>
         this.CopyMove(sourceInitialCatalog, targetInitialCatalog, true, ct);
 
-    private ValueTask CopyMove(
-        string sourceInitialCatalog,
-        string targetInitialCatalog,
-        bool move,
-        CancellationToken ct)
+    private async ValueTask CopyMove(string sourceInitialCatalog, string targetInitialCatalog, bool move, CancellationToken ct)
     {
-        ct.ThrowIfCancellationRequested();
-
         var sourceFileInfo = databaseFileInfoResolver.Resolve(sourceInitialCatalog);
         var targetFileInfo = databaseFileInfoResolver.Resolve(targetInitialCatalog);
-        var targetSqlServer = this.GetServer(targetInitialCatalog);
+        var (targetSqlServer, _) = await this.GetServerAsync(targetInitialCatalog, ct);
 
         if (targetSqlServer.Databases[sourceInitialCatalog] is not null)
         {
-            var sourceSqlServer = this.GetServer(sourceInitialCatalog);
+            var (sourceSqlServer, sourceSqlServerLocker) = await this.GetServerAsync(sourceInitialCatalog, ct);
 
-            lock (sourceSqlServer)
+            using (await sourceSqlServerLocker.CreateScope(ct))
             {
                 sourceSqlServer.Refresh();
 
@@ -138,7 +132,7 @@ public class NativeDatabaseManager(
                 {
                     sourceDb.Validate(sourceFileInfo);
 
-                    sourceSqlServer.DetachDatabase(sourceInitialCatalog);
+                    await sourceSqlServer.DetachDatabaseAsync(sourceInitialCatalog, ct);
                 }
             }
         }
@@ -152,7 +146,7 @@ public class NativeDatabaseManager(
         {
             targetDb.Validate(targetFileInfo);
 
-            targetSqlServer.DetachDatabase(targetDb.Name);
+            await targetSqlServer.DetachDatabaseAsync(targetDb.Name, ct);
         }
 
         if (move)
@@ -167,8 +161,5 @@ public class NativeDatabaseManager(
         }
 
         targetSqlServer.AttachDatabase(targetInitialCatalog, new StringCollection { targetFileInfo.DbPath, targetFileInfo.LogPath });
-
-        return ValueTask.CompletedTask;
     }
-
 }

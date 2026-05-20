@@ -12,6 +12,7 @@
     <PackageVersion Include="Anch.DependencyInjection" Version="$(Anch)" />
     <PackageVersion Include="Anch.GenericRepository" Version="$(Anch)" />
     <PackageVersion Include="Anch.IdentitySource.Abstractions" Version="$(Anch)" />
+    <PackageVersion Include="Anch.Threading" Version="$(Anch)" />
     <PackageVersion Include="Anch.VisualIdentitySource.Abstractions" Version="$(Anch)" />
     <PackageVersion Include="Anch.GenericQueryable.Abstractions" Version="$(Anch)" />
     <PackageVersion Include="Anch.GenericQueryable.EntityFramework" Version="$(Anch)" />

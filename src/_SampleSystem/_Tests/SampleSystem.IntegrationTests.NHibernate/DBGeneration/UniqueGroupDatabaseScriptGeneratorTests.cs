@@ -20,7 +20,7 @@ public class UniqueGroupDatabaseScriptGeneratorTests(IServiceProvider rootServic
 
         var tableName = "RoleRoleDegreeLink";
 
-        var table = this.DataManager.GetTable(this.ActualConnectionString.DataSource, tableName);
+        var table = this.DataManager.GetTable(this.ActualConnectionString.InitialCatalog, tableName);
 
         var indexName = "unilink_RoleRoleDegreeLink";
 

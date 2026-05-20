@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System.Collections.Concurrent;
+using System.Collections.Specialized;
 
 using Framework.AutomationCore.Services.DatabaseUtils;
 
@@ -12,12 +13,23 @@ public class NativeDatabaseManager(
     IOptions<AutomationFrameworkSettings> automationFrameworkSettingsOptions,
     IDatabaseFileInfoResolver databaseFileInfoResolver) : INativeDatabaseManager
 {
+    private readonly ConcurrentDictionary<string, Server> serverCache = [];
+
+    private Server GetServer(string initialCatalog)
+    {
+        var server = this.serverCache.GetOrAdd(initialCatalog, _ => sqlServerFactory.Create());
+
+        server.Refresh();
+
+        return server;
+    }
+
     public ValueTask CreateEmpty(string initialCatalog, CancellationToken ct)
     {
         ct.ThrowIfCancellationRequested();
 
         var fileInfo = databaseFileInfoResolver.Resolve(initialCatalog);
-        var sqlServer = sqlServerFactory.Create();
+        var sqlServer = this.GetServer(initialCatalog);
 
         var db = new Microsoft.SqlServer.Management.Smo.Database(sqlServer, initialCatalog);
 
@@ -30,9 +42,7 @@ public class NativeDatabaseManager(
 
         var dataFile = new DataFile(fileGroup, Path.GetFileNameWithoutExtension(fileInfo.DbPath), fileInfo.DbPath)
                        {
-                           Size = 5.5 * 1024.0,
-                           GrowthType = FileGrowthType.KB,
-                           Growth = 1.0 * 1024.0
+                           Size = 5.5 * 1024.0, GrowthType = FileGrowthType.KB, Growth = 1.0 * 1024.0
                        };
 
         fileGroup.Files.Add(dataFile);
@@ -41,9 +51,7 @@ public class NativeDatabaseManager(
 
         var logFile = new LogFile(db, Path.GetFileNameWithoutExtension(fileInfo.LogPath), fileInfo.LogPath)
                       {
-                          Size = 1.0 * 1024.0,
-                          GrowthType = FileGrowthType.Percent,
-                          Growth = 10.0
+                          Size = 1.0 * 1024.0, GrowthType = FileGrowthType.Percent, Growth = 10.0
                       };
 
         db.LogFiles.Add(logFile);
@@ -58,7 +66,7 @@ public class NativeDatabaseManager(
         ct.ThrowIfCancellationRequested();
 
         var fileInfo = databaseFileInfoResolver.Resolve(initialCatalog);
-        var sqlServer = sqlServerFactory.Create();
+        var sqlServer = this.GetServer(initialCatalog);
 
         if (sqlServer.Databases[initialCatalog] is { } db)
         {
@@ -77,7 +85,7 @@ public class NativeDatabaseManager(
         ct.ThrowIfCancellationRequested();
 
         var fileInfo = databaseFileInfoResolver.Resolve(initialCatalog);
-        var sqlServer = sqlServerFactory.Create();
+        var sqlServer = this.GetServer(initialCatalog);
 
         if (sqlServer.Databases[initialCatalog] is { } db)
         {
@@ -115,24 +123,25 @@ public class NativeDatabaseManager(
 
         var sourceFileInfo = databaseFileInfoResolver.Resolve(sourceInitialCatalog);
         var targetFileInfo = databaseFileInfoResolver.Resolve(targetInitialCatalog);
-        var sqlServer = sqlServerFactory.Create();
+        var sourceSqlServer = this.GetServer(sourceInitialCatalog);
+        var targetSqlServer = this.GetServer(targetInitialCatalog);
 
-        if (sqlServer.Databases[sourceInitialCatalog] is { } sourceDb)
+        if (sourceSqlServer.Databases[sourceInitialCatalog] is { } sourceDb)
         {
             sourceDb.Validate(sourceFileInfo);
 
-            sqlServer.DetachDatabase(sourceInitialCatalog);
+            sourceSqlServer.DetachDatabase(sourceInitialCatalog);
         }
         else if (!sourceFileInfo.IsExists)
         {
             throw new InvalidOperationException("Source database not found.");
         }
 
-        if (sqlServer.Databases[targetInitialCatalog] is { } targetDb)
+        if (targetSqlServer.Databases[targetInitialCatalog] is { } targetDb)
         {
             targetDb.Validate(targetFileInfo);
 
-            sqlServer.DetachDatabase(targetDb.Name);
+            targetSqlServer.DetachDatabase(targetDb.Name);
         }
 
         if (move)
@@ -146,8 +155,9 @@ public class NativeDatabaseManager(
             File.Copy(sourceFileInfo.LogPath, targetFileInfo.LogPath, true);
         }
 
-        sqlServer.AttachDatabase(targetInitialCatalog, new StringCollection { targetFileInfo.DbPath, targetFileInfo.LogPath });
+        targetSqlServer.AttachDatabase(targetInitialCatalog, new StringCollection { targetFileInfo.DbPath, targetFileInfo.LogPath });
 
         return ValueTask.CompletedTask;
     }
+
 }

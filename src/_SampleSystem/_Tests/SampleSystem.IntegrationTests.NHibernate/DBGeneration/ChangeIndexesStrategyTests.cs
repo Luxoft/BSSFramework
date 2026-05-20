@@ -59,7 +59,7 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
         var generator = new DbGeneratorTest();
 
         var tableName = "Employee";
-        var table = this.DataManager.GetTable(this.ActualConnectionString.DataSource, tableName);
+        var table = this.DataManager.GetTable(this.ActualConnectionString.InitialCatalog, tableName);
 
         var ignoredIndexName = "IX_Employee_hRDepartmentId";
 

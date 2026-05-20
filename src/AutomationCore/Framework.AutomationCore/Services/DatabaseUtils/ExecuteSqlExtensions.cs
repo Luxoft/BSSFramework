@@ -22,11 +22,9 @@ public static class ExecuteSqlExtensions
 
         if (sqlFileOrText.EndsWith(".sql", StringComparison.InvariantCultureIgnoreCase))
         {
-            using (var stream = File.OpenRead(sqlFileOrText))
-            {
-                var reader = new StreamReader(stream);
-                sql = reader.ReadToEnd();
-            }
+            using var stream = File.OpenRead(sqlFileOrText);
+            var reader = new StreamReader(stream);
+            sql = reader.ReadToEnd();
         }
         else
         {
@@ -34,22 +32,20 @@ public static class ExecuteSqlExtensions
         }
 
         var regex = new Regex("^GO(\r\n|\n|\r)", RegexOptions.Multiline | RegexOptions.IgnoreCase);
-        string[] lines = regex.Split(sql).Select(z => z.Replace("$Database", connection.Database)).ToArray();
+        var lines = regex.Split(sql).Select(z => z.Replace("$Database", connection.Database)).ToArray();
 
-        using (var cmd = connection.CreateCommand())
+        using var cmd = connection.CreateCommand();
+        cmd.Connection = connection;
+
+        foreach (var line in lines)
         {
-            cmd.Connection = connection;
-
-            foreach (var line in lines)
+            if (line.Length > 0)
             {
-                if (line.Length > 0)
-                {
-                    cmd.CommandText = line;
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandTimeout = 30;
+                cmd.CommandText = line;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandTimeout = 30;
 
-                    cmd.ExecuteNonQuery();
-                }
+                cmd.ExecuteNonQuery();
             }
         }
     }

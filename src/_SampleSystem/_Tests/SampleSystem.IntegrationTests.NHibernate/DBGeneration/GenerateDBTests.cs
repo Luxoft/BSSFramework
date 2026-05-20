@@ -1,4 +1,6 @@
-﻿using Anch.Testing.Xunit;
+﻿using Anch.Core;
+using Anch.Testing.Database.Initializers;
+using Anch.Testing.Xunit;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,7 +15,7 @@ public class GenerateDBTests(IServiceProvider rootServiceProvider) : TestBase(ro
     public async Task GenerateDB_SecondTime_ShouldNotFail(CancellationToken ct)
     {
         // Arrange
-        var initializer = rootServiceProvider.GetRequiredService<EmptySchemaInitializer>();
+        var initializer = rootServiceProvider.GetRequiredService<IServiceProxyFactory>().Create<EmptySchemaInitializer>();
 
         // Act
         var ex = await Record.ExceptionAsync(() => initializer.Initialize(ct));

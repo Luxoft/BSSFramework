@@ -57,7 +57,7 @@ public static class ExecuteSqlExtensions
         }
     }
 
-    public static async Task ExecuteSqlFromFolderAsync(this TestConnectionString connectionString, string folder, string? initialCatalog = null, CancellationToken ct = default)
+    public static async Task ExecuteSqlFromFolderAsync(this TestConnectionString connectionString, string folder, CancellationToken ct = default)
     {
         string[] filePaths;
 
@@ -77,11 +77,6 @@ public static class ExecuteSqlExtensions
         }
 
         var builder = new SqlConnectionStringBuilder(connectionString.Value);
-
-        if (initialCatalog != null)
-        {
-            builder.InitialCatalog = initialCatalog;
-        }
 
         await ExecuteSqlScriptsAsync(filePaths, builder, ct);
     }

@@ -20,7 +20,7 @@ public class BssEmptySchemaInitializer(
 
         foreach (var executeScriptInfo in scriptInfoList)
         {
-            await actualTestConnectionStringSource.ActualConnectionString.ExecuteSqlFromFolderAsync(executeScriptInfo.Path, null, cancellationToken);
+            await actualTestConnectionStringSource.ActualConnectionString.ExecuteSqlFromFolderAsync(executeScriptInfo.Path, cancellationToken);
         }
     }
 }

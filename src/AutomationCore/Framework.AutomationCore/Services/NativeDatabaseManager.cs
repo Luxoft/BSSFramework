@@ -16,7 +16,7 @@ public class NativeDatabaseManager(
     IOptions<AutomationFrameworkSettings> automationFrameworkSettingsOptions,
     IDatabaseFileInfoResolver databaseFileInfoResolver) : INativeDatabaseManager
 {
-    private readonly ConcurrentDictionary<string, (Server, AsyncLocker)> serverCache = [];
+    private readonly ConcurrentDictionary<string, (Server, DatabaseFileInfo, AsyncLocker)> serverCache = [];
 
     private async ValueTask<TResult> EvaluateAsync<TResult>(
         string initialCatalog,
@@ -25,9 +25,7 @@ public class NativeDatabaseManager(
     {
         ct.ThrowIfCancellationRequested();
 
-        var (sqlServer, locker) = this.serverCache.GetOrAdd(initialCatalog, _ => (sqlServerFactory.Create(), new AsyncLocker()));
-
-        var fileInfo = databaseFileInfoResolver.Resolve(initialCatalog);
+        var (sqlServer, fileInfo, locker) = this.serverCache.GetOrAdd(initialCatalog, _ => (sqlServerFactory.Create(), databaseFileInfoResolver.Resolve(initialCatalog), new AsyncLocker()));
 
         using (await locker.CreateScope(ct))
         {
@@ -83,7 +81,7 @@ public class NativeDatabaseManager(
             ct);
 
     public ValueTask<bool> Exists(string initialCatalog, CancellationToken ct) =>
-        this.EvaluateAsync(initialCatalog, async (_, fileInfo) => fileInfo.IsExists, ct);
+        this.EvaluateAsync(initialCatalog, async (_, fileInfo) => fileInfo.IsExists(), ct);
 
     public ValueTask Remove(string initialCatalog, CancellationToken ct) =>
         this.EvaluateAsync(

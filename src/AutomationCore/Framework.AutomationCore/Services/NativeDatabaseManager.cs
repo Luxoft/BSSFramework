@@ -114,15 +114,29 @@ public class NativeDatabaseManager(
                     targetInitialCatalog,
                     async (targetSqlServer, targetFileInfo) =>
                     {
-                        if (move)
+                        try
                         {
-                            File.Move(sourceFileInfo.DbPath, targetFileInfo.DbPath, true);
-                            File.Move(sourceFileInfo.LogPath, targetFileInfo.LogPath, true);
+                            if (move)
+                            {
+                                File.Move(sourceFileInfo.DbPath, targetFileInfo.DbPath, true);
+                                File.Move(sourceFileInfo.LogPath, targetFileInfo.LogPath, true);
+                            }
+                            else
+                            {
+                                File.Copy(sourceFileInfo.DbPath, targetFileInfo.DbPath, true);
+                                File.Copy(sourceFileInfo.LogPath, targetFileInfo.LogPath, true);
+                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            File.Copy(sourceFileInfo.DbPath, targetFileInfo.DbPath, true);
-                            File.Copy(sourceFileInfo.LogPath, targetFileInfo.LogPath, true);
+                            var sourceDir = Path.GetDirectoryName(sourceFileInfo.DbPath)!;
+                            var filesInDir = Directory.Exists(sourceDir)
+                                                 ? Directory.GetFiles(sourceDir)
+                                                 : [];
+
+                            throw new IOException(
+                                $"{ex.Message}\nGitHub DEBUG: Source directory ({sourceDir}) files:\n{string.Join("\n", filesInDir)}",
+                                ex);
                         }
 
                         targetSqlServer.AttachDatabase(targetInitialCatalog, new StringCollection { targetFileInfo.DbPath, targetFileInfo.LogPath });

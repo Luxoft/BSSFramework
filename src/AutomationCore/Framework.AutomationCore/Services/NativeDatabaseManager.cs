@@ -136,9 +136,10 @@ public class NativeDatabaseManager(
 
                             throw new IOException(
                                 $"{ex.Message}\n\n" +
-                                $"::debug:: Source: {sourceFileInfo.DbPath}\n" +
-                                $"::debug:: Target: {targetFileInfo.DbPath}\n" +
-                                $"::debug:: Source directory ({sourceDir}) files:\n{string.Join("\n", filesInDir)}",
+                                $"Source: {sourceFileInfo.DbPath}\n" +
+                                $"Target: {targetFileInfo.DbPath}\n" +
+                                $"ProcessorCount: {Environment.ProcessorCount}\n" +
+                                $"Source directory ({sourceDir}) files:\n{string.Join("\n", filesInDir)}",
                                 ex);
                         }
 

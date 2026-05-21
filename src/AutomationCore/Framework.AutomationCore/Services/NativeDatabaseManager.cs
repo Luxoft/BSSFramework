@@ -2,6 +2,7 @@
 using System.Collections.Specialized;
 
 using Anch.Core;
+using Anch.Testing;
 using Anch.Threading;
 
 using Framework.AutomationCore.Extensions;
@@ -12,6 +13,7 @@ using Microsoft.SqlServer.Management.Smo;
 namespace Framework.AutomationCore.Services;
 
 public class NativeDatabaseManager(
+    ServiceProviderIndex serviceProviderIndex,
     ISqlServerFactory sqlServerFactory,
     IOptions<AutomationFrameworkSettings> automationFrameworkSettingsOptions,
     IDatabaseFileInfoResolver databaseFileInfoResolver) : INativeDatabaseManager
@@ -55,7 +57,8 @@ public class NativeDatabaseManager(
                 $"{nameof(Environment.ProcessorCount)}: {Environment.ProcessorCount}\n" +
                 $"Source directory ({sourceDir}) files (Count: {filesInDir.Length}):\n{string.Join("\n", filesInDir)}\n" +
                 $"HashCode: {this.GetHashCode()}\n" +
-                $"{nameof(Environment.ProcessId)}: {Environment.ProcessId}",
+                $"{nameof(Environment.ProcessId)}: {Environment.ProcessId}" +
+                $"{nameof(serviceProviderIndex)}: {serviceProviderIndex.Index}",
                 ex);
         }
     }

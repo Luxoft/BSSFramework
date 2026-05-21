@@ -52,10 +52,10 @@ public class NativeDatabaseManager(
                                  : [];
 
             throw new IOException(
-                $"{ex.Message}\n\n" +
-                $"DbPath: {fileInfo.DbPath}\n" +
-                $"ProcessorCount: {Environment.ProcessorCount}\n" +
-                $"Source directory ({sourceDir}) files:\n{string.Join("\n", filesInDir)}",
+                $"{nameof(fileInfo.DbPath)}: {fileInfo.DbPath}\n" +
+                $"{nameof(Environment.ProcessorCount)}: {Environment.ProcessorCount}\n" +
+                $"Source directory ({sourceDir}) files (Count: {filesInDir.Length}):\n{string.Join("\n", filesInDir)}\n" +
+                $"HashCode: {this.GetHashCode()}",
                 ex);
         }
     }

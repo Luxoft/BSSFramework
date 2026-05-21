@@ -27,18 +27,36 @@ public class NativeDatabaseManager(
 
         var (sqlServer, fileInfo, locker) = this.serverCache.GetOrAdd(initialCatalog, _ => (sqlServerFactory.Create(), databaseFileInfoResolver.Resolve(initialCatalog), new AsyncLocker()));
 
-        using (await locker.CreateScope(ct))
+        try
         {
-            sqlServer.Refresh();
 
-            if (sqlServer.Databases[initialCatalog] is { } db)
+            using (await locker.CreateScope(ct))
             {
-                db.Validate(fileInfo);
+                sqlServer.Refresh();
 
-                await sqlServer.DetachDatabaseAsync(db.Name, ct);
+                if (sqlServer.Databases[initialCatalog] is { } db)
+                {
+                    db.Validate(fileInfo);
+
+                    await sqlServer.DetachDatabaseAsync(db.Name, ct);
+                }
+
+                return await action(sqlServer, fileInfo);
             }
+        }
+        catch (Exception ex)
+        {
+            var sourceDir = Path.GetDirectoryName(fileInfo.DbPath)!;
+            var filesInDir = Directory.Exists(sourceDir)
+                                 ? Directory.GetFiles(sourceDir)
+                                 : [];
 
-            return await action(sqlServer, fileInfo);
+            throw new IOException(
+                $"{ex.Message}\n\n" +
+                $"DbPath: {fileInfo.DbPath}\n" +
+                $"ProcessorCount: {Environment.ProcessorCount}\n" +
+                $"Source directory ({sourceDir}) files:\n{string.Join("\n", filesInDir)}",
+                ex);
         }
     }
 
@@ -114,33 +132,15 @@ public class NativeDatabaseManager(
                     targetInitialCatalog,
                     async (targetSqlServer, targetFileInfo) =>
                     {
-                        try
+                        if (move)
                         {
-                            if (move)
-                            {
-                                File.Move(sourceFileInfo.DbPath, targetFileInfo.DbPath, true);
-                                File.Move(sourceFileInfo.LogPath, targetFileInfo.LogPath, true);
-                            }
-                            else
-                            {
-                                File.Copy(sourceFileInfo.DbPath, targetFileInfo.DbPath, true);
-                                File.Copy(sourceFileInfo.LogPath, targetFileInfo.LogPath, true);
-                            }
+                            File.Move(sourceFileInfo.DbPath, targetFileInfo.DbPath, true);
+                            File.Move(sourceFileInfo.LogPath, targetFileInfo.LogPath, true);
                         }
-                        catch (Exception ex)
+                        else
                         {
-                            var sourceDir = Path.GetDirectoryName(sourceFileInfo.DbPath)!;
-                            var filesInDir = Directory.Exists(sourceDir)
-                                                 ? Directory.GetFiles(sourceDir)
-                                                 : [];
-
-                            throw new IOException(
-                                $"{ex.Message}\n\n" +
-                                $"Source: {sourceFileInfo.DbPath}\n" +
-                                $"Target: {targetFileInfo.DbPath}\n" +
-                                $"ProcessorCount: {Environment.ProcessorCount}\n" +
-                                $"Source directory ({sourceDir}) files:\n{string.Join("\n", filesInDir)}",
-                                ex);
+                            File.Copy(sourceFileInfo.DbPath, targetFileInfo.DbPath, true);
+                            File.Copy(sourceFileInfo.LogPath, targetFileInfo.LogPath, true);
                         }
 
                         targetSqlServer.AttachDatabase(targetInitialCatalog, new StringCollection { targetFileInfo.DbPath, targetFileInfo.LogPath });

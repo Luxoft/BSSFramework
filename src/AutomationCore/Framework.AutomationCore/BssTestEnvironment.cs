@@ -38,6 +38,7 @@ public abstract class BssTestEnvironment : ConfigurationTestEnvironment
         services.AddOptions<AutomationFrameworkSettings>().Bind(actualConfiguration.GetSection(nameof(AutomationFrameworkSettings)));
 
         return services
+               .AddSingleton<ITestEnvironment>(this)
                .AddEnvironmentHook<BssCleanupTestEnvironmentHook>(EnvironmentHookType.After)
                .Self(v => this.InitializeServices(v, actualConfiguration))
                .AddIntegrationTests()

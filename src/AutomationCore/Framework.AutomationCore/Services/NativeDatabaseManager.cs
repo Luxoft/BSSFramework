@@ -14,6 +14,7 @@ namespace Framework.AutomationCore.Services;
 
 public class NativeDatabaseManager(
     IServiceProvider sp,
+    ITestEnvironment testEnvironment,
     ServiceProviderIndex serviceProviderIndex,
     ISqlServerFactory sqlServerFactory,
     IOptions<AutomationFrameworkSettings> automationFrameworkSettingsOptions,
@@ -58,9 +59,10 @@ public class NativeDatabaseManager(
                 $"{nameof(Environment.ProcessorCount)}: {Environment.ProcessorCount}\n" +
                 $"Source directory ({sourceDir}) files (Count: {filesInDir.Length}):\n{string.Join("\n", filesInDir)}\n" +
                 $"HashCode: {this.GetHashCode()}\n" +
-                $"{nameof(Environment.ProcessId)}: {Environment.ProcessId}" +
-                $"{nameof(serviceProviderIndex)}: {serviceProviderIndex.Index}" +
-                $"{nameof(IServiceProvider)} HashCode: {sp.GetHashCode()}",
+                $"{nameof(Environment.ProcessId)}: {Environment.ProcessId}\n" +
+                $"{nameof(serviceProviderIndex)}: {serviceProviderIndex.Index}\n" +
+                $"{nameof(IServiceProvider)} HashCode: {sp.GetHashCode()}\n" +
+                $"{nameof(ITestEnvironment)} HashCode: {testEnvironment.GetHashCode()} ",
                 ex);
         }
     }

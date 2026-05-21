@@ -13,6 +13,7 @@ using Microsoft.SqlServer.Management.Smo;
 namespace Framework.AutomationCore.Services;
 
 public class NativeDatabaseManager(
+    IServiceProvider sp,
     ServiceProviderIndex serviceProviderIndex,
     ISqlServerFactory sqlServerFactory,
     IOptions<AutomationFrameworkSettings> automationFrameworkSettingsOptions,
@@ -58,7 +59,8 @@ public class NativeDatabaseManager(
                 $"Source directory ({sourceDir}) files (Count: {filesInDir.Length}):\n{string.Join("\n", filesInDir)}\n" +
                 $"HashCode: {this.GetHashCode()}\n" +
                 $"{nameof(Environment.ProcessId)}: {Environment.ProcessId}" +
-                $"{nameof(serviceProviderIndex)}: {serviceProviderIndex.Index}",
+                $"{nameof(serviceProviderIndex)}: {serviceProviderIndex.Index}" +
+                $"{nameof(IServiceProvider)} HashCode: {sp.GetHashCode()}",
                 ex);
         }
     }

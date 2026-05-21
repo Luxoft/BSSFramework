@@ -135,7 +135,10 @@ public class NativeDatabaseManager(
                                                  : [];
 
                             throw new IOException(
-                                $"{ex.Message}\nGitHub DEBUG: Source directory ({sourceDir}) files:\n{string.Join("\n", filesInDir)}",
+                                $"{ex.Message}\n\n" +
+                                $"::debug:: Source: {sourceFileInfo.DbPath}\n" +
+                                $"::debug:: Target: {targetFileInfo.DbPath}\n" +
+                                $"::debug:: Source directory ({sourceDir}) files:\n{string.Join("\n", filesInDir)}",
                                 ex);
                         }
 

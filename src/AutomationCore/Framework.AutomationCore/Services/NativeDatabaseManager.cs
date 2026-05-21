@@ -29,7 +29,6 @@ public class NativeDatabaseManager(
 
         try
         {
-
             using (await locker.CreateScope(ct))
             {
                 sqlServer.Refresh();
@@ -55,7 +54,8 @@ public class NativeDatabaseManager(
                 $"{nameof(fileInfo.DbPath)}: {fileInfo.DbPath}\n" +
                 $"{nameof(Environment.ProcessorCount)}: {Environment.ProcessorCount}\n" +
                 $"Source directory ({sourceDir}) files (Count: {filesInDir.Length}):\n{string.Join("\n", filesInDir)}\n" +
-                $"HashCode: {this.GetHashCode()}",
+                $"HashCode: {this.GetHashCode()}\n" +
+                $"{nameof(Environment.ProcessId)}: {Environment.ProcessId}",
                 ex);
         }
     }

@@ -21,7 +21,7 @@ using SampleSystem.ServiceEnvironment.Jobs;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 [assembly: AnchTestFramework<NHibTestEnvironment>]
-[assembly: CollectionBehavior(DisableTestParallelization = true)]
+//[assembly: CollectionBehavior(DisableTestParallelization = true)]
 
 namespace SampleSystem.IntegrationTests._Environment;
 

@@ -25,12 +25,14 @@ internal class SquashWhereQueryableVisitor : ExpressionVisitor
     }
 
     protected override Expression VisitMethodCall(MethodCallExpression node) =>
+
         this.TryOptimizeWhere(node)
             .Or(() => this.TryOptimizeUnion(node))
             .Or(() => this.TryOptimizeExcept(node))
             .GetValueOrDefault(() => base.VisitMethodCall(node));
 
     private Maybe<Expression> TryOptimizeUnion(MethodCallExpression node) =>
+
         this.TrySquashWhereFilterMethods(
             node,
             GenericUnionMethod,
@@ -38,10 +40,11 @@ internal class SquashWhereQueryableVisitor : ExpressionVisitor
             {
                 var buildOrMethod = GenericBuildOrMethod.MakeGenericMethod(elementType);
 
-                return (Expression)buildOrMethod.Invoke(null, [left, right]);
+                return buildOrMethod.Invoke<Expression>(null, [left, right]);
             });
 
     private Maybe<Expression> TryOptimizeExcept(MethodCallExpression node) =>
+
         this.TrySquashWhereFilterMethods(
             node,
             GenericExceptMethod,
@@ -49,10 +52,11 @@ internal class SquashWhereQueryableVisitor : ExpressionVisitor
             {
                 var buildExceptMethod = GenericBuildExceptMethod.MakeGenericMethod(elementType);
 
-                return (Expression)buildExceptMethod.Invoke(null, [left, right]);
+                return buildExceptMethod.Invoke<Expression>(null, [left, right]);
             });
 
     private Maybe<Expression> TrySquashWhereFilterMethods(MethodCallExpression node, MethodInfo genericMethod, Func<Type, Expression, Expression, Expression> getNewFilter) =>
+
         from method in node.Method.ToMaybe()
 
         where method.IsGenericMethodImplementation(genericMethod)
@@ -80,6 +84,7 @@ internal class SquashWhereQueryableVisitor : ExpressionVisitor
         select (Expression)Expression.Call(whereMethod, q1.Arguments[0], Expression.Quote(newFilter));
 
     private Maybe<Expression> TryOptimizeWhere(MethodCallExpression node) =>
+
         from method in node.Method.ToMaybe()
 
         where method.IsGenericMethodImplementation(GenericWhereMethod)
@@ -96,7 +101,7 @@ internal class SquashWhereQueryableVisitor : ExpressionVisitor
 
         let buildAndMethod = GenericBuildAndMethod.MakeGenericMethod(elementType)
 
-        let newFilter = (Expression)buildAndMethod.Invoke(null, [q1FilterQuote.Operand, q2FilterQuote.Operand])
+        let newFilter = buildAndMethod.Invoke<Expression>(null, [q1FilterQuote.Operand, q2FilterQuote.Operand])
 
         select (Expression)Expression.Call(method, innerCallExpr.Arguments[0], Expression.Quote(newFilter));
 

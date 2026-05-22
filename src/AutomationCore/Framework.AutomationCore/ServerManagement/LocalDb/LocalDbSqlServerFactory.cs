@@ -1,39 +1,60 @@
-﻿using Framework.AutomationCore.Services;
+﻿using Anch.Testing.Database.ConnectionStringManagement;
+
+using Framework.AutomationCore.Extensions;
+
 using MartinCostello.SqlLocalDb;
+
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Options;
+using Microsoft.SqlServer.Management.Common;
+using Microsoft.SqlServer.Management.Smo;
 
 namespace Framework.AutomationCore.ServerManagement.LocalDb;
 
-public class LocalDbSqlServerFactory : ISqlServerFactory
+public class LocalDbSqlServerFactory(
+    IActualTestConnectionStringSource actualTestConnectionStringSource,
+    IOptions<AutomationFrameworkSettings> automationFrameworkSettingsOptions) : ISqlServerFactory
 {
-    public ISqlServer Create() => throw new NotImplementedException();
-}
+    private readonly string instanceName = ExtractInstanceName(actualTestConnectionStringSource.ActualConnectionString);
 
-public class LocalDbSqlServer : ISqlServer
-{
-    public void Refresh()
+    private readonly string rootConnectionString =
+        new SqlConnectionStringBuilder(actualTestConnectionStringSource.ActualConnectionString.Value) { InitialCatalog = "" }
+            .ConnectionString;
+
+    public ISqlServer Create()
     {
+        EnsureInstanceStarted(this.instanceName);
+
+        return new LocalDbSqlServer(
+            new Server(new ServerConnection(new SqlConnection(this.rootConnectionString))),
+            automationFrameworkSettingsOptions);
     }
 
-    public ISqlServerDatabase? TryGetDatabase(string initialCatalog)
+    private static string ExtractInstanceName(TestConnectionString connectionString)
     {
-        using var localDb = new SqlLocalDbApi();
-        var instanceInfo = localDb.GetInstanceInfo(initialCatalog);
-        localDb.AutomaticallyDeleteInstanceFiles = true;
+        if (!connectionString.IsLocalDb)
+        {
+            throw new InvalidOperationException(
+                $"Connection string data source '{connectionString.DataSource}' is not a LocalDB instance.");
+        }
+
+        return connectionString.DataSource.Split('\\', 2)[1];
+    }
+
+    private static void EnsureInstanceStarted(string instanceName)
+    {
+        using var localDb = new SqlLocalDbApi { AutomaticallyDeleteInstanceFiles = true };
+
+        var instanceInfo = localDb.GetInstanceInfo(instanceName);
 
         if (!instanceInfo.Exists)
         {
-            localDb.CreateInstance(instanceInfo.Name);
+            localDb.CreateInstance(instanceName);
         }
 
         if (!instanceInfo.IsRunning)
         {
-            localDb.StartInstance(instanceInfo.Name);
+            localDb.StartInstance(instanceName);
         }
     }
-
-    public ValueTask CreateEmptyAsync(string initialCatalog, DatabaseFileInfo fileInfo, CancellationToken ct) => throw new NotImplementedException();
-
-    public ValueTask AttachDatabaseAsync(string initialCatalog, DatabaseFileInfo fileInfo, CancellationToken ct) => throw new NotImplementedException();
-
-    public ValueTask DetachDatabaseAsync(string initialCatalog, CancellationToken ct) => throw new NotImplementedException();
 }

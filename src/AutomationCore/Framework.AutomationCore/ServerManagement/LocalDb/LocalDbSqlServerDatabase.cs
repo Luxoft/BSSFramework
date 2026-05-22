@@ -1,13 +1,10 @@
 ﻿using Framework.AutomationCore.Services;
 
-using MartinCostello.SqlLocalDb;
-using Microsoft.SqlServer.Management.Smo;
-
 namespace Framework.AutomationCore.ServerManagement.LocalDb;
 
-public class LocalDbSqlServerDatabase(ISqlLocalDbInstanceInfo sqlLocalDbInstanceInfo) : ISqlServerDatabase
+public class LocalDbSqlServerDatabase(Microsoft.SqlServer.Management.Smo.Database database) : ISqlServerDatabase
 {
-    public string Name => sqlLocalDbInstanceInfo.Name;
+    public string Name => database.Name;
 
     public void Validate(DatabaseFileInfo fileInfo)
     {

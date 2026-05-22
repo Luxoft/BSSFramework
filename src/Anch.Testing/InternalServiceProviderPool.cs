@@ -20,6 +20,10 @@ public class InternalServiceProviderPool(
 
     private readonly SemaphoreSlim? parallelSemaphoreSlim = parallelizationSettings.AllowParallelization ? null : new SemaphoreSlim(1, 1);
 
+    public int GlobalMainIndex => -999999;
+
+    public int MainIndex => -999;
+
     public bool IsRoot { get; } = false;
 
     public object TestFramework { get; } = root.TestFramework;

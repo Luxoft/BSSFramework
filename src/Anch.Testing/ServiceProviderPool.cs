@@ -7,11 +7,20 @@ namespace Anch.Testing;
 
 public class ServiceProviderPool(ITestEnvironment testEnvironment, bool? allowParallelization, object testFramework) : IServiceProviderPool
 {
+    private int mainIndex;
+
+    private static int globalMainIndex;
+
+
     private bool disposed;
 
     private readonly IAsyncLocker asyncLocker = new AsyncLocker();
 
     private IServiceProviderPool? internalServiceProviderPool;
+
+    public int MainIndex => this.mainIndex;
+
+    public int GlobalMainIndex => globalMainIndex;
 
     public bool IsRoot { get; } = true;
 
@@ -41,6 +50,10 @@ public class ServiceProviderPool(ITestEnvironment testEnvironment, bool? allowPa
             {
                 if (this.internalServiceProviderPool == null)
                 {
+                    Interlocked.Increment(ref this.mainIndex);
+
+                    Interlocked.Increment(ref globalMainIndex);
+
                     var serviceProviderBuildContext = ServiceProviderBuildContext.Main;
 
                     var services = new ServiceCollection()

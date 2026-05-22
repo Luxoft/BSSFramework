@@ -2,6 +2,10 @@
 
 public interface IServiceProviderPool : IAsyncDisposable
 {
+    int GlobalMainIndex { get; }
+
+    int MainIndex { get; }
+
     bool IsRoot { get; }
 
     object TestFramework { get; }

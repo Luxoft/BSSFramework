@@ -62,7 +62,8 @@ public class NativeDatabaseManager(
                 $"{nameof(Environment.ProcessId)}: {Environment.ProcessId}\n" +
                 $"{nameof(serviceProviderIndex)}: {serviceProviderIndex.Index}\n" +
                 $"{nameof(IServiceProvider)} HashCode: {sp.GetHashCode()}\n" +
-                $"{nameof(ITestEnvironment)} HashCode: {testEnvironment.GetHashCode()} ",
+                $"{nameof(ITestEnvironment)} HashCode: {testEnvironment.GetHashCode()}\n" +
+                $"{nameof(ITestEnvironment)} {nameof(BssTestEnvironment.DebugIndex)}: {BssTestEnvironment.DebugIndex}",
                 ex);
         }
     }

@@ -16,6 +16,15 @@ namespace Framework.AutomationCore;
 
 public abstract class BssTestEnvironment : ConfigurationTestEnvironment
 {
+    private static int debugIndex;
+
+    public static int DebugIndex => debugIndex;
+
+    protected BssTestEnvironment()
+    {
+        Interlocked.Increment(ref debugIndex);
+    }
+
     private AutomationFrameworkSettings Settings =>
         field ??= new AutomationFrameworkSettings().Self(this.RawConfiguration.GetSection(nameof(AutomationFrameworkSettings)).Bind);
 

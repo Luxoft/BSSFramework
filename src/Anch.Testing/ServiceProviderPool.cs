@@ -98,9 +98,6 @@ public class ServiceProviderPool(ITestEnvironment testEnvironment, bool? allowPa
             return;
         }
 
-        using (this.asyncLocker)
-        {
-            await using (this.internalServiceProviderPool) ;
-        }
+        await using (this.internalServiceProviderPool) ;
     }
 }

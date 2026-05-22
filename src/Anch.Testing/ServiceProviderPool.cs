@@ -20,6 +20,8 @@ public class ServiceProviderPool(ITestEnvironment testEnvironment, bool? allowPa
 
     public int MainIndex => this.mainIndex;
 
+    public IAsyncLocker AsyncLocker => this.asyncLocker;
+
     public int GlobalMainIndex => globalMainIndex;
 
     public bool IsRoot { get; } = true;

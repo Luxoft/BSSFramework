@@ -1,5 +1,7 @@
 ﻿using System.Collections.Concurrent;
 
+using Anch.Threading;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Anch.Testing;
@@ -19,6 +21,8 @@ public class InternalServiceProviderPool(
     private readonly ConcurrentBag<IServiceProvider> pool = returnMainServiceProviderToPool ? [mainServiceProvider] : [];
 
     private readonly SemaphoreSlim? parallelSemaphoreSlim = parallelizationSettings.AllowParallelization ? null : new SemaphoreSlim(1, 1);
+
+    public IAsyncLocker AsyncLocker => root.AsyncLocker;
 
     public int GlobalMainIndex => -999999;
 

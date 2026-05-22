@@ -4,8 +4,6 @@ namespace Anch.Testing;
 
 public interface IServiceProviderPool : IAsyncDisposable
 {
-    IAsyncLocker AsyncLocker { get; }
-
     int GlobalMainIndex { get; }
 
     int MainIndex { get; }

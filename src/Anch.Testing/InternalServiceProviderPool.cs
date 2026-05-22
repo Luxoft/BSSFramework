@@ -22,8 +22,6 @@ public class InternalServiceProviderPool(
 
     private readonly SemaphoreSlim? parallelSemaphoreSlim = parallelizationSettings.AllowParallelization ? null : new SemaphoreSlim(1, 1);
 
-    public IAsyncLocker AsyncLocker => root.AsyncLocker;
-
     public int GlobalMainIndex => -999999;
 
     public int MainIndex => -999;

@@ -70,8 +70,7 @@ public class NativeDatabaseManager(
                 $"{nameof(IServiceProviderPool.Inner)} {nameof(IServiceProviderPool)} HashCode: {serviceProviderPool.Inner?.GetHashCode()}\n" +
                 $"{nameof(IServiceProviderPool.TestFramework)} HashCode: {serviceProviderPool.TestFramework.GetHashCode()}\n" +
                 $"{nameof(IServiceProviderPool)} {nameof(IServiceProviderPool.MainIndex)}: {serviceProviderPool.MainIndex}\n" +
-                $"{nameof(IServiceProviderPool)} {nameof(IServiceProviderPool.GlobalMainIndex)}: {serviceProviderPool.GlobalMainIndex}\n" +
-                $"{nameof(IServiceProviderPool)} {nameof(IServiceProviderPool.AsyncLocker)} HashCode: {serviceProviderPool.AsyncLocker.GetHashCode()}\n",
+                $"{nameof(IServiceProviderPool)} {nameof(IServiceProviderPool.GlobalMainIndex)}: {serviceProviderPool.GlobalMainIndex}\n",
 
                 ex);
         }

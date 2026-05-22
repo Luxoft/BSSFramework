@@ -1,6 +1,6 @@
 ﻿using MartinCostello.SqlLocalDb;
 
-namespace Framework.AutomationCore.Services;
+namespace Framework.AutomationCore.ServerManagement.LocalDb;
 
 public class LocalDbManager
 {

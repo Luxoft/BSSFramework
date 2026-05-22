@@ -1,4 +1,4 @@
-﻿namespace Framework.AutomationCore.Services;
+﻿namespace Framework.AutomationCore.ServerManagement;
 
 public interface INativeDatabaseManager
 {

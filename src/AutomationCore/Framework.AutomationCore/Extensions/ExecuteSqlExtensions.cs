@@ -113,4 +113,3 @@ public static class ExecuteSqlExtensions
         await connection.CloseAsync();
     }
 }
-

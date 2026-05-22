@@ -1,8 +1,12 @@
-﻿namespace Framework.AutomationCore.Services;
+﻿using Framework.AutomationCore.Services;
 
-public static class DatabaseExtensions
+namespace Framework.AutomationCore.ServerManagement.Default;
+
+public class SqlServerDatabase(Microsoft.SqlServer.Management.Smo.Database database) : ISqlServerDatabase
 {
-    public static void Validate(this Microsoft.SqlServer.Management.Smo.Database database, DatabaseFileInfo fileInfo)
+    public string Name => database.Name;
+
+    public void Validate(DatabaseFileInfo fileInfo)
     {
         if (!database.FileGroups.SelectMany(fg => fg.Files).Select(f => f.FileName).Contains(fileInfo.DbPath, StringComparer.OrdinalIgnoreCase))
         {

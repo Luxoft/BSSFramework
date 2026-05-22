@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!--<PackageReference Include="Anch.Testing.Xunit" />-->
+    <PackageReference Include="Anch.Testing.Xunit" />
     <PackageReference Include="FluentMigrator" />
     <PackageReference Include="FluentMigrator.Extensions.SqlServer" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Anch.Testing.Xunit\Anch.Testing.Xunit.csproj" />
     <ProjectReference Include="..\..\..\AutomationCore\Framework.AutomationCore.Legacy\Framework.AutomationCore.Legacy.csproj" />
     <ProjectReference Include="..\..\SampleSystem.WebApiCore.NHibernate\SampleSystem.WebApiCore.NHibernate.csproj" />
     <ProjectReference Include="..\SampleSystem.DbGenerate.NHibernate\SampleSystem.DbGenerate.NHibernate.csproj" />

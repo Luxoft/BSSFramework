@@ -2,7 +2,6 @@
 using System.Collections.Specialized;
 
 using Anch.Core;
-using Anch.Testing;
 using Anch.Threading;
 
 using Framework.AutomationCore.Extensions;
@@ -13,13 +12,9 @@ using Microsoft.SqlServer.Management.Smo;
 namespace Framework.AutomationCore.Services;
 
 public class NativeDatabaseManager(
-    IServiceProvider sp,
-    ITestEnvironment testEnvironment,
-    ServiceProviderIndex serviceProviderIndex,
     ISqlServerFactory sqlServerFactory,
     IOptions<AutomationFrameworkSettings> automationFrameworkSettingsOptions,
-    IDatabaseFileInfoResolver databaseFileInfoResolver,
-    IServiceProviderPool serviceProviderPool) : INativeDatabaseManager
+    IDatabaseFileInfoResolver databaseFileInfoResolver) : INativeDatabaseManager
 {
     private readonly ConcurrentDictionary<string, (Server, DatabaseFileInfo, AsyncLocker)> serverCache = [];
 
@@ -32,47 +27,18 @@ public class NativeDatabaseManager(
 
         var (sqlServer, fileInfo, locker) = this.serverCache.GetOrAdd(initialCatalog, _ => (sqlServerFactory.Create(), databaseFileInfoResolver.Resolve(initialCatalog), new AsyncLocker()));
 
-        try
+        using (await locker.CreateScope(ct))
         {
-            using (await locker.CreateScope(ct))
+            sqlServer.Refresh();
+
+            if (sqlServer.Databases[initialCatalog] is { } db)
             {
-                sqlServer.Refresh();
+                db.Validate(fileInfo);
 
-                if (sqlServer.Databases[initialCatalog] is { } db)
-                {
-                    db.Validate(fileInfo);
-
-                    await sqlServer.DetachDatabaseAsync(db.Name, ct);
-                }
-
-                return await action(sqlServer, fileInfo);
+                await sqlServer.DetachDatabaseAsync(db.Name, ct);
             }
-        }
-        catch (Exception ex)
-        {
-            var sourceDir = Path.GetDirectoryName(fileInfo.DbPath)!;
-            var filesInDir = Directory.Exists(sourceDir)
-                                 ? Directory.GetFiles(sourceDir)
-                                 : [];
 
-            throw new IOException(
-                $"{nameof(fileInfo.DbPath)}: {fileInfo.DbPath}\n" +
-                $"{nameof(Environment.ProcessorCount)}: {Environment.ProcessorCount}\n" +
-                $"Source directory ({sourceDir}) files (Count: {filesInDir.Length}):\n{string.Join("\n", filesInDir)}\n" +
-                $"HashCode: {this.GetHashCode()}\n" +
-                $"{nameof(Environment.ProcessId)}: {Environment.ProcessId}\n" +
-                $"{nameof(serviceProviderIndex)}: {serviceProviderIndex.Index}\n" +
-                $"{nameof(IServiceProvider)} HashCode: {sp.GetHashCode()}\n" +
-                $"{nameof(ITestEnvironment)} HashCode: {testEnvironment.GetHashCode()}\n" +
-                $"{nameof(ITestEnvironment)} {nameof(BssTestEnvironment.DebugIndex)}: {BssTestEnvironment.DebugIndex}\n" +
-                $"{nameof(IServiceProviderPool)} {nameof(IServiceProviderPool.IsRoot)}: {serviceProviderPool.IsRoot}\n" +
-                $"{nameof(IServiceProviderPool)} HashCode: {serviceProviderPool.GetHashCode()}\n" +
-                $"{nameof(IServiceProviderPool.Inner)} {nameof(IServiceProviderPool)} HashCode: {serviceProviderPool.Inner?.GetHashCode()}\n" +
-                $"{nameof(IServiceProviderPool.TestFramework)} HashCode: {serviceProviderPool.TestFramework.GetHashCode()}\n" +
-                $"{nameof(IServiceProviderPool)} {nameof(IServiceProviderPool.MainIndex)}: {serviceProviderPool.MainIndex}\n" +
-                $"{nameof(IServiceProviderPool)} {nameof(IServiceProviderPool.GlobalMainIndex)}: {serviceProviderPool.GlobalMainIndex}\n",
-
-                ex);
+            return await action(sqlServer, fileInfo);
         }
     }
 
@@ -95,18 +61,22 @@ public class NativeDatabaseManager(
                 var fileGroup = new FileGroup(db, "PRIMARY");
 
                 var dataFile = new DataFile(fileGroup, Path.GetFileNameWithoutExtension(fileInfo.DbPath), fileInfo.DbPath)
-                               {
-                                   Size = 5.5 * 1024.0, GrowthType = FileGrowthType.KB, Growth = 1.0 * 1024.0
-                               };
+                {
+                    Size = 5.5 * 1024.0,
+                    GrowthType = FileGrowthType.KB,
+                    Growth = 1.0 * 1024.0
+                };
 
                 fileGroup.Files.Add(dataFile);
 
                 db.FileGroups.Add(fileGroup);
 
                 var logFile = new LogFile(db, Path.GetFileNameWithoutExtension(fileInfo.LogPath), fileInfo.LogPath)
-                              {
-                                  Size = 1.0 * 1024.0, GrowthType = FileGrowthType.Percent, Growth = 10.0
-                              };
+                {
+                    Size = 1.0 * 1024.0,
+                    GrowthType = FileGrowthType.Percent,
+                    Growth = 10.0
+                };
 
                 db.LogFiles.Add(logFile);
 

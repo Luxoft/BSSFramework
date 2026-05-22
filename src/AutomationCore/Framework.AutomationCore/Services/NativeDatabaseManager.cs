@@ -67,7 +67,7 @@ public class NativeDatabaseManager(
                 $"{nameof(ITestEnvironment)} {nameof(BssTestEnvironment.DebugIndex)}: {BssTestEnvironment.DebugIndex}\n" +
                 $"{nameof(IServiceProviderPool)} {nameof(IServiceProviderPool.IsRoot)}: {serviceProviderPool.IsRoot}\n" +
                 $"{nameof(IServiceProviderPool)} HashCode: {serviceProviderPool.GetHashCode()}\n" +
-                $"{nameof(IServiceProviderPool.Inner)} {nameof(IServiceProviderPool)} HashCode: {serviceProviderPool.Inner.GetHashCode()}\n" +
+                $"{nameof(IServiceProviderPool.Inner)} {nameof(IServiceProviderPool)} HashCode: {serviceProviderPool.Inner?.GetHashCode()}\n" +
                 $"{nameof(IServiceProviderPool.TestFramework)} HashCode: {serviceProviderPool.TestFramework.GetHashCode()}\n",
 
                 ex);

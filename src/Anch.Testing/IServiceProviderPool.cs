@@ -6,7 +6,7 @@ public interface IServiceProviderPool : IAsyncDisposable
 
     object TestFramework { get; }
 
-    IServiceProviderPool Inner { get; }
+    IServiceProviderPool? Inner { get; }
 
     ValueTask<IServiceProvider> GetAsync(CancellationToken ct);
 

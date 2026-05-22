@@ -17,9 +17,7 @@ public class ServiceProviderPool(ITestEnvironment testEnvironment, bool? allowPa
 
     public object TestFramework { get; } = testFramework;
 
-    public IServiceProviderPool Inner =>
-
-        this.internalServiceProviderPool ?? throw new InvalidOperationException("Internal service provider pool is not initialized.");
+    public IServiceProviderPool? Inner => this.internalServiceProviderPool;
 
     public async ValueTask<IServiceProvider> GetAsync(CancellationToken ct)
     {

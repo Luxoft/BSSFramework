@@ -18,7 +18,8 @@ public class NativeDatabaseManager(
     ServiceProviderIndex serviceProviderIndex,
     ISqlServerFactory sqlServerFactory,
     IOptions<AutomationFrameworkSettings> automationFrameworkSettingsOptions,
-    IDatabaseFileInfoResolver databaseFileInfoResolver) : INativeDatabaseManager
+    IDatabaseFileInfoResolver databaseFileInfoResolver,
+    IServiceProviderPool serviceProviderPool) : INativeDatabaseManager
 {
     private readonly ConcurrentDictionary<string, (Server, DatabaseFileInfo, AsyncLocker)> serverCache = [];
 
@@ -63,7 +64,12 @@ public class NativeDatabaseManager(
                 $"{nameof(serviceProviderIndex)}: {serviceProviderIndex.Index}\n" +
                 $"{nameof(IServiceProvider)} HashCode: {sp.GetHashCode()}\n" +
                 $"{nameof(ITestEnvironment)} HashCode: {testEnvironment.GetHashCode()}\n" +
-                $"{nameof(ITestEnvironment)} {nameof(BssTestEnvironment.DebugIndex)}: {BssTestEnvironment.DebugIndex}",
+                $"{nameof(ITestEnvironment)} {nameof(BssTestEnvironment.DebugIndex)}: {BssTestEnvironment.DebugIndex}\n" +
+                $"{nameof(IServiceProviderPool)} {nameof(IServiceProviderPool.IsRoot)}: {serviceProviderPool.IsRoot}\n" +
+                $"{nameof(IServiceProviderPool)} HashCode: {serviceProviderPool.GetHashCode()}\n" +
+                $"{nameof(IServiceProviderPool.Inner)} {nameof(IServiceProviderPool)} HashCode: {serviceProviderPool.Inner.GetHashCode()}\n" +
+                $"{nameof(IServiceProviderPool.TestFramework)} HashCode: {serviceProviderPool.TestFramework.GetHashCode()}\n",
+
                 ex);
         }
     }

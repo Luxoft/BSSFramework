@@ -190,7 +190,8 @@
     <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
   </Folder>
-  
+  <Project Path="Anch.Testing.Xunit/Anch.Testing.Xunit.csproj" />
+  <Project Path="Anch.Testing/Anch.Testing.csproj" />
   <Project Path="Framework.Core/Framework.Core.csproj" />
   <Project Path="Framework.DependencyInjection/Framework.DependencyInjection.csproj" />
   <Project Path="Framework.ExpressionParsers.Tests/Framework.ExpressionParsers.Tests.csproj" />

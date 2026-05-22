@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Anch.Testing</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Anch.Core" />
+    <PackageReference Include="Anch.Testing.Abstractions" />
+    <PackageReference Include="Anch.Threading" />
+  </ItemGroup>
+
+  <!--<ItemGroup>
+    <ProjectReference Include="..\..\Core\Anch.Core\Anch.Core.csproj" />
+    <ProjectReference Include="..\..\Core\Anch.Threading\Anch.Threading.csproj" />
+    <ProjectReference Include="..\Anch.Testing.Abstractions\Anch.Testing.Abstractions.csproj" />
+  </ItemGroup>-->
+
+</Project>

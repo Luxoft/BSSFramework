@@ -6,13 +6,16 @@
     <BssPlatform>[1.6.2]</BssPlatform>
   </PropertyGroup>
   <ItemGroup>
+    <PackageVersion Include="Anch.Testing.Abstractions" Version="3.6.2" />
+    <PackageVersion Include="xunit.v3.extensibility.core" Version="3.2.2" />
+
     <PackageVersion Include="Anch.Testing.Database.Configuration" Version="$(Anch)" />
-    <PackageVersion Include="Anch.Testing.Xunit" Version="$(Anch)" />
-    <PackageVersion Include="Anch.Core" Version="$(Anch)" />
+    <!--<PackageVersion Include="Anch.Testing.Xunit" Version="$(Anch)" />-->
+    <PackageVersion Include="Anch.Core" Version="3.6.2" />
     <PackageVersion Include="Anch.DependencyInjection" Version="$(Anch)" />
     <PackageVersion Include="Anch.GenericRepository" Version="$(Anch)" />
     <PackageVersion Include="Anch.IdentitySource.Abstractions" Version="$(Anch)" />
-    <PackageVersion Include="Anch.Threading" Version="$(Anch)" />
+    <PackageVersion Include="Anch.Threading" Version="3.6.2" />
     <PackageVersion Include="Anch.VisualIdentitySource.Abstractions" Version="$(Anch)" />
     <PackageVersion Include="Anch.GenericQueryable.Abstractions" Version="$(Anch)" />
     <PackageVersion Include="Anch.GenericQueryable.EntityFramework" Version="$(Anch)" />

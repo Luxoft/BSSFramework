@@ -279,7 +279,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
                                         .FirstOrDefault(z => string.Equals($"{database.Name}.{z.Schema}.{z.Name}", fqn, StringComparison.InvariantCultureIgnoreCase) ||
                                                              string.Equals($"{z.Schema}.{z.Name}", fqn, StringComparison.InvariantCultureIgnoreCase));
 
-                    bool create = true;
+                    var create = true;
 
                     if (table != null)
                     {
@@ -332,7 +332,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
     {
         foreach (var generator in this.IterateGenerators(cfg, dialect))
         {
-            string key = generator.GeneratorKey();
+            var key = generator.GeneratorKey();
             if (!databaseMetadata.IsSequence(key) && !databaseMetadata.IsTable(key))
             {
                 return generator.SqlCreateStrings(dialect);
@@ -356,8 +356,8 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
     {
         var generators = new Dictionary<string, IPersistentIdentifierGenerator>();
         var properties = configuration.Properties;
-        string defaultCatalog = PropertiesHelper.GetString(Environment.DefaultCatalog, properties, null);
-        string defaultSchema = PropertiesHelper.GetString(Environment.DefaultSchema, properties, null);
+        var defaultCatalog = PropertiesHelper.GetString(Environment.DefaultCatalog, properties, null);
+        var defaultSchema = PropertiesHelper.GetString(Environment.DefaultSchema, properties, null);
 
         foreach (var pc in configuration.ClassMappings)
         {

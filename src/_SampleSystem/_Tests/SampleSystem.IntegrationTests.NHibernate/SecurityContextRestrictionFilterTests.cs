@@ -3,15 +3,17 @@ using Framework.Database;
 
 using SampleSystem.Domain.BU;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 
 using Anch.SecuritySystem;
 using Anch.SecuritySystem.Validation;
+using Anch.Testing.Xunit;
+
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class SecurityContextRestrictionFilterTests : TestBase
+public class SecurityContextRestrictionFilterTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private static readonly SecurityRole DefaultSecurityRole = SampleSystemSecurityRole.DefaultRole;
 
@@ -26,13 +28,13 @@ public class SecurityContextRestrictionFilterTests : TestBase
 
     private BusinessUnitIdentityDTO buWithAllowedFilter;
 
-    public SecurityContextRestrictionFilterTests()
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
-        this.employee = this.DataHelper.SaveEmployee(login: this.employeeLogin);
+        this.employee = this.DataManager.SaveEmployee(login: this.employeeLogin);
 
-        this.defaultBu = this.DataHelper.SaveBusinessUnit();
+        this.defaultBu = this.DataManager.SaveBusinessUnit();
 
-        this.buWithAllowedFilter = this.DataHelper.SaveBusinessUnit(allowedForFilterRole: true);
+        this.buWithAllowedFilter = this.DataManager.SaveBusinessUnit(allowedForFilterRole: true);
     }
 
     [Fact]
@@ -41,14 +43,15 @@ public class SecurityContextRestrictionFilterTests : TestBase
         // Arrange
 
         // Act
-        var action = () => this.AuthManager.For(this.employee.Id).SetRole(
-                         new SampleSystemTestPermission(SampleSystemSecurityRole.WithRestrictionFilterRole)
-                         {
-                             BusinessUnit = this.defaultBu
-                         });
+        var ex = Record.Exception(() => this.AuthManager.For(this.employee.Id).SetRole(
+            new SampleSystemTestPermission(SampleSystemSecurityRole.WithRestrictionFilterRole)
+            {
+                BusinessUnit = this.defaultBu
+            }));
 
         // Assert
-        Assert.Contains($"SecurityContext: '{this.defaultBu.Id}' denied by filter", Assert.Throws<SecuritySystemValidationException>(action).Message);
+        var validationException = Assert.IsType<SecuritySystemValidationException>(ex);
+        Assert.Contains($"SecurityContext: '{this.defaultBu.Id}' denied by filter", validationException.Message);
     }
 
     [Fact]
@@ -101,11 +104,11 @@ public class SecurityContextRestrictionFilterTests : TestBase
         Assert.Equal(new[] { this.buWithAllowedFilter }, allowedBuList);
     }
 
-    [Fact]
-    public async Task CreateCustomRestrictionRule_SearchAccessorsForGrandPermission_EmployeeFounded()
+    [AnchFact]
+    public async Task CreateCustomRestrictionRule_SearchAccessorsForGrandPermission_EmployeeFounded(CancellationToken ct)
     {
         // Arrange
-        await this.AuthManager.For(this.employee.Id).SetRoleAsync(DefaultSecurityRole);
+        await this.AuthManager.For(this.employee.Id).SetRoleAsync(DefaultSecurityRole, ct);
 
         // Act
         var accesors = await this.EvaluateAsync(DBSessionMode.Read, this.employee.Id,
@@ -115,7 +118,7 @@ public class SecurityContextRestrictionFilterTests : TestBase
 
                                          var accessorData = await ctx
                                                                   .SecurityService.GetSecurityProvider<BusinessUnit>(DefaultRestrictionRule)
-                                                                  .GetAccessorDataAsync(bu);
+                                                                  .GetAccessorDataAsync(bu, ct);
 
                                          return ctx.SecurityAccessorResolver.Resolve(accessorData).ToList();
                                      });
@@ -124,11 +127,11 @@ public class SecurityContextRestrictionFilterTests : TestBase
         Assert.Contains(this.employeeLogin, accesors);
     }
 
-    [Fact]
-    public async Task CreateCustomRestrictionRule_SearchAccessorsForCorrectBU_EmployeeFounded()
+    [AnchFact]
+    public async Task CreateCustomRestrictionRule_SearchAccessorsForCorrectBU_EmployeeFounded(CancellationToken ct)
     {
         // Arrange
-        await this.AuthManager.For(this.employee.Id).SetRoleAsync(new SampleSystemTestPermission(DefaultSecurityRole) { BusinessUnits = [this.defaultBu, this.buWithAllowedFilter] });
+        await this.AuthManager.For(this.employee.Id).SetRoleAsync(new SampleSystemTestPermission(DefaultSecurityRole) { BusinessUnits = [this.defaultBu, this.buWithAllowedFilter] }, ct);
 
         // Act
         var accesors = await this.EvaluateAsync(DBSessionMode.Read, this.employee.Id,
@@ -138,7 +141,7 @@ public class SecurityContextRestrictionFilterTests : TestBase
 
                                                     var accessorData = await ctx
                                                                              .SecurityService.GetSecurityProvider<BusinessUnit>(DefaultRestrictionRule)
-                                                                             .GetAccessorDataAsync(bu);
+                                                                             .GetAccessorDataAsync(bu, ct);
 
                                                     return ctx.SecurityAccessorResolver.Resolve(accessorData).ToList();
                                                 });

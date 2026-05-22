@@ -1,21 +1,19 @@
 ﻿using SampleSystem.DbGenerate.NHibernate;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests.DBGeneration;
 
-public class SchemeUpdateTests : TestBase
+public class SchemeUpdateTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void SchemeUpdate_ExistsDatabase_ShouldNotFail()
     {
         // Arrange
-        var generator = new UseSchemeUpdateTest();
 
         // Act
-        var action = new Action(() => UseSchemeUpdateTest.UseSchemeUpdate(this.DatabaseContext.Main.ConnectionString));
+        var ex = Record.Exception(() => UseSchemeUpdateTest.UseSchemeUpdate(this.ActualConnectionString.Value));
 
         // Assert
-        var ex = Record.Exception(action);
         Assert.Null(ex);
     }
 }

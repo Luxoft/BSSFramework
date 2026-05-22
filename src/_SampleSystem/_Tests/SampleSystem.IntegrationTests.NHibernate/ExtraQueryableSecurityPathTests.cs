@@ -11,12 +11,12 @@ using Microsoft.Extensions.DependencyInjection;
 using SampleSystem.BLL;
 using SampleSystem.Domain.Employee;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.Security;
 
 namespace SampleSystem.IntegrationTests;
 
-public class ExtraQueryableSecurityPathTests : TestBase
+public class ExtraQueryableSecurityPathTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private EmployeeIdentityDTO TestEmployee;
 
@@ -34,48 +34,50 @@ public class ExtraQueryableSecurityPathTests : TestBase
 
     private LocationIdentityDTO loc2Ident;
 
-    public ExtraQueryableSecurityPathTests()
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
-        this.bu1Ident = this.DataHelper.SaveBusinessUnit();
+        this.bu1Ident = this.DataManager.SaveBusinessUnit();
 
-        this.bu2Ident = this.DataHelper.SaveBusinessUnit();
+        this.bu2Ident = this.DataManager.SaveBusinessUnit();
 
-        this.loc1Ident = this.DataHelper.SaveLocation(name: "Loc 1 (ExtraQueryableSecurityPathTests)");
+        this.loc1Ident = this.DataManager.SaveLocation(name: "Loc 1 (ExtraQueryableSecurityPathTests)");
 
-        this.loc2Ident = this.DataHelper.SaveLocation(name: "Loc 2 (ExtraQueryableSecurityPathTests)");
+        this.loc2Ident = this.DataManager.SaveLocation(name: "Loc 2 (ExtraQueryableSecurityPathTests)");
 
-        this.TestEmployee = this.DataHelper.SaveEmployee(login: "EQSP SecurityTester");
+        this.TestEmployee = this.DataManager.SaveEmployee(login: "EQSP SecurityTester");
 
-        this.AuthManager.For(this.TestEmployee.Id).SetRole(
-            new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident, null, this.loc1Ident),
-            new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident, null, this.loc2Ident));
+        await this.AuthManager.For(this.TestEmployee.Id).SetRoleAsync(
+            [
+                new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident, null, this.loc1Ident),
+                new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident, null, this.loc2Ident)
+            ],
+            ct);
 
-        this.TestEmp1 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu1Ident, location: this.loc1Ident);
+        this.TestEmp1 = this.DataManager.SaveEmployee(coreBusinessUnit: this.bu1Ident, location: this.loc1Ident);
 
-        this.TestEmp2 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu2Ident, location: this.loc1Ident);
+        this.TestEmp2 = this.DataManager.SaveEmployee(coreBusinessUnit: this.bu2Ident, location: this.loc1Ident);
 
-        this.TestEmp3 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu2Ident, location: this.loc2Ident);
+        this.TestEmp3 = this.DataManager.SaveEmployee(coreBusinessUnit: this.bu2Ident, location: this.loc2Ident);
     }
 
     [Fact]
     public void TestExtraQueryableSecurityPath_LoadedWithExtraQueryableFilter()
     {
         // Arrange
-        var createProviderFunc = FuncHelper.Create(
-            (ISampleSystemBLLContext context) =>
-            {
-                var extraQueryableSecurity = context.Logics.Location.GetUnsecureQueryable();
+        var createProviderFunc = FuncHelper.Create((ISampleSystemBLLContext context) =>
+        {
+            var extraQueryableSecurity = context.Logics.Location.GetUnsecureQueryable();
 
-                var extraSecurityPath = SecurityPath<Employee>.Create(e => e.CoreBusinessUnit, true)
-                                                              .And(e => e.Location, true)
-                                                              .And(
-                                                                  e => extraQueryableSecurity.Where(
-                                                                      l => l == e.Location && e.Location.Id == this.loc1Ident.Id), true);
+            var extraSecurityPath = SecurityPath<Employee>.Create(e => e.CoreBusinessUnit, true)
+                                                          .And(e => e.Location, true)
+                                                          .And(
+                                                              e => extraQueryableSecurity.Where(l => l == e.Location && e.Location.Id == this.loc1Ident.Id),
+                                                              true);
 
-                return context.ServiceProvider.GetRequiredService<IDomainSecurityProviderFactory<Employee>>().Create(
-                    SampleSystemSecurityOperation.EmployeeView,
-                    extraSecurityPath);
-            });
+            return context.ServiceProvider.GetRequiredService<IDomainSecurityProviderFactory<Employee>>().Create(
+                SampleSystemSecurityOperation.EmployeeView,
+                extraSecurityPath);
+        });
 
         // Act
         var items = this.Evaluate(

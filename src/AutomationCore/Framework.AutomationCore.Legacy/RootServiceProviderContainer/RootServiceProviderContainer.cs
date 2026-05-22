@@ -1,0 +1,3 @@
+﻿namespace Framework.AutomationCore.RootServiceProviderContainer;
+
+public class RootServiceProviderContainer<TBLLContext>(IServiceProvider rootServiceProvider) : RootServiceProviderContainer(rootServiceProvider), IRootServiceProviderContainer<TBLLContext>;

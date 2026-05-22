@@ -1,15 +1,16 @@
-﻿using Framework.Database.NHibernate.DBGenerator;
+﻿using Framework.AutomationCore.Extensions;
+using Framework.Database.NHibernate.DBGenerator;
 
 using Microsoft.SqlServer.Management.Smo;
 
 using SampleSystem.DbGenerate.NHibernate;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 using Index = Microsoft.SqlServer.Management.Smo.Index;
 
 namespace SampleSystem.IntegrationTests.DBGeneration;
 
-public class UniqueGroupDatabaseScriptGeneratorTests : TestBase
+public class UniqueGroupDatabaseScriptGeneratorTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void GenerateLocal_UniqueIndexExistsWithLessColumns_RecreatesColumns()
@@ -19,7 +20,7 @@ public class UniqueGroupDatabaseScriptGeneratorTests : TestBase
 
         var tableName = "RoleRoleDegreeLink";
 
-        var table = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
+        var table = this.DataManager.GetTable(this.ActualConnectionString.InitialCatalog, tableName);
 
         var indexName = "unilink_RoleRoleDegreeLink";
 
@@ -34,21 +35,21 @@ public class UniqueGroupDatabaseScriptGeneratorTests : TestBase
 
         // Act
         generator.GenerateAllDB(
-            this.DatabaseContext.Main.DataSource,
-            this.DatabaseContext.Main.DatabaseName,
+            this.ActualConnectionString.DataSource,
+            this.ActualConnectionString.InitialCatalog,
             credential: DbUserCredential.Create(
-                this.DatabaseContext.Main.UserId,
-                this.DatabaseContext.Main.Password),
+                this.ActualConnectionString.UserId,
+                this.ActualConnectionString.Password),
             skipFrameworkDatabases: true);
 
-        var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
+        var changedTable = this.DataManager.GetTable(this.ActualConnectionString.InitialCatalog, tableName);
 
         //  changedTable.Indexes.Refresh();
-        var indexes = changedTable.Indexes.Cast<Index>().ToList();
+        var indexes = changedTable.Indexes.ToList();
 
         // Assert
         Assert.Contains(indexes, x => x.Name == indexName);
-        var indexedColumns = indexes.First(x => x.Name == indexName).IndexedColumns.Cast<IndexedColumn>().ToList();
+        var indexedColumns = indexes.First(x => x.Name == indexName).IndexedColumns.ToList();
         Assert.Equal(2, indexedColumns.Count);
         Assert.Contains(indexedColumns, x => x.Name == "roleDegreeId");
         Assert.Contains(indexedColumns, x => x.Name == "roleId");

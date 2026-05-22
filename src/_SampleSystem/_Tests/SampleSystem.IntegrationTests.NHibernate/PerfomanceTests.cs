@@ -6,11 +6,11 @@ using Framework.Application;
 using Framework.Database;
 
 using SampleSystem.Domain.Employee;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class PerfomanceTests : TestBase
+public class PerfomanceTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void GetEmployee_ToManyFilterParameters_CheckTimeTest()
@@ -18,16 +18,20 @@ public class PerfomanceTests : TestBase
         var preEvaluate = this.Evaluate(DBSessionMode.Write, context => context.Logics.Employee.GetUnsecureQueryable().First());
 
         var task = Task.Run(() =>
-                                                           this.Evaluate(DBSessionMode.Write, context =>
-                                                                         {
-                                                                             Expression<Func<Employee, bool>> filter = z => false;
+                                this.Evaluate(
+                                    DBSessionMode.Write,
+                                    context =>
+                                    {
+                                        Expression<Func<Employee, bool>> filter = z => false;
 
-                                                                             var resultFilter = Enumerable.Range(0, 1000)
-                                                                                     .Select(number => (Expression<Func<Employee, bool>>)(z => z.Age == number && z.CellPhone == number.ToString()))
-                                                                                     .Aggregate(filter, (prev, current) => prev.BuildOr(current));
+                                        var resultFilter = Enumerable.Range(0, 1000)
+                                                                     .Select(number =>
+                                                                                 (Expression<Func<Employee, bool>>)(z => z.Age == number
+                                                                                             && z.CellPhone == number.ToString()))
+                                                                     .Aggregate(filter, (prev, current) => prev.BuildOr(current));
 
-                                                                             return context.Logics.Employee.GetUnsecureQueryable().Where(resultFilter).ToList();
-                                                                         }));
+                                        return context.Logics.Employee.GetUnsecureQueryable().Where(resultFilter).ToList();
+                                    }));
 
         var result = task.Wait(TimeSpan.FromSeconds(3));
 

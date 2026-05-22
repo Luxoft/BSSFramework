@@ -6,7 +6,7 @@ using Framework.Database.Domain;
 using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.WebApiCore.Controllers.Audit;
 using SampleSystem.WebApiCore.Controllers.Main;
 
@@ -14,7 +14,7 @@ using BusinessUnitController = SampleSystem.WebApiCore.Controllers.Audit.Busines
 
 namespace SampleSystem.IntegrationTests;
 
-public class AuditTests : TestBase
+public class AuditTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void GetObjectRevisions_CheckCount_Correct()
@@ -35,7 +35,7 @@ public class AuditTests : TestBase
 
         var employeeIdentity = employeeController.Evaluate(c => c.SaveEmployee(employeeStrictDto));
 
-        for (int q = 0; q < testCount; q++)
+        for (var q = 0; q < testCount; q++)
         {
             var employeeFull = employeeController.Evaluate(c => c.GetFullEmployee(employeeIdentity));
             var employeeStrict = employeeFull.ToStrict();
@@ -68,7 +68,7 @@ public class AuditTests : TestBase
 
         var employeeIdentity = employeeController.Evaluate(c => c.SaveEmployee(employeeStrictDto));
 
-        for (int q = 0; q < testCount; q++)
+        for (var q = 0; q < testCount; q++)
         {
             var employeeFull = employeeController.Evaluate(c => c.GetFullEmployee(employeeIdentity));
             var employeeStrict = employeeFull.ToStrict();
@@ -143,7 +143,7 @@ public class AuditTests : TestBase
 
         var employeeIdentity = employeeController.Evaluate(c => c.SaveEmployee(employeeStrictDto));
 
-        for (int q = 0; q < testCount; q++)
+        for (var q = 0; q < testCount; q++)
         {
             var employeeFull = employeeController.Evaluate(c => c.GetFullEmployee(employeeIdentity));
             var employeeStrict = employeeFull.ToStrict();
@@ -188,7 +188,7 @@ public class AuditTests : TestBase
 
         var employeeIdentity = employeeController.Evaluate(c => c.SaveEmployee(employeeStrictDto));
 
-        for (int q = 0; q < testCount; q++)
+        for (var q = 0; q < testCount; q++)
         {
             var employeeFull = employeeController.Evaluate(c => c.GetFullEmployee(employeeIdentity));
             var employeeStrict = employeeFull.ToStrict();
@@ -233,7 +233,7 @@ public class AuditTests : TestBase
 
         var employeeIdentity = employeeController.Evaluate(c => c.SaveEmployee(employeeStrictDto));
 
-        for (int q = 0; q < testCount; q++)
+        for (var q = 0; q < testCount; q++)
         {
             var employeeFull = employeeController.Evaluate(c => c.GetFullEmployee(employeeIdentity));
             var employeeStrict = employeeFull.ToStrict();
@@ -268,7 +268,7 @@ public class AuditTests : TestBase
         this.AuthManager.For(testUser).LoginAs();
 
         // Act
-        var newBu = this.DataHelper.SaveBusinessUnit();
+        var newBu = this.DataManager.SaveBusinessUnit();
 
         // Assert
 

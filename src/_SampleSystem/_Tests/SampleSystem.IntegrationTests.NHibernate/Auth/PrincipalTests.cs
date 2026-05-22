@@ -1,17 +1,18 @@
 ﻿using Framework.Authorization.Generated.DTO;
 using Framework.BLL.Exceptions;
 
-using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 using Anch.SecuritySystem;
 
+using SampleSystem.IntegrationTests._Environment.TestData;
+
 using DelegateToItemModelStrictDTO = Framework.Authorization.Generated.DTO.DelegateToItemModelStrictDTO;
 
 namespace SampleSystem.IntegrationTests.Auth;
 
-public class PrincipalTests : TestBase
+public class PrincipalTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private const string Name = "luxoft\\Login";
     private const string NewName = "luxoft\\ChangeLogin";
@@ -21,7 +22,7 @@ public class PrincipalTests : TestBase
     {
         // Arrange
         var authorizationController = this.GetAuthControllerEvaluator();
-        var currentUser = this.DataHelper.GetCurrentEmployee();
+        var currentUser = this.DataManager.GetCurrentEmployee();
 
         var businessRoleIdentity = authorizationController.Evaluate(c => c.GetSimpleBusinessRoleByName(SampleSystemSecurityRole.SecretariatNotification.Name)).Identity;
 
@@ -44,7 +45,7 @@ public class PrincipalTests : TestBase
     {
         // Arrange
         var authorizationController = this.GetAuthControllerEvaluator();
-        var currentUser = this.DataHelper.GetCurrentEmployee();
+        var currentUser = this.DataManager.GetCurrentEmployee();
 
         var businessRoleIdentity = authorizationController.Evaluate(c => c.GetSimpleBusinessRoleByName(SampleSystemSecurityRole.SecretariatNotification.Name)).Identity;
 
@@ -70,7 +71,7 @@ public class PrincipalTests : TestBase
     public void SavePrincipal_CheckPrincipalChanges()
     {
         // Arrange
-        var currentUser = this.DataHelper.GetCurrentEmployee();
+        var currentUser = this.DataManager.GetCurrentEmployee();
 
         var principalStrict = new PrincipalStrictDTO { Name = Name };
         this.GetAuthControllerEvaluator().Evaluate(c => c.SavePrincipal(principalStrict));
@@ -93,7 +94,7 @@ public class PrincipalTests : TestBase
     public void PermissionDelegate_CheckChanges()
     {
         // Arrange
-        var currentUser = this.DataHelper.GetCurrentEmployee();
+        var currentUser = this.DataManager.GetCurrentEmployee();
 
         var businessRoleIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRoleByName(SampleSystemSecurityRole.SecretariatNotification.Name)).Identity;
 
@@ -150,10 +151,11 @@ public class PrincipalTests : TestBase
 
         // Act
         this.GetAuthControllerEvaluator().Evaluate(c => c.RemovePermission(permissionIdentity));
-        Action call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePermission(permissionIdentity));
+        var ex = Record.Exception(() => this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePermission(permissionIdentity)));
 
         // Assert
-        Assert.Matches("^Permission with id = \".*\" not found$", Assert.Throws<ObjectByIdNotFoundException<Guid>>(call).Message);
+        var notFoundException = Assert.IsType<ObjectByIdNotFoundException<Guid>>(ex);
+        Assert.Matches("^Permission with id = \".*\" not found$", notFoundException.Message);
     }
 
     [Fact]
@@ -163,10 +165,11 @@ public class PrincipalTests : TestBase
         var principalIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetCurrentPrincipal()).Identity;
 
         // Act
-        var call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.RemovePrincipal(principalIdentity));
+        var ex = Record.Exception(() => this.GetAuthControllerEvaluator().Evaluate(c => c.RemovePrincipal(principalIdentity)));
 
         // Assert
-        Assert.Matches("^Removing principal \".*\" must be empty$", Assert.Throws<SecuritySystemException>(call).Message);
+        var securityException = Assert.IsType<SecuritySystemException>(ex);
+        Assert.Matches("^Removing principal \".*\" must be empty$", securityException.Message);
     }
 
     [Fact]
@@ -179,9 +182,10 @@ public class PrincipalTests : TestBase
 
         // Act
         this.GetAuthControllerEvaluator().Evaluate(c => c.RemovePrincipal(principalIdentity));
-        var call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePrincipal(principalIdentity));
+        var ex = Record.Exception(() => this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePrincipal(principalIdentity)));
 
         // Assert
-        Assert.Matches("^Principal with id = \".*\" not found$", Assert.Throws<ObjectByIdNotFoundException<Guid>>(call).Message);
+        var notFoundException = Assert.IsType<ObjectByIdNotFoundException<Guid>>(ex);
+        Assert.Matches("^Principal with id = \".*\" not found$", notFoundException.Message);
     }
 }

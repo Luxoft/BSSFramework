@@ -2,13 +2,13 @@
 
 using SampleSystem.Domain.TestDependency;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
-public class DependencySecurityTests : TestBase
+public class DependencySecurityTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     private const string TestEmployeeLogin = "DS SecurityTester";
 
@@ -30,15 +30,15 @@ public class DependencySecurityTests : TestBase
 
     private BusinessUnitIdentityDTO bu2Ident;
 
-    public DependencySecurityTests()
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
     {
-        this.bu1Ident = this.DataHelper.SaveBusinessUnit();
+        this.bu1Ident = this.DataManager.SaveBusinessUnit();
 
-        this.bu2Ident = this.DataHelper.SaveBusinessUnit();
+        this.bu2Ident = this.DataManager.SaveBusinessUnit();
 
-        this.DataHelper.SaveEmployee(login: TestEmployeeLogin);
+        this.DataManager.SaveEmployee(login: TestEmployeeLogin);
 
-        this.AuthManager.For(TestEmployeeLogin).SetRole(new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident));
+        await this.AuthManager.For(TestEmployeeLogin).SetRoleAsync(new SampleSystemTestPermission(SampleSystemSecurityRole.SeManager, this.bu2Ident), ct);
 
         this.EvaluateWrite(
                            context =>

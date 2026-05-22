@@ -17,7 +17,7 @@ public class PrimitiveTypeFieldMapper : Mapper<PrimitiveTypeFieldMetadata>
 
         var isNullable = !(field.IsVersion && new[] { typeof(int), typeof(long) }.Contains(field.Type) || isPrimaryKey);
 
-        string defaultConstraint = field.IsVersion && new[] { typeof(int), typeof(long) }.Contains(field.Type) ? "0" : null;
+        var defaultConstraint = field.IsVersion && new[] { typeof(int), typeof(long) }.Contains(field.Type) ? "0" : null;
 
         yield return new SqlFieldMappingInfo(
             field.Type.ToDataType(field.Attributes),

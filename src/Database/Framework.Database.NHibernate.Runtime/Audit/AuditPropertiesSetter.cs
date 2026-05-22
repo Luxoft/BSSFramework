@@ -62,7 +62,7 @@ internal sealed partial class AuditPropertiesSetter
         int? propertyIndex = null;
         Func<TProperty> getAuditValue = null;
 
-        string domainObjectPropertyName = auditProperty.PropertyExpr.GetMemberName();
+        var domainObjectPropertyName = auditProperty.PropertyExpr.GetMemberName();
         if (!string.IsNullOrEmpty(domainObjectPropertyName))
         {
             var property = typeof(TDomainObject).GetProperty(domainObjectPropertyName, true);
@@ -72,7 +72,7 @@ internal sealed partial class AuditPropertiesSetter
 
         return (state) =>
                {
-                   bool result = false;
+                   var result = false;
                    if (propertyIndex.HasValue)
                    {
                        var auditValue = (getAuditValue != null) ? getAuditValue.Invoke() : default(TProperty);
@@ -92,7 +92,7 @@ internal sealed partial class AuditPropertiesSetter
         }
 
         int? result = null;
-        for (int i = 0; i < source.Count; i++)
+        for (var i = 0; i < source.Count; i++)
         {
             if (source[i]?.Equals(propertyName, StringComparison.InvariantCultureIgnoreCase) == true)
             {

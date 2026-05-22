@@ -80,11 +80,11 @@ public class DbGeneratorTest
         AuditDatabaseName auditDatabaseName,
         DatabaseScriptGeneratorMode generatorMode = DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript,
         DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnTargetDatabase,
-        IEnumerable<string> migrationScriptFolderPaths = null,
-        IEnumerable<string> auditMigrationScriptFolderPaths = null,
+        IEnumerable<string>? migrationScriptFolderPaths = null,
+        IEnumerable<string>? auditMigrationScriptFolderPaths = null,
         bool preserveSchemaDatabase = false,
-        ICollection<string> ignoredIndexes = null,
-        DbUserCredential credential = null)
+        ICollection<string>? ignoredIndexes = null,
+        DbUserCredential? credential = null)
     {
         var generator = new SampleSystemDBGenerator(this.GetMappingSettings(serverName, databaseName, auditDatabaseName));
 
@@ -107,9 +107,9 @@ public class DbGeneratorTest
         DatabaseName mainDatabaseName,
         DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnCopySchemeDatabase,
         bool preserveSchemaDatabase = false,
-        DbUserCredential credential = null)
+        DbUserCredential? credential = null)
     {
-        string[] migrationScriptFolderPaths = null;
+        string[]? migrationScriptFolderPaths = null;
 
         Console.WriteLine("------ start Utilities");
         var resultScript = new Framework.Configuration.TestGenerate.ServerGenerators(

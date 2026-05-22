@@ -3,23 +3,23 @@
 using Anch.Core;
 
 using Framework.Application;
-using Framework.AutomationCore.Utils;
+using Framework.AutomationCore.Services;
 using Framework.Database;
 
 using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Enums;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class NhibArrayContainsTest : TestBase
+public class NhibArrayContainsTest(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void LinqContainsOverArray_TranslatedAndExecutedCorrectly()
     {
         // Arrange
         var name = TextRandomizer.UniqueString("BusinessUnit");
-        var bu = this.DataHelper.SaveBusinessUnit(name: name);
+        var bu = this.DataManager.SaveBusinessUnit(name: name);
 
         var arr1 = new[] { bu.Id };
         var arr2 = new[] { BusinessUnitStatus.Current };

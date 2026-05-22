@@ -56,7 +56,7 @@ public static class BaseCodeDomHelper
     public static IEnumerable<CodeConstructor> GenerateStrictConstructors<TConfiguration>(this IDTOSource<TConfiguration> source)
             where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment> =>
         source.GetActualStrictConstructorFileTypes()
-              .Concat([default(MainDTOFileType)])
+              .Concat([null])
               .Windowed2((fileType, baseFileType) => new[] { false, true}.Select(withoutMappingParameter => source.GenerateStrictConstructor(fileType, baseFileType, withoutMappingParameter)))
               .SelectMany();
 

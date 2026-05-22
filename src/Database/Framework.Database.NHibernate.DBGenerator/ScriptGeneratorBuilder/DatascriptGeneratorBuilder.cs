@@ -7,13 +7,15 @@ using Framework.Database.NHibernate.DBGenerator.Team;
 
 namespace Framework.Database.NHibernate.DBGenerator.ScriptGeneratorBuilder;
 
-public class DatascriptGeneratorBuilder(DBGenerateScriptMode scriptMode)
+public class DataScriptGeneratorBuilder(DBGenerateScriptMode scriptMode)
 {
     private readonly MainDBScriptGeneratorBuilder mainDbScriptGeneratorBuilder = new();
     private readonly AuditDBScriptGeneratorBuilder auditDbScriptGeneratorBuilder = new();
 
     private DatabaseName databaseName;
+
     private SqlDatabaseFactory sqlDatabaseFactory;
+
     private AssemblyMetadata assemblyMetadata;
 
     public IMainDBScriptGeneratorBuilder MainBuilder => this.mainDbScriptGeneratorBuilder;
@@ -28,45 +30,42 @@ public class DatascriptGeneratorBuilder(DBGenerateScriptMode scriptMode)
         var main = this.mainDbScriptGeneratorBuilder.Build(scriptMode);
         var audit = this.auditDbScriptGeneratorBuilder.Build(scriptMode);
 
-        this.mainDbScriptGeneratorBuilder.IsFreezed = true;
-        this.auditDbScriptGeneratorBuilder.IsFreezed = true;
+        this.mainDbScriptGeneratorBuilder.IsFrozen = true;
+        this.auditDbScriptGeneratorBuilder.IsFrozen = true;
 
         return new[] { main, audit }.Combine();
     }
 
-    public DatascriptGeneratorBuilder WithMainDatabase(string databaseName) =>
-            this.WithMainDatabase(new DatabaseName(databaseName));
+    public DataScriptGeneratorBuilder WithMainDatabase(string newDatabaseName) =>
+            this.WithMainDatabase(new DatabaseName(newDatabaseName));
 
-    public DatascriptGeneratorBuilder WithMainDatabase(DatabaseName databaseName)
+    public DataScriptGeneratorBuilder WithMainDatabase(DatabaseName newDatabaseName)
     {
-        this.databaseName.ValidateOneSet(databaseName, nameof(databaseName));
+        this.databaseName.ValidateOneSet(newDatabaseName, nameof(newDatabaseName));
 
-        this.databaseName = databaseName;
-
+        this.databaseName = newDatabaseName;
         return this;
     }
 
-    public DatascriptGeneratorBuilder WithSqlDatabaseFactory(SqlDatabaseFactory sqlDatabaseFactory)
+    public DataScriptGeneratorBuilder WithSqlDatabaseFactory(SqlDatabaseFactory newSqlDatabaseFactory)
     {
-        this.sqlDatabaseFactory.ValidateOneSet(sqlDatabaseFactory, nameof(sqlDatabaseFactory));
+        this.sqlDatabaseFactory.ValidateOneSet(newSqlDatabaseFactory, nameof(newSqlDatabaseFactory));
 
-        this.sqlDatabaseFactory = sqlDatabaseFactory;
-
+        this.sqlDatabaseFactory = newSqlDatabaseFactory;
         return this;
     }
 
-    public DatascriptGeneratorBuilder WithServerName(string serverName) =>
+    public DataScriptGeneratorBuilder WithServerName(string serverName) =>
             this.WithSqlDatabaseFactory(SqlDatabaseFactory.CreateDefault(serverName));
 
-    public DatascriptGeneratorBuilder WithServerName(string serverName, DbUserCredential credentials) =>
+    public DataScriptGeneratorBuilder WithServerName(string serverName, DbUserCredential credentials) =>
             this.WithSqlDatabaseFactory(SqlDatabaseFactory.Create(serverName, credentials));
 
-    public DatascriptGeneratorBuilder WithAssemblyMetadata(AssemblyMetadata assemblyMetadata)
+    public DataScriptGeneratorBuilder WithAssemblyMetadata(AssemblyMetadata newAssemblyMetadata)
     {
-        this.assemblyMetadata.ValidateOneSet(assemblyMetadata, nameof(assemblyMetadata));
+        this.assemblyMetadata.ValidateOneSet(newAssemblyMetadata, nameof(newAssemblyMetadata));
 
-        this.assemblyMetadata = assemblyMetadata;
-
+        this.assemblyMetadata = newAssemblyMetadata;
         return this;
     }
 
@@ -91,7 +90,6 @@ public class DatascriptGeneratorBuilder(DBGenerateScriptMode scriptMode)
         {
             throw new ArgumentException("AssemblyMetadata must be initialized");
         }
-
 
         if (string.IsNullOrWhiteSpace(this.databaseName.Name))
         {

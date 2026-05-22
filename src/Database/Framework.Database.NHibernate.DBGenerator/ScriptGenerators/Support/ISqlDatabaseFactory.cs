@@ -17,7 +17,7 @@ public interface ISqlDatabaseFactory
     /// </summary>
     /// <param name="databaseName">Имя базы данных</param>
     /// <returns>База данных</returns>
-    Microsoft.SqlServer.Management.Smo.Database GetDatabase(DatabaseName databaseName);
+    Microsoft.SqlServer.Management.Smo.Database? GetDatabase(DatabaseName databaseName);
 
     /// <summary>
     /// Возвращает базу данных или создает новую если такой нет из экземпляра SQL сервера <see cref="Server"/> с именем <paramref name="databaseName"/>

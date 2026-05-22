@@ -156,7 +156,7 @@ public static class CoreStringExtensions
     [Obsolete("v10 This method will be protected in future")]
     public static IEnumerable<char> GetCharsAfter(this string source, char afterChar)
     {
-        bool isReturn = false;
+        var isReturn = false;
         foreach (var s in source)
         {
             if (isReturn)

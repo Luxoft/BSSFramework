@@ -54,7 +54,7 @@ public class SqlDatabaseFactory : ISqlDatabaseFactory
     /// </summary>
     /// <param name="databaseName">Имя базы данных</param>
     /// <returns>База данных если она есть, иначе null</returns>
-    public Microsoft.SqlServer.Management.Smo.Database GetDatabase(DatabaseName databaseName)
+    public Microsoft.SqlServer.Management.Smo.Database? GetDatabase(DatabaseName databaseName)
     {
         var server = this.serverLazy.Value;
 

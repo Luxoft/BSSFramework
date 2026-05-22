@@ -4,11 +4,11 @@ using Framework.Database;
 
 using SampleSystem.Domain.Directories;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class NotificationCountryTests : TestBase
+public class NotificationCountryTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void CreateAndUpdateCountry_SingleModificationExists()
@@ -129,9 +129,10 @@ public class NotificationCountryTests : TestBase
         var configController = this.GetConfigurationControllerEvaluator(DefaultConstants.NOTIFICATION_ADMIN);
 
         // Act
-        var call = new Action(() => configController.Evaluate(c => c.ProcessModifications(1000)));
+        var ex = Record.Exception(() => configController.Evaluate(c => c.ProcessModifications(1000)));
 
         // Assert
-        Assert.Equal("Both arguments (previous and current) can't be null", Assert.Throws<ArgumentException>(call).Message);
+        var argumentException = Assert.IsType<ArgumentException>(ex);
+        Assert.Equal("Both arguments (previous and current) can't be null", argumentException.Message);
     }
 }

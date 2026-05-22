@@ -64,27 +64,25 @@ public class RoslynCSharpExpressionParser : INativeBodyExpressionParser
                                            .AddReferences(references)
                                            .AddSyntaxTrees(CSharpSyntaxTree.ParseText(source));
 
-        using (var stream = new MemoryStream())
+        using var stream = new MemoryStream();
+        var compileResult = compilation.Emit(stream);
+
+        if (compileResult.Success)
         {
-            var compileResult = compilation.Emit(stream);
+            stream.Position = 0;
 
-            if (compileResult.Success)
-            {
-                stream.Position = 0;
+            var assembly = AssemblyLoadContext.Default.LoadFromStream(stream);
 
-                var assembly = AssemblyLoadContext.Default.LoadFromStream(stream);
+            var expressionParserType = assembly.GetType($"{namespaceName}.{typeName}");
 
-                var expressionParserType = assembly.GetType($"{namespaceName}.{typeName}");
+            return expressionParserType.GetMethod(methodName).Invoke<Expression>(null);
+        }
+        else
+        {
 
-                return expressionParserType.GetMethod(methodName).Invoke<Expression>(null);
-            }
-            else
-            {
-
-                var errorTextBuilder = compileResult.Diagnostics.Join(",", d => $"{d.Id}: {d.GetMessage()}");
-                var exception = new ParseException(errorTextBuilder, 0);
-                throw exception;
-            }
+            var errorTextBuilder = compileResult.Diagnostics.Join(",", d => $"{d.Id}: {d.GetMessage()}");
+            var exception = new ParseException(errorTextBuilder, 0);
+            throw exception;
         }
     }
 }

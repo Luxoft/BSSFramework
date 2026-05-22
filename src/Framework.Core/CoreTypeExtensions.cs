@@ -235,7 +235,7 @@ public static class CoreTypeExtensions
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (memberName == null) throw new ArgumentNullException(nameof(memberName));
 
-        return type.GetMemberType(memberName, raiseIfNotFound ? () => new Exception($"Member \"{memberName}\" not found in type \"{type.Name}\"") : default(Func<Exception>));
+        return type.GetMemberType(memberName, raiseIfNotFound ? () => new Exception($"Member \"{memberName}\" not found in type \"{type.Name}\"") : null);
     }
 
     public static Type? GetMemberType(this Type type, string memberName, Func<Exception>? raiseIfNotFoundException)
@@ -277,7 +277,7 @@ public static class CoreTypeExtensions
         if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
 
         return type.GetProperty(propertyName, stringComparison, raiseIfNotFound ? () => new Exception(
-                                                                                   $"Property \"{propertyName}\" not found in type \"{type.Name}\"") : default(Func<Exception>));
+                                                                                   $"Property \"{propertyName}\" not found in type \"{type.Name}\"") : null);
     }
 
     public static PropertyInfo? GetProperty(this Type type, string propertyName, StringComparison stringComparison, Func<Exception>? raiseIfNotFoundException)
@@ -309,7 +309,7 @@ public static class CoreTypeExtensions
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
 
-        return type.GetProperty(propertyName, raiseIfNotFound ? () => new Exception($"Property \"{propertyName}\" not found in type \"{type.Name}\"") : default(Func<Exception>));
+        return type.GetProperty(propertyName, raiseIfNotFound ? () => new Exception($"Property \"{propertyName}\" not found in type \"{type.Name}\"") : null);
     }
 
     public static PropertyInfo? GetProperty(this Type type, string propertyName, Func<Exception>? raiseIfNotFoundException)
@@ -343,7 +343,7 @@ public static class CoreTypeExtensions
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (methodName == null) throw new ArgumentNullException(nameof(methodName));
 
-        return type.GetMethod(methodName, bindingFlags, raiseIfNotFound ? () => new Exception($"Method \"{methodName}\" not found") : default(Func<Exception>));
+        return type.GetMethod(methodName, bindingFlags, raiseIfNotFound ? () => new Exception($"Method \"{methodName}\" not found") : null);
     }
 
     public static MethodInfo? GetMethod(this Type type, string methodName, BindingFlags bindingFlags, Func<Exception>? raiseIfNotFoundException)
@@ -475,22 +475,20 @@ public static class CoreTypeExtensions
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (selector == null) throw new ArgumentNullException(nameof(selector));
 
-        using (var enumerator = source.GetEnumerator())
+        using var enumerator = source.GetEnumerator();
+        if (enumerator.MoveNext())
         {
+            var prev = enumerator.Current;
+
             if (enumerator.MoveNext())
             {
-                var prev = enumerator.Current;
+                var next = enumerator.Current;
 
-                if (enumerator.MoveNext())
+                yield return selector(prev, next);
+
+                while (enumerator.MoveNext())
                 {
-                    var next = enumerator.Current;
-
-                    yield return selector(prev, next);
-
-                    while (enumerator.MoveNext())
-                    {
-                        yield return selector(next, next = enumerator.Current);
-                    }
+                    yield return selector(next, next = enumerator.Current);
                 }
             }
         }
@@ -509,7 +507,7 @@ public static class CoreTypeExtensions
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (methodName == null) throw new ArgumentNullException(nameof(methodName));
 
-        return type.GetMethod(methodName, raiseIfNotFound ? () => new Exception($"Method \"{methodName}\" not found") : default(Func<Exception>));
+        return type.GetMethod(methodName, raiseIfNotFound ? () => new Exception($"Method \"{methodName}\" not found") : null);
     }
 
     public static MethodInfo? GetMethod(this Type type, string methodName, Func<Exception>? raiseIfNotFoundException)

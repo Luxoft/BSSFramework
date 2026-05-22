@@ -13,13 +13,13 @@ public class ExtractConstTests
     public void NullValueChainExpression_GetDeepMemberConstValue_NotThrowException()
     {
         // Arrange
-        Parameters p = null;
-        Expression<Func<Obj, bool>> testExpr = obj => p.Period.StartDate > obj.Period.StartDate;
+        Parameters? p = null;
+        Expression<Func<Obj, bool>> testExpr = obj => p!.Period.StartDate > obj.Period.StartDate;
 
-        Action action = () => testExpr.UpdateBase(OverrideHashSetVisitor<Guid>.Value);
+        // Act
+        var exception = Record.Exception(() => testExpr.UpdateBase(OverrideHashSetVisitor<Guid>.Value));
 
-        var exception = Record.Exception(action);
-
+        // Assert
         Assert.Null(exception);
     }
 

@@ -1,11 +1,13 @@
-﻿using Framework.Database.NHibernate.DBGenerator;
+﻿using Framework.AutomationCore.Extensions;
+using Framework.Database.NHibernate.DBGenerator;
+
 
 using SampleSystem.DbGenerate.NHibernate;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests.DBGeneration;
 
-public class GenerateDBTests : TestBase
+public class GenerateDBTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void GenerateDB_SecondTime_ShouldNotFail()
@@ -14,14 +16,14 @@ public class GenerateDBTests : TestBase
         var generator = new DbGeneratorTest();
 
         // Act
-        var action = new Action(() => generator.GenerateAllDB(
-                                                              this.DatabaseContext.Main.DataSource,
-                                                              this.DatabaseContext.Main.DatabaseName,
-                                                              credential: DbUserCredential.Create(
-                                                               this.DatabaseContext.Main.UserId,
-                                                               this.DatabaseContext.Main.Password)));
+        var ex = Record.Exception(() => generator.GenerateAllDB(
+                                      this.ActualConnectionString.DataSource,
+                                      this.ActualConnectionString.InitialCatalog,
+                                      credential: DbUserCredential.Create(
+                                          this.ActualConnectionString.UserId,
+                                          this.ActualConnectionString.Password)));
 
         // Assert
-        Assert.Null(Record.Exception(action));
+        Assert.Null(ex);
     }
 }

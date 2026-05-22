@@ -11,10 +11,7 @@ namespace Framework.Configuration.TestGenerate;
 public partial class ServerGenerators
 {
     [Fact]
-    public void GenerateMainTest()
-    {
-        this.GenerateMain().ToList();
-    }
+    public void GenerateMainTest() => this.GenerateMain().ToList();
 
     public IEnumerable<GeneratedFileInfo> GenerateMain() =>
         this.GenerateBLLCore()

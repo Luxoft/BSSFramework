@@ -1,12 +1,13 @@
 ﻿using Framework.Application;
+using Framework.AutomationCore.RootServiceProviderContainer;
 using Framework.Core;
 using Framework.Database;
 
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class ExpandPathTests : TestBase
+public class ExpandPathTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void LiftToNullableContainsExt_ShouldNotThrowException()
@@ -16,11 +17,13 @@ public class ExpandPathTests : TestBase
 
         // Act
         var action = new Action(() =>
-                                {
-                                    var res = this.Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnit.Period.ContainsExt(period.EndDate ?? period.StartDate)));
+        {
+            var res = this.Evaluate(
+                DBSessionMode.Read,
+                context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnit.Period.ContainsExt(period.EndDate ?? period.StartDate)));
 
-                                    return;
-                                });
+            return;
+        });
 
         // Assert
         action();
@@ -33,11 +36,11 @@ public class ExpandPathTests : TestBase
 
         // Act
         var action = new Action(() =>
-                                {
-                                    var res = this.Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.LocationCode == null));
+        {
+            var res = this.Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.LocationCode == null));
 
-                                    return;
-                                });
+            return;
+        });
 
         // Assert
         action();
@@ -50,15 +53,15 @@ public class ExpandPathTests : TestBase
 
         // Act
         var action = new Action(() =>
-                                {
-                                    var res = this.Evaluate(
-                                        DBSessionMode.Read,
-                                        context => context.Logics.Employee.GetListBy(
-                                            employee => employee.CoreBusinessUnitPeriod.IsIntersected(
-                                                this.TimeProvider.GetCurrentMonth())));
+        {
+            var currentMonth = this.TimeProvider.GetCurrentMonth();
 
-                                    return;
-                                });
+            var res = this.Evaluate(
+                DBSessionMode.Read,
+                context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnitPeriod.IsIntersected(currentMonth)));
+
+            return;
+        });
 
         // Assert
         action();
@@ -72,11 +75,15 @@ public class ExpandPathTests : TestBase
 
         // Act
         var action = new Action(() =>
-                                {
-                                    var res = this.Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnitPeriod.Contains(this.TimeProvider.GetToday())));
+        {
+            var today = this.TimeProvider.GetToday();
 
-                                    return;
-                                });
+            var res = this.Evaluate(
+                DBSessionMode.Read,
+                context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnitPeriod.Contains(today)));
+
+            return;
+        });
 
         // Assert
         action();

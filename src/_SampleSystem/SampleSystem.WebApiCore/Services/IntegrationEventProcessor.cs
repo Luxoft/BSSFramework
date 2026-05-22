@@ -17,6 +17,6 @@ public class IntegrationEventProcessor(IDBSessionEvaluator sessionEvaluator) : I
             async x =>
             {
                 await x.GetRequiredService<IMediator>().Publish(@event, cancellationToken);
-                return default!;
+                return null!;
             });
 }

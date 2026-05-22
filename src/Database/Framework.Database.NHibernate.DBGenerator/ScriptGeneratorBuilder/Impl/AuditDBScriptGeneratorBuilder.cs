@@ -96,5 +96,5 @@ class AuditDBScriptGeneratorBuilder : IAuditDBScriptGeneratorBuilder
         return new ReplaceDatabaseNameDecorator(context => nextMappingSettings.First().AuditDatabase, result);
     }
 
-    public bool IsFreezed { get; set; }
+    public bool IsFrozen { get; set; }
 }

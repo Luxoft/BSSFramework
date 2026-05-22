@@ -1,17 +1,19 @@
 ﻿using Framework.Application;
-using Framework.AutomationCore.ServiceEnvironment;
+using Framework.AutomationCore.Extensions;
 using Framework.Database;
 
+using Anch.Testing.Xunit;
+
 using SampleSystem.Domain;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.ServiceEnvironment.Jobs;
 
 namespace SampleSystem.IntegrationTests;
 
-public class JobTests : TestBase
+public class JobTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
-    [Fact]
-    public async Task InvokeJobs_JobObjectsCreated()
+    [AnchFact]
+    public async Task InvokeJobs_JobObjectsCreated(CancellationToken ct)
     {
         // Arrange
         var prevCount = GetJobInstanceCount();

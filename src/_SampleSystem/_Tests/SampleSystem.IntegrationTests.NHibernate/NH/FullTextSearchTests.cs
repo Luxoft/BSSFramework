@@ -1,10 +1,10 @@
 ﻿using Framework.AutomationCore.RootServiceProviderContainer;
 
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests.NH;
 
-public class FullTextSearchTests : TestBase
+public class FullTextSearchTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     /// <summary>
     /// Тест предназначен для проверки работоспособности диалекта NHibernate,

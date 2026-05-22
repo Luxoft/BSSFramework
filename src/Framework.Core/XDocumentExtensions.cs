@@ -29,21 +29,17 @@ public static class XDocumentExtensions
     {
         var xmlDocument = new XmlDocument();
 
-        using (var xmlReader = xDocument.CreateReader())
-        {
-            xmlDocument.Load(xmlReader);
-        }
+        using var xmlReader = xDocument.CreateReader();
+        xmlDocument.Load(xmlReader);
 
         return xmlDocument;
     }
 
     public static XDocument ToXDocument(this XmlDocument xmlDocument)
     {
-        using (var nodeReader = new XmlNodeReader(xmlDocument))
-        {
-            nodeReader.MoveToContent();
+        using var nodeReader = new XmlNodeReader(xmlDocument);
+        nodeReader.MoveToContent();
 
-            return XDocument.Load(nodeReader);
-        }
+        return XDocument.Load(nodeReader);
     }
 }

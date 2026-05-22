@@ -15,7 +15,7 @@ internal sealed class AuditInterceptor(IEnumerable<IAuditProperty> createAuditPr
 
     public override bool OnFlushDirty(object entity, object id, object[] currentState, object[] previousState, string[] propertyNames, IType[] types)
     {
-        bool result = false;
+        var result = false;
         if (entity is IAuditObject)
         {
             result =
@@ -29,12 +29,12 @@ internal sealed class AuditInterceptor(IEnumerable<IAuditProperty> createAuditPr
 
     public override bool OnSave(object entity, object id, object[] state, string[] propertyNames, IType[] types)
     {
-        bool result = false;
+        var result = false;
         if (entity is IAuditObject)
         {
             var domainObjectDescription = AuditPropertiesSetter.DomainObjectDescription.Get(entity.GetType(), propertyNames);
-            bool createSetterRes = this.createSetter.SetAuditFields(domainObjectDescription, ref state);
-            bool modifySetterRes = this.modifySetter.SetAuditFields(domainObjectDescription, ref state);
+            var createSetterRes = this.createSetter.SetAuditFields(domainObjectDescription, ref state);
+            var modifySetterRes = this.modifySetter.SetAuditFields(domainObjectDescription, ref state);
             result = createSetterRes | modifySetterRes;
         }
 

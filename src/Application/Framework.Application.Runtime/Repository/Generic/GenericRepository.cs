@@ -35,7 +35,7 @@ public class GenericRepository<TDomainObject, TIdent>(
         await dal.RemoveAsync(domainObject, cancellationToken);
     }
 
-    private Task CheckAccess(TDomainObject domainObject, CancellationToken cancellationToken) =>
+    private ValueTask CheckAccess(TDomainObject domainObject, CancellationToken cancellationToken) =>
         securityProvider.CheckAccessAsync(domainObject, accessDeniedExceptionService, cancellationToken);
 
     public IQueryable<TDomainObject> GetQueryable() => dal.GetQueryable().Pipe(securityProvider.Inject);

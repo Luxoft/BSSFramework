@@ -3,11 +3,11 @@ using Framework.Database;
 
 using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.ForUpdate;
-using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class TransactionFlushBeforeCommit : TestBase
+public class TransactionFlushBeforeCommit(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void ShouldNotConsiderChangesWhileTransactionIsNotCommited()

@@ -55,10 +55,7 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
         return TypeResolverHelper.Create(this.projections.ToDictionary(projection => projection, this.ProjectionTypeResolver.Resolve));
     }
 
-    public Type GetSecurityProjectionType(Type sourceType)
-    {
-        return this.ProjectionTypeResolver.Resolve(this.projections.TryGetSecurityProjection(sourceType)!);
-    }
+    public Type GetSecurityProjectionType(Type sourceType) => this.ProjectionTypeResolver.Resolve(this.projections.TryGetSecurityProjection(sourceType)!);
 
     /// <summary>
     /// Получение типа свойства из ссылки на тип

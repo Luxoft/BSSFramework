@@ -4,9 +4,11 @@ using Anch.Threading;
 
 namespace Anch.Testing;
 
-public class AsyncLazy<T>(Func<CancellationToken, Task<T>> factory)
+public class AsyncLazy<T>(Func<CancellationToken, Task<T>> factory) : IAsyncDisposable
 {
     private readonly IAsyncLocker asyncLocker = new AsyncLocker();
+
+    private bool disposed;
 
     private T? value;
 
@@ -20,7 +22,11 @@ public class AsyncLazy<T>(Func<CancellationToken, Task<T>> factory)
         {
             using (await this.asyncLocker.CreateScope(ct).ConfigureAwait(false))
             {
-                if (!this.initialized)
+                if (this.disposed)
+                {
+                    throw new ObjectDisposedException(nameof(AsyncLazy<T>));
+                }
+                else if (!this.initialized)
                 {
                     try
                     {
@@ -44,4 +50,27 @@ public class AsyncLazy<T>(Func<CancellationToken, Task<T>> factory)
     }
 
     public bool Initialized => this.initialized;
+
+    public async ValueTask DisposeAsync()
+    {
+        if (Interlocked.Exchange(ref this.disposed, true))
+        {
+            return;
+        }
+
+        using (this.asyncLocker)
+        {
+            using (await this.asyncLocker.CreateScope(CancellationToken.None).ConfigureAwait(false))
+            {
+                if (this.initialized && this.value is IAsyncDisposable asyncDisposable)
+                {
+                    await asyncDisposable.DisposeAsync().ConfigureAwait(false);
+                }
+                else if (this.initialized && this.value is IDisposable disposable)
+                {
+                    disposable.Dispose();
+                }
+            }
+        }
+    }
 }

@@ -1,7 +1,7 @@
 ﻿{
   "AutomationFrameworkSettings": {
     "DatabaseInitMode": "RebuildSnapshot",
-    "BackupPath": "/var/opt/mssql/",
+    "BackupPath": "/var/opt/mssql/data", // For Linux, use the path where SQL Server stores its data files. Adjust as necessary for your environment.
     "TestsParallelize": true
   },
 

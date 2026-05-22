@@ -1,5 +1,4 @@
 ﻿using Anch.Core;
-using Anch.Threading;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -86,13 +85,7 @@ public class ServiceProviderPool : IServiceProviderPool
         await v.ReleaseAsync(serviceProvider, ct);
     }
 
-    public async ValueTask DisposeAsync()
-    {
-        if (Interlocked.Exchange(ref this.disposed, true))
-        {
-            return;
-        }
 
-        await using (this.internalServiceProviderPool) ;
-    }
+
+    public ValueTask DisposeAsync() => this.lazyInternalServiceProviderPool.DisposeAsync();
 }

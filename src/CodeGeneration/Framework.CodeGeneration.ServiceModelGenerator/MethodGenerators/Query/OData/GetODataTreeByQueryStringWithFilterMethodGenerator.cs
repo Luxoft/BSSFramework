@@ -59,9 +59,9 @@ public class GetODataTreeByQueryStringWithFilterMethodGenerator<TConfiguration> 
 
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
     {
-        var typedFilterDeсl = this.filterType.ToTypeReference().ToVariableDeclarationStatement("typedFilter", this.Parameters[1].ToVariableReferenceExpression().ToMethodInvokeExpression(this.Configuration.Environment.ServerDTO.ToDomainObjectMethodName, evaluateDataExpr.GetMappingService()));
+        var typedFilterDecl = this.filterType.ToTypeReference().ToVariableDeclarationStatement("typedFilter", this.Parameters[1].ToVariableReferenceExpression().ToMethodInvokeExpression(this.Configuration.Environment.ServerDTO.ToDomainObjectMethodName, evaluateDataExpr.GetMappingService()));
 
-        yield return typedFilterDeсl;
+        yield return typedFilterDecl;
 
         var selectMethod = typeof(SelectOperationResultExtensions).ToTypeReferenceExpression().ToMethodReferenceExpression(nameof(SelectOperationResultExtensions.ChangeItem));
 
@@ -74,7 +74,7 @@ public class GetODataTreeByQueryStringWithFilterMethodGenerator<TConfiguration> 
         var selectOperationDecl = typeof(SelectOperation<>).ToTypeReference(this.DomainType)
                                                            .ToVariableDeclarationStatement("selectOperation", this.GetSelectOperationExpression(evaluateDataExpr));
 
-        var treeDecl = new CodeVariableDeclarationStatement("var", "odataTree", bllRefExpr.ToMethodReferenceExpression("GetTreeByOData").ToMethodInvokeExpression(selectOperationDecl.ToVariableReferenceExpression(), typedFilterDeсl.ToVariableReferenceExpression(), this.GetFetchRule()));
+        var treeDecl = new CodeVariableDeclarationStatement("var", "odataTree", bllRefExpr.ToMethodReferenceExpression("GetTreeByOData").ToMethodInvokeExpression(selectOperationDecl.ToVariableReferenceExpression(), typedFilterDecl.ToVariableReferenceExpression(), this.GetFetchRule()));
 
         yield return selectOperationDecl;
 

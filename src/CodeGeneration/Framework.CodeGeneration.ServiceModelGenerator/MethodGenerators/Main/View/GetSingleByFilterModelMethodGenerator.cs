@@ -42,11 +42,11 @@ public class GetSingleByFilterModelMethodGenerator<TConfiguration> : ViewMethodG
 
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
     {
-        var typedFilterDeсl = this.filterType.ToTypeReference().ToVariableDeclarationStatement("typedFilter", this.Parameter.ToVariableReferenceExpression().ToMethodInvokeExpression(this.Configuration.Environment.ServerDTO.ToDomainObjectMethodName, evaluateDataExpr.GetMappingService()));
+        var typedFilterDecl = this.filterType.ToTypeReference().ToVariableDeclarationStatement("typedFilter", this.Parameter.ToVariableReferenceExpression().ToMethodInvokeExpression(this.Configuration.Environment.ServerDTO.ToDomainObjectMethodName, evaluateDataExpr.GetMappingService()));
 
-        yield return typedFilterDeсl;
+        yield return typedFilterDecl;
 
-        yield return bllRefExpr.ToMethodInvokeExpression("GetObjectBy", typedFilterDeсl.ToVariableReferenceExpression(), this.GetFetchRule())
+        yield return bllRefExpr.ToMethodInvokeExpression("GetObjectBy", typedFilterDecl.ToVariableReferenceExpression(), this.GetFetchRule())
                                .Pipe(source => this.ConvertToDTO(source, evaluateDataExpr.GetMappingService()))
                                .ToMethodReturnStatement();
 

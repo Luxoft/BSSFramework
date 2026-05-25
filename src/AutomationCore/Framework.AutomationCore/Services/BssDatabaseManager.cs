@@ -10,9 +10,9 @@ public class BssDatabaseManager(
     INativeDatabaseManager nativeDatabaseManager,
     IDatabaseCatalogResolver databaseCatalogResolver) : IDatabaseManager
 {
-    public async ValueTask CreateEmpty(TestConnectionStringRole connectionStringRole, CancellationToken сancellationToken)
+    public async ValueTask CreateEmpty(TestConnectionStringRole connectionStringRole, CancellationToken cancellationToken)
     {
-        сancellationToken.ThrowIfCancellationRequested();
+        cancellationToken.ThrowIfCancellationRequested();
 
         if (!string.IsNullOrEmpty(automationFrameworkSettingsOptions.Value.BackupPath)
             && !Directory.Exists(automationFrameworkSettingsOptions.Value.BackupPath))
@@ -22,18 +22,18 @@ public class BssDatabaseManager(
 
         foreach (var initialCatalog in databaseCatalogResolver.GetCatalogs(connectionStringRole))
         {
-            await nativeDatabaseManager.CreateEmpty(initialCatalog, сancellationToken);
+            await nativeDatabaseManager.CreateEmpty(initialCatalog, cancellationToken);
         }
     }
 
-    public ValueTask<bool> Exists(TestConnectionStringRole connectionStringRole, CancellationToken сancellationToken) =>
-        databaseCatalogResolver.GetCatalogs(connectionStringRole).ToAsyncEnumerable().AllAsync(nativeDatabaseManager.Exists, сancellationToken);
+    public ValueTask<bool> Exists(TestConnectionStringRole connectionStringRole, CancellationToken cancellationToken) =>
+        databaseCatalogResolver.GetCatalogs(connectionStringRole).ToAsyncEnumerable().AllAsync(nativeDatabaseManager.Exists, cancellationToken);
 
-    public async ValueTask Remove(TestConnectionStringRole connectionStringRole, CancellationToken сancellationToken)
+    public async ValueTask Remove(TestConnectionStringRole connectionStringRole, CancellationToken cancellationToken)
     {
         foreach (var initialCatalog in databaseCatalogResolver.GetCatalogs(connectionStringRole))
         {
-            await nativeDatabaseManager.Remove(initialCatalog, сancellationToken);
+            await nativeDatabaseManager.Remove(initialCatalog, cancellationToken);
         }
     }
 

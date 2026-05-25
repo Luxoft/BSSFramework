@@ -3,6 +3,7 @@ using Framework.Database.NHibernate.DBGenerator;
 
 
 using SampleSystem.DbGenerate.NHibernate;
+using SampleSystem.IntegrationTests._Environment;
 using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests.DBGeneration;
@@ -19,9 +20,7 @@ public class GenerateDBTests(IServiceProvider rootServiceProvider) : TestBase(ro
         var ex = Record.Exception(() => generator.GenerateAllDB(
                                       this.ActualConnectionString.DataSource,
                                       this.ActualConnectionString.InitialCatalog,
-                                      credential: DbUserCredential.Create(
-                                          this.ActualConnectionString.UserId,
-                                          this.ActualConnectionString.Password)));
+                                      credential: this.ActualConnectionString.TryGetDbUserCredential()));
 
         // Assert
         Assert.Null(ex);

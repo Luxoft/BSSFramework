@@ -59,7 +59,7 @@ public class PrincipalWithInitTests(IServiceProvider rootServiceProvider) : Test
         var expectedErrorMessage = $"Principal \"{TestPrincipalName}\" has duplicate permissions";
 
         // Act
-        var call = () =>
+        var ex = Record.Exception(() =>
                    {
                        this.Evaluate(
                            DBSessionMode.Write,
@@ -99,10 +99,9 @@ public class PrincipalWithInitTests(IServiceProvider rootServiceProvider) : Test
                                }
 
                            });
-                   };
+                   });
 
         // Assert
-        var ex = Record.Exception(() => call());
         var validationException = Assert.IsType<SecuritySystemValidationException>(ex);
         Assert.Contains(expectedErrorMessage, validationException.Message);
     }

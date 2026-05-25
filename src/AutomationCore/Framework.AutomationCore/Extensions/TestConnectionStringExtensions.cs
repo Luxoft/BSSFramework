@@ -7,8 +7,6 @@ public static class TestConnectionStringExtensions
 {
     extension(TestConnectionString connectionString)
     {
-        public bool IsLocalDb => connectionString.DataSource.StartsWith("(localdb)\\", StringComparison.OrdinalIgnoreCase);
-
         public string UserId => connectionString.GetFromBuilder(v => v.UserID);
 
         public string Password => connectionString.GetFromBuilder(v => v.Password);
@@ -20,5 +18,15 @@ public static class TestConnectionStringExtensions
         private T GetFromBuilder<T>(Func<SqlConnectionStringBuilder, T> selector) => selector(connectionString.GetSqlConnectionStringBuilder());
 
         private SqlConnectionStringBuilder GetSqlConnectionStringBuilder() => new(connectionString.Value);
+
+        public string? TryGetLocalDbInstanceName()
+        {
+            const string prefix = "(localdb)\\";
+            var src = connectionString.DataSource;
+
+            return src.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)
+                       ? src[prefix.Length..]
+                       : null;
+        }
     }
 }

@@ -4,6 +4,7 @@ using Framework.Database.NHibernate.DBGenerator;
 using Microsoft.SqlServer.Management.Smo;
 
 using SampleSystem.DbGenerate.NHibernate;
+using SampleSystem.IntegrationTests._Environment;
 using SampleSystem.IntegrationTests._Environment.TestData;
 
 using Index = Microsoft.SqlServer.Management.Smo.Index;
@@ -39,9 +40,7 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
         generator.GenerateAllDB(
             this.ActualConnectionString.DataSource,
             this.ActualConnectionString.InitialCatalog,
-            credential: DbUserCredential.Create(
-                this.ActualConnectionString.UserId,
-                this.ActualConnectionString.Password),
+            credential: this.ActualConnectionString.TryGetDbUserCredential(),
             skipFrameworkDatabases: true);
 
         var changedTable = this.DataManager.GetTable(this.ActualConnectionString.InitialCatalog, tableName);
@@ -70,9 +69,7 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
         generator.GenerateAllDB(
             this.ActualConnectionString.DataSource,
             this.ActualConnectionString.InitialCatalog,
-            credential: DbUserCredential.Create(
-                this.ActualConnectionString.UserId,
-                this.ActualConnectionString.Password),
+            credential: this.ActualConnectionString.TryGetDbUserCredential(),
             ignoredIndexes: [ignoredIndexName],
             skipFrameworkDatabases: true);
         var changedTable = this.DataManager.GetTable(this.ActualConnectionString.InitialCatalog, tableName);
@@ -91,9 +88,7 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
         generator.GenerateAllDB(
             this.ActualConnectionString.DataSource,
             this.ActualConnectionString.InitialCatalog,
-            credential: DbUserCredential.Create(
-                this.ActualConnectionString.UserId,
-                this.ActualConnectionString.Password),
+            credential: this.ActualConnectionString.TryGetDbUserCredential(),
             skipFrameworkDatabases: true);
 
         var changedTable = this.DataManager.GetTable(this.ActualConnectionString.InitialCatalog, "Employee");

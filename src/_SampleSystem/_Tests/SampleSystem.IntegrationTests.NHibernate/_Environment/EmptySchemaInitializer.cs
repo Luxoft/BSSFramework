@@ -18,9 +18,8 @@ public class EmptySchemaInitializer(IActualTestConnectionStringSource actualTest
         generator.GenerateAllDB(
             actualTestConnectionStringSource.ActualConnectionString.DataSource,
             actualTestConnectionStringSource.ActualConnectionString.InitialCatalog,
-            credential: DbUserCredential.Create(
-                actualTestConnectionStringSource.ActualConnectionString.UserId,
-                actualTestConnectionStringSource.ActualConnectionString.Password));
+
+            credential: actualTestConnectionStringSource.ActualConnectionString.TryGetDbUserCredential());
 
         await actualTestConnectionStringSource.ActualConnectionString.ExecuteSqlFromFolderAsync("__Support/Scripts/Authorization", cancellationToken);
         await actualTestConnectionStringSource.ActualConnectionString.ExecuteSqlFromFolderAsync("__Support/Scripts/Configuration", cancellationToken);

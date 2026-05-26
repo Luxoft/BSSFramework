@@ -47,8 +47,6 @@ public class NHibTestEnvironment : BssTestEnvironment
 
                 .AddSingleton<SampleSystemInitializer>()
 
-                .AddIntegrationTests()
-
                 .AddScoped<IIntegrationEventPublisher, TestIntegrationEventPublisher>()
 
                 .AddSingleton(new JobImpersonateData("sampleSystemTestJob"))

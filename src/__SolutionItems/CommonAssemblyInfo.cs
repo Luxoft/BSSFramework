@@ -4,7 +4,7 @@
 [assembly: AssemblyCompany("Luxoft")]
 [assembly: AssemblyCopyright("Copyright © Luxoft 2009-2026")]
 
-[assembly: AssemblyVersion("27.2.3.0")]
+[assembly: AssemblyVersion("27.2.4.0")]
 
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]

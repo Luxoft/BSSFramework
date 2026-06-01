@@ -12,7 +12,7 @@ public class AutomationFrameworkSettings
 
     public string DatabaseCollation { get; set; } = "";
 
-    public string BackupPath { get; set; } = null!;
+    public string BackupPath { get; set; } = "";
 
     public string[] SecondaryDatabases { get; set; } = [];
 

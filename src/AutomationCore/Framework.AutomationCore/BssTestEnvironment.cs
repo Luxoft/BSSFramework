@@ -1,4 +1,5 @@
 ﻿using Anch.Core;
+using Anch.DependencyInjection;
 using Anch.Testing;
 using Anch.Testing.Database;
 using Anch.Testing.Database.Configuration;
@@ -43,12 +44,14 @@ public abstract class BssTestEnvironment : ConfigurationTestEnvironment
         services.AddOptions<AutomationFrameworkSettings>().Bind(actualConfiguration.GetSection(nameof(AutomationFrameworkSettings)));
 
         return services
-               .AddSingleton<ITestEnvironment>(this)
                .AddEnvironmentHook<BssCleanupTestEnvironmentHook>(EnvironmentHookType.After)
                .Self(v => this.InitializeServices(v, actualConfiguration))
                .AddIntegrationTests(this.SetupSettings)
-               .Pipe(this.InternalBuildServiceProvider);
+               .Pipe(v => this.InternalBuildServiceProvider(v, actualConfiguration));
     }
 
-    protected virtual IServiceProvider InternalBuildServiceProvider(IServiceCollection services) => services.BuildDefaultServiceProvider();
+    protected virtual IServiceProvider InternalBuildServiceProvider(IServiceCollection services, IConfiguration actualConfiguration) =>
+        services.AddValidator<DuplicateServiceUsageValidator>()
+                .Validate()
+                .BuildServiceProvider(new ServiceProviderOptions { ValidateScopes = true, ValidateOnBuild = true });
 }

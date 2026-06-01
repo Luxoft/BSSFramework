@@ -66,10 +66,5 @@ public static class ServiceCollectionExtensions
                                                                                         .Pipe(options => new TestRootUserInfo(
                                                                                                   options.Value.IntegrationTestUserName))));
         }
-
-        public IServiceProvider BuildDefaultServiceProvider() =>
-            services.AddValidator<DuplicateServiceUsageValidator>()
-                    .Validate()
-                    .BuildServiceProvider(new ServiceProviderOptions { ValidateScopes = true, ValidateOnBuild = true });
     }
 }

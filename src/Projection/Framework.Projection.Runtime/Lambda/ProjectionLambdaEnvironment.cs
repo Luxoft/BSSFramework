@@ -42,8 +42,8 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
 
         this.projections =
         [
-            ..projectionSource.Pipe(v => new ExpandPathProjectionSource(this, v))
-                              .Pipe(v => new LinkAllProjectionSource(v))
+            ..projectionSource.Pipe(v => new LinkAllProjectionSource(v))
+                              .Pipe(v => new ExpandPathProjectionSource(this, v))
                               .Pipe(v => new VerifyUniqueProjectionSource(v))
                               .Pipe(v => this.UseDependencySecurity ? (IProjectionSource)v : new CreateSecurityNodesProjectionSource(this, v))
                               .Pipe(v => new CreateAutoNodesProjectionSource(this, v))

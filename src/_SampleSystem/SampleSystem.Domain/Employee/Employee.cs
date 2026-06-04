@@ -261,6 +261,9 @@ public partial class Employee :
     ////    set { this.address = value; }
     ////}
 
+    [ExpandPath("CoreBusinessUnit.Period")]
+    public virtual Period BuPeriod => this.CoreBusinessUnit.Maybe(v => v.Period);
+
     [ExpandPath("HRDepartment.Location")]
     public virtual Location Location => this.HRDepartment?.Location;
 

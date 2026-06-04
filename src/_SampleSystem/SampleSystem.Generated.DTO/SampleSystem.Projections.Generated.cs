@@ -346,6 +346,46 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.EmployeeWithBuPeriod), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class EmployeeWithBuPeriodProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>
+    {
+        
+        private Framework.Core.Period? _buPeriod;
+        
+        public EmployeeWithBuPeriodProjectionDTO()
+        {
+        }
+        
+        public EmployeeWithBuPeriodProjectionDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Projections.EmployeeWithBuPeriod domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapEmployeeWithBuPeriod(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period? BuPeriod
+        {
+            get
+            {
+                return this._buPeriod;
+            }
+            set
+            {
+                this._buPeriod = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.IgnoreDataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.EmployeeIdentityDTO(this.Id);
+            }
+        }
+    }
+    
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Projections.HerBusinessUnit), "ProjectionDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class HerBusinessUnitProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitIdentityDTO>
@@ -534,6 +574,8 @@ namespace SampleSystem.Generated.DTO
         
         private string _name;
         
+        private Framework.Core.Period? _parentPeriod;
+        
         private System.DateTime? _parentPeriodStartDate;
         
         private System.DateTime? _periodEndDate;
@@ -632,6 +674,19 @@ namespace SampleSystem.Generated.DTO
             set
             {
                 this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period? ParentPeriod
+        {
+            get
+            {
+                return this._parentPeriod;
+            }
+            set
+            {
+                this._parentPeriod = value;
             }
         }
         

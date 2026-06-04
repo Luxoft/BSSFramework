@@ -18,39 +18,35 @@ using Framework.Projection;
 namespace Framework.CodeGeneration.ProjectionGenerator.FileFactory;
 
 public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfiguration, FileType>
-        where TConfiguration : class, IProjectionGeneratorConfiguration<IProjectionGenerationEnvironment>
+    where TConfiguration : class, IProjectionGeneratorConfiguration<IProjectionGenerationEnvironment>
 {
     private readonly bool isPersistent;
 
     private readonly Type sourceType;
 
-    private readonly Type contractType;
+    private readonly Type? contractType;
 
     public ProjectionFileFactory(TConfiguration configuration, Type domainType)
-            : base(configuration, domainType)
+        : base(configuration, domainType)
     {
-        this.sourceType = this.DomainType.GetProjectionSourceType();
+        this.sourceType = this.DomainType!.GetProjectionSourceType()!;
 
-        this.contractType = this.DomainType.GetProjectionContractType();
+        this.contractType = this.DomainType!.GetProjectionContractType();
 
-        this.isPersistent = this.Configuration.IsPersistentObject(this.DomainType);
+        this.isPersistent = this.Configuration.IsPersistentObject(this.DomainType!);
     }
 
 
     public override FileType FileType { get; } = FileType.Projection;
 
-    public override CodeTypeReference BaseReference => this.Configuration.Environment.HasCustomProjectionProperties(this.DomainType)
-                                                               ? this.Configuration.GetCodeTypeReference(this.DomainType, FileType.CustomProjectionBase)
-                                                               : this.DomainType.BaseType.ToTypeReference(); //this.Configuration.Environment.GetProjectionBaseType(this.DomainType).ToTypeReference();
+    public override CodeTypeReference BaseReference => this.Configuration.Environment.HasCustomProjectionProperties(this.DomainType!)
+                                                           ? this.Configuration.GetCodeTypeReference(this.DomainType, FileType.CustomProjectionBase)
+                                                           : this.DomainType!.BaseType!
+                                                                 .ToTypeReference(); //this.Configuration.Environment.GetProjectionBaseType(this.DomainType).ToTypeReference();
 
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration() =>
-        new()
-        {
-            Name = this.Name,
-            TypeAttributes = TypeAttributes.Public,
-            IsPartial = true,
-        };
+        new() { Name = this.Name, TypeAttributes = TypeAttributes.Public, IsPartial = true, };
 
     protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {
@@ -59,15 +55,16 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
             yield return baseType;
         }
 
-        foreach (var @interface in this.DomainType.GetInterfaces().Except(this.DomainType.BaseType.GetInterfaces()))
+        foreach (var @interface in this.DomainType!.GetInterfaces().Except(this.DomainType!.BaseType!.GetInterfaces()))
         {
             yield return @interface.ToTypeReference();
         }
     }
 
-    protected override IEnumerable<CodeAttributeDeclaration> GetCustomAttributes() => this.Configuration.GetDomainTypeAttributeDeclarations(this.DomainType);
+    protected override IEnumerable<CodeAttributeDeclaration> GetCustomAttributes() => this.Configuration.GetDomainTypeAttributeDeclarations(this.DomainType!);
 
-    private IEnumerable<PropertyInfo> GetProperties(bool includeBase) => this.Configuration.Environment.GetProjectionProperties(this.DomainType, includeBase, false);
+    private IEnumerable<PropertyInfo> GetProperties(bool includeBase) =>
+        this.Configuration.Environment.GetProjectionProperties(this.DomainType!, includeBase, false);
 
     protected override IEnumerable<CodeTypeMember> GetMembers()
     {
@@ -86,13 +83,10 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
             {
                 var genProp = new CodeMemberProperty
                               {
-                                      Name = property.Name,
-
-                                      Type = propertyTypeRef,
-
-                                      Attributes = MemberAttributes.Public | MemberAttributes.Override,
-
-                                      GetStatements = { new CodeBaseReferenceExpression().ToPropertyReference(property).ToMethodReturnStatement() }
+                                  Name = property.Name,
+                                  Type = propertyTypeRef,
+                                  Attributes = MemberAttributes.Public | MemberAttributes.Override,
+                                  GetStatements = { new CodeBaseReferenceExpression().ToPropertyReference(property).ToMethodReturnStatement() }
                               };
 
                 genProp.CustomAttributes.AddRange(attributes);
@@ -109,31 +103,27 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
             }
             else
             {
-                var fieldType = property.PropertyType.IsCollection() ? typeof(ICollection<>).MakeGenericType(property.PropertyType.GetCollectionElementType()) : property.PropertyType;
+                var fieldType = property.PropertyType.IsCollection()
+                                    ? typeof(ICollection<>).MakeGenericType(property.PropertyType.GetCollectionElementType()!)
+                                    : property.PropertyType;
 
-                var genField = new CodeMemberField
-                               {
-                                       Name = property.Name.ToStartLowerCase(),
-
-                                       Type = fieldType.ToTypeReference()
-                               };
+                var genField = new CodeMemberField { Name = property.Name.ToStartLowerCase(), Type = fieldType.ToTypeReference() };
 
                 var genProp = new CodeMemberProperty
                               {
-                                      Name = property.Name,
-
-                                      Type = propertyTypeRef,
-
-                                      Attributes = MemberAttributes.Public,
-
-                                      GetStatements = { new CodeThisReferenceExpression().ToFieldReference(genField).ToMethodReturnStatement() }
+                                  Name = property.Name,
+                                  Type = propertyTypeRef,
+                                  Attributes = MemberAttributes.Public,
+                                  GetStatements = { new CodeThisReferenceExpression().ToFieldReference(genField).ToMethodReturnStatement() }
                               };
 
                 genProp.CustomAttributes.AddRange(attributes);
 
-                if (this.Configuration.Environment.MetadataProxyProvider.Wrap(property).HasAttribute<MappingAttribute>(mappingAttr => mappingAttr.IsOneToOne) && this.Configuration.OneToOneSetter)
+                if (this.Configuration.Environment.MetadataProxyProvider.Wrap(property).HasAttribute<MappingAttribute>(mappingAttr => mappingAttr.IsOneToOne)
+                    && this.Configuration.OneToOneSetter)
                 {
-                    genProp.SetStatements.Add(new CodePropertySetValueReferenceExpression().ToAssignStatement(new CodeThisReferenceExpression().ToFieldReference(genField)));
+                    genProp.SetStatements.Add(
+                        new CodePropertySetValueReferenceExpression().ToAssignStatement(new CodeThisReferenceExpression().ToFieldReference(genField)));
                 }
 
                 yield return genField;
@@ -142,13 +132,13 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
             }
         }
 
-        foreach (var interfaceType in this.DomainType.GetInterfaces())
+        foreach (var interfaceType in this.DomainType!.GetInterfaces())
         {
             var reverseInterfaceMap = this.DomainType.GetInterfaceMapDictionary(interfaceType);
 
             foreach (var privateProperty in this.DomainType.GetProperties(BindingFlags.Instance | BindingFlags.NonPublic))
             {
-                if (reverseInterfaceMap.ContainsValue(privateProperty.GetMethod))
+                if (reverseInterfaceMap.ContainsValue(privateProperty.GetMethod!))
                 {
                     var genProp = this.CreateExpandProperty(privateProperty, true);
 
@@ -164,48 +154,49 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
-        var expandPathAttr = property.GetCustomAttribute<ExpandPathAttribute>();
+        var expandPathAttr = property.GetCustomAttribute<ExpandPathAttribute>()!;
 
         var propertyPath = this.Configuration.Environment.PropertyPathService.TryGetExpandPath(property)!;
 
         var getExpr = propertyPath.Aggregate(
 
-                                             new { Expression = (CodeExpression)new CodeThisReferenceExpression(), IsRef = false },
+            new { Expression = (CodeExpression)new CodeThisReferenceExpression(), IsRef = false },
 
-                                             (state, propNode) =>
-                                             {
-                                                 if (state.IsRef)
-                                                 {
-                                                     return new { Expression = (CodeExpression)state.Expression.ToMaybePropertyReference(propNode), IsRef = true };
-                                                 }
-                                                 else
-                                                 {
-                                                     return new { Expression = (CodeExpression)state.Expression.ToPropertyReference(propNode), IsRef = propNode.PropertyType.IsNullable() || propNode.PropertyType.IsClass };
-                                                 }
-                                             },
-                                             state =>
-                                             {
-                                                 if (propertyPath.Count > 1 && property.PropertyType.IsCollection())
-                                                 {
-                                                     return typeof(Anch.Core.EnumerableExtensions)
-                                                            .ToTypeReferenceExpression()
-                                                            .ToMethodInvokeExpression("EmptyIfNull", state.Expression);
-                                                 }
-                                                 else
-                                                 {
-                                                     return state.Expression;
-                                                 }
-                                             });
+            (state, propNode) =>
+            {
+                if (state.IsRef)
+                {
+                    return new { Expression = (CodeExpression)state.Expression.ToMaybePropertyReference(propNode), IsRef = true };
+                }
+                else
+                {
+                    return new
+                           {
+                               Expression = (CodeExpression)state.Expression.ToPropertyReference(propNode),
+                               IsRef = propNode.PropertyType.IsNullable() || propNode.PropertyType.IsClass
+                           };
+                }
+            },
+            state =>
+            {
+                if (propertyPath.Count > 1 && property.PropertyType.IsCollection())
+                {
+                    return typeof(Anch.Core.EnumerableExtensions)
+                           .ToTypeReferenceExpression()
+                           .ToMethodInvokeExpression("EmptyIfNull", state.Expression);
+                }
+                else
+                {
+                    return state.Expression;
+                }
+            });
 
         var prop = new CodeMemberProperty
                    {
-                           Name = property.Name,
-
-                           Type = property.PropertyType.ToTypeReference(),
-
-                           Attributes = MemberAttributes.Public,
-
-                           GetStatements = { getExpr.ToMethodReturnStatement() },
+                       Name = property.Name,
+                       Type = property.PropertyType.ToTypeReference(),
+                       Attributes = MemberAttributes.Public,
+                       GetStatements = { getExpr.ToMethodReturnStatement() },
                    };
 
         if (withAttr)
@@ -219,10 +210,7 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
 
     protected override IEnumerable<CodeConstructor> GetConstructors()
     {
-        yield return new CodeConstructor
-                     {
-                             Attributes = this.Configuration.GeneratePublicCtors ? MemberAttributes.Public : MemberAttributes.Family
-                     };
+        yield return new CodeConstructor { Attributes = this.Configuration.GeneratePublicCtors ? MemberAttributes.Public : MemberAttributes.Family };
 
         if (this.contractType != null)
         {
@@ -232,21 +220,18 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
 
     private CodeConstructor GetSourceConstructor()
     {
-        var parameter = this.contractType.ToTypeReference().ToParameterDeclarationExpression("source");
+        var parameter = this.contractType!.ToTypeReference().ToParameterDeclarationExpression("source");
         var parameterVar = parameter.ToVariableReferenceExpression();
 
-        return new CodeConstructor
-               {
-                       Attributes = MemberAttributes.Public,
-                       Parameters = { parameter }
-               }.WithStatements(this.GetSourceConstructorStatements(parameterVar));
+        return new CodeConstructor { Attributes = MemberAttributes.Public, Parameters = { parameter } }.WithStatements(
+            this.GetSourceConstructorStatements(parameterVar));
     }
 
     private IEnumerable<CodeStatement> GetSourceConstructorStatements(CodeExpression sourceExpr)
     {
         var targetExpr = new CodeThisReferenceExpression();
 
-        var baseProperties = this.contractType.GetAllInterfaceProperties();
+        var baseProperties = this.contractType!.GetAllInterfaceProperties();
 
         var basePropertiesDict = baseProperties.ToDictionary(p => p.Name);
 
@@ -261,21 +246,24 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
                 var sourcePropExpr = sourceExpr.ToPropertyReference(sourceProp);
 
 
-                var targetMemberExpr = targetProp.ReflectedType == this.DomainType ? (CodeExpression)targetExpr.ToFieldReference(targetProp.Name.ToStartLowerCase())
-                                               : targetExpr.ToPropertyReference(targetProp);
+                var targetMemberExpr = targetProp.ReflectedType == this.DomainType
+                                           ? (CodeExpression)targetExpr.ToFieldReference(targetProp.Name.ToStartLowerCase())
+                                           : targetExpr.ToPropertyReference(targetProp);
 
                 if (sourceProp.PropertyType != targetProp.PropertyType)
                 {
-                    if (sourceProp.PropertyType.IsCollection())
+                    if (targetProp.PropertyType.GetCollectionElementType() is { } elementType)
                     {
-                        var elementType = targetProp.PropertyType.GetCollectionElementType();
-
-                        var lambda = new CodeParameterDeclarationExpression { Name = "v" }.Pipe(param => new CodeLambdaExpression
-                            {
-                                    Parameters = { param },
-
-                                    Statements = { elementType.ToTypeReference().ToObjectCreateExpression(param.ToVariableReferenceExpression()).ToMethodReturnStatement() }
-                            });
+                        var lambda = new CodeParameterDeclarationExpression { Name = "v" }
+                            .Pipe(param => new CodeLambdaExpression
+                                           {
+                                               Parameters = { param },
+                                               Statements =
+                                               {
+                                                   elementType.ToTypeReference().ToObjectCreateExpression(param.ToVariableReferenceExpression())
+                                                              .ToMethodReturnStatement()
+                                               }
+                                           });
 
                         yield return typeof(CoreEnumerableExtensions)
                                      .ToTypeReferenceExpression()
@@ -286,10 +274,11 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
                     {
                         yield return new CodeNotNullConditionStatement(sourcePropExpr)
                                      {
-                                             TrueStatements =
-                                             {
-                                                     targetProp.PropertyType.ToTypeReference().ToObjectCreateExpression(sourcePropExpr).ToAssignStatement(targetMemberExpr)
-                                             }
+                                         TrueStatements =
+                                         {
+                                             targetProp.PropertyType.ToTypeReference().ToObjectCreateExpression(sourcePropExpr)
+                                                       .ToAssignStatement(targetMemberExpr)
+                                         }
                                      };
                     }
                 }

@@ -412,6 +412,8 @@ namespace SampleSystem.Generated.DTO
         
         void MapEmployeeToEmployeeLink(SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink domainObject, SampleSystem.Generated.DTO.EmployeeToEmployeeLinkEventRichDTO mappingObject);
         
+        void MapEmployeeWithBuPeriod(SampleSystem.Domain.Projections.EmployeeWithBuPeriod domainObject, SampleSystem.Generated.DTO.EmployeeWithBuPeriodProjectionDTO mappingObject);
+        
         void MapExample1(SampleSystem.Domain.ForUpdate.Example1 domainObject, SampleSystem.Generated.DTO.Example1SimpleDTO mappingObject);
         
         void MapExample1(SampleSystem.Domain.ForUpdate.Example1 domainObject, SampleSystem.Generated.DTO.Example1FullDTO mappingObject);
@@ -2774,6 +2776,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.AccountName = domainObject.AccountName;
             mappingObject.Age = domainObject.Age;
             mappingObject.BirthDate = domainObject.BirthDate;
+            mappingObject.BuPeriod = domainObject.BuPeriod;
             mappingObject.CanBePPM = domainObject.CanBePPM;
             mappingObject.CellPhone = domainObject.CellPhone;
             mappingObject.CoreBusinessUnitPeriod = domainObject.CoreBusinessUnitPeriod;
@@ -3238,6 +3241,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Active = domainObject.Active;
             mappingObject.Age = domainObject.Age;
             mappingObject.BirthDate = domainObject.BirthDate;
+            mappingObject.BuPeriod = domainObject.BuPeriod;
             mappingObject.CanBePPM = domainObject.CanBePPM;
             mappingObject.CellPhone = domainObject.CellPhone;
             mappingObject.CellPhones = SampleSystem.Generated.DTO.LambdaHelper.ToRichIntegrationDTOList(domainObject.CellPhones, this);
@@ -3458,6 +3462,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Active = domainObject.Active;
             mappingObject.Age = domainObject.Age;
             mappingObject.BirthDate = domainObject.BirthDate;
+            mappingObject.BuPeriod = domainObject.BuPeriod;
             mappingObject.CanBePPM = domainObject.CanBePPM;
             mappingObject.CellPhone = domainObject.CellPhone;
             mappingObject.CoreBusinessUnitPeriod = domainObject.CoreBusinessUnitPeriod;
@@ -3519,6 +3524,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Active = domainObject.Active;
             mappingObject.Age = domainObject.Age;
             mappingObject.BirthDate = domainObject.BirthDate;
+            mappingObject.BuPeriod = domainObject.BuPeriod;
             mappingObject.CanBePPM = domainObject.CanBePPM;
             mappingObject.CellPhone = domainObject.CellPhone;
             mappingObject.CellPhones = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTOList(domainObject.CellPhones, this);
@@ -3657,6 +3663,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Active = domainObject.Active;
             mappingObject.Age = domainObject.Age;
             mappingObject.BirthDate = domainObject.BirthDate;
+            mappingObject.BuPeriod = domainObject.BuPeriod;
             mappingObject.CanBePPM = domainObject.CanBePPM;
             mappingObject.CellPhone = domainObject.CellPhone;
             mappingObject.CoreBusinessUnitPeriod = domainObject.CoreBusinessUnitPeriod;
@@ -4731,6 +4738,11 @@ namespace SampleSystem.Generated.DTO
                 mappingObject.Owner = null;
             }
             mappingObject.Version = domainObject.Version;
+        }
+        
+        public virtual void MapEmployeeWithBuPeriod(SampleSystem.Domain.Projections.EmployeeWithBuPeriod domainObject, SampleSystem.Generated.DTO.EmployeeWithBuPeriodProjectionDTO mappingObject)
+        {
+            mappingObject.BuPeriod = domainObject.BuPeriod;
         }
         
         public virtual void MapExample1(SampleSystem.Domain.ForUpdate.Example1 domainObject, SampleSystem.Generated.DTO.Example1SimpleDTO mappingObject)
@@ -6635,6 +6647,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Employees = domainObject.Employees;
             mappingObject.HerBusinessUnit_Full = domainObject.HerBusinessUnit_Full;
             mappingObject.Name = domainObject.Name;
+            mappingObject.ParentPeriod = domainObject.ParentPeriod;
             mappingObject.ParentPeriodStartDate = domainObject.ParentPeriodStartDate;
             mappingObject.PeriodEndDate = domainObject.PeriodEndDate;
         }

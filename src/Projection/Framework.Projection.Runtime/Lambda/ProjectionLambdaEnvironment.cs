@@ -42,14 +42,15 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
 
         this.projections =
         [
-            ..projectionSource.Pipe(v => new LinkAllProjectionSource(v))
-                              .Pipe(v => new ExpandPathProjectionSource(this, v))
-                              .Pipe(v => new VerifyUniqueProjectionSource(v))
-                              .Pipe(v => this.UseDependencySecurity ? (IProjectionSource)v : new CreateSecurityNodesProjectionSource(this, v))
-                              .Pipe(v => new CreateAutoNodesProjectionSource(this, v))
-                              .Pipe(v => new InjectMissedParentsProjectionSource(this, v))
-                              .Pipe(v => new InjectAttributesProjectionSource(this, v))
-                              .GetProjections()
+            ..projectionSource
+              .Pipe(v => new LinkAllProjectionSource(v))
+              .Pipe(v => new ExpandPathProjectionSource(this, v))
+              .Pipe(v => new VerifyUniqueProjectionSource(v))
+              .Pipe(v => this.UseDependencySecurity ? (IProjectionSource)v : new CreateSecurityNodesProjectionSource(this, v))
+              .Pipe(v => new CreateAutoNodesProjectionSource(this, v))
+              .Pipe(v => new InjectMissedParentsProjectionSource(this, v))
+              .Pipe(v => new InjectAttributesProjectionSource(this, v))
+              .GetProjections()
         ];
 
         return TypeResolverHelper.Create(this.projections.ToDictionary(projection => projection, this.ProjectionTypeResolver.Resolve));
@@ -108,6 +109,11 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
         if (typeReferenceBase == null) throw new ArgumentNullException(nameof(typeReferenceBase));
         if (generatedProjection == null) throw new ArgumentNullException(nameof(generatedProjection));
         if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
+
+        if (propertyName == "BuPeriod")
+        {
+
+        }
 
         try
         {

@@ -50,7 +50,7 @@ internal class ProjectionPropertyBuilder : IProjectionProperty
 
     public bool IsCollection => this.CollectionType != null;
 
-    public bool IsNullable { get; }
+    public bool IsNullable { get; set; }
 
     public Type ElementType { get; }
 

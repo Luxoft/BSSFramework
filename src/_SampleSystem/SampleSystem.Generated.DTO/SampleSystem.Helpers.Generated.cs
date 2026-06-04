@@ -1401,6 +1401,11 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.CustomTestObjForNestedProjectionDTO(mappingService, domainObject);
         }
         
+        public static SampleSystem.Generated.DTO.EmployeeWithBuPeriodProjectionDTO ToProjectionDTO(this SampleSystem.Domain.Projections.EmployeeWithBuPeriod domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return new SampleSystem.Generated.DTO.EmployeeWithBuPeriodProjectionDTO(mappingService, domainObject);
+        }
+        
         public static SampleSystem.Generated.DTO.HerBusinessUnitProjectionDTO ToProjectionDTO(this SampleSystem.Domain.Projections.HerBusinessUnit domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return new SampleSystem.Generated.DTO.HerBusinessUnitProjectionDTO(mappingService, domainObject);
@@ -1502,6 +1507,11 @@ namespace SampleSystem.Generated.DTO
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.CustomTestObjForNestedProjectionDTO> ToProjectionDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Projections.CustomTestObjForNested> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeWithBuPeriodProjectionDTO> ToProjectionDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Projections.EmployeeWithBuPeriod> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTO(domainObject, mappingService));
         }

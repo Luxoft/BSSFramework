@@ -50,6 +50,8 @@ public class SampleSystemProjectionSource : ProjectionSource
 
                                 .Property(bu => bu.Parent.Period.StartDate)
 
+                                .Property(bu => bu.Parent.Period)
+
                                 .Property(bu => bu, () => this.HerBusinessUnit, "Her", ignoreSerialization: true)
                                 .CustomProperty<string>("HerBusinessUnit_Full") // Расчётное свойство типа "string"
 
@@ -152,6 +154,8 @@ public class SampleSystemProjectionSource : ProjectionSource
         this.TestCustomContextSecurityObjProjection =
             new Projection<TestCustomContextSecurityObj>(() => this.TestCustomContextSecurityObjProjection, true)
                 .Property(item => item.Name);
+
+        this.EmployeeWithBuPeriod = new Projection<Employee>(nameof(this.EmployeeWithBuPeriod)).Property(e => e.BuPeriod);
     }
 
     public Projection<TestCustomContextSecurityObj> TestCustomContextSecurityObjProjection { get; }
@@ -159,6 +163,8 @@ public class SampleSystemProjectionSource : ProjectionSource
     public Projection<BusinessUnit> BusinessUnitProgramClass { get; }
 
     public Projection<Employee> TestEmployee { get; }
+
+    public Projection<Employee> EmployeeWithBuPeriod { get; }
 
     public Projection<IMRequest> TestIMRequest { get; }
 

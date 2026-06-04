@@ -44,6 +44,21 @@
       <property name="PeriodStartDateXXX" column="periodStartDate" type="timestamp" insert="false" update="false" access="field.camelcase" />
     </join>
   </class>
+  <class name="SampleSystem.Domain.Projections.EmployeeWithBuPeriod" table="Employee">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <many-to-one name="CoreBusinessUnit_Auto" column="coreBusinessUnitId" class="SampleSystem.Domain.Projections.EmployeeWithBuPeriod_AutoProp_CoreBusinessUnit" access="field.camelcase" insert="false" update="false" />
+  </class>
+  <class name="SampleSystem.Domain.Projections.EmployeeWithBuPeriod_AutoProp_CoreBusinessUnit" table="BusinessUnit">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <component name="Period_Last_BuPeriod" class="Framework.Core.Period, Framework.Core" access="field.camelcase">
+      <property name="EndDate" column="periodendDate" access="field.camelcase" type="timestamp" />
+      <property name="StartDate" column="periodstartDate" access="field.camelcase" type="timestamp" />
+    </component>
+  </class>
   <class name="SampleSystem.Domain.Projections.HerBusinessUnit" table="BusinessUnit">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
@@ -76,6 +91,10 @@
       <generator class="guid.comb" />
     </id>
     <property name="PeriodStartDate_Last_ParentPeriodStartDate" column="periodStartDate" type="timestamp" insert="false" update="false" access="field.camelcase" />
+    <component name="Period_Last_ParentPeriod" class="Framework.Core.Period, Framework.Core" access="field.camelcase">
+      <property name="EndDate" column="periodendDate" access="field.camelcase" type="timestamp" />
+      <property name="StartDate" column="periodstartDate" access="field.camelcase" type="timestamp" />
+    </component>
   </class>
   <class name="SampleSystem.Domain.Projections.TestBusinessUnitType" table="BusinessUnitType">
     <id name="Id" column="id" type="Guid" access="field.camelcase">

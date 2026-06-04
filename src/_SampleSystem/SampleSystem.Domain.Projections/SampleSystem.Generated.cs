@@ -278,6 +278,67 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Employee.Employee))]
+    [Framework.Database.Mapping.TableAttribute(Name="Employee")]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee.Employee), Framework.Projection.ProjectionRole.Default)]
+    public partial class EmployeeWithBuPeriod : SampleSystem.Domain.PersistentDomainObjectBase
+    {
+        
+        private SampleSystem.Domain.Projections.EmployeeWithBuPeriod_AutoProp_CoreBusinessUnit coreBusinessUnit_Auto;
+        
+        protected EmployeeWithBuPeriod()
+        {
+        }
+        
+        [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
+        [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("CoreBusinessUnit_Auto.Period_Last_BuPeriod")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        public virtual Framework.Core.Period? BuPeriod
+        {
+            get
+            {
+                return this.CoreBusinessUnit_Auto?.Period_Last_BuPeriod;
+            }
+        }
+        
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.AutoNode)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="coreBusinessUnitId")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        public virtual SampleSystem.Domain.Projections.EmployeeWithBuPeriod_AutoProp_CoreBusinessUnit CoreBusinessUnit_Auto
+        {
+            get
+            {
+                return this.coreBusinessUnit_Auto;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit))]
+    [Framework.Database.Mapping.TableAttribute(Name="BusinessUnit")]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit), Framework.Projection.ProjectionRole.AutoNode)]
+    public partial class EmployeeWithBuPeriod_AutoProp_CoreBusinessUnit : SampleSystem.Domain.PersistentDomainObjectBase
+    {
+        
+        private Framework.Core.Period period_Last_BuPeriod;
+        
+        protected EmployeeWithBuPeriod_AutoProp_CoreBusinessUnit()
+        {
+        }
+        
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.LastAutoNode)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="period")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        public virtual Framework.Core.Period Period_Last_BuPeriod
+        {
+            get
+            {
+                return this.period_Last_BuPeriod;
+            }
+        }
+    }
+    
     [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit))]
     [Framework.Database.Mapping.TableAttribute(Name="BusinessUnit")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BU.BusinessUnit), Framework.Projection.ProjectionRole.Default)]
@@ -517,6 +578,17 @@ namespace SampleSystem.Domain.Projections
         }
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
+        [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("Parent_Auto.Period_Last_ParentPeriod")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        public virtual Framework.Core.Period? ParentPeriod
+        {
+            get
+            {
+                return this.Parent_Auto?.Period_Last_ParentPeriod;
+            }
+        }
+        
+        [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
         [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("Parent_Auto.PeriodStartDate_Last_ParentPeriodStartDate")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
         public virtual System.DateTime? ParentPeriodStartDate
@@ -545,10 +617,24 @@ namespace SampleSystem.Domain.Projections
     public partial class TestBusinessUnit_AutoProp_Parent : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
+        private Framework.Core.Period period_Last_ParentPeriod;
+        
         private System.DateTime periodStartDate_Last_ParentPeriodStartDate;
         
         protected TestBusinessUnit_AutoProp_Parent()
         {
+        }
+        
+        [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.LastAutoNode)]
+        [Framework.Database.Mapping.MappingAttribute(ColumnName="period")]
+        [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        public virtual Framework.Core.Period Period_Last_ParentPeriod
+        {
+            get
+            {
+                return this.period_Last_ParentPeriod;
+            }
         }
         
         [Framework.BLL.Domain.Serialization.CustomSerializationAttribute(Framework.BLL.Domain.Serialization.CustomSerializationMode.Ignore)]

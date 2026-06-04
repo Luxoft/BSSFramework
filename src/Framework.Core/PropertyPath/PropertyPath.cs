@@ -71,7 +71,8 @@ public class PropertyPath(IEnumerable<PropertyInfo> properties) : ReadOnlyCollec
 
     public static PropertyPath operator +(PropertyPath path, PropertyInfo propertyInfo) => path.Concat([propertyInfo]).ToPropertyPath();
 
-    public static bool operator ==(PropertyPath path1, PropertyPath path2) => ReferenceEquals(path1, path2) || (!ReferenceEquals(path1, null) && path1.Equals(path2));
+    public static bool operator ==(PropertyPath path1, PropertyPath path2) =>
+        ReferenceEquals(path1, path2) || (!ReferenceEquals(path1, null) && path1.Equals(path2));
 
     public static bool operator !=(PropertyPath path1, PropertyPath path2) => !(path1 == path2);
 
@@ -86,6 +87,6 @@ public class PropertyPath(IEnumerable<PropertyInfo> properties) : ReadOnlyCollec
             {
                 var currentType = prevProperty == null ? sourceType : prevProperty.PropertyType.GetCollectionElementTypeOrSelf();
 
-                return currentType.GetRequiredProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+                return currentType.GetRequiredProperty(propertyName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             }).Skip(1).Select(v => v!);
 }

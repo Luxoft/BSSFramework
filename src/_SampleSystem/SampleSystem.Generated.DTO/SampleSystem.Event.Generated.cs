@@ -7884,6 +7884,8 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _birthDate;
         
+        private Framework.Core.Period _buPeriod;
+        
         private bool _canBePPM;
         
         private string _cellPhone;
@@ -8034,6 +8036,19 @@ namespace SampleSystem.Generated.DTO
             set
             {
                 this._birthDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period BuPeriod
+        {
+            get
+            {
+                return this._buPeriod;
+            }
+            set
+            {
+                this._buPeriod = value;
             }
         }
         
@@ -8649,6 +8664,8 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _birthDate;
         
+        private Framework.Core.Period _buPeriod;
+        
         private bool _canBePPM;
         
         private string _cellPhone;
@@ -8769,6 +8786,19 @@ namespace SampleSystem.Generated.DTO
             set
             {
                 this._birthDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Core.Period BuPeriod
+        {
+            get
+            {
+                return this._buPeriod;
+            }
+            set
+            {
+                this._buPeriod = value;
             }
         }
         

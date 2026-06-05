@@ -1,6 +1,7 @@
 ﻿using System.CodeDom;
 
 using Anch.Core;
+using Anch.OData.Domain;
 
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.DTO.Extensions;
@@ -9,8 +10,6 @@ using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Query.OData.Base;
-
-using Anch.OData.Domain;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Query.OData;
 
@@ -45,10 +44,10 @@ public class GetODataListByQueryStringWithOperationMethodGenerator<TConfiguratio
         var selectMethod = typeof(SelectOperationResultExtensions).ToTypeReferenceExpression().ToMethodReferenceExpression(nameof(SelectOperationResultExtensions.Select));
 
         var selectLambda = new CodeParameterDeclarationExpression { Name = this.DomainType.Name.ToStartLowerCase() }.Pipe(param => new CodeLambdaExpression
-            {
-                    Parameters = { param },
-                    Statements = { param.ToVariableReferenceExpression().Pipe(source => this.ConvertToDTO(source, evaluateDataExpr.GetMappingService())) }
-            });
+        {
+            Parameters = { param },
+            Statements = { param.ToVariableReferenceExpression().Pipe(source => this.ConvertToDTO(source, evaluateDataExpr.GetMappingService())) }
+        });
 
         var selectOperationDecl = typeof(SelectOperation<>).ToTypeReference(this.DomainType).ToVariableDeclarationStatement("selectOperation", this.GetSelectOperationExpression(evaluateDataExpr));
 
@@ -64,3 +63,4 @@ public class GetODataListByQueryStringWithOperationMethodGenerator<TConfiguratio
                              .ToMethodReturnStatement();
     }
 }
+

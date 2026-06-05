@@ -82,12 +82,12 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
             if (this.Configuration.IsIdentityProperty(property))
             {
                 var genProp = new CodeMemberProperty
-                              {
-                                  Name = property.Name,
-                                  Type = propertyTypeRef,
-                                  Attributes = MemberAttributes.Public | MemberAttributes.Override,
-                                  GetStatements = { new CodeBaseReferenceExpression().ToPropertyReference(property).ToMethodReturnStatement() }
-                              };
+                {
+                    Name = property.Name,
+                    Type = propertyTypeRef,
+                    Attributes = MemberAttributes.Public | MemberAttributes.Override,
+                    GetStatements = { new CodeBaseReferenceExpression().ToPropertyReference(property).ToMethodReturnStatement() }
+                };
 
                 genProp.CustomAttributes.AddRange(attributes);
 
@@ -110,12 +110,12 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
                 var genField = new CodeMemberField { Name = property.Name.ToStartLowerCase(), Type = fieldType.ToTypeReference() };
 
                 var genProp = new CodeMemberProperty
-                              {
-                                  Name = property.Name,
-                                  Type = propertyTypeRef,
-                                  Attributes = MemberAttributes.Public,
-                                  GetStatements = { new CodeThisReferenceExpression().ToFieldReference(genField).ToMethodReturnStatement() }
-                              };
+                {
+                    Name = property.Name,
+                    Type = propertyTypeRef,
+                    Attributes = MemberAttributes.Public,
+                    GetStatements = { new CodeThisReferenceExpression().ToFieldReference(genField).ToMethodReturnStatement() }
+                };
 
                 genProp.CustomAttributes.AddRange(attributes);
 
@@ -171,10 +171,10 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
                 else
                 {
                     return new
-                           {
-                               Expression = (CodeExpression)state.Expression.ToPropertyReference(propNode),
-                               IsRef = propNode.PropertyType.IsNullable() || propNode.PropertyType.IsClass
-                           };
+                    {
+                        Expression = (CodeExpression)state.Expression.ToPropertyReference(propNode),
+                        IsRef = propNode.PropertyType.IsNullable() || propNode.PropertyType.IsClass
+                    };
                 }
             },
             state =>
@@ -192,12 +192,12 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
             });
 
         var prop = new CodeMemberProperty
-                   {
-                       Name = property.Name,
-                       Type = property.PropertyType.ToTypeReference(),
-                       Attributes = MemberAttributes.Public,
-                       GetStatements = { getExpr.ToMethodReturnStatement() },
-                   };
+        {
+            Name = property.Name,
+            Type = property.PropertyType.ToTypeReference(),
+            Attributes = MemberAttributes.Public,
+            GetStatements = { getExpr.ToMethodReturnStatement() },
+        };
 
         if (withAttr)
         {
@@ -256,14 +256,14 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
                     {
                         var lambda = new CodeParameterDeclarationExpression { Name = "v" }
                             .Pipe(param => new CodeLambdaExpression
-                                           {
-                                               Parameters = { param },
-                                               Statements =
+                            {
+                                Parameters = { param },
+                                Statements =
                                                {
                                                    elementType.ToTypeReference().ToObjectCreateExpression(param.ToVariableReferenceExpression())
                                                               .ToMethodReturnStatement()
                                                }
-                                           });
+                            });
 
                         yield return typeof(CoreEnumerableExtensions)
                                      .ToTypeReferenceExpression()
@@ -273,13 +273,13 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
                     else
                     {
                         yield return new CodeNotNullConditionStatement(sourcePropExpr)
-                                     {
-                                         TrueStatements =
+                        {
+                            TrueStatements =
                                          {
                                              targetProp.PropertyType.ToTypeReference().ToObjectCreateExpression(sourcePropExpr)
                                                        .ToAssignStatement(targetMemberExpr)
                                          }
-                                     };
+                        };
                     }
                 }
                 else
@@ -290,3 +290,4 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
         }
     }
 }
+

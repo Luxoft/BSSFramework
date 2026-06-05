@@ -18,3 +18,4 @@ public class DefaultDomainObjectRevisionDTO : DomainObjectRevisionDTO<Guid>
 
     }
 }
+

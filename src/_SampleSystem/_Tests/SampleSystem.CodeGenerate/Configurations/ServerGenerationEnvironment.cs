@@ -1,6 +1,8 @@
 ﻿using System.Collections.Immutable;
 using System.Reflection;
 
+using Anch.SecuritySystem;
+
 using Framework.BLL.Domain.Attributes;
 using Framework.CodeGeneration.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Audit.Configuration;
@@ -29,8 +31,6 @@ using SampleSystem.Domain.ManualProjections;
 using SampleSystem.Domain.Models.Filters._Base;
 using SampleSystem.Security;
 using SampleSystem.Validation;
-
-using Anch.SecuritySystem;
 
 namespace SampleSystem.CodeGenerate.Configurations;
 
@@ -122,3 +122,4 @@ public partial class ServerGenerationEnvironment() : CodeGenerationEnvironment<D
                      .Build();
     }
 }
+

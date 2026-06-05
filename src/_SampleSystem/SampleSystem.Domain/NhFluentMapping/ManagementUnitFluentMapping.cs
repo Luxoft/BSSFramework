@@ -1,10 +1,11 @@
-﻿using Framework.BLL.Domain.Serialization;
+﻿using Anch.SecuritySystem;
+
+using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.Core;
 using Framework.Database.Mapping;
-using SampleSystem.Domain.BU;
 
-using Anch.SecuritySystem;
+using SampleSystem.Domain.BU;
 
 namespace SampleSystem.Domain.NhFluentMapping;
 
@@ -59,3 +60,4 @@ public class ManagementUnitFluentMapping :
 
     ManagementUnitFluentMapping IUnit<ManagementUnitFluentMapping>.CurrentObject => this;
 }
+

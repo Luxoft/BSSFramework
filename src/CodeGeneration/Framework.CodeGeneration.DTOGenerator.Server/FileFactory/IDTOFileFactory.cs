@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 
 using Anch.Core;
+
 using Framework.BLL.Domain.Persistent.Attributes;
 using Framework.BLL.DTOMapping.MappingObject;
 using Framework.CodeDom.Extensions;
@@ -49,29 +50,29 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
         if (this.MapDomainObjectToMappingObjectPropertyAssigner != null)
         {
             yield return new CodeMemberMethod
-                         {
-                                 Name = "Map" + this.DomainType!.Name,
-                                 ReturnType = typeof(void).ToTypeReference(),
-                                 Parameters =
+            {
+                Name = "Map" + this.DomainType!.Name,
+                ReturnType = typeof(void).ToTypeReference(),
+                Parameters =
                                  {
                                          domainTypeRef.ToParameterDeclarationExpression("domainObject"),
                                          mappingTypeRef.ToParameterDeclarationExpression("mappingObject"),
                                  }
-                         };
+            };
         }
 
         if (this.MapMappingObjectToDomainObjectPropertyAssigner != null)
         {
             yield return new CodeMemberMethod
-                         {
-                                 Name = "Map" + this.DomainType.Name,
-                                 ReturnType = typeof(void).ToTypeReference(),
-                                 Parameters =
+            {
+                Name = "Map" + this.DomainType.Name,
+                ReturnType = typeof(void).ToTypeReference(),
+                Parameters =
                                  {
                                          mappingTypeRef.ToParameterDeclarationExpression("mappingObject"),
                                          domainTypeRef.ToParameterDeclarationExpression("domainObject"),
                                  }
-                         };
+            };
         }
 
         if (this.HasToDomainObjectMethod)
@@ -111,12 +112,12 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
                                                                             this.MapDomainObjectToMappingObjectPropertyAssigner.GetAssignStatementBySource(property, domainTypeParameterRef, mappingTypeParameterRef));
 
             yield return new CodeMemberMethod
-                         {
-                                 Attributes = MemberAttributes.Public,
-                                 Name = "Map" + this.DomainType.Name,
-                                 Parameters = { domainTypeParameter, mappingTypeParameter },
-                                 Statements = { assignStatements.Composite() }
-                         };
+            {
+                Attributes = MemberAttributes.Public,
+                Name = "Map" + this.DomainType.Name,
+                Parameters = { domainTypeParameter, mappingTypeParameter },
+                Statements = { assignStatements.Composite() }
+            };
         }
 
         if (this.MapMappingObjectToDomainObjectPropertyAssigner != null)
@@ -134,15 +135,15 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
 
 
             yield return new CodeMemberMethod
-                         {
-                                 Attributes = MemberAttributes.Public,
-                                 Name = "Map" + this.DomainType.Name,
-                                 Parameters = { mappingTypeParameter, domainTypeParameter },
-                                 Statements =
+            {
+                Attributes = MemberAttributes.Public,
+                Name = "Map" + this.DomainType.Name,
+                Parameters = { mappingTypeParameter, domainTypeParameter },
+                Statements =
                                  {
                                          properties.Select(property => this.MapMappingObjectToDomainObjectPropertyAssigner.GetAssignStatementBySource(property, mappingTypeParameterRef, domainTypeParameterRef)).Composite(),
                                  }
-                         };
+            };
         }
 
         if (this.HasToDomainObjectMethod)
@@ -251,11 +252,11 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
         var fieldTypeRef = this.CodeTypeReferenceService.GetCodeTypeReference(property, true);
 
         return new CodeMemberField
-               {
-                       Name = fieldName,
-                       Type = fieldTypeRef,
-                       InitExpression = this.GetFieldInitExpression(fieldTypeRef, property)
-               };
+        {
+            Name = fieldName,
+            Type = fieldTypeRef,
+            InitExpression = this.GetFieldInitExpression(fieldTypeRef, property)
+        };
     }
 
     protected virtual CodeExpression GetFieldInitExpression(CodeTypeReference codeTypeReference, PropertyInfo property) => null;
@@ -267,13 +268,13 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
         var fieldMemberRef = new CodeThisReferenceExpression().ToFieldReference(fieldMember);
 
         return new CodeMemberProperty
-               {
-                       Type = fieldMember.Type,
-                       Name = sourceProperty.Name,
-                       Attributes = MemberAttributes.Public | MemberAttributes.Final,
-                       GetStatements = { fieldMemberRef.ToMethodReturnStatement() },
-                       SetStatements = { new CodePropertySetValueReferenceExpression().ToAssignStatement(fieldMemberRef) }
-               }.Self(p => p.CustomAttributes.AddRange(this.GetPropertyCustomAttributes(sourceProperty).ToArray()));
+        {
+            Type = fieldMember.Type,
+            Name = sourceProperty.Name,
+            Attributes = MemberAttributes.Public | MemberAttributes.Final,
+            GetStatements = { fieldMemberRef.ToMethodReturnStatement() },
+            SetStatements = { new CodePropertySetValueReferenceExpression().ToAssignStatement(fieldMemberRef) }
+        }.Self(p => p.CustomAttributes.AddRange(this.GetPropertyCustomAttributes(sourceProperty).ToArray()));
     }
 
 
@@ -318,13 +319,13 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
                 }
             }
             : new CodeTypeReference(typeof(IMappingObject<,>))
-              {
-                  TypeArguments =
+            {
+                TypeArguments =
                   {
                       this.Configuration.DTOMappingServiceInterfaceTypeReference,
                       this.DomainType
                   }
-              };
+            };
 
     DTOFileType IDTOSource.FileType => this.FileType;
     //DTOFileType IFileTypeSource<DTOFileType>.FileType => this.FileType;
@@ -334,3 +335,4 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
 //{
 //    IEnumerable<CodeTypeMember> CreatePropertyMember(PropertyInfo sourceProperty);
 //}
+

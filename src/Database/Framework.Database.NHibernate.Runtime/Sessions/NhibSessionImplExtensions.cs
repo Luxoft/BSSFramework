@@ -25,3 +25,4 @@ internal static class NhibSessionImplExtensions
 
     internal static void OverrideInterceptor(this SessionImpl source, IInterceptor interceptor) => SetInterceptorAction(source, interceptor);
 }
+

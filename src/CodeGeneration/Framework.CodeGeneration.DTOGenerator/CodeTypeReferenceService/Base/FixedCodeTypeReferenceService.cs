@@ -33,3 +33,4 @@ public class FixedCodeTypeReferenceService<TConfiguration> : LayerCodeTypeRefere
 
     public override RoleFileType GetCollectionFileType(PropertyInfo _) => this.collectionFileType;
 }
+

@@ -8,3 +8,4 @@ public interface IWebApiDBSessionModeResolver
 {
     DBSessionMode? GetSessionMode(MethodInfo methodInfo);
 }
+

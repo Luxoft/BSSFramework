@@ -52,12 +52,12 @@ public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configu
             var extendedValidationDataParam = typeof(IServiceProvider).ToTypeReference().ToParameterDeclarationExpression("serviceProvider");
 
             yield return new CodeConstructor
-                         {
-                                 Attributes = MemberAttributes.Family,
-                                 Parameters = { extendedValidationDataParam },
-                                 BaseConstructorArgs = { extendedValidationDataParam.ToVariableReferenceExpression() },
-                                 Statements = { typeof(ValidationMap).ToTypeReference().ToObjectCreateExpression(extendedValidationDataParam.ToVariableReferenceExpression()).ToAssignStatement(new CodeThisReferenceExpression().ToFieldReference(defaultValidatorMapField)) }
-                         };
+            {
+                Attributes = MemberAttributes.Family,
+                Parameters = { extendedValidationDataParam },
+                BaseConstructorArgs = { extendedValidationDataParam.ToVariableReferenceExpression() },
+                Statements = { typeof(ValidationMap).ToTypeReference().ToObjectCreateExpression(extendedValidationDataParam.ToVariableReferenceExpression()).ToAssignStatement(new CodeThisReferenceExpression().ToFieldReference(defaultValidatorMapField)) }
+            };
         }
 
         if (this.Configuration.GenerateExternalClassValidators)
@@ -75,11 +75,11 @@ public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configu
             var domainTypeValidatorGenerator = this.Configuration.GetValidatorGenerator(domainType, new CodeThisReferenceExpression());
 
             var getMethod = new CodeMemberMethod
-                            {
-                                    Attributes = MemberAttributes.Family,
-                                    Name = $"Get{domainType.Name}ValidationMap",
-                                    ReturnType = typeof(IClassValidationMap<>).ToTypeReference(domainType)
-                            };
+            {
+                Attributes = MemberAttributes.Family,
+                Name = $"Get{domainType.Name}ValidationMap",
+                ReturnType = typeof(IClassValidationMap<>).ToTypeReference(domainType)
+            };
 
             if (this.IsEmptyClassMap(domainType, domainTypeValidatorGenerator))
             {
@@ -147,14 +147,14 @@ public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configu
                                 select Tuple.Create((CodeExpression)condition, (CodeStatement)statement);
 
         return new CodeMemberMethod
-               {
+        {
 #pragma warning disable S3265 // Non-flags enums should not be used in bitwise operations
-                       Attributes = MemberAttributes.Family | MemberAttributes.Override,
+            Attributes = MemberAttributes.Family | MemberAttributes.Override,
 #pragma warning restore S3265 // Non-flags enums should not be used in bitwise operations
-                       Name = "GetInternalClassMap",
-                       ReturnType = typeof(IClassValidationMap<>).ToTypeReference(sourceTypeRef),
-                       TypeParameters = { sourceParameter },
-                       Statements =
+            Name = "GetInternalClassMap",
+            ReturnType = typeof(IClassValidationMap<>).ToTypeReference(sourceTypeRef),
+            TypeParameters = { sourceParameter },
+            Statements =
                        {
                                statementsRequest.ToSwitchExpressionStatement(
 
@@ -162,7 +162,7 @@ public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configu
                                                                                      .ToStaticMethodInvokeExpression(typeof(ValidationMapExtensions).ToTypeReferenceExpression().ToMethodReferenceExpression("GetClassMap", sourceParameter.ToTypeReference()))
                                                                                      .ToMethodReturnStatement())
                        }
-               };
+        };
     }
 
 
@@ -173,16 +173,16 @@ public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configu
         var classValidatorType = typeof(IClassValidator<>).ToTypeReference(sourceParameter.ToTypeReference());
 
         return new CodeMemberMethod
-               {
-                       Attributes = MemberAttributes.Family,
-                       Name = this.ExternalClassValidatorsMethodName,
-                       ReturnType = classValidatorType.ToEnumerableReference(),
-                       TypeParameters = { sourceParameter },
-                       Statements =
+        {
+            Attributes = MemberAttributes.Family,
+            Name = this.ExternalClassValidatorsMethodName,
+            ReturnType = classValidatorType.ToEnumerableReference(),
+            TypeParameters = { sourceParameter },
+            Statements =
                        {
                                new CodeMethodYieldBreakStatement()
                        }
-               };
+        };
     }
 
     private CodeMemberMethod GetExternalPropertyValidatorsMethod()
@@ -197,17 +197,17 @@ public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configu
         var propertyValidatorType = typeof(IPropertyValidator<,>).ToTypeReference(sourceParameter.ToTypeReference(), propertyParameter.ToTypeReference());
 
         return new CodeMemberMethod
-               {
-                       Attributes = MemberAttributes.Family,
-                       Name = this.ExternalPropertyValidatorsMethodName,
-                       ReturnType = propertyValidatorType.ToEnumerableReference(),
-                       TypeParameters = { sourceParameter, propertyParameter },
-                       Parameters = { expressionParam },
-                       Statements =
+        {
+            Attributes = MemberAttributes.Family,
+            Name = this.ExternalPropertyValidatorsMethodName,
+            ReturnType = propertyValidatorType.ToEnumerableReference(),
+            TypeParameters = { sourceParameter, propertyParameter },
+            Parameters = { expressionParam },
+            Statements =
                        {
                                new CodeMethodYieldBreakStatement()
                        }
-               };
+        };
     }
 
     private CodeMemberMethod GetClassPropertiesMethod(Type domainType, IValidatorGenerator validatorGenerator)
@@ -242,12 +242,12 @@ public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configu
                                             new CodeThisReferenceExpression().ToMethodReferenceExpression("GetClassMap", (collectionElementType ?? property.PropertyType).ToTypeReference()).ToMethodInvokeExpression(true.ToPrimitiveExpression()));
 
         return new CodeMemberMethod
-               {
-                       Attributes = MemberAttributes.Family,
-                       Name = $"Get{domainType.Name}Properties",
-                       ReturnType = typeof(IPropertyValidationMap<>).ToTypeReference(domainType).ToEnumerableReference(),
-                       Parameters = { currentClassValidatorParam }
-               }.WithYield(propertyValidatorExpressions);
+        {
+            Attributes = MemberAttributes.Family,
+            Name = $"Get{domainType.Name}Properties",
+            ReturnType = typeof(IPropertyValidationMap<>).ToTypeReference(domainType).ToEnumerableReference(),
+            Parameters = { currentClassValidatorParam }
+        }.WithYield(propertyValidatorExpressions);
     }
 
     private CodeMemberMethod GetClassValidatorsMethod(Type domainType, IReadOnlyDictionary<CodeExpression, IValidationData> classValidators)
@@ -257,11 +257,11 @@ public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configu
         var classValidatorType = typeof(IClassValidator<>).ToTypeReference(domainType);
 
         var method = new CodeMemberMethod
-                     {
-                             Attributes = MemberAttributes.Family,
-                             Name = $"Get{domainType.Name}Validators",
-                             ReturnType = classValidatorType.ToEnumerableReference()
-                     };
+        {
+            Attributes = MemberAttributes.Family,
+            Name = $"Get{domainType.Name}Validators",
+            ReturnType = classValidatorType.ToEnumerableReference()
+        };
 
         var getExternalExpr = new CodeThisReferenceExpression().ToMethodReferenceExpression(this.ExternalClassValidatorsMethodName, domainType.ToTypeReference()).ToMethodInvokeExpression();
 
@@ -276,13 +276,13 @@ public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configu
                                         select TryApplyValidatorDataExpression(classValidatorExpressionPair.Key, classValidatorExpressionPair.Value, typeof(ClassValidatorExtensions));
 
             var getForeachStatement = FuncHelper.Create(() => new CodeParameterDeclarationExpression { Name = "classValidator" }.Pipe(iterator => new CodeForeachStatement
-                                                            {
-                                                                    Iterator = iterator,
+            {
+                Iterator = iterator,
 
-                                                                    Source = getExternalExpr,
+                Source = getExternalExpr,
 
-                                                                    Statements = { iterator.ToVariableReferenceExpression().ToMethodYieldReturnStatement() }
-                                                            }));
+                Statements = { iterator.ToVariableReferenceExpression().ToMethodYieldReturnStatement() }
+            }));
 
             return method.WithStatement(this.Configuration.GenerateExternalClassValidators, getForeachStatement)
                          .WithYield(validatorsExpressions, false)
@@ -303,20 +303,20 @@ public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configu
         var property = propertyValidatorPair.Key;
 
         var getForeachStatement = FuncHelper.Create(() => new CodeParameterDeclarationExpression { Name = "propertyValidator" }.Pipe(iterator => new CodeForeachStatement
-                                                        {
-                                                                Iterator = iterator,
+        {
+            Iterator = iterator,
 
-                                                                Source = new CodeThisReferenceExpression().ToMethodReferenceExpression(this.ExternalPropertyValidatorsMethodName, domainType.ToTypeReference(), property.PropertyType.ToTypeReference()).ToMethodInvokeExpression(property.ToCodeLambdaExpression()),
+            Source = new CodeThisReferenceExpression().ToMethodReferenceExpression(this.ExternalPropertyValidatorsMethodName, domainType.ToTypeReference(), property.PropertyType.ToTypeReference()).ToMethodInvokeExpression(property.ToCodeLambdaExpression()),
 
-                                                                Statements = { iterator.ToVariableReferenceExpression().ToMethodYieldReturnStatement() }
-                                                        }));
+            Statements = { iterator.ToVariableReferenceExpression().ToMethodYieldReturnStatement() }
+        }));
 
         return new CodeMemberMethod
-               {
-                       Attributes = MemberAttributes.Family,
-                       Name = $"Get{domainType.Name}_{property.Name}Validators",
-                       ReturnType = propValidatorType.ToEnumerableReference()
-               }
+        {
+            Attributes = MemberAttributes.Family,
+            Name = $"Get{domainType.Name}_{property.Name}Validators",
+            ReturnType = propValidatorType.ToEnumerableReference()
+        }
                .WithStatement(this.Configuration.GenerateExternalPropertyValidators, getForeachStatement)
                .WithYield(validatorsExpressions, false)
                .WithTryBreak();
@@ -349,3 +349,4 @@ public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configu
         }
     }
 }
+

@@ -19,3 +19,4 @@ public class OverrideCallInterfacePropertiesVisitor : ExpressionVisitor
 
     public override Expression? Visit(Expression? node) => this.internalVisitor.Visit(node);
 }
+

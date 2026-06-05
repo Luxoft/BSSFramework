@@ -79,33 +79,33 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration>(IDTOSource<TConfi
 
 
                 return new CodeConditionStatement
-                       {
-                               Condition = new CodeObjectEqualsExpression(sourcePropertyRef, propertyTypeRefExpr.ToDefaultValueExpression()).ToNegateExpression(),
+                {
+                    Condition = new CodeObjectEqualsExpression(sourcePropertyRef, propertyTypeRefExpr.ToDefaultValueExpression()).ToNegateExpression(),
 
-                               TrueStatements =
+                    TrueStatements =
                                {
                                        getToDomainObjectExpr(sourcePropertyRef, property.PropertyType, property.IsDetail()).ToAssignStatement(targetPropertyRef)
                                },
 
-                               FalseStatements =
+                    FalseStatements =
                                {
                                        new CodePrimitiveExpression(null).ToAssignStatement(targetPropertyRef)
                                }
-                       };
+                };
             }
             else
             {
                 return new CodeNotNullConditionStatement(sourcePropertyRef)
-                       {
-                               TrueStatements =
+                {
+                    TrueStatements =
                                {
                                        getToDomainObjectExpr (sourcePropertyRef, property.PropertyType, property.IsDetail()).ToAssignStatement(targetPropertyRef)
                                },
-                               FalseStatements =
+                    FalseStatements =
                                {
                                        new CodePrimitiveExpression(null).ToAssignStatement(targetPropertyRef)
                                }
-                       };
+                };
             }
         }
         else if (this.Configuration.IsCollectionProperty(property))
@@ -120,8 +120,8 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration>(IDTOSource<TConfi
                 }
 
                 return new CodeNotNullConditionStatement(sourcePropertyRef)
-                       {
-                               TrueStatements =
+                {
+                    TrueStatements =
                                {
                                        typeof(CoreEnumerableExtensions).ToTypeReferenceExpression()
                                                                                   .ToMethodInvokeExpression(
@@ -133,7 +133,7 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration>(IDTOSource<TConfi
                                                                                                Statements = { getToDomainObjectExpr(lamdaParam.ToVariableReferenceExpression(), elementType, property.IsDetail()) }
                                                                                        })).ToAssignStatement(targetPropertyRef)
                                }
-                       };
+                };
             }
             else
             {
@@ -145,33 +145,33 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration>(IDTOSource<TConfi
                 var transferElementTypeRef = this.Configuration.GetCodeTypeReference(elementType, this.CodeTypeReferenceService.GetCollectionFileType(property));
 
                 var createDetailLambda = new CodeParameterDeclarationExpression { Name = "detailDTO" }.Pipe(lambdaParam => new CodeLambdaExpression
-                    {
-                            Parameters = { lambdaParam },
-                            Statements = { getToDomainObjectExpr(lambdaParam.ToVariableReferenceExpression(), elementType, true) }
-                    });
+                {
+                    Parameters = { lambdaParam },
+                    Statements = { getToDomainObjectExpr(lambdaParam.ToVariableReferenceExpression(), elementType, true) }
+                });
 
                 var removeDetailLambda = this.Configuration.UseRemoveMappingExtension
 
                                                  ? (CodeExpression)new CodeParameterDeclarationExpression { Name = "detail" }.Pipe(lamdaParam => new CodeLambdaExpression
-                                                     {
-                                                             Parameters = { lamdaParam },
-                                                             Statements =  { typeof(AddRemoveDetailHelper).ToTypeReferenceExpression()
+                                                 {
+                                                     Parameters = { lamdaParam },
+                                                     Statements =  { typeof(AddRemoveDetailHelper).ToTypeReferenceExpression()
                                                                                      .ToMethodReferenceExpression("RemoveDetail", property.DeclaringType.ToTypeReference(), elementType.ToTypeReference())
                                                                                      .ToMethodInvokeExpression(this.DomainParameter.ToVariableReferenceExpression(), lamdaParam.ToVariableReferenceExpression())
                                                                            }
-                                                     })
+                                                 })
 
                                                  : this.DomainParameter.ToVariableReferenceExpression().ToPropertyReference("Remove" + elementType.Name);
 
                 return new CodeNotNullConditionStatement(sourcePropertyRef)
-                       {
-                               TrueStatements =
+                {
+                    TrueStatements =
                                {
                                        this.GetCollectionMappingMethodReferenceExpression(transferElementTypeRef, elementType)
                                            .ToMethodInvokeExpression(createDetailLambda, removeDetailLambda)
                                            .ToMethodInvokeExpression("Map", sourcePropertyRef, targetPropertyRef)
                                }
-                       };
+                };
             }
         }
 
@@ -264,3 +264,4 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration>(IDTOSource<TConfi
         return statement;
     }
 }
+

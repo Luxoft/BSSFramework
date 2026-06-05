@@ -3,6 +3,7 @@ using Framework.Core;
 using Framework.Projection;
 using Framework.Projection.Lambda;
 using Framework.Projection.Lambda.ProjectionSource;
+
 using SampleSystem.Domain;
 using SampleSystem.Domain._CustomProjectionAttribute;
 using SampleSystem.Domain.BU;
@@ -198,3 +199,4 @@ public class SampleSystemProjectionSource : ProjectionSource
 
     public Projection<TestSecurityObjItem> TestSecurityObjItemProjection { get; }
 }
+

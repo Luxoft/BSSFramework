@@ -1,6 +1,7 @@
 ﻿using System.CodeDom;
 
 using Anch.Core;
+
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeDom.Extensions;
@@ -60,3 +61,4 @@ public abstract class GetObjectPropertyRevisionsMethodGeneratorBase<TConfigurati
         yield return this.PropertyNameParameter.ToVariableReferenceExpression();
     }
 }
+

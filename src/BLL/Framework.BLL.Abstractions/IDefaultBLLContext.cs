@@ -9,3 +9,4 @@ public interface IDefaultBLLContext<in TPersistentDomainObjectBase, TIdent> : IB
     IHierarchicalObjectExpanderFactoryContainer
 
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>;
+

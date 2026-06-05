@@ -36,3 +36,4 @@ public class RoleRoleDegreeLink : AuditPersistentDomainObjectBase
         set => this.anotherRole = value;
     }
 }
+

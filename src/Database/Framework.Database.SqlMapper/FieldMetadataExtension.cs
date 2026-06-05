@@ -8,22 +8,22 @@ namespace Framework.Database.SqlMapper;
 
 public static class FieldMetadataExtension
 {
-    public static string ToColumnName<TFieldMetadata> (this TFieldMetadata source, Func<FieldMetadata, string> getDefaultColumnNameFunc)
+    public static string ToColumnName<TFieldMetadata>(this TFieldMetadata source, Func<FieldMetadata, string> getDefaultColumnNameFunc)
             where TFieldMetadata : FieldMetadata
     {
         var mappingAttribute =
                 source
                         .Attributes
-                        .OfType<MappingAttribute> ()
-                        .SingleOrDefault (() => new Exception (
+                        .OfType<MappingAttribute>()
+                        .SingleOrDefault(() => new Exception(
                                                                $"Field {source.Name} of {source.DomainTypeMetadata.DomainType.Name} has no one {typeof(MappingAttribute).Name}"));
 
-        return mappingAttribute.Maybe (z => z.ColumnName).IfDefaultString(getDefaultColumnNameFunc (source));
+        return mappingAttribute.Maybe(z => z.ColumnName).IfDefaultString(getDefaultColumnNameFunc(source));
     }
 
-    public static string ToColumnName<TFieldMetadata> (this TFieldMetadata source)
+    public static string ToColumnName<TFieldMetadata>(this TFieldMetadata source)
             where TFieldMetadata : FieldMetadata =>
-        source.ToColumnName (z =>
+        source.ToColumnName(z =>
                                  z.Name);
 }
 public static class ReferenceTypeFieldMetadataExtension
@@ -50,9 +50,10 @@ public static class ReferenceTypeFieldMetadataExtension
     public static string GetSqlReferenceColumnName(this ReferenceTypeFieldMetadata source)
     {
         var fi = (FieldMetadata)source;
-        return fi.ToColumnName (z => z.Name + "Id");
+        return fi.ToColumnName(z => z.Name + "Id");
     }
     public static string ToSqlColumnName(this FieldMetadata source) => source.GetMappingName() ?? source.Name;
 
     private static string GetMappingName(this FieldMetadata source) => source.Attributes.OfType<MappingAttribute>().SingleOrDefault().Maybe(z => z.ColumnName);
 }
+

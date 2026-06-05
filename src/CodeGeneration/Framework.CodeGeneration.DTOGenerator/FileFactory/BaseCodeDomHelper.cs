@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 
 using Anch.Core;
+
 using Framework.Application.Domain;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.IdentityObject;
@@ -28,9 +29,9 @@ public static class BaseCodeDomHelper
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 
         return new CodeConstructor
-               {
-                       Attributes = ((fileFactory as IFileTypeSource<MainDTOFileType>).Maybe(s => s.FileType.IsAbstract) || fileFactory.DomainType.IsAbstractDTO() ? MemberAttributes.Family : MemberAttributes.Public) | MemberAttributes.Override,
-               };
+        {
+            Attributes = ((fileFactory as IFileTypeSource<MainDTOFileType>).Maybe(s => s.FileType.IsAbstract) || fileFactory.DomainType.IsAbstractDTO() ? MemberAttributes.Family : MemberAttributes.Public) | MemberAttributes.Override,
+        };
     }
 
     public static CodeMemberMethod GenerateIdConstructor<TConfiguration>(this IFileFactory<TConfiguration> fileFactory)
@@ -41,23 +42,23 @@ public static class BaseCodeDomHelper
         var idParameter = new CodeParameterDeclarationExpression(typeof(string), "id");
 
         return new CodeConstructor
-               {
-                       Attributes = MemberAttributes.Public,
-                       Parameters = { idParameter },
-                       Statements =
+        {
+            Attributes = MemberAttributes.Public,
+            Parameters = { idParameter },
+            Statements =
                        {
                                typeof(Guid).ToTypeReference()
                                            .ToObjectCreateExpression(idParameter.ToVariableReferenceExpression())
                                            .ToAssignStatement(new CodeThisReferenceExpression().ToPropertyReference(fileFactory.Configuration.Environment.IdentityProperty))
                        }
-               };
+        };
     }
 
     public static IEnumerable<CodeConstructor> GenerateStrictConstructors<TConfiguration>(this IDTOSource<TConfiguration> source)
             where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment> =>
         source.GetActualStrictConstructorFileTypes()
               .Concat([null])
-              .Windowed2((fileType, baseFileType) => new[] { false, true}.Select(withoutMappingParameter => source.GenerateStrictConstructor(fileType, baseFileType, withoutMappingParameter)))
+              .Windowed2((fileType, baseFileType) => new[] { false, true }.Select(withoutMappingParameter => source.GenerateStrictConstructor(fileType, baseFileType, withoutMappingParameter)))
               .SelectMany();
 
     public static IEnumerable<MainDTOFileType> GetStrictConstructorFileTypes<TConfiguration>(this IDTOSource<TConfiguration> source)
@@ -98,11 +99,11 @@ public static class BaseCodeDomHelper
         if (withoutMappingParameter)
         {
             return new CodeConstructor
-                   {
-                           Parameters = { sourceTypeParameter },
-                           Attributes = sourceFileType.IsAbstract ? MemberAttributes.Private : MemberAttributes.Public,
-                           ChainedConstructorArgs = { sourceTypeParameterRefExpr, source.Configuration.GetDefaultClientDTOMappingServiceExpression()  }
-                   };
+            {
+                Parameters = { sourceTypeParameter },
+                Attributes = sourceFileType.IsAbstract ? MemberAttributes.Private : MemberAttributes.Public,
+                ChainedConstructorArgs = { sourceTypeParameterRefExpr, source.Configuration.GetDefaultClientDTOMappingServiceExpression() }
+            };
         }
         else
         {
@@ -112,15 +113,15 @@ public static class BaseCodeDomHelper
             var mapName = $"Map{sourceFileType.ShortName}To{source.FileType.ShortName}For{source.DomainType.Name}";
 
             var constructor = new CodeConstructor
-                              {
-                                      Parameters = { sourceTypeParameter, mappingServiceParameter },
-                                      Attributes = sourceFileType.IsAbstract ? MemberAttributes.Private : MemberAttributes.Public,
-                                      Statements =
+            {
+                Parameters = { sourceTypeParameter, mappingServiceParameter },
+                Attributes = sourceFileType.IsAbstract ? MemberAttributes.Private : MemberAttributes.Public,
+                Statements =
                                       {
                                               new CodeThrowArgumentNullExceptionConditionStatement(mappingServiceParameter),
                                               mappingServiceParameterRefExpr.ToMethodInvokeExpression(mapName, new CodeThisReferenceExpression(), sourceTypeParameterRefExpr)
                                       }
-                              };
+            };
 
             if (baseFileType != null)
             {
@@ -160,11 +161,11 @@ public static class BaseCodeDomHelper
         if (withoutMappingParameter)
         {
             return new CodeConstructor
-                   {
-                           Parameters = { currentSourceTypeParameter, baseSourceTypeParameter },
-                           Attributes = MemberAttributes.Public,
-                           ChainedConstructorArgs = { currentSourceTypeParameterRefExpr, baseSourceTypeParameterRefExpr, fileFactory.Configuration.GetDefaultClientDTOMappingServiceExpression() }
-                   };
+            {
+                Parameters = { currentSourceTypeParameter, baseSourceTypeParameter },
+                Attributes = MemberAttributes.Public,
+                ChainedConstructorArgs = { currentSourceTypeParameterRefExpr, baseSourceTypeParameterRefExpr, fileFactory.Configuration.GetDefaultClientDTOMappingServiceExpression() }
+            };
         }
         else
         {
@@ -172,15 +173,15 @@ public static class BaseCodeDomHelper
             var mappingServiceParameterRefExpr = mappingServiceParameter.ToVariableReferenceExpression();
 
             return new CodeConstructor
-                   {
-                           Parameters = { currentSourceTypeParameter, baseSourceTypeParameter, mappingServiceParameter },
-                           Attributes = MemberAttributes.Public,
-                           Statements =
+            {
+                Parameters = { currentSourceTypeParameter, baseSourceTypeParameter, mappingServiceParameter },
+                Attributes = MemberAttributes.Public,
+                Statements =
                            {
                                    new CodeThrowArgumentNullExceptionConditionStatement(mappingServiceParameter),
                                    mappingServiceParameterRefExpr.ToMethodInvokeExpression($"Map{fileFactory.DomainType.Name}", new CodeThisReferenceExpression(), currentSourceTypeParameterRefExpr, baseSourceTypeParameterRefExpr)
                            }
-                   };
+            };
         }
     }
 
@@ -198,11 +199,11 @@ public static class BaseCodeDomHelper
         if (withoutMappingParameter)
         {
             return new CodeConstructor
-                   {
-                           Parameters = { currentSourceTypeParameter },
-                           Attributes = MemberAttributes.Public,
-                           ChainedConstructorArgs = { currentSourceTypeParameterRefExpr, fileFactory.Configuration.GetDefaultClientDTOMappingServiceExpression() }
-                   };
+            {
+                Parameters = { currentSourceTypeParameter },
+                Attributes = MemberAttributes.Public,
+                ChainedConstructorArgs = { currentSourceTypeParameterRefExpr, fileFactory.Configuration.GetDefaultClientDTOMappingServiceExpression() }
+            };
         }
         else
         {
@@ -210,15 +211,15 @@ public static class BaseCodeDomHelper
             var mappingServiceParameterRefExpr = mappingServiceParameter.ToVariableReferenceExpression();
 
             return new CodeConstructor
-                   {
-                           Parameters = { currentSourceTypeParameter, mappingServiceParameter },
-                           Attributes = MemberAttributes.Public,
-                           Statements =
+            {
+                Parameters = { currentSourceTypeParameter, mappingServiceParameter },
+                Attributes = MemberAttributes.Public,
+                Statements =
                            {
                                    new CodeThrowArgumentNullExceptionConditionStatement(mappingServiceParameter),
                                    mappingServiceParameterRefExpr.ToMethodInvokeExpression($"Map{fileFactory.DomainType.Name}", new CodeThisReferenceExpression(), currentSourceTypeParameterRefExpr)
                            }
-                   };
+            };
         }
     }
 
@@ -248,17 +249,17 @@ public static class BaseCodeDomHelper
         var identityImplRef = typeof(IIdentityObjectContainer<>).ToTypeReference(identityRef);
 
         return new CodeMemberProperty
-               {
-                       Attributes = MemberAttributes.Public | MemberAttributes.Final,
-                       Name = "Identity",
-                       Type = identityRef,
-                       PrivateImplementationType = internalImplementation ? identityImplRef : null,
-                       GetStatements =
+        {
+            Attributes = MemberAttributes.Public | MemberAttributes.Final,
+            Name = "Identity",
+            Type = identityRef,
+            PrivateImplementationType = internalImplementation ? identityImplRef : null,
+            GetStatements =
                        {
                                identityRef.ToObjectCreateExpression(fileFactory.Configuration.GetIdentityPropertyCodeExpression()).ToMethodReturnStatement()
                        },
-                       CustomAttributes = { new CodeAttributeDeclaration(typeof(IgnoreDataMemberAttribute).ToTypeReference()) } 
-               };
+            CustomAttributes = { new CodeAttributeDeclaration(typeof(IgnoreDataMemberAttribute).ToTypeReference()) }
+        };
     }
 
     public static CodeMemberProperty GetIdentityObjectImplementation<TConfiguration>(this IFileFactory<TConfiguration> fileFactory, bool internalImplementation = false)
@@ -270,16 +271,16 @@ public static class BaseCodeDomHelper
         var identityImplRef = typeof(IIdentityObject<>).ToTypeReference(identityRef);
 
         return new CodeMemberProperty
-               {
-                       Attributes = MemberAttributes.Public | MemberAttributes.Final,
-                       Name = fileFactory.Configuration.Environment.IdentityProperty.Name,
-                       Type = identityRef,
-                       PrivateImplementationType = internalImplementation ? identityImplRef : null,
-                       GetStatements =
+        {
+            Attributes = MemberAttributes.Public | MemberAttributes.Final,
+            Name = fileFactory.Configuration.Environment.IdentityProperty.Name,
+            Type = identityRef,
+            PrivateImplementationType = internalImplementation ? identityImplRef : null,
+            GetStatements =
                        {
                                new CodeThisReferenceExpression().ToPropertyReference(fileFactory.Configuration.Environment.IdentityProperty).ToMethodReturnStatement()
                        }
-               };
+        };
     }
 
 
@@ -293,13 +294,14 @@ public static class BaseCodeDomHelper
         var targetRef = fileFactory.Configuration.GetCodeTypeReference(fileFactory.DomainType, fileType);
 
         return new CodeMemberMethod
-               {
-                       Attributes = fileType != BaseFileType.StrictDTO ? MemberAttributes.Public | MemberAttributes.Final | MemberAttributes.New
+        {
+            Attributes = fileType != BaseFileType.StrictDTO ? MemberAttributes.Public | MemberAttributes.Final | MemberAttributes.New
                                             : fileFactory.FileType.ToMapToDomainObjectMemberAttributes(),
 
-                       Name = "To" + fileType.Name.SkipLast("DTO", true),
-                       ReturnType = targetRef,
-                       Statements = { targetRef.ToObjectCreateExpression(new CodeThisReferenceExpression()).ToMethodReturnStatement() }
-               };
+            Name = "To" + fileType.Name.SkipLast("DTO", true),
+            ReturnType = targetRef,
+            Statements = { targetRef.ToObjectCreateExpression(new CodeThisReferenceExpression()).ToMethodReturnStatement() }
+        };
     }
 }
+

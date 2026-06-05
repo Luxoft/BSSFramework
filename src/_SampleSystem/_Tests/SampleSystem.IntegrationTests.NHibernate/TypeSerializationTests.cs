@@ -43,3 +43,4 @@ public class TypeSerializationTests
         Assert.Empty(wrongTypes);
     }
 }
+

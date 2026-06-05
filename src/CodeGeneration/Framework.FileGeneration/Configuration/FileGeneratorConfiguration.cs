@@ -22,3 +22,4 @@ public abstract class FileGeneratorConfiguration<TEnvironment> : IFileGeneratorC
 
     protected virtual IEnumerable<Type> GetDomainTypes() => this.Environment.GetDefaultDomainTypes();
 }
+

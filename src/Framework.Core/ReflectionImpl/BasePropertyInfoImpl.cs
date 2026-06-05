@@ -37,3 +37,4 @@ public abstract class BasePropertyInfoImpl : PropertyInfo
 
     public override bool CanWrite => throw new NotImplementedException();
 }
+

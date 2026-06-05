@@ -36,3 +36,4 @@ internal static class TrackingResult
         return argument => cache.GetOrAdd(argument, func);
     }
 }
+

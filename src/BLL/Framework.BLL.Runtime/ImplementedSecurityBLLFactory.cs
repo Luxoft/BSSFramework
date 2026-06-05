@@ -1,9 +1,9 @@
-﻿using Framework.Application.Domain;
+﻿using Anch.SecuritySystem.Providers;
+
+using Framework.Application.Domain;
 using Framework.BLL.Services;
 
 using Microsoft.Extensions.DependencyInjection;
-
-using Anch.SecuritySystem.Providers;
 
 namespace Framework.BLL;
 
@@ -32,3 +32,4 @@ public abstract class ImplementedSecurityBLLFactory<TBLLContext, TPersistentDoma
         ISecurityProvider<TDomainObject> securityProvider)
         where TDomainObject : class, TPersistentDomainObjectBase;
 }
+

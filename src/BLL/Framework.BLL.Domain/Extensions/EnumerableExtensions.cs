@@ -40,5 +40,6 @@ public static class EnumerableExtensions
         return raiseIfNotFound ? () => GetNotFoundException<TSource>(name, nameof(name)) : null;
     }
 
-    private static Exception GetNotFoundException<TSource>(string identity, string identityName) => throw new Exception($"{typeof (TSource).Name} with {identityName} \"{identity}\" not found");
+    private static Exception GetNotFoundException<TSource>(string identity, string identityName) => throw new Exception($"{typeof(TSource).Name} with {identityName} \"{identity}\" not found");
 }
+

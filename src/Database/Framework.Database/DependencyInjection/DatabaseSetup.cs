@@ -77,7 +77,7 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
 
     public IDatabaseSetup SetDefaultConnectionStringName(string connectionStringName)
     {
-        this.defaultConnectionStringSettings = new (connectionStringName);
+        this.defaultConnectionStringSettings = new(connectionStringName);
 
         return this;
     }
@@ -140,3 +140,4 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
         return services;
     }
 }
+

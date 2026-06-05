@@ -6,3 +6,4 @@ public interface IJobMiddlewareFactory
 {
     IScopedEvaluatorMiddleware Create<TService>(bool withRootLogging);
 }
+

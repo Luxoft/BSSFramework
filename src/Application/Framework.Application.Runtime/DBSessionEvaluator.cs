@@ -16,3 +16,4 @@ public class DbSessionEvaluator(IServiceProvider rootServiceProvider) : IDBSessi
         return await sessionMiddleware.EvaluateAsync(async () => await getResult(scope.ServiceProvider));
     }
 }
+

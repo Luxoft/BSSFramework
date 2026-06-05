@@ -188,9 +188,9 @@ public class UnsafeApplyChangedDatabaseScriptGenerator : IDatabaseScriptGenerato
         }
 
         var transfer = new Transfer(database)
-                       {
-                               CopyAllObjects = false,
-                               Options =
+        {
+            CopyAllObjects = false,
+            Options =
                                {
                                        WithDependencies = true,
                                        Default = true,
@@ -203,24 +203,24 @@ public class UnsafeApplyChangedDatabaseScriptGenerator : IDatabaseScriptGenerato
                                        DriUniqueKeys = true,
                                        ContinueScriptingOnError = true
                                },
-                               DestinationDatabase = target.Name,
-                               DestinationServer = target.Parent.Name,
-                               DestinationLoginSecure = database.Parent.ConnectionContext.LoginSecure,
-                               CreateTargetDatabase = false,
-                               CopySchema = true,
-                               CopyAllTables = true,
-                               CopyAllPartitionFunctions = true,
-                               CopyAllStoredProcedures = true,
-                               CopyAllUserDefinedDataTypes = true,
-                               CopyAllUserDefinedTableTypes = true,
-                               CopyAllUserDefinedFunctions = true,
-                               CopyAllViews = true,
-                               CopyData = this.copyData,
-                               CopyAllLogins = false,
-                               CopyAllUsers = false,
-                               CopyAllRules = false,
-                               CopyAllRoles = false,
-                       };
+            DestinationDatabase = target.Name,
+            DestinationServer = target.Parent.Name,
+            DestinationLoginSecure = database.Parent.ConnectionContext.LoginSecure,
+            CreateTargetDatabase = false,
+            CopySchema = true,
+            CopyAllTables = true,
+            CopyAllPartitionFunctions = true,
+            CopyAllStoredProcedures = true,
+            CopyAllUserDefinedDataTypes = true,
+            CopyAllUserDefinedTableTypes = true,
+            CopyAllUserDefinedFunctions = true,
+            CopyAllViews = true,
+            CopyData = this.copyData,
+            CopyAllLogins = false,
+            CopyAllUsers = false,
+            CopyAllRules = false,
+            CopyAllRoles = false,
+        };
 
         transfer.CreateTargetDatabase = false;
 
@@ -230,9 +230,9 @@ public class UnsafeApplyChangedDatabaseScriptGenerator : IDatabaseScriptGenerato
         if (null != this.copyDataForTables)
         {
             var transfer2 = new Transfer(database)
-                            {
-                                    CopyAllObjects = false,
-                                    Options =
+            {
+                CopyAllObjects = false,
+                Options =
                                     {
                                             WithDependencies = true,
                                             Default = true,
@@ -244,18 +244,18 @@ public class UnsafeApplyChangedDatabaseScriptGenerator : IDatabaseScriptGenerato
                                             DriPrimaryKey = true,
                                             DriUniqueKeys = true,
                                     },
-                                    DestinationDatabase = target.Name,
-                                    DestinationServer = target.Parent.Name,
-                                    DestinationLoginSecure = database.Parent.ConnectionContext.LoginSecure,
-                                    CreateTargetDatabase = false,
-                                    CopySchema = false,
-                                    CopyAllTables = false,
-                                    CopyData = true,
-                                    CopyAllLogins = false,
-                                    CopyAllUsers = false,
-                                    CopyAllRules = false,
-                                    CopyAllRoles = false,
-                            };
+                DestinationDatabase = target.Name,
+                DestinationServer = target.Parent.Name,
+                DestinationLoginSecure = database.Parent.ConnectionContext.LoginSecure,
+                CreateTargetDatabase = false,
+                CopySchema = false,
+                CopyAllTables = false,
+                CopyData = true,
+                CopyAllLogins = false,
+                CopyAllUsers = false,
+                CopyAllRules = false,
+                CopyAllRoles = false,
+            };
 
             var copyTables = (from schema in database.Schemas.OfType<Schema>()
                               from tableName in this.copyDataForTables
@@ -300,3 +300,4 @@ public class UnsafeApplyChangedDatabaseScriptGenerator : IDatabaseScriptGenerato
         public AssemblyMetadata AssemblyMetadata => this.source.AssemblyMetadata;
     }
 }
+

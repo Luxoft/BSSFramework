@@ -6,3 +6,4 @@ public class MainServiceGeneratorConfiguration(ConfigurationGenerationEnvironmen
 {
     public override string ImplementClassName { get; } = "ConfigurationFacade";
 }
+

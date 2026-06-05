@@ -21,3 +21,4 @@ public class Location1676 : BaseDirectory
 
     public virtual IEnumerable<WorkingCalendar1676> Calendar => this.calendar;
 }
+

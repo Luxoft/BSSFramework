@@ -1,4 +1,4 @@
 ﻿namespace Framework.Database.Mapping;
 
-[AttributeUsage (AttributeTargets.Field)]
+[AttributeUsage(AttributeTargets.Field)]
 public class NotPersistentFieldAttribute : Attribute;

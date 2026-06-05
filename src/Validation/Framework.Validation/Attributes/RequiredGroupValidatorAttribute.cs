@@ -12,3 +12,4 @@ public class RequiredGroupValidatorAttribute(RequiredGroupValidatorMode mode) : 
 
     public override IClassValidator CreateValidator() => new RequiredGroupValidator(this.Mode, this.GroupKey);
 }
+

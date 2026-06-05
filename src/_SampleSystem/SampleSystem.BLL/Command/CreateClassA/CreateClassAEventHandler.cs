@@ -22,3 +22,4 @@ public record CreateClassAEventHandler(IRepositoryFactory<ClassA> Repository, II
         await Task.Delay(10000, cancellationToken);
     }
 }
+

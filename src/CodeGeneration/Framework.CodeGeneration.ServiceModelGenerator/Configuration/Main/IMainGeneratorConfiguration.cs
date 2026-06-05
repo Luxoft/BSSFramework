@@ -9,3 +9,4 @@ public interface IMainGeneratorConfiguration : ICodeGeneratorConfiguration
 
 public interface IMainGeneratorConfiguration<out TEnvironment> : IMainGeneratorConfiguration, IServiceModelGeneratorConfiguration<TEnvironment>
         where TEnvironment : IServiceModelGenerationEnvironment;
+

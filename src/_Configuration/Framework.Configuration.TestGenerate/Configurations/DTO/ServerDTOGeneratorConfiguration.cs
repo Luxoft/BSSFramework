@@ -21,3 +21,4 @@ public class ServerDTOGeneratorConfiguration(ConfigurationGenerationEnvironment 
 
     protected override IGeneratePolicy<RoleFileType> CreateGeneratePolicy() => new DTORoleGeneratePolicy(DTORole.Client);
 }
+

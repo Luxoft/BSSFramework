@@ -54,3 +54,4 @@ public abstract class ServiceModelGeneratorBase<TEnvironment> : CodeGeneratorCon
         yield break;
     }
 }
+

@@ -23,8 +23,8 @@ public abstract class StrictToDomainObjectPropertyAssignerBase<TConfiguration>(I
         if (innerAssignStatement == null) throw new ArgumentNullException(nameof(innerAssignStatement));
 
         return new CodeConditionStatement(justValueRefExpr.ToPropertyReference(nameof(Maybe<>.HasValue)))
-               {
-                   TrueStatements =
+        {
+            TrueStatements =
                    {
                        new CodeConditionStatement
                        {
@@ -36,6 +36,7 @@ public abstract class StrictToDomainObjectPropertyAssignerBase<TConfiguration>(I
                                                                                                               new CodePrimitiveExpression($"Access for write to field \"{property.Name}\" denied"))) }
                        }
                    }
-               };
+        };
     }
 }
+

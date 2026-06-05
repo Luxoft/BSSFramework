@@ -43,3 +43,4 @@ public static class DefaultPersistentDomainObjectBaseExtensions
             where TSource : class, IIdentityObject<Guid> =>
         source.SetValueSafe<TSource, TField, Guid>(fieldExpr, newValue, customSetAction);
 }
+

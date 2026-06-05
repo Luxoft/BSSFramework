@@ -21,3 +21,4 @@ public interface IValidationContext<out TSource> : IValidationContextBase<TSourc
 /// <typeparam name="TValidationMap">Метаданные</typeparam>
 public interface IValidationContext<out TSource, out TValidationMap> : IValidationContext<TSource>, IValidationContextBase<TSource, TValidationMap>
         where TValidationMap : class;
+

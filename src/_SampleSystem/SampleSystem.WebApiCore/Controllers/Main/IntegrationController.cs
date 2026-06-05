@@ -1,10 +1,12 @@
-﻿using Framework.Authorization.Generated.DTO;
+﻿using Anch.SecuritySystem;
+
+using Framework.Authorization.Generated.DTO;
 using Framework.Core.TypeResolving;
 using Framework.Infrastructure.Integration;
 
 using Microsoft.AspNetCore.Mvc;
+
 using SampleSystem.Generated.DTO;
-using Anch.SecuritySystem;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
@@ -30,3 +32,4 @@ public class IntegrationController(
                   .Where(z => typeof(Framework.Authorization.Generated.DTO.EventDTOBase).IsAssignableFrom(z))
                   .ToList();
 }
+

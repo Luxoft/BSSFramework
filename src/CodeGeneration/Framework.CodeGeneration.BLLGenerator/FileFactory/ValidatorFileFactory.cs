@@ -11,17 +11,12 @@ public class ValidatorFileFactory<TConfiguration>(TConfiguration configuration) 
     public override FileType FileType => FileType.Validator;
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration() =>
-        new()
-        {
-            Name = this.Name,
-            Attributes = MemberAttributes.Public,
-            IsPartial = true,
-        };
+        new() { Name = this.Name, Attributes = MemberAttributes.Public, IsPartial = true, };
 
     protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {
         yield return this.Configuration.GetCodeTypeReference(this.DomainType, FileType.ValidatorBase);
-        yield return this.Configuration.GetCodeTypeReference(this.DomainType, FileType.ValidatorInterface);
+        yield return this.Configuration.Environment.BLLCore.GetCodeTypeReference(this.DomainType, BLLCoreGenerator.FileType.ValidatorInterface);
     }
 
     protected override IEnumerable<CodeTypeMember> GetMembers()
@@ -36,11 +31,12 @@ public class ValidatorFileFactory<TConfiguration>(TConfiguration configuration) 
             var cacheParameter = this.Configuration.GetCodeTypeReference(null, FileType.ValidatorCompileCache).ToParameterDeclarationExpression("cache");
 
             yield return new CodeConstructor
-                         {
-                                 Attributes = MemberAttributes.Public,
-                                 Parameters = { contextParameter, cacheParameter },
-                                 BaseConstructorArgs = { contextParameter.ToVariableReferenceExpression(), cacheParameter.ToVariableReferenceExpression() }
-                         };
+            {
+                Attributes = MemberAttributes.Public,
+                Parameters = { contextParameter, cacheParameter },
+                BaseConstructorArgs = { contextParameter.ToVariableReferenceExpression(), cacheParameter.ToVariableReferenceExpression() }
+            };
         }
     }
 }
+

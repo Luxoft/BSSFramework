@@ -54,3 +54,4 @@ public abstract partial class RazorTemplate<TRenderingObject> : IMessageTemplate
 
     protected record RenderingState(StringWriter Writer, IServiceProvider ServiceProvider, DomainObjectVersions<TRenderingObject> Versions);
 }
+

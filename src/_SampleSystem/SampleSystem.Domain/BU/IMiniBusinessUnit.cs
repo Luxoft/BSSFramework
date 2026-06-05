@@ -6,3 +6,4 @@ namespace SampleSystem.Domain.BU;
 
 [ProjectionContract(typeof(BusinessUnit))]
 public interface IMiniBusinessUnit : IIdentityObject<Guid>, IVisualIdentityObject, IPeriodObject;
+

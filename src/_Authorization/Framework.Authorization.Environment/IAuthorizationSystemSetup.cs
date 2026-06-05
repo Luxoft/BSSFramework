@@ -1,6 +1,6 @@
-﻿using Framework.Authorization.Domain;
+﻿using Anch.SecuritySystem.GeneralPermission.Validation;
 
-using Anch.SecuritySystem.GeneralPermission.Validation;
+using Framework.Authorization.Domain;
 
 namespace Framework.Authorization.Environment;
 
@@ -11,3 +11,4 @@ public interface IAuthorizationSystemSetup
     IAuthorizationSystemSetup SetUniquePermissionComparer<TComparer>()
         where TComparer : class, IPermissionEqualityComparer<Permission, PermissionRestriction>;
 }
+

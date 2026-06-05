@@ -1,4 +1,5 @@
 ﻿using Anch.Core;
+using Anch.SecuritySystem;
 
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Fetching;
@@ -18,8 +19,6 @@ using SampleSystem.Domain.Enums;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Domain.MU;
 
-using Anch.SecuritySystem;
-
 namespace SampleSystem.Domain.Employee;
 
 [UniqueGroup(UseDbEvaluation = true)]
@@ -34,7 +33,7 @@ public partial class Employee :
         IMaster<EmployeeAndEmployeeSpecializationLink>,
         IMaster<EmployeePhoto>,
         ISecurityContext//,
-        //IEmployee
+                        //IEmployee
 {
     private readonly ICollection<EmployeePhoto> employeePhotos = new List<EmployeePhoto>();
 
@@ -393,3 +392,4 @@ public partial class Employee :
 
     public override string ToString() => this.Pin + " - " + this.NameNative;
 }
+

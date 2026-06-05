@@ -35,3 +35,4 @@ public class DomainTypeEventOperation : BaseDirectory, IDetail<DomainType>
 
     DomainType IDetail<DomainType>.Master => this.DomainType;
 }
+

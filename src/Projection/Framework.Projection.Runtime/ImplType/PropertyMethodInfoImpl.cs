@@ -13,3 +13,4 @@ internal class PropertyMethodInfoImpl(MethodInfo? baseDefinition = null) : BaseM
 
     public override bool Equals(object obj) => ReferenceEquals(this, obj);
 }
+

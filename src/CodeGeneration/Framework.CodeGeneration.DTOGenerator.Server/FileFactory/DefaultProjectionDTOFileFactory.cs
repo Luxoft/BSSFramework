@@ -100,3 +100,4 @@ public class DefaultProjectionDTOFileFactory<TConfiguration> : DTOFileFactory<TC
         yield return this.GenerateFromDomainObjectConstructor(this.MapDomainObjectToMappingObjectPropertyAssigner);
     }
 }
+

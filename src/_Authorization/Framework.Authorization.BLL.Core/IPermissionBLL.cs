@@ -8,3 +8,4 @@ public partial interface IPermissionBLL
 
     void UpdateDelegatePermissions(UpdatePermissionDelegatesModel updatePermissionDelegatesModel);
 }
+

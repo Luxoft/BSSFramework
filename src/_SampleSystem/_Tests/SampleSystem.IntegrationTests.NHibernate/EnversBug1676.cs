@@ -21,9 +21,9 @@ public class EnversBug1676(IServiceProvider rootServiceProvider) : TestBase(root
                            context =>
                            {
                                var location = new Location1676
-                                              {
-                                                      Name = "test"
-                                              };
+                               {
+                                   Name = "test"
+                               };
 
                                context.Logics.Location1676.Insert(location, locaitionId);
 
@@ -65,19 +65,20 @@ public class EnversBug1676(IServiceProvider rootServiceProvider) : TestBase(root
                           {
                               var locationRevisions = context.Logics.Location1676.GetObjectRevisions(locaitionId).RevisionInfos.OrderBy(z => z.RevisionNumber).ToList();
 
-                               Assert.Equal(4, locationRevisions.Count);
+                              Assert.Equal(4, locationRevisions.Count);
 
                               var version1 = context.Logics.Location1676.GetObjectByRevision(locaitionId, locationRevisions[0].RevisionNumber);
-                               Assert.Equal(version1Norm, version1.Coefficient.NormCoefficient);
+                              Assert.Equal(version1Norm, version1.Coefficient.NormCoefficient);
 
                               var version2 = context.Logics.Location1676.GetObjectByRevision(locaitionId, locationRevisions[1].RevisionNumber);
-                               Assert.Equal(version1Norm, version2.Coefficient.NormCoefficient);
+                              Assert.Equal(version1Norm, version2.Coefficient.NormCoefficient);
 
                               var version3 = context.Logics.Location1676.GetObjectByRevision(locaitionId, locationRevisions[2].RevisionNumber);
-                               Assert.Equal(version2Norm, version3.Coefficient.NormCoefficient);
+                              Assert.Equal(version2Norm, version3.Coefficient.NormCoefficient);
 
                               var version4 = context.Logics.Location1676.GetObjectByRevision(locaitionId, locationRevisions[3].RevisionNumber);
-                               Assert.Equal(version2Norm, version4.Coefficient.NormCoefficient);
+                              Assert.Equal(version2Norm, version4.Coefficient.NormCoefficient);
                           });
     }
 }
+

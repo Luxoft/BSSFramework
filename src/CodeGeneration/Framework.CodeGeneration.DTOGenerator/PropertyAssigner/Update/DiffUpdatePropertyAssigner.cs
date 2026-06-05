@@ -98,9 +98,9 @@ public class DiffUpdatePropertyAssigner<TConfiguration> : GeneratorConfiguration
                 var baseSourceItemParam = new CodeParameterDeclarationExpression { Name = "baseSourceItem" };
 
                 var toPairElementLambda = new CodeLambdaExpression
-                                          {
-                                                  Parameters = { currentSourceItemParam, baseSourceItemParam },
-                                                  Statements =
+                {
+                    Parameters = { currentSourceItemParam, baseSourceItemParam },
+                    Statements =
                                                   {
                                                           this.Configuration.GetCreateUpdateDTOExpression(
                                                            elementType,
@@ -108,12 +108,12 @@ public class DiffUpdatePropertyAssigner<TConfiguration> : GeneratorConfiguration
                                                            baseSourceItemParam.ToVariableReferenceExpression(),
                                                            this.MappingServiceRefExpr)
                                                   }
-                                          };
+                };
 
                 var toSingleElementLambda = new CodeLambdaExpression
-                                            {
-                                                    Parameters = { currentSourceItemParam },
-                                                    Statements =
+                {
+                    Parameters = { currentSourceItemParam },
+                    Statements =
                                                     {
                                                             this.Configuration.GetCreateUpdateDTOExpression(
                                                              elementType,
@@ -121,7 +121,7 @@ public class DiffUpdatePropertyAssigner<TConfiguration> : GeneratorConfiguration
                                                              null,
                                                              this.MappingServiceRefExpr)
                                                     }
-                                            };
+                };
 
                 return extractMethod.ToMethodInvokeExpression(currentSourcePropertyRef, baseSourcePropertyRef, toPairElementLambda, toSingleElementLambda).ToAssignStatement(targetPropertyRef);
             }
@@ -138,25 +138,26 @@ public class DiffUpdatePropertyAssigner<TConfiguration> : GeneratorConfiguration
             if (isSecurity)
             {
                 return new CodeConditionStatement
-                       {
-                               Condition = new CodeBinaryOperatorExpression(baseSourcePropertyRef, CodeBinaryOperatorType.ValueEquality, currentSourcePropertyRef).ToNegateExpression(),
-                               TrueStatements =
+                {
+                    Condition = new CodeBinaryOperatorExpression(baseSourcePropertyRef, CodeBinaryOperatorType.ValueEquality, currentSourcePropertyRef).ToNegateExpression(),
+                    TrueStatements =
                                {
                                        currentSourcePropertyRef.ToAssignStatement(targetPropertyRef)
                                }
-                       };
+                };
             }
             else
             {
                 return new CodeConditionStatement
-                       {
-                               Condition = new CodeBinaryOperatorExpression(baseSourcePropertyRef, CodeBinaryOperatorType.ValueEquality, currentSourcePropertyRef).ToNegateExpression(),
-                               TrueStatements =
+                {
+                    Condition = new CodeBinaryOperatorExpression(baseSourcePropertyRef, CodeBinaryOperatorType.ValueEquality, currentSourcePropertyRef).ToNegateExpression(),
+                    TrueStatements =
                                {
                                        currentSourcePropertyRef.ToMaybeReturnExpression().ToAssignStatement(targetPropertyRef)
                                }
-                       };
+                };
             }
         }
     }
 }
+

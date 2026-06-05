@@ -28,3 +28,4 @@ public sealed class PureFluentMappingObjectClassMap : ClassMap<PureFluentMapping
             .Access.CamelCaseField();
     }
 }
+

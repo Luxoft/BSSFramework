@@ -12,3 +12,4 @@ public class BusinessRoleMap : AuthBaseMap<BusinessRole>
         this.HasMany(x => x.Permissions).AsSet().Inverse().Cascade.None();
     }
 }
+

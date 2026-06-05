@@ -15,3 +15,4 @@ public class TargetSystemMap : ConfigurationBaseMap<TargetSystem>
         this.HasMany(x => x.DomainTypes).AsSet().Inverse().Cascade.AllDeleteOrphan();
     }
 }
+

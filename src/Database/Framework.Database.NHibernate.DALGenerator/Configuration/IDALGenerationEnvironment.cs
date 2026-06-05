@@ -3,3 +3,4 @@
 namespace Framework.Database.NHibernate.DALGenerator.Configuration;
 
 public interface IDALGenerationEnvironment : IFileGenerationEnvironment;
+

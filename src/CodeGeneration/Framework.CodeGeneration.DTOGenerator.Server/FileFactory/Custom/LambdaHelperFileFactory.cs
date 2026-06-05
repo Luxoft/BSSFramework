@@ -90,41 +90,41 @@ public class LambdaHelperFileFactory<TConfiguration>(TConfiguration configuratio
         if (!fileType.NeedMappingServiceForConvert())
         {
             return new CodeMemberMethod
-                   {
-                           Attributes = MemberAttributes.Public | MemberAttributes.Static,
-                           Name = "To" + fileType.Name,
-                           ReturnType = dtoRef,
-                           Parameters =
+            {
+                Attributes = MemberAttributes.Public | MemberAttributes.Static,
+                Name = "To" + fileType.Name,
+                ReturnType = dtoRef,
+                Parameters =
                            {
                                    new CodeParameterDeclarationExpression(domainType, sourceDomainParameter.Name)
                            },
-                           Statements =
+                Statements =
                            {
                                    dtoRef.ToObjectCreateExpression(sourceDomainParameter.ToVariableReferenceExpression())
                                          .ToMethodReturnStatement()
                            }
-                   }.MarkAsExtension();
+            }.MarkAsExtension();
         }
         else
         {
             var mappingServiceParameter = this.GetMappingServiceParameter();
 
             return new CodeMemberMethod
-                   {
-                           Attributes = MemberAttributes.Public | MemberAttributes.Static,
-                           Name = "To" + fileType.Name,
-                           ReturnType = dtoRef,
-                           Parameters =
+            {
+                Attributes = MemberAttributes.Public | MemberAttributes.Static,
+                Name = "To" + fileType.Name,
+                ReturnType = dtoRef,
+                Parameters =
                            {
                                    new CodeParameterDeclarationExpression(domainType, sourceDomainParameter.Name),
                                    mappingServiceParameter
                            },
-                           Statements =
+                Statements =
                            {
                                    dtoRef.ToObjectCreateExpression(mappingServiceParameter.ToVariableReferenceExpression(), sourceDomainParameter.ToVariableReferenceExpression())
                                          .ToMethodReturnStatement()
                            }
-                   }.MarkAsExtension();
+            }.MarkAsExtension();
         }
     }
 
@@ -142,15 +142,15 @@ public class LambdaHelperFileFactory<TConfiguration>(TConfiguration configuratio
         if (!fileType.NeedMappingServiceForConvert())
         {
             return new CodeMemberMethod
-                   {
-                           Attributes = MemberAttributes.Public | MemberAttributes.Static,
-                           Name = "To" + fileType.Name + "List",
-                           ReturnType = typeof(List<>).ToTypeReference(dtoRef),
-                           Parameters =
+            {
+                Attributes = MemberAttributes.Public | MemberAttributes.Static,
+                Name = "To" + fileType.Name + "List",
+                ReturnType = typeof(List<>).ToTypeReference(dtoRef),
+                Parameters =
                            {
                                    new CodeParameterDeclarationExpression(typeof(IEnumerable<>).MakeGenericType(domainType), domainObjectsParameter.Name)
                            },
-                           Statements =
+                Statements =
                            {
                                    typeof(CoreEnumerableExtensions)
                                            .ToTypeReferenceExpression()
@@ -171,23 +171,23 @@ public class LambdaHelperFileFactory<TConfiguration>(TConfiguration configuratio
                                                                              }))
                                            .ToMethodReturnStatement()
                            }
-                   }.MarkAsExtension();
+            }.MarkAsExtension();
         }
         else
         {
             var mappingServiceParameter = this.GetMappingServiceParameter();
 
             return new CodeMemberMethod
-                   {
-                           Attributes = MemberAttributes.Public | MemberAttributes.Static,
-                           Name = "To" + fileType.Name + "List",
-                           ReturnType = typeof(List<>).ToTypeReference(dtoRef),
-                           Parameters =
+            {
+                Attributes = MemberAttributes.Public | MemberAttributes.Static,
+                Name = "To" + fileType.Name + "List",
+                ReturnType = typeof(List<>).ToTypeReference(dtoRef),
+                Parameters =
                            {
                                    new CodeParameterDeclarationExpression(typeof(IEnumerable<>).MakeGenericType(domainType), domainObjectsParameter.Name),
                                    mappingServiceParameter
                            },
-                           Statements =
+                Statements =
                            {
                                    typeof(CoreEnumerableExtensions)
                                            .ToTypeReferenceExpression()
@@ -208,7 +208,8 @@ public class LambdaHelperFileFactory<TConfiguration>(TConfiguration configuratio
                                                                              }))
                                            .ToMethodReturnStatement()
                            }
-                   }.MarkAsExtension();
+            }.MarkAsExtension();
         }
     }
 }
+

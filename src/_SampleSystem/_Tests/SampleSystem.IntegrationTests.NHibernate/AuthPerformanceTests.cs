@@ -1,15 +1,14 @@
-﻿using Framework.AutomationCore.RootServiceProviderContainer;
+﻿using Anch.SecuritySystem;
+
+using Framework.AutomationCore.RootServiceProviderContainer;
 using Framework.BLL;
 using Framework.Core;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.TestDeserializedAuth;
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.Main;
-
-using Anch.SecuritySystem;
-
-using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -39,13 +38,13 @@ public class AuthPerformanceTests(IServiceProvider rootServiceProvider) : TestBa
                                                         from buIdent in genBu
                                                         from mbuIdent in genMbu
                                                         select new TestPerformanceObject
-                                                               {
-                                                                       Employee = ctx.Logics.Employee.GetById(emplIdent.Id),
-                                                                       Location = ctx.Logics.Location.GetById(locIdent.Id),
-                                                                       BusinessUnit = ctx.Logics.BusinessUnit.GetById(buIdent.Id),
-                                                                       ManagementUnit = ctx.Logics.ManagementUnit.GetById(mbuIdent.Id),
-                                                                       Name = Guid.NewGuid().ToString()
-                                                               };
+                                                        {
+                                                            Employee = ctx.Logics.Employee.GetById(emplIdent.Id),
+                                                            Location = ctx.Logics.Location.GetById(locIdent.Id),
+                                                            BusinessUnit = ctx.Logics.BusinessUnit.GetById(buIdent.Id),
+                                                            ManagementUnit = ctx.Logics.ManagementUnit.GetById(mbuIdent.Id),
+                                                            Name = Guid.NewGuid().ToString()
+                                                        };
 
                                                 var genObjects = gebObjectsRequest.ToList();
 
@@ -111,3 +110,4 @@ public class AuthPerformanceTests(IServiceProvider rootServiceProvider) : TestBa
         Assert.Equal(Limit * Limit * Limit * Limit, testPerformanceObjects.Count());
     }
 }
+

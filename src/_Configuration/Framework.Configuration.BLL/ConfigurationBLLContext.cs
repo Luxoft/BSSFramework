@@ -2,6 +2,8 @@
 using System.Collections.Immutable;
 
 using Anch.Core;
+using Anch.HierarchicalExpand;
+using Anch.SecuritySystem.AccessDenied;
 
 using Framework.Application;
 using Framework.Application.Events;
@@ -17,11 +19,7 @@ using Framework.Core.Serialization;
 using Framework.Core.TypeResolving;
 using Framework.Validation;
 
-using Anch.HierarchicalExpand;
-
 using Microsoft.Extensions.DependencyInjection;
-
-using Anch.SecuritySystem.AccessDenied;
 
 namespace Framework.Configuration.BLL;
 
@@ -91,3 +89,4 @@ public partial class ConfigurationBLLContext(
 
         this.TryGetDomainType(typeNameIdentity) ?? throw new BusinessLogicException("TargetSystem with domainType \"{0}\" not found", typeNameIdentity);
 }
+

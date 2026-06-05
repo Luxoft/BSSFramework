@@ -1,8 +1,8 @@
-﻿using Framework.Application;
+﻿using Anch.SecuritySystem;
+
+using Framework.Application;
 using Framework.AutomationCore.RootServiceProviderContainer;
 using Framework.Database;
-
-using Anch.SecuritySystem;
 
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests._Environment.TestData;
@@ -70,3 +70,4 @@ public class CurrentUserManyRelativePathTests(IServiceProvider rootServiceProvid
         Assert.Equal(expectedResult, results);
     }
 }
+

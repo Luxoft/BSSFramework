@@ -46,11 +46,11 @@ public class ValidatorBaseFileFactory<TConfiguration>(TConfiguration configurati
                                                                      .ToExpressionStatement();
 
             yield return new CodeConstructor
-                         {
-                                 Attributes = MemberAttributes.Public,
-                                 Parameters = { contextParameter, cacheParameter },
-                                 BaseConstructorArgs = { contextParameter.ToVariableReferenceExpression(), cacheParameter.ToVariableReferenceExpression() }
-                         }.WithStatements(statements);
+            {
+                Attributes = MemberAttributes.Public,
+                Parameters = { contextParameter, cacheParameter },
+                BaseConstructorArgs = { contextParameter.ToVariableReferenceExpression(), cacheParameter.ToVariableReferenceExpression() }
+            }.WithStatements(statements);
         }
 
         foreach (var domainType in this.Configuration.ValidationTypes)
@@ -62,19 +62,20 @@ public class ValidatorBaseFileFactory<TConfiguration>(TConfiguration configurati
             var ownerStateParameter = typeof(IValidationState).ToTypeReference().ToParameterDeclarationExpression("ownerState");
 
             yield return new CodeMemberMethod
-                         {
-                                 Attributes = MemberAttributes.Family,
-                                 Name = $"Get{domainType.Name}ValidationResult",
-                                 ReturnType = typeof(ValidationResult).ToTypeReference(),
-                                 Parameters = { sourceParameter, operationContextParameter, ownerStateParameter },
+            {
+                Attributes = MemberAttributes.Family,
+                Name = $"Get{domainType.Name}ValidationResult",
+                ReturnType = typeof(ValidationResult).ToTypeReference(),
+                Parameters = { sourceParameter, operationContextParameter, ownerStateParameter },
 
-                                 Statements = { new CodeBaseReferenceExpression().ToMethodInvokeExpression(
+                Statements = { new CodeBaseReferenceExpression().ToMethodInvokeExpression(
                                                  "GetValidationResult",
                                                  sourceParameter.ToVariableReferenceExpression(),
                                                  operationContextParameter.ToVariableReferenceExpression(),
                                                  ownerStateParameter.ToVariableReferenceExpression(),
                                                  false.ToPrimitiveExpression()).ToMethodReturnStatement() }
-                         };
+            };
         }
     }
 }
+

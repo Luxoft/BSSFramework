@@ -30,3 +30,4 @@ public class BssFluentMigrator
         runner.MigrateUp();
     }
 }
+

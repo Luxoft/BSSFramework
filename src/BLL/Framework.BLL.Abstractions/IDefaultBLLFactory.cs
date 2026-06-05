@@ -8,3 +8,4 @@ public interface IDefaultBLLFactory<in TPersistentDomainObjectBase, TIdent>
     IDefaultDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>()
         where TDomainObject : class, TPersistentDomainObjectBase;
 }
+

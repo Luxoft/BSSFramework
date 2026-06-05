@@ -21,3 +21,4 @@ public class MuComponent
         set => this.authorizedLuxoftSignatory = value;
     }
 }
+

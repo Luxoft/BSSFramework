@@ -40,3 +40,4 @@ public class GetSingleByCodeMethodGenerator<TConfiguration>(TConfiguration confi
                                      .ToMethodReturnStatement();
     }
 }
+

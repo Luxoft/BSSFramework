@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+
 using Framework.Core;
 
 namespace Framework.Database;
@@ -13,3 +14,4 @@ public abstract class ExpressionVisitorAggregator : IExpressionVisitorContainer
 
     protected abstract IEnumerable<ExpressionVisitor> GetVisitors();
 }
+

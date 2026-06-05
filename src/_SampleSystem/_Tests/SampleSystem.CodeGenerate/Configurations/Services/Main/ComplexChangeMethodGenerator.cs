@@ -12,6 +12,7 @@ using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators;
+
 using SampleSystem.Domain;
 using SampleSystem.Domain.Models.Change._Base;
 
@@ -59,14 +60,14 @@ public class ComplexChangeMethodGenerator : ModelMethodGenerator<MainServiceGene
         var domainObjectsRef = changeModelDecl.ToVariableReferenceExpression().ToPropertyReference(nameof(DomainObjectComplexChangeModel<PersistentDomainObjectBase>.SecondaryChangingObjects));
 
         yield return new CodeParameterDeclarationExpression { Name = "secondaryDomainObject" }.Pipe(iterator => new CodeForeachStatement
-            {
-                    Source = domainObjectsRef,
-                    Iterator = iterator,
-                    Statements =
+        {
+            Source = domainObjectsRef,
+            Iterator = iterator,
+            Statements =
                     {
                             bllRefExpr.ToMethodInvokeExpression("CheckAccess", iterator.ToVariableReferenceExpression()).ToExpressionStatement()
                     }
-            });
+        });
 
         yield return bllRefExpr.ToMethodInvokeExpression(this.DomainType.GetModelMethodName(this.ModelType, SampleSystemModelRole.ComplexChange, false),
                                                          changeModelDecl.ToVariableReferenceExpression())
@@ -87,3 +88,4 @@ public class ComplexChangeMethodGenerator : ModelMethodGenerator<MainServiceGene
         return modelSecurityAttribute.SecurityRule;
     }
 }
+

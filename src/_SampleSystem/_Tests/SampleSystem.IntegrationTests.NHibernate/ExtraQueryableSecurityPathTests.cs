@@ -1,11 +1,11 @@
 ﻿using Anch.Core;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.Services;
 
 using Framework.Application;
 using Framework.Core;
 using Framework.Database;
 
-using Anch.SecuritySystem;
-using Anch.SecuritySystem.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.BLL;
@@ -94,3 +94,4 @@ public class ExtraQueryableSecurityPathTests(IServiceProvider rootServiceProvide
         Assert.Equal(this.TestEmp2.Id, Assert.Single(items));
     }
 }
+

@@ -1,14 +1,13 @@
 ﻿using System.Linq.Expressions;
 
 using Anch.Core;
+using Anch.GenericQueryable;
+using Anch.GenericQueryable.Fetching;
 
 using Framework.Application.Domain;
 using Framework.BLL.Domain.Persistent.IdentityObject;
 using Framework.BLL.Exceptions;
 using Framework.Core;
-
-using Anch.GenericQueryable;
-using Anch.GenericQueryable.Fetching;
 
 namespace Framework.BLL;
 
@@ -126,3 +125,4 @@ public static class DefaultDomainBLLBaseExtensions
         }
     }
 }
+

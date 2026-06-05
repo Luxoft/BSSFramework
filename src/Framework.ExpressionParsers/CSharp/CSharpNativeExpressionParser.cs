@@ -32,18 +32,18 @@ public class CSharpNativeExpressionParser(INativeBodyExpressionParser parser) : 
         var genericParameterSequencies =
                 methodInfo
                         .InputTypes
-                        .Select((parameterType, index) => new {ParameterType = parameterType, Index = index})
+                        .Select((parameterType, index) => new { ParameterType = parameterType, Index = index })
                         .ToList();
 
         var expressionParameterNames =
                 parameterNames
-                        .Select((name, index) => new {Name = name, Index = index})
+                        .Select((name, index) => new { Name = name, Index = index })
                         .ToList();
 
         if (!expressionParameterNames.Any())
         {
             expressionParameterNames =
-                    genericParameterSequencies.Select((_, index) => new {Name = string.Empty, Index = index}).ToList();
+                    genericParameterSequencies.Select((_, index) => new { Name = string.Empty, Index = index }).ToList();
         }
 
 
@@ -123,3 +123,4 @@ public class CSharpNativeExpressionParser(INativeBodyExpressionParser parser) : 
     /// <returns></returns>
     public static readonly CSharpNativeExpressionParser Compile = new(new RoslynCSharpExpressionParser());
 }
+

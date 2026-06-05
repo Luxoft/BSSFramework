@@ -43,3 +43,4 @@ public static class SerializerFactoryExtensions
         serializerFactory.Create<TValue>().Deserialize(serializedValue);
     }
 }
+

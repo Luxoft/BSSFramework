@@ -18,3 +18,4 @@ public class ExampleFaultDALListenerSettings
 {
     public bool Raise { get; set; }
 }
+

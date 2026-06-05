@@ -27,3 +27,4 @@ public class BaseFieldInfoImpl : FieldInfo
 
     public override void SetValue(object obj, object value, BindingFlags invokeAttr, Binder binder, CultureInfo culture) => throw new NotImplementedException();
 }
+

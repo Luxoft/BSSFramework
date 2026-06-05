@@ -12,7 +12,7 @@ public static class DataContractSerializerHelper
     {
         var serializer = new DataContractSerializer(typeof(T));
 
-        using var textReader = new StringReader (source);
+        using var textReader = new StringReader(source);
         using var xmlReader = new XmlTextReader(textReader);
         return (T)serializer.ReadObject(xmlReader);
     }
@@ -58,5 +58,6 @@ public static class DataContractSerializerHelper
     }
 
 
-    public static ISerializer<string, T> GetSerializer<T>() => new Serializer<string, T> (Deserialize<T>, value => Serialize(value));
+    public static ISerializer<string, T> GetSerializer<T>() => new Serializer<string, T>(Deserialize<T>, value => Serialize(value));
 }
+

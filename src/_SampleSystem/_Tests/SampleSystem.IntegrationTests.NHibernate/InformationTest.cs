@@ -37,3 +37,4 @@ public class InformationTest(IServiceProvider rootServiceProvider) : TestBase(ro
         Assert.Single(this.GetIntegrationEvents<InformationRemoveEventDTO>(), dto => dto.Information.Id == id);
     }
 }
+

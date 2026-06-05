@@ -33,3 +33,4 @@ public abstract class MaybeSecurityToDomainObjectPropertyAssigner<TConfiguration
         }
     }
 }
+

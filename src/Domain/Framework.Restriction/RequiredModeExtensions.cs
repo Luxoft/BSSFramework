@@ -23,7 +23,7 @@ public static class RequiredModeExtensions
         {
             case RequiredMode.AllowEmptyString:
 
-                return typeof (string) == appliedType;
+                return typeof(string) == appliedType;
 
             case RequiredMode.ClosedPeriodEndDate:
 
@@ -37,3 +37,4 @@ public static class RequiredModeExtensions
         }
     }
 }
+

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Immutable;
-
 using System.Reflection;
 
 using Anch.Core;
@@ -18,7 +17,7 @@ public class PropertyPathService(IMetadataProxyProvider metadataProxyProvider) :
 
     private readonly ConcurrentDictionary<Type, ConcurrentDictionary<PropertyInfo, ImmutableArray<PropertyPath>>> manyPathCache = [];
 
-    private readonly ConcurrentDictionary<PropertyInfo,  PropertyPath?> expandPathCache = [];
+    private readonly ConcurrentDictionary<PropertyInfo, PropertyPath?> expandPathCache = [];
 
     public PropertyPath? TryGetPropertyPath<TAttribute>(PropertyInfo property, bool recurse)
         where TAttribute : Attribute, IPathAttribute =>
@@ -82,3 +81,4 @@ public class PropertyPathService(IMetadataProxyProvider metadataProxyProvider) :
 
     public PropertyPath WithExpand(PropertyPath propertyPath) => propertyPath.SelectMany(this.GetExpandPathOrSelf).ToPropertyPath();
 }
+

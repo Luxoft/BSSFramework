@@ -157,3 +157,4 @@ internal class AddOrUpdateStrategy(DatabaseScriptGeneratorStrategyInfo parameter
         return result;
     }
 }
+

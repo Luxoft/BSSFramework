@@ -29,27 +29,28 @@ public class ClientPrimitiveDTOMappingServiceFileFactory<TConfiguration> : FileF
     protected override IEnumerable<CodeTypeMember> GetMembers()
     {
         var currentInstanceField = new CodeMemberField
-                                   {
-                                           Attributes = MemberAttributes.Private | MemberAttributes.Static,
-                                           Name = "_default",
-                                           Type = this.CurrentReference,
-                                           InitExpression = this.CurrentReference.ToObjectCreateExpression(),
-                                   };
+        {
+            Attributes = MemberAttributes.Private | MemberAttributes.Static,
+            Name = "_default",
+            Type = this.CurrentReference,
+            InitExpression = this.CurrentReference.ToObjectCreateExpression(),
+        };
 
         yield return currentInstanceField;
 
         yield return new CodeMemberProperty
-                     {
-                             Attributes = MemberAttributes.Public | MemberAttributes.Static,
-                             Type = this.CurrentReference,
-                             Name = "Default",
-                             HasGet = true,
-                             GetStatements =
+        {
+            Attributes = MemberAttributes.Public | MemberAttributes.Static,
+            Type = this.CurrentReference,
+            Name = "Default",
+            HasGet = true,
+            GetStatements =
                              {
                                      this.CurrentReference.ToTypeReferenceExpression()
                                          .ToFieldReference(currentInstanceField)
                                          .ToMethodReturnStatement()
                              }
-                     };
+        };
     }
 }
+

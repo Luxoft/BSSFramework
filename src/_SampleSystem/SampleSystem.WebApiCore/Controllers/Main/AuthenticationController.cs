@@ -9,3 +9,4 @@ public class AuthenticationController : ControllerBase
     [HttpGet]
     public bool IsAuthenticated() => this.HttpContext.User.Identity!.IsAuthenticated;
 }
+

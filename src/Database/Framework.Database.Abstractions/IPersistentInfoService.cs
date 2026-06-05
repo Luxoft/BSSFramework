@@ -8,3 +8,4 @@ public interface IPersistentInfoService
 
     bool IsPersistent(PropertyInfo propertyInfo);
 }
+

@@ -1,13 +1,13 @@
 ﻿using System.CodeDom;
 
 using Framework.CodeDom.Extensions;
-using Framework.CodeGeneration.BLLGenerator.Configuration;
+using Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 using Framework.Validation;
 
-namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
+namespace Framework.CodeGeneration.BLLCoreGenerator.FileFactory;
 
 public class ValidatorInterfaceFileFactory<TConfiguration>(TConfiguration configuration) : FileFactory<TConfiguration>(configuration, null)
-    where TConfiguration : class, IBLLGeneratorConfiguration<IBLLGenerationEnvironment>
+    where TConfiguration : class, IBLLCoreGeneratorConfiguration<IBLLCoreGenerationEnvironment>
 {
     public override FileType FileType => FileType.ValidatorInterface;
 
@@ -22,3 +22,4 @@ public class ValidatorInterfaceFileFactory<TConfiguration>(TConfiguration config
             IsInterface = true
         };
 }
+

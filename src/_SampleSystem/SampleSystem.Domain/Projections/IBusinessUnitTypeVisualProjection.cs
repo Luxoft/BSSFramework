@@ -9,3 +9,4 @@ namespace SampleSystem.Domain.Projections;
 [BLLProjectionViewRole]
 [ProjectionContract(typeof(BusinessUnitType))]
 public interface IBusinessUnitTypeVisualProjection : IIdentityObject<Guid>, IVisualIdentityObject;
+

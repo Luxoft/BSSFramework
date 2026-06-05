@@ -216,12 +216,12 @@ internal class GeneratedType : BaseTypeImpl, IWrappingObject
         var interfaceExplicitProperties = this.explicitProperties.Where(prop => prop.InterfaceProp.ReflectedType == realInterface).ToArray();
 
         return new InterfaceMapping
-               {
-                   InterfaceType = interfaceType,
-                   TargetType = this,
-                   InterfaceMethods = interfaceExplicitProperties.ToArray(prop => prop.InterfaceProp.GetMethod!),
-                   TargetMethods = interfaceExplicitProperties.ToArray(prop => prop.GetMethod!)
-               };
+        {
+            InterfaceType = interfaceType,
+            TargetType = this,
+            InterfaceMethods = interfaceExplicitProperties.ToArray(prop => prop.InterfaceProp.GetMethod!),
+            TargetMethods = interfaceExplicitProperties.ToArray(prop => prop.GetMethod!)
+        };
     }
 
     public override bool Equals(Type? o) => ReferenceEquals(this, o);
@@ -296,3 +296,4 @@ internal class GeneratedType : BaseTypeImpl, IWrappingObject
         }
     }
 }
+

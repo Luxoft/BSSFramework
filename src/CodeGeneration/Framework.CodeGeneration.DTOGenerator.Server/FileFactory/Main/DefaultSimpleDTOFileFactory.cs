@@ -10,7 +10,6 @@ using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main.Base;
 using Framework.Core;
 
-
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main;
 
 public class DefaultSimpleDTOFileFactory<TConfiguration>(TConfiguration configuration, Type domainType) : MainDTOFileFactory<TConfiguration>(configuration, domainType)
@@ -72,3 +71,4 @@ public class DefaultSimpleDTOFileFactory<TConfiguration>(TConfiguration configur
         return base.GetFieldInitExpression(codeTypeReference, property);
     }
 }
+

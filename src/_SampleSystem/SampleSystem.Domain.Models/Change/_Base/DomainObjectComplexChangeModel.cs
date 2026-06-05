@@ -17,3 +17,4 @@ public abstract class DomainObjectComplexChangeModel<TDomainObject> : DomainObje
     [Required]
     public List<TDomainObject> SecondaryChangingObjects { get; set; }
 }
+

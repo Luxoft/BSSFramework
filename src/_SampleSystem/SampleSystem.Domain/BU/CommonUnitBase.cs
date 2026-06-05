@@ -12,3 +12,4 @@ public abstract class CommonUnitBase : BaseDirectory
         set => this.businessUnitStatus = value;
     }
 }
+

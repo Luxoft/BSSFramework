@@ -1,5 +1,6 @@
 ﻿using System.CodeDom;
 using System.Reflection;
+
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
 
@@ -13,3 +14,4 @@ public interface IPropertyAssigner : IDTOSource
 
 public interface IPropertyAssigner<out TConfiguration> : IDTOSource<TConfiguration>, IPropertyAssigner
         where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>;
+

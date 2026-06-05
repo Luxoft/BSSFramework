@@ -1,18 +1,16 @@
-﻿using Framework.Application;
+﻿using Anch.SecuritySystem;
+using Anch.SecuritySystem.Validation;
+
+using Framework.Application;
 using Framework.Authorization.Domain;
+using Framework.AutomationCore.RootServiceProviderContainer;
 using Framework.BLL;
 using Framework.Core;
 using Framework.Database;
 
 using SampleSystem.Generated.DTO;
-using SampleSystem.Security;
-
-using Anch.SecuritySystem;
-using Anch.SecuritySystem.Validation;
-
-using Framework.AutomationCore.RootServiceProviderContainer;
-
 using SampleSystem.IntegrationTests._Environment.TestData;
+using SampleSystem.Security;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -48,7 +46,8 @@ public class PrincipalWithInitTests(IServiceProvider rootServiceProvider) : Test
         await this.AuthManager.For(TestPrincipalName).SetRoleAsync(
             new SampleSystemTestPermission(
             SampleSystemSecurityRole.TestPerformance,
-            new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)) { Period = new PermissionPeriod(this.testPeriod.StartDate, this.testPeriod.EndDate) },
+            new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID))
+            { Period = new PermissionPeriod(this.testPeriod.StartDate, this.testPeriod.EndDate) },
             ct);
     }
 
@@ -106,3 +105,4 @@ public class PrincipalWithInitTests(IServiceProvider rootServiceProvider) : Test
         Assert.Contains(expectedErrorMessage, validationException.Message);
     }
 }
+

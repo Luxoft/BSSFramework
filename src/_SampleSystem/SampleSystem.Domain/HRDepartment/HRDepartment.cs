@@ -169,3 +169,4 @@ public partial class HRDepartment :
         return HRDepartmentEmployeeRoleType.None != inspectorRoleType;
     }
 }
+

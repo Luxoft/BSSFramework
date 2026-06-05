@@ -48,10 +48,10 @@ public partial class DataManager
         Employee employee;
 
         nameEng = nameEng ?? new Fio
-                             {
-                                     FirstName = TextRandomizer.RandomString("FirstName", 15),
-                                     LastName = TextRandomizer.RandomString("LastName", 15)
-                             };
+        {
+            FirstName = TextRandomizer.RandomString("FirstName", 15),
+            LastName = TextRandomizer.RandomString("LastName", 15)
+        };
         var nameTemp = nameEng;
         nameTemp.MiddleName = TextRandomizer.RandomString("MiddleName", 15);
 
@@ -104,34 +104,34 @@ public partial class DataManager
                                       }
 
                                       employee = new Employee
-                                                 {
-                                                         Active = active,
-                                                         ExternalId = externalId,
-                                                         BirthDate = birthDate,
-                                                         HRDepartment = context.Logics.HRDepartment.GetById(hrDepartmentId, isObjectRequired),
-                                                         DismissDate = dismissDate,
-                                                         Email = email,
-                                                         HireDate = hireDate,
-                                                         PlannedHireDate = hireDate,
-                                                         Login = login,
-                                                         NameEng = nameEng,
-                                                         NameNative = nameNative,
-                                                         NameRussian = nameRussian,
-                                                         Pin = pin,
-                                                         ManagementUnit = null, //context.Logics.ManagementUnit.GetById(managementUnitId, isObjectRequired),
-                                                         Position = context.Logics.EmployeePosition.GetById(positionId),
-                                                         RegistrationType = context.Logics.EmployeeRegistrationType.GetById(registrationId),
-                                                         Role = context.Logics.EmployeeRole.GetById(roleId),
-                                                         RoleDegree = context.Logics.EmployeeRoleDegree.GetById(roleDegreeId),
-                                                         CellPhone = cellPhone,
-                                                         Interphone = "3365",
-                                                         Landlinephone = "3365",
-                                                         PersonalCellPhone = personalCellPhone,
-                                                         WorkPeriod = workPeriod ?? new Period(DateTime.Now.Date.AddMonths(-1), DateTime.Now.Date),
-                                                         EducationDuration = educationDuration ?? new Period(DateTime.Now.Date.AddYears(-5), DateTime.Now.Date.AddYears(-2)),
-                                                         NonValidateVirtualProp = nonValidateVirtualProp ?? DateTime.Now,
-                                                         ValidateVirtualProp = validateVirtualProp ?? DateTime.Now,
-                                                         Age = age
+                                      {
+                                          Active = active,
+                                          ExternalId = externalId,
+                                          BirthDate = birthDate,
+                                          HRDepartment = context.Logics.HRDepartment.GetById(hrDepartmentId, isObjectRequired),
+                                          DismissDate = dismissDate,
+                                          Email = email,
+                                          HireDate = hireDate,
+                                          PlannedHireDate = hireDate,
+                                          Login = login,
+                                          NameEng = nameEng,
+                                          NameNative = nameNative,
+                                          NameRussian = nameRussian,
+                                          Pin = pin,
+                                          ManagementUnit = null, //context.Logics.ManagementUnit.GetById(managementUnitId, isObjectRequired),
+                                          Position = context.Logics.EmployeePosition.GetById(positionId),
+                                          RegistrationType = context.Logics.EmployeeRegistrationType.GetById(registrationId),
+                                          Role = context.Logics.EmployeeRole.GetById(roleId),
+                                          RoleDegree = context.Logics.EmployeeRoleDegree.GetById(roleDegreeId),
+                                          CellPhone = cellPhone,
+                                          Interphone = "3365",
+                                          Landlinephone = "3365",
+                                          PersonalCellPhone = personalCellPhone,
+                                          WorkPeriod = workPeriod ?? new Period(DateTime.Now.Date.AddMonths(-1), DateTime.Now.Date),
+                                          EducationDuration = educationDuration ?? new Period(DateTime.Now.Date.AddYears(-5), DateTime.Now.Date.AddYears(-2)),
+                                          NonValidateVirtualProp = nonValidateVirtualProp ?? DateTime.Now,
+                                          ValidateVirtualProp = validateVirtualProp ?? DateTime.Now,
+                                          Age = age
                                       };
 
                                       if (coreBusinessUnit != null)
@@ -168,13 +168,13 @@ public partial class DataManager
                                       if (position == null)
                                       {
                                           position = new EmployeePosition
-                                                     {
-                                                             Active = active,
-                                                             Name = name,
-                                                             EnglishName = englishName,
-                                                             ExternalId = externalId,
-                                                             Location = context.Logics.Location.GetById(locationId)
-                                                     };
+                                          {
+                                              Active = active,
+                                              Name = name,
+                                              EnglishName = englishName,
+                                              ExternalId = externalId,
+                                              Location = context.Logics.Location.GetById(locationId)
+                                          };
 
                                           context.Logics.EmployeePosition.Insert(position, this.GetGuid(id));
                                       }
@@ -200,11 +200,11 @@ public partial class DataManager
                                       if (type == null)
                                       {
                                           type = new EmployeeRegistrationType
-                                                 {
-                                                         Active = active,
-                                                         Name = name,
-                                                         ExternalId = externalId
-                                                 };
+                                          {
+                                              Active = active,
+                                              Name = name,
+                                              ExternalId = externalId
+                                          };
 
                                           context.Logics.EmployeeRegistrationType.Insert(type, this.GetGuid(id));
                                       }
@@ -273,10 +273,10 @@ public partial class DataManager
             context =>
             {
                 var specialization = new EmployeeSpecialization
-                                     {
-                                         Id = id ?? Guid.NewGuid(),
-                                         Name = name ?? TextRandomizer.UniqueString("EmployeeSpecialization")
-                                     };
+                {
+                    Id = id ?? Guid.NewGuid(),
+                    Name = name ?? TextRandomizer.UniqueString("EmployeeSpecialization")
+                };
 
                 context.Logics.EmployeeSpecialization.Insert(specialization, specialization.Id);
 
@@ -290,12 +290,13 @@ public partial class DataManager
                 var employeeRole = context.Logics.EmployeeRole.GetById(employeeRoleIdentity.Id, true);
                 var employeeRoleDegree = context.Logics.EmployeeRoleDegree.GetById(employeeRoleDegreeIdentity.Id, true);
                 var result = new RoleRoleDegreeLink
-                             {
-                                 Id = id ?? Guid.NewGuid(),
-                                 Role = employeeRole,
-                                 RoleDegree = employeeRoleDegree
-                             };
+                {
+                    Id = id ?? Guid.NewGuid(),
+                    Role = employeeRole,
+                    RoleDegree = employeeRoleDegree
+                };
 
                 context.Logics.RoleRoleDegreeLink.Insert(result, result.Id);
             });
 }
+

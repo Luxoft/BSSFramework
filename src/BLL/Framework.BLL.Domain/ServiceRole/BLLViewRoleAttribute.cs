@@ -51,3 +51,4 @@ public class BLLViewRoleAttribute : BLLViewRoleBaseAttribute
 
     protected override ViewDTOType BaseMaxFetch => (ViewDTOType)this.MaxFetch;
 }
+

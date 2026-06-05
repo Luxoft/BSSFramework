@@ -1,10 +1,9 @@
-﻿using Framework.Core;
-
+﻿using Anch.HierarchicalExpand;
 using Anch.SecuritySystem;
 using Anch.SecuritySystem.DependencyInjection;
 using Anch.SecuritySystem.VirtualPermission.DependencyInjection;
 
-using Anch.HierarchicalExpand;
+using Framework.Core;
 
 using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Directories;
@@ -54,7 +53,8 @@ public static class SampleSystemSecuritySystemExtensions
                     SampleSystemSecurityRole.SeManager,
                     new SecurityRoleInfo(new Guid("dbf3556d-7106-4175-b5e4-a32d00bd857a"))
                     {
-                        Children = [SampleSystemSecurityRole.TestVirtualRole], Operations = [SampleSystemSecurityOperation.BusinessUnitEdit]
+                        Children = [SampleSystemSecurityRole.TestVirtualRole],
+                        Operations = [SampleSystemSecurityOperation.BusinessUnitEdit]
                     })
 
                 .AddSecurityRole(
@@ -125,7 +125,7 @@ public static class SampleSystemSecuritySystemExtensions
                     SecurityRole.Administrator,
                     new SecurityRoleInfo(new Guid("d9c1d2f0-0c2f-49ab-bb0b-de13a456169e"))
                     {
-                        Operations = [..typeof(SampleSystemSecurityOperation).GetStaticPropertyValueList<SecurityOperation>()]
+                        Operations = [.. typeof(SampleSystemSecurityOperation).GetStaticPropertyValueList<SecurityOperation>()]
                     });
 
         public ISecuritySystemSetup AddSecurityRules()
@@ -161,3 +161,4 @@ public static class SampleSystemSecuritySystemExtensions
                               v => v.AddFilter(link => link.Role == BusinessUnitEmployeeRoleType.Manager)));
     }
 }
+

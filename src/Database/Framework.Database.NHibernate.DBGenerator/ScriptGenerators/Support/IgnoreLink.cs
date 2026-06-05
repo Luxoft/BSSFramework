@@ -30,7 +30,7 @@ public class IgnoreLink
             throw new ArgumentException("Expected PropertyExpression, actual expression:{0}", collectionExpression.ToString());
         }
 
-        var memberExpression = (MemberExpression) collectionExpression.Body;
+        var memberExpression = (MemberExpression)collectionExpression.Body;
 
         var member = memberExpression.Member;
 
@@ -46,7 +46,8 @@ public class IgnoreLink
 
     private IgnoreLink(Type fromType) => this.FromType = fromType;
 
-    public Type FromType { get; private set;}
+    public Type FromType { get; private set; }
 
     public PropertyInfo MemberInfo { get; private set; }
 }
+

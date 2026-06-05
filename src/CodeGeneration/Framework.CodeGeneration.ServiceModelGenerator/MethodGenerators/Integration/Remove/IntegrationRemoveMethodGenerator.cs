@@ -50,3 +50,4 @@ public class IntegrationRemoveMethodGenerator<TConfiguration> : IntegrationMetho
         yield return bllRefExpr.ToMethodInvokeExpression("Remove", domainObjectVarDecl.ToVariableReferenceExpression()).ToExpressionStatement();
     }
 }
+

@@ -62,3 +62,4 @@ public class BaseMapToDomainObjectMethodFactory<TConfiguration, TFileFactory, TF
                          .ToExpressionStatement();
     }
 }
+

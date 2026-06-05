@@ -8,5 +8,7 @@ public enum FileType
 
     BLLFactoryInterface,
 
-    BLLFactoryContainerInterface
+    BLLFactoryContainerInterface,
+
+    ValidatorInterface
 }

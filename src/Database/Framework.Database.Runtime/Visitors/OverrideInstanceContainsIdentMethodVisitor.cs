@@ -49,3 +49,4 @@ public class OverrideInstanceContainsIdentMethodVisitor<TIdent> : ExpressionVisi
 
     public static readonly OverrideInstanceContainsIdentMethodVisitor<TIdent> HashSet = new(new Func<TIdent, bool>(new HashSet<TIdent>().Contains).Method);
 }
+

@@ -26,3 +26,4 @@ public class OverrideEqualsDomainObjectMapper<TDomainObject, TIdent>(IdentityInf
 
                   select Expression.MakeBinary(node.NodeType, this.applyId(node.Left), Expression.Constant(identityInfo.Id.Getter(rightVal))));
 }
+

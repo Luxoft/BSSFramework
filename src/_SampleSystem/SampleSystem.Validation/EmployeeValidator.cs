@@ -19,3 +19,4 @@ public sealed class EmployeeValidator : IClassValidator<Employee>
         return ValidationResult.Success;
     }
 }
+

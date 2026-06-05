@@ -37,3 +37,4 @@ public class StringParser
 
     public StringParseResult Evaluate(string inputString) => new(new Regex(this.regexPatternBuilder.ToString()).Match(inputString));
 }
+

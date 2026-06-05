@@ -15,3 +15,4 @@ public class TestEmployeeFilter : DomainObjectBase
         set;
     }
 }
+

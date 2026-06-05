@@ -14,3 +14,4 @@ public partial class PrincipalController
         this.Evaluate(DBSessionMode.Read, evaluateData =>
                           LambdaHelper.ToFullDTO((Principal)evaluateData.Context.Authorization.CurrentPrincipalSource.CurrentUser, evaluateData.MappingService));
 }
+

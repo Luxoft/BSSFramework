@@ -12,3 +12,4 @@ internal static class Extensions
             ? CodeBinaryOperatorType.LessThanOrEqual
             : CodeBinaryOperatorType.LessThan;
 }
+

@@ -11,3 +11,4 @@ public interface IDomainObjectExtendedModel<out TDomainObject>
     [Required]
     TDomainObject ExtendedObject { get; }
 }
+

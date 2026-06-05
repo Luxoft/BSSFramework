@@ -52,3 +52,4 @@ public class HasAccessMethodGenerator<TConfiguration>(TConfiguration configurati
                          .ToMethodReturnStatement();
     }
 }
+

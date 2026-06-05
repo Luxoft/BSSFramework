@@ -20,3 +20,4 @@ public class TestSequenceController(ISequenceBLLFactory sequenceBllFactory) : Co
         return nextNumber;
     }
 }
+

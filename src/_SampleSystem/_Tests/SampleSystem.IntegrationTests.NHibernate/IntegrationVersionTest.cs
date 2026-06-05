@@ -1,6 +1,6 @@
-﻿using Framework.AutomationCore.RootServiceProviderContainer;
+﻿using Anch.SecuritySystem;
 
-using Anch.SecuritySystem;
+using Framework.AutomationCore.RootServiceProviderContainer;
 
 using SampleSystem.Domain.IntegrationVersions;
 using SampleSystem.Generated.DTO;
@@ -20,10 +20,10 @@ public class IntegrationVersionTest(IServiceProvider rootServiceProvider) : Test
         var id = this.EvaluateWrite(context =>
                                     {
                                         var obj = new IntegrationVersionContainer1()
-                                                  {
-                                                          Name = Guid.NewGuid().ToString(),
-                                                          IntegrationVersion = integrationVersion
-                                                  };
+                                        {
+                                            Name = Guid.NewGuid().ToString(),
+                                            IntegrationVersion = integrationVersion
+                                        };
 
                                         context.Logics.Default.Create<IntegrationVersionContainer1>().Save(obj);
 
@@ -40,9 +40,9 @@ public class IntegrationVersionTest(IServiceProvider rootServiceProvider) : Test
         integrationVersionContainer1Controller.Evaluate(c => c.SaveIntegrationVersionContainer1(
                                                          new IntegrationVersionContainer1IntegrationRichDTO()
                                                          {
-                                                                 Id = id,
-                                                                 IntegrationVersion = expectedIntegrationVersion,
-                                                                 Name = expectedName
+                                                             Id = id,
+                                                             IntegrationVersion = expectedIntegrationVersion,
+                                                             Name = expectedName
                                                          }));
 
         // Assert
@@ -62,10 +62,10 @@ public class IntegrationVersionTest(IServiceProvider rootServiceProvider) : Test
         var id = this.EvaluateWrite(context =>
                                     {
                                         var obj = new IntegrationVersionContainer1()
-                                                  {
-                                                          Name = expectedName,
-                                                          IntegrationVersion = expectedIntegrationVersion
-                                                  };
+                                        {
+                                            Name = expectedName,
+                                            IntegrationVersion = expectedIntegrationVersion
+                                        };
 
                                         context.Logics.Default.Create<IntegrationVersionContainer1>().Save(obj);
 
@@ -80,9 +80,9 @@ public class IntegrationVersionTest(IServiceProvider rootServiceProvider) : Test
         integrationVersionContainer1Controller.Evaluate(c => c.SaveIntegrationVersionContainer1(
                                                          new IntegrationVersionContainer1IntegrationRichDTO()
                                                          {
-                                                                 Id = id,
-                                                                 IntegrationVersion = expectedIntegrationVersion - 10,
-                                                                 Name = Guid.NewGuid().ToString()
+                                                             Id = id,
+                                                             IntegrationVersion = expectedIntegrationVersion - 10,
+                                                             Name = Guid.NewGuid().ToString()
                                                          }));
 
         // Assert
@@ -102,10 +102,10 @@ public class IntegrationVersionTest(IServiceProvider rootServiceProvider) : Test
         var id = this.EvaluateWrite(context =>
                                     {
                                         var obj = new IntegrationVersionContainer1()
-                                                  {
-                                                          Name = expectedName,
-                                                          IntegrationVersion = expectedIntegrationVersion
-                                                  };
+                                        {
+                                            Name = expectedName,
+                                            IntegrationVersion = expectedIntegrationVersion
+                                        };
 
                                         context.Logics.Default.Create<IntegrationVersionContainer1>().Save(obj);
 
@@ -120,9 +120,9 @@ public class IntegrationVersionTest(IServiceProvider rootServiceProvider) : Test
         integrationVersionContainer1Controller.Evaluate(c => c.SaveIntegrationVersionContainer1(
                                                          new IntegrationVersionContainer1IntegrationRichDTO()
                                                          {
-                                                                 Id = id,
-                                                                 IntegrationVersion = expectedIntegrationVersion,
-                                                                 Name = Guid.NewGuid().ToString()
+                                                             Id = id,
+                                                             IntegrationVersion = expectedIntegrationVersion,
+                                                             Name = Guid.NewGuid().ToString()
                                                          }));
 
         // Assert
@@ -141,10 +141,10 @@ public class IntegrationVersionTest(IServiceProvider rootServiceProvider) : Test
         var id = this.EvaluateWrite(context =>
                                     {
                                         var obj = new IntegrationVersionContainer2()
-                                                  {
-                                                          Name = Guid.NewGuid().ToString(),
-                                                          IntegrationVersion = integrationVersion
-                                                  };
+                                        {
+                                            Name = Guid.NewGuid().ToString(),
+                                            IntegrationVersion = integrationVersion
+                                        };
 
                                         context.Logics.Default.Create<IntegrationVersionContainer2>().Save(obj);
 
@@ -161,9 +161,9 @@ public class IntegrationVersionTest(IServiceProvider rootServiceProvider) : Test
         integrationVersionContainer2Controller.Evaluate(c => c.SaveIntegrationVersionContainer2(
                                                          new IntegrationVersionContainer2IntegrationRichDTO()
                                                          {
-                                                                 Id = id,
-                                                                 IntegrationVersion = expectedIntegrationVersion,
-                                                                 Name = expectedName
+                                                             Id = id,
+                                                             IntegrationVersion = expectedIntegrationVersion,
+                                                             Name = expectedName
                                                          }));
 
         // Assert
@@ -183,10 +183,10 @@ public class IntegrationVersionTest(IServiceProvider rootServiceProvider) : Test
         var id = this.EvaluateWrite(context =>
                                     {
                                         var obj = new IntegrationVersionContainer2()
-                                                  {
-                                                          Name = expectedName,
-                                                          IntegrationVersion = expectedIntegrationVersion
-                                                  };
+                                        {
+                                            Name = expectedName,
+                                            IntegrationVersion = expectedIntegrationVersion
+                                        };
 
                                         context.Logics.Default.Create<IntegrationVersionContainer2>().Save(obj);
 
@@ -201,9 +201,9 @@ public class IntegrationVersionTest(IServiceProvider rootServiceProvider) : Test
         integrationVersionContainer2Controller.Evaluate(c => c.SaveIntegrationVersionContainer2(
                                                          new IntegrationVersionContainer2IntegrationRichDTO()
                                                          {
-                                                                 Id = id,
-                                                                 IntegrationVersion = expectedIntegrationVersion - 10,
-                                                                 Name = Guid.NewGuid().ToString()
+                                                             Id = id,
+                                                             IntegrationVersion = expectedIntegrationVersion - 10,
+                                                             Name = Guid.NewGuid().ToString()
                                                          }));
 
         // Assert
@@ -223,10 +223,10 @@ public class IntegrationVersionTest(IServiceProvider rootServiceProvider) : Test
         var id = this.EvaluateWrite(context =>
                                     {
                                         var obj = new IntegrationVersionContainer2()
-                                                  {
-                                                          Name = expectedName,
-                                                          IntegrationVersion = expectedIntegrationVersion
-                                                  };
+                                        {
+                                            Name = expectedName,
+                                            IntegrationVersion = expectedIntegrationVersion
+                                        };
 
                                         context.Logics.Default.Create<IntegrationVersionContainer2>().Save(obj);
 
@@ -243,9 +243,9 @@ public class IntegrationVersionTest(IServiceProvider rootServiceProvider) : Test
         integrationVersionContainer2Controller.Evaluate(c => c.SaveIntegrationVersionContainer2(
                                                          new IntegrationVersionContainer2IntegrationRichDTO()
                                                          {
-                                                                 Id = id,
-                                                                 IntegrationVersion = expectedIntegrationVersion,
-                                                                 Name = nextName
+                                                             Id = id,
+                                                             IntegrationVersion = expectedIntegrationVersion,
+                                                             Name = nextName
                                                          }));
 
         // Assert
@@ -265,10 +265,10 @@ public class IntegrationVersionTest(IServiceProvider rootServiceProvider) : Test
         var id = this.EvaluateWrite(context =>
                                     {
                                         var obj = new IntegrationVersionContainer1()
-                                                  {
-                                                          Name = expectedName,
-                                                          IntegrationVersion = expectedIntegrationVersion
-                                                  };
+                                        {
+                                            Name = expectedName,
+                                            IntegrationVersion = expectedIntegrationVersion
+                                        };
 
                                         context.Logics.Default.Create<IntegrationVersionContainer1>().Save(obj);
 
@@ -283,8 +283,8 @@ public class IntegrationVersionTest(IServiceProvider rootServiceProvider) : Test
         integrationVersionContainer1Controller.Evaluate(c => c.SaveIntegrationVersionContainer1ByCustom(
                                                          new IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO()
                                                          {
-                                                                 SavingObject = new IntegrationVersionContainer1IntegrationSimpleDTO() { Id = id, IntegrationVersion = expectedIntegrationVersion - 1 },
-                                                                 CustomName = modelName
+                                                             SavingObject = new IntegrationVersionContainer1IntegrationSimpleDTO() { Id = id, IntegrationVersion = expectedIntegrationVersion - 1 },
+                                                             CustomName = modelName
                                                          }));
 
 
@@ -294,8 +294,8 @@ public class IntegrationVersionTest(IServiceProvider rootServiceProvider) : Test
         integrationVersionContainer1Controller.Evaluate(c => c.SaveIntegrationVersionContainer1ByCustom(
                                                          new IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO()
                                                          {
-                                                                 SavingObject = new IntegrationVersionContainer1IntegrationSimpleDTO() { Id = id, IntegrationVersion = expectedIntegrationVersion - 1 },
-                                                                 CustomName = Guid.NewGuid().ToString()
+                                                             SavingObject = new IntegrationVersionContainer1IntegrationSimpleDTO() { Id = id, IntegrationVersion = expectedIntegrationVersion - 1 },
+                                                             CustomName = Guid.NewGuid().ToString()
                                                          }));
 
         // Assert
@@ -315,10 +315,10 @@ public class IntegrationVersionTest(IServiceProvider rootServiceProvider) : Test
         var id = this.EvaluateWrite(context =>
                                     {
                                         var obj = new IntegrationVersionContainer1()
-                                                  {
-                                                          Name = expectedName,
-                                                          IntegrationVersion = expectedIntegrationVersion
-                                                  };
+                                        {
+                                            Name = expectedName,
+                                            IntegrationVersion = expectedIntegrationVersion
+                                        };
 
                                         context.Logics.Default.Create<IntegrationVersionContainer1>().Save(obj);
 
@@ -333,8 +333,8 @@ public class IntegrationVersionTest(IServiceProvider rootServiceProvider) : Test
         integrationVersionContainer1Controller.Evaluate(c => c.SaveIntegrationVersionContainer1ByCustom(
                                                          new IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO()
                                                          {
-                                                                 SavingObject = new IntegrationVersionContainer1IntegrationSimpleDTO() { Id = id, IntegrationVersion = expectedIntegrationVersion + 1 },
-                                                                 CustomName = modelName
+                                                             SavingObject = new IntegrationVersionContainer1IntegrationSimpleDTO() { Id = id, IntegrationVersion = expectedIntegrationVersion + 1 },
+                                                             CustomName = modelName
                                                          }));
 
 
@@ -344,8 +344,8 @@ public class IntegrationVersionTest(IServiceProvider rootServiceProvider) : Test
         integrationVersionContainer1Controller.Evaluate(c => c.SaveIntegrationVersionContainer1ByCustom(
                                                          new IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO()
                                                          {
-                                                                 SavingObject = new IntegrationVersionContainer1IntegrationSimpleDTO() { Id = id, IntegrationVersion = expectedIntegrationVersion + 1 },
-                                                                 CustomName = Guid.NewGuid().ToString()
+                                                             SavingObject = new IntegrationVersionContainer1IntegrationSimpleDTO() { Id = id, IntegrationVersion = expectedIntegrationVersion + 1 },
+                                                             CustomName = Guid.NewGuid().ToString()
                                                          }));
 
         // Assert
@@ -355,3 +355,4 @@ public class IntegrationVersionTest(IServiceProvider rootServiceProvider) : Test
         Assert.Equal(expectedIntegrationVersion + 1, actual.IntegrationVersion);
     }
 }
+

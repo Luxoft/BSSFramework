@@ -94,3 +94,4 @@ public interface IAuditDAL<TDomainObject, TIdent>
     /// <returns></returns>
     IEnumerable<TIdent> GetIdentiesWithHistory(Expression<Func<TDomainObject, bool>> query);
 }
+

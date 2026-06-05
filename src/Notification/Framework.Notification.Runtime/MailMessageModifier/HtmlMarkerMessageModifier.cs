@@ -6,3 +6,4 @@ public class HtmlMarkerMessageModifier : IMailMessageModifier
 {
     public void Modify(MailMessage message) => message.IsBodyHtml = message.Body.StartsWith("<html");
 }
+

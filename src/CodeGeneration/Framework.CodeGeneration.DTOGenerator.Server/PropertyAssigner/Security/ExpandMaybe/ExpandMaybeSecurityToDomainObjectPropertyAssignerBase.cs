@@ -24,9 +24,9 @@ public abstract class ExpandMaybeSecurityToDomainObjectPropertyAssignerBase<TCon
         var sourcePropertyTypeRef = this.CodeTypeReferenceService.GetCodeTypeReference(property);
 
         return new CodeConditionStatement
-               {
-                       Condition = new CodeValueEqualityOperatorExpression(sourcePropertyRef, new CodeDefaultValueExpression(sourcePropertyTypeRef)).ToNegateExpression(),
-                       TrueStatements =
+        {
+            Condition = new CodeValueEqualityOperatorExpression(sourcePropertyRef, new CodeDefaultValueExpression(sourcePropertyTypeRef)).ToNegateExpression(),
+            TrueStatements =
                        {
                                new CodeConditionStatement
                                {
@@ -41,6 +41,7 @@ public abstract class ExpandMaybeSecurityToDomainObjectPropertyAssignerBase<TCon
                                                                new CodePrimitiveExpression($"Access for write to field \"{property.Name}\" denied"))) }
                                }
                        }
-               };
+        };
     }
 }
+

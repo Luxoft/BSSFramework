@@ -53,3 +53,4 @@ public class GenericNamedLockSetup : IGenericNamedLockSetup, IServiceInitializer
         this.elementsInitAction.ForEach(a => a(services));
     }
 }
+

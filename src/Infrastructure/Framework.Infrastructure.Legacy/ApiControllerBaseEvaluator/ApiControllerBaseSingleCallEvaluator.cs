@@ -28,3 +28,4 @@ public class ApiControllerBaseSingleCallEvaluator<TBLLContext, TMappingService>(
         return getResult(serviceProvider.GetRequiredService<EvaluatedData<TBLLContext, TMappingService>>());
     }
 }
+

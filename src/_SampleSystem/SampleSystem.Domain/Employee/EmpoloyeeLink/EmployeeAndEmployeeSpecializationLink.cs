@@ -42,3 +42,4 @@ public class EmployeeAndEmployeeSpecializationLink : AuditPersistentDomainObject
 
     Employee IDetail<Employee>.Master => this.Employee;
 }
+

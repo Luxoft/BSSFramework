@@ -10,3 +10,4 @@ public record DatabaseSettings
 
     public int? BatchSize { get; init; } = null;
 }
+

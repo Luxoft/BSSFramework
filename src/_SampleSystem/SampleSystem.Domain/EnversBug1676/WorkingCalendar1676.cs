@@ -15,3 +15,4 @@ public class WorkingCalendar1676 : BaseDirectory
 
     public virtual Location1676 Location => this.location;
 }
+

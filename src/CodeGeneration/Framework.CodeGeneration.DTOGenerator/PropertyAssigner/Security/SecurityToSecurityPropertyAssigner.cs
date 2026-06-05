@@ -40,8 +40,8 @@ public class SecurityToSecurityPropertyAssigner<TConfiguration> : MaybePropertyA
         var resultVarDeclRef = new CodeVariableReferenceExpression(resultVarDecl.Name);
 
         return new CodeConditionStatement(sourcePropertyRef.ToPropertyReference(nameof(Maybe<>.HasValue)))
-               {
-                   TrueStatements =
+        {
+            TrueStatements =
                    {
                        resultVarDecl,
                        this.InnerAssigner.GetAssignStatement(property, sourcePropertyRef.ToPropertyReference(nameof(Maybe<>.Value)), resultVarDeclRef),
@@ -50,9 +50,10 @@ public class SecurityToSecurityPropertyAssigner<TConfiguration> : MaybePropertyA
                                     .ToMethodInvokeExpression(resultVarDeclRef)
                                     .ToAssignStatement(targetPropertyRef)
                    },
-                   FalseStatements = { targetPropertyTypeRef.ToNothingValueExpression().ToAssignStatement(targetPropertyRef) }
-               };
+            FalseStatements = { targetPropertyTypeRef.ToNothingValueExpression().ToAssignStatement(targetPropertyRef) }
+        };
 
 
     }
 }
+

@@ -24,3 +24,4 @@ public class SampleSystemBLLCoreFileGenerator(BLLCoreGeneratorConfiguration conf
         }
     }
 }
+

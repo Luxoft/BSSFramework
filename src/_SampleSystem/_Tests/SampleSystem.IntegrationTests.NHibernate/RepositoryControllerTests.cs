@@ -24,3 +24,4 @@ public class RepositoryControllerTests(IServiceProvider rootServiceProvider) : T
         Assert.Contains(currentEmployee.Identity, result.Employees);
     }
 }
+

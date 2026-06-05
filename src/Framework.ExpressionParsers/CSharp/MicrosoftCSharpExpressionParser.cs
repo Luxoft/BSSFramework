@@ -13,3 +13,4 @@ internal class MicrosoftCSharpExpressionParser : INativeBodyExpressionParser
         return Expression.Lambda(resultExpression, parameters);
     }
 }
+

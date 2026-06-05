@@ -6,3 +6,4 @@ public class BssFrameworkExtension(Action<IServiceCollection> setupAction) : IBs
 {
     public void AddServices(IServiceCollection services) => setupAction(services);
 }
+

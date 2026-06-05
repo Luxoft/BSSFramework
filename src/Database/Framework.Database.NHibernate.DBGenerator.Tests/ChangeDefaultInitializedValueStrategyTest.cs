@@ -90,3 +90,4 @@ public class ChangeDefaultInitializedValueStrategyTest
 
     private static IEnumerable<string> SkipDefaultTemplate(IEnumerable<string> script) => script.Where(x => x != "GO" && !x.StartsWith("-------------") && x != "use []" + Environment.NewLine && x != Environment.NewLine);
 }
+

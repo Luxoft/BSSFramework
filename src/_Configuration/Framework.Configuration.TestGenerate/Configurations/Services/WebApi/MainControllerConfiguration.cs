@@ -8,3 +8,4 @@ public class MainControllerConfiguration(ConfigurationGenerationEnvironment envi
 
     public override string ImplementClassName { get; } = "ConfigMainController";
 }
+

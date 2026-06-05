@@ -20,3 +20,4 @@ public partial class AuthMainController
     [HttpPost]
     public void FinishRunAsUser() => this.Evaluate(DBSessionMode.Write, evaluateData => evaluateData.Context.RunAsManager.FinishRunAsUserAsync().GetAwaiter().GetResult());
 }
+

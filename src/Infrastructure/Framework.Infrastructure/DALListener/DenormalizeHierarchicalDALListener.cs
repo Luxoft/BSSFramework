@@ -1,16 +1,14 @@
 ﻿using Anch.Core;
+using Anch.HierarchicalExpand;
+using Anch.HierarchicalExpand.Denormalization;
+using Anch.SecuritySystem;
 
 using Framework.Application.Lock;
 using Framework.Core;
 using Framework.Database;
 using Framework.Database.DALListener;
 
-using Anch.HierarchicalExpand;
-using Anch.HierarchicalExpand.Denormalization;
-
 using Microsoft.Extensions.DependencyInjection;
-
-using Anch.SecuritySystem;
 
 namespace Framework.Infrastructure.DALListener;
 
@@ -77,3 +75,4 @@ public class DenormalizeHierarchicalDALListener(
         await namedLockService.LockAsync(namedLock, LockRole.Update, cancellationToken);
     }
 }
+

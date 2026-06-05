@@ -1,9 +1,8 @@
 ﻿using Anch.Core;
+using Anch.SecuritySystem;
 
 using Framework.Database;
 using Framework.Infrastructure.Services;
-
-using Anch.SecuritySystem;
 
 namespace Framework.Infrastructure.ContextEvaluator;
 
@@ -32,3 +31,4 @@ public static class ContextEvaluatorExtensions
             contextEvaluator.EvaluateAsync<TResult>(sessionMode, customUserCredential, async c => getResult(c)).GetAwaiter().GetResult();
     }
 }
+

@@ -2,6 +2,7 @@
 using Anch.SecuritySystem;
 using Anch.SecuritySystem.Services;
 using Anch.SecuritySystem.Testing;
+
 using Framework.AutomationCore;
 
 using Microsoft.Extensions.Options;
@@ -244,3 +245,4 @@ public class TestDataInitializer(
             DefaultConstants.HRDEPARTMENT_PARENT_NAME);
     }
 }
+

@@ -15,3 +15,4 @@ public class CryptCodeTypeReferenceService<TConfiguration>(
 {
     public override bool IsOptional(PropertyInfo property) => false;
 }
+

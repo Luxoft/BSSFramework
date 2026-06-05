@@ -1,13 +1,15 @@
-﻿using Framework.BLL;
+﻿using Anch.OData.Domain;
+
+using Framework.BLL;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Persistent;
 using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;
 
-using Anch.OData.Domain;
 using SampleSystem.Domain.BU;
 using SampleSystem.Generated.DTO;
+
 using SelectOperationResultExtensions = Framework.BLL.OData.SelectOperationResultExtensions;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
@@ -41,3 +43,4 @@ public partial class BusinessUnitController
                 return SelectOperationResultExtensions.ChangeItem<BusinessUnit, BusinessUnitFullDTO, Guid>(odataTree, x => LambdaHelper.ToFullDTO((BusinessUnit)x, evaluateData.MappingService));
             });
 }
+

@@ -4,5 +4,6 @@ namespace Framework.Database.SqlMapper;
 
 public interface IMapper
 {
-    IEnumerable<SqlFieldMappingInfo> GetMapping (FieldMetadata field);
+    IEnumerable<SqlFieldMappingInfo> GetMapping(FieldMetadata field);
 }
+

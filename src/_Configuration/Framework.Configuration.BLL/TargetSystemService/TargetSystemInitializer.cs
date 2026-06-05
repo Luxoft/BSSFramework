@@ -34,9 +34,11 @@ public class TargetSystemInitializer(
 
         var targetSystem = bll.GetById(targetSystemInfo.Id, false, new DTOFetchRule<TargetSystem>(MainDTOType.RichDTO))
                            ?? new TargetSystem(isBase, persistentTargetSystemInfo?.IsMain ?? false, persistentTargetSystemInfo?.IsRevision ?? false)
-                              {
-                                  Name = targetSystemInfo.Name, SubscriptionEnabled = !isBase, Id = targetSystemInfo.Id
-                              }.Self(bll.Insert);
+                           {
+                               Name = targetSystemInfo.Name,
+                               SubscriptionEnabled = !isBase,
+                               Id = targetSystemInfo.Id
+                           }.Self(bll.Insert);
 
         var mergeResult = targetSystem.DomainTypes.GetMergeResult(targetSystemInfo.Domain.Types, t => t.Id, t => t.Id);
 
@@ -84,3 +86,4 @@ public class TargetSystemInitializer(
         }
     }
 }
+

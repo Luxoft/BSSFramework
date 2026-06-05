@@ -21,3 +21,4 @@ public class Sequence : BaseDirectory
         set => this.number = value;
     }
 }
+

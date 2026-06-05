@@ -50,15 +50,15 @@ public abstract class EventsSubscriptionManager<TPersistentDomainObjectBase> : I
         where TDomainObject : class, TPersistentDomainObjectBase
     {
         var listener = new Listener<TDomainObject>
-                       {
-                           Filter = filter,
-                           CreateMessage = (domainObject, operation) => new DomainOperationSerializeData<TDomainObject>
-                                                                        {
-                                                                            DomainObject = domainObject,
-                                                                            Operation = operation,
-                                                                            CustomSendObject = customSendObjectConvertFunc?.Invoke(domainObject, operation)
-                                                                        }
-                       };
+        {
+            Filter = filter,
+            CreateMessage = (domainObject, operation) => new DomainOperationSerializeData<TDomainObject>
+            {
+                DomainObject = domainObject,
+                Operation = operation,
+                CustomSendObject = customSendObjectConvertFunc?.Invoke(domainObject, operation)
+            }
+        };
 
         this.sc.AddSingleton(listener);
     }
@@ -101,3 +101,4 @@ public abstract class EventsSubscriptionManager<TPersistentDomainObjectBase> : I
         public required Func<TDomainObject, EventOperation, DomainOperationSerializeData<TDomainObject>> CreateMessage { get; init; }
     }
 }
+

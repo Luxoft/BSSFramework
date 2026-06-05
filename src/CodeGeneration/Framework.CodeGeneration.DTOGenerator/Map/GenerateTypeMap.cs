@@ -1,6 +1,4 @@
-﻿
-
-using Framework.CodeGeneration.DTOGenerator.FileTypes;
+﻿using Framework.CodeGeneration.DTOGenerator.FileTypes;
 
 namespace Framework.CodeGeneration.DTOGenerator.Map;
 
@@ -39,3 +37,4 @@ public class GenerateTypeMap
 
     public override string ToString() => $"DomainType: {this.DomainType.Name} | FileType: {this.FileType}";
 }
+

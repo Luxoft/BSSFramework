@@ -17,7 +17,7 @@ public static class TypeExtensions
         {
             return type.GetGenericArguments()[0].ToDataType(propertyAttributies);
         }
-        if (type.IsArray && type.GetElementType() == typeof(byte) && propertyAttributies.All(z=>z.GetType() != typeof(VersionAttribute)))
+        if (type.IsArray && type.GetElementType() == typeof(byte) && propertyAttributies.All(z => z.GetType() != typeof(VersionAttribute)))
         {
             return DataType.Image;
         }
@@ -108,8 +108,9 @@ public static class TypeExtensions
     private static TValue GetValueByAttribute<TValue, TAttribute>(IEnumerable<Attribute> attributes, Func<TAttribute, TValue> getValueFunc, TValue defaultValue)
     {
         var attribute = attributes.OfType<TAttribute>()
-                                  .Concat(attributes.OfType<IConvertible<TAttribute>>().Select(z=>z.Convert())).FirstOrDefault();
+                                  .Concat(attributes.OfType<IConvertible<TAttribute>>().Select(z => z.Convert())).FirstOrDefault();
         return null != attribute ? getValueFunc(attribute) : defaultValue;
     }
 
 }
+

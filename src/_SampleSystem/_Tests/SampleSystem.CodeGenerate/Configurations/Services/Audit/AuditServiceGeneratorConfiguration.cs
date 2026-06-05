@@ -7,3 +7,4 @@ public class AuditServiceGeneratorConfiguration(ServerGenerationEnvironment envi
 {
     protected override IEnumerable<Type> GetDomainTypes() => base.GetDomainTypes().Where(z => !z.IsProjection());
 }
+

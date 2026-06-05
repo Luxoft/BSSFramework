@@ -1,13 +1,13 @@
 ﻿using System.CodeDom;
 
+using Anch.SecuritySystem;
+
 using Framework.BLL;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.FileStore;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
-
-using Anch.SecuritySystem;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.FileStore;
 
@@ -74,3 +74,4 @@ public abstract class FileStoreMethodGeneratorBase<TConfiguration>(TConfiguratio
         return bllRef.ToVariableDeclarationStatement("targetBLL", bllCreateExpr);
     }
 }
+

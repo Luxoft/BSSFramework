@@ -40,3 +40,4 @@ public class BusinessUnitTypeLinkWithPossibleParent :
 
     BusinessUnitType IDetail<BusinessUnitType>.Master => this.businessUnitType;
 }
+

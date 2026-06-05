@@ -14,3 +14,4 @@ public class WebApiCurrentMethodResolver(IHttpContextAccessor httpContextAccesso
         return endPoint?.Metadata.GetMetadata<ControllerActionDescriptor>()?.MethodInfo;
     }
 }
+

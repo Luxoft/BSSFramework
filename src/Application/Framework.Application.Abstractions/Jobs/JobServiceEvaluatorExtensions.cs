@@ -8,3 +8,4 @@ public static class JobServiceEvaluatorExtensions
         where TService : notnull =>
         await jobServiceEvaluator.EvaluateAsync(executeAsync.ToDefaultTask());
 }
+

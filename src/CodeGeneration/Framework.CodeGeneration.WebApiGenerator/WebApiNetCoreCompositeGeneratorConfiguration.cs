@@ -64,3 +64,4 @@ public class WebApiNetCoreCompositeGeneratorConfiguration : IServiceModelGenerat
 
     public IEnumerable<IServiceMethodGenerator> GetAccumulateMethodGenerators() => throw new NotImplementedException();
 }
+

@@ -10,3 +10,4 @@ public class TestRelativeEmployeeParentObject : AuditPersistentDomainObjectBase,
 
     ICollection<TestRelativeEmployeeChildObject> IMaster<TestRelativeEmployeeChildObject>.Details => (ICollection<TestRelativeEmployeeChildObject>)this.Children;
 }
+

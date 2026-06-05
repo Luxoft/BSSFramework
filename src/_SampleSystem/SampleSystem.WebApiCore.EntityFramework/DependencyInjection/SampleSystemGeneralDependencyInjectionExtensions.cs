@@ -1,4 +1,5 @@
 ﻿using Anch.DependencyInjection;
+using Anch.SecuritySystem;
 
 using Framework.Database.EntityFramework.DependencyInjection;
 using Framework.Infrastructure.DependencyInjection;
@@ -6,8 +7,6 @@ using Framework.Infrastructure.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 
 using SampleSystem.WebApiCore.Domain;
-
-using Anch.SecuritySystem;
 
 namespace SampleSystem.WebApiCore.DependencyInjection;
 
@@ -39,3 +38,4 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
             .AddHttpContextAccessor()
             .AddLogging();
 }
+

@@ -10,3 +10,4 @@ public class ChildEntity : AuditPersistentDomainObjectBase
     [UniqueElement(nameof(Parent))]
     public virtual ParentEntity Parent => this.parent;
 }
+

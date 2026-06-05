@@ -51,3 +51,4 @@ public class DefaultRichDTOFileFactory<TConfiguration>(TConfiguration configurat
         return base.GetFieldInitExpression(codeTypeReference, property);
     }
 }
+

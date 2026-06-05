@@ -40,13 +40,13 @@ public partial class DataManager
                                       if (country == null)
                                       {
                                           country = new Country
-                                                    {
-                                                            Active = active,
-                                                            Code = code,
-                                                            Name = name,
-                                                            NameNative = nativeName,
-                                                            Culture = culture,
-                                                    };
+                                          {
+                                              Active = active,
+                                              Code = code,
+                                              Name = name,
+                                              NameNative = nativeName,
+                                              Culture = culture,
+                                          };
 
                                           countryBLL.Insert(country, this.GetGuid(id));
                                       }
@@ -78,16 +78,16 @@ public partial class DataManager
                                       if (location == null)
                                       {
                                           location = new Location
-                                                     {
-                                                             Active = active,
-                                                             Name = name,
-                                                             IsFinancial = isFinancial,
-                                                             LocationType = locationType,
-                                                             Parent = context.Logics.Location.GetById(parentId),
-                                                             Country = context.Logics.Country.GetById(countryId),
-                                                             CloseDate = closeDate,
-                                                             Code = code
-                                                     };
+                                          {
+                                              Active = active,
+                                              Name = name,
+                                              IsFinancial = isFinancial,
+                                              LocationType = locationType,
+                                              Parent = context.Logics.Location.GetById(parentId),
+                                              Country = context.Logics.Country.GetById(countryId),
+                                              CloseDate = closeDate,
+                                              Code = code
+                                          };
 
                                           context.Logics.Location.Insert(location, this.GetGuid(id));
                                       }
@@ -183,10 +183,10 @@ public partial class DataManager
         possibleParentsList.AddRange(
                                      possibleParents.Select(
                                                             possibleParent => new BusinessUnitTypeLinkWithPossibleParentStrictDTO
-                                                                              {
-                                                                                      BusinessUnitType = type.ToIdentityDTO(),
-                                                                                      PossibleParent = possibleParent
-                                                                              }));
+                                                            {
+                                                                BusinessUnitType = type.ToIdentityDTO(),
+                                                                PossibleParent = possibleParent
+                                                            }));
 
         if (!currentTypeInPossibleParents)
         {
@@ -209,10 +209,10 @@ public partial class DataManager
             transferToList.AddRange(
                                     transferTo.Select(
                                                       transfer => new BusinessUnitTypeLinkWithTransferToStrictDTO
-                                                                  {
-                                                                          BusinessUnitType = type.ToIdentityDTO(),
-                                                                          TransferTo = transfer
-                                                                  }));
+                                                      {
+                                                          BusinessUnitType = type.ToIdentityDTO(),
+                                                          TransferTo = transfer
+                                                      }));
 
             if (!currentTypeInTransferTo)
             {
@@ -229,8 +229,8 @@ public partial class DataManager
                                                          t =>
                                                                  new BusinessUnitTypeLinkWithPossibleFinancialProjectTypeStrictDTO
                                                                  {
-                                                                         FinancialProjectType = t,
-                                                                         BusinessUnitType = buTypeStrict.Identity
+                                                                     FinancialProjectType = t,
+                                                                     BusinessUnitType = buTypeStrict.Identity
                                                                  })
                                                  .ToList();
         }
@@ -282,21 +282,21 @@ public partial class DataManager
                                           businessUnit =
                                                   new BusinessUnit(parentIsNeeded ? context.Logics.BusinessUnit.GetById(parentId) : null)
                                                   {
-                                                          Active = active,
-                                                          Name = name,
-                                                          BusinessUnitForRent = null,
-                                                          IsPool = isPool,
-                                                          IsNewBusiness = isNewBusiness,
-                                                          IsSpecialCommission = isSpecialCommision,
-                                                          Commission = commision,
-                                                          NewBusinessStatusLeft = newBusinessStatusLeft,
-                                                          BusinessUnitStatus = BusinessUnitStatus.Current,
-                                                          Options = BusinessUnitOptions.None,
-                                                          Rank = rank,
-                                                          IsProduction = isProduction,
-                                                          BusinessUnitType = context.Logics.BusinessUnitType.GetById(typeId),
-                                                          Period = period.Value,
-                                                          AllowedForFilterRole = allowedForFilterRole
+                                                      Active = active,
+                                                      Name = name,
+                                                      BusinessUnitForRent = null,
+                                                      IsPool = isPool,
+                                                      IsNewBusiness = isNewBusiness,
+                                                      IsSpecialCommission = isSpecialCommision,
+                                                      Commission = commision,
+                                                      NewBusinessStatusLeft = newBusinessStatusLeft,
+                                                      BusinessUnitStatus = BusinessUnitStatus.Current,
+                                                      Options = BusinessUnitOptions.None,
+                                                      Rank = rank,
+                                                      IsProduction = isProduction,
+                                                      BusinessUnitType = context.Logics.BusinessUnitType.GetById(typeId),
+                                                      Period = period.Value,
+                                                      AllowedForFilterRole = allowedForFilterRole
                                                   };
 
                                           context.Logics.BusinessUnit.Insert(businessUnit, this.GetGuid(id));
@@ -330,13 +330,13 @@ public partial class DataManager
                                       if (unit == null)
                                       {
                                           unit = new ManagementUnit
-                                                 {
-                                                         Active = active,
-                                                         Name = name,
-                                                         Parent = parentIsNeeded ? context.Logics.ManagementUnit.GetById(parentId) : null,
-                                                         Period = (Period)period,
-                                                         IsProduction = isProduction
-                                                 };
+                                          {
+                                              Active = active,
+                                              Name = name,
+                                              Parent = parentIsNeeded ? context.Logics.ManagementUnit.GetById(parentId) : null,
+                                              Period = (Period)period,
+                                              IsProduction = isProduction
+                                          };
 
                                           context.Logics.ManagementUnit.Insert(unit, this.GetGuid(id));
                                       }
@@ -390,20 +390,20 @@ public partial class DataManager
                                           var head = context.Logics.Employee.GetById(employeeId, true);
 
                                           department = new HRDepartment
-                                                       {
-                                                               Active = active,
-                                                               Name = name,
-                                                               NameNative = nameNative,
-                                                               Location = context.Logics.Location.GetById(locationId),
-                                                               Parent = context.Logics.HRDepartment.GetById(parentId),
-                                                               Head = head,
-                                                               CompanyLegalEntity = context.Logics.CompanyLegalEntity.GetById(companyLegalEntityId),
-                                                               Code = code,
-                                                               CodeNative = codeNative,
-                                                               IsLegal = isLegal,
-                                                               IsProduction = isProduction,
-                                                               ExternalId = externalId
-                                                       };
+                                          {
+                                              Active = active,
+                                              Name = name,
+                                              NameNative = nameNative,
+                                              Location = context.Logics.Location.GetById(locationId),
+                                              Parent = context.Logics.HRDepartment.GetById(parentId),
+                                              Head = head,
+                                              CompanyLegalEntity = context.Logics.CompanyLegalEntity.GetById(companyLegalEntityId),
+                                              Code = code,
+                                              CodeNative = codeNative,
+                                              IsLegal = isLegal,
+                                              IsProduction = isProduction,
+                                              ExternalId = externalId
+                                          };
 
                                           context.Logics.HRDepartment.Insert(department, this.GetGuid(id));
                                       }
@@ -438,14 +438,14 @@ public partial class DataManager
                                                                        : context.Logics.CompanyLegalEntity.GetById(parent.Value.Id);
 
                                           legal = new CompanyLegalEntity
-                                                  {
-                                                          Active = active,
-                                                          Name = name,
-                                                          NameEnglish = nameEnglish,
-                                                          Code = code,
-                                                          Type = (CompanyLegalEntityType)type,
-                                                          Parent = parentDomainObject
-                                                  };
+                                          {
+                                              Active = active,
+                                              Name = name,
+                                              NameEnglish = nameEnglish,
+                                              Code = code,
+                                              Type = (CompanyLegalEntityType)type,
+                                              Parent = parentDomainObject
+                                          };
 
                                           context.Logics.CompanyLegalEntity.Insert(legal, this.GetGuid(id));
                                       }
@@ -478,3 +478,4 @@ public partial class DataManager
         return result;
     }
 }
+

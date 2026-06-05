@@ -42,3 +42,4 @@ public static class ScopedEvaluatorMiddlewareExtensions
         public async Task<TResult> EvaluateAsync<TResult>(Func<Task<TResult>> getResult) => await otherMiddleware.EvaluateAsync(async () => await middleware.EvaluateAsync(async () => await getResult()));
     }
 }
+

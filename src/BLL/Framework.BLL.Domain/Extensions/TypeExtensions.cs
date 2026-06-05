@@ -1,9 +1,8 @@
 ﻿using Anch.Core;
+using Anch.SecuritySystem;
 
 using Framework.BLL.Domain.Attributes;
 using Framework.Core;
-
-using Anch.SecuritySystem;
 
 namespace Framework.BLL.Domain.Extensions;
 
@@ -48,3 +47,4 @@ public static class TypeExtensions
         return sourceType.GetSecurityNodeInterfaces().Where(interfaceType => interfaceType.IsGenericType);
     }
 }
+

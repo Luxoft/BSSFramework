@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 
 using Framework.CodeGeneration.BLLGenerator.Configuration;
+
 using SampleSystem.Domain.Directories;
 using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.Validation;
@@ -24,3 +25,4 @@ public class BLLGeneratorConfiguration(ServerGenerationEnvironment environment) 
 
     public override bool SquashPropertyValidators(PropertyInfo property) => property != typeof(Employee).GetProperty(nameof(Employee.ExternalId));
 }
+

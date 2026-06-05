@@ -17,3 +17,4 @@ public class AnonymousTypeByFieldBuilder<TMap, TMapMember>(IAnonymousTypeBuilder
 
     public static AnonymousTypeByFieldBuilder<TMap, TMapMember> Default => LazyDefault.Value;
 }
+

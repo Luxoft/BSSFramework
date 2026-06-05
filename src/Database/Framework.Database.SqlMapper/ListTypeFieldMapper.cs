@@ -9,3 +9,4 @@ public class ListTypeFieldMapper : Mapper<ListTypeFieldMetadata>
         yield break;
     }
 }
+

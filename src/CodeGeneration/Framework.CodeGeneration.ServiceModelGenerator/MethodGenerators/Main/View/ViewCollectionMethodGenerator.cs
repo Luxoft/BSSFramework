@@ -1,4 +1,5 @@
 ﻿using System.CodeDom;
+
 using Framework.BLL.Domain.DTO;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
@@ -13,3 +14,4 @@ public abstract class ViewCollectionMethodGenerator<TConfiguration>(TConfigurati
                                                                   .GetCodeTypeReference(this.DomainType, this.DTOType)
                                                                   .ToEnumerableReference();
 }
+

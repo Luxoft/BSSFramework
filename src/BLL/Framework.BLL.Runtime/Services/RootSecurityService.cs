@@ -1,9 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-using Anch.SecuritySystem;
+﻿using Anch.SecuritySystem;
 using Anch.SecuritySystem.AccessDenied;
 using Anch.SecuritySystem.DomainServices;
 using Anch.SecuritySystem.Providers;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.BLL.Services;
 
@@ -20,3 +20,4 @@ public class RootSecurityService(
     protected IDomainSecurityService<TDomainObject> GetDomainSecurityService<TDomainObject>() =>
         serviceProvider.GetRequiredService<IDomainSecurityService<TDomainObject>>();
 }
+

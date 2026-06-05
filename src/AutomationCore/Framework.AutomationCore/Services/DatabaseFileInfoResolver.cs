@@ -13,3 +13,4 @@ public class DatabaseFileInfoResolver(IOptions<AutomationFrameworkSettings> sett
         return new DatabaseFileInfo(dbPath, logPath);
     }
 }
+

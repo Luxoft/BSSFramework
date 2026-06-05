@@ -64,3 +64,4 @@ public static class DynamicValidatorExtensions
         return dynamicValidator.GetValidator(type, serviceProvider).Maybe(typeValidator => typeValidator.GetLastClassValidator(type, serviceProvider));
     }
 }
+

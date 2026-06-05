@@ -1,4 +1,7 @@
-﻿using Framework.Infrastructure.DependencyInjection;
+﻿using Anch.SecuritySystem;
+using Anch.SecuritySystem.DependencyInjection;
+
+using Framework.Infrastructure.DependencyInjection;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.BU;
@@ -15,9 +18,6 @@ using SampleSystem.Domain.Projections;
 using SampleSystem.Domain.TestDependency;
 using SampleSystem.Domain.TestDeserializedAuth;
 using SampleSystem.Security.Services;
-
-using Anch.SecuritySystem;
-using Anch.SecuritySystem.DependencyInjection;
 
 namespace SampleSystem.Security;
 
@@ -171,3 +171,4 @@ public static class SampleSystemDomainSecurityServiceExtensions
                 .AddDomainSecurity<TestLegacyEmployee>(b => b.SetUntypedDependency<Employee>());
     }
 }
+

@@ -18,11 +18,11 @@ public class UpdateTests(IServiceProvider rootServiceProvider) : TestBase(rootSe
         var example1Controller = this.GetControllerEvaluator<Example1Controller>();
 
         var strictSource = new Example1StrictDTO
-                           {
-                                   Field1 = Guid.NewGuid(),
-                                   Field2 = Guid.NewGuid(),
-                                   Field3 = Maybe.Return(Guid.NewGuid())
-                           };
+        {
+            Field1 = Guid.NewGuid(),
+            Field2 = Guid.NewGuid(),
+            Field3 = Maybe.Return(Guid.NewGuid())
+        };
 
         var updateDTO = new Example1UpdateDTO(strictSource);
 
@@ -44,18 +44,18 @@ public class UpdateTests(IServiceProvider rootServiceProvider) : TestBase(rootSe
     {
         // Arrange
         var strictSource = new Example1StrictDTO
-                           {
-                                   Field1 = Guid.NewGuid(),
-                                   Field2 = Guid.NewGuid(),
-                                   Field3 = Maybe.Return(Guid.NewGuid())
-                           };
+        {
+            Field1 = Guid.NewGuid(),
+            Field2 = Guid.NewGuid(),
+            Field3 = Maybe.Return(Guid.NewGuid())
+        };
 
         var strictTarget = new Example1StrictDTO
-                           {
-                                   Field1 = strictSource.Field1,
-                                   Field2 = Guid.NewGuid(),
-                                   Field3 = Maybe.Return(Guid.NewGuid())
-                           };
+        {
+            Field1 = strictSource.Field1,
+            Field2 = Guid.NewGuid(),
+            Field3 = Maybe.Return(Guid.NewGuid())
+        };
 
 
         // Act
@@ -74,17 +74,17 @@ public class UpdateTests(IServiceProvider rootServiceProvider) : TestBase(rootSe
         var example1Controller = this.GetControllerEvaluator<Example1Controller>();
 
         var ident = example1Controller.Evaluate(c => c.UpdateExample1(new Example1UpdateDTO(new Example1StrictDTO
-                                                                          {
-                                                                                  Field1 = Guid.NewGuid(),
-                                                                                  Field2 = Guid.NewGuid(),
-                                                                                  Field3 = Maybe.Return(Guid.NewGuid()),
-                                                                                  Items2 = new List<Example2StrictDTO>
+        {
+            Field1 = Guid.NewGuid(),
+            Field2 = Guid.NewGuid(),
+            Field3 = Maybe.Return(Guid.NewGuid()),
+            Items2 = new List<Example2StrictDTO>
                                                                                       {
                                                                                               new() { Field1 = Guid.NewGuid(), Field2 = Guid.NewGuid() },
                                                                                               new() { Field1 = Guid.NewGuid(), Field2 = Guid.NewGuid() },
                                                                                               new() { Field1 = Guid.NewGuid(), Field2 = Guid.NewGuid() }
                                                                                       }
-                                                                          })));
+        })));
 
         var richObj = example1Controller.Evaluate(c => c.GetRichExample1(ident));
 
@@ -132,3 +132,4 @@ public class UpdateTests(IServiceProvider rootServiceProvider) : TestBase(rootSe
         Assert.True(createdItems[0].Value.Field2.HasValue);
     }
 }
+

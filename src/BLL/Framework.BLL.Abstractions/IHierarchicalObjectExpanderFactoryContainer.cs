@@ -6,3 +6,4 @@ public interface IHierarchicalObjectExpanderFactoryContainer
 {
     IHierarchicalObjectExpanderFactory HierarchicalObjectExpanderFactory { get; }
 }
+

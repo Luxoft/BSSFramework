@@ -24,3 +24,4 @@ public class DALFileGenerator<TConfiguration>(TConfiguration configuration)
         }
     }
 }
+

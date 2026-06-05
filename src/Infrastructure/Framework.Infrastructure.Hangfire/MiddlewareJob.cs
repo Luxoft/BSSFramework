@@ -8,3 +8,4 @@ public class MiddlewareJob<TJob, TArg>(TJob innerJob, JobInfo<TJob, TArg> jobInf
     public Task ExecuteAsync(TArg arg) =>
         jobMiddlewareFactory.Create<TJob>(true).EvaluateAsync(async () => await jobInfo.ExecuteActon(innerJob, arg));
 }
+

@@ -29,8 +29,5 @@ public enum FileType
 
     ValidatorBase,
 
-    Validator,
-
-
-    ValidatorInterface
+    Validator
 }

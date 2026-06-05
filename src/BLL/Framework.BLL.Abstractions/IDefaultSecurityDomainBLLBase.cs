@@ -1,6 +1,6 @@
-﻿using Framework.Application.Domain;
+﻿using Anch.SecuritySystem.Providers;
 
-using Anch.SecuritySystem.Providers;
+using Framework.Application.Domain;
 
 namespace Framework.BLL;
 
@@ -21,3 +21,4 @@ public interface IDefaultSecurityDomainBLLBase<out TBLLContext, in TPersistentDo
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     where TDomainObject : class, TPersistentDomainObjectBase
     where TBLLContext : IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>;
+

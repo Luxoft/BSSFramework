@@ -23,3 +23,4 @@ public class DefaultBaseAbstractDTOFileFactory<TConfiguration>(TConfiguration co
     //    yield return this.GenerateFromDomainObjectConstructor(this.MapToMappingObjectPropertyAssigner);
     //}
 }
+

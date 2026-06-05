@@ -34,3 +34,4 @@ public class Country : BaseDirectory, ICodeObject
         set => this.culture = value.TrimNull();
     }
 }
+

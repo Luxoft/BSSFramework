@@ -21,3 +21,4 @@ public class TestManualEmployeeProjection : PersistentDomainObjectBase
     [CustomSerialization(CustomSerializationMode.Ignore)]
     public virtual Guid? CoreBusinessUnitId => this.coreBusinessUnitId;
 }
+

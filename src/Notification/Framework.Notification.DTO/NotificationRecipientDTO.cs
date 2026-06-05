@@ -23,3 +23,4 @@ public class NotificationRecipientDTO
         this.Type = notificationRecipient.Role;
     }
 }
+

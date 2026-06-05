@@ -1,11 +1,10 @@
 ﻿using Anch.DependencyInjection;
+using Anch.GenericQueryable.DependencyInjection;
+using Anch.GenericQueryable.EntityFramework;
 
 using Framework.Core;
 using Framework.Database.EntityFramework.Sessions;
 using Framework.DependencyInjection;
-
-using Anch.GenericQueryable.DependencyInjection;
-using Anch.GenericQueryable.EntityFramework;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -30,3 +29,4 @@ public class EntityFrameworkSetup : IEntityFrameworkSetup, IServiceInitializer
         //services.AddSingleton<IDefaultConnectionStringSource, DefaultConnectionStringSource>();
     }
 }
+

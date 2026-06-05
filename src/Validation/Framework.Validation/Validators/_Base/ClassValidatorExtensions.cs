@@ -130,3 +130,4 @@ public static class ClassValidatorExtensions
         public ValidationResult GetValidationResult(IClassValidationContext<TExpectedSource> context) => this.baseClassValidator.GetValidationResult(context.Box<TExpectedSource, TBaseSource>());
     }
 }
+

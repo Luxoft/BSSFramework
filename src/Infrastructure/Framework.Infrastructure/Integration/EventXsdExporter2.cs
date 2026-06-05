@@ -108,10 +108,10 @@ public class EventXsdExporter2 : IEventXsdExporter2
         foreach (var schemaReference in references)
         {
             var xmlSchemaImport = new XmlSchemaImport
-                                  {
-                                      Namespace = schemaReference.TargetNamespace,
-                                      SchemaLocation = $".\\{ToFileName(schemaReference.TargetNamespace)}"
-                                  };
+            {
+                Namespace = schemaReference.TargetNamespace,
+                SchemaLocation = $".\\{ToFileName(schemaReference.TargetNamespace)}"
+            };
 
             schema.Includes.Add(xmlSchemaImport);
         }
@@ -219,3 +219,4 @@ public class EventXsdExporter2 : IEventXsdExporter2
         || (type.IsGenericType && type.GetGenericTypeDefinition() != typeof(Nullable<>))
         || type.IsArray;
 }
+

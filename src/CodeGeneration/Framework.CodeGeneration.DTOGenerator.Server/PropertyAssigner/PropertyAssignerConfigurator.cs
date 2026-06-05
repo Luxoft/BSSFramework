@@ -2,6 +2,7 @@
 using System.Reflection;
 
 using Anch.Core;
+
 using Framework.BLL.Domain.Attributes;
 using Framework.BLL.Domain.Extensions;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
@@ -40,3 +41,4 @@ public class PropertyAssignerConfigurator<TConfiguration>(TConfiguration configu
         }
     }
 }
+

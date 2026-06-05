@@ -14,3 +14,4 @@ public abstract class ClassValidatorAttribute : ValidatorAttribute
 
     public abstract IClassValidator CreateValidator();
 }
+

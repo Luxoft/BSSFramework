@@ -90,3 +90,4 @@ public class PropertyPath(IEnumerable<PropertyInfo> properties) : ReadOnlyCollec
                 return currentType.GetRequiredProperty(propertyName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             }).Skip(1).Select(v => v!);
 }
+

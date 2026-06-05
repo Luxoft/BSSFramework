@@ -1007,4 +1007,8 @@ namespace SampleSystem.BLL
     public partial interface ITestImmutableObjBLLFactory : Framework.BLL.ISecurityBLLFactory<SampleSystem.BLL.ITestImmutableObjBLL, SampleSystem.Domain.TestImmutableObj>
     {
     }
+    
+    public partial interface ISampleSystemValidator : Framework.Validation.IValidator
+    {
+    }
 }

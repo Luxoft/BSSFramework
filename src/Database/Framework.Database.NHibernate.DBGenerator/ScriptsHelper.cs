@@ -63,3 +63,4 @@ internal static class ScriptsHelper
         }
     }
 }
+

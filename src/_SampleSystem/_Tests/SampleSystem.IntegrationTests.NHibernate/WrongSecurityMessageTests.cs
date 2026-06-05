@@ -1,16 +1,13 @@
-﻿using Framework.Application;
-using Framework.Database;
-
-using Anch.SecuritySystem;
-
-using SampleSystem.Domain.Employee;
-using SampleSystem.Security;
-
+﻿using Anch.SecuritySystem;
 using Anch.SecuritySystem.AccessDenied;
 
+using Framework.Application;
 using Framework.AutomationCore.Services;
+using Framework.Database;
 
+using SampleSystem.Domain.Employee;
 using SampleSystem.IntegrationTests._Environment.TestData;
+using SampleSystem.Security;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -49,3 +46,4 @@ public class WrongSecurityMessageTests(IServiceProvider rootServiceProvider) : T
             accessDeniedException.Message);
     }
 }
+

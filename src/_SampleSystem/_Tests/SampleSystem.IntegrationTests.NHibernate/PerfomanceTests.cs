@@ -38,3 +38,4 @@ public class PerfomanceTests(IServiceProvider rootServiceProvider) : TestBase(ro
         Xunit.Assert.True(result);
     }
 }
+

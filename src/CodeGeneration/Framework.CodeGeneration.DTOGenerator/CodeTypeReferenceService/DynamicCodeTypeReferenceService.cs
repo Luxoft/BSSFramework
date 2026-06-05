@@ -60,3 +60,4 @@ public class DynamicCodeTypeReferenceService<TConfiguration> : LayerCodeTypeRefe
         return this.detailFileType;
     }
 }
+

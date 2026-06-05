@@ -6,3 +6,4 @@ public interface IDomainObjectVersionsResolver
 {
     DomainObjectVersions GetDomainObjectVersions(Guid domainObjectId, long revisionNumber);
 }
+

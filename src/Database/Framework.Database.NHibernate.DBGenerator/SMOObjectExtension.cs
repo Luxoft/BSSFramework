@@ -6,7 +6,7 @@ public static class SmoObjectExtension
 {
     public static void CreateOrAlter(this Table source)
     {
-        if(source.State == SqlSmoState.Creating)
+        if (source.State == SqlSmoState.Creating)
         {
             source.Create();
             return;
@@ -18,3 +18,4 @@ public static class SmoObjectExtension
         }
     }
 }
+

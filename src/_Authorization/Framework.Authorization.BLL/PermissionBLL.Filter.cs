@@ -1,8 +1,8 @@
-﻿using Framework.Authorization.Domain;
+﻿using Anch.GenericQueryable.Fetching;
+
+using Framework.Authorization.Domain;
 using Framework.BLL.Domain.Models;
 using Framework.Validation.Extensions;
-
-using Anch.GenericQueryable.Fetching;
 
 namespace Framework.Authorization.BLL;
 
@@ -19,3 +19,4 @@ public partial class PermissionBLL
         return base.GetListBy(innerFilter, fetchs);
     }
 }
+

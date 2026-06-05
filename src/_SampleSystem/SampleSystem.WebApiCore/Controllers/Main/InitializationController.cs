@@ -1,6 +1,7 @@
 ﻿using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;
+
 using SampleSystem.ServiceEnvironment;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
@@ -20,3 +21,4 @@ public class InitializationController(
         await service.InitializeAsync(cancellationToken);
     }
 }
+

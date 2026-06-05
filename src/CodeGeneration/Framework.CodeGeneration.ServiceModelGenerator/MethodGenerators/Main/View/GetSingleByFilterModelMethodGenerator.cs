@@ -64,3 +64,4 @@ public class GetSingleByFilterModelMethodGenerator<TConfiguration> : ViewMethodG
         return modelSecurityAttribute.SecurityRule;
     }
 }
+

@@ -5,7 +5,6 @@ using Anch.Core;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Models;
 using Framework.BLL.Domain.ServiceRole;
-
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
 using Framework.CodeGeneration.DTOGenerator.Server;
@@ -76,7 +75,7 @@ public class IntegrationSaveModelMethodGenerator<TConfiguration> : IntegrationMe
 
         if (null == integrationVersionProperty)
         {
-            yield return bllRefExpr.ToMethodInvokeExpression(this.Configuration.Environment.BLLCore.IntegrationSaveMethodName,integrationSaveModelDecl.ToVariableReferenceExpression())
+            yield return bllRefExpr.ToMethodInvokeExpression(this.Configuration.Environment.BLLCore.IntegrationSaveMethodName, integrationSaveModelDecl.ToVariableReferenceExpression())
                                    .ToStaticMethodInvokeExpression(this.GetConvertToDTOMethod(DTOType.IdentityDTO))
                                    .ToMethodReturnStatement();
         }
@@ -100,15 +99,15 @@ public class IntegrationSaveModelMethodGenerator<TConfiguration> : IntegrationMe
                                                         dtoVersion);
 
             yield return new CodeConditionStatement(less)
-                         {
-                                 TrueStatements =
+            {
+                TrueStatements =
                                  {
                                          savingModelRef.ToPropertyReference(integrationVersionProperty.Name).ToAssignStatement(saveObjectDecl.ToVariableReferenceExpression().ToPropertyReference(integrationVersionProperty.Name)),
                                          bllRefExpr.ToMethodInvokeExpression(
                                                                              this.Configuration.Environment.BLLCore.IntegrationSaveMethodName,
                                                                              integrationSaveModelDecl.ToVariableReferenceExpression())
                                  }
-                         };
+            };
 
             yield return saveObjectDecl.ToVariableReferenceExpression()
                                        .ToStaticMethodInvokeExpression(this.GetConvertToDTOMethod(DTOType.IdentityDTO))
@@ -117,3 +116,4 @@ public class IntegrationSaveModelMethodGenerator<TConfiguration> : IntegrationMe
         }
     }
 }
+

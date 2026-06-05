@@ -22,3 +22,4 @@ public class Insurance : DomainObjectBase
 
     public bool UseFullAnnualRemainder { get; set; }
 }
+

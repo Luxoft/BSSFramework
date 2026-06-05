@@ -23,11 +23,11 @@ public static class GeneratorConfigurationExtensions
         var contextParameterRefExpr = contextParameter.ToVariableReferenceExpression();
 
         return new CodeTypeDeclaration
-               {
-                   Name = typeName,
-                   TypeAttributes = asAbstract ? (TypeAttributes.Public | TypeAttributes.Abstract) : TypeAttributes.Public,
-                   IsPartial = true,
-                   Members =
+        {
+            Name = typeName,
+            TypeAttributes = asAbstract ? (TypeAttributes.Public | TypeAttributes.Abstract) : TypeAttributes.Public,
+            IsPartial = true,
+            Members =
                    {
                        new CodeConstructor
                        {
@@ -36,7 +36,8 @@ public static class GeneratorConfigurationExtensions
                            BaseConstructorArgs = { contextParameterRefExpr }
                        }
                    },
-                   BaseTypes = { containerType ?? typeof(BLLContextContainer<>).ToTypeReference(bllContextInterfaceTypeReference) }
-               };
+            BaseTypes = { containerType ?? typeof(BLLContextContainer<>).ToTypeReference(bllContextInterfaceTypeReference) }
+        };
     }
 }
+

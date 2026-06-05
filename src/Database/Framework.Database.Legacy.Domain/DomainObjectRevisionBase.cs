@@ -12,3 +12,4 @@ public abstract class DomainObjectRevisionBase<TIdent, TRevisionItems>(TIdent id
 
     public IEnumerable<TRevisionItems> RevisionInfos => this.revisionInfos;
 }
+

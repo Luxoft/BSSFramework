@@ -118,3 +118,4 @@ public static class CodeMemberMethodExtensions
         return codeMemberMethod;
     }
 }
+

@@ -7,3 +7,4 @@ public interface IMessageTemplate<TRenderingObject>
 {
     (string Subject, string Body) Render(IServiceProvider serviceProvider, DomainObjectVersions<TRenderingObject> versions);
 }
+

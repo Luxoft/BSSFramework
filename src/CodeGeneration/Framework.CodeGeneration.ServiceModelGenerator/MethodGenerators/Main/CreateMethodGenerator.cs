@@ -34,7 +34,7 @@ public class CreateMethodGenerator<TConfiguration>(TConfiguration configuration,
     protected override IEnumerable<CodeParameterDeclarationExpression> GetParameters()
     {
         yield return this.Configuration.Environment.ServerDTO.GetCodeTypeReference(this.ModelType, DTOType.StrictDTO)
-                         .ToParameterDeclarationExpression (this.DomainType.Name.ToStartLowerCase() + "CreateModel");
+                         .ToParameterDeclarationExpression(this.DomainType.Name.ToStartLowerCase() + "CreateModel");
     }
 
 
@@ -67,3 +67,4 @@ public class CreateMethodGenerator<TConfiguration>(TConfiguration configuration,
                        : modelSecurityAttribute.SecurityRule;
     }
 }
+

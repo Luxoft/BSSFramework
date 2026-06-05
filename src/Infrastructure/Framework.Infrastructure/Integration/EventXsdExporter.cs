@@ -77,3 +77,4 @@ public class EventXsdExporter(string xsdNamespace, IEnumerable<Type> types)
         return zipStream;
     }
 }
+

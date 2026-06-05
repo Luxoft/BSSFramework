@@ -1,8 +1,7 @@
-﻿using Framework.Application.Repository;
-
-using Anch.GenericQueryable;
-
+﻿using Anch.GenericQueryable;
 using Anch.SecuritySystem;
+
+using Framework.Application.Repository;
 
 using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Employee;
@@ -35,3 +34,4 @@ public class ExampleServiceForRepository(
         return (employees.ToList(), businessUnits.ToList());
     }
 }
+

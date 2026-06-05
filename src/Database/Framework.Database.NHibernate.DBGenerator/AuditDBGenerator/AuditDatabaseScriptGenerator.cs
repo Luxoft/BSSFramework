@@ -19,7 +19,6 @@ using NHibernate.Id;
 using NHibernate.Mapping;
 using NHibernate.Tool.hbm2ddl;
 using NHibernate.Util;
-
 using Environment = NHibernate.Cfg.Environment;
 
 namespace Framework.Database.NHibernate.DBGenerator.AuditDBGenerator;
@@ -392,3 +391,4 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
         return generators.Values;
     }
 }
+

@@ -28,10 +28,11 @@ public class ValidatorCompileCacheFileFactory<TConfiguration>(TConfiguration con
                     .ToParameterDeclarationExpression("validationMap");
 
         yield return new CodeConstructor
-                     {
-                         Attributes = MemberAttributes.Public,
-                         Parameters = { validationMapParam },
-                         BaseConstructorArgs = { validationMapParam.ToVariableReferenceExpression() }
-                     };
+        {
+            Attributes = MemberAttributes.Public,
+            Parameters = { validationMapParam },
+            BaseConstructorArgs = { validationMapParam.ToVariableReferenceExpression() }
+        };
     }
 }
+

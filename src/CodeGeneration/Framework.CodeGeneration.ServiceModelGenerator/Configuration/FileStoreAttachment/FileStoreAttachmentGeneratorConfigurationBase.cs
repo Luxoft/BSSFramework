@@ -1,7 +1,7 @@
-﻿using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators;
-using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.FileStore;
+﻿using Anch.SecuritySystem;
 
-using Anch.SecuritySystem;
+using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators;
+using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.FileStore;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.Configuration.FileStoreAttachment;
 
@@ -59,3 +59,4 @@ public abstract class FileStoreAttachmentGeneratorConfigurationBase<TEnvironment
         }
     }
 }
+

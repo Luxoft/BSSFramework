@@ -16,3 +16,4 @@ public class EmployeeInformation : Information
         set => this.personalEmail = value.TrimNull();
     }
 }
+

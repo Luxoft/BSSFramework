@@ -661,8 +661,4 @@ namespace SampleSystem.BLL
         {
         }
     }
-    
-    public partial interface ISampleSystemValidator : Framework.Validation.IValidator
-    {
-    }
 }

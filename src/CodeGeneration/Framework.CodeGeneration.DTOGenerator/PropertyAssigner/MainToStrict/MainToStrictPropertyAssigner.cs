@@ -31,13 +31,13 @@ public class MainToStrictPropertyAssigner<TConfiguration>(IDTOSource<TConfigurat
                 var identityTypeRef = this.Configuration.GetCodeTypeReference(property.PropertyType, BaseFileType.IdentityDTO);
 
                 return new CodeNotNullConditionStatement(sourcePropertyRef)
-                       {
-                               TrueStatements =
+                {
+                    TrueStatements =
                                {
                                        sourcePropertyRef.ToPropertyReference(this.Configuration.DTOIdentityPropertyName)
                                                         .ToAssignStatement(targetPropertyRef)
                                },
-                               FalseStatements =
+                    FalseStatements =
                                {
                                        this.Configuration.IdentityIsReference
 
@@ -48,41 +48,41 @@ public class MainToStrictPropertyAssigner<TConfiguration>(IDTOSource<TConfigurat
                                                                 .ToFieldReference(this.Configuration.DTOEmptyPropertyName)
                                                                 .ToAssignStatement(targetPropertyRef)
                                }
-                       };
+                };
             }
             else
             {
                 var strictRefType = this.CodeTypeReferenceService.GetCodeTypeReference(property);
 
                 return new CodeNotNullConditionStatement(sourcePropertyRef)
-                       {
-                               TrueStatements =
+                {
+                    TrueStatements =
                                {
                                        strictRefType.ToObjectCreateExpression(sourcePropertyRef)
                                                     .ToAssignStatement(targetPropertyRef)
                                },
-                               FalseStatements =
+                    FalseStatements =
                                {
                                        new CodePrimitiveExpression(null).ToAssignStatement(targetPropertyRef)
                                }
-                       };
+                };
             }
         }
         if (property.PropertyType.IsArray)
         {
             return new CodeNotNullConditionStatement(sourcePropertyRef)
-                   {
-                           TrueStatements =
+            {
+                TrueStatements =
                            {
                                    typeof(Enumerable).ToTypeReferenceExpression()
                                                      .ToMethodInvokeExpression("ToArray", sourcePropertyRef)
                                                      .ToAssignStatement(targetPropertyRef)
                            },
-                           FalseStatements =
+                FalseStatements =
                            {
                                    new CodePrimitiveExpression(null).ToAssignStatement(targetPropertyRef)
                            }
-                   };
+            };
         }
         else if (this.Configuration.IsCollectionProperty(property))
         {
@@ -103,10 +103,10 @@ public class MainToStrictPropertyAssigner<TConfiguration>(IDTOSource<TConfigurat
                                    : paramRef.ToPropertyReference(this.Configuration.DTOIdentityPropertyName);
 
                 return new CodeLambdaExpression
-                       {
-                               Parameters = { param },
-                               Statements = { body }
-                       };
+                {
+                    Parameters = { param },
+                    Statements = { body }
+                };
             });
 
             var selectMethod = typeof(CoreEnumerableExtensions)
@@ -118,15 +118,16 @@ public class MainToStrictPropertyAssigner<TConfiguration>(IDTOSource<TConfigurat
 
 
             return new CodeNotNullConditionStatement(sourcePropertyRef)
-                   {
-                           TrueStatements =
+            {
+                TrueStatements =
                            {
                                    assignStatement
                            }
-                   };
+            };
         }
 
 
         return sourcePropertyRef.ToAssignStatement(targetPropertyRef);
     }
 }
+

@@ -105,3 +105,4 @@ public class SqlParserTests(IServiceProvider rootServiceProvider) : TestBase(roo
         Assert.Equal($"{nameof(HRDepartment)} cannot be removed because it is used in {nameof(Employee)}", removeLinkedObjectsException.Message);
     }
 }
+

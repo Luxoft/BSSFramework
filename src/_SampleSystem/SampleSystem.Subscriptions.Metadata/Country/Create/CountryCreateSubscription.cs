@@ -10,7 +10,7 @@ public class CountryCreateSubscription : Subscription<Domain.Directories.Country
 {
     public override DomainObjectChangeType DomainObjectChangeType { get; } = DomainObjectChangeType.Create;
 
-    public override MailAddress Sender { get; } = new ("SampleSystem@luxoft.com", "SampleSystem");
+    public override MailAddress Sender { get; } = new("SampleSystem@luxoft.com", "SampleSystem");
 
     public override bool InlineAttachments { get; } = false;
 
@@ -24,3 +24,4 @@ public class CountryCreateSubscription : Subscription<Domain.Directories.Country
         yield return new("tester@luxoft.com", versions);
     }
 }
+

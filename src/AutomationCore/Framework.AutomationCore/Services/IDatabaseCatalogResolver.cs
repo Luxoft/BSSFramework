@@ -6,3 +6,4 @@ public interface IDatabaseCatalogResolver
 {
     IEnumerable<string> GetCatalogs(TestConnectionStringRole connectionStringRole);
 }
+

@@ -6,3 +6,4 @@ public partial class DelegateToItemModelStrictDTO
 {
     internal Permission DelegatedFromPermission;
 }
+

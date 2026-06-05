@@ -1,7 +1,9 @@
 ﻿using System.CodeDom;
 using System.Collections.ObjectModel;
-using Framework.CodeGeneration.Configuration;
+
 using Anch.SecuritySystem;
+
+using Framework.CodeGeneration.Configuration;
 
 namespace Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 
@@ -53,6 +55,8 @@ public interface IBLLCoreGeneratorConfiguration : ICodeGeneratorConfiguration, I
 
     Type? IntegrationSaveModelType { get; }
 
+    bool GenerateValidation { get; }
+
     /// <summary>
     ///     Получает или возвращает флаг, указывающий на необходимость проверки уникальности путем запроса к БД.
     /// </summary>
@@ -64,6 +68,8 @@ public interface IBLLCoreGeneratorConfiguration : ICodeGeneratorConfiguration, I
     string IntegrationSaveMethodName { get; }
 
     CodeExpression GetSecurityService(CodeExpression contextExpression);
+
     CodeExpression GetSecurityCodeExpression(SecurityRule securityRule);
 }
 #pragma warning restore S100 // Methods and properties should be named in camel case
+

@@ -18,3 +18,4 @@ public class RedirectToSupportMailMessageModifier(IOptions<SmtpSettings> setting
         }
     }
 }
+

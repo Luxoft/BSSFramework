@@ -27,11 +27,11 @@ public class OneToOneTests(IServiceProvider rootServiceProvider) : TestBase(root
                                        bll.Save(request);
 
                                        return new
-                                              {
-                                                      RequestId = request.Id,
+                                       {
+                                           RequestId = request.Id,
 
-                                                      DetailId = request.OneToOneDetail.Id
-                                              };
+                                           DetailId = request.OneToOneDetail.Id
+                                       };
                                    });
 
         // Act
@@ -41,3 +41,4 @@ public class OneToOneTests(IServiceProvider rootServiceProvider) : TestBase(root
         Assert.Contains(result.Items, request => request.Id == idents.RequestId && request.OneToOneDetail.Id == idents.DetailId);
     }
 }
+

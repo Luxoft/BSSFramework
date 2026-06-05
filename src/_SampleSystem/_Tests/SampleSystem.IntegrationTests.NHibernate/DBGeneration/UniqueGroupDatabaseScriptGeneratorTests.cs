@@ -1,5 +1,4 @@
 ﻿using Framework.AutomationCore.Extensions;
-using Framework.Database.NHibernate.DBGenerator;
 
 using Microsoft.SqlServer.Management.Smo;
 
@@ -54,3 +53,4 @@ public class UniqueGroupDatabaseScriptGeneratorTests(IServiceProvider rootServic
         Assert.Contains(indexedColumns, x => x.Name == "roleId");
     }
 }
+

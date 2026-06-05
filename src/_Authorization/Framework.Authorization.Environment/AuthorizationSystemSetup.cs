@@ -1,14 +1,6 @@
 ﻿using Anch.Core;
 using Anch.DependencyInjection;
 using Anch.RelativePath.DependencyInjection;
-
-using Framework.Application;
-using Framework.Authorization.Domain;
-using Framework.Authorization.Environment.Security;
-using Framework.Core;
-
-using Microsoft.Extensions.DependencyInjection;
-
 using Anch.SecuritySystem;
 using Anch.SecuritySystem.DependencyInjection;
 using Anch.SecuritySystem.ExternalSystem.ApplicationSecurity;
@@ -16,6 +8,13 @@ using Anch.SecuritySystem.GeneralPermission.DependencyInjection;
 using Anch.SecuritySystem.GeneralPermission.Validation;
 using Anch.SecuritySystem.Notification.DependencyInjection;
 using Anch.SecuritySystem.UserSource;
+
+using Framework.Application;
+using Framework.Authorization.Domain;
+using Framework.Authorization.Environment.Security;
+using Framework.Core;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.Environment;
 
@@ -101,3 +100,4 @@ public class AuthorizationSystemSetup : IAuthorizationSystemSetup, IServiceIniti
                 });
     }
 }
+

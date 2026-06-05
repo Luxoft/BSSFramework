@@ -52,3 +52,4 @@ public class CheckAccessMethodGenerator<TConfiguration>(TConfiguration configura
                          .ToExpressionStatement();
     }
 }
+

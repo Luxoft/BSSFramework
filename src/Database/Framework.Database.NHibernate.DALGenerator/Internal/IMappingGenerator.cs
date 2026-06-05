@@ -9,3 +9,4 @@ public interface IMappingGenerator
 
     XDocument Generate();
 }
+

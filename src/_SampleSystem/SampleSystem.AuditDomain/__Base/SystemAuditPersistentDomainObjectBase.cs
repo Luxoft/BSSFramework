@@ -40,3 +40,4 @@ public abstract class SystemAuditPersistentDomainObjectBase : IIdentityObject<Gu
 
     public virtual DateTime? ModifyDate => this.modifyDate;
 }
+

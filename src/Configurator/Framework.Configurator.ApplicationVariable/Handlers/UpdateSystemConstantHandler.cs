@@ -1,11 +1,11 @@
-﻿using Framework.Application.ApplicationVariable;
+﻿using Anch.SecuritySystem;
+using Anch.SecuritySystem.Attributes;
+using Anch.SecuritySystem.Configurator.Handlers;
+
+using Framework.Application.ApplicationVariable;
 using Framework.Configurator.Interfaces;
 
 using Microsoft.AspNetCore.Http;
-
-using Anch.SecuritySystem;
-using Anch.SecuritySystem.Attributes;
-using Anch.SecuritySystem.Configurator.Handlers;
 
 namespace Framework.Configurator.Handlers;
 
@@ -24,3 +24,4 @@ public class UpdateSystemConstantHandler(
         await variableStorage.UpdateVariableAsync(variableName, newValue, cancellationToken);
     }
 }
+

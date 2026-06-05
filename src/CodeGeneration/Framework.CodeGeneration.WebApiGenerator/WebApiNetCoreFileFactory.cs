@@ -5,6 +5,7 @@ using Anch.Core;
 using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace Framework.CodeGeneration.WebApiGenerator;
@@ -55,3 +56,4 @@ public class WebApiNetCoreFileFactory<TConfiguration>(
             .Concat(base.GetMembers())
             .OrderBy(z => z.Name);
 }
+

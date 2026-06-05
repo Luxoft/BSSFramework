@@ -9,3 +9,4 @@ public interface IEmployeeEmailExtractor
 {
     ImmutableHashSet<string> GetEmails(ImmutableArray<SecurityRole> securityRoles, ImmutableArray<NotificationFilterGroup> notificationFilterGroups);
 }
+

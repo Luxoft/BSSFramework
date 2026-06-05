@@ -11,3 +11,4 @@ public class AuditDTOGeneratorConfiguration(ServerGenerationEnvironment environm
 
     protected override IEnumerable<Type> GetDomainTypes() => base.GetDomainTypes().Where(v => !v.IsProjection());
 }
+

@@ -1,12 +1,11 @@
-﻿using Framework.Authorization.Generated.DTO;
+﻿using Anch.SecuritySystem;
+
+using Framework.Authorization.Generated.DTO;
 using Framework.BLL.Exceptions;
 
+using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.Main;
-
-using Anch.SecuritySystem;
-
-using SampleSystem.IntegrationTests._Environment.TestData;
 
 using DelegateToItemModelStrictDTO = Framework.Authorization.Generated.DTO.DelegateToItemModelStrictDTO;
 
@@ -50,10 +49,10 @@ public class PrincipalTests(IServiceProvider rootServiceProvider) : TestBase(roo
         var businessRoleIdentity = authorizationController.Evaluate(c => c.GetSimpleBusinessRoleByName(SampleSystemSecurityRole.SecretariatNotification.Name)).Identity;
 
         var principalStrict = new PrincipalStrictDTO
-                              {
-                                      Name = Name,
-                                      Permissions = [new PermissionStrictDTO { Role = businessRoleIdentity }]
-                              };
+        {
+            Name = Name,
+            Permissions = [new PermissionStrictDTO { Role = businessRoleIdentity }]
+        };
 
         // Act
         var principalIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.SavePrincipal(principalStrict));
@@ -109,9 +108,9 @@ public class PrincipalTests(IServiceProvider rootServiceProvider) : TestBase(roo
         var newPrincipalIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.SavePrincipal(newPrincipalStrict));
 
         var changePermissionDelegate = new ChangePermissionDelegatesModelStrictDTO
-                                       {
-                                               DelegateFromPermission = permissionIdentity,
-                                               Items =
+        {
+            DelegateFromPermission = permissionIdentity,
+            Items =
                                                {
                                                        new DelegateToItemModelStrictDTO
                                                        {
@@ -119,7 +118,7 @@ public class PrincipalTests(IServiceProvider rootServiceProvider) : TestBase(roo
                                                                Permission = new PermissionStrictDTO { Role = businessRoleIdentity }
                                                        }
                                                }
-                                       };
+        };
 
         // Act
         this.GetAuthControllerEvaluator().Evaluate(c => c.ChangeDelegatePermissions(changePermissionDelegate));
@@ -189,3 +188,4 @@ public class PrincipalTests(IServiceProvider rootServiceProvider) : TestBase(roo
         Assert.Matches("^Principal with id = \".*\" not found$", notFoundException.Message);
     }
 }
+

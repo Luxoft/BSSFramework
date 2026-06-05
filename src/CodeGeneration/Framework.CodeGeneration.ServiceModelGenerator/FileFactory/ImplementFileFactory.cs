@@ -1,4 +1,5 @@
 ﻿using System.CodeDom;
+
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.FileFactory;
@@ -25,3 +26,4 @@ public class ImplementFileFactory<TConfiguration>(TConfiguration configuration, 
 
         select method;
 }
+

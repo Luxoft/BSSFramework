@@ -3,6 +3,7 @@ using Anch.Testing.Database.ConnectionStringManagement;
 
 using Framework.AutomationCore;
 using Framework.AutomationCore.Services;
+
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.BLL;
@@ -38,3 +39,4 @@ public class TestBase(IServiceProvider rootServiceProvider) : IntegrationTestBas
 
     ValueTask IAsyncDisposable.DisposeAsync() => ValueTask.CompletedTask;
 }
+

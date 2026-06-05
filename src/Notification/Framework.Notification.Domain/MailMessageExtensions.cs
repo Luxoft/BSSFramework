@@ -25,7 +25,7 @@ public static class MailMessageExtensions
             }
         }
 
-        public ImmutableArray<Attachment> AttachmentList { get => [..mailMessage.Attachments]; set => mailMessage.Attachments.Override(value); }
+        public ImmutableArray<Attachment> AttachmentList { get => [.. mailMessage.Attachments]; set => mailMessage.Attachments.Override(value); }
 
         public MailMessage Clone() =>
 
@@ -40,3 +40,4 @@ public static class MailMessageExtensions
             };
     }
 }
+

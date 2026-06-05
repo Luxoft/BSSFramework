@@ -1,8 +1,8 @@
-﻿using Framework.Application.Repository.Generic;
-using Framework.Database;
-
-using Anch.SecuritySystem.AccessDenied;
+﻿using Anch.SecuritySystem.AccessDenied;
 using Anch.SecuritySystem.Providers;
+
+using Framework.Application.Repository.Generic;
+using Framework.Database;
 
 namespace Framework.Application.Repository.Default;
 
@@ -13,3 +13,4 @@ public class Repository<TDomainObject>(
     : GenericRepository<TDomainObject, Guid>(dal, accessDeniedExceptionService, securityProvider),
       IRepository<TDomainObject>
     where TDomainObject : class;
+

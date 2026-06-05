@@ -83,3 +83,4 @@ internal class CollectionOfProjectionType : BaseTypeImpl, IWrappingObject
 
     protected override PropertyInfo? GetPropertyImpl(string name, BindingFlags bindingAttr, Binder? binder, Type? returnType, Type[]? types, ParameterModifier[]? modifiers) => null;
 }
+

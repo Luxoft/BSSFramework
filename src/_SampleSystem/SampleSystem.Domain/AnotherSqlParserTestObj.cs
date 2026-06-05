@@ -25,3 +25,4 @@ public class AnotherSqlParserTestObj : AuditPersistentDomainObjectBase
         set => this.uniqueColumn = value;
     }
 }
+

@@ -88,7 +88,7 @@ public static class PersistentDomainObjectBaseExtensions
 
         return source.GetCollectionValue(propertyExpr)
                      .Match(() => null,
-                            v  => v,
+                            v => v,
                             _ => { throw new Exception($"{typeof(TSource).Name} one-to-one error. To many items in collection {typeof(TProperty).Name}"); });
     }
 
@@ -132,3 +132,4 @@ public static class PersistentDomainObjectBaseExtensions
         return collectionRequest.GetValue(() => new ArgumentException("Invalid property expression", nameof(propertyExpr)));
     }
 }
+

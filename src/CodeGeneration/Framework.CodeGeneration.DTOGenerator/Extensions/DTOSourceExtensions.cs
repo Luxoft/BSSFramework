@@ -14,3 +14,4 @@ public static class DTOSourceExtensions
         return source.Configuration.IsPersistentObject(source.DomainType);
     }
 }
+

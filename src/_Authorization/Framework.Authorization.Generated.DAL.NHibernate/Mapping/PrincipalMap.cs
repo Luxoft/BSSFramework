@@ -12,3 +12,4 @@ public class PrincipalMap : AuthBaseMap<Principal>
         this.HasMany(x => x.Permissions).AsSet().Inverse().Cascade.AllDeleteOrphan();
     }
 }
+

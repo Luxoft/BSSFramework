@@ -33,3 +33,4 @@ public interface INHibernateSetup
 
     INHibernateSetup AddExtension(INHibernateSetupExtension extension);
 }
+

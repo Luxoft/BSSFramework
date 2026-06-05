@@ -30,10 +30,10 @@ public class UniqueIndexMetadataReader
                                                        z =>
                                                                new
                                                                {
-                                                                       Source = z,
-                                                                       UniqueGroupLowKeys = z.DomainType.GetCustomAttributes<UniqueGroupAttribute>().Select(w => w.Key.MaybeString(e => e.ToLower())).ToList(),
-                                                                       UniqueElementFields = z.GetExpandedUpFields().Where(w => w.GetExpandedAttributes(z.DomainType).OfType<UniqueElementAttribute>().Any()).ToList(),
-                                                                       UniqueElementsLowKeys = z.GetExpandedUpFields().SelectMany(w => w.GetExpandedAttributes(z.DomainType).OfType<UniqueElementAttribute>().Select(e => e.Key.MaybeString(r => r.ToLower()))).Distinct().ToList()
+                                                                   Source = z,
+                                                                   UniqueGroupLowKeys = z.DomainType.GetCustomAttributes<UniqueGroupAttribute>().Select(w => w.Key.MaybeString(e => e.ToLower())).ToList(),
+                                                                   UniqueElementFields = z.GetExpandedUpFields().Where(w => w.GetExpandedAttributes(z.DomainType).OfType<UniqueElementAttribute>().Any()).ToList(),
+                                                                   UniqueElementsLowKeys = z.GetExpandedUpFields().SelectMany(w => w.GetExpandedAttributes(z.DomainType).OfType<UniqueElementAttribute>().Select(e => e.Key.MaybeString(r => r.ToLower()))).Distinct().ToList()
                                                                })
                                                .Where(z => z.UniqueGroupLowKeys.Any() && z.UniqueElementFields.Any() && z.UniqueGroupLowKeys.Intersect(z.UniqueElementsLowKeys).Any())
 
@@ -41,14 +41,14 @@ public class UniqueIndexMetadataReader
 
         var keyToUniqueProperties = info.SelectMany(z => z.UniqueGroupLowKeys
                                                           .Select(w => new
-                                                                       {
-                                                                               Source = z.Source,
-                                                                               LowGroupedKey = w,
-                                                                               UniqueElementFields = z
+                                                          {
+                                                              Source = z.Source,
+                                                              LowGroupedKey = w,
+                                                              UniqueElementFields = z
                                                                                        .UniqueElementFields
                                                                                        .Where(u => u.GetExpandedAttributes(z.Source.DomainType).OfType<UniqueElementAttribute>()
                                                                                                .Any(q => string.Equals(q.Key, w, StringComparison.InvariantCultureIgnoreCase))),
-                                                                       }))
+                                                          }))
                                         .GroupBy(z => z.LowGroupedKey)
                                         .ToList();
 
@@ -119,3 +119,4 @@ public class UniqueIndexMetadataReader
     }
 
 }
+

@@ -169,3 +169,4 @@ public partial class BusinessUnitType :
 
     ICollection<BusinessUnitTypeLinkWithPossibleFinancialProjectType> IMaster<BusinessUnitTypeLinkWithPossibleFinancialProjectType>.Details => (ICollection<BusinessUnitTypeLinkWithPossibleFinancialProjectType>)this.PossibleFinancialProjectTypes;
 }
+

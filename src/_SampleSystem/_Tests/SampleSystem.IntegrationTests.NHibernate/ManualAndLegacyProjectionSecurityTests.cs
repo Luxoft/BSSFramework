@@ -1,6 +1,6 @@
-﻿using SampleSystem.Domain.Projections;
+﻿using SampleSystem.Domain.ManualProjections;
+using SampleSystem.Domain.Projections;
 using SampleSystem.Generated.DTO;
-using SampleSystem.Domain.ManualProjections;
 using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
@@ -90,3 +90,4 @@ public class ManualAndLegacyProjectionSecurityTests(IServiceProvider rootService
     //    item.Value.Should().Contain(TestEmployeeLogin);
     //}
 }
+

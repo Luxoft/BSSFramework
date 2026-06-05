@@ -6,3 +6,4 @@ namespace Framework.Infrastructure.WebApiExceptionExpander;
 /// Handle and wrap exception for user UI
 /// </summary>
 public interface IWebApiExceptionExpander : IExceptionExpander;
+

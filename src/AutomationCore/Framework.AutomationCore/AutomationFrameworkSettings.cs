@@ -18,3 +18,4 @@ public class AutomationFrameworkSettings
 
     public string[] LocalAdmins { get; set; } = [];
 }
+

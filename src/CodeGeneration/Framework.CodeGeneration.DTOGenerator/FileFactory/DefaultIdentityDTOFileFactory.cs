@@ -28,31 +28,31 @@ public class DefaultIdentityDTOFileFactory<TConfiguration>(TConfiguration config
         if (this.Configuration.ForceGenerateProperties(this.DomainType, this.FileType))
         {
             var fieldMember = new CodeMemberField(this.Configuration.Environment.IdentityProperty.PropertyType, "_" + this.IdPropertyName.ToStartLowerCase())
-                              {
-                                      Attributes = MemberAttributes.Private
-                              };
+            {
+                Attributes = MemberAttributes.Private
+            };
 
             var fieldRefExpr = new CodeThisReferenceExpression().ToFieldReference(fieldMember);
 
             yield return fieldMember;
 
             yield return new CodeMemberProperty
-                         {
-                                 Type = fieldMember.Type,
-                                 Name = this.IdPropertyName,
-                                 Attributes = MemberAttributes.Public | MemberAttributes.Final,
-                                 CustomAttributes = { new CodeAttributeDeclaration(new CodeTypeReference(typeof(DataMemberAttribute))) },
-                                 GetStatements = { { fieldRefExpr.ToMethodReturnStatement() } },
-                                 SetStatements = { { new CodePropertySetValueReferenceExpression().ToAssignStatement(fieldRefExpr) } }
-                         };
+            {
+                Type = fieldMember.Type,
+                Name = this.IdPropertyName,
+                Attributes = MemberAttributes.Public | MemberAttributes.Final,
+                CustomAttributes = { new CodeAttributeDeclaration(new CodeTypeReference(typeof(DataMemberAttribute))) },
+                GetStatements = { { fieldRefExpr.ToMethodReturnStatement() } },
+                SetStatements = { { new CodePropertySetValueReferenceExpression().ToAssignStatement(fieldRefExpr) } }
+            };
         }
         else
         {
             yield return new CodeMemberField(this.Configuration.Environment.IdentityProperty.PropertyType, this.IdPropertyName)
-                         {
-                                 Attributes = MemberAttributes.Public,
-                                 CustomAttributes = { new CodeAttributeDeclaration(new CodeTypeReference(typeof(DataMemberAttribute))) }
-                         };
+            {
+                Attributes = MemberAttributes.Public,
+                CustomAttributes = { new CodeAttributeDeclaration(new CodeTypeReference(typeof(DataMemberAttribute))) }
+            };
         }
     }
 
@@ -83,11 +83,11 @@ public class DefaultIdentityDTOFileFactory<TConfiguration>(TConfiguration config
             var idParameter = new CodeParameterDeclarationExpression(this.Configuration.Environment.IdentityProperty.PropertyType, this.IdPropertyName.ToStartLowerCase());
 
             yield return new CodeConstructor
-                         {
-                                 Attributes = MemberAttributes.Public,
-                                 Parameters = { idParameter },
-                                 Statements = { idParameter.ToVariableReferenceExpression().ToAssignStatement(this.GetAssignIdExpression()) }
-                         };
+            {
+                Attributes = MemberAttributes.Public,
+                Parameters = { idParameter },
+                Statements = { idParameter.ToVariableReferenceExpression().ToAssignStatement(this.GetAssignIdExpression()) }
+            };
         }
 
         if (this.Configuration.GeneratePolicy.Used(this.DomainType, BaseFileType.SimpleDTO))
@@ -97,16 +97,16 @@ public class DefaultIdentityDTOFileFactory<TConfiguration>(TConfiguration config
             var sourceParameterRef = sourceParameter.ToVariableReferenceExpression();
 
             yield return new CodeConstructor
-                         {
-                                 Parameters = { sourceParameter },
-                                 Attributes = MemberAttributes.Public | MemberAttributes.Override,
-                                 Statements =
+            {
+                Parameters = { sourceParameter },
+                Attributes = MemberAttributes.Public | MemberAttributes.Override,
+                Statements =
                                  {
                                          new CodeThrowArgumentNullExceptionConditionStatement(sourceParameter),
 
                                          this.Configuration.GetIdentityPropertyCodeExpression(sourceParameterRef).ToAssignStatement(this.GetAssignIdExpression())
                                  },
-                         };
+            };
         }
     }
 
@@ -130,38 +130,38 @@ public class DefaultIdentityDTOFileFactory<TConfiguration>(TConfiguration config
         }
 
         yield return new CodeMemberField(this.CurrentReference, emptyInstanceFieldName)
-                     {
-                             Attributes = MemberAttributes.Private | MemberAttributes.Static | MemberAttributes.Final,
-                             InitExpression = new CodeObjectCreateExpression(
+        {
+            Attributes = MemberAttributes.Private | MemberAttributes.Static | MemberAttributes.Final,
+            InitExpression = new CodeObjectCreateExpression(
                                                                              this.CurrentReference,
                                                                              this.Configuration.Environment.GetIdentityType().ToTypeReferenceExpression().ToFieldReference(
                                                                               this.Configuration.DTOEmptyPropertyName))
-                     };
+        };
 
         yield return new CodeMemberProperty
-                     {
-                             Name = this.Configuration.DTOEmptyPropertyName,
-                             Attributes = MemberAttributes.Public | MemberAttributes.Static,
-                             Type = this.CurrentReference,
-                             GetStatements =
+        {
+            Name = this.Configuration.DTOEmptyPropertyName,
+            Attributes = MemberAttributes.Public | MemberAttributes.Static,
+            Type = this.CurrentReference,
+            GetStatements =
                              {
                                      this.CurrentReference.ToTypeReferenceExpression()
                                          .ToFieldReference(emptyInstanceFieldName)
                                          .ToMethodReturnStatement()
                              }
-                     };
+        };
 
         yield return new CodeMemberMethod
-                     {
-                             Name = "operator ==",
-                             Attributes = MemberAttributes.Public | MemberAttributes.Static,
-                             ReturnType = new CodeTypeReference(typeof(bool)),
-                             Parameters =
+        {
+            Name = "operator ==",
+            Attributes = MemberAttributes.Public | MemberAttributes.Static,
+            ReturnType = new CodeTypeReference(typeof(bool)),
+            Parameters =
                              {
                                      operatorValueParameter1,
                                      operatorValueParameter2
                              },
-                             Statements =
+            Statements =
                              {
                                      this.Configuration.IdentityIsReference
                                              ? new CodeBooleanOrOperatorExpression(
@@ -186,34 +186,34 @@ public class DefaultIdentityDTOFileFactory<TConfiguration>(TConfiguration config
                                                                           operatorValueParameter2.ToVariableReferenceExpression())
                                                                       .ToMethodReturnStatement()
                              }
-                     };
+        };
 
         yield return new CodeMemberMethod
-                     {
-                             Name = "operator !=",
-                             Attributes = MemberAttributes.Public | MemberAttributes.Static,
-                             ReturnType = new CodeTypeReference(typeof(bool)),
-                             Parameters =
+        {
+            Name = "operator !=",
+            Attributes = MemberAttributes.Public | MemberAttributes.Static,
+            ReturnType = new CodeTypeReference(typeof(bool)),
+            Parameters =
                              {
                                      operatorValueParameter1,
                                      operatorValueParameter2
                              },
-                             Statements =
+            Statements =
                              {
                                      new CodeValueUnequalityOperatorExpression(
                                                                                operatorValueParameter1.ToVariableReferenceExpression(),
                                                                                operatorValueParameter2.ToVariableReferenceExpression())
                                              .ToMethodReturnStatement()
                              }
-                     };
+        };
 
         yield return new CodeMemberMethod
-                     {
-                             Name = "Equals",
-                             Attributes = MemberAttributes.Override | MemberAttributes.Public,
-                             ReturnType = new CodeTypeReference(typeof(bool)),
-                             Parameters = { new CodeParameterDeclarationExpression(typeof(object), operatorOtherName) },
-                             Statements =
+        {
+            Name = "Equals",
+            Attributes = MemberAttributes.Override | MemberAttributes.Public,
+            ReturnType = new CodeTypeReference(typeof(bool)),
+            Parameters = { new CodeParameterDeclarationExpression(typeof(object), operatorOtherName) },
+            Statements =
                              {
                                      new CodeBooleanAndOperatorExpression (
 
@@ -235,15 +235,15 @@ public class DefaultIdentityDTOFileFactory<TConfiguration>(TConfiguration config
 
                                              .ToMethodReturnStatement()
                              }
-                     };
+        };
 
         yield return new CodeMemberMethod
-                     {
-                             Name = "Equals",
-                             Attributes = MemberAttributes.Final | MemberAttributes.Public,
-                             ReturnType = new CodeTypeReference(typeof(bool)),
-                             Parameters = { this.CurrentReference.ToParameterDeclarationExpression(operatorOtherName) },
-                             Statements =
+        {
+            Name = "Equals",
+            Attributes = MemberAttributes.Final | MemberAttributes.Public,
+            ReturnType = new CodeTypeReference(typeof(bool)),
+            Parameters = { this.CurrentReference.ToParameterDeclarationExpression(operatorOtherName) },
+            Statements =
                              {
                                      this.Configuration.IdentityIsReference
                                              ? new CodeBooleanAndOperatorExpression(
@@ -259,33 +259,33 @@ public class DefaultIdentityDTOFileFactory<TConfiguration>(TConfiguration config
                                                      .ToMethodReturnStatement()
 
                              }
-                     };
+        };
 
         yield return new CodeMemberMethod
-                     {
-                             Name = "GetHashCode",
-                             Attributes = MemberAttributes.Override | MemberAttributes.Public,
-                             ReturnType = new CodeTypeReference(typeof(int)),
-                             Statements =
+        {
+            Name = "GetHashCode",
+            Attributes = MemberAttributes.Override | MemberAttributes.Public,
+            ReturnType = new CodeTypeReference(typeof(int)),
+            Statements =
                              {
                                      new CodeThisReferenceExpression().ToFieldReference(this.IdPropertyName)
                                                                       .ToMethodInvokeExpression("GetHashCode")
                                                                       .ToMethodReturnStatement()
                              }
-                     };
+        };
 
         yield return new CodeMemberMethod
-                     {
-                             Name = "ToString",
-                             Attributes = MemberAttributes.Override | MemberAttributes.Public,
-                             ReturnType = new CodeTypeReference(typeof(string)),
-                             Statements =
+        {
+            Name = "ToString",
+            Attributes = MemberAttributes.Override | MemberAttributes.Public,
+            ReturnType = new CodeTypeReference(typeof(string)),
+            Statements =
                              {
                                      new CodeThisReferenceExpression().ToFieldReference(this.IdPropertyName)
                                                                       .ToMethodInvokeExpression("ToString")
                                                                       .ToMethodReturnStatement()
                              }
-                     };
+        };
 
         yield return this.GetIdentityObjectImplementation(true);
     }
@@ -306,3 +306,4 @@ public class DefaultIdentityDTOFileFactory<TConfiguration>(TConfiguration config
         yield return this.Configuration.GetIdentityObjectCodeTypeReference();
     }
 }
+

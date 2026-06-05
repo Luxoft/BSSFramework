@@ -53,3 +53,4 @@ public static class AuditedExtension
         return new AuditMetadataProvider<AuditRevisionEntity>(assemblies, auditSchema, tablePostfix, new AuditRevisionEntityListener<AuditRevisionEntity>(defaultCurrentUser));
     }
 }
+

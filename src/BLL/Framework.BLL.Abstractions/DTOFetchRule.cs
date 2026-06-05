@@ -1,6 +1,6 @@
-﻿using Framework.BLL.Domain.DTO;
+﻿using Anch.GenericQueryable.Fetching;
 
-using Anch.GenericQueryable.Fetching;
+using Framework.BLL.Domain.DTO;
 
 namespace Framework.BLL;
 
@@ -11,3 +11,4 @@ public record DTOFetchRule<TSource>(ViewDTOType Value) : FetchRuleHeader<TSource
     {
     }
 }
+

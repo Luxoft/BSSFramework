@@ -25,3 +25,4 @@ public class BLLContextHandlerValidator<TBLLContext, TOperationContext>(TBLLCont
 
     protected void RegisterHandler<TDomainObject>(Func<TDomainObject, TOperationContext, IValidationState, ValidationResult> func) => this.handlers.Add(typeof(TDomainObject), func);
 }
+

@@ -2,13 +2,12 @@
 using System.Net.Mail;
 
 using Anch.Core;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.Notification.Domain;
 
 using Framework.Subscriptions.Domain;
 
 using Microsoft.Extensions.DependencyInjection;
-
-using Anch.SecuritySystem;
-using Anch.SecuritySystem.Notification.Domain;
 
 namespace Framework.Subscriptions.Metadata;
 
@@ -59,3 +58,4 @@ public abstract class Subscription<TDomainObject, TRenderingObject, TMessageTemp
 
     public virtual IEnumerable<Attachment> GetAttachments(IServiceProvider serviceProvider, DomainObjectVersions<TRenderingObject> versions) => [];
 }
+

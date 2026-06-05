@@ -90,7 +90,7 @@ internal class GeneratedType : BaseTypeImpl, IWrappingObject
     public override object[] GetCustomAttributes(bool inherit) => this.customAttributes;
 
     private Attribute[] GetCustomAttributes() =>
-        new []
+        new[]
         {
             this.GetSourceTypeAttributes(),
 
@@ -186,21 +186,21 @@ internal class GeneratedType : BaseTypeImpl, IWrappingObject
                       let implementProp = explicitProp ?? (PropertyInfo)prop
 
                       select new
-                             {
-                                 InterfaceMethod = prop.ContractProperty.GetMethod,
+                      {
+                          InterfaceMethod = prop.ContractProperty.GetMethod,
 
-                                 ImplementMethod = implementProp.GetMethod
-                             };
+                          ImplementMethod = implementProp.GetMethod
+                      };
 
         var methods = request.ToArray();
 
         return new InterfaceMapping
-               {
-                   InterfaceType = interfaceType,
-                   TargetType = this,
-                   InterfaceMethods = methods.ToArray(pair => pair.InterfaceMethod),
-                   TargetMethods = methods.ToArray(pair => pair.ImplementMethod)
-               };
+        {
+            InterfaceType = interfaceType,
+            TargetType = this,
+            InterfaceMethods = methods.ToArray(pair => pair.InterfaceMethod),
+            TargetMethods = methods.ToArray(pair => pair.ImplementMethod)
+        };
     }
 
     public override bool Equals(Type? o) => ReferenceEquals(this, o);
@@ -239,3 +239,4 @@ internal class GeneratedType : BaseTypeImpl, IWrappingObject
         return request.ToDictionary();
     }
 }
+

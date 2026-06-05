@@ -45,3 +45,4 @@ public class DTORoleGeneratePolicy(DTORole filter, ClientDTORole clientFilter = 
         return filter.HasFlag(fileType.Role);
     }
 }
+

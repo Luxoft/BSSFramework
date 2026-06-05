@@ -27,3 +27,4 @@ public static class OperationBLLBaseExtensions
         domainObjects.Foreach(bll.Remove);
     }
 }
+

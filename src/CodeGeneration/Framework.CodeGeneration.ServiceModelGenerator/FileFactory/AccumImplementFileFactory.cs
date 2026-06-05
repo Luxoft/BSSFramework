@@ -26,3 +26,4 @@ public class AccumImplementFileFactory<TConfiguration>(TConfiguration configurat
 
         select method;
 }
+

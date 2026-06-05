@@ -1,8 +1,9 @@
-﻿using Framework.Application;
+﻿using Anch.SecuritySystem;
+using Anch.SecuritySystem.Services;
+
+using Framework.Application;
 using Framework.Database;
 
-using Anch.SecuritySystem;
-using Anch.SecuritySystem.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.Domain.Employee;
@@ -40,3 +41,4 @@ public class SecurityPathTests(IServiceProvider rootServiceProvider) : TestBase(
         Assert.Equal(employeeIdentity, result);
     }
 }
+

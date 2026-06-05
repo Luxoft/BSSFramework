@@ -1,7 +1,7 @@
-﻿using Microsoft.OpenApi.Any;
-using Microsoft.OpenApi.Models;
+﻿using Anch.SecuritySystem.SecurityRuleInfo;
 
-using Anch.SecuritySystem.SecurityRuleInfo;
+using Microsoft.OpenApi.Any;
+using Microsoft.OpenApi.Models;
 
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -17,10 +17,10 @@ public class ClientSecurityRuleDocumentFilter(IClientSecurityRuleInfoSource sour
         var ruleNames = source.GetInfos().Select(info => info.Rule.Name).OrderBy(v => v).ToArray();
 
         var schema = new OpenApiSchema
-                     {
-                         Type = "integer",
-                         Enum = Enumerable.Range(0, ruleNames.Length).Select(IOpenApiAny (v) => new OpenApiInteger(v)).ToList(),
-                     };
+        {
+            Type = "integer",
+            Enum = Enumerable.Range(0, ruleNames.Length).Select(IOpenApiAny (v) => new OpenApiInteger(v)).ToList(),
+        };
 
         var apiNames = new OpenApiArray();
         apiNames.AddRange(ruleNames.Select(v => new OpenApiString(v)));
@@ -29,3 +29,4 @@ public class ClientSecurityRuleDocumentFilter(IClientSecurityRuleInfoSource sour
         return schema;
     }
 }
+

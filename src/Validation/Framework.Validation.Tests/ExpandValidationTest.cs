@@ -15,7 +15,7 @@ public class ExpandValidationTest
                  .AddSingleton<IValidationMap, ValidationMap>()
                  .AddSingleton<ValidatorCompileCache>()
                  .AddSingleton<IValidator, Validator>()
-                 .BuildServiceProvider(new ServiceProviderOptions{ ValidateScopes = true, ValidateOnBuild = true });
+                 .BuildServiceProvider(new ServiceProviderOptions { ValidateScopes = true, ValidateOnBuild = true });
 
 
         var validator = sp.GetRequiredService<IValidator>();
@@ -42,3 +42,4 @@ public class TestCompositeClass
     [RequiredValidator]
     public string SomeProperty { get; set; }
 }
+

@@ -1,9 +1,11 @@
-﻿using Bss.Platform.Api.Documentation;
+﻿using Anch.DependencyInjection;
+using Anch.SecuritySystem.Configurator;
+using Anch.SecuritySystem.Configurator.Interfaces;
+
+using Bss.Platform.Api.Documentation;
 using Bss.Platform.Api.Middlewares;
 using Bss.Platform.Events;
 using Bss.Platform.Logging;
-
-using Anch.DependencyInjection;
 
 using Framework.Configuration.BLL.Jobs;
 using Framework.Configurator;
@@ -27,9 +29,6 @@ using SampleSystem.BLL.Command.CreateClassA.Intergation;
 using SampleSystem.ServiceEnvironment.DependencyInjection;
 using SampleSystem.ServiceEnvironment.Jobs;
 using SampleSystem.WebApiCore.Services;
-
-using Anch.SecuritySystem.Configurator;
-using Anch.SecuritySystem.Configurator.Interfaces;
 
 namespace SampleSystem.WebApiCore;
 
@@ -120,3 +119,4 @@ public static class GenericProgram
         await app.RunAsync();
     }
 }
+

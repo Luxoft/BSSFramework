@@ -1,11 +1,12 @@
-﻿using Framework.BLL.Domain.Serialization;
+﻿using Anch.SecuritySystem;
+
+using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.Core;
 using Framework.Relations;
 using Framework.Restriction;
-using SampleSystem.Domain.BU;
 
-using Anch.SecuritySystem;
+using SampleSystem.Domain.BU;
 
 namespace SampleSystem.Domain.MU;
 
@@ -81,3 +82,4 @@ public class ManagementUnit :
 
     public static bool operator !=(ManagementUnit left, IUnit<ManagementUnit> right) => !Equals(left, right);
 }
+

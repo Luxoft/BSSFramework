@@ -1,17 +1,15 @@
 ﻿using System.Data.SqlTypes;
 
 using Anch.Core;
-
-using Framework.Application;
-using Framework.Application.Events;
-using Framework.Configuration.Generated.DTO;
-using Framework.Database;
-using Framework.Database.NHibernate.Sessions;
-
 using Anch.SecuritySystem;
 using Anch.Testing.Xunit;
 
+using Framework.Application;
+using Framework.Application.Events;
 using Framework.AutomationCore.Extensions;
+using Framework.Configuration.Generated.DTO;
+using Framework.Database;
+using Framework.Database.NHibernate.Sessions;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -212,7 +210,8 @@ public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(root
             c => c.ForceDomainTypeEvent(
                 new DomainTypeEventModelStrictDTO
                 {
-                    Operation = operation.Identity, DomainObjectIdents = new List<Guid> { employeeIdentity.Id }
+                    Operation = operation.Identity,
+                    DomainObjectIdents = new List<Guid> { employeeIdentity.Id }
                 }));
 
         // Assert
@@ -358,3 +357,4 @@ public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(root
         Assert.True(notNull);
     }
 }
+

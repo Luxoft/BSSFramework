@@ -10,3 +10,4 @@ public class DefaultFullRefDTOFileFactory<TConfiguration>(TConfiguration configu
 {
     public override MainDTOFileType FileType { get; } = SampleSystemFileType.FullRefDTO;
 }
+

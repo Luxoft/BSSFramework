@@ -41,3 +41,4 @@ public abstract class FileFactory<TConfiguration, TFileType> : CodeFileFactory<T
                                                       }.Where(v => v != null).ToArray());
     }
 }
+

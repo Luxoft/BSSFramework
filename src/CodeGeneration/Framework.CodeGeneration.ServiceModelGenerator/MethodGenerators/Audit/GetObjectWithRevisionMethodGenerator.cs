@@ -23,7 +23,7 @@ public class GetObjectWithRevisionMethodGenerator<TConfiguration> : ViewMethodGe
 
     protected override CodeTypeReference ReturnType => this.Configuration.Environment.ServerDTO.GetCodeTypeReference(this.DomainType, this.DTOType);
 
-    private CodeParameterDeclarationExpression RevisionParameter => new(typeof (long), "revision");
+    private CodeParameterDeclarationExpression RevisionParameter => new(typeof(long), "revision");
 
     protected override string GetComment() => $"Get {this.DomainType.Name} ({this.DTOType}) by revision";
 
@@ -49,3 +49,4 @@ public class GetObjectWithRevisionMethodGenerator<TConfiguration> : ViewMethodGe
                                      .ToMethodReturnStatement();
     }
 }
+

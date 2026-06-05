@@ -123,7 +123,7 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
 
                                                                                             foreach (var pair in genericMap)
                                                                                             {
-                                                                                                    if (pair.Key.ContainsGenericParameters)
+                                                                                                if (pair.Key.ContainsGenericParameters)
                                                                                                 {
                                                                                                     // with explicit method implement not need contraints of class generics
                                                                                                     var contraints = pair.Key.GetGenericParameterConstraints()
@@ -215,3 +215,4 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
         return typeBuilder.CreateTypeInfo();
     }
 }
+

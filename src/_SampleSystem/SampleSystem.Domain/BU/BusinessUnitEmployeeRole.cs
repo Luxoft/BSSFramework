@@ -59,9 +59,10 @@ public class BusinessUnitEmployeeRole : AuditPersistentDomainObjectBase, IDetail
         }
 
         return new BusinessUnitEmployeeRole(businessUnit)
-               {
-                       Employee = employee,
-                       Role = role
-               };
+        {
+            Employee = employee,
+            Role = role
+        };
     }
 }
+

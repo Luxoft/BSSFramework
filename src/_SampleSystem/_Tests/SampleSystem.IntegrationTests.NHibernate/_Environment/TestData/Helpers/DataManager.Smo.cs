@@ -1,4 +1,5 @@
 ﻿using Anch.Testing;
+
 using Framework.AutomationCore.Services;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -16,3 +17,4 @@ public partial class DataManager
         return database.Tables[tableName, schema];
     }
 }
+

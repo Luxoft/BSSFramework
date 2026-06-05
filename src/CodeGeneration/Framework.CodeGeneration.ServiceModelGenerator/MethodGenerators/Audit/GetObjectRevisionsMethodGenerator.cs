@@ -40,3 +40,4 @@ public class GetObjectRevisionsMethodGenerator<TConfiguration>(TConfiguration co
                      .ToMethodReturnStatement();
     }
 }
+

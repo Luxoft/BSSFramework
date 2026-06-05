@@ -34,3 +34,4 @@ public partial interface IConfigurationBLLContext :
 
     DomainType? TryGetDomainType(TypeNameIdentity type);
 }
+

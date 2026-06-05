@@ -72,3 +72,4 @@ public static class PropertyInfoExtensions
                    propertyInfo.PropertyType.IsCollection(elementType => allowHierarchical || elementType != propertyInfo.DeclaringType || propertyInfo.IsDetail()));
     }
 }
+

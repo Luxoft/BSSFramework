@@ -4,14 +4,14 @@ using System.Reflection;
 using Anch.Core;
 
 using Framework.Application.Domain;
-using Framework.Core;
-using Framework.Restriction;
-using Framework.Validation;
 using Framework.BLL.Validation;
 using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
-using Framework.Tracking.Validation;
+using Framework.Core;
 using Framework.FileGeneration.Configuration;
+using Framework.Restriction;
+using Framework.Tracking.Validation;
+using Framework.Validation;
 using Framework.Validation.Attributes;
 using Framework.Validation.Attributes.Available;
 using Framework.Validation.Attributes.Available.Range;
@@ -20,8 +20,8 @@ using Framework.Validation.Validators;
 using Framework.Validation.Validators.Deep;
 using Framework.Validation.Validators.DynamicClass.Available.Base;
 
-using ValidatorPairExpr = System.Collections.Generic.KeyValuePair<System.CodeDom.CodeExpression, Framework.Validation.IValidationData?>;
 using ValidatorExpr = System.Collections.Generic.IReadOnlyDictionary<System.CodeDom.CodeExpression, Framework.Validation.IValidationData>;
+using ValidatorPairExpr = System.Collections.Generic.KeyValuePair<System.CodeDom.CodeExpression, Framework.Validation.IValidationData?>;
 
 namespace Framework.CodeGeneration.BLLGenerator.Configuration;
 
@@ -86,10 +86,10 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
         var attributes = this.DomainType
                              .TryGetRestrictionValidatorAttribute<UniqueGroupAttribute, UniDBGroupValidatorAttribute>(attr => new UniDBGroupValidatorAttribute
-                                                                                                                          {
-                                                                                                                              GroupKey = attr.Key,
-                                                                                                                              UseDbEvaluation = attr.UseDbEvaluation
-                                                                                                                          })
+                             {
+                                 GroupKey = attr.Key,
+                                 UseDbEvaluation = attr.UseDbEvaluation
+                             })
                              .Where(attr => attr.UseDbEvaluation || this.Configuration.UseDbUniquenessEvaluation);
 
         foreach (var attr in attributes)
@@ -166,18 +166,18 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
                 return this.GetFixedPropertyValidator(property, fixedPropertyValidatorAttribute);
 
             default:
-            {
-                var autoExpr = this.TryAutoExpandPropertyAttributes(property, attribute);
+                {
+                    var autoExpr = this.TryAutoExpandPropertyAttributes(property, attribute);
 
-                if (autoExpr != null)
-                {
-                    return autoExpr;
+                    if (autoExpr != null)
+                    {
+                        return autoExpr;
+                    }
+                    else
+                    {
+                        throw new ArgumentOutOfRangeException(nameof(attribute));
+                    }
                 }
-                else
-                {
-                    throw new ArgumentOutOfRangeException(nameof(attribute));
-                }
-            }
         }
     }
 
@@ -366,9 +366,9 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
         var createTupleExpr = new CodeParameterDeclarationExpression { Name = "source" }
             .Pipe(param => new CodeLambdaExpression
-                           {
-                               Parameters = { param },
-                               Statements =
+            {
+                Parameters = { param },
+                Statements =
                                {
                                    groupElementType.ToTypeReference().ToObjectCreateExpression(
 
@@ -384,7 +384,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
                                        ).ToMethodReturnStatement()
                                }
-                           });
+            });
 
         return internalPropertyValidatorType
                .ToTypeReference()
@@ -517,16 +517,16 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
         var propertyValidatorDict = uniProperties.ToDictionary(
             property => property.Name,
             property => new CodeLambdaExpression
-                        {
-                            Parameters = { sourceParam },
-                            Statements =
+            {
+                Parameters = { sourceParam },
+                Statements =
                             {
                                 typeof(RequiredHelper).ToTypeReferenceExpression().ToMethodInvokeExpression(
                                     "IsValid",
                                     sourceParam.ToVariableReferenceExpression().ToPropertyReference(property),
                                     RequiredMode.Default.ToPrimitiveExpression())
                             }
-                        });
+            });
 
 
 
@@ -619,3 +619,4 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
         }
     }
 }
+

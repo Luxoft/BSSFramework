@@ -20,3 +20,4 @@ public static class PropertyInfoExtensions
         return propertyInfo.GetPrivateField().Maybe(field => !field.HasAttribute<NotPersistentFieldAttribute>());
     }
 }
+

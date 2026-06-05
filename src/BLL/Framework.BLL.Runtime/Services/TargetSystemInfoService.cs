@@ -14,3 +14,4 @@ public class TargetSystemInfoService(IEnumerable<PersistentTargetSystemInfo> tar
         this.cache.GetValueOrDefault(domainType)
         ?? throw new ArgumentOutOfRangeException(nameof(domainType), $"{nameof(PersistentTargetSystemInfo)} for domainType {domainType.Name} not found");
 }
+

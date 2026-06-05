@@ -11,3 +11,4 @@ public static class FileTypeExtensions
         return fileType != BaseFileType.IdentityDTO;
     }
 }
+

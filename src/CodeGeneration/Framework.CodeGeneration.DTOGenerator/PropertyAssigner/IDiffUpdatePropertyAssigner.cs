@@ -9,3 +9,4 @@ public interface IDiffUpdatePropertyAssigner : IDTOSource
 {
     CodeStatement GetAssignStatement(PropertyInfo property, CodeExpression baseSourcePropertyRef, CodeExpression currentSourcePropertyRef, CodeExpression targetPropertyRef);
 }
+

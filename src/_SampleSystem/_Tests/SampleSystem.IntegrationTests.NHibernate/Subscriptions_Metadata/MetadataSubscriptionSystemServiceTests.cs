@@ -178,3 +178,4 @@ public sealed class MetadataSubscriptionSystemServiceTests(IServiceProvider root
         }
     }
 }
+

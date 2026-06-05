@@ -21,3 +21,4 @@ public class ProjectionManyProperty<TDomainObject, TElement> : ProjectionPropert
     /// <inheritdoc />
     public override Type CollectionType { get; } = typeof(IEnumerable<>);
 }
+

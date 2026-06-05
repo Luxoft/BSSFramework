@@ -1,4 +1,5 @@
 ﻿using Anch.Core;
+using Anch.SecuritySystem.GeneralPermission.Initialize;
 
 using Framework.Application.Lock;
 using Framework.Configuration.BLL;
@@ -6,8 +7,6 @@ using Framework.Configuration.BLL.TargetSystemService;
 using Framework.Database;
 
 using Microsoft.Extensions.DependencyInjection;
-
-using Anch.SecuritySystem.GeneralPermission.Initialize;
 
 namespace SampleSystem.ServiceEnvironment;
 
@@ -35,3 +34,4 @@ public class SampleSystemInitializer(
             DBSessionMode.Write,
             serviceProvider => serviceProvider.GetRequiredService<TInitializer>().Initialize(cancellationToken));
 }
+

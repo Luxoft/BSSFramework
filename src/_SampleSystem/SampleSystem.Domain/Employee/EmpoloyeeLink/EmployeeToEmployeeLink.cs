@@ -48,3 +48,4 @@ public class EmployeeToEmployeeLink : AuditPersistentDomainObjectBase, IDetail<E
 
     Employee IDetail<Employee>.Master => this.owner;
 }
+

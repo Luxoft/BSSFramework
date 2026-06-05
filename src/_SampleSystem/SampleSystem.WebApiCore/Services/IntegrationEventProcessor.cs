@@ -20,3 +20,4 @@ public class IntegrationEventProcessor(IDBSessionEvaluator sessionEvaluator) : I
                 return null!;
             });
 }
+

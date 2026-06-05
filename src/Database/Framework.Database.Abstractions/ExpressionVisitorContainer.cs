@@ -6,3 +6,4 @@ public class ExpressionVisitorContainer(ExpressionVisitor visitor) : IExpression
 {
     public ExpressionVisitor Visitor { get; } = visitor;
 }
+

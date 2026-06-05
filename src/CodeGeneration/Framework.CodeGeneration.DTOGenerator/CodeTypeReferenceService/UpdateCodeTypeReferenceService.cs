@@ -50,3 +50,4 @@ public class UpdateCodeTypeReferenceService<TConfiguration>(TConfiguration confi
         return typeof(UpdateItemData<,>).ToTypeReference(elementTypeRef, identityTypeRef).ToCollectionReference(this.Configuration.CollectionType);
     }
 }
+

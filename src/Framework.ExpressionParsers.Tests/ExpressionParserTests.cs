@@ -20,3 +20,4 @@ public sealed class ExpressionParserTests
         Assert.Contains("The name 'blah' does not exist in the current context", innerException.Message);
     }
 }
+

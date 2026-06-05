@@ -38,3 +38,4 @@ public class MainProjectionGeneratorConfiguration(ServerGenerationEnvironment en
         }
     }
 }
+

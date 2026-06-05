@@ -72,3 +72,4 @@ public class DomainObjectModification : AuditPersistentDomainObjectBase, IVersio
         set => this.version = value;
     }
 }
+

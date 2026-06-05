@@ -11,6 +11,6 @@ public static class SequenceBLLExtensions
     {
         if (sequenceBLL == null) throw new ArgumentNullException(nameof(sequenceBLL));
 
-        return sequenceBLL.GetNextNumber(typeof (T).Name);
+        return sequenceBLL.GetNextNumber(typeof(T).Name);
     }
 }

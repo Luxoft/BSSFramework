@@ -53,7 +53,7 @@ public static class DomainMetadataBaseExtensions
                select type;
     }
 
-    public static bool IsDomainObjectBaseProperty (this IDomainMetadata domainMetadata, PropertyInfo prop)
+    public static bool IsDomainObjectBaseProperty(this IDomainMetadata domainMetadata, PropertyInfo prop)
     {
         if (domainMetadata == null) throw new ArgumentNullException(nameof(domainMetadata));
         if (prop == null) throw new ArgumentNullException(nameof(prop));
@@ -120,3 +120,4 @@ public static class DomainMetadataBaseExtensions
         return domainMetadata.IdentityProperty.IsAssignableFrom(property);
     }
 }
+

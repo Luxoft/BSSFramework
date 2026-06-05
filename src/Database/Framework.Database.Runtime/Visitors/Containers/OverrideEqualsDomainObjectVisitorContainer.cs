@@ -9,3 +9,4 @@ public class OverrideEqualsDomainObjectVisitorContainer(IServiceProxyFactory ser
 {
     public ExpressionVisitor Visitor { get; } = new OverrideEqualsDomainObjectVisitor(serviceProxyFactory, identityInfoSource);
 }
+

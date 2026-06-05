@@ -1,5 +1,6 @@
 ﻿using System.CodeDom;
 using System.Reflection;
+
 using Framework.CodeGeneration.DTOGenerator.Extensions;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
@@ -53,3 +54,4 @@ public class DefaultBaseEventDTOFileFactory<TConfiguration>(TConfiguration confi
             TypeAttributes = TypeAttributes.Public | TypeAttributes.Abstract
         };
 }
+

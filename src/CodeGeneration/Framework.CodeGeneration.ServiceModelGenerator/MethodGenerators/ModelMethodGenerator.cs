@@ -36,3 +36,4 @@ public abstract class ModelMethodGenerator<TConfiguration, TBLLRoleAttribute> : 
 
         this.ModelType.GetCustomAttribute<DBSessionModeAttribute>().Maybe(attr => attr.SessionMode, () => base.SessionMode);
 }
+

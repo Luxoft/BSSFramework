@@ -133,8 +133,4 @@ namespace Framework.Configuration.BLL
         {
         }
     }
-    
-    public partial interface IConfigurationValidator : Framework.Validation.IValidator
-    {
-    }
 }

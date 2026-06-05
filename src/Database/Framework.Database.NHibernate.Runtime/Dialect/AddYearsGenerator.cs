@@ -34,3 +34,4 @@ public class AddYearsGenerator : BaseHqlGeneratorForMethod
                                    visitor.Visit(targetObject).AsExpression(),
                                    visitor.Visit(arguments[0]).AsExpression());
 }
+

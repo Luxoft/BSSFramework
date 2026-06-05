@@ -37,20 +37,21 @@ public class BLLContextFileFactory<TConfiguration>(TConfiguration configuration)
     {
         var pairs = new[] { this.Configuration.Environment.BLLCore.DefaultBLLFactoryContainerType, this.Configuration.Environment.BLLCore.SecurityBLLFactoryContainerType }
                 .Select(z => new
-                             {
-                                     BLLFactoryContextType = z,
-                                     ContainerContextType = typeof(IBLLFactoryContainerContext<>).MakeGenericType(z)
-                             });
+                {
+                    BLLFactoryContextType = z,
+                    ContainerContextType = typeof(IBLLFactoryContainerContext<>).MakeGenericType(z)
+                });
 
         foreach (var pair in pairs)
         {
             yield return new CodeMemberProperty
-                         {
-                                 Name = "Logics",
-                                 PrivateImplementationType = pair.ContainerContextType.ToTypeReference(),
-                                 Type = pair.BLLFactoryContextType.ToTypeReference(),
-                                 GetStatements = { new CodeThisReferenceExpression().ToPropertyReference("Logics").ToMethodReturnStatement() }
-                         };
+            {
+                Name = "Logics",
+                PrivateImplementationType = pair.ContainerContextType.ToTypeReference(),
+                Type = pair.BLLFactoryContextType.ToTypeReference(),
+                GetStatements = { new CodeThisReferenceExpression().ToPropertyReference("Logics").ToMethodReturnStatement() }
+            };
         }
     }
 }
+

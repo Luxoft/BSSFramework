@@ -1,9 +1,8 @@
 ﻿using System.CodeDom;
 using System.Collections.ObjectModel;
 using System.Reflection;
-
 using Anch.Core;
-
+using Anch.SecuritySystem;
 using Framework.BLL;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.BLL.Services;
@@ -13,8 +12,6 @@ using Framework.CodeGeneration.FileFactory;
 using Framework.Core;
 using Framework.FileGeneration.Configuration;
 using Framework.Projection;
-
-using Anch.SecuritySystem;
 
 #pragma warning disable S100 // Methods and properties should be named in camel case
 namespace Framework.CodeGeneration.BLLCoreGenerator.Configuration;
@@ -45,6 +42,8 @@ public abstract class BLLCoreGeneratorConfigurationBase<TEnvironment> : CodeGene
 
     protected override string NamespacePostfix { get; } = "BLL";
 
+    public virtual bool GenerateValidation { get; } = true;
+
     public ReadOnlyCollection<Type> BLLDomainTypes => this.lazyBLLDomainTypes.Value;
 
     /// <inheritdoc />
@@ -68,6 +67,9 @@ public abstract class BLLCoreGeneratorConfigurationBase<TEnvironment> : CodeGene
 
             new CodeFileFactoryHeader<FileType>(FileType.BLLFactoryContainerInterface, string.Empty, _ => $"I{this.Environment.TargetSystemName}BLLFactoryContainer");
 
+    protected virtual ICodeFileFactoryHeader<FileType> ValidatorInterfaceFileFactoryHeader =>
+
+        new CodeFileFactoryHeader<FileType>(FileType.ValidatorInterface, string.Empty, _ => $"I{this.Environment.TargetSystemName}Validator");
 
 
     private Type DefaultBLLFactoryType =>
@@ -101,10 +103,10 @@ public abstract class BLLCoreGeneratorConfigurationBase<TEnvironment> : CodeGene
     protected override IEnumerable<ICodeFileFactoryHeader<FileType>> GetFileFactoryHeaders() =>
     [
         this.BLLContextInterfaceFileFactoryHeader,
-
         this.BLLInterfaceFileFactoryHeader,
         this.BLLFactoryInterfaceFileFactoryHeader,
-        this.BLLFactoryContainerInterfaceFileFactoryHeader
+        this.BLLFactoryContainerInterfaceFileFactoryHeader,
+        this.ValidatorInterfaceFileFactoryHeader
     ];
 
     public CodeExpression GetSecurityCodeExpression(SecurityRule securityRule)

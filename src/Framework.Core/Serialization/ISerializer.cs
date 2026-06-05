@@ -79,3 +79,4 @@ public class Serializer<TSerializedValue, TValue> : ISerializer<TSerializedValue
         }
     }
 }
+

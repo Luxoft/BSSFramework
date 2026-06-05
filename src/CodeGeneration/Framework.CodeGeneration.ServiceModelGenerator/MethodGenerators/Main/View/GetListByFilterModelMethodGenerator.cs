@@ -70,3 +70,4 @@ public class GetListByFilterModelMethodGenerator<TConfiguration> : ViewCollectio
         return modelSecurityAttribute.SecurityRule;
     }
 }
+

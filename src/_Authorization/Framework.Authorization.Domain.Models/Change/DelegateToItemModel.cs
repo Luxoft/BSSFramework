@@ -12,3 +12,4 @@ public class DelegateToItemModel : DomainObjectBase
     [DetailRole(true)]
     public Permission Permission { get; set; }
 }
+

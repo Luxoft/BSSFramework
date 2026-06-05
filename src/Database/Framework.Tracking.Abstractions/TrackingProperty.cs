@@ -23,3 +23,4 @@ public readonly record struct TrackingProperty(string PropertyName, object? Prev
         }
     }
 }
+

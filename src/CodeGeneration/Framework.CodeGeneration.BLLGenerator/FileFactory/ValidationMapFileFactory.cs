@@ -36,11 +36,12 @@ public class ValidationMapFileFactory<TConfiguration>(TConfiguration configurati
 
 
             yield return new CodeConstructor
-                         {
-                                 Attributes = MemberAttributes.Public,
-                                 Parameters = { extendedValidationDataParam },
-                                 BaseConstructorArgs = { extendedValidationDataParam.ToVariableReferenceExpression() }
-                         };
+            {
+                Attributes = MemberAttributes.Public,
+                Parameters = { extendedValidationDataParam },
+                BaseConstructorArgs = { extendedValidationDataParam.ToVariableReferenceExpression() }
+            };
         }
     }
 }
+

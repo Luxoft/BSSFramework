@@ -29,3 +29,4 @@ public static class FileTypeExtensions
         return new CodeFileFactoryHeader<TFileType>(fileType, relativePath, getTypeNameFunc);
     }
 }
+

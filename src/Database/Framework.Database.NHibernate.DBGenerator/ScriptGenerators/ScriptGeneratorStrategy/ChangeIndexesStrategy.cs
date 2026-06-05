@@ -6,7 +6,6 @@ using Framework.Database.NHibernate.DBGenerator.Team;
 using Framework.Database.SqlMapper;
 
 using Microsoft.SqlServer.Management.Smo;
-
 using Index = Microsoft.SqlServer.Management.Smo.Index;
 
 namespace Framework.Database.NHibernate.DBGenerator.ScriptGenerators.ScriptGeneratorStrategy;
@@ -40,9 +39,9 @@ internal class ChangeIndexesStrategy(DatabaseScriptGeneratorStrategyInfo paramet
     private static void CreateNewIndex(Table table, string indexName, IndexKeyType indexKeyType, IEnumerable<string> columnNames)
     {
         var index = new Index(table, indexName)
-                    {
-                            IndexKeyType = indexKeyType
-                    };
+        {
+            IndexKeyType = indexKeyType
+        };
 
         columnNames.Foreach(z => index.IndexedColumns.Add(new IndexedColumn(index, z)));
 
@@ -305,3 +304,4 @@ internal class ChangeIndexesStrategy(DatabaseScriptGeneratorStrategyInfo paramet
         return result;
     }
 }
+

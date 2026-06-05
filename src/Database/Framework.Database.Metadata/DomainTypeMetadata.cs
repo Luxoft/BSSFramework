@@ -109,3 +109,4 @@ public class DomainTypeMetadata
         return grouped.Select(z => z.UniqueIndexMetadataCollection.First()).ToList();
     }
 }
+

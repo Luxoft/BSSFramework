@@ -31,3 +31,4 @@ public class AttachmentTemplateEvaluatorSubscription : Subscription<Domain.Emplo
         yield return new System.Net.Mail.Attachment(new MemoryStream(template), AttachmentName);
     }
 }
+

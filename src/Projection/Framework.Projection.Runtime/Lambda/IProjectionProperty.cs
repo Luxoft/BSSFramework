@@ -50,3 +50,4 @@ public interface IProjectionProperty : IProjectionAttributeProvider
     /// </summary>
     PropertyInfo? VirtualExplicitInterfaceProperty { get; }
 }
+

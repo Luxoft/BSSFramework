@@ -1,12 +1,14 @@
 ﻿using System.Runtime.CompilerServices;
 
+using Anch.SecuritySystem.Attributes;
+
 using Framework.Application.Repository;
 using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;
+
 using SampleSystem.Domain;
 using SampleSystem.ServiceEnvironment;
-using Anch.SecuritySystem.Attributes;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
@@ -46,3 +48,4 @@ public class FaultDALListenerController(
         yield return 234;
     }
 }
+

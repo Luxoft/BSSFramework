@@ -1,8 +1,8 @@
-﻿using Hangfire.Dashboard;
+﻿using Anch.SecuritySystem;
+
+using Hangfire.Dashboard;
 
 using Microsoft.Extensions.DependencyInjection;
-
-using Anch.SecuritySystem;
 
 namespace Framework.Infrastructure.Hangfire;
 
@@ -20,3 +20,4 @@ public class AdminHangfireAuthorization(DomainSecurityRule.RoleBaseSecurityRule 
                              .GetResult();
     }
 }
+

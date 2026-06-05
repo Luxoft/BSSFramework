@@ -3,6 +3,7 @@ using Framework.Core;
 using Framework.Restriction;
 using Framework.Validation;
 using Framework.Validation.Attributes;
+
 using SampleSystem.Domain.Directories;
 using SampleSystem.Domain.Validation;
 
@@ -103,3 +104,4 @@ public abstract class HRDepartmentBase : BaseDirectory, IExternalSynchronizable,
         set => this.externalId = value;
     }
 }
+

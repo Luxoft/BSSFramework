@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 
-using Framework.Database.DALExceptions;
 using Framework.Core;
+using Framework.Database.DALExceptions;
 using Framework.Database.Mapping;
 
 namespace Framework.Database.NHibernate.SqlExceptionProcessors;
@@ -74,3 +74,4 @@ internal class RemoveLinkedObjectSqlProcessor : ISqlExceptionProcessor
         }
     }
 }
+

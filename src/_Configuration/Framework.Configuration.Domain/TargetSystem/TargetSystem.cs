@@ -78,3 +78,4 @@ public class TargetSystem : BaseDirectory, IMaster<DomainType>
 
     #endregion
 }
+

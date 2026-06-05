@@ -27,3 +27,4 @@ public class ExtractConstTests
 
     public record Obj(Period Period);
 }
+

@@ -38,3 +38,4 @@ public struct UniqueConstraint
         return match.Success ? match.Groups[1].Value : columnName;
     }
 }
+

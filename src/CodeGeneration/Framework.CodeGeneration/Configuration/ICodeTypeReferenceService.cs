@@ -12,3 +12,4 @@ public interface ICodeTypeReferenceService<in TFileType>
 
     ICodeFileFactoryHeader? GetFileFactoryHeader(TFileType fileType, bool raiseIfNotFound = true);
 }
+

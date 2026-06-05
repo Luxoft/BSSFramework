@@ -56,3 +56,4 @@ internal class GeneratedCustomProperty : BasePropertyInfoImpl, IWrappingObject
 
     public override MethodInfo? GetSetMethod(bool nonPublic) => this.setMethod;
 }
+

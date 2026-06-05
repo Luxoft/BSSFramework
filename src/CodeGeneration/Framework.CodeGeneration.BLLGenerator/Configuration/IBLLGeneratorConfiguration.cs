@@ -41,8 +41,6 @@ public interface IBLLGeneratorConfiguration : ICodeGeneratorConfiguration, ICode
 
     IValidatorGenerator GetValidatorGenerator(Type domainType, CodeExpression validatorMapExpr);
 
-    bool GenerateValidation { get; }
-
     CodeTypeReference SecurityDomainBLLBaseTypeReference { get; }
 
     IFetchPathFactory<ViewDTOType> FetchPathFactory { get; }
@@ -69,3 +67,4 @@ public interface IBLLGeneratorConfiguration : ICodeGeneratorConfiguration, ICode
     /// <returns></returns>
     bool SquashPropertyValidators(PropertyInfo property);
 }
+

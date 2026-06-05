@@ -65,3 +65,4 @@ public abstract class ScriptGeneratorStrategyBase(DatabaseScriptGeneratorStrateg
         return result;
     }
 }
+

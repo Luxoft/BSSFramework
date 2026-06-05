@@ -6,3 +6,4 @@ public interface IWrappingObject : ICustomAttributeProvider
 {
     bool CanWrap { get; }
 }
+

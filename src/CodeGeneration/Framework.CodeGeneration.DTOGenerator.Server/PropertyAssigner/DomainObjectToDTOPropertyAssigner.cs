@@ -29,18 +29,18 @@ public class DomainObjectToDTOPropertyAssigner<TConfiguration>(IDTOSource<TConfi
                                            : new[] { sourcePropertyRef };
 
             return new CodeNotNullConditionStatement(sourcePropertyRef)
-                   {
-                           TrueStatements =
+            {
+                TrueStatements =
                            {
                                    this.Configuration.GetConvertToDTOMethod(property.PropertyType, referenceFileType)
                                        .ToMethodInvokeExpression(convertArguments)
                                        .ToAssignStatement(targetPropertyRef)
                            },
-                           FalseStatements =
+                FalseStatements =
                            {
                                    new CodePrimitiveExpression(null).ToAssignStatement(targetPropertyRef)
                            }
-                   };
+            };
         }
 
         if (this.Configuration.IsCollectionProperty(property))
@@ -60,3 +60,4 @@ public class DomainObjectToDTOPropertyAssigner<TConfiguration>(IDTOSource<TConfi
         return sourcePropertyRef.ToAssignStatement(targetPropertyRef);
     }
 }
+

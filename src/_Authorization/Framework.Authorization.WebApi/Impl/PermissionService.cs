@@ -1,7 +1,7 @@
-﻿using Framework.Authorization.Generated.DTO;
-using Framework.Database;
+﻿using Anch.SecuritySystem;
 
-using Anch.SecuritySystem;
+using Framework.Authorization.Generated.DTO;
+using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,3 +41,4 @@ public partial class AuthMainController
                                 .ToVisualDTO(evaluateData.MappingService))
     ];
 }
+

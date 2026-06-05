@@ -21,3 +21,4 @@ public static class MethodGeneratorInfoExtensions
         return info.Parameters.Single();
     }
 }
+

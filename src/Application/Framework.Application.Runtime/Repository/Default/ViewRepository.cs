@@ -1,8 +1,8 @@
-﻿using Framework.Database;
-
-using Anch.SecuritySystem;
+﻿using Anch.SecuritySystem;
 using Anch.SecuritySystem.AccessDenied;
 using Anch.SecuritySystem.DomainServices;
+
+using Framework.Database;
 
 namespace Framework.Application.Repository.Default;
 
@@ -15,3 +15,4 @@ public class ViewRepository<TDomainObject>(
         accessDeniedExceptionService,
         domainSecurityService.GetSecurityProvider(SecurityRule.View))
     where TDomainObject : class;
+

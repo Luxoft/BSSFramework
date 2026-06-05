@@ -56,16 +56,17 @@ public partial class PermissionBLL
         this.Context.Validator.Validate(updatePermissionDelegatesModel);
 
         var changePermissionDelegatesModel = new ChangePermissionDelegatesModel
-                                             {
-                                                     DelegateFromPermission = updatePermissionDelegatesModel.DelegateFromPermission,
+        {
+            DelegateFromPermission = updatePermissionDelegatesModel.DelegateFromPermission,
 
-                                                     Items = updatePermissionDelegatesModel.DelegateFromPermission.DelegatedTo.ToList(subPerm =>
+            Items = updatePermissionDelegatesModel.DelegateFromPermission.DelegatedTo.ToList(subPerm =>
 
-                                                             new DelegateToItemModel { Permission = subPerm, Principal = subPerm.Principal })
-                                             };
+                    new DelegateToItemModel { Permission = subPerm, Principal = subPerm.Principal })
+        };
 
         changePermissionDelegatesModel.Merge(updatePermissionDelegatesModel);
 
         this.ChangeDelegatePermissions(changePermissionDelegatesModel);
     }
 }
+

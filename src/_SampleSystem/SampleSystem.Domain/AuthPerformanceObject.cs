@@ -23,3 +23,4 @@ public class AuthPerformanceObject : AuditPersistentDomainObjectBase
 
     public virtual Employee.Employee? Employee { get => this.employee; set => this.employee = value; }
 }
+

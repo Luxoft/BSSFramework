@@ -56,3 +56,4 @@ public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Pe
 
     Permission IDetail<Permission>.Master => this.Permission;
 }
+

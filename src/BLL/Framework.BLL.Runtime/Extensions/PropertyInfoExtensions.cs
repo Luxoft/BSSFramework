@@ -11,3 +11,4 @@ public static class PropertyInfoExtensions
         public Type GetNestedType() => property.PropertyType.GetCollectionElementType() ?? property.PropertyType;
     }
 }
+

@@ -105,3 +105,4 @@ public partial class AuthorizationGenerationEnvironment(DatabaseName databaseNam
 
     public static readonly AuthorizationGenerationEnvironment Default = new(new DatabaseName("", "auth"));
 }
+

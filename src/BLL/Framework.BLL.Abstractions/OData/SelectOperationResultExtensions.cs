@@ -1,7 +1,7 @@
-﻿using Framework.Application.Domain;
-using Framework.BLL.Domain.Persistent;
+﻿using Anch.OData.Domain;
 
-using Anch.OData.Domain;
+using Framework.Application.Domain;
+using Framework.BLL.Domain.Persistent;
 
 namespace Framework.BLL.OData;
 
@@ -19,3 +19,4 @@ public static class SelectOperationResultExtensions
         return source.Items.Select(node => node.ChangeItem(selector)).ToSelectOperationResult(source.TotalCount);
     }
 }
+

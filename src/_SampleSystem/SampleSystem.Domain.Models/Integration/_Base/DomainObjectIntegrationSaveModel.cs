@@ -9,3 +9,4 @@ public abstract class DomainObjectIntegrationSaveModel<TDomainObject> : DomainOb
     [Required]
     public virtual TDomainObject SavingObject { get; set; }
 }
+

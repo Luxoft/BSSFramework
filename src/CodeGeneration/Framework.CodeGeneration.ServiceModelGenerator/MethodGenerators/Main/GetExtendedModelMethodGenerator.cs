@@ -67,3 +67,4 @@ public class GetExtendedModelMethodGenerator<TConfiguration> : ModelMethodGenera
         return modelSecurityAttribute.SecurityRule;
     }
 }
+

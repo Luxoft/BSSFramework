@@ -14,3 +14,4 @@ public class GetObjectPropertyRevisionsMethodGenerator<TConfiguration>(TConfigur
 
     protected override string GetComment() => $"Get {this.DomainType.Name} Property Revisions";
 }
+

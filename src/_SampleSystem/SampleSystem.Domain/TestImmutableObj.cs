@@ -26,3 +26,4 @@ public class TestImmutableObj : AuditPersistentDomainObjectBase
         set => this.testImmutableRefProperty = value;
     }
 }
+

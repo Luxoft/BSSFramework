@@ -120,3 +120,4 @@ public static class TryResult
         public TArgs Args { get; }
     }
 }
+

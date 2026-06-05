@@ -47,3 +47,4 @@ public class Fix2100SqlClientDriver : MicrosoftDataSqlClientDriver
         guidParameters.Foreach(x => sqlCommand.Parameters.Remove(x));
     }
 }
+

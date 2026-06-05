@@ -22,3 +22,4 @@ public abstract class OperationBLLBase<TBLLContext, TPersistentDomainObjectBase,
         this.Context.OperationSender.Send(domainObject, EventOperation.Remove, CancellationToken.None).GetAwaiter().GetResult();
     }
 }
+

@@ -115,3 +115,4 @@ public abstract class MainDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
         yield return this.GenerateFromDomainObjectConstructor(this.MapDomainObjectToMappingObjectPropertyAssigner);
     }
 }
+

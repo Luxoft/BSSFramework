@@ -55,7 +55,7 @@ public class FioShort : ICloneable, IEquatable<FioShort>
 
     public override string ToString() => this.FullName;
 
-    public FioShort Clone () => this.MemberwiseClone() as FioShort;
+    public FioShort Clone() => this.MemberwiseClone() as FioShort;
 
     object ICloneable.Clone() => this.Clone();
 
@@ -72,3 +72,4 @@ public class FioShort : ICloneable, IEquatable<FioShort>
 
     public static bool operator !=(FioShort v1, FioShort v2) => !(v1 == v2);
 }
+

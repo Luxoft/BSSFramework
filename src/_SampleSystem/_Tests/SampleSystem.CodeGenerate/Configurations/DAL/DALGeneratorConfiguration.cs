@@ -31,3 +31,4 @@ public class DALGeneratorConfiguration(ServerGenerationEnvironment environment) 
 
     private (Type fromType, string propertyName)[] GetIgnoreFields() => [];
 }
+

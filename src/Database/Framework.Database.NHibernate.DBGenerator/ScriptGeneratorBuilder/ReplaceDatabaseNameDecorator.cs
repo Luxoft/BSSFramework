@@ -34,3 +34,4 @@ internal class ReplaceDatabaseNameDecorator : IDatabaseScriptGenerator
     /// <returns>Скрипт модификации</returns>
     public IDatabaseScriptResult GenerateScript(IDatabaseScriptGeneratorContext context) => this.source.GenerateScript(new DatabaseScriptGeneratorContext(this.nextDatabaseNameFunc(context), context.SqlDatabaseFactory, context.AssemblyMetadata));
 }
+

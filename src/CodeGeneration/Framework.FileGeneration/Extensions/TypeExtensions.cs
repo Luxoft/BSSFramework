@@ -14,3 +14,4 @@ public static class TypeExtensions
         return @namespace.SkipLast(postfix, false);
     }
 }
+

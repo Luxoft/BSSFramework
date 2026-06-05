@@ -13,3 +13,4 @@ public class BusinessUnit : ISecurityContext
 
     public virtual BusinessUnit? Parent { get; set; }
 }
+

@@ -8,3 +8,4 @@ public interface IAuditTypeFilter
 
     bool IsAuditedProperty(Type type, PropertyInfo propertyInfo);
 }
+

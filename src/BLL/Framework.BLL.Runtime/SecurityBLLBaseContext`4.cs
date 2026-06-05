@@ -1,10 +1,9 @@
-﻿using Framework.Application.Domain;
+﻿using Anch.HierarchicalExpand;
+using Anch.SecuritySystem.AccessDenied;
+
+using Framework.Application.Domain;
 using Framework.Application.Events;
 using Framework.BLL.Default;
-
-using Anch.HierarchicalExpand;
-
-using Anch.SecuritySystem.AccessDenied;
 
 namespace Framework.BLL;
 
@@ -24,3 +23,4 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent
 {
     public IAccessDeniedExceptionService AccessDeniedExceptionService { get; } = accessDeniedExceptionService;
 }
+

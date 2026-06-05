@@ -9,7 +9,7 @@ public record ModelRole(string Name, DirectMode.DirectMode DirectMode)
 
 
 
-    public static readonly ModelRole Create = new(nameof (Create), Domain.DirectMode.DirectMode.In);
+    public static readonly ModelRole Create = new(nameof(Create), Domain.DirectMode.DirectMode.In);
 
     public static readonly ModelRole Extended = new(nameof(Extended), Domain.DirectMode.DirectMode.Out | Domain.DirectMode.DirectMode.In);
 

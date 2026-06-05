@@ -22,3 +22,4 @@ public class CodeForeachStatement : CodeStatement
 
     public CodeExpression Source { get; set; }
 }
+

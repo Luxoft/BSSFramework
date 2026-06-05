@@ -1,7 +1,7 @@
-﻿using Framework.Configuration.Generated.DTO;
-using Framework.Database;
+﻿using Anch.SecuritySystem;
 
-using Anch.SecuritySystem;
+using Framework.Configuration.Generated.DTO;
+using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,3 +26,4 @@ public partial class ConfigMainController
             });
     }
 }
+

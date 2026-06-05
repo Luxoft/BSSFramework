@@ -1,6 +1,7 @@
 ﻿using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;
+
 using SampleSystem.AuditDomain;
 using SampleSystem.Generated.DTO;
 
@@ -18,3 +19,4 @@ public class BusinessUnitAuditController(IAsyncDal<BusinessUnitAudit, Guid> dal)
         return (auditBu.Revision.Author, auditBu.Revision.Id, new BusinessUnitIdentityDTO(auditBu.Id));
     }
 }
+

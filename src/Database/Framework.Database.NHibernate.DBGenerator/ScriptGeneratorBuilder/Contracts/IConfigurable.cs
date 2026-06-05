@@ -17,3 +17,4 @@ public interface IMigrationScriptGeneratorBuilder : IConfigurable
 
     IMigrationScriptGeneratorBuilder WithFolder(string directoryPath);
 }
+

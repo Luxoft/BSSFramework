@@ -24,3 +24,4 @@ public static class CodeDomRendererExtensions
         return new GeneratedFileInfo(filename + "." + renderer.FileExtension, sources.Join(Environment.NewLine, renderer.Render));
     }
 }
+

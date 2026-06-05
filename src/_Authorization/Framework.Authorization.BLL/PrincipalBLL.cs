@@ -1,10 +1,10 @@
-﻿using Framework.Application;
+﻿using Anch.SecuritySystem.Services;
+
+using Framework.Application;
 using Framework.Authorization.Domain;
 using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;
-
-using Anch.SecuritySystem.Services;
 
 namespace Framework.Authorization.BLL;
 
@@ -36,3 +36,4 @@ public partial class PrincipalBLL
         base.Remove(domainObject);
     }
 }
+

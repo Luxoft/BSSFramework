@@ -6,3 +6,4 @@ public interface IMigrationScriptReader
 {
     IEnumerable<MigrationDbScript> Read();
 }
+

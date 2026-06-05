@@ -29,7 +29,7 @@ public static class MissingParsingMethodExceptionExtensions
 
                           where parameters.Length == ex.TryArgs.Count
 
-                          let argIndex = ex.TryArgs.IndexOf(typeof (TArg))
+                          let argIndex = ex.TryArgs.IndexOf(typeof(TArg))
 
                           where argIndex != -1
 
@@ -39,3 +39,4 @@ public static class MissingParsingMethodExceptionExtensions
         }
     }
 }
+

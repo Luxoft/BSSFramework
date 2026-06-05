@@ -9,7 +9,6 @@ using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.WebApiCore.Controllers.Audit;
 using SampleSystem.WebApiCore.Controllers.Main;
-
 using BusinessUnitController = SampleSystem.WebApiCore.Controllers.Audit.BusinessUnitController;
 
 namespace SampleSystem.IntegrationTests;
@@ -25,13 +24,13 @@ public class AuditTests(IServiceProvider rootServiceProvider) : TestBase(rootSer
         var testCount = 10;
 
         var employeeStrictDto = new EmployeeStrictDTO
-                                {
-                                        NameEng = new Fio() { FirstName = "firstName", LastName = "lastName" },
-                                        WorkPeriod = new Period(DateTime.Now.AddDays(-1), DateTime.Now),
-                                        ValidateVirtualProp = DateTime.Now,
-                                        EducationDuration = new Period(DateTime.Now.AddYears(-5), DateTime.Now.AddYears(-2)),
-                                        ExternalId = 1
-                                };
+        {
+            NameEng = new Fio() { FirstName = "firstName", LastName = "lastName" },
+            WorkPeriod = new Period(DateTime.Now.AddDays(-1), DateTime.Now),
+            ValidateVirtualProp = DateTime.Now,
+            EducationDuration = new Period(DateTime.Now.AddYears(-5), DateTime.Now.AddYears(-2)),
+            ExternalId = 1
+        };
 
         var employeeIdentity = employeeController.Evaluate(c => c.SaveEmployee(employeeStrictDto));
 
@@ -58,13 +57,13 @@ public class AuditTests(IServiceProvider rootServiceProvider) : TestBase(rootSer
         var testCount = 10;
 
         var employeeStrictDto = new EmployeeStrictDTO
-                                {
-                                        NameEng = new Fio() { FirstName = "firstName", LastName = "lastName" },
-                                        WorkPeriod = new Period(DateTime.Now.AddDays(-1), DateTime.Now),
-                                        ValidateVirtualProp = DateTime.Now,
-                                        EducationDuration = new Period(DateTime.Now.AddYears(-5), DateTime.Now.AddYears(-2)),
-                                        ExternalId = 1
-                                };
+        {
+            NameEng = new Fio() { FirstName = "firstName", LastName = "lastName" },
+            WorkPeriod = new Period(DateTime.Now.AddDays(-1), DateTime.Now),
+            ValidateVirtualProp = DateTime.Now,
+            EducationDuration = new Period(DateTime.Now.AddYears(-5), DateTime.Now.AddYears(-2)),
+            ExternalId = 1
+        };
 
         var employeeIdentity = employeeController.Evaluate(c => c.SaveEmployee(employeeStrictDto));
 
@@ -86,11 +85,11 @@ public class AuditTests(IServiceProvider rootServiceProvider) : TestBase(rootSer
                                                   .Skip(skip) ////
                                                   .FirstOrDefault();
 
-        var lastEmployeeState = employeeAuditController.Evaluate(c => c.GetFullEmployeeWithRevision( new GetFullEmployeeWithRevisionAutoRequest
-                                                                     {
-                                                                             EmployeeIdentity = employeeIdentity,
-                                                                             Revision = lastRevision.RevisionNumber
-                                                                     }));
+        var lastEmployeeState = employeeAuditController.Evaluate(c => c.GetFullEmployeeWithRevision(new GetFullEmployeeWithRevisionAutoRequest
+        {
+            EmployeeIdentity = employeeIdentity,
+            Revision = lastRevision.RevisionNumber
+        }));
 
         var expected = Enumerable.Range(-1, testCount).Skip(skip).First();
         Assert.Equal($"{expected}", lastEmployeeState.NameEng.FirstName);
@@ -103,22 +102,22 @@ public class AuditTests(IServiceProvider rootServiceProvider) : TestBase(rootSer
         var employeeController = this.MainWebApi.Employee;
         var employeeAuditController = this.MainAuditWebApi.Employee;
         var employeeStrictDto = new EmployeeStrictDTO
-                                {
-                                        NameEng = new Fio() { FirstName = "firstName", LastName = "lastName" },
-                                        WorkPeriod = new Period(DateTime.Now.AddDays(-1), DateTime.Now),
-                                        ValidateVirtualProp = DateTime.Now,
-                                        EducationDuration = new Period(DateTime.Now.AddYears(-5), DateTime.Now.AddYears(-2)),
-                                        ExternalId = 1
-                                };
+        {
+            NameEng = new Fio() { FirstName = "firstName", LastName = "lastName" },
+            WorkPeriod = new Period(DateTime.Now.AddDays(-1), DateTime.Now),
+            ValidateVirtualProp = DateTime.Now,
+            EducationDuration = new Period(DateTime.Now.AddYears(-5), DateTime.Now.AddYears(-2)),
+            ExternalId = 1
+        };
 
         var employeeIdentity = employeeController.Evaluate(c => c.SaveEmployee(employeeStrictDto));
 
         // Assert
         var propertyRevisions = employeeAuditController.Evaluate(c => c.GetEmployeePropertyRevisions(new GetEmployeePropertyRevisionsAutoRequest
-                                                                     {
-                                                                             EmployeeIdentity = employeeIdentity,
-                                                                             PropertyName = $"{nameof(Employee.CoreBusinessUnit)}"
-                                                                     }));
+        {
+            EmployeeIdentity = employeeIdentity,
+            PropertyName = $"{nameof(Employee.CoreBusinessUnit)}"
+        }));
 
         Assert.Single(propertyRevisions.RevisionInfos);
     }
@@ -133,13 +132,13 @@ public class AuditTests(IServiceProvider rootServiceProvider) : TestBase(rootSer
         var emailTail = "@email.email";
 
         var employeeStrictDto = new EmployeeStrictDTO
-                                {
-                                        NameEng = new Fio() { FirstName = "firstName", LastName = "lastName" },
-                                        WorkPeriod = new Period(DateTime.Now.AddDays(-1), DateTime.Now),
-                                        ValidateVirtualProp = DateTime.Now,
-                                        EducationDuration = new Period(DateTime.Now.AddYears(-5), DateTime.Now.AddYears(-2)),
-                                        ExternalId = 1
-                                };
+        {
+            NameEng = new Fio() { FirstName = "firstName", LastName = "lastName" },
+            WorkPeriod = new Period(DateTime.Now.AddDays(-1), DateTime.Now),
+            ValidateVirtualProp = DateTime.Now,
+            EducationDuration = new Period(DateTime.Now.AddYears(-5), DateTime.Now.AddYears(-2)),
+            ExternalId = 1
+        };
 
         var employeeIdentity = employeeController.Evaluate(c => c.SaveEmployee(employeeStrictDto));
 
@@ -154,10 +153,10 @@ public class AuditTests(IServiceProvider rootServiceProvider) : TestBase(rootSer
         // Assert
         var skip = 3;
         var checkPropertyRevision = employeeAuditController.Evaluate(c => c.GetEmployeePropertyRevisions(new GetEmployeePropertyRevisionsAutoRequest
-                                                                         {
-                                                                                 EmployeeIdentity = employeeIdentity,
-                                                                                 PropertyName = $"{nameof(Employee.Email)}"
-                                                                         }))
+        {
+            EmployeeIdentity = employeeIdentity,
+            PropertyName = $"{nameof(Employee.Email)}"
+        }))
                                                            .RevisionInfos
                                                            .EmptyIfNull()
                                                            .OrderBy(z => z.RevisionNumber)
@@ -178,13 +177,13 @@ public class AuditTests(IServiceProvider rootServiceProvider) : TestBase(rootSer
         var emailTail = "@email.email";
 
         var employeeStrictDto = new EmployeeStrictDTO
-                                {
-                                        NameEng = new Fio() { FirstName = "firstName", LastName = "lastName" },
-                                        WorkPeriod = new Period(DateTime.Now.AddDays(-1), DateTime.Now),
-                                        ValidateVirtualProp = DateTime.Now,
-                                        EducationDuration = new Period(DateTime.Now.AddYears(-5), DateTime.Now.AddYears(-2)),
-                                        ExternalId = 1
-                                };
+        {
+            NameEng = new Fio() { FirstName = "firstName", LastName = "lastName" },
+            WorkPeriod = new Period(DateTime.Now.AddDays(-1), DateTime.Now),
+            ValidateVirtualProp = DateTime.Now,
+            EducationDuration = new Period(DateTime.Now.AddYears(-5), DateTime.Now.AddYears(-2)),
+            ExternalId = 1
+        };
 
         var employeeIdentity = employeeController.Evaluate(c => c.SaveEmployee(employeeStrictDto));
 
@@ -200,10 +199,10 @@ public class AuditTests(IServiceProvider rootServiceProvider) : TestBase(rootSer
         var skip = 3;
 
         var firstRevision = employeeAuditController.Evaluate(c => c.GetEmployeePropertyRevisions(new GetEmployeePropertyRevisionsAutoRequest
-                                                                 {
-                                                                         EmployeeIdentity = employeeIdentity,
-                                                                         PropertyName = $"{nameof(Employee.Email)}"
-                                                                 }))
+        {
+            EmployeeIdentity = employeeIdentity,
+            PropertyName = $"{nameof(Employee.Email)}"
+        }))
                                                    .RevisionInfos
                                                    .EmptyIfNull()
                                                    .OrderBy(z => z.RevisionNumber)
@@ -223,13 +222,13 @@ public class AuditTests(IServiceProvider rootServiceProvider) : TestBase(rootSer
         var emailTail = "@email.email";
 
         var employeeStrictDto = new EmployeeStrictDTO
-                                {
-                                        NameEng = new Fio() { FirstName = "firstName", LastName = "lastName" },
-                                        WorkPeriod = new Period(DateTime.Now.AddDays(-1), DateTime.Now),
-                                        ValidateVirtualProp = DateTime.Now,
-                                        EducationDuration = new Period(DateTime.Now.AddYears(-5), DateTime.Now.AddYears(-2)),
-                                        ExternalId = 1
-                                };
+        {
+            NameEng = new Fio() { FirstName = "firstName", LastName = "lastName" },
+            WorkPeriod = new Period(DateTime.Now.AddDays(-1), DateTime.Now),
+            ValidateVirtualProp = DateTime.Now,
+            EducationDuration = new Period(DateTime.Now.AddYears(-5), DateTime.Now.AddYears(-2)),
+            ExternalId = 1
+        };
 
         var employeeIdentity = employeeController.Evaluate(c => c.SaveEmployee(employeeStrictDto));
 
@@ -243,10 +242,10 @@ public class AuditTests(IServiceProvider rootServiceProvider) : TestBase(rootSer
 
         // Assert
         var afterFirstRevisions = employeeAuditController.Evaluate(c => c.GetEmployeePropertyRevisions(new GetEmployeePropertyRevisionsAutoRequest
-                                                                       {
-                                                                               EmployeeIdentity = employeeIdentity,
-                                                                               PropertyName = $"{nameof(Employee.Email)}"
-                                                                       }))
+        {
+            EmployeeIdentity = employeeIdentity,
+            PropertyName = $"{nameof(Employee.Email)}"
+        }))
                                                          .RevisionInfos
                                                          .EmptyIfNull()
                                                          .OrderBy(z => z.RevisionNumber)
@@ -288,3 +287,4 @@ public class AuditTests(IServiceProvider rootServiceProvider) : TestBase(rootSer
         Assert.Equal(newBu, auditBu.BuIdent);
     }
 }
+

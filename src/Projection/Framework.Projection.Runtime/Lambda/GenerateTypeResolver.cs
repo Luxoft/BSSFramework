@@ -21,3 +21,4 @@ internal class GenerateTypeResolver(ProjectionLambdaEnvironment environment) : I
 
     public ImmutableHashSet<Type> Types => this.generateState.Types;
 }
+

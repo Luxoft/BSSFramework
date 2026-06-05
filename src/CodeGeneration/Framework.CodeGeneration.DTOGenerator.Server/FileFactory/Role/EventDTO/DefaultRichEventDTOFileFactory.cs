@@ -9,3 +9,4 @@ public class DefaultRichEventDTOFileFactory<TConfiguration>(TConfiguration confi
 {
     public override DTOFileType FileType { get; } = ServerFileType.RichEventDTO;
 }
+

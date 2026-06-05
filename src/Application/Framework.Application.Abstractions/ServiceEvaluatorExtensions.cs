@@ -1,8 +1,7 @@
 ﻿using Anch.Core;
+using Anch.SecuritySystem;
 
 using Framework.Database;
-
-using Anch.SecuritySystem;
 
 namespace Framework.Application;
 
@@ -36,3 +35,4 @@ public static class ServiceEvaluatorExtensions
         }
     }
 }
+

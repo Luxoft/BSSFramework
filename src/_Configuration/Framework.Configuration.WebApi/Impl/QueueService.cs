@@ -1,9 +1,10 @@
-﻿using Framework.Configuration.Generated.DTO;
+﻿using Anch.SecuritySystem;
+
+using Framework.Configuration.Generated.DTO;
 using Framework.Core;
 using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;
-using Anch.SecuritySystem;
 
 // ReSharper disable once CheckNamespace
 namespace Framework.Configuration.WebApi;
@@ -59,3 +60,4 @@ public partial class ConfigMainController
                 return evaluateData.Context.Logics.DomainObjectNotification.GetProcessingState().ToSimpleDTO(evaluateData.MappingService);
             });
 }
+

@@ -14,3 +14,4 @@ public readonly struct DomainOperationSerializeData<TDomainObject> : IDomainOper
 
     Type IDomainOperationSerializeData<TDomainObject>.DomainObjectType => this.CustomDomainObjectType ?? typeof(TDomainObject);
 }
+

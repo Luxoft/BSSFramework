@@ -1,12 +1,13 @@
-﻿using Framework.Application.Repository;
+﻿using Anch.GenericQueryable;
+using Anch.SecuritySystem;
+
+using Framework.Application.Repository;
 using Framework.Database;
 
-using Anch.GenericQueryable;
-
 using Microsoft.AspNetCore.Mvc;
+
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
-using Anch.SecuritySystem;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
@@ -51,3 +52,4 @@ public class NoSecurityController(IRepositoryFactory<NoSecurityObject> repositor
         return result.ToIdentityDTOList();
     }
 }
+

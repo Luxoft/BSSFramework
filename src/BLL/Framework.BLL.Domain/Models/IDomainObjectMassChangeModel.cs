@@ -13,3 +13,4 @@ public interface IDomainObjectMassChangeModel<out TDomainObject>
     [Required]
     IEnumerable<TDomainObject> ChangingObjects { get; }
 }
+

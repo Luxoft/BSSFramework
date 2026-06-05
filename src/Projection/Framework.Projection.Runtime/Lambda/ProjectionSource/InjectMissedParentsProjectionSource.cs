@@ -46,9 +46,11 @@ internal class InjectMissedParentsProjectionSource(ProjectionLambdaEnvironment e
         foreach (var pair in missedParentRequest)
         {
             var newPropertyBuilder = new ProjectionPropertyBuilder(environment, pair.ParentProperty.ToGetLambdaExpression(pair.Projection.SourceType))
-                                     {
-                                         Role = ProjectionPropertyRole.MissedParent, ElementProjection = pair.ParentProjection, IgnoreSerialization = true
-                                     };
+            {
+                Role = ProjectionPropertyRole.MissedParent,
+                ElementProjection = pair.ParentProjection,
+                IgnoreSerialization = true
+            };
 
             pair.Projection.Properties.Add(newPropertyBuilder);
         }
@@ -56,3 +58,4 @@ internal class InjectMissedParentsProjectionSource(ProjectionLambdaEnvironment e
         return builders;
     }
 }
+

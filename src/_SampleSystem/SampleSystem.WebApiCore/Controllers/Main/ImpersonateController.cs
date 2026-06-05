@@ -1,11 +1,12 @@
-﻿using Framework.Application;
+﻿using Anch.GenericQueryable;
+
+using Framework.Application;
 using Framework.Application.Repository;
 using Framework.Database;
 
-using Anch.GenericQueryable;
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 
@@ -46,3 +47,4 @@ public class ImpersonateController(
                 return result.ToSimpleDTOList(mappingService);
             });
 }
+

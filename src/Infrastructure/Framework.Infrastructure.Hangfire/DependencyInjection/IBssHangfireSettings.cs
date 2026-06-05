@@ -35,3 +35,4 @@ public interface IBssHangfireSettings
     IBssHangfireSettings AddJob<TJob, TArg>(Func<TJob, TArg, Task> executeAction, JobSettings? jobSettings = null)
         where TJob : class;
 }
+

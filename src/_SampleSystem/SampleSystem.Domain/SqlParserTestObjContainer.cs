@@ -17,3 +17,4 @@ public class SqlParserTestObjContainer : AuditPersistentDomainObjectBase
         set => this.includedObject = value;
     }
 }
+

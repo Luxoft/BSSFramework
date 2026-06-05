@@ -68,3 +68,4 @@ public record GeneratedFileInfo(string RelativePath, string Content)
         Modified
     }
 }
+

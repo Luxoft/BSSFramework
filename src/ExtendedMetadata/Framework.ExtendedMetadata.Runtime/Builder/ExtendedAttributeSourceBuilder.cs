@@ -26,7 +26,7 @@ public class ExtendedAttributeSourceBuilder : IExtendedAttributeSourceBuilder
     {
         foreach (var domainTypeMetadataBuilder in this.types)
         {
-            yield return (domainTypeMetadataBuilder.Key, [..domainTypeMetadataBuilder.Value.Attributes]);
+            yield return (domainTypeMetadataBuilder.Key, [.. domainTypeMetadataBuilder.Value.Attributes]);
 
             foreach (var propertyMetadataBuilder in domainTypeMetadataBuilder.Value.Properties)
             {
@@ -35,3 +35,4 @@ public class ExtendedAttributeSourceBuilder : IExtendedAttributeSourceBuilder
         }
     }
 }
+

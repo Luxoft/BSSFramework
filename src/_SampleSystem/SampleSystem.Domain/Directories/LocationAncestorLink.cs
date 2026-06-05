@@ -26,3 +26,4 @@ public class LocationAncestorLink : AuditPersistentDomainObjectBase
         set => this.child = value;
     }
 }
+

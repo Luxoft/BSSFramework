@@ -55,3 +55,4 @@ public static class ConsoleCancellationToken
         }
     }
 }
+

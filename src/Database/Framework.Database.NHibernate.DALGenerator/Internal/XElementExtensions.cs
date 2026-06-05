@@ -134,3 +134,4 @@ internal static class XElementExtensions
 
     internal static XElement CreateElementWithRootNamespaceHandled(this XElement source, string name) => source.CreateElement(name);
 }
+

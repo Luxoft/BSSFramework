@@ -6,3 +6,4 @@ public interface IConfigurationInitializer
 {
     void Initialize(Configuration cfg);
 }
+

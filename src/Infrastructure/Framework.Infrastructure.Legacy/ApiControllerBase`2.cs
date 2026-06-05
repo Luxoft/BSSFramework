@@ -58,3 +58,4 @@ public abstract class ApiControllerBase<TBLLContext, TMappingService> : ApiContr
     [NonAction]
     public TResult EvaluateWrite<TResult>(Func<EvaluatedData<TBLLContext, TMappingService>, TResult> getResult) => this.Evaluate(DBSessionMode.Write, getResult);
 }
+

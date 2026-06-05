@@ -28,3 +28,4 @@ public class BLLFactoryFileFactory<TConfiguration>(TConfiguration configuration,
         yield return this.BLLFactoryInterfaceRef;
     }
 }
+

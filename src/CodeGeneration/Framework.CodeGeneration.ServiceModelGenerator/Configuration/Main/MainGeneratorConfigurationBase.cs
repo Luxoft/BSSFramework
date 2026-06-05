@@ -163,3 +163,4 @@ public abstract class MainGeneratorConfigurationBase<TEnvironment>(TEnvironment 
         }
     }
 }
+

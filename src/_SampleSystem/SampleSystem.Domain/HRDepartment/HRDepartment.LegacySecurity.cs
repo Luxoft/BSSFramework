@@ -1,8 +1,8 @@
-﻿using Framework.BLL.Domain.Attributes;
+﻿using Anch.SecuritySystem;
+
+using Framework.BLL.Domain.Attributes;
 
 using SampleSystem.Domain.Directories;
-
-using Anch.SecuritySystem;
 
 namespace SampleSystem.Domain.HRDepartment;
 
@@ -18,3 +18,4 @@ public interface IDepartmentSecurityElement<out TDepartment, out TLocation> : ID
         where TLocation : ISecurityContext;
 
 public partial class HRDepartment : ILocationSecurityElement<Location>;
+

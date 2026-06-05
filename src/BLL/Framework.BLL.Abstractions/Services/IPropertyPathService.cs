@@ -20,3 +20,4 @@ public interface IPropertyPathService
 
     PropertyPath WithExpand(PropertyPath propertyPath);
 }
+

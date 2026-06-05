@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+
 using Framework.Core;
 
 namespace Framework.ExpressionParsers.Native;
@@ -34,3 +35,4 @@ public class MethodTypeInfo : IEquatable<MethodTypeInfo>
 
     public bool Equals(MethodTypeInfo? other) => other != null && this.InputTypes.SequenceEqual(other.InputTypes) && this.ReturnType == other.ReturnType;
 }
+

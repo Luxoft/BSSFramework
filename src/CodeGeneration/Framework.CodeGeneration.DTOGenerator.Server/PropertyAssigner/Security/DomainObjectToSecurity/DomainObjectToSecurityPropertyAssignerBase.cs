@@ -40,20 +40,21 @@ public abstract class DomainObjectToSecurityPropertyAssignerBase<TConfiguration>
 
 
         return new CodeConditionStatement
-               {
-                       Condition = this.GetCondition(property, false),
+        {
+            Condition = this.GetCondition(property, false),
 
-                       TrueStatements =
+            TrueStatements =
                        {
                                resultVarDecl,
                                this.InnerAssigner.GetAssignStatement(property, sourcePropertyRef, resultVarDeclRef),
                                this.GetCreateSecurityValueExpression(property, resultVarDeclRef).ToAssignStatement(targetPropertyRef)
                        },
 
-                       FalseStatements =
+            FalseStatements =
                        {
                                targetPropertyTypeRef.ToNothingValueExpression().ToAssignStatement(targetPropertyRef)
                        }
-               };
+        };
     }
 }
+

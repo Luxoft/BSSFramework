@@ -60,3 +60,4 @@ public class DomainObjectVersionsResolver<TBLLContext, TDomainObject>(
         return result;
     }
 }
+

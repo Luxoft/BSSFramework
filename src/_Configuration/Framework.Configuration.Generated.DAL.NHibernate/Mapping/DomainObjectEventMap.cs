@@ -19,3 +19,4 @@ public class DomainObjectEventMap : ConfigurationBaseMap<DomainObjectEvent>
         this.References(x => x.Operation).Column($"{nameof(DomainObjectEvent.Operation)}Id");
     }
 }
+

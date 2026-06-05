@@ -1,4 +1,5 @@
 ﻿using Anch.Core.DictionaryCache;
+
 using Framework.Application.Domain;
 
 namespace Framework.BLL;
@@ -8,3 +9,4 @@ public class NestedCache<TBLLContext, TPersistentDomainObjectBase, TIdent, TDoma
     where TBLLContext : IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>
     where TDomainObject : class, TPersistentDomainObjectBase
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>;
+

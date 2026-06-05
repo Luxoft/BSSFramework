@@ -12,3 +12,4 @@ public interface IRootSecurityService
 
     void CheckAccess<TDomainObject>(TDomainObject domainObject, SecurityRule securityRule);
 }
+

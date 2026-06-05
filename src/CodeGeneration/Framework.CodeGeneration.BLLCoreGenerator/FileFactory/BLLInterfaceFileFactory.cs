@@ -1,6 +1,8 @@
 ﻿using System.CodeDom;
 
 using Anch.Core;
+using Anch.GenericQueryable.Fetching;
+using Anch.OData.Domain;
 
 using Framework.BLL;
 using Framework.BLL.Domain.DirectMode;
@@ -12,10 +14,6 @@ using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
 using Framework.Core;
 using Framework.FileGeneration.Configuration;
 using Framework.Projection;
-
-using Anch.GenericQueryable.Fetching;
-
-using Anch.OData.Domain;
 
 namespace Framework.CodeGeneration.BLLCoreGenerator.FileFactory;
 
@@ -58,14 +56,14 @@ public class BLLInterfaceFileFactory<TConfiguration>(TConfiguration configuratio
                 createModelType.CheckDirectMode(DirectMode.Out, true);
 
                 yield return new CodeMemberMethod
-                             {
-                                     Name = this.DomainType.GetModelMethodName(createModelType, ModelRole.Create, false),
-                                     ReturnType = this.DomainType.ToTypeReference(),
-                                     Parameters =
+                {
+                    Name = this.DomainType.GetModelMethodName(createModelType, ModelRole.Create, false),
+                    ReturnType = this.DomainType.ToTypeReference(),
+                    Parameters =
                                      {
                                              createModelType.ToTypeReference().ToParameterDeclarationExpression("createModel")
                                      }
-                             };
+                };
             }
         }
 
@@ -78,27 +76,27 @@ public class BLLInterfaceFileFactory<TConfiguration>(TConfiguration configuratio
                 if (directMode.HasFlag(DirectMode.Out))
                 {
                     yield return new CodeMemberMethod
-                                 {
-                                         Name = "Get" + methodName,
-                                         ReturnType = changeModelType.ToTypeReference(),
-                                         Parameters =
+                    {
+                        Name = "Get" + methodName,
+                        ReturnType = changeModelType.ToTypeReference(),
+                        Parameters =
                                          {
                                                  this.DomainType.ToTypeReference().ToParameterDeclarationExpression(this.DomainType.Name.ToStartLowerCase())
                                          }
-                                 };
+                    };
                 }
 
                 if (directMode.HasFlag(DirectMode.In))
                 {
                     yield return new CodeMemberMethod
-                                 {
-                                         Name = methodName,
-                                         ReturnType = this.DomainType.ToTypeReference(),
-                                         Parameters =
+                    {
+                        Name = methodName,
+                        ReturnType = this.DomainType.ToTypeReference(),
+                        Parameters =
                                          {
                                                  changeModelType.ToTypeReference().ToParameterDeclarationExpression("changeModel")
                                          }
-                                 };
+                    };
                 }
             }
         }
@@ -112,27 +110,27 @@ public class BLLInterfaceFileFactory<TConfiguration>(TConfiguration configuratio
                 if (directMode.HasFlag(DirectMode.Out))
                 {
                     yield return new CodeMemberMethod
-                                 {
-                                         Name = "Get" + methodName,
-                                         ReturnType = changeModelType.ToTypeReference(),
-                                         Parameters =
+                    {
+                        Name = "Get" + methodName,
+                        ReturnType = changeModelType.ToTypeReference(),
+                        Parameters =
                                          {
                                                  typeof(List<>).MakeGenericType(this.DomainType).ToTypeReference().ToParameterDeclarationExpression(this.DomainType.Name.ToPluralize().ToStartLowerCase())
                                          }
-                                 };
+                    };
                 }
 
                 if (directMode.HasFlag(DirectMode.In))
                 {
                     yield return new CodeMemberMethod
-                                 {
-                                         Name = methodName,
-                                         ReturnType = typeof(List<>).MakeGenericType(this.DomainType).ToTypeReference(),
-                                         Parameters =
+                    {
+                        Name = methodName,
+                        ReturnType = typeof(List<>).MakeGenericType(this.DomainType).ToTypeReference(),
+                        Parameters =
                                          {
                                                  changeModelType.ToTypeReference().ToParameterDeclarationExpression("changeModel")
                                          }
-                                 };
+                    };
                 }
             }
         }
@@ -143,15 +141,15 @@ public class BLLInterfaceFileFactory<TConfiguration>(TConfiguration configuratio
                 contextFilterModelType.CheckDirectMode(DirectMode.Out, true);
 
                 yield return new CodeMemberMethod
-                             {
-                                     Name = "GetListBy",
-                                     ReturnType = typeof(List<>).MakeGenericType(this.DomainType).ToTypeReference(),
-                                     Parameters =
+                {
+                    Name = "GetListBy",
+                    ReturnType = typeof(List<>).MakeGenericType(this.DomainType).ToTypeReference(),
+                    Parameters =
                                      {
                                              contextFilterModelType.ToTypeReference().ToParameterDeclarationExpression("filter"),
                                              typeof(FetchRule<>).MakeGenericType(this.DomainType).ToTypeReference().ToParameterDeclarationExpression("fetchs")
                                      }
-                             };
+                };
             }
         }
 
@@ -163,15 +161,15 @@ public class BLLInterfaceFileFactory<TConfiguration>(TConfiguration configuratio
                 contextFilterModelType.CheckDirectMode(DirectMode.Out, true);
 
                 yield return new CodeMemberMethod
-                             {
-                                     Name = "GetListBy",
-                                     ReturnType = typeof(List<>).MakeGenericType(this.DomainType).ToTypeReference(),
-                                     Parameters =
+                {
+                    Name = "GetListBy",
+                    ReturnType = typeof(List<>).MakeGenericType(this.DomainType).ToTypeReference(),
+                    Parameters =
                                      {
                                              contextFilterModelType.ToTypeReference().ToParameterDeclarationExpression("filter"),
                                              typeof(FetchRule<>).MakeGenericType(this.DomainType).ToTypeReference().ToParameterDeclarationExpression("fetchs")
                                      }
-                             };
+                };
             }
 
             foreach (var contextFilterModelType in this.DomainType.GetProjectionFilters(ProjectionFilterTargets.Single))
@@ -179,15 +177,15 @@ public class BLLInterfaceFileFactory<TConfiguration>(TConfiguration configuratio
                 contextFilterModelType.CheckDirectMode(DirectMode.Out, true);
 
                 yield return new CodeMemberMethod
-                             {
-                                     Name = "GetObjectBy",
-                                     ReturnType = this.DomainType.ToTypeReference(),
-                                     Parameters =
+                {
+                    Name = "GetObjectBy",
+                    ReturnType = this.DomainType.ToTypeReference(),
+                    Parameters =
                                      {
                                              contextFilterModelType.ToTypeReference().ToParameterDeclarationExpression("filter"),
                                              typeof(FetchRule<>).MakeGenericType(this.DomainType).ToTypeReference().ToParameterDeclarationExpression("fetchs")
                                      }
-                             };
+                };
             }
         }
 
@@ -197,16 +195,16 @@ public class BLLInterfaceFileFactory<TConfiguration>(TConfiguration configuratio
                 contextFilterModelType.CheckDirectMode(DirectMode.Out, true);
 
                 yield return new CodeMemberMethod
-                             {
-                                     Name = "GetObjectsByOData",
-                                     ReturnType = typeof(SelectOperationResult<>).MakeGenericType(this.DomainType).ToTypeReference(),
-                                     Parameters =
+                {
+                    Name = "GetObjectsByOData",
+                    ReturnType = typeof(SelectOperationResult<>).MakeGenericType(this.DomainType).ToTypeReference(),
+                    Parameters =
                                      {
                                              typeof(SelectOperation<>).ToTypeReference(this.DomainType).ToParameterDeclarationExpression("selectOperation"),
                                              contextFilterModelType.ToTypeReference().ToParameterDeclarationExpression("filter"),
                                              typeof(FetchRule<>).MakeGenericType(this.DomainType).ToTypeReference().ToParameterDeclarationExpression("fetchs")
                                      }
-                             };
+                };
             }
         }
 
@@ -219,27 +217,27 @@ public class BLLInterfaceFileFactory<TConfiguration>(TConfiguration configuratio
                 if (directMode.HasFlag(DirectMode.Out))
                 {
                     yield return new CodeMemberMethod
-                                 {
-                                         Name = "Get" + methodName,
-                                         ReturnType = extendedModelType.ToTypeReference(),
-                                         Parameters =
+                    {
+                        Name = "Get" + methodName,
+                        ReturnType = extendedModelType.ToTypeReference(),
+                        Parameters =
                                          {
                                                  this.DomainType.ToTypeReference().ToParameterDeclarationExpression("extendedModel")
                                          }
-                                 };
+                    };
                 }
 
                 if (directMode.HasFlag(DirectMode.In))
                 {
                     yield return new CodeMemberMethod
-                                 {
-                                         Name = "Save" + methodName,
-                                         ReturnType = this.DomainType.ToTypeReference(),
-                                         Parameters =
+                    {
+                        Name = "Save" + methodName,
+                        ReturnType = this.DomainType.ToTypeReference(),
+                        Parameters =
                                          {
                                                  extendedModelType.ToTypeReference().ToParameterDeclarationExpression("extendedModel")
                                          }
-                                 };
+                    };
                 }
             }
         }
@@ -251,14 +249,14 @@ public class BLLInterfaceFileFactory<TConfiguration>(TConfiguration configuratio
                 formatModelType.CheckDirectMode(DirectMode.Out, true);
 
                 yield return new CodeMemberMethod
-                             {
-                                     Name = this.DomainType.GetModelMethodName(formatModelType, ModelRole.Format, false),
-                                     ReturnType = this.DomainType.ToTypeReference(),
-                                     Parameters =
+                {
+                    Name = this.DomainType.GetModelMethodName(formatModelType, ModelRole.Format, false),
+                    ReturnType = this.DomainType.ToTypeReference(),
+                    Parameters =
                                      {
                                              formatModelType.ToTypeReference().ToParameterDeclarationExpression("formatModel")
                                      }
-                             };
+                };
             }
         }
 
@@ -268,14 +266,14 @@ public class BLLInterfaceFileFactory<TConfiguration>(TConfiguration configuratio
                 integrationModelType.CheckDirectMode(DirectMode.In, true);
 
                 yield return new CodeMemberMethod
-                             {
-                                     Name = this.Configuration.IntegrationSaveMethodName,
-                                     ReturnType = this.DomainType.ToTypeReference(),
-                                     Parameters =
+                {
+                    Name = this.Configuration.IntegrationSaveMethodName,
+                    ReturnType = this.DomainType.ToTypeReference(),
+                    Parameters =
                                      {
                                              integrationModelType.ToTypeReference().ToParameterDeclarationExpression("integrationSaveModel")
                                      }
-                             };
+                };
             }
         }
 
@@ -284,16 +282,16 @@ public class BLLInterfaceFileFactory<TConfiguration>(TConfiguration configuratio
             foreach (var filterModelType in this.DomainType.GetProjectionFilters(ProjectionFilterTargets.OData))
             {
                 yield return new CodeMemberMethod
-                             {
-                                     Name = "GetObjectsByOData",
-                                     ReturnType = typeof(SelectOperationResult<>).MakeGenericType(this.DomainType).ToTypeReference(),
-                                     Parameters =
+                {
+                    Name = "GetObjectsByOData",
+                    ReturnType = typeof(SelectOperationResult<>).MakeGenericType(this.DomainType).ToTypeReference(),
+                    Parameters =
                                      {
                                              typeof(SelectOperation<>).ToTypeReference(this.DomainType).ToParameterDeclarationExpression("selectOperation"),
                                              filterModelType.ToTypeReference().ToParameterDeclarationExpression("filter"),
                                              typeof(FetchRule<>).MakeGenericType(this.DomainType).ToTypeReference().ToParameterDeclarationExpression("fetchs")
                                      }
-                             };
+                };
             }
 
             if (this.Configuration.Environment.IsHierarchical(this.DomainType.GetProjectionSourceTypeOrSelf()))
@@ -301,18 +299,19 @@ public class BLLInterfaceFileFactory<TConfiguration>(TConfiguration configuratio
                 foreach (var filterModelType in this.DomainType.GetProjectionFilters(ProjectionFilterTargets.ODataTree))
                 {
                     yield return new CodeMemberMethod
-                                 {
-                                         Name = "GetTreeByOData",
-                                         ReturnType = typeof(SelectOperationResult<>).MakeGenericType(typeof(HierarchicalNode<,>).MakeGenericType(this.DomainType, this.Configuration.Environment.GetIdentityType())).ToTypeReference(),
-                                         Parameters =
+                    {
+                        Name = "GetTreeByOData",
+                        ReturnType = typeof(SelectOperationResult<>).MakeGenericType(typeof(HierarchicalNode<,>).MakeGenericType(this.DomainType, this.Configuration.Environment.GetIdentityType())).ToTypeReference(),
+                        Parameters =
                                          {
                                                  typeof(SelectOperation<>).ToTypeReference(this.DomainType).ToParameterDeclarationExpression("selectOperation"),
                                                  filterModelType.ToTypeReference().ToParameterDeclarationExpression("filter"),
                                                  typeof(FetchRule<>).MakeGenericType(this.DomainType).ToTypeReference().ToParameterDeclarationExpression("fetchs")
                                          }
-                                 };
+                    };
                 }
             }
         }
     }
 }
+

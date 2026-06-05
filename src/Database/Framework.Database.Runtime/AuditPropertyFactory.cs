@@ -12,3 +12,4 @@ public class AuditPropertyFactory(
 
     public AuditPropertyPair GetModifyAuditProperty() => AuditPropertyPair.GetModifyAuditProperty(currentUser, timeProvider);
 }
+

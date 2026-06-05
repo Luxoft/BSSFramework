@@ -1,5 +1,6 @@
-﻿using Framework.Database;
-using Anch.GenericQueryable.EntityFramework;
+﻿using Anch.GenericQueryable.EntityFramework;
+
+using Framework.Database;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -27,3 +28,4 @@ public class AppDbContext(DbContextOptions<AppDbContext> rootOptions, IExpressio
         options.AddInterceptors(new GeneralQueryExpressionInterceptor(expressionVisitorContainer));
     }
 }
+

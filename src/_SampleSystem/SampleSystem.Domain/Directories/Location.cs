@@ -1,12 +1,12 @@
-﻿using Framework.BLL.Domain.Fetching;
+﻿using Anch.SecuritySystem;
+
+using Framework.BLL.Domain.Fetching;
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.Relations;
 using Framework.Restriction;
 
 using SampleSystem.Domain.Enums;
-
-using Anch.SecuritySystem;
 
 namespace SampleSystem.Domain.Directories;
 
@@ -120,3 +120,4 @@ public class Location :
 
     ICollection<Location> IMaster<Location>.Details => (ICollection<Location>)this.Children;
 }
+

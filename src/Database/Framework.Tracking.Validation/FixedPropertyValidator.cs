@@ -45,3 +45,4 @@ public class FixedPropertyValidator<TSource, TProperty, TPersistentDomainObjectB
             () => $"{validationContext.GetPropertyName()} field in {validationContext.GetSourceTypeName()} can't be changed");
     }
 }
+

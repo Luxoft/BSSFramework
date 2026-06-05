@@ -14,3 +14,4 @@ public class LocationToAncestorChildView : AuditPersistentDomainObjectBase
 
     public virtual Location Source => this.source;
 }
+

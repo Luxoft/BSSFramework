@@ -64,3 +64,4 @@ public class PropertyRevisionDTO<TValue, TIdent> : PropertyRevisionDTOBase
             : base(source) =>
         this.Value = source.Value;
 }
+

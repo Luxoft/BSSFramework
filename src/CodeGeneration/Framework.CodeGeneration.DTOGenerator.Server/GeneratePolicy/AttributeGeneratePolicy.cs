@@ -3,8 +3,8 @@ using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.GeneratePolicy;
 using Framework.Core;
-using Framework.Projection;
 using Framework.ExtendedMetadata;
+using Framework.Projection;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.GeneratePolicy;
 
@@ -54,3 +54,4 @@ public class AttributeGeneratePolicy(IMetadataProxyProvider metadata) : IGenerat
         }
     }
 }
+

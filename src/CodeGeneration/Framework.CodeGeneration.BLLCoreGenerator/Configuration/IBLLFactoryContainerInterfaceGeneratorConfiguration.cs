@@ -6,3 +6,4 @@ public interface IBLLFactoryContainerInterfaceGeneratorConfiguration
 {
     CodeExpression GetCreateSecurityBLLExpr(CodeExpression logicExpressionSource, Type domainType, object securitySource);
 }
+

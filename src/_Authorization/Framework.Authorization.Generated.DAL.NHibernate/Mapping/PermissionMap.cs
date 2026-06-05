@@ -23,3 +23,4 @@ public class PermissionMap : AuthBaseMap<Permission>
         this.HasMany(x => x.Restrictions).AsSet().Inverse().Cascade.AllDeleteOrphan();
     }
 }
+

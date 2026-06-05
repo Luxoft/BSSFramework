@@ -69,3 +69,4 @@ public class FuncFactory<TArg1, TArg2, TResult>(Func<TArg1, TArg2, TResult> crea
 {
     public TResult Create(TArg1 arg1, TArg2 arg2) => createFunc(arg1, arg2);
 }
+

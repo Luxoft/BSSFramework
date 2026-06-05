@@ -1,8 +1,8 @@
-﻿using Framework.Application;
-using Framework.Database;
-
-using Anch.SecuritySystem;
+﻿using Anch.SecuritySystem;
 using Anch.SecuritySystem.Testing;
+
+using Framework.Application;
+using Framework.Database;
 
 namespace Framework.AutomationCore.Services;
 
@@ -11,3 +11,4 @@ public class BssTestingEvaluator<TService>(IServiceEvaluator<TService> serviceEv
 {
     public Task<TResult> EvaluateAsync<TResult>(TestingScopeMode mode, UserCredential? userCredential, Func<TService, Task<TResult>> evaluate) => serviceEvaluator.EvaluateAsync((DBSessionMode)mode, userCredential, evaluate);
 }
+

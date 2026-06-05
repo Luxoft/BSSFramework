@@ -25,3 +25,4 @@ public class ReferenceTypeFieldMetadata(string name, Type type, IEnumerable<Attr
     }
 
 }
+

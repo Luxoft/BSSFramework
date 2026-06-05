@@ -44,3 +44,4 @@ public class TestSecurityObjItem : BaseDirectory, IDetail<TestRootSecurityObj>, 
 
     TestRootSecurityObj IDetail<TestRootSecurityObj>.Master => this.FirstMaster;
 }
+

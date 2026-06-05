@@ -53,23 +53,23 @@ public class DefaultDomainOperationEventDTOFileFactory<TConfiguration> : DTOFile
         var fieldTypeRef = this.Configuration.GetCodeTypeReference(this.DomainType, ServerFileType.RichEventDTO);
 
         var field = new CodeMemberField
-                    {
-                        Type = fieldTypeRef,
-                        Name = this.DomainType!.Name.ToStartLowerCase(),
-                        Attributes = MemberAttributes.Private,
-                    };
+        {
+            Type = fieldTypeRef,
+            Name = this.DomainType!.Name.ToStartLowerCase(),
+            Attributes = MemberAttributes.Private,
+        };
 
         var fieldMemberRef = new CodeThisReferenceExpression().ToFieldReference(field);
 
         var property = new CodeMemberProperty
-                       {
-                           Type = fieldTypeRef,
-                           Name = this.DomainType.Name,
-                           Attributes = MemberAttributes.Public | MemberAttributes.Final,
-                           CustomAttributes = { new CodeAttributeDeclaration(new CodeTypeReference(typeof(DataMemberAttribute))) },
-                           GetStatements = { fieldMemberRef.ToMethodReturnStatement() },
-                           SetStatements = { new CodePropertySetValueReferenceExpression().ToAssignStatement(fieldMemberRef) }
-                       };
+        {
+            Type = fieldTypeRef,
+            Name = this.DomainType.Name,
+            Attributes = MemberAttributes.Public | MemberAttributes.Final,
+            CustomAttributes = { new CodeAttributeDeclaration(new CodeTypeReference(typeof(DataMemberAttribute))) },
+            GetStatements = { fieldMemberRef.ToMethodReturnStatement() },
+            SetStatements = { new CodePropertySetValueReferenceExpression().ToAssignStatement(fieldMemberRef) }
+        };
 
         var mappingServiceParameter = this.GetMappingServiceParameter();
         var mappingServiceParameterRefExpr = mappingServiceParameter.ToVariableReferenceExpression();
@@ -83,15 +83,16 @@ public class DefaultDomainOperationEventDTOFileFactory<TConfiguration> : DTOFile
         yield return this.GenerateDefaultConstructor();
 
         yield return new CodeConstructor
-                     {
-                             Attributes = MemberAttributes.Public,
-                             Parameters = { mappingServiceParameter, domainTypeParameter },
-                             Statements =
+        {
+            Attributes = MemberAttributes.Public,
+            Parameters = { mappingServiceParameter, domainTypeParameter },
+            Statements =
                              {
                                      this.Configuration.GetConvertToDTOMethod(this.DomainType, ServerFileType.RichEventDTO)
                                          .ToMethodInvokeExpression(domainTypeParameterRefExp, mappingServiceParameterRefExpr)
                                          .ToAssignStatement(new CodeThisReferenceExpression().ToFieldReference(field))
                              }
-                     };
+        };
     }
 }
+

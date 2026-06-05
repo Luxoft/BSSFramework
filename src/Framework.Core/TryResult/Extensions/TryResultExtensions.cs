@@ -206,3 +206,4 @@ public static partial class TryResultExtensions
         }
     }
 }
+

@@ -6,3 +6,4 @@ public interface ITargetSystemInfoService
 {
     PersistentTargetSystemInfo GetPersistentTargetSystemInfo(Type domainType);
 }
+

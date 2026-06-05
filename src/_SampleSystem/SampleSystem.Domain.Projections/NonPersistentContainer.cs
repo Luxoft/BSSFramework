@@ -12,3 +12,4 @@ public partial class NonPersistentContainer
 
     public override string TestString { get; set; }
 }
+

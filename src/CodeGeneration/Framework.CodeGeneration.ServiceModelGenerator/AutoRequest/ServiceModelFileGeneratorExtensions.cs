@@ -76,35 +76,35 @@ public static class ServiceModelFileGeneratorExtensions
             if (method == null) throw new ArgumentNullException(nameof(method));
 
             var requestType = new CodeTypeDeclaration(method.Name + "AutoRequest")
-                              {
-                                  Attributes = MemberAttributes.Public,
-                                  IsPartial = true,
-                                  IsClass = true,
-                                  CustomAttributes =
+            {
+                Attributes = MemberAttributes.Public,
+                IsPartial = true,
+                IsClass = true,
+                CustomAttributes =
                                   {
                                       typeof(DataContractAttribute).ToTypeReference().ToAttributeDeclaration(),
                                       typeof(AutoRequestAttribute).ToTypeReference().ToAttributeDeclaration()
                                   }
-                              };
+            };
 
             method.Parameters.Cast<CodeParameterDeclarationExpression>().Foreach(
                 (parameter, index) =>
                 {
                     var fieldMember = new CodeMemberField
-                                      {
-                                          Type = parameter.Type,
-                                          Name = parameter.Name.ToStartLowerCase(),
-                                          Attributes = MemberAttributes.Private
-                                      };
+                    {
+                        Type = parameter.Type,
+                        Name = parameter.Name.ToStartLowerCase(),
+                        Attributes = MemberAttributes.Private
+                    };
 
                     var fieldRefExpr = new CodeThisReferenceExpression().ToFieldReference(fieldMember);
 
                     var propertyMember = new CodeMemberProperty
-                                      {
-                                          Type = parameter.Type,
-                                          Name = parameter.Name.ToStartUpperCase(),
-                                          Attributes = MemberAttributes.Public,
-                                          CustomAttributes =
+                    {
+                        Type = parameter.Type,
+                        Name = parameter.Name.ToStartUpperCase(),
+                        Attributes = MemberAttributes.Public,
+                        CustomAttributes =
                                           {
                                               typeof(DataMemberAttribute).ToTypeReference().ToAttributeDeclaration(),
                                               typeof(AutoRequestPropertyAttribute).ToTypeReference().ToAttributeDeclaration(
@@ -112,9 +112,9 @@ public static class ServiceModelFileGeneratorExtensions
                                                       nameof(AutoRequestPropertyAttribute.OrderIndex),
                                                       index.ToPrimitiveExpression()))
                                           },
-                                          GetStatements = { fieldRefExpr.ToMethodReturnStatement() },
-                                          SetStatements = { new CodePropertySetValueReferenceExpression().ToAssignStatement(fieldRefExpr)  }
-                                      };
+                        GetStatements = { fieldRefExpr.ToMethodReturnStatement() },
+                        SetStatements = { new CodePropertySetValueReferenceExpression().ToAssignStatement(fieldRefExpr) }
+                    };
 
 
                     requestType.Members.Add(fieldMember);
@@ -125,3 +125,4 @@ public static class ServiceModelFileGeneratorExtensions
         }
     }
 }
+

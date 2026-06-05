@@ -14,3 +14,4 @@ public class SmtpClientFactory(IOptions<SmtpSettings> settings) : ISmtpClientFac
             ? new SmtpClient(settings.Value.Server, settings.Value.Port) { UseDefaultCredentials = true }
             : new SmtpClient { UseDefaultCredentials = true, DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory, PickupDirectoryLocation = settings.Value.OutputFolder };
 }
+

@@ -23,3 +23,4 @@ public class UniqueGroupTests(IServiceProvider rootServiceProvider) : TestBase(r
         Assert.Equal("Role-Seniority link with same:'Role,Seniority' already exists", uniqueViolationException.Message);
     }
 }
+

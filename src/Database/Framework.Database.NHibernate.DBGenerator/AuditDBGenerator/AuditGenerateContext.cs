@@ -77,3 +77,4 @@ internal struct AuditGenerateContext
         this.OriginalDatabaseMetadata = new DatabaseMetadata(this.OriginalConnection, dialect);
     }
 }
+

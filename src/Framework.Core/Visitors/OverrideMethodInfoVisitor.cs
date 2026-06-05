@@ -41,4 +41,5 @@ public class OverrideMethodInfoVisitor : ExpressionVisitor
 
 public class OverrideMethodInfoVisitor<TDelegate>(TDelegate func, Expression<TDelegate> expression) : OverrideMethodInfoVisitor(((Delegate)(object)func).Method, expression);
 
-    //where TDelegate : Delegate
+//where TDelegate : Delegate
+

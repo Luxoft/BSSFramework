@@ -1,4 +1,5 @@
 ﻿using Anch.Core.Auth;
+using Anch.SecuritySystem.Attributes;
 
 using Framework.Application.Jobs;
 using Framework.Application.Repository;
@@ -8,8 +9,6 @@ using Hangfire;
 using Microsoft.Extensions.Logging;
 
 using SampleSystem.Domain;
-
-using Anch.SecuritySystem.Attributes;
 
 namespace SampleSystem.ServiceEnvironment.Jobs;
 
@@ -25,3 +24,4 @@ public class SampleJob([DisabledSecurity] IRepository<TestJobObject> testReposit
         await testRepository.SaveAsync(new TestJobObject(), cancellationToken);
     }
 }
+

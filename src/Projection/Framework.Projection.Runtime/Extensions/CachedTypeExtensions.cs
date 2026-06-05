@@ -20,3 +20,4 @@ public static class CachedTypeExtensions
         return MakeGenericTypeCache[(type, args)];
     }
 }
+

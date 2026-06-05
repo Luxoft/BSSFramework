@@ -40,3 +40,4 @@ public class NhibArrayContainsTest(IServiceProvider rootServiceProvider) : TestB
         Assert.Equal(bu.Id, buId);
     }
 }
+

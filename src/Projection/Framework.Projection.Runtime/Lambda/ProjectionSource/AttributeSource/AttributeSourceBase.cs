@@ -45,3 +45,4 @@ public abstract class AttributeSourceBase<TProjectionValue> : IAttributeSource
     /// <returns></returns>
     protected abstract IEnumerable<Attribute> GetDefaultAttributes();
 }
+

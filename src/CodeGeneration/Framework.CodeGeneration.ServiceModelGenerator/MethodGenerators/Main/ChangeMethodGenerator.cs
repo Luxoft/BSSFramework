@@ -69,3 +69,4 @@ public class ChangeMethodGenerator<TConfiguration> : ModelMethodGenerator<TConfi
         return modelSecurityAttribute.SecurityRule;
     }
 }
+

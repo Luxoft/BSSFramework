@@ -1,9 +1,9 @@
-﻿using Framework.Application;
-using Framework.Database;
-using Framework.BLL;
-
-using Anch.SecuritySystem;
+﻿using Anch.SecuritySystem;
 using Anch.SecuritySystem.UserSource;
+
+using Framework.Application;
+using Framework.BLL;
+using Framework.Database;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -59,3 +59,4 @@ public class CurrentUserSingleRelativePathTests(IServiceProvider rootServiceProv
         [nameof(TestRelativeEmployeeObject.EmployeeRef2), 1],
     ];
 }
+

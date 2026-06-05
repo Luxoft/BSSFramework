@@ -1,7 +1,5 @@
 ﻿using Anch.Core;
-
 using Anch.HierarchicalExpand;
-
 using Anch.SecuritySystem;
 
 namespace Framework.Infrastructure;
@@ -14,3 +12,4 @@ public class ProjectionSecurityContextInfoSource(
 {
     public override SecurityContextInfo GetSecurityContextInfo(Type type) => base.GetSecurityContextInfo(actualDomainTypeResolver.Resolve(type));
 }
+

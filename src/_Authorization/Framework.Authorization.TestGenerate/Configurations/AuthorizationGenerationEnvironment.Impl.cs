@@ -5,17 +5,18 @@ using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 
 namespace Framework.Authorization.TestGenerate.Configurations;
 
-    public partial class AuthorizationGenerationEnvironment :
+public partial class AuthorizationGenerationEnvironment :
 
-        IBLLCoreGenerationEnvironment,
+    IBLLCoreGenerationEnvironment,
 
-        IBLLGenerationEnvironment,
+    IBLLGenerationEnvironment,
 
-        IServerDTOGenerationEnvironment,
+    IServerDTOGenerationEnvironment,
 
-        IServiceModelGenerationEnvironment
-    {
-        IBLLCoreGeneratorConfiguration<IBLLCoreGenerationEnvironment> IBLLCoreGeneratorConfigurationContainer.BLLCore => this.BLLCore;
+    IServiceModelGenerationEnvironment
+{
+    IBLLCoreGeneratorConfiguration<IBLLCoreGenerationEnvironment> IBLLCoreGeneratorConfigurationContainer.BLLCore => this.BLLCore;
 
-        IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment> IServerDTOGeneratorConfigurationContainer.ServerDTO => this.ServerDTO;
-    }
+    IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment> IServerDTOGeneratorConfigurationContainer.ServerDTO => this.ServerDTO;
+}
+

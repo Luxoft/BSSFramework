@@ -50,14 +50,14 @@ public class MassChangeMethodGenerator<TConfiguration> : ModelMethodGenerator<TC
         var domainObjectsRef = changeModelDecl.ToVariableReferenceExpression().ToPropertyReference((IDomainObjectMassChangeModel<object> model) => model.ChangingObjects);
 
         yield return new CodeParameterDeclarationExpression { Name = "domainObject" }.Pipe(iterator => new CodeForeachStatement
-            {
-                    Source = domainObjectsRef,
-                    Iterator = iterator,
-                    Statements =
+        {
+            Source = domainObjectsRef,
+            Iterator = iterator,
+            Statements =
                     {
                             bllRefExpr.ToMethodInvokeExpression("CheckAccess", iterator.ToVariableReferenceExpression()).ToExpressionStatement()
                     }
-            });
+        });
 
         yield return bllRefExpr.ToMethodInvokeExpression(this.DomainType.GetModelMethodName(this.ModelType, ModelRole.MassChange, false),
                                                          changeModelDecl.ToVariableReferenceExpression())
@@ -78,3 +78,4 @@ public class MassChangeMethodGenerator<TConfiguration> : ModelMethodGenerator<TC
         return modelSecurityAttribute.SecurityRule;
     }
 }
+

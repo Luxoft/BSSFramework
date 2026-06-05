@@ -1,10 +1,10 @@
 ﻿using Anch.Core;
-using Anch.IdentitySource;
-using Framework.Core;
-using Framework.Database.NHibernate.Sessions;
-
 using Anch.GenericQueryable.NHibernate;
 using Anch.GenericQueryable.Services;
+using Anch.IdentitySource;
+
+using Framework.Core;
+using Framework.Database.NHibernate.Sessions;
 
 using NHibernate;
 
@@ -111,3 +111,4 @@ public class NHibAsyncDal<TDomainObject, TIdent>(
         }
     }
 }
+

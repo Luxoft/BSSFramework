@@ -37,3 +37,4 @@ public static class CodeFileExtensions
         public CodeNamespace GetRenderData() => this.visitor.VisitNamespace(this.baseCodeFile.GetRenderData());
     }
 }
+

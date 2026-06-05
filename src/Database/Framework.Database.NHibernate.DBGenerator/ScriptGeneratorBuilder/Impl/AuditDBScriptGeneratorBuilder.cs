@@ -72,25 +72,25 @@ class AuditDBScriptGeneratorBuilder : IAuditDBScriptGeneratorBuilder
 
         var auditDatabaseScriptGenerator = new AuditDatabaseScriptGenerator(nextMappingSettings, this.auditPostfix);
         var migrationBuilder = this.migrationBuilder.Build(mode);
-        var combined = new[] {auditDatabaseScriptGenerator, migrationBuilder}.Combine();
+        var combined = new[] { auditDatabaseScriptGenerator, migrationBuilder }.Combine();
 
         switch (mode)
         {
             case DBGenerateScriptMode.AppliedOnCopySchemeDatabase:
-            {
-                result = combined.Unsafe(false, this.removeSchemaDatabase);
-                break;
-            }
+                {
+                    result = combined.Unsafe(false, this.removeSchemaDatabase);
+                    break;
+                }
             case DBGenerateScriptMode.AppliedOnCopySchemeAndDataDatabase:
-            {
-                result = combined.Unsafe(false, this.removeSchemaDatabase);
-                break;
-            }
+                {
+                    result = combined.Unsafe(false, this.removeSchemaDatabase);
+                    break;
+                }
             default:
-            {
-                result = new []{ auditDatabaseScriptGenerator.ToTryCreateDatabase(), migrationBuilder}.Combine();
-                break;
-            }
+                {
+                    result = new[] { auditDatabaseScriptGenerator.ToTryCreateDatabase(), migrationBuilder }.Combine();
+                    break;
+                }
         }
 
         return new ReplaceDatabaseNameDecorator(context => nextMappingSettings.First().AuditDatabase, result);
@@ -98,3 +98,4 @@ class AuditDBScriptGeneratorBuilder : IAuditDBScriptGeneratorBuilder
 
     public bool IsFrozen { get; set; }
 }
+

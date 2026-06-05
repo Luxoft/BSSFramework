@@ -6,3 +6,4 @@ public partial interface IDomainTypeBLL
 {
     Task ForceEventAsync(DomainTypeEventModel eventModel, CancellationToken cancellationToken);
 }
+

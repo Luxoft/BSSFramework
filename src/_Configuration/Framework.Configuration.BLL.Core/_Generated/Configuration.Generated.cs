@@ -169,4 +169,8 @@ namespace Framework.Configuration.BLL
     public partial interface ITargetSystemBLLFactory : Framework.BLL.ISecurityBLLFactory<Framework.Configuration.BLL.ITargetSystemBLL, Framework.Configuration.Domain.TargetSystem>
     {
     }
+    
+    public partial interface IConfigurationValidator : Framework.Validation.IValidator
+    {
+    }
 }

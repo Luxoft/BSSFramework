@@ -73,31 +73,31 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
         switch (typeReferenceBase)
         {
             case TypeReferenceBase.FixedTypeReference fixRef:
-            {
-                if (this.IsPersistent(fixRef.PropertyType))
                 {
-                    throw new PropertyProjectionNotInitializedException(fixRef.PropertyType);
-                }
+                    if (this.IsPersistent(fixRef.PropertyType))
+                    {
+                        throw new PropertyProjectionNotInitializedException(fixRef.PropertyType);
+                    }
 
-                return fixRef.PropertyType;
-            }
+                    return fixRef.PropertyType;
+                }
 
             case TypeReferenceBase.BuildTypeReference buildTypeRef:
-            {
-                if (buildTypeRef.ElementProjection == null && this.IsPersistent(buildTypeRef.ElementType))
                 {
-                    throw new PropertyProjectionNotInitializedException(buildTypeRef.ElementType);
+                    if (buildTypeRef.ElementProjection == null && this.IsPersistent(buildTypeRef.ElementType))
+                    {
+                        throw new PropertyProjectionNotInitializedException(buildTypeRef.ElementType);
+                    }
+
+                    var elementProjectionType =
+                        (GeneratedType?)buildTypeRef.ElementProjection.Maybe(v => this.ProjectionTypeResolver.Resolve(v));
+
+                    var elementType = elementProjectionType ?? buildTypeRef.ElementType;
+
+                    return buildTypeRef.IsNullable
+                               ? typeof(Nullable<>).CachedMakeGenericType(elementType)
+                               : buildTypeRef.CollectionType.SafeMakeProjectionCollectionType(elementType);
                 }
-
-                var elementProjectionType =
-                    (GeneratedType?)buildTypeRef.ElementProjection.Maybe(v => this.ProjectionTypeResolver.Resolve(v));
-
-                var elementType = elementProjectionType ?? buildTypeRef.ElementType;
-
-                return buildTypeRef.IsNullable
-                           ? typeof(Nullable<>).CachedMakeGenericType(elementType)
-                           : buildTypeRef.CollectionType.SafeMakeProjectionCollectionType(elementType);
-            }
 
             default:
                 throw new ArgumentOutOfRangeException(nameof(typeReferenceBase));
@@ -171,3 +171,4 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
         return new ProjectionCustomPropertyAttributeSource(this, projectionCustomProperty);
     }
 }
+

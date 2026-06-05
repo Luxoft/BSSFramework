@@ -66,3 +66,4 @@ public abstract class IntegrationDTOFileFactory<TConfiguration> : RoleDTOFileFac
         }
     }
 }
+

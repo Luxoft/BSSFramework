@@ -30,3 +30,4 @@ public static class BssFrameworkSettingsExtensions
                                                         TDTOMappingService, TEventDTOBase>>());
     }
 }
+

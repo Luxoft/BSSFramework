@@ -1,8 +1,9 @@
-﻿using Bss.Platform.Api.Documentation;
+﻿using Anch.DependencyInjection;
+using Anch.SecuritySystem.Configurator;
+
+using Bss.Platform.Api.Documentation;
 using Bss.Platform.Api.Middlewares;
 using Bss.Platform.Logging;
-
-using Anch.DependencyInjection;
 
 using Framework.Infrastructure.JsonConverter;
 using Framework.Infrastructure.Middleware;
@@ -12,8 +13,6 @@ using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Authorization;
 
 using SampleSystem.WebApiCore.DependencyInjection;
-
-using Anch.SecuritySystem.Configurator;
 
 namespace SampleSystem.WebApiCore;
 
@@ -89,3 +88,4 @@ public static class Program
         await app.RunAsync();
     }
 }
+

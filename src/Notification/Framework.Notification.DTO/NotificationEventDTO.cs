@@ -42,10 +42,11 @@ public class NotificationEventDTO
         this.Recipients = mailMessage.Recipients.Select(mar => new NotificationRecipientDTO(mar)).ToList();
         this.Subject = mailMessage.Subject;
 
-        this.Message = new () { IsBodyHtml = mailMessage.IsBodyHtml, Message = mailMessage.Body };
+        this.Message = new() { IsBodyHtml = mailMessage.IsBodyHtml, Message = mailMessage.Body };
 
         this.Attachments = mailMessage.Attachments.Select(z => new NotificationAttachmentDTO(z)).ToList();
 
-        this.TechnicalInformation = new (notification.TechnicalInformation);
+        this.TechnicalInformation = new(notification.TechnicalInformation);
     }
 }
+

@@ -1,4 +1,5 @@
 ﻿using Framework.Validation;
+
 using SampleSystem.Domain.Validation;
 
 // ReSharper disable once CheckNamespace
@@ -51,3 +52,4 @@ public partial class SecurityDomainBLLBase<TDomainObject>
         base.Save(value);
     }
 }
+

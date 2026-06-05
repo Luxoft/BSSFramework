@@ -6,3 +6,4 @@ public interface IAnonymousTypeBuilderStorage
 {
     ModuleBuilder ModuleBuilder { get; }
 }
+

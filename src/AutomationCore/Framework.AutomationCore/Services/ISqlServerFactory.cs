@@ -6,3 +6,4 @@ public interface ISqlServerFactory
 {
     Server Create();
 }
+

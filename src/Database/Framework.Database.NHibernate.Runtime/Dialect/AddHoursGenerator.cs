@@ -30,3 +30,4 @@ public class AddHoursGenerator : BaseHqlGeneratorForMethod
             IHqlExpressionVisitor visitor) =>
         treeBuilder.MethodCall("AddHours", visitor.Visit(targetObject).AsExpression(), visitor.Visit(arguments[0]).AsExpression());
 }
+

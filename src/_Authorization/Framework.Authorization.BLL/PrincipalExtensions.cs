@@ -1,6 +1,6 @@
-﻿using Framework.Authorization.Domain;
+﻿using Anch.SecuritySystem.ExternalSystem.Management;
 
-using Anch.SecuritySystem.ExternalSystem.Management;
+using Framework.Authorization.Domain;
 
 namespace Framework.Authorization.BLL;
 
@@ -12,3 +12,4 @@ public static class PrincipalExtensions
     public static PermissionData<Permission, PermissionRestriction> ToPermissionData(this Permission permission) =>
         new(permission, permission.Restrictions.ToArray());
 }
+

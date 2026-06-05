@@ -525,3 +525,4 @@ public static class CoreTypeExtensions
         return method;
     }
 }
+

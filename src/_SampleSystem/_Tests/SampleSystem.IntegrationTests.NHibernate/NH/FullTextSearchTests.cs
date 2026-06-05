@@ -29,3 +29,4 @@ public class FullTextSearchTests(IServiceProvider rootServiceProvider) : TestBas
                           });
     }
 }
+

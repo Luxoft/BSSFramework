@@ -7,3 +7,4 @@ public interface ISubscriptionService
 {
     IEnumerable<ITryResult<SubscriptionHeader>> Process(DomainObjectVersions versions);
 }
+

@@ -165,3 +165,4 @@ public abstract class ProjectionGeneratorConfigurationBase<TEnvironment> : CodeG
         yield return this.CustomProjectionBaseFileFactoryHeader;
     }
 }
+

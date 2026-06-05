@@ -1,7 +1,7 @@
-﻿using Framework.Application.Domain;
-
-using Anch.SecuritySystem;
+﻿using Anch.SecuritySystem;
 using Anch.SecuritySystem.Providers;
+
+using Framework.Application.Domain;
 
 namespace Framework.BLL;
 
@@ -14,3 +14,4 @@ public interface IDefaultSecurityBLLFactory<in TPersistentDomainObjectBase, TIde
     IDefaultSecurityDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>(ISecurityProvider<TDomainObject> securityProvider)
         where TDomainObject : class, TPersistentDomainObjectBase;
 }
+

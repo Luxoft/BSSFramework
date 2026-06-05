@@ -7,7 +7,7 @@ namespace Framework.CodeGeneration.DTOGenerator.GeneratePolicy;
 public class DependencyGeneratePolicy : CachedGeneratePolicy<RoleFileType>
 {
     public DependencyGeneratePolicy(IGeneratePolicy<RoleFileType> baseGeneratePolicy, IEnumerable<GenerateTypeMap> maps)
-            : base (baseGeneratePolicy)
+            : base(baseGeneratePolicy)
     {
         if (baseGeneratePolicy == null) throw new ArgumentNullException(nameof(baseGeneratePolicy));
         if (maps == null) throw new ArgumentNullException(nameof(maps));
@@ -99,3 +99,4 @@ public class DependencyGeneratePolicy : CachedGeneratePolicy<RoleFileType>
         }
     }
 }
+

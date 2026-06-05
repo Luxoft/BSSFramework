@@ -55,3 +55,4 @@ public class AuditPropertyPair : AuditPropertyPair<IAuditObject>
         obj => obj.ModifiedBy,
         obj => obj.ModifyDate);
 }
+

@@ -17,3 +17,4 @@ public abstract class DynamicClassValidator : IDynamicClassValidator
 
     protected abstract IClassValidator GetValidator<TSource>(IServiceProvider serviceProvider);
 }
+

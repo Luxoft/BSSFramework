@@ -8,3 +8,4 @@ public record DomainOperationEventDTOFileType(EventOperation EventOperation) : D
 {
     protected override string InternalToString() => $"{this.Name} ({this.EventOperation.Name})";
 }
+

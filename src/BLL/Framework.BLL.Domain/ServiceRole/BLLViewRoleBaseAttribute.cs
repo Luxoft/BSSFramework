@@ -14,3 +14,4 @@ public abstract class BLLViewRoleBaseAttribute : BLLServiceRoleAttribute, IMaxFe
 
     ViewDTOType IMaxFetchContainer.MaxFetch => this.BaseMaxFetch;
 }
+

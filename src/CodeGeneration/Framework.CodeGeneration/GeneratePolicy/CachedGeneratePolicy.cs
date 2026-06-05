@@ -40,3 +40,4 @@ public class CachedGeneratePolicy<TIdent> : IGeneratePolicy<TIdent>
         return this.baseGeneratePolicy.Used(domainType, fileType);
     }
 }
+

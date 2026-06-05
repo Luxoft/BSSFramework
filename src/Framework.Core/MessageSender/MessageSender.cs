@@ -27,7 +27,7 @@ public abstract class MessageSender<TMessage> : IMessageSender<TMessage>
 
         }
 
-        public override async Task SendAsync (TMessage message, CancellationToken cancellationToken)
+        public override async Task SendAsync(TMessage message, CancellationToken cancellationToken)
         {
 
         }

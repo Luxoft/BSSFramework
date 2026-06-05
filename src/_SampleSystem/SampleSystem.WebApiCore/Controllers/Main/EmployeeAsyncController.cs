@@ -1,11 +1,11 @@
 ﻿using Anch.Core.Auth;
+using Anch.GenericQueryable;
 
 using Framework.Application.Repository;
 using Framework.Database;
 
-using Anch.GenericQueryable;
-
 using Microsoft.AspNetCore.Mvc;
+
 using SampleSystem.Domain.Employee;
 using SampleSystem.Generated.DTO;
 
@@ -35,3 +35,4 @@ public class EmployeeAsyncController(
         return employees.Single().ToSimpleDTO(mappingService);
     }
 }
+

@@ -47,3 +47,4 @@ public abstract class MaybePropertyAssigner<TConfiguration> : PropertyAssigner<T
         }
     }
 }
+

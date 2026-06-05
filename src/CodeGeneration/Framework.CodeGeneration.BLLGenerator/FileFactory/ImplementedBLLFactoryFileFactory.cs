@@ -1,11 +1,11 @@
 ﻿using System.CodeDom;
 
+using Anch.SecuritySystem.Providers;
+
 using Framework.BLL;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLGenerator.Configuration;
 using Framework.FileGeneration.Configuration;
-
-using Anch.SecuritySystem.Providers;
 
 namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 
@@ -32,12 +32,12 @@ public class ImplementedBLLFactoryFileFactory<TConfiguration>(TConfiguration con
                                 this.Configuration.Environment.GetIdentityType().ToTypeReference());
 
         return new CodeTypeDeclaration
-               {
-                       Name = this.Name,
+        {
+            Name = this.Name,
 
-                       Attributes = MemberAttributes.Public,
-                       IsPartial = true,
-                       Members =
+            Attributes = MemberAttributes.Public,
+            IsPartial = true,
+            Members =
                        {
                                new CodeConstructor
                                {
@@ -49,8 +49,8 @@ public class ImplementedBLLFactoryFileFactory<TConfiguration>(TConfiguration con
                                this.GetCreateMethod(),
                        },
 
-                       BaseTypes = { baseTypeRef, interfaceBase }
-               };
+            BaseTypes = { baseTypeRef, interfaceBase }
+        };
     }
 
     private CodeTypeMember GetCreateMethod()
@@ -68,16 +68,17 @@ public class ImplementedBLLFactoryFileFactory<TConfiguration>(TConfiguration con
         var parameter = typeof(ISecurityProvider<>).ToTypeReference(genericDomainTypeRefExpr).ToParameterDeclarationExpression("securityProvider");
 
         return new CodeMemberMethod
-               {
-                       Name = methodName,
-                       Attributes = MemberAttributes.Family | MemberAttributes.Override,
-                       ReturnType = resultType,
-                       Parameters = { parameter },
-                       Statements =
+        {
+            Name = methodName,
+            Attributes = MemberAttributes.Family | MemberAttributes.Override,
+            ReturnType = resultType,
+            Parameters = { parameter },
+            Statements =
                        {
                            this.Configuration.SecurityDomainBLLBaseTypeReference.ToTypeReference(genericDomainTypeRefExpr).ToObjectCreateExpression(contextFieldRefExpr, parameter.ToVariableReferenceExpression()).ToMethodReturnStatement()
                        },
-                       TypeParameters = { genericDomainTypeRef }
-               };
+            TypeParameters = { genericDomainTypeRef }
+        };
     }
 }
+

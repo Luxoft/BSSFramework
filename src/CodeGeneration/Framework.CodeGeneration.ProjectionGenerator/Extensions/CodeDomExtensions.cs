@@ -2,6 +2,7 @@
 using System.Reflection;
 
 using Anch.Core;
+using Anch.SecuritySystem;
 
 using Framework.BLL.Domain.Attributes;
 using Framework.BLL.Domain.DTO;
@@ -14,8 +15,6 @@ using Framework.CodeDom.Extensions;
 using Framework.Core;
 using Framework.Database.Mapping;
 using Framework.Projection;
-
-using Anch.SecuritySystem;
 
 namespace Framework.CodeGeneration.ProjectionGenerator.Extensions;
 
@@ -249,3 +248,4 @@ internal static class CodeDomExtensions
         return typeof(FetchPathAttribute).ToTypeReference().ToAttributeDeclaration(arg);
     }
 }
+

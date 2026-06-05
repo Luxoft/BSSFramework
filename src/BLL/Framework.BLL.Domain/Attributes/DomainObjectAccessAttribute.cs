@@ -1,6 +1,6 @@
-﻿using Framework.BLL.Domain.Extensions;
+﻿using Anch.SecuritySystem;
 
-using Anch.SecuritySystem;
+using Framework.BLL.Domain.Extensions;
 
 namespace Framework.BLL.Domain.Attributes;
 
@@ -21,3 +21,4 @@ public class DomainObjectAccessAttribute : Attribute
 
     public SecurityRule SecurityRule { get; }
 }
+

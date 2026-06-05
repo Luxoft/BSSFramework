@@ -1,9 +1,8 @@
-﻿using Framework.Application;
-using Framework.Database;
+﻿using Anch.SecuritySystem.UserSource;
 
-using Anch.SecuritySystem.UserSource;
-
+using Framework.Application;
 using Framework.AutomationCore.Services;
+using Framework.Database;
 
 using SampleSystem.Domain.Employee;
 using SampleSystem.IntegrationTests._Environment.TestData;
@@ -52,3 +51,4 @@ public class CurrentUserSourceTests(IServiceProvider rootServiceProvider) : Test
         Assert.Equal($"{nameof(Employee)} \"{randomName}\" not found", userSourceException.Message);
     }
 }
+

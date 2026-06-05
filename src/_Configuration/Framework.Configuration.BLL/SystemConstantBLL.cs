@@ -1,8 +1,8 @@
-﻿using Framework.Application.ApplicationVariable;
+﻿using Anch.SecuritySystem.Providers;
+
+using Framework.Application.ApplicationVariable;
 using Framework.Configuration.Domain;
 using Framework.Tracking;
-
-using Anch.SecuritySystem.Providers;
 
 namespace Framework.Configuration.BLL;
 
@@ -35,3 +35,4 @@ public partial class SystemConstantBLL(
         return serializer.Parse(systemConstant.Value);
     }
 }
+

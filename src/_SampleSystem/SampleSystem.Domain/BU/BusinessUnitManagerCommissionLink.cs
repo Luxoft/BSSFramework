@@ -95,3 +95,4 @@ public class BusinessUnitManagerCommissionLink : AuditPersistentDomainObjectBase
 
     public override string ToString() => $"BusinessUnit: {this.BusinessUnit}, Manager: {this.Manager}, Period: {this.Period}";
 }
+

@@ -1,5 +1,4 @@
 ﻿using Anch.Core;
-
 using Anch.SecuritySystem;
 using Anch.SecuritySystem.DomainServices;
 using Anch.SecuritySystem.Providers;
@@ -21,3 +20,4 @@ public abstract class TemplateRepositoryFactory<TRepository, TRepositoryImpl, TD
     public TRepository Create(ISecurityProvider<TDomainObject> securityProvider) =>
         serviceProxyFactory.Create<TRepository, TRepositoryImpl>(securityProvider);
 }
+

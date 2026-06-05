@@ -63,25 +63,26 @@ public class CustomProjectionFileFactoryBase<TConfiguration>(TConfiguration conf
         if (property == null) throw new ArgumentNullException(nameof(property));
 
         return new CodeMemberProperty
-               {
-                       Name = property.Name,
+        {
+            Name = property.Name,
 
-                       Type = property.PropertyType.ToTypeReference(),
+            Type = property.PropertyType.ToTypeReference(),
 
-                       Attributes = MemberAttributes.Public | MemberAttributes.Abstract,
+            Attributes = MemberAttributes.Public | MemberAttributes.Abstract,
 
-                       HasGet = true,
+            HasGet = true,
 
-                       HasSet = property.HasSetMethod()
-               };
+            HasSet = property.HasSetMethod()
+        };
     }
 
 
     protected override IEnumerable<CodeConstructor> GetConstructors()
     {
         yield return new CodeConstructor
-                     {
-                             Attributes = MemberAttributes.Family
-                     };
+        {
+            Attributes = MemberAttributes.Family
+        };
     }
 }
+

@@ -81,3 +81,4 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
         set => this.version = value;
     }
 }
+

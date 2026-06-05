@@ -36,3 +36,4 @@ public class TestItemAuthObject : AuditPersistentDomainObjectBase, IDetail<TestP
         set => this.managementUnit = value;
     }
 }
+

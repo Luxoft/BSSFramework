@@ -35,3 +35,4 @@ public class DatabaseScriptGeneratorContextMockBuilder
 
     public Server MainServer { get; }
 }
+

@@ -1,9 +1,8 @@
 ﻿using Anch.SecuritySystem;
-
-using SampleSystem.Domain;
-
 using Anch.SecuritySystem.DomainServices;
 using Anch.SecuritySystem.Providers;
+
+using SampleSystem.Domain;
 
 namespace SampleSystem.Security.Services;
 
@@ -11,3 +10,4 @@ public class SampleSystemTestCustomContextSecurityObjSecurityService : DomainSec
 {
     protected override ISecurityProvider<TestCustomContextSecurityObj> CreateSecurityProvider(SecurityRule securityRule) => new AccessDeniedSecurityProvider<TestCustomContextSecurityObj>();
 }
+

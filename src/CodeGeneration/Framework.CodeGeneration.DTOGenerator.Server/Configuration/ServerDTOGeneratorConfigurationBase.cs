@@ -378,3 +378,4 @@ public abstract class ServerDTOGeneratorConfigurationBase<TEnvironment> : DTOGen
         return this.domainTypeDetailsCache.GetValue(domainType, fileType, isWritable);
     }
 }
+

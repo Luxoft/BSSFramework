@@ -66,3 +66,4 @@ public class DALListenerSetup : IDALListenerSetup, IServiceInitializer
         where TService : class =>
         services.AddScopedFromLazyInterfaceImplement<TService, TListener>(false);
 }
+

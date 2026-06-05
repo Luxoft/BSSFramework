@@ -16,3 +16,4 @@ public class SampleSystemEventDTORoleGeneratePolicy : IGeneratePolicy<RoleFileTy
         return false;
     }
 }
+

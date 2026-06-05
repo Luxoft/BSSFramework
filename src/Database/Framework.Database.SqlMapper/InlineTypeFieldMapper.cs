@@ -16,14 +16,14 @@ public class InlineTypeFieldMapper : IMapper
                     .GetAllElements(z => z.Children)
                     .Select(
                             z => new
-                                 {
-                                         Name = string.Join(
+                            {
+                                Name = string.Join(
                                                             string.Empty,
                                                             z.GetAllElements(q => q.Parent)
                                                              .Select(q => q.Name)
                                                              .Reverse()),
-                                         PrimitiveCollection = z.PrimitiveMetadataCollection,
-                                 })
+                                PrimitiveCollection = z.PrimitiveMetadataCollection,
+                            })
                     .ToList();
 
         var mapper = new PrimitiveTypeFieldMapper();
@@ -39,14 +39,14 @@ public class InlineTypeFieldMapper : IMapper
                     .GetAllElements(z => z.Children)
                     .Select(
                             z => new
-                                 {
-                                         Name = string.Join(
+                            {
+                                Name = string.Join(
                                                             string.Empty,
                                                             z.GetAllElements(q => q.Parent)
                                                              .Select(q => q.Name)
                                                              .Reverse()),
-                                         z.ReferenceTypes,
-                                 })
+                                z.ReferenceTypes,
+                            })
                     .ToList();
 
         var mapper = new ReferenceTypeFieldMapper();
@@ -54,3 +54,4 @@ public class InlineTypeFieldMapper : IMapper
         return pairs.SelectMany(z => z.ReferenceTypes.SelectMany(q => mapper.GetMapping(q, z.Name)));
     }
 }
+

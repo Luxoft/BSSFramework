@@ -1,7 +1,7 @@
-﻿using Framework.Application;
-using Framework.Database;
+﻿using Anch.Testing.Xunit;
 
-using Anch.Testing.Xunit;
+using Framework.Application;
+using Framework.Database;
 
 using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Enums;
@@ -156,3 +156,4 @@ public class VirtualPermissionTests(IServiceProvider rootServiceProvider) : Test
         Assert.False(hasAccess);
     }
 }
+

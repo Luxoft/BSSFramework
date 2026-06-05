@@ -18,3 +18,4 @@ public interface IAuditDBScriptGeneratorBuilder : IConfigurable
 
     IMigrationScriptGeneratorBuilder MigrationBuilder { get; }
 }
+

@@ -33,3 +33,4 @@ public class DomainTypeMetadataBuilder<TDomainType> : IDomainTypeMetadataBuilder
         return this;
     }
 }
+

@@ -6,3 +6,4 @@ public interface INotificationExtractor
 {
     IEnumerable<Notification.Domain.Notification> GetNotifications(DomainObjectVersions versions);
 }
+

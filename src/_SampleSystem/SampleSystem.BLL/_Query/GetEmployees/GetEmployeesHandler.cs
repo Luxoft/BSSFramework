@@ -1,6 +1,6 @@
-﻿using MediatR;
+﻿using Anch.SecuritySystem;
 
-using Anch.SecuritySystem;
+using MediatR;
 
 namespace SampleSystem.BLL._Query.GetEmployees;
 
@@ -15,3 +15,4 @@ public class GetEmployeesHandler(IEmployeeBLLFactory employeeBllFactory) : IRequ
         return result.Select(x => new GetEmployeesResponse(x.Id, x.NameEng.FullName)).ToArray();
     }
 }
+

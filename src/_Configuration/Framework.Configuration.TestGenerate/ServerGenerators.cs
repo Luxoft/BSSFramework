@@ -3,7 +3,6 @@ using Framework.CodeGeneration.BLLGenerator;
 using Framework.CodeGeneration.DTOGenerator.Server;
 using Framework.CodeGeneration.Extensions;
 using Framework.CodeGeneration.WebApiGenerator.SingleController;
-
 using Framework.FileGeneration;
 
 namespace Framework.Configuration.TestGenerate;
@@ -67,3 +66,4 @@ public partial class ServerGenerators
         yield return generator.GenerateSingle(outputPath, "Configuration.Generated", this.CheckOutService);
     }
 }
+

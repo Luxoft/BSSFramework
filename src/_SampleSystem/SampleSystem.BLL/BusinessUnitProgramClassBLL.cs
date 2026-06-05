@@ -1,12 +1,10 @@
 ﻿using System.Linq.Expressions;
 
 using Anch.GenericQueryable.Fetching;
-
 using Anch.OData.Domain;
 
 using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Models.Filters;
-
 using BusinessUnitProgramClass = SampleSystem.Domain.Projections.BusinessUnitProgramClass;
 
 namespace SampleSystem.BLL;
@@ -51,3 +49,4 @@ public partial class BusinessUnitProgramClassBLL
         return z => childQueryable.Contains(z.Id);
     }
 }
+

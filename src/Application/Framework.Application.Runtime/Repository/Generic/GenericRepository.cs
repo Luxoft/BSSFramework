@@ -1,9 +1,8 @@
 ﻿using Anch.Core;
-
-using Framework.Database;
-
 using Anch.SecuritySystem.AccessDenied;
 using Anch.SecuritySystem.Providers;
+
+using Framework.Database;
 
 namespace Framework.Application.Repository.Generic;
 
@@ -53,3 +52,4 @@ public class GenericRepository<TDomainObject, TIdent>(
 
     public async Task LockAsync(TDomainObject domainObject, LockRole lockRole, CancellationToken cancellationToken) => await dal.LockAsync(domainObject, lockRole, cancellationToken);
 }
+

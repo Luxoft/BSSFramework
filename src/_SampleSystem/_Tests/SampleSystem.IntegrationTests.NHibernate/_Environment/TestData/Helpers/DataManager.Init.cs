@@ -14,3 +14,4 @@ public partial class DataManager(IServiceProvider rootServiceProvider) : IRootSe
 
     public IServiceProvider RootServiceProvider { get; } = rootServiceProvider;
 }
+

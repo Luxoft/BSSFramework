@@ -15,3 +15,4 @@ public class DefaultSimpleIntegrationDTOFileFactory<TConfiguration>(TConfigurati
 
     protected override bool AllowCreate { get; } = false;
 }
+

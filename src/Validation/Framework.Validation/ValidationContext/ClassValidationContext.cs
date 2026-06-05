@@ -11,3 +11,4 @@ public class ClassValidationContext<TSource>(
     IClassValidationMap<TSource> map,
     IServiceProvider serviceProvider)
     : ValidationContext<TSource, IClassValidationMap>(validator, operationContext, source, parentState, map, serviceProvider), IClassValidationContext<TSource>;
+

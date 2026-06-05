@@ -25,3 +25,4 @@ public class JobLoggingMiddleware<TJob>(ILogger<TJob> logger) : IScopedEvaluator
         }
     }
 }
+

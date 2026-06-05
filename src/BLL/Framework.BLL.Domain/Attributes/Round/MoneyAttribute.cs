@@ -4,3 +4,4 @@ namespace Framework.BLL.Domain.Attributes.Round;
 
 [AttributeUsage(AttributeTargets.Property)]
 public class MoneyAttribute() : RoundDecimalAttribute(NumberExtensions.MoneyRoundDecimals);
+

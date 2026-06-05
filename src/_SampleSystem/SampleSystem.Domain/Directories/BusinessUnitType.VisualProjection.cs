@@ -3,3 +3,4 @@
 namespace SampleSystem.Domain.Directories;
 
 public partial class BusinessUnitType : IBusinessUnitTypeVisualProjection;
+

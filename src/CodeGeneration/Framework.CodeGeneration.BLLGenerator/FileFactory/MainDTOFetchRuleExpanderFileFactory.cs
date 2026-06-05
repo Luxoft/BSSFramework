@@ -22,3 +22,4 @@ public class MainDTOFetchRuleExpanderFileFactory<TConfiguration>(TConfiguration 
         yield return this.Configuration.GetCodeTypeReference(this.DomainType, FileType.MainDTOFetchRuleExpanderBase);
     }
 }
+

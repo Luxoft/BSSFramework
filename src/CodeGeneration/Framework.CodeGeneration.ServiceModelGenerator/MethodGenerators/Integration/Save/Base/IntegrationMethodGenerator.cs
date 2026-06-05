@@ -1,13 +1,13 @@
 ﻿using System.CodeDom;
 
+using Anch.SecuritySystem;
+
 using Framework.BLL;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Integration;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
-
-using Anch.SecuritySystem;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Integration.Save.Base;
 
@@ -30,3 +30,4 @@ public abstract class IntegrationMethodGenerator<TConfiguration, TBLLRoleAttribu
                                      .ToExpressionStatement();
     }
 }
+

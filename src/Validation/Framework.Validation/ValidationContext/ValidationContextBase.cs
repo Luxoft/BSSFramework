@@ -18,3 +18,4 @@ public class ValidationContextBase<TSource>(IValidator validator, int operationC
     /// <inheritdoc />
     public IValidationState? ParentState { get; } = parentState;
 }
+

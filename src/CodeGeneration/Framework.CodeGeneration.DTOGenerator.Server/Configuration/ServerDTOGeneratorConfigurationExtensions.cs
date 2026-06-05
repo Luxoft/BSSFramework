@@ -12,15 +12,15 @@ public static class ServerDTOGeneratorConfigurationExtensions
         if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
         return new CodeMemberProperty
-               {
-                       Name = "Version",
-                       PrivateImplementationType = configuration.GetVersionObjectCodeTypeReference(),
-                       GetStatements =
+        {
+            Name = "Version",
+            PrivateImplementationType = configuration.GetVersionObjectCodeTypeReference(),
+            GetStatements =
                        {
                                new CodeThisReferenceExpression().ToPropertyReference(configuration.VersionProperty).ToMethodReturnStatement()
                        },
-                       Type = configuration.VersionType.ToTypeReference()
-               };
+            Type = configuration.VersionType.ToTypeReference()
+        };
     }
 
 
@@ -32,3 +32,4 @@ public static class ServerDTOGeneratorConfigurationExtensions
         return typeof(IVersionObject<>).MakeGenericType(configuration.VersionType).ToTypeReference();
     }
 }
+

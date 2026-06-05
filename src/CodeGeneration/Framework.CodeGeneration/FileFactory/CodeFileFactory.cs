@@ -76,3 +76,4 @@ public abstract class CodeFileFactory<TConfiguration, TFileType>(TConfiguration 
 
     #endregion
 }
+

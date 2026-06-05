@@ -1,4 +1,7 @@
-﻿using Framework.Application;
+﻿using Anch.SecuritySystem;
+using Anch.Testing.Xunit;
+
+using Framework.Application;
 using Framework.Application.Repository;
 using Framework.Database;
 
@@ -10,12 +13,8 @@ using SampleSystem.Domain.Directories;
 using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.MU;
 using SampleSystem.Generated.DTO;
-using SampleSystem.Security;
-
-using Anch.SecuritySystem;
-using Anch.Testing.Xunit;
-
 using SampleSystem.IntegrationTests._Environment.TestData;
+using SampleSystem.Security;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -104,12 +103,12 @@ public class AuthPerformanceTest(IServiceProvider rootServiceProvider) : TestBas
                             foreach (var emp in this.employeeSource)
                             {
                                 var testObj = new AuthPerformanceObject
-                                              {
-                                                  BusinessUnit = fbu == null ? null : await fbuRep.LoadAsync(fbu.Value.Id),
-                                                  ManagementUnit = mbu == null ? null : await mbuRep.LoadAsync(mbu.Value.Id),
-                                                  Location = loc == null ? null : await locRep.LoadAsync(loc.Value.Id),
-                                                  Employee = emp == null ? null : await empRep.LoadAsync(emp.Value.Id),
-                                              };
+                                {
+                                    BusinessUnit = fbu == null ? null : await fbuRep.LoadAsync(fbu.Value.Id),
+                                    ManagementUnit = mbu == null ? null : await mbuRep.LoadAsync(mbu.Value.Id),
+                                    Location = loc == null ? null : await locRep.LoadAsync(loc.Value.Id),
+                                    Employee = emp == null ? null : await empRep.LoadAsync(emp.Value.Id),
+                                };
 
                                 await testObjRep.SaveAsync(testObj);
 
@@ -122,3 +121,4 @@ public class AuthPerformanceTest(IServiceProvider rootServiceProvider) : TestBas
                 return count;
             });
 }
+

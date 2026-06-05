@@ -39,3 +39,4 @@ public class SampleSystemNHibernateExtension(bool includeTypedAudit) : IBssFrame
                                                  .AddMapping(new SampleSystemMappingSettings(appDatabase))));
     }
 }
+

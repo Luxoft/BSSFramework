@@ -31,3 +31,4 @@ public interface IAuditReaderPatched : IAuditReader
     /// <returns>System.Int64.</returns>
     long GetMaxRevision();
 }
+

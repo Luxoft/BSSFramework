@@ -1,12 +1,13 @@
-﻿using Framework.Application.Repository;
+﻿using Anch.GenericQueryable;
+using Anch.SecuritySystem.Attributes;
+
+using Framework.Application.Repository;
 using Framework.Database;
 
-using Anch.GenericQueryable;
-
 using Microsoft.AspNetCore.Mvc;
+
 using SampleSystem.Domain.Directories;
 using SampleSystem.Generated.DTO;
-using Anch.SecuritySystem.Attributes;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
@@ -49,3 +50,4 @@ public class TestAsyncController(
         return 123;
     }
 }
+

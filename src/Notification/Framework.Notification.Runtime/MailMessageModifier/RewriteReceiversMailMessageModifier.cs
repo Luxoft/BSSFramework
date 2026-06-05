@@ -23,3 +23,4 @@ public class RewriteReceiversMailMessageModifier(IOptions<RewriteReceiversSettin
                       .SelectMany()
         ];
 }
+

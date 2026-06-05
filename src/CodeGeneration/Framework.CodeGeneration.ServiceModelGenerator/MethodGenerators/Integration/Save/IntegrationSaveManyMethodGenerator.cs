@@ -70,11 +70,11 @@ public class IntegrationSaveManyMethodGenerator<TConfiguration> : IntegrationBas
 
                 new CodeLambdaExpression
                 {
-                        Parameters =
+                    Parameters =
                         {
                                 lambdaParam
                         },
-                        Statements =
+                    Statements =
                         {
                                 new CodeThisReferenceExpression().ToMethodInvokeExpression(this.singleSaveGenerator.InternalName, lambdaParam.ToVariableReferenceExpression(), evaluateDataExpr, bllRefExpr )
                         }
@@ -91,3 +91,4 @@ public class IntegrationSaveManyMethodGenerator<TConfiguration> : IntegrationBas
                          .ToMethodReturnStatement();
     }
 }
+

@@ -11,6 +11,6 @@ public record Range<T>(T Min, T Max)
 
         private static readonly T MaxValue = (T)typeof(T).GetField("MaxValue")!.GetValue(null)!;
 
-        public static readonly Range<T> RangeValue = new (MinValue, MaxValue);
+        public static readonly Range<T> RangeValue = new(MinValue, MaxValue);
     }
 }

@@ -15,3 +15,4 @@ public class EmployeeRegistrationType : BaseDirectory, IExternalSynchronizable
         set => this.externalId = value;
     }
 }
+

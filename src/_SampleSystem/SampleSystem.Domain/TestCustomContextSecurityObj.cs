@@ -4,3 +4,4 @@ namespace SampleSystem.Domain;
 
 [BLLViewRole]
 public class TestCustomContextSecurityObj : BaseDirectory;
+

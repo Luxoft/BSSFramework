@@ -37,3 +37,4 @@ public class EscapeUnderscoreVisitor : ExpressionVisitor
 
     public static readonly EscapeUnderscoreVisitor Value = new();
 }
+

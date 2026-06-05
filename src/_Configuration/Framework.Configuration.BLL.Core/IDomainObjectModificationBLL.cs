@@ -18,3 +18,4 @@ public partial interface IDomainObjectModificationBLL
     /// <returns></returns>
     QueueProcessingState GetProcessingState();
 }
+

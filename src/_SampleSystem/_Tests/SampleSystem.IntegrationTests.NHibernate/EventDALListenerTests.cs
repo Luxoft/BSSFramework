@@ -1,7 +1,7 @@
-﻿using Framework.Application;
-using Framework.Database;
+﻿using Anch.Testing.Xunit;
 
-using Anch.Testing.Xunit;
+using Framework.Application;
+using Framework.Database;
 
 using SampleSystem.EventMetadata;
 using SampleSystem.IntegrationTests._Environment.TestData;
@@ -27,3 +27,4 @@ public class EventDALListenerTests(IServiceProvider rootServiceProvider) : TestB
         await action();
     }
 }
+

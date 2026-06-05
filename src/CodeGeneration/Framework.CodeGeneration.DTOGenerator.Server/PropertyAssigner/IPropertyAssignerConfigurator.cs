@@ -10,3 +10,4 @@ public interface IPropertyAssignerConfigurator
 
     IPropertyAssigner GetDomainObjectToSecurityPropertyAssigner(IPropertyAssigner innerAssigner);
 }
+

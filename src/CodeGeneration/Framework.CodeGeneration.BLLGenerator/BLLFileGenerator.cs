@@ -42,3 +42,4 @@ public class BLLFileGenerator<TConfiguration>(TConfiguration configuration) : Co
         }
     }
 }
+

@@ -45,7 +45,7 @@ public static class CodeTypeDeclarationExtensions
     }
 
 
-    public static string GetBLLFileNameFunc(this  CodeTypeDeclaration typeDecl, string systemName)
+    public static string GetBLLFileNameFunc(this CodeTypeDeclaration typeDecl, string systemName)
     {
         var suffix = ".BLL";
         if (typeDecl.Name.EndsWith("Factory"))
@@ -129,3 +129,4 @@ public static class CodeTypeDeclarationExtensions
         return systemName + suffix + ".Generated";
     }
 }
+

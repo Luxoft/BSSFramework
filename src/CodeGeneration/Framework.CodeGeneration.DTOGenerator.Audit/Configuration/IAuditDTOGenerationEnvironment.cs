@@ -3,3 +3,4 @@
 namespace Framework.CodeGeneration.DTOGenerator.Audit.Configuration;
 
 public interface IAuditDTOGenerationEnvironment : IServerDTOGenerationEnvironment, IServerDTOGeneratorConfigurationContainer;
+

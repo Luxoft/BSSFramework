@@ -1,15 +1,14 @@
-﻿using Framework.Application;
+﻿using Anch.SecuritySystem;
+using Anch.SecuritySystem.Validation;
+using Anch.Testing.Xunit;
+
+using Framework.Application;
 using Framework.Database;
 
 using SampleSystem.Domain.BU;
 using SampleSystem.Generated.DTO;
-using SampleSystem.Security;
-
-using Anch.SecuritySystem;
-using Anch.SecuritySystem.Validation;
-using Anch.Testing.Xunit;
-
 using SampleSystem.IntegrationTests._Environment.TestData;
+using SampleSystem.Security;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -173,3 +172,4 @@ public class SecurityContextRestrictionFilterTests(IServiceProvider rootServiceP
         Assert.DoesNotContain(this.employeeLogin, accesors);
     }
 }
+

@@ -9,7 +9,7 @@ internal static class DomainTypeMetadataExtension
 {
     public static IEnumerable<ReferenceTypeFieldMetadata> GetManyToOneReference(this DomainTypeMetadata domainTypeMetadata) => domainTypeMetadata.ReferenceFields.Except(domainTypeMetadata.GetOneToOneReference());
 
-    public static IEnumerable<ReferenceTypeFieldMetadata> GetOneToOneReference( this DomainTypeMetadata domainTypeMetadata)
+    public static IEnumerable<ReferenceTypeFieldMetadata> GetOneToOneReference(this DomainTypeMetadata domainTypeMetadata)
     {
         var referencies = domainTypeMetadata.ReferenceFields;
         var toTypes = referencies.Select(z => z.ToType).Distinct();
@@ -21,15 +21,15 @@ internal static class DomainTypeMetadataExtension
 
     public static FieldMetadata GetIdentityField(this DomainTypeMetadata source)
     {
-        var request = from typeMetadata in source.GetAllElements (m => m.Parent)
+        var request = from typeMetadata in source.GetAllElements(m => m.Parent)
 
                       from fieldMetaData in typeMetadata.Fields
 
-                      where string.Equals (fieldMetaData.Name, "Id", StringComparison.InvariantCultureIgnoreCase)
+                      where string.Equals(fieldMetaData.Name, "Id", StringComparison.InvariantCultureIgnoreCase)
 
                       select fieldMetaData;
 
-        return request.Single(() => new ArgumentException (
+        return request.Single(() => new ArgumentException(
                                                                   $"Domain type {source.DomainType.Name} has no identity field"));
 
 
@@ -47,5 +47,6 @@ internal static class DomainTypeMetadataExtension
 
         //return identityField;
     }
-    public static string GetIdentityFieldName(this DomainTypeMetadata source, Func<DomainTypeMetadata, string> getIdentityFieldInBdFunc) => source.GetIdentityField ().ToColumnName (z => getIdentityFieldInBdFunc (source));
+    public static string GetIdentityFieldName(this DomainTypeMetadata source, Func<DomainTypeMetadata, string> getIdentityFieldInBdFunc) => source.GetIdentityField().ToColumnName(z => getIdentityFieldInBdFunc(source));
 }
+

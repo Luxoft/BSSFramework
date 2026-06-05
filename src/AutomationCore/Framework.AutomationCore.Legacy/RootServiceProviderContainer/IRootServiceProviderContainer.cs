@@ -1,11 +1,11 @@
-﻿using Framework.Application;
+﻿using Anch.SecuritySystem;
+
+using Framework.Application;
 using Framework.Database;
 using Framework.Infrastructure.ContextEvaluator;
 using Framework.Infrastructure.Services;
 
 using Microsoft.Extensions.DependencyInjection;
-
-using Anch.SecuritySystem;
 
 namespace Framework.AutomationCore.RootServiceProviderContainer;
 
@@ -26,3 +26,4 @@ public interface IRootServiceProviderContainer<TBLLContext, TMappingService> : I
             Func<EvaluatedData<TBLLContext, TMappingService>, Task<TResult>> getResult) =>
         await this.RootServiceProvider.GetRequiredService<IContextEvaluator<TBLLContext, TMappingService>>().EvaluateAsync(sessionMode, customUserCredential, getResult);
 }
+

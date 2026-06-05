@@ -70,3 +70,4 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
 
             .AddGeneralApplicationServices(configuration, hostEnvironment);
 }
+

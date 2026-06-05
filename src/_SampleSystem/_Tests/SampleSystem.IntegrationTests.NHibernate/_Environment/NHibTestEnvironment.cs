@@ -56,3 +56,4 @@ public class NHibTestEnvironment : BssTestEnvironment
 
                 .AddSingleton<DataManager>();
 }
+

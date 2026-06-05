@@ -3,7 +3,7 @@
 [Flags]
 public enum TypeSearchMode
 {
-    Name =  1,
+    Name = 1,
 
     FullName = 2,
 

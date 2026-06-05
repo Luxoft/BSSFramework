@@ -53,3 +53,4 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
         internal protected set => this.createdBy = value.TrimNull();
     }
 }
+

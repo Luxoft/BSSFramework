@@ -98,3 +98,4 @@ public static class DatabaseScriptResultFactory
         return generateScript;
     }
 }
+

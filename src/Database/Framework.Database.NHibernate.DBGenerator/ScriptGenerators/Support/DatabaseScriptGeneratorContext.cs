@@ -45,3 +45,4 @@ public class DatabaseScriptGeneratorContext : IDatabaseScriptGeneratorContext
     /// </summary>
     public AssemblyMetadata AssemblyMetadata { get; }
 }
+

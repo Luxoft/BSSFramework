@@ -1,6 +1,8 @@
 ﻿using System.CodeDom;
 
 using Anch.Core;
+using Anch.SecuritySystem;
+
 using Framework.BLL;
 using Framework.BLL.DTOMapping.Services;
 using Framework.CodeDom.Extend;
@@ -12,8 +14,6 @@ using Framework.CodeGeneration.DTOGenerator.PropertyAssigner;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.Core;
 using Framework.Database;
-
-using Anch.SecuritySystem;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.FileFactory;
 
@@ -42,24 +42,24 @@ internal static class CodeDomHelper
         var sourceDomainParameterRef = sourceDomainParameter.ToVariableReferenceExpression();
 
         return new CodeConstructor
-               {
-                       Attributes = (domainType.IsAbstractDTO() ? MemberAttributes.Family : MemberAttributes.Public) | MemberAttributes.Final,
-                       Parameters = { mappingServiceParameter, sourceDomainParameter },
-                       Statements =
+        {
+            Attributes = (domainType.IsAbstractDTO() ? MemberAttributes.Family : MemberAttributes.Public) | MemberAttributes.Final,
+            Parameters = { mappingServiceParameter, sourceDomainParameter },
+            Statements =
                        {
                                mappingServiceParameterRefExpr.ToMethodInvokeExpression("Map" + domainType.Name, sourceDomainParameterRef, new CodeThisReferenceExpression())
                        }
-               }.Self(decl =>
-                      {
-                          if (fileFactory.FileType == BaseFileType.ProjectionDTO || (fileFactory.FileType as MainDTOFileType).Maybe(fileType => fileType.BaseType != null))
-                          {
-                              decl.BaseConstructorArgs.AddRange(
-                              [
-                                  mappingServiceParameterRefExpr,
+        }.Self(decl =>
+               {
+                   if (fileFactory.FileType == BaseFileType.ProjectionDTO || (fileFactory.FileType as MainDTOFileType).Maybe(fileType => fileType.BaseType != null))
+                   {
+                       decl.BaseConstructorArgs.AddRange(
+                       [
+                           mappingServiceParameterRefExpr,
                                                                         sourceDomainParameter.ToVariableReferenceExpression()
-                              ]);
-                          }
-                      });
+                       ]);
+                   }
+               });
     }
 
 
@@ -117,18 +117,18 @@ internal static class CodeDomHelper
         var mappingServiceParameterRefExpr = mappingServiceParameter.ToVariableReferenceExpression();
 
         return new CodeMemberMethod
-               {
-                       Name = fileFactory.Configuration.ToDomainObjectMethodName,
-                       Attributes = MemberAttributes.Public | MemberAttributes.Final,
-                       Parameters = { mappingServiceParameter },
-                       ReturnType = fileFactory.DomainType.ToTypeReference(),
-                       Statements =
+        {
+            Name = fileFactory.Configuration.ToDomainObjectMethodName,
+            Attributes = MemberAttributes.Public | MemberAttributes.Final,
+            Parameters = { mappingServiceParameter },
+            ReturnType = fileFactory.DomainType.ToTypeReference(),
+            Statements =
                        {
                                mappingServiceParameterRefExpr.ToMethodReferenceExpression($"To{fileFactory.DomainType.Name}")
                                                              .ToMethodInvokeExpression(new CodeThisReferenceExpression())
                                                              .ToMethodReturnStatement()
                        }
-               };
+        };
     }
 
     public static CodeMemberMethod GetToDomainObjectWithAllowCreateMethod(this IFileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>> fileFactory)
@@ -140,18 +140,18 @@ internal static class CodeDomHelper
         var allowCreateParameterExpr = allowCreateParameter.ToVariableReferenceExpression();
 
         return new CodeMemberMethod
-               {
-                       Name = fileFactory.Configuration.ToDomainObjectMethodName,
-                       Attributes = MemberAttributes.Public | MemberAttributes.Final,
-                       Parameters = { mappingServiceParameter, allowCreateParameter },
-                       ReturnType = fileFactory.DomainType.ToTypeReference(),
-                       Statements =
+        {
+            Name = fileFactory.Configuration.ToDomainObjectMethodName,
+            Attributes = MemberAttributes.Public | MemberAttributes.Final,
+            Parameters = { mappingServiceParameter, allowCreateParameter },
+            ReturnType = fileFactory.DomainType.ToTypeReference(),
+            Statements =
                        {
                                mappingServiceParameterRefExpr.ToMethodReferenceExpression($"To{fileFactory.DomainType.Name}")
                                                              .ToMethodInvokeExpression(new CodeThisReferenceExpression(), allowCreateParameterExpr)
                                                              .ToMethodReturnStatement()
                        }
-               };
+        };
     }
 
 
@@ -170,11 +170,11 @@ internal static class CodeDomHelper
         var parameter = fileFactory.GetMappingServiceDomainObjectParameter();
 
         return new CodeMemberMethod
-               {
-                       Name = $"To{fileFactory.DomainType.Name}",
-                       Parameters = { parameter },
-                       ReturnType = fileFactory.DomainType.ToTypeReference()
-               };
+        {
+            Name = $"To{fileFactory.DomainType.Name}",
+            Parameters = { parameter },
+            ReturnType = fileFactory.DomainType.ToTypeReference()
+        };
     }
 
     public static CodeMemberMethod GetMappingServiceInterfaceToDomainObjectWithAllowCreateMethod(this IFileFactory fileFactory)
@@ -185,11 +185,11 @@ internal static class CodeDomHelper
         var allowCreateParameter = typeof(bool).ToTypeReference().ToParameterDeclarationExpression("allowCreate");
 
         return new CodeMemberMethod
-               {
-                       Name = $"To{fileFactory.DomainType.Name}",
-                       Parameters = { parameter, allowCreateParameter },
-                       ReturnType = fileFactory.DomainType.ToTypeReference()
-               };
+        {
+            Name = $"To{fileFactory.DomainType.Name}",
+            Parameters = { parameter, allowCreateParameter },
+            ReturnType = fileFactory.DomainType.ToTypeReference()
+        };
     }
 
     public static CodeMemberMethod GetMappingServiceInterfaceToDomainObjectMethod(this IFileFactory fileFactory, Type masterType)
@@ -202,11 +202,11 @@ internal static class CodeDomHelper
         var masterParameter = masterType.ToTypeReference().ToParameterDeclarationExpression("master");
 
         return new CodeMemberMethod
-               {
-                       Name = $"To{fileFactory.DomainType.Name}",
-                       Parameters = { parameter, masterParameter },
-                       ReturnType = fileFactory.DomainType.ToTypeReference()
-               };
+        {
+            Name = $"To{fileFactory.DomainType.Name}",
+            Parameters = { parameter, masterParameter },
+            ReturnType = fileFactory.DomainType.ToTypeReference()
+        };
     }
 
     public static CodeMemberMethod GetMappingServiceToDomainObjectMethod<TConfiguration>(this IDTOFileFactory<TConfiguration, DTOFileType> fileFactory, Type masterType)
@@ -226,12 +226,12 @@ internal static class CodeDomHelper
         var methodName = $"To{fileFactory.DomainType.Name}";
 
         return new CodeMemberMethod
-               {
-                       Attributes = MemberAttributes.Public,
-                       Name = methodName,
-                       Parameters = { parameter, masterParameter },
-                       ReturnType = fileFactory.DomainType.ToTypeReference(),
-                       Statements =
+        {
+            Attributes = MemberAttributes.Public,
+            Name = methodName,
+            Parameters = { parameter, masterParameter },
+            ReturnType = fileFactory.DomainType.ToTypeReference(),
+            Statements =
                        {
                                mappingServiceParameterRefExpr.ToMethodInvokeExpression(fileFactory.Configuration.ToDomainObjectMethodName, parameterExpr,
                                                                                        new CodeLambdaExpression
@@ -239,7 +239,7 @@ internal static class CodeDomHelper
                                                                                                Statements = { fileFactory.DomainType.ToTypeReference().ToObjectCreateExpression(masterParameterExpr) }
                                                                                        }).ToMethodReturnStatement()
                        }
-               };
+        };
     }
 
 
@@ -283,19 +283,19 @@ internal static class CodeDomHelper
         var parameterIdExpr = parameterExpr.ToPropertyReference(fileFactory.Configuration.Environment.IdentityProperty.Name);
 
         return new CodeMemberMethod
-               {
-                       Attributes = MemberAttributes.Public,
-                       Name = $"To{fileFactory.DomainType.Name}",
-                       Parameters = { parameter },
-                       ReturnType = fileFactory.DomainType.ToTypeReference(),
-                       Statements =
+        {
+            Attributes = MemberAttributes.Public,
+            Name = $"To{fileFactory.DomainType.Name}",
+            Parameters = { parameter },
+            ReturnType = fileFactory.DomainType.ToTypeReference(),
+            Statements =
                        {
                                new CodeThisReferenceExpression()
                                        .ToMethodReferenceExpression($"{nameof(IDTOMappingService<object, object>.GetById)}", fileFactory.DomainType.ToTypeReference())
                                        .ToMethodInvokeExpression(parameterIdExpr)
                                        .ToMethodReturnStatement()
                        },
-               };
+        };
     }
 
     private static CodeMemberMethod GetMappingServiceIdentityToIntegrationVersionDomainObjectMethod(this IFileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>, DTOFileType> fileFactory)
@@ -308,19 +308,19 @@ internal static class CodeDomHelper
         var parameterIdExpr = parameterExpr.ToPropertyReference(fileFactory.Configuration.Environment.IdentityProperty.Name);
 
         return new CodeMemberMethod
-               {
-                       Attributes = MemberAttributes.Public,
-                       Name = $"To{fileFactory.DomainType.Name}",
-                       Parameters = { parameter },
-                       ReturnType = fileFactory.DomainType.ToTypeReference(),
-                       Statements =
+        {
+            Attributes = MemberAttributes.Public,
+            Name = $"To{fileFactory.DomainType.Name}",
+            Parameters = { parameter },
+            ReturnType = fileFactory.DomainType.ToTypeReference(),
+            Statements =
                        {
                                new CodeThisReferenceExpression()
                                        .ToMethodReferenceExpression($"{nameof(IDTOMappingService<object, object>.GetById)}", fileFactory.DomainType.ToTypeReference())
                                        .ToMethodInvokeExpression(parameterIdExpr, IdCheckMode.SkipEmpty.ToPrimitiveExpression(), LockRole.Update.ToPrimitiveExpression())
                                        .ToMethodReturnStatement()
                        },
-               };
+        };
     }
 
 
@@ -334,12 +334,12 @@ internal static class CodeDomHelper
         var mappingServiceParameterRefExpr = new CodeThisReferenceExpression();
 
         return new CodeMemberMethod
-               {
-                       Attributes = MemberAttributes.Public,
-                       Name = $"To{fileFactory.DomainType.Name}",
-                       Parameters = { parameter },
-                       ReturnType = fileFactory.DomainType.ToTypeReference(),
-                       Statements =
+        {
+            Attributes = MemberAttributes.Public,
+            Name = $"To{fileFactory.DomainType.Name}",
+            Parameters = { parameter },
+            ReturnType = fileFactory.DomainType.ToTypeReference(),
+            Statements =
                        {
                                mappingServiceParameterRefExpr.ToMethodReferenceExpression(
                                                               fileFactory.Configuration.ToDomainObjectMethodName + "Base",
@@ -348,7 +348,7 @@ internal static class CodeDomHelper
                                                              .ToMethodInvokeExpression(parameterExpr)
                                                              .ToMethodReturnStatement()
                        }
-               };
+        };
     }
 
     private static CodeMemberMethod GetMappingServicePersistentToDomainObjectMethod(this IFileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>, DTOFileType> fileFactory)
@@ -364,18 +364,18 @@ internal static class CodeDomHelper
 
 
         return new CodeMemberMethod
-               {
-                       Attributes = MemberAttributes.Public,
-                       Name = methodName,
-                       Parameters = { parameter },
-                       ReturnType = fileFactory.DomainType.ToTypeReference(),
-                       Statements =
+        {
+            Attributes = MemberAttributes.Public,
+            Name = methodName,
+            Parameters = { parameter },
+            ReturnType = fileFactory.DomainType.ToTypeReference(),
+            Statements =
                        {
                                mappingServiceParameterRefExpr.ToMethodReferenceExpression(fileFactory.Configuration.ToDomainObjectMethodName, fileFactory.CurrentReference, fileFactory.DomainType.ToTypeReference())
                                                              .ToMethodInvokeExpression(parameterExpr)
                                                              .ToMethodReturnStatement()
                        }
-               };
+        };
     }
 
 
@@ -395,28 +395,29 @@ internal static class CodeDomHelper
 
 
         var conditionStatement = new CodeConditionStatement
-                                 {
-                                         Condition = allowCreateParameterExpr,
-                                         TrueStatements =
+        {
+            Condition = allowCreateParameterExpr,
+            TrueStatements =
                                          {
                                                  mappingServiceParameterRefExpr.ToMethodInvokeExpression(fileFactory.Configuration.ToDomainObjectMethodName, parameterExpr, new CodeLambdaExpression { Statements = { fileFactory.DomainType.ToTypeReference().ToObjectCreateExpression() } })
                                                                                .ToMethodReturnStatement()
                                          },
-                                         FalseStatements =
+            FalseStatements =
                                          {
                                                  mappingServiceParameterRefExpr.ToMethodInvokeExpression(methodName, parameterExpr)
                                                                                .ToMethodReturnStatement()
                                          }
-                                 };
+        };
 
 
         return new CodeMemberMethod
-               {
-                       Attributes = MemberAttributes.Public,
-                       Name = methodName,
-                       Parameters = { parameter, allowCreateParameter },
-                       ReturnType = fileFactory.DomainType.ToTypeReference(),
-                       Statements = { conditionStatement }
-               };
+        {
+            Attributes = MemberAttributes.Public,
+            Name = methodName,
+            Parameters = { parameter, allowCreateParameter },
+            ReturnType = fileFactory.DomainType.ToTypeReference(),
+            Statements = { conditionStatement }
+        };
     }
 }
+

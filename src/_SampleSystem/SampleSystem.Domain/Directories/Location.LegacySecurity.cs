@@ -1,6 +1,6 @@
-﻿using Framework.BLL.Domain.Attributes;
+﻿using Anch.SecuritySystem;
 
-using Anch.SecuritySystem;
+using Framework.BLL.Domain.Attributes;
 
 namespace SampleSystem.Domain.Directories;
 
@@ -10,3 +10,4 @@ public interface ILocationSecurityElement<out TLocation>
 {
     TLocation Location { get; }
 }
+

@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 
 using Anch.Core;
+
 using Framework.Core;
 
 namespace Framework.Database.Metadata;
@@ -64,11 +65,11 @@ public class InlineTypeFieldMetadata : FieldMetadata
                                                                     domainTypeMetadata, this)).ToList();
     }
 
-    public IEnumerable<PrimitiveTypeFieldMetadata> GetPrimitiveTypeFieldMetadata (Type declarationType)
+    public IEnumerable<PrimitiveTypeFieldMetadata> GetPrimitiveTypeFieldMetadata(Type declarationType)
     {
         var parentPrefix = this.Parent.Maybe(z => z.Name, string.Empty);
         return this.Type.GetInstanceFieldsDeep()
-                   .Select(z => new PrimitiveTypeFieldMetadata(parentPrefix+z.Name, z.FieldType, z.GetAttributes(declarationType)
+                   .Select(z => new PrimitiveTypeFieldMetadata(parentPrefix + z.Name, z.FieldType, z.GetAttributes(declarationType)
                                                                        .Concat(z.GetAttributes(z.DeclaringType)), this.DomainTypeMetadata, z.Name.ToLower() == "id"));
     }
 
@@ -85,12 +86,12 @@ public class InlineTypeFieldMetadata : FieldMetadata
 
 public static class FieldInfoExtension
 {
-    public static IEnumerable<Attribute> GetCollectionAttributes (this FieldInfo field, Type declarationType)
+    public static IEnumerable<Attribute> GetCollectionAttributes(this FieldInfo field, Type declarationType)
     {
         var fieldType = field.FieldType;
 
         var property = declarationType.GetProperties(BindingFlags.Public | BindingFlags.Instance).FirstOrDefault(
-         property_ => string.Equals (property_.Name, field.Name, StringComparison.CurrentCultureIgnoreCase));
+         property_ => string.Equals(property_.Name, field.Name, StringComparison.CurrentCultureIgnoreCase));
 
         if (null == property)
         {
@@ -99,7 +100,7 @@ public static class FieldInfoExtension
                        .Where(z => (z.GetGetMethod(true) ?? z.GetSetMethod(true))!.IsDefined(typeof(CompilerGeneratedAttribute), false))
                        .Select(z => new { GeneratedName = $"<{z.Name}>k__BackingField", Property = z })
                        .FirstOrDefault(z => string.Equals(z.GeneratedName, field.Name, StringComparison.InvariantCultureIgnoreCase))
-                       .Maybe(z=>z.Property);
+                       .Maybe(z => z.Property);
         }
 
         if (property != null && fieldType.IsGenericType)
@@ -121,17 +122,17 @@ public static class FieldInfoExtension
     public static IEnumerable<Attribute> GetAttributes(this FieldInfo field, Type declarationType)
     {
 
-        var property = declarationType.GetPropertyInfoBy (field);
+        var property = declarationType.GetPropertyInfoBy(field);
 
         return property
-               .Maybe (z => z.GetCustomAttributes<Attribute>()).EmptyIfNull ();
+               .Maybe(z => z.GetCustomAttributes<Attribute>()).EmptyIfNull();
     }
 
     private static PropertyInfo? GetPropertyInfoBy(this Type type, FieldInfo fieldInfo)
     {
         var result = type.GetProperties().FirstOrDefault(
                                                          z => fieldInfo.FieldType == z.PropertyType
-                                                              && string.Equals (z.Name, fieldInfo.Name, StringComparison.CurrentCultureIgnoreCase));
+                                                              && string.Equals(z.Name, fieldInfo.Name, StringComparison.CurrentCultureIgnoreCase));
 
         if (null == result)
         {
@@ -139,8 +140,9 @@ public static class FieldInfoExtension
             {
                 return null;
             }
-            return type.BaseType.GetPropertyInfoBy (fieldInfo);
+            return type.BaseType.GetPropertyInfoBy(fieldInfo);
         }
         return result;
     }
 }
+

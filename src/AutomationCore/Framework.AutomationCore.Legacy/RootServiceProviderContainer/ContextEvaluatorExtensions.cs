@@ -3,7 +3,7 @@ using Framework.Database;
 
 namespace Framework.AutomationCore.RootServiceProviderContainer;
 
-public static class  ContextEvaluatorExtensions
+public static class ContextEvaluatorExtensions
 {
     public static TResult EvaluateWrite<TBLLContext, TResult>(this IServiceEvaluator<TBLLContext> contextEvaluator, Func<TBLLContext, TResult> func) => contextEvaluator.Evaluate(DBSessionMode.Write, func);
 
@@ -13,3 +13,4 @@ public static class  ContextEvaluatorExtensions
 
     public static TResult EvaluateRead<TBLLContext, TResult>(this IServiceEvaluator<TBLLContext> contextEvaluator, Func<TBLLContext, TResult> func) => contextEvaluator.Evaluate(DBSessionMode.Read, func);
 }
+

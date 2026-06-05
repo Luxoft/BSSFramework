@@ -1,8 +1,8 @@
 ﻿using Anch.Core;
+using Anch.SecuritySystem;
+
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.FileStore;
-
-using Anch.SecuritySystem;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.Configuration.FileStore;
 
@@ -56,3 +56,4 @@ public abstract class FileStoreGeneratorConfigurationBase<TEnvironment> : Servic
 
     public record FileStoreBLLParameter(Type Type, SecurityRule SecurityRule, bool IsEdit);
 }
+

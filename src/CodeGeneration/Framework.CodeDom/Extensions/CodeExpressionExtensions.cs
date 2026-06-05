@@ -65,9 +65,10 @@ public static class CodeExpressionExtensions
         var varDecl = new CodeParameterDeclarationExpression { Name = varName };
 
         return new CodeLambdaExpression
-               {
-                       Parameters = { varDecl },
-                       Statements = { varDecl.ToVariableReferenceExpression().ToPropertyReference(property) }
-               };
+        {
+            Parameters = { varDecl },
+            Statements = { varDecl.ToVariableReferenceExpression().ToPropertyReference(property) }
+        };
     }
 }
+

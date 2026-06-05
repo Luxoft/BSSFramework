@@ -20,3 +20,4 @@ public record DatabaseName(string Name, string Schema = "dbo")
     [Obsolete("Use constructor", true)]
     public static implicit operator DatabaseName?(string? name) => name.MaybeString(v => new DatabaseName(v));
 }
+

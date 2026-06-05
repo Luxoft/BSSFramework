@@ -1,9 +1,9 @@
-﻿using Framework.Application.Middleware;
+﻿using Anch.SecuritySystem;
+
+using Framework.Application.Middleware;
 using Framework.Database;
 
 using Microsoft.Extensions.DependencyInjection;
-
-using Anch.SecuritySystem;
 
 namespace Framework.Application;
 
@@ -32,3 +32,4 @@ public class ServiceEvaluator<TService>(IServiceProvider rootServiceProvider) : 
         }
     }
 }
+

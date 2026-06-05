@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Anch.SecuritySystem.AvailableSecurity;
 
-using Anch.SecuritySystem.AvailableSecurity;
+using Microsoft.AspNetCore.Mvc;
 
 // ReSharper disable once CheckNamespace
 namespace Authorization.WebApi.Controllers;
@@ -15,3 +15,4 @@ public class SecurityRuleController(IAvailableClientSecurityRuleSource available
                                                .Select(sr => sr.Name)
                                                .ToListAsync(cancellationToken);
 }
+

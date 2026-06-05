@@ -16,6 +16,7 @@ using Framework.Projection;
 using Framework.Projection.Contract;
 using Framework.Projection.Lambda;
 using Framework.Projection.Lambda.ProjectionSource;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.FileGeneration.Configuration;
@@ -173,3 +174,4 @@ public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDo
         return new ManualProjectionEnvironment(assembly, this.PersistentDomainObjectBaseType, this.MetadataProxyProvider);
     }
 }
+

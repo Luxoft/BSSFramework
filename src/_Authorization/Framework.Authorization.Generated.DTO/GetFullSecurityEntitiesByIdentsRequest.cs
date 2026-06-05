@@ -16,3 +16,4 @@ public class GetFullSecurityEntitiesByIdentsRequest
     [AutoRequestProperty(OrderIndex = 1)]
     public List<SecurityEntityIdentityDTO> SecurityEntities { get; set; }
 }
+

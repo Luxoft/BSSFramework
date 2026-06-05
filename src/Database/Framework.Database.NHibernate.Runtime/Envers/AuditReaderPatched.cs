@@ -144,3 +144,4 @@ public class AuditReaderPatched(AuditConfiguration verCfg, ISession session, ISe
         return (PropertyData)idFileInfo.GetValue(mapper);
     }
 }
+

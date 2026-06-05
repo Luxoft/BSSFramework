@@ -66,9 +66,11 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase>(
             var eventType = item.Item2;
 
             var message = new DomainOperationSerializeData<TPersistentDomainObjectBase>
-                          {
-                              DomainObject = domainObject, Operation = eventType, CustomDomainObjectType = domainObjectType
-                          };
+            {
+                DomainObject = domainObject,
+                Operation = eventType,
+                CustomDomainObjectType = domainObjectType
+            };
 
             await messageSender.SendAsync(message, cancellationToken);
         }
@@ -102,10 +104,10 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase>(
                                                                z.Item2.GetTargetValue(q.Object)))
                                                        .Select(
                                                            q => new
-                                                                {
-                                                                    TargetObject = z.Item2.GetTargetValue(q.Object),
-                                                                    TargetObjectType = z.Item2.TargetTypeEvent.Type,
-                                                                }))
+                                                           {
+                                                               TargetObject = z.Item2.GetTargetValue(q.Object),
+                                                               TargetObjectType = z.Item2.TargetTypeEvent.Type,
+                                                           }))
                                               .Distinct(z => z.TargetObject)
                                               .ToList();
 
@@ -159,3 +161,4 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase>(
         }
     }
 }
+

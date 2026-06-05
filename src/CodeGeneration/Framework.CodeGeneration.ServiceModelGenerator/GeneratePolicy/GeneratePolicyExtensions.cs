@@ -22,3 +22,4 @@ public static class GeneratePolicyExtensions
         return policy.Except(identity => hash.Contains(identity));
     }
 }
+

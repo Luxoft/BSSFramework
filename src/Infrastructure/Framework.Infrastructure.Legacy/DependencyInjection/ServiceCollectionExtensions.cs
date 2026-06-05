@@ -1,6 +1,12 @@
 ﻿using System.Reflection;
 
 using Anch.DependencyInjection;
+using Anch.HierarchicalExpand;
+using Anch.OData.DependencyInjection;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.DomainServices;
+using Anch.SecuritySystem.DomainServices.DependencySecurity;
+using Anch.SecuritySystem.SecurityRuleInfo;
 
 using Framework.Application.Events;
 using Framework.BLL;
@@ -20,16 +26,7 @@ using Framework.Projection;
 using Framework.Tracking;
 using Framework.Validation;
 
-using Anch.HierarchicalExpand;
-
 using Microsoft.Extensions.DependencyInjection;
-
-using Anch.OData.DependencyInjection;
-
-using Anch.SecuritySystem;
-using Anch.SecuritySystem.DomainServices;
-using Anch.SecuritySystem.DomainServices.DependencySecurity;
-using Anch.SecuritySystem.SecurityRuleInfo;
 
 namespace Framework.Infrastructure.DependencyInjection;
 
@@ -122,3 +119,4 @@ public static class ServiceCollectionExtensions
         }
     }
 }
+

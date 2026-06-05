@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 
 using Anch.DependencyInjection;
+using Anch.GenericQueryable.NHibernate;
 
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
@@ -10,8 +11,6 @@ using Framework.Database.NHibernate.Mapping;
 using Framework.Database.NHibernate.Sessions;
 using Framework.Database.NHibernate.Visitors;
 using Framework.DependencyInjection;
-
-using Anch.GenericQueryable.NHibernate;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -72,13 +71,13 @@ public class NHibernateSetup : INHibernateSetup, IServiceInitializer
         var prevAction = this.settings.RawMappingAction;
 
         this.settings = this.settings with
-                        {
-                            RawMappingAction = v =>
-                                               {
-                                                   prevAction(v);
-                                                   initAction(v);
-                                               }
-                        };
+        {
+            RawMappingAction = v =>
+                               {
+                                   prevAction(v);
+                                   initAction(v);
+                               }
+        };
 
         return this;
     }
@@ -88,13 +87,13 @@ public class NHibernateSetup : INHibernateSetup, IServiceInitializer
         var prevAction = this.settings.RawDatabaseAction;
 
         this.settings = this.settings with
-                        {
-                            RawDatabaseAction = v =>
-                                                {
-                                                    prevAction(v);
-                                                    initAction(v);
-                                                }
-                        };
+        {
+            RawDatabaseAction = v =>
+                                {
+                                    prevAction(v);
+                                    initAction(v);
+                                }
+        };
 
         return this;
     }
@@ -161,3 +160,4 @@ public class NHibernateSetup : INHibernateSetup, IServiceInitializer
         this.extensions.ForEach(ex => ex.AddServices(services));
     }
 }
+

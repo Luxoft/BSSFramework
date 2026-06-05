@@ -29,3 +29,4 @@ public abstract class AuditGeneratorConfigurationBase<TEnvironment>(TEnvironment
         yield return new GetObjectPropertyRevisionsByDateRangeMethodGenerator<AuditGeneratorConfigurationBase<TEnvironment>>(this, domainType, this.Environment.AuditDTO);
     }
 }
+

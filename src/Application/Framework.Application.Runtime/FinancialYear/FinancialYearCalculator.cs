@@ -1,9 +1,8 @@
 ﻿using Framework.Core;
 
-
 namespace Framework.Application.FinancialYear;
 
-public class FinancialYearCalculator (FinancialYearServiceSettings settings) : IFinancialYearCalculator
+public class FinancialYearCalculator(FinancialYearServiceSettings settings) : IFinancialYearCalculator
 {
     private const int MinMonthValue = 1;
 
@@ -37,3 +36,4 @@ public class FinancialYearCalculator (FinancialYearServiceSettings settings) : I
 
     public bool IsStartFinancialYearDate(DateTime dateTime) => dateTime.Day == 1 && dateTime.Month == settings.StartMonth;
 }
+

@@ -1,9 +1,9 @@
 ﻿using Anch.Core.Auth;
+using Anch.GenericQueryable.NHibernate;
+
 using Framework.Core;
 using Framework.Database.NHibernate.Mapping;
 using Framework.Database.NHibernate.SqlExceptionProcessors;
-
-using Anch.GenericQueryable.NHibernate;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -21,7 +21,7 @@ public class NHibSessionEnvironment : IDisposable
     public NHibSessionEnvironment(
             IEnumerable<MappingSettings> mappingSettings,
             IEnumerable<IConfigurationInitializer> initializers,
-            [FromKeyedServices(ICurrentUser.DefaultKey)]ICurrentUser defaultCurrentUser,
+            [FromKeyedServices(ICurrentUser.DefaultKey)] ICurrentUser defaultCurrentUser,
             INHibSessionEnvironmentSettings settings,
             IDalValidationIdentitySource dalValidationIdentitySource)
     {
@@ -75,3 +75,4 @@ public class NHibSessionEnvironment : IDisposable
         }
     }
 }
+

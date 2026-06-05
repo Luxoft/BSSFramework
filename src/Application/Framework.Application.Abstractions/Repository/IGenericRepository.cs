@@ -31,3 +31,4 @@ public interface IGenericRepository<TDomainObject, in TIdent>
 
     Task LockAsync(TDomainObject domainObject, LockRole lockRole, CancellationToken cancellationToken = default);
 }
+

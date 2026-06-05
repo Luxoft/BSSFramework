@@ -1,4 +1,5 @@
 ﻿using System.CodeDom;
+
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.Projection;
 
@@ -56,3 +57,4 @@ public class WebApiNetCoreFileGenerator : CodeFileGenerator<IServiceModelGenerat
         }
     }
 }
+

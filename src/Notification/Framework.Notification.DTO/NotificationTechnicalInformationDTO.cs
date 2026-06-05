@@ -28,3 +28,4 @@ public class NotificationTechnicalInformationDTO
         this.ContextObjectType = information.ContextObjectType;
     }
 }
+

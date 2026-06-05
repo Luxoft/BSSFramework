@@ -12,3 +12,4 @@ public interface IDatabaseScriptResult
 
     IDatabaseScriptResult Evaluate();
 }
+

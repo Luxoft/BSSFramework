@@ -62,3 +62,4 @@ public class DatabaseScriptGenerator(
         yield return new ChangeDefaultInitializedValueStrategy(parameter);
     }
 }
+

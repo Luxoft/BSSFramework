@@ -1,11 +1,11 @@
 ﻿using System.Globalization;
 using System.Net.Mime;
 
+using Anch.SecuritySystem;
+
 using Framework.Core;
 
 using Microsoft.AspNetCore.Mvc;
-
-using Anch.SecuritySystem;
 
 namespace Framework.Infrastructure.Integration;
 
@@ -53,3 +53,4 @@ public abstract class IntegrationSchemaControllerBase(
 
     protected abstract IReadOnlyCollection<Type> GetAuthEventDTOTypes();
 }
+

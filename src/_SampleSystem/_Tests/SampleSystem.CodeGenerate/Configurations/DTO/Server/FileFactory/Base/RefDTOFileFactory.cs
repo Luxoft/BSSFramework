@@ -16,3 +16,4 @@ public abstract class RefDTOFileFactory<TConfiguration> : MainDTOFileFactory<TCo
 
     protected override bool HasMapToDomainObjectMethod { get; } = false;
 }
+

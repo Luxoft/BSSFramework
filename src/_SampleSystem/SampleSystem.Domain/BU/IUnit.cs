@@ -7,3 +7,4 @@ public interface IUnit<out TUnit> : IVisualIdentityObject
 {
     TUnit CurrentObject { get; }
 }
+

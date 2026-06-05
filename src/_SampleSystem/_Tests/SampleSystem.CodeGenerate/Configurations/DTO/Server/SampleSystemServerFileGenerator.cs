@@ -24,3 +24,4 @@ public class SampleSystemServerFileGenerator<TConfiguration>(TConfiguration conf
         }
     }
 }
+

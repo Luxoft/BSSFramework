@@ -25,3 +25,4 @@ public record SampleSystemMappingSettings : MappingSettings<PersistentDomainObje
     {
     }
 }
+

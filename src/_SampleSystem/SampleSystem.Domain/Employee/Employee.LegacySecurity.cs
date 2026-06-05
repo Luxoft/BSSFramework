@@ -1,11 +1,11 @@
-﻿using Framework.BLL.Domain.Attributes;
+﻿using Anch.SecuritySystem;
+
+using Framework.BLL.Domain.Attributes;
 using Framework.BLL.Domain.Persistent.Attributes;
 
 using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Directories;
 using SampleSystem.Domain.HRDepartment;
-
-using Anch.SecuritySystem;
 
 namespace SampleSystem.Domain.Employee;
 
@@ -43,3 +43,4 @@ public partial class Employee : IEmployeeSecurity<BusinessUnit, HRDepartment.HRD
     [ExpandPath(nameof(HRDepartment))]
     HRDepartment.HRDepartment IDepartmentSecurityElement<HRDepartment.HRDepartment>.Department => this.HRDepartment;
 }
+

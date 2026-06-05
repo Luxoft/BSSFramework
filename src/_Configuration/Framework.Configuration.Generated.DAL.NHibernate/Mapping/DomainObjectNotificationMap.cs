@@ -14,3 +14,4 @@ public class DomainObjectNotificationMap : ConfigurationBaseMap<DomainObjectNoti
         this.Map(x => x.Status);
     }
 }
+

@@ -50,3 +50,4 @@ public class GetFileContainerMethodGenerator<TConfiguration>(TConfiguration conf
         yield return this.ReturnType.ToObjectCreateExpression(evaluateDataExpr.GetMappingService(), resultDecl.ToVariableReferenceExpression()).ToMethodReturnStatement();
     }
 }
+

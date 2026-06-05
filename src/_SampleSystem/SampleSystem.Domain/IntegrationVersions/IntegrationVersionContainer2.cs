@@ -23,3 +23,4 @@ public class IntegrationVersionContainer2 : ExternalDomainObject
         set => base.IntegrationVersion = value;
     }
 }
+

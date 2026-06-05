@@ -19,3 +19,4 @@ internal static class DbGeneratorExtensions
 
     public static IEnumerable<ReferenceTypeFieldMetadata> GetPersistentReferenceFields(this DomainTypeMetadata source) => source.ReferenceFields.Where(z => !(z.Attributes.OfType<MappingAttribute>().Any(q => q.IsOneToOne)));
 }
+

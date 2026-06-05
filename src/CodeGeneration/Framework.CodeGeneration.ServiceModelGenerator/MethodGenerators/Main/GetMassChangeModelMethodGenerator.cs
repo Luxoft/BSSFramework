@@ -72,3 +72,4 @@ public class GetMassChangeModelMethodGenerator<TConfiguration> : ModelMethodGene
         return modelSecurityAttribute.SecurityRule;
     }
 }
+

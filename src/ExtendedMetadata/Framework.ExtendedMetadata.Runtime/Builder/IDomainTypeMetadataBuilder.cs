@@ -21,3 +21,4 @@ public interface IDomainTypeMetadataBuilder<TDomainType>
         Expression<Func<TDomainType, TProperty>> propertySelector,
         Action<IPropertyMetadataBuilder> setupAction);
 }
+

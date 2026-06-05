@@ -1,11 +1,12 @@
-﻿using Framework.Authorization.Domain;
+﻿using Anch.SecuritySystem;
+
+using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
 using Framework.BLL;
 using Framework.BLL.DTOMapping.Domain;
 using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;
-using Anch.SecuritySystem;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
@@ -56,3 +57,4 @@ public class AuthMainController : Framework.Authorization.WebApi.AuthMainControl
         public PermissionStrictDTO PermissionDTO { get; set; }
     }
 }
+

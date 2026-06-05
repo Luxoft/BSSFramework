@@ -12,3 +12,4 @@ public static class GetCodeTypeReferenceExtensions
             typeof(KnownTypeAttribute).ToTypeReference(),
             new CodeAttributeArgument(codeTypeReference.ToTypeOfExpression()));
 }
+

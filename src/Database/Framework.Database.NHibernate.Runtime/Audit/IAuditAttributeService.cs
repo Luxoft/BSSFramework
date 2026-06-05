@@ -11,3 +11,4 @@ public interface IAuditAttributeService
 
     string GetAuditTableSchemaOrDefault(Type type);
 }
+

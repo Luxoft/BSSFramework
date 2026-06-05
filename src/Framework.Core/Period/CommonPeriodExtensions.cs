@@ -339,3 +339,4 @@ public static class CommonPeriodExtensions
 
     private static string ProcessYear(this Period period, string result, bool addStartDateYear) => addStartDateYear ? $"{result} ({period.StartDate:yyyy})" : result;
 }
+

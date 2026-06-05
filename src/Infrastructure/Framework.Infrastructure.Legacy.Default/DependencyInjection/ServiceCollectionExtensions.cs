@@ -1,4 +1,7 @@
-﻿using Framework.Application.ApplicationVariable;
+﻿using Anch.SecuritySystem;
+using Anch.SecuritySystem.DependencyInjection;
+
+using Framework.Application.ApplicationVariable;
 using Framework.Application.Events;
 using Framework.Application.Lock;
 using Framework.Authorization.BLL;
@@ -19,9 +22,6 @@ using Framework.Infrastructure.SubscriptionService;
 using Framework.Notification;
 
 using Microsoft.Extensions.DependencyInjection;
-
-using Anch.SecuritySystem;
-using Anch.SecuritySystem.DependencyInjection;
 
 namespace Framework.Infrastructure.DependencyInjection;
 
@@ -90,3 +90,4 @@ public static class ServiceCollectionExtensions
             .AddDomainSecurity<TargetSystem>(b => b.SetView(SecurityRole.Administrator).SetEdit(SecurityRole.Administrator))
             .AddDomainSecurity<DomainType>(b => b.SetView(SecurityRule.Disabled));
 }
+

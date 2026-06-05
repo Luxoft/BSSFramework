@@ -20,7 +20,7 @@ public class SampleSystemBLLInterfaceFileFactory(BLLCoreGeneratorConfiguration c
     {
         foreach (var member in base.GetMembers())
         {
-            yield return  member;
+            yield return member;
         }
 
         foreach (var complexChangeModelType in this.Configuration.Environment.GetModelTypes(this.DomainType, this.Configuration.ComplexChangeModelType))
@@ -30,14 +30,15 @@ public class SampleSystemBLLInterfaceFileFactory(BLLCoreGeneratorConfiguration c
             complexChangeModelType.CheckDirectMode(DirectMode.In, true);
 
             yield return new CodeMemberMethod
-                         {
-                                 Name = methodName,
-                                 ReturnType = this.DomainType.ToTypeReference(),
-                                 Parameters =
+            {
+                Name = methodName,
+                ReturnType = this.DomainType.ToTypeReference(),
+                Parameters =
                                  {
                                          complexChangeModelType.ToTypeReference().ToParameterDeclarationExpression("changeModel")
                                  }
-                         };
+            };
         }
     }
 }
+

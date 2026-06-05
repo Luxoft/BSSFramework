@@ -34,3 +34,4 @@ public class NotificationAttachmentDTO
         this.IsInline = attachment.ContentDisposition!.Inline;
     }
 }
+

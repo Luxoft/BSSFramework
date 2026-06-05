@@ -2,11 +2,11 @@
 using System.Linq.Expressions;
 using System.Reflection;
 
+using Anch.SecuritySystem;
+
 using Framework.Application.Domain;
 using Framework.Database;
 using Framework.FileGeneration.Configuration;
-
-using Anch.SecuritySystem;
 
 namespace Framework.CodeGeneration.Configuration;
 
@@ -22,3 +22,4 @@ public abstract class CodeGenerationEnvironment<TDomainObjectBase, TPersistentDo
 
     public virtual bool IsHierarchical(Type type) => false;
 }
+

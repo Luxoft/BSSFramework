@@ -64,3 +64,4 @@ public abstract class ExpressionParser<TDelegate, TExpression> : IExpressionPars
 
     public virtual void Validate(string source) => this.GetExpression(source);
 }
+

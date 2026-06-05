@@ -23,10 +23,10 @@ public static class UpdateExtensions
         var targetMap = target.ToDictionary(getTargetKey, actualComparer);
 
         var updateLists = source.Partial(itemData => itemData is SaveItemData<TSource, TSourceIdentity>, (saveItems, removeItems) => new
-                                             {
-                                                     SaveItems = saveItems.Cast<SaveItemData<TSource, TSourceIdentity>>().ToList(item => item.Value),
-                                                     RemoveItems = removeItems.Cast<RemoveItemData<TSource, TSourceIdentity>>().ToList(item => item.Identity)
-                                             });
+        {
+            SaveItems = saveItems.Cast<SaveItemData<TSource, TSourceIdentity>>().ToList(item => item.Value),
+            RemoveItems = removeItems.Cast<RemoveItemData<TSource, TSourceIdentity>>().ToList(item => item.Identity)
+        });
 
 
         foreach (var savingSourceItem in updateLists.SaveItems)
@@ -112,3 +112,4 @@ public static class UpdateExtensions
         }
     }
 }
+

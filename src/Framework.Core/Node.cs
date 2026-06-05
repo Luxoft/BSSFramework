@@ -37,7 +37,7 @@ public class NodeP<T> : Node<T>
 
     public new IEnumerable<NodeP<T>> Children
     {
-        get => (IEnumerable<NodeP<T>>) base.Children;
+        get => (IEnumerable<NodeP<T>>)base.Children;
         internal set => base.Children = value;
     }
 
@@ -64,3 +64,4 @@ public static class NodeExtensions
         return new Node<T>(selector(source.Value, children.Select(v => v.Value)), children);
     }
 }
+

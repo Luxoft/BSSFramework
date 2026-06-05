@@ -17,3 +17,4 @@ public static class CodeDomExtensions
         return typeof(IIdentityObject<>).ToTypeReference(fileFactory.Configuration.Environment.GetIdentityType().ToTypeReference());
     }
 }
+

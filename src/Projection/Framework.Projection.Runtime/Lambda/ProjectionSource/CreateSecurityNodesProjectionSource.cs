@@ -55,13 +55,13 @@ internal class CreateSecurityNodesProjectionSource(ProjectionLambdaEnvironment e
                 var name = $"{interfaceProp.Name}_Security";
 
                 projection.Properties.Add(new ProjectionPropertyBuilder(environment, implProp.ToGetLambdaExpression(sourceType))
-                                                {
-                                                    Role = ProjectionPropertyRole.Security,
-                                                    Name = name,
-                                                    IgnoreSerialization = true,
-                                                    ElementProjection = securityProjections.GetValueOrDefault(implProp.PropertyType.GetCollectionOrArrayElementTypeOrSelf()),
-                                                    VirtualExplicitInterfaceProperty = isExplicit ? interfaceProp : null
-                                                });
+                {
+                    Role = ProjectionPropertyRole.Security,
+                    Name = name,
+                    IgnoreSerialization = true,
+                    ElementProjection = securityProjections.GetValueOrDefault(implProp.PropertyType.GetCollectionOrArrayElementTypeOrSelf()),
+                    VirtualExplicitInterfaceProperty = isExplicit ? interfaceProp : null
+                });
             }
         }
 
@@ -122,3 +122,4 @@ internal class CreateSecurityNodesProjectionSource(ProjectionLambdaEnvironment e
         }
     }
 }
+

@@ -1,7 +1,7 @@
-﻿using Framework.Application.Domain;
-using Framework.Application.Events;
+﻿using Anch.HierarchicalExpand;
 
-using Anch.HierarchicalExpand;
+using Framework.Application.Domain;
+using Framework.Application.Events;
 
 namespace Framework.BLL.Default;
 
@@ -44,3 +44,4 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent,
 
     protected override IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>> BaseLogics => this.Logics;
 }
+

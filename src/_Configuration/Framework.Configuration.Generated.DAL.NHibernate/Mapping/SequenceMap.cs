@@ -11,3 +11,4 @@ public class SequenceMap : ConfigurationBaseMap<Sequence>
         this.Map(x => x.Number);
     }
 }
+

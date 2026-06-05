@@ -42,3 +42,4 @@ public class AsyncControllerTests(IServiceProvider rootServiceProvider) : TestBa
         Assert.IsType<InvalidOperationException>(ex);
     }
 }
+

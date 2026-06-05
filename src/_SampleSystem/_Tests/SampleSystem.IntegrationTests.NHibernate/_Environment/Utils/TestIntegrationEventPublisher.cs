@@ -6,3 +6,4 @@ public class TestIntegrationEventPublisher : IIntegrationEventPublisher
 {
     public Task PublishAsync(IIntegrationEvent @event, CancellationToken cancellationToken) => Task.CompletedTask;
 }
+

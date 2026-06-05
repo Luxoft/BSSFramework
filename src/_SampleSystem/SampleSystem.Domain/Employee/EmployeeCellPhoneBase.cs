@@ -69,3 +69,4 @@ public class EmployeeCellPhoneBase : AuditPersistentDomainObjectBase, IDetail<Em
 
     Employee IDetail<Employee>.Master => this.employee;
 }
+

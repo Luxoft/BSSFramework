@@ -21,3 +21,4 @@ public abstract class ConfigurationBaseMap<TEntity> : ClassMap<TEntity>
         this.Map(x => x.ModifyDate);
     }
 }
+

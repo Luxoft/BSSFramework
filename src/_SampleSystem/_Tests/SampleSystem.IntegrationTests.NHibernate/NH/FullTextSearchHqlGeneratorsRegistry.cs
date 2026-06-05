@@ -16,3 +16,4 @@ public class FullTextSearchHqlGeneratorsRegistry : EnhancedLinqToHqlGeneratorsRe
         // ReSharper restore RedundantBaseQualifier
     }
 }
+

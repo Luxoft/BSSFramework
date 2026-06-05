@@ -31,8 +31,8 @@ public abstract class UpdateToDomainObjectPropertyAssignerBase<TConfiguration>(
         var editAttr = configuration.Environment.MetadataProxyProvider.Wrap(property).GetEditDomainObjectAttribute();
 
         return new CodeConditionStatement(justValueRefExpr.ToPropertyReference(nameof(Maybe<>.HasValue)))
-               {
-                   TrueStatements =
+        {
+            TrueStatements =
                    {
                        editAttr == null ? innerAssignStatement : new CodeConditionStatement
                                                                  {
@@ -50,6 +50,7 @@ public abstract class UpdateToDomainObjectPropertyAssignerBase<TConfiguration>(
                                                                      }
                                                                  }
                    }
-               };
+        };
     }
 }
+

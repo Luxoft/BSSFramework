@@ -86,3 +86,4 @@ public class RangePropertyValidatorTests
         Assert.Equal("decimal has Number value was too overflow for a decimal", result.Errors[0].Message);
     }
 }
+

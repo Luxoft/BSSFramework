@@ -23,3 +23,4 @@ public static class DetailRoleExtensions
         return propertyInfo.HasAttribute<IsMasterAttribute>();
     }
 }
+

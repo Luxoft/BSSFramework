@@ -13,3 +13,4 @@ public class EnhancedMsSql2008Dialect : MsSql2008Dialect
     /// </summary>
     protected override void RegisterFunctions() => throw new NotImplementedException();
 }
+

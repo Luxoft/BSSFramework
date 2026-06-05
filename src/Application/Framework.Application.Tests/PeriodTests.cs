@@ -67,3 +67,4 @@ public class PeriodTests
         Assert.IsType<ArgumentOutOfRangeException>(ex);
     }
 }
+

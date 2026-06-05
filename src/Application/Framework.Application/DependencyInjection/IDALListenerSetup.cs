@@ -7,3 +7,4 @@ public interface IDALListenerSetup
     IDALListenerSetup Add<TListener>()
         where TListener : class, IDALListener;
 }
+

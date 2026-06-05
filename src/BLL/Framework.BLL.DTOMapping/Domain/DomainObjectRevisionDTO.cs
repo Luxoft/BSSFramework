@@ -23,3 +23,4 @@ public class DomainObjectRevisionDTO<TIdent>
         this.RevisionInfos = source.RevisionInfos.Select(z => new DomainObjectRevisionInfoDTO<TIdent>(z)).ToList();
     }
 }
+

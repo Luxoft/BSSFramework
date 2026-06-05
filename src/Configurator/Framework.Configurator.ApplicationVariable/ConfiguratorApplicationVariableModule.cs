@@ -1,10 +1,10 @@
-﻿using Framework.Configurator.Handlers;
+﻿using Anch.SecuritySystem.Configurator;
+
+using Framework.Configurator.Handlers;
 using Framework.Configurator.Interfaces;
 
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
-
-using Anch.SecuritySystem.Configurator;
 
 namespace Framework.Configurator;
 
@@ -22,3 +22,4 @@ public class ConfiguratorApplicationVariableModule : IConfiguratorModule
         endpointsBuilder.Get<IGetSystemConstantsHandler>($"{route}/api/constants")
                         .Post<IUpdateSystemConstantHandler>(route + "/api/constant/{name}");
 }
+

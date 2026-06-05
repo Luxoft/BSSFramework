@@ -60,11 +60,11 @@ public class RemoveManyMethodGenerator<TConfiguration> : BaseRemoveMethodGenerat
 
                 new CodeLambdaExpression
                 {
-                        Parameters =
+                    Parameters =
                         {
                                 lambdaParam
                         },
-                        Statements =
+                    Statements =
                         {
                                 new CodeThisReferenceExpression().ToMethodInvokeExpression(this.singleRemoveGenerator.InternalName, lambdaParam.ToVariableReferenceExpression(), evaluateDataExpr, bllRefExpr)
                         }
@@ -81,3 +81,4 @@ public class RemoveManyMethodGenerator<TConfiguration> : BaseRemoveMethodGenerat
                          .ToExpressionStatement();
     }
 }
+

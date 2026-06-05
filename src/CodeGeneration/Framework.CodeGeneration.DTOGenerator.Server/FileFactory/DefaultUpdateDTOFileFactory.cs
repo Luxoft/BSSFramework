@@ -177,26 +177,26 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
         var checkProperties = this.GetProperties(true).Where(prop => !prop.HasAttribute<VersionAttribute>()).ToList();
 
         yield return new CodeMemberProperty
-                     {
-                             Attributes = MemberAttributes.Public | MemberAttributes.Final,
-                             Name = nameof(IUpdateDTO.IsEmpty),
-                             Type = typeof(bool).ToTypeReference(),
-                             HasGet = true,
-                             GetStatements =
+        {
+            Attributes = MemberAttributes.Public | MemberAttributes.Final,
+            Name = nameof(IUpdateDTO.IsEmpty),
+            Type = typeof(bool).ToTypeReference(),
+            HasGet = true,
+            GetStatements =
                              {
                                      checkProperties.ToArray(this.GetPropertyIsEmptyCondition)
                                                     .Pipe(items => items.Any() ? new CodeBooleanAndOperatorExpression(items) : true.ToPrimitiveExpression())
                                                     .ToMethodReturnStatement()
                              },
-                             CustomAttributes = { new CodeAttributeDeclaration(typeof(IgnoreDataMemberAttribute).ToTypeReference()) }
+            CustomAttributes = { new CodeAttributeDeclaration(typeof(IgnoreDataMemberAttribute).ToTypeReference()) }
         };
 
         yield return new CodeMemberMethod
-                     {
-                             Attributes = MemberAttributes.Public | MemberAttributes.Final,
-                             Name = nameof(IUpdateDTO.Compress),
-                             ReturnType = typeof(void).ToTypeReference()
-                     }.WithStatements(checkProperties.Select(this.TryGetPropertyCompressStatement).Where(statement => statement != null));
+        {
+            Attributes = MemberAttributes.Public | MemberAttributes.Final,
+            Name = nameof(IUpdateDTO.Compress),
+            ReturnType = typeof(void).ToTypeReference()
+        }.WithStatements(checkProperties.Select(this.TryGetPropertyCompressStatement).Where(statement => statement != null));
     }
 
     private CodeExpression GetPropertyIsEmptyCondition(PropertyInfo property)
@@ -260,11 +260,11 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
             var propertyAssigner = new UpdatePropertyAssigner<TConfiguration>(this);
 
             yield return new CodeMemberMethod
-                         {
-                                 Name = $"Map{this.DomainType.Name}",
-                                 Attributes = MemberAttributes.Public,
-                                 Parameters = { targetParameter, currentSourceParameter }
-                         }.WithStatement(new CodeThrowArgumentNullExceptionConditionStatement(targetParameter))
+            {
+                Name = $"Map{this.DomainType.Name}",
+                Attributes = MemberAttributes.Public,
+                Parameters = { targetParameter, currentSourceParameter }
+            }.WithStatement(new CodeThrowArgumentNullExceptionConditionStatement(targetParameter))
                           .WithStatement(new CodeThrowArgumentNullExceptionConditionStatement(currentSourceParameter))
                           .WithStatements(this.GetProperties(false).Select(property => propertyAssigner.GetAssignStatement(property, currentSourceParameterRefExpr.ToPropertyReference(property), targetParameterRefExpr.ToPropertyReference(property))));
         }
@@ -276,11 +276,11 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
             var propertyAssigner = new DiffUpdatePropertyAssigner<TConfiguration>(this);
 
             yield return new CodeMemberMethod
-                         {
-                                 Name = $"Map{this.DomainType.Name}",
-                                 Attributes = MemberAttributes.Public,
-                                 Parameters = { targetParameter, currentSourceParameter, baseSourceParameter }
-                         }.WithStatement(new CodeThrowArgumentNullExceptionConditionStatement(targetParameter))
+            {
+                Name = $"Map{this.DomainType.Name}",
+                Attributes = MemberAttributes.Public,
+                Parameters = { targetParameter, currentSourceParameter, baseSourceParameter }
+            }.WithStatement(new CodeThrowArgumentNullExceptionConditionStatement(targetParameter))
                           .WithStatement(new CodeThrowArgumentNullExceptionConditionStatement(currentSourceParameter))
                           .WithStatement(new CodeThrowArgumentNullExceptionConditionStatement(baseSourceParameter))
                           .WithStatements(this.GetProperties(false).Select(property => propertyAssigner.GetAssignStatement(property, baseSourceParameterRefExpr.ToPropertyReference(property), currentSourceParameterRefExpr.ToPropertyReference(property), targetParameterRefExpr.ToPropertyReference(property))))
@@ -296,20 +296,21 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
 
         {
             yield return new CodeMemberMethod
-                         {
-                                 Name = $"Map{this.DomainType.Name}",
-                                 Parameters = { targetParameter, currentSourceParameter }
-                         };
+            {
+                Name = $"Map{this.DomainType.Name}",
+                Parameters = { targetParameter, currentSourceParameter }
+            };
         }
 
         {
             var baseSourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType, BaseFileType.StrictDTO).ToParameterDeclarationExpression("baseSource");
 
             yield return new CodeMemberMethod
-                         {
-                                 Name = $"Map{this.DomainType.Name}",
-                                 Parameters = { targetParameter, currentSourceParameter, baseSourceParameter }
-                         };
+            {
+                Name = $"Map{this.DomainType.Name}",
+                Parameters = { targetParameter, currentSourceParameter, baseSourceParameter }
+            };
         }
     }
 }
+

@@ -1,5 +1,6 @@
 ﻿using Anch.Core;
 using Anch.DependencyInjection;
+using Anch.SecuritySystem.DependencyInjection;
 
 using Framework.Application;
 using Framework.Application.Auth;
@@ -8,7 +9,6 @@ using Framework.Application.Events;
 using Framework.Core;
 using Framework.Database.DALListener;
 using Framework.Database.DependencyInjection;
-
 using Framework.Infrastructure.Auth;
 using Framework.Infrastructure.DALListener;
 using Framework.Infrastructure.Integration;
@@ -17,8 +17,6 @@ using Framework.Infrastructure.Services;
 using Framework.Infrastructure.WebApiExceptionExpander;
 
 using Microsoft.Extensions.DependencyInjection;
-
-using Anch.SecuritySystem.DependencyInjection;
 
 namespace Framework.Infrastructure.DependencyInjection;
 
@@ -122,3 +120,4 @@ public class BssFrameworkSetup : IBssFrameworkSetup, IServiceInitializer
         this.extensions.ForEach(ex => ex.AddServices(services));
     }
 }
+

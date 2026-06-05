@@ -52,3 +52,4 @@ public class ChangeDefaultInitializedValueStrategy(DatabaseScriptGeneratorStrate
         this.Server.ConnectionContext.CapturedSql.Add(ScriptsHelper.KeywordGo);
     }
 }
+

@@ -192,11 +192,11 @@ public class DefaultStrictDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
             var properties = this.Configuration.GetDomainTypeProperties(this.DomainType!, sourceFileType).Intersect(this.GetProperties(false));
 
             yield return new CodeMemberMethod
-                         {
-                                 Name = $"Map{sourceFileType.ShortName}To{this.FileType.ShortName}For{this.DomainType!.Name}",
-                                 Attributes = MemberAttributes.Public,
-                                 Parameters = { targetParameter, currentSourceParameter }
-                         }.WithStatement(new CodeThrowArgumentNullExceptionConditionStatement(currentSourceParameter))
+            {
+                Name = $"Map{sourceFileType.ShortName}To{this.FileType.ShortName}For{this.DomainType!.Name}",
+                Attributes = MemberAttributes.Public,
+                Parameters = { targetParameter, currentSourceParameter }
+            }.WithStatement(new CodeThrowArgumentNullExceptionConditionStatement(currentSourceParameter))
                           .WithStatement(new CodeThrowArgumentNullExceptionConditionStatement(targetParameter))
                           .WithStatements(properties.Select(property => propertyAssigner.GetAssignStatementBySource(property, currentSourceParameterRefExpr, targetParameterRefExpr)));
         }
@@ -211,10 +211,11 @@ public class DefaultStrictDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
             var sourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType, sourceFileType).ToParameterDeclarationExpression("currentSource");
 
             yield return new CodeMemberMethod
-                         {
-                                 Name = $"Map{sourceFileType.ShortName}To{this.FileType.ShortName}For{this.DomainType.Name}",
-                                 Parameters = { targetParameter, sourceParameter }
-                         };
+            {
+                Name = $"Map{sourceFileType.ShortName}To{this.FileType.ShortName}For{this.DomainType.Name}",
+                Parameters = { targetParameter, sourceParameter }
+            };
         }
     }
 }
+

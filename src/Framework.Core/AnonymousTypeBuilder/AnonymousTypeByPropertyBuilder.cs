@@ -48,3 +48,4 @@ public class AnonymousTypeByPropertyBuilder<TMap, TMapMember>(IAnonymousTypeBuil
 
     public static AnonymousTypeByPropertyBuilder<TMap, TMapMember> Default => LazyDefault.Value;
 }
+

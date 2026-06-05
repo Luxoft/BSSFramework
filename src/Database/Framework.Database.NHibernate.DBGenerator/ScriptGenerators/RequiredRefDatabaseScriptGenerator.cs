@@ -7,7 +7,6 @@ using Framework.Database.SqlMapper;
 using Framework.Restriction;
 
 using Microsoft.SqlServer.Management.Smo;
-
 using Index = Microsoft.SqlServer.Management.Smo.Index;
 
 namespace Framework.Database.NHibernate.DBGenerator.ScriptGenerators;
@@ -68,11 +67,11 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
                                   z =>
                                   {
                                       var newView = new View(z.Database, z.Name, z.Schema)
-                                                    {
-                                                            TextHeader = z.TextHeader,
-                                                            TextBody = z.TextBody,
-                                                            TextMode = z.TextMode
-                                                    };
+                                      {
+                                          TextHeader = z.TextHeader,
+                                          TextBody = z.TextBody,
+                                          TextMode = z.TextMode
+                                      };
 
                                       newView.Create();
                                   });
@@ -179,8 +178,8 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
                                            .Select(z =>
                                                            new
                                                            {
-                                                                   DomainTypeMetadata = z,
-                                                                   RequeredFields = z.Fields.Where(q => !(q is ListTypeFieldMetadata))
+                                                               DomainTypeMetadata = z,
+                                                               RequeredFields = z.Fields.Where(q => !(q is ListTypeFieldMetadata))
                                                                                      .Where(q => q.Attributes.OfType<RequiredAttribute>().Any()).ToList()
                                                            })
                                            .SelectMany(z => z.RequeredFields.Select(q => new { DomainTypeMetadata = z.DomainTypeMetadata, RequeredField = q }))
@@ -310,3 +309,4 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
         public void Add(View view) => this.Add([view]);
     }
 }
+

@@ -20,3 +20,4 @@ public partial class ServerGenerationEnvironment :
 
     IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment> IServerDTOGeneratorConfigurationContainer.ServerDTO => this.ServerDTO;
 }
+

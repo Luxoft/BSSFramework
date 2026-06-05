@@ -1,17 +1,15 @@
-﻿using Framework.Application;
+﻿using Anch.SecuritySystem;
+using Anch.SecuritySystem.AccessDenied;
+using Anch.Testing.Xunit;
+
+using Framework.Application;
 using Framework.Application.Repository;
 using Framework.BLL;
 using Framework.Database;
 
-using Anch.SecuritySystem;
-using Anch.Testing.Xunit;
-
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.Domain.Employee;
-
-using Anch.SecuritySystem.AccessDenied;
-
 using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
@@ -79,3 +77,4 @@ public class SecurityRuleTests(IServiceProvider rootServiceProvider) : TestBase(
         Assert.Equal(faultMessage, accessDeniedException.Message);
     }
 }
+

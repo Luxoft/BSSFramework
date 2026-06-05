@@ -65,8 +65,8 @@ public class SaveManyMethodGenerator<TConfiguration> : BaseSaveMethodGenerator<T
 
                 new CodeLambdaExpression
                 {
-                        Parameters = { lambdaParam },
-                        Statements =
+                    Parameters = { lambdaParam },
+                    Statements =
                         {
                                 new CodeThisReferenceExpression().ToMethodInvokeExpression(this.singleSaveGenerator.InternalName, lambdaParam.ToVariableReferenceExpression(), evaluateDataExpr, bllRefExpr)
                         }
@@ -83,3 +83,4 @@ public class SaveManyMethodGenerator<TConfiguration> : BaseSaveMethodGenerator<T
                          .ToMethodReturnStatement();
     }
 }
+

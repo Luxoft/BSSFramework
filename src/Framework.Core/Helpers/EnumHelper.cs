@@ -10,7 +10,7 @@ public static class EnumHelper
     public static ReadOnlyCollection<TEnum> GetValues<TEnum>()
             where TEnum : struct, Enum
     {
-        if (!typeof (TEnum).IsEnum)
+        if (!typeof(TEnum).IsEnum)
         {
             throw new InvalidOperationException($"Type:{typeof(TEnum)} is not Enum");
         }
@@ -73,3 +73,4 @@ public static class EnumHelper
         }
     }
 }
+

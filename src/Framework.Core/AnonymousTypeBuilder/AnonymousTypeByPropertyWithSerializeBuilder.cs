@@ -27,5 +27,6 @@ public class AnonymousTypeByPropertyWithSerializeBuilder<TMap, TMapMember>(IAnon
 
     protected virtual CustomAttributeBuilder GetDataContractAttribute(TMap typeMap) => new(typeof(DataContractAttribute).GetConstructor(Type.EmptyTypes), []);
 
-    protected virtual CustomAttributeBuilder GetDataMemberAttribute(TMapMember member) => new(typeof (DataMemberAttribute).GetConstructor(Type.EmptyTypes), []);
+    protected virtual CustomAttributeBuilder GetDataMemberAttribute(TMapMember member) => new(typeof(DataMemberAttribute).GetConstructor(Type.EmptyTypes), []);
 }
+

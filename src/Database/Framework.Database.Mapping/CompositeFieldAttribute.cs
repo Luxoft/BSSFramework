@@ -1,6 +1,6 @@
 ﻿namespace Framework.Database.Mapping;
 
-[AttributeUsage (AttributeTargets.Property, AllowMultiple = true)]
+[AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
 public class CompositeFieldAttribute : Attribute
 {
     public string ClassFieldName;

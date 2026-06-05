@@ -31,3 +31,4 @@ public class TestPlainAuthObject : BaseDirectory, IMaster<TestItemAuthObject>
 
     ICollection<TestItemAuthObject> IMaster<TestItemAuthObject>.Details => (ICollection<TestItemAuthObject>)this.Items;
 }
+

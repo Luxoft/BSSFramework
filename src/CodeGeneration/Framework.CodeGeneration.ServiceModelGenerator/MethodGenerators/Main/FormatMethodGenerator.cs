@@ -57,3 +57,4 @@ public class FormatMethodGenerator<TConfiguration> : ModelMethodGenerator<TConfi
                                .ToMethodReturnStatement();
     }
 }
+

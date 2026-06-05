@@ -44,3 +44,4 @@ public abstract class EventDTOMessageSenderBase<TPersistentDomainObjectBase> : I
             [domainObjectEventArgs.DomainObject, domainObjectEventArgs.Operation, domainObjectEventArgs.CustomSendObject, cancellationToken]);
     }
 }
+

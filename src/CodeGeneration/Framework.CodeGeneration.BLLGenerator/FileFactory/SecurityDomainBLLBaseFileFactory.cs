@@ -1,5 +1,6 @@
 ﻿using System.CodeDom;
 using System.Reflection;
+
 using Framework.BLL;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLGenerator.Configuration;
@@ -25,24 +26,24 @@ public class SecurityDomainBLLBaseFileFactory<TConfiguration>(TConfiguration con
         var securityProviderParameterRefExpr = securityProviderParameter.ToVariableReferenceExpression();
 
         return new CodeTypeDeclaration
-               {
-                       TypeParameters =
+        {
+            TypeParameters =
                        {
                                genericDomainObjectParameter
                        },
 
-                       TypeAttributes = TypeAttributes.Public,
-                       Name = this.Name,
-                       IsClass = true,
-                       IsPartial = true,
-                       BaseTypes =
+            TypeAttributes = TypeAttributes.Public,
+            Name = this.Name,
+            IsClass = true,
+            IsPartial = true,
+            BaseTypes =
                        {
                                typeof(DefaultSecurityDomainBLLBase<,,,>).ToTypeReference(this.Configuration.Environment.BLLCore.BLLContextInterfaceTypeReference,
                                                                                          this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
                                                                                          genericDomainObjectParameterTypeRef,
                                                                                          this.Configuration.Environment.GetIdentityType().ToTypeReference())
                        },
-                       Members =
+            Members =
                        {
                                new CodeConstructor
                                {
@@ -51,6 +52,7 @@ public class SecurityDomainBLLBaseFileFactory<TConfiguration>(TConfiguration con
                                        BaseConstructorArgs = { contextParameterRefExpr, securityProviderParameterRefExpr }
                                }
                        }
-               };
+        };
     }
 }
+

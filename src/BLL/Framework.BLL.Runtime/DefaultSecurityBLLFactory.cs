@@ -1,8 +1,8 @@
-﻿using Framework.Application.Domain;
-using Framework.BLL.Services;
-
-using Anch.SecuritySystem;
+﻿using Anch.SecuritySystem;
 using Anch.SecuritySystem.Providers;
+
+using Framework.Application.Domain;
+using Framework.BLL.Services;
 
 namespace Framework.BLL;
 
@@ -24,3 +24,4 @@ public abstract class DefaultSecurityBLLFactory<TBLLContext, TPersistentDomainOb
         ISecurityProvider<TDomainObject> securityProvider)
         where TDomainObject : class, TPersistentDomainObjectBase;
 }
+

@@ -42,3 +42,4 @@ public class OverrideCallInterfacePropertyVisitor : ExpressionVisitor
         return base.VisitMember(node);
     }
 }
+

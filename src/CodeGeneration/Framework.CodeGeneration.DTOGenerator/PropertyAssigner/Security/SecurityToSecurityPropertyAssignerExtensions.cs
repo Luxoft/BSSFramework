@@ -14,3 +14,4 @@ public static class SecurityToSecurityPropertyAssignerExtensions
         return new SecurityToSecurityPropertyAssigner<TConfiguration>(innerAssigner, sourceTypeReferenceService);
     }
 }
+

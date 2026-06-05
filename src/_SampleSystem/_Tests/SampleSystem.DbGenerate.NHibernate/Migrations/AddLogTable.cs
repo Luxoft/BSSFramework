@@ -24,3 +24,4 @@ public class AddLogTable2 : Migration
 
     public override void Down() => this.Delete.Table("Log2");
 }
+

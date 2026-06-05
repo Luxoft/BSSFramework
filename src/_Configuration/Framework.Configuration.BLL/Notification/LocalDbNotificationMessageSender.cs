@@ -1,10 +1,10 @@
-﻿using Framework.Application.Repository;
-using Framework.Configuration.Domain;
-using Framework.Core.Helpers;
-using Framework.Core;
-using Framework.Notification.DTO;
+﻿using Anch.SecuritySystem.Attributes;
 
-using Anch.SecuritySystem.Attributes;
+using Framework.Application.Repository;
+using Framework.Configuration.Domain;
+using Framework.Core;
+using Framework.Core.Helpers;
+using Framework.Notification.DTO;
 
 namespace Framework.Configuration.BLL.Notification;
 
@@ -25,3 +25,4 @@ public class LocalDbNotificationMessageSender([DisabledSecurity] IRepository<Dom
         await domainObjectNotificationRepository.SaveAsync(dbNotification, cancellationToken);
     }
 }
+

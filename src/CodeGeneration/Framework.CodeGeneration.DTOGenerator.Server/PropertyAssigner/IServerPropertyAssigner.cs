@@ -1,4 +1,5 @@
 ﻿using System.CodeDom;
+
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.FileFactory.Base;
 using Framework.CodeGeneration.DTOGenerator.PropertyAssigner;
@@ -27,3 +28,4 @@ public abstract class ServerPropertyAssigner<TConfiguration>(IDTOSource<TConfigu
     public CodeParameterDeclarationExpression DomainParameter => this.DomainType.GetDomainObjectParameter();
 
 }
+

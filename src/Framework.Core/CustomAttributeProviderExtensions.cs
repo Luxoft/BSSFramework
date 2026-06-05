@@ -77,3 +77,4 @@ public static class CustomAttributeProviderExtensions
                    : attributes.FirstOrDefault();
     }
 }
+

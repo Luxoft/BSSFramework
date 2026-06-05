@@ -1,6 +1,7 @@
 ﻿using Framework.Projection;
 using Framework.Projection.Lambda;
 using Framework.Projection.Lambda.ProjectionSource;
+
 using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.Models.Filters;
 
@@ -18,3 +19,4 @@ public class LegacySampleSystemProjectionSource : ProjectionSource
 
     public Projection<Employee> TestLegacyEmployee { get; }
 }
+

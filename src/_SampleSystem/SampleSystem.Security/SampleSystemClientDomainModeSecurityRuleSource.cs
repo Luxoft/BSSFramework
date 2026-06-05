@@ -1,6 +1,6 @@
-﻿using SampleSystem.Domain;
+﻿using Anch.SecuritySystem.SecurityRuleInfo;
 
-using Anch.SecuritySystem.SecurityRuleInfo;
+using SampleSystem.Domain;
 
 namespace SampleSystem.Security;
 
@@ -9,3 +9,4 @@ public class SampleSystemClientDomainModeSecurityRuleSource(IEnumerable<DomainMo
 {
     protected override bool Allowed(DomainModeSecurityRuleInfo info) => base.Allowed(info) && typeof(PersistentDomainObjectBase).IsAssignableFrom(info.SecurityRule.DomainType);
 }
+

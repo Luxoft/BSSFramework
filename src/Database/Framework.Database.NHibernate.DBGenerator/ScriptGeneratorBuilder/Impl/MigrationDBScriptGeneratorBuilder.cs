@@ -229,3 +229,4 @@ internal class MigrationDBScriptGeneratorBuilder : IMigrationScriptGeneratorBuil
         }
     }
 }
+

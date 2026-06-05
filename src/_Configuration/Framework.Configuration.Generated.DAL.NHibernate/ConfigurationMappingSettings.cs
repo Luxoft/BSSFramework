@@ -12,3 +12,4 @@ public record ConfigurationMappingSettings(DatabaseName DatabaseName) :
     {
     }
 }
+

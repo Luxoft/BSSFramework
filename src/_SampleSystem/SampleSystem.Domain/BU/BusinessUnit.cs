@@ -1,4 +1,5 @@
 ﻿using Anch.Core;
+using Anch.SecuritySystem;
 
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.ServiceRole;
@@ -6,12 +7,11 @@ using Framework.Core;
 using Framework.Relations;
 using Framework.Restriction;
 using Framework.Validation.Attributes;
+
 using SampleSystem.Domain.Directories;
 using SampleSystem.Domain.Enums;
 using SampleSystem.Domain.MU;
 using SampleSystem.Domain.Projects;
-
-using Anch.SecuritySystem;
 
 namespace SampleSystem.Domain.BU;
 
@@ -348,3 +348,4 @@ public partial class BusinessUnit :
             ? this
             : this.Parent.Maybe(z => z.GetParentByTypeIds(businessUnitTypesIds));
 }
+

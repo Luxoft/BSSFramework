@@ -11,3 +11,4 @@ public class ApplicationDefaultCurrentUser(IHttpContextAccessor httpContextAcces
 {
     public string Name => httpContextAccessor.HttpContext?.User.Identity?.Name ?? settings.UserName;
 }
+

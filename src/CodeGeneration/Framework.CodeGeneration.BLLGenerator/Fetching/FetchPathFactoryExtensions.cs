@@ -14,3 +14,4 @@ public static class FetchPathFactoryExtensions
     private class FuncFetchPathFactory<T>(Func<Type, T, IEnumerable<PropertyPath>> createFunc)
         : FuncFactory<Type, T, IEnumerable<PropertyPath>>(createFunc), IFetchPathFactory<T>;
 }
+

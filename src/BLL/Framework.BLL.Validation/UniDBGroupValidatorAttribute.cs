@@ -29,3 +29,4 @@ public class UniDBGroupValidatorAttribute : ClassValidatorAttribute
     /// <inheritdoc />
     public override IClassValidator CreateValidator() => new UniqueGroupDatabaseValidator(this.GroupKey);
 }
+

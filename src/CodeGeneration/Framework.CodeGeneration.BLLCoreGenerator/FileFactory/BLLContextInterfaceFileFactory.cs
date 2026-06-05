@@ -35,11 +35,12 @@ public class BLLContextInterfaceFileFactory<TConfiguration>(TConfiguration confi
     protected override IEnumerable<CodeTypeMember> GetMembers()
     {
         yield return new CodeMemberProperty
-                     {
-                             Name = "Logics",
-                             Attributes = MemberAttributes.New,
-                             Type = this.Configuration.GetCodeTypeReference(null, FileType.BLLFactoryContainerInterface),
-                             HasGet = true
-                     };
+        {
+            Name = "Logics",
+            Attributes = MemberAttributes.New,
+            Type = this.Configuration.GetCodeTypeReference(null, FileType.BLLFactoryContainerInterface),
+            HasGet = true
+        };
     }
 }
+

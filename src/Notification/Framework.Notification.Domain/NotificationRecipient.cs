@@ -11,3 +11,4 @@ public record NotificationRecipient(MailAddress Address, RecipientRole Role)
 
     public override string ToString() => $"{this.Address} ({nameof(this.Role)} = {this.Role})";
 }
+

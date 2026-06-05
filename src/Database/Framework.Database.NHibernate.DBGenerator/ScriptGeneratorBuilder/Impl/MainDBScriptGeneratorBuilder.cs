@@ -62,21 +62,22 @@ class MainDBScriptGeneratorBuilder : DatabaseScriptGeneratorContainer, IMainDBSc
         switch (mode)
         {
             case DBGenerateScriptMode.AppliedOnCopySchemeDatabase:
-            {
-                return combined.Unsafe(false, this.removeSchemaDatabase, [this.MigrationDbScriptGeneratorBuilder.TableName]);
-            }
+                {
+                    return combined.Unsafe(false, this.removeSchemaDatabase, [this.MigrationDbScriptGeneratorBuilder.TableName]);
+                }
             case DBGenerateScriptMode.AppliedOnCopySchemeAndDataDatabase:
-            {
-                return combined.Unsafe(true, this.removeSchemaDatabase, [this.MigrationDbScriptGeneratorBuilder.TableName]);
-            }
+                {
+                    return combined.Unsafe(true, this.removeSchemaDatabase, [this.MigrationDbScriptGeneratorBuilder.TableName]);
+                }
 
             default:
-            {
-                return combined;
-            }
+                {
+                    return combined;
+                }
         }
 
     }
 
     public bool IsFrozen { get; internal set; }
 }
+

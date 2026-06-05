@@ -73,7 +73,7 @@ public abstract class AuditEventListenerBase
 
         return (operationEvent, state) =>
                {
-                   var domainObject = (TDomainObject) operationEvent.Entity;
+                   var domainObject = (TDomainObject)operationEvent.Entity;
 
                    var auditValue = getAuditValue();
 
@@ -83,3 +83,4 @@ public abstract class AuditEventListenerBase
                };
     }
 }
+

@@ -2,6 +2,7 @@
 
 using Framework.AutomationCore.Extensions;
 using Framework.AutomationCore.Services;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace Framework.AutomationCore.RootServiceProviderContainer;
@@ -14,3 +15,4 @@ public class RootServiceProviderContainer(IServiceProvider rootServiceProvider) 
         where TController : ControllerBase =>
         this.RootServiceProvider.GetDefaultControllerEvaluator<TController>(userCredential);
 }
+

@@ -33,10 +33,11 @@ public class ServerPrimitiveDTOMappingServiceFileFactory<TConfiguration> : FileF
         var contextParameter = this.Configuration.BLLContextTypeReference.ToParameterDeclarationExpression("context");
 
         yield return new CodeConstructor
-                     {
-                             Attributes = MemberAttributes.Public,
-                             Parameters = {contextParameter},
-                             BaseConstructorArgs = {contextParameter.ToVariableReferenceExpression()}
-                     };
+        {
+            Attributes = MemberAttributes.Public,
+            Parameters = { contextParameter },
+            BaseConstructorArgs = { contextParameter.ToVariableReferenceExpression() }
+        };
     }
 }
+

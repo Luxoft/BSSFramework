@@ -19,3 +19,4 @@ public class AuditQueryCreatorPatched(AuditConfiguration auditCfg, IAuditReaderI
 
     public RevisionsOfEntityQuery CreateRevisionEntityQuery() => new(this.auditCfg, this.auditReaderImplementor, this.auditCfg.AuditEntCfg.RevisionInfoEntityFullClassName(), true, false);
 }
+

@@ -10,3 +10,4 @@ public static class DTOTypeExtensions
 
     public static DTOType Max(this DTOType v1, DTOType v2) => v1 < v2 ? v2 : v1;
 }
+

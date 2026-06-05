@@ -1,13 +1,12 @@
 ﻿using System.Reflection;
 
 using Anch.Core;
+using Anch.GenericQueryable.Fetching;
 
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.Validation;
 using Framework.Validation.Map;
-
-using Anch.GenericQueryable.Fetching;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -105,15 +104,15 @@ public static class ServiceCollectionExtensions
         var factoryContainerDeclType = typeof(TBLLContextImpl).GetSingleCtorParameterTypeImpl(typeof(IBLLFactoryContainer<object>));
 
         return new BLLSystemSettings
-               {
-                   ValidatorDeclType = validatorDeclType,
-                   ValidatorImplType = validatorImplType,
-                   ValidatorCompileCacheType = validatorCompileCacheType,
-                   ValidationMapType = validationMapType,
-                   FactoryContainerDeclType = factoryContainerDeclType,
-                   FactoryContainerImplType = GetImplType(factoryContainerDeclType),
-                   FetchRuleExpanderType = TryGetImplType(typeof(DTOFetchRuleExpander<>).MakeGenericType(persistentDomainObjectBaseType)) ?? typeof(IFetchRuleExpander),
-               };
+        {
+            ValidatorDeclType = validatorDeclType,
+            ValidatorImplType = validatorImplType,
+            ValidatorCompileCacheType = validatorCompileCacheType,
+            ValidationMapType = validationMapType,
+            FactoryContainerDeclType = factoryContainerDeclType,
+            FactoryContainerImplType = GetImplType(factoryContainerDeclType),
+            FetchRuleExpanderType = TryGetImplType(typeof(DTOFetchRuleExpander<>).MakeGenericType(persistentDomainObjectBaseType)) ?? typeof(IFetchRuleExpander),
+        };
 
         Type? TryGetImplType(Type baseType) => asmTypes.SingleOrDefault(t => t is { IsClass: true, IsAbstract: false } && baseType.IsAssignableFrom(t));
 
@@ -125,3 +124,4 @@ public static class ServiceCollectionExtensions
 
     private static IEnumerable<Type> GetSingleCtorParameterTypes(this Type type) => type.GetConstructors().Single().GetParameters().Select(p => p.ParameterType);
 }
+

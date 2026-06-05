@@ -21,3 +21,4 @@ internal class GenerateState
 
     public ImmutableHashSet<Type> Types => this.types;
 }
+

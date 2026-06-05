@@ -42,3 +42,4 @@ public class LocalDbManager
         localDb.DeleteInstance(instanceName);
     }
 }
+

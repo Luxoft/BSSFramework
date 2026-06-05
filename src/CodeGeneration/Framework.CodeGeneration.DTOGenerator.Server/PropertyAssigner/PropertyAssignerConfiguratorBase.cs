@@ -1,5 +1,6 @@
 ﻿using System.CodeDom;
 using System.Reflection;
+
 using Framework.CodeGeneration.DTOGenerator.PropertyAssigner;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner.Security.DomainObjectToSecurity;
@@ -88,3 +89,4 @@ public abstract class PropertyAssignerConfiguratorBase<TConfiguration>(TConfigur
         protected override CodeExpression GetCondition(PropertyInfo property) => this.propertyAssignerConfigurator.GetPropertyHasAccessCondition(this, property, true);
     }
 }
+

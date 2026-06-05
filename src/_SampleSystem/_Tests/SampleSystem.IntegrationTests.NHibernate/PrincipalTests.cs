@@ -1,9 +1,9 @@
-﻿using Framework.Application.Events;
+﻿using Anch.SecuritySystem;
+
+using Framework.Application.Events;
 using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
 using Framework.Core;
-
-using Anch.SecuritySystem;
 
 using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
@@ -47,11 +47,11 @@ public class PrincipalTests(IServiceProvider rootServiceProvider) : TestBase(roo
 
         // Act
         configFacade.Evaluate(c => c.ForceDomainTypeEvent(new Framework.Configuration.Generated.DTO.DomainTypeEventModelStrictDTO
-                                                          {
-                                                                  Operation = operation.Identity,
+        {
+            Operation = operation.Identity,
 
-                                                                  DomainObjectIdents = new List<Guid> { principalId }
-                                                          }));
+            DomainObjectIdents = new List<Guid> { principalId }
+        }));
 
         // Assert
         Assert.Contains(this.GetIntegrationEvents<PrincipalSaveEventDTO>("authDALQuery"), dto => dto.Principal.Id == principalId);
@@ -68,10 +68,10 @@ public class PrincipalTests(IServiceProvider rootServiceProvider) : TestBase(roo
         var role = this.GetAuthControllerEvaluator().Evaluate(c => c.GetVisualBusinessRoleByName(SecurityRole.Administrator.Name)).Identity;
 
         var saveRequest = new AuthMainController.SavePermissionAutoRequest(new PrincipalIdentityDTO(principalId), new PermissionStrictDTO
-                                                                                 {
-                                                                                         Role = role,
-                                                                                         Period = Period.Eternity
-                                                                                 });
+        {
+            Role = role,
+            Period = Period.Eternity
+        });
         var permissionIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.SavePermission(saveRequest));
 
         var configFacade = this.GetConfigurationControllerEvaluator();
@@ -88,14 +88,15 @@ public class PrincipalTests(IServiceProvider rootServiceProvider) : TestBase(roo
 
         // Act
         configFacade.Evaluate(c => c.ForceDomainTypeEvent(new Framework.Configuration.Generated.DTO.DomainTypeEventModelStrictDTO
-                                                          {
-                                                                  Operation = operation.Identity,
+        {
+            Operation = operation.Identity,
 
-                                                                  DomainObjectIdents = new List<Guid> { permissionIdentity.Id }
-                                                          }));
+            DomainObjectIdents = new List<Guid> { permissionIdentity.Id }
+        }));
 
         // Assert
         Assert.Contains(this.GetIntegrationEvents<PermissionSaveEventDTO>("authDALQuery"), dto => dto.Permission.Id == permissionIdentity.Id);
         Assert.Contains(this.GetIntegrationEvents<PrincipalSaveEventDTO>("authDALQuery"), dto => dto.Principal.Id == principalId);
     }
 }
+

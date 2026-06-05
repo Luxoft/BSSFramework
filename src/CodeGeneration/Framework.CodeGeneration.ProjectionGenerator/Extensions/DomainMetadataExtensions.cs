@@ -23,7 +23,7 @@ internal static class DomainMetadataExtensions
 
         foreach (var property in domainType.GetProperties(BindingFlags.Instance | BindingFlags.Public).OrderBy(property => property.Name))
         {
-            var isCustom =  property.HasAttribute<ProjectionPropertyAttribute>(attr => attr.Role == ProjectionPropertyRole.Custom);
+            var isCustom = property.HasAttribute<ProjectionPropertyAttribute>(attr => attr.Role == ProjectionPropertyRole.Custom);
 
             if (customPropFilter == null || isCustom == customPropFilter)
             {
@@ -37,3 +37,4 @@ internal static class DomainMetadataExtensions
         }
     }
 }
+

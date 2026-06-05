@@ -77,3 +77,4 @@ public class Address : AuditPersistentDomainObjectBase, IDetail<LegalEntityBase>
 
     LegalEntityBase IDetail<LegalEntityBase>.Master => this.LegalEntity;
 }
+

@@ -8,6 +8,7 @@ using Framework.Core;
 using Framework.Relations;
 using Framework.Restriction;
 using Framework.Validation.Attributes;
+
 using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Enums;
 using SampleSystem.Domain.Validation;
@@ -113,3 +114,4 @@ public class Project :
 
     public virtual DateTime GetCurrentDate() => DateTime.Today;
 }
+

@@ -33,3 +33,4 @@ public class GeneratePropertyMap
 
     public override string ToString() => $"Name: {this.Property.Name} | ElementFileType: {this.ElementFileType} | ElementType: {this.ElementType}";
 }
+

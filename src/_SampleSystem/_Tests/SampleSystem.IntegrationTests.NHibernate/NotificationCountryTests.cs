@@ -25,9 +25,12 @@ public class NotificationCountryTests(IServiceProvider rootServiceProvider) : Te
                 var bll = context.Logics.Country;
 
                 var country = new Country
-                              {
-                                  Code = Guid.NewGuid().ToString(), NameNative = Guid.NewGuid().ToString(), Culture = Guid.NewGuid().ToString(), Name = Guid.NewGuid().ToString()
-                              };
+                {
+                    Code = Guid.NewGuid().ToString(),
+                    NameNative = Guid.NewGuid().ToString(),
+                    Culture = Guid.NewGuid().ToString(),
+                    Name = Guid.NewGuid().ToString()
+                };
 
                 bll.Save(country);
 
@@ -58,9 +61,12 @@ public class NotificationCountryTests(IServiceProvider rootServiceProvider) : Te
                 var bll = context.Logics.Country;
 
                 var country = new Country
-                              {
-                                  Code = Guid.NewGuid().ToString(), NameNative = Guid.NewGuid().ToString(), Culture = Guid.NewGuid().ToString(), Name = Guid.NewGuid().ToString()
-                              };
+                {
+                    Code = Guid.NewGuid().ToString(),
+                    NameNative = Guid.NewGuid().ToString(),
+                    Culture = Guid.NewGuid().ToString(),
+                    Name = Guid.NewGuid().ToString()
+                };
 
                 bll.Save(country);
 
@@ -83,9 +89,12 @@ public class NotificationCountryTests(IServiceProvider rootServiceProvider) : Te
                 var bll = context.Logics.Country;
 
                 var country = new Country
-                              {
-                                  Code = Guid.NewGuid().ToString(), NameNative = Guid.NewGuid().ToString(), Culture = Guid.NewGuid().ToString(), Name = Guid.NewGuid().ToString()
-                              };
+                {
+                    Code = Guid.NewGuid().ToString(),
+                    NameNative = Guid.NewGuid().ToString(),
+                    Culture = Guid.NewGuid().ToString(),
+                    Name = Guid.NewGuid().ToString()
+                };
 
                 bll.Save(country);
 
@@ -116,12 +125,12 @@ public class NotificationCountryTests(IServiceProvider rootServiceProvider) : Te
             context =>
             {
                 var fakeModification = new DomainObjectModification()
-                                       {
-                                           DomainType = context.Configuration.GetDomainType(typeof(Country)),
-                                           Type = ModificationType.Save,
-                                           Revision = revision,
-                                           DomainObjectId = domainObjectId
-                                       };
+                {
+                    DomainType = context.Configuration.GetDomainType(typeof(Country)),
+                    Type = ModificationType.Save,
+                    Revision = revision,
+                    DomainObjectId = domainObjectId
+                };
 
                 context.Configuration.Logics.DomainObjectModification.Save(fakeModification);
             });
@@ -136,3 +145,4 @@ public class NotificationCountryTests(IServiceProvider rootServiceProvider) : Te
         Assert.Equal("Both arguments (previous and current) can't be null", argumentException.Message);
     }
 }
+

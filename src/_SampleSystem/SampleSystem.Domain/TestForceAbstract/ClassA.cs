@@ -17,3 +17,4 @@ public class ClassA : PersistentDomainObjectBase
 
     public virtual IEnumerable<ClassAChild> Child => this.child;
 }
+

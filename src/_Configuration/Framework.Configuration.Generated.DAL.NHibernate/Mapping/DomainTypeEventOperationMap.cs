@@ -15,3 +15,4 @@ public class DomainTypeEventOperationMap : ConfigurationBaseMap<DomainTypeEventO
             .Not.Nullable();
     }
 }
+

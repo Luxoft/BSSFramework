@@ -6,3 +6,4 @@ public class TryCloseSessionEvaluatorMiddleware(IDBSessionManager dbSessionManag
 {
     public async Task<TResult> EvaluateAsync<TResult>(Func<Task<TResult>> getResult) => await dbSessionManager.EvaluateAsync(getResult);
 }
+

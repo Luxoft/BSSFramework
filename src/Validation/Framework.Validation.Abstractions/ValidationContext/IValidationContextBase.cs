@@ -34,3 +34,4 @@ public interface IValidationContextBase<out TSource, out TValidationMap> : IVali
 {
     TValidationMap Map { get; }
 }
+

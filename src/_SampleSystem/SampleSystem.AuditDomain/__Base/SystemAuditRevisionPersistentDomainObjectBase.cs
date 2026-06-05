@@ -13,3 +13,4 @@ public abstract class SystemAuditRevisionPersistentDomainObjectBase : IIdentityO
 
     public virtual long Id => this.id;
 }
+

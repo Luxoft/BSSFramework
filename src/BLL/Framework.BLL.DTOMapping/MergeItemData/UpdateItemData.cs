@@ -16,3 +16,4 @@ public static class UpdateItemData
 
     public static UpdateItemData<TValue, TIdentity> CreateRemove<TValue, TIdentity>(TIdentity identity) => new RemoveItemData<TValue, TIdentity>(identity);
 }
+

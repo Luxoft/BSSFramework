@@ -13,3 +13,4 @@ public static class SampleSystemModelRole
     /// </summary>
     public static readonly ModelRole ComplexChange = new(nameof(ComplexChange), DirectMode.In);
 }
+

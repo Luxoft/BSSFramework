@@ -27,3 +27,4 @@ public class SqlFieldMappingInfo(
 
     public string DefaultConstraint => defaultConstraint;
 }
+

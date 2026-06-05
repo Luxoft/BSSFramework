@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 
-using Microsoft.Extensions.DependencyInjection;
-
 using Anch.SecuritySystem.DependencyInjection;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Infrastructure.DependencyInjection;
 
@@ -10,3 +10,4 @@ public class ProjectionDomainSecurityBssFrameworkExtension(Assembly assembly) : 
 {
     public void AddServices(IServiceCollection services) => services.AddProjectionDomainSecurityServices(assembly);
 }
+

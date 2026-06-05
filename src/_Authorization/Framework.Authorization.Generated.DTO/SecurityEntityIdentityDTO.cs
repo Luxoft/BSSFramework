@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+
 using Framework.Application.Domain;
 
 namespace Framework.Authorization.Generated.DTO;
@@ -9,3 +10,4 @@ public struct SecurityEntityIdentityDTO(Guid id) : IIdentityObject<Guid>
     [DataMember]
     public Guid Id { get; set; } = id;
 }
+

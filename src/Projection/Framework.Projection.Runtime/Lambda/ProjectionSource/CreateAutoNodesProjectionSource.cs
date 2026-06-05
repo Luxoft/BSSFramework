@@ -24,3 +24,4 @@ internal class CreateAutoNodesProjectionSource(ProjectionLambdaEnvironment envir
         return builders.GetAllProjections();
     }
 }
+

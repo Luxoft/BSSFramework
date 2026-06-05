@@ -1,11 +1,9 @@
 ﻿using Anch.Core;
+using Anch.GenericQueryable;
+using Anch.SecuritySystem.Attributes;
 
 using Framework.Application.Repository;
 using Framework.Database;
-
-using Anch.GenericQueryable;
-
-using Anch.SecuritySystem.Attributes;
 
 namespace Framework.Application.Lock;
 
@@ -22,3 +20,4 @@ public class NamedLockService<TGenericNamedLock>(
         await namedLockRepository.LockAsync(genericNamedLock, lockRole, cancellationToken);
     }
 }
+

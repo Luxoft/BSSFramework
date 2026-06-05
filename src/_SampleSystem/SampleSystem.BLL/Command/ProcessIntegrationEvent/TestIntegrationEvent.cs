@@ -3,3 +3,4 @@
 namespace SampleSystem.BLL.Command.ProcessIntegrationEvent;
 
 public record TestIntegrationEvent(Guid CountryId) : IIntegrationEvent;
+

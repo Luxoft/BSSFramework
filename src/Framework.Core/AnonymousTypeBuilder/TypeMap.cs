@@ -47,3 +47,4 @@ public class TypeMap<TMember> : ITypeMap<TMember>, IEquatable<TypeMap<TMember>>,
 
     IEnumerable<TMember> ITypeMap<TMember>.Members => this.Members;
 }
+

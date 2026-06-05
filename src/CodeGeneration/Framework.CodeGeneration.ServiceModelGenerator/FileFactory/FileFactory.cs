@@ -9,3 +9,4 @@ public abstract class FileFactory<TConfiguration>(TConfiguration configuration, 
 {
     protected IEnumerable<IServiceMethodGenerator> GetMethodGenerators() => this.Configuration.GetActualMethodGenerators(this.DomainType!);
 }
+

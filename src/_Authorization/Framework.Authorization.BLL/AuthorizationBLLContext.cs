@@ -1,5 +1,12 @@
 ﻿using Anch.Core.Auth;
 using Anch.Core.DictionaryCache;
+using Anch.HierarchicalExpand;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.AccessDenied;
+using Anch.SecuritySystem.ExternalSystem.SecurityContextStorage;
+using Anch.SecuritySystem.GeneralPermission.Validation.Principal;
+using Anch.SecuritySystem.Services;
+using Anch.SecuritySystem.UserSource;
 
 using Framework.Application.Events;
 using Framework.Authorization.Domain;
@@ -8,15 +15,6 @@ using Framework.BLL.Services;
 using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;
-
-using Anch.HierarchicalExpand;
-
-using Anch.SecuritySystem;
-using Anch.SecuritySystem.Services;
-using Anch.SecuritySystem.ExternalSystem.SecurityContextStorage;
-using Anch.SecuritySystem.AccessDenied;
-using Anch.SecuritySystem.GeneralPermission.Validation.Principal;
-using Anch.SecuritySystem.UserSource;
 
 namespace Framework.Authorization.BLL;
 
@@ -75,3 +73,4 @@ public partial class AuthorizationBLLContext(
 
     IAuthorizationBLLContext IAuthorizationBLLContextContainer<IAuthorizationBLLContext>.Authorization => this;
 }
+

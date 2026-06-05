@@ -1,9 +1,9 @@
-﻿using SampleSystem.WebApiCore.Domain;
-using SampleSystem.WebApiCore.Security;
-
-using Anch.SecuritySystem;
+﻿using Anch.SecuritySystem;
 using Anch.SecuritySystem.DependencyInjection;
 using Anch.SecuritySystem.VirtualPermission.DependencyInjection;
+
+using SampleSystem.WebApiCore.Domain;
+using SampleSystem.WebApiCore.Security;
 
 namespace SampleSystem.WebApiCore.DependencyInjection;
 
@@ -32,3 +32,4 @@ public static class SampleSystemSecuritySystemExtensions
                           SampleSystemSecurityRole.SeManager,
                           v => v.AddFilter(link => link.Role == BusinessUnitEmployeeRoleType.Manager)));
 }
+

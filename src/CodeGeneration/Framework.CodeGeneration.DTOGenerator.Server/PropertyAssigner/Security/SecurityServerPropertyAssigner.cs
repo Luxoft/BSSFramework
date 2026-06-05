@@ -18,3 +18,4 @@ public abstract class SecurityServerPropertyAssigner<TConfiguration>(IPropertyAs
 
     public CodeParameterDeclarationExpression DomainParameter => this.DomainType.GetDomainObjectParameter();
 }
+

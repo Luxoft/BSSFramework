@@ -56,3 +56,4 @@ public class SampleSystemTestPermission : TestPermission
         set => this.SetSingle<Employee, Guid>(value.MaybeNullable(v => TypedSecurityIdentity.Create(v.Id)));
     }
 }
+

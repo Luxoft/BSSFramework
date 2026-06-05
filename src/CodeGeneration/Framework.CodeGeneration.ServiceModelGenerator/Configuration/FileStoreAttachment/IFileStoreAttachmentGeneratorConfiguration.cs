@@ -1,6 +1,6 @@
-﻿using Framework.CodeGeneration.Configuration;
+﻿using Anch.SecuritySystem;
 
-using Anch.SecuritySystem;
+using Framework.CodeGeneration.Configuration;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.Configuration.FileStoreAttachment;
 
@@ -21,3 +21,4 @@ public interface IFileStoreAttachmentGeneratorConfiguration : ICodeGeneratorConf
 
     SecurityRule TryGetSecurityAttribute(Type type, bool forEdit);
 }
+

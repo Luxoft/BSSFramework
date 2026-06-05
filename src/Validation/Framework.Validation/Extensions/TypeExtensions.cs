@@ -58,3 +58,4 @@ public static class TypeExtensions
         return type.Assembly == typeof(Ignore).Assembly;
     }
 }
+

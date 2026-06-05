@@ -12,7 +12,8 @@ internal class AuditPropertyEvalutor : ExpressionVisitor
 
     protected override Expression VisitMember(MemberExpression node)
     {
-        this.result.Value =  AuditEntity.Property(node.Member.Name);
+        this.result.Value = AuditEntity.Property(node.Member.Name);
         return base.VisitMember(node);
     }
 }
+

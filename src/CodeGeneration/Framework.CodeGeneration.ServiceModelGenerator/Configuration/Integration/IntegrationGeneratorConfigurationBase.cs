@@ -1,5 +1,7 @@
 ﻿using System.CodeDom;
 
+using Anch.SecuritySystem;
+
 using Framework.BLL.Domain.DirectMode;
 using Framework.CodeGeneration.BLLCoreGenerator.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators;
@@ -8,8 +10,6 @@ using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Integratio
 using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Integration.Save.ByModel;
 using Framework.FileGeneration.Configuration;
 using Framework.Projection;
-
-using Anch.SecuritySystem;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.Configuration.Integration;
 
@@ -51,3 +51,4 @@ public abstract class IntegrationGeneratorConfigurationBase<TEnvironment>(TEnvir
         }
     }
 }
+

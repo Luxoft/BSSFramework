@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-using Anch.SecuritySystem;
+﻿using Anch.SecuritySystem;
 using Anch.SecuritySystem.Services;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Application.Middleware;
 
@@ -14,3 +14,4 @@ public class ImpersonateEvaluatorMiddleware(IServiceProvider scopedServiceProvid
         return await impersonateService.WithImpersonateAsync(customUserCredential, getResult);
     }
 }
+

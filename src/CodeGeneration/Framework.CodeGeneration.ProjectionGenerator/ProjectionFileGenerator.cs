@@ -23,3 +23,4 @@ public class ProjectionFileGenerator<TConfiguration>(TConfiguration configuratio
         }
     }
 }
+

@@ -17,3 +17,4 @@ public partial class ServerGenerators
 
     private ICheckOutService CheckOutService { get; } = Framework.FileGeneration.Checkout.CheckOutService.Trace;
 }
+

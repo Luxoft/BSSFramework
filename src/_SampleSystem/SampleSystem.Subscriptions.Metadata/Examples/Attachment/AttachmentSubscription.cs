@@ -27,9 +27,10 @@ public class AttachmentSubscription : Subscription<Domain.Employee.Employee, _Ex
     public override IEnumerable<System.Net.Mail.Attachment> GetAttachments(IServiceProvider _, DomainObjectVersions<Domain.Employee.Employee> versions)
     {
         yield return new System.Net.Mail.Attachment(new MemoryStream(Encoding.UTF8.GetBytes("Hello world!")), AttachmentName)
-                     {
-                         // If ContentId not set .NET generate new GUID https://github.com/Microsoft/referencesource/blob/master/System/net/System/Net/mail/Attachment.cs
-                         ContentId = "testId@luxoft.com"
-                     };
+        {
+            // If ContentId not set .NET generate new GUID https://github.com/Microsoft/referencesource/blob/master/System/net/System/Net/mail/Attachment.cs
+            ContentId = "testId@luxoft.com"
+        };
     }
 }
+

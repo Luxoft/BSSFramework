@@ -21,3 +21,4 @@ public class ProjectionSingleProperty<TDomainObject, TElement>(
     /// <inheritdoc />
     public override Type? CollectionType { get; } = null;
 }
+

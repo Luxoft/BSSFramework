@@ -2,6 +2,10 @@
 using System.Linq.Expressions;
 
 using Anch.Core;
+using Anch.GenericQueryable;
+using Anch.GenericQueryable.Fetching;
+using Anch.HierarchicalExpand;
+using Anch.OData.Domain;
 
 using Framework.Application.Domain;
 using Framework.BLL.Domain.Persistent;
@@ -9,14 +13,7 @@ using Framework.BLL.Exceptions;
 using Framework.Core;
 using Framework.Database;
 
-using Anch.GenericQueryable;
-using Anch.GenericQueryable.Fetching;
-
-using Anch.HierarchicalExpand;
-
 using Microsoft.Extensions.DependencyInjection;
-
-using Anch.OData.Domain;
 
 namespace Framework.BLL.Default;
 
@@ -300,3 +297,4 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
         where TNestedDomainObject : class, TDomainObject =>
         this.Context.Logics.Default.Create<TNestedDomainObject>().GetById(domainObject.Id);
 }
+

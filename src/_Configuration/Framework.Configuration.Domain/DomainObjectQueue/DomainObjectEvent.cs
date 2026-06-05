@@ -89,3 +89,4 @@ public class DomainObjectEvent : AuditPersistentDomainObjectBase
     ////    get { return this.number; }
     ////}
 }
+

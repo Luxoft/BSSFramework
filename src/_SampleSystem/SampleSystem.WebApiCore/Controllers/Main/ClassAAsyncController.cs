@@ -1,7 +1,7 @@
-﻿using Framework.Application.Repository;
-using Framework.Database;
+﻿using Anch.GenericQueryable;
 
-using Anch.GenericQueryable;
+using Framework.Application.Repository;
+using Framework.Database;
 
 using MediatR;
 
@@ -35,3 +35,4 @@ public class ClassAAsyncController(
         await mediator.Send(new CreateClassAEvent(value), cancellationToken);
     }
 }
+

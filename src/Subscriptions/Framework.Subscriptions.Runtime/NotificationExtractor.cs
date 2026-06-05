@@ -60,14 +60,14 @@ public class NotificationExtractor<TDomainObject, TRenderingObject>(
         var attachments = subscription.GetAttachments(serviceProvider, notificationMessageGenerationInfo.Versions);
 
         var mailMessage = new MailMessage
-                          {
-                              IsBodyHtml = true,
-                              From = subscription.Sender,
-                              Subject = subject,
-                              Body = body,
-                              Recipients = [.. notificationMessageGenerationInfo.Recipients],
-                              AttachmentList = [.. attachments]
-                          };
+        {
+            IsBodyHtml = true,
+            From = subscription.Sender,
+            Subject = subject,
+            Body = body,
+            Recipients = [.. notificationMessageGenerationInfo.Recipients],
+            AttachmentList = [.. attachments]
+        };
 
         if (subscription.InlineAttachments)
         {
@@ -125,3 +125,4 @@ public class NotificationExtractor<TDomainObject, TRenderingObject>(
 
         select new NotificationMessageGenerationInfo<TRenderingObject>([.. resultRecipients], g.Key);
 }
+

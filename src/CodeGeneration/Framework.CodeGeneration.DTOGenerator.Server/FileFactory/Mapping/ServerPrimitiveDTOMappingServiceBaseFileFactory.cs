@@ -68,9 +68,11 @@ public class ServerPrimitiveDTOMappingServiceBaseFileFactory<TConfiguration> : F
         var contextParameter = this.Configuration.BLLContextTypeReference.ToParameterDeclarationExpression("context");
 
         yield return new CodeConstructor
-                     {
-                         Attributes = MemberAttributes.Family, Parameters = { contextParameter }, BaseConstructorArgs = { contextParameter.ToVariableReferenceExpression() }
-                     };
+        {
+            Attributes = MemberAttributes.Family,
+            Parameters = { contextParameter },
+            BaseConstructorArgs = { contextParameter.ToVariableReferenceExpression() }
+        };
 
 
 
@@ -96,16 +98,16 @@ public class ServerPrimitiveDTOMappingServiceBaseFileFactory<TConfiguration> : F
         var domainObjectGenericParameter = new CodeTypeParameter { Name = "TDomainObject", Constraints = { this.Configuration.Environment.PersistentDomainObjectBaseType } };
 
         var mappingObjectGenericParameter = new CodeTypeParameter
-                                            {
-                                                Name = "TMappingObject",
-                                                Constraints =
+        {
+            Name = "TMappingObject",
+            Constraints =
                                                 {
                                                     typeof(IMappingObject<,,>).ToTypeReference(
                                                         mappingServiceTypeRef,
                                                         domainObjectGenericParameter.ToTypeReference(),
                                                         this.Configuration.Environment.GetIdentityType().ToTypeReference())
                                                 }
-                                            };
+        };
 
         var mappingObjectMethodParameter = mappingObjectGenericParameter.ToTypeReference().ToParameterDeclarationExpression("mappingObject");
 
@@ -119,12 +121,12 @@ public class ServerPrimitiveDTOMappingServiceBaseFileFactory<TConfiguration> : F
                                                  IdCheckMode.CheckAll.ToPrimitiveExpression()));
 
         return new CodeMemberMethod
-               {
-                   Name = this.Configuration.ToDomainObjectMethodName,
-                   Attributes = MemberAttributes.Family,
-                   TypeParameters = { mappingObjectGenericParameter, domainObjectGenericParameter },
-                   Parameters = { mappingObjectMethodParameter },
-                   Statements =
+        {
+            Name = this.Configuration.ToDomainObjectMethodName,
+            Attributes = MemberAttributes.Family,
+            TypeParameters = { mappingObjectGenericParameter, domainObjectGenericParameter },
+            Parameters = { mappingObjectMethodParameter },
+            Statements =
                    {
                        domainObjectVariableStatement,
                        new CodeThisReferenceExpression().ToMethodInvokeExpression(
@@ -133,8 +135,8 @@ public class ServerPrimitiveDTOMappingServiceBaseFileFactory<TConfiguration> : F
                            domainObjectVariableStatement.ToVariableReferenceExpression()),
                        domainObjectVariableStatement.ToVariableReferenceExpression().ToMethodReturnStatement()
                    },
-                   ReturnType = domainObjectGenericParameter.ToTypeReference()
-               };
+            ReturnType = domainObjectGenericParameter.ToTypeReference()
+        };
     }
 
     private CodeMemberMethod GetToPersistentDomainObjectByFactoryMethod()
@@ -144,16 +146,16 @@ public class ServerPrimitiveDTOMappingServiceBaseFileFactory<TConfiguration> : F
         var domainObjectGenericParameter = new CodeTypeParameter { Name = "TDomainObject", Constraints = { this.Configuration.Environment.PersistentDomainObjectBaseType } };
 
         var mappingObjectGenericParameter = new CodeTypeParameter
-                                            {
-                                                Name = "TMappingObject",
-                                                Constraints =
+        {
+            Name = "TMappingObject",
+            Constraints =
                                                 {
                                                     typeof(IMappingObject<,,>).ToTypeReference(
                                                         mappingServiceTypeRef,
                                                         domainObjectGenericParameter.ToTypeReference(),
                                                         this.Configuration.Environment.GetIdentityType().ToTypeReference())
                                                 }
-                                            };
+        };
 
         var mappingObjectMethodParameter = mappingObjectGenericParameter.ToTypeReference().ToParameterDeclarationExpression("mappingObject");
         var createFuncParameter = typeof(Func<>).ToTypeReference(domainObjectGenericParameter.ToTypeReference()).ToParameterDeclarationExpression("createFunc");
@@ -168,12 +170,12 @@ public class ServerPrimitiveDTOMappingServiceBaseFileFactory<TConfiguration> : F
                                                  createFuncParameter.ToVariableReferenceExpression()));
 
         return new CodeMemberMethod
-               {
-                   Name = this.Configuration.ToDomainObjectMethodName,
-                   Attributes = MemberAttributes.Family,
-                   TypeParameters = { mappingObjectGenericParameter, domainObjectGenericParameter },
-                   Parameters = { mappingObjectMethodParameter, createFuncParameter },
-                   Statements =
+        {
+            Name = this.Configuration.ToDomainObjectMethodName,
+            Attributes = MemberAttributes.Family,
+            TypeParameters = { mappingObjectGenericParameter, domainObjectGenericParameter },
+            Parameters = { mappingObjectMethodParameter, createFuncParameter },
+            Statements =
                    {
                        domainObjectVariableStatement,
                        new CodeThisReferenceExpression().ToMethodInvokeExpression(
@@ -182,8 +184,8 @@ public class ServerPrimitiveDTOMappingServiceBaseFileFactory<TConfiguration> : F
                            domainObjectVariableStatement.ToVariableReferenceExpression()),
                        domainObjectVariableStatement.ToVariableReferenceExpression().ToMethodReturnStatement()
                    },
-                   ReturnType = domainObjectGenericParameter.ToTypeReference()
-               };
+            ReturnType = domainObjectGenericParameter.ToTypeReference()
+        };
     }
 
     private CodeMemberMethod GetToDomainObjectBaseMethod()
@@ -191,15 +193,17 @@ public class ServerPrimitiveDTOMappingServiceBaseFileFactory<TConfiguration> : F
         var mappingServiceTypeRef = this.Configuration.GetCodeTypeReference(null, ServerFileType.ServerDTOMappingServiceInterface);
 
         var domainObjectGenericParameter = new CodeTypeParameter
-                                           {
-                                               Name = "TDomainObject", Constraints = { this.Configuration.Environment.DomainObjectBaseType }, HasConstructorConstraint = true
-                                           };
+        {
+            Name = "TDomainObject",
+            Constraints = { this.Configuration.Environment.DomainObjectBaseType },
+            HasConstructorConstraint = true
+        };
 
         var mappingObjectGenericParameter = new CodeTypeParameter
-                                            {
-                                                Name = "TMappingObject",
-                                                Constraints = { typeof(IMappingObject<,>).ToTypeReference(mappingServiceTypeRef, domainObjectGenericParameter.ToTypeReference()) }
-                                            };
+        {
+            Name = "TMappingObject",
+            Constraints = { typeof(IMappingObject<,>).ToTypeReference(mappingServiceTypeRef, domainObjectGenericParameter.ToTypeReference()) }
+        };
 
         var mappingObjectMethodParameter = mappingObjectGenericParameter.ToTypeReference().ToParameterDeclarationExpression("mappingObject");
 
@@ -210,12 +214,12 @@ public class ServerPrimitiveDTOMappingServiceBaseFileFactory<TConfiguration> : F
             domainObjectGenericParameter.ToTypeReference().ToObjectCreateExpression());
 
         return new CodeMemberMethod
-               {
-                   Name = this.Configuration.ToDomainObjectMethodName + "Base",
-                   Attributes = MemberAttributes.Family,
-                   TypeParameters = { mappingObjectGenericParameter, domainObjectGenericParameter },
-                   Parameters = { mappingObjectMethodParameter },
-                   Statements =
+        {
+            Name = this.Configuration.ToDomainObjectMethodName + "Base",
+            Attributes = MemberAttributes.Family,
+            TypeParameters = { mappingObjectGenericParameter, domainObjectGenericParameter },
+            Parameters = { mappingObjectMethodParameter },
+            Statements =
                    {
                        domainObjectVariableStatement,
                        new CodeThisReferenceExpression().ToMethodInvokeExpression(
@@ -224,8 +228,8 @@ public class ServerPrimitiveDTOMappingServiceBaseFileFactory<TConfiguration> : F
                            domainObjectVariableStatement.ToVariableReferenceExpression()),
                        domainObjectVariableStatement.ToVariableReferenceExpression().ToMethodReturnStatement()
                    },
-                   ReturnType = domainObjectGenericParameter.ToTypeReference()
-               };
+            ReturnType = domainObjectGenericParameter.ToTypeReference()
+        };
     }
 
     private CodeMemberMethod GetMapToDomainObjectMethod()
@@ -235,22 +239,22 @@ public class ServerPrimitiveDTOMappingServiceBaseFileFactory<TConfiguration> : F
         var domainObjectGenericParameter = new CodeTypeParameter { Name = "TDomainObject", Constraints = { this.Configuration.Environment.DomainObjectBaseType } };
 
         var mappingObjectGenericParameter = new CodeTypeParameter
-                                            {
-                                                Name = "TMappingObject",
-                                                Constraints = { typeof(IMappingObject<,>).ToTypeReference(mappingServiceTypeRef, domainObjectGenericParameter.ToTypeReference()) }
-                                            };
+        {
+            Name = "TMappingObject",
+            Constraints = { typeof(IMappingObject<,>).ToTypeReference(mappingServiceTypeRef, domainObjectGenericParameter.ToTypeReference()) }
+        };
 
         var mappingObjectMethodParameter = mappingObjectGenericParameter.ToTypeReference().ToParameterDeclarationExpression("mappingObject");
 
         var domainObjectMethodParameter = domainObjectGenericParameter.ToTypeReference().ToParameterDeclarationExpression("domainObject");
 
         return new CodeMemberMethod
-               {
-                   Name = this.Configuration.MapToDomainObjectMethodName,
-                   Attributes = MemberAttributes.Family,
-                   TypeParameters = { mappingObjectGenericParameter, domainObjectGenericParameter },
-                   Parameters = { mappingObjectMethodParameter, domainObjectMethodParameter },
-                   Statements =
+        {
+            Name = this.Configuration.MapToDomainObjectMethodName,
+            Attributes = MemberAttributes.Family,
+            TypeParameters = { mappingObjectGenericParameter, domainObjectGenericParameter },
+            Parameters = { mappingObjectMethodParameter, domainObjectMethodParameter },
+            Statements =
                    {
                        mappingObjectMethodParameter.ToVariableReferenceExpression()
                                                    .ToMethodInvokeExpression(
@@ -258,7 +262,8 @@ public class ServerPrimitiveDTOMappingServiceBaseFileFactory<TConfiguration> : F
                                                        new CodeThisReferenceExpression(),
                                                        domainObjectMethodParameter.ToVariableReferenceExpression()),
                    },
-                   ReturnType = typeof(void).ToTypeReference()
-               };
+            ReturnType = typeof(void).ToTypeReference()
+        };
     }
 }
+

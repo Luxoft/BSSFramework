@@ -5,7 +5,7 @@ namespace Framework.Validation.Validators.DynamicClass.Available;
 
 public class AvailableDecimalValidator : RangeClassValidator<decimal, decimal>
 {
-    private AvailableDecimalValidator ()
+    private AvailableDecimalValidator()
     {
     }
 
@@ -15,3 +15,4 @@ public class AvailableDecimalValidator : RangeClassValidator<decimal, decimal>
 
     public static AvailableDecimalValidator Value { get; } = new();
 }
+

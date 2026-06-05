@@ -1,4 +1,6 @@
-﻿using Framework.Configuration.Domain;
+﻿using Anch.SecuritySystem.Providers;
+
+using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Database;
 using Framework.Database.Domain;
@@ -6,8 +8,6 @@ using Framework.Subscriptions;
 using Framework.Subscriptions.Domain;
 
 using Microsoft.Extensions.Logging;
-
-using Anch.SecuritySystem.Providers;
 
 namespace Framework.Configuration.BLL;
 
@@ -83,3 +83,4 @@ public partial class DomainObjectModificationBLL(
             LastProcessedItemDateTime = this.GetUnsecureQueryable().Where(mod => mod.Processed).Max(mod => mod.ModifyDate)
         };
 }
+

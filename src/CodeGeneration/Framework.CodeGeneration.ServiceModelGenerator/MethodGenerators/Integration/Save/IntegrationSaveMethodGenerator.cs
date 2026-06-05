@@ -61,11 +61,11 @@ public class IntegrationSaveMethodGenerator<TConfiguration>(TConfiguration confi
 
     public CodeMemberMethod GetFacadeMethodWithBLL(CodeParameterDeclarationExpression evaluateDataParameterExpr, CodeParameterDeclarationExpression bllParameterExpr) =>
         new CodeMemberMethod
-            {
-                Attributes = MemberAttributes.Family,
-                Name = this.InternalName,
-                ReturnType = this.ReturnType,
-            }.WithParameters(this.Parameters.Concat([evaluateDataParameterExpr, bllParameterExpr]))
+        {
+            Attributes = MemberAttributes.Family,
+            Name = this.InternalName,
+            ReturnType = this.ReturnType,
+        }.WithParameters(this.Parameters.Concat([evaluateDataParameterExpr, bllParameterExpr]))
              .WithStatements(this.GetFacadeMethodWithBLLStatements(evaluateDataParameterExpr.ToVariableReferenceExpression(), bllParameterExpr.ToVariableReferenceExpression()));
 
     private IEnumerable<CodeStatement> GetFacadeMethodWithBLLStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
@@ -97,12 +97,12 @@ public class IntegrationSaveMethodGenerator<TConfiguration>(TConfiguration confi
         if (allowCreate)
         {
             yield return new CodeNullConditionStatement(saveObjectRefExpr)
-                         {
-                                 TrueStatements =
+            {
+                TrueStatements =
                                  {
                                          this.DomainType.ToTypeReference().ToObjectCreateExpression().ToAssignStatement(saveObjectRefExpr)
                                  }
-                         };
+            };
         }
 
         foreach (var codeStatement in this.ProcessIntegrationVersion(saveObjectRefExpr, savingObject, [this.GetMappingMethod(evaluateDataExpr, savingObject, saveObjectDecl),this.GetInsertMethod(bllRefExpr, allowCreate, saveObjectDecl, savingObject)
@@ -162,3 +162,4 @@ public class IntegrationSaveMethodGenerator<TConfiguration>(TConfiguration confi
                                                   evaluateDataExpr.GetMappingService(), saveObjectDecl.ToVariableReferenceExpression())
                         .ToExpressionStatement();
 }
+

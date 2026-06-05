@@ -34,7 +34,7 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
 {
     private readonly IDictionaryCache<Tuple<Type, DTOFileType>, ReadOnlyCollection<PropertyInfo>> domainTypePropertiesCache;
 
-    private static readonly ImmutableArray<MainDTOFileType> MainDTOFileTypes = [..typeof(BaseFileType).GetStaticPropertyValueList<MainDTOFileType>()];
+    private static readonly ImmutableArray<MainDTOFileType> MainDTOFileTypes = [.. typeof(BaseFileType).GetStaticPropertyValueList<MainDTOFileType>()];
 
     private static readonly ConcurrentDictionary<MainDTOFileType, ImmutableArray<MainDTOFileType>> NestedMainTypesCache = [];
 
@@ -125,7 +125,7 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
             {
                 var children = MainDTOFileTypes.Where(dtoType => dtoType.BaseType == fileType);
 
-                return [..children.GetAllElements(this.GetNestedTypes)];
+                return [.. children.GetAllElements(this.GetNestedTypes)];
             });
 
     public virtual bool ForceGenerateProperties(Type domainType, DTOFileType fileType)
@@ -448,3 +448,4 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
             .SelectMany(projectionEnvironment => projectionEnvironment.Assembly.GetTypes())
             .Where(type => this.Environment.MetadataProxyProvider.Wrap(type).HasAttribute<ProjectionAttribute>(attr => attr.Role == ProjectionRole.Default));
 }
+

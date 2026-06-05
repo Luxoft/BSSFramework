@@ -12,7 +12,7 @@ public class AttachmentInlineSubscription : Subscription<Domain.Employee.Employe
 
     public override DomainObjectChangeType DomainObjectChangeType { get; } = DomainObjectChangeType.Update;
 
-    public override MailAddress Sender { get; } = new ("InlineAttach@luxoft.com", "SampleSystem");
+    public override MailAddress Sender { get; } = new("InlineAttach@luxoft.com", "SampleSystem");
 
     public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee.Employee>> GetTo(IServiceProvider _, DomainObjectVersions<Domain.Employee.Employee> versions)
     {
@@ -27,9 +27,10 @@ public class AttachmentInlineSubscription : Subscription<Domain.Employee.Employe
     public override IEnumerable<System.Net.Mail.Attachment> GetAttachments(IServiceProvider _, DomainObjectVersions<Domain.Employee.Employee> versions)
     {
         yield return new(new MemoryStream(Encoding.UTF8.GetBytes("Hello world!")), AttachmentName)
-                     {
-                         // If ContentId not set .NET generate new GUID https://github.com/Microsoft/referencesource/blob/master/System/net/System/Net/mail/Attachment.cs
-                         ContentId = "testId@luxoft.com"
-                     };
+        {
+            // If ContentId not set .NET generate new GUID https://github.com/Microsoft/referencesource/blob/master/System/net/System/Net/mail/Attachment.cs
+            ContentId = "testId@luxoft.com"
+        };
     }
 }
+

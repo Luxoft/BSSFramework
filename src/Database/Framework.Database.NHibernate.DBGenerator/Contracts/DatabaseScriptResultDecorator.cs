@@ -37,3 +37,4 @@ public class DatabaseScriptResultDecorator : IDatabaseScriptResult
 
     public IDatabaseScriptResult Evaluate() => this.source.Evaluate();
 }
+

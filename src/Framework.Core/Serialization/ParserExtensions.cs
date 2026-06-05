@@ -19,3 +19,4 @@ public static class ParserExtensions
         return new Parser<TValue, TResult>(FuncHelper.Create((TValue value) => parser.Parse(value)).WithLock());
     }
 }
+

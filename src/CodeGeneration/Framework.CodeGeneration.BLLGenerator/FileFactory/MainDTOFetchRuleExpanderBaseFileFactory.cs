@@ -1,6 +1,8 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
+using Anch.GenericQueryable.Fetching;
+
 using Framework.BLL;
 using Framework.BLL.Domain.DTO;
 using Framework.CodeDom;
@@ -9,10 +11,7 @@ using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLGenerator.Configuration;
 using Framework.Core;
 using Framework.Core.Helpers;
-
 using Framework.Projection;
-
-using Anch.GenericQueryable.Fetching;
 
 namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 
@@ -74,14 +73,14 @@ public class MainDTOFetchRuleExpanderBaseFileFactory<TConfiguration>(TConfigurat
                                 select Tuple.Create((CodeExpression)condition, (CodeStatement)statement);
 
         return new CodeMemberMethod
-               {
-                   Attributes = MemberAttributes.Family | MemberAttributes.Override,
-                   Name = "TryExpand",
-                   ReturnType = typeof(PropertyFetchRule<>).ToTypeReference(domainObjectTypeRef),
-                   TypeParameters = { domainObjectParameter },
-                   Parameters = { dtoTypeParameter },
-                   Statements = { statementsRequest.ToSwitchExpressionStatement(new CodePrimitiveExpression(null).ToMethodReturnStatement()) }
-               };
+        {
+            Attributes = MemberAttributes.Family | MemberAttributes.Override,
+            Name = "TryExpand",
+            ReturnType = typeof(PropertyFetchRule<>).ToTypeReference(domainObjectTypeRef),
+            TypeParameters = { domainObjectParameter },
+            Parameters = { dtoTypeParameter },
+            Statements = { statementsRequest.ToSwitchExpressionStatement(new CodePrimitiveExpression(null).ToMethodReturnStatement()) }
+        };
     }
 
 
@@ -106,12 +105,12 @@ public class MainDTOFetchRuleExpanderBaseFileFactory<TConfiguration>(TConfigurat
                                 select Tuple.Create((CodeExpression)condition, (CodeStatement)statement);
 
         return new CodeMemberMethod
-               {
-                   Attributes = MemberAttributes.Family,
-                   Name = $"TryGet{domainType.Name}FetchRule",
-                   ReturnType = typeof(PropertyFetchRule<>).ToTypeReference(domainType),
-                   Parameters = { dtoTypeParameter },
-                   Statements = { statementsRequest.ToSwitchExpressionStatement(new CodePrimitiveExpression(null).ToMethodReturnStatement()) }
+        {
+            Attributes = MemberAttributes.Family,
+            Name = $"TryGet{domainType.Name}FetchRule",
+            ReturnType = typeof(PropertyFetchRule<>).ToTypeReference(domainType),
+            Parameters = { dtoTypeParameter },
+            Statements = { statementsRequest.ToSwitchExpressionStatement(new CodePrimitiveExpression(null).ToMethodReturnStatement()) }
         };
     }
 
@@ -152,8 +151,10 @@ public class MainDTOFetchRuleExpanderBaseFileFactory<TConfiguration>(TConfigurat
                         .ToMethodInvokeExpression(
                             new CodeLambdaExpression
                             {
-                                Parameters = { lambdaParam }, Statements = { lambdaParamExpr.ToPropertyReference(propInfo.prop).ToMethodReturnStatement() }
+                                Parameters = { lambdaParam },
+                                Statements = { lambdaParamExpr.ToPropertyReference(propInfo.prop).ToMethodReturnStatement() }
                             });
         });
     }
 }
+

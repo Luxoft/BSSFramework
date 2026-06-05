@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 
 using Anch.Core;
+using Anch.SecuritySystem;
 
 using Framework.BLL;
 using Framework.BLL.Domain.ServiceRole;
@@ -13,8 +14,6 @@ using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.Core;
 using Framework.Database;
 using Framework.FileGeneration.Configuration;
-
-using Anch.SecuritySystem;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators;
 
@@ -169,9 +168,12 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
             });
 
         return new CodeMemberMethod
-            {
-                Attributes = MemberAttributes.Public, Name = this.Name, ReturnType = this.ReturnType, Statements = { evaluateStatement.ToResultStatement(this.ReturnType) }
-            }.WithParameters(this.Parameters)
+        {
+            Attributes = MemberAttributes.Public,
+            Name = this.Name,
+            ReturnType = this.ReturnType,
+            Statements = { evaluateStatement.ToResultStatement(this.ReturnType) }
+        }.WithParameters(this.Parameters)
              .WithComment(this.GetComment());
     }
 
@@ -214,3 +216,4 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
         return bllRef.ToVariableDeclarationStatement(varName, bllCreateExpr);
     }
 }
+

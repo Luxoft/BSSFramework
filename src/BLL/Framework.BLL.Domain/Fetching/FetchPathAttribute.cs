@@ -7,3 +7,4 @@ namespace Framework.BLL.Domain.Fetching;
 /// </summary>
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
 public class FetchPathAttribute(string path) : PathAttribute(path);
+

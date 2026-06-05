@@ -21,14 +21,15 @@ public class ManagmentUnitFluentMappingTests(IServiceProvider rootServiceProvide
                       {
                           var employee = c.Logics.Employee.GetById(employeeId.Id)!;
                           var mu = new ManagementUnitFluentMapping
-                                   {
-                                           Name = "test",
-                                           Period = Period.Eternity,
-                                           MuComponent = new MuComponent
-                                                         {
-                                                                 AuthorizedLuxoftSignatory = employee, LuxoftSignsFirst = true
-                                                         }
-                                   };
+                          {
+                              Name = "test",
+                              Period = Period.Eternity,
+                              MuComponent = new MuComponent
+                              {
+                                  AuthorizedLuxoftSignatory = employee,
+                                  LuxoftSignsFirst = true
+                              }
+                          };
                           c.Logics.ManagementUnitFluentMapping.Save(mu);
                       });
 
@@ -42,11 +43,11 @@ public class ManagmentUnitFluentMappingTests(IServiceProvider rootServiceProvide
                                           .Where(x => x.MuComponent.AuthorizedLuxoftSignatory.Id == employeeId.Id)
                                           .Select(
                                                   x => new
-                                                       {
-                                                               x.Id,
-                                                               x.MuComponent.LuxoftSignsFirst,
-                                                               EmployeeId = x.MuComponent.AuthorizedLuxoftSignatory.Id
-                                                       })
+                                                  {
+                                                      x.Id,
+                                                      x.MuComponent.LuxoftSignsFirst,
+                                                      EmployeeId = x.MuComponent.AuthorizedLuxoftSignatory.Id
+                                                  })
                                           .ToList();
                               });
 
@@ -55,3 +56,4 @@ public class ManagmentUnitFluentMappingTests(IServiceProvider rootServiceProvide
         Assert.Equal(employeeId.Id, item.EmployeeId);
     }
 }
+

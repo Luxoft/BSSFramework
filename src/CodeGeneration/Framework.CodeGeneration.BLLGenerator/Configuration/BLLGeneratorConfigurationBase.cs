@@ -175,3 +175,4 @@ public abstract class BLLGeneratorConfigurationBase<TEnvironment>(TEnvironment e
         yield return new CodeFileFactoryHeader<FileType>(FileType.BLLFactoryContainer, "", _ => this.Environment.TargetSystemName + FileType.BLLFactoryContainer);
     }
 }
+

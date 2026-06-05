@@ -20,7 +20,7 @@ public interface IClassValidationMap
     /// <summary>
     /// Список валидируемых свойств
     /// </summary>
-    IReadOnlyCollection<IPropertyValidationMap> PropertyMaps { get;  }
+    IReadOnlyCollection<IPropertyValidationMap> PropertyMaps { get; }
 }
 
 /// <summary>
@@ -34,3 +34,4 @@ public interface IClassValidationMap<in TSource> : IClassValidationMap, IValidat
     /// </summary>
     new IReadOnlyCollection<IPropertyValidationMap<TSource>> PropertyMaps { get; }
 }
+

@@ -30,14 +30,14 @@ public class BssHangfireSettings : IBssHangfireSettings
     private IJobNameExtractPolicy jobNameExtractPolicy = new JobNameExtractPolicy();
 
     private readonly SqlServerStorageOptions sqlServerStorageOptions = new()
-                                                                       {
-                                                                           CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
-                                                                           SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
-                                                                           QueuePollInterval = TimeSpan.Zero,
-                                                                           UseRecommendedIsolationLevel = true,
-                                                                           UsePageLocksOnDequeue = true,
-                                                                           DisableGlobalLocks = true,
-                                                                       };
+    {
+        CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+        SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+        QueuePollInterval = TimeSpan.Zero,
+        UseRecommendedIsolationLevel = true,
+        UsePageLocksOnDequeue = true,
+        DisableGlobalLocks = true,
+    };
 
     private Action<IGlobalConfiguration> globalConfigurationAction = _ => { };
 
@@ -122,11 +122,11 @@ public class BssHangfireSettings : IBssHangfireSettings
                 var job = Job.FromExpression(ExpressionHelper.Create((MiddlewareJob<TJob, TArg> job) => job.ExecuteAsync(default!)));
 
                 var actualSettings = new JobSettings
-                                     {
-                                         Name = jobName,
-                                         CronTiming = cronTiming,
-                                         DisplayName = jobSettings?.DisplayName ?? this.jobNameExtractPolicy.GetDisplayName(typeof(TJob))
-                                     };
+                {
+                    Name = jobName,
+                    CronTiming = cronTiming,
+                    DisplayName = jobSettings?.DisplayName ?? this.jobNameExtractPolicy.GetDisplayName(typeof(TJob))
+                };
 
                 this.registerJobs.Add(job, actualSettings);
 
@@ -179,3 +179,4 @@ public class BssHangfireSettings : IBssHangfireSettings
         }
     }
 }
+

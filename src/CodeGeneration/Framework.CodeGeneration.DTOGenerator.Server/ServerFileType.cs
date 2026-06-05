@@ -26,3 +26,4 @@ public static class ServerFileType
 
     public static BaseFileType ServerPrimitiveDTOMappingServiceBase { get; } = new(nameof(ServerPrimitiveDTOMappingServiceBase));
 }
+

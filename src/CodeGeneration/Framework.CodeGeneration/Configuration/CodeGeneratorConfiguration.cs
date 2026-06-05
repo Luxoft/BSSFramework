@@ -16,7 +16,7 @@ public abstract class CodeGeneratorConfiguration<TEnvironment> : FileGeneratorCo
     private readonly Lazy<string?> defaultNamespaceLazy;
 
     protected CodeGeneratorConfiguration(TEnvironment environment)
-        :base(environment) =>
+        : base(environment) =>
         this.defaultNamespaceLazy = LazyHelper.Create(() =>
         {
             var request = from prefix in this.Environment.PersistentDomainObjectBaseType.GetNamespacePrefix().ToMaybe()
@@ -63,3 +63,4 @@ public abstract class CodeGeneratorConfiguration<TEnvironment, TFileType> : Code
 
     protected abstract IEnumerable<ICodeFileFactoryHeader<TFileType>> GetFileFactoryHeaders();
 }
+

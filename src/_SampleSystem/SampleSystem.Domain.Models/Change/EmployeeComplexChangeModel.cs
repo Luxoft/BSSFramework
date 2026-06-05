@@ -6,3 +6,4 @@ public class EmployeeComplexChangeModel : DomainObjectComplexChangeModel<Employe
 {
     public string Email { get; set; }
 }
+

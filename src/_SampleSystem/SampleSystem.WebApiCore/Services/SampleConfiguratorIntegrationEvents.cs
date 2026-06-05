@@ -1,9 +1,9 @@
-﻿using Framework.Application.Domain;
+﻿using Anch.SecuritySystem.Configurator.Interfaces;
+
+using Framework.Application.Domain;
 using Framework.Database;
 
 using Microsoft.Extensions.Logging;
-
-using Anch.SecuritySystem.Configurator.Interfaces;
 
 namespace SampleSystem.WebApiCore.Services;
 
@@ -26,3 +26,4 @@ public class SampleConfiguratorIntegrationEvents(ILogger<SampleConfiguratorInteg
 
     public Task PermissionChangedAsync(object permission, CancellationToken cancellationToken) => Task.CompletedTask;
 }
+

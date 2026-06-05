@@ -13,3 +13,4 @@ public record ExtendedAttributeSource(FrozenDictionary<MemberInfo, ImmutableArra
     {
     }
 }
+

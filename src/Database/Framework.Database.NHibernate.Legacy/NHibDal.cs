@@ -2,6 +2,8 @@
 
 using Anch.Core;
 using Anch.Core.ExpressionEvaluate;
+using Anch.GenericQueryable;
+using Anch.GenericQueryable.Fetching;
 
 using Framework.Core;
 using Framework.Database.Domain;
@@ -9,9 +11,6 @@ using Framework.Database.NHibernate.DAL.Revisions;
 using Framework.Database.NHibernate.Envers;
 using Framework.Database.NHibernate.Envers.LinqVisitors;
 using Framework.Database.NHibernate.Sessions;
-
-using Anch.GenericQueryable;
-using Anch.GenericQueryable.Fetching;
 
 using NHibernate;
 using NHibernate.Envers.Query;
@@ -278,5 +277,6 @@ public class NHibDal<TDomainObject, TIdent>(INHibSession session, IAsyncDal<TDom
         }
     }
 }
+
 
 

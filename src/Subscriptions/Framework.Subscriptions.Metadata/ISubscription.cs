@@ -1,10 +1,10 @@
 ﻿using System.Collections.Immutable;
 using System.Net.Mail;
 
-using Framework.Subscriptions.Domain;
-
 using Anch.SecuritySystem;
 using Anch.SecuritySystem.Notification.Domain;
+
+using Framework.Subscriptions.Domain;
 
 namespace Framework.Subscriptions.Metadata;
 
@@ -96,3 +96,4 @@ public interface ISubscription
     /// </value>
     ImmutableArray<SecurityRole> SecurityRoles { get; }
 }
+

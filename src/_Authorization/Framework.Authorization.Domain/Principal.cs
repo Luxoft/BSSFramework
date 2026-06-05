@@ -32,3 +32,4 @@ public class Principal : BaseDirectory, IMaster<Permission>
 
     ICollection<Permission> IMaster<Permission>.Details => (ICollection<Permission>)this.Permissions;
 }
+

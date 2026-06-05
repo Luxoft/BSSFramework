@@ -1,5 +1,6 @@
 ﻿using Anch.Testing.Database;
 using Anch.Testing.Database.ConnectionStringManagement;
+
 using Microsoft.Data.SqlClient;
 
 namespace Framework.AutomationCore.Services;
@@ -18,3 +19,4 @@ public class BssTestConnectionStringFactory(TestDatabaseSettings databaseSetting
         return new TestConnectionString(builder.ConnectionString);
     }
 }
+

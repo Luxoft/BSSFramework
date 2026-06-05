@@ -1,10 +1,10 @@
 ﻿using System.Linq.Expressions;
 
+using Anch.SecuritySystem.ExternalSystem.SecurityContextStorage;
+
 using Framework.Authorization.Domain;
 using Framework.BLL.Domain.Models;
 using Framework.Core;
-
-using Anch.SecuritySystem.ExternalSystem.SecurityContextStorage;
 
 namespace Framework.Authorization.BLL;
 
@@ -33,3 +33,4 @@ internal class PermissionDirectInternalFilterModel(IAuthorizationBLLContext cont
         }
     }
 }
+

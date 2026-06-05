@@ -40,3 +40,4 @@ public static class LazyInterfaceImplementHelper<T>
 
     public static readonly Func<Func<T>, T> CreateCallProxy = CallProxyInterfaceImplementTypeBuilder.Default.GetCreateProxyFunc<T>();
 }
+

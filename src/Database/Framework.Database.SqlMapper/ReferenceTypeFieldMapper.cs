@@ -18,6 +18,7 @@ public class ReferenceTypeFieldMapper : Mapper<ReferenceTypeFieldMetadata>
                                              false,
                                              field,
                                              null,
-                                             field.Attributes.OfType<MappingAttribute>().Any(z=>z.IsUnique));
+                                             field.Attributes.OfType<MappingAttribute>().Any(z => z.IsUnique));
     }
 }
+

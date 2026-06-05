@@ -11,14 +11,14 @@ public abstract class ProjectionEnvironmentBase : IProjectionEnvironment
 {
     private readonly Lazy<PropertyInfo> lazyIdentityProperty;
 
-    protected ProjectionEnvironmentBase(IMetadataProxyProvider metadataProxyProvider )
+    protected ProjectionEnvironmentBase(IMetadataProxyProvider metadataProxyProvider)
     {
         this.MetadataProxyProvider = metadataProxyProvider;
 
         this.lazyIdentityProperty = LazyHelper.Create(this.GetIdentityProperty);
     }
 
-    public IMetadataProxyProvider MetadataProxyProvider  { get; }
+    public IMetadataProxyProvider MetadataProxyProvider { get; }
 
     public abstract string Namespace { get; }
 
@@ -59,3 +59,4 @@ public abstract class ProjectionEnvironmentBase : IProjectionEnvironment
         return this.PersistentDomainObjectBaseType.IsAssignableFrom(type);
     }
 }
+

@@ -33,15 +33,15 @@ public class BLLFactoryContainerFileFactory<TConfiguration>(TConfiguration confi
                                                                                     bllFactoryInterfaceTypeRef);
 
             var factoryProperty = new CodeMemberProperty
-                                  {
-                                          Attributes = MemberAttributes.Public | MemberAttributes.Final,
-                                          Name = domainType.Name + "Factory",
-                                          Type = bllFactoryInterfaceTypeRef,
-                                          GetStatements =
+            {
+                Attributes = MemberAttributes.Public | MemberAttributes.Final,
+                Name = domainType.Name + "Factory",
+                Type = bllFactoryInterfaceTypeRef,
+                GetStatements =
                                           {
                                                   contextFieldRefExpr.ToPropertyReference("ServiceProvider").ToStaticMethodInvokeExpression(getRequiredServiceMethod).ToMethodReturnStatement()
                                           }
-                                  };
+            };
 
             var factoryPropertyRefExpr = new CodeThisReferenceExpression().ToPropertyReference(factoryProperty);
 
@@ -55,16 +55,16 @@ public class BLLFactoryContainerFileFactory<TConfiguration>(TConfiguration confi
             yield return defaultBLLFieldMember;
 
             yield return new CodeMemberProperty
-                         {
-                                 Attributes = MemberAttributes.Public | MemberAttributes.Final,
-                                 Name = domainType.Name,
-                                 Type = bllTypeRef,
-                                 GetStatements =
+            {
+                Attributes = MemberAttributes.Public | MemberAttributes.Final,
+                Name = domainType.Name,
+                Type = bllTypeRef,
+                GetStatements =
                                  {
                                          new CodeThisReferenceExpression().ToFieldReference(defaultBLLFieldMember)
                                                                           .ToMethodReturnStatementWithLazyInitialize(factoryPropertyRefExpr.ToMethodInvokeExpression("Create"))
                                  }
-                         };
+            };
         }
 
         foreach (var member in this.GetGenericFactoryMembers(contextFieldRefExpr))
@@ -93,16 +93,16 @@ public class BLLFactoryContainerFileFactory<TConfiguration>(TConfiguration confi
             yield return bllFactoryField;
 
             yield return new CodeMemberProperty
-                         {
-                                 Attributes = MemberAttributes.Public | MemberAttributes.Final,
-                                 Type = pair.Type.ToTypeReference(),
-                                 Name = pair.FileType.ToString().SkipLast("BLLFactory", true),
-                                 GetStatements =
+            {
+                Attributes = MemberAttributes.Public | MemberAttributes.Final,
+                Type = pair.Type.ToTypeReference(),
+                Name = pair.FileType.ToString().SkipLast("BLLFactory", true),
+                GetStatements =
                                  {
                                          new CodeThisReferenceExpression().ToFieldReference(bllFactoryField)
                                                                           .ToMethodReturnStatementWithLazyInitialize(bllTypeRef.ToObjectCreateExpression(contextFieldRefExpr))
                                  }
-                         };
+            };
         }
     }
 
@@ -119,11 +119,11 @@ public class BLLFactoryContainerFileFactory<TConfiguration>(TConfiguration confi
                                   select statement;
 
         return new CodeMemberMethod
-               {
-                       Name = methodName,
-                       Attributes = MemberAttributes.Public | MemberAttributes.Static,
-                       Parameters = { serviceCollectionParameter },
-               }.WithStatements(addScopedStatements);
+        {
+            Name = methodName,
+            Attributes = MemberAttributes.Public | MemberAttributes.Static,
+            Parameters = { serviceCollectionParameter },
+        }.WithStatements(addScopedStatements);
     }
 
 
@@ -156,3 +156,4 @@ public class BLLFactoryContainerFileFactory<TConfiguration>(TConfiguration confi
         yield return serviceCollectionParameter.ToVariableReferenceExpression().ToStaticMethodInvokeExpression(addScopedFromMethod).ToExpressionStatement();
     }
 }
+

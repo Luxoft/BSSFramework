@@ -38,9 +38,10 @@ public class MethodIdentity : IEquatable<MethodIdentity>
 
     public static implicit operator MethodIdentity(MethodIdentityType type) => type.Maybe(v => new MethodIdentity(v));
 
-    public static bool operator == (MethodIdentity source, MethodIdentity other) =>
+    public static bool operator ==(MethodIdentity source, MethodIdentity other) =>
         ReferenceEquals(source, other)
         || (!ReferenceEquals(source, null) && source.Equals(other));
 
     public static bool operator !=(MethodIdentity fileType, MethodIdentity other) => !(fileType == other);
 }
+

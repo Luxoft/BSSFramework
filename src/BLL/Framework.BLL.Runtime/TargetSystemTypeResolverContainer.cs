@@ -8,3 +8,4 @@ public class TargetSystemTypeResolverContainer(IEnumerable<TargetSystemInfo> tar
 {
     public ITypeResolver<TypeNameIdentity> TypeResolver => field ??= targetSystemInfoList.Select(v => v.Domain.TypeResolver).ToComposite();
 }
+

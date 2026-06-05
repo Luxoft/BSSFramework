@@ -1,4 +1,5 @@
 ﻿using Anch.Core;
+
 using Framework.Core;
 
 namespace Framework.Database.Metadata;
@@ -48,3 +49,4 @@ public class UniqueIndexMetadata
         return this.Equals((UniqueIndexMetadata)obj);
     }
 }
+

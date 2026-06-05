@@ -6,3 +6,4 @@ public interface IDataTypeComparer
 {
     bool Equals(DataType x, DataType y);
 }
+

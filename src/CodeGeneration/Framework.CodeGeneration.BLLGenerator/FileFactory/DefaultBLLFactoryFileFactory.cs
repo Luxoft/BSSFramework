@@ -1,11 +1,11 @@
 ﻿using System.CodeDom;
 
+using Anch.SecuritySystem.Providers;
+
 using Framework.BLL;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLGenerator.Configuration;
 using Framework.FileGeneration.Configuration;
-
-using Anch.SecuritySystem.Providers;
 
 namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 
@@ -44,13 +44,13 @@ public class DefaultBLLFactoryFileFactory<TConfiguration>(TConfiguration configu
 
 
         var implMethod = new CodeMemberMethod
-                         {
-                                 Attributes = MemberAttributes.Public | MemberAttributes.Override,
-                                 ReturnType = typeof(IDefaultSecurityDomainBLLBase<,,>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(), genericDomainObjectParameterTypeRef, this.Configuration.Environment.GetIdentityType().ToTypeReference()),
-                                 Name = "Create",
-                                 Parameters = { parameter },
-                                 TypeParameters = { genericDomainObjectParameter },
-                                 Statements =
+        {
+            Attributes = MemberAttributes.Public | MemberAttributes.Override,
+            ReturnType = typeof(IDefaultSecurityDomainBLLBase<,,>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(), genericDomainObjectParameterTypeRef, this.Configuration.Environment.GetIdentityType().ToTypeReference()),
+            Name = "Create",
+            Parameters = { parameter },
+            TypeParameters = { genericDomainObjectParameter },
+            Statements =
                                  {
                                          this.Configuration
                                              .SecurityDomainBLLBaseTypeReference
@@ -58,16 +58,16 @@ public class DefaultBLLFactoryFileFactory<TConfiguration>(TConfiguration configu
                                              .ToObjectCreateExpression(contextFieldRefExpr, parameter.ToVariableReferenceExpression())
                                              .ToMethodReturnStatement()
                                  }
-                         };
+        };
 
 
         return new CodeTypeDeclaration
-               {
-                       Name = this.Name,
+        {
+            Name = this.Name,
 
-                       Attributes = MemberAttributes.Public,
-                       IsPartial = true,
-                       Members =
+            Attributes = MemberAttributes.Public,
+            IsPartial = true,
+            Members =
                        {
                                new CodeConstructor
                                {
@@ -81,8 +81,8 @@ public class DefaultBLLFactoryFileFactory<TConfiguration>(TConfiguration configu
                                ////GetCreateBySecurityProviderMethod(),
                                ////GetCreateBLLSecurityModeMethod()
                        },
-                       BaseTypes = { baseTypeRef, interfaceBase }
-               };
+            BaseTypes = { baseTypeRef, interfaceBase }
+        };
     }
 
     ////private CodeTypeMember GetCreateBySecurityProviderMethod()
@@ -171,3 +171,4 @@ public class DefaultBLLFactoryFileFactory<TConfiguration>(TConfiguration configu
     ////}
 
 }
+

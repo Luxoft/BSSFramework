@@ -7,3 +7,4 @@ public interface IServiceModelGenerationEnvironment : ICodeGenerationEnvironment
     BLLCoreGenerator.Configuration.IBLLCoreGeneratorConfigurationContainer,
 
     DTOGenerator.Server.Configuration.IServerDTOGeneratorConfigurationContainer;
+

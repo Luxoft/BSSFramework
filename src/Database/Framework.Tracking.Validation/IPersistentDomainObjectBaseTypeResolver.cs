@@ -3,3 +3,4 @@
 namespace Framework.Tracking.Validation;
 
 public interface IPersistentDomainObjectBaseTypeResolver : ITypeResolver<Type>;
+

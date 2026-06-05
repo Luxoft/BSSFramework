@@ -1,14 +1,12 @@
 ﻿using System.Collections.Immutable;
 
 using Anch.Core;
-using Anch.GenericRepository;
-using Anch.VisualIdentitySource;
-
 using Anch.GenericQueryable;
-
+using Anch.GenericRepository;
 using Anch.SecuritySystem;
 using Anch.SecuritySystem.Notification;
 using Anch.SecuritySystem.Notification.Domain;
+using Anch.VisualIdentitySource;
 
 namespace Framework.Subscriptions;
 
@@ -36,3 +34,4 @@ public class EmployeeEmailExtractor<TEmployee, TPrincipal>(
                                         .ToImmutableHashSetAsync(ct);
         });
 }
+

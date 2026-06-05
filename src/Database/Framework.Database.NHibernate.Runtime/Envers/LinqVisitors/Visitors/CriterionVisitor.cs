@@ -71,3 +71,4 @@ internal class CriterionVisitor : ExpressionVisitor
 
     protected override Expression VisitUnary(UnaryExpression node) => node;
 }
+

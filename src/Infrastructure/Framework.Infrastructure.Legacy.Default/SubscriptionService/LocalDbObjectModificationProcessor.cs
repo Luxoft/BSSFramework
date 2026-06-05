@@ -22,13 +22,14 @@ public class LocalDbObjectModificationProcessor : BLLContextContainer<IConfigura
     public async Task ProcessChanged(ObjectModificationInfoDTO<Guid> changedObjectInfo, CancellationToken cancellationToken)
     {
         var domainObjectModification = new DomainObjectModification
-                                       {
-                                           DomainType = this.Context.GetDomainType(changedObjectInfo.TypeInfoDescription.ToDomainObject()),
-                                           DomainObjectId = changedObjectInfo.Identity,
-                                           Revision = changedObjectInfo.Revision,
-                                           Type = changedObjectInfo.ModificationType
-                                       };
+        {
+            DomainType = this.Context.GetDomainType(changedObjectInfo.TypeInfoDescription.ToDomainObject()),
+            DomainObjectId = changedObjectInfo.Identity,
+            Revision = changedObjectInfo.Revision,
+            Type = changedObjectInfo.ModificationType
+        };
 
         this.Context.Logics.Default.Create<DomainObjectModification>().Save(domainObjectModification);
     }
 }
+

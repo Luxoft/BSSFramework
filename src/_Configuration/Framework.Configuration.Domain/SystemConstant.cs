@@ -92,3 +92,4 @@ public class SystemConstant : AuditPersistentDomainObjectBase
 
     public override string ToString() => this.Code;
 }
+

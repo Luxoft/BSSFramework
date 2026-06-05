@@ -2,6 +2,9 @@
 
 using Anch.Core;
 using Anch.Core.Visitor;
+using Anch.SecuritySystem;
+using Anch.SecuritySystem.Services;
+using Anch.SecuritySystem.Testing;
 
 using Framework.Core;
 using Framework.Database;
@@ -11,10 +14,6 @@ using Framework.Infrastructure.WebApiExceptionExpander;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-
-using Anch.SecuritySystem;
-using Anch.SecuritySystem.Services;
-using Anch.SecuritySystem.Testing;
 
 namespace Framework.AutomationCore.Services;
 
@@ -111,3 +110,4 @@ public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvid
         public async Task Invoke() => await next(context);
     }
 }
+

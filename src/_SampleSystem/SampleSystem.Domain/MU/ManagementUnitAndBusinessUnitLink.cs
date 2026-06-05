@@ -81,3 +81,4 @@ public class ManagementUnitAndBusinessUnitLink :
 
     string IVisualIdentityObject.Name => this.BusinessUnit.Maybe(x => x.Name) + "-" + this.ManagementUnit.Maybe(x => x.Name);
 }
+

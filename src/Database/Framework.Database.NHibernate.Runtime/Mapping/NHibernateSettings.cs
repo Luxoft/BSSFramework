@@ -17,3 +17,4 @@ public record NHibernateSettings
 
     public Action<MsSqlConfiguration> RawDatabaseAction { get; init; } = _ => { };
 }
+

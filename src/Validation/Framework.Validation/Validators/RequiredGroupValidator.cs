@@ -18,7 +18,7 @@ public class RequiredGroupValidator : DynamicClassValidator
 
     public RequiredGroupValidator(RequiredGroupValidatorMode mode, string groupKey)
     {
-        if (!Enum.IsDefined(typeof (RequiredGroupValidatorMode), mode)) throw new ArgumentOutOfRangeException(nameof(mode));
+        if (!Enum.IsDefined(typeof(RequiredGroupValidatorMode), mode)) throw new ArgumentOutOfRangeException(nameof(mode));
 
         this.mode = mode;
         this.groupKey = groupKey;
@@ -106,3 +106,4 @@ public class RequiredGroupValidator<TSource>(RequiredGroupValidatorMode mode, Di
         }
     }
 }
+

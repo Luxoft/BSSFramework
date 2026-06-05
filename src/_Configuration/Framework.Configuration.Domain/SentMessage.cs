@@ -105,3 +105,4 @@ public class SentMessage : AuditPersistentDomainObjectBase
     [MaxLength]
     public virtual string ReplyTo => this.replyTo;
 }
+

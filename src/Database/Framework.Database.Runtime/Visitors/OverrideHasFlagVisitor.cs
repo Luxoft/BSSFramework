@@ -39,3 +39,4 @@ public class OverrideHasFlagVisitor : ExpressionVisitor
 
     public readonly static OverrideHasFlagVisitor Value = new();
 }
+

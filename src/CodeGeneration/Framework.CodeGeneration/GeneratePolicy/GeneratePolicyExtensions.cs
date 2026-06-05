@@ -254,7 +254,7 @@ public static class GeneratePolicyExtensions
     {
         if (policies == null) throw new ArgumentNullException(nameof(policies));
 
-        return policies.Aggregate (GeneratePolicy<TIdent>.DisableAll, (pol1, pol2) => pol1.Or(pol2));
+        return policies.Aggregate(GeneratePolicy<TIdent>.DisableAll, (pol1, pol2) => pol1.Or(pol2));
     }
 
     /// <summary>

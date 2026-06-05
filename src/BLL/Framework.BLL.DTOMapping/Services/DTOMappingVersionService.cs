@@ -22,3 +22,4 @@ public class DTOMappingVersionService<TBLLContext, TAuditPersistentDomainObjectB
         return mappingObjectVersion;
     }
 }
+

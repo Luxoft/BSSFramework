@@ -1,5 +1,6 @@
 ﻿using Framework.Validation;
 using Framework.Validation.Map;
+
 using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.Validation;
 
@@ -20,3 +21,4 @@ public partial class SampleSystemValidator
         return base.GetEmployeeValidationResult(source, operationContext, ownerState);
     }
 }
+

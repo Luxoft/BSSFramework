@@ -15,3 +15,4 @@ public class AvailablePeriodValidator : RangeClassValidator<Period, DateTime>
 
     public static AvailablePeriodValidator Value { get; } = new();
 }
+

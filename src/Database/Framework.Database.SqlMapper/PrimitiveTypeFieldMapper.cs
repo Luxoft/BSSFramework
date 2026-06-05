@@ -30,3 +30,4 @@ public class PrimitiveTypeFieldMapper : Mapper<PrimitiveTypeFieldMetadata>
 
     }
 }
+

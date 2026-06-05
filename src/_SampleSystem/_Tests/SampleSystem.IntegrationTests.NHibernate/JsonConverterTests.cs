@@ -59,3 +59,4 @@ public class JsonConverterTests(IServiceProvider rootServiceProvider) : TestBase
         Assert.Equal(testPeriod, restored);
     }
 }
+

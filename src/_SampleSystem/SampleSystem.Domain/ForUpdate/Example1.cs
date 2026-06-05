@@ -3,7 +3,7 @@ using Framework.Relations;
 
 namespace SampleSystem.Domain.ForUpdate;
 
-[BLLViewRole, BLLSaveRole(SaveType = BLLSaveType.Both )]
+[BLLViewRole, BLLSaveRole(SaveType = BLLSaveType.Both)]
 public class Example1 : AuditPersistentDomainObjectBase, IMaster<Example2>
 {
     private readonly ICollection<Example2> items2 = new HashSet<Example2>();
@@ -36,3 +36,4 @@ public class Example1 : AuditPersistentDomainObjectBase, IMaster<Example2>
 
     ICollection<Example2> IMaster<Example2>.Details => (ICollection<Example2>)this.Items2;
 }
+

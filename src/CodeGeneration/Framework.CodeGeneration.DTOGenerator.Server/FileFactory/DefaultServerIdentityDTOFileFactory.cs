@@ -34,16 +34,16 @@ public class DefaultServerIdentityDTOFileFactory<TConfiguration>(TConfiguration 
             var domainParameter = this.GetDomainObjectParameter();
 
             yield return new CodeConstructor
-                         {
-                                 Attributes = MemberAttributes.Public,
-                                 Parameters = { domainParameter },
-                                 Statements =
+            {
+                Attributes = MemberAttributes.Public,
+                Parameters = { domainParameter },
+                Statements =
                                  {
                                          new CodeThrowArgumentNullExceptionConditionStatement(domainParameter),
                                          domainParameter.ToVariableReferenceExpression().ToPropertyReference(this.Configuration.Environment.IdentityProperty)
                                                         .ToAssignStatement(this.GetAssignIdExpression())
                                  }
-                         };
+            };
         }
 
         if (this.Configuration.IdentityIsReference)
@@ -55,11 +55,11 @@ public class DefaultServerIdentityDTOFileFactory<TConfiguration>(TConfiguration 
             var idParameter = new CodeParameterDeclarationExpression(typeof(string), "id");
 
             yield return new CodeConstructor
-                         {
-                                 Attributes = MemberAttributes.Public,
-                                 Parameters = { idParameter },
-                                 ChainedConstructorArgs = { typeof(Guid).ToTypeReference().ToObjectCreateExpression(idParameter.ToVariableReferenceExpression())}
-                         };
+            {
+                Attributes = MemberAttributes.Public,
+                Parameters = { idParameter },
+                ChainedConstructorArgs = { typeof(Guid).ToTypeReference().ToObjectCreateExpression(idParameter.ToVariableReferenceExpression()) }
+            };
         }
     }
 
@@ -83,3 +83,4 @@ public class DefaultServerIdentityDTOFileFactory<TConfiguration>(TConfiguration 
         yield return this.Configuration.GetDTOFileAttribute(this.DomainType, this.FileType);
     }
 }
+

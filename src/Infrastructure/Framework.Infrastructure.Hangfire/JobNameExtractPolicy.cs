@@ -10,3 +10,4 @@ public class JobNameExtractPolicy : IJobNameExtractPolicy
 
     public string GetDisplayName(Type jobType) => jobType.Name;
 }
+

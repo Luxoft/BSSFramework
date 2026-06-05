@@ -1,4 +1,5 @@
 ﻿using System.CodeDom;
+
 using Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 
 namespace Framework.CodeGeneration.BLLCoreGenerator.FileFactory;
@@ -19,11 +20,12 @@ public class BLLFactoryContainerInterfaceFileFactory<TConfiguration>(TConfigurat
         foreach (var domainType in this.Configuration.BLLDomainTypes)
         {
             yield return new CodeMemberProperty
-                         {
-                                 Name = domainType.Name + "Factory",
-                                 Type = this.Configuration.GetCodeTypeReference(domainType, FileType.BLLFactoryInterface),
-                                 HasGet = true
-                         };
+            {
+                Name = domainType.Name + "Factory",
+                Type = this.Configuration.GetCodeTypeReference(domainType, FileType.BLLFactoryInterface),
+                HasGet = true
+            };
         }
     }
 }
+

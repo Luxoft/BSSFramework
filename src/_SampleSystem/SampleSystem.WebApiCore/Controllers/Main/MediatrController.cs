@@ -4,6 +4,7 @@ using Framework.Infrastructure;
 using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
+
 using SampleSystem.BLL;
 using SampleSystem.BLL._Query.GetEmployees;
 using SampleSystem.BLL._Query.GetManagementUnitFluentMappings;
@@ -41,3 +42,4 @@ public class MediatrController(IMediator mediator) : ApiControllerBase<ISampleSy
             DBSessionMode.Write,
             _ => mediator.Send(new CreateIntegrationEventCommand()).GetAwaiter().GetResult());
 }
+

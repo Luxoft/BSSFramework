@@ -63,3 +63,4 @@ public class ListTypeFieldMetadata : FieldMetadata
 
     public bool IsCompilerGenerated => this._isCompilerGenerated;
 }
+

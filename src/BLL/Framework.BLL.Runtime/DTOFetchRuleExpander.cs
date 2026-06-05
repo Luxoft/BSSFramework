@@ -1,6 +1,6 @@
-﻿using Framework.BLL.Domain.DTO;
+﻿using Anch.GenericQueryable.Fetching;
 
-using Anch.GenericQueryable.Fetching;
+using Framework.BLL.Domain.DTO;
 
 namespace Framework.BLL;
 
@@ -19,3 +19,4 @@ public abstract class DTOFetchRuleExpander<TPersistentObjectBase> : IFetchRuleEx
 
     protected abstract PropertyFetchRule<TSource>? TryExpand<TSource>(ViewDTOType dtoType);
 }
+

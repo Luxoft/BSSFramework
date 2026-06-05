@@ -20,3 +20,4 @@ public static class BssFrameworkSettingsExtensions
             builder.AddServices(services => services.Initialize<TargetSystemSetup>(setupAction));
     }
 }
+

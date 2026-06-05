@@ -19,3 +19,4 @@ public class WebApiTests(IServiceProvider rootServiceProvider) : TestBase(rootSe
         Assert.Contains(employees, e => e.Id == employeeIdentity.Id);
     }
 }
+

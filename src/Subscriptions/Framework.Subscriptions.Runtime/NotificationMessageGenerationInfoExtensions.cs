@@ -31,3 +31,4 @@ public static class NotificationMessageGenerationInfoExtensions
 
         group recipient by g.Key;
 }
+

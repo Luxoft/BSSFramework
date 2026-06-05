@@ -1,7 +1,10 @@
 ﻿using System.Linq.Expressions;
 
 using Anch.Core;
+using Anch.GenericQueryable;
+using Anch.GenericQueryable.Fetching;
 using Anch.IdentitySource;
+using Anch.OData.Domain;
 
 using Framework.Application;
 using Framework.Application.Domain;
@@ -10,12 +13,7 @@ using Framework.Core;
 using Framework.Database;
 using Framework.Database.Domain;
 
-using Anch.GenericQueryable;
-using Anch.GenericQueryable.Fetching;
-
 using Microsoft.Extensions.DependencyInjection;
-
-using Anch.OData.Domain;
 
 namespace Framework.BLL;
 
@@ -25,7 +23,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     where TBLLContext : class, IBLLBaseContext
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     where TDomainObject : class, TPersistentDomainObjectBase
-    where TIdent: notnull
+    where TIdent : notnull
 {
     private readonly IDAL<TDomainObject, TIdent> dal;
 
@@ -304,3 +302,4 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     #endregion
 
 }
+

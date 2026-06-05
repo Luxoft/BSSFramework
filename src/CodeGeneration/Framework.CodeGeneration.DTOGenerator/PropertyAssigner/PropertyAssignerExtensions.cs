@@ -1,5 +1,6 @@
 ﻿using System.CodeDom;
 using System.Reflection;
+
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
 
@@ -50,3 +51,4 @@ public static class PropertyAssignerExtensions
         }
     }
 }
+

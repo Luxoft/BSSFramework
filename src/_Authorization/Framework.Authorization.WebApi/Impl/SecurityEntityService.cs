@@ -1,9 +1,8 @@
 ﻿using Anch.Core;
+using Anch.SecuritySystem.ExternalSystem.SecurityContextStorage;
 
 using Framework.Authorization.Generated.DTO;
 using Framework.Database;
-
-using Anch.SecuritySystem.ExternalSystem.SecurityContextStorage;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -45,3 +44,4 @@ public partial class AuthMainController
                                    .ToList();
             });
 }
+

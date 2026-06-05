@@ -34,7 +34,7 @@ public class UniqueCollectionValidator(string groupKey) : IDynamicPropertyValida
                                            {
                                                var basePropExpr = Expression.Property(elementParameter, prop);
 
-                                               if(prop.PropertyType == typeof(string))
+                                               if (prop.PropertyType == typeof(string))
                                                {
                                                    return normalizeString.GetBodyWithOverrideParameters(basePropExpr);
                                                }
@@ -85,3 +85,4 @@ public class UniqueCollectionValidator<TSource, TProperty, TElement, TGroupEleme
                                               () => $"{context.GetPropertyName()}{(context.GetSource() as IVisualIdentityObject).Maybe(x => " (" + x.Name + ")")} error. Duplicate fields ({this.uniqueElementString}) combination: {duplicates.Join(", ", d => d.Key)}");
     }
 }
+

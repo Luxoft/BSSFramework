@@ -42,22 +42,23 @@ public class DefaultBasePersistentDTOFileFactory<TConfiguration>(TConfiguration 
 
 
         yield return new CodeMemberProperty
-                     {
-                             Attributes = MemberAttributes.Public | MemberAttributes.Final,
-                             Name = "IsNew",
-                             Type = new CodeTypeReference(typeof(bool)),
-                             GetStatements =
+        {
+            Attributes = MemberAttributes.Public | MemberAttributes.Final,
+            Name = "IsNew",
+            Type = new CodeTypeReference(typeof(bool)),
+            GetStatements =
                              {
                                      new CodeValueEqualityOperatorExpression(
                                                                              this.Configuration.Environment.GetIdentityType().ToTypeReference().ToDefaultValueExpression(),
                                                                              this.Configuration.GetIdentityPropertyCodeExpression()).ToMethodReturnStatement()
                              },
-                             CustomAttributes =
+            CustomAttributes =
                              {
                                  new CodeAttributeDeclaration(new CodeTypeReference(typeof(IgnoreDataMemberAttribute))),
                              }
-                     };
+        };
 
         yield return this.GetIdentityObjectImplementation(true);
     }
 }
+

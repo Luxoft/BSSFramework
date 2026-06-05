@@ -10,3 +10,4 @@ public partial interface IDomainObjectNotificationBLL
     /// <returns></returns>
     QueueProcessingState GetProcessingState();
 }
+

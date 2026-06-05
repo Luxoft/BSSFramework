@@ -12,7 +12,7 @@ using Framework.Core;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner.Security.ExpandMaybe;
 
-public class ExpandMaybeSecurityToSecurityPropertyAssigner<TConfiguration>  : MaybePropertyAssigner<TConfiguration>
+public class ExpandMaybeSecurityToSecurityPropertyAssigner<TConfiguration> : MaybePropertyAssigner<TConfiguration>
         where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
     private readonly IPropertyCodeTypeReferenceService sourceTypeReferenceService;
@@ -41,14 +41,15 @@ public class ExpandMaybeSecurityToSecurityPropertyAssigner<TConfiguration>  : Ma
         var resultVarDeclRef = new CodeVariableReferenceExpression(resultVarDecl.Name);
 
         return new CodeConditionStatement(sourcePropertyRef.ToPropertyReference(nameof(Maybe<>.HasValue)))
-               {
-                   TrueStatements =
+        {
+            TrueStatements =
                    {
                        resultVarDecl,
                        this.InnerAssigner.GetAssignStatement(property, sourcePropertyRef.ToPropertyReference(nameof(Maybe<>.Value)), resultVarDeclRef),
                        resultVarDeclRef.ToAssignStatement(targetPropertyRef)
                    },
-                   FalseStatements = { new CodeDefaultValueExpression(targetPropertyTypeRef).ToAssignStatement(targetPropertyRef) }
-               };
+            FalseStatements = { new CodeDefaultValueExpression(targetPropertyTypeRef).ToAssignStatement(targetPropertyRef) }
+        };
     }
 }
+

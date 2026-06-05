@@ -70,3 +70,4 @@ public class TransactionFlushBeforeCommit(IServiceProvider rootServiceProvider) 
         Assert.Equal(object2.Field1, savedExampleField1);
     }
 }
+

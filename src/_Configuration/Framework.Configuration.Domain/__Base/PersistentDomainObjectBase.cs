@@ -16,7 +16,7 @@ public abstract class PersistentDomainObjectBase : DomainObjectBase, IEquatable<
     }
 
     protected PersistentDomainObjectBase(Guid id)
-            : this () =>
+            : this() =>
         this.id = id;
 
     #endregion
@@ -45,3 +45,4 @@ public abstract class PersistentDomainObjectBase : DomainObjectBase, IEquatable<
 
     public override int GetHashCode() => this.Id.IsDefault() ? base.GetHashCode() : this.Id.GetHashCode();
 }
+

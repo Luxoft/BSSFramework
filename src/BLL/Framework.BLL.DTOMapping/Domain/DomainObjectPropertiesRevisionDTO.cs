@@ -15,3 +15,4 @@ public class DomainObjectPropertiesRevisionDTO<TIdent, TPropertyRevision>
     [DataMember]
     public List<TPropertyRevision> RevisionInfos { get; set; } = [];
 }
+

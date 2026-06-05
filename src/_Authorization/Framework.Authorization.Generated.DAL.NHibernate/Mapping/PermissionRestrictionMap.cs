@@ -15,3 +15,4 @@ public class PermissionRestrictionMap : AuthBaseMap<PermissionRestriction>
             .UniqueKey("UIX_permission_securityContextId_securityContextTypePermissionRestriction");
     }
 }
+

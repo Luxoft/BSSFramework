@@ -104,3 +104,4 @@ public class RestoreQueryableCallsVisitor : ExpressionVisitor
 
     public static readonly RestoreQueryableCallsVisitor Value = new();
 }
+

@@ -8,3 +8,4 @@ internal static class EntityActionHeaderExtensions
             where T : AbstractPostDatabaseOperationEvent =>
         new DALObject(source.Entity, source.Persister.EntityMetamodel.Type, applyIndex);
 }
+

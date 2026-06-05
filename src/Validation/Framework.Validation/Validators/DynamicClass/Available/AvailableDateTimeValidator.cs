@@ -15,3 +15,4 @@ public class AvailableDateTimeValidator : RangeClassValidator<DateTime, DateTime
 
     public static AvailableDateTimeValidator Value { get; } = new();
 }
+

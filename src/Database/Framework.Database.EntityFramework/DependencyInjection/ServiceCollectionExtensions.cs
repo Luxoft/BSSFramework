@@ -9,3 +9,4 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddEntityFramework(this IServiceCollection services, Action<IEntityFrameworkSetup>? setupAction = null) =>
         services.Initialize<EntityFrameworkSetup>(setupAction);
 }
+

@@ -1,7 +1,7 @@
-﻿using Framework.BLL.Domain.Attributes;
-using Framework.BLL.Domain.Persistent.Attributes;
+﻿using Anch.SecuritySystem;
 
-using Anch.SecuritySystem;
+using Framework.BLL.Domain.Attributes;
+using Framework.BLL.Domain.Persistent.Attributes;
 
 namespace SampleSystem.Domain.BU;
 
@@ -17,3 +17,4 @@ public partial class BusinessUnit : IBusinessUnitSecurityElement<BusinessUnit>
     [ExpandPath("")]
     BusinessUnit IBusinessUnitSecurityElement<BusinessUnit>.BusinessUnit => this;
 }
+

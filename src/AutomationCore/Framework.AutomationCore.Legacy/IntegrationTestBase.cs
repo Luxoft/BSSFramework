@@ -1,4 +1,5 @@
 ﻿using Anch.Core;
+using Anch.SecuritySystem;
 
 using Framework.Application;
 using Framework.Application.Repository;
@@ -12,8 +13,6 @@ using Framework.Database;
 using Framework.Notification.DTO;
 
 using Microsoft.Extensions.DependencyInjection;
-
-using Anch.SecuritySystem;
 
 namespace Framework.AutomationCore;
 
@@ -97,3 +96,4 @@ public abstract class IntegrationTestBase<TBLLContext>(IServiceProvider rootServ
         this.EvaluateRead(context => this.GetConfigurationBLLContext(context).Logics.DomainObjectNotification.GetFullList()
                                          .ToList(obj => DataContractSerializerHelper.Deserialize<NotificationEventDTO>(obj.SerializeData)));
 }
+

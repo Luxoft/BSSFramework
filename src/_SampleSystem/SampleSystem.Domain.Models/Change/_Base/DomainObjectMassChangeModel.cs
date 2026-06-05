@@ -17,3 +17,4 @@ public abstract class DomainObjectMassChangeModel<TDomainObject> : DomainObjectB
 
     IEnumerable<TDomainObject> IDomainObjectMassChangeModel<TDomainObject>.ChangingObjects => this.ChangingObjects;
 }
+

@@ -32,14 +32,15 @@ public abstract class MethodGenerator : IMethodGenerator, IMethodGeneratorInfo
 
     public CodeMemberMethod GetMethod() =>
         new CodeMemberMethod
-            {
-                Attributes = this.Attributes,
+        {
+            Attributes = this.Attributes,
 
-                Name = this.Name,
+            Name = this.Name,
 
-                ReturnType = this.ReturnType,
-            }.WithParameters(this.Parameters)
+            ReturnType = this.ReturnType,
+        }.WithParameters(this.Parameters)
              .WithStatements(this.GetStatements());
 
     IEnumerable<CodeParameterDeclarationExpression> IMethodGeneratorInfo.Parameters => this.Parameters;
 }
+

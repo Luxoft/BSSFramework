@@ -13,5 +13,6 @@ public class GeneratedAssembly(string fullName, string name, ITypeSource typeSou
 
     public override string FullName { get; } = fullName;
 
-    public override AssemblyName GetName() => new (name) { Name = name };
+    public override AssemblyName GetName() => new(name) { Name = name };
 }
+

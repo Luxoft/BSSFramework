@@ -90,13 +90,13 @@ public class DALChanges : DALChanges<IDALObject>
                           into typeGroup
 
                           select new
-                                 {
-                                     typeGroup.Key,
-                                     Value = new DALChanges<object>(
+                          {
+                              typeGroup.Key,
+                              Value = new DALChanges<object>(
                                          typeGroup.Where(pair => pair.Value == DALObjectChangeType.Created).Select(pair => pair.Object),
                                          typeGroup.Where(pair => pair.Value == DALObjectChangeType.Updated).Select(pair => pair.Object),
                                          typeGroup.Where(pair => pair.Value == DALObjectChangeType.Removed).Select(pair => pair.Object))
-                                 };
+                          };
 
             return request.ToDictionary(pair => pair.Key, pair => pair.Value);
         });
@@ -108,3 +108,4 @@ public class DALChanges : DALChanges<IDALObject>
 
     public Dictionary<Type, DALChanges<object>> GroupByType() => this.lazyGroupByType.Value;
 }
+

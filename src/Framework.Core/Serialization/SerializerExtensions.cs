@@ -41,3 +41,4 @@ public static class SerializerExtensions
         return new Serializer<TS2, TValue>(v => serializer.Parse(nextSerializer.Parse(v)), v => nextSerializer.Format(serializer.Format(v)));
     }
 }
+

@@ -25,3 +25,4 @@ public class ChangePermissionDelegatesModel : DomainObjectBase
         this.Items.RemoveBy(item => updatePermissionDelegatesModel.RemoveItems.Contains(item.Permission));
     }
 }
+

@@ -24,7 +24,7 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     }
 
     protected AuditPersistentDomainObjectBase(Guid id)
-            : base (id)
+            : base(id)
     {
     }
 
@@ -71,3 +71,4 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
         internal protected set => this.createdBy = value.TrimNull();
     }
 }
+

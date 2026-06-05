@@ -9,3 +9,4 @@ public class ApiControllerNewScopeEvaluator<TBLLContext, TMappingService>(IConte
 {
     public TResult Evaluate<TResult>(DBSessionMode sessionMode, Func<EvaluatedData<TBLLContext, TMappingService>, TResult> getResult) => contextEvaluator.Evaluate(sessionMode, getResult);
 }
+

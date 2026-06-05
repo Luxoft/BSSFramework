@@ -42,5 +42,5 @@ public static class NumberExtensions
     }
 
 
-    public static decimal AwayFromZeroRound (this decimal value, int rank) => decimal.Round(value, rank, MidpointRounding.AwayFromZero);
+    public static decimal AwayFromZeroRound(this decimal value, int rank) => decimal.Round(value, rank, MidpointRounding.AwayFromZero);
 }

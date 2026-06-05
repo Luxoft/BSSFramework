@@ -34,3 +34,4 @@ public class SampleSystemExtGeneratePolicy : IGeneratePolicy<RoleFileType>
         return false;
     }
 }
+

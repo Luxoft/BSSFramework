@@ -7,3 +7,4 @@ public abstract class DomainObjectRootFilterModel<TDomainObject> : DomainObjectF
 {
     public override Expression<Func<TDomainObject, bool>> ToFilterExpression() => _ => true;
 }
+

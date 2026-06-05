@@ -20,3 +20,4 @@ public partial class DataManager
             return subscriptionService.Process(new DomainObjectVersions<T>(prev, next)).ToList();
         });
 }
+

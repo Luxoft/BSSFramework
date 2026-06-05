@@ -136,3 +136,4 @@ public class EmployeeProjectionTests(IServiceProvider rootServiceProvider) : Tes
         Assert.Equal(expected, actual);
     }
 }
+

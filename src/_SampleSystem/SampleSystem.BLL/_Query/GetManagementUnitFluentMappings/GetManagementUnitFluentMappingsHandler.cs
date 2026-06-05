@@ -1,6 +1,6 @@
-﻿using MediatR;
+﻿using Anch.SecuritySystem;
 
-using Anch.SecuritySystem;
+using MediatR;
 
 namespace SampleSystem.BLL._Query.GetManagementUnitFluentMappings;
 
@@ -21,3 +21,4 @@ public class GetManagementUnitFluentMappingsHandler(IManagementUnitFluentMapping
         return result;
     }
 }
+

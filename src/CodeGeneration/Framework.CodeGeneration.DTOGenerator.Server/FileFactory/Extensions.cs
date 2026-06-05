@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 
 using Anch.Core;
+
 using Framework.BLL.Domain.Attributes;
 using Framework.BLL.Domain.Serialization;
 using Framework.BLL.Domain.Serialization.Extensions;
@@ -28,3 +29,4 @@ public static class Extensions
 
     public static bool IsIntegrationVersion(this Type domainType) => domainType.TryGetIntegrationVersionProperty() != null;
 }
+

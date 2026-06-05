@@ -1,11 +1,9 @@
-﻿using Framework.BLL.Domain.Persistent;
-
-using Anch.GenericQueryable.Fetching;
-
+﻿using Anch.GenericQueryable.Fetching;
 using Anch.OData.Domain;
 
-using SampleSystem.Domain.Models.Filters;
+using Framework.BLL.Domain.Persistent;
 
+using SampleSystem.Domain.Models.Filters;
 using TestBusinessUnit = SampleSystem.Domain.Projections.TestBusinessUnit;
 
 namespace SampleSystem.BLL;
@@ -18,3 +16,4 @@ public partial class TestBusinessUnitBLL
             FetchRule<TestBusinessUnit> fetchs) =>
         this.GetTreeByOData(selectOperation, fetchs);
 }
+

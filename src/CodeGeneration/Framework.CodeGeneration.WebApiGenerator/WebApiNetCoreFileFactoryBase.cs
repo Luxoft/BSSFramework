@@ -24,14 +24,15 @@ public class WebApiNetCoreFileFactoryBase<TConfiguration>(TConfiguration configu
     protected sealed override IEnumerable<CodeTypeReference> GetBaseTypes()
     {
         var result = new CodeTypeReference(typeof(ApiControllerBase<,>))
-                     {
-                             TypeArguments =
+        {
+            TypeArguments =
                              {
                                      this.Configuration.Environment.BLLCore.BLLContextInterfaceTypeReference,
                                      this.Configuration.Environment.ServerDTO.DTOMappingServiceInterfaceTypeReference
                              }
-                     };
+        };
 
         yield return result;
     }
 }
+

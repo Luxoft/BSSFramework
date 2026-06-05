@@ -57,3 +57,4 @@ public class PropertyCodeTypeReferenceService<TConfiguration>(TConfiguration con
         return this.GetCodeTypeReferenceByType(property.PropertyType);
     }
 }
+

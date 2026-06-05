@@ -48,10 +48,10 @@ public class GetTreeByOperationMethodGenerator<TConfiguration> : ViewMethodGener
         var selectMethod = typeof(HierarchicalNodeExtensions).ToTypeReferenceExpression().ToMethodReferenceExpression(nameof(HierarchicalNodeExtensions.ChangeItem));
 
         var selectLambda = new CodeParameterDeclarationExpression { Name = this.DomainType.Name.ToStartLowerCase() }.Pipe(param => new CodeLambdaExpression
-            {
-                    Parameters = { param },
-                    Statements = { param.ToVariableReferenceExpression().Pipe(source => this.ConvertToDTO(source, evaluateDataExpr.GetMappingService())) }
-            });
+        {
+            Parameters = { param },
+            Statements = { param.ToVariableReferenceExpression().Pipe(source => this.ConvertToDTO(source, evaluateDataExpr.GetMappingService())) }
+        });
 
         var treeDecl = new CodeVariableDeclarationStatement("var", "tree", bllRefExpr.ToMethodReferenceExpression("GetTree").ToMethodInvokeExpression(this.GetFetchRule()));
 
@@ -62,3 +62,4 @@ public class GetTreeByOperationMethodGenerator<TConfiguration> : ViewMethodGener
                              .ToMethodReturnStatement();
     }
 }
+

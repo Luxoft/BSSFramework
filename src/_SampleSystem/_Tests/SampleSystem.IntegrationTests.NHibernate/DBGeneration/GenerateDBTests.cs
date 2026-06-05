@@ -1,6 +1,4 @@
 ﻿using Framework.AutomationCore.Extensions;
-using Framework.Database.NHibernate.DBGenerator;
-
 
 using SampleSystem.DbGenerate.NHibernate;
 using SampleSystem.IntegrationTests._Environment;
@@ -26,3 +24,4 @@ public class GenerateDBTests(IServiceProvider rootServiceProvider) : TestBase(ro
         Assert.Null(ex);
     }
 }
+

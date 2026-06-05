@@ -1,9 +1,8 @@
 ﻿using System.CodeDom;
 using System.Collections.ObjectModel;
 using System.Reflection;
-
 using Anch.Core;
-
+using Anch.SecuritySystem;
 using Framework.BLL;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.BLL.Services;
@@ -13,8 +12,6 @@ using Framework.CodeGeneration.FileFactory;
 using Framework.Core;
 using Framework.FileGeneration.Configuration;
 using Framework.Projection;
-
-using Anch.SecuritySystem;
 
 #pragma warning disable S100 // Methods and properties should be named in camel case
 namespace Framework.CodeGeneration.BLLCoreGenerator.Configuration;

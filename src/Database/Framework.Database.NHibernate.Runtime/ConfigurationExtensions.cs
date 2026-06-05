@@ -26,3 +26,4 @@ public static class ConfigurationExtensions
         documents.Foreach(configuration.AddDocument);
     }
 }
+

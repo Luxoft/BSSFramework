@@ -31,3 +31,4 @@ public class AlphabetValidator : IPropertyValidator<object, string>
                                               () => $"The value of {context.GetPropertyName()} property of {context.GetSourceTypeName()} contains invalid chars: {invalidChars}");
     }
 }
+

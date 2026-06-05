@@ -1,6 +1,8 @@
 ﻿using System.CodeDom;
 
 using Anch.Core;
+using Anch.OData;
+
 using Framework.BLL;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.DTO.Extensions;
@@ -9,8 +11,6 @@ using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Extensions;
 using Framework.Core;
-
-using Anch.OData;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.View;
 
@@ -96,3 +96,4 @@ public abstract class ViewMethodGenerator<TConfiguration>(TConfiguration configu
 
     protected CodeExpression ConvertToDTOList(CodeExpression sourceExpr, CodeExpression mappingServiceExpr) => sourceExpr.ToStaticMethodInvokeExpression(this.GetConvertToDTOListMethod(), mappingServiceExpr);
 }
+

@@ -42,7 +42,7 @@ public class UpdatePropertyAssigner<TConfiguration>(IDTOSource<TConfiguration> s
         }
         else if (this.Configuration.IsReferenceProperty(property) && property.IsDetail())
         {
-            return this.Configuration.GetCreateUpdateDTOExpression(property.PropertyType, sourcePropertyRef,  null, this.MappingServiceRefExpr)
+            return this.Configuration.GetCreateUpdateDTOExpression(property.PropertyType, sourcePropertyRef, null, this.MappingServiceRefExpr)
                        .ToMaybeReturnExpression()
                        .ToAssignStatement(targetPropertyRef);
         }
@@ -75,10 +75,10 @@ public class UpdatePropertyAssigner<TConfiguration>(IDTOSource<TConfiguration> s
              var body = this.Configuration.GetCreateUpdateDTOExpression(elementType, paramRef, null, this.MappingServiceRefExpr);
 
              return new CodeLambdaExpression
-                    {
-                            Parameters = { param },
-                            Statements = { body }
-                    };
+             {
+                 Parameters = { param },
+                 Statements = { body }
+             };
          });
 
         var extractMethodExpr = this.MappingServiceRefExpr.ToMethodReferenceExpression(extractMethodName, sourceElementTypeRef, targetElementIdentityTypeRef, targetElementTypeRef)
@@ -87,3 +87,4 @@ public class UpdatePropertyAssigner<TConfiguration>(IDTOSource<TConfiguration> s
         return extractMethodExpr.ToAssignStatement(targetPropertyRef);
     }
 }
+

@@ -41,16 +41,16 @@ public class LegalEntityProjectionTests(IServiceProvider rootServiceProvider) : 
 
         // Act
         var result = this.EvaluateRead(context => context.Logics.Default.Create<CustomCompanyLegalEntity>().GetById(id, true).Pipe(customLegalEntity => new
-                                           {
-                                                   customLegalEntity.Name,
-                                                   customLegalEntity.Code,
-                                                   customLegalEntity.NameEnglish,
-                                                   BaseObjName = customLegalEntity.BaseObj.Name,
-                                                   CurrentObjName = customLegalEntity.CurrentObj.Name,
-                                                   PeriodStartDate = customLegalEntity.CurrentObj.PeriodStartDateXXX,
-                                                   customLegalEntity.AribaStatusDescription,
-                                                   customLegalEntity.AribaStatusType,
-                                           }));
+        {
+            customLegalEntity.Name,
+            customLegalEntity.Code,
+            customLegalEntity.NameEnglish,
+            BaseObjName = customLegalEntity.BaseObj.Name,
+            CurrentObjName = customLegalEntity.CurrentObj.Name,
+            PeriodStartDate = customLegalEntity.CurrentObj.PeriodStartDateXXX,
+            customLegalEntity.AribaStatusDescription,
+            customLegalEntity.AribaStatusType,
+        }));
 
 
         // Assert
@@ -62,3 +62,4 @@ public class LegalEntityProjectionTests(IServiceProvider rootServiceProvider) : 
         Assert.Equal(period.StartDate, result.PeriodStartDate);
     }
 }
+

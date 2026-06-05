@@ -4,5 +4,6 @@ namespace SampleSystem.EventMetadata;
 
 public static class SampleSystemEventOperation
 {
-    public static EventOperation CustomAction { get; } = new (nameof(CustomAction));
+    public static EventOperation CustomAction { get; } = new(nameof(CustomAction));
 }
+

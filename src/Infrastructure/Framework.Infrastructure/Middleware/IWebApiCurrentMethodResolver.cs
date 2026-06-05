@@ -6,3 +6,4 @@ public interface IWebApiCurrentMethodResolver
 {
     MethodInfo? TryGetCurrentMethod();
 }
+

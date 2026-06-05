@@ -17,3 +17,4 @@ public class TypeMapProperty : ITypeMapMember
 
     public virtual Type Type => this.Property.PropertyType;
 }
+

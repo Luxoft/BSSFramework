@@ -24,3 +24,4 @@ public class CodeTypeReferenceComparer : IEqualityComparer<CodeTypeReference>
 
     public static readonly CodeTypeReferenceComparer Value = new();
 }
+

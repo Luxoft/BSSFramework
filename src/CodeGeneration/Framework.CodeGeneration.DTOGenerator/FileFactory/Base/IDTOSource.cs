@@ -12,3 +12,4 @@ public interface IDTOSource : IDomainTypeContainer//, IFileTypeSource<DTOFileTyp
 
 public interface IDTOSource<out TConfiguration> : IDTOSource, IFileGeneratorConfigurationContainer<TConfiguration>
         where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>;
+

@@ -1,12 +1,11 @@
 ﻿using System.Linq.Expressions;
 
+using Anch.GenericQueryable.Fetching;
+using Anch.OData.Domain;
+
 using Framework.Application;
 using Framework.BLL.Domain.Models;
 using Framework.Database;
-
-using Anch.GenericQueryable.Fetching;
-
-using Anch.OData.Domain;
 
 namespace Framework.BLL;
 
@@ -86,3 +85,4 @@ public interface IBLLQueryBase<TDomainObject> : IBLLSimpleQueryBase<TDomainObjec
         bool throwOnNotFound,
         Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule);
 }
+

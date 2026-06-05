@@ -32,3 +32,4 @@ public class DefaultUpdateCollectionMappingService<TSource, TSourceIdentity, TTa
         sourceItems.Update(targetItems, this.GetSourceId, this.GetSourceIdentityId, this.GetTargetId, this.AddDetail, this.RemoveDetail);
     }
 }
+

@@ -24,3 +24,4 @@ public abstract class AuditDTOGeneratorConfigurationBase<TEnvironment>(TEnvironm
 
     protected override string NamespacePostfix { get; } = "Generated.DTO";
 }
+

@@ -21,3 +21,4 @@ public partial class TestBusinessUnit
 
     public override string Employees => Enumerable.OrderBy<MiniBusinessUnitEmployeeRole, string>(this.BusinessUnitEmployeeRoles, link => link.Employee.NameEngFirstName).Join(",", link => link.Employee.NameEngFirstName);
 }
+

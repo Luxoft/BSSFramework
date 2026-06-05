@@ -6,3 +6,4 @@ public interface IMailMessageModifier
 {
     void Modify(MailMessage message);
 }
+

@@ -31,11 +31,12 @@ public class ValidatorFileFactory<TConfiguration>(TConfiguration configuration) 
             var cacheParameter = this.Configuration.GetCodeTypeReference(null, FileType.ValidatorCompileCache).ToParameterDeclarationExpression("cache");
 
             yield return new CodeConstructor
-                         {
-                             Attributes = MemberAttributes.Public,
-                             Parameters = { contextParameter, cacheParameter },
-                             BaseConstructorArgs = { contextParameter.ToVariableReferenceExpression(), cacheParameter.ToVariableReferenceExpression() }
-                         };
+            {
+                Attributes = MemberAttributes.Public,
+                Parameters = { contextParameter, cacheParameter },
+                BaseConstructorArgs = { contextParameter.ToVariableReferenceExpression(), cacheParameter.ToVariableReferenceExpression() }
+            };
         }
     }
 }
+

@@ -1,12 +1,11 @@
-﻿using Framework.Application;
+﻿using Anch.SecuritySystem;
+
+using Framework.Application;
 using Framework.AutomationCore.RootServiceProviderContainer;
+using Framework.AutomationCore.Services;
 using Framework.BLL.Domain.Persistent;
 using Framework.Core;
 using Framework.Database;
-
-using Anch.SecuritySystem;
-
-using Framework.AutomationCore.Services;
 
 using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Enums;
@@ -14,7 +13,6 @@ using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.Security;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
-
 using BusinessUnitController = SampleSystem.WebApiCore.Controllers.Main.BusinessUnitController;
 
 namespace SampleSystem.IntegrationTests;
@@ -192,3 +190,4 @@ public class BusinessUnitTests(IServiceProvider rootServiceProvider) : TestBase(
             });
     }
 }
+

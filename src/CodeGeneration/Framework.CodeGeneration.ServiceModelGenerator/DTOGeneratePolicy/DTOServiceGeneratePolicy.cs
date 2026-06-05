@@ -46,3 +46,4 @@ public class DTOServiceGeneratePolicy<TConfiguration> : GeneratorConfigurationCo
         return this.cache.Contains(new Tuple<Type, RoleFileType>(domainType, fileType));
     }
 }
+

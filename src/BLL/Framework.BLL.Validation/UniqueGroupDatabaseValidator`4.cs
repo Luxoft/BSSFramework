@@ -41,3 +41,4 @@ public class UniqueGroupDatabaseValidator<TBLLContext, TPersistentDomainObjectBa
             () => $"{typeof(TDomainObject).Name} with same {propertyName} ({getPropertyValues(validationContext.Source).Join(", ")}) already exists");
     }
 }
+

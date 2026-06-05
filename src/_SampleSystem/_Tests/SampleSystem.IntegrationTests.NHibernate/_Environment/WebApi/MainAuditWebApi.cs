@@ -11,3 +11,4 @@ public class MainAuditWebApi(IServiceProvider serviceProvider) : WebApiBase(serv
 
     public ControllerEvaluator<LocationController> Location => this.GetControllerEvaluator<LocationController>();
 }
+

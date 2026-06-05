@@ -2,7 +2,6 @@
 using Anch.Testing.Database.ConnectionStringManagement;
 
 using Framework.AutomationCore.Extensions;
-using Framework.Database.NHibernate.DBGenerator;
 
 using SampleSystem.DbGenerate.NHibernate;
 using SampleSystem.IntegrationTests._Environment.FluentMigration;
@@ -28,3 +27,4 @@ public class EmptySchemaInitializer(IActualTestConnectionStringSource actualTest
         new BssFluentMigrator(actualTestConnectionStringSource.ActualConnectionString.Value, typeof(InitNumberInDomainObjectEventMigration).Assembly).Migrate();
     }
 }
+

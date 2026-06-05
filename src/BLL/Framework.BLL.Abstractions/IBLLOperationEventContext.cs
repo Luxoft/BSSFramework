@@ -6,3 +6,4 @@ public interface IBLLOperationEventContext
 {
     IEventOperationSender OperationSender { get; }
 }
+

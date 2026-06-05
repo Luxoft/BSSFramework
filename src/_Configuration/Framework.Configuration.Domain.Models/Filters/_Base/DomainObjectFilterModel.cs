@@ -10,3 +10,4 @@ public abstract class DomainObjectFilterModel<TDomainObject> : DomainObjectBase,
 {
     public virtual Expression<Func<TDomainObject, bool>> ToFilterExpression() => _ => true;
 }
+

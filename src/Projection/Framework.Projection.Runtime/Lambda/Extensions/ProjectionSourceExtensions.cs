@@ -26,3 +26,4 @@ public static class ProjectionSourceExtensions
         public IEnumerable<IProjection> GetProjections() => this.sources.SelectMany(p => p.GetProjections());
     }
 }
+

@@ -32,3 +32,4 @@ public static class SampleSystemSecurityRole
 
     public static SecurityRole TestPerformance { get; } = new(nameof(TestPerformance));
 }
+

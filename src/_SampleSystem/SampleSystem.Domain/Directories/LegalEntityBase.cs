@@ -43,3 +43,4 @@ public class LegalEntityBase : BaseDirectory, IMaster<Address>
 
     ICollection<Address> IMaster<Address>.Details => (ICollection<Address>)this.Addresses;
 }
+

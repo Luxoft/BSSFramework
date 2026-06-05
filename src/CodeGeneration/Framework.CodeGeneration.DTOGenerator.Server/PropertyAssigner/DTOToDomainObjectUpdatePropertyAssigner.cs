@@ -17,3 +17,4 @@ public class DTOToDomainObjectUpdatePropertyAssigner<TConfiguration>(IDTOSource<
             this.Configuration.GetCodeTypeReference(elementType, DTOType.IdentityDTO),
             elementType.ToTypeReference());
 }
+

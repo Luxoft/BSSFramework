@@ -73,7 +73,7 @@ public class ExceptionProcessingContext
     public IEnumerable<PersistentClass> GetPersistentClass(TableDescription tableDescription)
     {
         IReadOnlyList<PersistentClass> result;
-        if(!this.tableNameToPersistentClass.TryGetValue(tableDescription, out result))
+        if (!this.tableNameToPersistentClass.TryGetValue(tableDescription, out result))
         {
             //костыль
             var results = this.tableNameToPersistentClass.Where(z => string.Equals(z.Key.Name, tableDescription.Name, StringComparison.InvariantCultureIgnoreCase)).ToList();
@@ -133,10 +133,11 @@ public class ExceptionProcessingContext
                                                 string.Equals(propertyFunc(localThis), propertyFunc(other), StringComparison.InvariantCultureIgnoreCase));
         }
 
-        public override string ToString() => string.Join(".", new[]{this.Catalog, this.Schema, this.Name}.Where(z=>null != z));
+        public override string ToString() => string.Join(".", new[] { this.Catalog, this.Schema, this.Name }.Where(z => null != z));
 
         public override bool Equals(object obj) => string.Equals(this.ToString(), obj.ToString());
 
         public override int GetHashCode() => this.ToString().GetHashCode();
     }
 }
+

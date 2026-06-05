@@ -43,3 +43,4 @@ public static class SqlServerExtensions
     public static Microsoft.SqlServer.Management.Smo.Database? GetDatabase(this Server server, string name) =>
         server.Databases.Contains(name) ? server.Databases[name] : null;
 }
+

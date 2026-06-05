@@ -1,14 +1,12 @@
 ﻿using System.Reflection;
 
 using Anch.Core;
+using Anch.GenericQueryable;
+using Anch.SecuritySystem.Attributes;
 
 using Framework.Application.ApplicationVariable;
 using Framework.Application.Repository;
 using Framework.Configuration.Domain;
-
-using Anch.GenericQueryable;
-
-using Anch.SecuritySystem.Attributes;
 
 namespace Framework.Configuration.BLL;
 
@@ -55,3 +53,4 @@ public class SystemConstantInitializer(IConfigurationBLLContext context, [Disabl
         }
     }
 }
+

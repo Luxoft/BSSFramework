@@ -1,4 +1,5 @@
 ﻿using System.CodeDom;
+
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
@@ -27,3 +28,4 @@ public abstract class IntegrationBaseSaveMethodGenerator<TConfiguration> : Integ
                                           .GetCodeTypeReference(this.DomainType, DTOGenerator.Server.ServerFileType.RichIntegrationDTO);
     }
 }
+

@@ -10,3 +10,4 @@ public class DomainTypeDto
 
     public List<EventOperation> Operations { get; set; } = null!;
 }
+

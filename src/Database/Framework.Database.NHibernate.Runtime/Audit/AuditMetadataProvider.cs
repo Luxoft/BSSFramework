@@ -233,9 +233,9 @@ internal class AuditMetadataProvider<TAuditRevisionEntity> : IMetaDataProvider
             var tableName = type.GetTableName(string.Empty).tableName;
 
             var auditTableAttribute = new AuditTableAttribute(tableName + this.auditTableSuffix)
-                                      {
-                                          Schema = auditService.GetAuditTableSchemaOrDefault(type) ?? this.auditEntityRevisionSchema
-                                      };
+            {
+                Schema = auditService.GetAuditTableSchemaOrDefault(type) ?? this.auditEntityRevisionSchema
+            };
 
             ((EntityMeta)dicToFill[type]).AddClassMeta(auditTableAttribute);
         }
@@ -247,3 +247,4 @@ internal class AuditMetadataProvider<TAuditRevisionEntity> : IMetaDataProvider
         }
     }
 }
+

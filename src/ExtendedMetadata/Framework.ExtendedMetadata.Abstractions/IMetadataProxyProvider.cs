@@ -10,3 +10,4 @@ public interface IMetadataProxyProvider
     T? TryWrap<T>(T value)
         where T : class, ICustomAttributeProvider;
 }
+

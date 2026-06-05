@@ -1,8 +1,8 @@
-﻿using Framework.Application;
+﻿using Anch.Testing.Xunit;
+
+using Framework.Application;
 using Framework.AutomationCore.Extensions;
 using Framework.Database;
-
-using Anch.Testing.Xunit;
 
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests._Environment.TestData;
@@ -34,3 +34,4 @@ public class JobTests(IServiceProvider rootServiceProvider) : TestBase(rootServi
                 c => c.Logics.Default.Create<TestJobObject>().GetUnsecureQueryable().Count());
     }
 }
+

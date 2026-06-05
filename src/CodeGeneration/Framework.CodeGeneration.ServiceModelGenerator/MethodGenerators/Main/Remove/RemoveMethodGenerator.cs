@@ -47,11 +47,11 @@ public class RemoveMethodGenerator<TConfiguration>(TConfiguration configuration,
 
     public CodeMemberMethod GetFacadeMethodWithBLL(CodeParameterDeclarationExpression evaluateDataParameterExpr, CodeParameterDeclarationExpression bllParameterExpr) =>
         new CodeMemberMethod
-            {
-                Attributes = MemberAttributes.Family,
-                Name = this.InternalName,
-                ReturnType = this.ReturnType,
-            }.WithParameters(this.Parameters.Concat([evaluateDataParameterExpr, bllParameterExpr]))
+        {
+            Attributes = MemberAttributes.Family,
+            Name = this.InternalName,
+            ReturnType = this.ReturnType,
+        }.WithParameters(this.Parameters.Concat([evaluateDataParameterExpr, bllParameterExpr]))
              .WithStatements(this.GetFacadeMethodWithBLLStatements(bllParameterExpr.ToVariableReferenceExpression()));
 
     private IEnumerable<CodeStatement> GetFacadeMethodWithBLLStatements(CodeExpression bllRefExpr)
@@ -63,3 +63,4 @@ public class RemoveMethodGenerator<TConfiguration>(TConfiguration configuration,
         yield return bllRefExpr.ToMethodInvokeExpression("Remove", domainObjectVarDecl.ToVariableReferenceExpression()).ToExpressionStatement();
     }
 }
+

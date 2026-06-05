@@ -14,3 +14,4 @@ public class DeepCollectionValidator<TSource, TProperty, TElement> : IPropertyVa
     /// <inheritdoc />
     public ValidationResult GetValidationResult(IPropertyValidationContext<TSource, TProperty> validationContext) => validationContext.Value.Sum(value => validationContext.Validator.GetValidationResult(value, validationContext.OperationContext, new ValidationState(validationContext.ParentState, validationContext.Map, validationContext.Source)));
 }
+

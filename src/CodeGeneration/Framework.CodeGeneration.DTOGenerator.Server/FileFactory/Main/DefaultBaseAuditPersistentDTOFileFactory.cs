@@ -10,3 +10,4 @@ public class DefaultBaseAuditPersistentDTOFileFactory<TConfiguration>(TConfigura
 {
     public override MainDTOFileType FileType { get; } = BaseFileType.BaseAuditPersistentDTO;
 }
+

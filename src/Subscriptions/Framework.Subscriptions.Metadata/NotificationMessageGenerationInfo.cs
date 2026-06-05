@@ -22,3 +22,4 @@ public record NotificationMessageGenerationInfo<TRenderingObject>(ImmutableHashS
 
 public record NotificationMessageGenerationInfo<TRenderingObject, TRecipient>(ImmutableHashSet<TRecipient> Recipients, DomainObjectVersions<TRenderingObject> Versions)
     where TRenderingObject : class;
+

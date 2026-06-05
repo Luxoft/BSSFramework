@@ -16,3 +16,4 @@ public static class PropertyInfoExtensions
             _ => null
         };
 }
+

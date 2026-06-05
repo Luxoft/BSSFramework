@@ -1,4 +1,5 @@
 ﻿using Framework.Database.Domain;
+
 using NHibernate.Envers;
 
 namespace Framework.Database.NHibernate;
@@ -21,3 +22,4 @@ internal static class RevisionTypeExtension
         }
     }
 }
+

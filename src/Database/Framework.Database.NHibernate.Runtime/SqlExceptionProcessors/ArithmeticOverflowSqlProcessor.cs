@@ -12,3 +12,4 @@ internal class ArithmeticOverflowSqlProcessor : ISqlExceptionProcessor
         return new ArithmeticOverflowDALException(sqlException.Message, sqlException.Message);
     }
 }
+

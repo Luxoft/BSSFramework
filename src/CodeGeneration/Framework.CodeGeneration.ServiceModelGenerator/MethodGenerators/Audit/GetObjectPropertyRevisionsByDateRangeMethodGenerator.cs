@@ -27,3 +27,4 @@ public class GetObjectPropertyRevisionsByDateRangeMethodGenerator<TConfiguration
 
     protected override IEnumerable<CodeExpression> GetBLLMethodParameters() => base.GetBLLMethodParameters().Concat([this.PeriodParameter.ToVariableReferenceExpression()]);
 }
+

@@ -2,6 +2,7 @@
 using Anch.SecuritySystem.Providers;
 
 namespace Framework.BLL;
+
 public interface ISecurityBLLFactory<out TBLL>
 {
     TBLL Create();
@@ -13,3 +14,4 @@ public interface ISecurityBLLFactory<out TBLL, TDomainObject> : ISecurityBLLFact
 {
     TBLL Create(ISecurityProvider<TDomainObject> securityProvider);
 }
+

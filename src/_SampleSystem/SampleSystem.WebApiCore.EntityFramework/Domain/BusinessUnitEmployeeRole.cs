@@ -15,3 +15,4 @@ public class BusinessUnitEmployeeRole : IIdentityObject<Guid>
 
     public BusinessUnitEmployeeRoleType Role { get; set; }
 }
+

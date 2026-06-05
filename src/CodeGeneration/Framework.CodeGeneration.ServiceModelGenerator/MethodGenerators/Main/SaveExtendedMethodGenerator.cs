@@ -53,3 +53,4 @@ public class SaveExtendedMethodGenerator<TConfiguration> : ModelMethodGenerator<
                                .ToMethodReturnStatement();
     }
 }
+

@@ -40,3 +40,4 @@ public class BusinessUnitTypeLinkWithTransferTo :
 
     BusinessUnitType IDetail<BusinessUnitType>.Master => this.businessUnitType;
 }
+

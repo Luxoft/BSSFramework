@@ -1,4 +1,5 @@
 ﻿using Anch.Core.Auth;
+
 using Framework.Database.NHibernate.DAL.Revisions;
 
 using NHibernate.Envers;
@@ -19,3 +20,4 @@ public class AuditRevisionEntityListener<TAuditRevisionEntity>(ICurrentUser defa
 
     private void SetAuthor(TAuditRevisionEntity revisionEntity) => revisionEntity.Author = defaultCurrentUser.Name;
 }
+

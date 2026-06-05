@@ -10,3 +10,4 @@ public class ExampleSampleSystemAribaEventsSubscriptionManager(SampleSystemCusto
 {
     public override void Subscribe() => this.SubscribeForSaveOperation<Employee>();
 }
+

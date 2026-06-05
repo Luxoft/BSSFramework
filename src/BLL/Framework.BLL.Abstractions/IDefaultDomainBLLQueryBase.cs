@@ -1,10 +1,9 @@
-﻿using Framework.Application.Domain;
+﻿using Anch.GenericQueryable.Fetching;
+using Anch.OData.Domain;
+
+using Framework.Application.Domain;
 using Framework.BLL.Domain.Persistent;
 using Framework.Database;
-
-using Anch.GenericQueryable.Fetching;
-
-using Anch.OData.Domain;
 
 namespace Framework.BLL;
 
@@ -82,3 +81,4 @@ public interface IDefaultDomainBLLBase<out TBLLContext, in TPersistentDomainObje
         where TBLLContext : IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObject : class, TPersistentDomainObjectBase;
+

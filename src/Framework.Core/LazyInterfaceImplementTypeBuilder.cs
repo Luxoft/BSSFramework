@@ -23,7 +23,8 @@ public class LazyInterfaceImplementTypeBuilder : InterfaceImplementTypeBuilder
     /// </summary>
     /// <param name="moduleBuilder">Модуль, где будет генерировать анонимный тип</param>
     public LazyInterfaceImplementTypeBuilder(ModuleBuilder moduleBuilder)
-            :base(moduleBuilder, typeof(Lazy<>))
+            : base(moduleBuilder, typeof(Lazy<>))
     {
     }
 }
+

@@ -10,3 +10,4 @@ public class DefaultSimpleRefFullDetailDTOFileFactory<TConfiguration>(TConfigura
 {
     public override MainDTOFileType FileType { get; } = SampleSystemFileType.SimpleRefFullDetailDTO;
 }
+

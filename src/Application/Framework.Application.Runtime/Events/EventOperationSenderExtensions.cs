@@ -15,3 +15,4 @@ public static class EventOperationSenderExtensions
               .CreateGenericMethod(domainObjectType)
               .Invoke<Task>(sender, [domainObject, domainObjectEvent]);
 }
+

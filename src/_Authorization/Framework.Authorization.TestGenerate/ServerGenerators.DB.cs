@@ -61,3 +61,4 @@ public partial class ServerGenerators
                 new DatabaseSettings(),
                 new NHibernateSettings { FluentAssemblyList = [typeof(AuthorizationMappingSettings).Assembly] }));
 }
+

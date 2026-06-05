@@ -1,7 +1,6 @@
 ﻿using Anch.Core;
 
 using Framework.Core;
-
 using Framework.Projection.Lambda.ProjectionBuilder;
 
 namespace Framework.Projection.Lambda.ProjectionSource.AutoProjection;
@@ -57,9 +56,11 @@ internal class AutoProjectionFactory(ProjectionLambdaEnvironment environment, Pr
                 node.Children);
 
             yield return new ProjectionPropertyBuilder(environment, property.ToGetLambdaExpression(domainType), "_Auto")
-                         {
-                             ElementProjection = elementProjection, Role = ProjectionPropertyRole.AutoNode, IgnoreSerialization = true
-                         };
+            {
+                ElementProjection = elementProjection,
+                Role = ProjectionPropertyRole.AutoNode,
+                IgnoreSerialization = true
+            };
         }
         else
         {
@@ -68,10 +69,13 @@ internal class AutoProjectionFactory(ProjectionLambdaEnvironment environment, Pr
                 var lastPropertyValue = projectionPath.LastProperty;
 
                 yield return new ProjectionPropertyBuilder(environment, projectionPath.PropertyPath.ToLambdaExpression(domainType), $"_Last_{lastPropertyValue.PropertyName}")
-                             {
-                                 Role = ProjectionPropertyRole.LastAutoNode, IgnoreSerialization = true, ElementProjection = lastPropertyValue.ElementProjection
-                             };
+                {
+                    Role = ProjectionPropertyRole.LastAutoNode,
+                    IgnoreSerialization = true,
+                    ElementProjection = lastPropertyValue.ElementProjection
+                };
             }
         }
     }
 }
+

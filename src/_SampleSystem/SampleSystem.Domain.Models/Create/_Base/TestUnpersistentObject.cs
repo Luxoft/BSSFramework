@@ -10,3 +10,4 @@ public class TestUnpersistentObject : DomainObjectBase
 
     public int Value2 { get; set; }
 }
+

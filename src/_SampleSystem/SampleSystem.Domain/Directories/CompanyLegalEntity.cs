@@ -50,3 +50,4 @@ public class CompanyLegalEntity : LegalEntityBase, ICodeObject
         set => base.Active = value;
     }
 }
+

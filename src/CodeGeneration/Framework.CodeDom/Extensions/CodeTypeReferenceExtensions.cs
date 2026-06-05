@@ -547,11 +547,11 @@ public static class CodeTypeReferenceExtensions
         if (branches == null) throw new ArgumentNullException(nameof(branches));
 
         return branches.Reverse().Aggregate(lastElseStatement, (state, pair) => new CodeConditionStatement
-                                                                                {
-                                                                                        Condition = pair.Item1,
-                                                                                        TrueStatements = { pair.Item2 },
-                                                                                        FalseStatements = { state }
-                                                                                });
+        {
+            Condition = pair.Item1,
+            TrueStatements = { pair.Item2 },
+            FalseStatements = { state }
+        });
     }
 
 
@@ -578,3 +578,4 @@ public static class CodeTypeReferenceExtensions
         }
     }
 }
+

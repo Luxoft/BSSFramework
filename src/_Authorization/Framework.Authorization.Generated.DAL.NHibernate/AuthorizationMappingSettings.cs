@@ -17,3 +17,4 @@ public record AuthorizationMappingSettings(DatabaseName DatabaseName, AuditDatab
     {
     }
 }
+

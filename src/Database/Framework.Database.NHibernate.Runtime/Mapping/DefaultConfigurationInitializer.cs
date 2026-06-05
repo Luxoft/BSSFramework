@@ -8,7 +8,6 @@ using Framework.Database.NHibernate.Dialect;
 using Framework.Database.NHibernate.Fix2100;
 
 using NHibernate.Cfg;
-
 using Environment = NHibernate.Cfg.Environment;
 
 namespace Framework.Database.NHibernate.Mapping;
@@ -59,3 +58,4 @@ public class DefaultConfigurationInitializer(
                 })
             .BuildConfiguration();
 }
+

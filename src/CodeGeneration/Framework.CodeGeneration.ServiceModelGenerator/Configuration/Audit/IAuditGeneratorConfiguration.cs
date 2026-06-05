@@ -6,3 +6,4 @@ public interface IAuditGeneratorConfiguration : ICodeGeneratorConfiguration;
 
 public interface IAuditGeneratorConfiguration<out TEnvironment> : IAuditGeneratorConfiguration, IServiceModelGeneratorConfiguration<TEnvironment>
         where TEnvironment : IAuditGenerationEnvironment;
+

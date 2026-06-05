@@ -1,9 +1,10 @@
 ﻿using System.CodeDom;
+
+using Anch.SecuritySystem.Providers;
+
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLGenerator.Configuration;
 using Framework.Core;
-
-using Anch.SecuritySystem.Providers;
 
 namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 
@@ -44,13 +45,14 @@ internal static class BaseCodeDomHelper
             if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 
             return new CodeTypeParameter
-                   {
-                       Name = "TSecurityMode",
-                       Constraints =
+            {
+                Name = "TSecurityMode",
+                Constraints =
                        {
                            new CodeTypeReference(" struct")
                        }
-                   };
+            };
         }
     }
 }
+

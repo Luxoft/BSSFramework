@@ -7,7 +7,7 @@ namespace Framework.Core.AnonymousTypeBuilder;
 
 public abstract class AnonymousTypeByMemberBuilder<TMap, TMapMember, TMemberBuilder> : IAnonymousTypeBuilder<TMap>
         where TMap : class, ITypeMap<TMapMember>
-        where TMapMember: ITypeMapMember
+        where TMapMember : ITypeMapMember
 {
     private readonly IAnonymousTypeBuilderStorage storage;
 
@@ -61,3 +61,4 @@ public abstract class AnonymousTypeByMemberBuilder<TMap, TMapMember, TMemberBuil
         return type;
     }
 }
+

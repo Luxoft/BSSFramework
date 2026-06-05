@@ -1,12 +1,12 @@
-﻿using Framework.Infrastructure.Hangfire.DependencyInjection;
+﻿using Anch.SecuritySystem;
+
+using Framework.Infrastructure.Hangfire.DependencyInjection;
 
 using Hangfire;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
-using Anch.SecuritySystem;
 
 namespace Framework.Infrastructure.Hangfire;
 
@@ -42,14 +42,14 @@ public static class HangfireExtensions
         if (settings.Enabled)
         {
             var options = new DashboardOptions
-                          {
-                              DashboardTitle = "Regular jobs",
-                              Authorization =
+            {
+                DashboardTitle = "Regular jobs",
+                Authorization =
                               [
                                   new AdminHangfireAuthorization(SecurityRole.Administrator)
                               ],
-                              DisplayNameFunc = (_, job) => settings.GetDisplayName(job)
-                          };
+                DisplayNameFunc = (_, job) => settings.GetDisplayName(job)
+            };
 
             setupOptions?.Invoke(options);
 
@@ -63,3 +63,4 @@ public static class HangfireExtensions
         return app;
     }
 }
+

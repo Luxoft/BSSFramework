@@ -50,9 +50,9 @@ public class BUProjectionTests(IServiceProvider rootServiceProvider) : TestBase(
                               var emp = context.Logics.Employee.GetById(empId.Id, true);
 
                               var link = new BusinessUnitEmployeeRole(bu)
-                                         {
-                                                 Employee = emp
-                                         };
+                              {
+                                  Employee = emp
+                              };
                           }
 
                           context.Logics.BusinessUnit.Save(bu);
@@ -89,3 +89,4 @@ public class BUProjectionTests(IServiceProvider rootServiceProvider) : TestBase(
         Assert.Equal(expectedHer, item.HerBusinessUnit_Full);
     }
 }
+

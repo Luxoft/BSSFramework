@@ -41,9 +41,9 @@ public class AuditDTOModelFileGenerator<TConfiguration>(TConfiguration configura
                        .Self(z => z.TypeArguments.Add(this.Configuration.PropertyRevisionTypeName));
 
         return new CodeTypeDeclaration(this.Configuration.DomainObjectPropertiesRevisionDTOTypeName)
-            {
-                CustomAttributes = new CodeAttributeDeclarationCollection([new CodeAttributeDeclaration(typeof(DataContractAttribute).FullName)]),
-            }
+        {
+            CustomAttributes = new CodeAttributeDeclarationCollection([new CodeAttributeDeclaration(typeof(DataContractAttribute).FullName)]),
+        }
             .Self(z => z.BaseTypes.Add(baseType));
     }
 
@@ -51,9 +51,9 @@ public class AuditDTOModelFileGenerator<TConfiguration>(TConfiguration configura
     {
         var baseType = new CodeTypeReference(typeof(PropertyRevisionDTOBase));
         return new CodeTypeDeclaration(this.Configuration.PropertyRevisionTypeName)
-               {
-                   CustomAttributes = new CodeAttributeDeclarationCollection(this.GetCustomerAttributeNames().ToArray()),
-               }
+        {
+            CustomAttributes = new CodeAttributeDeclarationCollection(this.GetCustomerAttributeNames().ToArray()),
+        }
                .Self(z => z.BaseTypes.Add(baseType))
                .Self(z => z.Members.AddRange([.. GetPropertyRevisionsCodeConstructor()]));
     }
@@ -133,19 +133,19 @@ public class AuditDTOModelFileGenerator<TConfiguration>(TConfiguration configura
         var fieldExpr = new CodeThisReferenceExpression().ToFieldReference(field);
 
         var property = new CodeMemberProperty
-                       {
-                           Name = "Value",
-                           Type = new CodeTypeReference("TValue"),
-                           Attributes = MemberAttributes.Public,
-                           CustomAttributes = { new CodeAttributeDeclaration(typeof(DataMemberAttribute).FullName) },
-                           GetStatements = { fieldExpr.ToMethodReturnStatement() },
-                           SetStatements = { new CodePropertySetValueReferenceExpression().ToAssignStatement(fieldExpr) }
-                       };
+        {
+            Name = "Value",
+            Type = new CodeTypeReference("TValue"),
+            Attributes = MemberAttributes.Public,
+            CustomAttributes = { new CodeAttributeDeclaration(typeof(DataMemberAttribute).FullName) },
+            GetStatements = { fieldExpr.ToMethodReturnStatement() },
+            SetStatements = { new CodePropertySetValueReferenceExpression().ToAssignStatement(fieldExpr) }
+        };
 
         return new CodeTypeDeclaration(this.Configuration.PropertyRevisionTypeName)
-               {
-                   CustomAttributes = new CodeAttributeDeclarationCollection([new CodeAttributeDeclaration(typeof(DataContractAttribute).FullName)]),
-               }
+        {
+            CustomAttributes = new CodeAttributeDeclarationCollection([new CodeAttributeDeclaration(typeof(DataContractAttribute).FullName)]),
+        }
                .Self(z => z.BaseTypes.Add(this.Configuration.PropertyRevisionTypeName))
                .Self(z => z.TypeParameters.Add("TValue"))
                .Self(z => z.Members.AddRange([.. GetPropertyRevisionsCodeConstructor()]))
@@ -170,3 +170,4 @@ public class AuditDTOModelFileGenerator<TConfiguration>(TConfiguration configura
         public string Filename => this.Configuration.PropertyRevisionTypeName;
     }
 }
+

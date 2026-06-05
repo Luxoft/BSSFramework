@@ -89,3 +89,4 @@ public static class FileGeneratorExtensions
 
     public static IEnumerable<GeneratedFileInfo> GeneratePair(this IFileGenerator<ICodeFile, CodeDomRenderer> generator, string path, string mainFilename, string interfaceFileName, ICheckOutService? checkOutService = null, bool parallel = true) => generator.GenerateGroup(path, delc => delc.IsInterface ? interfaceFileName : mainFilename, checkOutService, parallel);
 }
+

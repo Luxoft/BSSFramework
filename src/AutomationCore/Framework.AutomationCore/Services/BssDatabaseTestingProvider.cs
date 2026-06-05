@@ -18,3 +18,4 @@ public class BssDatabaseTestingProvider : IDatabaseTestingProvider
                 .AddKeyedSingleton<IInitializer, BssEmptySchemaInitializer>(BssEmptySchemaInitializer.Key)
                 .AddSingleton(new ExecuteScriptInfo(@"__Support\Scripts"));
 }
+

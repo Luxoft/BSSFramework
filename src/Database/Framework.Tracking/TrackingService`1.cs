@@ -68,3 +68,4 @@ public class TrackingService<TPersistentDomainObjectBase>(IObjectStateService ob
         where TDomainObject : class, TPersistentDomainObjectBase =>
         objectStatesService.GetModifiedObjectStates(value);
 }
+

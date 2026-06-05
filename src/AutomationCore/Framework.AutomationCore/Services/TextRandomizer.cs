@@ -21,3 +21,4 @@ public static class TextRandomizer
         return builder.ToString();
     }
 }
+

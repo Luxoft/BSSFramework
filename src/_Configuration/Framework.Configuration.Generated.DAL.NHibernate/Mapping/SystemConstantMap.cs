@@ -14,3 +14,4 @@ public class SystemConstantMap : ConfigurationBaseMap<SystemConstant>
         this.References(x => x.Type).Column($"{nameof(SystemConstant.Type)}Id").Not.Nullable();
     }
 }
+

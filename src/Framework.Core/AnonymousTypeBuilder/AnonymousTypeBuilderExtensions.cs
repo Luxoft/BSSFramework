@@ -64,7 +64,7 @@ public static class AnonymousTypeBuilderExtensions
 
         return new FuncAnonymousTypeBuilder<TMap>(map =>
                                                   {
-                                                      lock(locker)
+                                                      lock (locker)
                                                       {
                                                           return anonymousTypeBuilder.GetAnonymousType(map);
                                                       }
@@ -86,3 +86,4 @@ public static class AnonymousTypeBuilderExtensions
         public Type GetAnonymousType(TMap typeMap) => this.func(typeMap);
     }
 }
+

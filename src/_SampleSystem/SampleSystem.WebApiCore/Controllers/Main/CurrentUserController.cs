@@ -11,3 +11,4 @@ public class CurrentUserController(ICurrentUser currentUser) : ControllerBase
     [HttpGet]
     public string GetCurrentUserName() => currentUser.Name;
 }
+

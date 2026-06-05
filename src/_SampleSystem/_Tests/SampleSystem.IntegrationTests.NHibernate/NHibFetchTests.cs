@@ -1,7 +1,7 @@
-﻿using Framework.Application;
-using Framework.Database;
+﻿using Anch.GenericQueryable;
 
-using Anch.GenericQueryable;
+using Framework.Application;
+using Framework.Database;
 
 using SampleSystem.IntegrationTests._Environment.TestData;
 

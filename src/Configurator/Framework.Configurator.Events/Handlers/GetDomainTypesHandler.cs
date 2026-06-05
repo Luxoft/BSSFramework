@@ -1,13 +1,12 @@
-﻿using Framework.Application.Events;
+﻿using Anch.SecuritySystem;
+using Anch.SecuritySystem.Attributes;
+using Anch.SecuritySystem.Configurator.Handlers;
+
+using Framework.Application.Events;
 using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
 
-using Anch.SecuritySystem;
-
 using Microsoft.AspNetCore.Http;
-
-using Anch.SecuritySystem.Attributes;
-using Anch.SecuritySystem.Configurator.Handlers;
 
 namespace Framework.Configurator.Handlers;
 
@@ -23,13 +22,13 @@ public class GetDomainTypesHandler([WithoutRunAs] ISecuritySystem securitySystem
                               .OrderBy(t => t.AssemblyQualifiedName)
                               .ThenBy(t => t.Name)
                               .Select(t => new DomainTypeDto
-                                           {
-                                               Name = t.Name,
-                                               FullName = t.FullName!,
-                                               Operations = eventSystem.DomainObjectEventMetadata.GetEventOperations(t)
+                              {
+                                  Name = t.Name,
+                                  FullName = t.FullName!,
+                                  Operations = eventSystem.DomainObjectEventMetadata.GetEventOperations(t)
                                                                        .OrderBy(o => o.Name)
                                                                        .ToList()
-                                           })
+                              })
                               .ToList();
         }
         else
@@ -38,3 +37,4 @@ public class GetDomainTypesHandler([WithoutRunAs] ISecuritySystem securitySystem
         }
     }
 }
+

@@ -42,3 +42,4 @@ public class Fio : FioShort, ICloneable
 
     public static bool operator !=(Fio v1, Fio v2) => !(v1 == v2);
 }
+

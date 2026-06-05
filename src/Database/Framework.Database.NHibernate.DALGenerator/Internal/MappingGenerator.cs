@@ -39,7 +39,7 @@ public class MappingGenerator(IGrouping<Assembly, DomainTypeMetadata> assemblyGr
         this.assemblyGroup
             .Where(z => !z.DomainType.GetCustomAttributes<IgnoreMappingAttribute>().Any())
             .Where(z => !z.DomainType.GetCustomAttributes<IgnoreHbmMappingAttribute>().Any())
-            .Concat(this.assemblyGroup.SelectMany(z=>z.NotAbstractChildrenDomainTypes.GetAllElements(q=>q.NotAbstractChildrenDomainTypes)).Where(z=>z.IsInlineBaseType))
+            .Concat(this.assemblyGroup.SelectMany(z => z.NotAbstractChildrenDomainTypes.GetAllElements(q => q.NotAbstractChildrenDomainTypes)).Where(z => z.IsInlineBaseType))
             .OrderBy(meta => meta.DomainType.FullName)
             .Foreach(z => this.GenerateClassMapping(z, root, null));
 
@@ -101,7 +101,7 @@ public class MappingGenerator(IGrouping<Assembly, DomainTypeMetadata> assemblyGr
 
     protected virtual void GenerateMappingForChildrenTypes(DomainTypeMetadata domainTypeMetadata, XElement rootElement) =>
         domainTypeMetadata.NotAbstractChildrenDomainTypes
-                          .Where(z=>!z.IsInlineBaseType)
+                          .Where(z => !z.IsInlineBaseType)
                           .OrderBy(x => x.DomainType.FullName)
                           .Foreach(z => this.GenerateMappingForChildType(z, rootElement));
 
@@ -565,3 +565,4 @@ public class MappingGenerator(IGrouping<Assembly, DomainTypeMetadata> assemblyGr
                 .WithClassAttribute(listTypeFieldMetadata.ElementType.FullName);
     }
 }
+

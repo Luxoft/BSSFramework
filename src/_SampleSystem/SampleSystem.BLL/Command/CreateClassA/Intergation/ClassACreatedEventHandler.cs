@@ -15,3 +15,4 @@ public record ClassACreatedEventHandler(IRepositoryFactory<ClassA> Repository) :
         await repo.RemoveAsync(classA, cancellationToken);
     }
 }
+

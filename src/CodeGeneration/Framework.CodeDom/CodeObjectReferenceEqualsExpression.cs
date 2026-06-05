@@ -9,3 +9,4 @@ public class CodeObjectReferenceEqualsExpression : CodeMethodInvokeExpression
     {
     }
 }
+

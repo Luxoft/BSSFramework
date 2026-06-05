@@ -1,4 +1,5 @@
 ﻿using System.CodeDom;
+
 using Framework.CodeGeneration.DTOGenerator.FileFactory;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
@@ -40,3 +41,4 @@ public class DefaultVisualDTOFileFactory<TConfiguration>(TConfiguration configur
         }
     }
 }
+

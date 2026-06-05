@@ -7,7 +7,6 @@ using Framework.Database.SqlMapper;
 using Framework.Restriction;
 
 using Microsoft.SqlServer.Management.Smo;
-
 using Index = Microsoft.SqlServer.Management.Smo.Index;
 
 namespace Framework.Database.NHibernate.DBGenerator.ScriptGenerators;
@@ -122,3 +121,4 @@ public class UniqueGroupDatabaseScriptGenerator(params IgnoreLink[] ignore) : Po
         }
     }
 }
+

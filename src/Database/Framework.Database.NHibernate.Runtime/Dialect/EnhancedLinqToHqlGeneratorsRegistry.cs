@@ -20,3 +20,4 @@ public class EnhancedLinqToHqlGeneratorsRegistry : DefaultLinqToHqlGeneratorsReg
         this.Merge(new DiffDaysHqlGenerator());
     }
 }
+

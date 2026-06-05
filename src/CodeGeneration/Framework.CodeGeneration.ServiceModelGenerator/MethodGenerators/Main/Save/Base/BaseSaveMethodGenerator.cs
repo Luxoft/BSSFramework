@@ -40,3 +40,4 @@ public abstract class BaseSaveMethodGenerator<TConfiguration> : MethodGenerator<
     //    return new BLLSaveRoleAttribute { AllowCreate = this.DomainType.HasDefaultConstructor() };
     //}
 }
+

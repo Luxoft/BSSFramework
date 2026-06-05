@@ -21,3 +21,4 @@ public static class ActionExtensions
         return source.Select(selector).Composite();
     }
 }
+

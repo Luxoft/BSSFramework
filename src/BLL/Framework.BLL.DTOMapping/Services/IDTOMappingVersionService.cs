@@ -7,3 +7,4 @@ public interface IDTOMappingVersionService<in TAuditPersistentDomainObjectBase, 
     TVersion GetVersion<TDomainObject>(TVersion mappingObjectVersion, TDomainObject domainObject)
         where TDomainObject : TAuditPersistentDomainObjectBase, IVersionObject<TVersion>;
 }
+

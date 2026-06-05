@@ -1,7 +1,9 @@
 ﻿using System.CodeDom;
 using System.Collections.ObjectModel;
-using Framework.CodeGeneration.Configuration;
+
 using Anch.SecuritySystem;
+
+using Framework.CodeGeneration.Configuration;
 
 namespace Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 
@@ -70,3 +72,4 @@ public interface IBLLCoreGeneratorConfiguration : ICodeGeneratorConfiguration, I
     CodeExpression GetSecurityCodeExpression(SecurityRule securityRule);
 }
 #pragma warning restore S100 // Methods and properties should be named in camel case
+

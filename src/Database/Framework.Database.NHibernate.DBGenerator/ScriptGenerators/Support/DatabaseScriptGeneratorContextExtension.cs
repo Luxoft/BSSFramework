@@ -57,3 +57,4 @@ public static class DatabaseScriptGeneratorContextExtension
         return result;
     }
 }
+

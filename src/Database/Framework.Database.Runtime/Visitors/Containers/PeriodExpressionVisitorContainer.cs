@@ -74,3 +74,4 @@ public class PeriodExpressionVisitorContainer : ExpressionVisitorAggregator
                                             period.StartDate != otherPeriod.StartDate || period.EndDate != otherPeriod.EndDate));
     }
 }
+

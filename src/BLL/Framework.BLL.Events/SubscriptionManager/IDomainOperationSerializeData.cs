@@ -12,3 +12,4 @@ public interface IDomainOperationSerializeData<out TDomainObject>
 
     Type DomainObjectType { get; }
 }
+

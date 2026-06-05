@@ -11,3 +11,4 @@ public class TestWebApiExceptionExpander(IExceptionExpander exceptionExpander) :
     /// <inheritdoc />
     public Exception? TryExpand(Exception baseException) => this.exceptionExpander.TryExpand(baseException);
 }
+

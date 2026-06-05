@@ -57,3 +57,4 @@ public static class TypeExtensions
                                                              (genericArg, implArg) => (genericArg, implArg)).ToDictionary();
     }
 }
+

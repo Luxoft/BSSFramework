@@ -96,3 +96,4 @@ public class ServerDTOGeneratorConfiguration(ServerGenerationEnvironment environ
         }
     }
 }
+

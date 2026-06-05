@@ -1,6 +1,7 @@
 ﻿using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;
+
 using SampleSystem.BLL;
 using SampleSystem.Generated.DTO;
 
@@ -19,3 +20,4 @@ public class TestRepositoryController(IExampleServiceForRepository exampleServic
         return (pair.Employees.ToIdentityDTOList(), pair.BusinessUnits.ToIdentityDTOList());
     }
 }
+

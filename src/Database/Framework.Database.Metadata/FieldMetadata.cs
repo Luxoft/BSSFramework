@@ -48,3 +48,4 @@ public static class FieldMetadataExtensions
                                                                        () => new Exception($"Property for field {fieldMetadata.Name} not found of type:{fieldMetadata.DomainTypeMetadata.DomainType.Name}"));
     }
 }
+

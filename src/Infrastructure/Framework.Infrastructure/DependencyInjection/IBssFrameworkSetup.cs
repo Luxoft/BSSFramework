@@ -1,9 +1,9 @@
-﻿using Framework.Application.DependencyInjection;
+﻿using Anch.SecuritySystem.DependencyInjection;
+
+using Framework.Application.DependencyInjection;
 using Framework.Application.Events;
 using Framework.Database.DALListener;
 using Framework.Database.DependencyInjection;
-
-using Anch.SecuritySystem.DependencyInjection;
 
 namespace Framework.Infrastructure.DependencyInjection;
 
@@ -23,3 +23,4 @@ public interface IBssFrameworkSetup : IBssFrameworkSetup<IBssFrameworkSetup>
     IBssFrameworkSetup SetDomainObjectEventMetadata<T>()
         where T : IDomainObjectEventMetadata;
 }
+

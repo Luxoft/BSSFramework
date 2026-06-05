@@ -1,8 +1,9 @@
 ﻿using System.CodeDom;
 
+using Anch.SecuritySystem;
+
 using Framework.CodeDom.Extensions;
 using Framework.FileGeneration.Configuration;
-using Anch.SecuritySystem;
 
 namespace Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 
@@ -35,3 +36,4 @@ public class BLLFactoryContainerInterfaceGeneratorConfiguration<TConfiguration>(
         }
     }
 }
+

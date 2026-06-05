@@ -96,3 +96,4 @@ public abstract class TypeReferenceBase
         }
     }
 }
+

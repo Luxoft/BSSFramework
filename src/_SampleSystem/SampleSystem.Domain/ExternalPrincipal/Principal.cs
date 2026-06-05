@@ -21,3 +21,4 @@ public class Principal : AuditPersistentDomainObjectBase
         set => this.externalId = value.TrimNull();
     }
 }
+

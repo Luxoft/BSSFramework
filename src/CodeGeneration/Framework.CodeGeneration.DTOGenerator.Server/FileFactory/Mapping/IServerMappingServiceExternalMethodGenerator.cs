@@ -8,3 +8,4 @@ public interface IServerMappingServiceExternalMethodGenerator
 
     IEnumerable<CodeMemberMethod> GetServerMappingServiceInterfaceMethods();
 }
+

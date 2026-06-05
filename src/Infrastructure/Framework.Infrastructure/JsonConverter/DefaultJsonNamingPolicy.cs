@@ -1,6 +1,4 @@
-﻿
-
-using System.Text.Json;
+﻿using System.Text.Json;
 
 namespace Framework.Infrastructure.JsonConverter;
 
@@ -10,3 +8,4 @@ public class DefaultJsonNamingPolicy : JsonNamingPolicy
 
     public static DefaultJsonNamingPolicy Default { get; } = new();
 }
+

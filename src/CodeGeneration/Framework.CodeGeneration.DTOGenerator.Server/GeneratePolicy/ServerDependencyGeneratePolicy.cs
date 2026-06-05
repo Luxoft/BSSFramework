@@ -48,3 +48,4 @@ public class ServerDependencyGeneratePolicy(IGeneratePolicy<RoleFileType> baseGe
         }
     }
 }
+

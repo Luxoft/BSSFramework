@@ -14,3 +14,4 @@ public partial class IntegrationVersionContainer1BLL
         return integrationSaveModel.SavingObject;
     }
 }
+

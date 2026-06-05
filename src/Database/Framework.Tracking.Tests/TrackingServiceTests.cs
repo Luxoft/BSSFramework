@@ -1,4 +1,5 @@
 ﻿using Framework.Database;
+
 using NSubstitute;
 
 namespace Framework.Tracking.Tests;
@@ -733,3 +734,4 @@ public class TrackingServiceTests
         Assert.True(result);
     }
 }
+

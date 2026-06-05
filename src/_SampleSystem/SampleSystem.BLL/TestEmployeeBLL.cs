@@ -1,5 +1,4 @@
 ﻿using Anch.GenericQueryable.Fetching;
-
 using Anch.OData.Domain;
 
 using SampleSystem.Domain.Models.Filters;
@@ -42,3 +41,4 @@ public partial class TestEmployeeBLL
         return this.GetObjectsByOData(nextSelectOperation, fetchs);
     }
 }
+

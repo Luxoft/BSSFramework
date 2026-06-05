@@ -78,3 +78,4 @@ internal class ExplicitProperty : BasePropertyInfoImpl, IWrappingObject
 
     public override MethodInfo? GetSetMethod(bool nonPublic) => null; //new PropertyMethodInfoImpl();
 }
+

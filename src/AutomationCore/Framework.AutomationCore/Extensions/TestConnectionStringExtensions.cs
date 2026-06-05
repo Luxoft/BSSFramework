@@ -1,4 +1,5 @@
 ﻿using Anch.Testing.Database.ConnectionStringManagement;
+
 using Microsoft.Data.SqlClient;
 
 namespace Framework.AutomationCore.Extensions;
@@ -30,3 +31,4 @@ public static class TestConnectionStringExtensions
         }
     }
 }
+

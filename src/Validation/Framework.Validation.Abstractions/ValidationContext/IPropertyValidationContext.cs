@@ -7,3 +7,4 @@ public interface IPropertyValidationContext<out TSource, out TProperty> : IValid
 {
     TProperty Value { get; }
 }
+

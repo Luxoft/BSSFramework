@@ -104,3 +104,4 @@ public partial class ConfigurationGenerationEnvironment(DatabaseName databaseNam
 
     public static readonly ConfigurationGenerationEnvironment Default = new(new DatabaseName("", "configuration"));
 }
+

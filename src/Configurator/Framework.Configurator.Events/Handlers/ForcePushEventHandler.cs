@@ -1,11 +1,11 @@
-﻿using Framework.Application.Events;
+﻿using Anch.SecuritySystem;
+using Anch.SecuritySystem.Attributes;
+using Anch.SecuritySystem.Configurator.Handlers;
+
+using Framework.Application.Events;
 using Framework.Configurator.Interfaces;
 
 using Microsoft.AspNetCore.Http;
-
-using Anch.SecuritySystem;
-using Anch.SecuritySystem.Attributes;
-using Anch.SecuritySystem.Configurator.Handlers;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 
@@ -40,3 +40,4 @@ public class ForcePushEventHandler([WithoutRunAs] ISecuritySystem securitySystem
         public string Ids { get; set; } = null!;
     }
 }
+

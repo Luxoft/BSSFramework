@@ -70,3 +70,4 @@ public partial class ServerGenerators
         yield return generator.GenerateSingle(outputPath, "Authorization.Generated", this.CheckOutService);
     }
 }
+

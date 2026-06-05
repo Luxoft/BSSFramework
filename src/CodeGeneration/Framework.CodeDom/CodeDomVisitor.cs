@@ -68,14 +68,14 @@ public abstract class CodeDomVisitor
         if (codeTypeDeclaration == null) throw new ArgumentNullException(nameof(codeTypeDeclaration));
 
         var newTypeDeclaration = new CodeTypeDeclaration
-                                 {
-                                         IsClass = codeTypeDeclaration.IsClass,
-                                         IsEnum = codeTypeDeclaration.IsEnum,
-                                         IsInterface = codeTypeDeclaration.IsInterface,
-                                         IsPartial = codeTypeDeclaration.IsPartial,
-                                         IsStruct = codeTypeDeclaration.IsStruct,
-                                         TypeAttributes = codeTypeDeclaration.TypeAttributes,
-                                 };
+        {
+            IsClass = codeTypeDeclaration.IsClass,
+            IsEnum = codeTypeDeclaration.IsEnum,
+            IsInterface = codeTypeDeclaration.IsInterface,
+            IsPartial = codeTypeDeclaration.IsPartial,
+            IsStruct = codeTypeDeclaration.IsStruct,
+            TypeAttributes = codeTypeDeclaration.TypeAttributes,
+        };
 
         this.InitializeTypeMember(newTypeDeclaration, codeTypeDeclaration);
 
@@ -177,12 +177,12 @@ public abstract class CodeDomVisitor
         if (codeMemberProperty == null) throw new ArgumentNullException(nameof(codeMemberProperty));
 
         var newMemberProperty = new CodeMemberProperty
-                                {
-                                        HasGet = codeMemberProperty.HasGet,
-                                        HasSet = codeMemberProperty.HasSet,
-                                        PrivateImplementationType = codeMemberProperty.PrivateImplementationType.Maybe(v => this.VisitTypeReference(v)),
-                                        Type = this.VisitTypeReference(codeMemberProperty.Type)
-                                };
+        {
+            HasGet = codeMemberProperty.HasGet,
+            HasSet = codeMemberProperty.HasSet,
+            PrivateImplementationType = codeMemberProperty.PrivateImplementationType.Maybe(v => this.VisitTypeReference(v)),
+            Type = this.VisitTypeReference(codeMemberProperty.Type)
+        };
 
         this.InitializeTypeMember(newMemberProperty, codeMemberProperty);
 
@@ -218,10 +218,10 @@ public abstract class CodeDomVisitor
         if (codeMemberField == null) throw new ArgumentNullException(nameof(codeMemberField));
 
         return new CodeMemberField
-               {
-                       Type = this.VisitTypeReference(codeMemberField.Type),
-                       InitExpression = codeMemberField.InitExpression.Maybe(this.VisitExpression)
-               }.Self(v => this.InitializeTypeMember(v, codeMemberField));
+        {
+            Type = this.VisitTypeReference(codeMemberField.Type),
+            InitExpression = codeMemberField.InitExpression.Maybe(this.VisitExpression)
+        }.Self(v => this.InitializeTypeMember(v, codeMemberField));
     }
 
     public virtual CodeTypeParameter VisitTypeParameter(CodeTypeParameter codeTypeParameter)
@@ -238,24 +238,24 @@ public abstract class CodeDomVisitor
 
     public virtual CodeAttributeDeclaration VisitAttributeDeclaration(CodeAttributeDeclaration codeAttributeDeclaration)
     {
-        var newAttributeDeclaration = new CodeAttributeDeclaration (codeAttributeDeclaration.AttributeType)
-                                      {
-                                              Name = codeAttributeDeclaration.Name
-                                      };
+        var newAttributeDeclaration = new CodeAttributeDeclaration(codeAttributeDeclaration.AttributeType)
+        {
+            Name = codeAttributeDeclaration.Name
+        };
 
         newAttributeDeclaration.Arguments.AddRange(codeAttributeDeclaration.Arguments.Cast<CodeAttributeArgument>().ToArrayExceptNull(this.VisitAttributeArgument));
 
         return newAttributeDeclaration;
     }
 
-    public virtual CodeAttributeArgument VisitAttributeArgument (CodeAttributeArgument codeAttributeArgument)
+    public virtual CodeAttributeArgument VisitAttributeArgument(CodeAttributeArgument codeAttributeArgument)
     {
         if (codeAttributeArgument == null) throw new ArgumentNullException(nameof(codeAttributeArgument));
 
         return new CodeAttributeArgument(codeAttributeArgument.Name, codeAttributeArgument.Value.Maybe(v => this.VisitExpression(v)));
     }
 
-    public virtual CodeParameterDeclarationExpressionCollection VisitParameterDeclarationExpressionCollection (CodeParameterDeclarationExpressionCollection collection)
+    public virtual CodeParameterDeclarationExpressionCollection VisitParameterDeclarationExpressionCollection(CodeParameterDeclarationExpressionCollection collection)
     {
         if (collection == null) throw new ArgumentNullException(nameof(collection));
 
@@ -274,13 +274,13 @@ public abstract class CodeDomVisitor
         if (codeParameterDeclarationExpression == null) throw new ArgumentNullException(nameof(codeParameterDeclarationExpression));
 
         return new CodeParameterDeclarationExpression(this.VisitTypeReference(codeParameterDeclarationExpression.Type), codeParameterDeclarationExpression.Name)
-               {
-                       Direction = codeParameterDeclarationExpression.Direction,
-                       CustomAttributes = new CodeAttributeDeclarationCollection(codeParameterDeclarationExpression.CustomAttributes.ToArrayExceptNull(this.VisitAttributeDeclaration))
-               }.WithCopyUserDataFrom(codeParameterDeclarationExpression);
+        {
+            Direction = codeParameterDeclarationExpression.Direction,
+            CustomAttributes = new CodeAttributeDeclarationCollection(codeParameterDeclarationExpression.CustomAttributes.ToArrayExceptNull(this.VisitAttributeDeclaration))
+        }.WithCopyUserDataFrom(codeParameterDeclarationExpression);
     }
 
-    public virtual CodeExpression VisitExpression (CodeExpression codeExpression)
+    public virtual CodeExpression VisitExpression(CodeExpression codeExpression)
     {
         if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
 
@@ -312,7 +312,7 @@ public abstract class CodeDomVisitor
         {
             return this.VisitTypeReferenceExpression(typeReferenceExpression);
         }
-        else if(codeExpression is CodeLambdaExpression lambdaExpression)
+        else if (codeExpression is CodeLambdaExpression lambdaExpression)
         {
             return this.VisitLambdaExpression(lambdaExpression);
         }
@@ -342,9 +342,9 @@ public abstract class CodeDomVisitor
         if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
 
         return new CodeTypeReferenceExpression
-               {
-                       Type = this.VisitTypeReference(codeExpression.Type)
-               }.WithCopyUserDataFrom(codeExpression);
+        {
+            Type = this.VisitTypeReference(codeExpression.Type)
+        }.WithCopyUserDataFrom(codeExpression);
     }
 
     protected virtual CodeMethodReferenceExpression VisitMethodReferenceExpression(CodeMethodReferenceExpression codeMethodReferenceExpression)
@@ -461,9 +461,9 @@ public abstract class CodeDomVisitor
         if (codeVariableDeclarationStatement == null) throw new ArgumentNullException(nameof(codeVariableDeclarationStatement));
 
         return new CodeVariableDeclarationStatement(this.VisitTypeReference(codeVariableDeclarationStatement.Type), codeVariableDeclarationStatement.Name, codeVariableDeclarationStatement.InitExpression.Maybe(v => this.VisitExpression(v)))
-               {
-                       LinePragma = codeVariableDeclarationStatement.LinePragma
-               };
+        {
+            LinePragma = codeVariableDeclarationStatement.LinePragma
+        };
     }
 
     public virtual CodeTypeReference VisitTypeReference(CodeTypeReference codeTypeReference)
@@ -471,12 +471,12 @@ public abstract class CodeDomVisitor
         if (codeTypeReference == null) throw new ArgumentNullException(nameof(codeTypeReference));
 
         var newTypeReference = new CodeTypeReference
-                               {
-                                       ArrayElementType = codeTypeReference.ArrayElementType.Maybe(this.VisitTypeReference),
-                                       ArrayRank = codeTypeReference.ArrayRank,
-                                       BaseType = codeTypeReference.BaseType,
-                                       Options = codeTypeReference.Options
-                               };
+        {
+            ArrayElementType = codeTypeReference.ArrayElementType.Maybe(this.VisitTypeReference),
+            ArrayRank = codeTypeReference.ArrayRank,
+            BaseType = codeTypeReference.BaseType,
+            Options = codeTypeReference.Options
+        };
 
         newTypeReference.TypeArguments.AddRange(codeTypeReference.TypeArguments.ToArrayExceptNull(this.VisitTypeReference));
 
@@ -537,3 +537,4 @@ public abstract class CodeDomVisitor
 
     private class CloneVisitor : CodeDomVisitor;
 }
+

@@ -1,11 +1,10 @@
 ﻿using Anch.GenericQueryable.Fetching;
 
-using SampleSystem.Domain.Models.Filters;
-
 using Framework.BLL;
 
 using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.Models.Change;
+using SampleSystem.Domain.Models.Filters;
 using SampleSystem.Domain.Models.Integration;
 
 namespace SampleSystem.BLL;
@@ -58,3 +57,4 @@ public partial class EmployeeBLL
         return changeModel.PrimaryChangingObject;
     }
 }
+

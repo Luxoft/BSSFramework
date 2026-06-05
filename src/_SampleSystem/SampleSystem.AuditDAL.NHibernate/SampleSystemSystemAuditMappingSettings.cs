@@ -9,3 +9,4 @@ public record SampleSystemSystemAuditMappingSettings(DatabaseName DatabaseName)
     : MappingSettings<SystemAuditPersistentDomainObjectBase>(
         typeof(SampleSystemSystemAuditMappingSettings).Assembly,
         DatabaseName);
+

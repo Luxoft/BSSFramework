@@ -27,3 +27,4 @@ public static class MappingSettingsExtensions
         return string.Equals(mappingSettings.Database.Name, mappingSettings.AuditDatabase?.Name);
     }
 }
+

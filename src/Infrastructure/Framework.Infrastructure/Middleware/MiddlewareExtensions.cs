@@ -8,3 +8,4 @@ public static class MiddlewareExtensions
 
     public static IApplicationBuilder UseWebApiExceptionExpander(this IApplicationBuilder builder) => builder.UseMiddleware<WebApiExceptionExpanderMiddleware>();
 }
+

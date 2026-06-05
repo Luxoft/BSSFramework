@@ -36,3 +36,4 @@ public class GetListMethodGenerator<TConfiguration> : ViewCollectionMethodGenera
                                .ToMethodReturnStatement();
     }
 }
+

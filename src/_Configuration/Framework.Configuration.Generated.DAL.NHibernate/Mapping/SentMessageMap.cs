@@ -19,3 +19,4 @@ public class SentMessageMap : ConfigurationBaseMap<SentMessage>
         this.Map(x => x.To).Length(int.MaxValue);
     }
 }
+

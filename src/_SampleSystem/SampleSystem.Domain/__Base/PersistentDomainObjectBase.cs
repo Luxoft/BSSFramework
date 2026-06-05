@@ -51,3 +51,4 @@ public abstract class PersistentDomainObjectBase : DomainObjectBase, IIdentityOb
 
     public override int GetHashCode() => this.Id.IsDefault() ? base.GetHashCode() : this.Id.GetHashCode();
 }
+

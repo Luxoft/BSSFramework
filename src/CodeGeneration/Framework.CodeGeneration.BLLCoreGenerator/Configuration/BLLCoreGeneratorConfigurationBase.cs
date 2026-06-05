@@ -45,6 +45,8 @@ public abstract class BLLCoreGeneratorConfigurationBase<TEnvironment> : CodeGene
 
     protected override string NamespacePostfix { get; } = "BLL";
 
+    public virtual bool GenerateValidation { get; } = true;
+
     public ReadOnlyCollection<Type> BLLDomainTypes => this.lazyBLLDomainTypes.Value;
 
     /// <inheritdoc />
@@ -68,6 +70,9 @@ public abstract class BLLCoreGeneratorConfigurationBase<TEnvironment> : CodeGene
 
             new CodeFileFactoryHeader<FileType>(FileType.BLLFactoryContainerInterface, string.Empty, _ => $"I{this.Environment.TargetSystemName}BLLFactoryContainer");
 
+    protected virtual ICodeFileFactoryHeader<FileType> ValidatorInterfaceFileFactoryHeader =>
+
+        new CodeFileFactoryHeader<FileType>(FileType.ValidatorInterface, string.Empty, _ => $"I{this.Environment.TargetSystemName}Validator");
 
 
     private Type DefaultBLLFactoryType =>
@@ -101,10 +106,10 @@ public abstract class BLLCoreGeneratorConfigurationBase<TEnvironment> : CodeGene
     protected override IEnumerable<ICodeFileFactoryHeader<FileType>> GetFileFactoryHeaders() =>
     [
         this.BLLContextInterfaceFileFactoryHeader,
-
         this.BLLInterfaceFileFactoryHeader,
         this.BLLFactoryInterfaceFileFactoryHeader,
-        this.BLLFactoryContainerInterfaceFileFactoryHeader
+        this.BLLFactoryContainerInterfaceFileFactoryHeader,
+        this.ValidatorInterfaceFileFactoryHeader
     ];
 
     public CodeExpression GetSecurityCodeExpression(SecurityRule securityRule)

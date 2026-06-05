@@ -22,5 +22,10 @@ public class BLLCoreFileGenerator<TConfiguration>(TConfiguration configuration) 
             yield return new BLLInterfaceFileFactory<TConfiguration>(this.Configuration, domainType);
             yield return new BLLFactoryInterfaceFileFactory<TConfiguration>(this.Configuration, domainType);
         }
+
+        if (this.Configuration.GenerateValidation)
+        {
+            yield return new ValidatorInterfaceFileFactory<TConfiguration>(this.Configuration);
+        }
     }
 }

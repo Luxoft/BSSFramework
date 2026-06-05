@@ -98,8 +98,6 @@ public abstract class BLLGeneratorConfigurationBase<TEnvironment>(TEnvironment e
         return new DefaultValidatorGenerator<IBLLGeneratorConfiguration<TEnvironment>>(this, domainType, validatorMapExpr);
     }
 
-    public virtual bool GenerateValidation { get; } = true;
-
     public virtual Type OperationContextType { get; } = typeof(OperationContextBase);
 
     public virtual bool UseDbUniquenessEvaluation { get; } = false;
@@ -145,10 +143,6 @@ public abstract class BLLGeneratorConfigurationBase<TEnvironment>(TEnvironment e
 
         new CodeFileFactoryHeader<FileType>(FileType.Validator, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.Validator}");
 
-    protected virtual ICodeFileFactoryHeader<FileType> ValidatorInterfaceFileFactoryHeader =>
-
-        new CodeFileFactoryHeader<FileType>(FileType.ValidatorInterface, string.Empty, _ => $"I{this.Environment.TargetSystemName}{FileType.Validator}");
-
     public CodeTypeReference SecurityDomainBLLBaseTypeReference => this.GetSecurityDomainBLLBaseTypeReference(null);
 
     public CodeTypeReference GetSecurityDomainBLLBaseTypeReference(Type? type) => this.GetCodeTypeReference(type, FileType.SecurityDomainBLLBase);
@@ -162,7 +156,6 @@ public abstract class BLLGeneratorConfigurationBase<TEnvironment>(TEnvironment e
 
         yield return this.ValidatorBaseFileFactoryHeader;
         yield return this.ValidatorFileFactoryHeader;
-        yield return this.ValidatorInterfaceFileFactoryHeader;
 
         yield return this.MainDTOFetchRuleExpanderBaseFileFactoryHeader;
         yield return this.MainDTOFetchRuleExpanderFileFactoryHeader;

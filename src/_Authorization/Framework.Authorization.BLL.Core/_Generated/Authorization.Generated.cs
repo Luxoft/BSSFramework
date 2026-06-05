@@ -115,4 +115,8 @@ namespace Framework.Authorization.BLL
     public partial interface ISecurityContextTypeBLLFactory : Framework.BLL.ISecurityBLLFactory<Framework.Authorization.BLL.ISecurityContextTypeBLL, Framework.Authorization.Domain.SecurityContextType>
     {
     }
+    
+    public partial interface IAuthorizationValidator : Framework.Validation.IValidator
+    {
+    }
 }

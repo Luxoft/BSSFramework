@@ -91,8 +91,4 @@ namespace Framework.Authorization.BLL
         {
         }
     }
-    
-    public partial interface IAuthorizationValidator : Framework.Validation.IValidator
-    {
-    }
 }

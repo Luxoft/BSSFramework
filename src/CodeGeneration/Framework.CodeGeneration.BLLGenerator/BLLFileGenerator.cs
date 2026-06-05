@@ -30,7 +30,7 @@ public class BLLFileGenerator<TConfiguration>(TConfiguration configuration) : Co
 
         yield return new SecurityDomainBLLBaseFileFactory<TConfiguration>(this.Configuration);
 
-        if (this.Configuration.GenerateValidation)
+        if (this.Configuration.Environment.BLLCore.GenerateValidation)
         {
             yield return new ValidationMapBaseFileFactory<TConfiguration>(this.Configuration);
             yield return new ValidationMapFileFactory<TConfiguration>(this.Configuration);
@@ -39,7 +39,6 @@ public class BLLFileGenerator<TConfiguration>(TConfiguration configuration) : Co
 
             yield return new ValidatorBaseFileFactory<TConfiguration>(this.Configuration);
             yield return new ValidatorFileFactory<TConfiguration>(this.Configuration);
-            yield return new ValidatorInterfaceFileFactory<TConfiguration>(this.Configuration);
         }
     }
 }

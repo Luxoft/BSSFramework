@@ -17,37 +17,37 @@ public class NoSecurityController(IRepositoryFactory<NoSecurityObject> repositor
 {
     [DBSessionMode(DBSessionMode.Write)]
     [HttpPost]
-    public async Task<NoSecurityObjectIdentityDTO> TestFaultSave(CancellationToken cancellationToken = default)
+    public async Task<NoSecurityObjectIdentityDTO> TestFaultSave(CancellationToken ct)
     {
         var repository = repositoryFactory.Create(SecurityRule.Edit);
 
         var obj = new NoSecurityObject();
 
-        await repository.SaveAsync(obj, cancellationToken);
+        await repository.SaveAsync(obj, ct);
 
         return obj.ToIdentityDTO();
     }
 
     [DBSessionMode(DBSessionMode.Write)]
     [HttpPost]
-    public async Task<NoSecurityObjectIdentityDTO> TestSave(CancellationToken cancellationToken = default)
+    public async Task<NoSecurityObjectIdentityDTO> TestSave(CancellationToken ct)
     {
         var repository = repositoryFactory.Create();
 
         var obj = new NoSecurityObject();
 
-        await repository.SaveAsync(obj, cancellationToken);
+        await repository.SaveAsync(obj, ct);
 
         return obj.ToIdentityDTO();
     }
 
     [DBSessionMode(DBSessionMode.Read)]
     [HttpPost]
-    public async Task<List<NoSecurityObjectIdentityDTO>> GetFullList(CancellationToken cancellationToken = default)
+    public async Task<List<NoSecurityObjectIdentityDTO>> GetFullList(CancellationToken ct)
     {
         var repository = repositoryFactory.Create();
 
-        var result = await repository.GetQueryable().GenericToListAsync(cancellationToken);
+        var result = await repository.GetQueryable().GenericToListAsync(ct);
 
         return result.ToIdentityDTOList();
     }

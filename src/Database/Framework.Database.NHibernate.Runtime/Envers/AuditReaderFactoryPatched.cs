@@ -28,14 +28,14 @@ public static class AuditReaderFactoryPatched
         return NotImplemented;
     }
 
-    internal static async Task SafeInitCurrentRevisionAsync(this IAuditReaderPatched auditReader, CancellationToken cancellationToken)
+    internal static async Task SafeInitCurrentRevisionAsync(this IAuditReaderPatched auditReader, CancellationToken ct)
     {
         if (auditReader == NotImplemented)
         {
             return;
         }
 
-        await auditReader.GetCurrentRevisionAsync(true, cancellationToken);
+        await auditReader.GetCurrentRevisionAsync(true, ct);
     }
 }
 

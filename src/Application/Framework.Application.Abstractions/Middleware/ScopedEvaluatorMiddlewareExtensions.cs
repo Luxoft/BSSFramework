@@ -6,7 +6,7 @@ public static class ScopedEvaluatorMiddlewareExtensions
 {
     extension(IScopedEvaluatorMiddleware middleware)
     {
-        public async Task EvaluateAsync(Func<Task> action) => await middleware.EvaluateAsync(action.ToDefaultTask());
+        public async Task EvaluateAsync(Func<Task> action, CancellationToken ct) => await middleware.EvaluateAsync(action.ToDefaultTask(), ct);
 
         public IScopedEvaluatorMiddleware With(IScopedEvaluatorMiddleware otherMiddleware) => new WithMiddleware(middleware, otherMiddleware);
     }
@@ -34,12 +34,12 @@ public static class ScopedEvaluatorMiddlewareExtensions
 
     private class EmptyMiddleware : IScopedEvaluatorMiddleware
     {
-        public async Task<TResult> EvaluateAsync<TResult>(Func<Task<TResult>> getResult) => await getResult();
+        public async Task<TResult> EvaluateAsync<TResult>(Func<Task<TResult>> getResult, CancellationToken ct) => await getResult();
     }
 
     private class WithMiddleware(IScopedEvaluatorMiddleware middleware, IScopedEvaluatorMiddleware otherMiddleware) : IScopedEvaluatorMiddleware
     {
-        public async Task<TResult> EvaluateAsync<TResult>(Func<Task<TResult>> getResult) => await otherMiddleware.EvaluateAsync(async () => await middleware.EvaluateAsync(async () => await getResult()));
+        public async Task<TResult> EvaluateAsync<TResult>(Func<Task<TResult>> getResult, CancellationToken ct) => await otherMiddleware.EvaluateAsync(async () => await middleware.EvaluateAsync(async () => await getResult(), ct), ct);
     }
 }
 

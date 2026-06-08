@@ -1,7 +1,8 @@
-﻿using Framework.Authorization.Generated.DTO;
-using Framework.Database;
+﻿using Framework.Authorization.BLL;
+using Framework.Authorization.Generated.DTO;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 
 // ReSharper disable once CheckNamespace
 namespace Framework.Authorization.WebApi;
@@ -9,15 +10,18 @@ namespace Framework.Authorization.WebApi;
 public partial class AuthMainController
 {
     [HttpPost]
-    public void RunAsUser([FromForm] PrincipalIdentityDTO principal) =>
-        this.EvaluateC(DBSessionMode.Write, context =>
-        {
-            var runAsPrincipal = context.Logics.Principal.GetById(principal.Id, true);
+    public async Task RunAsUser([FromForm] PrincipalIdentityDTO principal, CancellationToken ct)
+    {
+        var context = this.HttpContext.RequestServices.GetRequiredService<IAuthorizationBLLContext>();
 
-            context.RunAsManager.StartRunAsUserAsync(runAsPrincipal.Name).GetAwaiter().GetResult();
-        });
+        await context.RunAsManager.StartRunAsUserAsync(principal.Id, ct);
+    }
 
     [HttpPost]
-    public void FinishRunAsUser() => this.Evaluate(DBSessionMode.Write, evaluateData => evaluateData.Context.RunAsManager.FinishRunAsUserAsync().GetAwaiter().GetResult());
-}
+    public async Task FinishRunAsUser(CancellationToken ct)
+    {
+        var context = this.HttpContext.RequestServices.GetRequiredService<IAuthorizationBLLContext>();
 
+        await context.RunAsManager.FinishRunAsUserAsync(ct);
+    }
+}

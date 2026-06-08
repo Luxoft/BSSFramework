@@ -112,12 +112,6 @@ public class CSharpNativeExpressionParser(INativeBodyExpressionParser parser) : 
     private LambdaExpression ParseExpression(ParameterExpression[] parameters, Type returnType, string expression) => (LambdaExpression)parser.Parse(parameters, returnType, expression);
 
     /// <summary>
-    /// Parse only primitive types
-    /// </summary>
-    /// <returns></returns>
-    public static readonly CSharpNativeExpressionParser Default = new(new MicrosoftCSharpExpressionParser());
-
-    /// <summary>
     /// Parse via compile
     /// </summary>
     /// <returns></returns>

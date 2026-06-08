@@ -70,7 +70,7 @@ public abstract class EventsSubscriptionManager<TPersistentDomainObjectBase> : I
         return this.sc.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
     }
 
-    private async Task Receive<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent, CancellationToken cancellationToken)
+    private async Task Receive<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent, CancellationToken ct)
         where TDomainObject : class, TPersistentDomainObjectBase
     {
         foreach (var listener in this.cache.Value.GetRequiredService<IEnumerable<Listener<TDomainObject>>>())
@@ -79,18 +79,18 @@ public abstract class EventsSubscriptionManager<TPersistentDomainObjectBase> : I
             {
                 var message = listener.CreateMessage(domainObject, domainObjectEvent);
 
-                await this.MessageSender.SendAsync(message, cancellationToken);
+                await this.MessageSender.SendAsync(message, ct);
             }
         }
     }
 
-    async Task IEventOperationReceiver.Receive<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent, CancellationToken cancellationToken)
+    async Task IEventOperationReceiver.Receive<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent, CancellationToken ct)
     {
         if (domainObject is TPersistentDomainObjectBase)
         {
             await new Func<TPersistentDomainObjectBase, EventOperation, CancellationToken, Task>(this.Receive)
                   .CreateGenericMethod(typeof(TDomainObject))
-                  .Invoke<Task>(this, [domainObject, domainObjectEvent, cancellationToken]);
+                  .Invoke<Task>(this, [domainObject, domainObjectEvent, ct]);
         }
     }
 

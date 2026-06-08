@@ -6,7 +6,7 @@ public class JobServiceEvaluator<TService>(IServiceProvider rootServiceProvider,
     : IJobServiceEvaluator<TService>
     where TService : notnull
 {
-    public async Task<TResult> EvaluateAsync<TResult>(Func<TService, Task<TResult>> executeAsync)
+    public async Task<TResult> EvaluateAsync<TResult>(Func<TService, Task<TResult>> executeAsync, CancellationToken ct)
     {
         await using var scope = rootServiceProvider.CreateAsyncScope();
 
@@ -16,7 +16,7 @@ public class JobServiceEvaluator<TService>(IServiceProvider rootServiceProvider,
 
         return await middlewareFactory
                      .Create<TService>(settings?.WithRootLogging ?? false)
-                     .EvaluateAsync(async () => await executeAsync(service));
+                     .EvaluateAsync(async () => await executeAsync(service), ct);
     }
 }
 

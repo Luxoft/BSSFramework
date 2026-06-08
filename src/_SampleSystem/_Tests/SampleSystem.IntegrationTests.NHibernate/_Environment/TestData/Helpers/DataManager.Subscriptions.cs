@@ -1,5 +1,4 @@
 ﻿using Framework.Application;
-using Framework.AutomationCore.RootServiceProviderContainer;
 using Framework.Core;
 using Framework.Database;
 using Framework.Subscriptions;
@@ -22,5 +21,5 @@ public partial class DataManager
                 var subscriptionService = context.ServiceProvider.GetRequiredService<ISubscriptionService>();
 
                 return await subscriptionService.ProcessAsync(new DomainObjectVersions<T>(prev, next)).ToListAsync(ct);
-            });
+            }, ct);
 }

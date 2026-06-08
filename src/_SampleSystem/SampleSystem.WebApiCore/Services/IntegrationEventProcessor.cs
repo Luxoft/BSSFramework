@@ -11,13 +11,6 @@ namespace SampleSystem.WebApiCore.Services;
 
 public class IntegrationEventProcessor(IDBSessionEvaluator sessionEvaluator) : IIntegrationEventProcessor
 {
-    public Task ProcessAsync(IIntegrationEvent @event, CancellationToken cancellationToken) =>
-        sessionEvaluator.EvaluateAsync<object>(
-            DBSessionMode.Write,
-            async x =>
-            {
-                await x.GetRequiredService<IMediator>().Publish(@event, cancellationToken);
-                return null!;
-            });
+    public Task ProcessAsync(IIntegrationEvent @event, CancellationToken ct) =>
+        sessionEvaluator.EvaluateAsync(DBSessionMode.Write, x => x.GetRequiredService<IMediator>().Publish(@event, ct), ct);
 }
-

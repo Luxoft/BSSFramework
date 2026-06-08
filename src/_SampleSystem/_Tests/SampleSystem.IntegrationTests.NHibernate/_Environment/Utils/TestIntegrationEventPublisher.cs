@@ -4,6 +4,6 @@ namespace SampleSystem.IntegrationTests._Environment.Utils;
 
 public class TestIntegrationEventPublisher : IIntegrationEventPublisher
 {
-    public Task PublishAsync(IIntegrationEvent @event, CancellationToken cancellationToken) => Task.CompletedTask;
+    public Task PublishAsync(IIntegrationEvent @event, CancellationToken ct) => Task.CompletedTask;
 }
 

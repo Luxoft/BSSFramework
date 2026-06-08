@@ -15,11 +15,11 @@ public class GetSystemConstantsHandler(
     IApplicationVariableStorage variableStorage)
     : BaseReadHandler, IGetSystemConstantsHandler
 {
-    protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
+    protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken ct)
     {
-        if (await securitySystem.HasAccessAsync(SecurityRole.Administrator, cancellationToken))
+        if (await securitySystem.HasAccessAsync(SecurityRole.Administrator, ct))
         {
-            var variables = await variableStorage.GetVariablesAsync(cancellationToken);
+            var variables = await variableStorage.GetVariablesAsync(ct);
 
             return variables.Select(x => new SystemConstantDto { Name = x.Key.Name, Description = x.Key.Description, Value = x.Value })
                             .OrderBy(x => x.Name);

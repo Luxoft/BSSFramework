@@ -21,31 +21,31 @@ public class TestAsyncController(
 {
     [DBSessionMode(DBSessionMode.Read)]
     [HttpPost]
-    public async Task<List<LocationSimpleDTO>> AsyncGetLocations(CancellationToken cancellationToken = default)
+    public async Task<List<LocationSimpleDTO>> AsyncGetLocations(CancellationToken ct)
     {
-        var list = await locationViewRepository.GetQueryable().GenericToListAsync(cancellationToken);
+        var list = await locationViewRepository.GetQueryable().GenericToListAsync(ct);
 
         return list.ToSimpleDTOList(mappingService);
     }
 
     [HttpPost]
-    public async Task<LocationIdentityDTO> AsyncSaveLocation(LocationStrictDTO locationStrictDTO, CancellationToken cancellationToken = default)
+    public async Task<LocationIdentityDTO> AsyncSaveLocation(LocationStrictDTO locationStrictDTO, CancellationToken ct)
     {
         var location = locationStrictDTO.ToDomainObject(mappingService, true);
 
-        await locationEditRepository.SaveAsync(location, cancellationToken);
+        await locationEditRepository.SaveAsync(location, ct);
 
         return location.ToIdentityDTO();
     }
 
     [DBSessionMode(DBSessionMode.Read)]
     [HttpPost]
-    public async Task<LocationIdentityDTO> AsyncSaveLocationWithWriteException(LocationStrictDTO locationStrictDTO, CancellationToken cancellationToken = default) => await this.AsyncSaveLocation(locationStrictDTO, cancellationToken);
+    public async Task<LocationIdentityDTO> AsyncSaveLocationWithWriteException(LocationStrictDTO locationStrictDTO, CancellationToken ct) => await this.AsyncSaveLocation(locationStrictDTO, ct);
 
     [HttpGet]
-    public async Task<int> TestDelay(CancellationToken cancellationToken = default)
+    public async Task<int> TestDelay(CancellationToken ct)
     {
-        await Task.Delay(new TimeSpan(0, 1, 0), cancellationToken);
+        await Task.Delay(new TimeSpan(0, 1, 0), ct);
 
         return 123;
     }

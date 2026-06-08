@@ -14,9 +14,9 @@ namespace Framework.Configurator.Handlers;
 public class ForcePushEventHandler([WithoutRunAs] ISecuritySystem securitySystem, IEventSystem eventSystem)
     : BaseWriteHandler, IForcePushEventHandler
 {
-    public async Task Execute(HttpContext context, CancellationToken cancellationToken)
+    public async Task Execute(HttpContext context, CancellationToken ct)
     {
-        await securitySystem.CheckAccessAsync(SecurityRole.Administrator, cancellationToken);
+        await securitySystem.CheckAccessAsync(SecurityRole.Administrator, ct);
 
         var body = await this.ParseRequestBodyAsync<RequestBodyDto>(context);
 
@@ -26,7 +26,7 @@ public class ForcePushEventHandler([WithoutRunAs] ISecuritySystem securitySystem
                 [.. body.Ids.Split(',').Select(i => new Guid(i))],
                 new EventOperation(body.OperationName),
                 body.Revision),
-            cancellationToken);
+            ct);
     }
 
     private class RequestBodyDto

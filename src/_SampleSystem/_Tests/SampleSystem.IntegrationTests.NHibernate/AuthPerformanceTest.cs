@@ -51,7 +51,7 @@ public class AuthPerformanceTest(IServiceProvider rootServiceProvider) : TestBas
     public async Task LoadGenerateAuthPerformanceObjects_CountEquals(CancellationToken ct)
     {
         // Arrange
-        var authPerfCount = await this.GenerateAuthPerformanceObject();
+        var authPerfCount = await this.GenerateAuthPerformanceObject(ct);
 
         // Act
         var findCount = await this.RootServiceProvider.GetRequiredService<IServiceEvaluator<IRepositoryFactory<AuthPerformanceObject>>>().EvaluateAsync(
@@ -61,7 +61,7 @@ public class AuthPerformanceTest(IServiceProvider rootServiceProvider) : TestBas
                                 var testObjRep = service.Create(SecurityRule.View);
 
                                 return testObjRep.GetQueryable().Count();
-                            });
+                            }, ct);
 
         // Assert
         Assert.Equal(findCount, authPerfCount);
@@ -82,7 +82,7 @@ public class AuthPerformanceTest(IServiceProvider rootServiceProvider) : TestBas
         await this.AuthManager.For(PrincipalName).SetRoleAsync([.. request], ct);
     }
 
-    private async Task<int> GenerateAuthPerformanceObject() =>
+    private async Task<int> GenerateAuthPerformanceObject(CancellationToken ct) =>
         await this.RootServiceProvider.GetRequiredService<IDBSessionEvaluator>().EvaluateAsync(
             DBSessionMode.Write,
             async sp =>
@@ -104,13 +104,13 @@ public class AuthPerformanceTest(IServiceProvider rootServiceProvider) : TestBas
                             {
                                 var testObj = new AuthPerformanceObject
                                 {
-                                    BusinessUnit = fbu == null ? null : await fbuRep.LoadAsync(fbu.Value.Id),
-                                    ManagementUnit = mbu == null ? null : await mbuRep.LoadAsync(mbu.Value.Id),
-                                    Location = loc == null ? null : await locRep.LoadAsync(loc.Value.Id),
-                                    Employee = emp == null ? null : await empRep.LoadAsync(emp.Value.Id),
+                                    BusinessUnit = fbu == null ? null : await fbuRep.LoadAsync(fbu.Value.Id, ct),
+                                    ManagementUnit = mbu == null ? null : await mbuRep.LoadAsync(mbu.Value.Id, ct),
+                                    Location = loc == null ? null : await locRep.LoadAsync(loc.Value.Id, ct),
+                                    Employee = emp == null ? null : await empRep.LoadAsync(emp.Value.Id, ct),
                                 };
 
-                                await testObjRep.SaveAsync(testObj);
+                                await testObjRep.SaveAsync(testObj, ct);
 
                                 count++;
                             }
@@ -119,6 +119,6 @@ public class AuthPerformanceTest(IServiceProvider rootServiceProvider) : TestBas
                 }
 
                 return count;
-            });
+            }, ct);
 }
 

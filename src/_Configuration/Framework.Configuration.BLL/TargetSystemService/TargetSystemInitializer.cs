@@ -14,9 +14,9 @@ public class TargetSystemInitializer(
     IConfigurationBLLContext context,
     IEnumerable<TargetSystemInfo> targetSystemInfoList) : ITargetSystemInitializer
 {
-    public async Task Initialize(CancellationToken cancellationToken)
+    public async Task Initialize(CancellationToken ct)
     {
-        await context.NamedLockService.LockAsync(ConfigurationNamedLock.UpdateDomainTypeLock, LockRole.Update, cancellationToken);
+        await context.NamedLockService.LockAsync(ConfigurationNamedLock.UpdateDomainTypeLock, LockRole.Update, ct);
 
         foreach (var targetSystemInfo in targetSystemInfoList)
         {

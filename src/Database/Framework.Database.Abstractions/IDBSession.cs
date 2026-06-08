@@ -8,12 +8,7 @@ public interface IDBSession : ICurrentRevisionService, IAsyncDisposable, IDispos
 
     IDbTransaction Transaction { get; }
 
-    /// <summary>
-    /// Мануальный флаш сессии, при его вызове срабатывают только Flushed-евенты, TransactionCompleted-евенты вызываются только при закрытие сессии
-    /// </summary>
-    void Flush() => this.FlushAsync().GetAwaiter().GetResult();
-
-    Task FlushAsync(CancellationToken cancellationToken = default);
+    Task FlushAsync(CancellationToken ct);
 
     /// <summary>
     /// Закрывает текущую транзакцию без применения изменений.
@@ -36,9 +31,7 @@ public interface IDBSession : ICurrentRevisionService, IAsyncDisposable, IDispos
     /// </summary>
     void AsWritable();
 
-    public void Close() => this.CloseAsync().GetAwaiter().GetResult();
-
-    Task CloseAsync(CancellationToken cancellationToken = default);
+    Task CloseAsync(CancellationToken ct);
 
     void IDisposable.Dispose() => this.DisposeAsync().GetAwaiter().GetResult();
 }

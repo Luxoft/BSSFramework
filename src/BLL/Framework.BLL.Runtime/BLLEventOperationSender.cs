@@ -6,11 +6,11 @@ namespace Framework.BLL;
 
 public class BLLEventOperationSender([FromKeyedServices(nameof(BLL))] IEnumerable<IEventOperationReceiver> receivers) : IEventOperationSender
 {
-    public async Task Send<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent, CancellationToken cancellationToken)
+    public async Task Send<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent, CancellationToken ct)
     {
         foreach (var receiver in receivers)
         {
-            await receiver.Receive(domainObject, domainObjectEvent, cancellationToken);
+            await receiver.Receive(domainObject, domainObjectEvent, ct);
         }
     }
 }

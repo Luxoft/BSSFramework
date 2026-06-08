@@ -4,7 +4,10 @@ namespace Framework.Database;
 
 public static class DbSessionEvaluatorExtensions
 {
-    public static Task EvaluateAsync(this IDBSessionEvaluator evaluator, DBSessionMode sessionMode, Func<IServiceProvider, Task> action) =>
-        evaluator.EvaluateAsync(sessionMode, action.ToDefaultTask());
+    public static Task EvaluateAsync(
+        this IDBSessionEvaluator evaluator,
+        DBSessionMode sessionMode,
+        Func<IServiceProvider, Task> action,
+        CancellationToken ct) =>
+        evaluator.EvaluateAsync(sessionMode, action.ToDefaultTask(), ct);
 }
-

@@ -21,7 +21,7 @@ public class EventDALListenerTests(IServiceProvider rootServiceProvider) : TestB
             ctx => ctx.OperationSender.Send(
                 ctx.CurrentEmployeeSource.CurrentUser,
                 SampleSystemEventOperation.CustomAction,
-                ct));
+                ct), ct);
 
         // Assert
         await action();

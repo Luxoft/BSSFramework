@@ -1,6 +1,6 @@
 ﻿using Anch.Testing.Xunit;
 
-using Framework.Application;
+using Framework.BLL;
 using Framework.Database;
 
 using SampleSystem.Domain.BU;
@@ -84,7 +84,7 @@ public class VirtualPermissionTests(IServiceProvider rootServiceProvider) : Test
                                                 .GetAccessorDataAsync(bu, ct);
 
                     return ctx.SecurityAccessorResolver.Resolve(accessorData);
-                });
+                }, ct);
 
         // Assert
         Assert.Contains(this.Datas[0].UserLogin, accessorList);
@@ -107,7 +107,7 @@ public class VirtualPermissionTests(IServiceProvider rootServiceProvider) : Test
 
                     return await ctx.SecurityService.GetSecurityProvider<BusinessUnit>(SampleSystemSecurityRole.SeManager)
                               .HasAccessAsync(bu, ct);
-                });
+                }, ct);
 
         // Assert
         Assert.True(hasAccess);
@@ -130,7 +130,7 @@ public class VirtualPermissionTests(IServiceProvider rootServiceProvider) : Test
 
                     return await ctx.SecurityService.GetSecurityProvider<BusinessUnit>(SampleSystemSecurityRole.SeManager)
                               .HasAccessAsync(bu, ct);
-                });
+                }, ct);
 
         // Assert
         Assert.False(hasAccess);
@@ -150,7 +150,7 @@ public class VirtualPermissionTests(IServiceProvider rootServiceProvider) : Test
                 async ctx =>
                 {
                     return await ctx.Authorization.SecuritySystem.HasAccessAsync(SampleSystemSecurityRole.SeManager, ct);
-                });
+                }, ct);
 
         // Assert
         Assert.False(hasAccess);

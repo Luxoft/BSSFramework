@@ -1,4 +1,5 @@
-﻿using Anch.SecuritySystem;
+﻿using Anch.Core;
+using Anch.SecuritySystem;
 using Anch.SecuritySystem.DomainServices;
 
 using Framework.Application.Domain;
@@ -18,14 +19,14 @@ public abstract class DTOMappingService<TBLLContext, TPersistentDomainObjectBase
 {
     public virtual IDTOMappingVersionService<TAuditPersistentDomainObjectBase, TVersion> VersionService { get; } = new DTOMappingVersionService<TBLLContext, TAuditPersistentDomainObjectBase, TIdent, TVersion>(context);
 
+    protected IDefaultCancellationTokenSource? DefaultCancellationTokenSource => field ??= context.ServiceProvider.GetService<IDefaultCancellationTokenSource>();
+
     protected bool HasAccess<TDomainObject>(TDomainObject domainObject, SecurityRule securityRule) =>
-        this.Context
-            .ServiceProvider
-            .GetRequiredService<IDomainSecurityService<TDomainObject>>()
-            .GetSecurityProvider(securityRule)
-            .HasAccessAsync(domainObject)
-            .GetAwaiter()
-            .GetResult();
+        this.DefaultCancellationTokenSource.RunSync(async ct => await this.Context
+                                                                          .ServiceProvider
+                                                                          .GetRequiredService<IDomainSecurityService<TDomainObject>>()
+                                                                          .GetSecurityProvider(securityRule)
+                                                                          .HasAccessAsync(domainObject, ct));
 
     public virtual TDomainObject? GetById<TDomainObject>(TIdent ident, IdCheckMode checkMode = IdCheckMode.SkipEmpty, LockRole lockRole = LockRole.None)
             where TDomainObject : class, TPersistentDomainObjectBase =>

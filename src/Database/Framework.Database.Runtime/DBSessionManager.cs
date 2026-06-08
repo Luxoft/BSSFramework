@@ -7,11 +7,11 @@ public class DBSessionManager(ILazyObject<IDBSession> lazyDbSession) : IDBSessio
     /// <summary>
     /// Tries to close existing DB session (if exists) and to flush events to DAL listeners
     /// </summary>
-    public async Task TryCloseDbSessionAsync(CancellationToken cancellationToken)
+    public async Task TryCloseDbSessionAsync(CancellationToken ct)
     {
         if (lazyDbSession.IsValueCreated)
         {
-            await lazyDbSession.Value.CloseAsync(cancellationToken);
+            await lazyDbSession.Value.CloseAsync(ct);
         }
     }
 

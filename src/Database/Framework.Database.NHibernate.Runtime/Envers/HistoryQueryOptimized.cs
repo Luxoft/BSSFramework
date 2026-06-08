@@ -16,7 +16,7 @@ public class HistoryQueryOptimized<TEntity, TRevisionEntity, TIdentity>(
 {
     private readonly AuditConfiguration verCfg = auditConfiguration;
 
-    public override async Task<IEnumerable<IIdentityRevisionEntityInfo<TRevisionEntity, TIdentity>>> ResultsAsync(CancellationToken cancellationToken = default)
+    public override async Task<IEnumerable<IIdentityRevisionEntityInfo<TRevisionEntity, TIdentity>>> ResultsAsync(CancellationToken ct)
     {
         var auditEntitiesConfiguration = this.AuditConfiguration.AuditEntCfg;
 
@@ -28,7 +28,7 @@ public class HistoryQueryOptimized<TEntity, TRevisionEntity, TIdentity>(
 
         var revisionTypePropertyName = auditEntitiesConfiguration.RevisionTypePropName;
 
-        return from resultRow in await this.BuildAndExecuteQueryAsync<object[]>(cancellationToken)
+        return from resultRow in await this.BuildAndExecuteQueryAsync<object[]>(ct)
                let versionsEntity = (IDictionary)resultRow[0]
                let revisionData = (TRevisionEntity)resultRow[1]
                let revision = this.GetRevisionNumberFromDynamicEntity(versionsEntity)

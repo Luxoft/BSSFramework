@@ -14,7 +14,7 @@ public abstract class EfSessionBase(DbContext nativeSession, DBSessionMode sessi
 
     public abstract IDbTransaction Transaction { get; }
 
-    public abstract Task FlushAsync(CancellationToken cancellationToken = default);
+    public abstract Task FlushAsync(CancellationToken ct);
 
     /// <inheritdoc />
     public long GetCurrentRevision() => throw new NotImplementedException("EF");
@@ -30,8 +30,8 @@ public abstract class EfSessionBase(DbContext nativeSession, DBSessionMode sessi
     /// <inheritdoc />
     public abstract void AsWritable();
 
-    public abstract Task CloseAsync(CancellationToken cancellationToken = default);
+    public abstract Task CloseAsync(CancellationToken ct);
 
-    public async ValueTask DisposeAsync() => await this.CloseAsync();
+    public async ValueTask DisposeAsync() => await this.CloseAsync(CancellationToken.None);
 }
 

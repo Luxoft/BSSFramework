@@ -35,20 +35,20 @@ public class NHibAsyncDal<TDomainObject, TIdent>(
 
     public TDomainObject Load(TIdent id) => this.NativeSession.Load<TDomainObject>(id);
 
-    public Task<TDomainObject> LoadAsync(TIdent id, CancellationToken cancellationToken) =>
-        this.NativeSession.LoadAsync<TDomainObject>(id, cancellationToken);
+    public Task<TDomainObject> LoadAsync(TIdent id, CancellationToken ct) =>
+        this.NativeSession.LoadAsync<TDomainObject>(id, ct);
 
-    public Task RefreshAsync(TDomainObject domainObject, CancellationToken cancellationToken) =>
-        this.NativeSession.RefreshAsync(domainObject, cancellationToken);
+    public Task RefreshAsync(TDomainObject domainObject, CancellationToken ct) =>
+        this.NativeSession.RefreshAsync(domainObject, ct);
 
-    public async Task SaveAsync(TDomainObject domainObject, CancellationToken cancellationToken)
+    public async Task SaveAsync(TDomainObject domainObject, CancellationToken ct)
     {
         this.CheckWrite();
 
-        await this.ActualSaveAsync(domainObject, cancellationToken);
+        await this.ActualSaveAsync(domainObject, ct);
     }
 
-    private Task ActualSaveAsync(TDomainObject domainObject, CancellationToken cancellationToken)
+    private Task ActualSaveAsync(TDomainObject domainObject, CancellationToken ct)
     {
         if (!session.NativeSession.Contains(domainObject))
         {
@@ -56,14 +56,14 @@ public class NHibAsyncDal<TDomainObject, TIdent>(
 
             if (!EqualityComparer<TIdent>.Default.Equals(id, default))
             {
-                return session.NativeSession.SaveAsync(domainObject, id, cancellationToken);
+                return session.NativeSession.SaveAsync(domainObject, id, ct);
             }
         }
 
-        return session.NativeSession.SaveOrUpdateAsync(domainObject, cancellationToken);
+        return session.NativeSession.SaveOrUpdateAsync(domainObject, ct);
     }
 
-    public async Task InsertAsync(TDomainObject domainObject, TIdent id, CancellationToken cancellationToken)
+    public async Task InsertAsync(TDomainObject domainObject, TIdent id, CancellationToken ct)
     {
         if (id.IsDefault())
         {
@@ -72,35 +72,35 @@ public class NHibAsyncDal<TDomainObject, TIdent>(
 
         this.CheckWrite();
 
-        await this.ActualInsertAsync(domainObject, id, cancellationToken);
+        await this.ActualInsertAsync(domainObject, id, ct);
     }
 
-    public Task ActualInsertAsync(TDomainObject domainObject, TIdent id, CancellationToken cancellationToken)
+    public Task ActualInsertAsync(TDomainObject domainObject, TIdent id, CancellationToken ct)
     {
         this.CheckWrite();
 
         if (EqualityComparer<TIdent>.Default.Equals(id, default))
         {
-            return session.NativeSession.SaveOrUpdateAsync(domainObject, cancellationToken);
+            return session.NativeSession.SaveOrUpdateAsync(domainObject, ct);
         }
         else
         {
-            return this.NativeSession.SaveAsync(domainObject, id, cancellationToken);
+            return this.NativeSession.SaveAsync(domainObject, id, ct);
         }
     }
 
-    public async Task RemoveAsync(TDomainObject domainObject, CancellationToken cancellationToken)
+    public async Task RemoveAsync(TDomainObject domainObject, CancellationToken ct)
     {
         this.CheckWrite();
 
-        await this.NativeSession.DeleteAsync(domainObject, cancellationToken);
+        await this.NativeSession.DeleteAsync(domainObject, ct);
     }
 
-    public async Task LockAsync(TDomainObject domainObject, LockRole lockRole, CancellationToken cancellationToken)
+    public async Task LockAsync(TDomainObject domainObject, LockRole lockRole, CancellationToken ct)
     {
         this.CheckWrite();
 
-        await this.NativeSession.LockAsync(domainObject, lockRole.ToLockMode(), cancellationToken);
+        await this.NativeSession.LockAsync(domainObject, lockRole.ToLockMode(), ct);
     }
 
     private void CheckWrite()

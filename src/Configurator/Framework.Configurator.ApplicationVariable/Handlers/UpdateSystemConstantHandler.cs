@@ -14,14 +14,14 @@ public class UpdateSystemConstantHandler(
     IApplicationVariableStorage variableStorage)
     : BaseWriteHandler, IUpdateSystemConstantHandler
 {
-    public async Task Execute(HttpContext context, CancellationToken cancellationToken)
+    public async Task Execute(HttpContext context, CancellationToken ct)
     {
-        await securitySystem.CheckAccessAsync(SecurityRole.Administrator, cancellationToken);
+        await securitySystem.CheckAccessAsync(SecurityRole.Administrator, ct);
 
         var variableName = (string?)context.Request.RouteValues["name"]!;
         var newValue = await this.ParseRequestBodyAsync<string>(context);
 
-        await variableStorage.UpdateVariableAsync(variableName, newValue, cancellationToken);
+        await variableStorage.UpdateVariableAsync(variableName, newValue, ct);
     }
 }
 

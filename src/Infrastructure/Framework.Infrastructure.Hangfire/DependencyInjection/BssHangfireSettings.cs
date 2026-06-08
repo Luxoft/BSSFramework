@@ -119,7 +119,11 @@ public class BssHangfireSettings : IBssHangfireSettings
                                  ?? this.JobTimings.Where(jt => jt.Name == jobName).Select(jt => jt.Scchedule).SingleOrDefault()
                                  ?? throw new Exception($"{nameof(JobTiming)} for job '{jobName}' not found");
 
-                var job = Job.FromExpression(ExpressionHelper.Create((MiddlewareJob<TJob, TArg> job) => job.ExecuteAsync(default!)));
+                var job =
+
+                    typeof(TArg) == typeof(CancellationToken)
+                        ? Job.FromExpression(ExpressionHelper.Create((CancellationMiddlewareJob<TJob> job) => job.ExecuteAsync(CancellationToken.None)))
+                        : Job.FromExpression(ExpressionHelper.Create((MiddlewareJob<TJob, TArg> job) => job.ExecuteAsync(default!)));
 
                 var actualSettings = new JobSettings
                 {

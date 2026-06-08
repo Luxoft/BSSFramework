@@ -19,7 +19,7 @@ public class LocalDbObjectModificationProcessor : BLLContextContainer<IConfigura
     {
     }
 
-    public async Task ProcessChanged(ObjectModificationInfoDTO<Guid> changedObjectInfo, CancellationToken cancellationToken)
+    public async Task ProcessChanged(ObjectModificationInfoDTO<Guid> changedObjectInfo, CancellationToken ct)
     {
         var domainObjectModification = new DomainObjectModification
         {

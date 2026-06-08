@@ -19,7 +19,7 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase>(
     private readonly EventDALListenerSettings<TPersistentDomainObjectBase> settings = settings ?? new EventDALListenerSettings<TPersistentDomainObjectBase>();
 
     /// <inheritdoc />
-    public async Task Process(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
+    public async Task Process(DALChangesEventArgs eventArgs, CancellationToken ct)
     {
         if (!this.settings.TypeEvents.Any())
         {
@@ -72,7 +72,7 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase>(
                 CustomDomainObjectType = domainObjectType
             };
 
-            await messageSender.SendAsync(message, cancellationToken);
+            await messageSender.SendAsync(message, ct);
         }
     }
 
@@ -135,13 +135,13 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase>(
                 z => ValueTuple.Create((IDALObject)(new DALObject(z.TargetObject, z.TargetObjectType, 1)), EventOperation.Save)));
     }
 
-    async Task IEventOperationReceiver.Receive<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent, CancellationToken cancellationToken)
+    async Task IEventOperationReceiver.Receive<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent, CancellationToken ct)
     {
         var dalChanges = GetDALChanges(domainObject, domainObjectEvent);
 
         if (dalChanges != null)
         {
-            await this.Process(new DALChangesEventArgs(dalChanges), cancellationToken);
+            await this.Process(new DALChangesEventArgs(dalChanges), ct);
         }
     }
 

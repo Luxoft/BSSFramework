@@ -7,7 +7,7 @@ namespace Framework.Application.Middleware;
 
 public class ImpersonateEvaluatorMiddleware(IServiceProvider scopedServiceProvider, UserCredential customUserCredential) : IScopedEvaluatorMiddleware
 {
-    public async Task<TResult> EvaluateAsync<TResult>(Func<Task<TResult>> getResult)
+    public async Task<TResult> EvaluateAsync<TResult>(Func<Task<TResult>> getResult, CancellationToken ct)
     {
         var impersonateService = scopedServiceProvider.GetRequiredService<IImpersonateService>();
 

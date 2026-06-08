@@ -5,7 +5,7 @@ namespace SampleSystem.ServiceEnvironment;
 
 public class ExampleFaultDALListener(ExampleFaultDALListenerSettings settings) : IBeforeTransactionCompletedDALListener
 {
-    public async Task Process(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
+    public async Task Process(DALChangesEventArgs eventArgs, CancellationToken ct)
     {
         if (settings.Raise)
         {

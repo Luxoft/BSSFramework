@@ -20,7 +20,7 @@ public class ImpersonateController(
     : ControllerBase
 {
     [HttpPost]
-    public async Task<NoSecurityObjectIdentityDTO> TestSave(string impersonateLogin, CancellationToken cancellationToken = default) =>
+    public async Task<NoSecurityObjectIdentityDTO> TestSave(string impersonateLogin, CancellationToken ct) =>
         await serviceEvaluator.EvaluateAsync(
             DBSessionMode.Write,
             impersonateLogin,
@@ -28,13 +28,13 @@ public class ImpersonateController(
             {
                 var obj = new NoSecurityObject();
 
-                await repositoryFactory.Create().SaveAsync(obj, cancellationToken);
+                await repositoryFactory.Create().SaveAsync(obj, ct);
 
                 return obj.ToIdentityDTO();
-            });
+            }, ct);
 
     [HttpPost]
-    public async Task<List<NoSecurityObjectSimpleDTO>> GetFullList(CancellationToken cancellationToken = default) =>
+    public async Task<List<NoSecurityObjectSimpleDTO>> GetFullList(CancellationToken ct) =>
         await dbSessionEvaluator.EvaluateAsync(
             DBSessionMode.Read,
             async serviceProvider =>
@@ -42,9 +42,9 @@ public class ImpersonateController(
                 var repositoryFactory = serviceProvider.GetRequiredService<IRepositoryFactory<NoSecurityObject>>();
 
                 var mappingService = serviceProvider.GetRequiredService<ISampleSystemDTOMappingService>();
-                var result = await repositoryFactory.Create().GetQueryable().GenericToListAsync(cancellationToken);
+                var result = await repositoryFactory.Create().GetQueryable().GenericToListAsync(ct);
 
                 return result.ToSimpleDTOList(mappingService);
-            });
+            }, ct);
 }
 

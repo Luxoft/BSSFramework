@@ -42,7 +42,7 @@ public class NHibSession : INHibSession
 
     public IDbTransaction Transaction => this.InnerSession.Transaction;
 
-    public Task FlushAsync(CancellationToken cancellationToken) => this.InnerSession.FlushAsync(cancellationToken);
+    public Task FlushAsync(CancellationToken ct) => this.InnerSession.FlushAsync(ct);
 
     public long GetCurrentRevision() => this.InnerSession.GetCurrentRevision();
 
@@ -66,11 +66,11 @@ public class NHibSession : INHibSession
         }
     }
 
-    public async Task CloseAsync(CancellationToken cancellationToken = default)
+    public async Task CloseAsync(CancellationToken ct)
     {
         if (this.lazyInnerSession.IsValueCreated)
         {
-            await this.InnerSession.CloseAsync(cancellationToken);
+            await this.InnerSession.CloseAsync(ct);
         }
     }
 

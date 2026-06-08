@@ -13,9 +13,9 @@ public class TestRepositoryController(IExampleServiceForRepository exampleServic
 {
     [DBSessionMode(DBSessionMode.Read)]
     [HttpPost]
-    public async Task<(List<EmployeeIdentityDTO> Employees, List<BusinessUnitIdentityDTO> BusinessUnits)> LoadPair(CancellationToken cancellationToken = default)
+    public async Task<(List<EmployeeIdentityDTO> Employees, List<BusinessUnitIdentityDTO> BusinessUnits)> LoadPair(CancellationToken ct)
     {
-        var pair = await exampleService.LoadPair(cancellationToken);
+        var pair = await exampleService.LoadPair(ct);
 
         return (pair.Employees.ToIdentityDTOList(), pair.BusinessUnits.ToIdentityDTOList());
     }

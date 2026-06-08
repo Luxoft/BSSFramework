@@ -7,5 +7,5 @@ namespace Framework.Core;
 /// <typeparam name="TMessage"></typeparam>
 public interface IMessageSender<in TMessage>
 {
-    Task SendAsync(TMessage message, CancellationToken cancellationToken = default);
+    Task SendAsync(TMessage message, CancellationToken ct);
 }

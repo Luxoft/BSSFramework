@@ -24,22 +24,22 @@ public class TestSecurityController(
     public EmployeeDto GetCurrentEmployee() => new(currentUserSource.CurrentUser);
 
     [HttpGet]
-    public async Task<List<EmployeeDto>> GetSecurityEmployees(CancellationToken cancellationToken)
+    public async Task<List<EmployeeDto>> GetSecurityEmployees(CancellationToken ct)
     {
-        var allData = await employeeRepositoryFactory.Create(SecurityRule.Disabled).GetQueryable().GenericToListAsync(cancellationToken);
+        var allData = await employeeRepositoryFactory.Create(SecurityRule.Disabled).GetQueryable().GenericToListAsync(ct);
 
-        var secData = await employeeRepositoryFactory.Create(SecurityRule.View).GetQueryable().GenericToListAsync(cancellationToken);
+        var secData = await employeeRepositoryFactory.Create(SecurityRule.View).GetQueryable().GenericToListAsync(ct);
 
         return secData.Select(e => new EmployeeDto(e)).ToList();
     }
 
 
     [HttpGet]
-    public async Task<List<BusinessUnitDto>> GetSecurityBusinessUnits(CancellationToken cancellationToken)
+    public async Task<List<BusinessUnitDto>> GetSecurityBusinessUnits(CancellationToken ct)
     {
-        var allData = await buRepositoryFactory.Create(SecurityRule.Disabled).GetQueryable().GenericToListAsync(cancellationToken);
+        var allData = await buRepositoryFactory.Create(SecurityRule.Disabled).GetQueryable().GenericToListAsync(ct);
 
-        var secData = await buRepositoryFactory.Create(SecurityRule.View).GetQueryable().GenericToListAsync(cancellationToken);
+        var secData = await buRepositoryFactory.Create(SecurityRule.View).GetQueryable().GenericToListAsync(ct);
 
         return secData.Select(e => new BusinessUnitDto(e)).ToList();
     }

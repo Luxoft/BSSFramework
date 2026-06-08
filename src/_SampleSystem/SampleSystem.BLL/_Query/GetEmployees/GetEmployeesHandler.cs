@@ -8,7 +8,7 @@ public class GetEmployeesHandler(IEmployeeBLLFactory employeeBllFactory) : IRequ
 {
     private readonly IEmployeeBLL employeeBll = employeeBllFactory.Create(SecurityRule.View);
 
-    public async Task<GetEmployeesResponse[]> Handle(GetEmployeesQuery request, CancellationToken cancellationToken)
+    public async Task<GetEmployeesResponse[]> Handle(GetEmployeesQuery request, CancellationToken ct)
     {
         var result = this.employeeBll.GetUnsecureQueryable().Where(x => x.Active).ToList();
 

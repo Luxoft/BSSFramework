@@ -12,9 +12,9 @@ public static class ServiceProviderExtensions
 {
     extension(IServiceProvider rootServiceProvider)
     {
-        public async Task RunJob<TJob>(CancellationToken cancellationToken = default)
+        public async Task RunJob<TJob>(CancellationToken ct)
             where TJob : IJob =>
-            await rootServiceProvider.GetRequiredService<IJobServiceEvaluatorFactory>().RunJob<TJob>(cancellationToken);
+            await rootServiceProvider.GetRequiredService<IJobServiceEvaluatorFactory>().RunJob<TJob>(ct);
 
         public ControllerEvaluator<TController> GetDefaultControllerEvaluator<TController>(UserCredential? userCredential = null)
             where TController : ControllerBase

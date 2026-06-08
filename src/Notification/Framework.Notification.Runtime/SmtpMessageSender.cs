@@ -15,7 +15,7 @@ public class SmtpMessageSender(
     IEnumerable<IMailMessageModifier> mailMessageModifiers,
     ILogger<SmtpMessageSender> logger) : IMessageSender<MailMessage>
 {
-    public async Task SendAsync(MailMessage baseMessage, CancellationToken cancellationToken)
+    public async Task SendAsync(MailMessage baseMessage, CancellationToken ct)
     {
         try
         {
@@ -23,7 +23,7 @@ public class SmtpMessageSender(
 
             using var client = smtpClientFactory.CreateSmtpClient();
 
-            await client.SendMailAsync(actualMailMessage, cancellationToken);
+            await client.SendMailAsync(actualMailMessage, ct);
         }
         catch (Exception e)
         {

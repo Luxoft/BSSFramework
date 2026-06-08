@@ -21,18 +21,18 @@ public class ClassAAsyncController(
 {
     [DBSessionMode(DBSessionMode.Write)]
     [HttpPost]
-    public async Task CreateClassA(int value, bool withSession, CancellationToken cancellationToken)
+    public async Task CreateClassA(int value, bool withSession, CancellationToken ct)
     {
         if (withSession)
         {
             var repository = classARepositoryFactory.Create();
 
-            var classA = await repository.GetQueryable().Where(x => x.Value == value).GenericSingleOrDefaultAsync(cancellationToken);
+            var classA = await repository.GetQueryable().Where(x => x.Value == value).GenericSingleOrDefaultAsync(ct);
 
             if (classA != null) throw new Exception("Should not exist yet");
         }
 
-        await mediator.Send(new CreateClassAEvent(value), cancellationToken);
+        await mediator.Send(new CreateClassAEvent(value), ct);
     }
 }
 

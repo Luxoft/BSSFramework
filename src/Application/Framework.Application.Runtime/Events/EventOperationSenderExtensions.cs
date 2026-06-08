@@ -9,7 +9,7 @@ public static class EventOperationSenderExtensions
         object domainObject,
         Type domainObjectType,
         EventOperation domainObjectEvent,
-        CancellationToken cancellationToken) =>
+        CancellationToken ct) =>
 
         await new Func<object, EventOperation, CancellationToken, Task>(sender.Send)
               .CreateGenericMethod(domainObjectType)

@@ -10,12 +10,12 @@ namespace SampleSystem.BLL.Command.CreateIntegrationEvent;
 public class CreateIntegrationEventHandler(IIntegrationEventPublisher eventPublisher, ICountryBLLFactory countryBllFactory)
     : IRequestHandler<CreateIntegrationEventCommand>
 {
-    public async Task Handle(CreateIntegrationEventCommand request, CancellationToken cancellationToken)
+    public async Task Handle(CreateIntegrationEventCommand request, CancellationToken ct)
     {
         var country = new Country { Code = "test11", Name = "test11", Culture = "test11", NameNative = "test11" };
         countryBllFactory.Create().Save(country);
 
-        await eventPublisher.PublishAsync(new TestIntegrationEvent(country.Id), cancellationToken);
+        await eventPublisher.PublishAsync(new TestIntegrationEvent(country.Id), ct);
     }
 }
 

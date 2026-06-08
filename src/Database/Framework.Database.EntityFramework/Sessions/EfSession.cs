@@ -34,7 +34,7 @@ public class EfSession : IEfSession
 
     public IDbTransaction Transaction => this.InnerSession.Transaction;
 
-    public async Task FlushAsync(CancellationToken cancellationToken = default) => await this.InnerSession.FlushAsync(cancellationToken);
+    public async Task FlushAsync(CancellationToken ct) => await this.InnerSession.FlushAsync(ct);
 
     public long GetCurrentRevision() => this.InnerSession.GetCurrentRevision();
 
@@ -58,11 +58,11 @@ public class EfSession : IEfSession
         }
     }
 
-    public async Task CloseAsync(CancellationToken cancellationToken = default)
+    public async Task CloseAsync(CancellationToken ct)
     {
         if (this.lazyInnerSession.IsValueCreated)
         {
-            await this.InnerSession.CloseAsync(cancellationToken);
+            await this.InnerSession.CloseAsync(ct);
         }
     }
 

@@ -7,7 +7,7 @@ namespace Framework.Configuration.BLL;
 public partial class DomainTypeBLL
 {
     /// <inheritdoc />
-    public async Task ForceEventAsync(DomainTypeEventModel eventModel, CancellationToken cancellationToken)
+    public async Task ForceEventAsync(DomainTypeEventModel eventModel, CancellationToken ct)
     {
         this.Context.Validator.Validate(eventModel);
 
@@ -18,7 +18,7 @@ public partial class DomainTypeBLL
             throw new BusinessLogicException($"Target system \"{targetSystem.Name}\" must be revision");
         }
 
-        await this.Context.TargetSystemServices.Values.Single(tss => tss.TargetSystem == targetSystem).ForceEventAsync(eventModel, cancellationToken);
+        await this.Context.TargetSystemServices.Values.Single(tss => tss.TargetSystem == targetSystem).ForceEventAsync(eventModel, ct);
     }
 }
 

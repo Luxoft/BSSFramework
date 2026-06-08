@@ -10,7 +10,7 @@ public interface ITargetSystemService
 
     bool IsAssignable(Type domainType);
 
-    Task ForceEventAsync(DomainTypeEventModel eventModel, CancellationToken cancellationToken);
+    Task ForceEventAsync(DomainTypeEventModel eventModel, CancellationToken ct);
 
     IEnumerable<ObjectModificationInfo<Guid>> GetObjectModifications(DALChanges changes);
 }

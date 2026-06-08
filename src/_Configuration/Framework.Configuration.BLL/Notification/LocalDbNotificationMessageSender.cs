@@ -15,14 +15,14 @@ public class LocalDbNotificationMessageSender([DisabledSecurity] IRepository<Dom
     : IMessageSender<Framework.Notification.Domain.Notification>
 {
     /// <inheritdoc />
-    public async Task SendAsync(Framework.Notification.Domain.Notification notification, CancellationToken cancellationToken)
+    public async Task SendAsync(Framework.Notification.Domain.Notification notification, CancellationToken ct)
     {
         var dto = new NotificationEventDTO(notification);
 
         var serializedData = DataContractSerializerHelper.Serialize(dto);
         var dbNotification = new DomainObjectNotification { SerializeData = serializedData, Size = serializedData.Length };
 
-        await domainObjectNotificationRepository.SaveAsync(dbNotification, cancellationToken);
+        await domainObjectNotificationRepository.SaveAsync(dbNotification, ct);
     }
 }
 

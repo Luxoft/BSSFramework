@@ -17,19 +17,19 @@ public class ExampleServiceForRepository(
 
     private readonly IRepository<BusinessUnit> businessUnitRepository = businessUnitRepository.Create(SecurityRule.View);
 
-    public async Task<(List<Employee> Employees, List<BusinessUnit> BusinessUnits)> LoadPair(CancellationToken cancellationToken = default)
+    public async Task<(List<Employee> Employees, List<BusinessUnit> BusinessUnits)> LoadPair(CancellationToken ct)
     {
         //var employeesFuture = this.employeeRepository.GetQueryable().ToFuture();
 
         //var businessUnitsFuture = this.businessUnitRepository.GetQueryable().ToFuture();
 
-        //var employees = await employeesFuture.GetEnumerableAsync(cancellationToken);
+        //var employees = await employeesFuture.GetEnumerableAsync(ct);
 
-        //var businessUnits = await businessUnitsFuture.GetEnumerableAsync(cancellationToken);
+        //var businessUnits = await businessUnitsFuture.GetEnumerableAsync(ct);
 
-        var employees = await this.employeeRepository.GetQueryable().GenericToHashSetAsync(cancellationToken);
+        var employees = await this.employeeRepository.GetQueryable().GenericToHashSetAsync(ct);
 
-        var businessUnits = await this.businessUnitRepository.GetQueryable().GenericToHashSetAsync(cancellationToken);
+        var businessUnits = await this.businessUnitRepository.GetQueryable().GenericToHashSetAsync(ct);
 
         return (employees.ToList(), businessUnits.ToList());
     }

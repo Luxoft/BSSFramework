@@ -1,7 +1,7 @@
 ﻿using Anch.SecuritySystem.Notification;
 using Anch.SecuritySystem.Notification.Domain;
 
-using Framework.Application;
+using Framework.BLL;
 using Framework.Database;
 
 using Microsoft.Extensions.DependencyInjection;

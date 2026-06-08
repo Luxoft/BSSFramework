@@ -7,9 +7,12 @@ public interface IRootSecurityService
 {
     ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(SecurityRule securityRule);
 
-    bool HasAccess<TDomainObject>(TDomainObject domainObject, SecurityRule securityRule) =>
-        this.GetSecurityProvider<TDomainObject>(securityRule).HasAccessAsync(domainObject).GetAwaiter().GetResult();
+    bool HasAccess<TDomainObject>(TDomainObject domainObject, SecurityRule securityRule);
 
     void CheckAccess<TDomainObject>(TDomainObject domainObject, SecurityRule securityRule);
+
+    bool HasAccess(DomainSecurityRule securityRule);
+
+    void CheckAccess(DomainSecurityRule securityRule);
 }
 

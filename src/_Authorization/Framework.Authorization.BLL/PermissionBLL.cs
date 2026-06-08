@@ -25,7 +25,7 @@ public partial class PermissionBLL
 
     protected override void Validate(Permission permission, OperationContextBase operationContext)
     {
-        this.Context.PrincipalValidator.ValidateAsync(permission.Principal.ToPrincipalData(), CancellationToken.None).GetAwaiter().GetResult();
+        this.DefaultCancellationTokenSource.RunSync(async ct => await this.Context.PrincipalValidator.ValidateAsync(permission.Principal.ToPrincipalData(), ct));
 
         base.Validate(permission, operationContext);
     }

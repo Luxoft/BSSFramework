@@ -18,15 +18,15 @@ public class EfAsyncDal<TDomainObject, TIdent>(
 
     public IQueryable<TDomainObject> GetQueryable() => this.NativeSession.Set<TDomainObject>();
 
-    public TDomainObject Load(TIdent id) => this.LoadAsync(id).GetAwaiter().GetResult();
+    public TDomainObject Load(TIdent id) => this.NativeSession.Find<TDomainObject>(id) ?? throw new InvalidOperationException($"Entity of type {typeof(TDomainObject).Name} with ID {id} not found.");
 
-    public async Task<TDomainObject> LoadAsync(TIdent id, CancellationToken cancellationToken = default) =>
-        (await this.NativeSession.FindAsync<TDomainObject>([id], cancellationToken))!; // Hack
+    public async Task<TDomainObject> LoadAsync(TIdent id, CancellationToken ct) =>
+        (await this.NativeSession.FindAsync<TDomainObject>([id], ct) ?? throw new InvalidOperationException($"Entity of type {typeof(TDomainObject).Name} with ID {id} not found.")); // Hack
 
-    public async Task RefreshAsync(TDomainObject domainObject, CancellationToken cancellationToken = default) =>
-        await this.NativeSession.Entry(domainObject).ReloadAsync(cancellationToken);
+    public async Task RefreshAsync(TDomainObject domainObject, CancellationToken ct) =>
+        await this.NativeSession.Entry(domainObject).ReloadAsync(ct);
 
-    public async Task SaveAsync(TDomainObject domainObject, CancellationToken cancellationToken = default)
+    public async Task SaveAsync(TDomainObject domainObject, CancellationToken ct)
     {
         this.CheckWrite();
 
@@ -34,11 +34,11 @@ public class EfAsyncDal<TDomainObject, TIdent>(
 
         if (state == EntityState.Detached)
         {
-            await session.NativeSession.AddAsync(domainObject, cancellationToken);
+            await session.NativeSession.AddAsync(domainObject, ct);
         }
     }
 
-    public async Task InsertAsync(TDomainObject domainObject, TIdent id, CancellationToken cancellationToken = default)
+    public async Task InsertAsync(TDomainObject domainObject, TIdent id, CancellationToken ct)
     {
         if (identityInfo.Id.Getter(domainObject).IsDefault())
         {
@@ -53,24 +53,24 @@ public class EfAsyncDal<TDomainObject, TIdent>(
 
         if (state == EntityState.Detached)
         {
-            await this.NativeSession.AddAsync(domainObject, cancellationToken);
+            await this.NativeSession.AddAsync(domainObject, ct);
         }
     }
 
-    public async Task RemoveAsync(TDomainObject domainObject, CancellationToken cancellationToken = default)
+    public async Task RemoveAsync(TDomainObject domainObject, CancellationToken ct)
     {
         this.CheckWrite();
 
         this.NativeSession.Remove(domainObject);
     }
 
-    public async Task LockAsync(TDomainObject domainObject, LockRole lockRole, CancellationToken cancellationToken)
+    public async Task LockAsync(TDomainObject domainObject, LockRole lockRole, CancellationToken ct)
     {
         this.CheckWrite();
 
         await this.NativeSession.Set<TDomainObject>()
                   .FromSqlRaw($"SELECT * FROM {nameof(TDomainObject)} WITH (UPDLOCK) WHERE Id = {0}", identityInfo.Id.Getter(domainObject))
-                  .ToListAsync(cancellationToken);
+                  .ToListAsync(ct);
 
         //throw new NotImplementedException();
     }

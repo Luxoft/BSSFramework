@@ -94,12 +94,16 @@ public class AuditService<TIdent, TBLLContext, TBllFactoryContainer, TRootSecuri
 
         return result;
     }
-    private bool HasAccess<TDomain>(TDomain domainObject, PropertyInfo propertyInfo)
-            where TDomain : class, TPersistentObjectBase
-    {
-        var viewSecurityRule = propertyInfo.GetViewSecurityRule();
 
-        return bllContext.SecurityService.GetSecurityProvider<TDomain>(viewSecurityRule).HasAccessAsync(domainObject).GetAwaiter().GetResult();
+    private bool HasAccess<TDomain>(TDomain domainObject, PropertyInfo propertyInfo)
+        where TDomain : class, TPersistentObjectBase
+    {
+        var viewSecurityRule = propertyInfo.GetViewSecurityRule()!;
+
+        var defaultCancellationTokenSource = bllContext.ServiceProvider.GetService<IDefaultCancellationTokenSource>();
+
+        return defaultCancellationTokenSource.RunSync(async ct => await bllContext.SecurityService.GetSecurityProvider<TDomain>(viewSecurityRule)
+                                                                                  .HasAccessAsync(domainObject, ct));
     }
 
     private TPropertyRevisionDto ToPropertyRevisionDto<TDtoProperty, TProperty>(

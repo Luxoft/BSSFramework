@@ -8,11 +8,11 @@ namespace SampleSystem.BLL.Command.CreateClassA.Intergation;
 
 public record ClassACreatedEventHandler(IRepositoryFactory<ClassA> Repository) : INotificationHandler<ClassACreatedEvent>
 {
-    public async Task Handle(ClassACreatedEvent request, CancellationToken cancellationToken)
+    public async Task Handle(ClassACreatedEvent request, CancellationToken ct)
     {
         var repo = this.Repository.Create();
-        var classA = await repo.LoadAsync(request.Id, cancellationToken);
-        await repo.RemoveAsync(classA, cancellationToken);
+        var classA = await repo.LoadAsync(request.Id, ct);
+        await repo.RemoveAsync(classA, ct);
     }
 }
 

@@ -14,11 +14,11 @@ public class InitializationController(
     : ControllerBase
 {
     [HttpPost]
-    public async Task RunInitialize(CancellationToken cancellationToken)
+    public async Task RunInitialize(CancellationToken ct)
     {
         var service = new SampleSystemInitializer(sessionEvaluator, initializeManager);
 
-        await service.InitializeAsync(cancellationToken);
+        await service.InitializeAsync(ct);
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using Anch.SecuritySystem.Services;
+﻿using Anch.Core;
+using Anch.SecuritySystem.Services;
 
 using Framework.Application;
 using Framework.Authorization.Domain;
@@ -24,16 +25,16 @@ public partial class PrincipalBLL
 
     protected override void Validate(Principal domainObject, OperationContextBase operationContext)
     {
-        this.Context.PrincipalValidator.ValidateAsync(domainObject.ToPrincipalData(), CancellationToken.None).GetAwaiter().GetResult();
+        this.DefaultCancellationTokenSource.RunSync(async ct => await this.Context.PrincipalValidator.ValidateAsync(domainObject.ToPrincipalData(), ct));
 
         base.Validate(domainObject, operationContext);
     }
 
     public override void Remove(Principal domainObject)
     {
-        this.Context.ServiceProvider.GetRequiredService<IPrincipalDomainService<Principal>>().RemoveAsync(domainObject).GetAwaiter().GetResult();
+        this.DefaultCancellationTokenSource.RunSync(ct => this.Context.ServiceProvider.GetRequiredService<IPrincipalDomainService<Principal>>()
+                                                              .RemoveAsync(domainObject, false, ct));
 
         base.Remove(domainObject);
     }
 }
-

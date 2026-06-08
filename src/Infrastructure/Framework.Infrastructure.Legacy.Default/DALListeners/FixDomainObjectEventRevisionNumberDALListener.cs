@@ -11,7 +11,7 @@ public class FixDomainObjectEventRevisionNumberDALListener(
     ICurrentRevisionService currentRevisionService) : BLLContextContainer<IConfigurationBLLContext>(context),
                                                                                                IBeforeTransactionCompletedDALListener
 {
-    public async Task Process(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
+    public async Task Process(DALChangesEventArgs eventArgs, CancellationToken ct)
     {
         if (eventArgs == null) throw new ArgumentNullException(nameof(eventArgs));
 

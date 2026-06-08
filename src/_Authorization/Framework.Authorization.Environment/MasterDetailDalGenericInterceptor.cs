@@ -7,7 +7,7 @@ public class MasterDetailDalGenericInterceptor<TDomainObject, TMaster> : IDalGen
     where TMaster : class, IMaster<TDomainObject>
     where TDomainObject : class, IDetail<TMaster>
 {
-    public async Task SaveAsync(TDomainObject data, CancellationToken cancellationToken)
+    public async Task SaveAsync(TDomainObject data, CancellationToken ct)
     {
         if (data.Master != null && !data.Master.Details.Contains(data))
         {
@@ -15,6 +15,6 @@ public class MasterDetailDalGenericInterceptor<TDomainObject, TMaster> : IDalGen
         }
     }
 
-    public async Task RemoveAsync(TDomainObject data, CancellationToken cancellationToken) => data.Master?.RemoveDetail<TMaster, TDomainObject>(data);
+    public async Task RemoveAsync(TDomainObject data, CancellationToken ct) => data.Master?.RemoveDetail<TMaster, TDomainObject>(data);
 }
 

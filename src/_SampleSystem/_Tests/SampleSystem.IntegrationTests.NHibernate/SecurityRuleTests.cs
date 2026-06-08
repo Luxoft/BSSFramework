@@ -39,7 +39,7 @@ public class SecurityRuleTests(IServiceProvider rootServiceProvider) : TestBase(
                 bll.Save([testObj1, testObj2]);
 
                 return new[] { testObj1.Id, testObj2.Id };
-            });
+            }, ct);
 
         // Act
         var loadedObjects = this.Evaluate(

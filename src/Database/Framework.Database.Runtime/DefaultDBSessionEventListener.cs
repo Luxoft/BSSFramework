@@ -15,7 +15,7 @@ public class DefaultDBSessionEventListener(
 
     private readonly IReadOnlyCollection<IAfterTransactionCompletedDALListener> afterTransactionCompletedDALListener = afterTransactionCompletedDALListener.ToArray();
 
-    public async Task OnFlushed(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
+    public async Task OnFlushed(DALChangesEventArgs eventArgs, CancellationToken ct)
     {
         if (initializeManager.IsInitialize)
         {
@@ -24,11 +24,11 @@ public class DefaultDBSessionEventListener(
 
         foreach (var listener in this.flushedDALListener)
         {
-            await listener.Process(eventArgs, cancellationToken);
+            await listener.Process(eventArgs, ct);
         }
     }
 
-    public async Task OnBeforeTransactionCompleted(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
+    public async Task OnBeforeTransactionCompleted(DALChangesEventArgs eventArgs, CancellationToken ct)
     {
         if (initializeManager.IsInitialize)
         {
@@ -37,11 +37,11 @@ public class DefaultDBSessionEventListener(
 
         foreach (var listener in this.beforeTransactionCompletedDALListener)
         {
-            await listener.Process(eventArgs, cancellationToken);
+            await listener.Process(eventArgs, ct);
         }
     }
 
-    public async Task OnAfterTransactionCompleted(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
+    public async Task OnAfterTransactionCompleted(DALChangesEventArgs eventArgs, CancellationToken ct)
     {
         if (initializeManager.IsInitialize)
         {
@@ -50,7 +50,7 @@ public class DefaultDBSessionEventListener(
 
         foreach (var listener in this.afterTransactionCompletedDALListener)
         {
-            await listener.Process(eventArgs, cancellationToken);
+            await listener.Process(eventArgs, ct);
         }
     }
 }

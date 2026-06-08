@@ -9,20 +9,22 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Infrastructure.ContextEvaluator;
 
-public class ContextEvaluator<TBLLContext, TMappingService>(IServiceEvaluator<TBLLContext> baseContextEvaluator)
+public class ContextEvaluator<TBLLContext, TMappingService>(
+    IServiceEvaluator<TBLLContext> contextEvaluator)
     : IContextEvaluator<TBLLContext, TMappingService>
     where TBLLContext : IServiceProviderContainer where TMappingService : notnull
 {
     public async Task<TResult> EvaluateAsync<TResult>(
         DBSessionMode sessionMode,
         UserCredential? customUserCredential,
-        Func<EvaluatedData<TBLLContext, TMappingService>, Task<TResult>> getResult) =>
-        await baseContextEvaluator.EvaluateAsync(
+        Func<EvaluatedData<TBLLContext, TMappingService>, Task<TResult>> getResult,
+        CancellationToken ct) =>
+        await contextEvaluator.EvaluateAsync(
             sessionMode,
             customUserCredential,
             context => getResult(
                 new EvaluatedData<TBLLContext, TMappingService>(
                     context,
-                    context.ServiceProvider.GetRequiredService<TMappingService>())));
+                    context.ServiceProvider.GetRequiredService<TMappingService>())),
+            ct);
 }
-

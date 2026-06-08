@@ -4,9 +4,9 @@ using Anch.Core;
 using Anch.SecuritySystem;
 using Anch.Testing.Xunit;
 
-using Framework.Application;
 using Framework.Application.Events;
 using Framework.AutomationCore.Extensions;
+using Framework.BLL;
 using Framework.Configuration.Generated.DTO;
 using Framework.Database;
 using Framework.Database.NHibernate.Sessions;

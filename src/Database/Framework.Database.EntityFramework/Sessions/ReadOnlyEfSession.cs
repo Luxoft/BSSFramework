@@ -34,7 +34,7 @@ public class ReadOnlyEfSession : EfSessionBase
 
     public override void AsWritable() => throw new InvalidOperationException("Readonly session already created");
 
-    public override async Task CloseAsync(CancellationToken cancellationToken = default)
+    public override async Task CloseAsync(CancellationToken ct)
     {
         if (this.closed)
         {
@@ -53,6 +53,6 @@ public class ReadOnlyEfSession : EfSessionBase
 
     public override IDbTransaction Transaction { get; } = null;
 
-    public override async Task FlushAsync(CancellationToken cancellationToken = default) => throw new InvalidOperationException();
+    public override async Task FlushAsync(CancellationToken ct) => throw new InvalidOperationException();
 }
 

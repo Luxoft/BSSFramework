@@ -16,21 +16,21 @@ public interface ISubscription<TDomainObject, TRenderingObject> : ISubscription
 
     Type ISubscription.RenderingObjectType => typeof(TRenderingObject);
 
-    bool IsProcessed(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions);
+    ValueTask<bool> IsProcessed(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions, CancellationToken ct);
 
-    TRenderingObject ConvertToRenderingObject(IServiceProvider serviceProvider, TDomainObject domainObject);
+    ValueTask<TRenderingObject> ConvertToRenderingObject(IServiceProvider serviceProvider, TDomainObject domainObject, CancellationToken ct);
 
-    IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> GetTo(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions);
+    IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> GetTo(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions);
 
-    IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> GetCopyTo(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions);
+    IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> GetCopyTo(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions);
 
-    IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> GetReplyTo(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions);
+    IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> GetReplyTo(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions);
 
-    IEnumerable<NotificationFilterGroup> GetNotificationFilterGroups(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions);
+    IAsyncEnumerable<NotificationFilterGroup> GetNotificationFilterGroups(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions);
 
-    (string Subject, string Body) GetMessage(IServiceProvider serviceProvider, DomainObjectVersions<TRenderingObject> versions);
+    ValueTask<(string Subject, string Body)> GetMessage(IServiceProvider serviceProvider, DomainObjectVersions<TRenderingObject> versions, CancellationToken ct);
 
-    IEnumerable<Attachment> GetAttachments(IServiceProvider serviceProvider, DomainObjectVersions<TRenderingObject> versions);
+    IAsyncEnumerable<Attachment> GetAttachments(IServiceProvider serviceProvider, DomainObjectVersions<TRenderingObject> versions);
 }
 
 /// <summary>

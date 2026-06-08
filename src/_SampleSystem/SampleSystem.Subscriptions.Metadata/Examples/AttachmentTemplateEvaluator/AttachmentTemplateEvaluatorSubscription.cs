@@ -14,17 +14,17 @@ public class AttachmentTemplateEvaluatorSubscription : Subscription<Domain.Emplo
 
     public override MailAddress Sender { get; } = new("AttachmentTemplateEvaluator@luxoft.com", "SampleSystem");
 
-    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee.Employee>> GetTo(IServiceProvider serviceProvider, DomainObjectVersions<Domain.Employee.Employee> versions)
+    public override async IAsyncEnumerable<NotificationMessageGenerationInfo<Domain.Employee.Employee>> GetTo(IServiceProvider serviceProvider, DomainObjectVersions<Domain.Employee.Employee> versions)
     {
         yield return new("tester@luxoft.com", versions);
     }
 
-    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee.Employee>> GetCopyTo(IServiceProvider serviceProvider, DomainObjectVersions<Domain.Employee.Employee> versions)
+    public override async IAsyncEnumerable<NotificationMessageGenerationInfo<Domain.Employee.Employee>> GetCopyTo(IServiceProvider serviceProvider, DomainObjectVersions<Domain.Employee.Employee> versions)
     {
         yield return new("tester@luxoft.com", versions);
     }
 
-    public override IEnumerable<System.Net.Mail.Attachment> GetAttachments(IServiceProvider serviceProvider, DomainObjectVersions<Domain.Employee.Employee> versions)
+    public override async IAsyncEnumerable<System.Net.Mail.Attachment> GetAttachments(IServiceProvider serviceProvider, DomainObjectVersions<Domain.Employee.Employee> versions)
     {
         var template = Encoding.UTF8.GetBytes($"Hello world! {versions.Current!.NameNative}");
 

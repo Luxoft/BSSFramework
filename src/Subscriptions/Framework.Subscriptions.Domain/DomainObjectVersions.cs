@@ -33,8 +33,8 @@ public record DomainObjectVersions<TDomainObject>(TDomainObject? Previous, TDoma
     /// <inheritdoc/>
     public override string ToString() => $"DomainObjectType: {this.DomainObjectType}, Previous: {this.Previous}, Current: {this.Current}";
 
-    public DomainObjectVersions<TNewDomainObject> ChangeDomainObject<TNewDomainObject>(Func<TDomainObject, TNewDomainObject> selector)
-        where TNewDomainObject : class => new(this.Previous == null ? null : selector(this.Previous), this.Current == null ? null : selector(this.Current));
+    public async ValueTask<DomainObjectVersions<TNewDomainObject>> ChangeDomainObjectAsync<TNewDomainObject>(Func<TDomainObject, ValueTask<TNewDomainObject>> selector)
+        where TNewDomainObject : class => new(this.Previous == null ? null : await selector(this.Previous), this.Current == null ? null : await selector(this.Current));
 
     private static DomainObjectChangeType GetChangeType(TDomainObject? previous, TDomainObject? current)
     {

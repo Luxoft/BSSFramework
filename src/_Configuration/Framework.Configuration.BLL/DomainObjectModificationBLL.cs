@@ -1,4 +1,5 @@
-﻿using Anch.SecuritySystem.Providers;
+﻿using Anch.GenericQueryable;
+using Anch.SecuritySystem.Providers;
 
 using Framework.Configuration.Domain;
 using Framework.Core;
@@ -19,12 +20,17 @@ public partial class DomainObjectModificationBLL(
     IDomainObjectVersionsResolverFactory domainObjectVersionsResolverFactory)
     : SecurityDomainBLLBase<DomainObjectModification>(context, securityProvider)
 {
-    public ITryResult<int> Process(int limit = 1000)
+    public async Task<ITryResult<int>> ProcessAsync(int limit, CancellationToken ct)
     {
-        this.Context.NamedLockService.LockAsync(ConfigurationNamedLock.ProcessModifications, LockRole.Update).GetAwaiter().GetResult();
+        await this.Context.NamedLockService.LockAsync(ConfigurationNamedLock.ProcessModifications, LockRole.Update, ct);
 
-        var modifications = this.Context.Logics.DomainObjectModification.GetUnsecureQueryable().Where(m => !m.Processed) // Add Order by time?
-                                .Take(limit).ToList();
+        var modifications = await this.Context
+                                      .Logics
+                                      .DomainObjectModification
+                                      .GetUnsecureQueryable()
+                                      .Where(m => !m.Processed) // Add Order by time?
+                                      .Take(limit)
+                                      .GenericToListAsync(ct);
 
         logger.LogDebug("Found {Count} modifications", modifications.Count);
 
@@ -42,7 +48,7 @@ public partial class DomainObjectModificationBLL(
 
             var versions = this.GetDomainObjectVersions(info);
 
-            foreach (var tryResult in subscriptionService.Process(versions))
+            await foreach (var tryResult in subscriptionService.ProcessAsync(versions).WithCancellation(ct))
             {
                 tryResult.Match(
                     _ => { },

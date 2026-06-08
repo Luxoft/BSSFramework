@@ -3,5 +3,5 @@
 public class SendNotificationsJob(IConfigurationBLLContext context)
     : ISendNotificationsJob
 {
-    public async Task ExecuteAsync(CancellationToken cancellationToken) => context.Logics.DomainObjectModification.Process();
+    public Task ExecuteAsync(CancellationToken cancellationToken) => context.Logics.DomainObjectModification.ProcessAsync(1000, cancellationToken);
 }

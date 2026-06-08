@@ -1,5 +1,5 @@
-﻿using System.Collections.Immutable;
-using System.Net.Mail;
+﻿using System.Net.Mail;
+using System.Runtime.CompilerServices;
 
 using Anch.Core;
 using Anch.IdentitySource;
@@ -15,49 +15,48 @@ public class NotificationExtractor<TDomainObject, TRenderingObject>(
     IServiceProvider serviceProvider,
     IIdentityInfoSource identityInfoSource,
     ISubscription<TDomainObject, TRenderingObject> subscription,
-    IEmployeeEmailExtractor employeeEmailExtractor) : INotificationExtractor
+    IEmployeeEmailExtractor employeeEmailExtractor) : INotificationExtractor<TDomainObject>
     where TDomainObject : class
     where TRenderingObject : class
 {
-    public IEnumerable<Notification.Domain.Notification> GetNotifications(DomainObjectVersions versions)
+    public IAsyncEnumerable<Notification.Domain.Notification> GetNotifications(DomainObjectVersions<TDomainObject> versions)
     {
-        var typedVersions = (DomainObjectVersions<TDomainObject>)versions;
-
         var technicalInformation = new NotificationTechnicalInformation(
             subscription.MessageTemplateCode,
             typeof(TDomainObject).FullName!,
             identityInfoSource.TryGetIdentityInfo<TDomainObject>()
-                              .Maybe(identityInfo => identityInfo.GetId(typedVersions.Previous ?? typedVersions.Current!) as Guid?));
+                              .Maybe(identityInfo => identityInfo.GetId(versions.Previous ?? versions.Current!) as Guid?));
 
-        return from mailMessage in this.GetMailMessages(typedVersions)
+        return from mailMessage in this.GetMailMessages(versions)
 
                select new Notification.Domain.Notification(technicalInformation, mailMessage);
     }
 
-    private IEnumerable<MailMessage> GetMailMessages(DomainObjectVersions<TDomainObject> versions)
+    private async IAsyncEnumerable<MailMessage> GetMailMessages(DomainObjectVersions<TDomainObject> versions, [EnumeratorCancellation] CancellationToken ct = default)
     {
-        if (subscription.IsProcessed(serviceProvider, versions))
+        if (await subscription.IsProcessed(serviceProvider, versions, ct))
         {
             var preTo = subscription.GetTo(serviceProvider, versions);
-            var authTo = this.GetAuthTo(versions);
+            var authTo = this.GetAuthTo(versions, ct);
 
             var resultTo = this.GetMergeResult(preTo, authTo);
             var copyTo = subscription.GetCopyTo(serviceProvider, versions);
             var replyTo = subscription.GetReplyTo(serviceProvider, versions);
 
-            return ReGroup(resultTo, copyTo, replyTo).Select(this.ToMailMessage);
-        }
-        else
-        {
-            return [];
+            await foreach (var mailMessage in ReGroup(resultTo, copyTo, replyTo).Select(this.ToMailMessage).WithCancellation(ct))
+            {
+                yield return mailMessage;
+            }
         }
     }
 
-    private MailMessage ToMailMessage(NotificationMessageGenerationInfo<TRenderingObject, NotificationRecipient> notificationMessageGenerationInfo)
+    private async ValueTask<MailMessage> ToMailMessage(
+        NotificationMessageGenerationInfo<TRenderingObject, NotificationRecipient> notificationMessageGenerationInfo,
+        CancellationToken ct)
     {
-        var (subject, body) = subscription.GetMessage(serviceProvider, notificationMessageGenerationInfo.Versions);
+        var (subject, body) = await subscription.GetMessage(serviceProvider, notificationMessageGenerationInfo.Versions, ct);
 
-        var attachments = subscription.GetAttachments(serviceProvider, notificationMessageGenerationInfo.Versions);
+        var attachments = await subscription.GetAttachments(serviceProvider, notificationMessageGenerationInfo.Versions).ToImmutableArrayAsync(ct);
 
         var mailMessage = new MailMessage
         {
@@ -80,30 +79,33 @@ public class NotificationExtractor<TDomainObject, TRenderingObject>(
         return mailMessage;
     }
 
-    private static IEnumerable<NotificationMessageGenerationInfo<TRenderingObject, NotificationRecipient>> ReGroup(
-        IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> to,
-        IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> copyTo,
-        IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> replyTo) =>
+    private static IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject, NotificationRecipient>> ReGroup(
+        IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> to,
+        IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> copyTo,
+        IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> replyTo) =>
 
-        from g in new[] { to.GroupRecipients(RecipientRole.To), copyTo.GroupRecipients(RecipientRole.Copy), replyTo.GroupRecipients(RecipientRole.ReplyTo) }.RegroupRecipients()
+        from g in new[] { to.GroupRecipients(RecipientRole.To), copyTo.GroupRecipients(RecipientRole.Copy), replyTo.GroupRecipients(RecipientRole.ReplyTo) }
+                  .ToAsyncEnumerable().RegroupRecipients()
 
         let recipients = g.Select(pair => new NotificationRecipient(pair.Recipient, pair.Tag))
 
         select new NotificationMessageGenerationInfo<TRenderingObject, NotificationRecipient>([.. recipients], g.Key);
 
-    private IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> GetAuthTo(DomainObjectVersions<TDomainObject> versions)
+    private async IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> GetAuthTo(
+        DomainObjectVersions<TDomainObject> versions,
+        [EnumeratorCancellation] CancellationToken ct = default)
     {
         if (subscription.SecurityRoles.Length > 0)
         {
-            var notificationFilterGroups = subscription.GetNotificationFilterGroups(serviceProvider, versions).ToImmutableArray();
+            var notificationFilterGroups = await subscription.GetNotificationFilterGroups(serviceProvider, versions).ToImmutableArrayAsync(ct);
 
             if (notificationFilterGroups.Length > 0)
             {
-                var emails = employeeEmailExtractor.GetEmails(subscription.SecurityRoles, notificationFilterGroups);
+                var emails = await employeeEmailExtractor.GetEmails(subscription.SecurityRoles, notificationFilterGroups).ToImmutableHashSetAsync(ct);
 
                 if (emails.Count > 0)
                 {
-                    var renderingVersions = versions.ChangeDomainObject(domainObject => subscription.ConvertToRenderingObject(serviceProvider, domainObject));
+                    var renderingVersions = await versions.ChangeDomainObjectAsync(domainObject => subscription.ConvertToRenderingObject(serviceProvider, domainObject, ct));
 
                     yield return new NotificationMessageGenerationInfo<TRenderingObject>(emails, renderingVersions);
                 }
@@ -111,11 +113,11 @@ public class NotificationExtractor<TDomainObject, TRenderingObject>(
         }
     }
 
-    private IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> GetMergeResult(
-        IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> preTo,
-        IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> authTo) =>
+    private IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> GetMergeResult(
+        IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> preTo,
+        IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> authTo) =>
 
-        from g in new[] { preTo.GroupRecipients(false), authTo.GroupRecipients(true) }.RegroupRecipients()
+        from g in new[] { preTo.GroupRecipients(false), authTo.GroupRecipients(true) }.ToAsyncEnumerable().RegroupRecipients()
 
         let resultRecipients = g.Partial(
             pair => pair.Tag,
@@ -125,4 +127,3 @@ public class NotificationExtractor<TDomainObject, TRenderingObject>(
 
         select new NotificationMessageGenerationInfo<TRenderingObject>([.. resultRecipients], g.Key);
 }
-

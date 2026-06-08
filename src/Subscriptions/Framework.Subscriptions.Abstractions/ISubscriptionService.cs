@@ -5,6 +5,6 @@ namespace Framework.Subscriptions;
 
 public interface ISubscriptionService
 {
-    IEnumerable<ITryResult<SubscriptionHeader>> Process(DomainObjectVersions versions);
+    IAsyncEnumerable<ITryResult<SubscriptionHeader>> ProcessAsync(DomainObjectVersions versions);
 }
 

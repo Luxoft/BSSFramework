@@ -14,12 +14,12 @@ public class CountryCreateSubscription : Subscription<Domain.Directories.Country
 
     public override bool InlineAttachments { get; } = false;
 
-    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Directories.Country>> GetTo(IServiceProvider serviceProvider, DomainObjectVersions<Domain.Directories.Country> versions)
+    public override async IAsyncEnumerable<NotificationMessageGenerationInfo<Domain.Directories.Country>> GetTo(IServiceProvider serviceProvider, DomainObjectVersions<Domain.Directories.Country> versions)
     {
         yield return new("tester@luxoft.com", versions);
     }
 
-    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Directories.Country>> GetCopyTo(IServiceProvider serviceProvider, DomainObjectVersions<Domain.Directories.Country> versions)
+    public override async IAsyncEnumerable<NotificationMessageGenerationInfo<Domain.Directories.Country>> GetCopyTo(IServiceProvider serviceProvider, DomainObjectVersions<Domain.Directories.Country> versions)
     {
         yield return new("tester@luxoft.com", versions);
     }

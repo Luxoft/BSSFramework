@@ -7,6 +7,5 @@ namespace Framework.Subscriptions;
 
 public interface IEmployeeEmailExtractor
 {
-    ImmutableHashSet<string> GetEmails(ImmutableArray<SecurityRole> securityRoles, ImmutableArray<NotificationFilterGroup> notificationFilterGroups);
+    IAsyncEnumerable<string> GetEmails(ImmutableArray<SecurityRole> securityRoles, ImmutableArray<NotificationFilterGroup> notificationFilterGroups);
 }
-

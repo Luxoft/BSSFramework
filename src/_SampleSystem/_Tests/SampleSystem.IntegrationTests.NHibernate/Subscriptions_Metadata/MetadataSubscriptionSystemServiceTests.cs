@@ -1,5 +1,7 @@
 ﻿using System.Text;
 
+using Anch.Testing.Xunit;
+
 using Framework.Core;
 using Framework.Notification.Domain;
 
@@ -13,14 +15,14 @@ public sealed class MetadataSubscriptionSystemServiceTests(IServiceProvider root
 {
     protected override async ValueTask InitializeAsync(CancellationToken ct) => this.GetNotifications().Clear();
 
-    [Fact]
-    public void SubscriptionFromMetadataShouldBeSent()
+    [AnchFact]
+    public async Task SubscriptionFromMetadataShouldBeSent(CancellationToken ct)
     {
         // Arrange
         var employee = this.CreateEmployee();
 
         // Act
-        var results = this.DataManager.ProcessSubscription(employee, employee);
+        var results = await this.DataManager.ProcessSubscriptionAsync(employee, employee, ct);
         var errors = results.GetErrors().ToList();
 
         var expectedNotifications = this.GetNotifications()
@@ -32,15 +34,15 @@ public sealed class MetadataSubscriptionSystemServiceTests(IServiceProvider root
         Assert.Equal("replayTo@luxoft.com", Assert.Single(notification.Recipients, z => z.Type == RecipientRole.ReplyTo).Name);
     }
 
-    [Fact]
-    public void RazorTemplateImpl_SubscriptionFromMetadataShouldBeSent()
+    [AnchFact]
+    public async Task RazorTemplateImpl_SubscriptionFromMetadataShouldBeSent(CancellationToken ct)
     {
         // Arrange
         var employee = this.DataManager.SaveEmployee("Chuck Norris");
         var message = @"String.Concat it is good choice for Chuck Norris.";
 
         // Act
-        var results = this.DataManager.ProcessSubscription(employee, employee);
+        var results = await this.DataManager.ProcessSubscriptionAsync(employee, employee, ct);
         var errors = results.GetErrors().ToList();
 
         var expectedNotifications = this.GetNotifications()
@@ -53,18 +55,18 @@ public sealed class MetadataSubscriptionSystemServiceTests(IServiceProvider root
         Assert.Empty(errors);
         var notification = Assert.Single(expectedNotifications);
         Assert.Equal(message, notification.Message.Message);
-        Assert.False(notification.Recipients.Any(z => z.Type == RecipientRole.ReplyTo));
+        Assert.DoesNotContain(notification.Recipients, z => z.Type == RecipientRole.ReplyTo);
     }
 
-    [Fact]
-    public void LocalRazorTemplate_SubscriptionFromMetadataShouldBeSent()
+    [AnchFact]
+    public async Task LocalRazorTemplate_SubscriptionFromMetadataShouldBeSent(CancellationToken ct)
     {
         // Arrange
         var employee = this.CreateEmployee();
         var message = $"<h2>Hi there!!!</h2>{Environment.NewLine}My test employee Name:  John Doe {Environment.NewLine}Date: 21 Oct 2015";
 
         // Act
-        var results = this.DataManager.ProcessSubscription(employee, employee);
+        var results = await this.DataManager.ProcessSubscriptionAsync(employee, employee, ct);
         var errors = results.GetErrors().ToList();
 
         var expectedNotifications = this.GetNotifications()
@@ -80,15 +82,15 @@ public sealed class MetadataSubscriptionSystemServiceTests(IServiceProvider root
     /// IADFRAME-1525 Сделать пример использования аттачей в CodeFirst подписках
     /// </summary>
     /// <remarks>Создать тест: подписка с аттачем, который добавляется в нотификацию</remarks>
-    [Fact]
-    public void AttachTest()
+    [AnchFact]
+    public async Task AttachTest(CancellationToken ct)
     {
         // Arrange
         var employee = this.CreateEmployee();
         var content = Encoding.UTF8.GetBytes("Hello world!");
 
         // Act
-        this.DataManager.ProcessSubscription(employee, employee);
+        await this.DataManager.ProcessSubscriptionAsync(employee, employee, ct);
 
         var expectedNotifications = this.GetNotifications()
                                         .Where(n => n.From == "Attachment@luxoft.com");
@@ -97,22 +99,22 @@ public sealed class MetadataSubscriptionSystemServiceTests(IServiceProvider root
         var notification = expectedNotifications.Single();
         var attachment = notification.Attachments.Single();
         Assert.Equal(content, attachment.Content);
-        Assert.Equal(SampleSystem.Subscriptions.Metadata.Examples.Attachment.AttachmentSubscription.AttachmentName, attachment.Name);
+        Assert.Equal(Subscriptions.Metadata.Examples.Attachment.AttachmentSubscription.AttachmentName, attachment.Name);
     }
 
     /// <summary>
     /// IADFRAME-1525 Сделать пример использования аттачей в CodeFirst подписках
     /// </summary>
     /// <remarks>Создать тест: подписка с аттачем который провернут через шаблонизатор (TemplateEvaluatorFactory) просто текст, который добавляется в нотификацию</remarks>
-    [Fact]
-    public void AttachTemplateEvaluatorTest()
+    [AnchFact]
+    public async Task AttachTemplateEvaluatorTest(CancellationToken ct)
     {
         // Arrange
         var employee = this.CreateEmployee();
         var content = "Hello world!  John Doe ";
 
         // Act
-        this.DataManager.ProcessSubscription(employee, employee);
+        await this.DataManager.ProcessSubscriptionAsync(employee, employee, ct);
 
         var expectedNotifications = this.GetNotifications().Where(n => n.From == "AttachmentTemplateEvaluator@luxoft.com");
 
@@ -127,15 +129,15 @@ public sealed class MetadataSubscriptionSystemServiceTests(IServiceProvider root
     /// IADFRAME-1525 Сделать пример использования аттачей в CodeFirst подписках
     /// </summary>
     /// <remarks>Создать тест: подписка с inline аттачем (ContentId), который добавляется в нотификацию</remarks>
-    [Fact]
-    public void AttachInlinedTest()
+    [AnchFact]
+    public async Task AttachInlinedTest(CancellationToken ct)
     {
         // Arrange
         var employee = this.CreateEmployee();
         var messageTemplate = @"<html><head><title></title></head><body> John Doe <br/><img src=""cid:testId@luxoft.com""/></body></html>";
 
         // Act
-        this.DataManager.ProcessSubscription(employee, employee);
+        await this.DataManager.ProcessSubscriptionAsync(employee, employee, ct);
 
         var expectedNotifications = this.GetNotifications()
                                         .Where(n => n.From == "InlineAttach@luxoft.com");
@@ -147,13 +149,13 @@ public sealed class MetadataSubscriptionSystemServiceTests(IServiceProvider root
         Assert.Single(notification.Attachments);
     }
 
-    [Fact]
-    public void DateModelCreateSubscriptionTest()
+    [AnchFact]
+    public async Task DateModelCreateSubscriptionTest(CancellationToken ct)
     {
         // Arrange
 
         // Act
-        this.DataManager.ProcessSubscription(null, new DateModel { Year = 2019 });
+        await this.DataManager.ProcessSubscriptionAsync(null, new DateModel { Year = 2019 }, ct);
 
         var expectedNotifications = this.GetNotifications()
                                         .Where(n => n.From == "DateModelCreateSampleSystem@luxoft.com");

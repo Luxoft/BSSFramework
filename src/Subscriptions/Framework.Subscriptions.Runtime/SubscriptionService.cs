@@ -2,33 +2,46 @@
 
 using Framework.Core;
 using Framework.Subscriptions.Domain;
+using Framework.Subscriptions.Metadata;
 
 namespace Framework.Subscriptions;
 
 public class SubscriptionService(
     IServiceProxyFactory serviceProxyFactory,
     ISubscriptionResolver subscriptionResolver,
-    IMessageSender<Notification.Domain.Notification> notificationMessageSender,
-    IDefaultCancellationTokenSource? defaultCancellationTokenSource) : ISubscriptionService
+    IMessageSender<Notification.Domain.Notification> notificationMessageSender) : ISubscriptionService
 {
-    public IEnumerable<ITryResult<SubscriptionHeader>> Process(DomainObjectVersions versions)
+    public IAsyncEnumerable<ITryResult<SubscriptionHeader>> ProcessAsync(DomainObjectVersions versions) =>
+        subscriptionResolver.Resolve(versions.DomainObjectType, versions.ChangeType)
+                            .ToAsyncEnumerable()
+                            .Select(async (ISubscription subscription, CancellationToken ct) =>
+                            {
+                                try
+                                {
+                                    await new Func<ISubscription<object, object>, DomainObjectVersions<object>, CancellationToken, Task>(this.ProcessAsync)
+                                          .CreateGenericMethod(subscription.DomainObjectType, subscription.RenderingObjectType)
+                                          .Invoke<Task<SubscriptionHeader>>(subscription, versions, ct);
+
+                                    return TryResult.Return(subscription.Header);
+                                }
+                                catch (Exception ex)
+                                {
+                                    return TryResult.CreateFault<SubscriptionHeader>(ex);
+                                }
+                            });
+
+    private async Task ProcessAsync<TDomainObject, TRenderingObject>(
+        ISubscription<TDomainObject, TRenderingObject> subscription,
+        DomainObjectVersions<TDomainObject> versions,
+        CancellationToken ct)
+        where TDomainObject : class
+        where TRenderingObject : class
     {
-        foreach (var subscription in subscriptionResolver.Resolve(versions.DomainObjectType, versions.ChangeType))
+        var notificationExtractor = serviceProxyFactory.Create<NotificationExtractor<TDomainObject, TRenderingObject>>(subscription);
+
+        await foreach (var notification in notificationExtractor.GetNotifications(versions).WithCancellation(ct))
         {
-            yield return TryResult.Catch(() =>
-            {
-                var notificationExtractorType = typeof(NotificationExtractor<,>).MakeGenericType(subscription.DomainObjectType, subscription.RenderingObjectType);
-
-                var notificationExtractor = serviceProxyFactory.Create<INotificationExtractor>(notificationExtractorType, subscription);
-
-                foreach (var notification in notificationExtractor.GetNotifications(versions))
-                {
-                    defaultCancellationTokenSource.RunSync(async ct => await notificationMessageSender.SendAsync(notification, ct));
-                }
-
-                return subscription.Header;
-            });
+            await notificationMessageSender.SendAsync(notification, ct);
         }
     }
 }
-

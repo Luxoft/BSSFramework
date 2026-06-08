@@ -11,12 +11,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Subscriptions.Metadata;
 
-
 public abstract class Subscription<TDomainObject, TMessageTemplate> : Subscription<TDomainObject, TDomainObject, TMessageTemplate>
     where TDomainObject : class
     where TMessageTemplate : IMessageTemplate<TDomainObject>
 {
-    public sealed override TDomainObject ConvertToRenderingObject(IServiceProvider serviceProvider, TDomainObject domainObject) => domainObject;
+    public sealed override ValueTask<TDomainObject> ConvertToRenderingObject(IServiceProvider serviceProvider, TDomainObject domainObject, CancellationToken ct) => new(domainObject);
 }
 
 public abstract class Subscription<TDomainObject, TRenderingObject, TMessageTemplate> : ISubscription<TDomainObject, TRenderingObject>
@@ -40,22 +39,34 @@ public abstract class Subscription<TDomainObject, TRenderingObject, TMessageTemp
 
     public virtual ImmutableArray<SecurityRole> SecurityRoles { get; } = [];
 
-    public (string Subject, string Body) GetMessage(IServiceProvider serviceProvider, DomainObjectVersions<TRenderingObject> versions) =>
-        serviceProvider.GetRequiredService<IServiceProxyFactory>().Create<TMessageTemplate>().Render(serviceProvider, versions);
+    public ValueTask<(string Subject, string Body)> GetMessage(
+        IServiceProvider serviceProvider,
+        DomainObjectVersions<TRenderingObject> versions,
+        CancellationToken ct) =>
+        serviceProvider.GetRequiredService<IServiceProxyFactory>().Create<TMessageTemplate>().Render(serviceProvider, versions, ct);
 
-    public abstract TRenderingObject ConvertToRenderingObject(IServiceProvider serviceProvider, TDomainObject domainObject);
+    public abstract ValueTask<TRenderingObject> ConvertToRenderingObject(IServiceProvider serviceProvider, TDomainObject domainObject, CancellationToken ct);
 
-    public virtual bool IsProcessed(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions) => true;
+    public virtual ValueTask<bool> IsProcessed(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions, CancellationToken ct) =>
+        new(true);
 
-    public virtual IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> GetTo(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions) => [];
+    public virtual IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> GetTo(
+        IServiceProvider serviceProvider,
+        DomainObjectVersions<TDomainObject> versions) => AsyncEnumerable.Empty<NotificationMessageGenerationInfo<TRenderingObject>>();
 
-    public virtual IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> GetCopyTo(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions) => [];
+    public virtual IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> GetCopyTo(
+        IServiceProvider serviceProvider,
+        DomainObjectVersions<TDomainObject> versions) => AsyncEnumerable.Empty<NotificationMessageGenerationInfo<TRenderingObject>>();
 
-    public virtual IEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> GetReplyTo(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions) =>
-        [];
+    public virtual IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> GetReplyTo(
+        IServiceProvider serviceProvider,
+        DomainObjectVersions<TDomainObject> versions) =>
+        AsyncEnumerable.Empty<NotificationMessageGenerationInfo<TRenderingObject>>();
 
-    public virtual IEnumerable<NotificationFilterGroup> GetNotificationFilterGroups(IServiceProvider serviceProvider, DomainObjectVersions<TDomainObject> versions) => [];
+    public virtual IAsyncEnumerable<NotificationFilterGroup> GetNotificationFilterGroups(
+        IServiceProvider serviceProvider,
+        DomainObjectVersions<TDomainObject> versions) => AsyncEnumerable.Empty<NotificationFilterGroup>();
 
-    public virtual IEnumerable<Attachment> GetAttachments(IServiceProvider serviceProvider, DomainObjectVersions<TRenderingObject> versions) => [];
+    public virtual IAsyncEnumerable<Attachment> GetAttachments(IServiceProvider serviceProvider, DomainObjectVersions<TRenderingObject> versions) =>
+        AsyncEnumerable.Empty<Attachment>();
 }
-

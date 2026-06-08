@@ -10,7 +10,7 @@ public partial interface IDomainObjectModificationBLL
     /// </summary>
     /// <param name="limit">Ограничение на количество обработанных модификаций</param>
     /// <returns>Количество обработанных модификаций</returns>
-    ITryResult<int> Process(int limit = 1000);
+    Task<ITryResult<int>> ProcessAsync(int limit = 1000, CancellationToken ct = default);
 
     /// <summary>
     /// Получение состояния обработки очереди

@@ -14,17 +14,17 @@ public class AttachmentInlineSubscription : Subscription<Domain.Employee.Employe
 
     public override MailAddress Sender { get; } = new("InlineAttach@luxoft.com", "SampleSystem");
 
-    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee.Employee>> GetTo(IServiceProvider _, DomainObjectVersions<Domain.Employee.Employee> versions)
+    public override async IAsyncEnumerable<NotificationMessageGenerationInfo<Domain.Employee.Employee>> GetTo(IServiceProvider _, DomainObjectVersions<Domain.Employee.Employee> versions)
     {
         yield return new("tester@luxoft.com", versions);
     }
 
-    public override IEnumerable<NotificationMessageGenerationInfo<Domain.Employee.Employee>> GetCopyTo(IServiceProvider _, DomainObjectVersions<Domain.Employee.Employee> versions)
+    public override async IAsyncEnumerable<NotificationMessageGenerationInfo<Domain.Employee.Employee>> GetCopyTo(IServiceProvider _, DomainObjectVersions<Domain.Employee.Employee> versions)
     {
         yield return new("tester@luxoft.com", versions);
     }
 
-    public override IEnumerable<System.Net.Mail.Attachment> GetAttachments(IServiceProvider _, DomainObjectVersions<Domain.Employee.Employee> versions)
+    public override async IAsyncEnumerable<System.Net.Mail.Attachment> GetAttachments(IServiceProvider _, DomainObjectVersions<Domain.Employee.Employee> versions)
     {
         yield return new(new MemoryStream(Encoding.UTF8.GetBytes("Hello world!")), AttachmentName)
         {

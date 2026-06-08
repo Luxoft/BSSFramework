@@ -145,4 +145,3 @@ public class NotificationCountryTests(IServiceProvider rootServiceProvider) : Te
         Assert.Equal("Both arguments (previous and current) can't be null", argumentException.Message);
     }
 }
-

@@ -18,10 +18,9 @@ public partial class ConfigMainController
             DBSessionMode.Write,
             context =>
             {
-
                 context.Authorization.SecuritySystem.CheckAccessAsync(SecurityRole.SystemIntegration, this.HttpContext.RequestAborted).GetAwaiter().GetResult();
 
-                return context.Logics.DomainObjectModification.Process(limit == 0 ? 1000 : limit);
+                return context.Logics.DomainObjectModification.ProcessAsync(limit == 0 ? 1000 : limit, this.HttpContext.RequestAborted).GetAwaiter().GetResult();
             });
 
         return result.Match(v => v, ex => throw ex);

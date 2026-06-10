@@ -1,4 +1,6 @@
-﻿using Framework.BLL;
+﻿using Anch.Testing.Xunit;
+
+using Framework.BLL;
 using Framework.Database;
 
 using SampleSystem.Domain.Directories;
@@ -9,56 +11,55 @@ namespace SampleSystem.IntegrationTests;
 
 public class SubscriptionCustomNotPersistentModelTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
-    [Fact]
-    public void CustomNotPersistentNotificationModel_Always_ShouldNotThrowException()
+    [AnchFact]
+    public async Task CustomNotPersistentNotificationModel_Always_ShouldNotThrowException(CancellationToken ct)
     {
         // Arrange
-        var countryId = this.Evaluate(DBSessionMode.Write, context =>
-                                                           {
-                                                               var country = new Country
-                                                               {
-                                                                   Code = Guid.NewGuid().ToString(),
-                                                                   NameNative = Guid.NewGuid().ToString(),
-                                                                   Culture = Guid.NewGuid().ToString(),
-                                                                   Name = Guid.NewGuid().ToString()
-                                                               };
+        var countryId = this.Evaluate(
+            DBSessionMode.Write,
+            context =>
+            {
+                var country = new Country
+                              {
+                                  Code = Guid.NewGuid().ToString(),
+                                  NameNative = Guid.NewGuid().ToString(),
+                                  Culture = Guid.NewGuid().ToString(),
+                                  Name = Guid.NewGuid().ToString()
+                              };
 
-                                                               context.Logics.Country.Save(country);
+                context.Logics.Country.Save(country);
 
-                                                               for (var i = 0; i < 5; i++)
-                                                               {
-                                                                   context.Logics.Location.Save(new Location
-                                                                   {
-                                                                       Country = country,
-                                                                       Name = Guid.NewGuid().ToString(),
-                                                                       Code = i + 1,
-                                                                       CloseDate = 15
-                                                                   });
-                                                               }
+                for (var i = 0; i < 5; i++)
+                {
+                    context.Logics.Location.Save(new Location { Country = country, Name = Guid.NewGuid().ToString(), Code = i + 1, CloseDate = 15 });
+                }
 
-                                                               return country.Id;
-                                                           });
+                return country.Id;
+            });
 
         this.ClearModifications();
 
         // Act
-        this.Evaluate(DBSessionMode.Write, context =>
-                                           {
-                                               var bll = context.Logics.Country;
+        this.Evaluate(
+            DBSessionMode.Write,
+            context =>
+            {
+                var bll = context.Logics.Country;
 
-                                               var country = bll.GetById(countryId, true);
+                var country = bll.GetById(countryId, true);
 
-                                               country.Name = $"{country.Name} renamed";
+                country.Name = $"{country.Name} renamed";
 
-                                               bll.Save(country);
-                                           });
+                bll.Save(country);
+            });
 
-        this.GetConfigurationControllerEvaluator(DefaultConstants.NOTIFICATION_ADMIN).Evaluate(c => c.ProcessModifications(1000));
+        await this.GetConfigurationControllerEvaluator(DefaultConstants.NOTIFICATION_ADMIN).EvaluateAsync(c => c.ProcessModifications(1000, ct));
 
         var notifications = this.GetNotifications();
 
         // Assert
-        Assert.Contains(notifications, x => x.TechnicalInformation.MessageTemplateCode == typeof(_DomainChangedByRecipients_NotPersistentCustomModel_MessageTemplate_cshtml).FullName);
+        Assert.Contains(
+            notifications,
+            x => x.TechnicalInformation.MessageTemplateCode == typeof(_DomainChangedByRecipients_NotPersistentCustomModel_MessageTemplate_cshtml).FullName);
     }
 }
-

@@ -1,4 +1,5 @@
-﻿using Framework.BLL;
+﻿using Anch.Testing.Xunit;
+using Framework.BLL;
 using Framework.Configuration.Domain;
 using Framework.Database;
 
@@ -25,12 +26,12 @@ public class NotificationCountryTests(IServiceProvider rootServiceProvider) : Te
                 var bll = context.Logics.Country;
 
                 var country = new Country
-                {
-                    Code = Guid.NewGuid().ToString(),
-                    NameNative = Guid.NewGuid().ToString(),
-                    Culture = Guid.NewGuid().ToString(),
-                    Name = Guid.NewGuid().ToString()
-                };
+                              {
+                                  Code = Guid.NewGuid().ToString(),
+                                  NameNative = Guid.NewGuid().ToString(),
+                                  Culture = Guid.NewGuid().ToString(),
+                                  Name = Guid.NewGuid().ToString()
+                              };
 
                 bll.Save(country);
 
@@ -43,7 +44,11 @@ public class NotificationCountryTests(IServiceProvider rootServiceProvider) : Te
 
         // Assert
         Assert.Single(this.GetModifications());
-        Assert.Equal(1, this.GetModifications().Count(mod => mod.ModificationType == ModificationType.Save && mod.Identity == countryId && mod.TypeInfoDescription.Name == nameof(Country)));
+        Assert.Equal(
+            1,
+            this.GetModifications().Count(mod => mod.ModificationType == ModificationType.Save
+                                                 && mod.Identity == countryId
+                                                 && mod.TypeInfoDescription.Name == nameof(Country)));
     }
 
     [Fact]
@@ -61,12 +66,12 @@ public class NotificationCountryTests(IServiceProvider rootServiceProvider) : Te
                 var bll = context.Logics.Country;
 
                 var country = new Country
-                {
-                    Code = Guid.NewGuid().ToString(),
-                    NameNative = Guid.NewGuid().ToString(),
-                    Culture = Guid.NewGuid().ToString(),
-                    Name = Guid.NewGuid().ToString()
-                };
+                              {
+                                  Code = Guid.NewGuid().ToString(),
+                                  NameNative = Guid.NewGuid().ToString(),
+                                  Culture = Guid.NewGuid().ToString(),
+                                  Name = Guid.NewGuid().ToString()
+                              };
 
                 bll.Save(country);
 
@@ -89,12 +94,12 @@ public class NotificationCountryTests(IServiceProvider rootServiceProvider) : Te
                 var bll = context.Logics.Country;
 
                 var country = new Country
-                {
-                    Code = Guid.NewGuid().ToString(),
-                    NameNative = Guid.NewGuid().ToString(),
-                    Culture = Guid.NewGuid().ToString(),
-                    Name = Guid.NewGuid().ToString()
-                };
+                              {
+                                  Code = Guid.NewGuid().ToString(),
+                                  NameNative = Guid.NewGuid().ToString(),
+                                  Culture = Guid.NewGuid().ToString(),
+                                  Name = Guid.NewGuid().ToString()
+                              };
 
                 bll.Save(country);
 
@@ -108,12 +113,16 @@ public class NotificationCountryTests(IServiceProvider rootServiceProvider) : Te
 
         // Assert
         Assert.Single(this.GetModifications());
-        Assert.Equal(1, this.GetModifications().Count(mod => mod.ModificationType == ModificationType.Remove && mod.Identity == countryId && mod.TypeInfoDescription.Name == nameof(Country)));
+        Assert.Equal(
+            1,
+            this.GetModifications().Count(mod => mod.ModificationType == ModificationType.Remove
+                                                 && mod.Identity == countryId
+                                                 && mod.TypeInfoDescription.Name == nameof(Country)));
     }
 
 
-    [Fact]
-    public void EmulateFailureCountryModification_RaisedException()
+    [AnchFact]
+    public async Task EmulateFailureCountryModification_RaisedException(CancellationToken ct)
     {
         // Arrange
         var domainObjectId = Guid.NewGuid();
@@ -125,12 +134,12 @@ public class NotificationCountryTests(IServiceProvider rootServiceProvider) : Te
             context =>
             {
                 var fakeModification = new DomainObjectModification()
-                {
-                    DomainType = context.Configuration.GetDomainType(typeof(Country)),
-                    Type = ModificationType.Save,
-                    Revision = revision,
-                    DomainObjectId = domainObjectId
-                };
+                                       {
+                                           DomainType = context.Configuration.GetDomainType(typeof(Country)),
+                                           Type = ModificationType.Save,
+                                           Revision = revision,
+                                           DomainObjectId = domainObjectId
+                                       };
 
                 context.Configuration.Logics.DomainObjectModification.Save(fakeModification);
             });
@@ -138,7 +147,7 @@ public class NotificationCountryTests(IServiceProvider rootServiceProvider) : Te
         var configController = this.GetConfigurationControllerEvaluator(DefaultConstants.NOTIFICATION_ADMIN);
 
         // Act
-        var ex = Record.Exception(() => configController.Evaluate(c => c.ProcessModifications(1000)));
+        var ex = await Record.ExceptionAsync(() => configController.EvaluateAsync(c => c.ProcessModifications(1000, ct)));
 
         // Assert
         var argumentException = Assert.IsType<ArgumentException>(ex);

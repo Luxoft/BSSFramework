@@ -142,15 +142,11 @@ public class VirtualPermissionTests(IServiceProvider rootServiceProvider) : Test
         // Arrange
 
         // Act
-        var hasAccess =
-
-            await this.EvaluateAsync(
-                DBSessionMode.Read,
-                "Noname",
-                async ctx =>
-                {
-                    return await ctx.Authorization.SecuritySystem.HasAccessAsync(SampleSystemSecurityRole.SeManager, ct);
-                }, ct);
+        var hasAccess = await
+                            this.EvaluateAsync(
+                                DBSessionMode.Read,
+                                "Noname",
+                                 ctx => ctx.Authorization.SecuritySystem.HasAccessAsync(SampleSystemSecurityRole.SeManager, ct), ct);
 
         // Assert
         Assert.False(hasAccess);

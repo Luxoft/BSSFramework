@@ -1,9 +1,12 @@
 ﻿using Anch.SecuritySystem;
 
+using Framework.Configuration.BLL;
 using Framework.Configuration.Generated.DTO;
 using Framework.Database;
+using Framework.Infrastructure.Services;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 
 // ReSharper disable once CheckNamespace
 namespace Framework.Configuration.WebApi;
@@ -11,19 +14,14 @@ namespace Framework.Configuration.WebApi;
 public partial class ConfigMainController
 {
     [HttpPost]
-    public void ForceDomainTypeEvent(DomainTypeEventModelStrictDTO domainTypeEventModel)
+    public async Task ForceDomainTypeEvent(DomainTypeEventModelStrictDTO domainTypeEventModel, CancellationToken ct)
     {
         if (domainTypeEventModel == null) throw new ArgumentNullException(nameof(domainTypeEventModel));
 
-        this.Evaluate(
-            DBSessionMode.Write,
-            evaluateData =>
-            {
-                evaluateData.Context.Authorization.SecuritySystem.CheckAccessAsync(SecurityRole.Administrator, this.HttpContext.RequestAborted).GetAwaiter().GetResult();
+        var evaluateData = this.HttpContext.RequestServices.GetRequiredService<EvaluatedData<IConfigurationBLLContext, IConfigurationDTOMappingService>>();
 
-                evaluateData.Context.Logics.DomainType.ForceEventAsync(domainTypeEventModel.ToDomainObject(evaluateData.MappingService), this.HttpContext.RequestAborted)
-                            .GetAwaiter().GetResult();
-            });
+        await evaluateData.Context.Authorization.SecuritySystem.CheckAccessAsync(SecurityRole.Administrator, ct);
+
+        await evaluateData.Context.Logics.DomainType.ForceEventAsync(domainTypeEventModel.ToDomainObject(evaluateData.MappingService), ct);
     }
 }
-

@@ -20,7 +20,7 @@ public class SubscriptionService(
                                 {
                                     await new Func<ISubscription<object, object>, DomainObjectVersions<object>, CancellationToken, Task>(this.ProcessAsync)
                                           .CreateGenericMethod(subscription.DomainObjectType, subscription.RenderingObjectType)
-                                          .Invoke<Task<SubscriptionHeader>>(subscription, versions, ct);
+                                          .Invoke<Task>(this, subscription, versions, ct);
 
                                     return TryResult.Return(subscription.Header);
                                 }

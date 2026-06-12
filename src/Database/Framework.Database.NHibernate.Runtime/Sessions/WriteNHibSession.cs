@@ -82,7 +82,7 @@ public class WriteNHibSession : NHibSessionBase
     {
     }
 
-    public override async Task CloseAsync(CancellationToken cancellationToken = default)
+    public override async Task CloseAsync(CancellationToken ct)
     {
         if (this.closed)
         {
@@ -99,14 +99,14 @@ public class WriteNHibSession : NHibSessionBase
                 {
                     if (!this.nhibTransaction.WasRolledBack)
                     {
-                        await this.nhibTransaction.RollbackAsync(cancellationToken);
+                        await this.nhibTransaction.RollbackAsync(ct);
                     }
                 }
                 else
                 {
-                    await this.FlushAsync(true, cancellationToken);
+                    await this.FlushAsync(true, ct);
 
-                    await this.nhibTransaction.CommitAsync(cancellationToken);
+                    await this.nhibTransaction.CommitAsync(ct);
                 }
             }
         }
@@ -123,9 +123,9 @@ public class WriteNHibSession : NHibSessionBase
         return dbCommand.Transaction!;
     }
 
-    public override async Task FlushAsync(CancellationToken cancellationToken = default) => await this.FlushAsync(false, cancellationToken);
+    public override async Task FlushAsync(CancellationToken ct) => await this.FlushAsync(false, ct);
 
-    private async Task FlushAsync(bool withCompleteTransaction, CancellationToken cancellationToken)
+    private async Task FlushAsync(bool withCompleteTransaction, CancellationToken ct)
     {
         try
         {
@@ -133,7 +133,7 @@ public class WriteNHibSession : NHibSessionBase
 
             do
             {
-                await this.NativeSession.FlushAsync(cancellationToken);
+                await this.NativeSession.FlushAsync(ct);
 
                 var changes = this.collectChangedEventListener.EvictChanges();
 
@@ -145,16 +145,16 @@ public class WriteNHibSession : NHibSessionBase
                 {
                     dalHistory.Add(changes);
 
-                    await this.AuditReader.SafeInitCurrentRevisionAsync(cancellationToken);
+                    await this.AuditReader.SafeInitCurrentRevisionAsync(ct);
 
                     var changedEventArgs = new DALChangesEventArgs(changes);
 
                     // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!! Use UseTryCloseDbSession middleware
                     foreach (var eventListener in this.eventListeners)
                     {
-                        cancellationToken.ThrowIfCancellationRequested();
+                        ct.ThrowIfCancellationRequested();
 
-                        await eventListener.OnFlushed(changedEventArgs, cancellationToken);
+                        await eventListener.OnFlushed(changedEventArgs, ct);
                     }
                 }
             } while (true);
@@ -166,12 +166,12 @@ public class WriteNHibSession : NHibSessionBase
                 // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!!!!! Use UseTryCloseDbSession middleware
                 foreach (var eventListener in this.eventListeners)
                 {
-                    cancellationToken.ThrowIfCancellationRequested();
+                    ct.ThrowIfCancellationRequested();
 
-                    await eventListener.OnBeforeTransactionCompleted(new DALChangesEventArgs(beforeTransactionCompletedChangeState), cancellationToken);
+                    await eventListener.OnBeforeTransactionCompleted(new DALChangesEventArgs(beforeTransactionCompletedChangeState), ct);
                 }
 
-                await this.NativeSession.FlushAsync(cancellationToken);
+                await this.NativeSession.FlushAsync(ct);
 
                 var afterTransactionCompletedChangeState =
                     new[] { beforeTransactionCompletedChangeState, this.collectChangedEventListener.EvictChanges() }
@@ -180,13 +180,13 @@ public class WriteNHibSession : NHibSessionBase
                 // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!!!!! Use UseTryCloseDbSession middleware
                 foreach (var eventListener in this.eventListeners)
                 {
-                    cancellationToken.ThrowIfCancellationRequested();
+                    ct.ThrowIfCancellationRequested();
 
-                    await eventListener.OnAfterTransactionCompleted(new DALChangesEventArgs(afterTransactionCompletedChangeState), cancellationToken);
+                    await eventListener.OnAfterTransactionCompleted(new DALChangesEventArgs(afterTransactionCompletedChangeState), ct);
                 }
 
                 await this.NativeSession.FlushAsync(
-                    cancellationToken); // Флашим для того, чтобы проверить, что никто ничего не менял в объектах после AfterTransactionCompleted-евента
+                    ct); // Флашим для того, чтобы проверить, что никто ничего не менял в объектах после AfterTransactionCompleted-евента
 
                 if (this.collectChangedEventListener.HasAny())
                 {

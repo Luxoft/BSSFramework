@@ -4,9 +4,9 @@ using Anch.Core;
 using Anch.SecuritySystem;
 using Anch.Testing.Xunit;
 
-using Framework.Application;
 using Framework.Application.Events;
 using Framework.AutomationCore.Extensions;
+using Framework.BLL;
 using Framework.Configuration.Generated.DTO;
 using Framework.Database;
 using Framework.Database.NHibernate.Sessions;
@@ -191,8 +191,8 @@ public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(root
         Assert.DoesNotContain(456, pins);
     }
 
-    [Fact]
-    public void ForceDomainTypeEvent_ForceEmployeeSaveEvent_ContainsEventEmployee()
+    [AnchFact]
+    public async Task ForceDomainTypeEvent_ForceEmployeeSaveEvent_ContainsEventEmployee(CancellationToken ct)
     {
         // Arrange
         var employeeIdentity = this.DataManager.SaveEmployee(Guid.NewGuid());
@@ -206,21 +206,21 @@ public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(root
         this.ClearIntegrationEvents();
 
         // Act
-        configFacade.Evaluate(
+        await configFacade.EvaluateAsync(
             c => c.ForceDomainTypeEvent(
                 new DomainTypeEventModelStrictDTO
                 {
                     Operation = operation.Identity,
                     DomainObjectIdents = new List<Guid> { employeeIdentity.Id }
-                }));
+                }, ct));
 
         // Assert
         Assert.Single(this.GetIntegrationEvents<EmployeeSaveEventDTO>(), dto => dto.Employee.Id == employeeIdentity.Id);
         Assert.Single(this.GetIntegrationEvents<EmployeeCustomEventModelSaveEventDTO>(), dto => dto.EmployeeCustomEventModel.Id == employeeIdentity.Id);
     }
 
-    [Fact]
-    public void ChangeEmployee_ProcessModifications_ContainsNotification()
+    [AnchFact]
+    public async Task ChangeEmployee_ProcessModifications_ContainsNotification(CancellationToken ct)
     {
         // Arrange
         var employeeController = this.MainWebApi.Employee;
@@ -235,12 +235,8 @@ public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(root
             c => c.UpdateEmployee(
                 new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = Maybe.Return("1234"), Version = employeeVersion }));
 
-        var restFacade = this.GetConfigurationControllerEvaluator();
-
         // Act
-        var processedModCount = restFacade
-                                .WithImpersonate(DefaultConstants.INTEGRATION_BUS)
-                                .Evaluate(c => c.ProcessModifications(1000));
+        var processedModCount = await this.ProcessModificationsAsync(ct);
 
         // Assert
         var modifications = this.GetModifications();
@@ -256,8 +252,8 @@ public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(root
                    && dto.TechnicalInformation.ContextObjectId == employeeIdentity.Id);
     }
 
-    [Fact]
-    public void ChangeEmployee_ProcessModifications_ChangedUnprocessedCount()
+    [AnchFact]
+    public async Task ChangeEmployee_ProcessModifications_ChangedUnprocessedCount(CancellationToken ct)
     {
         // Arrange
         var employeeController = this.MainWebApi.Employee;
@@ -277,7 +273,7 @@ public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(root
         var preProcessedModificationState = restFacade.Evaluate(c => c.GetModificationQueueProcessingState());
         var preProcessedNotificationState = restFacade.Evaluate(c => c.GetNotificationQueueProcessingState());
 
-        restFacade.WithImpersonate(DefaultConstants.INTEGRATION_BUS).Evaluate(c => c.ProcessModifications(1000));
+        await this.ProcessModificationsAsync(ct);
 
         var postProcessedModificationState = restFacade.Evaluate(c => c.GetModificationQueueProcessingState());
         var postProcessedNotificationState = restFacade.Evaluate(c => c.GetNotificationQueueProcessingState());

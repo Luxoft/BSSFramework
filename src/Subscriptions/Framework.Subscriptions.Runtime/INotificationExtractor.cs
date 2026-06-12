@@ -2,8 +2,8 @@
 
 namespace Framework.Subscriptions;
 
-public interface INotificationExtractor
+public interface INotificationExtractor<TDomainObject>
+    where TDomainObject : class
 {
-    IEnumerable<Notification.Domain.Notification> GetNotifications(DomainObjectVersions versions);
+    IAsyncEnumerable<Notification.Domain.Notification> GetNotifications(DomainObjectVersions<TDomainObject> versions);
 }
-

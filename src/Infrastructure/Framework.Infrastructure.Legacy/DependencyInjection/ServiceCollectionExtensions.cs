@@ -41,6 +41,8 @@ public static class ServiceCollectionExtensions
 
             services.AddScoped<IRootSecurityService, RootSecurityService>();
 
+            services.AddSingleton(typeof(ISyncServiceEvaluator<>), typeof(SyncServiceEvaluator<>));
+
             services.AddSingleton<IMetadataProxyProvider, MetadataProxyProvider>();
             services.AddSingleton<IPropertyPathService, PropertyPathService>();
 

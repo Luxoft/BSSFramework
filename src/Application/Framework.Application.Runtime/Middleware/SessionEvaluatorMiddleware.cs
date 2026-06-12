@@ -6,7 +6,7 @@ namespace Framework.Application.Middleware;
 
 public class SessionEvaluatorMiddleware(IServiceProvider scopedServiceProvider, DBSessionMode sessionMode) : IScopedEvaluatorMiddleware
 {
-    public async Task<TResult> EvaluateAsync<TResult>(Func<Task<TResult>> getResult)
+    public async Task<TResult> EvaluateAsync<TResult>(Func<Task<TResult>> getResult, CancellationToken ct)
     {
         await using var session = scopedServiceProvider.GetRequiredService<IDBSession>();
 
@@ -25,6 +25,9 @@ public class SessionEvaluatorMiddleware(IServiceProvider scopedServiceProvider, 
 
             throw;
         }
+        finally
+        {
+            await session.CloseAsync(ct);
+        }
     }
 }
-

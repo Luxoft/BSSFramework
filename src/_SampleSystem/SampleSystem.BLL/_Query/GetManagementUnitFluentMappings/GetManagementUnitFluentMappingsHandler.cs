@@ -12,7 +12,7 @@ public class GetManagementUnitFluentMappingsHandler(IManagementUnitFluentMapping
 
     public async Task<GetManagementUnitFluentMappingsResponse[]> Handle(
             GetManagementUnitFluentMappingsQuery request,
-            CancellationToken cancellationToken)
+            CancellationToken ct)
     {
         var result = this.managementUnitFluentMappingBll.GetUnsecureQueryable()
                          .Select(x => new GetManagementUnitFluentMappingsResponse(x.Id, x.Name, x.Parent.Id, x.Period))

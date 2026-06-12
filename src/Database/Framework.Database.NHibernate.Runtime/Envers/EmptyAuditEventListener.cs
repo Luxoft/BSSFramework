@@ -10,7 +10,7 @@ public class EmptyAuditEventListener : IPostInsertEventListener,
                                        IPostCollectionRecreateEventListener,
                                        IInitializable
 {
-    public async Task OnPostInsertAsync(PostInsertEvent @event, CancellationToken cancellationToken)
+    public async Task OnPostInsertAsync(PostInsertEvent @event, CancellationToken ct)
     {
     }
 
@@ -19,7 +19,7 @@ public class EmptyAuditEventListener : IPostInsertEventListener,
         // Empty
     }
 
-    public async Task OnPostUpdateAsync(PostUpdateEvent @event, CancellationToken cancellationToken)
+    public async Task OnPostUpdateAsync(PostUpdateEvent @event, CancellationToken ct)
     {
     }
 
@@ -28,7 +28,7 @@ public class EmptyAuditEventListener : IPostInsertEventListener,
         // Empty
     }
 
-    public async Task OnPostDeleteAsync(PostDeleteEvent @event, CancellationToken cancellationToken)
+    public async Task OnPostDeleteAsync(PostDeleteEvent @event, CancellationToken ct)
     {
     }
 
@@ -37,7 +37,7 @@ public class EmptyAuditEventListener : IPostInsertEventListener,
         // Empty
     }
 
-    public async Task OnPreUpdateCollectionAsync(PreCollectionUpdateEvent @event, CancellationToken cancellationToken)
+    public async Task OnPreUpdateCollectionAsync(PreCollectionUpdateEvent @event, CancellationToken ct)
     {
     }
 
@@ -46,7 +46,7 @@ public class EmptyAuditEventListener : IPostInsertEventListener,
         // Empty
     }
 
-    public async Task OnPreRemoveCollectionAsync(PreCollectionRemoveEvent @event, CancellationToken cancellationToken)
+    public async Task OnPreRemoveCollectionAsync(PreCollectionRemoveEvent @event, CancellationToken ct)
     {
     }
 
@@ -55,7 +55,7 @@ public class EmptyAuditEventListener : IPostInsertEventListener,
         // Empty
     }
 
-    public async Task OnPostRecreateCollectionAsync(PostCollectionRecreateEvent @event, CancellationToken cancellationToken)
+    public async Task OnPostRecreateCollectionAsync(PostCollectionRecreateEvent @event, CancellationToken ct)
     {
     }
 

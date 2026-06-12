@@ -13,9 +13,9 @@ namespace Framework.Configuration.BLL;
 public class SystemConstantInitializer(IConfigurationBLLContext context, [DisabledSecurity] IRepository<SystemConstant> repository, IEnumerable<SystemConstantInfo> infoList)
     : ISystemConstantInitializer
 {
-    public async Task Initialize(CancellationToken cancellationToken)
+    public async Task Initialize(CancellationToken ct)
     {
-        var dbConstants = await repository.GetQueryable().GenericToListAsync(cancellationToken);
+        var dbConstants = await repository.GetQueryable().GenericToListAsync(ct);
 
         var initMethod = new Func<ApplicationVariable<object>, IReadOnlyList<SystemConstant>, CancellationToken, Task>(this.Initialize).Method.GetGenericMethodDefinition();
 
@@ -26,13 +26,13 @@ public class SystemConstantInitializer(IConfigurationBLLContext context, [Disabl
                 if (field.GetValue(null) is { } systemConstant
                     && systemConstant.GetType().GetGenericTypeImplementationArgument(typeof(ApplicationVariable<>)) is { } constType)
                 {
-                    await initMethod.MakeGenericMethod(constType).Invoke<Task>(this, systemConstant, dbConstants, cancellationToken);
+                    await initMethod.MakeGenericMethod(constType).Invoke<Task>(this, systemConstant, dbConstants, ct);
                 }
             }
         }
     }
 
-    private async Task Initialize<T>(ApplicationVariable<T> typedSystemConstant, IReadOnlyList<SystemConstant> dbConstants, CancellationToken cancellationToken)
+    private async Task Initialize<T>(ApplicationVariable<T> typedSystemConstant, IReadOnlyList<SystemConstant> dbConstants, CancellationToken ct)
     {
         var systemConstant = dbConstants.SingleOrDefault(sc => string.Equals(sc.Code, typedSystemConstant.Name, StringComparison.CurrentCultureIgnoreCase))
                              ?? new SystemConstant { Code = typedSystemConstant.Name, Type = context.GetDomainType(typeof(T)) };
@@ -48,7 +48,7 @@ public class SystemConstantInitializer(IConfigurationBLLContext context, [Disabl
                 systemConstant.Description = typedSystemConstant.Description;
                 systemConstant.Value = serializedValue;
 
-                await repository.SaveAsync(systemConstant, cancellationToken);
+                await repository.SaveAsync(systemConstant, ct);
             }
         }
     }

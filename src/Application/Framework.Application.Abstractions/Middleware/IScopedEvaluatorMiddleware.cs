@@ -2,5 +2,5 @@
 
 public interface IScopedEvaluatorMiddleware
 {
-    Task<TResult> EvaluateAsync<TResult>(Func<Task<TResult>> getResult);
+    Task<TResult> EvaluateAsync<TResult>(Func<Task<TResult>> getResult, CancellationToken ct);
 }

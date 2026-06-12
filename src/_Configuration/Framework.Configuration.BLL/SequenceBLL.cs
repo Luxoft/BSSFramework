@@ -1,4 +1,6 @@
-﻿using Framework.BLL;
+﻿using Anch.Core;
+
+using Framework.BLL;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Database;
@@ -27,7 +29,7 @@ public partial class SequenceBLL
         return sequence.Number;
     }
 
-    protected virtual void LockSequence() => this.Context.NamedLockService.LockAsync(ConfigurationNamedLock.UpdateSequence, LockRole.Update).GetAwaiter().GetResult();
+    protected virtual void LockSequence() => this.DefaultCancellationTokenSource.RunSync(ct => this.Context.NamedLockService.LockAsync(ConfigurationNamedLock.UpdateSequence, LockRole.Update, ct));
 
     public Sequence Create(SequenceCreateModel createModel) => new();
 }

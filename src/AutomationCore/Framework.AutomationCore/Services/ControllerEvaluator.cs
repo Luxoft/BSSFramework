@@ -47,7 +47,11 @@ public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvid
     {
         await using var scope = rootServiceProvider.CreateAsyncScope();
 
-        var c = new DefaultHttpContext { RequestServices = scope.ServiceProvider };
+        var c = new DefaultHttpContext
+        {
+            RequestServices = scope.ServiceProvider,
+            RequestAborted = scope.ServiceProvider.GetService<IDefaultCancellationTokenSource>()?.CancellationToken ?? CancellationToken.None
+        };
 
         await new WebApiInvoker(c, context => InvokeController(context, func))
               .WithMiddleware(next => new ImpersonateMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, customUserCredential))

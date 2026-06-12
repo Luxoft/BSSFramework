@@ -22,12 +22,12 @@ public abstract class IntegrationSchemaControllerBase(
 
     [HttpGet]
     [Route("DownloadKnownTypesWsdl")]
-    public Task<IActionResult> DownloadKnownTypesWsdl(CancellationToken cancellationToken) =>
-            this.DownloadKnownTypesWsdl(this.IntegrationNamespace, this.GetEventDTOTypes(), cancellationToken);
+    public Task<IActionResult> DownloadKnownTypesWsdl(CancellationToken ct) =>
+            this.DownloadKnownTypesWsdl(this.IntegrationNamespace, this.GetEventDTOTypes(), ct);
 
-    private async Task<IActionResult> DownloadKnownTypesWsdl(string xsdNamespace, IReadOnlyCollection<Type> eventTypes, CancellationToken cancellationToken)
+    private async Task<IActionResult> DownloadKnownTypesWsdl(string xsdNamespace, IReadOnlyCollection<Type> eventTypes, CancellationToken ct)
     {
-        await securitySystem.CheckAccessAsync(SecurityRole.SystemIntegration, cancellationToken);
+        await securitySystem.CheckAccessAsync(SecurityRole.SystemIntegration, ct);
 
         var content = eventXsdExporter.Export(xsdNamespace, "IntegrationEvent", eventTypes);
 
@@ -41,8 +41,8 @@ public abstract class IntegrationSchemaControllerBase(
 
     [HttpGet]
     [Route("DownloadAuthKnownTypesWsdl")]
-    public Task<IActionResult> DownloadAuthKnownTypesWsdl(CancellationToken cancellationToken) =>
-            this.DownloadKnownTypesWsdl(AuthIntegrationNamespace, this.GetAuthEventDTOTypes(), cancellationToken);
+    public Task<IActionResult> DownloadAuthKnownTypesWsdl(CancellationToken ct) =>
+            this.DownloadKnownTypesWsdl(AuthIntegrationNamespace, this.GetAuthEventDTOTypes(), ct);
 
     protected abstract string IntegrationNamespace
     {

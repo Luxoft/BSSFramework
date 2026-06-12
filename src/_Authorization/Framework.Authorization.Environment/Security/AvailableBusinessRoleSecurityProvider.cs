@@ -26,15 +26,15 @@ public class AvailableBusinessRoleSecurityProvider<TDomainObject>(
                                            ExpressionHelper.Create((BusinessRole businessRole) => permissionQ.Select(p => p.Role).Contains(businessRole)))
                                  .Pipe(toBusinessRolePathInfo.CreateCondition);
 
-    public override async ValueTask<SecurityAccessorData> GetAccessorDataAsync(TDomainObject domainObject, CancellationToken cancellationToken) =>
+    public override async ValueTask<SecurityAccessorData> GetAccessorDataAsync(TDomainObject domainObject, CancellationToken ct) =>
         (await toBusinessRolePathInfo
                .GetRelativeObjects(domainObject)
                .ToAsyncEnumerable()
                .Select(async (br, ct) => await this.GetAccessorData(br, ct))
-               .ToListAsync(cancellationToken))
+               .ToListAsync(ct))
         .Or();
 
-    private async Task<SecurityAccessorData> GetAccessorData(BusinessRole businessRole, CancellationToken cancellationToken) =>
+    private async Task<SecurityAccessorData> GetAccessorData(BusinessRole businessRole, CancellationToken ct) =>
         SecurityAccessorData.Return(
             await availablePermissionSource
                   .GetQueryable(DomainSecurityRule.AnyRole with { CustomCredential = new SecurityRuleCredential.AnyUserCredential() })
@@ -42,6 +42,6 @@ public class AvailableBusinessRoleSecurityProvider<TDomainObject>(
                   .Select(permission => permission.Principal)
                   .Distinct()
                   .Select(principal => principal.Name)
-                  .GenericToListAsync(cancellationToken));
+                  .GenericToListAsync(ct));
 }
 

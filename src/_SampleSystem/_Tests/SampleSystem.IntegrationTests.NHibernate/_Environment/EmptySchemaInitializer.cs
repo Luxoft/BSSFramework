@@ -10,7 +10,7 @@ namespace SampleSystem.IntegrationTests._Environment;
 
 public class EmptySchemaInitializer(IActualTestConnectionStringSource actualTestConnectionStringSource) : IInitializer
 {
-    public async Task Initialize(CancellationToken cancellationToken)
+    public async Task Initialize(CancellationToken ct)
     {
         var generator = new DbGeneratorTest();
 
@@ -20,9 +20,9 @@ public class EmptySchemaInitializer(IActualTestConnectionStringSource actualTest
 
             credential: actualTestConnectionStringSource.ActualConnectionString.TryGetDbUserCredential());
 
-        await actualTestConnectionStringSource.ActualConnectionString.ExecuteSqlFromFolderAsync("__Support/Scripts/Authorization", cancellationToken);
-        await actualTestConnectionStringSource.ActualConnectionString.ExecuteSqlFromFolderAsync("__Support/Scripts/Configuration", cancellationToken);
-        await actualTestConnectionStringSource.ActualConnectionString.ExecuteSqlFromFolderAsync("__Support/Scripts/SampleSystem", cancellationToken);
+        await actualTestConnectionStringSource.ActualConnectionString.ExecuteSqlFromFolderAsync("__Support/Scripts/Authorization", ct);
+        await actualTestConnectionStringSource.ActualConnectionString.ExecuteSqlFromFolderAsync("__Support/Scripts/Configuration", ct);
+        await actualTestConnectionStringSource.ActualConnectionString.ExecuteSqlFromFolderAsync("__Support/Scripts/SampleSystem", ct);
 
         new BssFluentMigrator(actualTestConnectionStringSource.ActualConnectionString.Value, typeof(InitNumberInDomainObjectEventMigration).Assembly).Migrate();
     }

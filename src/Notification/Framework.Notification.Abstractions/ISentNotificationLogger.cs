@@ -2,5 +2,5 @@
 
 public interface ISentNotificationLogger
 {
-    Task LogAsync(Domain.Notification notification, CancellationToken cancellationToken = default);
+    Task LogAsync(Domain.Notification notification, CancellationToken ct);
 }

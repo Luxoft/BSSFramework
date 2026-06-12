@@ -11,7 +11,7 @@ public class NotificationMessageSender(
     ILogger<NotificationMessageSender> logger,
     ISentNotificationLogger? sentNotificationLogger = null) : IMessageSender<Notification.Domain.Notification>
 {
-    public async Task SendAsync(Domain.Notification notification, CancellationToken cancellationToken = default)
+    public async Task SendAsync(Domain.Notification notification, CancellationToken ct)
     {
         if (notification.Message.To.Count == 0)
         {
@@ -20,11 +20,11 @@ public class NotificationMessageSender(
                 notification.TechnicalInformation.MessageTemplateCode);
         }
 
-        await mailMessageSender.SendAsync(notification.Message, cancellationToken);
+        await mailMessageSender.SendAsync(notification.Message, ct);
 
         if (sentNotificationLogger != null)
         {
-            await sentNotificationLogger.LogAsync(notification, cancellationToken);
+            await sentNotificationLogger.LogAsync(notification, ct);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using System.Runtime.CompilerServices;
 
 using Anch.Core;
 using Anch.GenericQueryable;
@@ -15,23 +16,28 @@ public class EmployeeEmailExtractor<TEmployee, TPrincipal>(
     IVisualIdentityInfo<TPrincipal> principalVisualIdentityInfo,
     IVisualIdentityInfo<TEmployee> employeeVisualIdentityInfo,
     IQueryableSource queryableSource,
-    EmployeeInfo<TEmployee> employeeInfo,
-    IDefaultCancellationTokenSource? defaultCancellationTokenSource = null) : IEmployeeEmailExtractor
+    EmployeeInfo<TEmployee> employeeInfo) : IEmployeeEmailExtractor
     where TEmployee : class
 {
-    public ImmutableHashSet<string> GetEmails(ImmutableArray<SecurityRole> securityRoles, ImmutableArray<NotificationFilterGroup> notificationFilterGroups) =>
+    public IAsyncEnumerable<string> GetEmails(ImmutableArray<SecurityRole> securityRoles, ImmutableArray<NotificationFilterGroup> notificationFilterGroups) =>
+        this.GetEmailsInternal(securityRoles, notificationFilterGroups);
 
-        defaultCancellationTokenSource.RunSync(async ct =>
+    private async IAsyncEnumerable<string> GetEmailsInternal(
+        ImmutableArray<SecurityRole> securityRoles,
+        ImmutableArray<NotificationFilterGroup> notificationFilterGroups,
+        [EnumeratorCancellation] CancellationToken ct = default)
+    {
+        var principalNames = await notificationPrincipalExtractor.GetPrincipalsAsync(securityRoles, notificationFilterGroups)
+                                                                 .Select(principalVisualIdentityInfo.Name.Getter)
+                                                                 .ToHashSetAsync(null, ct);
+
+        await foreach (var email in queryableSource.GetQueryable<TEmployee>()
+                                                   .Where(employeeVisualIdentityInfo.Name.Path.Select(employeeName => principalNames.Contains(employeeName)))
+                                                   .Select(employeeInfo.Email.Path)
+                                                   .GenericAsAsyncEnumerable()
+                                                   .WithCancellation(ct))
         {
-            var principalNames = await notificationPrincipalExtractor.GetPrincipalsAsync(securityRoles, notificationFilterGroups)
-                                                                     .Select(principalVisualIdentityInfo.Name.Getter)
-                                                                     .ToHashSetAsync(null, ct);
-
-            return await queryableSource.GetQueryable<TEmployee>()
-                                        .Where(employeeVisualIdentityInfo.Name.Path.Select(employeeName => principalNames.Contains(employeeName)))
-                                        .Select(employeeInfo.Email.Path)
-                                        .GenericAsAsyncEnumerable()
-                                        .ToImmutableHashSetAsync(ct);
-        });
+            yield return email;
+        }
+    }
 }
-

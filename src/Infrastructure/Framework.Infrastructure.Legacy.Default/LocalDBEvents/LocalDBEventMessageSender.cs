@@ -24,7 +24,7 @@ public class LocalDBEventMessageSender<TPersistentDomainObjectBase>(
 {
     private readonly LocalDBEventMessageSenderSettings<TPersistentDomainObjectBase> settings = settings ?? new LocalDBEventMessageSenderSettings<TPersistentDomainObjectBase>();
 
-    public override async Task SendAsync<TDomainObject>(IDomainOperationSerializeData<TDomainObject> domainObjectEventArgs, CancellationToken cancellationToken)
+    public override async Task SendAsync<TDomainObject>(IDomainOperationSerializeData<TDomainObject> domainObjectEventArgs, CancellationToken ct)
     {
         var dto = domainObjectEventArgs.CustomSendObject ?? eventDtoMapper.Convert(domainObjectEventArgs.DomainObject, domainObjectEventArgs.Operation);
 

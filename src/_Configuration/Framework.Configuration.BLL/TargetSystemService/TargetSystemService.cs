@@ -30,16 +30,16 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase>(
 
     public Type PersistentDomainObjectBaseType => typeof(TPersistentDomainObjectBase);
 
-    public Task ForceEventAsync(DomainTypeEventModel eventModel, CancellationToken cancellationToken)
+    public Task ForceEventAsync(DomainTypeEventModel eventModel, CancellationToken ct)
     {
         var domainType = this.TypeResolver.Resolve(eventModel.Operation.DomainType);
 
         return new Func<DomainTypeEventModel, CancellationToken, Task>(this.ForceEvent<TPersistentDomainObjectBase>)
                .CreateGenericMethod(domainType)
-               .Invoke<Task>(this, [eventModel, cancellationToken]);
+               .Invoke<Task>(this, [eventModel, ct]);
     }
 
-    private async Task ForceEvent<TDomainObject>(DomainTypeEventModel eventModel, CancellationToken cancellationToken)
+    private async Task ForceEvent<TDomainObject>(DomainTypeEventModel eventModel, CancellationToken ct)
         where TDomainObject : class, TPersistentDomainObjectBase
     {
         var bll = context.Logics.Default.Create<TDomainObject>();
@@ -54,7 +54,7 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase>(
 
             var domainObjectEvent = new EventOperation(eventModel.Operation.Name);
 
-            await eventOperationSender.Send(domainObject, domainObjectEvent, cancellationToken);
+            await eventOperationSender.Send(domainObject, domainObjectEvent, ct);
         }
     }
 

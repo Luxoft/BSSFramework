@@ -4,6 +4,6 @@ namespace Framework.Configuration.BLL;
 
 public partial interface IDomainTypeBLL
 {
-    Task ForceEventAsync(DomainTypeEventModel eventModel, CancellationToken cancellationToken);
+    Task ForceEventAsync(DomainTypeEventModel eventModel, CancellationToken ct);
 }
 

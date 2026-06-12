@@ -13,9 +13,9 @@ namespace Framework.Configurator.Handlers;
 public class GetDomainTypesHandler([WithoutRunAs] ISecuritySystem securitySystem, IEventSystem eventSystem)
     : BaseReadHandler, IGetDomainTypesHandler
 {
-    protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken cancellationToken)
+    protected override async Task<object> GetDataAsync(HttpContext context, CancellationToken ct)
     {
-        if (await securitySystem.HasAccessAsync(SecurityRole.Administrator, cancellationToken))
+        if (await securitySystem.HasAccessAsync(SecurityRole.Administrator, ct))
         {
             return eventSystem.TypeResolver
                               .Types

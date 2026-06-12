@@ -1,7 +1,7 @@
 ﻿using Anch.Testing.Xunit;
 
-using Framework.Application;
 using Framework.AutomationCore.Extensions;
+using Framework.BLL;
 using Framework.Database;
 
 using SampleSystem.Domain;
@@ -21,7 +21,7 @@ public class JobTests(IServiceProvider rootServiceProvider) : TestBase(rootServi
         var repeatCount = 10;
 
         // Act
-        await Task.WhenAll(Enumerable.Range(0, repeatCount).Select(_ => this.RootServiceProvider.RunJob<SampleJob>()).ToArray());
+        await Task.WhenAll(Enumerable.Range(0, repeatCount).Select(_ => this.RootServiceProvider.RunJob<SampleJob>(ct)).ToArray());
 
         // Assert
         var newCount = GetJobInstanceCount();

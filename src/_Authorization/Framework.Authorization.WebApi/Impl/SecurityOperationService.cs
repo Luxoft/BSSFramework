@@ -9,14 +9,14 @@ namespace Framework.Authorization.WebApi;
 public partial class AuthMainController
 {
     [HttpPost]
-    public virtual async Task<List<string>> GetSecurityOperations(CancellationToken cancellationToken = default)
+    public virtual async Task<List<string>> GetSecurityOperations(CancellationToken ct)
     {
         var availableSecurityOperationSource = this.HttpContext.RequestServices.GetRequiredService<IAvailableSecurityOperationSource>();
 
         return await availableSecurityOperationSource
                      .GetAvailableSecurityOperations()
                      .Select(op => op.Name)
-                     .ToListAsync(cancellationToken);
+                     .ToListAsync(ct);
     }
 }
 

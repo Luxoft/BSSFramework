@@ -11,34 +11,31 @@ namespace Framework.BLL;
 /// </summary>
 /// <typeparam name="TBLLContext"></typeparam>
 /// <typeparam name="TDomainObject"></typeparam>
-public class DefaultSecurityDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent>
-    : DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent>,
+public class DefaultSecurityDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent>(
+    TBLLContext context,
+    ISecurityProvider<TDomainObject> securityProvider)
+    : DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent>(context),
 
       IDefaultSecurityDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent>
 
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     where TDomainObject : class, TPersistentDomainObjectBase
-    where TBLLContext : class, ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>, IAccessDeniedExceptionServiceContainer, IHierarchicalObjectExpanderFactoryContainer
+    where TBLLContext : class, ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>, IAccessDeniedExceptionServiceContainer,
+    IHierarchicalObjectExpanderFactoryContainer
+    where TIdent : notnull
 {
-    protected DefaultSecurityDomainBLLBase(
-        TBLLContext context,
-        ISecurityProvider<TDomainObject> securityProvider)
-        : base(context) =>
-        this.SecurityProvider = securityProvider;
-
-    public ISecurityProvider<TDomainObject> SecurityProvider { get; }
+    public ISecurityProvider<TDomainObject> SecurityProvider { get; } = securityProvider;
 
 
-    protected override IQueryable<TDomainObject> ProcessSecurity(IQueryable<TDomainObject> queryable) => base.ProcessSecurity(queryable).Pipe(q => this.SecurityProvider.Inject(q));
+    protected override IQueryable<TDomainObject> ProcessSecurity(IQueryable<TDomainObject> queryable) =>
+        base.ProcessSecurity(queryable).Pipe(q => this.SecurityProvider.Inject(q));
 
     public virtual void CheckAccess(TDomainObject domainObject)
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-        this.SecurityProvider.CheckAccessAsync(domainObject, this.Context.AccessDeniedExceptionService).GetAwaiter().GetResult();
+        this.DefaultCancellationTokenSource.RunSync(async ct => await this.SecurityProvider.CheckAccessAsync(domainObject, this.Context.AccessDeniedExceptionService, ct));
     }
-
-    protected virtual void CheckInsertAccess(TDomainObject domainObject, TIdent id) => this.CheckAccess(domainObject);
 
     public override void Save(TDomainObject domainObject)
     {
@@ -72,7 +69,8 @@ public class DefaultSecurityDomainBLLBase<TBLLContext, TPersistentDomainObjectBa
         var request = from objectWithoutPermission in this.Context.Logics.Default.Create<TDomainObject>().GetById(id).ToMaybe()
 
                       let accessDeniedResult =
-                          this.SecurityProvider.GetAccessResultAsync(objectWithoutPermission).GetAwaiter().GetResult() as AccessResult.AccessDeniedResult
+                          this.DefaultCancellationTokenSource.RunSync(async ct => await this.SecurityProvider.GetAccessResultAsync(objectWithoutPermission, ct))
+                              as AccessResult.AccessDeniedResult
 
                       where accessDeniedResult != null
 

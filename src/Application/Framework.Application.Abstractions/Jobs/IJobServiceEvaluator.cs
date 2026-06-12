@@ -3,5 +3,5 @@
 public interface IJobServiceEvaluator<out TService>
     where TService : notnull
 {
-    Task<TResult> EvaluateAsync<TResult>(Func<TService, Task<TResult>> executeAsync);
+    Task<TResult> EvaluateAsync<TResult>(Func<TService, Task<TResult>> executeAsync, CancellationToken ct);
 }

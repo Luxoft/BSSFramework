@@ -13,14 +13,14 @@ namespace Framework.Infrastructure.LocalDBEvents;
 public abstract class EventDTOMessageSenderBase<TPersistentDomainObjectBase> : IEventDTOMessageSender<TPersistentDomainObjectBase>
     where TPersistentDomainObjectBase : class
 {
-    public abstract Task SendAsync<TDomainObject>(IDomainOperationSerializeData<TDomainObject> domainObjectEventArgs, CancellationToken cancellationToken)
+    public abstract Task SendAsync<TDomainObject>(IDomainOperationSerializeData<TDomainObject> domainObjectEventArgs, CancellationToken ct)
         where TDomainObject : class, TPersistentDomainObjectBase;
 
     private async Task InternalSend<TDomainObject>(
         TDomainObject domainObject,
         EventOperation operation,
         object? customSendObject,
-        CancellationToken cancellationToken)
+        CancellationToken ct)
         where TDomainObject : class, TPersistentDomainObjectBase =>
         await this.SendAsync(
             new DomainOperationSerializeData<TDomainObject>
@@ -28,11 +28,11 @@ public abstract class EventDTOMessageSenderBase<TPersistentDomainObjectBase> : I
                 DomainObject = domainObject,
                 Operation = operation,
                 CustomSendObject = customSendObject
-            }, cancellationToken);
+            }, ct);
 
     async Task IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>>.SendAsync(
         IDomainOperationSerializeData<TPersistentDomainObjectBase> domainObjectEventArgs,
-        CancellationToken cancellationToken)
+        CancellationToken ct)
     {
         if (domainObjectEventArgs == null) throw new ArgumentNullException(nameof(domainObjectEventArgs));
 
@@ -41,7 +41,7 @@ public abstract class EventDTOMessageSenderBase<TPersistentDomainObjectBase> : I
 
         await func.Invoke<Task>(
             this,
-            [domainObjectEventArgs.DomainObject, domainObjectEventArgs.Operation, domainObjectEventArgs.CustomSendObject, cancellationToken]);
+            [domainObjectEventArgs.DomainObject, domainObjectEventArgs.Operation, domainObjectEventArgs.CustomSendObject, ct]);
     }
 }
 

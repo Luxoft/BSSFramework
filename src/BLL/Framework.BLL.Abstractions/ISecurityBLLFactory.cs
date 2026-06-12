@@ -14,4 +14,3 @@ public interface ISecurityBLLFactory<out TBLL, TDomainObject> : ISecurityBLLFact
 {
     TBLL Create(ISecurityProvider<TDomainObject> securityProvider);
 }
-

@@ -19,7 +19,7 @@ using NHibernate.Linq;
 
 namespace Framework.Database.NHibernate;
 
-public class NHibDal<TDomainObject, TIdent>(INHibSession session, IAsyncDal<TDomainObject, TIdent> asyncDal) : IDAL<TDomainObject, TIdent>
+public class NHibDal<TDomainObject, TIdent>(INHibSession session, IAsyncDal<TDomainObject, TIdent> asyncDal, IDefaultCancellationTokenSource? defaultCancellationTokenSource = null) : IDAL<TDomainObject, TIdent>
     where TDomainObject : class
 {
     private static readonly LambdaCompileCache LambdaCompileCache = new(LambdaCompileMode.None);
@@ -28,15 +28,15 @@ public class NHibDal<TDomainObject, TIdent>(INHibSession session, IAsyncDal<TDom
 
     public TDomainObject GetById(TIdent id, LockRole lockRole) => this.NativeSession.Get<TDomainObject>(id, lockRole.ToLockMode());
 
-    public void Lock(TDomainObject domainObject, LockRole lockRole) => asyncDal.LockAsync(domainObject, lockRole).GetAwaiter().GetResult();
+    public void Lock(TDomainObject domainObject, LockRole lockRole) => defaultCancellationTokenSource.RunSync(ct => asyncDal.LockAsync(domainObject, lockRole, ct));
 
     public void Refresh(TDomainObject domainObject) => this.NativeSession.Refresh(domainObject);
 
-    public virtual void Save(TDomainObject domainObject) => asyncDal.SaveAsync(domainObject).GetAwaiter().GetResult();
+    public virtual void Save(TDomainObject domainObject) => defaultCancellationTokenSource.RunSync(ct => asyncDal.SaveAsync(domainObject, ct));
 
-    public virtual void Insert(TDomainObject domainObject, TIdent id) => asyncDal.InsertAsync(domainObject, id).GetAwaiter().GetResult();
+    public virtual void Insert(TDomainObject domainObject, TIdent id) => defaultCancellationTokenSource.RunSync(ct => asyncDal.InsertAsync(domainObject, id, ct));
 
-    public virtual void Remove(TDomainObject domainObject) => asyncDal.RemoveAsync(domainObject).GetAwaiter().GetResult();
+    public virtual void Remove(TDomainObject domainObject) => defaultCancellationTokenSource.RunSync(ct => asyncDal.RemoveAsync(domainObject, ct));
 
     public IQueryable<TDomainObject> GetQueryable(LockRole lockRole, FetchRule<TDomainObject>? fetchRule = null)
     {

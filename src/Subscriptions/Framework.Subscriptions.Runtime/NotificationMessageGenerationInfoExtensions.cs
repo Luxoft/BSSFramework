@@ -5,8 +5,8 @@ namespace Framework.Subscriptions;
 
 public static class NotificationMessageGenerationInfoExtensions
 {
-    public static IEnumerable<IGrouping<DomainObjectVersions<TRenderingObject>, (TRecipient Recipient, TTag Tag)>>
-        GroupRecipients<TRenderingObject, TRecipient, TTag>(this IEnumerable<NotificationMessageGenerationInfo<TRenderingObject, TRecipient>> source, TTag tag)
+    public static IAsyncEnumerable<IGrouping<DomainObjectVersions<TRenderingObject>, (TRecipient Recipient, TTag Tag)>>
+        GroupRecipients<TRenderingObject, TRecipient, TTag>(this IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject, TRecipient>> source, TTag tag)
 
         where TRenderingObject : class =>
 
@@ -17,9 +17,9 @@ public static class NotificationMessageGenerationInfoExtensions
         group (recipient, tag) by item.Versions;
 
 
-    public static IEnumerable<IGrouping<DomainObjectVersions<TRenderingObject>, TValue>>
+    public static IAsyncEnumerable<IGrouping<DomainObjectVersions<TRenderingObject>, TValue>>
         RegroupRecipients<TRenderingObject, TValue>(
-        this IEnumerable<IEnumerable<IGrouping<DomainObjectVersions<TRenderingObject>, TValue>>> source)
+        this IAsyncEnumerable<IAsyncEnumerable<IGrouping<DomainObjectVersions<TRenderingObject>, TValue>>> source)
 
         where TRenderingObject : class =>
 

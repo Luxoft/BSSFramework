@@ -38,7 +38,7 @@ public class WriteEfSession : EfSessionBase
     {
     }
 
-    public override async Task CloseAsync(CancellationToken cancellationToken = default)
+    public override async Task CloseAsync(CancellationToken ct)
     {
         if (this.closed)
         {
@@ -55,22 +55,22 @@ public class WriteEfSession : EfSessionBase
                 {
                     if (this.Transaction.Connection != null)
                     {
-                        await this.efTransaction.RollbackAsync(cancellationToken);
+                        await this.efTransaction.RollbackAsync(ct);
                     }
                 }
                 else
                 {
-                    await this.FlushAsync(true, cancellationToken);
+                    await this.FlushAsync(true, ct);
 
-                    await this.efTransaction.CommitAsync(cancellationToken);
+                    await this.efTransaction.CommitAsync(ct);
                 }
             }
         }
     }
 
-    public override async Task FlushAsync(CancellationToken cancellationToken = default) => await this.FlushAsync(false, cancellationToken);
+    public override async Task FlushAsync(CancellationToken ct) => await this.FlushAsync(false, ct);
 
-    private async Task FlushAsync(bool withCompleteTransaction, CancellationToken cancellationToken)
+    private async Task FlushAsync(bool withCompleteTransaction, CancellationToken ct)
     {
         try
         {
@@ -78,7 +78,7 @@ public class WriteEfSession : EfSessionBase
 
             do
             {
-                await this.NativeSession.SaveChangesAsync(cancellationToken);
+                await this.NativeSession.SaveChangesAsync(ct);
 
                 break;
                 //var changes = this.collectChangedEventListener.EvictChanges();
@@ -91,14 +91,14 @@ public class WriteEfSession : EfSessionBase
                 //{
                 //    dalHistory.Add(changes);
 
-                //    await this.AuditReader.SafeInitCurrentRevisionAsync(cancellationToken);
+                //    await this.AuditReader.SafeInitCurrentRevisionAsync(ct);
 
                 //    var changedEventArgs = new DALChangesEventArgs(changes);
 
                 //    // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!! Use UseTryCloseDbSession middleware
                 //    this.eventListeners.Foreach(eventListener =>
                 //                                {
-                //                                    cancellationToken.ThrowIfCancellationRequested();
+                //                                    ct.ThrowIfCancellationRequested();
 
                 //                                    eventListener.OnFlushed(changedEventArgs);
                 //                                });
@@ -112,12 +112,12 @@ public class WriteEfSession : EfSessionBase
                 // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!!!!! Use UseTryCloseDbSession middleware
                 foreach (var eventListener in this.eventListeners)
                 {
-                    cancellationToken.ThrowIfCancellationRequested();
+                    ct.ThrowIfCancellationRequested();
 
-                    await eventListener.OnBeforeTransactionCompleted(new DALChangesEventArgs(beforeTransactionCompletedChangeState), cancellationToken);
+                    await eventListener.OnBeforeTransactionCompleted(new DALChangesEventArgs(beforeTransactionCompletedChangeState), ct);
                 }
 
-                await this.NativeSession.SaveChangesAsync(cancellationToken);
+                await this.NativeSession.SaveChangesAsync(ct);
 
                 //var afterTransactionCompletedChangeState =
                 //        new[] { beforeTransactionCompletedChangeState, this.collectChangedEventListener.EvictChanges() }
@@ -126,7 +126,7 @@ public class WriteEfSession : EfSessionBase
                 // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!!!!! Use UseTryCloseDbSession middleware
                 //this.eventListeners.Foreach(eventListener => eventListener.OnAfterTransactionCompleted(new DALChangesEventArgs(afterTransactionCompletedChangeState)));
 
-                await this.NativeSession.SaveChangesAsync(cancellationToken); // Флашим для того, чтобы проверить, что никто ничего не менял в объектах после AfterTransactionCompleted-евента
+                await this.NativeSession.SaveChangesAsync(ct); // Флашим для того, чтобы проверить, что никто ничего не менял в объектах после AfterTransactionCompleted-евента
 
                 //if (this.collectChangedEventListener.HasAny())
                 //{

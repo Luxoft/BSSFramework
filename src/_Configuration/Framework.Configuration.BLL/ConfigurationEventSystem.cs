@@ -16,8 +16,8 @@ public class ConfigurationEventSystem(
 
     public IDomainObjectEventMetadata DomainObjectEventMetadata { get; } = domainObjectEventMetadata;
 
-    public Task ForceEventAsync(EventModel eventModel, CancellationToken cancellationToken) =>
-        context.Logics.DomainType.ForceEventAsync(this.ToDomainTypeEventModel(eventModel), cancellationToken);
+    public Task ForceEventAsync(EventModel eventModel, CancellationToken ct) =>
+        context.Logics.DomainType.ForceEventAsync(this.ToDomainTypeEventModel(eventModel), ct);
 
     private DomainTypeEventModel ToDomainTypeEventModel(EventModel eventModel)
     {

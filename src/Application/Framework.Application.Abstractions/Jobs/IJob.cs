@@ -2,5 +2,5 @@
 
 public interface IJob
 {
-    Task ExecuteAsync(CancellationToken cancellationToken);
+    Task ExecuteAsync(CancellationToken ct);
 }

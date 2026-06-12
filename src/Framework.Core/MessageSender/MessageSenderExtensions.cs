@@ -62,6 +62,6 @@ public static class MessageSenderExtensions
 
     private class ActionMessageSender<TMessage>(Func<TMessage, CancellationToken, Task> sendAction) : IMessageSender<TMessage>
     {
-        public async Task SendAsync(TMessage message, CancellationToken cancellationToken) => await sendAction(message, cancellationToken);
+        public async Task SendAsync(TMessage message, CancellationToken ct) => await sendAction(message, ct);
     }
 }

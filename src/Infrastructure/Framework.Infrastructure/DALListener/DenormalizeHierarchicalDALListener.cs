@@ -21,7 +21,7 @@ public class DenormalizeHierarchicalDALListener(
 {
     private readonly IReadOnlyDictionary<Type, FullAncestorLinkInfo> hierarchicalInfoTypes = hierarchicalInfoList.ToDictionary(h => h.DomainObjectType);
 
-    public async Task Process(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
+    public async Task Process(DALChangesEventArgs eventArgs, CancellationToken ct)
     {
         foreach (var typeGroup in eventArgs.Changes.GroupByType())
         {
@@ -42,7 +42,7 @@ public class DenormalizeHierarchicalDALListener(
                         values.Modified.Select(z => z.Key).ToArray(domainType),
                         values.Removing.Select(z => z.Key).ToArray(domainType),
                         hierarchicalInfo,
-                        cancellationToken
+                        ct
                     ]);
             }
         }
@@ -52,27 +52,27 @@ public class DenormalizeHierarchicalDALListener(
         TDomainObject[] modified,
         TDomainObject[] removing,
         FullAncestorLinkInfo<TDomainObject> fullAncestorLinkInfo,
-        CancellationToken cancellationToken)
+        CancellationToken ct)
         where TDomainObject : class
     {
-        await this.LockChanges(fullAncestorLinkInfo, cancellationToken);
+        await this.LockChanges(fullAncestorLinkInfo, ct);
 
         if (serviceProvider.GetService(typeof(DeepLevelInfo<>).MakeGenericType(typeof(TDomainObject))) != null)
         {
-            await serviceProvider.GetRequiredService<IDeepLevelDenormalizer<TDomainObject>>().UpdateDeepLevels(modified, cancellationToken);
+            await serviceProvider.GetRequiredService<IDeepLevelDenormalizer<TDomainObject>>().UpdateDeepLevels(modified, ct);
         }
 
-        await serviceProvider.GetRequiredService<IAncestorDenormalizer<TDomainObject>>().SyncAsync(modified, removing, cancellationToken);
+        await serviceProvider.GetRequiredService<IAncestorDenormalizer<TDomainObject>>().SyncAsync(modified, removing, ct);
     }
 
-    private async Task LockChanges(FullAncestorLinkInfo fullAncestorLinkInfo, CancellationToken cancellationToken)
+    private async Task LockChanges(FullAncestorLinkInfo fullAncestorLinkInfo, CancellationToken ct)
     {
         var domainObjectAncestorLinkType = fullAncestorLinkInfo.DirectedLinkType;
 
         var namedLock = namedLockSource.NamedLocks.Where(nl => nl.DomainType == domainObjectAncestorLinkType)
                                        .Single(() => new ArgumentException($"System must have namedLock for {domainObjectAncestorLinkType.Name} global lock "));
 
-        await namedLockService.LockAsync(namedLock, LockRole.Update, cancellationToken);
+        await namedLockService.LockAsync(namedLock, LockRole.Update, ct);
     }
 }
 

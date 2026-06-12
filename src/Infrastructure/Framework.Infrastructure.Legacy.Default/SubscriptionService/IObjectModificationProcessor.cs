@@ -4,6 +4,6 @@ namespace Framework.Infrastructure.SubscriptionService;
 
 public interface IObjectModificationProcessor
 {
-    Task ProcessChanged(ObjectModificationInfoDTO<Guid> changedObjectInfo, CancellationToken cancellationToken);
+    Task ProcessChanged(ObjectModificationInfoDTO<Guid> changedObjectInfo, CancellationToken ct);
 }
 

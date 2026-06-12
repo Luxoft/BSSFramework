@@ -14,23 +14,23 @@ public class NamedLockInitializer<TGenericNamedLock>(
     : INamedLockInitializer
     where TGenericNamedLock : new()
 {
-    public async Task Initialize(CancellationToken cancellationToken)
+    public async Task Initialize(CancellationToken ct)
     {
         var getNameFunc = genericNamedLockTypeInfo.NamePath.Compile();
         var setNameFunc = genericNamedLockTypeInfo.NamePath.ToSetLambdaExpression().Compile();
 
-        var dbValues = await namedLockRepository.GetQueryable().GenericToListAsync(cancellationToken);
+        var dbValues = await namedLockRepository.GetQueryable().GenericToListAsync(ct);
 
         var mergeResult = dbValues.GetMergeResult(namedLockSource.NamedLocks, getNameFunc, v => v.Name);
 
         foreach (var addingItem in mergeResult.AddingItems)
         {
-            await namedLockRepository.SaveAsync(new TGenericNamedLock().Self(v => setNameFunc(v, addingItem.Name)), cancellationToken);
+            await namedLockRepository.SaveAsync(new TGenericNamedLock().Self(v => setNameFunc(v, addingItem.Name)), ct);
         }
 
         foreach (var removingItem in mergeResult.RemovingItems)
         {
-            await namedLockRepository.RemoveAsync(removingItem, cancellationToken);
+            await namedLockRepository.RemoveAsync(removingItem, ct);
         }
     }
 }

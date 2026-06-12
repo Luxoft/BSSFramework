@@ -21,17 +21,16 @@ public class TestDataInitializer(
     IOptions<AutomationFrameworkSettings> settings,
     IRootImpersonateService rootImpersonateService) : IInitializer
 {
-    public async Task Initialize(CancellationToken cancellationToken) =>
+    public async Task Initialize(CancellationToken ct) =>
         await rootImpersonateService
-            .WithImpersonateAsync(nameof(TestDataInitializer), async () => await this.InitializeInternal(cancellationToken));
+            .WithImpersonateAsync(nameof(TestDataInitializer), async () => await this.InitializeInternal(ct));
 
-    public async Task InitializeInternal(CancellationToken cancellationToken)
+    public async Task InitializeInternal(CancellationToken ct)
     {
-        await mainInitializer.InitializeAsync(cancellationToken);
+        await mainInitializer.InitializeAsync(ct);
 
-        await authManager.For(nameof(TestDataInitializer)).SetAdminRoleAsync(cancellationToken);
-        await authManager.For(DefaultConstants.NOTIFICATION_ADMIN).SetRoleAsync(SecurityRole.SystemIntegration, cancellationToken);
-        await authManager.For(DefaultConstants.INTEGRATION_BUS).SetRoleAsync(SecurityRole.SystemIntegration, cancellationToken);
+        await authManager.For(nameof(TestDataInitializer)).SetAdminRoleAsync(ct);
+        await authManager.For(DefaultConstants.INTEGRATION_BUS).SetRoleAsync(SecurityRole.SystemIntegration, ct);
 
         this.FillMainData();
 
@@ -42,13 +41,13 @@ public class TestDataInitializer(
             nameEng: new Fio { FirstName = DefaultConstants.EMPLOYEE_MY_NAME, LastName = DefaultConstants.EMPLOYEE_MY_NAME },
             login: integrationTestUserName);
 
-        await authManager.For(integrationTestUserName).SetAdminRoleAsync(cancellationToken);
+        await authManager.For(integrationTestUserName).SetAdminRoleAsync(ct);
 
         foreach (var localAdmin in settings.Value.LocalAdmins)
         {
             dataManager.SaveEmployee(login: localAdmin);
 
-            await authManager.For(localAdmin).SetRoleAsync(SecurityRole.Administrator, cancellationToken);
+            await authManager.For(localAdmin).SetRoleAsync(SecurityRole.Administrator, ct);
         }
     }
 

@@ -4,6 +4,7 @@ using Anch.SecuritySystem;
 using Framework.Application;
 using Framework.Application.Repository;
 using Framework.AutomationCore.RootServiceProviderContainer;
+using Framework.BLL;
 using Framework.BLL.DTOMapping.Domain;
 using Framework.Configuration.BLL;
 using Framework.Configuration.Domain;
@@ -22,8 +23,15 @@ public abstract class IntegrationTestBase<TBLLContext>(IServiceProvider rootServ
     public Task<TResult> EvaluateAsync<TResult>(
         DBSessionMode sessionMode,
         UserCredential? customUserCredential,
-        Func<TBLLContext, Task<TResult>> getResult) =>
-        rootServiceProvider.GetRequiredService<IServiceEvaluator<TBLLContext>>().EvaluateAsync(sessionMode, customUserCredential, getResult);
+        Func<TBLLContext, Task<TResult>> getResult,
+        CancellationToken ct) =>
+        rootServiceProvider.GetRequiredService<IServiceEvaluator<TBLLContext>>().EvaluateAsync(sessionMode, customUserCredential, getResult, ct);
+
+    public TResult Evaluate<TResult>(
+        DBSessionMode sessionMode,
+        UserCredential? customUserCredential,
+        Func<TBLLContext, TResult> getResult) =>
+        rootServiceProvider.GetRequiredService<ISyncServiceEvaluator<TBLLContext>>().Evaluate(sessionMode, customUserCredential, getResult);
 
 
     protected IConfigurationBLLContext GetConfigurationBLLContext(TBLLContext context) => context.ServiceProvider.GetRequiredService<IConfigurationBLLContext>();
@@ -49,6 +57,16 @@ public abstract class IntegrationTestBase<TBLLContext>(IServiceProvider rootServ
                                       Revision = mod.Revision,
                                       TypeInfoDescription = new TypeInfoDescriptionDTO { Name = mod.DomainType.Name, Namespace = mod.DomainType.Namespace }
                                   }));
+
+    protected virtual async Task<int> ProcessModificationsAsync(CancellationToken ct)
+    {
+        var processSubscriptions = await this.EvaluateAsync(
+            DBSessionMode.Write,
+            context => this.GetConfigurationBLLContext(context).Logics.DomainObjectModification.ProcessAsync(1000, ct),
+            ct);
+
+        return processSubscriptions.GetValue();
+    }
 
     /// <summary>
     /// Отчистка списка модификаций

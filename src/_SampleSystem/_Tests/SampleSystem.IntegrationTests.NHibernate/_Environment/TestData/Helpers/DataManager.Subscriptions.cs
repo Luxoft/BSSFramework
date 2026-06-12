@@ -1,5 +1,6 @@
-﻿using Framework.AutomationCore.RootServiceProviderContainer;
+﻿using Framework.Application;
 using Framework.Core;
+using Framework.Database;
 using Framework.Subscriptions;
 using Framework.Subscriptions.Domain;
 
@@ -9,15 +10,16 @@ namespace SampleSystem.IntegrationTests._Environment.TestData.Helpers;
 
 public partial class DataManager
 {
-    public List<ITryResult<SubscriptionHeader>> ProcessSubscription<T>(T? prev, T? next)
+    public Task<List<ITryResult<SubscriptionHeader>>> ProcessSubscriptionAsync<T>(T? prev, T? next, CancellationToken ct)
 
         where T : class =>
 
-        this.EvaluateWrite(context =>
-        {
-            var subscriptionService = context.ServiceProvider.GetRequiredService<ISubscriptionService>();
+        this.EvaluateAsync(
+            DBSessionMode.Write,
+            async context =>
+            {
+                var subscriptionService = context.ServiceProvider.GetRequiredService<ISubscriptionService>();
 
-            return subscriptionService.Process(new DomainObjectVersions<T>(prev, next)).ToList();
-        });
+                return await subscriptionService.ProcessAsync(new DomainObjectVersions<T>(prev, next)).ToListAsync(ct);
+            }, ct);
 }
-

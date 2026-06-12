@@ -2,7 +2,6 @@
 using Anch.SecuritySystem.Validation;
 using Anch.Testing.Xunit;
 
-using Framework.Application;
 using Framework.Database;
 
 using SampleSystem.Domain.BU;
@@ -120,7 +119,7 @@ public class SecurityContextRestrictionFilterTests(IServiceProvider rootServiceP
                                                                   .GetAccessorDataAsync(bu, ct);
 
                                          return ctx.SecurityAccessorResolver.Resolve(accessorData).ToList();
-                                     });
+                                     }, ct);
 
         // Assert
         Assert.Contains(this.employeeLogin, accesors);
@@ -143,17 +142,17 @@ public class SecurityContextRestrictionFilterTests(IServiceProvider rootServiceP
                                                                              .GetAccessorDataAsync(bu, ct);
 
                                                     return ctx.SecurityAccessorResolver.Resolve(accessorData).ToList();
-                                                });
+                                                }, ct);
 
         // Assert
         Assert.Contains(this.employeeLogin, accesors);
     }
 
-    [Fact]
-    public async Task CreateCustomRestrictionRule_SearchAccessorsForIncorrectBU_EmployeeNotFounded()
+    [AnchFact]
+    public async Task CreateCustomRestrictionRule_SearchAccessorsForIncorrectBU_EmployeeNotFounded(CancellationToken ct)
     {
         // Arrange
-        await this.AuthManager.For(this.employee.Id).SetRoleAsync(new SampleSystemTestPermission(DefaultSecurityRole) { BusinessUnits = [this.defaultBu, this.buWithAllowedFilter] });
+        await this.AuthManager.For(this.employee.Id).SetRoleAsync(new SampleSystemTestPermission(DefaultSecurityRole) { BusinessUnits = [this.defaultBu, this.buWithAllowedFilter] }, ct);
 
         // Act
         var accesors = await this.EvaluateAsync(DBSessionMode.Read, this.employee.Id,
@@ -163,10 +162,11 @@ public class SecurityContextRestrictionFilterTests(IServiceProvider rootServiceP
 
                                               var accessorData = await ctx
                                                                  .SecurityService.GetSecurityProvider<BusinessUnit>(DefaultRestrictionRule)
-                                                                 .GetAccessorDataAsync(bu);
+                                                                 .GetAccessorDataAsync(bu, ct);
 
                                               return ctx.SecurityAccessorResolver.Resolve(accessorData).ToList();
-                                          });
+                                          },
+                                          ct);
 
         // Assert
         Assert.DoesNotContain(this.employeeLogin, accesors);

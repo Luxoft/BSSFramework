@@ -1,4 +1,5 @@
 ﻿using Anch.SecuritySystem;
+using Anch.Testing.Xunit;
 
 using Framework.Application.Events;
 using Framework.Authorization.Domain;
@@ -25,13 +26,13 @@ public class PrincipalTests(IServiceProvider rootServiceProvider) : TestBase(roo
         Assert.Contains(this.GetIntegrationEvents<PrincipalSaveEventDTO>("authDALQuery"), dto => dto.Principal.Id == principalId);
     }
 
-    [Fact]
-    public void CreatePrincipal_ForceEventExist()
+    [AnchFact]
+    public async Task CreatePrincipal_ForceEventExist(CancellationToken ct)
     {
         // Arrange
         var name = $@"luxoft\saveprincipaltest_{Guid.NewGuid()}";
 
-        var principalId = (Guid)this.AuthManager.For(name).CreatePrincipal().GetId();
+        var principalId = (Guid)(await this.AuthManager.For(name).CreatePrincipalAsync(ct)).GetId();
 
         var configFacade = this.GetConfigurationControllerEvaluator();
 
@@ -46,24 +47,24 @@ public class PrincipalTests(IServiceProvider rootServiceProvider) : TestBase(roo
         this.ClearIntegrationEvents();
 
         // Act
-        configFacade.Evaluate(c => c.ForceDomainTypeEvent(new Framework.Configuration.Generated.DTO.DomainTypeEventModelStrictDTO
+        await configFacade.EvaluateAsync(c => c.ForceDomainTypeEvent(new Framework.Configuration.Generated.DTO.DomainTypeEventModelStrictDTO
         {
             Operation = operation.Identity,
 
             DomainObjectIdents = new List<Guid> { principalId }
-        }));
+        }, ct));
 
         // Assert
         Assert.Contains(this.GetIntegrationEvents<PrincipalSaveEventDTO>("authDALQuery"), dto => dto.Principal.Id == principalId);
     }
 
-    [Fact]
-    public void CreatePermission_ForceDependencyEventExist()
+    [AnchFact]
+    public async Task CreatePermission_ForceDependencyEventExist(CancellationToken ct)
     {
         // Arrange
         var name = $@"luxoft\saveprincipaltest_{Guid.NewGuid()}";
 
-        var principalId = (Guid)this.AuthManager.For(name).CreatePrincipal().GetId();
+        var principalId = (Guid)(await this.AuthManager.For(name).CreatePrincipalAsync(ct)).GetId();
 
         var role = this.GetAuthControllerEvaluator().Evaluate(c => c.GetVisualBusinessRoleByName(SecurityRole.Administrator.Name)).Identity;
 
@@ -87,12 +88,12 @@ public class PrincipalTests(IServiceProvider rootServiceProvider) : TestBase(roo
         this.ClearIntegrationEvents();
 
         // Act
-        configFacade.Evaluate(c => c.ForceDomainTypeEvent(new Framework.Configuration.Generated.DTO.DomainTypeEventModelStrictDTO
+        await configFacade.EvaluateAsync(c => c.ForceDomainTypeEvent(new Framework.Configuration.Generated.DTO.DomainTypeEventModelStrictDTO
         {
             Operation = operation.Identity,
 
             DomainObjectIdents = new List<Guid> { permissionIdentity.Id }
-        }));
+        }, ct));
 
         // Assert
         Assert.Contains(this.GetIntegrationEvents<PermissionSaveEventDTO>("authDALQuery"), dto => dto.Permission.Id == permissionIdentity.Id);

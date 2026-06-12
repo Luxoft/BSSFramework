@@ -21,7 +21,7 @@ public class EmployeeAsyncController(
 {
     [DBSessionMode(DBSessionMode.Read)]
     [HttpPost]
-    public async Task<EmployeeSimpleDTO> GetCurrentEmployee(CancellationToken cancellationToken)
+    public async Task<EmployeeSimpleDTO> GetCurrentEmployee(CancellationToken ct)
     {
         var userName = currentUser.Name;
 
@@ -30,7 +30,7 @@ public class EmployeeAsyncController(
         var employees = await repository
                               .GetQueryable()
                               .Where(employee => employee.Login == userName)
-                              .GenericToListAsync(cancellationToken);
+                              .GenericToListAsync(ct);
 
         return employees.Single().ToSimpleDTO(mappingService);
     }

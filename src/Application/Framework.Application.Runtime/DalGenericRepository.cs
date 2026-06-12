@@ -8,30 +8,30 @@ namespace Framework.Application;
 
 public class DalGenericRepository(IServiceProvider serviceProvider) : IGenericRepository
 {
-    public async Task SaveAsync<TDomainObject>(TDomainObject data, CancellationToken cancellationToken)
+    public async Task SaveAsync<TDomainObject>(TDomainObject data, CancellationToken ct)
         where TDomainObject : class
     {
         var dal = serviceProvider.GetRequiredService<IAsyncDal<TDomainObject, Guid>>();
 
         if (serviceProvider.GetService<IDalGenericInterceptor<TDomainObject>>() is { } interceptor)
         {
-            await interceptor.SaveAsync(data, cancellationToken);
+            await interceptor.SaveAsync(data, ct);
         }
 
-        await dal.SaveAsync(data, cancellationToken);
+        await dal.SaveAsync(data, ct);
     }
 
-    public async Task RemoveAsync<TDomainObject>(TDomainObject data, CancellationToken cancellationToken)
+    public async Task RemoveAsync<TDomainObject>(TDomainObject data, CancellationToken ct)
         where TDomainObject : class
     {
         var dal = serviceProvider.GetRequiredService<IAsyncDal<TDomainObject, Guid>>();
 
         if (serviceProvider.GetService<IDalGenericInterceptor<TDomainObject>>() is { } interceptor)
         {
-            await interceptor.RemoveAsync(data, cancellationToken);
+            await interceptor.RemoveAsync(data, ct);
         }
 
-        await dal.RemoveAsync(data, cancellationToken);
+        await dal.RemoveAsync(data, ct);
     }
 }
 

@@ -3,7 +3,7 @@ namespace Framework.Core;
 
 public abstract class MessageSender<TMessage> : IMessageSender<TMessage>
 {
-    public abstract Task SendAsync(TMessage message, CancellationToken cancellationToken);
+    public abstract Task SendAsync(TMessage message, CancellationToken ct);
 
 
     public static readonly IMessageSender<TMessage> Empty = new EmptyMessageSender();
@@ -27,7 +27,7 @@ public abstract class MessageSender<TMessage> : IMessageSender<TMessage>
 
         }
 
-        public override async Task SendAsync(TMessage message, CancellationToken cancellationToken)
+        public override async Task SendAsync(TMessage message, CancellationToken ct)
         {
 
         }
@@ -40,6 +40,6 @@ public abstract class MessageSender<TMessage> : IMessageSender<TMessage>
 
         }
 
-        public override async Task SendAsync(TMessage message, CancellationToken cancellationToken) => throw new NotImplementedException();
+        public override async Task SendAsync(TMessage message, CancellationToken ct) => throw new NotImplementedException();
     }
 }

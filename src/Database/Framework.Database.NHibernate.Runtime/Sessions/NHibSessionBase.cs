@@ -33,7 +33,7 @@ public abstract class NHibSessionBase : INHibSession
 
     protected internal NHibSessionEnvironment Environment { get; }
 
-    public abstract Task FlushAsync(CancellationToken cancellationToken = default);
+    public abstract Task FlushAsync(CancellationToken ct);
 
     /// <inheritdoc />
     public long GetCurrentRevision() => this.AuditReader.GetCurrentRevision<AuditRevisionEntity>(false).Id;
@@ -49,8 +49,8 @@ public abstract class NHibSessionBase : INHibSession
     /// <inheritdoc />
     public abstract void AsWritable();
 
-    public abstract Task CloseAsync(CancellationToken cancellationToken = default);
+    public abstract Task CloseAsync(CancellationToken ct);
 
-    public async ValueTask DisposeAsync() => await this.CloseAsync();
+    public async ValueTask DisposeAsync() => await this.CloseAsync(CancellationToken.None);
 }
 

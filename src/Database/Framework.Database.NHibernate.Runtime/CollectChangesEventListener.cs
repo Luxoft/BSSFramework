@@ -32,7 +32,7 @@ internal class CollectChangesEventListener : IPostDeleteEventListener, IPostInse
 
     public bool HasAny() => this.insertedObjects.Any() || this.removedObjects.Any() || this.updatedObjects.Any();
 
-    public async Task OnPostDeleteAsync(PostDeleteEvent @event, CancellationToken cancellationToken) => this.OnPostDelete(@event);
+    public async Task OnPostDeleteAsync(PostDeleteEvent @event, CancellationToken ct) => this.OnPostDelete(@event);
 
     public void OnPostDelete(PostDeleteEvent @event)
     {
@@ -43,7 +43,7 @@ internal class CollectChangesEventListener : IPostDeleteEventListener, IPostInse
         this.removedObjects.Add(@event.ToDALObjects(this.counter++));
     }
 
-    public async Task OnPostInsertAsync(PostInsertEvent @event, CancellationToken cancellationToken) => this.OnPostInsert(@event);
+    public async Task OnPostInsertAsync(PostInsertEvent @event, CancellationToken ct) => this.OnPostInsert(@event);
 
     public void OnPostInsert(PostInsertEvent @event)
     {
@@ -55,7 +55,7 @@ internal class CollectChangesEventListener : IPostDeleteEventListener, IPostInse
         this.insertedObjects.Add(@event.ToDALObjects(this.counter++));
     }
 
-    public async Task OnPostUpdateAsync(PostUpdateEvent @event, CancellationToken cancellationToken) => this.OnPostUpdate(@event);
+    public async Task OnPostUpdateAsync(PostUpdateEvent @event, CancellationToken ct) => this.OnPostUpdate(@event);
 
     public void OnPostUpdate(PostUpdateEvent @event)
     {

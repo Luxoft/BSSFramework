@@ -15,7 +15,7 @@ public class DateModelCreateSubscription : Subscription<DateModel, _DataModel_Cr
 
     public override bool InlineAttachments { get; } = false;
 
-    public override IEnumerable<NotificationMessageGenerationInfo<DateModel>> GetTo(IServiceProvider _, DomainObjectVersions<DateModel> versions)
+    public override async IAsyncEnumerable<NotificationMessageGenerationInfo<DateModel>> GetTo(IServiceProvider _, DomainObjectVersions<DateModel> versions)
     {
         yield return new("tester@luxoft.com", versions);
     }

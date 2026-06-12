@@ -26,7 +26,7 @@ public interface IBssHangfireSettings
 
     IBssHangfireSettings AddJob<TJob>(JobSettings? jobSettings = null)
         where TJob : class, IJob =>
-        this.AddJob<TJob, CancellationToken>((job, cancellationToken) => job.ExecuteAsync(cancellationToken), jobSettings);
+        this.AddJob<TJob, CancellationToken>((job, ct) => job.ExecuteAsync(ct), jobSettings);
 
     IBssHangfireSettings AddJob<TJob>(Func<TJob, CancellationToken, Task> executeAction, JobSettings? jobSettings = null)
         where TJob : class =>

@@ -21,9 +21,9 @@ public class FaultDALListenerController(
 {
     [HttpPost]
     [DBSessionMode(DBSessionMode.Write)]
-    public async Task<int> TestFault(bool raiseError, CancellationToken cancellationToken)
+    public async Task<int> TestFault(bool raiseError, CancellationToken ct)
     {
-        await repository.SaveAsync(new NoSecurityObject(), cancellationToken);
+        await repository.SaveAsync(new NoSecurityObject(), ct);
 
         listenerSettings.Raise = raiseError;
 
@@ -32,13 +32,13 @@ public class FaultDALListenerController(
 
     [HttpPost]
     [DBSessionMode(DBSessionMode.Write)]
-    public async IAsyncEnumerable<int> TestFault2(bool raiseError, [EnumeratorCancellation] CancellationToken cancellationToken)
+    public async IAsyncEnumerable<int> TestFault2(bool raiseError, [EnumeratorCancellation] CancellationToken ct)
     {
-        await repository.SaveAsync(new NoSecurityObject(), cancellationToken);
+        await repository.SaveAsync(new NoSecurityObject(), ct);
 
         yield return 123;
 
-        await Task.Delay(5000, cancellationToken);
+        await Task.Delay(5000, ct);
 
         if (raiseError)
         {

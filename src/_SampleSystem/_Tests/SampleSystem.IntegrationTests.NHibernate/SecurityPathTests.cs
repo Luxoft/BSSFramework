@@ -1,7 +1,7 @@
 ﻿using Anch.SecuritySystem;
 using Anch.SecuritySystem.Services;
 
-using Framework.Application;
+using Framework.BLL;
 using Framework.Database;
 
 using Microsoft.Extensions.DependencyInjection;

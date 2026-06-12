@@ -1,6 +1,6 @@
 ﻿using Anch.GenericQueryable;
 
-using Framework.Application;
+using Framework.BLL;
 using Framework.Database;
 
 using SampleSystem.IntegrationTests._Environment.TestData;

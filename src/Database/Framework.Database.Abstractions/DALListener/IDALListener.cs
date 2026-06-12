@@ -5,5 +5,5 @@
 /// </summary>
 public interface IDALListener
 {
-    Task Process(DALChangesEventArgs eventArgs, CancellationToken cancellationToken);
+    Task Process(DALChangesEventArgs eventArgs, CancellationToken ct);
 }

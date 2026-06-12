@@ -14,13 +14,13 @@ public class BssEmptySchemaInitializer(
 {
     public const string Key = nameof(BssEmptySchemaInitializer);
 
-    public async Task Initialize(CancellationToken cancellationToken)
+    public async Task Initialize(CancellationToken ct)
     {
-        await emptySchemaInitializer.Initialize(cancellationToken);
+        await emptySchemaInitializer.Initialize(ct);
 
         foreach (var executeScriptInfo in scriptInfoList)
         {
-            await actualTestConnectionStringSource.ActualConnectionString.ExecuteSqlFromFolderAsync(executeScriptInfo.Path, cancellationToken);
+            await actualTestConnectionStringSource.ActualConnectionString.ExecuteSqlFromFolderAsync(executeScriptInfo.Path, ct);
         }
     }
 }

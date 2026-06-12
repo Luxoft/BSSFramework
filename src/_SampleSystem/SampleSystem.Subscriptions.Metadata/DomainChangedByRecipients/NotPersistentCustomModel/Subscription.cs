@@ -1,4 +1,5 @@
 ﻿using System.Net.Mail;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 using Framework.Subscriptions.Domain;
@@ -15,25 +16,35 @@ public class Subscription : Subscription<Domain.Directories.Country, CustomNotif
 
     public override MailAddress Sender { get; } = new("SampleSystem@luxoft.com", "SampleSystem");
 
-    public override CustomNotificationModel ConvertToRenderingObject(
+    public override async ValueTask<CustomNotificationModel> ConvertToRenderingObject(
         IServiceProvider serviceProvider,
-        Domain.Directories.Country domainObject) => new(serviceProvider, domainObject);
+        Domain.Directories.Country domainObject,
+         CancellationToken ct) => new(serviceProvider, domainObject);
 
-    public override IEnumerable<NotificationMessageGenerationInfo<CustomNotificationModel>> GetTo(
+    public override IAsyncEnumerable<NotificationMessageGenerationInfo<CustomNotificationModel>> GetTo(
         IServiceProvider serviceProvider,
-        DomainObjectVersions<Domain.Directories.Country> versions)
+        DomainObjectVersions<Domain.Directories.Country> versions) =>
+
+        new[] { "tester@luxoft.com" }
+            .ToAsyncEnumerable()
+            .Select(async (email, ct) =>
+                        new NotificationMessageGenerationInfo<CustomNotificationModel>(
+                            email,
+                            await versions.ChangeDomainObjectAsync(c => this.ConvertToRenderingObject(serviceProvider, c, ct))));
+
+    public override IAsyncEnumerable<NotificationMessageGenerationInfo<CustomNotificationModel>> GetReplyTo(
+        IServiceProvider serviceProvider,
+        DomainObjectVersions<Domain.Directories.Country> versions) => this.InternalGetReplyTo(serviceProvider, versions);
+
+    private async IAsyncEnumerable<NotificationMessageGenerationInfo<CustomNotificationModel>> InternalGetReplyTo(
+        IServiceProvider serviceProvider,
+        DomainObjectVersions<Domain.Directories.Country> versions,
+        [EnumeratorCancellation] CancellationToken ct = default)
     {
-        yield return new("tester@luxoft.com", versions.ChangeDomainObject(c => this.ConvertToRenderingObject(serviceProvider, c)));
+        yield return new("replayTo@luxoft.com", await versions.ChangeDomainObjectAsync(c => this.ConvertToRenderingObject(serviceProvider, c, ct)));
     }
 
-    public override IEnumerable<NotificationMessageGenerationInfo<CustomNotificationModel>> GetReplyTo(
-        IServiceProvider serviceProvider,
-        DomainObjectVersions<Domain.Directories.Country> versions)
-    {
-        yield return new("replayTo@luxoft.com", versions.ChangeDomainObject(c => this.ConvertToRenderingObject(serviceProvider, c)));
-    }
-
-    public override IEnumerable<Attachment> GetAttachments(IServiceProvider serviceProvider, DomainObjectVersions<CustomNotificationModel> versions)
+    public override async IAsyncEnumerable<Attachment> GetAttachments(IServiceProvider serviceProvider, DomainObjectVersions<CustomNotificationModel> versions)
     {
         yield return new(new MemoryStream(Encoding.UTF8.GetBytes("Hello world!")), AttachmentName);
     }

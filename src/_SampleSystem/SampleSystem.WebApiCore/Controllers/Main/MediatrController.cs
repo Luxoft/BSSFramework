@@ -1,5 +1,4 @@
-﻿using Framework.Database;
-using Framework.Infrastructure;
+﻿using Framework.Infrastructure;
 
 using MediatR;
 
@@ -19,27 +18,17 @@ namespace SampleSystem.WebApiCore.Controllers.Main;
 public class MediatrController(IMediator mediator) : ApiControllerBase<ISampleSystemBLLContext, ISampleSystemDTOMappingService>
 {
     [HttpGet]
-    public GetEmployeesResponse[] GetEmployees() =>
-        this.Evaluate(
-            DBSessionMode.Read,
-            _ => mediator.Send(new GetEmployeesQuery()).GetAwaiter().GetResult());
+    public Task<GetEmployeesResponse[]> GetEmployees(CancellationToken ct) => mediator.Send(new GetEmployeesQuery(), ct);
 
     [HttpGet]
-    public GetManagementUnitFluentMappingsResponse[] GetManagementUnitFluentMappings() =>
-        this.Evaluate(
-            DBSessionMode.Read,
-            _ => mediator.Send(new GetManagementUnitFluentMappingsQuery()).GetAwaiter().GetResult());
+    public Task<GetManagementUnitFluentMappingsResponse[]> GetManagementUnitFluentMappings(CancellationToken ct) =>
+        mediator.Send(new GetManagementUnitFluentMappingsQuery(), ct);
 
     [HttpPost]
-    public Guid CreateManagementUnitFluentMappings([FromBody] CreateManagementUnitFluentMappingCommand command) =>
-        this.Evaluate(
-            DBSessionMode.Write,
-            _ => mediator.Send(command).GetAwaiter().GetResult());
+    public Task<Guid> CreateManagementUnitFluentMappings([FromBody] CreateManagementUnitFluentMappingCommand command, CancellationToken ct) =>
+        mediator.Send(command, ct);
 
     [HttpPost]
-    public void CreateIntegrationEvent() =>
-        this.Evaluate(
-            DBSessionMode.Write,
-            _ => mediator.Send(new CreateIntegrationEventCommand()).GetAwaiter().GetResult());
+    public Task CreateIntegrationEvent(CancellationToken ct) =>
+        mediator.Send(new CreateIntegrationEventCommand(), ct);
 }
-

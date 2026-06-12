@@ -6,7 +6,7 @@ namespace Framework.Application.Jobs;
 
 public class JobLoggingMiddleware<TJob>(ILogger<TJob> logger) : IScopedEvaluatorMiddleware
 {
-    public async Task<TResult> EvaluateAsync<TResult>(Func<Task<TResult>> getResult)
+    public async Task<TResult> EvaluateAsync<TResult>(Func<Task<TResult>> getResult, CancellationToken ct)
     {
         try
         {

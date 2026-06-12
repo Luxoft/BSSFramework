@@ -57,7 +57,7 @@ public static class ExecuteSqlExtensions
         }
     }
 
-    public static async Task ExecuteSqlFromFolderAsync(this TestConnectionString connectionString, string folder, CancellationToken ct = default)
+    public static async Task ExecuteSqlFromFolderAsync(this TestConnectionString connectionString, string folder, CancellationToken ct)
     {
         string[] filePaths;
 

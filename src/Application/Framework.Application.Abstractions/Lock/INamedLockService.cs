@@ -4,6 +4,6 @@ namespace Framework.Application.Lock;
 
 public interface INamedLockService
 {
-    Task LockAsync(NamedLock namedLock, LockRole lockRole, CancellationToken cancellationToken = default);
+    Task LockAsync(NamedLock namedLock, LockRole lockRole, CancellationToken ct);
 }
 

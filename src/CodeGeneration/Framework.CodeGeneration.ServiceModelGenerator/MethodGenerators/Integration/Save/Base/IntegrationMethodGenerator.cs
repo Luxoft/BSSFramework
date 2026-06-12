@@ -1,9 +1,7 @@
 ﻿using System.CodeDom;
 
-using Anch.SecuritySystem;
-
-using Framework.BLL;
 using Framework.BLL.Domain.ServiceRole;
+using Framework.BLL.Services;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration;
 using Framework.CodeGeneration.ServiceModelGenerator.Configuration.Integration;
@@ -23,11 +21,10 @@ public abstract class IntegrationMethodGenerator<TConfiguration, TBLLRoleAttribu
 
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
     {
-        yield return evaluateDataExpr.GetContext()
-                                     .ToPropertyReference(nameof(IAuthorizationBLLContextContainer<>.Authorization))
-                                     .ToPropertyReference(nameof(SecuritySystem))
-                                     .ToMethodInvokeExpression(nameof(ISecuritySystem.CheckAccessAsync), this.Configuration.IntegrationSecurityRule)
-                                     .ToExpressionStatement();
+        yield return this.Configuration.Environment.BLLCore.GetSecurityService(evaluateDataExpr.GetContext())
+                         .ToMethodInvokeExpression(
+                             nameof(IRootSecurityService.CheckAccess),
+                             this.Configuration.IntegrationSecurityRule)
+                         .ToExpressionStatement();
     }
 }
-

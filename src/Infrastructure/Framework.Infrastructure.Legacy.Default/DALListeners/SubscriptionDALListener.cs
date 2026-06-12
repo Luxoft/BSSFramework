@@ -9,7 +9,7 @@ namespace Framework.Infrastructure.DALListeners;
 public class SubscriptionDALListener(IConfigurationBLLContext configurationBLLContext, IObjectModificationProcessor subscriptionService)
     : IBeforeTransactionCompletedDALListener
 {
-    public async Task Process(DALChangesEventArgs eventArgs, CancellationToken cancellationToken)
+    public async Task Process(DALChangesEventArgs eventArgs, CancellationToken ct)
     {
         foreach (var targetSystemService in configurationBLLContext.TargetSystemServices.Values)
         {
@@ -17,7 +17,7 @@ public class SubscriptionDALListener(IConfigurationBLLContext configurationBLLCo
             {
                 foreach (var info in targetSystemService.GetObjectModifications(eventArgs.Changes))
                 {
-                    await subscriptionService.ProcessChanged(new ObjectModificationInfoDTO<Guid>(info), cancellationToken);
+                    await subscriptionService.ProcessChanged(new ObjectModificationInfoDTO<Guid>(info), ct);
                 }
             }
         }

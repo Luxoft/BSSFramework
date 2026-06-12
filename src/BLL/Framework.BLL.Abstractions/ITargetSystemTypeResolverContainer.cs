@@ -7,4 +7,3 @@ public interface ITargetSystemTypeResolverContainer
 {
     ITypeResolver<TypeNameIdentity> TypeResolver { get; }
 }
-

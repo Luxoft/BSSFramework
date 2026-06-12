@@ -13,13 +13,14 @@ public class ServiceEvaluator<TService>(IServiceProvider rootServiceProvider) : 
     public async Task<TResult> EvaluateAsync<TResult>(
         DBSessionMode sessionMode,
         UserCredential? userCredential,
-        Func<TService, Task<TResult>> getResult)
+        Func<TService, Task<TResult>> getResult,
+        CancellationToken ct)
     {
         await using var scope = rootServiceProvider.CreateAsyncScope();
 
         return await GetMiddlewares(scope.ServiceProvider, sessionMode, userCredential)
                      .Aggregate()
-                     .EvaluateAsync(async () => await getResult(scope.ServiceProvider.GetRequiredService<TService>()));
+                     .EvaluateAsync(async () => await getResult(scope.ServiceProvider.GetRequiredService<TService>()), ct);
     }
 
     private static IEnumerable<IScopedEvaluatorMiddleware> GetMiddlewares(IServiceProvider serviceProvider, DBSessionMode sessionMode, UserCredential? userCredential)

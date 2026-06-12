@@ -9,6 +9,6 @@ public interface IEventSystem
 
     IDomainObjectEventMetadata DomainObjectEventMetadata { get; }
 
-    Task ForceEventAsync(EventModel eventModel, CancellationToken cancellationToken = default);
+    Task ForceEventAsync(EventModel eventModel, CancellationToken ct);
 }
 

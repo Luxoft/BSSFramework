@@ -8,25 +8,25 @@ namespace Framework.Notification.DTO;
 public class NotificationEventDTO
 {
     [DataMember]
-    public List<NotificationRecipientDTO> Recipients { get; set; }
+    public List<NotificationRecipientDTO> Recipients { get; set; } = [];
 
     [DataMember]
-    public List<NotificationAttachmentDTO> Attachments { get; set; }
+    public List<NotificationAttachmentDTO> Attachments { get; set; } = [];
 
     [DataMember]
-    public string From { get; set; }
+    public string From { get; set; } = null!;
 
     [DataMember]
-    public string FromName { get; set; }
+    public string FromName { get; set; } = null!;
 
     [DataMember]
-    public string Subject { get; set; }
+    public string Subject { get; set; } = null!;
 
     [DataMember]
-    public NotificationMessage Message { get; set; }
+    public NotificationMessage Message { get; set; } = null!;
 
     [DataMember]
-    public NotificationTechnicalInformationDTO TechnicalInformation { get; set; }
+    public NotificationTechnicalInformationDTO TechnicalInformation { get; set; } = null!;
 
     public NotificationEventDTO()
     {

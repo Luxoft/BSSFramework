@@ -144,10 +144,8 @@ public class NotificationCountryTests(IServiceProvider rootServiceProvider) : Te
                 context.Configuration.Logics.DomainObjectModification.Save(fakeModification);
             });
 
-        var configController = this.GetConfigurationControllerEvaluator(DefaultConstants.NOTIFICATION_ADMIN);
-
         // Act
-        var ex = await Record.ExceptionAsync(() => configController.EvaluateAsync(c => c.ProcessModifications(1000, ct)));
+        var ex = await Record.ExceptionAsync(() => this.ProcessModificationsAsync(ct));
 
         // Assert
         var argumentException = Assert.IsType<ArgumentException>(ex);

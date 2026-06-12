@@ -30,7 +30,6 @@ public class TestDataInitializer(
         await mainInitializer.InitializeAsync(ct);
 
         await authManager.For(nameof(TestDataInitializer)).SetAdminRoleAsync(ct);
-        await authManager.For(DefaultConstants.NOTIFICATION_ADMIN).SetRoleAsync(SecurityRole.SystemIntegration, ct);
         await authManager.For(DefaultConstants.INTEGRATION_BUS).SetRoleAsync(SecurityRole.SystemIntegration, ct);
 
         this.FillMainData();

@@ -58,6 +58,16 @@ public abstract class IntegrationTestBase<TBLLContext>(IServiceProvider rootServ
                                       TypeInfoDescription = new TypeInfoDescriptionDTO { Name = mod.DomainType.Name, Namespace = mod.DomainType.Namespace }
                                   }));
 
+    protected virtual async Task<int> ProcessModificationsAsync(CancellationToken ct)
+    {
+        var processSubscriptions = await this.EvaluateAsync(
+            DBSessionMode.Write,
+            context => this.GetConfigurationBLLContext(context).Logics.DomainObjectModification.ProcessAsync(1000, ct),
+            ct);
+
+        return processSubscriptions.GetValue();
+    }
+
     /// <summary>
     /// Отчистка списка модификаций
     /// </summary>

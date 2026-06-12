@@ -53,7 +53,7 @@ public class SubscriptionCustomNotPersistentModelTests(IServiceProvider rootServ
                 bll.Save(country);
             });
 
-        await this.GetConfigurationControllerEvaluator(DefaultConstants.NOTIFICATION_ADMIN).EvaluateAsync(c => c.ProcessModifications(1000, ct));
+        await this.ProcessModificationsAsync(ct);
 
         var notifications = this.GetNotifications();
 

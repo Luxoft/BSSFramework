@@ -235,18 +235,14 @@ public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(root
             c => c.UpdateEmployee(
                 new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = Maybe.Return("1234"), Version = employeeVersion }));
 
-        var restFacade = this.GetConfigurationControllerEvaluator();
-
         // Act
-        var processedModCount = restFacade
-                                .WithImpersonate(DefaultConstants.INTEGRATION_BUS)
-                                .EvaluateAsync(c => c.ProcessModifications(1000, ct));
+        var processedModCount = await this.ProcessModificationsAsync(ct);
 
         // Assert
         var modifications = this.GetModifications();
         var notifications = this.GetNotifications();
 
-        Assert.True(await processedModCount > 0);
+        Assert.True(processedModCount > 0);
 
         Assert.Single(modifications, dto => dto.ModificationType == ModificationType.Save && dto.Identity == employeeIdentity.Id);
         Assert.Single(
@@ -277,7 +273,7 @@ public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(root
         var preProcessedModificationState = restFacade.Evaluate(c => c.GetModificationQueueProcessingState());
         var preProcessedNotificationState = restFacade.Evaluate(c => c.GetNotificationQueueProcessingState());
 
-        await restFacade.WithImpersonate(DefaultConstants.INTEGRATION_BUS).EvaluateAsync(c => c.ProcessModifications(1000, ct));
+        await this.ProcessModificationsAsync(ct);
 
         var postProcessedModificationState = restFacade.Evaluate(c => c.GetModificationQueueProcessingState());
         var postProcessedNotificationState = restFacade.Evaluate(c => c.GetNotificationQueueProcessingState());

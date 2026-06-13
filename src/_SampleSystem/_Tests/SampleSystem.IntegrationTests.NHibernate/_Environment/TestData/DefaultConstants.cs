@@ -143,6 +143,6 @@ public static class DefaultConstants
     /// </summary>
     public static readonly Guid HRDepartment_DEFAULT_HEAD_EMPLOYEE_ID = new("2B2B2B2B-0000-0000-0007-000000000002");
 
-    
+
     public const string INTEGRATION_BUS = "IntegrationBus";
 }

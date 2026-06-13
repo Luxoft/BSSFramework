@@ -20,12 +20,12 @@ public class SubscriptionCustomNotPersistentModelTests(IServiceProvider rootServ
             context =>
             {
                 var country = new Country
-                              {
-                                  Code = Guid.NewGuid().ToString(),
-                                  NameNative = Guid.NewGuid().ToString(),
-                                  Culture = Guid.NewGuid().ToString(),
-                                  Name = Guid.NewGuid().ToString()
-                              };
+                {
+                    Code = Guid.NewGuid().ToString(),
+                    NameNative = Guid.NewGuid().ToString(),
+                    Culture = Guid.NewGuid().ToString(),
+                    Name = Guid.NewGuid().ToString()
+                };
 
                 context.Logics.Country.Save(country);
 

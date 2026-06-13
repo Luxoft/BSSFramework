@@ -34,6 +34,7 @@ public static class ServiceCollectionExtensions
             services.AddSingleton<ISubscriptionResolver, SubscriptionResolver>();
 
             services.AddScoped<ISubscriptionService, SubscriptionService>();
+            services.AddScoped<ISyncSubscriptionService, SyncSubscriptionService>();
 
             services.AddSingleton(new EmployeeInfo<TEmployee>(emailPath.ToPropertyAccessors()));
             services.AddScoped<IEmployeeEmailExtractor, EmployeeEmailExtractor<TEmployee, TPrincipal>>();

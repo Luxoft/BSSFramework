@@ -7,4 +7,3 @@ public interface ISubscriptionService
 {
     IAsyncEnumerable<ITryResult<SubscriptionHeader>> ProcessAsync(DomainObjectVersions versions);
 }
-

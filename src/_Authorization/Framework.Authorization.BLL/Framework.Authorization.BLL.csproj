@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Anch.DependencyInjection" />
     <PackageReference Include="Anch.SecuritySystem.GeneralPermission.Abstractions" />
   </ItemGroup>
 

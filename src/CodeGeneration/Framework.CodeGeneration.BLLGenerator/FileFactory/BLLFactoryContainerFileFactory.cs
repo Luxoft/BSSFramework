@@ -2,11 +2,16 @@
 
 using Anch.Core;
 using Anch.DependencyInjection;
+using Anch.OData.Domain.QueryLanguage;
+using Anch.SecuritySystem;
 
 using Framework.BLL;
+using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLGenerator.Configuration;
 using Framework.FileGeneration.Configuration;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 
@@ -130,30 +135,25 @@ public class BLLFactoryContainerFileFactory<TConfiguration>(TConfiguration confi
 
     private IEnumerable<CodeExpressionStatement> GetRegisterBLLStatements(CodeParameterDeclarationExpression serviceCollectionParameter, Type domainType)
     {
-        var factoryDecl = this.Configuration.Environment.BLLCore.GetCodeTypeReference(domainType, BLLCoreGenerator.FileType.BLLFactoryInterface);
+        var serviceCollectionRef = serviceCollectionParameter.ToVariableReferenceExpression();
 
-        var factoryImpl = this.Configuration.GetCodeTypeReference(domainType, FileType.BLLFactory);
+        var bllDecl = this.Configuration.Environment.BLLCore.GetCodeTypeReference(domainType, BLLCoreGenerator.FileType.BLLInterface);
 
-        var addScopedMethod = typeof(Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions).ToTypeReferenceExpression()
+        var bllFactoryDecl = this.Configuration.Environment.BLLCore.GetCodeTypeReference(domainType, BLLCoreGenerator.FileType.BLLFactoryInterface);
+
+        var bllFactoryImpl = this.Configuration.GetCodeTypeReference(domainType, FileType.BLLFactory);
+
+        var addScopedMethod = typeof(Framework.BLL.DependencyInjection.BllServiceCollectionExtensions).ToTypeReferenceExpression()
                                                                         .ToMethodReferenceExpression(
-                                                                            nameof(Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped),
-                                                                            factoryDecl,
-                                                                            factoryImpl);
+                                                                            nameof(Framework.BLL.DependencyInjection.BllServiceCollectionExtensions.AddBLL),
+                                                                            this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
+                                                                            domainType.ToTypeReference(),
+                                                                            this.Configuration.Environment.GetIdentityType().ToTypeReference(),
+                                                                            bllFactoryDecl,
+                                                                            bllFactoryImpl,
+                                                                            bllDecl);
 
-        yield return serviceCollectionParameter.ToVariableReferenceExpression().ToStaticMethodInvokeExpression(addScopedMethod).ToExpressionStatement();
-
-        var baseFactoryDecl = typeof(ISecurityBLLFactory<,>)
-            .ToTypeReference(
-                typeof(IDefaultSecurityDomainBLLBase<,,>).MakeGenericType(this.Configuration.Environment.PersistentDomainObjectBaseType, domainType, this.Configuration.Environment.GetIdentityType()).ToTypeReference(),
-                domainType.ToTypeReference());
-
-        var addScopedFromMethod = typeof(ServiceCollectionExtensions).ToTypeReferenceExpression()
-            .ToMethodReferenceExpression(
-                nameof(ServiceCollectionExtensions.AddScopedFrom),
-                baseFactoryDecl,
-                factoryDecl);
-
-        yield return serviceCollectionParameter.ToVariableReferenceExpression().ToStaticMethodInvokeExpression(addScopedFromMethod).ToExpressionStatement();
+        yield return serviceCollectionRef.ToStaticMethodInvokeExpression(addScopedMethod).ToExpressionStatement();
     }
 }
 

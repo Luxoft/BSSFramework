@@ -77,98 +77,9 @@ public class DefaultBLLFactoryFileFactory<TConfiguration>(TConfiguration configu
                                },
 
                                implMethod
-                               ////GetCreateBySecurityOperationMethod(),
-                               ////GetCreateBySecurityProviderMethod(),
-                               ////GetCreateBLLSecurityModeMethod()
                        },
             BaseTypes = { baseTypeRef, interfaceBase }
         };
     }
-
-    ////private CodeTypeMember GetCreateBySecurityProviderMethod()
-    ////{
-    ////    var genericDomainTypeRef = new CodeTypeParameter("TDomainObject");
-
-    ////    var securityProvider = typeof(ISecurityProvider<>).ToTypeReference(genericDomainTypeRef.ToTypeReference());
-
-    ////    var securityProviderParameterName = "securityProvider";
-
-
-    ////    var genericDomainTypeRefExpr = genericDomainTypeRef.ToTypeReference();
-
-    ////    var methodName = "Create";
-
-    ////    var resultType = typeof(IDefaultDomainBLLBase<,,>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(), genericDomainTypeRefExpr, this.Configuration.Environment.GetIdentityType().ToTypeReference());
-
-    ////    var throwException = new CodeThrowExceptionStatement(new CodeObjectCreateExpression(new CodeTypeReference(typeof(System.NotImplementedException)), new CodeExpression[] { }));
-
-    ////    return new CodeMemberMethod
-    ////    {
-    ////        Name = methodName,
-    ////        Attributes = MemberAttributes.Public | MemberAttributes.Override,
-    ////        ReturnType = resultType,
-    ////        Statements = { throwException },
-    ////        TypeParameters = { genericDomainTypeRef, },
-    ////        Parameters = { new CodeParameterDeclarationExpression(securityProvider, securityProviderParameterName) }
-    ////    };
-    ////}
-
-
-    ////private CodeTypeMember GetCreateBySecurityOperationMethod()
-    ////{
-    ////    var genericDomainTypeRef = new CodeTypeParameter("TDomainObject");
-
-    ////    var securityOperationModeTypeRef = this.Configuration.Environment.SecurityOperationCodeType.ToTypeReference();
-
-    ////    var securityOperationModeParamName = "securityRule";
-
-
-    ////    var genericDomainTypeRefExpr = genericDomainTypeRef.ToTypeReference();
-
-    ////    var methodName = "Create";
-
-    ////    var resultType = typeof(IDefaultDomainBLLBase<,,>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(), genericDomainTypeRefExpr, this.Configuration.Environment.GetIdentityType().ToTypeReference());
-
-    ////    var throwException = new CodeThrowExceptionStatement(new CodeObjectCreateExpression(new CodeTypeReference(typeof(System.NotImplementedException)), new CodeExpression[] { }));
-
-
-
-    ////    return new CodeMemberMethod
-    ////    {
-    ////        Name = methodName,
-    ////        Attributes = MemberAttributes.Public | MemberAttributes.Override,
-    ////        ReturnType = resultType,
-    ////        Statements = { throwException },
-    ////        TypeParameters = { genericDomainTypeRef, },
-    ////        Parameters = { new CodeParameterDeclarationExpression(securityOperationModeTypeRef, securityOperationModeParamName) }
-    ////    };
-    ////}
-
-    ////private CodeTypeMember GetCreateBLLSecurityModeMethod()
-    ////{
-    ////    var genericDomainTypeRef = new CodeTypeParameter("TDomainObject");
-
-    ////    var bllSecurityModeTypeRef = typeof(SecurityRule).ToTypeReference();
-
-    ////    var bllSecurityModeParamName = "bllSecurityMode";
-
-    ////    var genericDomainTypeRefExpr = genericDomainTypeRef.ToTypeReference();
-
-    ////    var methodName = "Create";
-
-    ////    var resultType = typeof(IDefaultDomainBLLBase<,,>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(), genericDomainTypeRefExpr, this.Configuration.Environment.GetIdentityType().ToTypeReference());
-
-    ////    var throwException = new CodeThrowExceptionStatement(new CodeObjectCreateExpression(new CodeTypeReference(typeof(System.NotImplementedException)), new CodeExpression[] { }));
-    ////    return new CodeMemberMethod
-    ////    {
-    ////        Name = methodName,
-    ////        Attributes = MemberAttributes.Public,
-    ////        ReturnType = resultType,
-    ////        Statements = { throwException },
-    ////        TypeParameters = { genericDomainTypeRef, },
-    ////        Parameters = { new CodeParameterDeclarationExpression(bllSecurityModeTypeRef, bllSecurityModeParamName) }
-    ////    };
-    ////}
-
 }
 

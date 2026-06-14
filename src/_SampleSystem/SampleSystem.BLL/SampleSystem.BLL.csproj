@@ -8,8 +8,6 @@
     <PackageReference Include="Anch.OData.Abstractions" />
 
     <PackageReference Include="Luxoft.Bss.Platform.Events.Abstractions" />
-
-    <PackageReference Include="Anch.DependencyInjection" />
   </ItemGroup>
 
   <ItemGroup>

@@ -31,7 +31,7 @@ public sealed class MetadataSubscriptionSystemServiceTests(IServiceProvider root
         // Assert
         Assert.Empty(errors);
         var notification = Assert.Single(expectedNotifications);
-        Assert.Equal("replayTo@luxoft.com", Assert.Single(notification.Recipients, z => z.Type == RecipientRole.ReplyTo).Name);
+        Assert.Equal("replyTo@luxoft.com", Assert.Single(notification.Recipients, z => z.Type == RecipientRole.ReplyTo).Name);
     }
 
     [AnchFact]

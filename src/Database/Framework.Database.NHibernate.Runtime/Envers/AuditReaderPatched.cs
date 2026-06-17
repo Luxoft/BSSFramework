@@ -87,10 +87,10 @@ public class AuditReaderPatched(AuditConfiguration verCfg, ISession session, ISe
                                      .SetMaxResults(takeCount)
                                      .GetResultList();
 
-        var resultList = from object[] revisionoObject in auditDomainObjects
-                         where revisionoObject[0] is T && revisionoObject[1].GetType().FullName.Contains("AuditRevisionEntity")
-                         let revisionNumber = (long)revisionoObject[1].GetType().GetProperty("Id", typeof(long)).GetValue(revisionoObject[1], [])
-                         select new Tuple<T, long>(revisionoObject[0] as T, revisionNumber);
+        var resultList = from object[] revisionObject in auditDomainObjects
+                         where revisionObject[0] is T && revisionObject[1].GetType().FullName.Contains("AuditRevisionEntity")
+                         let revisionNumber = (long)revisionObject[1].GetType().GetProperty("Id", typeof(long)).GetValue(revisionObject[1], [])
+                         select new Tuple<T, long>(revisionObject[0] as T, revisionNumber);
 
         return resultList.ToList();
     }
@@ -140,8 +140,8 @@ public class AuditReaderPatched(AuditConfiguration verCfg, ISession session, ISe
     private PropertyData GetIdPropertyData(IIdMapper mapper)
     {
         var allFields = mapper.GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic);
-        var idFileInfo = allFields.Single(z => z.FieldType == typeof(PropertyData));
-        return (PropertyData)idFileInfo.GetValue(mapper);
+        var idFieldInfo = allFields.Single(z => z.FieldType == typeof(PropertyData));
+        return (PropertyData)idFieldInfo.GetValue(mapper);
     }
 }
 

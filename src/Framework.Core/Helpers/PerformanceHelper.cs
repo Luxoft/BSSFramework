@@ -11,7 +11,7 @@ public static class PerformanceHelper
     /// Calculates method execution duration (in ms)
     /// </summary>
     /// <param name="action">Action</param>
-    /// <returns>Action duration in miliseconds</returns>
+    /// <returns>Action duration in milliseconds</returns>
     public static long Duration(Action action)
     {
         var stopwatch = new Stopwatch();
@@ -31,7 +31,7 @@ public static class PerformanceHelper
     public static string GetHealthStatus(Action action)
     {
         var duration = Duration(action);
-        return $"Health status is ok. SQL execution time: {duration} miliseconds";
+        return $"Health status is ok. SQL execution time: {duration} milliseconds";
     }
 }
 

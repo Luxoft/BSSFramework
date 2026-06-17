@@ -29,7 +29,7 @@ abstract class DatabaseScriptGeneratorContainer
     {
         if (this.isComplete)
         {
-            throw new ArgumentException("Also builded result script");
+            throw new ArgumentException("Also built result script");
         }
     }
 }

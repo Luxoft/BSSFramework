@@ -23,7 +23,7 @@ public class RepositoryWithoutSecurityTests(IServiceProvider rootServiceProvider
     }
 
     [AnchFact]
-    public async Task GetDataFromUnsecurityRepository_TryLoadWithSecurity_DataLoadFaileds(CancellationToken ct)
+    public async Task GetDataFromUnsecurityRepository_TryLoadWithSecurity_DataLoadFailed(CancellationToken ct)
     {
         // Arrange
         var controllerEvaluator = this.GetControllerEvaluator<NoSecurityController>();

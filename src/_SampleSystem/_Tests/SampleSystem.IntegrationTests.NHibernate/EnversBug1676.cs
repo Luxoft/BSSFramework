@@ -14,7 +14,7 @@ public class EnversBug1676(IServiceProvider rootServiceProvider) : TestBase(root
         decimal version1Norm = 1;
         decimal version2Norm = 2;
 
-        var locaitionId = Guid.NewGuid();
+        var locationId = Guid.NewGuid();
 
         // Act
         this.EvaluateWrite(
@@ -25,7 +25,7 @@ public class EnversBug1676(IServiceProvider rootServiceProvider) : TestBase(root
                                    Name = "test"
                                };
 
-                               context.Logics.Location1676.Insert(location, locaitionId);
+                               context.Logics.Location1676.Insert(location, locationId);
 
                                var coefficient = new Coefficient1676() { NormCoefficient = version1Norm };
                                coefficient.Location = location;
@@ -35,7 +35,7 @@ public class EnversBug1676(IServiceProvider rootServiceProvider) : TestBase(root
         this.EvaluateWrite(
                            context =>
                            {
-                               var location = context.Logics.Location1676.GetById(locaitionId);
+                               var location = context.Logics.Location1676.GetById(locationId);
                                location.Name = location.Name + "NextName";
                                context.Logics.Default.Create<Location1676>().Save(location);
                            });
@@ -43,7 +43,7 @@ public class EnversBug1676(IServiceProvider rootServiceProvider) : TestBase(root
         this.EvaluateWrite(
                            context =>
                            {
-                               var location = context.Logics.Location1676.GetById(locaitionId);
+                               var location = context.Logics.Location1676.GetById(locationId);
                                location.Name = location.Name + "NextName";
                                location.Coefficient.NormCoefficient = version2Norm;
 
@@ -54,7 +54,7 @@ public class EnversBug1676(IServiceProvider rootServiceProvider) : TestBase(root
         this.EvaluateWrite(
                            context =>
                            {
-                               var location = context.Logics.Location1676.GetById(locaitionId);
+                               var location = context.Logics.Location1676.GetById(locationId);
                                location.Name = location.Name + "NextName";
                                context.Logics.Default.Create<Location1676>().Save(location);
                            });
@@ -63,20 +63,20 @@ public class EnversBug1676(IServiceProvider rootServiceProvider) : TestBase(root
         this.EvaluateRead(
                           context =>
                           {
-                              var locationRevisions = context.Logics.Location1676.GetObjectRevisions(locaitionId).RevisionInfos.OrderBy(z => z.RevisionNumber).ToList();
+                              var locationRevisions = context.Logics.Location1676.GetObjectRevisions(locationId).RevisionInfos.OrderBy(z => z.RevisionNumber).ToList();
 
                               Assert.Equal(4, locationRevisions.Count);
 
-                              var version1 = context.Logics.Location1676.GetObjectByRevision(locaitionId, locationRevisions[0].RevisionNumber);
+                              var version1 = context.Logics.Location1676.GetObjectByRevision(locationId, locationRevisions[0].RevisionNumber);
                               Assert.Equal(version1Norm, version1.Coefficient.NormCoefficient);
 
-                              var version2 = context.Logics.Location1676.GetObjectByRevision(locaitionId, locationRevisions[1].RevisionNumber);
+                              var version2 = context.Logics.Location1676.GetObjectByRevision(locationId, locationRevisions[1].RevisionNumber);
                               Assert.Equal(version1Norm, version2.Coefficient.NormCoefficient);
 
-                              var version3 = context.Logics.Location1676.GetObjectByRevision(locaitionId, locationRevisions[2].RevisionNumber);
+                              var version3 = context.Logics.Location1676.GetObjectByRevision(locationId, locationRevisions[2].RevisionNumber);
                               Assert.Equal(version2Norm, version3.Coefficient.NormCoefficient);
 
-                              var version4 = context.Logics.Location1676.GetObjectByRevision(locaitionId, locationRevisions[3].RevisionNumber);
+                              var version4 = context.Logics.Location1676.GetObjectByRevision(locationId, locationRevisions[3].RevisionNumber);
                               Assert.Equal(version2Norm, version4.Coefficient.NormCoefficient);
                           });
     }

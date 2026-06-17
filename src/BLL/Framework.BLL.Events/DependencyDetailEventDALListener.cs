@@ -56,10 +56,10 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase>(
         // в общем случае пока сложно написать.
         var allFilteredOrderedValues = allFilteredValues.OrderBy(z => z.Item1.ApplyIndex);
 
-        var proccessedValues = this.ProcessFinalAllFilteredOrderedValues(eventArgs, allFilteredOrderedValues);
+        var processedValues = this.ProcessFinalAllFilteredOrderedValues(eventArgs, allFilteredOrderedValues);
 
         // отсылаем во внешние системы.
-        foreach (var item in proccessedValues)
+        foreach (var item in processedValues)
         {
             var domainObject = (TPersistentDomainObjectBase)item.Item1.Object;
             var domainObjectType = item.Item1.Type;
@@ -92,7 +92,7 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase>(
         }
 
         // потенциальные target-объекты для добавления
-        var targetObjectCanditates = joinItems.SelectMany(
+        var targetObjectCandidates = joinItems.SelectMany(
                                                   z =>
                                                       z.Item1.Value.CreatedItems.Concat(z.Item1.Value.UpdatedItems).Where(
                                                            q => z.Item2.SourceTypeEvent.IsSaveProcessingFunc(q.Object))
@@ -125,7 +125,7 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase>(
                 .SelectMany(z => z.CreatedItems.Concat(z.UpdatedItems).Concat(z.RemovedItems).Select(q => q.Object))
                 .ToHashSet();
 
-        var allAbsentsTargetObjects = targetObjectCanditates.Except(
+        var allAbsentsTargetObjects = targetObjectCandidates.Except(
             allTargetObjects,
             (anon, alwaysObject) => anon.TargetObject.Equals(alwaysObject)).ToList();
 

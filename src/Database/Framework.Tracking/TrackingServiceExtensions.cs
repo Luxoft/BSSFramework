@@ -63,15 +63,15 @@ public static class TrackingServiceExtensions
 
             var getItemsFunc = propertyPath.Tail.GetAllElements<TDetail, TRemovedItem>();
 
-            return (trakingService, domainObject) =>
+            return (trackingService, domainObject) =>
                    {
-                       var changes = trakingService.GetChanges(domainObject);
+                       var changes = trackingService.GetChanges(domainObject);
 
                        if (changes.HasChange(propertyExpression))
                        {
-                           var megreResult = trakingService.GetChanges(domainObject).ManyProperty(propertyExpression).ToMergeResult();
+                           var mergeResult = trackingService.GetChanges(domainObject).ManyProperty(propertyExpression).ToMergeResult();
 
-                           return megreResult.RemovingItems.Pipe(getItemsFunc);
+                           return mergeResult.RemovingItems.Pipe(getItemsFunc);
                        }
                        else
                        {
@@ -89,15 +89,15 @@ public static class TrackingServiceExtensions
 
             var getSubSourceFunc = InternalHelper<TPersistentDomainObjectBase, TDetail, TRemovedItem>.SourceFunc;
 
-            return (trakingService, domainObject) =>
+            return (trackingService, domainObject) =>
                    {
-                       var changes = trakingService.GetChanges(domainObject);
+                       var changes = trackingService.GetChanges(domainObject);
 
                        if (changes.HasChange(propertyExpression))
                        {
-                           var megreResult = trakingService.GetChanges(domainObject).ManyProperty(propertyExpression).ToMergeResult();
+                           var mergeResult = trackingService.GetChanges(domainObject).ManyProperty(propertyExpression).ToMergeResult();
 
-                           return megreResult.CombineItems.Select(t => t.Item2).SelectMany(detail => getSubSourceFunc(trakingService, detail));
+                           return mergeResult.CombineItems.Select(t => t.Item2).SelectMany(detail => getSubSourceFunc(trackingService, detail));
                        }
                        else
                        {

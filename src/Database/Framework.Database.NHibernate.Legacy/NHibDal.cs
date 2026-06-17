@@ -155,14 +155,14 @@ public class NHibDal<TDomainObject, TIdent>(INHibSession session, IAsyncDal<TDom
         foreach (var queryResult in queryResults.Cast<object[]>())
         {
             var domainObject = (TDomainObject)queryResult[0];
-            var auditRevisionEntiry = (AuditRevisionEntity)queryResult[1];
+            var auditRevisionEntity = (AuditRevisionEntity)queryResult[1];
             new PropertyRevision<TIdent, TProperty>(
                 result,
                 getPropertyFunc(domainObject),
                 AuditRevisionType.Modified,
-                auditRevisionEntiry.Author,
-                auditRevisionEntiry.RevisionDate,
-                auditRevisionEntiry.Id);
+                auditRevisionEntity.Author,
+                auditRevisionEntity.RevisionDate,
+                auditRevisionEntity.Id);
         }
 
         return result;

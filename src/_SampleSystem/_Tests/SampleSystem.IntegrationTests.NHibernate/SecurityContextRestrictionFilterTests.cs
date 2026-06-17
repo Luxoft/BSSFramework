@@ -109,7 +109,7 @@ public class SecurityContextRestrictionFilterTests(IServiceProvider rootServiceP
         await this.AuthManager.For(this.employee.Id).SetRoleAsync(DefaultSecurityRole, ct);
 
         // Act
-        var accesors = await this.EvaluateAsync(DBSessionMode.Read, this.employee.Id,
+        var accessors = await this.EvaluateAsync(DBSessionMode.Read, this.employee.Id,
                                      async ctx =>
                                      {
                                          var bu = ctx.Logics.BusinessUnit.GetById(this.buWithAllowedFilter.Id, true)!;
@@ -122,7 +122,7 @@ public class SecurityContextRestrictionFilterTests(IServiceProvider rootServiceP
                                      }, ct);
 
         // Assert
-        Assert.Contains(this.employeeLogin, accesors);
+        Assert.Contains(this.employeeLogin, accessors);
     }
 
     [AnchFact]
@@ -132,7 +132,7 @@ public class SecurityContextRestrictionFilterTests(IServiceProvider rootServiceP
         await this.AuthManager.For(this.employee.Id).SetRoleAsync(new SampleSystemTestPermission(DefaultSecurityRole) { BusinessUnits = [this.defaultBu, this.buWithAllowedFilter] }, ct);
 
         // Act
-        var accesors = await this.EvaluateAsync(DBSessionMode.Read, this.employee.Id,
+        var accessors = await this.EvaluateAsync(DBSessionMode.Read, this.employee.Id,
                                                 async ctx =>
                                                 {
                                                     var bu = ctx.Logics.BusinessUnit.GetById(this.buWithAllowedFilter.Id, true)!;
@@ -145,7 +145,7 @@ public class SecurityContextRestrictionFilterTests(IServiceProvider rootServiceP
                                                 }, ct);
 
         // Assert
-        Assert.Contains(this.employeeLogin, accesors);
+        Assert.Contains(this.employeeLogin, accessors);
     }
 
     [AnchFact]
@@ -155,7 +155,7 @@ public class SecurityContextRestrictionFilterTests(IServiceProvider rootServiceP
         await this.AuthManager.For(this.employee.Id).SetRoleAsync(new SampleSystemTestPermission(DefaultSecurityRole) { BusinessUnits = [this.defaultBu, this.buWithAllowedFilter] }, ct);
 
         // Act
-        var accesors = await this.EvaluateAsync(DBSessionMode.Read, this.employee.Id,
+        var accessors = await this.EvaluateAsync(DBSessionMode.Read, this.employee.Id,
                                           async ctx =>
                                           {
                                               var bu = ctx.Logics.BusinessUnit.GetById(this.defaultBu.Id, true)!;
@@ -169,7 +169,7 @@ public class SecurityContextRestrictionFilterTests(IServiceProvider rootServiceP
                                           ct);
 
         // Assert
-        Assert.DoesNotContain(this.employeeLogin, accesors);
+        Assert.DoesNotContain(this.employeeLogin, accessors);
     }
 }
 

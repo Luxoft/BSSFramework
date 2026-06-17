@@ -43,8 +43,8 @@ public static class ReferenceTypeFieldMetadataExtension
     public static string GetForeignKeyName(this ListTypeFieldMetadata source)
     {
         var assemblyMetadata = source.DomainTypeMetadata.AssemblyMetadata;
-        var allReferancies = assemblyMetadata.DomainTypes.SelectMany(z => z.ReferenceFields);
-        var reference = allReferancies.Single(z => z.FromType == source.ElementType && z.ToType == source.DomainTypeMetadata.DomainType);
+        var allReferences = assemblyMetadata.DomainTypes.SelectMany(z => z.ReferenceFields);
+        var reference = allReferences.Single(z => z.FromType == source.ElementType && z.ToType == source.DomainTypeMetadata.DomainType);
         return reference.GetForeignKeyName();
     }
     public static string GetSqlReferenceColumnName(this ReferenceTypeFieldMetadata source)

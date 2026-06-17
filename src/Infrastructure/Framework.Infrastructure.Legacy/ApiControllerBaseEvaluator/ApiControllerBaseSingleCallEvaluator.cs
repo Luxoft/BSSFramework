@@ -15,7 +15,7 @@ public class ApiControllerBaseSingleCallEvaluator<TBLLContext, TMappingService>(
     {
         if (this.evaluateInvoked)
         {
-            throw new Exception($"Allowed single evaluate. For multiply session DON'T use this method. Use {nameof(IContextEvaluator<,>)}");
+            throw new Exception($"Allowed single evaluate. For multiple session DON'T use this method. Use {nameof(IContextEvaluator<,>)}");
         }
 
         this.evaluateInvoked = true;

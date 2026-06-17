@@ -18,7 +18,7 @@ internal static class RevisionTypeExtension
             case RevisionType.Added: return AuditRevisionType.Added;
             case RevisionType.Modified: return AuditRevisionType.Modified;
             case RevisionType.Deleted: return AuditRevisionType.Deleted;
-            default: throw new ArgumentException($"unknow {source}");
+            default: throw new ArgumentException($"unknown {source}");
         }
     }
 }

@@ -43,9 +43,9 @@ public class AuditTests(IServiceProvider rootServiceProvider) : TestBase(rootSer
         }
 
         // Assert
-        var actualRevesionCount = employeeAuditController.Evaluate(c => c.GetEmployeeRevisions(employeeIdentity));
+        var actualRevisionCount = employeeAuditController.Evaluate(c => c.GetEmployeeRevisions(employeeIdentity));
 
-        Assert.Equal(testCount + 1, actualRevesionCount.RevisionInfos.Count());
+        Assert.Equal(testCount + 1, actualRevisionCount.RevisionInfos.Count());
     }
 
     [Fact]
@@ -168,7 +168,7 @@ public class AuditTests(IServiceProvider rootServiceProvider) : TestBase(rootSer
     }
 
     [Fact]
-    public void GetObjectPropertyRevisions_CheckFirstRevisioins_HasAddedState()
+    public void GetObjectPropertyRevisions_CheckFirstRevisions_HasAddedState()
     {
         // Act
         var employeeController = this.MainWebApi.Employee;
@@ -213,7 +213,7 @@ public class AuditTests(IServiceProvider rootServiceProvider) : TestBase(rootSer
     }
 
     [Fact]
-    public void GetObjectPropertyRevisions_CheckAfterFirstRevisioins_AllModifiedState()
+    public void GetObjectPropertyRevisions_CheckAfterFirstRevisions_AllModifiedState()
     {
         // Act
         var employeeController = this.MainWebApi.Employee;
@@ -260,10 +260,10 @@ public class AuditTests(IServiceProvider rootServiceProvider) : TestBase(rootSer
 
 
     [Fact]
-    public void CrateNewBu_AuditBuLoadedFromCustomMapping()
+    public void CreateNewBu_AuditBuLoadedFromCustomMapping()
     {
         // Arrange
-        var testUser = nameof(this.CrateNewBu_AuditBuLoadedFromCustomMapping);
+        var testUser = nameof(this.CreateNewBu_AuditBuLoadedFromCustomMapping);
         this.AuthManager.For(testUser).LoginAs();
 
         // Act

@@ -9,7 +9,7 @@ namespace Framework.Database.NHibernate.DBGenerator;
 
 internal static class DbGeneratorExtensions
 {
-    public static void ClearIndexies(this Table source)
+    public static void ClearIndexes(this Table source)
     {
         var indexNames = source.Indexes.Select(z => z).OrderBy(z => IndexKeyType.DriPrimaryKey == z.IndexKeyType).ToList();
         indexNames.Foreach(z => z.Drop());

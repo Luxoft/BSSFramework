@@ -82,21 +82,21 @@ public class AuditDTOModelFileGenerator<TConfiguration>(TConfiguration configura
 
         foreach (var propertyInfo in allPropertyInfoCollection)
         {
-            foreach (var typeReference in this.GetPropertyCodeTypeRefences(propertyInfo))
+            foreach (var typeReference in this.GetPropertyCodeTypeReferences(propertyInfo))
             {
                 var dtoPropertyChangedType = new CodeTypeReference(this.Configuration.PropertyRevisionTypeName);
                 dtoPropertyChangedType.TypeArguments.Add(typeReference);
 
-                var typeOfCodeExpresson = dtoPropertyChangedType.ToTypeOfExpression();
+                var typeOfCodeExpression = dtoPropertyChangedType.ToTypeOfExpression();
                 var result = new CodeAttributeDeclaration(typeof(KnownTypeAttribute).FullName);
-                result.Self(z => z.Arguments.Add(new CodeAttributeArgument(typeOfCodeExpresson)));
+                result.Self(z => z.Arguments.Add(new CodeAttributeArgument(typeOfCodeExpression)));
 
                 yield return result;
             }
         }
     }
 
-    private IEnumerable<CodeTypeReference> GetPropertyCodeTypeRefences(Type propertyType)
+    private IEnumerable<CodeTypeReference> GetPropertyCodeTypeReferences(Type propertyType)
     {
         if (this.Configuration.IsDomainObject(propertyType))
         {

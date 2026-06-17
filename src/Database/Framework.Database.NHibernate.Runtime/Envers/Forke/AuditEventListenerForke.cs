@@ -68,7 +68,7 @@ public class AuditEventListenerForke : AuditEventListener
 
                 if (!Toolz.EntitiesEqual(session, oldValue, newValue))
                 {
-                    // We have to generate changes both in the old collection (size decreses) and new collection
+                    // We have to generate changes both in the old collection (size decreases) and new collection
                     // (size increases).
                     if (newValue != null)
                     {

@@ -36,7 +36,7 @@ internal class RemoveLinkedObjectSqlProcessor : ISqlExceptionProcessor
 
             var persistentClasses = context.GetPersistentClass(context.CreateTableDescription(string.Empty, database, tableName));
 
-            var pairs = persistentClasses.SelectMany(z => z.Table.ForeignKeyIterator.Select(q => new { FromPersistentClass = z, ForeighKey = q })).ToList();
+            var pairs = persistentClasses.SelectMany(z => z.Table.ForeignKeyIterator.Select(q => new { FromPersistentClass = z, ForeignKey = q })).ToList();
 
             if (!pairs.Any())
             {
@@ -44,8 +44,8 @@ internal class RemoveLinkedObjectSqlProcessor : ISqlExceptionProcessor
             }
 
             var linkedTables = pairs
-                               .Where(z => string.Equals(columnNameWithBrackets, z.ForeighKey.Columns.FirstOrDefault()?.Name, StringComparison.CurrentCultureIgnoreCase))
-                               .Select(z => new { PersistentClass = z.FromPersistentClass, z.ForeighKey.ReferencedTable })
+                               .Where(z => string.Equals(columnNameWithBrackets, z.ForeignKey.Columns.FirstOrDefault()?.Name, StringComparison.CurrentCultureIgnoreCase))
+                               .Select(z => new { PersistentClass = z.FromPersistentClass, z.ForeignKey.ReferencedTable })
                                .ToList();
 
             var linkedTable = linkedTables.OrderBy(z => z.PersistentClass.MappedClass.GetCustomAttributes<TableAttribute>().Any() ? 1 : 0).FirstOrDefault();

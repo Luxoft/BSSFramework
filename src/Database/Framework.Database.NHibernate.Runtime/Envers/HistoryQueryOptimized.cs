@@ -11,8 +11,8 @@ namespace Framework.Database.NHibernate.Envers;
 public class HistoryQueryOptimized<TEntity, TRevisionEntity, TIdentity>(
     AuditConfiguration auditConfiguration,
     IAuditReaderImplementor versionsReader,
-    bool includesDeletations)
-    : AbstractRevisionsQuery<IIdentityRevisionEntityInfo<TRevisionEntity, TIdentity>>(auditConfiguration, versionsReader, includesDeletations, typeof(TEntity).FullName)
+    bool includesDeletions)
+    : AbstractRevisionsQuery<IIdentityRevisionEntityInfo<TRevisionEntity, TIdentity>>(auditConfiguration, versionsReader, includesDeletions, typeof(TEntity).FullName)
 {
     private readonly AuditConfiguration verCfg = auditConfiguration;
 

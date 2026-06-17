@@ -52,11 +52,11 @@ public class ScriptEngineService
         }
 
 
-        var assembliNames =
+        var assemblyNames =
                 types
                         .SelectMany(z => z.Assembly.GetReferencedAssemblies().Concat([z.Assembly.GetName()])).Distinct().ToArray();
 
-        var assemblyPaths = assembliNames.Select(Assembly.Load).ToList();
+        var assemblyPaths = assemblyNames.Select(Assembly.Load).ToList();
 
 
         var usingNamespaces =
@@ -121,7 +121,7 @@ public class ScriptEngineService
 
     private IEnumerable<ParameterExpression> GetInputFuncParameters(IEnumerable<string> parameterNames, MethodTypeInfo methodInfo)
     {
-        var genericParameterSequencies =
+        var genericParameterSequences =
                 methodInfo
                         .InputTypes
                         .Select((parameterType, index) => new { ParameterType = parameterType, Index = index })
@@ -135,16 +135,16 @@ public class ScriptEngineService
         if (!expressionParameterNames.Any())
         {
             expressionParameterNames =
-                    genericParameterSequencies.Select((_, index) => new { Name = string.Empty, Index = index }).ToList();
+                    genericParameterSequences.Select((_, index) => new { Name = string.Empty, Index = index }).ToList();
         }
 
 
-        if (genericParameterSequencies.Count != expressionParameterNames.Count)
+        if (genericParameterSequences.Count != expressionParameterNames.Count)
         {
             throw new ArgumentException("Amount generic parameters not equal input parameters in expression");
         }
 
-        return genericParameterSequencies.Join(expressionParameterNames, z => z.Index, z => z.Index,
+        return genericParameterSequences.Join(expressionParameterNames, z => z.Index, z => z.Index,
                                                (parameter, name) =>
                                                        Expression.Parameter(parameter.ParameterType, name.Name));
 

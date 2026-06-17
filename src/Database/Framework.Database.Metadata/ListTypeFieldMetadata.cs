@@ -50,7 +50,7 @@ public class ListTypeFieldMetadata : FieldMetadata
 
             if (attributes.Count > 1)
             {
-                throw new ArgumentException("Declare more then one set immuble indentifier");
+                throw new ArgumentException("Declare more then one set immutable identifier");
             }
 
             if (!attributes.Any())

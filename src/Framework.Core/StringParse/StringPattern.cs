@@ -9,7 +9,7 @@ public class StringPattern
     private string start;
     private string end;
 
-    private string afterThatWorlds;
+    private string afterThatWords;
 
     public StringPattern()
     {
@@ -18,7 +18,7 @@ public class StringPattern
 
     public string End => this.end ?? this.defaultEnd;
 
-    public string AfterThatWorlds => this.afterThatWorlds;
+    public string AfterThatWorlds => this.afterThatWords;
 
     public StringPattern WithStart(char start) => this.WithStart(new string(new[] { start }));
 
@@ -34,7 +34,7 @@ public class StringPattern
     }
     public StringPattern WithAfterThatWords(string words)
     {
-        this.SetValue(words, () => this.afterThatWorlds, value => this.afterThatWorlds = value, MethodBase.GetCurrentMethod());
+        this.SetValue(words, () => this.afterThatWords, value => this.afterThatWords = value, MethodBase.GetCurrentMethod());
         return this;
     }
 
@@ -42,7 +42,7 @@ public class StringPattern
     {
         if (string.IsNullOrEmpty(value))
         {
-            throw new ArgumentException($"Setted value can't be empty. Method:{methodInfo.Name}");
+            throw new ArgumentException($"Set value can't be empty. Method:{methodInfo.Name}");
         }
         if (!string.IsNullOrEmpty(getValue()))
         {

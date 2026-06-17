@@ -4,7 +4,7 @@ using MediatR;
 
 using SampleSystem.Domain.TestForceAbstract;
 
-namespace SampleSystem.BLL.Command.CreateClassA.Intergation;
+namespace SampleSystem.BLL.Command.CreateClassA.Integration;
 
 public record ClassACreatedEventHandler(IRepositoryFactory<ClassA> Repository) : INotificationHandler<ClassACreatedEvent>
 {

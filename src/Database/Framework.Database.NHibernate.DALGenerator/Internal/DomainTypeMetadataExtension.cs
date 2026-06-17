@@ -11,12 +11,12 @@ internal static class DomainTypeMetadataExtension
 
     public static IEnumerable<ReferenceTypeFieldMetadata> GetOneToOneReference(this DomainTypeMetadata domainTypeMetadata)
     {
-        var referencies = domainTypeMetadata.ReferenceFields;
-        var toTypes = referencies.Select(z => z.ToType).Distinct();
-        var toDomainTypeMetadataReferencies = domainTypeMetadata.AssemblyMetadata.DomainTypes
+        var references = domainTypeMetadata.ReferenceFields;
+        var toTypes = references.Select(z => z.ToType).Distinct();
+        var toDomainTypeMetadataReferences = domainTypeMetadata.AssemblyMetadata.DomainTypes
                                                                 .Join(toTypes, z => z.DomainType, z => z, (d, t) => d.ReferenceFields).SelectMany(z => z).Distinct();
 
-        return referencies.Join(toDomainTypeMetadataReferencies, z => z.FromType, z => z.ToType, (f, s) => f);
+        return references.Join(toDomainTypeMetadataReferences, z => z.FromType, z => z.ToType, (f, s) => f);
     }
 
     public static FieldMetadata GetIdentityField(this DomainTypeMetadata source)

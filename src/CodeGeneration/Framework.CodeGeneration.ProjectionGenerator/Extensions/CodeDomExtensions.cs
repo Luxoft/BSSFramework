@@ -192,12 +192,12 @@ internal static class CodeDomExtensions
     {
         if (attr == null) throw new ArgumentNullException(nameof(attr));
 
-        var canInsertArrb = new CodeAttributeArgument
+        var canInsertArg = new CodeAttributeArgument
         { Name = "CanInsert", Value = attr.CanInsert.ToPrimitiveExpression() };
-        var canUpdateArrb = new CodeAttributeArgument
+        var canUpdateArg = new CodeAttributeArgument
         { Name = "CanUpdate", Value = attr.CanUpdate.ToPrimitiveExpression() };
 
-        return typeof(MappingPropertyAttribute).ToTypeReference().ToAttributeDeclaration(new[] { canInsertArrb, canUpdateArrb });
+        return typeof(MappingPropertyAttribute).ToTypeReference().ToAttributeDeclaration(new[] { canInsertArg, canUpdateArg });
     }
 
     public static CodeAttributeDeclaration ToAttributeDeclaration(this InlineBaseTypeMappingAttribute mappingAttr)

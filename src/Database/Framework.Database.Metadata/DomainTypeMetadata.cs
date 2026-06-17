@@ -86,7 +86,7 @@ public class DomainTypeMetadata
     {
         if (this.isCollected)
         {
-            throw new ArgumentException($"{this.GetType().Name} has initialed state. Change object in this state impossible");
+            throw new ArgumentException($"{this.GetType().Name} has initialized state. Change object in this state impossible");
         }
     }
 
@@ -103,7 +103,7 @@ public class DomainTypeMetadata
         if (grouped.Any(z => z.UniqueIndexMetadataCollection.Count > 1))
         {
             throw new ArgumentException(
-                                        $"UniqueIndexSet has more then one names:'{result.GroupBy(z => z.Name).Where(z => z.Skip(1).Any()).Select(z => z.Key).Join(",")}' for '{this.DomainType.Name}' domain type");
+                                        $"UniqueIndexSet has more than one names:'{result.GroupBy(z => z.Name).Where(z => z.Skip(1).Any()).Select(z => z.Key).Join(",")}' for '{this.DomainType.Name}' domain type");
         }
 
         return grouped.Select(z => z.UniqueIndexMetadataCollection.First()).ToList();

@@ -34,7 +34,7 @@ public abstract class IntegrationSchemaControllerBase(
         var contentType = MediaTypeNames.Application.Octet;
 
         var fileName =
-                $"KnowTypes {xsdNamespace} ({this.timeProvider.GetToday().ToString("dd MMM yyyy", CultureInfo.InvariantCulture)}).zip";
+                $"KnownTypes {xsdNamespace} ({this.timeProvider.GetToday().ToString("dd MMM yyyy", CultureInfo.InvariantCulture)}).zip";
 
         return this.File(content, contentType, fileName);
     }

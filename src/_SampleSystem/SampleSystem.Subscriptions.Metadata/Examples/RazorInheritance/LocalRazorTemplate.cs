@@ -1,6 +1,6 @@
 ﻿using Framework.Subscriptions.Metadata;
 
-namespace SampleSystem.Subscriptions.Metadata.Examples.RazerInheritance;
+namespace SampleSystem.Subscriptions.Metadata.Examples.RazorInheritance;
 
 public abstract class LocalRazorTemplate<T> : RazorTemplate<T>
     where T : class

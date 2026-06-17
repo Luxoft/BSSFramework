@@ -40,9 +40,9 @@ public static class FactoryExtensions
         }
         else
         {
-            var intance = factory.Create();
+            var instance = factory.Create();
 
-            return new FuncFactory<T>(() => intance);
+            return new FuncFactory<T>(() => instance);
         }
     }
 

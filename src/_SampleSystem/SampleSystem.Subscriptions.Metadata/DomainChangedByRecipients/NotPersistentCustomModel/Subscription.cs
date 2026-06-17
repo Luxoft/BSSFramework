@@ -41,7 +41,7 @@ public class Subscription : Subscription<Domain.Directories.Country, CustomNotif
         DomainObjectVersions<Domain.Directories.Country> versions,
         [EnumeratorCancellation] CancellationToken ct = default)
     {
-        yield return new("replayTo@luxoft.com", await versions.ChangeDomainObjectAsync(c => this.ConvertToRenderingObject(serviceProvider, c, ct)));
+        yield return new("replyTo@luxoft.com", await versions.ChangeDomainObjectAsync(c => this.ConvertToRenderingObject(serviceProvider, c, ct)));
     }
 
     public override async IAsyncEnumerable<Attachment> GetAttachments(IServiceProvider serviceProvider, DomainObjectVersions<CustomNotificationModel> versions)

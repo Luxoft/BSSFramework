@@ -16,7 +16,7 @@ public static class Extensions
         var integrationVersionProperty = domainType
                                          .GetProperties(BindingFlags.Public | BindingFlags.Instance)
                                          .Where(z => z.HasAttribute<IntegrationVersionAttribute>())
-                                         .SingleOrDefault((properties) => new ArgumentException($"Type:{domainType} has more then one property with {nameof(IntegrationVersionAttribute)} attribute. FindedProperties:{properties.Select(z => z.Name).Join(",")}"));
+                                         .SingleOrDefault((properties) => new ArgumentException($"Type:{domainType} has more than one property with {nameof(IntegrationVersionAttribute)} attribute. FoundProperties:{properties.Select(z => z.Name).Join(",")}"));
 
         if (null != integrationVersionProperty && integrationVersionProperty.IsIgnored(DTORole.Integration))
         {

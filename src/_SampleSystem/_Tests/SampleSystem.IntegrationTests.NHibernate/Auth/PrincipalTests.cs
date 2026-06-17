@@ -40,7 +40,7 @@ public class PrincipalTests(IServiceProvider rootServiceProvider) : TestBase(roo
     }
 
     [Fact]
-    public void SavePrincipal_CheckCreateon()
+    public void SavePrincipal_CheckCreation()
     {
         // Arrange
         var authorizationController = this.GetAuthControllerEvaluator();

@@ -70,7 +70,7 @@ public static class Extensions
         if (baseTypes.Count > 1)
         {
             throw new InvalidOperationException($"{nameof(targetNamespace)}('{targetNamespace.Name}') and {nameof(addedNamespaces)}('{addedNamespaces.Select(z => z.Name).Join(",")}') must have one base type. "
-                                                + $"Funded base types of {nameof(targetNamespace)} and {nameof(addedNamespaces)}' are '{baseTypes.Select(z => z.FullName).Join(",")}'");
+                                                + $"Found base types of {nameof(targetNamespace)} and {nameof(addedNamespaces)}' are '{baseTypes.Select(z => z.FullName).Join(",")}'");
         }
 
         var targetMethods = targetNamespace.Types.Cast<CodeTypeDeclaration>().SelectMany(z => z.Members.OfType<CodeMemberMethod>()).ToArray();
@@ -122,7 +122,7 @@ public static class Extensions
 
                 if (null == mainRenderedData)
                 {
-                    throw new ArgumentException($"Main domain object controller must be exists for combine projections. Finded Projection:{valueTuple.otherGenerators.Select(z => z.domainType.Name).Join(',')}");
+                    throw new ArgumentException($"Main domain object controller must be exists for combine projections. Found Projection:{valueTuple.otherGenerators.Select(z => z.domainType.Name).Join(',')}");
                 }
 
                 var resultNameSpace = mainRenderedData.CombineMethods(valueTuple.otherGenerators.Select(q => q.renderedData).ToList(), suffix);

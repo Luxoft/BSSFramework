@@ -125,12 +125,12 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
                                                                                             {
                                                                                                 if (pair.Key.ContainsGenericParameters)
                                                                                                 {
-                                                                                                    // with explicit method implement not need contraints of class generics
-                                                                                                    var contraints = pair.Key.GetGenericParameterConstraints()
+                                                                                                    // with explicit method implement not need constraints of class generics
+                                                                                                    var constraints = pair.Key.GetGenericParameterConstraints()
                                                                                                             .Select(fixGenericType)
                                                                                                             .Partial(t => t.IsInterface, (interfaceTypes, classTypes) => new { InterfaceTypes = interfaceTypes, ClassTypes = classTypes });
 
-                                                                                                    var baseTypeConstraint = contraints.ClassTypes.Aggregate(default(Type), (current, tryNested) =>
+                                                                                                    var baseTypeConstraint = constraints.ClassTypes.Aggregate(default(Type), (current, tryNested) =>
                                                                                                             current == null || current.IsAssignableFrom(tryNested) ? tryNested : current);
 
                                                                                                     if (baseTypeConstraint != null && (baseTypeConstraint.DeclaringType == null || baseTypeConstraint.DeclaringType == typeBuilder))
@@ -138,7 +138,7 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
                                                                                                         pair.Value.SetBaseTypeConstraint(baseTypeConstraint);
                                                                                                     }
 
-                                                                                                    pair.Value.SetInterfaceConstraints(contraints.InterfaceTypes.ToArray());
+                                                                                                    pair.Value.SetInterfaceConstraints(constraints.InterfaceTypes.ToArray());
 
                                                                                                     pair.Value.SetGenericParameterAttributes(pair.Key.GenericParameterAttributes);
                                                                                                 }

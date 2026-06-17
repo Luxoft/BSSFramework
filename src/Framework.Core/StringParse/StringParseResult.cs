@@ -5,10 +5,10 @@ namespace Framework.Core.StringParse;
 [Obsolete("v10 This method will be protected in future")]
 public class StringParseResult
 {
-    private readonly Match math;
+    private readonly Match match;
 
-    internal StringParseResult(Match math) => this.math = math;
+    internal StringParseResult(Match match) => this.match = match;
 
-    public string GetResultFor(MatchResultDescription mathResultDescription) => this.math.Groups[mathResultDescription.ResultIndex].Value;
+    public string GetResultFor(MatchResultDescription matchResultDescription) => this.match.Groups[matchResultDescription.ResultIndex].Value;
 }
 

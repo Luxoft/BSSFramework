@@ -26,7 +26,7 @@ public class EmployeeUpdateSubscription : Subscription<Domain.Employee.Employee,
 
     public override async IAsyncEnumerable<NotificationMessageGenerationInfo<Domain.Employee.Employee>> GetReplyTo(IServiceProvider _, DomainObjectVersions<Domain.Employee.Employee> versions)
     {
-        yield return new("replayTo@luxoft.com", versions);
+        yield return new("replyTo@luxoft.com", versions);
     }
 }
 

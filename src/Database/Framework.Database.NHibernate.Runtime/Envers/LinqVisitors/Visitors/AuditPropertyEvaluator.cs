@@ -4,7 +4,7 @@ using NHibernate.Envers.Query;
 
 namespace Framework.Database.NHibernate.Envers.LinqVisitors.Visitors;
 
-internal class AuditPropertyEvalutor : ExpressionVisitor
+internal class AuditPropertyEvaluator : ExpressionVisitor
 {
     private readonly Immutable<global::NHibernate.Envers.Query.Criteria.AuditProperty> result = new();
 

@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SampleSystem.Subscriptions.Metadata.Examples.RazerInheritance
+namespace SampleSystem.Subscriptions.Metadata.Examples.RazorInheritance
 {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     public partial class _Examples_RazorInheritance_MessageTemplate_cshtml : LocalRazorTemplate<Domain.Employee.Employee>

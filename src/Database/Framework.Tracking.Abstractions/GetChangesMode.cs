@@ -6,7 +6,7 @@
 public enum GetChangesMode
 {
     /// <summary>
-    /// Gets all changes without validation values to be dafault ones. This is default behavior by compatibility reasons
+    /// Gets all changes without validation values to be default ones. This is default behavior by compatibility reasons
     /// </summary>
     Default,
 

@@ -9,7 +9,7 @@ namespace Framework.Database.NHibernate.Audit;
 /// <summary> Setter of Audit properties (<seealso cref="IAuditProperty"/>) into NHibernate domain object state collection
 /// </summary>
 /// <remarks>
-/// Incapsulates logic of searching and setting audit properties inside domain object's NHibernate state collection
+/// Encapsulates logic of searching and setting audit properties inside domain object's NHibernate state collection
 /// </remarks>
 internal sealed partial class AuditPropertiesSetter
 {

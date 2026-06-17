@@ -51,7 +51,7 @@ public struct RevenueDocumentAribaStatus(AribaStatusType type, string descriptio
 
     public static RevenueDocumentAribaStatus CreateDefault() => Create(AribaStatusType.UnSynchronized, string.Empty, null);
 
-    public static RevenueDocumentAribaStatus Create(AribaStatusType status, string desctiption, DateTime? date) => new(status, desctiption, date);
+    public static RevenueDocumentAribaStatus Create(AribaStatusType status, string description, DateTime? date) => new(status, description, date);
 
     public static bool operator !=(RevenueDocumentAribaStatus arg1, RevenueDocumentAribaStatus arg2) => !arg1.Equals(arg2);
 

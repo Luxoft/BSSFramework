@@ -24,7 +24,7 @@ public struct TrackingResult<TDomainObject> : IEnumerable<TrackingProperty>
         this.properties = (modifiedProperties ?? []).ToList();
 
     /// <summary>
-    /// Get the trackingproperty by expression
+    /// Get the tracking property by expression
     /// </summary>
     /// <typeparam name="TProperty">The type of the property.</typeparam>
     /// <param name="propertyExpression">The property expression.</param>

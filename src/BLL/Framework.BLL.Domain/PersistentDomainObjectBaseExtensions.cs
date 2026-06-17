@@ -89,7 +89,7 @@ public static class PersistentDomainObjectBaseExtensions
         return source.GetCollectionValue(propertyExpr)
                      .Match(() => null,
                             v => v,
-                            _ => { throw new Exception($"{typeof(TSource).Name} one-to-one error. To many items in collection {typeof(TProperty).Name}"); });
+                            _ => { throw new Exception($"{typeof(TSource).Name} one-to-one error. Too many items in collection {typeof(TProperty).Name}"); });
     }
 
     public static void SetOneToOne<TSource, TProperty, TIdent>(this TSource source, Expression<Func<TSource, IEnumerable<TProperty>>> propertyExpr, TProperty? newValue)
@@ -105,7 +105,7 @@ public static class PersistentDomainObjectBaseExtensions
 
             if (collection.Count > 1)
             {
-                throw new Exception($"{typeof(TSource).Name} one-to-one error. To many items in collection {typeof(TProperty).Name}");
+                throw new Exception($"{typeof(TSource).Name} one-to-one error. Too many items in collection {typeof(TProperty).Name}");
             }
 
             collection.Clear();

@@ -127,10 +127,10 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration>(IDTOSource<TConfi
                                                                                   .ToMethodInvokeExpression(
                                                                                    "ToList",
                                                                                    sourcePropertyRef,
-                                                                                   new CodeParameterDeclarationExpression { Name = "v" }.Pipe(lamdaParam => new CodeLambdaExpression
+                                                                                   new CodeParameterDeclarationExpression { Name = "v" }.Pipe(lambdaParam => new CodeLambdaExpression
                                                                                        {
-                                                                                               Parameters = { lamdaParam },
-                                                                                               Statements = { getToDomainObjectExpr(lamdaParam.ToVariableReferenceExpression(), elementType, property.IsDetail()) }
+                                                                                               Parameters = { lambdaParam },
+                                                                                               Statements = { getToDomainObjectExpr(lambdaParam.ToVariableReferenceExpression(), elementType, property.IsDetail()) }
                                                                                        })).ToAssignStatement(targetPropertyRef)
                                }
                 };
@@ -152,12 +152,12 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration>(IDTOSource<TConfi
 
                 var removeDetailLambda = this.Configuration.UseRemoveMappingExtension
 
-                                                 ? (CodeExpression)new CodeParameterDeclarationExpression { Name = "detail" }.Pipe(lamdaParam => new CodeLambdaExpression
+                                                 ? (CodeExpression)new CodeParameterDeclarationExpression { Name = "detail" }.Pipe(lambdaParam => new CodeLambdaExpression
                                                  {
-                                                     Parameters = { lamdaParam },
+                                                     Parameters = { lambdaParam },
                                                      Statements =  { typeof(AddRemoveDetailHelper).ToTypeReferenceExpression()
                                                                                      .ToMethodReferenceExpression("RemoveDetail", property.DeclaringType.ToTypeReference(), elementType.ToTypeReference())
-                                                                                     .ToMethodInvokeExpression(this.DomainParameter.ToVariableReferenceExpression(), lamdaParam.ToVariableReferenceExpression())
+                                                                                     .ToMethodInvokeExpression(this.DomainParameter.ToVariableReferenceExpression(), lambdaParam.ToVariableReferenceExpression())
                                                                            }
                                                  })
 

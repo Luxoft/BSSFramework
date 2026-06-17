@@ -88,7 +88,7 @@ public class Project :
     BusinessUnit IDetail<BusinessUnit>.Master => this.BusinessUnit;
 
     /// <summary>
-    /// For notifiactions
+    /// For notifications
     /// </summary>
     /// <returns></returns>
     public virtual string GetProjectTypeName() => throw new NotImplementedException();

@@ -12,12 +12,12 @@ public static class Extensions
 {
     public static IAuditAttributeService GetAuditAttributeService(this IReadOnlyList<MappingSettings> mappingSettings, IEnumerable<PersistentClass> persistentClasses)
     {
-        var monitoriableTypes = mappingSettings
+        var monitorableTypes = mappingSettings
                                 .Select(z => new { MappingSettings = z, Filter = z.AuditTypeFilter })
                                 .SelectMany(z => z.MappingSettings.Types.Select(q => new { Filter = z.Filter, Type = q }))
                                 .ToList();
 
-        var typeToFilter = monitoriableTypes.Where(z => z.Filter.IsAuditedType(z.Type)).ToDictionary(z => z.Type, z => z.Filter);
+        var typeToFilter = monitorableTypes.Where(z => z.Filter.IsAuditedType(z.Type)).ToDictionary(z => z.Type, z => z.Filter);
 
         var types = typeToFilter.Keys.ToList();
 

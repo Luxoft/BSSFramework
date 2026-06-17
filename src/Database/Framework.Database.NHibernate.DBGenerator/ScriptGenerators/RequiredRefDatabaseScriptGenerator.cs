@@ -28,11 +28,11 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
 
         var requiredRefContext = new RequiredRefContext(context);
 
-        this.ProcessRequeredAttribute(requiredRefContext);
+        this.ProcessRequiredAttribute(requiredRefContext);
         this.ProcessMasterRef(requiredRefContext);
         this.ProcessViews(requiredRefContext);
 
-        var createIndexActions = requiredRefContext.RecreateIndexies.Select(z =>
+        var createIndexActions = requiredRefContext.RecreateIndexes.Select(z =>
                                                                             {
                                                                                 var index = new Index(z.Parent, z.Name);
                                                                                 index.IndexKeyType = z.IndexKeyType;
@@ -55,9 +55,9 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
 
         removableViews.Foreach(z => z.Drop());
 
-        requiredRefContext.RequeredColumns.Foreach(z => z.Nullable = false);
+        requiredRefContext.RequiredColumns.Foreach(z => z.Nullable = false);
 
-        requiredRefContext.RequeredColumns.Foreach(z => z.Alter());
+        requiredRefContext.RequiredColumns.Foreach(z => z.Alter());
 
         createIndexActions.Foreach(z => z.Create());
 
@@ -124,7 +124,7 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
 
     private void ProcessViews(RequiredRefContext refContext)
     {
-        foreach (var databaseGrouped in refContext.RequeredColumns.GroupBy(z => ((Table)z.Parent).Parent))
+        foreach (var databaseGrouped in refContext.RequiredColumns.GroupBy(z => ((Table)z.Parent).Parent))
         {
             var database = databaseGrouped.Key;
 
@@ -145,7 +145,7 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
 
                 var filteredResult = result.Where(z => z.Urn.Type != "View").ToList();
 
-                var dependendiesTables = filteredResult.Select(z =>
+                var dependenciesTables = filteredResult.Select(z =>
                                                                {
                                                                    try
                                                                    {
@@ -159,7 +159,7 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
                                                        .Where(z => null != z)
                                                        .ToHashSet();
 
-                if (dependendiesTables.Any(z => affectedTables.Contains(z)))
+                if (dependenciesTables.Any(z => affectedTables.Contains(z)))
                 {
                     refContext.Add(view);
                 }
@@ -167,7 +167,7 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
         }
     }
 
-    private void ProcessRequeredAttribute(RequiredRefContext refContext)
+    private void ProcessRequiredAttribute(RequiredRefContext refContext)
     {
         var context = refContext.Context;
 
@@ -179,22 +179,22 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
                                                            new
                                                            {
                                                                DomainTypeMetadata = z,
-                                                               RequeredFields = z.Fields.Where(q => !(q is ListTypeFieldMetadata))
+                                                               RequiredFields = z.Fields.Where(q => !(q is ListTypeFieldMetadata))
                                                                                      .Where(q => q.Attributes.OfType<RequiredAttribute>().Any()).ToList()
                                                            })
-                                           .SelectMany(z => z.RequeredFields.Select(q => new { DomainTypeMetadata = z.DomainTypeMetadata, RequeredField = q }))
+                                           .SelectMany(z => z.RequiredFields.Select(q => new { DomainTypeMetadata = z.DomainTypeMetadata, RequiredField = q }))
                                            .Where(z => !this.ignoreDomainTypeLinksHash
                                                             .Any(link => link.FromType.IsAssignableFrom(z.DomainTypeMetadata.DomainType)
-                                                                         && link.MemberInfo.PropertyType == z.RequeredField.Type))
+                                                                         && link.MemberInfo.PropertyType == z.RequiredField.Type))
                                            .ToList();
 
         foreach (var domainTypeWithRequiredField in domainTypeWithRequiredFields.Where(z => !z.DomainTypeMetadata.IsView))
         {
             var table = context.GetTable(domainTypeWithRequiredField.DomainTypeMetadata.DomainType);
 
-            var columnNames = MapperFactory.GetMapping(domainTypeWithRequiredField.RequeredField).Select(z => z.Name).ToHashSet();
+            var columnNames = MapperFactory.GetMapping(domainTypeWithRequiredField.RequiredField).Select(z => z.Name).ToHashSet();
 
-            this.ApplyRequered(refContext, table, columnNames);
+            this.ApplyRequired(refContext, table, columnNames);
         }
     }
 
@@ -239,13 +239,13 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
 
             var masterRefColumnName = MapperFactory.GetMapping(masterRef).First().Name;
 
-            this.ApplyRequered(refContext, table, masterRefColumnName);
+            this.ApplyRequired(refContext, table, masterRefColumnName);
         }
     }
 
-    private void ApplyRequered(RequiredRefContext context, Table table, string columnName) => this.ApplyRequered(context, table, [columnName]);
+    private void ApplyRequired(RequiredRefContext context, Table table, string columnName) => this.ApplyRequired(context, table, [columnName]);
 
-    private void ApplyRequered(RequiredRefContext refContext, Table table, IEnumerable<string> columnNames)
+    private void ApplyRequired(RequiredRefContext refContext, Table table, IEnumerable<string> columnNames)
     {
         var columnNamesHashSet = columnNames.Select(z => z.ToLower()).ToHashSet();
 
@@ -294,9 +294,9 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
 
         public IDatabaseScriptGeneratorContext Context => contex;
 
-        public IEnumerable<Index> RecreateIndexies => this.recreateIndexies;
+        public IEnumerable<Index> RecreateIndexes => this.recreateIndexies;
 
-        public IEnumerable<Column> RequeredColumns => this.requeredColumns;
+        public IEnumerable<Column> RequiredColumns => this.requeredColumns;
 
         public IEnumerable<View> RecreateViews => this.expectedRemovableViews;
 

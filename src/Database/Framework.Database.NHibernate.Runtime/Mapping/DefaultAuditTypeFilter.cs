@@ -55,7 +55,7 @@ public class DefaultAuditTypeFilter : IAuditTypeFilter
             }
 
             var attribute = attributes.Single(() => new ArgumentException(
-                                                  $"Attribute:{nameof(Attribute)} from property:{propertyInfo.Name} more then one"));
+                                                  $"Attribute:{nameof(Attribute)} from property:{propertyInfo.Name} more than one"));
 
             var skip = skipAuditFunc(attribute);
 

@@ -19,7 +19,7 @@ static class BuilderExtensions
     {
         if (null != currentValue && !EqualityComparer<T>.Default.Equals(currentValue, nextValue))
         {
-            throw new ArgumentException($"Value:{propertyName} also setted");
+            throw new ArgumentException($"Value:{propertyName} also set");
         }
     }
 

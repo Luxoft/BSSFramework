@@ -17,7 +17,7 @@ public static class EvaluateExtension
 
     internal static global::NHibernate.Envers.Query.Criteria.AuditProperty ToAuditProperty(this Expression expression)
     {
-        var evaluator = new AuditPropertyEvalutor();
+        var evaluator = new AuditPropertyEvaluator();
         evaluator.Visit(expression);
         return evaluator.AuditProperty;
     }

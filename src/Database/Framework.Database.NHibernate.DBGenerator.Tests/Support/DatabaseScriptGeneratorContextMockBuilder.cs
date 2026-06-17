@@ -12,7 +12,7 @@ public class DatabaseScriptGeneratorContextMockBuilder
 {
     public DatabaseScriptGeneratorContextMockBuilder()
     {
-        this.MainDaraBase = new Microsoft.SqlServer.Management.Smo.Database();
+        this.MainDatabase = new Microsoft.SqlServer.Management.Smo.Database();
         this.MainServer = new Server();
 
         this.DatabaseScriptGeneratorContext = Substitute.For<IDatabaseScriptGeneratorContext>();
@@ -20,8 +20,8 @@ public class DatabaseScriptGeneratorContextMockBuilder
         this.SqlDatabaseFactory = Substitute.For<ISqlDatabaseFactory>();
 
         this.SqlDatabaseFactory.Server.Returns(this.MainServer);
-        this.SqlDatabaseFactory.GetDatabase(Arg.Any<DatabaseName>()).Returns(this.MainDaraBase);
-        this.SqlDatabaseFactory.GetOrCreateDatabase(Arg.Any<DatabaseName>()).Returns(this.MainDaraBase);
+        this.SqlDatabaseFactory.GetDatabase(Arg.Any<DatabaseName>()).Returns(this.MainDatabase);
+        this.SqlDatabaseFactory.GetOrCreateDatabase(Arg.Any<DatabaseName>()).Returns(this.MainDatabase);
 
         this.DatabaseScriptGeneratorContext.SqlDatabaseFactory.Returns(this.SqlDatabaseFactory);
         this.DatabaseScriptGeneratorContext.AssemblyMetadata.Returns(new AssemblyMetadata(typeof(object)) { DomainTypes = [] });
@@ -31,7 +31,7 @@ public class DatabaseScriptGeneratorContextMockBuilder
 
     public ISqlDatabaseFactory SqlDatabaseFactory { get; }
 
-    public Microsoft.SqlServer.Management.Smo.Database MainDaraBase { get; }
+    public Microsoft.SqlServer.Management.Smo.Database MainDatabase { get; }
 
     public Server MainServer { get; }
 }

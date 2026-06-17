@@ -39,14 +39,14 @@ public class NHibObjectStatesService(ISession session) : IObjectStateService
 
         var currentState = persister.GetPropertyValues(unProxy);
 
-        var dirtyIndexies = persister.FindDirty(currentState, oldState, unProxy, sessionImpl);
+        var dirtyIndices = persister.FindDirty(currentState, oldState, unProxy, sessionImpl);
 
-        var modifiedIndexies = (dirtyIndexies ?? []).ToHashSet();
+        var modifiedIndices = (dirtyIndices ?? []).ToHashSet();
 
         Func<int, bool> isModifiedPropertyFunc = (index) =>
         {
 
-            if (modifiedIndexies.Contains(index))
+            if (modifiedIndices.Contains(index))
             {
                 return true;
             }

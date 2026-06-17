@@ -1,6 +1,6 @@
 ﻿using Framework.Subscriptions.Metadata;
 
-namespace SampleSystem.Subscriptions.Metadata.Examples.RazerTemplateImpl;
+namespace SampleSystem.Subscriptions.Metadata.Examples.RazorTemplateImpl;
 
 public class RazorTemplateImpl : RazorTemplate<Domain.Employee.Employee>
 {

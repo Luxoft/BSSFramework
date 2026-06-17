@@ -263,7 +263,7 @@ internal class AuditSqlScriptGenerator
                 addOrUpdate = "alter column";
             }
 
-            // the column doesnt exist at all.
+            // the column doesn't exist at all.
             var alter = new StringBuilder(
                                           rootTemplate.ToString())
                         .Append(' ')

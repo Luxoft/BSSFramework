@@ -9,7 +9,7 @@ public class FullTextSearchHqlGeneratorsRegistry : EnhancedLinqToHqlGeneratorsRe
         // ReSharper disable RedundantBaseQualifier
 #pragma warning disable SA1100 // Do not prefix calls with base unless local implementation exists
 
-        base.RegisterGenerator(DialectExtensions.GetPropetyFullTextContainsMethodInfo(), new PropertyFullTextContainsGenerator());
+        base.RegisterGenerator(DialectExtensions.GetPropertyFullTextContainsMethodInfo(), new PropertyFullTextContainsGenerator());
 
 #pragma warning restore SA1100 // Do not prefix calls with base unless local implementation exists
 

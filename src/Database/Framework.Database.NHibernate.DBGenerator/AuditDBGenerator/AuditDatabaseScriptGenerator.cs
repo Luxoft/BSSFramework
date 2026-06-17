@@ -219,7 +219,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
 
             if (table.IsPhysicalTable && table.SchemaActions.HasFlag(SchemaAction.Update))
             {
-                sqlScript.AddRange(CreateForegnKey(context));
+                sqlScript.AddRange(CreateForeignKey(context));
                 sqlScript.AddRange(CreateIndexScript(context));
             }
 
@@ -260,7 +260,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
         return cfg;
     }
 
-    private static IEnumerable<string> CreateForegnKey(AuditTableGenerateContext context)
+    private static IEnumerable<string> CreateForeignKey(AuditTableGenerateContext context)
     {
         if (context.Dialect.SupportsForeignKeyConstraintInAlterTable)
         {

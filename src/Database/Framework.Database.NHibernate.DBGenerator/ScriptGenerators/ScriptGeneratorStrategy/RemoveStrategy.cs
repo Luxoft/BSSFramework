@@ -43,29 +43,29 @@ internal class RemoveStrategy(DatabaseScriptGeneratorStrategyInfo parameter) : S
 
     private void RemoveColumns(Column removableColumn) => this.RemoveColumns(removableColumn.Parent as Table, [removableColumn]);
 
-    private void RemoveColumns(Table table, IEnumerable<Column> removableColums)
+    private void RemoveColumns(Table table, IEnumerable<Column> removableColumns)
     {
         var allFk =
                 table.ForeignKeys.SelectMany(
                                                                 z => z.Columns.Select(c => new { Fk = z, Column = c }));
 
-        var removeFk = allFk.Join(removableColums, c => c.Column.Name, c => c.Name, (c1, c2) => c1).ToList();
+        var removeFk = allFk.Join(removableColumns, c => c.Column.Name, c => c.Name, (c1, c2) => c1).ToList();
 
         removeFk.Foreach(z => z.Fk.Drop());
 
         var allIndexes = table.Indexes.SelectMany(z => z.IndexedColumns.Select(c => new { Index = z, Column = c }));
 
-        var removeIndexes = allIndexes.Join(removableColums, c => c.Column.Name, c => c.Name, (c1, c2) => c1).ToList();
+        var removeIndexes = allIndexes.Join(removableColumns, c => c.Column.Name, c => c.Name, (c1, c2) => c1).ToList();
         removeIndexes.Foreach(z => z.Index.Drop());
 
-        removableColums.Where(z => null != z.DefaultConstraint).Foreach(
+        removableColumns.Where(z => null != z.DefaultConstraint).Foreach(
                                                                         z =>
                                                                         {
                                                                             z.UnbindDefault();
                                                                             z.Alter();
                                                                         });
 
-        removableColums.Foreach(z => z.Drop());
+        removableColumns.Foreach(z => z.Drop());
     }
 
     private void TryRemoveNotExistColumns(DomainTypeMetadata typeDescription)
@@ -81,11 +81,11 @@ internal class RemoveStrategy(DatabaseScriptGeneratorStrategyInfo parameter) : S
 
         var columns = table.Columns.Cast<Column>();
 
-        var removableColums = columns
+        var removableColumns = columns
                               .Where(z => null == sqlMappings.FirstOrDefault(w => w.Name.Equals(z.Name, StringComparison.CurrentCultureIgnoreCase)))
                               .ToList();
 
-        this.RemoveColumns(table, removableColums);
+        this.RemoveColumns(table, removableColumns);
     }
 }
 

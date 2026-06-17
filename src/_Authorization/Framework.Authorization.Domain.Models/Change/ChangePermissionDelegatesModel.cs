@@ -17,7 +17,7 @@ public class ChangePermissionDelegatesModel : DomainObjectBase
 
         if (this.DelegateFromPermission != updatePermissionDelegatesModel.DelegateFromPermission)
         {
-            throw new ArgumentException("Invalida delegated from principal", nameof(updatePermissionDelegatesModel));
+            throw new ArgumentException("Invalid delegated from principal", nameof(updatePermissionDelegatesModel));
         }
 
         this.Items.AddRange(updatePermissionDelegatesModel.AddItems.Where(tryAddItem => this.Items.All(item => item.Permission != tryAddItem.Permission)));

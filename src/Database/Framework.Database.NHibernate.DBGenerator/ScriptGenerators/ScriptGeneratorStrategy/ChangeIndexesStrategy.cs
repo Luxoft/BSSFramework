@@ -268,12 +268,12 @@ internal class ChangeIndexesStrategy(DatabaseScriptGeneratorStrategyInfo paramet
             foreignKey.ReferencedTable = toTable.Name;
             foreignKey.ReferencedTableSchema = toTable.Schema;
 
-            var primeryKeyColumnName = toTable
+            var primaryKeyColumnName = toTable
                                        .Indexes.Single(z => z.IndexKeyType == IndexKeyType.DriPrimaryKey)
                                        .IndexedColumns
                                        .First().Name;
 
-            foreignKey.Columns.Add(new ForeignKeyColumn(foreignKey, reference.Name, primeryKeyColumnName));
+            foreignKey.Columns.Add(new ForeignKeyColumn(foreignKey, reference.Name, primaryKeyColumnName));
             table.ForeignKeys.Add(foreignKey);
 
             foreignKey.Create();

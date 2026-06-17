@@ -10,7 +10,7 @@ using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class PerfomanceTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
+public class PerformanceTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void GetEmployee_ToManyFilterParameters_CheckTimeTest()

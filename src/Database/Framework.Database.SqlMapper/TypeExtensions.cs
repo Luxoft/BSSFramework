@@ -11,17 +11,17 @@ namespace Framework.Database.SqlMapper;
 
 public static class TypeExtensions
 {
-    public static DataType ToDataType(this Type type, IEnumerable<Attribute> propertyAttributies)
+    public static DataType ToDataType(this Type type, IEnumerable<Attribute> propertyAttributes)
     {
         if (type.IsNullable())
         {
-            return type.GetGenericArguments()[0].ToDataType(propertyAttributies);
+            return type.GetGenericArguments()[0].ToDataType(propertyAttributes);
         }
-        if (type.IsArray && type.GetElementType() == typeof(byte) && propertyAttributies.All(z => z.GetType() != typeof(VersionAttribute)))
+        if (type.IsArray && type.GetElementType() == typeof(byte) && propertyAttributes.All(z => z.GetType() != typeof(VersionAttribute)))
         {
             return DataType.Image;
         }
-        if (type.IsArray && type.GetElementType() == typeof(byte) && propertyAttributies.Any(z => z.GetType() == typeof(VersionAttribute)))
+        if (type.IsArray && type.GetElementType() == typeof(byte) && propertyAttributes.Any(z => z.GetType() == typeof(VersionAttribute)))
         {
             return DataType.Timestamp;
         }
@@ -40,11 +40,11 @@ public static class TypeExtensions
         }
         if (type == typeof(string))
         {
-            var length = GetValueByAttribute<int, MaxLengthAttribute>(propertyAttributies, z => z.Value, 255);
+            var length = GetValueByAttribute<int, MaxLengthAttribute>(propertyAttributes, z => z.Value, 255);
 
-            var notUseUnitCode = propertyAttributies.Any(attr => attr is UseAsciiAttribute);
+            var notUseUnicode = propertyAttributes.Any(attr => attr is UseAsciiAttribute);
 
-            var useUnicode = !notUseUnitCode;
+            var useUnicode = !notUseUnicode;
 
             if (length != int.MaxValue && length >= (useUnicode ? 4000 : 8000))
             {
@@ -58,7 +58,7 @@ public static class TypeExtensions
         }
         if (type == typeof(decimal))
         {
-            var attribute = propertyAttributies.OfType<LengthAndPrecisionAttribute>().FirstOrDefault() ?? LengthAndPrecisionAttribute.Default;
+            var attribute = propertyAttributes.OfType<LengthAndPrecisionAttribute>().FirstOrDefault() ?? LengthAndPrecisionAttribute.Default;
 
             return DataType.Decimal(attribute.Precision, attribute.Length);
         }

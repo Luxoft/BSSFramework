@@ -22,7 +22,7 @@ class AuditDBScriptGeneratorBuilder : IAuditDBScriptGeneratorBuilder
 
         if (this.auditPostfix != null && !string.Equals(this.auditPostfix, auditPostfix))
         {
-            throw new ArgumentException("AuditBulder can work with one db only");
+            throw new ArgumentException("AuditBuilder can work with one db only");
         }
         this.auditPostfix = auditPostfix;
 

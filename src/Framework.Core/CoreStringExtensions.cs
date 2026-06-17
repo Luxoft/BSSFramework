@@ -60,9 +60,9 @@ public static class CoreStringExtensions
 
     public static string TakeWhileNot(this string input, string pattern, StringComparison stringComparison)
     {
-        var patterIndex = input.IndexOf(pattern, stringComparison);
+        var patternIndex = input.IndexOf(pattern, stringComparison);
 
-        return patterIndex == -1 ? input : input.Substring(0, patterIndex);
+        return patternIndex == -1 ? input : input.Substring(0, patternIndex);
     }
 
     public static string SubStringUnsafe(this string source, int length) => source.Substring(0, Math.Min(length, source.Length));

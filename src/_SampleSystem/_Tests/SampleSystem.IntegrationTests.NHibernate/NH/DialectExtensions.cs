@@ -7,7 +7,7 @@ public static class DialectExtensions
 {
     public static bool FullTextContains(this string source, string pattern) => throw new InvalidOperationException("This method for db layer, not for application layer");
 
-    public static MethodInfo GetPropetyFullTextContainsMethodInfo()
+    public static MethodInfo GetPropertyFullTextContainsMethodInfo()
     {
         Expression<Func<string, bool>> func = z => z.FullTextContains(z);
 

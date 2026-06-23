@@ -20,6 +20,7 @@ public partial class DataManager
             {
                 var subscriptionService = context.ServiceProvider.GetRequiredService<ISubscriptionService>();
 
-                return await subscriptionService.ProcessAsync(new DomainObjectVersions<T>(prev, next)).ToListAsync(ct);
-            }, ct);
+                return await subscriptionService.ProcessAsync(new DomainObjectVersions<T>(prev, next), ct);
+            },
+            ct);
 }

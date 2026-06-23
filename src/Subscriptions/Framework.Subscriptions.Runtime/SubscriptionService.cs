@@ -11,24 +11,26 @@ public class SubscriptionService(
     ISubscriptionResolver subscriptionResolver,
     IMessageSender<Notification.Domain.Notification> notificationMessageSender) : ISubscriptionService
 {
-    public IAsyncEnumerable<ITryResult<SubscriptionHeader>> ProcessAsync(DomainObjectVersions versions) =>
-        subscriptionResolver.Resolve(versions.DomainObjectType, versions.ChangeType)
-                            .ToAsyncEnumerable()
-                            .Select(async (ISubscription subscription, CancellationToken ct) =>
-                            {
-                                try
-                                {
-                                    await new Func<ISubscription<object, object>, DomainObjectVersions<object>, CancellationToken, Task>(this.ProcessAsync)
-                                          .CreateGenericMethod(subscription.DomainObjectType, subscription.RenderingObjectType)
-                                          .Invoke<Task>(this, subscription, versions, ct);
+    public async Task<List<ITryResult<SubscriptionHeader>>> ProcessAsync(DomainObjectVersions versions, CancellationToken ct) =>
+        await subscriptionResolver.Resolve(versions.DomainObjectType, versions.ChangeType)
+                                  .ToAsyncEnumerable()
+                                  .Select(async (ISubscription subscription, CancellationToken lct) =>
+                                  {
+                                      try
+                                      {
+                                          await new Func<ISubscription<object, object>, DomainObjectVersions<object>, CancellationToken, Task>(
+                                                    this.ProcessAsync)
+                                                .CreateGenericMethod(subscription.DomainObjectType, subscription.RenderingObjectType)
+                                                .Invoke<Task>(this, subscription, versions, lct);
 
-                                    return TryResult.Return(subscription.Header);
-                                }
-                                catch (Exception ex)
-                                {
-                                    return TryResult.CreateFault<SubscriptionHeader>(ex);
-                                }
-                            });
+                                          return TryResult.Return(subscription.Header);
+                                      }
+                                      catch (Exception ex)
+                                      {
+                                          return TryResult.CreateFault<SubscriptionHeader>(ex);
+                                      }
+                                  })
+                                  .ToListAsync(ct);
 
     private async Task ProcessAsync<TDomainObject, TRenderingObject>(
         ISubscription<TDomainObject, TRenderingObject> subscription,

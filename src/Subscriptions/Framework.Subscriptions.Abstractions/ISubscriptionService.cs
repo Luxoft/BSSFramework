@@ -5,5 +5,5 @@ namespace Framework.Subscriptions;
 
 public interface ISubscriptionService
 {
-    IAsyncEnumerable<ITryResult<SubscriptionHeader>> ProcessAsync(DomainObjectVersions versions);
+    Task<List<ITryResult<SubscriptionHeader>>> ProcessAsync(DomainObjectVersions versions, CancellationToken ct);
 }

@@ -48,7 +48,7 @@ public partial class DomainObjectModificationBLL(
 
             var versions = this.GetDomainObjectVersions(info);
 
-            await foreach (var tryResult in subscriptionService.ProcessAsync(versions).WithCancellation(ct))
+            foreach (var tryResult in await subscriptionService.ProcessAsync(versions, ct))
             {
                 tryResult.Match(
                     _ => { },

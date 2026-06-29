@@ -11,8 +11,8 @@ namespace SampleSystem.Domain.Employee;
 public class EmployeePosition : BaseDirectory, IExternalSynchronizable
 {
     private long externalId;
-    private string englishName;
-    private Location location;
+    private string? englishName;
+    private Location location = null!;
 
     public virtual long ExternalId
     {

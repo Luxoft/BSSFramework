@@ -30,8 +30,8 @@ public partial class HRDepartment :
     private readonly ICollection<HRDepartment> children = new List<HRDepartment>();
     private readonly ICollection<ManagementUnitAndHRDepartmentLink> managementUnits = new List<ManagementUnitAndHRDepartmentLink>();
 
-    private HRDepartment parent;
-    private Employee.Employee approvedBy;
+    private HRDepartment? parent;
+    private Employee.Employee? approvedBy;
 
     public HRDepartment()
     {
@@ -78,13 +78,13 @@ public partial class HRDepartment :
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Event | DTORole.Integration)]
     public virtual IEnumerable<HRDepartment> Children => this.children;
 
-    public virtual HRDepartment Parent
+    public virtual HRDepartment? Parent
     {
         get => this.parent;
         set => this.parent = value;
     }
 
-    public virtual Employee.Employee ApprovedBy
+    public virtual Employee.Employee? ApprovedBy
     {
         get => this.approvedBy;
         set => this.approvedBy = value;
@@ -144,7 +144,7 @@ public partial class HRDepartment :
 
     ICollection<HRDepartment> IMaster<HRDepartment>.Details => (ICollection<HRDepartment>)this.Children;
 
-    HRDepartment IDetail<HRDepartment>.Master => this.Parent;
+    HRDepartment? IDetail<HRDepartment>.Master => this.Parent;
 
     public virtual IEnumerable<HRDepartmentEmployeeRoleType> GetCurrentUserRoles(ICurrentUser currentUser)
     {

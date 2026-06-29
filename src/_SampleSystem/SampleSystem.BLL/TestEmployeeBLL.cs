@@ -36,7 +36,7 @@ public partial class TestEmployeeBLL
             FetchRule<TestEmployee> fetchs)
     {
 
-        var nextSelectOperation = selectOperation.AddFilter(te => te.CoreBusinessUnit.Id == filter.BusinessUnit.Id);
+        var nextSelectOperation = selectOperation.AddFilter(te => te.CoreBusinessUnit.Id == filter.BusinessUnit!.Id);
 
         return this.GetObjectsByOData(nextSelectOperation, fetchs);
     }

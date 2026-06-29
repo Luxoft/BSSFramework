@@ -40,13 +40,13 @@ public class ManagementUnitFluentMappingTests(IServiceProvider rootServiceProvid
                               {
                                   return c.Logics.ManagementUnitFluentMapping
                                           .GetUnsecureQueryable()
-                                          .Where(x => x.MuComponent.AuthorizedLuxoftSignatory.Id == employeeId.Id)
+                                          .Where(x => x.MuComponent.AuthorizedLuxoftSignatory!.Id == employeeId.Id)
                                           .Select(
                                                   x => new
                                                   {
                                                       x.Id,
                                                       x.MuComponent.LuxoftSignsFirst,
-                                                      EmployeeId = x.MuComponent.AuthorizedLuxoftSignatory.Id
+                                                      EmployeeId = x.MuComponent.AuthorizedLuxoftSignatory!.Id
                                                   })
                                           .ToList();
                               });

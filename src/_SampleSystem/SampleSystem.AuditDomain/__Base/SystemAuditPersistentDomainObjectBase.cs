@@ -8,13 +8,13 @@ public abstract class SystemAuditPersistentDomainObjectBase : IIdentityObject<Gu
 {
     private AuditIdentifier identifier;
 
-    private SampleSystemAuditRevisionEntity revision;
+    private SampleSystemAuditRevisionEntity revision = null!;
 
     private Guid id;
 
     private AuditRevisionType revType;
 
-    private string modifiedBy;
+    private string modifiedBy = null!;
 
     private DateTime? modifyDate;
 

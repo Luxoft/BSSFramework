@@ -29,7 +29,7 @@ public class MethodTypeInfo : IEquatable<MethodTypeInfo>
     public Type ReturnType { get; }
 
 
-    public override bool Equals(object obj) => this.Equals(obj as MethodTypeInfo);
+    public override bool Equals(object? obj) => this.Equals(obj as MethodTypeInfo);
 
     public override int GetHashCode() => this.ReturnType.GetHashCode();
 

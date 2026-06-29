@@ -6,9 +6,9 @@ public class BusinessUnitTypeLinkWithTransferTo :
         AuditPersistentDomainObjectBase,
         IDetail<BusinessUnitType>
 {
-    private BusinessUnitType businessUnitType;
+    private BusinessUnitType businessUnitType = null!;
 
-    private BusinessUnitType transferTo;
+    private BusinessUnitType transferTo = null!;
 
     public BusinessUnitTypeLinkWithTransferTo()
     {

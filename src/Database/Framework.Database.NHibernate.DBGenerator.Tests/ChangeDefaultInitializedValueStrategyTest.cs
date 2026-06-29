@@ -36,7 +36,7 @@ public class ChangeDefaultInitializedValueStrategyTest
 
         var table = new Table { Name = "Object" };
         var column = new Column { Name = "test" };
-        databaseScriptGeneratorStrategyInfo.AddedColumns.Add(new Tuple<Table, Column, string>(table, column, "0"));
+        databaseScriptGeneratorStrategyInfo.AddedColumns.Add(new Tuple<Table, Column, string?>(table, column, "0"));
 
         var changeDefaultInitializedValueStrategy = new ChangeDefaultInitializedValueStrategy(databaseScriptGeneratorStrategyInfo);
 
@@ -59,7 +59,7 @@ public class ChangeDefaultInitializedValueStrategyTest
 
         var table = new Table { Name = "Object" };
         var column = new Column { Name = "test" };
-        databaseScriptGeneratorStrategyInfo.AddedColumns.Add(new Tuple<Table, Column, string>(table, column, "0"));
+        databaseScriptGeneratorStrategyInfo.AddedColumns.Add(new Tuple<Table, Column, string?>(table, column, "0"));
 
         var changeDefaultInitializedValueStrategy = new ChangeDefaultInitializedValueStrategy(databaseScriptGeneratorStrategyInfo);
 

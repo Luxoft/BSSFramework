@@ -171,7 +171,7 @@ internal class ChangeIndexesStrategy(DatabaseScriptGeneratorStrategyInfo paramet
         {
             var column = this.GetColumn(table, sqlMapping);
 
-            if (!column.Nullable)
+            if (column == null || !column.Nullable)
             {
                 continue;
             }

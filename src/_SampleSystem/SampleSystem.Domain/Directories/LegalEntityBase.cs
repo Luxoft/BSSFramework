@@ -10,9 +10,9 @@ public class LegalEntityBase : BaseDirectory, IMaster<Address>
 {
     private readonly ICollection<Address> addresses = new List<Address>();
 
-    private string nameEnglish;
+    private string? nameEnglish;
 
-    private TestObjForNested baseObj;
+    private TestObjForNested? baseObj;
 
     private RevenueDocumentAribaStatus aribaStatus = RevenueDocumentAribaStatus.CreateDefault();
 
@@ -26,7 +26,7 @@ public class LegalEntityBase : BaseDirectory, IMaster<Address>
         protected internal set => this.aribaStatus = value;
     }
 
-    public virtual TestObjForNested BaseObj
+    public virtual TestObjForNested? BaseObj
     {
         get => this.baseObj;
         set => this.baseObj = value;

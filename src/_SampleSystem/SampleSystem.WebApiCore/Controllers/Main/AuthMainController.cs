@@ -24,7 +24,7 @@ public class AuthMainController : Framework.Authorization.WebApi.AuthMainControl
             var principalBLL = evaluateData.Context.Logics.PrincipalFactory.Create(SecurityRule.Edit);
             var permissionBLL = evaluateData.Context.Logics.PermissionFactory.Create(SecurityRule.Edit);
 
-            var principal = principalBLL.GetById(principalIdent.Id, true);
+            var principal = principalBLL.GetById(principalIdent.Id, true)!;
 
             var permission = permissionBLL.GetById(permissionDTO.Id, IdCheckMode.SkipEmpty) ?? new Permission(principal);
 
@@ -52,11 +52,11 @@ public class AuthMainController : Framework.Authorization.WebApi.AuthMainControl
 
         [System.Runtime.Serialization.DataMemberAttribute]
         [AutoRequestProperty(OrderIndex = 0)]
-        public PrincipalIdentityDTO PrincipalIdent { get; set; }
+        public PrincipalIdentityDTO PrincipalIdent { get; set; } = null!;
 
         [System.Runtime.Serialization.DataMemberAttribute]
         [AutoRequestProperty(OrderIndex = 1)]
-        public PermissionStrictDTO PermissionDTO { get; set; }
+        public PermissionStrictDTO PermissionDTO { get; set; } = null!;
     }
 }
 

@@ -7,7 +7,7 @@ public class RequiredGroupValidatorAttribute(RequiredGroupValidatorMode mode) : 
 {
     public readonly RequiredGroupValidatorMode Mode = mode;
 
-    public string GroupKey { get; set; }
+    public string? GroupKey { get; set; }
 
 
     public override IClassValidator CreateValidator() => new RequiredGroupValidator(this.Mode, this.GroupKey);

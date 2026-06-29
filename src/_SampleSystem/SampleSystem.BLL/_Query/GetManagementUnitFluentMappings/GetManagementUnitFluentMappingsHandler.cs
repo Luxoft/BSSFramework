@@ -14,7 +14,7 @@ public class GetManagementUnitFluentMappingsHandler([ViewSecurity] IManagementUn
         CancellationToken ct)
     {
         var result = await managementUnitFluentMappingBll.GetUnsecureQueryable()
-                                                         .Select(x => new GetManagementUnitFluentMappingsResponse(x.Id, x.Name, x.Parent.Id, x.Period))
+                                                         .Select(x => new GetManagementUnitFluentMappingsResponse(x.Id, x.Name, x.Parent!.Id, x.Period))
                                                          .GenericToArrayAsync(ct);
 
         return result;

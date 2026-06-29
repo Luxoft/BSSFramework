@@ -8,7 +8,7 @@ public interface IValidationState
     /// <summary>
     /// Стейт верхнего уровня
     /// </summary>
-    IValidationState Parent { get; }
+    IValidationState? Parent { get; }
 
     /// <summary>
     /// Валидируемое свойство

@@ -14,7 +14,7 @@ namespace SampleSystem.IntegrationTests;
 
 public class CurrentUserSingleRelativePathTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
-    private Guid[] testObjectIdents;
+    private Guid[] testObjectIdents = null!;
 
     protected override async ValueTask InitializeAsync(CancellationToken ct) =>
         this.testObjectIdents = this.Evaluate(

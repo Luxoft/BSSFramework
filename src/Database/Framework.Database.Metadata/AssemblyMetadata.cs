@@ -12,5 +12,5 @@ public class AssemblyMetadata : IAssemblyMetadata
 
     public Type PersistentDomainObjectBaseType { get; }
 
-    public IEnumerable<DomainTypeMetadata> DomainTypes { get; set; }
+    public IEnumerable<DomainTypeMetadata> DomainTypes { get; set; } = null!;
 }

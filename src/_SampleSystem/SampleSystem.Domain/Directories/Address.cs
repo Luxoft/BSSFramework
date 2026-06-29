@@ -8,13 +8,13 @@ namespace SampleSystem.Domain.Directories;
 
 public class Address : AuditPersistentDomainObjectBase, IDetail<LegalEntityBase>
 {
-    private readonly LegalEntityBase legalEntity;
+    private readonly LegalEntityBase legalEntity = null!;
     private AddressType addressType;
-    private string cityName;
-    private Country countryName;
-    private string regionName;
-    private string street;
-    private string zip;
+    private string? cityName;
+    private Country countryName = null!;
+    private string? regionName;
+    private string? street;
+    private string? zip;
 
     public Address(LegalEntityBase legalEntity)
     {

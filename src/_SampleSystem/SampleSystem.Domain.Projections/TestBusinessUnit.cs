@@ -15,7 +15,7 @@ public partial class TestBusinessUnit
                                                  ["A", "B"], ["B", "C"]
                                              };
 
-    public override TestBusinessUnitType CalcProjectionProp => null;
+    public override TestBusinessUnitType CalcProjectionProp => null!;
 
     public override string HerBusinessUnit_Full => EnumerableExtensions.GetAllElements<HerBusinessUnit>(this.Her, h => h.Parent).Join(",", bu => bu.Name);
 

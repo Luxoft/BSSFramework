@@ -14,16 +14,17 @@ public static class DataContractSerializerHelper
 
         using var textReader = new StringReader(source);
         using var xmlReader = new XmlTextReader(textReader);
-        return (T)serializer.ReadObject(xmlReader);
+        return (T)serializer.ReadObject(xmlReader)!;
     }
 
-    public static string Serialize<T>(T source, Encoding encoding = null)
+    public static string Serialize<T>(T source, Encoding? encoding = null)
     {
-        var serializer = new DataContractSerializer(typeof(T) == typeof(object) ? source.GetType() : typeof(T));
+        var serializer = new DataContractSerializer(typeof(T) == typeof(object) ? source!.GetType() : typeof(T));
 
         var sb = new StringBuilder();
-        using var stringWriter = new EncodingStringWriter(sb, encoding);
-        using var xmlWriter = XmlWriter.Create(stringWriter, new XmlWriterSettings { Indent = true, Encoding = encoding ?? Encoding.Unicode });
+        var resolvedEncoding = encoding ?? Encoding.Unicode;
+        using var stringWriter = new EncodingStringWriter(sb, resolvedEncoding);
+        using var xmlWriter = XmlWriter.Create(stringWriter, new XmlWriterSettings { Indent = true, Encoding = resolvedEncoding });
         serializer.WriteObject(xmlWriter, source);
 
         xmlWriter.Flush();
@@ -41,7 +42,7 @@ public static class DataContractSerializerHelper
 
         stream.Position = 0;
 
-        return (T)serializer.ReadObject(stream);
+        return (T)serializer.ReadObject(stream)!;
     }
 
     public static bool XmlEquals<T>(this T source, T other)

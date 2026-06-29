@@ -2,7 +2,7 @@
 
 public static class FileHelper
 {
-    public static string GetTempFileName(string extension)
+    public static string GetTempFileName(string? extension)
     {
         var tempFileName = Path.GetTempFileName();
 
@@ -27,7 +27,7 @@ public static class FileHelper
         }
     }
 
-    public static TResult TempProcess<TResult>(Func<string, TResult> getResult, string pureExtension = null, byte[]? content = null)
+    public static TResult TempProcess<TResult>(Func<string, TResult> getResult, string? pureExtension = null, byte[]? content = null)
     {
         if (getResult == null) throw new ArgumentNullException(nameof(getResult));
 
@@ -48,7 +48,7 @@ public static class FileHelper
         }
     }
 
-    public static byte[] TempProcessBinary(Action<string> action, string pureExtension = null, byte[] content = null)
+    public static byte[] TempProcessBinary(Action<string> action, string? pureExtension = null, byte[]? content = null)
     {
         if (action == null) throw new ArgumentNullException(nameof(action));
 

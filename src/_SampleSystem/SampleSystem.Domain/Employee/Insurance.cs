@@ -7,11 +7,11 @@ namespace SampleSystem.Domain.Employee;
 public class Insurance : DomainObjectBase
 {
     [DetailRole(true)]
-    public InsuranceDetail Details { get; set; }
+    public InsuranceDetail Details { get; set; } = null!;
 
-    public Insurance Self { get; set; }
+    public Insurance? Self { get; set; }
 
-    public Employee Employee { get; set; }
+    public Employee Employee { get; set; } = null!;
 
     public int WorkExperience { get; set; }
 

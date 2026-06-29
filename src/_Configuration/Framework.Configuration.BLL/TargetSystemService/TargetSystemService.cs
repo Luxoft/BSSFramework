@@ -50,11 +50,11 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase>(
                                      ? bll.GetObjectRevisions(domainObjectId).RevisionInfos.Select(v => v.RevisionNumber).OrderByDescending(v => v).Skip(1).First()
                                      : eventModel.Revision;
 
-            var domainObject = actualRevision == null ? bll.GetById(domainObjectId, true) : bll.GetObjectByRevision(domainObjectId, actualRevision.Value);
+            var domainObject = actualRevision == null ? bll.GetById(domainObjectId, true)! : bll.GetObjectByRevision(domainObjectId, actualRevision.Value);
 
             var domainObjectEvent = new EventOperation(eventModel.Operation.Name);
 
-            await eventOperationSender.Send(domainObject, domainObjectEvent, ct);
+            await eventOperationSender.Send<TDomainObject>(domainObject, domainObjectEvent, ct);
         }
     }
 

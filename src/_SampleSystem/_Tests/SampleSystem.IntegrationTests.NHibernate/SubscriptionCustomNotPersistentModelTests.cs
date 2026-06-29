@@ -48,7 +48,7 @@ public class SubscriptionCustomNotPersistentModelTests(IServiceProvider rootServ
 
                 var country = bll.GetById(countryId, true);
 
-                country.Name = $"{country.Name} renamed";
+                country!.Name = $"{country!.Name} renamed";
 
                 bll.Save(country);
             });

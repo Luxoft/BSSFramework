@@ -44,7 +44,7 @@ public interface IServerDTOGeneratorConfiguration : IDTOGeneratorConfiguration
 
     Type VersionType { get; }
 
-    PropertyInfo VersionProperty { get; }
+    PropertyInfo? VersionProperty { get; }
 
 
     CodeMethodReferenceExpression GetConvertToDTOMethod(Type domainType, BaseFileType fileType);

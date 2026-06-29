@@ -12,9 +12,9 @@ public abstract class DomainObjectComplexChangeModel<TDomainObject> : DomainObje
         where TDomainObject : PersistentDomainObjectBase
 {
     [Required]
-    public TDomainObject PrimaryChangingObject { get; set; }
+    public TDomainObject PrimaryChangingObject { get; set; } = null!;
 
     [Required]
-    public List<TDomainObject> SecondaryChangingObjects { get; set; }
+    public List<TDomainObject> SecondaryChangingObjects { get; set; } = null!;
 }
 

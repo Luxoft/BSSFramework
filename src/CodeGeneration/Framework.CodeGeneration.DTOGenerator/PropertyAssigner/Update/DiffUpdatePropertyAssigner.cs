@@ -20,7 +20,7 @@ public class DiffUpdatePropertyAssigner<TConfiguration> : GeneratorConfiguration
         where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
 {
     public DiffUpdatePropertyAssigner(IDTOSource<TConfiguration> source)
-            : this(source.FromMaybe(() => new ArgumentOutOfRangeException(nameof(source))).Configuration, source.DomainType)
+            : this(source.FromMaybe(() => new ArgumentOutOfRangeException(nameof(source))).Configuration, source.DomainType!)
     {
     }
 
@@ -40,9 +40,9 @@ public class DiffUpdatePropertyAssigner<TConfiguration> : GeneratorConfiguration
 
     public DTOFileType FileType { get; } = BaseFileType.UpdateDTO;
 
-    protected ILayerCodeTypeReferenceService UpdateCodeTypeReferenceService { get; }
+    protected ILayerCodeTypeReferenceService? UpdateCodeTypeReferenceService { get; }
 
-    protected ILayerCodeTypeReferenceService StrictCodeTypeReferenceService { get; }
+    protected ILayerCodeTypeReferenceService? StrictCodeTypeReferenceService { get; }
 
     public CodeExpression MappingServiceRefExpr => new CodeThisReferenceExpression();
 
@@ -76,15 +76,15 @@ public class DiffUpdatePropertyAssigner<TConfiguration> : GeneratorConfiguration
             //}
             //else
             {
-                var elementType = property.PropertyType.GetCollectionElementType();
+                var elementType = property.PropertyType.GetCollectionElementType()!;
 
-                var elementSourceFileType = this.StrictCodeTypeReferenceService.GetCollectionFileType(property);
+                var elementSourceFileType = this.StrictCodeTypeReferenceService!.GetCollectionFileType(property);
 
                 var elementSourceTypeRef = this.Configuration.GetCodeTypeReference(elementType, elementSourceFileType);
 
                 var elementIdentityTypeRef = this.Configuration.GetCodeTypeReference(elementType, DTOType.IdentityDTO);
 
-                var elementTargetFileType = this.UpdateCodeTypeReferenceService.GetCollectionFileType(property);
+                var elementTargetFileType = this.UpdateCodeTypeReferenceService!.GetCollectionFileType(property);
 
                 var elementTargetTypeRef = this.Configuration.GetCodeTypeReference(elementType, elementTargetFileType);
 

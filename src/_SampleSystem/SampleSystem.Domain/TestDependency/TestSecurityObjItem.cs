@@ -6,7 +6,7 @@ namespace SampleSystem.Domain.TestDependency;
 [BLLViewRole]
 public class TestSecurityObjItem : BaseDirectory, IDetail<TestRootSecurityObj>, IMaster<TestSecuritySubObjItem>, IMaster<TestSecuritySubObjItem2>, IMaster<TestSecuritySubObjItem3>
 {
-    private TestRootSecurityObj firstMaster;
+    private TestRootSecurityObj firstMaster = null!;
 
     private readonly ICollection<TestSecuritySubObjItem> items = new List<TestSecuritySubObjItem>();
 

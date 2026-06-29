@@ -19,6 +19,7 @@ public static class SerializerExtensions
     }
 
     public static ISerializer<TValue, TResult> WithParseCache<TValue, TResult>(this ISerializer<TValue, TResult> serializer)
+            where TValue : notnull
     {
         if (serializer == null) throw new ArgumentNullException(nameof(serializer));
 

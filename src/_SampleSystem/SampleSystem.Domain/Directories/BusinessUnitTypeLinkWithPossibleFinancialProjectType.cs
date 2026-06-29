@@ -8,7 +8,7 @@ public class BusinessUnitTypeLinkWithPossibleFinancialProjectType :
         AuditPersistentDomainObjectBase,
         IDetail<BusinessUnitType>
 {
-    private BusinessUnitType businessUnitType;
+    private BusinessUnitType businessUnitType = null!;
 
     private FinancialProjectType financialProjectType;
 

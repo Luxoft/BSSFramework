@@ -34,11 +34,8 @@ public class CSharpCodeDomRenderer(CodeDomProvider provider, CodeGeneratorOption
 
         public override CodeStatement VisitConditionStatement(CodeConditionStatement codeConditionStatement)
         {
-            if (codeConditionStatement.FalseStatements.Count == 1 && codeConditionStatement.FalseStatements[0] is CodeConditionStatement)
+            if (codeConditionStatement.FalseStatements.Count == 1 && codeConditionStatement.FalseStatements[0] is CodeConditionStatement innerStatement)
             {
-                var innerStatement = codeConditionStatement.FalseStatements[0] as CodeConditionStatement;
-
-
                 var head = this.Renderer.Render(new CodeConditionStatement { Condition = codeConditionStatement.Condition }.WithCopyUserDataFrom(codeConditionStatement).Self(newS => newS.TrueStatements.AddRange(codeConditionStatement.TrueStatements)));
 
                 var tail = this.Renderer.Render(innerStatement);
@@ -218,18 +215,18 @@ public class CSharpCodeDomRenderer(CodeDomProvider provider, CodeGeneratorOption
 
             if (codeStatements.Length == 1)
             {
-                if (codeStatements[0] is CodeMethodReturnStatement)
+                if (codeStatements[0] is CodeMethodReturnStatement returnStatement)
                 {
-                    var returnExpr = (codeStatements[0] as CodeMethodReturnStatement).Expression;
+                    var returnExpr = returnStatement.Expression;
 
                     if (returnExpr != null)
                     {
                         return [this.Renderer.Render(returnExpr)];
                     }
                 }
-                else if (codeStatements[0] is CodeExpressionStatement)
+                else if (codeStatements[0] is CodeExpressionStatement expressionStatement)
                 {
-                    var statExpr = (codeStatements[0] as CodeExpressionStatement).Expression;
+                    var statExpr = expressionStatement.Expression;
 
                     return [this.Renderer.Render(statExpr)];
                 }

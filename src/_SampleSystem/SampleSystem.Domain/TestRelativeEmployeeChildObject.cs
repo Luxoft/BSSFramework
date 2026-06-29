@@ -4,9 +4,9 @@ namespace SampleSystem.Domain;
 
 public class TestRelativeEmployeeChildObject : AuditPersistentDomainObjectBase, IDetail<TestRelativeEmployeeParentObject>
 {
-    private readonly TestRelativeEmployeeParentObject master;
+    private readonly TestRelativeEmployeeParentObject master = null!;
 
-    private Employee.Employee employee;
+    private Employee.Employee employee = null!;
 
     protected TestRelativeEmployeeChildObject()
     {

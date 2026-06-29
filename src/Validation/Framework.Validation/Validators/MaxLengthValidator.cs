@@ -31,11 +31,11 @@ public class MaxLengthValidator : IDynamicPropertyValidator
 
         if (property.PropertyType == typeof(string))
         {
-            return typeof(StringMaxLengthValidator<>).MakeGenericType(property.ReflectedType);
+            return typeof(StringMaxLengthValidator<>).MakeGenericType(property.ReflectedType!);
         }
         else if (property.PropertyType == typeof(byte[]))
         {
-            return typeof(BinaryMaxLengthValidator<>).MakeGenericType(property.ReflectedType);
+            return typeof(BinaryMaxLengthValidator<>).MakeGenericType(property.ReflectedType!);
         }
         else
         {

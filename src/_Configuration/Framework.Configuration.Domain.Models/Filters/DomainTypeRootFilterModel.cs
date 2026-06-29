@@ -5,7 +5,7 @@ namespace Framework.Configuration.Domain;
 
 public class DomainTypeRootFilterModel : DomainObjectFilterModel<DomainType>
 {
-    public TargetSystem TargetSystem { get; set; }
+    public TargetSystem? TargetSystem { get; set; }
 
 
     public override Expression<Func<DomainType, bool>> ToFilterExpression()

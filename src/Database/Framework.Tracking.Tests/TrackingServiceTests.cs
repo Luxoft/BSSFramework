@@ -538,7 +538,7 @@ public class TrackingServiceTests
         var changes = this.trackingService.GetChanges(domainObject);
 
         // Act
-        var result = changes.HasChange(x => (object)x.Name);
+        var result = changes.HasChange(x => (object)x.Name!);
 
         // Assert
         Assert.True(result);
@@ -557,7 +557,7 @@ public class TrackingServiceTests
         var changes = this.trackingService.GetChanges(domainObject);
 
         // Act
-        var result = changes.HasChange(x => (object)x.ModifiedAt);
+        var result = changes.HasChange(x => (object)x.ModifiedAt!);
 
         // Assert
         Assert.True(result);
@@ -576,7 +576,7 @@ public class TrackingServiceTests
         var changes = this.trackingService.GetChanges(domainObject);
 
         // Act
-        var result = changes.HasChange(x => (object)x.Array);
+        var result = changes.HasChange(x => (object)x.Array!);
 
         // Assert
         Assert.True(result);
@@ -595,7 +595,7 @@ public class TrackingServiceTests
         var changes = this.trackingService.GetChanges(domainObject, GetChangesMode.IgnoreDefaultValues);
 
         // Act
-        var result = changes.HasChange(x => (object)x.Name);
+        var result = changes.HasChange(x => (object)x.Name!);
 
         // Assert
         Assert.False(result);
@@ -614,7 +614,7 @@ public class TrackingServiceTests
         var changes = this.trackingService.GetChanges(domainObject);
 
         // Act
-        var result = changes.HasChange(x => (object)x.Name);
+        var result = changes.HasChange(x => (object)x.Name!);
 
         // Assert
         Assert.True(result);
@@ -633,7 +633,7 @@ public class TrackingServiceTests
         var changes = this.trackingService.GetChanges(domainObject, GetChangesMode.IgnoreDefaultValues);
 
         // Act
-        var result = changes.HasChange(x => (object)x.ModifiedAt);
+        var result = changes.HasChange(x => (object)x.ModifiedAt!);
 
         // Assert
         Assert.False(result);
@@ -652,7 +652,7 @@ public class TrackingServiceTests
         var changes = this.trackingService.GetChanges(domainObject);
 
         // Act
-        var result = changes.HasChange(x => (object)x.ModifiedAt);
+        var result = changes.HasChange(x => (object)x.ModifiedAt!);
 
         // Assert
         Assert.True(result);
@@ -709,7 +709,7 @@ public class TrackingServiceTests
         var changes = this.trackingService.GetChanges(domainObject, GetChangesMode.IgnoreDefaultValues);
 
         // Act
-        var result = changes.HasChange(x => (object)x.Array);
+        var result = changes.HasChange(x => (object)x.Array!);
 
         // Assert
         Assert.False(result);
@@ -728,7 +728,7 @@ public class TrackingServiceTests
         var changes = this.trackingService.GetChanges(domainObject);
 
         // Act
-        var result = changes.HasChange(x => (object)x.Array);
+        var result = changes.HasChange(x => (object)x.Array!);
 
         // Assert
         Assert.True(result);

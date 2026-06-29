@@ -9,7 +9,7 @@ public class WebApiNetCoreFileGenerator : CodeFileGenerator<IServiceModelGenerat
 {
     private readonly bool generateMainDomainObjectController;
 
-    private readonly List<CodeAttributeDeclaration> additionalControllerAttributes;
+    private readonly List<CodeAttributeDeclaration>? additionalControllerAttributes;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="WebApiNetCoreFileGenerator"/> class.
@@ -20,7 +20,7 @@ public class WebApiNetCoreFileGenerator : CodeFileGenerator<IServiceModelGenerat
     public WebApiNetCoreFileGenerator(
             IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment> configuration,
             bool generateMainDomainObjectController = true,
-            List<CodeAttributeDeclaration> additionalControllerAttributes = null)
+            List<CodeAttributeDeclaration>? additionalControllerAttributes = null)
             : base(configuration)
     {
         this.generateMainDomainObjectController = generateMainDomainObjectController;
@@ -36,6 +36,7 @@ public class WebApiNetCoreFileGenerator : CodeFileGenerator<IServiceModelGenerat
             var types = domainTypes
                         .Select(z => z.GetProjectionSourceType(false))
                         .Where(z => null != z)
+                        .Select(z => z!)
                         .Where(z => !domainTypes.Contains(z))
                         .OrderBy(z => z.FullName);
 

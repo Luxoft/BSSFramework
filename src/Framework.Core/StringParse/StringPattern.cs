@@ -6,19 +6,19 @@ namespace Framework.Core.StringParse;
 public class StringPattern
 {
     private readonly string defaultEnd = "$";
-    private string start;
-    private string end;
+    private string? start;
+    private string? end;
 
-    private string afterThatWords;
+    private string? afterThatWords;
 
     public StringPattern()
     {
     }
-    public string Start => this.start;
+    public string? Start => this.start;
 
     public string End => this.end ?? this.defaultEnd;
 
-    public string AfterThatWorlds => this.afterThatWords;
+    public string? AfterThatWorlds => this.afterThatWords;
 
     public StringPattern WithStart(char start) => this.WithStart(new string(new[] { start }));
 
@@ -38,15 +38,15 @@ public class StringPattern
         return this;
     }
 
-    private void SetValue(string value, Func<string> getValue, Action<string> setValue, MethodBase methodInfo)
+    private void SetValue(string value, Func<string?> getValue, Action<string> setValue, MethodBase? methodInfo)
     {
         if (string.IsNullOrEmpty(value))
         {
-            throw new ArgumentException($"Set value can't be empty. Method:{methodInfo.Name}");
+            throw new ArgumentException($"Set value can't be empty. Method:{methodInfo?.Name}");
         }
         if (!string.IsNullOrEmpty(getValue()))
         {
-            throw new ArgumentException($"Parameter also initialized. Method:{methodInfo.Name}");
+            throw new ArgumentException($"Parameter also initialized. Method:{methodInfo?.Name}");
         }
         setValue(value);
     }

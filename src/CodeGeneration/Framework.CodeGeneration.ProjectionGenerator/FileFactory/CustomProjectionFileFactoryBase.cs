@@ -16,7 +16,7 @@ public class CustomProjectionFileFactoryBase<TConfiguration>(TConfiguration conf
 {
     public override FileType FileType { get; } = FileType.CustomProjectionBase;
 
-    public override CodeTypeReference BaseReference => this.DomainType.BaseType.ToTypeReference(); // this.Configuration.Environment.GetProjectionBaseType(this.DomainType).ToTypeReference();
+    public override CodeTypeReference BaseReference => this.DomainType!.BaseType!.ToTypeReference(); // this.Configuration.Environment.GetProjectionBaseType(this.DomainType).ToTypeReference();
 
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration() =>
@@ -30,7 +30,7 @@ public class CustomProjectionFileFactoryBase<TConfiguration>(TConfiguration conf
     protected override IEnumerable<CodeAttributeDeclaration> GetCustomAttributes()
     {
         {
-            var projectionAttr = this.DomainType.GetCustomAttribute<ProjectionAttribute>();
+            var projectionAttr = this.DomainType!.GetCustomAttribute<ProjectionAttribute>();
 
             if (projectionAttr != null)
             {

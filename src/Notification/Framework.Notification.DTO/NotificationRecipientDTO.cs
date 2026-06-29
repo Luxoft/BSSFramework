@@ -11,7 +11,7 @@ public class NotificationRecipientDTO
     public RecipientRole Type { get; set; }
 
     [DataMember]
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
     public NotificationRecipientDTO()
     {

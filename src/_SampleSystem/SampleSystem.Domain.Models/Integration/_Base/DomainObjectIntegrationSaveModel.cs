@@ -7,6 +7,6 @@ public abstract class DomainObjectIntegrationSaveModel<TDomainObject> : DomainOb
         where TDomainObject : PersistentDomainObjectBase
 {
     [Required]
-    public virtual TDomainObject SavingObject { get; set; }
+    public virtual TDomainObject SavingObject { get; set; } = null!;
 }
 

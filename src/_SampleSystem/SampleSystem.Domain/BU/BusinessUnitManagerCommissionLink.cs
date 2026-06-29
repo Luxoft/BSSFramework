@@ -16,11 +16,11 @@ namespace SampleSystem.Domain.BU;
 [CustomName("Manager Commissions")]
 public class BusinessUnitManagerCommissionLink : AuditPersistentDomainObjectBase, IDetail<BusinessUnit>
 {
-    private readonly BusinessUnit businessUnit;
+    private readonly BusinessUnit businessUnit = null!;
 
     private decimal commission;
 
-    private Employee.Employee manager;
+    private Employee.Employee manager = null!;
 
     private Period period;
 

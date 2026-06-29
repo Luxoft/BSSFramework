@@ -9,8 +9,8 @@ internal class PropertyMethodInfoImpl(MethodInfo? baseDefinition = null) : BaseM
 {
     public bool CanWrap => false;
 
-    public override MethodInfo GetBaseDefinition() => baseDefinition;
+    public override MethodInfo GetBaseDefinition() => baseDefinition!;
 
-    public override bool Equals(object obj) => ReferenceEquals(this, obj);
+    public override bool Equals(object? obj) => ReferenceEquals(this, obj);
 }
 

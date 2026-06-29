@@ -7,8 +7,8 @@ namespace SampleSystem.Domain.HRDepartment;
 
 public class HRDepartmentRoleEmployee : AuditPersistentDomainObjectBase, IDetail<HRDepartment>
 {
-    private Employee.Employee employee;
-    private HRDepartment hRDepartment;
+    private Employee.Employee employee = null!;
+    private HRDepartment hRDepartment = null!;
     private HRDepartmentEmployeeRoleType hRDepartmentEmployeeRoleType;
 
     public HRDepartmentRoleEmployee(HRDepartment hRDepartment)

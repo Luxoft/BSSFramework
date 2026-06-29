@@ -2,9 +2,9 @@
 
 public class TestRelativeEmployeeObject : AuditPersistentDomainObjectBase
 {
-    private Employee.Employee employeeRef1;
+    private Employee.Employee employeeRef1 = null!;
 
-    private Employee.Employee employeeRef2;
+    private Employee.Employee employeeRef2 = null!;
 
     public virtual Employee.Employee EmployeeRef1
     {

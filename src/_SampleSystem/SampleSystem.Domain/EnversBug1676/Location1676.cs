@@ -9,7 +9,7 @@ public class Location1676 : BaseDirectory
 {
     private readonly ICollection<WorkingCalendar1676> calendar = new List<WorkingCalendar1676>();
 
-    private Coefficient1676 coefficient;
+    private Coefficient1676 coefficient = null!;
 
     [Mapping(IsOneToOne = true)]
     [CustomSerialization(CustomSerializationMode.Ignore)]

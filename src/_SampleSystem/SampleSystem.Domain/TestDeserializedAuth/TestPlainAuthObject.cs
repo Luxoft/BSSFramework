@@ -10,9 +10,9 @@ public class TestPlainAuthObject : BaseDirectory, IMaster<TestItemAuthObject>
 {
     private readonly ICollection<TestItemAuthObject> items = new List<TestItemAuthObject>();
 
-    private Location location;
+    private Location location = null!;
 
-    private Employee.Employee employee;
+    private Employee.Employee employee = null!;
 
 
     public virtual Location Location

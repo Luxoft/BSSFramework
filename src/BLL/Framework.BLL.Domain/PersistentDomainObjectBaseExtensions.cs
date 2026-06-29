@@ -87,7 +87,7 @@ public static class PersistentDomainObjectBaseExtensions
         if (propertyExpr == null) throw new ArgumentNullException(nameof(propertyExpr));
 
         return source.GetCollectionValue(propertyExpr)
-                     .Match(() => null,
+                     .Match(() => (TProperty?)null,
                             v => v,
                             _ => { throw new Exception($"{typeof(TSource).Name} one-to-one error. Too many items in collection {typeof(TProperty).Name}"); });
     }

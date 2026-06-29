@@ -30,7 +30,7 @@ public static class BaseCodeDomHelper
 
         return new CodeConstructor
         {
-            Attributes = ((fileFactory as IFileTypeSource<MainDTOFileType>).Maybe(s => s.FileType.IsAbstract) || fileFactory.DomainType.IsAbstractDTO() ? MemberAttributes.Family : MemberAttributes.Public) | MemberAttributes.Override,
+            Attributes = ((fileFactory as IFileTypeSource<MainDTOFileType>).Maybe(s => s.FileType.IsAbstract) || fileFactory.DomainType!.IsAbstractDTO() ? MemberAttributes.Family : MemberAttributes.Public) | MemberAttributes.Override,
         };
     }
 
@@ -58,7 +58,7 @@ public static class BaseCodeDomHelper
             where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment> =>
         source.GetActualStrictConstructorFileTypes()
               .Concat([null])
-              .Windowed2((fileType, baseFileType) => new[] { false, true }.Select(withoutMappingParameter => source.GenerateStrictConstructor(fileType, baseFileType, withoutMappingParameter)))
+              .Windowed2((fileType, baseFileType) => new[] { false, true }.Select(withoutMappingParameter => source.GenerateStrictConstructor(fileType!, baseFileType, withoutMappingParameter)))
               .SelectMany();
 
     public static IEnumerable<MainDTOFileType> GetStrictConstructorFileTypes<TConfiguration>(this IDTOSource<TConfiguration> source)
@@ -82,7 +82,7 @@ public static class BaseCodeDomHelper
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
-        return source.GetStrictConstructorFileTypes().Where(fileType => source.Configuration.GeneratePolicy.Used(source.DomainType, fileType));
+        return source.GetStrictConstructorFileTypes().Where(fileType => source.Configuration.GeneratePolicy.Used(source.DomainType!, fileType));
     }
 
     private static CodeConstructor GenerateStrictConstructor<TConfiguration>(this IDTOSource<TConfiguration> source, MainDTOFileType sourceFileType, MainDTOFileType? baseFileType, bool withoutMappingParameter)
@@ -91,7 +91,7 @@ public static class BaseCodeDomHelper
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (sourceFileType == null) throw new ArgumentNullException(nameof(sourceFileType));
 
-        var interfaceSourceTypeRef = source.Configuration.GetCodeTypeReference(source.DomainType, sourceFileType);
+        var interfaceSourceTypeRef = source.Configuration.GetCodeTypeReference(source.DomainType!, sourceFileType);
 
         var sourceTypeParameter = new CodeParameterDeclarationExpression(interfaceSourceTypeRef, SourceParameterName);
         var sourceTypeParameterRefExpr = sourceTypeParameter.ToVariableReferenceExpression();
@@ -110,7 +110,7 @@ public static class BaseCodeDomHelper
             var mappingServiceParameter = new CodeParameterDeclarationExpression(source.Configuration.GetCodeTypeReference(null, BaseFileType.ClientDTOMappingServiceInterface), "mappingService");
             var mappingServiceParameterRefExpr = mappingServiceParameter.ToVariableReferenceExpression();
 
-            var mapName = $"Map{sourceFileType.ShortName}To{source.FileType.ShortName}For{source.DomainType.Name}";
+            var mapName = $"Map{sourceFileType.ShortName}To{source.FileType.ShortName}For{source.DomainType!.Name}";
 
             var constructor = new CodeConstructor
             {
@@ -127,7 +127,7 @@ public static class BaseCodeDomHelper
             {
                 if (!baseFileType.IsAbstract || source.IsPersistent())
                 {
-                    var baseInterfaceSourceTypeRef = source.Configuration.GetCodeTypeReference(source.DomainType, baseFileType);
+                    var baseInterfaceSourceTypeRef = source.Configuration.GetCodeTypeReference(source.DomainType!, baseFileType);
 
                     constructor.ChainedConstructorArgs.AddRange([new CodeCastExpression(baseInterfaceSourceTypeRef, sourceTypeParameterRefExpr), mappingServiceParameterRefExpr]);
                 }
@@ -149,7 +149,7 @@ public static class BaseCodeDomHelper
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 
-        var strictTypeRef = fileFactory.Configuration.GetCodeTypeReference(fileFactory.DomainType, DTOType.StrictDTO);
+        var strictTypeRef = fileFactory.Configuration.GetCodeTypeReference(fileFactory.DomainType!, DTOType.StrictDTO);
 
 
         var currentSourceTypeParameter = new CodeParameterDeclarationExpression(strictTypeRef, "currentSource");
@@ -179,7 +179,7 @@ public static class BaseCodeDomHelper
                 Statements =
                            {
                                    new CodeThrowArgumentNullExceptionConditionStatement(mappingServiceParameter),
-                                   mappingServiceParameterRefExpr.ToMethodInvokeExpression($"Map{fileFactory.DomainType.Name}", new CodeThisReferenceExpression(), currentSourceTypeParameterRefExpr, baseSourceTypeParameterRefExpr)
+                                   mappingServiceParameterRefExpr.ToMethodInvokeExpression($"Map{fileFactory.DomainType!.Name}", new CodeThisReferenceExpression(), currentSourceTypeParameterRefExpr, baseSourceTypeParameterRefExpr)
                            }
             };
         }
@@ -191,7 +191,7 @@ public static class BaseCodeDomHelper
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 
-        var strictTypeRef = fileFactory.Configuration.GetCodeTypeReference(fileFactory.DomainType, DTOType.StrictDTO);
+        var strictTypeRef = fileFactory.Configuration.GetCodeTypeReference(fileFactory.DomainType!, DTOType.StrictDTO);
 
         var currentSourceTypeParameter = new CodeParameterDeclarationExpression(strictTypeRef, "currentSource");
         var currentSourceTypeParameterRefExpr = currentSourceTypeParameter.ToVariableReferenceExpression();
@@ -217,7 +217,7 @@ public static class BaseCodeDomHelper
                 Statements =
                            {
                                    new CodeThrowArgumentNullExceptionConditionStatement(mappingServiceParameter),
-                                   mappingServiceParameterRefExpr.ToMethodInvokeExpression($"Map{fileFactory.DomainType.Name}", new CodeThisReferenceExpression(), currentSourceTypeParameterRefExpr)
+                                   mappingServiceParameterRefExpr.ToMethodInvokeExpression($"Map{fileFactory.DomainType!.Name}", new CodeThisReferenceExpression(), currentSourceTypeParameterRefExpr)
                            }
             };
         }
@@ -229,7 +229,7 @@ public static class BaseCodeDomHelper
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 
-        return typeof(IIdentityObjectContainer<>).ToTypeReference(fileFactory.Configuration.GetCodeTypeReference(fileFactory.DomainType.GetProjectionSourceTypeOrSelf(), BaseFileType.IdentityDTO));
+        return typeof(IIdentityObjectContainer<>).ToTypeReference(fileFactory.Configuration.GetCodeTypeReference(fileFactory.DomainType!.GetProjectionSourceTypeOrSelf(), BaseFileType.IdentityDTO));
     }
 
     public static CodeTypeReference GetIdentityObjectTypeReference<TConfiguration>(this IFileFactory<TConfiguration> fileFactory)
@@ -245,7 +245,7 @@ public static class BaseCodeDomHelper
     {
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
 
-        var identityRef = fileFactory.Configuration.GetCodeTypeReference(fileFactory.DomainType.GetProjectionSourceTypeOrSelf(), BaseFileType.IdentityDTO);
+        var identityRef = fileFactory.Configuration.GetCodeTypeReference(fileFactory.DomainType!.GetProjectionSourceTypeOrSelf(), BaseFileType.IdentityDTO);
         var identityImplRef = typeof(IIdentityObjectContainer<>).ToTypeReference(identityRef);
 
         return new CodeMemberProperty
@@ -291,7 +291,7 @@ public static class BaseCodeDomHelper
         if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
-        var targetRef = fileFactory.Configuration.GetCodeTypeReference(fileFactory.DomainType, fileType);
+        var targetRef = fileFactory.Configuration.GetCodeTypeReference(fileFactory.DomainType!, fileType);
 
         return new CodeMemberMethod
         {

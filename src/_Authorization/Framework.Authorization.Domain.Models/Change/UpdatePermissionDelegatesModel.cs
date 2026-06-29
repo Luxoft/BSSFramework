@@ -4,7 +4,7 @@ namespace Framework.Authorization.Domain;
 public class UpdatePermissionDelegatesModel : DomainObjectBase
 {
     [Restriction.Required]
-    public Permission DelegateFromPermission { get; set; }
+    public Permission DelegateFromPermission { get; set; } = null!;
 
     [Restriction.Required]
     public List<DelegateToItemModel> AddItems { get; set; } = [];

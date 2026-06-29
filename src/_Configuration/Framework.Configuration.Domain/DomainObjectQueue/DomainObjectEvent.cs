@@ -12,27 +12,27 @@ public class DomainObjectEvent : AuditPersistentDomainObjectBase
 {
     private readonly QueueProgressStatus status;
 
-    private readonly string hostName;
+    private readonly string? hostName;
 
     private readonly DateTime? processDate;
 
-    private DomainTypeEventOperation operation;
+    private DomainTypeEventOperation? operation;
 
     private Guid domainObjectId;
 
     private long revision;
 
-    private string serializeData;
+    private string serializeData = null!;
 
-    private string serializeType;
+    private string serializeType = null!;
 
-    private string queueTag;
+    private string queueTag = null!;
 
     private int size;
 
     ////private readonly long number;
 
-    public virtual DomainTypeEventOperation Operation
+    public virtual DomainTypeEventOperation? Operation
     {
         get => this.operation;
         set => this.operation = value;
@@ -73,7 +73,7 @@ public class DomainObjectEvent : AuditPersistentDomainObjectBase
 
     public virtual QueueProgressStatus Status => this.status;
 
-    public virtual string HostName => this.hostName;
+    public virtual string? HostName => this.hostName;
 
     public virtual DateTime? ProcessDate => this.processDate;
 

@@ -69,8 +69,8 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
             BaseTypes = { typeof(IUpdateDTO) }
         };
 
-    protected override CodeExpression GetFieldInitExpression(CodeTypeReference codeTypeReference, PropertyInfo property) =>
-        this.CodeTypeReferenceService.IsOptional(property) ? this.CodeTypeReferenceService.GetCodeTypeReference(property).ToNothingValueExpression()
+    protected override CodeExpression? GetFieldInitExpression(CodeTypeReference codeTypeReference, PropertyInfo property) =>
+        this.CodeTypeReferenceService!.IsOptional(property) ? this.CodeTypeReferenceService!.GetCodeTypeReference(property).ToNothingValueExpression()
         : property.PropertyType.IsCollection() ? (CodeExpression)new CodeObjectCreateExpression(codeTypeReference)
         : property.GetCustomAttribute<DefaultValueAttribute>().Maybe(attr => attr.Value.ToDynamicPrimitiveExpression());
 
@@ -81,7 +81,7 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
             yield return method;
         }
 
-        foreach (var masterType in this.Configuration.GetDomainTypeMasters(this.DomainType, this.FileType, true))
+        foreach (var masterType in this.Configuration.GetDomainTypeMasters(this.DomainType!, this.FileType, true))
         {
             if (this.Configuration.IsPersistentObject(masterType))
             {
@@ -98,7 +98,7 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
         }
 
 
-        foreach (var masterType in this.Configuration.GetDomainTypeMasters(this.DomainType, this.FileType, true))
+        foreach (var masterType in this.Configuration.GetDomainTypeMasters(this.DomainType!, this.FileType, true))
         {
             if (this.Configuration.IsPersistentObject(masterType))
             {
@@ -119,7 +119,7 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
         {
             yield return this.GetIdentityObjectTypeRef();
 
-            if (this.Configuration.GeneratePolicy.Used(this.DomainType, BaseFileType.IdentityDTO))
+            if (this.Configuration.GeneratePolicy.Used(this.DomainType!, BaseFileType.IdentityDTO))
             {
                 yield return this.GetIdentityObjectContainerTypeReference();
             }
@@ -161,7 +161,7 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
 
         if (this.IsPersistent())
         {
-            if (this.Configuration.GeneratePolicy.Used(this.DomainType, BaseFileType.IdentityDTO))
+            if (this.Configuration.GeneratePolicy.Used(this.DomainType!, BaseFileType.IdentityDTO))
             {
                 yield return this.GetIdentityObjectContainerImplementation();
             }
@@ -196,7 +196,7 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
             Attributes = MemberAttributes.Public | MemberAttributes.Final,
             Name = nameof(IUpdateDTO.Compress),
             ReturnType = typeof(void).ToTypeReference()
-        }.WithStatements(checkProperties.Select(this.TryGetPropertyCompressStatement).Where(statement => statement != null));
+        }.WithStatements(checkProperties.Select(this.TryGetPropertyCompressStatement).OfType<CodeStatement>());
     }
 
     private CodeExpression GetPropertyIsEmptyCondition(PropertyInfo property)
@@ -215,7 +215,7 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
         }
     }
 
-    private CodeStatement TryGetPropertyCompressStatement(PropertyInfo property)
+    private CodeStatement? TryGetPropertyCompressStatement(PropertyInfo property)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
@@ -253,7 +253,7 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
         var targetParameter = this.CurrentReference.ToParameterDeclarationExpression("target");
         var targetParameterRefExpr = targetParameter.ToVariableReferenceExpression();
 
-        var currentSourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType, BaseFileType.StrictDTO).ToParameterDeclarationExpression("currentSource");
+        var currentSourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType!, BaseFileType.StrictDTO).ToParameterDeclarationExpression("currentSource");
         var currentSourceParameterRefExpr = currentSourceParameter.ToVariableReferenceExpression();
 
         {
@@ -261,7 +261,7 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
 
             yield return new CodeMemberMethod
             {
-                Name = $"Map{this.DomainType.Name}",
+                Name = $"Map{this.DomainType!.Name}",
                 Attributes = MemberAttributes.Public,
                 Parameters = { targetParameter, currentSourceParameter }
             }.WithStatement(new CodeThrowArgumentNullExceptionConditionStatement(targetParameter))
@@ -270,14 +270,14 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
         }
 
         {
-            var baseSourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType, BaseFileType.StrictDTO).ToParameterDeclarationExpression("baseSource");
+            var baseSourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType!, BaseFileType.StrictDTO).ToParameterDeclarationExpression("baseSource");
             var baseSourceParameterRefExpr = baseSourceParameter.ToVariableReferenceExpression();
 
             var propertyAssigner = new DiffUpdatePropertyAssigner<TConfiguration>(this);
 
             yield return new CodeMemberMethod
             {
-                Name = $"Map{this.DomainType.Name}",
+                Name = $"Map{this.DomainType!.Name}",
                 Attributes = MemberAttributes.Public,
                 Parameters = { targetParameter, currentSourceParameter, baseSourceParameter }
             }.WithStatement(new CodeThrowArgumentNullExceptionConditionStatement(targetParameter))
@@ -292,22 +292,22 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
     {
         var targetParameter = this.CurrentReference.ToParameterDeclarationExpression("target");
 
-        var currentSourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType, BaseFileType.StrictDTO).ToParameterDeclarationExpression("currentSource");
+        var currentSourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType!, BaseFileType.StrictDTO).ToParameterDeclarationExpression("currentSource");
 
         {
             yield return new CodeMemberMethod
             {
-                Name = $"Map{this.DomainType.Name}",
+                Name = $"Map{this.DomainType!.Name}",
                 Parameters = { targetParameter, currentSourceParameter }
             };
         }
 
         {
-            var baseSourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType, BaseFileType.StrictDTO).ToParameterDeclarationExpression("baseSource");
+            var baseSourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType!, BaseFileType.StrictDTO).ToParameterDeclarationExpression("baseSource");
 
             yield return new CodeMemberMethod
             {
-                Name = $"Map{this.DomainType.Name}",
+                Name = $"Map{this.DomainType!.Name}",
                 Parameters = { targetParameter, currentSourceParameter, baseSourceParameter }
             };
         }

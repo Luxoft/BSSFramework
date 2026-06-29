@@ -17,7 +17,7 @@ internal class ProjectionCustomPropertyBuilder : IProjectionCustomProperty
 
     public bool Writable { get; set; }
 
-    public TypeReferenceBase Type { get; set; }
+    public TypeReferenceBase Type { get; set; } = null!;
 
     public IReadOnlyList<string> Fetchs { get; set; }
 

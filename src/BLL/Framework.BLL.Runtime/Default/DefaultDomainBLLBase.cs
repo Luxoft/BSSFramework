@@ -42,7 +42,7 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
 
     public TDomainObject GetNested(TDomainObject domainObject)
     {
-        var method = new Func<TDomainObject, TDomainObject>(this.GetNested<TDomainObject>).Method.GetGenericMethodDefinition();
+        var method = new Func<TDomainObject, TDomainObject?>(this.GetNested<TDomainObject>).Method.GetGenericMethodDefinition();
 
         var request = from t in typeof(TDomainObject).Assembly.GetTypes()
                       where t != typeof(TDomainObject) && !t.IsAbstract && !t.IsGenericTypeDefinition && typeof(TDomainObject).IsAssignableFrom(t)

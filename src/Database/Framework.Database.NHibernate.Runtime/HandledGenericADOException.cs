@@ -7,8 +7,8 @@ namespace Framework.Database.NHibernate;
 [Serializable]
 public class HandledGenericAdoException : ADOException
 {
-    public string EntityName { get; private set; }
-    public object EntityId { get; private set; }
+    public string EntityName { get; private set; } = null!;
+    public object EntityId { get; private set; } = null!;
 
     public HandledGenericAdoException()
     {
@@ -26,6 +26,6 @@ public class HandledGenericAdoException : ADOException
         this.EntityId = unTypeObjectInfo.Item2;
     }
 
-    public Microsoft.Data.SqlClient.SqlException SqlException => (Microsoft.Data.SqlClient.SqlException)this.InnerException;
+    public Microsoft.Data.SqlClient.SqlException SqlException => (Microsoft.Data.SqlClient.SqlException)this.InnerException!;
 }
 

@@ -47,8 +47,8 @@ public partial class Employee :
 
     private BusinessUnit? coreBusinessUnit;
     private HRDepartment.HRDepartment? hRDepartment;
-    private EmployeePosition position;
-    private Employee ppm;
+    private EmployeePosition position = null!;
+    private Employee ppm = null!;
 
     private Period educationDuration;
     private Gender gender;
@@ -56,10 +56,10 @@ public partial class Employee :
     private FioShort nameEng = new();
     private Fio nameNative = new();
     private Fio nameRussian = new();
-    private EmployeeRegistrationType registrationType;
+    private EmployeeRegistrationType registrationType = null!;
 
-    private string email;
-    private string login;
+    private string? email;
+    private string? login;
     private int? pin;
     private long externalId;
     private DateTime? plannedHireDate;
@@ -67,18 +67,18 @@ public partial class Employee :
     private DateTime? dismissDate;
     private DateTime? birthDate;
     private DateTime? lastActionDate;
-    private string interphone;
-    private string landlinephone;
-    private Employee vacationApprover;
+    private string? interphone;
+    private string? landlinephone;
+    private Employee vacationApprover = null!;
 
     // ReSharper disable once InconsistentNaming
     private bool canBePPM;
 
-    private string cellPhone;
-    private string personalCellPhone;
-    private ManagementUnit managementUnit;
-    private EmployeeRole role;
-    private EmployeeRoleDegree roleDegree;
+    private string? cellPhone;
+    private string? personalCellPhone;
+    private ManagementUnit managementUnit = null!;
+    private EmployeeRole role = null!;
+    private EmployeeRoleDegree roleDegree = null!;
     private Period workPeriod;
 
     private int age;
@@ -121,14 +121,14 @@ public partial class Employee :
     public virtual IEnumerable<EmployeePersonalCellPhone> PersonalCellPhones => this.personalCellPhones;
 
     [CustomSerialization(CustomSerializationMode.Ignore)]
-    public virtual EmployeePhoto DefaultPhoto => this.EmployeePhotos.SingleOrDefault(z => z.IsDefault);
+    public virtual EmployeePhoto? DefaultPhoto => this.EmployeePhotos.SingleOrDefault(z => z.IsDefault);
 
     public virtual string AccountName => this.Login.Split('\\').LastOrDefault().TrimNull();
 
     public virtual string MailAccountName => this.Email.Split('@').FirstOrDefault().TrimNull();
 
     [FetchPath("EmployeeToEmployeeLinks.LinkedEmployee")]
-    public virtual Employee PersonalAssistant =>
+    public virtual Employee? PersonalAssistant =>
         this.EmployeeToEmployeeLinks.FirstOrDefault(
             x => x.EmployeeLinkType == EmployeeLinkType.PersonalAssistant).Maybe(x => x.LinkedEmployee);
 
@@ -264,7 +264,7 @@ public partial class Employee :
     public virtual Period BuPeriod => this.CoreBusinessUnit.Maybe(v => v.Period);
 
     [ExpandPath("HRDepartment.Location")]
-    public virtual Location Location => this.HRDepartment?.Location;
+    public virtual Location? Location => this.HRDepartment?.Location;
 
     [ExpandPath("HRDepartment.Location.Code")]
     public virtual int? LocationCode => this.Location?.Code;
@@ -297,7 +297,7 @@ public partial class Employee :
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client)]
     [ExpandPath("HRDepartment.CompanyLegalEntity")]
     [DetailRole(false)]
-    public virtual CompanyLegalEntity CompanyLegalEntity => this.HRDepartment.Maybe(x => x.CompanyLegalEntity);
+    public virtual CompanyLegalEntity? CompanyLegalEntity => this.HRDepartment.Maybe(x => x.CompanyLegalEntity);
 
     public virtual DateTime? LastActionDate
     {

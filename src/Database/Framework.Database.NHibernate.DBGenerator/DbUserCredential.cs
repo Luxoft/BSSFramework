@@ -2,11 +2,11 @@
 
 public class DbUserCredential
 {
-    private readonly string name;
+    private readonly string? name;
 
-    private readonly string password;
+    private readonly string? password;
 
-    internal DbUserCredential(string name, string password)
+    internal DbUserCredential(string? name, string? password)
     {
         var parameters = new[] { name, password };
         if (parameters.Any(z => null == z) && parameters.Any(z => null != z))
@@ -21,9 +21,9 @@ public class DbUserCredential
 
     public bool IsDefault => null == this.password && null == this.name;
 
-    public virtual string UserName => this.name;
+    public virtual string? UserName => this.name;
 
-    public virtual string Password => this.password;
+    public virtual string? Password => this.password;
 
     public static DbUserCredential CreateDefault() => new(null, null);
 

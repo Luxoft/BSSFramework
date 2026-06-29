@@ -10,6 +10,6 @@ public class CodeNameofExpression : CodeExpression
 
     public CodeNameofExpression(string value) => this.Value = value ?? throw new ArgumentNullException(nameof(value));
 
-    public string Value { get; set; }
+    public string Value { get; set; } = null!;
 }
 

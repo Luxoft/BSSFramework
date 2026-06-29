@@ -34,18 +34,18 @@ public static class TrackingServiceExtensions
 
         private static Func<ITrackingService<TPersistentDomainObjectBase>, TDomainObject, IEnumerable<TRemovedItem>> GetSourceFunc(PropertyPath propertyPath)
         {
-            if (propertyPath == null) throw new ArgumentNullException(nameof(propertyPath));
+            if (propertyPath is null) throw new ArgumentNullException(nameof(propertyPath));
 
             var prop = propertyPath.Head;
 
             var directFunc = new Func<PropertyPath, Expression<Func<TDomainObject, IEnumerable<TDomainObject>>>, Func<ITrackingService<TPersistentDomainObjectBase>, TDomainObject, IEnumerable<TRemovedItem>>>(GetSourceFuncDirect)
-                             .CreateGenericMethod(prop.PropertyType.GetCollectionElementType())
+                             .CreateGenericMethod(prop.PropertyType.GetCollectionElementType()!)
                              .Invoke<Func<ITrackingService<TPersistentDomainObjectBase>, TDomainObject, IEnumerable<TRemovedItem>>>(null, propertyPath, prop.ToGetLambdaExpression());
 
             if (propertyPath.Count > 1)
             {
                 var subMergeFunc = new Func<PropertyPath, Expression<Func<TDomainObject, IEnumerable<TDomainObject>>>, Func<ITrackingService<TPersistentDomainObjectBase>, TDomainObject, IEnumerable<TRemovedItem>>>(GetSourceFuncSubMerge)
-                                   .CreateGenericMethod(prop.PropertyType.GetCollectionElementType())
+                                   .CreateGenericMethod(prop.PropertyType.GetCollectionElementType()!)
                                    .Invoke<Func<ITrackingService<TPersistentDomainObjectBase>, TDomainObject, IEnumerable<TRemovedItem>>>(null, propertyPath, prop.ToGetLambdaExpression());
 
                 return new[] { directFunc, subMergeFunc }.Sum();
@@ -58,7 +58,7 @@ public static class TrackingServiceExtensions
 
         private static Func<ITrackingService<TPersistentDomainObjectBase>, TDomainObject, IEnumerable<TRemovedItem>> GetSourceFuncDirect<TDetail>(PropertyPath propertyPath, Expression<Func<TDomainObject, IEnumerable<TDetail>>> propertyExpression)
         {
-            if (propertyPath == null) throw new ArgumentNullException(nameof(propertyPath));
+            if (propertyPath is null) throw new ArgumentNullException(nameof(propertyPath));
             if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));
 
             var getItemsFunc = propertyPath.Tail.GetAllElements<TDetail, TRemovedItem>();
@@ -84,7 +84,7 @@ public static class TrackingServiceExtensions
         private static Func<ITrackingService<TPersistentDomainObjectBase>, TDomainObject, IEnumerable<TRemovedItem>> GetSourceFuncSubMerge<TDetail>(PropertyPath propertyPath, Expression<Func<TDomainObject, IEnumerable<TDetail>>> propertyExpression)
                 where TDetail : class, TPersistentDomainObjectBase
         {
-            if (propertyPath == null) throw new ArgumentNullException(nameof(propertyPath));
+            if (propertyPath is null) throw new ArgumentNullException(nameof(propertyPath));
             if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));
 
             var getSubSourceFunc = InternalHelper<TPersistentDomainObjectBase, TDetail, TRemovedItem>.SourceFunc;
@@ -122,7 +122,7 @@ public static class TrackingServiceExtensions
         if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
         if (targetType == null) throw new ArgumentNullException(nameof(targetType));
 
-        var detailType = propertyInfo.PropertyType.GetCollectionElementType();
+        var detailType = propertyInfo.PropertyType.GetCollectionElementType()!;
 
         if (targetType.IsAssignableFrom(detailType))
         {
@@ -140,7 +140,7 @@ public static class TrackingServiceExtensions
 
     internal static Func<IEnumerable<TSource>, IEnumerable<TElement>> GetAllElements<TSource, TElement>(this PropertyPath propertyPath)
     {
-        if (propertyPath == null) throw new ArgumentNullException(nameof(propertyPath));
+        if (propertyPath is null) throw new ArgumentNullException(nameof(propertyPath));
 
         var baseSource = propertyPath.GetAllElements() ?? FuncHelper.Create((IEnumerable<TSource> s) => s);
 
@@ -149,7 +149,7 @@ public static class TrackingServiceExtensions
 
     internal static Delegate? GetAllElements(this PropertyPath propertyPath)
     {
-        if (propertyPath == null) throw new ArgumentNullException(nameof(propertyPath));
+        if (propertyPath is null) throw new ArgumentNullException(nameof(propertyPath));
 
         var cachedProperties = propertyPath.ToArray();
 
@@ -157,15 +157,15 @@ public static class TrackingServiceExtensions
         {
             var selectManyMethod = new Func<IEnumerable<Ignore>, Func<Ignore, IEnumerable<Ignore>>, IEnumerable<Ignore>>(Enumerable.SelectMany).Method.GetGenericMethodDefinition();
 
-            var parameter = Expression.Parameter(typeof(IEnumerable<>).MakeGenericType(cachedProperties.First().DeclaringType));
+            var parameter = Expression.Parameter(typeof(IEnumerable<>).MakeGenericType(cachedProperties.First().DeclaringType!));
 
             var resultExpr = cachedProperties.Aggregate(
                                                         (Expression)parameter,
                                                         (expr, property) =>
                                                         {
-                                                            var sourceType = property.DeclaringType;
+                                                            var sourceType = property.DeclaringType!;
 
-                                                            var detailType = property.PropertyType.GetCollectionElementType();
+                                                            var detailType = property.PropertyType.GetCollectionElementType()!;
 
                                                             return Expression.Call(selectManyMethod.MakeGenericMethod(sourceType, detailType), expr, property.ToGetLambdaExpression());
                                                         });

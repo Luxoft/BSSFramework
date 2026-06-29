@@ -2,7 +2,7 @@
 
 public class SampleSystemAuditRevisionEntity : SystemAuditRevisionPersistentDomainObjectBase
 {
-    private string author;
+    private string author = null!;
 
     private DateTime revisionDate;
 

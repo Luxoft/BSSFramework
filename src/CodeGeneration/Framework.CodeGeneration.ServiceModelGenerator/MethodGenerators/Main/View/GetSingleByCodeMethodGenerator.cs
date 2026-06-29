@@ -25,7 +25,7 @@ public class GetSingleByCodeMethodGenerator<TConfiguration>(TConfiguration confi
 
     protected override IEnumerable<CodeParameterDeclarationExpression> GetParameters()
     {
-        yield return this.DomainType.GetInterfaceImplementationArgument(typeof(ICodeObject<>)).ToTypeReference().ToParameterDeclarationExpression(this.DomainType.Name.ToStartLowerCase() + "Code");
+        yield return this.DomainType.GetInterfaceImplementationArgument(typeof(ICodeObject<>))!.ToTypeReference().ToParameterDeclarationExpression(this.DomainType.Name.ToStartLowerCase() + "Code");
     }
 
 

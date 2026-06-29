@@ -2,8 +2,11 @@
 
 public class PropertyEqualityComparer<T, TProperty>(Func<T, TProperty> getPropertyFunc) : EqualityComparer<T>
 {
-    public override bool Equals(T x, T y)
+    public override bool Equals(T? x, T? y)
     {
+        if (x is null) return y is null;
+        if (y is null) return false;
+
         var xValue = getPropertyFunc(x);
         var yValue = getPropertyFunc(y);
 

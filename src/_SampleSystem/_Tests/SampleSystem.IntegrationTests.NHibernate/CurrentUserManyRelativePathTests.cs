@@ -10,7 +10,7 @@ namespace SampleSystem.IntegrationTests;
 
 public class CurrentUserManyRelativePathTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
-    private Guid[] testEmployeeIdents;
+    private Guid[] testEmployeeIdents = null!;
 
     private Guid testObj;
 

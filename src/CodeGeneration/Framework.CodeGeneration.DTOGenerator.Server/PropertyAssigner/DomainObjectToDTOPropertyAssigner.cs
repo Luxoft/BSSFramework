@@ -23,7 +23,7 @@ public class DomainObjectToDTOPropertyAssigner<TConfiguration>(IDTOSource<TConfi
 
         if (this.Configuration.IsReferenceProperty(property))
         {
-            var referenceFileType = this.CodeTypeReferenceService.GetReferenceFileType(property);
+            var referenceFileType = this.CodeTypeReferenceService!.GetReferenceFileType(property);
 
             var convertArguments = referenceFileType.NeedMappingServiceForConvert() ? new[] { sourcePropertyRef, this.MappingServiceRefExpr }
                                            : new[] { sourcePropertyRef };
@@ -45,12 +45,12 @@ public class DomainObjectToDTOPropertyAssigner<TConfiguration>(IDTOSource<TConfi
 
         if (this.Configuration.IsCollectionProperty(property))
         {
-            var collectionFileType = this.CodeTypeReferenceService.GetCollectionFileType(property);
+            var collectionFileType = this.CodeTypeReferenceService!.GetCollectionFileType(property);
 
             var convertArguments = collectionFileType.NeedMappingServiceForConvert() ? new[] { sourcePropertyRef, this.MappingServiceRefExpr }
                                            : new[] { sourcePropertyRef };
 
-            var elementType = property.PropertyType.GetCollectionElementType();
+            var elementType = property.PropertyType.GetCollectionElementType()!;
 
             return this.Configuration.GetConvertToDTOListMethod(elementType, collectionFileType)
                        .ToMethodInvokeExpression(convertArguments)

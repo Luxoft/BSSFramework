@@ -36,7 +36,7 @@ public class EnversBug1676(IServiceProvider rootServiceProvider) : TestBase(root
                            context =>
                            {
                                var location = context.Logics.Location1676.GetById(locationId);
-                               location.Name = location.Name + "NextName";
+                               location!.Name = location!.Name + "NextName";
                                context.Logics.Default.Create<Location1676>().Save(location);
                            });
 
@@ -44,7 +44,7 @@ public class EnversBug1676(IServiceProvider rootServiceProvider) : TestBase(root
                            context =>
                            {
                                var location = context.Logics.Location1676.GetById(locationId);
-                               location.Name = location.Name + "NextName";
+                               location!.Name = location!.Name + "NextName";
                                location.Coefficient.NormCoefficient = version2Norm;
 
                                context.Logics.Default.Create<Location1676>().Save(location);
@@ -55,7 +55,7 @@ public class EnversBug1676(IServiceProvider rootServiceProvider) : TestBase(root
                            context =>
                            {
                                var location = context.Logics.Location1676.GetById(locationId);
-                               location.Name = location.Name + "NextName";
+                               location!.Name = location!.Name + "NextName";
                                context.Logics.Default.Create<Location1676>().Save(location);
                            });
 

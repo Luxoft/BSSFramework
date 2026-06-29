@@ -14,8 +14,8 @@ class AuditTableGenerateContext(
     global::NHibernate.Dialect.Dialect dialect,
     IMapping mapping,
     string defaultCatalog,
-    string defaultSchema,
-    PersistentClass original,
+    string? defaultSchema,
+    PersistentClass? original,
     IAuditAttributeService auditAttributeService,
     IDatabaseScriptGeneratorContext context)
 {
@@ -29,11 +29,11 @@ class AuditTableGenerateContext(
 
     public ITableMetadata TableInfo { get; } = tableInfo;
 
-    public string DefaultSchema { get; } = defaultSchema;
+    public string? DefaultSchema { get; } = defaultSchema;
 
     public ITableMetadata OriginalTableMetadata { get; } = originalTable;
 
-    public PersistentClass Original { get; } = original;
+    public PersistentClass? Original { get; } = original;
 
     public IAuditAttributeService AuditAttributeService { get; } = auditAttributeService;
 

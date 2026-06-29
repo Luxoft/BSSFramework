@@ -32,7 +32,7 @@ public abstract class DomainObjectToSecurityPropertyAssignerBase<TConfiguration>
         if (sourcePropertyRef == null) throw new ArgumentNullException(nameof(sourcePropertyRef));
         if (targetPropertyRef == null) throw new ArgumentNullException(nameof(targetPropertyRef));
 
-        var targetPropertyTypeRef = this.CodeTypeReferenceService.GetCodeTypeReference(property);
+        var targetPropertyTypeRef = this.CodeTypeReferenceService!.GetCodeTypeReference(property);
 
         var resultVarDecl = targetPropertyTypeRef.ToVariableDeclarationStatement("result" + property.Name);
         var resultVarDeclRef = resultVarDecl.ToVariableReferenceExpression();

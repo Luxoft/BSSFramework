@@ -4,8 +4,8 @@ namespace SampleSystem.Domain.MU;
 
 public class ManagementUnitAncestorLink : AuditPersistentDomainObjectBase
 {
-    private ManagementUnit ancestor;
-    private ManagementUnit child;
+    private ManagementUnit ancestor = null!;
+    private ManagementUnit child = null!;
 
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual ManagementUnit Ancestor

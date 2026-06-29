@@ -37,7 +37,7 @@ public class IgnoreLink
         return new IgnoreLink((PropertyInfo)member);
     }
 
-    private IgnoreLink(PropertyInfo propertyInfo) : this(propertyInfo.DeclaringType)
+    private IgnoreLink(PropertyInfo propertyInfo) : this(propertyInfo.DeclaringType!)
     {
         if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
 
@@ -48,6 +48,6 @@ public class IgnoreLink
 
     public Type FromType { get; private set; }
 
-    public PropertyInfo MemberInfo { get; private set; }
+    public PropertyInfo? MemberInfo { get; private set; }
 }
 

@@ -5,7 +5,7 @@
 /// </summary>
 public class IMRequestDetail : AuditPersistentDomainObjectBase
 {
-    private IMRequest request;
+    private IMRequest request = null!;
 
     protected IMRequestDetail()
     {

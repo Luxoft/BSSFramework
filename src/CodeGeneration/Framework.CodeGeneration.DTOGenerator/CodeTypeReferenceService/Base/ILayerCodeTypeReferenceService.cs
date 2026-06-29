@@ -30,7 +30,7 @@ public abstract class LayerCodeTypeReferenceService<TConfiguration>(TConfigurati
     public abstract RoleFileType GetCollectionFileType(PropertyInfo property);
 
 
-    public override RoleFileType GetFileType(PropertyInfo property)
+    public override RoleFileType? GetFileType(PropertyInfo property)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 

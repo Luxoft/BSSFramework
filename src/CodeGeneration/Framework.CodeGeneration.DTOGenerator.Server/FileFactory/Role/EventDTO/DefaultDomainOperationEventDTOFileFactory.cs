@@ -50,7 +50,7 @@ public class DefaultDomainOperationEventDTOFileFactory<TConfiguration> : DTOFile
 
     protected override IEnumerable<CodeTypeMember> GetMembers()
     {
-        var fieldTypeRef = this.Configuration.GetCodeTypeReference(this.DomainType, ServerFileType.RichEventDTO);
+        var fieldTypeRef = this.Configuration.GetCodeTypeReference(this.DomainType!, ServerFileType.RichEventDTO);
 
         var field = new CodeMemberField
         {
@@ -64,7 +64,7 @@ public class DefaultDomainOperationEventDTOFileFactory<TConfiguration> : DTOFile
         var property = new CodeMemberProperty
         {
             Type = fieldTypeRef,
-            Name = this.DomainType.Name,
+            Name = this.DomainType!.Name,
             Attributes = MemberAttributes.Public | MemberAttributes.Final,
             CustomAttributes = { new CodeAttributeDeclaration(new CodeTypeReference(typeof(DataMemberAttribute))) },
             GetStatements = { fieldMemberRef.ToMethodReturnStatement() },
@@ -88,7 +88,7 @@ public class DefaultDomainOperationEventDTOFileFactory<TConfiguration> : DTOFile
             Parameters = { mappingServiceParameter, domainTypeParameter },
             Statements =
                              {
-                                     this.Configuration.GetConvertToDTOMethod(this.DomainType, ServerFileType.RichEventDTO)
+                                     this.Configuration.GetConvertToDTOMethod(this.DomainType!, ServerFileType.RichEventDTO)
                                          .ToMethodInvokeExpression(domainTypeParameterRefExp, mappingServiceParameterRefExpr)
                                          .ToAssignStatement(new CodeThisReferenceExpression().ToFieldReference(field))
                              }

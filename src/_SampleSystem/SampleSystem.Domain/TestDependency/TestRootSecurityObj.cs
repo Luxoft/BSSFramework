@@ -10,13 +10,13 @@ namespace SampleSystem.Domain.TestDependency;
 [BLLViewRole]
 public class TestRootSecurityObj : BaseDirectory, IMaster<TestSecurityObjItem>
 {
-    private BusinessUnit businessUnit;
+    private BusinessUnit businessUnit = null!;
 
-    private Location location;
+    private Location location = null!;
 
     private readonly ICollection<TestSecurityObjItem> items = new List<TestSecurityObjItem>();
 
-    private ManagementUnitFluentMapping managementUnitFluentMapping;
+    private ManagementUnitFluentMapping managementUnitFluentMapping = null!;
 
     public virtual IEnumerable<TestSecurityObjItem> Items => this.items;
 

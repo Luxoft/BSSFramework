@@ -20,13 +20,13 @@ namespace SampleSystem.IntegrationTests;
 
 public class AuthPerformanceTest(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
-    private IReadOnlyCollection<BusinessUnitIdentityDTO?> fbuSource;
+    private IReadOnlyCollection<BusinessUnitIdentityDTO?> fbuSource = null!;
 
-    private IReadOnlyCollection<ManagementUnitIdentityDTO?> mbuSource;
+    private IReadOnlyCollection<ManagementUnitIdentityDTO?> mbuSource = null!;
 
-    private IReadOnlyCollection<LocationIdentityDTO?> locationSource;
+    private IReadOnlyCollection<LocationIdentityDTO?> locationSource = null!;
 
-    private IReadOnlyCollection<EmployeeIdentityDTO?> employeeSource;
+    private IReadOnlyCollection<EmployeeIdentityDTO?> employeeSource = null!;
 
     private static readonly string PrincipalName = "AuthPerformance";
 

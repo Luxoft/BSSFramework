@@ -24,7 +24,7 @@ public class LazyImplementDictionaryCache<TKey, TValue>(
             {
                 var createProxyFunc = this.GetCreateProxyFunc(key);
 
-                var proxy = createProxyFunc(() => result);
+                var proxy = createProxyFunc(() => result!);
 
                 this.dict.Add(key, proxy);
 
@@ -56,7 +56,7 @@ public class LazyImplementDictionaryCache<TKey, TValue>(
 
     private static Func<Func<TValue>, TValue> GetCreateProxyFunc<TProxyValue>()
             where TProxyValue : TValue =>
-        f => LazyInterfaceImplementHelper<TProxyValue>.CreateProxy(() => (TProxyValue)f());
+        f => LazyInterfaceImplementHelper<TProxyValue>.CreateProxy(() => (TProxyValue)f()!);
 
     IEnumerable<TValue> IDictionaryCache<TKey, TValue>.Values => this.dict.Values;
 }

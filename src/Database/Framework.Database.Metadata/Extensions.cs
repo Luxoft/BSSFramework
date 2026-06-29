@@ -14,7 +14,7 @@ internal static class Extensions
     {
         var allTypes = new[] { type }
                        .Concat(type.BaseType.Maybe(z => z.GetAllElements(q => q.BaseType)
-                                                         .TakeWhile(q => null != q && q != typeof(object) && q.IsAbstract)))
+                                                         .TakeWhile(q => null != q && q != typeof(object) && q.IsAbstract)) ?? [])
                        .ToList();
 
         var result =
@@ -40,7 +40,7 @@ public static class MetadataReader
                               isCompilerGenerated = true;
                               fieldName = d.DomainType
                                            .GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-                                           .Where(z => (z.GetGetMethod(true) ?? z.GetSetMethod(true)).IsDefined(typeof(CompilerGeneratedAttribute), false))
+                                           .Where(z => (z.GetGetMethod(true) ?? z.GetSetMethod(true))!.IsDefined(typeof(CompilerGeneratedAttribute), false))
                                            .Select(z => new { GeneratedName = $"<{z.Name}>k__BackingField", Property = z })
                                            .First(z => string.Equals(z.GeneratedName, f.Name, StringComparison.InvariantCultureIgnoreCase))
                                            .Property.Name;
@@ -54,7 +54,7 @@ public static class MetadataReader
             inlineTypeFieldMetadataCreator
                     = (f, d) =>
                       {
-                          InlineTypeFieldMetadata result;
+                          InlineTypeFieldMetadata? result;
                           if (f.FieldType.IsInlineType(d.AssemblyMetadata.PersistentDomainObjectBaseType))
                           {
                               result = new InlineTypeFieldMetadata(f.Name, f.FieldType, f.GetAttributes(d.DomainType), d);
@@ -124,7 +124,7 @@ public static class MetadataReader
 
     static Func<Type, AssemblyMetadata, DomainTypeMetadata> domainTypeMetadataCreator4DeepFields = (t, a) =>
     {
-        return domainTypeMetadataCreatorBase(t, a,
+        return domainTypeMetadataCreatorBase!(t, a,
                                              t.GetCurrentAndUpAbstractTypeFields()
                                               .Where(z => !z.HasAttribute<NotPersistentFieldAttribute>()));
     };
@@ -139,7 +139,10 @@ public static class MetadataReader
                 foreach (var fieldInfo in fieldInfoCollection)
                 {
                     var z = fieldMetadataCreator(fieldInfo, result);
-                    r.Add(z);
+                    if (z != null)
+                    {
+                        r.Add(z);
+                    }
                 }
 
                 result.AddFields(r.Where(z => null != z));

@@ -4,5 +4,5 @@ public class BusinessUnitProgramClassFilterModel : DomainObjectBase
 {
     public Guid? AncestorIdent { get; set; }
 
-    public string FilterVirtualName { get; set; }
+    public string? FilterVirtualName { get; set; }
 }

@@ -6,7 +6,7 @@ public class MuComponent
 {
     private bool? luxoftSignsFirst;
 
-    private Employee.Employee authorizedLuxoftSignatory;
+    private Employee.Employee? authorizedLuxoftSignatory;
 
     public virtual bool? LuxoftSignsFirst
     {
@@ -15,7 +15,7 @@ public class MuComponent
     }
 
     [CustomSerialization(CustomSerializationMode.Ignore)]
-    public virtual Employee.Employee AuthorizedLuxoftSignatory
+    public virtual Employee.Employee? AuthorizedLuxoftSignatory
     {
         get => this.authorizedLuxoftSignatory;
         set => this.authorizedLuxoftSignatory = value;

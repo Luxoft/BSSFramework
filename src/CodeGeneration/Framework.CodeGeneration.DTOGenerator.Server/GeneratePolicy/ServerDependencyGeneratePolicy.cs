@@ -16,11 +16,11 @@ public class ServerDependencyGeneratePolicy(IGeneratePolicy<RoleFileType> baseGe
 
         if (fileType == ServerFileType.BaseEventDTO)
         {
-            return this.Maps.Any(map => map.FileType is DomainOperationEventDTOFileType && this.Used(map.DomainType, map.FileType));
+            return this.Maps.Any(map => map.FileType is DomainOperationEventDTOFileType && this.Used(map.DomainType!, map.FileType));
         }
         else if (fileType == ServerFileType.RichEventDTO)
         {
-            return this.Maps.Any(map => map.DomainType == domainType && map.FileType is DomainOperationEventDTOFileType && this.Used(map.DomainType, map.FileType))
+            return this.Maps.Any(map => map.DomainType! == domainType && map.FileType is DomainOperationEventDTOFileType && this.Used(map.DomainType!, map.FileType))
 
                    || this.IsUsedProperty(ServerFileType.RichEventDTO, domainType, fileType, true);
         }

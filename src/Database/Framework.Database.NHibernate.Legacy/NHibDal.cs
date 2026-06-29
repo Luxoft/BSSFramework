@@ -21,6 +21,7 @@ namespace Framework.Database.NHibernate;
 
 public class NHibDal<TDomainObject, TIdent>(INHibSession session, IAsyncDal<TDomainObject, TIdent> asyncDal, IDefaultCancellationTokenSource? defaultCancellationTokenSource = null) : IDAL<TDomainObject, TIdent>
     where TDomainObject : class
+    where TIdent : notnull
 {
     private static readonly LambdaCompileCache LambdaCompileCache = new(LambdaCompileMode.None);
 
@@ -111,11 +112,10 @@ public class NHibDal<TDomainObject, TIdent>(INHibSession session, IAsyncDal<TDom
             ((Func<TIdent, string, Period?, DomainObjectPropertyRevisions<TIdent, object>>)this.GetPropertyRevisions<object>)
             .Method
             .GetGenericMethodDefinition();
+
         var method = genericMethodDefinition.MakeGenericMethod(propertyInfo.PropertyType);
 
-        var result = method.InvokeWithExceptionProcessed(this, id, propertyName, period);
-
-        return (IDomainObjectPropertyRevisionBase<TIdent, RevisionInfoBase>)result;
+        return method.Invoke<IDomainObjectPropertyRevisionBase<TIdent, RevisionInfoBase>>(this, id, propertyName, period);
     }
 
     public DomainObjectPropertyRevisions<TIdent, TProperty> GetPropertyRevisions<TProperty>(
@@ -199,8 +199,6 @@ public class NHibDal<TDomainObject, TIdent>(INHibSession session, IAsyncDal<TDom
     public IEnumerable<TIdent> GetIdentiesWithHistory(Expression<Func<TDomainObject, bool>> query) =>
         this.GetAuditReader().GetIdentsBy<TDomainObject, TIdent>(query.ToCriterion());
 
-    public TDomainObject GetById(TIdent id) => this.NativeSession.Get<TDomainObject>(id);
-
     public TDomainObject Load(TIdent id) => this.NativeSession.Load<TDomainObject>(id);
 
     public DomainObjectPropertyRevisions<TIdent, TProperty> GetPrimitivePropertiesRevision<TProperty>(
@@ -241,11 +239,11 @@ public class NHibDal<TDomainObject, TIdent>(INHibSession session, IAsyncDal<TDom
             var propertyValue = (TProperty)Convert.ChangeType(resultItem[0], typeof(TProperty));
 
             var revisionType = (AuditRevisionType)((int)resultItem[1]);
-            var author = isAuditedType ? resultItem[4].ToString() : string.Empty;
+            var author = isAuditedType ? resultItem[4].ToString() ?? string.Empty : string.Empty;
             var revisionNumber = (long)resultItem[2];
-            var date = isAuditedType ? DateTime.Parse(resultItem[3].ToString()) : new DateTime(1753, 01, 01);
+            var date = isAuditedType ? DateTime.Parse(resultItem[3].ToString()!) : new DateTime(1753, 01, 01);
 
-            new PropertyRevision<TIdent, TProperty>(result, propertyValue, revisionType, author, date, revisionNumber);
+            _ = new PropertyRevision<TIdent, TProperty>(result, propertyValue, revisionType, author, date, revisionNumber);
         }
 
         return result;
@@ -268,14 +266,6 @@ public class NHibDal<TDomainObject, TIdent>(INHibSession session, IAsyncDal<TDom
     }
 
     private IAuditReaderPatched GetAuditReader() => session.AuditReader;
-
-    private void CheckWrite()
-    {
-        if (session.SessionMode != DBSessionMode.Write)
-        {
-            throw new InvalidOperationException("Invalid session mode. Expected Write.");
-        }
-    }
 }
 
 

@@ -57,7 +57,7 @@ public abstract class IntegrationDTOFileFactory<TConfiguration> : RoleDTOFileFac
 
         if (this.IsPersistent())
         {
-            if (this.Configuration.GeneratePolicy.Used(this.DomainType, BaseFileType.IdentityDTO))
+            if (this.Configuration.GeneratePolicy.Used(this.DomainType!, BaseFileType.IdentityDTO))
             {
                 yield return this.GetIdentityObjectContainerImplementation();
             }

@@ -12,7 +12,7 @@ public class OverrideHashSetVisitor<TIdent> : ExpressionVisitor
 
     }
 
-    public override Expression Visit(Expression node) => new InternalStateVisitor().Visit(node);
+    public override Expression? Visit(Expression? node) => new InternalStateVisitor().Visit(node);
 
     public class InternalStateVisitor : ExpressionVisitor
     {
@@ -21,7 +21,7 @@ public class OverrideHashSetVisitor<TIdent> : ExpressionVisitor
                 new DictionaryCache<HashSet<TIdent>, Expression>(source => Expression.Constant(source.ToList()));
 
 
-        public override Expression Visit(Expression? baseNode)
+        public override Expression? Visit(Expression? baseNode)
         {
             var request = from node in baseNode.ToMaybe()
 

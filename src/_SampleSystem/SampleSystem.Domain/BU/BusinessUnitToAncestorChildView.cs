@@ -5,9 +5,9 @@ namespace SampleSystem.Domain.BU;
 [View]
 public class BusinessUnitToAncestorChildView : AuditPersistentDomainObjectBase
 {
-    private BusinessUnit childOrAncestor;
+    private BusinessUnit childOrAncestor = null!;
 
-    private BusinessUnit source;
+    private BusinessUnit source = null!;
 
 
     public virtual BusinessUnit ChildOrAncestor => this.childOrAncestor;

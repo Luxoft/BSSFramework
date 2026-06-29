@@ -26,7 +26,7 @@ public class BLLFactoryInterfaceFileFactory<TConfiguration>(TConfiguration confi
     {
         var bllInterfaceTypeRef = this.Configuration.GetCodeTypeReference(this.DomainType, FileType.BLLInterface);
 
-        yield return typeof(ISecurityBLLFactory<,>).ToTypeReference(bllInterfaceTypeRef, this.DomainType.ToTypeReference());
+        yield return typeof(ISecurityBLLFactory<,>).ToTypeReference(bllInterfaceTypeRef, this.DomainType!.ToTypeReference());
     }
 }
 

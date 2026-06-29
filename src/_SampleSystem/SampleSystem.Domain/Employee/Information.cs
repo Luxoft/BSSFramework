@@ -8,7 +8,7 @@ namespace SampleSystem.Domain.Employee;
 [BLLEventRole]
 public class Information : BaseDirectory
 {
-    private string email;
+    private string? email;
 
     [MaxLength(50)]
     public virtual string Email

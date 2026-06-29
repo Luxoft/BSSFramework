@@ -16,7 +16,7 @@ public class SingleControllerCodeFileGenerator<TConfiguration>(TConfiguration co
         {
             if (baseFileGenerator is ImplementFileFactory<TConfiguration> fileFactory)
             {
-                yield return new SingleControllerCodeFileFactory<TConfiguration>(this.Configuration, fileFactory.DomainType);
+                yield return new SingleControllerCodeFileFactory<TConfiguration>(this.Configuration, fileFactory.DomainType!);
             }
         }
     }

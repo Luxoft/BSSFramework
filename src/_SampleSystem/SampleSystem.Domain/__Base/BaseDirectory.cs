@@ -14,7 +14,7 @@ public abstract class BaseDirectory : AuditPersistentDomainObjectBase, IVisualId
     /// <summary>
     ///     Название типа
     /// </summary>
-    private string name;
+    private string? name;
 
     [VisualIdentity]
     [Required]

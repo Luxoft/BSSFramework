@@ -10,7 +10,7 @@ public static class PropertyPathExtensions
 {
     public static bool HasReferenceResult(this PropertyPath path)
     {
-        if (path == null) { throw new ArgumentNullException(nameof(path)); }
+        if (path is null) { throw new ArgumentNullException(nameof(path)); }
 
         return path.Any(prop => prop.PropertyType.IsClass || prop.PropertyType.IsNullable());
     }

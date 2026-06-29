@@ -9,6 +9,7 @@ public class DefaultCollectionMappingService<TSource, TTarget, TIdent>(Func<TSou
     : ICollectionMappingService<TSource, TTarget>
     where TSource : IIdentityObject<TIdent>
     where TTarget : class, IIdentityObject<TIdent>
+    where TIdent : notnull
 {
     protected virtual TTarget AddDetail(TSource source) => createAndMapDetail(source);
 

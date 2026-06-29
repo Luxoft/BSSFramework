@@ -30,7 +30,7 @@ public abstract class GetByODataQueryWithFilterMethodGeneratorBase<TConfiguratio
 
     protected sealed override CodeTypeReference ReturnType { get; }
 
-    protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
+    protected override object? GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
         var modelSecurityAttribute = this.FilterType.GetViewDomainObjectAttribute();
 

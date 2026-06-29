@@ -67,13 +67,13 @@ public static partial class TryResultExtensions
         if (successAction == null) throw new ArgumentNullException(nameof(successAction));
         if (getFaultResult == null) throw new ArgumentNullException(nameof(getFaultResult));
 
-        if (source is ISuccessResult<T>)
+        if (source is ISuccessResult<T> successResult)
         {
-            return successAction((source as ISuccessResult<T>).Result);
+            return successAction(successResult.Result);
         }
-        else if (source is IFaultResult<T>)
+        else if (source is IFaultResult<T> faultResult)
         {
-            return getFaultResult((source as IFaultResult<T>).Error);
+            return getFaultResult(faultResult.Error);
         }
         else
         {
@@ -159,11 +159,11 @@ public static partial class TryResultExtensions
         return source.Match(v => v, error => { throw getThrowException(error); });
     }
 
-    public static T GetValueOrDefault<T>(this ITryResult<T> source)
+    public static T? GetValueOrDefault<T>(this ITryResult<T> source)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
-        return source.Match(v => v, error => default(T));
+        return source.Match(v => (T?)v, error => default(T));
     }
 
     public static ITryResult<T> ToTryResult<T>(this Maybe<T> source) => source.Match(TryResult.Return<T>, TryResult.CreateBreak<T>);

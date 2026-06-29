@@ -21,11 +21,11 @@ public class MsSqlDataBaseSchemaExtended(DbConnection connection) : AbstractData
             this.Name = Convert.ToString(rs["TABLE_NAME"]);
         }
 
-        protected override string GetConstraintName(DataRow rs) => Convert.ToString(rs["CONSTRAINT_NAME"]);
+        protected override string GetConstraintName(DataRow rs) => Convert.ToString(rs["CONSTRAINT_NAME"])!;
 
-        protected override string GetColumnName(DataRow rs) => Convert.ToString(rs["COLUMN_NAME"]);
+        protected override string GetColumnName(DataRow rs) => Convert.ToString(rs["COLUMN_NAME"])!;
 
-        protected override string GetIndexName(DataRow rs) => Convert.ToString(rs["INDEX_NAME"]);
+        protected override string GetIndexName(DataRow rs) => Convert.ToString(rs["INDEX_NAME"])!;
 
         protected override IColumnMetadata GetColumnMetadata(DataRow rs) => new MsSqlColumnMetadataExtended(rs);
 

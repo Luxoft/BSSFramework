@@ -9,16 +9,16 @@ namespace Framework.Configuration.Domain;
 [NotAuditedClass]
 public class SentMessage : AuditPersistentDomainObjectBase
 {
-    private readonly string from;
-    private readonly string to;
-    private readonly string copy;
-    private readonly string subject;
-    private readonly string message;
-    private readonly string templateName;
-    private readonly string comment;
-    private readonly string contextObjectType;
+    private readonly string? from;
+    private readonly string? to;
+    private readonly string? copy;
+    private readonly string? subject;
+    private readonly string? message;
+    private readonly string? templateName;
+    private readonly string? comment;
+    private readonly string? contextObjectType;
     private readonly Guid? contextObjectId;
-    private readonly string replyTo;
+    private readonly string? replyTo;
 
     protected SentMessage()
     {
@@ -58,51 +58,51 @@ public class SentMessage : AuditPersistentDomainObjectBase
     /// <summary>
     /// Доменный тип, на который зарегистрирована подписка
     /// </summary>
-    public virtual string ContextObjectType => this.contextObjectType;
+    public virtual string? ContextObjectType => this.contextObjectType;
 
     /// <summary>
     /// Дополнительный получатель в копии письма
     /// </summary>
     [MaxLength]
-    public virtual string Copy => this.copy;
+    public virtual string? Copy => this.copy;
 
     /// <summary>
     /// Получатель(и) нотификации
     /// </summary>
     [MaxLength]
-    public virtual string To => this.to;
+    public virtual string? To => this.to;
 
     /// <summary>
     /// Шаблон темы нотификации
     /// </summary>
     [MaxLength(1000)]
-    public virtual string Subject => this.subject;
+    public virtual string? Subject => this.subject;
 
     /// <summary>
     /// Шаблон текста нотифкации
     /// </summary>
     [MaxLength]
-    public virtual string Message => this.message;
+    public virtual string? Message => this.message;
 
     /// <summary>
     /// Название шаблона нотификации
     /// </summary>
-    public virtual string TemplateName => this.templateName;
+    public virtual string? TemplateName => this.templateName;
 
     /// <summary>
     /// Комментарии
     /// </summary>
-    public virtual string Comment => this.comment;
+    public virtual string? Comment => this.comment;
 
     /// <summary>
     /// Отправитель нотификации
     /// </summary>
-    public virtual string From => this.from;
+    public virtual string? From => this.from;
 
     /// <summary>
     /// ReplyTo нотификации
     /// </summary>
     [MaxLength]
-    public virtual string ReplyTo => this.replyTo;
+    public virtual string? ReplyTo => this.replyTo;
 }
 

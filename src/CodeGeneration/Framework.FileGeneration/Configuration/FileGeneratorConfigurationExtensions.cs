@@ -8,12 +8,11 @@ public static class FileGeneratorConfigurationExtensions
     {
         public bool IsDomainObject(Type type) => !type.IsAbstract && configuration.Environment.DomainObjectBaseType.IsAssignableFrom(type);
 
-        public bool IsPersistentObject(Type type)
+        public bool IsPersistentObject(Type? type)
         {
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-            if (type == null) throw new ArgumentNullException(nameof(type));
 
-            return !type.IsAbstract && configuration.Environment.PersistentDomainObjectBaseType.IsAssignableFrom(type);
+            return type != null && !type.IsAbstract && configuration.Environment.PersistentDomainObjectBaseType.IsAssignableFrom(type);
         }
 
         public bool IsIdentityProperty(PropertyInfo property)

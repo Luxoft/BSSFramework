@@ -16,6 +16,6 @@ public abstract class SecurityServerPropertyAssigner<TConfiguration>(IPropertyAs
 
     public CodeExpression ContextRef => this.MappingServiceRefExpr.ToPropertyReference("Context");
 
-    public CodeParameterDeclarationExpression DomainParameter => this.DomainType.GetDomainObjectParameter();
+    public CodeParameterDeclarationExpression DomainParameter => this.DomainType!.GetDomainObjectParameter();
 }
 

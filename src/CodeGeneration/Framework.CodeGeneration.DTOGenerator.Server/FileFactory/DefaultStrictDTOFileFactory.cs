@@ -77,8 +77,8 @@ public class DefaultStrictDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
             Attributes = MemberAttributes.Public
         };
 
-    protected override CodeExpression GetFieldInitExpression(CodeTypeReference codeTypeReference, PropertyInfo property) =>
-        this.CodeTypeReferenceService.IsOptional(property) ? this.CodeTypeReferenceService.GetCodeTypeReference(property).ToNothingValueExpression()
+    protected override CodeExpression? GetFieldInitExpression(CodeTypeReference codeTypeReference, PropertyInfo property) =>
+        this.CodeTypeReferenceService!.IsOptional(property) ? this.CodeTypeReferenceService!.GetCodeTypeReference(property).ToNothingValueExpression()
         : property.PropertyType.IsCollection() ? (CodeExpression)new CodeObjectCreateExpression(codeTypeReference)
         : property.GetCustomAttribute<DefaultValueAttribute>().Maybe(attr => attr.Value.ToDynamicPrimitiveExpression());
 
@@ -93,7 +93,7 @@ public class DefaultStrictDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
         {
             yield return this.GetIdentityObjectTypeRef();
 
-            if (this.Configuration.GeneratePolicy.Used(this.DomainType, BaseFileType.IdentityDTO))
+            if (this.Configuration.GeneratePolicy.Used(this.DomainType!, BaseFileType.IdentityDTO))
             {
                 yield return this.GetIdentityObjectContainerTypeReference();
             }
@@ -128,7 +128,7 @@ public class DefaultStrictDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
 
         if (this.IsPersistent())
         {
-            if (this.Configuration.GeneratePolicy.Used(this.DomainType, BaseFileType.IdentityDTO))
+            if (this.Configuration.GeneratePolicy.Used(this.DomainType!, BaseFileType.IdentityDTO))
             {
                 yield return this.GetIdentityObjectContainerImplementation();
             }
@@ -151,7 +151,7 @@ public class DefaultStrictDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
         }
 
 
-        foreach (var masterType in this.Configuration.GetDomainTypeMasters(this.DomainType, this.FileType, true))
+        foreach (var masterType in this.Configuration.GetDomainTypeMasters(this.DomainType!, this.FileType, true))
         {
             if (this.Configuration.IsPersistentObject(masterType))
             {
@@ -168,7 +168,7 @@ public class DefaultStrictDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
         }
 
 
-        foreach (var masterType in this.Configuration.GetDomainTypeMasters(this.DomainType, this.FileType, true))
+        foreach (var masterType in this.Configuration.GetDomainTypeMasters(this.DomainType!, this.FileType, true))
         {
             if (this.Configuration.IsPersistentObject(masterType))
             {
@@ -186,7 +186,7 @@ public class DefaultStrictDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
             var targetParameter = this.CurrentReference.ToParameterDeclarationExpression("target");
             var targetParameterRefExpr = targetParameter.ToVariableReferenceExpression();
 
-            var currentSourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType, sourceFileType).ToParameterDeclarationExpression("source");
+            var currentSourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType!, sourceFileType).ToParameterDeclarationExpression("source");
             var currentSourceParameterRefExpr = currentSourceParameter.ToVariableReferenceExpression();
 
             var properties = this.Configuration.GetDomainTypeProperties(this.DomainType!, sourceFileType).Intersect(this.GetProperties(false));
@@ -208,11 +208,11 @@ public class DefaultStrictDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
         {
             var targetParameter = this.CurrentReference.ToParameterDeclarationExpression("target");
 
-            var sourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType, sourceFileType).ToParameterDeclarationExpression("currentSource");
+            var sourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType!, sourceFileType).ToParameterDeclarationExpression("currentSource");
 
             yield return new CodeMemberMethod
             {
-                Name = $"Map{sourceFileType.ShortName}To{this.FileType.ShortName}For{this.DomainType.Name}",
+                Name = $"Map{sourceFileType.ShortName}To{this.FileType.ShortName}For{this.DomainType!.Name}",
                 Parameters = { targetParameter, sourceParameter }
             };
         }

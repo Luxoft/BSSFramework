@@ -54,6 +54,6 @@ public static class ReferenceTypeFieldMetadataExtension
     }
     public static string ToSqlColumnName(this FieldMetadata source) => source.GetMappingName() ?? source.Name;
 
-    private static string GetMappingName(this FieldMetadata source) => source.Attributes.OfType<MappingAttribute>().SingleOrDefault().Maybe(z => z.ColumnName);
+    private static string? GetMappingName(this FieldMetadata source) => source.Attributes.OfType<MappingAttribute>().SingleOrDefault().Maybe(z => z.ColumnName);
 }
 

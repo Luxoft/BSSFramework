@@ -6,7 +6,7 @@ namespace Framework.CodeGeneration.DTOGenerator.Map;
 
 public class GeneratePropertyMap
 {
-    public GeneratePropertyMap(PropertyInfo property, Type elementType, RoleFileType elementFileType, bool isCollection, bool isNullable, bool isDetail)
+    public GeneratePropertyMap(PropertyInfo property, Type elementType, RoleFileType? elementFileType, bool isCollection, bool isNullable, bool isDetail)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
         if (elementType == null) throw new ArgumentNullException(nameof(elementType));
@@ -29,7 +29,7 @@ public class GeneratePropertyMap
 
     public bool IsDetail { get; }
 
-    public RoleFileType ElementFileType { get; }
+    public RoleFileType? ElementFileType { get; }
 
     public override string ToString() => $"Name: {this.Property.Name} | ElementFileType: {this.ElementFileType} | ElementType: {this.ElementType}";
 }

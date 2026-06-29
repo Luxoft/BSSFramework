@@ -31,7 +31,7 @@ public class ChangeDefaultInitializedValueStrategy(DatabaseScriptGeneratorStrate
     private void ChangeInitializedValueVersionColumns(
         IDatabaseScriptGeneratorContext context,
         IEnumerable<DomainTypeMetadata> typeDescriptions,
-        IEnumerable<Tuple<Table, Column, string>> addedColumns)
+        IEnumerable<Tuple<Table, Column, string?>> addedColumns)
     {
         var versioningFields = typeDescriptions.GetAllElements(z => z.NotAbstractChildrenDomainTypes).SelectMany(z => z.Fields.Where(f => f.IsVersion));
 

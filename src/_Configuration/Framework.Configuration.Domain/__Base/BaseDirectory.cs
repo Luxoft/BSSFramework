@@ -10,7 +10,7 @@ namespace Framework.Configuration.Domain;
 /// </summary>
 public abstract class BaseDirectory : AuditPersistentDomainObjectBase, IVisualIdentityObject
 {
-    private string name;
+    private string name = null!;
 
     /// <summary>
     /// Название типа

@@ -63,7 +63,7 @@ public abstract class AuditEventListenerBase
     private Action<AbstractPreDatabaseOperationEvent, object[]> GetSetAuditAction<TDomainObject, TPropertyDomainObject, TProperty>(IEntityPersister entityPersister, IAuditProperty<TPropertyDomainObject, TProperty> auditProperty)
             where TDomainObject : TPropertyDomainObject
     {
-        var property = typeof(TDomainObject).GetProperty(auditProperty.PropertyExpr.GetMemberName(), true);
+        var property = typeof(TDomainObject).GetProperty(auditProperty.PropertyExpr.GetMemberName(), true)!;
 
         var setAuditAction = property.GetSetValueAction<TDomainObject, TProperty>();
 
@@ -79,7 +79,7 @@ public abstract class AuditEventListenerBase
 
                    setAuditAction(domainObject, auditValue);
 
-                   state[propertyIndex] = auditValue;
+                   state[propertyIndex] = auditValue!;
                };
     }
 }

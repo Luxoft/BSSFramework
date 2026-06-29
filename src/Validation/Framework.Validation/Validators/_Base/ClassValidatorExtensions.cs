@@ -45,7 +45,7 @@ public static class ClassValidatorExtensions
 
                 if (validatorSourceType.IsAssignableFrom(typeof(TSource)))
                 {
-                    var unboxFunc = new Func<IClassValidator<object>, IClassValidator<TSource>>(Unbox<TSource, object>)
+                    var unboxFunc = new Func<IClassValidator<object>, IClassValidator<object>>(Unbox<object, object>)
                             .CreateGenericMethod(typeof(TSource), validatorSourceType);
 
                     return unboxFunc.Invoke<IClassValidator<TSource>>(null, baseClassValidator);

@@ -38,7 +38,8 @@ public abstract class ClientDTOMappingServiceBase
         IEnumerable<TSource> baseSource,
         Func<TSource, TSource, TTarget> getTargetFromPair,
         Func<TSource, TTarget> getTargetFromSingle)
-        where TSource : class, IIdentityObjectContainer<TIdentity> =>
+        where TSource : class, IIdentityObjectContainer<TIdentity>
+        where TIdentity : notnull =>
         currentSource.ExtractUpdateData(
             baseSource,
             (currentSourceItem, baseSourceItem) => baseSourceItem == null ? getTargetFromSingle(currentSourceItem) : getTargetFromPair(currentSourceItem, baseSourceItem),
@@ -50,6 +51,7 @@ public abstract class ClientDTOMappingServiceBase
         Func<TSource, TSource, TTarget> getTargetFromPair,
         Func<TSource, TTarget> getTargetFromSingle)
         where TSource : class, IIdentityObjectContainer<TIdentity>
+        where TIdentity : notnull
     {
         var tryCurrentSourceValue = currentSource.GetValueOrDefault();
 

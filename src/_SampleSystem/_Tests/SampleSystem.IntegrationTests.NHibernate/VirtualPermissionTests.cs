@@ -12,7 +12,7 @@ namespace SampleSystem.IntegrationTests;
 
 public class VirtualPermissionTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
-    private (string UserLogin, Guid BuId, Guid EmployeeId)[] Datas;
+    private (string UserLogin, Guid BuId, Guid EmployeeId)[] Datas = null!;
 
 
     protected override async ValueTask InitializeAsync(CancellationToken ct) =>
@@ -28,9 +28,9 @@ public class VirtualPermissionTests(IServiceProvider rootServiceProvider) : Test
                                  DBSessionMode.Write,
                                  context =>
                                  {
-                                     var bu = context.Logics.BusinessUnit.GetById(buId, true);
+                                     var bu = context.Logics.BusinessUnit.GetById(buId, true)!;
 
-                                     var employee = context.Logics.Employee.GetById(employeeId, true);
+                                     var employee = context.Logics.Employee.GetById(employeeId, true)!;
 
                                      context.Logics
                                             .Default

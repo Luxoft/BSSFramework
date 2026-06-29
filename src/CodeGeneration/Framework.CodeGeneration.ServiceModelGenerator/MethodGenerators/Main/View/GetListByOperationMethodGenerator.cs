@@ -30,7 +30,7 @@ public class GetListByOperationMethodGenerator<TConfiguration> : ViewCollectionM
         yield return this.GetSecurityRuleParameter();
     }
 
-    protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr) => this.GetSecurityRuleParameter().ToVariableReferenceExpression();
+    protected override object? GetBLLSecurityParameter(CodeExpression evaluateDataExpr) => this.GetSecurityRuleParameter().ToVariableReferenceExpression();
 
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
     {

@@ -10,7 +10,7 @@ public class TestObj : DomainObjectBase
 {
     [Required]
     [RestrictionExtension(typeof(RequiredAttribute), CustomError = "aaaa", OperationContext = (int)SampleSystemOperationContext.Save)]
-    public Fio FS { get; set; }
+    public Fio FS { get; set; } = null!;
 }
 
 

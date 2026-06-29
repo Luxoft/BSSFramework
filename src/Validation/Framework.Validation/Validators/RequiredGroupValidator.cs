@@ -13,10 +13,10 @@ public class RequiredGroupValidator : DynamicClassValidator
 {
     private readonly RequiredGroupValidatorMode mode;
 
-    private readonly string groupKey;
+    private readonly string? groupKey;
 
 
-    public RequiredGroupValidator(RequiredGroupValidatorMode mode, string groupKey)
+    public RequiredGroupValidator(RequiredGroupValidatorMode mode, string? groupKey)
     {
         if (!Enum.IsDefined(typeof(RequiredGroupValidatorMode), mode)) throw new ArgumentOutOfRangeException(nameof(mode));
 

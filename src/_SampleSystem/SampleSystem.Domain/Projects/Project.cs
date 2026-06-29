@@ -24,8 +24,8 @@ public class Project :
 {
     [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
     protected DateTime? startDate;
-    private string code;
-    private BusinessUnit businessUnit;
+    private string? code;
+    private BusinessUnit businessUnit = null!;
     private DateTime? plannedEndDate;
     private DateTime? endDate;
 

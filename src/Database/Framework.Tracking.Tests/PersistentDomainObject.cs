@@ -4,13 +4,13 @@ public class PersistentDomainObject
 {
     private Guid id;
 
-    private string name;
+    private string? name;
 
     private DateTime createdAt;
 
     private DateTime? modifiedAt;
 
-    private string[] array;
+    private string[]? array;
 
     public Guid Id
     {
@@ -18,7 +18,7 @@ public class PersistentDomainObject
         set => this.id = value;
     }
 
-    public string Name
+    public string? Name
     {
         get => this.name;
         set => this.name = value;
@@ -36,7 +36,7 @@ public class PersistentDomainObject
         set => this.modifiedAt = value;
     }
 
-    public string[] Array
+    public string[]? Array
     {
         get => this.array;
         set => this.array = value;

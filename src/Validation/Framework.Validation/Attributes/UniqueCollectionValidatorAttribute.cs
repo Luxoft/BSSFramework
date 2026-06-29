@@ -6,7 +6,7 @@ namespace Framework.Validation.Attributes;
 //[Obsolete("Use Framework.Restriction.UniqueGroup")]
 public class UniqueCollectionValidatorAttribute : PropertyValidatorAttribute
 {
-    public string GroupKey { get; set; }
+    public string? GroupKey { get; set; }
 
 
     public override IPropertyValidator CreateValidator() => new UniqueCollectionValidator(this.GroupKey);

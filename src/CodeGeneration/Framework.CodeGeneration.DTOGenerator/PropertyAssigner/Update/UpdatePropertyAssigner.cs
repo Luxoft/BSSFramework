@@ -54,15 +54,15 @@ public class UpdatePropertyAssigner<TConfiguration>(IDTOSource<TConfiguration> s
 
     private CodeStatement GetCollectionAssignStatement(PropertyInfo property, CodeExpression sourcePropertyRef, CodeExpression targetPropertyRef, string extractMethodName)
     {
-        var elementType = property.PropertyType.GetCollectionOrArrayElementType();
+        var elementType = property.PropertyType.GetCollectionOrArrayElementType()!;
 
-        var targetElementFileType = this.CodeTypeReferenceService.GetCollectionFileType(property);
+        var targetElementFileType = this.CodeTypeReferenceService!.GetCollectionFileType(property);
 
         var targetElementIdentityTypeRef = this.Configuration.GetCodeTypeReference(elementType, DTOType.IdentityDTO);
 
         var targetElementTypeRef = this.Configuration.GetCodeTypeReference(elementType, targetElementFileType);
 
-        var sourceElementFileType = this.Configuration.GetLayerCodeTypeReferenceService(BaseFileType.StrictDTO).GetCollectionFileType(property);
+        var sourceElementFileType = this.Configuration.GetLayerCodeTypeReferenceService(BaseFileType.StrictDTO)!.GetCollectionFileType(property);
 
         var sourceElementTypeRef = this.Configuration.GetCodeTypeReference(elementType, sourceElementFileType);
 

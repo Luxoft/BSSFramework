@@ -39,7 +39,7 @@ public partial class DataManager
             Period? workPeriod = null,
             DateTime? nonValidateVirtualProp = null,
             DateTime? validateVirtualProp = null,
-            string personalCellPhone = null,
+            string personalCellPhone = null!,
             Period? educationDuration = null,
             string cellPhone = "3365",
             LocationIdentityDTO? location = null,
@@ -118,11 +118,11 @@ public partial class DataManager
                                           NameNative = nameNative,
                                           NameRussian = nameRussian,
                                           Pin = pin,
-                                          ManagementUnit = null, //context.Logics.ManagementUnit.GetById(managementUnitId, isObjectRequired),
-                                          Position = context.Logics.EmployeePosition.GetById(positionId),
-                                          RegistrationType = context.Logics.EmployeeRegistrationType.GetById(registrationId),
-                                          Role = context.Logics.EmployeeRole.GetById(roleId),
-                                          RoleDegree = context.Logics.EmployeeRoleDegree.GetById(roleDegreeId),
+                                          ManagementUnit = null!, //context.Logics.ManagementUnit.GetById(managementUnitId, isObjectRequired),
+                                          Position = context.Logics.EmployeePosition.GetById(positionId)!,
+                                          RegistrationType = context.Logics.EmployeeRegistrationType.GetById(registrationId)!,
+                                          Role = context.Logics.EmployeeRole.GetById(roleId)!,
+                                          RoleDegree = context.Logics.EmployeeRoleDegree.GetById(roleDegreeId)!,
                                           CellPhone = cellPhone,
                                           Interphone = "3365",
                                           Landlinephone = "3365",
@@ -154,7 +154,7 @@ public partial class DataManager
             long externalId = 1,
             bool active = true)
     {
-        EmployeePosition position;
+        EmployeePosition? position;
         name = name ?? TextRandomizer.UniqueString("Position");
         englishName = englishName ?? name;
 
@@ -173,7 +173,7 @@ public partial class DataManager
                                               Name = name,
                                               EnglishName = englishName,
                                               ExternalId = externalId,
-                                              Location = context.Logics.Location.GetById(locationId)
+                                              Location = context.Logics.Location.GetById(locationId)!
                                           };
 
                                           context.Logics.EmployeePosition.Insert(position, this.GetGuid(id));
@@ -189,7 +189,7 @@ public partial class DataManager
             long externalId = 1,
             bool active = true)
     {
-        EmployeeRegistrationType type;
+        EmployeeRegistrationType? type;
         name = name ?? TextRandomizer.UniqueString("Type");
 
         return this.EvaluateWrite(
@@ -218,7 +218,7 @@ public partial class DataManager
             string? name = null,
             bool active = true)
     {
-        EmployeeRole role;
+        EmployeeRole? role;
         name = name ?? TextRandomizer.UniqueString("Role");
 
         return this.EvaluateWrite(
@@ -242,7 +242,7 @@ public partial class DataManager
             string? name = null,
             bool active = true)
     {
-        EmployeeRoleDegree roleDegree;
+        EmployeeRoleDegree? roleDegree;
         name = name ?? TextRandomizer.UniqueString("RoleDegree");
 
         return this.EvaluateWrite(
@@ -287,8 +287,8 @@ public partial class DataManager
         this.EvaluateWrite(
             context =>
             {
-                var employeeRole = context.Logics.EmployeeRole.GetById(employeeRoleIdentity.Id, true);
-                var employeeRoleDegree = context.Logics.EmployeeRoleDegree.GetById(employeeRoleDegreeIdentity.Id, true);
+                var employeeRole = context.Logics.EmployeeRole.GetById(employeeRoleIdentity.Id, true)!;
+                var employeeRoleDegree = context.Logics.EmployeeRoleDegree.GetById(employeeRoleDegreeIdentity.Id, true)!;
                 var result = new RoleRoleDegreeLink
                 {
                     Id = id ?? Guid.NewGuid(),

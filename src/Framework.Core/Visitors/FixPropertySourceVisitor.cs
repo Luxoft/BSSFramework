@@ -21,11 +21,13 @@ public class FixPropertySourceVisitor : ExpressionVisitor
     {
         var propRequest = from property in (node.Member as PropertyInfo).ToMaybe()
 
-                          where node.Expression.Type != property.ReflectedType
+                          from source in node.Expression.ToMaybe()
 
-                          let realProp = node.Expression.Type.GetProperty(property.Name, true)
+                          where source.Type != property.ReflectedType
 
-                          select (Expression)Expression.Property(node.Expression, realProp);
+                          let realProp = source.Type.GetProperty(property.Name, true)
+
+                          select (Expression)Expression.Property(source, realProp);
 
 
         return propRequest.GetValueOrDefault(() => base.VisitMember(node));
@@ -33,13 +35,13 @@ public class FixPropertySourceVisitor : ExpressionVisitor
 
     protected override Expression VisitMethodCall(MethodCallExpression node)
     {
-        var methodRequest = from _ in Maybe.Return()
+        var methodRequest = from source in node.Object.ToMaybe()
 
-                            where node.Object.Type != node.Method.ReflectedType
+                            where source.Type != node.Method.ReflectedType
 
-                            let realMethod = node.Object.Type.GetMethod(node.Method.Name, true)
+                            let realMethod = source.Type.GetMethod(node.Method.Name, true)
 
-                            select (Expression)Expression.Call(node.Object, realMethod, node.Arguments);
+                            select (Expression)Expression.Call(source, realMethod, node.Arguments);
 
         return methodRequest.GetValueOrDefault(() => base.VisitMethodCall(node));
     }

@@ -5,7 +5,7 @@ namespace Framework.Validation.Attributes;
 [AttributeUsage(AttributeTargets.Property)]
 public class NumberAlphabetValidatorAttribute : PropertyValidatorAttribute
 {
-    public string ExternalChars { get; set; }
+    public string? ExternalChars { get; set; }
 
 
     public override IPropertyValidator CreateValidator() => new NumberAlphabetValidator(this.ExternalChars);

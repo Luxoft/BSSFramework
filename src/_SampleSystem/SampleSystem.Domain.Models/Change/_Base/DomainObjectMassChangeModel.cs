@@ -13,7 +13,7 @@ public abstract class DomainObjectMassChangeModel<TDomainObject> : DomainObjectB
         where TDomainObject : PersistentDomainObjectBase
 {
     [Required]
-    public List<TDomainObject> ChangingObjects { get; set; }
+    public List<TDomainObject> ChangingObjects { get; set; } = null!;
 
     IEnumerable<TDomainObject> IDomainObjectMassChangeModel<TDomainObject>.ChangingObjects => this.ChangingObjects;
 }

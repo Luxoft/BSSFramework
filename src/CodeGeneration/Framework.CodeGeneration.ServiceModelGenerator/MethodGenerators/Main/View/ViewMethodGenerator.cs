@@ -33,7 +33,7 @@ public abstract class ViewMethodGenerator<TConfiguration>(TConfiguration configu
                                      .ToObjectCreateExpression(args);
     }
 
-    protected string CreateName(bool pluralize, string postfix, string postfixName = "By")
+    protected string CreateName(bool pluralize, string? postfix, string postfixName = "By")
     {
         var bodyPostfix = postfix.MaybeString(s => postfixName + s);
 

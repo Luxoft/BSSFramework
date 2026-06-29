@@ -4,9 +4,9 @@ namespace SampleSystem.Domain.Directories;
 
 public class LocationAncestorLink : AuditPersistentDomainObjectBase
 {
-    private Location ancestor;
+    private Location ancestor = null!;
 
-    private Location child;
+    private Location child = null!;
 
     public LocationAncestorLink()
     {

@@ -33,13 +33,13 @@ public class ExpandValidationTest
 
 public class TestRootClass
 {
-    public TestCompositeClass CompositeProp { get; set; }
+    public TestCompositeClass CompositeProp { get; set; } = null!;
 }
 
 [ExpandValidation]
 public class TestCompositeClass
 {
     [RequiredValidator]
-    public string SomeProperty { get; set; }
+    public string SomeProperty { get; set; } = null!;
 }
 

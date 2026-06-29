@@ -60,7 +60,7 @@ public class Serializer<TSerializedValue, TValue> : ISerializer<TSerializedValue
             {
                 var parser = new Parser<string, TValue>(ParserHelper.GetParseFunc<TValue>());
 
-                var formatter = new Formatter<TValue, string>(v => v == null ? null : v.ToString());
+                var formatter = new Formatter<TValue, string>(v => (v == null ? null : v.ToString())!);
 
                 return (Serializer<TSerializedValue, TValue>)(object)new Serializer<string, TValue>(parser, formatter);
             }

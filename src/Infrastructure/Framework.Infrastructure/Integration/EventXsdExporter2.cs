@@ -34,7 +34,7 @@ public class EventXsdExporter2 : IEventXsdExporter2
         }
 
         var exportTypes = this.GetSchemaSet(
-            attribute.Namespace,
+            attribute.Namespace!,
             baseEventDto.Name,
             Assembly.GetAssembly(baseEventDto)!.GetTypes()
                     .Where(x => x.IsClass && !x.IsAbstract && baseEventDto.IsAssignableFrom(x))

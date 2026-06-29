@@ -9,7 +9,7 @@ namespace SampleSystem.Domain;
 [UniqueGroup]
 public class SqlParserTestObjContainer : AuditPersistentDomainObjectBase
 {
-    private SqlParserTestObj includedObject;
+    private SqlParserTestObj includedObject = null!;
 
     public virtual SqlParserTestObj IncludedObject
     {

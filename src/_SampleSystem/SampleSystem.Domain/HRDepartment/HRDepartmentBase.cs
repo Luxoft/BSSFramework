@@ -15,13 +15,13 @@ namespace SampleSystem.Domain.HRDepartment;
 [UniqueGroup("Uni_NameNative")]
 public abstract class HRDepartmentBase : BaseDirectory, IExternalSynchronizable, ICodeObject
 {
-    private string code;
-    private string codeNative;
-    private string nameNative;
-    private Location location;
-    private Employee.Employee head;
+    private string? code;
+    private string? codeNative;
+    private string? nameNative;
+    private Location location = null!;
+    private Employee.Employee head = null!;
     private long externalId;
-    private CompanyLegalEntity companyLegalEntity;
+    private CompanyLegalEntity companyLegalEntity = null!;
     private bool isProduction;
     private bool isLegal;
 

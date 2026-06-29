@@ -9,8 +9,8 @@ namespace SampleSystem.Domain.BU;
 
 public class BusinessUnitEmployeeRole : AuditPersistentDomainObjectBase, IDetail<BusinessUnit>
 {
-    private BusinessUnit businessUnit;
-    private Employee.Employee employee;
+    private BusinessUnit businessUnit = null!;
+    private Employee.Employee employee = null!;
     private BusinessUnitEmployeeRoleType role;
 
     public BusinessUnitEmployeeRole(BusinessUnit businessUnit)

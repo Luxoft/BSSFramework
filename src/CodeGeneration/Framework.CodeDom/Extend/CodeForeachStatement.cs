@@ -20,6 +20,6 @@ public class CodeForeachStatement : CodeStatement
         set => this.iterator = value ?? new CodeParameterDeclarationExpression();
     }
 
-    public CodeExpression Source { get; set; }
+    public CodeExpression Source { get; set; } = null!;
 }
 

@@ -9,8 +9,8 @@ namespace SampleSystem.Domain.Employee.EmpoloyeeLink;
 public class EmployeeToEmployeeLink : AuditPersistentDomainObjectBase, IDetail<Employee>
 {
     private EmployeeLinkType employeeLinkType;
-    private Employee linkedEmployee;
-    private Employee owner;
+    private Employee linkedEmployee = null!;
+    private Employee owner = null!;
 
     public EmployeeToEmployeeLink(Employee owner)
     {

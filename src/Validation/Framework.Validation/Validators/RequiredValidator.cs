@@ -19,7 +19,7 @@ public class RequiredValidator(RequiredMode mode) : IPropertyValidator<object, o
         mode.ValidateAppliedType(property.PropertyType);
 
         return new Func<IPropertyValidationContext<object, object>, ValidationResult>(this.GetValidationResult<object, object>)
-               .CreateGenericMethod(property.ReflectedType, property.PropertyType)
+               .CreateGenericMethod(property.ReflectedType!, property.PropertyType)
                .Invoke<ValidationResult>(this, context);
     }
 
@@ -38,8 +38,8 @@ public class RequiredValidator(RequiredMode mode) : IPropertyValidator<object, o
 
         mode.ValidateAppliedType(property.PropertyType);
 
-        return (IPropertyValidator)typeof(RequiredValidator<,>).MakeGenericType(property.ReflectedType, property.PropertyType)
-                                                               .GetConstructor([typeof(RequiredMode)])
+        return (IPropertyValidator)typeof(RequiredValidator<,>).MakeGenericType(property.ReflectedType!, property.PropertyType)
+                                                               .GetConstructor([typeof(RequiredMode)])!
                                                                .Invoke([mode]);
     }
 

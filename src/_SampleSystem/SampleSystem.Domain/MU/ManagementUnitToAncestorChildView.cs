@@ -5,8 +5,8 @@ namespace SampleSystem.Domain.MU;
 [View]
 public class ManagementUnitToAncestorChildView : AuditPersistentDomainObjectBase
 {
-    private ManagementUnit childOrAncestor;
-    private ManagementUnit source;
+    private ManagementUnit childOrAncestor = null!;
+    private ManagementUnit source = null!;
 
     public virtual ManagementUnit ChildOrAncestor => this.childOrAncestor;
 

@@ -11,13 +11,13 @@ namespace SampleSystem.Domain.Directories;
 [UniqueGroup]
 public class CompanyLegalEntity : LegalEntityBase, ICodeObject
 {
-    private string code;
-    private CompanyLegalEntity parent;
+    private string code = null!;
+    private CompanyLegalEntity? parent;
     private CompanyLegalEntityType type;
 
-    private TestObjForNested currentObj;
+    private TestObjForNested? currentObj;
 
-    public virtual TestObjForNested CurrentObj
+    public virtual TestObjForNested? CurrentObj
     {
         get => this.currentObj;
         set => this.currentObj = value;
@@ -31,7 +31,7 @@ public class CompanyLegalEntity : LegalEntityBase, ICodeObject
         set => this.code = value;
     }
 
-    public virtual CompanyLegalEntity Parent
+    public virtual CompanyLegalEntity? Parent
     {
         get => this.parent;
         set => this.parent = value;

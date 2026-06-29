@@ -187,8 +187,8 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
 
         return new CodeMemberMethod { Attributes = MemberAttributes.Family, Name = this.InternalName, ReturnType = this.ReturnType, }
                .WithParameters(this.Parameters.Concat([evaluateDataParameterExpr]))
-               .WithStatements(this.UseBLL, () => [bllDecl])
-               .WithStatements(this.GetFacadeMethodInternalStatements(evaluateDataExpr, bllDecl.Maybe(v => v.ToVariableReferenceExpression())));
+               .WithStatements(this.UseBLL, () => [bllDecl!])
+               .WithStatements(this.GetFacadeMethodInternalStatements(evaluateDataExpr, bllDecl.Maybe(v => v.ToVariableReferenceExpression())!));
     }
 
     protected CodeVariableDeclarationStatement GetBLLVariableDeclaration(CodeExpression evaluateDataExpr, CodeParameterDeclarationExpression bllParameterExpr, bool isEdit)

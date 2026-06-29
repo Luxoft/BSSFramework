@@ -34,7 +34,7 @@ internal partial class AuditPropertiesSetter
             return result;
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (ReferenceEquals(this, obj))
             {

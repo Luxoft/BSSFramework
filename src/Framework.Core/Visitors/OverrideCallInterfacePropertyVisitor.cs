@@ -21,19 +21,17 @@ public class OverrideCallInterfacePropertyVisitor : ExpressionVisitor
 
     protected override Expression VisitMember(MemberExpression node)
     {
-        if (node.Member is PropertyInfo && node.Member.Name == this.property.Name)
+        if (node.Member is PropertyInfo property && property.Name == this.property.Name)
         {
-            var property = node.Member as PropertyInfo;
-
-            var overriding = this.isGeneric ? node.Expression.Type.IsGenericType
-                                               && node.Expression.Type.GetGenericTypeDefinition() == this.property.ReflectedType
+            var overriding = this.isGeneric ? node.Expression!.Type.IsGenericType
+                                               && node.Expression!.Type.GetGenericTypeDefinition() == this.property.ReflectedType
                                      : property == this.property;
 
             if (overriding)
             {
                 var expr = node.Expression is UnaryExpression // Convert Interface -> DomainObject?
                                    ? (node.Expression as UnaryExpression)!.Operand
-                                   : node.Expression;
+                                   : node.Expression!;
 
                 return Expression.Property(expr, expr.Type.GetImplementedProperty(property));
             }

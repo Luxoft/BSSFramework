@@ -22,12 +22,12 @@ public abstract class MainDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
             : base(configuration, domainType) =>
         this.CodeTypeReferenceService = new MainCodeTypeReferenceService<TConfiguration>(this.Configuration);
 
-    public virtual MainDTOFileType BaseType => this.FileType.GetBaseType(false);
+    public virtual MainDTOFileType? BaseType => this.FileType.GetBaseType(false);
 
     public override IPropertyCodeTypeReferenceService CodeTypeReferenceService { get; }
 
 
-    public override CodeTypeReference? BaseReference => this.BaseType.Maybe(baseType => this.Configuration.GetCodeTypeReference(this.DomainType, baseType));
+    public override CodeTypeReference? BaseReference => this.BaseType.Maybe(baseType => this.Configuration.GetCodeTypeReference(this.DomainType!, baseType));
 
 
     protected override IPropertyAssigner MapDomainObjectToMappingObjectPropertyAssigner => this.Configuration.PropertyAssignerConfigurator.GetDomainObjectToSecurityPropertyAssigner(new DomainObjectToDTOPropertyAssigner<TConfiguration>(this));
@@ -72,7 +72,7 @@ public abstract class MainDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
 
         if (!this.FileType.IsAbstract)
         {
-            foreach (var knownTypesAttribute in this.Configuration.GetKnownTypesAttributes(this.FileType, this.DomainType))
+            foreach (var knownTypesAttribute in this.Configuration.GetKnownTypesAttributes(this.FileType, this.DomainType!))
             {
                 yield return knownTypesAttribute;
             }
@@ -90,7 +90,7 @@ public abstract class MainDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
         {
             if (this.ConvertToStrict)
             {
-                if (this.Configuration.GeneratePolicy.Used(this.DomainType, BaseFileType.StrictDTO))
+                if (this.Configuration.GeneratePolicy.Used(this.DomainType!, BaseFileType.StrictDTO))
                 {
                     yield return this.GenerateConvertMethod(BaseFileType.StrictDTO);
                 }

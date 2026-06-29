@@ -42,7 +42,7 @@ public class RevisionsOfEntityProjectionQuery<T> : RevisionsOfEntityQuery
         var verEntCfg = this.VerCfg.AuditEntCfg;
         var originalId = verEntCfg.OriginalIdPropName;
         var revisionPropertyName = verEntCfg.RevisionFieldName;
-        var revisionInfoObject = ((IDictionary)versionsEntity[originalId])[revisionPropertyName];
+        var revisionInfoObject = ((IDictionary)versionsEntity[originalId]!)[revisionPropertyName];
         var proxy = revisionInfoObject as INHibernateProxy;
 
         return proxy != null ? Convert.ToInt64(proxy.HibernateLazyInitializer.Identifier) : this.VerCfg.RevisionInfoNumberReader.RevisionNumber(revisionInfoObject);
@@ -92,7 +92,7 @@ public class RevisionsOfEntityProjectionQuery<T> : RevisionsOfEntityQuery
         foreach (var resultRow in internalResult)
         {
             IDictionary versionsEntity;
-            object revisionData = null;
+            object? revisionData = null;
 
             if (this.selectEntitiesOnly)
             {

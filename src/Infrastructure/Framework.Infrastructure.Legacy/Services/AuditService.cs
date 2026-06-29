@@ -46,9 +46,7 @@ public class AuditService<TIdent, TBLLContext, TBllFactoryContainer, TRootSecuri
         var methodDefinition = (((Func<TIdent, string, PropertyInfo, Period?, TDomainPropertyRevisionsDto>)this.GetPropertyChanged<TDomain, object>))
                 .CreateGenericMethod(typeof(TDomain), propertyInfo.PropertyType);
 
-        var result = methodDefinition.InvokeWithExceptionProcessed(this, id, propertyName, propertyInfo, period);
-
-        return (TDomainPropertyRevisionsDto)result;
+        return methodDefinition.Invoke<TDomainPropertyRevisionsDto>(this, id, propertyName, propertyInfo, period);
 
     }
 
@@ -58,7 +56,7 @@ public class AuditService<TIdent, TBLLContext, TBllFactoryContainer, TRootSecuri
 
         var propertyChanged = bllContext.Logics.Default.Create<TDomain>().GetPropertyChanges<TProperty>(id, propertyName, period);
 
-        var domainObject = bllContext.Logics.Default.Create<TDomain>().GetById(id); //????
+        var domainObject = bllContext.Logics.Default.Create<TDomain>().GetById(id)!; //????
 
         var result = new TDomainPropertyRevisionsDto
         {
@@ -85,7 +83,7 @@ public class AuditService<TIdent, TBLLContext, TBllFactoryContainer, TRootSecuri
                         (this.ToPropertyRevisionDto<object, TProperty>))
                     .CreateGenericMethod(dtoType, typeof(TProperty));
 
-            result.RevisionInfos = propertyChanged.RevisionInfos.Select(z => (TPropertyRevisionDto)method.InvokeWithExceptionProcessed(this, z)).ToList();
+            result.RevisionInfos = propertyChanged.RevisionInfos.Select(z => method.Invoke<TPropertyRevisionDto>(this, z)).ToList();
         }
         else
         {

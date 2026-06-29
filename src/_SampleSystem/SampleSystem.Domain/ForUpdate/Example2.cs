@@ -4,7 +4,7 @@ namespace SampleSystem.Domain.ForUpdate;
 
 public class Example2 : AuditPersistentDomainObjectBase, IDetail<Example1>
 {
-    private readonly Example1 parent;
+    private readonly Example1 parent = null!;
 
     private Guid field1;
 

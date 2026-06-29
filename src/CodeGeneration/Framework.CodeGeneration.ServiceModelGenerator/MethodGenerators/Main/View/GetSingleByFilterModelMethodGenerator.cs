@@ -52,7 +52,7 @@ public class GetSingleByFilterModelMethodGenerator<TConfiguration> : ViewMethodG
 
     }
 
-    protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
+    protected override object? GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
         var modelSecurityAttribute = this.filterType.GetViewDomainObjectAttribute();
 

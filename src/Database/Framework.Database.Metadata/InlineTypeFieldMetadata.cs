@@ -9,14 +9,14 @@ namespace Framework.Database.Metadata;
 
 public class InlineTypeFieldMetadata : FieldMetadata
 {
-    private readonly InlineTypeFieldMetadata _parent;
+    private readonly InlineTypeFieldMetadata? _parent;
 
     private readonly List<PrimitiveTypeFieldMetadata> _primitiveMetadataCollection;
     private readonly List<InlineTypeFieldMetadata> _children;
 
     private readonly List<ReferenceTypeFieldMetadata> referenceTypes;
 
-    public InlineTypeFieldMetadata(string name, Type type, IEnumerable<Attribute> attributes, DomainTypeMetadata domainTypeMetadata, InlineTypeFieldMetadata parent = null)
+    public InlineTypeFieldMetadata(string name, Type type, IEnumerable<Attribute> attributes, DomainTypeMetadata domainTypeMetadata, InlineTypeFieldMetadata? parent = null)
             : base(name, type, attributes, domainTypeMetadata)
     {
         this._parent = parent;
@@ -25,7 +25,7 @@ public class InlineTypeFieldMetadata : FieldMetadata
         var currentType = type;
         if (currentType.IsNullable())
         {
-            currentType = currentType.GetNullableElementType();
+            currentType = currentType.GetNullableElementType()!;
         }
 
         var fields = currentType.ExpandFields();
@@ -70,12 +70,12 @@ public class InlineTypeFieldMetadata : FieldMetadata
         var parentPrefix = this.Parent.Maybe(z => z.Name, string.Empty);
         return this.Type.GetInstanceFieldsDeep()
                    .Select(z => new PrimitiveTypeFieldMetadata(parentPrefix + z.Name, z.FieldType, z.GetAttributes(declarationType)
-                                                                       .Concat(z.GetAttributes(z.DeclaringType)), this.DomainTypeMetadata, z.Name.ToLower() == "id"));
+                                                                       .Concat(z.GetAttributes(z.DeclaringType!)), this.DomainTypeMetadata, z.Name.ToLower() == "id"));
     }
 
     public bool IsComposite => this._children.Any();
 
-    public InlineTypeFieldMetadata Parent => this._parent;
+    public InlineTypeFieldMetadata? Parent => this._parent;
 
     public List<PrimitiveTypeFieldMetadata> PrimitiveMetadataCollection => this._primitiveMetadataCollection;
 
@@ -140,7 +140,7 @@ public static class FieldInfoExtension
             {
                 return null;
             }
-            return type.BaseType.GetPropertyInfoBy(fieldInfo);
+            return type.BaseType!.GetPropertyInfoBy(fieldInfo);
         }
         return result;
     }

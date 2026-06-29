@@ -19,7 +19,7 @@ public class EventXsdExporterTests
 
     public class TestDto
     {
-        public Guid[] Type { get; set; }
+        public Guid[] Type { get; set; } = null!;
     }
 }
 

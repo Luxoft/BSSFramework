@@ -54,7 +54,7 @@ public interface IDTOGeneratorConfiguration : ICodeGeneratorConfiguration, ICode
     CodeExpression GetCreateUpdateDTOExpression(
         Type domainType,
         CodeExpression currentStrictSource,
-        CodeExpression baseStrictSource,
+        CodeExpression? baseStrictSource,
         CodeExpression mappingService);
 
     //GenerateTypeMap GetTypeMap(Type domainType, DTOFileType fileType);

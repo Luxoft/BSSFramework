@@ -9,7 +9,7 @@ namespace Framework.Database.NHibernate.DBGenerator.ScriptGeneratorBuilder.Impl;
 class AuditDBScriptGeneratorBuilder : IAuditDBScriptGeneratorBuilder
 {
     private string auditPostfix = "Audit";
-    private List<MappingSettings> mappingSettings;
+    private List<MappingSettings> mappingSettings = null!;
     private readonly MigrationDBScriptGeneratorBuilder migrationBuilder = new();
 
     private bool removeSchemaDatabase = true;
@@ -93,7 +93,7 @@ class AuditDBScriptGeneratorBuilder : IAuditDBScriptGeneratorBuilder
                 }
         }
 
-        return new ReplaceDatabaseNameDecorator(context => nextMappingSettings.First().AuditDatabase, result);
+        return new ReplaceDatabaseNameDecorator(context => nextMappingSettings.First().AuditDatabase!, result);
     }
 
     public bool IsFrozen { get; set; }

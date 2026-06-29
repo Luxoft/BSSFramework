@@ -28,7 +28,7 @@ public class DefaultRichDTOFileFactory<TConfiguration>(TConfiguration configurat
 
         if (this.HasMapToDomainObjectMethod)
         {
-            foreach (var masterType in this.Configuration.GetDomainTypeMasters(this.DomainType, this.FileType, true))
+            foreach (var masterType in this.Configuration.GetDomainTypeMasters(this.DomainType!, this.FileType, true))
             {
                 if (this.Configuration.IsPersistentObject(masterType))
                 {
@@ -38,13 +38,13 @@ public class DefaultRichDTOFileFactory<TConfiguration>(TConfiguration configurat
         }
     }
 
-    protected override CodeExpression GetFieldInitExpression(CodeTypeReference codeTypeReference, PropertyInfo property)
+    protected override CodeExpression? GetFieldInitExpression(CodeTypeReference codeTypeReference, PropertyInfo property)
     {
-        if (!this.CodeTypeReferenceService.IsOptional(property))
+        if (!this.CodeTypeReferenceService!.IsOptional(property))
         {
             if (property.PropertyType.IsCollection())
             {
-                return this.CodeTypeReferenceService.GetCodeTypeReference(property, true).ToObjectCreateExpression();
+                return this.CodeTypeReferenceService!.GetCodeTypeReference(property, true).ToObjectCreateExpression();
             }
         }
 

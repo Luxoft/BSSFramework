@@ -8,7 +8,7 @@ public class MappingAttribute : Attribute
     /// <summary>
     /// Имя колонки в бд
     /// </summary>
-    public string ColumnName
+    public string? ColumnName
     {
         get;
         set;

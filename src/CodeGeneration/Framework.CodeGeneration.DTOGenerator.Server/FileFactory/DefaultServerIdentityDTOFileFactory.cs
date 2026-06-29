@@ -80,7 +80,7 @@ public class DefaultServerIdentityDTOFileFactory<TConfiguration>(TConfiguration 
             yield return customAttribute;
         }
 
-        yield return this.Configuration.GetDTOFileAttribute(this.DomainType, this.FileType);
+        yield return this.Configuration.GetDTOFileAttribute(this.DomainType!, this.FileType);
     }
 }
 

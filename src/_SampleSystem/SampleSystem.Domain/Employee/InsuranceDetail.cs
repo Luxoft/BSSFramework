@@ -10,19 +10,19 @@ public class InsuranceDetail : AuditPersistentDomainObjectBase
 {
     private decimal cost;
 
-    private Fio fio;
+    private Fio fio = null!;
 
     private DateTime? birthDate;
 
     private int age;
 
-    private string landlinePhone;
+    private string? landlinePhone;
 
-    private string cellPhone;
+    private string? cellPhone;
 
-    private string registrationAddress;
+    private string? registrationAddress;
 
-    private string residentalAddress;
+    private string? residentalAddress;
 
     [Money]
     public virtual decimal Cost
@@ -50,25 +50,25 @@ public class InsuranceDetail : AuditPersistentDomainObjectBase
         set => this.age = value;
     }
 
-    public virtual string LandlinePhone
+    public virtual string? LandlinePhone
     {
         get => this.landlinePhone;
         set => this.landlinePhone = value;
     }
 
-    public virtual string CellPhone
+    public virtual string? CellPhone
     {
         get => this.cellPhone;
         set => this.cellPhone = value;
     }
 
-    public virtual string RegistrationAddress
+    public virtual string? RegistrationAddress
     {
         get => this.registrationAddress;
         set => this.registrationAddress = value;
     }
 
-    public virtual string ResidentalAddress
+    public virtual string? ResidentalAddress
     {
         get => this.residentalAddress;
         set => this.residentalAddress = value;

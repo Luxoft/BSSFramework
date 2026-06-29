@@ -12,7 +12,7 @@ public class BusinessRole : BaseDirectory
 {
     private readonly ICollection<Permission> permissions = new List<Permission>();
 
-    private string description;
+    private string? description;
 
     /// <summary>
     /// Коллекция пермиссий принципалов, выданных по одной бизнес-роль

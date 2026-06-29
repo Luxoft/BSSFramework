@@ -35,7 +35,7 @@ public readonly struct TableDescription : IEquatable<TableDescription>
         builder.Append(this.Name).Append(')');
         return builder.ToString();
     }
-    public override bool Equals(object obj) => string.Equals(this.ToString(), obj.ToString());
+    public override bool Equals(object? obj) => string.Equals(this.ToString(), obj?.ToString());
 
     public override int GetHashCode() => this.ToString().GetHashCode();
 }
@@ -72,7 +72,7 @@ public class ExceptionProcessingContext
 
     public IEnumerable<PersistentClass> GetPersistentClass(TableDescription tableDescription)
     {
-        IReadOnlyList<PersistentClass> result;
+        IReadOnlyList<PersistentClass>? result;
         if (!this.tableNameToPersistentClass.TryGetValue(tableDescription, out result))
         {
             //костыль
@@ -135,7 +135,7 @@ public class ExceptionProcessingContext
 
         public override string ToString() => string.Join(".", new[] { this.Catalog, this.Schema, this.Name }.Where(z => null != z));
 
-        public override bool Equals(object obj) => string.Equals(this.ToString(), obj.ToString());
+        public override bool Equals(object? obj) => string.Equals(this.ToString(), obj?.ToString());
 
         public override int GetHashCode() => this.ToString().GetHashCode();
     }

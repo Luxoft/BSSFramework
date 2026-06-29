@@ -2,5 +2,6 @@
 
 public interface IEventOperationReceiver
 {
-    Task Receive<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent, CancellationToken ct);
+    Task Receive<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent, CancellationToken ct)
+            where TDomainObject : class;
 }

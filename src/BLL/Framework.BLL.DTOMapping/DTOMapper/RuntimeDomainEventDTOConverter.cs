@@ -31,7 +31,7 @@ public class RuntimeDomainEventDTOConverter<TPersistentDomainObjectBase, TMappin
     private Expression<Func<TMappingService, TDomainObject, TEventDTOBase>> CreateLambda<TDomainObject>(EventOperation domainObjectEvent)
     {
         var eventDtoType = this.GetEventDtoType<TDomainObject>(domainObjectEvent);
-        var eventDtoTypeConstructor = eventDtoType.GetConstructor([typeof(TMappingService), typeof(TDomainObject)]);
+        var eventDtoTypeConstructor = eventDtoType.GetConstructor([typeof(TMappingService), typeof(TDomainObject)])!;
 
         var mappingServiceParam = Expression.Parameter(typeof(TMappingService), "mappingService");
         var domainObjectParam = Expression.Parameter(typeof(TDomainObject), "domainObject");

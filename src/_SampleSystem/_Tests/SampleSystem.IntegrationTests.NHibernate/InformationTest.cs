@@ -29,7 +29,7 @@ public class InformationTest(IServiceProvider rootServiceProvider) : TestBase(ro
                                            {
                                                var obj = context.Logics.Information.GetById(id, true);
 
-                                               context.Logics.Information.Remove(obj);
+                                               context.Logics.Information.Remove(obj!);
                                            });
 
         // Assert

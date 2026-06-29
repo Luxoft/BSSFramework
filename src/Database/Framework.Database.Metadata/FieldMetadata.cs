@@ -20,7 +20,7 @@ public abstract class FieldMetadata(string name, Type type, IEnumerable<Attribut
 
     public bool IsVersion => this.Attributes.Any(q => q is VersionAttribute);
 
-    public string ExternalTableName => this.Attributes.OfType<MappingAttribute>().SingleOrDefault().Maybe(attr => attr.ExternalTableName);
+    public string? ExternalTableName => this.Attributes.OfType<MappingAttribute>().SingleOrDefault().Maybe(attr => attr.ExternalTableName);
 
     public IEnumerable<Attribute> GetExpandedAttributes(Type type)
     {
@@ -45,7 +45,7 @@ public static class FieldMetadataExtensions
         if (fieldMetadata == null) throw new ArgumentNullException(nameof(fieldMetadata));
 
         return fieldMetadata.DomainTypeMetadata.DomainType.GetProperty(fieldMetadata.Name.ToStartUpperCase(),
-                                                                       () => new Exception($"Property for field {fieldMetadata.Name} not found of type:{fieldMetadata.DomainTypeMetadata.DomainType.Name}"));
+                                                                       () => new Exception($"Property for field {fieldMetadata.Name} not found of type:{fieldMetadata.DomainTypeMetadata.DomainType.Name}"))!;
     }
 }
 

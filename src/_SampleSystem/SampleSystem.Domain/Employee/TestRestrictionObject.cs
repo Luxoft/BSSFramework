@@ -9,7 +9,7 @@ public class TestRestrictionObject : AuditPersistentDomainObjectBase
 {
     private bool restrictionHandler;
 
-    private BusinessUnit businessUnit;
+    private BusinessUnit businessUnit = null!;
 
     public virtual bool RestrictionHandler
     {

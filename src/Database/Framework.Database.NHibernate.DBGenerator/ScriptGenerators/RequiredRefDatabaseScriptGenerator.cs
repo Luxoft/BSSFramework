@@ -95,7 +95,7 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
 
     private void InitViewDeeps(View view, Dictionary<View, Lazy<int>> viewDictionary, DependencyWalker walker)
     {
-        Lazy<int> storageRemoveOrder;
+        Lazy<int>? storageRemoveOrder;
 
         if (viewDictionary.TryGetValue(view, out storageRemoveOrder))
         {
@@ -185,7 +185,7 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
                                            .SelectMany(z => z.RequiredFields.Select(q => new { DomainTypeMetadata = z.DomainTypeMetadata, RequiredField = q }))
                                            .Where(z => !this.ignoreDomainTypeLinksHash
                                                             .Any(link => link.FromType.IsAssignableFrom(z.DomainTypeMetadata.DomainType)
-                                                                         && link.MemberInfo.PropertyType == z.RequiredField.Type))
+                                                                         && link.MemberInfo?.PropertyType == z.RequiredField.Type))
                                            .ToList();
 
         foreach (var domainTypeWithRequiredField in domainTypeWithRequiredFields.Where(z => !z.DomainTypeMetadata.IsView))
@@ -212,7 +212,7 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
                                                 .Where(q => metadata.PersistentDomainObjectBaseType.IsAssignableFrom(q.ElementType))
                                                 .Where(q => q.ElementType != z.DomainType) //ignore hierarh
                                                 .Select(q => new { DomainType = z, ListField = q }))
-                              .Where(z => !this.ignoreDomainTypeLinksHash.Any(q => q.FromType.IsAssignableFrom(z.ListField.ElementType) && q.MemberInfo.PropertyType == z.DomainType.DomainType))
+                              .Where(z => !this.ignoreDomainTypeLinksHash.Any(q => q.FromType.IsAssignableFrom(z.ListField.ElementType) && q.MemberInfo?.PropertyType == z.DomainType.DomainType))
                               .ToList();
 
         if (!typeWithDetails.Any())
@@ -265,7 +265,7 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
 
     private DomainTypeMetadata GetDomainTypeMetadataBy(Type type, Dictionary<Type, DomainTypeMetadata> dictionary)
     {
-        DomainTypeMetadata result = null;
+        DomainTypeMetadata? result = null;
         var currentType = type;
         while (currentType != typeof(object))
         {
@@ -274,7 +274,7 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
                 break;
             }
 
-            currentType = currentType.BaseType;
+            currentType = currentType.BaseType!;
         }
 
         if (null == result)

@@ -39,10 +39,10 @@ public class AuthPerformanceTests(IServiceProvider rootServiceProvider) : TestBa
                                                         from mbuIdent in genMbu
                                                         select new TestPerformanceObject
                                                         {
-                                                            Employee = ctx.Logics.Employee.GetById(emplIdent.Id),
-                                                            Location = ctx.Logics.Location.GetById(locIdent.Id),
-                                                            BusinessUnit = ctx.Logics.BusinessUnit.GetById(buIdent.Id),
-                                                            ManagementUnit = ctx.Logics.ManagementUnit.GetById(mbuIdent.Id),
+                                                            Employee = ctx.Logics.Employee.GetById(emplIdent.Id)!,
+                                                            Location = ctx.Logics.Location.GetById(locIdent.Id)!,
+                                                            BusinessUnit = ctx.Logics.BusinessUnit.GetById(buIdent.Id)!,
+                                                            ManagementUnit = ctx.Logics.ManagementUnit.GetById(mbuIdent.Id)!,
                                                             Name = Guid.NewGuid().ToString()
                                                         };
 
@@ -56,7 +56,7 @@ public class AuthPerformanceTests(IServiceProvider rootServiceProvider) : TestBa
 
                                                 foreach (var genObjectSubEnumerable in genObjects.Split(SplitBy))
                                                 {
-                                                    var genPermission = new Framework.Authorization.Domain.Permission(testPrincipal) { Role = adminRole };
+                                                    var genPermission = new Framework.Authorization.Domain.Permission(testPrincipal) { Role = adminRole! };
 
                                                     foreach (var genObject in genObjectSubEnumerable)
                                                     {

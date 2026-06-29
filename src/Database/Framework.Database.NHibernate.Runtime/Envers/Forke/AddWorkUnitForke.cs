@@ -9,7 +9,7 @@ namespace Framework.Database.NHibernate.Envers.Forke;
 //TODO: Remove after fix Envers bugs (// https://nhibernate.jira.com/projects/NHE/issues/NHE-166)
 public class AddWorkUnitForke : AbstractAuditWorkUnit
 {
-    private readonly IEntityPersister entityPersister;
+    private readonly IEntityPersister entityPersister = null!;
 
     private readonly IDictionary<string, object> data;
 
@@ -28,7 +28,7 @@ public class AddWorkUnitForke : AbstractAuditWorkUnit
                              object id, IDictionary<string, object> data) : base(sessionImplementor, entityName, verCfg, id, RevisionType.Added) =>
         this.data = data;
 
-    internal object[] State { get; }
+    internal object[] State { get; } = null!;
 
     public override bool ContainsWork() => true;
 
@@ -42,7 +42,7 @@ public class AddWorkUnitForke : AbstractAuditWorkUnit
 
     public override IAuditWorkUnit Merge(ModWorkUnit second) => new AddWorkUnitForke(this.SessionImplementor, this.EntityName, this.VerCfg, this.EntityId, this.MergeModifiedFlags(this.data, second.Data));
 
-    public override IAuditWorkUnit Merge(DelWorkUnit second) => null;
+    public override IAuditWorkUnit Merge(DelWorkUnit second) => null!;
 
     public override IAuditWorkUnit Merge(CollectionChangeWorkUnit second)
     {
@@ -61,7 +61,7 @@ public class AddWorkUnitForke : AbstractAuditWorkUnit
         {
             if (propertyData.UsingModifiedFlag)
             {
-                object lhsUntypedValue;
+                object? lhsUntypedValue;
                 if (lhs.TryGetValue(propertyData.ModifiedFlagPropertyName, out lhsUntypedValue))
                 {
                     var lhsValue = (bool)lhsUntypedValue;

@@ -19,7 +19,7 @@ internal class ProjectionBuilder : IProjection
     public Type SourceType { get; }
 
 
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
     public bool BLLView { get; set; }
 

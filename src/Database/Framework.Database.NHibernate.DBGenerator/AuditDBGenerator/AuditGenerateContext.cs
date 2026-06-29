@@ -71,8 +71,6 @@ internal struct AuditGenerateContext
         this.OriginalConnectionHelper = new ManagedProviderConnectionHelper(cfg.Properties);
         this.OriginalConnectionHelper.Prepare();
 
-        this.OriginalDatabaseMetadata = this.OriginalDatabaseMetadata;
-
         this.OriginalConnection = this.OriginalConnectionHelper.Connection;
         this.OriginalDatabaseMetadata = new DatabaseMetadata(this.OriginalConnection, dialect);
     }

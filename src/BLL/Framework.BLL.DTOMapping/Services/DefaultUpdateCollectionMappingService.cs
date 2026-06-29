@@ -10,6 +10,7 @@ public class DefaultUpdateCollectionMappingService<TSource, TSourceIdentity, TTa
     where TSource : class, IIdentityObjectContainer<TSourceIdentity>
     where TTarget : class, IIdentityObject<TIdent>
     where TSourceIdentity : IIdentityObject<TIdent>
+    where TIdent : notnull
 {
     private readonly Func<TSource, TTarget> createAndMapDetail = createAndMapDetail ?? throw new ArgumentNullException(nameof(createAndMapDetail));
     private readonly Action<TTarget> removeDetail = removeDetail ?? throw new ArgumentNullException(nameof(removeDetail));

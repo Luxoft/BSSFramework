@@ -25,7 +25,7 @@ public class DefaultIdentityDTOFileFactory<TConfiguration>(TConfiguration config
 
     protected IEnumerable<CodeTypeMember> GetIdCodeMembers()
     {
-        if (this.Configuration.ForceGenerateProperties(this.DomainType, this.FileType))
+        if (this.Configuration.ForceGenerateProperties(this.DomainType!, this.FileType))
         {
             var fieldMember = new CodeMemberField(this.Configuration.Environment.IdentityProperty.PropertyType, "_" + this.IdPropertyName.ToStartLowerCase())
             {
@@ -58,7 +58,7 @@ public class DefaultIdentityDTOFileFactory<TConfiguration>(TConfiguration config
 
     protected CodeExpression GetAssignIdExpression()
     {
-        var forceProp = this.Configuration.ForceGenerateProperties(this.DomainType, this.FileType);
+        var forceProp = this.Configuration.ForceGenerateProperties(this.DomainType!, this.FileType);
 
         return new CodeThisReferenceExpression().ToPropertyReference(forceProp ? "_" + this.IdPropertyName.ToStartLowerCase() : this.IdPropertyName);
     }
@@ -90,9 +90,9 @@ public class DefaultIdentityDTOFileFactory<TConfiguration>(TConfiguration config
             };
         }
 
-        if (this.Configuration.GeneratePolicy.Used(this.DomainType, BaseFileType.SimpleDTO))
+        if (this.Configuration.GeneratePolicy.Used(this.DomainType!, BaseFileType.SimpleDTO))
         {
-            var sourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType, BaseFileType.SimpleDTO).ToParameterDeclarationExpression("source");
+            var sourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType!, BaseFileType.SimpleDTO).ToParameterDeclarationExpression("source");
 
             var sourceParameterRef = sourceParameter.ToVariableReferenceExpression();
 
@@ -294,7 +294,7 @@ public class DefaultIdentityDTOFileFactory<TConfiguration>(TConfiguration config
     {
         yield return this.GetDataContractCodeAttributeDeclaration();
 
-        //foreach (var attr in new[] { true, false }.Select(flag => this.DomainType.GetDomainObjectAccessAttribute(flag)).Where(attr => attr != null))
+        //foreach (var attr in new[] { true, false }.Select(flag => this.DomainType!.GetDomainObjectAccessAttribute(flag)).Where(attr => attr != null))
         //{
         //    yield return attr.ToCodeAttributeDeclaration();
         //}

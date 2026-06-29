@@ -49,7 +49,7 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration>(IDTOSource<TConfi
 
                 if (isDetail)
                 {
-                    if (this.Configuration.IsPersistentObject(this.DomainType))
+                    if (this.Configuration.IsPersistentObject(this.DomainType!))
                     {
                         return this.MappingServiceRefExpr.ToMethodInvokeExpression(
                             methodName,
@@ -69,7 +69,7 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration>(IDTOSource<TConfi
         {
             if (this.Configuration.IsPersistentObject(property.PropertyType))
             {
-                var propertyTypeRefExpr = this.CodeTypeReferenceService.GetCodeTypeReference(property);
+                var propertyTypeRefExpr = this.CodeTypeReferenceService!.GetCodeTypeReference(property);
 
                 if (isFixReferencePropertyMode)
                 {
@@ -110,7 +110,7 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration>(IDTOSource<TConfi
         }
         else if (this.Configuration.IsCollectionProperty(property))
         {
-            var elementType = property.PropertyType.GetCollectionElementType();
+            var elementType = property.PropertyType.GetCollectionElementType()!;
 
             if (!this.IsPersistent() && property.HasSetMethod())
             {
@@ -142,7 +142,7 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration>(IDTOSource<TConfi
                     return this.GetFixReferenceMappingStatement(property, sourcePropertyRef, targetPropertyRef);
                 }
 
-                var transferElementTypeRef = this.Configuration.GetCodeTypeReference(elementType, this.CodeTypeReferenceService.GetCollectionFileType(property));
+                var transferElementTypeRef = this.Configuration.GetCodeTypeReference(elementType, this.CodeTypeReferenceService!.GetCollectionFileType(property));
 
                 var createDetailLambda = new CodeParameterDeclarationExpression { Name = "detailDTO" }.Pipe(lambdaParam => new CodeLambdaExpression
                 {
@@ -156,7 +156,7 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration>(IDTOSource<TConfi
                                                  {
                                                      Parameters = { lambdaParam },
                                                      Statements =  { typeof(AddRemoveDetailHelper).ToTypeReferenceExpression()
-                                                                                     .ToMethodReferenceExpression("RemoveDetail", property.DeclaringType.ToTypeReference(), elementType.ToTypeReference())
+                                                                                     .ToMethodReferenceExpression("RemoveDetail", property.DeclaringType!.ToTypeReference(), elementType.ToTypeReference())
                                                                                      .ToMethodInvokeExpression(this.DomainParameter.ToVariableReferenceExpression(), lambdaParam.ToVariableReferenceExpression())
                                                                            }
                                                  })
@@ -227,7 +227,7 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration>(IDTOSource<TConfi
                                                              new CodeObjectCreateExpression(
                                                               this.Configuration.ExceptionType,
                                                               new CodePrimitiveExpression(
-                                                               $"{property.Name} property of {this.DomainType.Name} can not modified")));
+                                                               $"{property.Name} property of {this.DomainType!.Name} can not modified")));
 
         fixReferenceValidationStatement.TrueStatements.Add(throwStatement);
 

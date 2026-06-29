@@ -69,7 +69,7 @@ public static class CoreExpressionExtensions
 
             yield return (PropertyInfo)memberExpr.Member;
 
-            state = memberExpr.Expression;
+            state = memberExpr.Expression!;
         }
     }
 
@@ -149,13 +149,18 @@ public static class CoreExpressionExtensions
             if (leftExpression is ConstantExpression) // TODO: rewrite to common case
             {
                 var constantExpression = (ConstantExpression)leftExpression;
-                var field = constantExpression.Value.GetType().GetField(rightPath);
+                var field = constantExpression.Value!.GetType().GetField(rightPath);
 
-                return field.GetValue(constantExpression.Value).ToString();
+                return field!.GetValue(constantExpression.Value)!.ToString()!;
+            }
+
+            if (leftExpression == null)
+            {
+                return rightPath;
             }
 
             var leftPath = leftExpression.ToPath();
-            return leftPath.MaybeString(z => z + "." + rightPath).IfDefaultString(rightPath);
+            return string.IsNullOrWhiteSpace(leftPath) ? rightPath : leftPath + "." + rightPath;
         }
 
         if (source is UnaryExpression)
@@ -173,7 +178,7 @@ public static class CoreExpressionExtensions
         {
             var constantExpression = (ConstantExpression)source;
 
-            return constantExpression.Value.ToString();
+            return constantExpression.Value?.ToString() ?? string.Empty;
         }
 
         if (source is MethodCallExpression)

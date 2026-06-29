@@ -61,7 +61,7 @@ public class EventXsdExporter(string xsdNamespace, IEnumerable<Type> types)
 
             foreach (XmlSchema schema in schemasSet.Schemas())
             {
-                var entry = zip.CreateEntry(this.ToFileName(schema.TargetNamespace, index));
+                var entry = zip.CreateEntry(this.ToFileName(schema.TargetNamespace!, index));
 
                 using (var entryStream = entry.Open())
                 {

@@ -35,7 +35,7 @@ public class CustomServiceGeneratePolicy(IServiceModelGenerationEnvironment gene
 
         if (identity == SampleSystemMethodIdentityType.ComplexChange)
         {
-            return identity.ModelType.GetDirectMode().HasFlag(DirectMode.In);
+            return identity.ModelType!.GetDirectMode().HasFlag(DirectMode.In);
         }
 
         return base.Used(domainType, identity);

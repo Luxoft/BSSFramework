@@ -65,7 +65,7 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
         {
             yield return new CodeMemberMethod
             {
-                Name = "Map" + this.DomainType.Name,
+                Name = "Map" + this.DomainType!.Name,
                 ReturnType = typeof(void).ToTypeReference(),
                 Parameters =
                                  {
@@ -81,14 +81,14 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
             {
                 yield return this.GetMappingServiceInterfaceToDomainObjectMethod();
 
-                if (this.AllowCreate && this.DomainType.HasDefaultConstructor())
+                if (this.AllowCreate && this.DomainType!.HasDefaultConstructor())
                 {
                     yield return this.GetMappingServiceInterfaceToDomainObjectWithAllowCreateMethod();
                 }
             }
             else
             {
-                if (this.DomainType.HasDefaultConstructor())
+                if (this.DomainType!.HasDefaultConstructor())
                 {
                     yield return this.GetMappingServiceInterfaceToDomainObjectMethod();
                 }
@@ -99,7 +99,7 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
 
     public virtual IEnumerable<CodeMemberMethod> GetServerMappingServiceMethods()
     {
-        var domainTypeParameter = this.DomainType.ToTypeReference().ToParameterDeclarationExpression("domainObject");
+        var domainTypeParameter = this.DomainType!.ToTypeReference().ToParameterDeclarationExpression("domainObject");
         var domainTypeParameterRef = domainTypeParameter.ToVariableReferenceExpression();
 
         var mappingTypeParameter = this.CurrentReference.ToParameterDeclarationExpression("mappingObject");
@@ -114,7 +114,7 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
             yield return new CodeMemberMethod
             {
                 Attributes = MemberAttributes.Public,
-                Name = "Map" + this.DomainType.Name,
+                Name = "Map" + this.DomainType!.Name,
                 Parameters = { domainTypeParameter, mappingTypeParameter },
                 Statements = { assignStatements.Composite() }
             };
@@ -126,7 +126,7 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
 
                              orderby !property.HasAttribute<VersionAttribute>(),
 
-                                     this.CodeTypeReferenceService.IsOptional(property),
+                                     this.CodeTypeReferenceService!.IsOptional(property),
 
                                      property.GetCustomAttribute<MappingPriorityAttribute>().Maybe(attr => attr.Value)
 
@@ -137,7 +137,7 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
             yield return new CodeMemberMethod
             {
                 Attributes = MemberAttributes.Public,
-                Name = "Map" + this.DomainType.Name,
+                Name = "Map" + this.DomainType!.Name,
                 Parameters = { mappingTypeParameter, domainTypeParameter },
                 Statements =
                                  {
@@ -152,14 +152,14 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
             {
                 yield return this.GetMappingServiceToDomainObjectMethod();
 
-                if (this.AllowCreate && this.DomainType.HasDefaultConstructor())
+                if (this.AllowCreate && this.DomainType!.HasDefaultConstructor())
                 {
                     yield return this.GetMappingServiceToDomainObjectWithAllowCreateMethod();
                 }
             }
             else
             {
-                if (this.DomainType.HasDefaultConstructor())
+                if (this.DomainType!.HasDefaultConstructor())
                 {
                     yield return this.GetMappingServiceToDomainObjectMethod();
                 }
@@ -182,11 +182,11 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
 
         if (this.HasToDomainObjectMethod)
         {
-            if (this.IsPersistent() || this.DomainType.HasDefaultConstructor())
+            if (this.IsPersistent() || this.DomainType!.HasDefaultConstructor())
             {
                 var mappingServiceType = this.Configuration.GetCodeTypeReference(null, ServerFileType.ServerDTOMappingServiceInterface);
 
-                yield return typeof(IConvertMappingObject<,>).ToTypeReference(mappingServiceType, this.DomainType.ToTypeReference());
+                yield return typeof(IConvertMappingObject<,>).ToTypeReference(mappingServiceType, this.DomainType!.ToTypeReference());
             }
         }
     }
@@ -200,7 +200,7 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
         }
 
         yield return this.GetDataContractCodeAttributeDeclaration();
-        yield return this.Configuration.GetDTOFileAttribute(this.DomainType, this.FileType);
+        yield return this.Configuration.GetDTOFileAttribute(this.DomainType!, this.FileType);
     }
 
     protected override IEnumerable<CodeTypeMember> GetMembers()
@@ -221,14 +221,14 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
             {
                 yield return this.GetToDomainObjectMethod();
 
-                if (this.AllowCreate && this.DomainType.HasDefaultConstructor())
+                if (this.AllowCreate && this.DomainType!.HasDefaultConstructor())
                 {
                     yield return this.GetToDomainObjectWithAllowCreateMethod();
                 }
             }
             else
             {
-                if (this.DomainType.HasDefaultConstructor())
+                if (this.DomainType!.HasDefaultConstructor())
                 {
                     yield return this.GetToDomainObjectMethod();
                 }
@@ -249,7 +249,7 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
         if (property == null) throw new ArgumentNullException(nameof(property));
         if (fieldName == null) throw new ArgumentNullException(nameof(fieldName));
 
-        var fieldTypeRef = this.CodeTypeReferenceService.GetCodeTypeReference(property, true);
+        var fieldTypeRef = this.CodeTypeReferenceService!.GetCodeTypeReference(property, true);
 
         return new CodeMemberField
         {
@@ -259,7 +259,7 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
         };
     }
 
-    protected virtual CodeExpression GetFieldInitExpression(CodeTypeReference codeTypeReference, PropertyInfo property) => null;
+    protected virtual CodeExpression? GetFieldInitExpression(CodeTypeReference codeTypeReference, PropertyInfo property) => null;
 
     protected virtual CodeMemberProperty CreatePropertyMember(PropertyInfo sourceProperty, CodeMemberField fieldMember)
     {
@@ -282,7 +282,7 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
     {
         if (sourceProperty == null) throw new ArgumentNullException(nameof(sourceProperty));
 
-        if (!this.Configuration.ForceGenerateProperties(this.DomainType, this.FileType))
+        if (!this.Configuration.ForceGenerateProperties(this.DomainType!, this.FileType))
         {
             yield return this.CreateFieldMember(sourceProperty, sourceProperty.Name)
                              .Self(field => field.CustomAttributes.Add(typeof(DataMemberAttribute).ToTypeReference().ToAttributeDeclaration()))
@@ -314,7 +314,7 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
                 TypeArguments =
                 {
                     this.Configuration.DTOMappingServiceInterfaceTypeReference,
-                    this.DomainType,
+                    this.DomainType!,
                     this.Configuration.Environment.GetIdentityType()
                 }
             }
@@ -323,7 +323,7 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
                 TypeArguments =
                   {
                       this.Configuration.DTOMappingServiceInterfaceTypeReference,
-                      this.DomainType
+                      this.DomainType!
                   }
             };
 

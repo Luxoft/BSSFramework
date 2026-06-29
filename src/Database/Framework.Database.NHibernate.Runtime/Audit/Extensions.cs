@@ -36,7 +36,7 @@ public static class Extensions
 
                                     var order = z.Types.OrderBy<Type, string>(q => q.Name).ToList();
 
-                                    z.Types.Foreach(q => auditService.Register(q, z.AuditDatabase.Schema));
+                                    z.Types.Foreach(q => auditService.Register(q, z.AuditDatabase!.Schema));
                                 });
 
         foreach (var pair in filteredClassMappings)

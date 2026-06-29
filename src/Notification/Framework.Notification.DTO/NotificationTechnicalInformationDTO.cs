@@ -8,10 +8,10 @@ namespace Framework.Notification.DTO;
 public class NotificationTechnicalInformationDTO
 {
     [DataMember]
-    public string MessageTemplateCode { get; set; }
+    public string MessageTemplateCode { get; set; } = null!;
 
     [DataMember]
-    public string ContextObjectType { get; set; }
+    public string ContextObjectType { get; set; } = null!;
 
     [DataMember]
     public Guid? ContextObjectId { get; set; }

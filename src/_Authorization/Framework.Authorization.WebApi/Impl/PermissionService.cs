@@ -36,7 +36,7 @@ public partial class AuthMainController
                 evaluateData =>
                     evaluateData.Context.Logics.PermissionFactory
                                 .Create(SecurityRule.View)
-                                .GetById(permission.Id, true)
+                                .GetById(permission.Id, true)!
                                 .Role
                                 .ToVisualDTO(evaluateData.MappingService))
     ];

@@ -6,7 +6,7 @@ namespace Framework.BLL.Domain;
 
 public static class DefaultPersistentDomainObjectBaseExtensions
 {
-    public static TProperty GetOneToOne<TSource, TProperty>(this TSource source, Expression<Func<TSource, IEnumerable<TProperty>>> fieldExpr)
+    public static TProperty? GetOneToOne<TSource, TProperty>(this TSource source, Expression<Func<TSource, IEnumerable<TProperty>>> fieldExpr)
             where TSource : class, IIdentityObject<Guid>
             where TProperty : class, IIdentityObject<Guid> =>
         source.GetOneToOne<TSource, TProperty, Guid>(fieldExpr);

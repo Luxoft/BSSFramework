@@ -2,7 +2,7 @@
 
 public class Coefficient1676 : AuditPersistentDomainObjectBase
 {
-    private Location1676 location;
+    private Location1676 location = null!;
 
     private decimal normCoefficient;
 

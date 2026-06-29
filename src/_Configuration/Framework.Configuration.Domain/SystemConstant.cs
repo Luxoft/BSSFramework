@@ -11,14 +11,14 @@ namespace Framework.Configuration.Domain;
 [NotAuditedClass]
 public class SystemConstant : AuditPersistentDomainObjectBase
 {
-    private DomainType type;
+    private DomainType type = null!;
 
 
-    private string code;
+    private string code = null!;
 
-    private string value;
+    private string? value;
 
-    private string description;
+    private string? description;
 
     private bool isManual;
 

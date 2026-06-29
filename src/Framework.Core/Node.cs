@@ -20,7 +20,7 @@ public class Node<T> : IEnumerable<T>
     public IEnumerable<Node<T>> Children { get; internal set; }
 
 
-    public override string ToString() => this.Value == null ? "{null}" : this.Value.ToString();
+    public override string ToString() => this.Value?.ToString() ?? "{null}";
 
     public IEnumerator<T> GetEnumerator() => this.GetAllElements(v => v.Children).Select(node => node.Value).GetEnumerator();
 
@@ -41,7 +41,7 @@ public class NodeP<T> : Node<T>
         internal set => base.Children = value;
     }
 
-    public NodeP<T> Parent { get; internal set; }
+    public NodeP<T>? Parent { get; internal set; }
 }
 
 public static class NodeExtensions

@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace SampleSystem.WebApiCore.Services;
 
-public class SampleConfiguratorIntegrationEvents(ILogger<SampleConfiguratorIntegrationEvents> logger, ICurrentRevisionService currentRevisionService) : IConfiguratorIntegrationEvents
+public class SampleConfiguratorIntegrationEvents(ILogger<SampleConfiguratorIntegrationEvents> logger) : IConfiguratorIntegrationEvents
 {
     public Task PrincipalCreatedAsync(object principal, CancellationToken ct)
     {

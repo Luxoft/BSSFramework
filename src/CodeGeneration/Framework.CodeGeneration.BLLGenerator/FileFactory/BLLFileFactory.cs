@@ -29,12 +29,12 @@ public class BLLFileFactory<TConfiguration>(TConfiguration configuration, Type d
                                           {
                                                   baseBLLType,
 
-                                                  this.Configuration.Environment.BLLCore.GetCodeTypeReference(this.DomainType, BLLCoreGenerator.FileType.BLLInterface)
+                                                  this.Configuration.Environment.BLLCore.GetCodeTypeReference(this.DomainType!, BLLCoreGenerator.FileType.BLLInterface)
                                           }
         };
 
         {
-            if (this.Configuration.GenerateBllConstructor(this.DomainType))
+            if (this.Configuration.GenerateBllConstructor(this.DomainType!))
             {
                 var contextParameter = new CodeParameterDeclarationExpression
                 {
@@ -43,7 +43,7 @@ public class BLLFileFactory<TConfiguration>(TConfiguration configuration, Type d
                 };
                 var contextParameterExpr = contextParameter.ToVariableReferenceExpression();
 
-                var securityProviderParameterTypeRef = typeof(ISecurityProvider<>).ToTypeReference(this.DomainType.ToTypeReference());
+                var securityProviderParameterTypeRef = typeof(ISecurityProvider<>).ToTypeReference(this.DomainType!.ToTypeReference());
                 var securityProviderParameter = securityProviderParameterTypeRef.ToParameterDeclarationExpression("securityProvider");
 
                 var securityOperationConstructor = new CodeConstructor

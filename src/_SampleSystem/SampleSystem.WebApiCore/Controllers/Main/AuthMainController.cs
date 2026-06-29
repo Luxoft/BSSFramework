@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SampleSystem.WebApiCore.Controllers.Main;
 
+
+[Route("authApi/[controller]/[action]")]
 public class AuthMainController : Framework.Authorization.WebApi.AuthMainController
 {
     [HttpPost]

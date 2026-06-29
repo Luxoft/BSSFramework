@@ -18,9 +18,10 @@ public class DomainObjectVersionsResolver<TBLLContext, TDomainObject>(
     public DomainObjectVersions GetDomainObjectVersions(Guid domainObjectId, long revisionNumber)
     {
         var prev = this.GetPreviousDomainObjectByRevisionNumber(domainObjectId, revisionNumber);
+
         var next = this.GetDomainObjectByRevisionNumber(domainObjectId, revisionNumber);
 
-        return new DomainObjectVersions<TDomainObject>(prev, next);
+        return DomainObjectVersions.Create(prev, next);
     }
 
     private TDomainObject? GetPreviousDomainObjectByRevisionNumber(Guid domainObjectId, long revisionNumber)

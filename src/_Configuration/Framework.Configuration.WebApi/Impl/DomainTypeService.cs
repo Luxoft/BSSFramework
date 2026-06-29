@@ -2,7 +2,6 @@
 
 using Framework.Configuration.BLL;
 using Framework.Configuration.Generated.DTO;
-using Framework.Database;
 using Framework.Infrastructure.Services;
 
 using Microsoft.AspNetCore.Mvc;

@@ -5,6 +5,9 @@ public abstract record DomainObjectVersions
     public abstract Type DomainObjectType { get; }
 
     public abstract DomainObjectChangeType ChangeType { get; }
+
+    public static DomainObjectVersions<TDomainObject> Create<TDomainObject>(TDomainObject? previous, TDomainObject? current)
+        where TDomainObject : class => new(previous, current);
 }
 
 /// <summary>

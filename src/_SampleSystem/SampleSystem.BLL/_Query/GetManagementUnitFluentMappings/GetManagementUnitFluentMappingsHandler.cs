@@ -1,4 +1,4 @@
-﻿using Anch.SecuritySystem;
+﻿using Anch.GenericQueryable;
 using Anch.SecuritySystem.Attributes;
 
 using MediatR;
@@ -10,14 +10,13 @@ public class GetManagementUnitFluentMappingsHandler([ViewSecurity] IManagementUn
         GetManagementUnitFluentMappingsResponse[]>
 {
     public async Task<GetManagementUnitFluentMappingsResponse[]> Handle(
-            GetManagementUnitFluentMappingsQuery request,
-            CancellationToken ct)
+        GetManagementUnitFluentMappingsQuery request,
+        CancellationToken ct)
     {
-        var result = managementUnitFluentMappingBll.GetUnsecureQueryable()
-                                                   .Select(x => new GetManagementUnitFluentMappingsResponse(x.Id, x.Name, x.Parent.Id, x.Period))
-                                                   .ToArray();
+        var result = await managementUnitFluentMappingBll.GetUnsecureQueryable()
+                                                         .Select(x => new GetManagementUnitFluentMappingsResponse(x.Id, x.Name, x.Parent.Id, x.Period))
+                                                         .GenericToArrayAsync(ct);
 
         return result;
     }
 }
-

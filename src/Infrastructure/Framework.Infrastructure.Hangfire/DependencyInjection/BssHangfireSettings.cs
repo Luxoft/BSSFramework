@@ -7,6 +7,7 @@ using Framework.Core;
 
 using Hangfire;
 using Hangfire.Common;
+using Hangfire.Server;
 using Hangfire.SqlServer;
 
 using Microsoft.Data.SqlClient;
@@ -119,11 +120,7 @@ public class BssHangfireSettings : IBssHangfireSettings
                                  ?? this.JobTimings.Where(jt => jt.Name == jobName).Select(jt => jt.Schedule).SingleOrDefault()
                                  ?? throw new Exception($"{nameof(JobTiming)} for job '{jobName}' not found");
 
-                var job =
-
-                    typeof(TArg) == typeof(CancellationToken)
-                        ? Job.FromExpression(ExpressionHelper.Create((CancellationMiddlewareJob<TJob> job) => job.ExecuteAsync(CancellationToken.None)))
-                        : Job.FromExpression(ExpressionHelper.Create((MiddlewareJob<TJob, TArg> job) => job.ExecuteAsync(default!)));
+                var job = Job.FromExpression(ExpressionHelper.Create((MiddlewareJob<TJob, TArg> job) => job.ExecuteAsync(default!)));
 
                 var actualSettings = new JobSettings
                 {
@@ -153,6 +150,10 @@ public class BssHangfireSettings : IBssHangfireSettings
         {
             services.AddSingleton(new JobImpersonateData(this.RunAs));
         }
+
+        services.AddSingleton(typeof(ICancellationTokenResolver<>), typeof(DefaultCancellationTokenResolver<>));
+        services.AddSingleton<ICancellationTokenResolver<CancellationToken>, ExplicitCancellationTokenResolver>();
+        services.AddSingleton<ICancellationTokenResolver<PerformContext>, PerformContextCancellationTokenResolver>();
 
         this.registerServicesActions.ForEach(a => a(services));
 

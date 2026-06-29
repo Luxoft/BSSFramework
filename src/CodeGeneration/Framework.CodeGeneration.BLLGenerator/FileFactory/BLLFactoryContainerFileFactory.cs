@@ -1,17 +1,11 @@
 ﻿using System.CodeDom;
 
 using Anch.Core;
-using Anch.DependencyInjection;
-using Anch.OData.Domain.QueryLanguage;
-using Anch.SecuritySystem;
 
 using Framework.BLL;
-using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLGenerator.Configuration;
 using Framework.FileGeneration.Configuration;
-
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.CodeGeneration.BLLGenerator.FileFactory;
 

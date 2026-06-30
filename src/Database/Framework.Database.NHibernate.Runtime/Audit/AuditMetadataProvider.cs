@@ -23,7 +23,7 @@ namespace Framework.Database.NHibernate.Audit;
 internal class AuditMetadataProvider<TAuditRevisionEntity> : IMetaDataProvider
     where TAuditRevisionEntity : AuditRevisionEntity
 {
-    private List<Type> filledTypes;
+    private List<Type> filledTypes = [];
 
     private readonly string auditTableSuffix;
 
@@ -243,7 +243,7 @@ internal class AuditMetadataProvider<TAuditRevisionEntity> : IMetaDataProvider
         var baseType = type.BaseType;
         if (!type.IsInterface && baseType != typeof(object))
         {
-            this.FillClass(baseType, dicToFill, auditService);
+            this.FillClass(baseType!, dicToFill, auditService);
         }
     }
 }

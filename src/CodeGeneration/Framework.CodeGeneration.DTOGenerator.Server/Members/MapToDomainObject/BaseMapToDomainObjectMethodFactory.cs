@@ -58,7 +58,7 @@ public class BaseMapToDomainObjectMethodFactory<TConfiguration, TFileFactory, TF
     protected virtual IEnumerable<CodeStatement> GetMapMethodCodeStatements()
     {
         yield return this.MappingServiceParameterRefExpr
-                         .ToMethodInvokeExpression("Map" + this.FileFactory.DomainType.Name, new CodeThisReferenceExpression(), this.TargetDomainParameterRefExpr)
+                         .ToMethodInvokeExpression("Map" + this.FileFactory.DomainType!.Name, new CodeThisReferenceExpression(), this.TargetDomainParameterRefExpr)
                          .ToExpressionStatement();
     }
 }

@@ -3,7 +3,7 @@
 internal class Immutable<T>
         where T : class
 {
-    private T source;
+    private T source = null!;
 
     public T Value
     {

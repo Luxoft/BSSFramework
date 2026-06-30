@@ -28,7 +28,7 @@ public static class DatabaseScriptResultFactory
         {
             get
             {
-                IEnumerable<string> result = null;
+                IEnumerable<string>? result = null;
                 if (this.dictionary.TryGetValue(mode, out result))
                 {
                     return result;
@@ -63,7 +63,7 @@ public static class DatabaseScriptResultFactory
         {
             get
             {
-                Lazy<IEnumerable<string>> result = null;
+                Lazy<IEnumerable<string>>? result = null;
                 if (this.dictionary.TryGetValue(mode, out result))
                 {
                     return result.Value;

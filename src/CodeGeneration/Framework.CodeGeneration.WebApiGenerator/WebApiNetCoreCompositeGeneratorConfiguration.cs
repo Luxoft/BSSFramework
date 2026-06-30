@@ -39,7 +39,7 @@ public class WebApiNetCoreCompositeGeneratorConfiguration : IServiceModelGenerat
 
     public IGeneratePolicy<MethodIdentity> GeneratePolicy { get; }
 
-    public string? ImplementClassName { get; }
+    public string ImplementClassName { get; } = null!;
 
     public CodeTypeReference EvaluateDataTypeReference { get; }
 
@@ -48,12 +48,12 @@ public class WebApiNetCoreCompositeGeneratorConfiguration : IServiceModelGenerat
     public IServiceModelGenerationEnvironment Environment { get; }
 
     public string GetTypeName(Type domainType, FileType fileType) =>
-            this.source.Select(z => z.GetTypeName(domainType, fileType)).FirstOrDefault(z => !string.IsNullOrWhiteSpace(z));
+            this.source.Select(z => z.GetTypeName(domainType, fileType)).FirstOrDefault(z => !string.IsNullOrWhiteSpace(z))!;
 
-    public CodeTypeReference GetCodeTypeReference(Type domainType, FileType fileType) =>
-            this.source.Select(z => z.GetCodeTypeReference(domainType, fileType)).FirstOrDefault();
+    public CodeTypeReference GetCodeTypeReference(Type? domainType, FileType fileType) =>
+            this.source.Select(z => z.GetCodeTypeReference(domainType, fileType)).FirstOrDefault()!;
 
-    public ICodeFileFactoryHeader GetFileFactoryHeader(FileType fileType, bool raiseIfNotFound = true) =>
+    public ICodeFileFactoryHeader? GetFileFactoryHeader(FileType fileType, bool raiseIfNotFound = true) =>
             this.source.Select(z => z.GetFileFactoryHeader(fileType, false)).FirstOrDefault();
 
     public IEnumerable<IServiceMethodGenerator> GetMethodGenerators(Type domainType) =>

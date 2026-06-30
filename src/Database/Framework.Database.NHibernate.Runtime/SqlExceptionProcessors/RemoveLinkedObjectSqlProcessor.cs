@@ -51,7 +51,7 @@ internal class RemoveLinkedObjectSqlProcessor : ISqlExceptionProcessor
             var linkedTable = linkedTables.OrderBy(z => z.PersistentClass.MappedClass.GetCustomAttributes<TableAttribute>().Any() ? 1 : 0).FirstOrDefault();
 
 
-            var referencePersistentClass = context.GetPersistentClass(context.CreateTableDescription(linkedTable.ReferencedTable))
+            var referencePersistentClass = context.GetPersistentClass(context.CreateTableDescription(linkedTable!.ReferencedTable))
                                                   .OrderBy(z => z.MappedClass.GetCustomAttributes<TableAttribute>().Any() ? 1 : 0)
                                                   .FirstOrDefault();
 
@@ -64,7 +64,7 @@ internal class RemoveLinkedObjectSqlProcessor : ISqlExceptionProcessor
             return new RemoveLinkedObjectsDALException(
                 new LinkedObjects(
                     linkedTable.PersistentClass.MappedClass,
-                    referencePersistentClass.MappedClass,
+                    referencePersistentClass!.MappedClass,
                     linkedProperty),
                 string.Empty);
         }

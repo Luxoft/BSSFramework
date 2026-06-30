@@ -19,8 +19,8 @@ public class ManagementUnitAndBusinessUnitLink :
         IDetail<BusinessUnit>,
         IVisualIdentityObject
 {
-    private BusinessUnit businessUnit;
-    private ManagementUnit managementUnit;
+    private BusinessUnit businessUnit = null!;
+    private ManagementUnit managementUnit = null!;
     private bool equalBU;
 
     public ManagementUnitAndBusinessUnitLink(ManagementUnit managementUnit)

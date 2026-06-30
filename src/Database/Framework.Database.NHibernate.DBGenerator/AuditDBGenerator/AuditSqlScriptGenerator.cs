@@ -33,7 +33,7 @@ internal class AuditSqlScriptGenerator
 
         // try to find out the name of the pk to create it as identity if the
         // identitygenerator is used
-        string pkName = null;
+        string? pkName = null;
         if (table.HasPrimaryKey && identityColumn)
         {
             pkName = table.PrimaryKey.ColumnIterator.Single().GetQuotedName(dialect);

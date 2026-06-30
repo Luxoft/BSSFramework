@@ -137,7 +137,7 @@ public class NHibObjectStatesService(ISession session) : IObjectStateService
 
         var entityEntry = session.GetEntityEntry(entity);
 
-        return entityEntry.Status == Status.Deleted;
+        return entityEntry?.Status == Status.Deleted;
     }
 }
 

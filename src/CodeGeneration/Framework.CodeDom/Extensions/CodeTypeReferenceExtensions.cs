@@ -282,7 +282,7 @@ public static class CodeTypeReferenceExtensions
         return codeExpression.ToFieldReference(field.Name);
     }
 
-    public static CodeMemberField ToMemberField(this CodeTypeReference codeTypeReference, string fieldName, CodeExpression initExpression = null)
+    public static CodeMemberField ToMemberField(this CodeTypeReference codeTypeReference, string fieldName, CodeExpression? initExpression = null)
     {
         if (codeTypeReference == null) throw new ArgumentNullException(nameof(codeTypeReference));
         if (fieldName == null) throw new ArgumentNullException(nameof(fieldName));
@@ -380,7 +380,7 @@ public static class CodeTypeReferenceExtensions
         return new CodeMethodInvokeExpression(methodReference, new[] { targetObject }.Concat(parameters).ToArray());
     }
 
-    public static CodeVariableDeclarationStatement ToVariableDeclarationStatement(this CodeTypeReference typeReference, string name, CodeExpression initialize = null)
+    public static CodeVariableDeclarationStatement ToVariableDeclarationStatement(this CodeTypeReference typeReference, string name, CodeExpression? initialize = null)
     {
         if (typeReference == null) throw new ArgumentNullException(nameof(typeReference));
         if (name == null) throw new ArgumentNullException(nameof(name));

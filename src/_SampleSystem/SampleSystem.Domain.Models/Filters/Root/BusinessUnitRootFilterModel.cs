@@ -17,7 +17,7 @@ public class BusinessUnitRootFilterModel : DomainObjectRootFilterModel<BusinessU
     /// <value>
     /// The employee.
     /// </value>
-    public Employee.Employee Employee { get; set; }
+    public Employee.Employee? Employee { get; set; }
 
     /// <summary>
     /// Gets or sets the list days.
@@ -25,7 +25,7 @@ public class BusinessUnitRootFilterModel : DomainObjectRootFilterModel<BusinessU
     /// <value>
     /// The list days.
     /// </value>
-    public List<DateTime> ListDays { get; set; }
+    public List<DateTime>? ListDays { get; set; }
 
     /// <summary>
     /// Gets or sets the array days.
@@ -33,7 +33,7 @@ public class BusinessUnitRootFilterModel : DomainObjectRootFilterModel<BusinessU
     /// <value>
     /// The array days.
     /// </value>
-    public DateTime[] ArrayDays { get; set; }
+    public DateTime[]? ArrayDays { get; set; }
 
     /// <summary>
     /// Gets or sets the list periods.
@@ -41,7 +41,7 @@ public class BusinessUnitRootFilterModel : DomainObjectRootFilterModel<BusinessU
     /// <value>
     /// The list periods.
     /// </value>
-    public List<Period> ListPeriods { get; set; }
+    public List<Period>? ListPeriods { get; set; }
 
     /// <summary>
     /// Gets or sets the array periods.
@@ -49,6 +49,6 @@ public class BusinessUnitRootFilterModel : DomainObjectRootFilterModel<BusinessU
     /// <value>
     /// The array periods.
     /// </value>
-    public Period[] ArrayPeriods { get; set; }
+    public Period[]? ArrayPeriods { get; set; }
 }
 

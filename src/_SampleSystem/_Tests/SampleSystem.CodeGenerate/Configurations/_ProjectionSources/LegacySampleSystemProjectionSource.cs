@@ -10,7 +10,7 @@ namespace SampleSystem.CodeGenerate.Configurations._ProjectionSources;
 public class LegacySampleSystemProjectionSource : ProjectionSource
 {
     public LegacySampleSystemProjectionSource() =>
-        this.TestLegacyEmployee = new Projection<Employee>(() => this.TestLegacyEmployee, true)
+        this.TestLegacyEmployee = new Projection<Employee>(() => this.TestLegacyEmployee!, true)
                                   .Property(employee => employee.Login)
                                   .Property(employee => employee.Role.Name)
                                   .Property(employee => employee.Role.Id)

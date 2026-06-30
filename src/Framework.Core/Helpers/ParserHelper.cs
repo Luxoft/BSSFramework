@@ -10,7 +10,7 @@ public static class ParserHelper
 {
     public static T Parse<T>(string value) => GetParseFunc<T>()(value);
 
-    public static Maybe<T> TryParse<T>(string value) => GetTryParseFunc<T>()(value);
+    public static Maybe<T> TryParse<T>(string value) => GetTryParseFunc<T>()!(value);
 
     public static LambdaExpression GetParseExpression(Type type, bool raiseError = true) =>
         new Func<bool, Expression<Func<string, object>>>(GetParseExpression<object>)
@@ -26,7 +26,7 @@ public static class ParserHelper
             throw new Exception($"Parsing Func for type {typeof(T).Name} not found");
         }
 
-        return expr;
+        return expr!;
     }
 
     public static Delegate GetParseFunc(Type type, bool raiseError = true) =>
@@ -43,7 +43,7 @@ public static class ParserHelper
             throw new Exception($"Parsing Func for type {typeof(T).Name} not found");
         }
 
-        return func;
+        return func!;
     }
 
 
@@ -61,11 +61,11 @@ public static class ParserHelper
             throw new Exception($"TryParsing Func for type {typeof(T).Name} not found");
         }
 
-        return expr;
+        return expr!;
     }
 
     public static Delegate? GetTryParseFunc(Type type, bool raiseError = true) =>
-        new Func<bool, Func<string, Maybe<object>>>(GetTryParseFunc<object>)
+        new Func<bool, Func<string, Maybe<object>>?>(GetTryParseFunc<object>)
             .CreateGenericMethod(type)
             .Invoke<Delegate>(null, raiseError);
 

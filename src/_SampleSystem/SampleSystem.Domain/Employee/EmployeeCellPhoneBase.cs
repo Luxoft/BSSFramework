@@ -7,13 +7,13 @@ namespace SampleSystem.Domain.Employee;
 
 public class EmployeeCellPhoneBase : AuditPersistentDomainObjectBase, IDetail<Employee>
 {
-    protected readonly Employee employee;
+    protected readonly Employee employee = null!;
 
-    protected string countryCode;
-    protected string cityCode;
-    protected string number;
+    protected string? countryCode;
+    protected string? cityCode;
+    protected string? number;
 
-    protected string fullNumber;
+    protected string? fullNumber;
 
     protected EmployeeCellPhoneBase()
     {

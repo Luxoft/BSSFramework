@@ -48,9 +48,9 @@ public static class AuditedExtension
     {
         var assemblies = auditedAssemblies.SelectMany(z => z).ToArray();
 
-        var auditSchema = assemblies.Select(z => z.AuditDatabase.RevisionEntitySchema).Distinct().SingleOrDefault(() => new ArgumentException("More than one AuditDatabase. There can be only one!"));
+        var auditSchema = assemblies.Select(z => z.AuditDatabase!.RevisionEntitySchema).Distinct().SingleOrDefault(() => new ArgumentException("More than one AuditDatabase. There can be only one!"));
 
-        return new AuditMetadataProvider<AuditRevisionEntity>(assemblies, auditSchema, tablePostfix, new AuditRevisionEntityListener<AuditRevisionEntity>(defaultCurrentUser));
+        return new AuditMetadataProvider<AuditRevisionEntity>(assemblies, auditSchema!, tablePostfix, new AuditRevisionEntityListener<AuditRevisionEntity>(defaultCurrentUser));
     }
 }
 

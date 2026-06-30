@@ -21,7 +21,8 @@ public static class FactoryExtensions
         return new FuncFactory<TArg, TResult>(new Func<TArg, TResult>(factory.Create).WithLock());
     }
 
-    public static IFactory<TArg, TResult> WithCache<TArg, TResult>(this IFactory<TArg, TResult> factory, IEqualityComparer<TArg> equalityComparer = null)
+    public static IFactory<TArg, TResult> WithCache<TArg, TResult>(this IFactory<TArg, TResult> factory, IEqualityComparer<TArg>? equalityComparer = null)
+            where TArg : notnull
     {
         if (factory == null) throw new ArgumentNullException(nameof(factory));
 

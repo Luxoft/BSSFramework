@@ -48,8 +48,8 @@ public struct TrackingResult<TDomainObject> : IEnumerable<TrackingProperty>
 
         return TrackingProperty.Create<IEnumerable<TProperty>>(
                                                                property.PropertyName,
-                                                               ((IEnumerable)property.PreviousValue ?? Enumerable.Empty<TProperty>()).Cast<TProperty>().ToList(),
-                                                               ((IEnumerable)property.CurrentValue ?? Enumerable.Empty<TProperty>()).Cast<TProperty>().ToList());
+                                                               ((IEnumerable?)property.PreviousValue ?? Enumerable.Empty<TProperty>()).Cast<TProperty>().ToList(),
+                                                               ((IEnumerable?)property.CurrentValue ?? Enumerable.Empty<TProperty>()).Cast<TProperty>().ToList());
     }
 
     /// <summary>
@@ -94,7 +94,7 @@ public struct TrackingResult<TDomainObject> : IEnumerable<TrackingProperty>
     /// <param name="propertyChanged">Property get expression</param>
     public Maybe<TrackingProperty<TProperty>> GetChange<TProperty>(Expression<Func<TDomainObject, TProperty>> propertyChanged)
     {
-        var hasChange = this.HasChange(propertyChanged.Select(v => (object)v));
+        var hasChange = this.HasChange(propertyChanged.Select(v => (object)v!));
 
         if (hasChange)
         {
@@ -112,7 +112,7 @@ public struct TrackingResult<TDomainObject> : IEnumerable<TrackingProperty>
     /// <param name="propertyChanged">Property get expression</param>
     public Maybe<TrackingProperty<IEnumerable<TProperty>>> GetChange<TProperty>(Expression<Func<TDomainObject, IEnumerable<TProperty>>> propertyChanged)
     {
-        var hasChange = this.HasChange(propertyChanged.Select(v => (object)v));
+        var hasChange = this.HasChange(propertyChanged.Select(v => (object)v!));
 
         if (hasChange)
         {
@@ -138,7 +138,7 @@ public struct TrackingResult<TDomainObject> : IEnumerable<TrackingProperty>
             params Expression<Func<TDomainObject, object>>[] allowedPropertiesForChangingExpressions)
     {
         var allowedPropertiesForChanging =
-                allowedPropertiesForChangingExpressions.ToArray(expr => typeof(TDomainObject).GetProperty(expr.GetMemberName(), true));
+                allowedPropertiesForChangingExpressions.ToArray(expr => typeof(TDomainObject).GetProperty(expr.GetMemberName(), true)!);
 
         var mergeResult = this.GetMergeResult(allowedPropertiesForChanging, v => v.PropertyName, v => v.Name);
 

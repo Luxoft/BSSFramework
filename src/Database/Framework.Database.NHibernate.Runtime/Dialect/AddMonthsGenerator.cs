@@ -17,7 +17,7 @@ public class AddMonthsGenerator : BaseHqlGeneratorForMethod
     /// <summary>
     /// Creates new generator instance
     /// </summary>
-    public AddMonthsGenerator() => this.SupportedMethods = [ReflectionHelper.GetMethodDefinition<DateTime?>(d => d.Value.AddMonths(0))];
+    public AddMonthsGenerator() => this.SupportedMethods = [ReflectionHelper.GetMethodDefinition<DateTime?>(d => d!.Value.AddMonths(0))];
 
     /// <summary>
     /// Creates new <see cref="HqlTreeNode"/> node that represents AddMonths method call

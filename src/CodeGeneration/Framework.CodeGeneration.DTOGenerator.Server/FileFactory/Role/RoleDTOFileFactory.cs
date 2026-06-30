@@ -29,7 +29,7 @@ public abstract class RoleDTOFileFactory<TConfiguration>(TConfiguration configur
 
     protected override IEnumerable<CodeAttributeDeclaration> GetCustomAttributes()
     {
-        yield return this.Configuration.GetDTOFileAttribute(this.DomainType, this.FileType);
+        yield return this.Configuration.GetDTOFileAttribute(this.DomainType!, this.FileType);
         yield return this.GetDataContractCodeAttributeDeclaration(this.DataContractNamespace);
     }
 

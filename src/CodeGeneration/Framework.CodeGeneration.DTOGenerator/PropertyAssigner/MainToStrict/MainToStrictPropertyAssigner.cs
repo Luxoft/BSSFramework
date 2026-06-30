@@ -52,7 +52,7 @@ public class MainToStrictPropertyAssigner<TConfiguration>(IDTOSource<TConfigurat
             }
             else
             {
-                var strictRefType = this.CodeTypeReferenceService.GetCodeTypeReference(property);
+                var strictRefType = this.CodeTypeReferenceService!.GetCodeTypeReference(property);
 
                 return new CodeNotNullConditionStatement(sourcePropertyRef)
                 {
@@ -86,9 +86,9 @@ public class MainToStrictPropertyAssigner<TConfiguration>(IDTOSource<TConfigurat
         }
         else if (this.Configuration.IsCollectionProperty(property))
         {
-            var elementFileType = this.CodeTypeReferenceService.GetCollectionFileType(property);
+            var elementFileType = this.CodeTypeReferenceService!.GetCollectionFileType(property);
 
-            var elementType = property.PropertyType.GetCollectionOrArrayElementType();
+            var elementType = property.PropertyType.GetCollectionOrArrayElementType()!;
 
             var lambda = new CodeParameterDeclarationExpression { Name = elementType.Name.ToStartLowerCase() }.Pipe(param =>
             {

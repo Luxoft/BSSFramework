@@ -33,7 +33,7 @@ public class DefaultSimpleDTOFileFactory<TConfiguration>(TConfiguration configur
 
         if (this.IsPersistent())
         {
-            if (this.Configuration.GeneratePolicy.Used(this.DomainType, BaseFileType.IdentityDTO))
+            if (this.Configuration.GeneratePolicy.Used(this.DomainType!, BaseFileType.IdentityDTO))
             {
                 yield return this.GetIdentityObjectContainerTypeReference();
             }
@@ -49,7 +49,7 @@ public class DefaultSimpleDTOFileFactory<TConfiguration>(TConfiguration configur
 
         if (this.IsPersistent())
         {
-            if (this.Configuration.GeneratePolicy.Used(this.DomainType, BaseFileType.IdentityDTO))
+            if (this.Configuration.GeneratePolicy.Used(this.DomainType!, BaseFileType.IdentityDTO))
             {
                 yield return this.GetIdentityObjectContainerImplementation();
             }
@@ -58,9 +58,9 @@ public class DefaultSimpleDTOFileFactory<TConfiguration>(TConfiguration configur
         }
     }
 
-    protected override CodeExpression GetFieldInitExpression(CodeTypeReference codeTypeReference, PropertyInfo property)
+    protected override CodeExpression? GetFieldInitExpression(CodeTypeReference codeTypeReference, PropertyInfo property)
     {
-        if (!this.CodeTypeReferenceService.IsOptional(property))
+        if (!this.CodeTypeReferenceService!.IsOptional(property))
         {
             if (property.PropertyType == typeof(Period))
             {

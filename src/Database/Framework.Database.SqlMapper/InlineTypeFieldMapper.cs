@@ -10,7 +10,7 @@ public class InlineTypeFieldMapper : IMapper
 
     private static IEnumerable<SqlFieldMappingInfo> GetMappingWithPrimitives(FieldMetadata field)
     {
-        var inlineTypeFieldMetadata = field as InlineTypeFieldMetadata;
+        var inlineTypeFieldMetadata = (InlineTypeFieldMetadata)field;
 
         var pairs = inlineTypeFieldMetadata
                     .GetAllElements(z => z.Children)
@@ -33,7 +33,7 @@ public class InlineTypeFieldMapper : IMapper
 
     private static IEnumerable<SqlFieldMappingInfo> GetMappingWithRefType(FieldMetadata field)
     {
-        var inlineTypeFieldMetadata = field as InlineTypeFieldMetadata;
+        var inlineTypeFieldMetadata = (InlineTypeFieldMetadata)field;
 
         var pairs = inlineTypeFieldMetadata
                     .GetAllElements(z => z.Children)

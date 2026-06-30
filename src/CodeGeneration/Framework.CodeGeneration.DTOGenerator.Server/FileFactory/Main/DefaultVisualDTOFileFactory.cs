@@ -22,7 +22,7 @@ public class DefaultVisualDTOFileFactory<TConfiguration>(TConfiguration configur
             yield return baseType;
         }
 
-        if (this.Configuration.GeneratePolicy.Used(this.DomainType, BaseFileType.IdentityDTO))
+        if (this.Configuration.GeneratePolicy.Used(this.DomainType!, BaseFileType.IdentityDTO))
         {
             yield return this.GetIdentityObjectContainerTypeReference();
         }
@@ -35,7 +35,7 @@ public class DefaultVisualDTOFileFactory<TConfiguration>(TConfiguration configur
             yield return baseMember;
         }
 
-        if (this.Configuration.GeneratePolicy.Used(this.DomainType, BaseFileType.IdentityDTO))
+        if (this.Configuration.GeneratePolicy.Used(this.DomainType!, BaseFileType.IdentityDTO))
         {
             yield return this.GetIdentityObjectContainerImplementation();
         }

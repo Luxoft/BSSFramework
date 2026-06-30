@@ -36,7 +36,7 @@ public class HistoryQueryOptimized<TEntity, TRevisionEntity, TIdentity>(
                select new IdentityRevisionEntityInfo<TRevisionEntity, TIdentity>(
                    revisionData,
                    (TIdentity)identityObject,
-                   (RevisionType)versionsEntity[revisionTypePropertyName]);
+                   (RevisionType)versionsEntity[revisionTypePropertyName]!);
     }
 
     public override IEnumerable<IIdentityRevisionEntityInfo<TRevisionEntity, TIdentity>> Results()
@@ -66,7 +66,7 @@ public class HistoryQueryOptimized<TEntity, TRevisionEntity, TIdentity>(
                select new IdentityRevisionEntityInfo<TRevisionEntity, TIdentity>(
                                                                                  revisionData,
                                                                                  (TIdentity)identityObject,
-                                                                                 (RevisionType)versionsEntity[revisionTypePropertyName]);
+                                                                                 (RevisionType)versionsEntity[revisionTypePropertyName]!);
     }
 
     public object GetIdentityValue(string entityName, IDictionary? versionsEntity)
@@ -75,17 +75,17 @@ public class HistoryQueryOptimized<TEntity, TRevisionEntity, TIdentity>(
 
         if (versionsEntity == null)
         {
-            return null;
+            return null!;
         }
 
         if (versionsEntity.Contains(typeKey))
         {
-            entityName = this.verCfg.EntCfg.GetEntityNameForVersionsEntityName((string)versionsEntity[typeKey]);
+            entityName = this.verCfg.EntCfg.GetEntityNameForVersionsEntityName((string)versionsEntity[typeKey]!);
         }
 
         // First mapping the primary key
         var idMapper = this.verCfg.EntCfg[entityName].IdMapper;
-        var originalId = (IDictionary)versionsEntity[this.verCfg.AuditEntCfg.OriginalIdPropName];
+        var originalId = (IDictionary)versionsEntity[this.verCfg.AuditEntCfg.OriginalIdPropName]!;
 
         var primaryKey = idMapper.MapToIdFromMap(originalId);
         return primaryKey;

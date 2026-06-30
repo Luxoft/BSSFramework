@@ -13,11 +13,11 @@ public static class FileTypeExtensions
 
         if (fileType == BaseFileType.ProjectionDTO)
         {
-            return new CodeFileFactoryHeader<TFileType>(fileType, fileType + @"\", domainType => domainType.Name.SkipLast("Projection", false) + fileType);
+            return new CodeFileFactoryHeader<TFileType>(fileType, fileType + @"\", domainType => domainType!.Name.SkipLast("Projection", false) + fileType);
         }
         else
         {
-            return new CodeFileFactoryHeader<TFileType>(fileType, fileType + @"\", domainType => domainType.Name + fileType);
+            return new CodeFileFactoryHeader<TFileType>(fileType, fileType + @"\", domainType => domainType!.Name + fileType);
         }
     }
 
@@ -26,7 +26,7 @@ public static class FileTypeExtensions
     {
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
-        return new CodeFileFactoryHeader<TFileType>(fileType, relativePath, getTypeNameFunc);
+        return new CodeFileFactoryHeader<TFileType>(fileType, relativePath, t => getTypeNameFunc(t!));
     }
 }
 

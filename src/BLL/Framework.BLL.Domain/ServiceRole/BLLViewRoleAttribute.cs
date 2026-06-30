@@ -32,9 +32,9 @@ public class BLLViewRoleAttribute : BLLViewRoleBaseAttribute
         set => this.Collection = Values.TakeWhile(v => v <= value).ToArray();
     }
 
-    public IReadOnlyList<MainDTOType> Single { get; set; }
+    public IReadOnlyList<MainDTOType> Single { get; set; } = null!;
 
-    public IReadOnlyList<MainDTOType> Collection { get; set; }
+    public IReadOnlyList<MainDTOType> Collection { get; set; } = null!;
 
     public IEnumerable<MainDTOType> All => this.Single.Concat(this.Collection);
 

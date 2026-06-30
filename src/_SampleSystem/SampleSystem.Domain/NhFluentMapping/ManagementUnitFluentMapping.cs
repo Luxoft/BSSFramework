@@ -19,13 +19,13 @@ public class ManagementUnitFluentMapping :
 {
     private readonly ICollection<ManagementUnitFluentMapping> children = new List<ManagementUnitFluentMapping>();
 
-    private ManagementUnitFluentMapping parent;
+    private ManagementUnitFluentMapping? parent;
 
     private Period period;
 
     private bool isProduction;
 
-    private MuComponent muComponent;
+    private MuComponent muComponent = null!;
 
     public virtual Period Period
     {
@@ -48,7 +48,7 @@ public class ManagementUnitFluentMapping :
     /// <summary>
     ///  Supposed to be set from dto only.
     /// </summary>
-    public virtual ManagementUnitFluentMapping Parent
+    public virtual ManagementUnitFluentMapping? Parent
     {
         get => this.parent;
         protected internal set => this.parent = value;

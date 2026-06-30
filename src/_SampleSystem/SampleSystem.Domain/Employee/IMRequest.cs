@@ -9,9 +9,9 @@ namespace SampleSystem.Domain.Employee;
 [BLLViewRole]
 public class IMRequest : Information
 {
-    private string message;
+    private string? message;
 
-    private IMRequestDetail oneToOneDetail;
+    private IMRequestDetail oneToOneDetail = null!;
 
     [MaxLength(50)]
     public virtual string Message

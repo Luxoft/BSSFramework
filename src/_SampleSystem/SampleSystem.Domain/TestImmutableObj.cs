@@ -8,9 +8,9 @@ namespace SampleSystem.Domain;
 [BLLIntegrationSaveRole]
 public class TestImmutableObj : AuditPersistentDomainObjectBase
 {
-    private string testImmutablePrimitiveProperty;
+    private string testImmutablePrimitiveProperty = null!;
 
-    private Employee.Employee testImmutableRefProperty;
+    private Employee.Employee testImmutableRefProperty = null!;
 
     [FixedPropertyValidator]
     public virtual string TestImmutablePrimitiveProperty

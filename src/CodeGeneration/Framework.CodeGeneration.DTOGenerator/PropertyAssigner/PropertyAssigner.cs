@@ -34,7 +34,7 @@ public abstract class PropertyAssigner<TConfiguration> : GeneratorConfigurationC
     public DTOFileType FileType { get; }
 
 
-    protected ILayerCodeTypeReferenceService CodeTypeReferenceService { get; }
+    protected ILayerCodeTypeReferenceService? CodeTypeReferenceService { get; }
 
 
     public virtual CodeStatement GetAssignStatement(PropertyInfo property, CodeExpression sourcePropertyRef, CodeExpression targetPropertyRef)

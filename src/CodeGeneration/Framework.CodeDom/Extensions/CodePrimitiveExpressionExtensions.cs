@@ -6,7 +6,7 @@ namespace Framework.CodeDom.Extensions;
 
 public static class CodePrimitiveExpressionExtensions
 {
-    public static CodeExpression ToDynamicPrimitiveExpression(this object value) => (value as Enum).Maybe(e => e.ToPrimitiveExpression(), new CodePrimitiveExpression(value));
+    public static CodeExpression ToDynamicPrimitiveExpression(this object? value) => (value as Enum).Maybe(e => e.ToPrimitiveExpression(), new CodePrimitiveExpression(value));
 
     public static CodeExpression ToPrimitiveExpression(this Enum value)
     {

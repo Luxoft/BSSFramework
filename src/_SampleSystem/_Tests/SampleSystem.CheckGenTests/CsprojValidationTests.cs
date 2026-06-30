@@ -114,7 +114,7 @@ public class CsprojValidationTests
             .Where(x => x.Name.LocalName == "Project")
             .Select(x => x.Attribute("Path")?.Value)
             .Where(x => !string.IsNullOrWhiteSpace(x))
-            .Select(NormalizePath)
+            .Select(x => NormalizePath(x!))
             .ToHashSet(StringComparer.OrdinalIgnoreCase);
     }
 

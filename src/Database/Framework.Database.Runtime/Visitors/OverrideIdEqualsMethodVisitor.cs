@@ -7,8 +7,8 @@ namespace Framework.Database.Visitors;
 
 internal class OverrideIdEqualsMethodVisitor<TIdent> : ExpressionVisitor
 {
-    private static readonly MethodInfo ObjectEqualsMethod = typeof(object).GetMethod(nameof(object.Equals), [typeof(object)]);
-    private static readonly MethodInfo GenericEqualsMethod = typeof(TIdent).GetMethod(nameof(object.Equals), [typeof(TIdent)]);
+    private static readonly MethodInfo ObjectEqualsMethod = typeof(object).GetMethod(nameof(object.Equals), [typeof(object)])!;
+    private static readonly MethodInfo GenericEqualsMethod = typeof(TIdent).GetMethod(nameof(object.Equals), [typeof(TIdent)])!;
 
     private static readonly OverrideIdEqualsMethodVisitor<TIdent> Instance = new();
 
@@ -33,7 +33,7 @@ internal class OverrideIdEqualsMethodVisitor<TIdent> : ExpressionVisitor
             var left = this.Visit(node.Object);
             var arg = this.Visit(node.Arguments.Single());
             var right = arg.ExtractBoxingValue();
-            result = Expression.MakeBinary(ExpressionType.Equal, left, right);
+            result = Expression.MakeBinary(ExpressionType.Equal, left!, right);
         }
         else
         {

@@ -25,7 +25,7 @@ public static class PeriodObjectExtensions
         source.Period = new Period(source.Period.StartDate, endDate);
     }
 
-    public static T GetNewest<T>(this IEnumerable<T> source)
+    public static T? GetNewest<T>(this IEnumerable<T> source)
             where T : IPeriodObject
     {
         var request = from item in source
@@ -35,7 +35,7 @@ public static class PeriodObjectExtensions
         return request.FirstOrDefault();
     }
 
-    public static T GetForDate<T>(this IEnumerable<T> source, DateTime date)
+    public static T? GetForDate<T>(this IEnumerable<T> source, DateTime date)
             where T : IPeriodObject
     {
         var request = from item in source

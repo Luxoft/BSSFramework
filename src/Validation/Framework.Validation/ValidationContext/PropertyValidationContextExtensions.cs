@@ -75,7 +75,7 @@ public static class PropertyValidationContextExtensions
         }
         else
         {
-            return context.Source;
+            return context.Source!;
         }
     }
 
@@ -106,7 +106,7 @@ public static class PropertyValidationContextExtensions
                       .TakeWhile(state => state.PropertyMap.IsExpanded)
                       .LastOrDefault()
 
-               ?? new ValidationState(context.ParentState, context.Map, context.Source);
+               ?? new ValidationState(context.ParentState, context.Map, context.Source!);
     }
 
     private static IEnumerable<IValidationState> GetExpandPathStates<TSource, TProperty>(this IPropertyValidationContext<TSource, TProperty> context)
@@ -120,7 +120,7 @@ public static class PropertyValidationContextExtensions
     {
         if (context == null) throw new ArgumentNullException(nameof(context));
 
-        yield return new ValidationState(context.ParentState, context.Map, context.Source);
+        yield return new ValidationState(context.ParentState, context.Map, context.Source!);
 
         foreach (var state in context.ParentState.GetAllElements(state => state.Parent).TakeWhile(state => state.PropertyMap.IsExpanded))
         {
@@ -151,7 +151,7 @@ public static class PropertyValidationContextExtensions
 
         public int OperationContext { get; }
 
-        public IValidationState ParentState { get; }
+        public IValidationState? ParentState { get; }
 
         public TExpectedSource Source { get; }
 

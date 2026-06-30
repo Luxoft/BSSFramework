@@ -57,7 +57,7 @@ public struct RevenueDocumentAribaStatus(AribaStatusType type, string descriptio
 
     public static bool operator ==(RevenueDocumentAribaStatus arg1, RevenueDocumentAribaStatus arg2) => !(arg1 != arg2);
 
-    public override bool Equals(object obj) => obj is RevenueDocumentAribaStatus && this.Equals((RevenueDocumentAribaStatus)obj);
+    public override bool Equals(object? obj) => obj is RevenueDocumentAribaStatus && this.Equals((RevenueDocumentAribaStatus)obj);
 
     public bool Equals(RevenueDocumentAribaStatus target) => this.type == target.type && this.date == target.date && this.description == target.description;
 

@@ -20,7 +20,7 @@ public abstract class FileGenerator<TConfiguration>(TConfiguration configuration
 
     protected override IEnumerable<ICodeFile> GetInternalFileGenerators()
     {
-        var generators = this.GetRoleFileGenerators().Where(fileGenerator => this.Configuration.GeneratePolicy.Used(fileGenerator.DomainType, fileGenerator.FileType)).ToList();
+        var generators = this.GetRoleFileGenerators().Where(fileGenerator => this.Configuration.GeneratePolicy.Used(fileGenerator.DomainType!, fileGenerator.FileType)).ToList();
 
         var methodGenerators = generators.OfType<IClientMappingServiceExternalMethodGenerator>().ToList();
 

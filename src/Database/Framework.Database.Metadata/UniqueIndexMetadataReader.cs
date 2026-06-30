@@ -53,7 +53,7 @@ public class UniqueIndexMetadataReader
                                         .ToList();
 
 
-        return keyToUniqueProperties.Select(z => new UniqueIndexMetadata(domainTypeMetadata, z.Key, z.SelectMany(q => q.UniqueElementFields).Distinct()));
+        return keyToUniqueProperties.Select(z => new UniqueIndexMetadata(domainTypeMetadata, z.Key!, z.SelectMany(q => q.UniqueElementFields).Distinct()));
     }
 
     private IEnumerable<UniqueIndexMetadata> ProcessPropertyAttribute(DomainTypeMetadata domainTypeMetadata)
@@ -87,7 +87,7 @@ public class UniqueIndexMetadataReader
 
             var uniqueFields = fields.Union([masterRef]).ToList();
 
-            yield return new UniqueIndexMetadata(domainTypeMetadata, groupName, uniqueFields);
+            yield return new UniqueIndexMetadata(domainTypeMetadata, groupName!, uniqueFields);
         }
     }
 

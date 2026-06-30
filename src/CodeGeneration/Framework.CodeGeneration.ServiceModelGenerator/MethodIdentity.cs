@@ -11,7 +11,7 @@ public class MethodIdentity : IEquatable<MethodIdentity>
     {
     }
 
-    public MethodIdentity(MethodIdentityType type, Type modelType = null, ViewDTOType? dtoType = null)
+    public MethodIdentity(MethodIdentityType type, Type? modelType = null, ViewDTOType? dtoType = null)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
@@ -21,22 +21,22 @@ public class MethodIdentity : IEquatable<MethodIdentity>
     }
 
 
-    public Type ModelType { get; }
+    public Type? ModelType { get; }
 
     public ViewDTOType? DTOType { get; }
 
     public MethodIdentityType Type { get; }
 
 
-    public virtual bool Equals(MethodIdentity other) => !ReferenceEquals(other, null) && this.Type == other.Type && this.ModelType == other.ModelType && this.DTOType == other.DTOType;
+    public virtual bool Equals(MethodIdentity? other) => !ReferenceEquals(other, null) && this.Type == other.Type && this.ModelType == other.ModelType && this.DTOType == other.DTOType;
 
-    public override bool Equals(object obj) => this.Equals(obj as MethodIdentity);
+    public override bool Equals(object? obj) => this.Equals(obj as MethodIdentity);
 
     public override int GetHashCode() => this.Type.GetHashCode();
 
     public override string ToString() => this.Type.Name;
 
-    public static implicit operator MethodIdentity(MethodIdentityType type) => type.Maybe(v => new MethodIdentity(v));
+    public static implicit operator MethodIdentity(MethodIdentityType type) => type.Maybe(v => new MethodIdentity(v))!;
 
     public static bool operator ==(MethodIdentity source, MethodIdentity other) =>
         ReferenceEquals(source, other)

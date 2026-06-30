@@ -41,7 +41,7 @@ internal class RemoveStrategy(DatabaseScriptGeneratorStrategyInfo parameter) : S
         }
     }
 
-    private void RemoveColumns(Column removableColumn) => this.RemoveColumns(removableColumn.Parent as Table, [removableColumn]);
+    private void RemoveColumns(Column removableColumn) => this.RemoveColumns((removableColumn.Parent as Table)!, [removableColumn]);
 
     private void RemoveColumns(Table table, IEnumerable<Column> removableColumns)
     {

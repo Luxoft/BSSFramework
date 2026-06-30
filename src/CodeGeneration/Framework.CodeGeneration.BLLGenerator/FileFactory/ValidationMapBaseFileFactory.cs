@@ -119,12 +119,12 @@ public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configu
 
     private bool IsEmptyClassMap(Type domainType, IValidatorGenerator domainTypeValidatorGenerator) => domainTypeValidatorGenerator.PropertyValidators.All(this.SkipPropertyGeneration) && this.SkipClassValidatorsGeneration(domainType, domainTypeValidatorGenerator.ClassValidators);
 
-    private bool SkipPropertyGeneration(KeyValuePair<PropertyInfo, IReadOnlyDictionary<CodeExpression, IValidationData>> propertyValidatorPair) =>
+    private bool SkipPropertyGeneration(KeyValuePair<PropertyInfo, IReadOnlyDictionary<CodeExpression, IValidationData?>> propertyValidatorPair) =>
         this.Configuration.SquashPropertyValidators(propertyValidatorPair.Key)
         && !this.Configuration.GenerateExternalPropertyValidators
         && propertyValidatorPair.Value.IsEmpty();
 
-    private bool SkipClassValidatorsGeneration(Type domainType, IReadOnlyDictionary<CodeExpression, IValidationData> classValidatorPair) =>
+    private bool SkipClassValidatorsGeneration(Type domainType, IReadOnlyDictionary<CodeExpression, IValidationData?> classValidatorPair) =>
         this.Configuration.SquashClassValidators(domainType)
         && !this.Configuration.GenerateExternalClassValidators
         && classValidatorPair.IsEmpty();
@@ -250,7 +250,7 @@ public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configu
         }.WithYield(propertyValidatorExpressions);
     }
 
-    private CodeMemberMethod GetClassValidatorsMethod(Type domainType, IReadOnlyDictionary<CodeExpression, IValidationData> classValidators)
+    private CodeMemberMethod GetClassValidatorsMethod(Type domainType, IReadOnlyDictionary<CodeExpression, IValidationData?> classValidators)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
 
@@ -290,7 +290,7 @@ public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configu
         }
     }
 
-    private CodeMemberMethod GetPropertyValidatorsMethod(Type domainType, KeyValuePair<PropertyInfo, IReadOnlyDictionary<CodeExpression, IValidationData>> propertyValidatorPair)
+    private CodeMemberMethod GetPropertyValidatorsMethod(Type domainType, KeyValuePair<PropertyInfo, IReadOnlyDictionary<CodeExpression, IValidationData?>> propertyValidatorPair)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
 

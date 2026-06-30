@@ -50,7 +50,7 @@ public static class PropertyValidatorExtensions
 
                 if (validatorSourceType.IsAssignableFrom(typeof(TSource)) && validatorPropertyType.IsAssignableFrom(typeof(TProperty)))
                 {
-                    var unboxFunc = new Func<IPropertyValidator<object, object>, IPropertyValidator<TSource, TProperty>>(Unbox<TSource, object, TProperty, object>)
+                    var unboxFunc = new Func<IPropertyValidator<object, object>, IPropertyValidator<object, object>>(Unbox<object, object, object, object>)
                         .CreateGenericMethod(typeof(TSource), validatorSourceType, typeof(TProperty), validatorPropertyType);
 
                     return unboxFunc.Invoke<IPropertyValidator<TSource, TProperty>>(null, basePropertyValidator);

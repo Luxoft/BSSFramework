@@ -46,7 +46,7 @@ public static class Extensions
     public static IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment> ToWebApiNetCore(
             this IServiceModelGenerationEnvironment environment,
             IEnumerable<IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>> source,
-            string nameSpace = null) =>
+            string? nameSpace = null) =>
             new WebApiNetCoreCompositeGeneratorConfiguration(environment, source.ToList(), nameSpace);
 
     public static IFileGenerator<ICodeFile, CodeDomRenderer> DecorateProjectionsToRootControllerNetCore(this IFileGenerator<ICodeFile, CodeDomRenderer> source, string suffix = "") =>
@@ -70,7 +70,7 @@ public static class Extensions
         if (baseTypes.Count > 1)
         {
             throw new InvalidOperationException($"{nameof(targetNamespace)}('{targetNamespace.Name}') and {nameof(addedNamespaces)}('{addedNamespaces.Select(z => z.Name).Join(",")}') must have one base type. "
-                                                + $"Found base types of {nameof(targetNamespace)} and {nameof(addedNamespaces)}' are '{baseTypes.Select(z => z.FullName).Join(",")}'");
+                                                + $"Found base types of {nameof(targetNamespace)} and {nameof(addedNamespaces)}' are '{baseTypes.Select(z => z?.FullName).Join(",")}'");
         }
 
         var targetMethods = targetNamespace.Types.Cast<CodeTypeDeclaration>().SelectMany(z => z.Members.OfType<CodeMemberMethod>()).ToArray();
@@ -108,7 +108,7 @@ public static class Extensions
             var groupedByPersistentDomainType = source.GetFileGenerators()
                                                     .Select(z => (generator: z, renderedData: z.GetRenderData()))
                                                     .Select(z => (z.generator, z.renderedData, domainType: z.renderedData.Types[0].UserData["DomainType"] as Type))
-                                                    .Select(z => (z.generator, z.renderedData, z.domainType, mainDomainType: z.domainType.GetProjectionSourceTypeOrSelf()))
+                                                    .Select(z => (z.generator, z.renderedData, z.domainType, mainDomainType: z.domainType!.GetProjectionSourceTypeOrSelf()))
                                                     .GroupBy(z => z.mainDomainType)
                                                     .ToList();
 
@@ -122,7 +122,7 @@ public static class Extensions
 
                 if (null == mainRenderedData)
                 {
-                    throw new ArgumentException($"Main domain object controller must be exists for combine projections. Found Projection:{valueTuple.otherGenerators.Select(z => z.domainType.Name).Join(',')}");
+                    throw new ArgumentException($"Main domain object controller must be exists for combine projections. Found Projection:{valueTuple.otherGenerators.Select(z => z.domainType?.Name).Join(',')}");
                 }
 
                 var resultNameSpace = mainRenderedData.CombineMethods(valueTuple.otherGenerators.Select(q => q.renderedData).ToList(), suffix);

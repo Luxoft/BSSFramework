@@ -12,8 +12,8 @@ namespace SampleSystem.Domain.Inline;
 [KnownType(typeof(Fio))]
 public class FioShort : ICloneable, IEquatable<FioShort>
 {
-    private string firstName;
-    private string lastName;
+    private string? firstName;
+    private string? lastName;
 
 
     public FioShort()
@@ -55,21 +55,21 @@ public class FioShort : ICloneable, IEquatable<FioShort>
 
     public override string ToString() => this.FullName;
 
-    public FioShort Clone() => this.MemberwiseClone() as FioShort;
+    public FioShort Clone() => (FioShort)this.MemberwiseClone();
 
     object ICloneable.Clone() => this.Clone();
 
-    public override bool Equals(object obj) => this.Equals(obj as FioShort);
+    public override bool Equals(object? obj) => this.Equals(obj as FioShort);
 
     public override int GetHashCode() => 0;
 
-    public bool Equals(FioShort other) =>
+    public bool Equals(FioShort? other) =>
         other != null
         && this.FirstName == other.FirstName
         && this.LastName == other.LastName;
 
-    public static bool operator ==(FioShort v1, FioShort v2) => ReferenceEquals(v1, v2) || (!ReferenceEquals(v1, null) && v1.Equals(v2));
+    public static bool operator ==(FioShort? v1, FioShort? v2) => ReferenceEquals(v1, v2) || (!ReferenceEquals(v1, null) && v1.Equals(v2));
 
-    public static bool operator !=(FioShort v1, FioShort v2) => !(v1 == v2);
+    public static bool operator !=(FioShort? v1, FioShort? v2) => !(v1 == v2);
 }
 

@@ -15,14 +15,14 @@ internal class EqualEvaluator : ExpressionVisitor
     {
         if (!this.value.IsInit)
         {
-            this.value.Value = node.Value.ToString();
+            this.value.Value = node.Value!.ToString()!;
         }
         return base.VisitConstant(node);
     }
 
     protected override Expression VisitMember(MemberExpression node)
     {
-        if (node.Expression.GetType() == typeof(ConstantExpression))
+        if (node.Expression!.GetType() == typeof(ConstantExpression))
         {
             this.value.Value = node.ToValue();
         }

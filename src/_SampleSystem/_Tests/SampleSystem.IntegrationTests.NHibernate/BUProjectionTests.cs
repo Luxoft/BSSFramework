@@ -43,11 +43,11 @@ public class BUProjectionTests(IServiceProvider rootServiceProvider) : TestBase(
                       DBSessionMode.Write,
                       context =>
                       {
-                          var bu = context.Logics.BusinessUnit.GetById(profitBuId.Id, true);
+                          var bu = context.Logics.BusinessUnit.GetById(profitBuId.Id, true)!;
 
                           foreach (var empId in new[] { empId1, empId2, empId3 })
                           {
-                              var emp = context.Logics.Employee.GetById(empId.Id, true);
+                              var emp = context.Logics.Employee.GetById(empId.Id, true)!;
 
                               var link = new BusinessUnitEmployeeRole(bu)
                               {

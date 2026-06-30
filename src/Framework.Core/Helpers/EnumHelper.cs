@@ -47,7 +47,7 @@ public static class EnumHelper
     {
         if (value == null) throw new ArgumentNullException(nameof(value));
 
-        return value.GetType().GetField(value.ToString());
+        return value.GetType().GetField(value.ToString())!;
     }
 
     public static string ToCSharpCode(this Enum value)
@@ -69,7 +69,7 @@ public static class EnumHelper
                 throw new InvalidOperationException($"Type:{typeof(TEnum)} is not Enum");
             }
 
-            return typeof(TEnum).GetFields().Where(z => z.IsLiteral).Select(z => (TEnum)z.GetValue(null));
+            return typeof(TEnum).GetFields().Where(z => z.IsLiteral).Select(z => (TEnum)z.GetValue(null)!);
         }
     }
 }

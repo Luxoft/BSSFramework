@@ -4,19 +4,19 @@ namespace Framework.BLL.Domain.Extensions;
 
 public static class EnumerableExtensions
 {
-    public static TSource GetByName<TSource>(this IEnumerable<TSource> source, string name, bool raiseIfNotFound = true)
+    public static TSource? GetByName<TSource>(this IEnumerable<TSource> source, string name, bool raiseIfNotFound = true)
             where TSource : class, IVisualIdentityObject =>
         source.GetByName(name, StringComparison.CurrentCultureIgnoreCase, raiseIfNotFound);
 
-    public static TSource GetByName<TSource>(this IEnumerable<TSource> source, string name, Func<Exception> getFaultException)
+    public static TSource? GetByName<TSource>(this IEnumerable<TSource> source, string name, Func<Exception> getFaultException)
             where TSource : class, IVisualIdentityObject =>
         source.GetByName(name, StringComparison.CurrentCultureIgnoreCase, getFaultException);
 
-    public static TSource GetByName<TSource>(this IEnumerable<TSource> source, string name, StringComparison stringComparison, bool raiseIfNotFound = true)
+    public static TSource? GetByName<TSource>(this IEnumerable<TSource> source, string name, StringComparison stringComparison, bool raiseIfNotFound = true)
             where TSource : class, IVisualIdentityObject =>
         source.GetByName(name, stringComparison, TryGetNotFoundByNameExceptionFactory<TSource>(name, raiseIfNotFound));
 
-    public static TSource GetByName<TSource>(this IEnumerable<TSource> source, string name, StringComparison stringComparison, Func<Exception> getFaultException)
+    public static TSource? GetByName<TSource>(this IEnumerable<TSource> source, string name, StringComparison stringComparison, Func<Exception>? getFaultException)
             where TSource : class, IVisualIdentityObject
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
@@ -33,7 +33,7 @@ public static class EnumerableExtensions
     }
 
 
-    private static Func<Exception> TryGetNotFoundByNameExceptionFactory<TSource>(string name, bool raiseIfNotFound)
+    private static Func<Exception>? TryGetNotFoundByNameExceptionFactory<TSource>(string name, bool raiseIfNotFound)
     {
         if (name == null) throw new ArgumentNullException(nameof(name));
 

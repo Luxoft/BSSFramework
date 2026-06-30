@@ -29,7 +29,7 @@ public class DefaultProjectionDTOFileFactory<TConfiguration> : DTOFileFactory<TC
     {
         this.CodeTypeReferenceService = new ProjectionCodeTypeReferenceService<TConfiguration>(this.Configuration);
 
-        this.sourceType = this.DomainType.GetProjectionSourceType();
+        this.sourceType = this.DomainType!.GetProjectionSourceType()!;
 
         this.ignoreIdProp = domainType.GetProperties()
                                       .Any(prop => this.Configuration.IsIdentityProperty(prop)

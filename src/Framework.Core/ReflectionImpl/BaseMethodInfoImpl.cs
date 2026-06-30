@@ -13,7 +13,7 @@ public class BaseMethodInfoImpl : MethodInfo
 
     public override MethodImplAttributes GetMethodImplementationFlags() => throw new NotImplementedException();
 
-    public override object Invoke(object obj, BindingFlags invokeAttr, Binder binder, object[] parameters, CultureInfo culture) => throw new NotImplementedException();
+    public override object? Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture) => throw new NotImplementedException();
 
     public override MethodInfo GetBaseDefinition() => throw new NotImplementedException();
 

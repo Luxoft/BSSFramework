@@ -10,10 +10,10 @@ public class GetFullSecurityEntitiesByIdentsRequest
 {
     [DataMember]
     [AutoRequestProperty(OrderIndex = 0)]
-    public SecurityContextTypeIdentityDTO SecurityContextType { get; set; }
+    public SecurityContextTypeIdentityDTO SecurityContextType { get; set; } = null!;
 
     [DataMember]
     [AutoRequestProperty(OrderIndex = 1)]
-    public List<SecurityEntityIdentityDTO> SecurityEntities { get; set; }
+    public List<SecurityEntityIdentityDTO> SecurityEntities { get; set; } = [];
 }
 

@@ -219,6 +219,6 @@ public static class CoreStringExtensions
         return evaluate(source);
     }
 
-    public static string IfDefaultString(this string source, string otherResult) => string.IsNullOrWhiteSpace(source) ? otherResult : source;
+    public static string IfDefaultString(this string? source, string otherResult) => string.IsNullOrWhiteSpace(source) ? otherResult : source;
 }
 

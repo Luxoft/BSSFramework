@@ -51,7 +51,7 @@ public class ReadOnlyEfSession : EfSessionBase
         }
     }
 
-    public override IDbTransaction Transaction { get; } = null;
+    public override IDbTransaction Transaction { get; } = null!;
 
     public override async Task FlushAsync(CancellationToken ct) => throw new InvalidOperationException();
 }

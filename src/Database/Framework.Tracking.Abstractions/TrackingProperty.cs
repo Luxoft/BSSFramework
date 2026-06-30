@@ -12,7 +12,7 @@ public readonly record struct TrackingProperty(string PropertyName, object? Prev
     {
         if (typeof(T).IsClass)
         {
-            return new TrackingProperty<T>(propertyName, Maybe.Return((T)previousValue), Maybe.Return((T)currentValue));
+            return new TrackingProperty<T>(propertyName, Maybe.Return<T>((T)previousValue!), Maybe.Return<T>((T)currentValue!));
         }
         else
         {

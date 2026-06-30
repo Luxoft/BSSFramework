@@ -10,7 +10,7 @@ namespace Framework.Configuration.Domain;
 [NotAuditedClass]
 public class DomainTypeEventOperation : BaseDirectory, IDetail<DomainType>
 {
-    private readonly DomainType domainType;
+    private readonly DomainType domainType = null!;
 
     protected DomainTypeEventOperation()
     {

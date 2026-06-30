@@ -21,6 +21,6 @@ public static class TypeExtensions
             //    throw new Exception(string.Format("Type {0} must be not abstract", type.Name));
         }
 
-        return (TableAttribute)type.GetCustomAttributes(typeof(TableAttribute), false).FirstOrDefault();
+        return (TableAttribute?)type.GetCustomAttributes(typeof(TableAttribute), false).FirstOrDefault();
     }
 }

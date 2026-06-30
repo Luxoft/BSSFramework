@@ -13,7 +13,7 @@ public class DomainTypeMetadata
     private readonly List<DomainTypeMetadata> children;
     private readonly Lazy<List<UniqueIndexMetadata>> indexUniqueMetadataLazy;
     private bool isCollected;
-    private DomainTypeMetadata parent;
+    private DomainTypeMetadata? parent;
 
     public DomainTypeMetadata(Type domainType, AssemblyMetadata assemblyMetadata)
     {

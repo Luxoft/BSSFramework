@@ -9,13 +9,13 @@ namespace SampleSystem.Domain.TestDeserializedAuth;
 [BLLViewRole]
 public class TestPerformanceObject : BaseDirectory
 {
-    private Location location;
+    private Location location = null!;
 
-    private Employee.Employee employee;
+    private Employee.Employee employee = null!;
 
-    private BusinessUnit businessUnit;
+    private BusinessUnit businessUnit = null!;
 
-    private ManagementUnit managementUnit;
+    private ManagementUnit managementUnit = null!;
 
     public virtual Location Location
     {

@@ -63,9 +63,9 @@ public abstract partial class RazorTemplate<TRenderingObject>
                 var sf = fragment as Tuple<Tuple<string, int>, Tuple<string, int>, bool>;
                 var of = sf == null ? (Tuple<Tuple<string, int>, Tuple<object, int>, bool>)fragment : null;
 
-                var ws = sf != null ? sf.Item1.Item1 : of.Item1.Item1;
-                var literal = sf != null ? sf.Item3 : of.Item3;
-                var val = sf != null ? sf.Item2.Item1 : of.Item2.Item1;
+                var ws = sf != null ? sf.Item1.Item1 : of!.Item1.Item1;
+                var literal = sf != null ? sf.Item3 : of!.Item3;
+                var val = sf != null ? sf.Item2.Item1 : of!.Item2.Item1;
 
                 if (val == null)
                 {

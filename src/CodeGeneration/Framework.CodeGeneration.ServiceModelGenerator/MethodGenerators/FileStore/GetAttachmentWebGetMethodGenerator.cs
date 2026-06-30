@@ -47,7 +47,7 @@ public class GetAttachmentWebGetMethodGenerator<TConfiguration>(TConfiguration c
         return baseResult;
     }
 
-    protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
+    protected override object? GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
         var operationCode = this.Configuration.TryGetSecurityAttribute(this.DomainType, this.IsEdit);
         if (null != operationCode)

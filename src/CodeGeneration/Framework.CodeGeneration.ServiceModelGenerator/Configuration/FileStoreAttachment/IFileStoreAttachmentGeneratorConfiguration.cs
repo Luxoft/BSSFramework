@@ -19,6 +19,6 @@ public interface IFileStoreAttachmentGeneratorConfiguration : ICodeGeneratorConf
 
     string WebGetPath { get; }
 
-    SecurityRule TryGetSecurityAttribute(Type type, bool forEdit);
+    SecurityRule? TryGetSecurityAttribute(Type type, bool forEdit);
 }
 

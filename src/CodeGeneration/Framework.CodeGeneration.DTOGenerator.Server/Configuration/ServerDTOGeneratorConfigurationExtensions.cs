@@ -17,7 +17,7 @@ public static class ServerDTOGeneratorConfigurationExtensions
             PrivateImplementationType = configuration.GetVersionObjectCodeTypeReference(),
             GetStatements =
                        {
-                               new CodeThisReferenceExpression().ToPropertyReference(configuration.VersionProperty).ToMethodReturnStatement()
+                               new CodeThisReferenceExpression().ToPropertyReference(configuration.VersionProperty!).ToMethodReturnStatement()
                        },
             Type = configuration.VersionType.ToTypeReference()
         };

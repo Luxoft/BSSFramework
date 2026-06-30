@@ -19,7 +19,7 @@ public class AuditEntityService : IAuditAttributeService
     {
         var mappedClass = property.PersistentClass.MappedClass;
 
-        Dictionary<Property, bool> propertyDict;
+        Dictionary<Property, bool>? propertyDict;
 
         if (!this.isAuditedPropertyDict.TryGetValue(mappedClass, out propertyDict))
         {
@@ -43,7 +43,7 @@ public class AuditEntityService : IAuditAttributeService
 
     public RelationTargetAuditMode GetAttributeFor(Type type, Property property)
     {
-        Dictionary<Property, bool> propertyDict;
+        Dictionary<Property, bool>? propertyDict;
         var result = true;
 
         if (this.isAuditedPropertyDict.TryGetValue(type, out propertyDict))
@@ -57,9 +57,9 @@ public class AuditEntityService : IAuditAttributeService
         return result ? RelationTargetAuditMode.Audited : RelationTargetAuditMode.NotAudited;
     }
 
-    public string GetAuditTableSchemaOrDefault(Type type)
+    public string? GetAuditTableSchemaOrDefault(Type type)
     {
-        string result;
+        string? result;
         this.typeToAuditTableSchemaDictionary.TryGetValue(type, out result);
         return result;
     }

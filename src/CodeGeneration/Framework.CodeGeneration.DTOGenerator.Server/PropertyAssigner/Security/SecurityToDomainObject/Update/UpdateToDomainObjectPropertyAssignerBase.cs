@@ -18,7 +18,7 @@ public abstract class UpdateToDomainObjectPropertyAssignerBase<TConfiguration>(
     : MaybeSecurityToDomainObjectPropertyAssigner<TConfiguration>(innerAssigner)
     where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
-    protected override bool IsMaybeProperty(PropertyInfo property) => !this.CodeTypeReferenceService.IsCollection(property);
+    protected override bool IsMaybeProperty(PropertyInfo property) => !this.CodeTypeReferenceService!.IsCollection(property);
 
     protected abstract CodeExpression GetCondition(PropertyInfo property);
 

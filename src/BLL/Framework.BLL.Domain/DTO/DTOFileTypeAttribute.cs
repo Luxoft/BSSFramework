@@ -25,6 +25,6 @@ public class DTOFileTypeAttribute(Type domainType, string name, DTORole role) : 
     /// <summary>
     /// Дополнительные данные генерации
     /// </summary>
-    public string ExternalData { get; init; }
+    public string? ExternalData { get; init; }
 }
 

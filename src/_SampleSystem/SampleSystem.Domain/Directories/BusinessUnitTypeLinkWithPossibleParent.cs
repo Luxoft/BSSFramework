@@ -6,9 +6,9 @@ public class BusinessUnitTypeLinkWithPossibleParent :
         AuditPersistentDomainObjectBase,
         IDetail<BusinessUnitType>
 {
-    private BusinessUnitType businessUnitType;
+    private BusinessUnitType businessUnitType = null!;
 
-    private BusinessUnitType possibleParent;
+    private BusinessUnitType possibleParent = null!;
 
     public BusinessUnitTypeLinkWithPossibleParent()
     {

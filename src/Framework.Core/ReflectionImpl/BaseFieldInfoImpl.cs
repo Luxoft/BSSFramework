@@ -21,10 +21,10 @@ public class BaseFieldInfoImpl : FieldInfo
 
     public override object[] GetCustomAttributes(Type attributeType, bool inherit) => throw new NotImplementedException();
 
-    public override object GetValue(object obj) => throw new NotImplementedException();
+    public override object? GetValue(object? obj) => throw new NotImplementedException();
 
     public override bool IsDefined(Type attributeType, bool inherit) => throw new NotImplementedException();
 
-    public override void SetValue(object obj, object value, BindingFlags invokeAttr, Binder binder, CultureInfo culture) => throw new NotImplementedException();
+    public override void SetValue(object? obj, object? value, BindingFlags invokeAttr, Binder? binder, CultureInfo? culture) => throw new NotImplementedException();
 }
 

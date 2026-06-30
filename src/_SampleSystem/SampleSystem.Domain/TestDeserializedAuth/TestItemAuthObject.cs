@@ -7,11 +7,11 @@ namespace SampleSystem.Domain.TestDeserializedAuth;
 
 public class TestItemAuthObject : AuditPersistentDomainObjectBase, IDetail<TestPlainAuthObject>
 {
-    private readonly TestPlainAuthObject master;
+    private readonly TestPlainAuthObject master = null!;
 
-    private BusinessUnit businessUnit;
+    private BusinessUnit businessUnit = null!;
 
-    private ManagementUnit managementUnit;
+    private ManagementUnit managementUnit = null!;
 
     protected TestItemAuthObject()
     {

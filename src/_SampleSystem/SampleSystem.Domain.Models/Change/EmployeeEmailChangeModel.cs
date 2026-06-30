@@ -7,6 +7,6 @@ namespace SampleSystem.Domain.Models.Change;
 [BLLViewRole(CustomImplementation = true)]
 public class EmployeeEmailChangeModel : DomainObjectChangeModel<Employee.Employee>
 {
-    public string Email { get; set; }
+    public string Email { get; set; } = null!;
 }
 

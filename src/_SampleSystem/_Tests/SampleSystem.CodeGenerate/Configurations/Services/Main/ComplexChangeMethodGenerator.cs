@@ -76,7 +76,7 @@ public class ComplexChangeMethodGenerator : ModelMethodGenerator<MainServiceGene
                                .ToMethodReturnStatement();
     }
 
-    protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
+    protected override object? GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
         var modelSecurityAttribute = this.ModelType.GetEditDomainObjectAttribute();
 

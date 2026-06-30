@@ -10,7 +10,7 @@ using Framework.Validation.Extensions;
 
 namespace Framework.Validation.Validators;
 
-public class UniqueCollectionValidator(string groupKey) : IDynamicPropertyValidator
+public class UniqueCollectionValidator(string? groupKey) : IDynamicPropertyValidator
 {
     public IPropertyValidator GetValidator(PropertyInfo property, IServiceProvider serviceProvider)
     {

@@ -7,7 +7,7 @@ namespace SampleSystem.Domain.IntegrationVersions;
 [BLLIntegrationSaveRole]
 public class IntegrationVersionContainer2 : ExternalDomainObject
 {
-    private string name;
+    private string name = null!;
 
     public virtual string Name
     {

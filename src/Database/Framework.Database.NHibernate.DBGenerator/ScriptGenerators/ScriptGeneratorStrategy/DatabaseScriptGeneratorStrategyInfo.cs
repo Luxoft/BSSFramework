@@ -20,7 +20,7 @@ public struct DatabaseScriptGeneratorStrategyInfo
 
     public readonly string PreviousPostfix;
 
-    public readonly List<Tuple<Table, Column, string>> AddedColumns;
+    public readonly List<Tuple<Table, Column, string?>> AddedColumns;
 
     public readonly List<Column> RemovableColumns;
 

@@ -12,11 +12,11 @@ public class DataScriptGeneratorBuilder(DBGenerateScriptMode scriptMode)
     private readonly MainDBScriptGeneratorBuilder mainDbScriptGeneratorBuilder = new();
     private readonly AuditDBScriptGeneratorBuilder auditDbScriptGeneratorBuilder = new();
 
-    private DatabaseName databaseName;
+    private DatabaseName databaseName = null!;
 
-    private SqlDatabaseFactory sqlDatabaseFactory;
+    private SqlDatabaseFactory sqlDatabaseFactory = null!;
 
-    private AssemblyMetadata assemblyMetadata;
+    private AssemblyMetadata assemblyMetadata = null!;
 
     public IMainDBScriptGeneratorBuilder MainBuilder => this.mainDbScriptGeneratorBuilder;
 

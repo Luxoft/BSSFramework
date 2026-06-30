@@ -20,7 +20,7 @@ public class Location :
 {
     private readonly ICollection<Location> children = new List<Location>();
 
-    private Country country;
+    private Country? country;
     private bool isFinancial;
     private LocationType locationType;
     private Location? parent;
@@ -28,7 +28,7 @@ public class Location :
     private int closeDate;
     private int code;
 
-    private byte[] binaryData;
+    private byte[]? binaryData;
 
     private int deepLevel;
 
@@ -53,7 +53,7 @@ public class Location :
         set => this.deepLevel = value;
     }
 
-    public virtual byte[] BinaryData
+    public virtual byte[]? BinaryData
     {
         get => this.binaryData;
         set => this.binaryData = value;

@@ -6,7 +6,7 @@ namespace Framework.Authorization.Domain;
 public class PermissionDirectFilterModel : DomainObjectContextFilterModel<Permission>
 {
     [Required]
-    public SecurityContextType SecurityContextType { get; set; }
+    public SecurityContextType SecurityContextType { get; set; } = null!;
 
     [Required]
     public Guid SecurityContextId { get; set; }

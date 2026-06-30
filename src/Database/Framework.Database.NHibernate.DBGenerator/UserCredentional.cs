@@ -7,10 +7,10 @@ public class UserCredentional
 
     public static UserCredentional Create(string name, string password) => new(name, password);
 
-    private readonly string name;
-    private readonly string password;
+    private readonly string? name;
+    private readonly string? password;
 
-    internal UserCredentional(string name, string password)
+    internal UserCredentional(string? name, string? password)
     {
         var parameters = new[] { name, password };
         if (parameters.Any(z => null == z) && parameters.Any(z => null != z))
@@ -25,7 +25,7 @@ public class UserCredentional
 
     public bool IsDefault => null == this.password && null == this.name;
 
-    public virtual string UserName => this.name;
+    public virtual string? UserName => this.name;
 
-    public virtual string Password => this.password;
+    public virtual string? Password => this.password;
 }

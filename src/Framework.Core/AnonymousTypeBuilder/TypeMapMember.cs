@@ -6,5 +6,5 @@ public class TypeMapMember(string name, Type type) : TypeMapMemberBase(name, typ
 
     public bool Equals(TypeMapMember? other) => other != null && this.Name == other.Name && this.Type == other.Type;
 
-    public override bool Equals(object obj) => this.Equals(obj as TypeMapMember);
+    public override bool Equals(object? obj) => this.Equals(obj as TypeMapMember);
 }

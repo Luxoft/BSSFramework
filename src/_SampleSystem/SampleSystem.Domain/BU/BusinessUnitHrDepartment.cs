@@ -9,8 +9,8 @@ namespace SampleSystem.Domain.BU;
 [BLLViewRole, BLLSaveRole, BLLRemoveRole]
 public class BusinessUnitHrDepartment : AuditPersistentDomainObjectBase, IDetail<HRDepartment.HRDepartment>
 {
-    private BusinessUnit businessUnit;
-    private HRDepartment.HRDepartment hRDepartment;
+    private BusinessUnit businessUnit = null!;
+    private HRDepartment.HRDepartment hRDepartment = null!;
 
     public BusinessUnitHrDepartment(HRDepartment.HRDepartment hrDepartment)
     {

@@ -187,7 +187,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
 
         foreach (var classMapping in auditClassMappings)
         {
-            PersistentClass original;
+            PersistentClass? original;
             if (auditClass2OriginalClassDict.TryGetValue(classMapping, out original)) // auditEntityEntry
             {
                 if (auditAttributeService.GetAttributeFor(original.MappedClass) == RelationTargetAuditMode.NotAudited)
@@ -271,7 +271,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
                 if (fk.HasPhysicalConstraint &&
                     fk.ReferencedTable.SchemaActions.HasFlag(SchemaAction.Update))
                 {
-                    var database = context.Context.SqlDatabaseFactory.GetDatabase(context.Context.DatabaseName);
+                    var database = context.Context.SqlDatabaseFactory.GetDatabase(context.Context.DatabaseName)!;
                     database.Tables.Refresh();
 
                     var table = database.Tables

@@ -3,6 +3,7 @@
 public class EventOperationSender(IEnumerable<IEventOperationReceiver> receivers) : IEventOperationSender
 {
     public async Task Send<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent, CancellationToken ct)
+        where TDomainObject : class
     {
         foreach (var receiver in receivers)
         {

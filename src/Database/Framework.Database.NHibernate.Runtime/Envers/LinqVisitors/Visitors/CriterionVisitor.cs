@@ -36,7 +36,7 @@ internal class CriterionVisitor : ExpressionVisitor
 
     private IAuditCriterion GetLikeCriterion(MethodCallExpression node, MatchMode matchMode)
     {
-        var auditProperty = node.Object.ToAuditProperty();
+        var auditProperty = node.Object!.ToAuditProperty();
         var value = node.Arguments[0].ToValue();
         return auditProperty.Like(value, matchMode);
     }

@@ -7,9 +7,9 @@ public class SmtpSettings
     /// </summary>
     public bool SmtpEnabled { get; set; }
 
-    public string OutputFolder { get; set; }
+    public string? OutputFolder { get; set; }
 
-    public string Server { get; set; }
+    public string? Server { get; set; }
 
     public int Port { get; set; }
 

@@ -9,6 +9,6 @@ public class NotificationMessage
     public bool IsBodyHtml { get; set; }
 
     [DataMember]
-    public string Message { get; set; }
+    public string Message { get; set; } = null!;
 }
 

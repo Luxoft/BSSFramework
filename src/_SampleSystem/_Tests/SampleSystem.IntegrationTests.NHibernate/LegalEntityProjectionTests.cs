@@ -42,7 +42,7 @@ public class LegalEntityProjectionTests(IServiceProvider rootServiceProvider) : 
         // Act
         var result = this.EvaluateRead(context => context.Logics.Default.Create<CustomCompanyLegalEntity>().GetById(id, true).Pipe(customLegalEntity => new
         {
-            customLegalEntity.Name,
+            customLegalEntity!.Name,
             customLegalEntity.Code,
             customLegalEntity.NameEnglish,
             BaseObjName = customLegalEntity.BaseObj.Name,

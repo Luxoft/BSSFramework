@@ -13,9 +13,9 @@ public class EmployeePhoto : AuditPersistentDomainObjectBase, IDetail<Employee>
 {
     public const int DEFAULT_PHOTO_MAX_SIZE = 1024 * 1024;
 
-    private readonly Employee employee;
+    private readonly Employee employee = null!;
 
-    private string contentType;
+    private string? contentType;
     private byte[] data = [];
 
     private EmployeePhotoType type;

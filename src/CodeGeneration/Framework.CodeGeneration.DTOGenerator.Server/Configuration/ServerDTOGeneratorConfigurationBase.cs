@@ -115,7 +115,7 @@ public abstract class ServerDTOGeneratorConfigurationBase<TEnvironment> : DTOGen
 
     public virtual Type VersionType { get; }
 
-    public PropertyInfo VersionProperty { get; }
+    public PropertyInfo? VersionProperty { get; }
 
 
     protected virtual ICodeFileFactoryHeader<BaseFileType> LambdaHelperFileFactoryHeader { get; } =
@@ -221,7 +221,7 @@ public abstract class ServerDTOGeneratorConfigurationBase<TEnvironment> : DTOGen
         if (elementType == null) throw new ArgumentNullException(nameof(elementType));
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
-        var createRoleAttribute = property.GetCustomAttribute<CreateRoleAttribute>() ?? property.DeclaringType.GetCustomAttribute<CreateRoleAttribute>();
+        var createRoleAttribute = property.GetCustomAttribute<CreateRoleAttribute>() ?? property.DeclaringType!.GetCustomAttribute<CreateRoleAttribute>();
 
         if (createRoleAttribute != null)
         {
@@ -280,18 +280,16 @@ public abstract class ServerDTOGeneratorConfigurationBase<TEnvironment> : DTOGen
         }
     }
 
-    public override ICodeFileFactoryHeader GetFileFactoryHeader(BaseFileType fileType, bool raiseIfNotFound = true)
+    public override ICodeFileFactoryHeader? GetFileFactoryHeader(BaseFileType fileType, bool raiseIfNotFound = true)
     {
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
-        if (fileType is DomainOperationEventDTOFileType)
+        if (fileType is DomainOperationEventDTOFileType eventFileType)
         {
-            var eventFileType = fileType as DomainOperationEventDTOFileType;
-
             return new CodeFileFactoryHeader<DomainOperationEventDTOFileType>(
                 eventFileType,
                 "EventOperation",
-                domainType => $"{domainType.Name}{eventFileType.EventOperation.Name}{DTORole.Event}DTO");
+                domainType => $"{domainType!.Name}{eventFileType.EventOperation.Name}{DTORole.Event}DTO");
         }
         else
         {

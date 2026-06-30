@@ -9,11 +9,11 @@ namespace SampleSystem.Domain.Employee;
 [CustomName("Role-Seniority link")]
 public class RoleRoleDegreeLink : AuditPersistentDomainObjectBase
 {
-    private EmployeeRoleDegree roleDegree;
+    private EmployeeRoleDegree roleDegree = null!;
 
-    private EmployeeRole role;
+    private EmployeeRole role = null!;
 
-    private EmployeeRole anotherRole;
+    private EmployeeRole? anotherRole;
 
     [UniqueElement("UniLink")]
     [CustomName("Seniority")]
@@ -30,7 +30,7 @@ public class RoleRoleDegreeLink : AuditPersistentDomainObjectBase
         set => this.role = value;
     }
 
-    public virtual EmployeeRole AnotherRole
+    public virtual EmployeeRole? AnotherRole
     {
         get => this.anotherRole;
         set => this.anotherRole = value;

@@ -9,7 +9,7 @@ public class PropertyRevisionDTOBase
 {
     [DataMember] public AuditRevisionType RevisionType { get; set; }
 
-    [DataMember] public string Author { get; set; }
+    [DataMember] public string Author { get; set; } = null!;
 
     [DataMember] public DateTime Date { get; set; }
 
@@ -33,7 +33,7 @@ public class PropertyRevisionDTOBase
 public class PropertyRevisionDTO<TIdent> : PropertyRevisionDTOBase
 {
     [DataMember]
-    public string Value { get; set; }
+    public string? Value { get; set; }
 
     public PropertyRevisionDTO()
     {
@@ -47,7 +47,7 @@ public class PropertyRevisionDTO<TIdent> : PropertyRevisionDTOBase
 public class PropertyRevisionDTO<TValue, TIdent> : PropertyRevisionDTOBase
 {
     [DataMember]
-    public TValue Value { get; set; }
+    public TValue? Value { get; set; }
 
     public PropertyRevisionDTO()
             : base()

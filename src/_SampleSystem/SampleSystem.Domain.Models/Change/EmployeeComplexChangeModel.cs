@@ -4,6 +4,6 @@ namespace SampleSystem.Domain.Models.Change;
 
 public class EmployeeComplexChangeModel : DomainObjectComplexChangeModel<Employee.Employee>
 {
-    public string Email { get; set; }
+    public string Email { get; set; } = null!;
 }
 

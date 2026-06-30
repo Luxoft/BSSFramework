@@ -21,7 +21,7 @@ public class AnyElementsValidator : IDynamicPropertyValidator
         if (property == null) throw new ArgumentNullException(nameof(property));
         if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
 
-        var elementType = property.PropertyType.GetCollectionElementType();
+        var elementType = property.PropertyType.GetCollectionElementType()!;
 
         return serviceProvider.GetRequiredService<IServiceProxyFactory>().Create<IPropertyValidator>(typeof(AnyElementsValidator<>).MakeGenericType(elementType));
     }

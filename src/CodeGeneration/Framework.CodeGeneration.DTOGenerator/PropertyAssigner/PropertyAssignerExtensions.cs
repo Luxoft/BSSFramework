@@ -38,7 +38,7 @@ public static class PropertyAssignerExtensions
     }
 
     private class ImplPropertyAssigner<TConfiguration>(TConfiguration configuration, IPropertyAssigner innerAssigner)
-        : PropertyAssigner<TConfiguration>(configuration, innerAssigner.DomainType, innerAssigner.FileType)
+        : PropertyAssigner<TConfiguration>(configuration, innerAssigner.DomainType!, innerAssigner.FileType)
         where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
     {
         public override CodeStatement GetAssignStatement(PropertyInfo property, CodeExpression sourcePropertyRef, CodeExpression targetPropertyRef)

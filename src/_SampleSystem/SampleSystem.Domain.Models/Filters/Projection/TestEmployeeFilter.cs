@@ -9,7 +9,7 @@ public class TestEmployeeFilter : DomainObjectBase
     public SampleStruct SampleStruct { get; set; }
 
 
-    public BusinessUnit BusinessUnit
+    public BusinessUnit? BusinessUnit
     {
         get;
         set;

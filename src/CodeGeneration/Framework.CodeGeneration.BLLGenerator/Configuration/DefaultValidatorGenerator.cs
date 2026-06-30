@@ -20,7 +20,7 @@ using Framework.Validation.Validators;
 using Framework.Validation.Validators.Deep;
 using Framework.Validation.Validators.DynamicClass.Available.Base;
 
-using ValidatorExpr = System.Collections.Generic.IReadOnlyDictionary<System.CodeDom.CodeExpression, Framework.Validation.IValidationData>;
+using ValidatorExpr = System.Collections.Generic.IReadOnlyDictionary<System.CodeDom.CodeExpression, Framework.Validation.IValidationData?>;
 using ValidatorPairExpr = System.Collections.Generic.KeyValuePair<System.CodeDom.CodeExpression, Framework.Validation.IValidationData?>;
 
 namespace Framework.CodeGeneration.BLLGenerator.Configuration;
@@ -32,7 +32,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
     protected readonly Type DomainType;
 
-    private readonly IReadOnlyDictionary<PropertyInfo, IReadOnlyDictionary<CodeExpression, IValidationData>> expandedClassAttributes;
+    private readonly IReadOnlyDictionary<PropertyInfo, IReadOnlyDictionary<CodeExpression, IValidationData?>> expandedClassAttributes;
 
     private static readonly IReadOnlyCollection<Type> ManyPropertyDynamicClassAttributes =
     [
@@ -63,9 +63,9 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
 
 
-    public IReadOnlyDictionary<CodeExpression, IValidationData> ClassValidators { get; }
+    public IReadOnlyDictionary<CodeExpression, IValidationData?> ClassValidators { get; }
 
-    public IReadOnlyDictionary<PropertyInfo, IReadOnlyDictionary<CodeExpression, IValidationData>> PropertyValidators { get; }
+    public IReadOnlyDictionary<PropertyInfo, IReadOnlyDictionary<CodeExpression, IValidationData?>> PropertyValidators { get; }
 
     protected virtual IEnumerable<ValidatorPairExpr> GetClassValidators()
     {
@@ -109,7 +109,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
             yield break;
         }
 
-        foreach (var expandedClassValidator in this.expandedClassAttributes.GetValueOrDefault(property, () => new Dictionary<CodeExpression, IValidationData>()))
+        foreach (var expandedClassValidator in this.expandedClassAttributes.GetValueOrDefault(property, () => new Dictionary<CodeExpression, IValidationData?>()))
         {
             yield return expandedClassValidator;
         }

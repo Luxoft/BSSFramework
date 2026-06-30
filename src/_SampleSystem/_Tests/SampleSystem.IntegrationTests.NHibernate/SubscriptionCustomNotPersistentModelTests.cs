@@ -46,7 +46,7 @@ public class SubscriptionCustomNotPersistentModelTests(IServiceProvider rootServ
             {
                 var bll = context.Logics.Country;
 
-                var country = bll.GetById(countryId, true);
+                var country = bll.GetById(countryId, true)!;
 
                 country.Name = $"{country.Name} renamed";
 

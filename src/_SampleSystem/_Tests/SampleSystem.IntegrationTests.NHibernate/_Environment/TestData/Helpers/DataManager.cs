@@ -269,7 +269,7 @@ public partial class DataManager
                              ? ((BusinessUnitTypeIdentityDTO)type).Id
                              : DefaultConstants.BUSINESS_UNIT_TYPE_PROGRAM_ID;
 
-        BusinessUnit businessUnit;
+        BusinessUnit? businessUnit;
 
         return this.EvaluateWrite(
                                   context =>
@@ -315,7 +315,7 @@ public partial class DataManager
             bool isProduction = true,
             bool active = true)
     {
-        ManagementUnit unit;
+        ManagementUnit? unit;
         name = name ?? TextRandomizer.UniqueString("ManagementUnit");
 
         var parentId = parent != null
@@ -387,17 +387,17 @@ public partial class DataManager
 
                                       if (department == null)
                                       {
-                                          var head = context.Logics.Employee.GetById(employeeId, true);
+                                          var head = context.Logics.Employee.GetById(employeeId, true)!;
 
                                           department = new HRDepartment
                                           {
                                               Active = active,
                                               Name = name,
                                               NameNative = nameNative,
-                                              Location = context.Logics.Location.GetById(locationId),
+                                              Location = context.Logics.Location.GetById(locationId)!,
                                               Parent = context.Logics.HRDepartment.GetById(parentId),
                                               Head = head,
-                                              CompanyLegalEntity = context.Logics.CompanyLegalEntity.GetById(companyLegalEntityId),
+                                              CompanyLegalEntity = context.Logics.CompanyLegalEntity.GetById(companyLegalEntityId)!,
                                               Code = code,
                                               CodeNative = codeNative,
                                               IsLegal = isLegal,

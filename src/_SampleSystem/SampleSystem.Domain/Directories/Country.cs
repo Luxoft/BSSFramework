@@ -9,9 +9,9 @@ namespace SampleSystem.Domain.Directories;
 [UniqueGroup]
 public class Country : BaseDirectory, ICodeObject
 {
-    private string code;
-    private string nameNative;
-    private string culture;
+    private string? code;
+    private string? nameNative;
+    private string? culture;
 
     [Required]
     public virtual string Code

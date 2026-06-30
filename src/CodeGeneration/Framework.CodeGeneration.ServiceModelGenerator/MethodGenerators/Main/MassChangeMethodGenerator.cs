@@ -66,7 +66,7 @@ public class MassChangeMethodGenerator<TConfiguration> : ModelMethodGenerator<TC
                                .ToMethodReturnStatement();
     }
 
-    protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
+    protected override object? GetBLLSecurityParameter(CodeExpression evaluateDataExpr)
     {
         var modelSecurityAttribute = this.ModelType.GetEditDomainObjectAttribute();
 

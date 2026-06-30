@@ -41,7 +41,7 @@ public class AuditEventListenerForke : AuditEventListener
                                                                 IEntityPersister entityPersister,
                                                                 string entityName,
                                                                 IReadOnlyList<object> newState,
-                                                                IReadOnlyList<object> oldState,
+                                                                IReadOnlyList<object>? oldState,
                                                                 ISessionImplementor session)
     {
         // Checking if this is enabled in configuration ...

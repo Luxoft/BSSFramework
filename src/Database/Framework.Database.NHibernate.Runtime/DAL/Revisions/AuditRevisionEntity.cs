@@ -2,7 +2,7 @@
 
 public class AuditRevisionEntity
 {
-    public virtual string Author { get; set; }
+    public virtual string Author { get; set; } = null!;
 
     public virtual long Id { get; protected internal set; }
 

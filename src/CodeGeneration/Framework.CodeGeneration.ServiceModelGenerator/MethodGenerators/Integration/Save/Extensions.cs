@@ -8,7 +8,7 @@ namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Integr
 internal static class Extensions
 {
     internal static CodeBinaryOperatorType ToCodeBinaryOperator(this PropertyInfo integrationVersionProperty) =>
-        integrationVersionProperty.GetCustomAttribute<IntegrationVersionAttribute>().IntegrationPolicy == ApplyIntegrationPolicy.IgnoreLessVersion
+        integrationVersionProperty.GetCustomAttribute<IntegrationVersionAttribute>()!.IntegrationPolicy == ApplyIntegrationPolicy.IgnoreLessVersion
             ? CodeBinaryOperatorType.LessThanOrEqual
             : CodeBinaryOperatorType.LessThan;
 }

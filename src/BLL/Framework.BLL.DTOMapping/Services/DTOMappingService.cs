@@ -16,6 +16,7 @@ public abstract class DTOMappingService<TBLLContext, TPersistentDomainObjectBase
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     where TAuditPersistentDomainObjectBase : class, TPersistentDomainObjectBase
     where TVersion : IEquatable<TVersion>
+    where TIdent : notnull
 {
     public virtual IDTOMappingVersionService<TAuditPersistentDomainObjectBase, TVersion> VersionService { get; } = new DTOMappingVersionService<TBLLContext, TAuditPersistentDomainObjectBase, TIdent, TVersion>(context);
 

@@ -52,7 +52,7 @@ public class MappingGenerator(IGrouping<Assembly, DomainTypeMetadata> assemblyGr
         return result;
     }
 
-    protected virtual void GenerateClassMapping(DomainTypeMetadata domainTypeMetadata, XElement root, string externalTableName)
+    protected virtual void GenerateClassMapping(DomainTypeMetadata domainTypeMetadata, XElement root, string? externalTableName)
     {
         var classTag = this.CreateClassElement(domainTypeMetadata, root);
 
@@ -63,7 +63,7 @@ public class MappingGenerator(IGrouping<Assembly, DomainTypeMetadata> assemblyGr
         this.GenerateMappingForExternalTableColumns(domainTypeMetadata, classTag);
     }
 
-    protected virtual void GenerateMappingForTypeAttributes(DomainTypeMetadata domainTypeMetadata, XElement classTag, string externalTableName)
+    protected virtual void GenerateMappingForTypeAttributes(DomainTypeMetadata domainTypeMetadata, XElement classTag, string? externalTableName)
     {
         this.GenerateMappingForVersionField(domainTypeMetadata, classTag, externalTableName);
         this.GenerateMappingForPrimitiveFields(domainTypeMetadata, classTag, externalTableName);
@@ -72,7 +72,7 @@ public class MappingGenerator(IGrouping<Assembly, DomainTypeMetadata> assemblyGr
         this.GenerateMappingInlineFields(domainTypeMetadata, classTag, externalTableName);
     }
 
-    protected virtual void GenerateMappingForDetailsCollectionFields(DomainTypeMetadata domainTypeMetadata, XElement classTag, string externalTableName)
+    protected virtual void GenerateMappingForDetailsCollectionFields(DomainTypeMetadata domainTypeMetadata, XElement classTag, string? externalTableName)
     {
         var listTypeFieldMetadatas = domainTypeMetadata.ListFields;
 
@@ -84,7 +84,7 @@ public class MappingGenerator(IGrouping<Assembly, DomainTypeMetadata> assemblyGr
         listTypeFieldMetadatas.OrderBy(x => x.Name).Where(v => v.ExternalTableName == externalTableName).Foreach(z => this.GenerateOneToManyPropertyMapping(z, classTag));
     }
 
-    protected virtual void GenerateMappingInlineFields(DomainTypeMetadata domainTypeMetadata, XElement classTag, string externalTableName)
+    protected virtual void GenerateMappingInlineFields(DomainTypeMetadata domainTypeMetadata, XElement classTag, string? externalTableName)
     {
         var inlineTypeFieldMetadatas = domainTypeMetadata.InlineFields;
 
@@ -109,7 +109,7 @@ public class MappingGenerator(IGrouping<Assembly, DomainTypeMetadata> assemblyGr
     {
         var joinedSubclassElement = rootElement
                                     .CreateElementWithRootNamespaceHandled("joined-subclass")
-                                    .WithLowNameAttribute(domainTypeMetadata.DomainType.FullName)
+                                    .WithLowNameAttribute(domainTypeMetadata.DomainType.FullName!)
                                     .WithTableElement(domainTypeMetadata);
 
         this.TryInitDynamicUpdateForOptimisticDeclareType(domainTypeMetadata, joinedSubclassElement);
@@ -124,14 +124,14 @@ public class MappingGenerator(IGrouping<Assembly, DomainTypeMetadata> assemblyGr
         {
             var joinedSubclassElement = rootElement
                                         .CreateElementWithRootNamespaceHandled("join")
-                                        .WithAttribute("table", g.Key);
+                                        .WithAttribute("table", g.Key!);
 
             joinedSubclassElement.CreateElement("key").WithAttribute("column", "id");
 
             this.GenerateMappingForTypeAttributes(domainTypeMetadata, joinedSubclassElement, g.Key);
         });
 
-    protected virtual void GenerateMappingForReferenceFields(DomainTypeMetadata domainTypeMetadata, XElement classTag, string externalTableName)
+    protected virtual void GenerateMappingForReferenceFields(DomainTypeMetadata domainTypeMetadata, XElement classTag, string? externalTableName)
     {
         var referenceTypeFieldMetadatas = domainTypeMetadata.ReferenceFields;
 
@@ -162,14 +162,14 @@ public class MappingGenerator(IGrouping<Assembly, DomainTypeMetadata> assemblyGr
 
         var refTag = rootElement.CreateOneToOneElementWithRootNamespace()
                                 .WithLowNameAttribute(fieldMetadata.Name.ToPropertyName())
-                                .WithClassAttribute(fieldMetadata.ToType.FullName)
+                                .WithClassAttribute(fieldMetadata.ToType.FullName!)
                                 .WithTryUniqueAttribute(fieldMetadata)
                                 .WithPropertyRefAttribute(reverseRefProperty.Name.ToPropertyName());
 
         this.TryApplyCascadeMode(fieldMetadata, refTag);
     }
 
-    protected virtual void GenerateMappingForPrimitiveFields(DomainTypeMetadata domainTypeMetadata, XElement classTag, string externalTableName)
+    protected virtual void GenerateMappingForPrimitiveFields(DomainTypeMetadata domainTypeMetadata, XElement classTag, string? externalTableName)
     {
         var generatedPrimitiveFields = domainTypeMetadata.PrimitiveFields;
 
@@ -189,7 +189,7 @@ public class MappingGenerator(IGrouping<Assembly, DomainTypeMetadata> assemblyGr
             .Where(z => !z.Name.ToLowerInvariant().Equals("id"))
             .Foreach(z => this.GeneratePrimitivePropertyMapping(z, xmlTag));
 
-    protected virtual void GenerateMappingForVersionField(DomainTypeMetadata domainTypeMetadata, XElement root, string externalTableName)
+    protected virtual void GenerateMappingForVersionField(DomainTypeMetadata domainTypeMetadata, XElement root, string? externalTableName)
     {
         var primitiveFields = domainTypeMetadata.PrimitiveFields.Where(v => v.ExternalTableName == externalTableName);
 
@@ -252,7 +252,7 @@ public class MappingGenerator(IGrouping<Assembly, DomainTypeMetadata> assemblyGr
     protected virtual void CreateIdMapping(DomainTypeMetadata domainTypeMetadata, FieldMetadata field, XElement classTag)
     {
         var mappingAttribute = field.Attributes.OfType<MappingAttribute>().FirstOrDefault();
-        var identityFieldInDB = mappingAttribute.Maybe(z => z.ColumnName, this.GetColumnNameBy(domainTypeMetadata, domainTypeMetadata.GetIdentityField()));
+        var identityFieldInDB = mappingAttribute?.ColumnName ?? this.GetColumnNameBy(domainTypeMetadata, domainTypeMetadata.GetIdentityField());
         var typeName = field.Type.Name;
         var generatorAttribute = string.Empty;
         if (field.Type == typeof(Guid))
@@ -283,7 +283,7 @@ public class MappingGenerator(IGrouping<Assembly, DomainTypeMetadata> assemblyGr
     private XElement CreateClassElement(DomainTypeMetadata domainTypeMetadata, XElement root)
     {
         var classElement = root.CreateElementWithRootNamespaceHandled(ClassName)
-                               .WithLowNameAttribute(domainTypeMetadata.DomainType.FullName)
+                               .WithLowNameAttribute(domainTypeMetadata.DomainType.FullName!)
                                .WithTableElement(domainTypeMetadata)
                                .WithSchemaAttribute(domainTypeMetadata);
 
@@ -310,7 +310,7 @@ public class MappingGenerator(IGrouping<Assembly, DomainTypeMetadata> assemblyGr
             return;
         }
 
-        var optimisticLockAttribute = domainTypeMetadata.DomainType.GetCustomAttribute<OptimisticLockAttribute>();
+        var optimisticLockAttribute = domainTypeMetadata.DomainType.GetCustomAttribute<OptimisticLockAttribute>()!;
         if (domainTypeMetadata.Fields.Any(z => z.IsVersion))
         {
             throw new Exception(
@@ -417,7 +417,7 @@ public class MappingGenerator(IGrouping<Assembly, DomainTypeMetadata> assemblyGr
         var refTag = rootElement.CreateManyToOnePropertyElementWithRootNamespace()
                                 .WithLowNameAttribute(propertyName)
                                 .WithColumnAttribute(sqlReferenceColumnName)
-                                .WithClassAttribute(reference.ToType.FullName)
+                                .WithClassAttribute(reference.ToType.FullName!)
                                 .WithTryUniqueAttribute(reference)
                                 .WithPrivateAccessAttribute(reference.Name);
 
@@ -458,7 +458,7 @@ public class MappingGenerator(IGrouping<Assembly, DomainTypeMetadata> assemblyGr
 
                                                                   var compositeAttr = compositeAttributes.FirstOrDefault(q =>
                                                                           string.Equals(referenceName + q.ClassFieldName, defaultColumnName, StringComparison.InvariantCultureIgnoreCase));
-                                                                  return compositeAttr.Maybe(z => z.ColumnName).IfDefault(defaultColumnName);
+                                                                  return compositeAttr.Maybe(z => z.ColumnName).IfDefault(defaultColumnName)!;
                                                               };
 
         foreach (var pair in reference.PrimitiveMetadataCollection.OrderBy(v => v.Name).Select(z => new { Mapping = MapperFactory.GetMapping(z).Single(), FieldMetadata = z }))
@@ -535,7 +535,7 @@ public class MappingGenerator(IGrouping<Assembly, DomainTypeMetadata> assemblyGr
 
         while (0 == reverseReferenceArray.Length && elementType != typeof(object))
         {
-            elementType = elementType.BaseType;
+            elementType = elementType!.BaseType!;
             var domainTypeMetadatas = listTypeFieldMetadata.DomainTypeMetadata.AssemblyMetadata.DomainTypes.SelectMany(z => z.NotAbstractChildrenDomainTypes.Concat([z])).ToList();
 
             var baseElementDomainTypeMetadata = domainTypeMetadatas
@@ -562,7 +562,7 @@ public class MappingGenerator(IGrouping<Assembly, DomainTypeMetadata> assemblyGr
 
         oneToManyElement
                 .CreateOneToManyElementWithRootNamespace()
-                .WithClassAttribute(listTypeFieldMetadata.ElementType.FullName);
+                .WithClassAttribute(listTypeFieldMetadata.ElementType.FullName!);
     }
 }
 

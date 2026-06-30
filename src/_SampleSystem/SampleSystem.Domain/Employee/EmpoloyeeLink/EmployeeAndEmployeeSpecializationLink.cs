@@ -7,8 +7,8 @@ namespace SampleSystem.Domain.Employee.EmpoloyeeLink;
 
 public class EmployeeAndEmployeeSpecializationLink : AuditPersistentDomainObjectBase, IDetail<Employee>
 {
-    private Employee employee;
-    private EmployeeSpecialization specialization;
+    private Employee employee = null!;
+    private EmployeeSpecialization specialization = null!;
 
     public EmployeeAndEmployeeSpecializationLink(Employee employee)
     {

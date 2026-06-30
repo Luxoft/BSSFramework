@@ -12,11 +12,11 @@ public class DomainObjectNotification : AuditPersistentDomainObjectBase
 {
     private readonly QueueProgressStatus status;
 
-    private readonly string hostName;
+    private readonly string? hostName;
 
     private readonly DateTime? processDate;
 
-    private string serializeData;
+    private string serializeData = null!;
 
     private int size;
 
@@ -30,7 +30,7 @@ public class DomainObjectNotification : AuditPersistentDomainObjectBase
 
     public virtual QueueProgressStatus Status => this.status;
 
-    public virtual string HostName => this.hostName;
+    public virtual string? HostName => this.hostName;
 
     public virtual DateTime? ProcessDate => this.processDate;
 

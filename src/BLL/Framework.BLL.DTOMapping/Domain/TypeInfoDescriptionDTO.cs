@@ -8,10 +8,10 @@ namespace Framework.BLL.DTOMapping.Domain;
 public class TypeInfoDescriptionDTO
 {
     [DataMember]
-    public string Namespace { get; set; }
+    public string Namespace { get; set; } = null!;
 
     [DataMember]
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
     public TypeNameIdentity ToDomainObject() => new() { Namespace = this.Namespace, Name = this.Name };
 

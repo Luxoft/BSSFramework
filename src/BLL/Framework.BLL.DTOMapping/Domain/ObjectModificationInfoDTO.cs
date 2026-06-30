@@ -12,10 +12,10 @@ public class ObjectModificationInfoDTO<TIdent>
     public ModificationType ModificationType { get; set; }
 
     [DataMember]
-    public TIdent Identity { get; set; }
+    public TIdent Identity { get; set; } = default!;
 
     [DataMember]
-    public TypeInfoDescriptionDTO TypeInfoDescription { get; set; }
+    public TypeInfoDescriptionDTO TypeInfoDescription { get; set; } = null!;
 
     [DataMember]
     public long Revision { get; set; }

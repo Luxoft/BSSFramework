@@ -4,9 +4,9 @@ namespace Framework.CodeDom.Extend;
 
 public class CodeLambdaExpression : CodeExpression
 {
-    private CodeStatementCollection statements;
+    private CodeStatementCollection statements = new();
 
-    private CodeParameterDeclarationExpressionCollection parameters;
+    private CodeParameterDeclarationExpressionCollection parameters = new();
 
 
     public CodeLambdaExpression()

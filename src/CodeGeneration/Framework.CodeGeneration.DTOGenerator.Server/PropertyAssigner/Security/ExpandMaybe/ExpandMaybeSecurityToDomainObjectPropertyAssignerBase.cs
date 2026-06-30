@@ -21,7 +21,7 @@ public abstract class ExpandMaybeSecurityToDomainObjectPropertyAssignerBase<TCon
         if (sourcePropertyRef == null) throw new ArgumentNullException(nameof(sourcePropertyRef));
         if (targetPropertyRef == null) throw new ArgumentNullException(nameof(targetPropertyRef));
 
-        var sourcePropertyTypeRef = this.CodeTypeReferenceService.GetCodeTypeReference(property);
+        var sourcePropertyTypeRef = this.CodeTypeReferenceService!.GetCodeTypeReference(property);
 
         return new CodeConditionStatement
         {

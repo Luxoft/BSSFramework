@@ -9,6 +9,6 @@ public abstract class DomainObjectChangeModel<TDomainObject> : DomainObjectBase,
         where TDomainObject : PersistentDomainObjectBase
 {
     [Required]
-    public TDomainObject ChangingObject { get; set; }
+    public TDomainObject ChangingObject { get; set; } = null!;
 }
 

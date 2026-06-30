@@ -10,7 +10,7 @@ public class SqlFieldMappingInfo(
     bool isNullable,
     bool isPrimaryKey,
     FieldMetadata source,
-    string defaultConstraint,
+    string? defaultConstraint,
     bool isUniqueKey = false)
 {
     public string Name => name;
@@ -25,6 +25,6 @@ public class SqlFieldMappingInfo(
 
     public bool IsUniqueKey => isUniqueKey;
 
-    public string DefaultConstraint => defaultConstraint;
+    public string? DefaultConstraint => defaultConstraint;
 }
 

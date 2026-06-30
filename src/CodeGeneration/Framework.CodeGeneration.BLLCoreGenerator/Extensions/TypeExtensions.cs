@@ -53,7 +53,7 @@ public static class TypeExtensions
         if (interfaceType == null) throw new ArgumentNullException(nameof(interfaceType));
 
         return interfaceType.GetGenericArguments().ZipStrong(
-                                                             type.GetInterfaceImplementationArguments(interfaceType),
+                                                             type.GetInterfaceImplementationArguments(interfaceType)!,
                                                              (genericArg, implArg) => (genericArg, implArg)).ToDictionary();
     }
 }

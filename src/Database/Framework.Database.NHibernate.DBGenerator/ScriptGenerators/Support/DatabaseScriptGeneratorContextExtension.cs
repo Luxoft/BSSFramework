@@ -27,7 +27,7 @@ public static class DatabaseScriptGeneratorContextExtension
         return result;
     }
 
-    private static Table TryGetTable(IDatabaseScriptGeneratorContext context, Microsoft.SqlServer.Management.Smo.Database database, string name, string schema)
+    private static Table? TryGetTable(IDatabaseScriptGeneratorContext context, Microsoft.SqlServer.Management.Smo.Database database, string name, string schema)
     {
         var result = database.Tables.FirstOrDefault(q =>
                                                         string.Equals(q.Name, name, StringComparison.InvariantCultureIgnoreCase)

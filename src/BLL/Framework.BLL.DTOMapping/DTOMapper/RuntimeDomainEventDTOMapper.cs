@@ -9,6 +9,6 @@ public class RuntimeDomainEventDTOMapper<TPersistentDomainObjectBase, TMappingSe
 {
     public virtual object Convert<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent)
         where TDomainObject : TPersistentDomainObjectBase =>
-        converter.Convert(mappingService, domainObject, domainObjectEvent);
+        converter.Convert(mappingService, domainObject, domainObjectEvent)!;
 }
 

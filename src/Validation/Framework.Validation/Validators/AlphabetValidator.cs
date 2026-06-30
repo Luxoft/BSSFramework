@@ -10,7 +10,7 @@ public class AlphabetValidator : IPropertyValidator<object, string>
     private readonly char[] externalChars;
 
 
-    public AlphabetValidator(string alphabet, string externalChars = null)
+    public AlphabetValidator(string alphabet, string? externalChars = null)
     {
         if (alphabet == null) throw new ArgumentNullException(nameof(alphabet));
 

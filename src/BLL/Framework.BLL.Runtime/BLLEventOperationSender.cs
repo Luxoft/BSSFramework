@@ -7,6 +7,7 @@ namespace Framework.BLL;
 public class BLLEventOperationSender([FromKeyedServices(nameof(BLL))] IEnumerable<IEventOperationReceiver> receivers) : IEventOperationSender
 {
     public async Task Send<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent, CancellationToken ct)
+        where TDomainObject : class
     {
         foreach (var receiver in receivers)
         {

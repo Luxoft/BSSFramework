@@ -88,7 +88,7 @@ public class AuditTests(IServiceProvider rootServiceProvider) : TestBase(rootSer
         var lastEmployeeState = employeeAuditController.Evaluate(c => c.GetFullEmployeeWithRevision(new GetFullEmployeeWithRevisionAutoRequest
         {
             EmployeeIdentity = employeeIdentity,
-            Revision = lastRevision.RevisionNumber
+            Revision = lastRevision!.RevisionNumber
         }));
 
         var expected = Enumerable.Range(-1, testCount).Skip(skip).First();
@@ -209,7 +209,7 @@ public class AuditTests(IServiceProvider rootServiceProvider) : TestBase(rootSer
                                                    .FirstOrDefault() as SampleSystemPropertyRevisionDTO<string>;
 
         var expected = Enumerable.Range(-1, testCount).Skip(skip).First();
-        Assert.Equal(AuditRevisionType.Added, firstRevision.RevisionType);
+        Assert.Equal(AuditRevisionType.Added, firstRevision!.RevisionType);
     }
 
     [Fact]

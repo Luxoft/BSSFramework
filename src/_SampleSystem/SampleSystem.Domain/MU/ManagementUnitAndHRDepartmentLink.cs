@@ -19,8 +19,8 @@ public class ManagementUnitAndHRDepartmentLink :
         IDetail<HRDepartment.HRDepartment>,
         IVisualIdentityObject
 {
-    private HRDepartment.HRDepartment hRDepartment;
-    private ManagementUnit managementUnit;
+    private HRDepartment.HRDepartment hRDepartment = null!;
+    private ManagementUnit managementUnit = null!;
 
     public ManagementUnitAndHRDepartmentLink(ManagementUnit managementUnit)
     {

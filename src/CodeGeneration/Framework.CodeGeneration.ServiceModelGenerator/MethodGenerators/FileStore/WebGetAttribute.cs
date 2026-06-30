@@ -10,5 +10,5 @@ public sealed class WebGetAttribute : Attribute
     {
         get;
         set;
-    }
+    } = null!;
 }

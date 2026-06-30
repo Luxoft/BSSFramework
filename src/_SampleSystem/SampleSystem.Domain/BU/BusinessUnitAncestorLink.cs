@@ -4,9 +4,9 @@ namespace SampleSystem.Domain.BU;
 
 public class BusinessUnitAncestorLink : AuditPersistentDomainObjectBase
 {
-    private BusinessUnit ancestor;
+    private BusinessUnit ancestor = null!;
 
-    private BusinessUnit child;
+    private BusinessUnit child = null!;
 
     public BusinessUnitAncestorLink()
     {

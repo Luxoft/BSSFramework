@@ -52,7 +52,7 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
 
         var factoryMethod = type.GetMethod(CreateInstanceMethodName);
 
-        return factoryMethod.ToDelegate(typeof(Func<,>).MakeGenericType(funcType, sourceType));
+        return factoryMethod!.ToDelegate(typeof(Func<,>).MakeGenericType(funcType, sourceType));
     }
 
     /// <summary>
@@ -72,7 +72,7 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
 
         var typeBuilder = this.moduleBuilder.DefineType(name, TypeAttributes.Public | TypeAttributes.Class | TypeAttributes.Sealed, lazyType, [sourceType]);
 
-        var getInstanceMethod = lazyType.GetProperty("Value", true).GetGetMethod();
+        var getInstanceMethod = lazyType.GetProperty("Value", true)!.GetGetMethod()!;
 
         var implInterfaceMethodAttr = MethodAttributes.Private | MethodAttributes.HideBySig | MethodAttributes.NewSlot | MethodAttributes.Virtual | MethodAttributes.Final;
 
@@ -91,7 +91,7 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
                                                                                         {
                                                                                             var genericMap = method.GetGenericArguments().ZipStrong(methodBuilder.DefineGenericParameters(method.GetGenericArguments().ToArray(arg => arg.Name + "Impl")), (key, value) => (key, value)).ToDictionary();
 
-                                                                                            Func<Type, Type> fixGenericType = null;
+                                                                                            Func<Type, Type> fixGenericType = null!;
                                                                                             fixGenericType = t =>
                                                                                             {
                                                                                                 var genericOverride = genericMap.GetValueOrDefault(t);
@@ -111,7 +111,7 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
                                                                                                 }
                                                                                                 else if (t.DeclaringType.Maybe(dec => interfaceType.IsGenericTypeImplementation(dec)))
                                                                                                 {
-                                                                                                    var index = t.DeclaringType.GetGenericArguments().IndexOf(t);
+                                                                                                    var index = t.DeclaringType!.GetGenericArguments().IndexOf(t);
 
                                                                                                     return interfaceType.GetGenericArguments()[index];
                                                                                                 }
@@ -181,17 +181,17 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
 
             foreach (var ev in interfaceType.GetEvents())
             {
-                var eventBuilder = typeBuilder.DefineEvent(ev.Name, ev.Attributes, ev.EventHandlerType);
+                var eventBuilder = typeBuilder.DefineEvent(ev.Name, ev.Attributes, ev.EventHandlerType!);
 
-                eventBuilder.SetAddOnMethod(methods[ev.GetAddMethod()]);
+                eventBuilder.SetAddOnMethod(methods[ev.GetAddMethod()!]);
 
-                eventBuilder.SetRemoveOnMethod(methods[ev.GetRemoveMethod()]);
+                eventBuilder.SetRemoveOnMethod(methods[ev.GetRemoveMethod()!]);
             }
         }
 
         var ctorParamTypes = new[] { funcType };
 
-        var baseCtor = lazyType.GetConstructor(ctorParamTypes);
+        var baseCtor = lazyType.GetConstructor(ctorParamTypes)!;
 
         var ctorBuilder = typeBuilder.DefineConstructor(baseCtor.Attributes, baseCtor.CallingConvention, ctorParamTypes);
         {

@@ -105,7 +105,7 @@ public class BaseTypeImpl : Type
     {
         try
         {
-            return GetType(this.AssemblyQualifiedName);
+            return this.AssemblyQualifiedName == null ? null : GetType(this.AssemblyQualifiedName);
         }
         catch
         {

@@ -75,7 +75,7 @@ public class RoslynCSharpExpressionParser : INativeBodyExpressionParser
 
             var expressionParserType = assembly.GetType($"{namespaceName}.{typeName}");
 
-            return expressionParserType.GetMethod(methodName).Invoke<Expression>(null);
+            return expressionParserType!.GetMethod(methodName)!.Invoke<Expression>(null);
         }
         else
         {

@@ -37,7 +37,7 @@ public partial class BusinessUnit :
     private DateTime? firstNewBusinessStatusMonth;
     private int newBusinessStatusLeft;
     private BusinessUnit? parent;
-    private string projectStartMailList;
+    private string? projectStartMailList;
     private int rank;
     private DateTime? leastProjectStartDate;
     private DateTime? lastBusinessUnitHasNoLinkedProjectsWarningCheckDate;
@@ -45,7 +45,7 @@ public partial class BusinessUnit :
     private BusinessUnitType? businessUnitType;
     private BusinessUnitOptions options;
 
-    private BusinessUnit businessUnitForRent;
+    private BusinessUnit? businessUnitForRent;
     private decimal commission;
     private bool isNewBusiness;
     private bool isProduction;
@@ -61,7 +61,7 @@ public partial class BusinessUnit :
     {
     }
 
-    public BusinessUnit(BusinessUnit parent)
+    public BusinessUnit(BusinessUnit? parent)
     {
         this.Parent = parent;
         if (null != parent)
@@ -153,7 +153,7 @@ public partial class BusinessUnit :
         }
     }
 
-    public virtual BusinessUnit BusinessUnitForRent
+    public virtual BusinessUnit? BusinessUnitForRent
     {
         get => this.businessUnitForRent;
         set => this.businessUnitForRent = value;
@@ -231,7 +231,7 @@ public partial class BusinessUnit :
         }
     }
 
-    public virtual string ProjectStartMailList
+    public virtual string? ProjectStartMailList
     {
         get => this.projectStartMailList;
         set => this.projectStartMailList = value;
@@ -240,7 +240,7 @@ public partial class BusinessUnit :
     #region ForEventDTO
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client | DTORole.Integration)]
-    public virtual BusinessUnit AccountOrDivision =>
+    public virtual BusinessUnit? AccountOrDivision =>
         this.GetParentByTypeIds(new List<Guid>
                                 {
                                     BusinessUnitType.AccountTypeId,
@@ -248,7 +248,7 @@ public partial class BusinessUnit :
                                 });
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client | DTORole.Integration)]
-    public virtual BusinessUnit LobOrService =>
+    public virtual BusinessUnit? LobOrService =>
         this.GetParentByTypeIds(new List<Guid>
                                 {
                                     BusinessUnitType.LobTypeId,
@@ -256,40 +256,40 @@ public partial class BusinessUnit :
                                 });
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client | DTORole.Integration)]
-    public virtual BusinessUnit Account =>
+    public virtual BusinessUnit? Account =>
         this.GetParentByTypeIds(new List<Guid>
                                 {
                                     BusinessUnitType.AccountTypeId,
                                 });
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client | DTORole.Integration)]
-    public virtual BusinessUnit Program =>
+    public virtual BusinessUnit? Program =>
         this.GetParentByTypeIds(new List<Guid>
                                 {
                                     BusinessUnitType.ProgramTypeId,
                                 });
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client | DTORole.Integration)]
-    public virtual BusinessUnit Lob =>
+    public virtual BusinessUnit? Lob =>
         this.GetParentByTypeIds(new List<Guid>
                                 {
                                     BusinessUnitType.LobTypeId,
                                 });
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client | DTORole.Integration)]
-    public virtual string AccountOrDivisionName => this.AccountOrDivision.Maybe(z => z.Name);
+    public virtual string? AccountOrDivisionName => this.AccountOrDivision.Maybe(z => z.Name);
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client | DTORole.Integration)]
-    public virtual string LobOrServiceName => this.LobOrService.Maybe(z => z.Name);
+    public virtual string? LobOrServiceName => this.LobOrService.Maybe(z => z.Name);
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client | DTORole.Integration)]
-    public virtual string ProgramName => this.Program.Maybe(z => z.Name);
+    public virtual string? ProgramName => this.Program.Maybe(z => z.Name);
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client | DTORole.Integration)]
-    public virtual string AccountName => this.Account.Maybe(z => z.Name);
+    public virtual string? AccountName => this.Account.Maybe(z => z.Name);
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Integration)]
-    public virtual string LobName => this.Lob.Maybe(z => z.Name);
+    public virtual string? LobName => this.Lob.Maybe(z => z.Name);
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client | DTORole.Integration)]
     public virtual Guid AccountOrDivisionId => this.AccountOrDivision.Maybe(z => z.Id);
@@ -333,13 +333,13 @@ public partial class BusinessUnit :
 
     ICollection<BusinessUnit> IMaster<BusinessUnit>.Details => (ICollection<BusinessUnit>)this.Children;
 
-    BusinessUnit IDetail<BusinessUnit>.Master => this.Parent;
+    BusinessUnit? IDetail<BusinessUnit>.Master => this.Parent;
 
     ICollection<Project> IMaster<Project>.Details => (ICollection<Project>)this.Projects;
 
-    public static bool operator ==(BusinessUnit left, IUnit<BusinessUnit> right) => Equals(left, right);
+    public static bool operator ==(BusinessUnit? left, IUnit<BusinessUnit>? right) => Equals(left, right);
 
-    public static bool operator !=(BusinessUnit left, IUnit<BusinessUnit> right) => !Equals(left, right);
+    public static bool operator !=(BusinessUnit? left, IUnit<BusinessUnit>? right) => !Equals(left, right);
 
     public override string ToString() => $"{base.ToString()}";
 

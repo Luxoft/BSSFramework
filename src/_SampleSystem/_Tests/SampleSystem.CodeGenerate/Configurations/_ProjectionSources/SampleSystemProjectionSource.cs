@@ -31,13 +31,13 @@ public class SampleSystemProjectionSource : ProjectionSource
 
                             .Property(employee => employee.Ppm.NameNative.MiddleName)
 
-                            .Property(employee => employee.CoreBusinessUnit.Period.EndDate, "BuEndDate")
+                            .Property(employee => employee.CoreBusinessUnit!.Period.EndDate, "BuEndDate")
 
-                            .Property(employee => employee.CoreBusinessUnit, () => this.BusinessUnitIdentity)
+                            .Property(employee => employee.CoreBusinessUnit!, () => this.BusinessUnitIdentity!)
 
-                            .Property(employee => employee.CoreBusinessUnit.Name)
+                            .Property(employee => employee.CoreBusinessUnit!.Name)
                             .Property(employee => employee.Position.Name)
-                            .Property(employee => employee.CoreBusinessUnit.Projects, () => this.VisualProject)
+                            .Property(employee => employee.CoreBusinessUnit!.Projects, () => this.VisualProject!)
 
                             .Filter<TestEmployeeFilter>(ProjectionFilterTargets.OData | ProjectionFilterTargets.Collection)
                             .Filter<EmployeeFilterModel>(ProjectionFilterTargets.Collection)
@@ -49,14 +49,14 @@ public class SampleSystemProjectionSource : ProjectionSource
                                 //.Property(bu => bu.Order)
                                 .Property(bu => bu.Period.EndDate)
 
-                                .Property(bu => bu.Parent.Period.StartDate)
+                                .Property(bu => bu.Parent!.Period.StartDate)
 
-                                .Property(bu => bu.Parent.Period)
+                                .Property(bu => bu.Parent!.Period)
 
-                                .Property(bu => bu, () => this.HerBusinessUnit, "Her", ignoreSerialization: true)
+                                .Property(bu => bu, () => this.HerBusinessUnit!, "Her", ignoreSerialization: true)
                                 .CustomProperty<string>("HerBusinessUnit_Full") // Расчётное свойство типа "string"
 
-                                .Property(bu => bu.BusinessUnitEmployeeRoles, () => this.MiniBusinessUnitEmployeeRole, ignoreSerialization: true)
+                                .Property(bu => bu.BusinessUnitEmployeeRoles, () => this.MiniBusinessUnitEmployeeRole!, ignoreSerialization: true)
                                 .CustomProperty<
                                     string>(
                                     "Employees",
@@ -65,49 +65,49 @@ public class SampleSystemProjectionSource : ProjectionSource
 
                                 .CustomProperty<string>("CalcProp", writable: true) // Расчётное свойство типа "string" с разрешенной записью в него
                                 .CustomProperty<string[][]>("CalcMatrix") // Расчётное свойство типа "string[][]"
-                                .CustomProperty("CalcProjectionProp", () => this.TestBusinessUnitType) // Расчётное свойство типа "TestBusinessUnitType"
+                                .CustomProperty("CalcProjectionProp", () => this.TestBusinessUnitType!) // Расчётное свойство типа "TestBusinessUnitType"
                                 .Filter<HierarchicalBusinessUnitFilterModel>(ProjectionFilterTargets.ODataTree);
 
-        this.TestBusinessUnitType = new Projection<BusinessUnitType>(() => this.TestBusinessUnitType)
+        this.TestBusinessUnitType = new Projection<BusinessUnitType>(() => this.TestBusinessUnitType!)
                                     .Property(
                                         employee => employee.Id,
                                         ignoreSerialization: true) // Id-поле исключается из сериализации, наследование этой ProjectionDTO будет производится от BaseAbstractDTO
                                     .Property(bu => bu.Name);
 
-        this.TestLocation = new Projection<Location>(() => this.TestLocation, true)
+        this.TestLocation = new Projection<Location>(() => this.TestLocation!, true)
             .Property(location => location.Name);
 
-        this.TestDepartment = new Projection<HRDepartment>(() => this.TestDepartment, true)
+        this.TestDepartment = new Projection<HRDepartment>(() => this.TestDepartment!, true)
                               .Property(department => department.Name)
-                              .Property(department => department.Location, () => this.TestLocation)
+                              .Property(department => department.Location, () => this.TestLocation!)
                               .Property(department => department.Location.BinaryData);
 
-        this.HerBusinessUnit = new Projection<BusinessUnit>(() => this.HerBusinessUnit)
+        this.HerBusinessUnit = new Projection<BusinessUnit>(() => this.HerBusinessUnit!)
                                .Property(bu => bu.Name)
-                               .Property(bu => bu.Parent, () => this.HerBusinessUnit);
+                               .Property(bu => bu.Parent!, () => this.HerBusinessUnit!);
 
-        this.MiniBusinessUnitEmployeeRole = new Projection<BusinessUnitEmployeeRole>(() => this.MiniBusinessUnitEmployeeRole)
-            .Property(link => link.Employee, () => this.VisualEmployee);
+        this.MiniBusinessUnitEmployeeRole = new Projection<BusinessUnitEmployeeRole>(() => this.MiniBusinessUnitEmployeeRole!)
+            .Property(link => link.Employee, () => this.VisualEmployee!);
 
-        this.VisualEmployee = new Projection<Employee>(() => this.VisualEmployee)
+        this.VisualEmployee = new Projection<Employee>(() => this.VisualEmployee!)
                               .Property(emp => emp.NameEng, ignoreSerialization: true)
                               .Property(emp => emp.NameEng.FirstName);
 
-        this.TestLocationCollectionProperties = new Projection<Location>(() => this.TestLocationCollectionProperties, true)
+        this.TestLocationCollectionProperties = new Projection<Location>(() => this.TestLocationCollectionProperties!, true)
                                                 .Property(location => location.Name)
-                                                .Property(x => x.Children, () => this.TestLocation)
+                                                .Property(x => x.Children, () => this.TestLocation!)
                                                 .CustomProperty<Guid[]>("Child_Identities")
                                                 .CustomProperty<Period[]>("Child_Periods")
                                                 .CustomProperty<DateTime[]>("Date_Intervals")
                                                 .CustomProperty<string[]>("Security_Codes");
 
-        this.TestIMRequest = new Projection<IMRequest>(() => this.TestIMRequest, true)
+        this.TestIMRequest = new Projection<IMRequest>(() => this.TestIMRequest!, true)
                              .Property(request => request.Message)
-                             .Property(request => request.OneToOneDetail, () => this.TestIMRequestDetail);
+                             .Property(request => request.OneToOneDetail, () => this.TestIMRequestDetail!);
 
-        this.TestIMRequestDetail = new Projection<IMRequestDetail>(() => this.TestIMRequestDetail);
+        this.TestIMRequestDetail = new Projection<IMRequestDetail>(() => this.TestIMRequestDetail!);
 
-        this.CustomCompanyLegalEntity = new Projection<CompanyLegalEntity>(() => this.CustomCompanyLegalEntity, true)
+        this.CustomCompanyLegalEntity = new Projection<CompanyLegalEntity>(() => this.CustomCompanyLegalEntity!, true)
                                         .Attribute(new ExampleCustomProjectionAttribute()) // Добавлям кастомный атрибут в проекцию
                                         .Attribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.BusinessUnitEdit)) // Подменяем атрибут доступа проекции
                                         .Property(
@@ -118,42 +118,42 @@ public class SampleSystemProjectionSource : ProjectionSource
                                             ]) // Добавляем свойство и атрибут доступа к нему
                                         .Property(legalEntity => legalEntity.Name)
                                         .Property(legalEntity => legalEntity.NameEnglish)
-                                        .Property(legalEntity => legalEntity.CurrentObj, () => this.CustomTestObjForNested)
-                                        .Property(legalEntity => legalEntity.BaseObj, () => this.CustomTestObjForNested)
+                                        .Property(legalEntity => legalEntity.CurrentObj!, () => this.CustomTestObjForNested!)
+                                        .Property(legalEntity => legalEntity.BaseObj!, () => this.CustomTestObjForNested!)
                                         .Property(obj => obj.AribaStatus.Type)
                                         .Property(obj => obj.AribaStatus.Description);
 
-        this.CustomTestObjForNested = new Projection<TestObjForNested>(() => this.CustomTestObjForNested, false)
+        this.CustomTestObjForNested = new Projection<TestObjForNested>(() => this.CustomTestObjForNested!, false)
                                       .Property(obj => obj.Period.StartDate, "PeriodStartDateXXX")
                                       .Property(obj => obj.Name);
 
-        this.NonPersistentContainer = new Projection<DomainObjectBase>(() => this.NonPersistentContainer)
+        this.NonPersistentContainer = new Projection<DomainObjectBase>(() => this.NonPersistentContainer!)
                                     .CustomProperty<string>("TestString", true)
-                                    .CustomProperty("TestBU", true, () => this.TestBusinessUnit)
+                                    .CustomProperty("TestBU", true, () => this.TestBusinessUnit!)
                                     .CustomManyProperty<Period>("PeriodArray", true, null, typeof(Array))
-                                    .CustomManyProperty("Locations", true, () => this.TestLocation, typeof(List<>));
+                                    .CustomManyProperty("Locations", true, () => this.TestLocation!, typeof(List<>));
 
-        this.VisualProject = new Projection<Project>(() => this.VisualProject)
+        this.VisualProject = new Projection<Project>(() => this.VisualProject!)
             .Property(proj => proj.Code);
 
-        this.BusinessUnitIdentity = new Projection<BusinessUnit>(() => this.BusinessUnitIdentity);
+        this.BusinessUnitIdentity = new Projection<BusinessUnit>(() => this.BusinessUnitIdentity!);
 
         this.BusinessUnitProgramClass =
-            new Projection<BusinessUnit>(() => this.BusinessUnitProgramClass, true)
+            new Projection<BusinessUnit>(() => this.BusinessUnitProgramClass!, true)
                 .Property(z => z.Name)
                 .Property(z => z.IsNewBusiness)
                 .CustomProperty<string>("VirtualValue")
                 .CustomProperty<string>("VirtualName")
                 .Property(z => z.Period.EndDate, ignoreSerialization: true)
-                .Property(z => z.BusinessUnitType.Id, ignoreSerialization: true)
+                .Property(z => z.BusinessUnitType!.Id, ignoreSerialization: true)
                 .Filter<BusinessUnitProgramClassFilterModel>();
 
         this.TestSecurityObjItemProjection =
-            new Projection<TestSecurityObjItem>(() => this.TestSecurityObjItemProjection, true)
+            new Projection<TestSecurityObjItem>(() => this.TestSecurityObjItemProjection!, true)
                 .Property(item => item.Name);
 
         this.TestCustomContextSecurityObjProjection =
-            new Projection<TestCustomContextSecurityObj>(() => this.TestCustomContextSecurityObjProjection, true)
+            new Projection<TestCustomContextSecurityObj>(() => this.TestCustomContextSecurityObjProjection!, true)
                 .Property(item => item.Name);
 
         this.EmployeeWithBuPeriod = new Projection<Employee>(nameof(this.EmployeeWithBuPeriod)).Property(e => e.BuPeriod);

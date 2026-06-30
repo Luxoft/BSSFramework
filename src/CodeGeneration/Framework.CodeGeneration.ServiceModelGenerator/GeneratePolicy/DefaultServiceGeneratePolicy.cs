@@ -42,11 +42,11 @@ public class DefaultServiceGeneratePolicy(IServiceModelGenerationEnvironment gen
         }
         else if (identity == MethodIdentityType.GetWithExtended)
         {
-            return identity.ModelType.GetDirectMode().HasFlag(DirectMode.Out);
+            return identity.ModelType!.GetDirectMode().HasFlag(DirectMode.Out);
         }
         else if (identity == MethodIdentityType.SaveByModel)
         {
-            return identity.ModelType.GetDirectMode().HasFlag(DirectMode.In);
+            return identity.ModelType!.GetDirectMode().HasFlag(DirectMode.In);
         }
         else if (identity == MethodIdentityType.Remove)
         {
@@ -94,11 +94,11 @@ public class DefaultServiceGeneratePolicy(IServiceModelGenerationEnvironment gen
         }
         else if (identity == MethodIdentityType.GetChangeModel || identity == MethodIdentityType.GetMassChangeModel)
         {
-            return identity.ModelType.GetDirectMode().HasFlag(DirectMode.Out);
+            return identity.ModelType!.GetDirectMode().HasFlag(DirectMode.Out);
         }
         else if (identity == MethodIdentityType.Change || identity == MethodIdentityType.MassChange)
         {
-            return identity.ModelType.GetDirectMode().HasFlag(DirectMode.In);
+            return identity.ModelType!.GetDirectMode().HasFlag(DirectMode.In);
         }
         else if (identity == MethodIdentityType.HasAccess || identity == MethodIdentityType.CheckAccess)
         {

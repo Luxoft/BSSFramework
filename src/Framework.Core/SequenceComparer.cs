@@ -2,7 +2,13 @@
 
 public class SequenceComparer<T>(IEqualityComparer<T> equalityComparer) : IEqualityComparer<IEnumerable<T>>
 {
-    public bool Equals(IEnumerable<T>? x, IEnumerable<T>? y) => x.SequenceEqual(y, equalityComparer);
+    public bool Equals(IEnumerable<T>? x, IEnumerable<T>? y)
+    {
+        if (x is null) return y is null;
+        if (y is null) return false;
+
+        return x.SequenceEqual(y, equalityComparer);
+    }
 
     public int GetHashCode(IEnumerable<T> sequence) => 0;
 

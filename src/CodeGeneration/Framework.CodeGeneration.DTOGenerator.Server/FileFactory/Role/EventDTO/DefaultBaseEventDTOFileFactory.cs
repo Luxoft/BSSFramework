@@ -43,7 +43,7 @@ public class DefaultBaseEventDTOFileFactory<TConfiguration>(TConfiguration confi
             yield return knownTypeAttribute;
         }
 
-        yield return this.Configuration.GetDTOFileAttribute(this.DomainType, this.FileType);
+        yield return this.Configuration.GetDTOFileAttribute(this.DomainType!, this.FileType);
     }
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration() =>

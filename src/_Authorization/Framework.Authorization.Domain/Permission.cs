@@ -29,15 +29,15 @@ public class Permission : AuditPersistentDomainObjectBase,
 
     private readonly ICollection<Permission> delegatedTo = new List<Permission>();
 
-    private Principal principal;
+    private Principal principal = null!;
 
     private Permission? delegatedFrom;
 
-    private BusinessRole role;
+    private BusinessRole role = null!;
 
     private Period period = Period.Eternity;
 
-    private string comment;
+    private string? comment;
 
     public Permission()
     {

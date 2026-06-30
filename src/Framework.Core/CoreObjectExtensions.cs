@@ -6,7 +6,7 @@ namespace Framework.Core;
 
 public static class CoreObjectExtensions
 {
-    private static readonly MethodInfo DefaultToStringMethod = new Func<string>(new object().ToString).Method;
+    private static readonly MethodInfo DefaultToStringMethod = new Func<string?>(new object().ToString).Method;
 
     private static readonly IDictionaryCache<Type, bool> IsBaseToStringDict =
         new DictionaryCache<Type, bool>(

@@ -17,6 +17,7 @@ public static class UpdateExtensions
             Func<TSource, TTarget> createAndMapFunc,
             Action<TTarget> removeAction,
             IEqualityComparer<TKey>? keyComparer = null)
+            where TKey : notnull
     {
         var actualComparer = keyComparer ?? new EqualityComparerImpl<TKey>((key1, key2) => !key1.IsDefault() && !key2.IsDefault() && EqualityComparer<TKey>.Default.Equals(key1, key2));
 
@@ -36,9 +37,7 @@ public static class UpdateExtensions
 
         foreach (var removingSourceItem in updateLists.RemoveItems)
         {
-            TTarget removingTargetItem;
-
-            if (targetMap.TryGetValue(getSourceIdentityKey(removingSourceItem), out removingTargetItem))
+            if (targetMap.TryGetValue(getSourceIdentityKey(removingSourceItem), out var removingTargetItem))
             {
                 removeAction(removingTargetItem);
             }
@@ -48,10 +47,11 @@ public static class UpdateExtensions
     public static IEnumerable<UpdateItemData<TTarget, TIdentity>> ExtractUpdateData<TSource, TIdentity, TTarget>(
             this IEnumerable<TSource> currentSource,
             IEnumerable<TSource> baseSource,
-            Func<TSource, TSource, TTarget> getTarget,
+            Func<TSource, TSource?, TTarget> getTarget,
             Func<TSource, TIdentity> getIdentity,
-            IEqualityComparer<TIdentity> identityComparer = null)
+            IEqualityComparer<TIdentity>? identityComparer = null)
             where TSource : class
+            where TIdentity : notnull
     {
         var mergeResult = baseSource.GetMergeResult(currentSource, getIdentity, getIdentity);
 
@@ -78,10 +78,8 @@ public static class UpdateExtensions
 
         items.RemoveBy(item =>
                        {
-                           if (item is SaveItemData<TItem, TIdentity>)
+                           if (item is SaveItemData<TItem, TIdentity> saveItem)
                            {
-                               var saveItem = item as SaveItemData<TItem, TIdentity>;
-
                                saveItem.Value.Compress();
 
                                return saveItem.Value.IsEmpty;

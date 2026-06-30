@@ -34,7 +34,7 @@ public abstract class FileStoreAttachmentGeneratorConfigurationBase<TEnvironment
         yield break;
     }
 
-    public SecurityRule TryGetSecurityAttribute(Type domainType, bool isEdit) => this.Environment.FileStore.TryGetSecurityAttribute(domainType, isEdit);
+    public SecurityRule? TryGetSecurityAttribute(Type domainType, bool isEdit) => this.Environment.FileStore.TryGetSecurityAttribute(domainType, isEdit);
 
     public class FileStoreBLLParameter(Type type, Enum securityRule, bool isEdit)
     {
@@ -46,7 +46,7 @@ public abstract class FileStoreAttachmentGeneratorConfigurationBase<TEnvironment
 
         public override int GetHashCode() => this.Type.GetHashCode() ^ this.SecurityRule.GetHashCode() ^ this.ForEdit.GetHashCode();
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             var target = obj as FileStoreBLLParameter;
             if (null == target)

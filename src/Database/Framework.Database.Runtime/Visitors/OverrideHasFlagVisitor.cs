@@ -24,13 +24,13 @@ public class OverrideHasFlagVisitor : ExpressionVisitor
 
                       from argEnumConstValue in node.Arguments.Single().ExtractBoxingValue().GetConstantValue()
 
-                      let underType = node.Object.Type.GetEnumUnderlyingType()
+                      let underType = node.Object!.Type.GetEnumUnderlyingType()
 
                       let argUnderConstValue = Convert.ChangeType(argEnumConstValue, underType)
 
                       let argUnderConst = Expression.Constant(argUnderConstValue)
 
-                      select Expression.MakeBinary(ExpressionType.Equal, Expression.MakeBinary(ExpressionType.And, Expression.Convert(node.Object, underType), argUnderConst), argUnderConst);
+                      select Expression.MakeBinary(ExpressionType.Equal, Expression.MakeBinary(ExpressionType.And, Expression.Convert(node.Object!, underType), argUnderConst), argUnderConst);
 
 
         return request.GetValueOrDefault(() => base.VisitMethodCall(node));

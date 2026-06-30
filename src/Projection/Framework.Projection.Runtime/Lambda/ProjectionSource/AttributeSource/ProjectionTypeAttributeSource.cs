@@ -42,13 +42,13 @@ public class ProjectionTypeAttributeSource : AttributeSourceBase<IProjection>
     /// <inheritdoc />
     protected override IEnumerable<Attribute> GetDefaultAttributes()
     {
-        var attributes = new Attribute[]
+        var attributes = new Attribute?[]
                          {
                              this.TryCreateBLLProjectionViewRole(),
                              this.CreateTableAttribute(),
                              this.CreateInlineBaseTypeAttribute(),
                              this.CreateProjectionAttribute()
-                         }.Where(attr => attr != null);
+                         }.OfType<Attribute>();
 
         return attributes.Concat(this.ProjectionValue.FilterAttributes)
                          .Concat(this.GetSourceTypeAttributes())

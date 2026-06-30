@@ -44,7 +44,7 @@ public class ServerDTOGeneratorConfiguration(ServerGenerationEnvironment environ
         }
     }
 
-    public override ILayerCodeTypeReferenceService GetLayerCodeTypeReferenceService(DTOFileType fileType)
+    public override ILayerCodeTypeReferenceService? GetLayerCodeTypeReferenceService(DTOFileType fileType)
     {
         if (fileType == SampleSystemFileType.SimpleRefFullDetailDTO || fileType == SampleSystemFileType.FullRefDTO)
         {

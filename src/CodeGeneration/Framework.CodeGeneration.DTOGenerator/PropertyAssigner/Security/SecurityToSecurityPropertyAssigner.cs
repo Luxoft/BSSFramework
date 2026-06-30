@@ -31,7 +31,7 @@ public class SecurityToSecurityPropertyAssigner<TConfiguration> : MaybePropertyA
         if (sourcePropertyRef == null) throw new ArgumentNullException(nameof(sourcePropertyRef));
         if (targetPropertyRef == null) throw new ArgumentNullException(nameof(targetPropertyRef));
 
-        var targetPropertyTypeRef = this.CodeTypeReferenceService.GetCodeTypeReference(property);
+        var targetPropertyTypeRef = this.CodeTypeReferenceService!.GetCodeTypeReference(property);
 
         var resultVarDecl = new CodeVariableDeclarationStatement(targetPropertyTypeRef, "result" + property.Name,
 

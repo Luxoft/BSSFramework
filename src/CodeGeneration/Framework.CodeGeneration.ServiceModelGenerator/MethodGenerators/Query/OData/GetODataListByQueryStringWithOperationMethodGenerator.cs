@@ -28,7 +28,7 @@ public class GetODataListByQueryStringWithOperationMethodGenerator<TConfiguratio
 
     protected override string Name => this.CreateName(true, "Operation");
 
-    protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr) => this.GetSecurityRuleParameter().ToVariableReferenceExpression();
+    protected override object? GetBLLSecurityParameter(CodeExpression evaluateDataExpr) => this.GetSecurityRuleParameter().ToVariableReferenceExpression();
 
     protected override string GetComment() => $"Get hierarchical data of type {this.DomainType.GetPluralizedDomainName()} ({this.DTOType}) by operation";
 

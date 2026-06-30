@@ -31,7 +31,7 @@ public static class SerializerFactoryExtensions
         }
         catch (TargetInvocationException ex)
         {
-            throw ex.InnerException;
+            throw ex.InnerException!;
         }
     }
 

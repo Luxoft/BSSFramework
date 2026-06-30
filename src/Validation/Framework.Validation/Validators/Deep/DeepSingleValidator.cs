@@ -12,6 +12,6 @@ namespace Framework.Validation.Validators.Deep;
 public class DeepSingleValidator<TSource, TProperty> : IPropertyValidator<TSource, TProperty>
 {
     /// <inheritdoc />
-    public ValidationResult GetValidationResult(IPropertyValidationContext<TSource, TProperty> validationContext) => validationContext.Value.Pipe(value => validationContext.Validator.GetValidationResult(value, validationContext.OperationContext, new ValidationState(validationContext.ParentState, validationContext.Map, validationContext.Source)));
+    public ValidationResult GetValidationResult(IPropertyValidationContext<TSource, TProperty> validationContext) => validationContext.Value.Pipe(value => validationContext.Validator.GetValidationResult(value, validationContext.OperationContext, new ValidationState(validationContext.ParentState, validationContext.Map, validationContext.Source!)));
 }
 

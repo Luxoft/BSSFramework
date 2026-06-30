@@ -2,5 +2,6 @@
 
 public interface IEventOperationSender
 {
-    Task Send<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent, CancellationToken ct);
+    Task Send<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent, CancellationToken ct)
+            where TDomainObject : class;
 }

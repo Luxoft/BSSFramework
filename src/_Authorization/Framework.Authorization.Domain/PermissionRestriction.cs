@@ -8,9 +8,9 @@ namespace Framework.Authorization.Domain;
 /// </summary>
 public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Permission>
 {
-    private Permission permission;
+    private Permission permission = null!;
 
-    private SecurityContextType securityContextType;
+    private SecurityContextType securityContextType = null!;
 
     private Guid securityContextId;
 

@@ -66,7 +66,7 @@ public class PrincipalWithInitTests(IServiceProvider rootServiceProvider) : Test
                                var authContext = context.Authorization;
 
                                var principalBll = authContext.Logics.Principal;
-                               var principal = principalBll.GetByName(TestPrincipalName, true);
+                               var principal = principalBll.GetByName(TestPrincipalName, true)!;
 
                                var existsPermission = principal.Permissions.Single();
 

@@ -9,7 +9,9 @@ public static class XDocumentExtensions
     {
         if (xDocument == null) throw new ArgumentNullException(nameof(xDocument));
 
-        return new XDocument(xDocument.Root.OverrideNamespace(xDocument.Root.Name.Namespace));
+        var root = xDocument.Root ?? throw new ArgumentException("XDocument has no root element.", nameof(xDocument));
+
+        return new XDocument(root.OverrideNamespace(root.Name.Namespace));
     }
 
     private static XElement OverrideNamespace(this XElement xElement, XNamespace xNamespace)

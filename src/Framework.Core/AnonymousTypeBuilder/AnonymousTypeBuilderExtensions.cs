@@ -48,6 +48,7 @@ public static class AnonymousTypeBuilderExtensions
     }
 
     public static IAnonymousTypeBuilder<TMap> WithCache<TMap>(this IAnonymousTypeBuilder<TMap> anonymousTypeBuilder, IEqualityComparer<TMap>? equalityComparer = null)
+            where TMap : notnull
     {
         if (anonymousTypeBuilder == null) throw new ArgumentNullException(nameof(anonymousTypeBuilder));
 

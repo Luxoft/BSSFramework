@@ -114,8 +114,8 @@ public class ScriptEngineService
         }
         var type = compileResult.CompiledAssembly.GetType($"{namespaceName}.{typeName}");
 
-        var method = type.GetMethod(methodName);
-        var result = (T)method.Invoke(null, []);
+        var method = type!.GetMethod(methodName)!;
+        var result = (T)method.Invoke(null, [])!;
         return result;
     }
 

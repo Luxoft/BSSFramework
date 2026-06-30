@@ -176,7 +176,7 @@ internal static class CodeDomExtensions
 
         if (!tableAttr.Schema.IsDefault())
         {
-            yield return new CodeAttributeArgument { Name = nameof(TableAttribute.Schema), Value = tableAttr.Schema.ToPrimitiveExpression() };
+            yield return new CodeAttributeArgument { Name = nameof(TableAttribute.Schema), Value = tableAttr.Schema!.ToPrimitiveExpression() };
         }
     }
 
@@ -213,7 +213,7 @@ internal static class CodeDomExtensions
 
         if (!mappingAttr.ColumnName.IsDefault())
         {
-            yield return new CodeAttributeArgument { Name = nameof(MappingAttribute.ColumnName), Value = mappingAttr.ColumnName.ToPrimitiveExpression() };
+            yield return new CodeAttributeArgument { Name = nameof(MappingAttribute.ColumnName), Value = mappingAttr.ColumnName!.ToPrimitiveExpression() };
         }
 
         if (!mappingAttr.IsOneToOne.IsDefault())
@@ -228,7 +228,7 @@ internal static class CodeDomExtensions
 
         if (!mappingAttr.ExternalTableName.IsDefault())
         {
-            yield return new CodeAttributeArgument { Name = nameof(MappingAttribute.ExternalTableName), Value = mappingAttr.ExternalTableName.ToPrimitiveExpression() };
+            yield return new CodeAttributeArgument { Name = nameof(MappingAttribute.ExternalTableName), Value = mappingAttr.ExternalTableName!.ToPrimitiveExpression() };
         }
     }
 

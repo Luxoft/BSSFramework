@@ -12,7 +12,7 @@ namespace SampleSystem.Domain.ManualProjections;
 [Table(Name = nameof(Employee.Employee))]
 public class TestManualEmployeeProjection : PersistentDomainObjectBase
 {
-    private readonly string login;
+    private readonly string login = null!;
 
     private readonly Guid? coreBusinessUnitId;
 

@@ -146,6 +146,7 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase>(
     }
 
     private static DALChanges? GetDALChanges<TDomainObject>(TDomainObject domainObject, EventOperation domainObjectEvent)
+        where TDomainObject : class
     {
         if (domainObjectEvent == EventOperation.Save)
         {

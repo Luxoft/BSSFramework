@@ -312,7 +312,7 @@ public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(root
             bllContext =>
             {
                 var dbSession = bllContext.ServiceProvider.GetRequiredService<IDBSession>();
-                var writeNhibSession = dbSession as WriteNHibSession;
+                var writeNhibSession = (dbSession as WriteNHibSession)!;
                 var impl = writeNhibSession.NativeSession as SessionImpl;
                 return;
             });

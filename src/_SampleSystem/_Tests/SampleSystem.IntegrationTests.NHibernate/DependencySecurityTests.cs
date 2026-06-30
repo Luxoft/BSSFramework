@@ -43,10 +43,10 @@ public class DependencySecurityTests(IServiceProvider rootServiceProvider) : Tes
         this.EvaluateWrite(
                            context =>
                            {
-                               var firstRootObj = new TestRootSecurityObj { Name = TestObj1, BusinessUnit = context.Logics.BusinessUnit.GetById(this.bu1Ident.Id, true) };
+                               var firstRootObj = new TestRootSecurityObj { Name = TestObj1, BusinessUnit = context.Logics.BusinessUnit.GetById(this.bu1Ident.Id, true)! };
                                new TestSecurityObjItem(firstRootObj) { Name = TestObjItem1 };
 
-                               var secondRootObj = new TestRootSecurityObj { Name = TestObj2, BusinessUnit = context.Logics.BusinessUnit.GetById(this.bu2Ident.Id, true) };
+                               var secondRootObj = new TestRootSecurityObj { Name = TestObj2, BusinessUnit = context.Logics.BusinessUnit.GetById(this.bu2Ident.Id, true)! };
                                var secondItemObj = new TestSecurityObjItem(secondRootObj) { Name = TestObjItem2 };
                                new TestSecuritySubObjItem(secondItemObj) { Name = TestObjSubItem1 };
                                new TestSecuritySubObjItem2(secondItemObj) { Name = TestObjSubItem2 };

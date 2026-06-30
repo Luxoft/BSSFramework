@@ -39,10 +39,10 @@ public class AuthPerformanceTests(IServiceProvider rootServiceProvider) : TestBa
                                                         from mbuIdent in genMbu
                                                         select new TestPerformanceObject
                                                         {
-                                                            Employee = ctx.Logics.Employee.GetById(emplIdent.Id),
-                                                            Location = ctx.Logics.Location.GetById(locIdent.Id),
-                                                            BusinessUnit = ctx.Logics.BusinessUnit.GetById(buIdent.Id),
-                                                            ManagementUnit = ctx.Logics.ManagementUnit.GetById(mbuIdent.Id),
+                                                            Employee = ctx.Logics.Employee.GetById(emplIdent.Id)!,
+                                                            Location = ctx.Logics.Location.GetById(locIdent.Id)!,
+                                                            BusinessUnit = ctx.Logics.BusinessUnit.GetById(buIdent.Id)!,
+                                                            ManagementUnit = ctx.Logics.ManagementUnit.GetById(mbuIdent.Id)!,
                                                             Name = Guid.NewGuid().ToString()
                                                         };
 
@@ -52,7 +52,7 @@ public class AuthPerformanceTests(IServiceProvider rootServiceProvider) : TestBa
 
                                                 var testPrincipal = new Framework.Authorization.Domain.Principal { Name = TestUser };
 
-                                                var adminRole = ctx.Authorization.Logics.BusinessRole.GetByName(SampleSystemSecurityRole.TestPerformance.Name);
+                                                var adminRole = ctx.Authorization.Logics.BusinessRole.GetByName(SampleSystemSecurityRole.TestPerformance.Name, true)!;
 
                                                 foreach (var genObjectSubEnumerable in genObjects.Split(SplitBy))
                                                 {

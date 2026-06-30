@@ -91,7 +91,7 @@ public class DBGenerator(MappingSettings settings)
             builder.MainBuilder.MigrationBuilder.WithCustom(customMigrationScriptReader);
         }
 
-        builder.MainBuilder.MigrationBuilder.WithDatabase(updateScriptsDB).WithTable(executedScriptsTable);
+        builder.MainBuilder.MigrationBuilder.WithDatabase(updateScriptsDB!).WithTable(executedScriptsTable);
         builder.MainBuilder.MigrationBuilder.WithDatabase(scriptDBName);
         builder.MainBuilder.MigrationBuilder.WithTable(executedScriptsTable);
 

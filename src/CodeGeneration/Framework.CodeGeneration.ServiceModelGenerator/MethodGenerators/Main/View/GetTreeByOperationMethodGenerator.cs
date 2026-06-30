@@ -34,7 +34,7 @@ public class GetTreeByOperationMethodGenerator<TConfiguration> : ViewMethodGener
 
     protected sealed override CodeTypeReference ReturnType { get; }
 
-    protected override object GetBLLSecurityParameter(CodeExpression evaluateDataExpr) => this.GetSecurityRuleParameter().ToVariableReferenceExpression();
+    protected override object? GetBLLSecurityParameter(CodeExpression evaluateDataExpr) => this.GetSecurityRuleParameter().ToVariableReferenceExpression();
 
     protected override string GetComment() => $"Get hierarchical data of type {this.DomainType.GetPluralizedDomainName()} ({this.DTOType}) by operation";
 

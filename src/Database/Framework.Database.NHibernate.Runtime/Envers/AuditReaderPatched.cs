@@ -88,9 +88,9 @@ public class AuditReaderPatched(AuditConfiguration verCfg, ISession session, ISe
                                      .GetResultList();
 
         var resultList = from object[] revisionObject in auditDomainObjects
-                         where revisionObject[0] is T && revisionObject[1].GetType().FullName.Contains("AuditRevisionEntity")
-                         let revisionNumber = (long)revisionObject[1].GetType().GetProperty("Id", typeof(long)).GetValue(revisionObject[1], [])
-                         select new Tuple<T, long>(revisionObject[0] as T, revisionNumber);
+                         where revisionObject[0] is T && revisionObject[1].GetType().FullName!.Contains("AuditRevisionEntity")
+                         let revisionNumber = (long)revisionObject[1].GetType().GetProperty("Id", typeof(long))!.GetValue(revisionObject[1], [])!
+                         select new Tuple<T, long>((revisionObject[0] as T)!, revisionNumber);
 
         return resultList.ToList();
     }
@@ -141,7 +141,7 @@ public class AuditReaderPatched(AuditConfiguration verCfg, ISession session, ISe
     {
         var allFields = mapper.GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic);
         var idFieldInfo = allFields.Single(z => z.FieldType == typeof(PropertyData));
-        return (PropertyData)idFieldInfo.GetValue(mapper);
+        return (PropertyData)idFieldInfo.GetValue(mapper)!;
     }
 }
 

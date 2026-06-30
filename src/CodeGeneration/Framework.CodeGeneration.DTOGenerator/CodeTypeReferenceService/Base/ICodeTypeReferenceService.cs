@@ -9,6 +9,6 @@ public interface ICodeTypeReferenceService
 {
     CodeTypeReference GetCodeTypeReferenceByType(Type type);
 
-    RoleFileType GetFileType(PropertyInfo property);
+    RoleFileType? GetFileType(PropertyInfo property);
 }
 

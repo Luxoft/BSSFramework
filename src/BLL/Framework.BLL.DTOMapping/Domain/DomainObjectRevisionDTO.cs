@@ -8,10 +8,10 @@ namespace Framework.BLL.DTOMapping.Domain;
 public class DomainObjectRevisionDTO<TIdent>
 {
     [DataMember]
-    public TIdent Identity { get; set; }
+    public TIdent Identity { get; set; } = default!;
 
     [DataMember]
-    public IEnumerable<DomainObjectRevisionInfoDTO<TIdent>> RevisionInfos { get; set; }
+    public IEnumerable<DomainObjectRevisionInfoDTO<TIdent>> RevisionInfos { get; set; } = [];
 
     public DomainObjectRevisionDTO()
     {

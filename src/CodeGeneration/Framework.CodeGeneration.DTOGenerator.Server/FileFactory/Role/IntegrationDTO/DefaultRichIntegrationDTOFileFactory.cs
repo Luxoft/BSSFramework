@@ -26,7 +26,7 @@ public class DefaultRichIntegrationDTOFileFactory<TConfiguration>(TConfiguration
 
         if (this.HasMapToDomainObjectMethod)
         {
-            foreach (var masterType in this.Configuration.GetDomainTypeMasters(this.DomainType, this.FileType, true))
+            foreach (var masterType in this.Configuration.GetDomainTypeMasters(this.DomainType!, this.FileType, true))
             {
                 if (this.Configuration.IsPersistentObject(masterType))
                 {

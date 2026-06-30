@@ -14,7 +14,7 @@ public class Principal : BaseDirectory, IMaster<Permission>
 {
     private readonly ICollection<Permission> permissions = new List<Permission>();
 
-    private Principal runAs;
+    private Principal? runAs;
 
     /// <summary>
     ///     Коллекция пермиссий принципала
@@ -24,7 +24,7 @@ public class Principal : BaseDirectory, IMaster<Permission>
     /// <summary>
     ///     Принципал, под которым сейчас работает пользователь
     /// </summary>
-    public virtual Principal RunAs
+    public virtual Principal? RunAs
     {
         get => this.runAs;
         set => this.runAs = value;

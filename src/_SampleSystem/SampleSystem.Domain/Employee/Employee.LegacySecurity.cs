@@ -38,9 +38,9 @@ public partial class Employee : IEmployeeSecurity<BusinessUnit, HRDepartment.HRD
     Employee IEmployeeSecurityElement<Employee>.Employee => this;
 
     [ExpandPath(nameof(CoreBusinessUnit))]
-    BusinessUnit IBusinessUnitSecurityElement<BusinessUnit>.BusinessUnit => this.CoreBusinessUnit;
+    BusinessUnit IBusinessUnitSecurityElement<BusinessUnit>.BusinessUnit => this.CoreBusinessUnit!;
 
     [ExpandPath(nameof(HRDepartment))]
-    HRDepartment.HRDepartment IDepartmentSecurityElement<HRDepartment.HRDepartment>.Department => this.HRDepartment;
+    HRDepartment.HRDepartment IDepartmentSecurityElement<HRDepartment.HRDepartment>.Department => this.HRDepartment!;
 }
 

@@ -2,7 +2,7 @@
 
 public class ClassAChild : PersistentDomainObjectBase
 {
-    private ClassA parent;
+    private ClassA parent = null!;
 
     private bool isFake;
 

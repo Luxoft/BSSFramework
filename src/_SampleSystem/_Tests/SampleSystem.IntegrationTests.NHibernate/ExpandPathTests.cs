@@ -20,7 +20,7 @@ public class ExpandPathTests(IServiceProvider rootServiceProvider) : TestBase(ro
         {
             var res = this.Evaluate(
                 DBSessionMode.Read,
-                context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnit.Period.ContainsExt(period.EndDate ?? period.StartDate)));
+                context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnit!.Period.ContainsExt(period.EndDate ?? period.StartDate)));
 
             return;
         });

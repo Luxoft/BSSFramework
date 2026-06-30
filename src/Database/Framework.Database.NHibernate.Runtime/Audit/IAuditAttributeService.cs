@@ -9,6 +9,6 @@ public interface IAuditAttributeService
 
     RelationTargetAuditMode GetAttributeFor(Type type, Property property);
 
-    string GetAuditTableSchemaOrDefault(Type type);
+    string? GetAuditTableSchemaOrDefault(Type type);
 }
 

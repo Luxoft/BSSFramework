@@ -14,7 +14,7 @@ public class TypeMap(string name, IEnumerable<TypeMapMember> members) : TypeMap<
 
     public new TypeMap SwitchName(string newName) => new(newName, this.Members);
 
-    public bool Equals(TypeMap other) => base.Equals(other);
+    public bool Equals(TypeMap? other) => base.Equals(other);
 }
 
 public class TypeMap<TMember> : ITypeMap<TMember>, IEquatable<TypeMap<TMember>>, ISwitchNameObject<TypeMap<TMember>>
@@ -43,7 +43,7 @@ public class TypeMap<TMember> : ITypeMap<TMember>, IEquatable<TypeMap<TMember>>,
 
     public TypeMap<TMember> SwitchName(string newName) => new(newName, this.Members);
 
-    public override bool Equals(object obj) => this.Equals(obj as TypeMap<TMember>);
+    public override bool Equals(object? obj) => this.Equals(obj as TypeMap<TMember>);
 
     IEnumerable<TMember> ITypeMap<TMember>.Members => this.Members;
 }

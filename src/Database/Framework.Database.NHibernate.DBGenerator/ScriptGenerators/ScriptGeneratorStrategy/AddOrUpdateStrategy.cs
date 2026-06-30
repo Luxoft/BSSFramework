@@ -136,7 +136,7 @@ internal class AddOrUpdateStrategy(DatabaseScriptGeneratorStrategyInfo parameter
         return column;
     }
 
-    private Column CreateColumn(Table table, string fieldName, DataType dataType, bool isNullable, string defaultConstraint)
+    private Column CreateColumn(Table table, string fieldName, DataType dataType, bool isNullable, string? defaultConstraint)
     {
         var result = new Column(table, fieldName, dataType);
 
@@ -152,7 +152,7 @@ internal class AddOrUpdateStrategy(DatabaseScriptGeneratorStrategyInfo parameter
             result.Create();
         }
 
-        this.Parameter.AddedColumns.Add(new Tuple<Table, Column, string>(table, result, defaultConstraint));
+        this.Parameter.AddedColumns.Add(new Tuple<Table, Column, string?>(table, result, defaultConstraint));
 
         return result;
     }

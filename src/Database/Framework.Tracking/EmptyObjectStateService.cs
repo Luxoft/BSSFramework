@@ -2,7 +2,7 @@
 
 public class EmptyObjectStateService : IObjectStateService
 {
-    public IEnumerable<ObjectState> GetModifiedObjectStates(object value)
+    public IEnumerable<ObjectState> GetModifiedObjectStates(object? value)
     {
         yield break;
     }

@@ -2,7 +2,7 @@
 
 public class TestExceptObject : AuditPersistentDomainObjectBase
 {
-    private Employee employee;
+    private Employee employee = null!;
 
     public virtual Employee Employee
     {

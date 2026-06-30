@@ -17,7 +17,7 @@ public abstract class CodeTypeReferenceService<TConfiguration>(TConfiguration co
 
         if (type.IsArray)
         {
-            return new CodeTypeReference(this.GetCodeTypeReferenceByType(type.GetElementType()), type.GetArrayRank());
+            return new CodeTypeReference(this.GetCodeTypeReferenceByType(type.GetElementType()!), type.GetArrayRank());
         }
         else
         {
@@ -25,7 +25,7 @@ public abstract class CodeTypeReferenceService<TConfiguration>(TConfiguration co
         }
     }
 
-    public virtual RoleFileType GetFileType(PropertyInfo property)
+    public virtual RoleFileType? GetFileType(PropertyInfo property)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 

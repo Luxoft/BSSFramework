@@ -14,9 +14,9 @@ public class DomainType : BaseDirectory, IDetail<TargetSystem>, IMaster<DomainTy
 {
     private readonly ICollection<DomainTypeEventOperation> eventOperations = new List<DomainTypeEventOperation>();
 
-    private readonly TargetSystem targetSystem;
+    private readonly TargetSystem targetSystem = null!;
 
-    private string @namespace;
+    private string? @namespace;
 
     protected DomainType()
     {

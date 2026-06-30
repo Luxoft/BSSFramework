@@ -78,8 +78,8 @@ public class ManagementUnit :
 
     ICollection<ManagementUnitAndBusinessUnitLink> IMaster<ManagementUnitAndBusinessUnitLink>.Details => (ICollection<ManagementUnitAndBusinessUnitLink>)this.BusinessUnits;
 
-    public static bool operator ==(ManagementUnit left, IUnit<ManagementUnit> right) => Equals(left, right);
+    public static bool operator ==(ManagementUnit? left, IUnit<ManagementUnit>? right) => Equals(left, right);
 
-    public static bool operator !=(ManagementUnit left, IUnit<ManagementUnit> right) => !Equals(left, right);
+    public static bool operator !=(ManagementUnit? left, IUnit<ManagementUnit>? right) => !Equals(left, right);
 }
 

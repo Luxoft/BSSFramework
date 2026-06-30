@@ -6,7 +6,7 @@ namespace SampleSystem.Domain.TestDependency;
 [BLLViewRole]
 public class TestSecuritySubObjItem : BaseDirectory, IDetail<TestSecurityObjItem>
 {
-    private TestSecurityObjItem innerMaster;
+    private TestSecurityObjItem innerMaster = null!;
 
     protected TestSecuritySubObjItem()
     {

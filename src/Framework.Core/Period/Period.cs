@@ -46,7 +46,7 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
         this.EndDate = this.startDate.ToEndMonthDate();
     }
 
-    public Period(string startDate, string endDate = null)
+    public Period(string startDate, string? endDate = null)
             : this()
     {
         this.StartDate = DateTime.Parse(startDate);
@@ -69,7 +69,7 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
 
     public bool Equals(Period other) => this.StartDate == other.StartDate && this.EndDate == other.EndDate;
 
-    public int CompareTo(object other) => this.CompareTo((Period)other);
+    public int CompareTo(object? other) => this.CompareTo((Period)other!);
 
     public int CompareTo(Period other)
     {
@@ -78,7 +78,7 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
         return startDateCompare == 0 ? this.EndDateValue.CompareTo(other.EndDateValue) : startDateCompare;
     }
 
-    public override bool Equals(object obj) => obj is Period && this.Equals((Period)obj);
+    public override bool Equals(object? obj) => obj is Period && this.Equals((Period)obj);
 
     public override int GetHashCode() => this.StartDate.GetHashCode() ^ this.EndDate.GetHashCode();
 
@@ -290,7 +290,7 @@ public partial struct Period : IDeserializationCallback
 {
     #region Interface
 
-    void IDeserializationCallback.OnDeserialization(object _)
+    void IDeserializationCallback.OnDeserialization(object? _)
     {
         this.startDate = this.startDate.ToSqlDateTime();
         this.endDate = this.endDate.ToSqlDateTime();

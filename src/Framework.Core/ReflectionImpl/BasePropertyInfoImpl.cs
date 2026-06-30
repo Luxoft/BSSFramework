@@ -9,9 +9,9 @@ public abstract class BasePropertyInfoImpl : PropertyInfo
 
     public override bool IsDefined(Type attributeType, bool inherit) => throw new NotImplementedException();
 
-    public override object GetValue(object obj, BindingFlags invokeAttr, Binder binder, object[] index, CultureInfo culture) => throw new NotImplementedException();
+    public override object? GetValue(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo? culture) => throw new NotImplementedException();
 
-    public override void SetValue(object obj, object value, BindingFlags invokeAttr, Binder binder, object[] index, CultureInfo culture) => throw new NotImplementedException();
+    public override void SetValue(object? obj, object? value, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo? culture) => throw new NotImplementedException();
 
     public override MethodInfo[] GetAccessors(bool nonPublic) => throw new NotImplementedException();
 

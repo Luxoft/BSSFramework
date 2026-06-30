@@ -8,7 +8,7 @@ namespace Framework.Restriction;
 
 public static class TypeExtensions2
 {
-    public static IEnumerable<PropertyInfo> GetUniqueElementProperties(this Type type, string groupKey)
+    public static IEnumerable<PropertyInfo> GetUniqueElementProperties(this Type type, string? groupKey)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
@@ -22,7 +22,7 @@ public static class TypeExtensions2
                select elementProperty;
     }
 
-    public static PropertyInfo[] GetUniqueElementProperties(this Type type, string groupKey, bool checkAnyElements)
+    public static PropertyInfo[] GetUniqueElementProperties(this Type type, string? groupKey, bool checkAnyElements)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
@@ -36,7 +36,7 @@ public static class TypeExtensions2
         return uniProperties;
     }
 
-    public static PropertyInfo[] GetUniqueElementProperties(this PropertyInfo property, string groupKey, bool checkAnyElements)
+    public static PropertyInfo[] GetUniqueElementProperties(this PropertyInfo property, string? groupKey, bool checkAnyElements)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
@@ -46,7 +46,7 @@ public static class TypeExtensions2
 
         if (!uniProperties.Any() && checkAnyElements)
         {
-            throw new Exception($"No group elements for key \"{groupKey}\" for property \"{property.Name}\" in domainType \"{property.ReflectedType.Name}\"");
+            throw new Exception($"No group elements for key \"{groupKey}\" for property \"{property.Name}\" in domainType \"{property.ReflectedType!.Name}\"");
         }
 
         return uniProperties;

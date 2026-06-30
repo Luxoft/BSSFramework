@@ -10,9 +10,9 @@ namespace SampleSystem.Domain;
 [UniqueGroup]
 public class SqlParserTestObj : AuditPersistentDomainObjectBase
 {
-    private string notNullColumn;
+    private string notNullColumn = null!;
 
-    private string uniqueColumn;
+    private string uniqueColumn = null!;
 
     public virtual string NotNullColumn
     {

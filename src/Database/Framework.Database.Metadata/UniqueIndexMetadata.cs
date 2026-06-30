@@ -40,7 +40,7 @@ public class UniqueIndexMetadata
 
     private bool Equals(IEnumerable<FieldMetadata> arg1, IEnumerable<FieldMetadata> arg2) => arg1.OrderBy(z => z.Name).SequenceEqual(arg2.OrderBy(z => z.Name));
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;

@@ -39,9 +39,9 @@ public abstract class PropertyAssigner<TConfiguration> : GeneratorConfigurationC
 
     public virtual CodeStatement GetAssignStatement(PropertyInfo property, CodeExpression sourcePropertyRef, CodeExpression targetPropertyRef)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
-        if (sourcePropertyRef == null) throw new ArgumentNullException(nameof(sourcePropertyRef));
-        if (targetPropertyRef == null) throw new ArgumentNullException(nameof(targetPropertyRef));
+        if (property is null) throw new ArgumentNullException(nameof(property));
+        if (sourcePropertyRef is null) throw new ArgumentNullException(nameof(sourcePropertyRef));
+        if (targetPropertyRef is null) throw new ArgumentNullException(nameof(targetPropertyRef));
 
         return sourcePropertyRef.ToAssignStatement(targetPropertyRef);
     }

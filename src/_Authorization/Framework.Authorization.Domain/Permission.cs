@@ -49,9 +49,7 @@ public class Permission : AuditPersistentDomainObjectBase,
     /// <param name="principal">принципал</param>
     public Permission(Principal principal)
     {
-        if (principal == null) throw new ArgumentNullException(nameof(principal));
-
-        this.principal = principal;
+        this.principal = principal ?? throw new ArgumentNullException(nameof(principal));
         this.principal.AddDetail(this);
     }
 
@@ -63,9 +61,7 @@ public class Permission : AuditPersistentDomainObjectBase,
     public Permission(Principal principal, Permission delegatedFrom)
         : this(principal)
     {
-        if (delegatedFrom == null) throw new ArgumentNullException(nameof(delegatedFrom));
-
-        this.delegatedFrom = delegatedFrom;
+        this.delegatedFrom = delegatedFrom ?? throw new ArgumentNullException(nameof(delegatedFrom));
         this.delegatedFrom.AddDetail(this);
     }
 

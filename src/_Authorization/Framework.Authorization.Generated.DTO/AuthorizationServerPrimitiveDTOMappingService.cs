@@ -32,12 +32,12 @@ public partial class AuthorizationServerPrimitiveDTOMappingService
     {
         base.MapDelegateToItemModel(mappingObject, domainObject);
 
-        if (domainObject.Permission == null && domainObject.Principal != null)
+        if (domainObject.Permission is null && domainObject.Principal is not null)
         {
             domainObject.Permission = new Permission(domainObject.Principal, mappingObject.DelegatedFromPermission);
         }
 
-        if (domainObject.Permission != null)
+        if (domainObject.Permission is not null)
         {
             mappingObject.Permission.MapToDomainObject(this, domainObject.Permission);
         }

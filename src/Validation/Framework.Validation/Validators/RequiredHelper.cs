@@ -21,7 +21,7 @@ public static class RequiredHelper
         switch (mode)
         {
             case RequiredMode.Default:
-                return value != null;
+                return value is not null;
 
             default:
                 throw mode.GetUnappliedException<TValue?>();
@@ -65,7 +65,7 @@ public static class RequiredHelper
                 return !value.IsNullOrWhiteSpace();
 
             case RequiredMode.AllowEmptyString:
-                return value != null;
+                return value is not null;
 
             default:
                 throw mode.GetUnappliedException<string>();
@@ -78,7 +78,7 @@ public static class RequiredHelper
         switch (mode)
         {
             case RequiredMode.Default:
-                return value != null;
+                return value is not null;
 
             default:
                 throw mode.GetUnappliedException<string>();
@@ -106,7 +106,7 @@ public static class RequiredHelper
         {
             var nullableType = typeof(TValue).GetNullableElementType();
 
-            if (nullableType != null)
+            if (nullableType is not null)
             {
                 return new Func<Ignore?, RequiredMode, bool>(IsValidNullable).Method.GetGenericMethodDefinition().MakeGenericMethod(nullableType);
             }

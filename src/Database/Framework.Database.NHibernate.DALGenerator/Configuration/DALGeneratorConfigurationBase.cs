@@ -46,7 +46,7 @@ public class DALGeneratorConfigurationBase<TEnvironment> : FileGeneratorConfigur
 
     private IMappingGenerator GetMappingGenerator(Assembly assembly)
     {
-        if (assembly == null) throw new ArgumentNullException(nameof(assembly));
+        if (assembly is null) throw new ArgumentNullException(nameof(assembly));
 
         var metadata = this.CreateAssemblyMetadata(assembly);
 

@@ -15,7 +15,7 @@ public static class MetaDataProviderExtension
 
         public MetaDataProviderComposite(IEnumerable<IMetaDataProvider> providers)
         {
-            if (providers == null)
+            if (providers is null)
             {
                 throw new ArgumentNullException(nameof(providers));
             }

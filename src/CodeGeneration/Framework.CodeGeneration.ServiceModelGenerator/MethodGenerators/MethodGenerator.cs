@@ -87,22 +87,22 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
 
     protected CodeVariableDeclarationStatement ToDomainObjectVarDecl(CodeExpression initExpression)
     {
-        if (initExpression == null) throw new ArgumentNullException(nameof(initExpression));
+        if (initExpression is null) throw new ArgumentNullException(nameof(initExpression));
 
         return this.DomainType.ToTypeReference().ToVariableDeclarationStatement("domainObject", initExpression);
     }
 
     protected CodeVariableDeclarationStatement ToDomainObjectVarDeclById(CodeExpression bllRefExpr, CodeParameterDeclarationExpression parameter)
     {
-        if (bllRefExpr == null) throw new ArgumentNullException(nameof(bllRefExpr));
-        if (parameter == null) throw new ArgumentNullException(nameof(parameter));
+        if (bllRefExpr is null) throw new ArgumentNullException(nameof(bllRefExpr));
+        if (parameter is null) throw new ArgumentNullException(nameof(parameter));
 
         return this.ToDomainObjectVarDecl(this.Configuration.GetByIdExpr(bllRefExpr, parameter.ToVariableReferenceExpression()));
     }
 
     protected CodeVariableDeclarationStatement ToDomainObjectVarDeclById(CodeExpression bllRefExpr)
     {
-        if (bllRefExpr == null) throw new ArgumentNullException(nameof(bllRefExpr));
+        if (bllRefExpr is null) throw new ArgumentNullException(nameof(bllRefExpr));
 
         return this.ToDomainObjectVarDeclById(bllRefExpr, this.Parameter);
     }
@@ -179,7 +179,7 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
 
     private CodeMemberMethod GetFacadeMethodInternal(CodeParameterDeclarationExpression evaluateDataParameterExpr, CodeParameterDeclarationExpression bllParameterExpr)
     {
-        if (evaluateDataParameterExpr == null) throw new ArgumentNullException(nameof(evaluateDataParameterExpr));
+        if (evaluateDataParameterExpr is null) throw new ArgumentNullException(nameof(evaluateDataParameterExpr));
 
         var evaluateDataExpr = evaluateDataParameterExpr.ToVariableReferenceExpression();
 
@@ -193,7 +193,7 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
 
     protected CodeVariableDeclarationStatement GetBLLVariableDeclaration(CodeExpression evaluateDataExpr, CodeParameterDeclarationExpression bllParameterExpr, bool isEdit)
     {
-        if (evaluateDataExpr == null) throw new ArgumentNullException(nameof(evaluateDataExpr));
+        if (evaluateDataExpr is null) throw new ArgumentNullException(nameof(evaluateDataExpr));
 
         var bllCreateExpr = this.Configuration.Environment.BLLCore.Logics.GetCreateSecurityBLLExpr(
             evaluateDataExpr.GetContext().ToPropertyReference((IBLLFactoryContainerContext<object> context) => context.Logics),

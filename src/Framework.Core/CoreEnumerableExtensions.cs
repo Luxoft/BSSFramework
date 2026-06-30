@@ -81,7 +81,7 @@ public static class CoreEnumerableExtensions
 
     public static IGrouping<TKey, TElement> ToGroup<TKey, TElement>(this TKey key, IEnumerable<TElement> values)
     {
-        if (values == null) throw new ArgumentNullException(nameof(values));
+        if (values is null) throw new ArgumentNullException(nameof(values));
 
         return key.ToKeyValuePair(values).ToGroup();
     }
@@ -90,8 +90,8 @@ public static class CoreEnumerableExtensions
 
     public static IEnumerable<T> IfEmpty<T>(this IEnumerable<T> source, Func<IEnumerable<T>> func)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (func == null) throw new ArgumentNullException(nameof(func));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (func is null) throw new ArgumentNullException(nameof(func));
 
         using var sourceEnumerator = source.GetEnumerator();
         if (sourceEnumerator.MoveNext())
@@ -130,8 +130,8 @@ public static class CoreEnumerableExtensions
 
     public static T FirstOr<T>(this IEnumerable<T> source, Func<T> func)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (func == null) throw new ArgumentNullException(nameof(func));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (func is null) throw new ArgumentNullException(nameof(func));
 
         using var enumerator = source.GetEnumerator();
         return enumerator.MoveNext() ? enumerator.Current : func();
@@ -139,8 +139,8 @@ public static class CoreEnumerableExtensions
 
     public static void Override<T>(this ICollection<T> source, IEnumerable<T> newItems)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (newItems == null) throw new ArgumentNullException(nameof(newItems));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (newItems is null) throw new ArgumentNullException(nameof(newItems));
 
         source.Clear();
 
@@ -149,12 +149,12 @@ public static class CoreEnumerableExtensions
 
     public static TSource First<TSource>(this IEnumerable<TSource> source, Func<Exception> emptyExceptionHandler)
     {
-        if (source == null)
+        if (source is null)
         {
             throw new ArgumentNullException(nameof(source));
         }
 
-        if (emptyExceptionHandler == null)
+        if (emptyExceptionHandler is null)
         {
             throw new ArgumentNullException(nameof(emptyExceptionHandler));
         }
@@ -211,7 +211,7 @@ public static class CoreEnumerableExtensions
 
     public static IEnumerable<IEnumerable<TSource>> Split<TSource>(this IEnumerable<TSource> source, int size)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
         if (size < 1) throw new ArgumentException("count");
 
         using var enumerator = source.GetEnumerator();
@@ -231,7 +231,7 @@ public static class CoreEnumerableExtensions
 
     public static Stack<T> ToStack<T>(this IEnumerable<T> source)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         return new Stack<T>(source);
     }
@@ -274,10 +274,10 @@ public static class CoreEnumerableExtensions
 
     public static void Match<TSource>(this IEnumerable<TSource> source, Action emptyAction, Action<TSource> singleAction, Action<TSource[]> manyAction)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (emptyAction == null) throw new ArgumentNullException(nameof(emptyAction));
-        if (singleAction == null) throw new ArgumentNullException(nameof(singleAction));
-        if (manyAction == null) throw new ArgumentNullException(nameof(manyAction));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (emptyAction is null) throw new ArgumentNullException(nameof(emptyAction));
+        if (singleAction is null) throw new ArgumentNullException(nameof(singleAction));
+        if (manyAction is null) throw new ArgumentNullException(nameof(manyAction));
 
         var cache = source.ToArray();
 
@@ -299,15 +299,15 @@ public static class CoreEnumerableExtensions
 
     public static bool IsEmpty<T>(this IEnumerable<T> source)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         return !source.Any();
     }
 
     public static TResult[] ToArray<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (selector == null) throw new ArgumentNullException(nameof(selector));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (selector is null) throw new ArgumentNullException(nameof(selector));
 
         return source.Select(selector).ToArray();
     }
@@ -357,9 +357,9 @@ public static class CoreEnumerableExtensions
 
     public static TResult Partial<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, bool> predicate, Func<List<TSource>, List<TSource>, TResult> selector)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (predicate == null) throw new ArgumentNullException(nameof(predicate));
-        if (selector == null) throw new ArgumentNullException(nameof(selector));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (predicate is null) throw new ArgumentNullException(nameof(predicate));
+        if (selector is null) throw new ArgumentNullException(nameof(selector));
 
         var l1 = new List<TSource>();
         var l2 = new List<TSource>();
@@ -374,23 +374,23 @@ public static class CoreEnumerableExtensions
 
     public static List<TResult> ToList<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (selector == null) throw new ArgumentNullException(nameof(selector));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (selector is null) throw new ArgumentNullException(nameof(selector));
 
         return source.Select(selector).ToList();
     }
 
     public static IEnumerable<T> Skip<T>(this IEnumerable<T> source, T expectedElement, bool raiseIfNotEquals = false)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         return source.Skip(expectedElement, EqualityComparer<T>.Default, raiseIfNotEquals);
     }
 
     public static IEnumerable<T> Skip<T>(this IEnumerable<T> source, T expectedElement, IEqualityComparer<T> equalityComparer, bool raiseIfNotEquals = false)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (equalityComparer == null) throw new ArgumentNullException(nameof(equalityComparer));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (equalityComparer is null) throw new ArgumentNullException(nameof(equalityComparer));
 
         using var enumerator = source.GetEnumerator();
         if (enumerator.MoveNext())
@@ -421,17 +421,17 @@ public static class CoreEnumerableExtensions
 
     public static TSource? SingleOrDefault<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate, Func<Exception> manyExceptionHandler)
     {
-        if (source == null)
+        if (source is null)
         {
             throw new ArgumentNullException(nameof(source));
         }
 
-        if (predicate == null)
+        if (predicate is null)
         {
             throw new ArgumentNullException(nameof(predicate));
         }
 
-        if (manyExceptionHandler == null)
+        if (manyExceptionHandler is null)
         {
             throw new ArgumentNullException(nameof(manyExceptionHandler));
         }
@@ -442,7 +442,7 @@ public static class CoreEnumerableExtensions
     public static IEnumerable<T> MaybeYield<T>(this T? source)
         where T : class
     {
-        if (source != null)
+        if (source is not null)
         {
             yield return source;
         }

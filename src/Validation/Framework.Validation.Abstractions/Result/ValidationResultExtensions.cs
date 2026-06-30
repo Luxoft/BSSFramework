@@ -9,14 +9,14 @@ public static class ValidationResultExtensions
 {
     public static ValidationResult Sum(this IEnumerable<ValidationResult> source)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         return source.Aggregate(ValidationResult.Success, (v1, v2) => v1 + v2);
     }
 
     public static ValidationResult Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, ValidationResult> selector)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         return source.Select(selector).Sum();
     }
@@ -28,10 +28,10 @@ public static class ValidationResultExtensions
 
     internal static ValidationResult Apply(this ValidationResult validationResult, ICustomErrorData errorData)
     {
-        if (validationResult == null) throw new ArgumentNullException(nameof(validationResult));
-        if (errorData == null) throw new ArgumentNullException(nameof(errorData));
+        if (validationResult is null) throw new ArgumentNullException(nameof(validationResult));
+        if (errorData is null) throw new ArgumentNullException(nameof(errorData));
 
-        return validationResult.HasErrors && errorData.CustomError != null
+        return validationResult.HasErrors && errorData.CustomError is not null
                        ? ValidationResult.CreateError(errorData.CustomError)
                        : validationResult;
     }

@@ -103,7 +103,7 @@ public static class FieldInfoExtension
                        .Maybe(z => z.Property);
         }
 
-        if (property != null && fieldType.IsGenericType)
+        if (property is not null && fieldType.IsGenericType)
         {
             var propertyGeneric = property.PropertyType.GetGenericTypeDefinition();
 

@@ -31,8 +31,8 @@ public class UniqueGroupDatabaseValidator(string? groupKey) : IDynamicClassValid
     /// </exception>
     public IClassValidator GetValidator(Type domainObjectType, IServiceProvider serviceProvider)
     {
-        if (domainObjectType == null) throw new ArgumentNullException(nameof(domainObjectType));
-        if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
+        if (domainObjectType is null) throw new ArgumentNullException(nameof(domainObjectType));
+        if (serviceProvider is null) throw new ArgumentNullException(nameof(serviceProvider));
 
         var contextTypeData = serviceProvider.GetRequiredService<BLLContextTypeData>();
 
@@ -81,9 +81,9 @@ public class UniqueGroupDatabaseValidator(string? groupKey) : IDynamicClassValid
 
     private LambdaExpression GetGetFilterExpression(Type domainObjectType, Type identType, IEnumerable<PropertyInfo> properties)
     {
-        if (domainObjectType == null) throw new ArgumentNullException(nameof(domainObjectType));
-        if (identType == null) throw new ArgumentNullException(nameof(identType));
-        if (properties == null) throw new ArgumentNullException(nameof(properties));
+        if (domainObjectType is null) throw new ArgumentNullException(nameof(domainObjectType));
+        if (identType is null) throw new ArgumentNullException(nameof(identType));
+        if (properties is null) throw new ArgumentNullException(nameof(properties));
 
         var idProp = typeof(IIdentityObject<>).MakeGenericType(identType).GetProperties().Single();
 
@@ -108,7 +108,7 @@ public class UniqueGroupDatabaseValidator(string? groupKey) : IDynamicClassValid
 
     private Expression GetEqualityMethod(PropertyInfo property, Expression e1, Expression e2)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         var eqMethod = property.PropertyType.GetEqualityMethod(true);
         return Expression.Equal(e1, e2, property.PropertyType.IsNullable(), eqMethod);

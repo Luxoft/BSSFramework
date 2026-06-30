@@ -28,9 +28,7 @@ public class DomainType : BaseDirectory, IDetail<TargetSystem>, IMaster<DomainTy
     /// <param name="targetSystem">Целевая система</param>
     public DomainType(TargetSystem targetSystem)
     {
-        if (targetSystem == null) throw new ArgumentNullException(nameof(targetSystem));
-
-        this.targetSystem = targetSystem;
+        this.targetSystem = targetSystem ?? throw new ArgumentNullException(nameof(targetSystem));
         this.targetSystem.AddDetail(this);
     }
 

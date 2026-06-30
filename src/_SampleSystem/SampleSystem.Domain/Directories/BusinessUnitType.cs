@@ -53,12 +53,7 @@ public partial class BusinessUnitType :
 
     public BusinessUnitType(string name)
     {
-        if (name == null)
-        {
-            throw new ArgumentNullException(nameof(name));
-        }
-
-        this.Name = name;
+        this.Name = name ?? throw new ArgumentNullException(nameof(name));
     }
 
     public virtual PossibleStartDate? PossibleStartDate

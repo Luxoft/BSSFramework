@@ -70,7 +70,7 @@ public class IntegrationSaveMethodGenerator<TConfiguration>(TConfiguration confi
 
     private IEnumerable<CodeStatement> GetFacadeMethodWithBLLStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
     {
-        if (bllRefExpr == null) throw new ArgumentNullException(nameof(bllRefExpr));
+        if (bllRefExpr is null) throw new ArgumentNullException(nameof(bllRefExpr));
 
         var savingObject = this.Parameter.ToVariableReferenceExpression();
 

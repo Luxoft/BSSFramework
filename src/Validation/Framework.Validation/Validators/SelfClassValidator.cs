@@ -5,7 +5,7 @@ public class SelfClassValidator<TSource> : IClassValidator<TSource>
 {
     public ValidationResult GetValidationResult(IClassValidationContext<TSource> validationContext)
     {
-        if (validationContext == null) throw new ArgumentNullException(nameof(validationContext));
+        if (validationContext is null) throw new ArgumentNullException(nameof(validationContext));
 
         return validationContext.Source.GetValidationResult(validationContext);
     }

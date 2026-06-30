@@ -4,7 +4,7 @@ internal class ProjectionCustomPropertyBuilder : IProjectionCustomProperty
 {
     public ProjectionCustomPropertyBuilder(IProjectionCustomProperty customProperty)
     {
-        if (customProperty == null) { throw new ArgumentNullException(nameof(customProperty)); }
+        if (customProperty is null) { throw new ArgumentNullException(nameof(customProperty)); }
 
         this.Name = customProperty.Name;
         this.Writable = customProperty.Writable;

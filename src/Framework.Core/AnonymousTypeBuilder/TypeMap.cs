@@ -22,10 +22,9 @@ public class TypeMap<TMember> : ITypeMap<TMember>, IEquatable<TypeMap<TMember>>,
 {
     public TypeMap(string name, IEnumerable<TMember> members)
     {
-        if (name == null) throw new ArgumentNullException(nameof(name));
-        if (members == null) throw new ArgumentNullException(nameof(members));
+        if (members is null) throw new ArgumentNullException(nameof(members));
 
-        this.Name = name;
+        this.Name = name ?? throw new ArgumentNullException(nameof(name));
         this.Members = members.ToReadOnlyCollection();
     }
 
@@ -39,7 +38,7 @@ public class TypeMap<TMember> : ITypeMap<TMember>, IEquatable<TypeMap<TMember>>,
 
     public override int GetHashCode() => this.Name.GetHashCode() ^ this.Members.Count;
 
-    public bool Equals(TypeMap<TMember>? other) => other != null && this.Name == other.Name && this.Members.SequenceEqual(other.Members);
+    public bool Equals(TypeMap<TMember>? other) => other is not null && this.Name == other.Name && this.Members.SequenceEqual(other.Members);
 
     public TypeMap<TMember> SwitchName(string newName) => new(newName, this.Members);
 

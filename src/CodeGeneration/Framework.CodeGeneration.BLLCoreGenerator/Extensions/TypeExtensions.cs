@@ -12,7 +12,7 @@ public static class TypeExtensions
 {
     public static DirectMode GetDirectMode(this Type model)
     {
-        if (model == null) throw new ArgumentNullException(nameof(model));
+        if (model is null) throw new ArgumentNullException(nameof(model));
 
         return model.GetCustomAttribute<DirectModeAttribute>()
                     .FromMaybe(() => new Exception($"{nameof(DirectModeAttribute)} not found for type {model.Name}"))
@@ -21,7 +21,7 @@ public static class TypeExtensions
 
     public static void CheckDirectMode(this Type model, DirectMode directMode, bool allowEmptyAttr)
     {
-        if (model == null) throw new ArgumentNullException(nameof(model));
+        if (model is null) throw new ArgumentNullException(nameof(model));
 
         var modelDirectModeM = allowEmptyAttr ? model.GetCustomAttribute<DirectModeAttribute>().ToMaybe().Select(v => v.DirectMode) : Maybe.Return(model.GetDirectMode());
 
@@ -36,8 +36,8 @@ public static class TypeExtensions
 
     public static string GetModelMethodName(this Type domainType, Type model, ModelRole modelRole, bool withDomainBody, string? modelRoleCustomPrefix = null)
     {
-        if (model == null) throw new ArgumentNullException(nameof(model));
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+        if (model is null) throw new ArgumentNullException(nameof(model));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
 
 
         var bodyName = model.Name.Skip(domainType.Name, true).SkipLast(modelRole + "Model", true);
@@ -49,8 +49,8 @@ public static class TypeExtensions
 
     internal static Dictionary<Type, Type> GetInterfaceImplementationArgumentDict(this Type type, Type interfaceType)
     {
-        if (type == null) throw new ArgumentNullException(nameof(type));
-        if (interfaceType == null) throw new ArgumentNullException(nameof(interfaceType));
+        if (type is null) throw new ArgumentNullException(nameof(type));
+        if (interfaceType is null) throw new ArgumentNullException(nameof(interfaceType));
 
         return interfaceType.GetGenericArguments().ZipStrong(
                                                              type.GetInterfaceImplementationArguments(interfaceType)!,

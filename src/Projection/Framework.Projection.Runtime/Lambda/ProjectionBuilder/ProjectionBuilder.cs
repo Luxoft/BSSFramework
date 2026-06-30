@@ -4,7 +4,7 @@ internal class ProjectionBuilder : IProjection
 {
     public ProjectionBuilder(IProjection sourceProjection)
     {
-        if (sourceProjection == null) throw new ArgumentNullException(nameof(sourceProjection));
+        if (sourceProjection is null) throw new ArgumentNullException(nameof(sourceProjection));
 
         this.SourceType = sourceProjection.SourceType;
         this.Name = sourceProjection.Name;

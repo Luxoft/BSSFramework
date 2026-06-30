@@ -10,7 +10,7 @@ public static class CodePrimitiveExpressionExtensions
 
     public static CodeExpression ToPrimitiveExpression(this Enum value)
     {
-        if (value == null) throw new ArgumentNullException(nameof(value));
+        if (value is null) throw new ArgumentNullException(nameof(value));
 
         return value.ToString()
                     .Split([", "], StringSplitOptions.None)

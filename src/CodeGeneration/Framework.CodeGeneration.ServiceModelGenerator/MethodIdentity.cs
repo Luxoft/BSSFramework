@@ -4,31 +4,21 @@ using Framework.BLL.Domain.DTO;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator;
 
-public class MethodIdentity : IEquatable<MethodIdentity>
+public class MethodIdentity(MethodIdentityType type, Type? modelType = null, ViewDTOType? dtoType = null) : IEquatable<MethodIdentity>
 {
     public MethodIdentity(MethodIdentityType type, ViewDTOType dtoType)
-            : this(type, null, dtoType)
+        : this(type, null, dtoType)
     {
     }
 
-    public MethodIdentity(MethodIdentityType type, Type? modelType = null, ViewDTOType? dtoType = null)
-    {
-        if (type == null) throw new ArgumentNullException(nameof(type));
+    public Type? ModelType { get; } = modelType;
 
-        this.Type = type;
-        this.ModelType = modelType;
-        this.DTOType = dtoType;
-    }
+    public ViewDTOType? DTOType { get; } = dtoType;
 
+    public MethodIdentityType Type { get; } = type ?? throw new ArgumentNullException(nameof(type));
 
-    public Type? ModelType { get; }
-
-    public ViewDTOType? DTOType { get; }
-
-    public MethodIdentityType Type { get; }
-
-
-    public virtual bool Equals(MethodIdentity? other) => !ReferenceEquals(other, null) && this.Type == other.Type && this.ModelType == other.ModelType && this.DTOType == other.DTOType;
+    public virtual bool Equals(MethodIdentity? other) =>
+        other is not null && this.Type == other.Type && this.ModelType == other.ModelType && this.DTOType == other.DTOType;
 
     public override bool Equals(object? obj) => this.Equals(obj as MethodIdentity);
 
@@ -40,8 +30,7 @@ public class MethodIdentity : IEquatable<MethodIdentity>
 
     public static bool operator ==(MethodIdentity source, MethodIdentity other) =>
         ReferenceEquals(source, other)
-        || (!ReferenceEquals(source, null) && source.Equals(other));
+        || (source is not null && source.Equals(other));
 
     public static bool operator !=(MethodIdentity fileType, MethodIdentity other) => !(fileType == other);
 }
-

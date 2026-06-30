@@ -60,7 +60,7 @@ public class SqlDatabaseFactory : ISqlDatabaseFactory
 
         var result = server.Databases.FirstOrDefault(z => z.Name.Equals(databaseName.Name, StringComparison.CurrentCultureIgnoreCase));
 
-        if (result != null)
+        if (result is not null)
         {
             if (result.Schemas
                       .OfType<Schema>()

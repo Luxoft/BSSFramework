@@ -13,8 +13,8 @@ public class OverrideMethodInfoVisitor : ExpressionVisitor
 
     public OverrideMethodInfoVisitor(MethodInfo methodInfo, LambdaExpression expression)
     {
-        if (methodInfo == null) throw new ArgumentNullException(nameof(methodInfo));
-        if (expression == null) throw new ArgumentNullException(nameof(expression));
+        if (methodInfo is null) throw new ArgumentNullException(nameof(methodInfo));
+        if (expression is null) throw new ArgumentNullException(nameof(expression));
         if (methodInfo.GetParameters().Length != expression.Parameters.Count) throw new Exception("Different parameters count");
 
         this.methodInfo = methodInfo;
@@ -30,7 +30,7 @@ public class OverrideMethodInfoVisitor : ExpressionVisitor
 
     private Expression GetExpressionByArgs(IEnumerable<Expression> arguments)
     {
-        if (arguments == null) throw new ArgumentNullException(nameof(arguments));
+        if (arguments is null) throw new ArgumentNullException(nameof(arguments));
 
         return this.expression
                    .Parameters

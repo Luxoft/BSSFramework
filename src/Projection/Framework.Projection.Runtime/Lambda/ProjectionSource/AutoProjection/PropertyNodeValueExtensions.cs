@@ -6,7 +6,7 @@ internal static class PropertyNodeValueExtensions
 {
     public static IEnumerable<Node<ProjectionNodeValue>> ToNodes(this IEnumerable<ProjectionPath> paths)
     {
-        if (paths == null) throw new ArgumentNullException(nameof(paths));
+        if (paths is null) throw new ArgumentNullException(nameof(paths));
 
         return from projectionPath in paths
 
@@ -18,14 +18,14 @@ internal static class PropertyNodeValueExtensions
 
                into g
 
-               let currentNodeValue = g.Key.LastProperty == null ? new ProjectionNodeValue(g.Key.Property) : new ProjectionLastNodeValue(g.Key.Property, g.Key.LastProperty)
+               let currentNodeValue = g.Key.LastProperty is null ? new ProjectionNodeValue(g.Key.Property) : new ProjectionLastNodeValue(g.Key.Property, g.Key.LastProperty)
 
                select new Node<ProjectionNodeValue>(currentNodeValue, g.Select(pair => new ProjectionPath(pair.SubPath, pair.LastProperty)).ToNodes());
     }
 
     public static IEnumerable<ProjectionPath> ToPaths(this Node<ProjectionNodeValue> node)
     {
-        if (node == null) throw new ArgumentNullException(nameof(node));
+        if (node is null) throw new ArgumentNullException(nameof(node));
 
         var property = node.Value.Property;
 

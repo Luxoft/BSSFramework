@@ -13,8 +13,8 @@ public class CodeTypeReferenceComparer : IEqualityComparer<CodeTypeReference>
 
 
     public bool Equals(CodeTypeReference? x, CodeTypeReference? y) =>
-        x == y || (x != null
-                   && y != null
+        x == y || (x is not null
+                   && y is not null
                    && x.BaseType == y.BaseType
                    && x.Options == y.Options
                    && x.ArrayRank == y.ArrayRank

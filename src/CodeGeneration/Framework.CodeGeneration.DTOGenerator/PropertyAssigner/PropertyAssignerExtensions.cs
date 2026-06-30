@@ -10,10 +10,10 @@ public static class PropertyAssignerExtensions
 {
     public static CodeStatement GetAssignStatementBySource(this IPropertyAssigner propertyAssigner, PropertyInfo property, CodeExpression sourceObjectRef, CodeExpression targetObjectRef)
     {
-        if (propertyAssigner == null) throw new ArgumentNullException(nameof(propertyAssigner));
-        if (property == null) throw new ArgumentNullException(nameof(property));
-        if (sourceObjectRef == null) throw new ArgumentNullException(nameof(sourceObjectRef));
-        if (targetObjectRef == null) throw new ArgumentNullException(nameof(targetObjectRef));
+        if (propertyAssigner is null) throw new ArgumentNullException(nameof(propertyAssigner));
+        if (property is null) throw new ArgumentNullException(nameof(property));
+        if (sourceObjectRef is null) throw new ArgumentNullException(nameof(sourceObjectRef));
+        if (targetObjectRef is null) throw new ArgumentNullException(nameof(targetObjectRef));
 
 
         return propertyAssigner.GetAssignStatement(property, sourceObjectRef.ToPropertyReference(property), targetObjectRef.ToPropertyReference(property));
@@ -22,12 +22,12 @@ public static class PropertyAssignerExtensions
     public static IPropertyAssigner<TConfiguration> WithConfiguration<TConfiguration>(this IPropertyAssigner propertyAssigner, TConfiguration configuration)
             where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
     {
-        if (propertyAssigner == null) throw new ArgumentNullException(nameof(propertyAssigner));
-        if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+        if (propertyAssigner is null) throw new ArgumentNullException(nameof(propertyAssigner));
+        if (configuration is null) throw new ArgumentNullException(nameof(configuration));
 
         var genericAssigner = propertyAssigner as IPropertyAssigner<TConfiguration>;
 
-        if (genericAssigner != null && genericAssigner.Configuration == configuration)
+        if (genericAssigner is not null && genericAssigner.Configuration == configuration)
         {
             return genericAssigner;
         }
@@ -43,9 +43,9 @@ public static class PropertyAssignerExtensions
     {
         public override CodeStatement GetAssignStatement(PropertyInfo property, CodeExpression sourcePropertyRef, CodeExpression targetPropertyRef)
         {
-            if (property == null) throw new ArgumentNullException(nameof(property));
-            if (sourcePropertyRef == null) throw new ArgumentNullException(nameof(sourcePropertyRef));
-            if (targetPropertyRef == null) throw new ArgumentNullException(nameof(targetPropertyRef));
+            if (property is null) throw new ArgumentNullException(nameof(property));
+            if (sourcePropertyRef is null) throw new ArgumentNullException(nameof(sourcePropertyRef));
+            if (targetPropertyRef is null) throw new ArgumentNullException(nameof(targetPropertyRef));
 
             return innerAssigner.GetAssignStatement(property, sourcePropertyRef, targetPropertyRef);
         }

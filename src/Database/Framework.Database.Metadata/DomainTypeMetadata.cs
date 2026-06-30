@@ -17,9 +17,7 @@ public class DomainTypeMetadata
 
     public DomainTypeMetadata(Type domainType, AssemblyMetadata assemblyMetadata)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-
-        this.type = domainType;
+        this.type = domainType ?? throw new ArgumentNullException(nameof(domainType));
         this.assemblyMetadata = assemblyMetadata;
         this.fields = [];
         this.children = [];

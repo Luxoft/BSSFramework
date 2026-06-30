@@ -21,9 +21,7 @@ public abstract class PropertyValidationMap : IPropertyValidationMap, IValidator
     /// <param name="property">Свойство</param>
     protected PropertyValidationMap(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
-
-        this.Property = property;
+        this.Property = property ?? throw new ArgumentNullException(nameof(property));
         this.PropertyName = this.Property.GetValidationName();
     }
 
@@ -79,10 +77,9 @@ public abstract class PropertyValidationMap<TSource, TProperty> : PropertyValida
     protected PropertyValidationMap(PropertyInfo property, IClassValidationMap<TSource> reflectedTypeMap, IEnumerable<IPropertyValidator<TSource, TProperty>> validators)
             : base(property)
     {
-        if (reflectedTypeMap == null) throw new ArgumentNullException(nameof(reflectedTypeMap));
-        if (validators == null) throw new ArgumentNullException(nameof(validators));
+        if (validators is null) throw new ArgumentNullException(nameof(validators));
 
-        this.ReflectedTypeMap = reflectedTypeMap;
+        this.ReflectedTypeMap = reflectedTypeMap ?? throw new ArgumentNullException(nameof(reflectedTypeMap));
 
         this.Validators = validators.ToReadOnlyCollection();
     }

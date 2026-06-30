@@ -8,29 +8,18 @@ public static class CodeFileExtensions
 {
     public static ICodeFile WithVisitor(this ICodeFile codeFile, CodeDomVisitor visitor)
     {
-        if (codeFile == null) throw new ArgumentNullException(nameof(codeFile));
-        if (visitor == null) throw new ArgumentNullException(nameof(visitor));
+        if (codeFile is null) throw new ArgumentNullException(nameof(codeFile));
+        if (visitor is null) throw new ArgumentNullException(nameof(visitor));
 
         return new VisitedCodeFile(codeFile, visitor);
     }
 
 
-    private class VisitedCodeFile : ICodeFile
+    private class VisitedCodeFile(ICodeFile baseCodeFile, CodeDomVisitor visitor) : ICodeFile
     {
-        private readonly ICodeFile baseCodeFile;
+        private readonly ICodeFile baseCodeFile = baseCodeFile ?? throw new ArgumentNullException(nameof(baseCodeFile));
 
-        private readonly CodeDomVisitor visitor;
-
-
-        public VisitedCodeFile(ICodeFile baseCodeFile, CodeDomVisitor visitor)
-        {
-            if (baseCodeFile == null) throw new ArgumentNullException(nameof(baseCodeFile));
-            if (visitor == null) throw new ArgumentNullException(nameof(visitor));
-
-            this.baseCodeFile = baseCodeFile;
-            this.visitor = visitor;
-        }
-
+        private readonly CodeDomVisitor visitor = visitor ?? throw new ArgumentNullException(nameof(visitor));
 
         public string Filename => this.baseCodeFile.Filename;
 

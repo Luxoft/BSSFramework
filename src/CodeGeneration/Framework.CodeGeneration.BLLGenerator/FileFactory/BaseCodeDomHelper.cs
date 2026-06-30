@@ -17,15 +17,15 @@ internal static class BaseCodeDomHelper
     {
         public CodeParameterDeclarationExpression GetContextParameter()
         {
-            if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
+            if (fileFactory is null) throw new ArgumentNullException(nameof(fileFactory));
 
             return fileFactory.Configuration.Environment.BLLCore.BLLContextInterfaceTypeReference.ToParameterDeclarationExpression(ContextParameterNameBase);
         }
 
         public CodeParameterDeclarationExpression GetSecurityProviderParameter(CodeTypeParameter domainObjectParameter)
         {
-            if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
-            if (domainObjectParameter == null) throw new ArgumentNullException(nameof(domainObjectParameter));
+            if (fileFactory is null) throw new ArgumentNullException(nameof(fileFactory));
+            if (domainObjectParameter is null) throw new ArgumentNullException(nameof(domainObjectParameter));
 
             return typeof(ISecurityProvider<>).ToTypeReference(domainObjectParameter.ToTypeReference())
                                               .ToParameterDeclarationExpression("securityProvider");
@@ -33,7 +33,7 @@ internal static class BaseCodeDomHelper
 
         public CodeTypeParameter GetDomainObjectCodeTypeParameter(bool withConstraints = true)
         {
-            if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
+            if (fileFactory is null) throw new ArgumentNullException(nameof(fileFactory));
 
             return new CodeTypeParameter { Name = "TDomainObject" }.Self(withConstraints, p =>
 
@@ -42,7 +42,7 @@ internal static class BaseCodeDomHelper
 
         public CodeTypeParameter GetSecurityModeCodeTypeParameter()
         {
-            if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
+            if (fileFactory is null) throw new ArgumentNullException(nameof(fileFactory));
 
             return new CodeTypeParameter
             {

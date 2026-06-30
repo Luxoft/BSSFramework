@@ -17,7 +17,7 @@ public static class PropertyValidationContextExtensions
     /// <returns></returns>
     public static string GetPropertyName<TSource, TProperty>(this IPropertyValidationContext<TSource, TProperty> context, bool withParent = true)
     {
-        if (context == null) throw new ArgumentNullException(nameof(context));
+        if (context is null) throw new ArgumentNullException(nameof(context));
 
         if (withParent)
         {
@@ -38,7 +38,7 @@ public static class PropertyValidationContextExtensions
     /// <returns></returns>
     public static string GetPropertyTypeName<TSource, TProperty>(this IPropertyValidationContext<TSource, TProperty> context)
     {
-        if (context == null) throw new ArgumentNullException(nameof(context));
+        if (context is null) throw new ArgumentNullException(nameof(context));
 
         return context.Map.PropertyTypeMap.TypeName;
     }
@@ -53,7 +53,7 @@ public static class PropertyValidationContextExtensions
     /// <returns></returns>
     public static string GetSourceTypeName<TSource, TProperty>(this IPropertyValidationContext<TSource, TProperty> context, bool withParent = true)
     {
-        if (context == null) throw new ArgumentNullException(nameof(context));
+        if (context is null) throw new ArgumentNullException(nameof(context));
 
         if (withParent)
         {
@@ -67,7 +67,7 @@ public static class PropertyValidationContextExtensions
 
     public static object GetSource<TSource, TProperty>(this IPropertyValidationContext<TSource, TProperty> context, bool withExpand = true)
     {
-        if (context == null) throw new ArgumentNullException(nameof(context));
+        if (context is null) throw new ArgumentNullException(nameof(context));
 
         if (withExpand)
         {
@@ -83,16 +83,16 @@ public static class PropertyValidationContextExtensions
         where TBaseProperty : TExpectedProperty
         where TBaseSource : TExpectedSource
     {
-        if (context == null) throw new ArgumentNullException(nameof(context));
+        if (context is null) throw new ArgumentNullException(nameof(context));
 
         return context.Cast<TBaseSource, TExpectedSource, TBaseProperty, TExpectedProperty>(v => v, v => v);
     }
 
     public static IPropertyValidationContext<TExpectedSource, TExpectedProperty> Cast<TBaseSource, TExpectedSource, TBaseProperty, TExpectedProperty>(this IPropertyValidationContext<TBaseSource, TBaseProperty> context, Func<TBaseSource, TExpectedSource> convertSource, Func<TBaseProperty, TExpectedProperty> convertProperty)
     {
-        if (context == null) throw new ArgumentNullException(nameof(context));
-        if (convertSource == null) throw new ArgumentNullException(nameof(convertSource));
-        if (convertProperty == null) throw new ArgumentNullException(nameof(convertProperty));
+        if (context is null) throw new ArgumentNullException(nameof(context));
+        if (convertSource is null) throw new ArgumentNullException(nameof(convertSource));
+        if (convertProperty is null) throw new ArgumentNullException(nameof(convertProperty));
 
         return new BoxedPropertyValidationContext<TBaseSource, TExpectedSource, TBaseProperty, TExpectedProperty>(context, convertSource, convertProperty);
     }
@@ -100,7 +100,7 @@ public static class PropertyValidationContextExtensions
 
     private static IValidationState GetExpandRootState<TSource, TProperty>(this IPropertyValidationContext<TSource, TProperty> context)
     {
-        if (context == null) throw new ArgumentNullException(nameof(context));
+        if (context is null) throw new ArgumentNullException(nameof(context));
 
         return context.ParentState.GetAllElements(state => state.Parent)
                       .TakeWhile(state => state.PropertyMap.IsExpanded)
@@ -111,14 +111,14 @@ public static class PropertyValidationContextExtensions
 
     private static IEnumerable<IValidationState> GetExpandPathStates<TSource, TProperty>(this IPropertyValidationContext<TSource, TProperty> context)
     {
-        if (context == null) throw new ArgumentNullException(nameof(context));
+        if (context is null) throw new ArgumentNullException(nameof(context));
 
         return context.GetReverseExpandPathStates().Reverse();
     }
 
     private static IEnumerable<IValidationState> GetReverseExpandPathStates<TSource, TProperty>(this IPropertyValidationContext<TSource, TProperty> context)
     {
-        if (context == null) throw new ArgumentNullException(nameof(context));
+        if (context is null) throw new ArgumentNullException(nameof(context));
 
         yield return new ValidationState(context.ParentState, context.Map, context.Source!);
 
@@ -133,9 +133,9 @@ public static class PropertyValidationContextExtensions
     {
         public BoxedPropertyValidationContext(IPropertyValidationContext<TBaseSource, TBaseProperty> baseContext, Func<TBaseSource, TExpectedSource> convertSource, Func<TBaseProperty, TExpectedProperty> convertProperty)
         {
-            if (baseContext == null) throw new ArgumentNullException(nameof(baseContext));
-            if (convertSource == null) throw new ArgumentNullException(nameof(convertSource));
-            if (convertProperty == null) throw new ArgumentNullException(nameof(convertProperty));
+            if (baseContext is null) throw new ArgumentNullException(nameof(baseContext));
+            if (convertSource is null) throw new ArgumentNullException(nameof(convertSource));
+            if (convertProperty is null) throw new ArgumentNullException(nameof(convertProperty));
 
             this.Validator = baseContext.Validator;
             this.OperationContext = baseContext.OperationContext;

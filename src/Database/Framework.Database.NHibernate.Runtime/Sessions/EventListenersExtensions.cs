@@ -12,7 +12,7 @@ public static class EventListenersExtensions
     /// <exception cref="ArgumentNullException"></exception>
     internal static EventListeners Clone(this EventListeners eventListeners)
     {
-        if (eventListeners == null) throw new ArgumentNullException(nameof(eventListeners));
+        if (eventListeners is null) throw new ArgumentNullException(nameof(eventListeners));
 
         return new EventListeners
         {

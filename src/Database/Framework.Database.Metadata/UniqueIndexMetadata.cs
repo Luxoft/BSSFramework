@@ -7,13 +7,14 @@ namespace Framework.Database.Metadata;
 public class UniqueIndexMetadata
 {
     private readonly DomainTypeMetadata _domainTypeMetadata;
+
     private readonly string _name;
+
     private readonly List<FieldMetadata> _fields;
 
     internal UniqueIndexMetadata(DomainTypeMetadata domainTypeMetadata, string name, IEnumerable<FieldMetadata> fields)
     {
-        if (domainTypeMetadata == null) throw new ArgumentNullException(nameof(domainTypeMetadata));
-        this._domainTypeMetadata = domainTypeMetadata;
+        this._domainTypeMetadata = domainTypeMetadata ?? throw new ArgumentNullException(nameof(domainTypeMetadata));
         this._name = name;
         this._fields = fields.ToList();
     }
@@ -22,7 +23,7 @@ public class UniqueIndexMetadata
 
     public IEnumerable<FieldMetadata> Fields => this._fields;
 
-    public override int GetHashCode() => this._name != null ? this._name.GetHashCode() : 0;
+    public override int GetHashCode() => this._name is not null ? this._name.GetHashCode() : 0;
 
     public string FriendlyName
     {
@@ -32,6 +33,7 @@ public class UniqueIndexMetadata
             {
                 return "UIX_" + this._fields.Select(z => z.Name).OrderBy(z => z).Join("_") + this._domainTypeMetadata.DomainType.Name;
             }
+
             return this._name + "_" + this._domainTypeMetadata.DomainType.Name;
         }
     }
@@ -42,11 +44,10 @@ public class UniqueIndexMetadata
 
     public override bool Equals(object? obj)
     {
-        if (ReferenceEquals(null, obj)) return false;
+        if (obj is null) return false;
         if (ReferenceEquals(this, obj)) return true;
         if (obj.GetType() != this.GetType()) return false;
 
         return this.Equals((UniqueIndexMetadata)obj);
     }
 }
-

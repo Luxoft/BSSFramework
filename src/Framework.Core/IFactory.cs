@@ -16,7 +16,7 @@ public static class FactoryExtensions
 {
     public static IFactory<TArg, TResult> WithLock<TArg, TResult>(this IFactory<TArg, TResult> factory)
     {
-        if (factory == null) throw new ArgumentNullException(nameof(factory));
+        if (factory is null) throw new ArgumentNullException(nameof(factory));
 
         return new FuncFactory<TArg, TResult>(new Func<TArg, TResult>(factory.Create).WithLock());
     }
@@ -24,14 +24,14 @@ public static class FactoryExtensions
     public static IFactory<TArg, TResult> WithCache<TArg, TResult>(this IFactory<TArg, TResult> factory, IEqualityComparer<TArg>? equalityComparer = null)
             where TArg : notnull
     {
-        if (factory == null) throw new ArgumentNullException(nameof(factory));
+        if (factory is null) throw new ArgumentNullException(nameof(factory));
 
         return new FuncFactory<TArg, TResult>(new Func<TArg, TResult>(factory.Create).WithCache(equalityComparer));
     }
 
     public static IFactory<T> WithCache<T>(this IFactory<T> factory, bool createLazy = true)
     {
-        if (factory == null) throw new ArgumentNullException(nameof(factory));
+        if (factory is null) throw new ArgumentNullException(nameof(factory));
 
         if (createLazy)
         {
@@ -49,8 +49,8 @@ public static class FactoryExtensions
 
     public static IFactory<TSource, TNewResult> Select<TSource, TResult, TNewResult>(this IFactory<TSource, TResult> factory, Func<TSource, TNewResult> selector)
     {
-        if (factory == null) throw new ArgumentNullException(nameof(factory));
-        if (selector == null) throw new ArgumentNullException(nameof(selector));
+        if (factory is null) throw new ArgumentNullException(nameof(factory));
+        if (selector is null) throw new ArgumentNullException(nameof(selector));
 
         return new FuncFactory<TSource, TNewResult>(selector);
     }

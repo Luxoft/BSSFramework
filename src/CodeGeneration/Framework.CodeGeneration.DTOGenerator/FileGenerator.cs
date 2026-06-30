@@ -13,7 +13,7 @@ public abstract class FileGenerator<TConfiguration>(TConfiguration configuration
 {
     protected virtual ICodeFileFactory<DTOFileType> GetIdentityDTOFileFactory(Type domainType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
 
         return new DefaultIdentityDTOFileFactory<TConfiguration>(this.Configuration, domainType);
     }
@@ -37,7 +37,7 @@ public abstract class FileGenerator<TConfiguration>(TConfiguration configuration
 
     protected virtual IEnumerable<ICodeFile> GetClientMappingFileGenerators(IEnumerable<IClientMappingServiceExternalMethodGenerator> methodGenerators)
     {
-        if (methodGenerators == null) throw new ArgumentNullException(nameof(methodGenerators));
+        if (methodGenerators is null) throw new ArgumentNullException(nameof(methodGenerators));
 
         var methodGeneratorsCache = methodGenerators.ToList();
 

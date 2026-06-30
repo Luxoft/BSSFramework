@@ -9,7 +9,7 @@ public class MasterDetailDalGenericInterceptor<TDomainObject, TMaster> : IDalGen
 {
     public async Task SaveAsync(TDomainObject data, CancellationToken ct)
     {
-        if (data.Master != null && !data.Master.Details.Contains(data))
+        if (data.Master is not null && !data.Master.Details.Contains(data))
         {
             data.Master.AddDetail(data);
         }

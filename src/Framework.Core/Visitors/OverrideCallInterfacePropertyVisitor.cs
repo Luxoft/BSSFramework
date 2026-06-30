@@ -3,21 +3,11 @@ using System.Reflection;
 
 namespace Framework.Core.Visitors;
 
-public class OverrideCallInterfacePropertyVisitor : ExpressionVisitor
+public class OverrideCallInterfacePropertyVisitor(PropertyInfo property) : ExpressionVisitor
 {
-    private readonly PropertyInfo property;
+    private readonly PropertyInfo property = property ?? throw new ArgumentNullException(nameof(property));
 
-    private readonly bool isGeneric;
-
-
-    public OverrideCallInterfacePropertyVisitor(PropertyInfo property)
-    {
-        if (property == null) throw new ArgumentNullException(nameof(property));
-
-        this.property = property;
-        this.isGeneric = property.ReflectedType!.IsGenericTypeDefinition;
-    }
-
+    private readonly bool isGeneric = property.ReflectedType!.IsGenericTypeDefinition;
 
     protected override Expression VisitMember(MemberExpression node)
     {

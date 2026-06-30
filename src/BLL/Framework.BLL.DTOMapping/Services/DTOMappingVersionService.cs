@@ -12,7 +12,7 @@ public class DTOMappingVersionService<TBLLContext, TAuditPersistentDomainObjectB
     public TVersion GetVersion<TDomainObject>(TVersion mappingObjectVersion, TDomainObject domainObject)
             where TDomainObject : TAuditPersistentDomainObjectBase, IVersionObject<TVersion>
     {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
+        if (domainObject is null) throw new ArgumentNullException(nameof(domainObject));
 
         if (!mappingObjectVersion.Equals(domainObject.Version))
         {

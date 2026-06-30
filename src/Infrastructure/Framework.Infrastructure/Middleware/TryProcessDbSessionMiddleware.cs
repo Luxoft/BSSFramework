@@ -13,7 +13,7 @@ public class TryProcessDbSessionMiddleware(RequestDelegate next)
             {
                 var sessionMode = sessionModeResolver.GetSessionMode();
 
-                if (sessionMode != null)
+                if (sessionMode is not null)
                 {
                     var dbSession = context.RequestServices.GetRequiredService<IDBSession>();
 

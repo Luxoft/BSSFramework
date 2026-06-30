@@ -14,8 +14,8 @@ public class UniqueCollectionValidator(string? groupKey) : IDynamicPropertyValid
 {
     public IPropertyValidator GetValidator(PropertyInfo property, IServiceProvider serviceProvider)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
-        if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
+        if (property is null) throw new ArgumentNullException(nameof(property));
+        if (serviceProvider is null) throw new ArgumentNullException(nameof(serviceProvider));
 
         var elementType = property.PropertyType.GetCollectionElementType()!;
 
@@ -67,11 +67,10 @@ public class UniqueCollectionValidator<TSource, TProperty, TElement, TGroupEleme
 
     public UniqueCollectionValidator(Expression<Func<TElement, TGroupElement>> getGroupElement, string uniqueElementString)
     {
-        if (getGroupElement == null) throw new ArgumentNullException(nameof(getGroupElement));
-        if (uniqueElementString == null) throw new ArgumentNullException(nameof(uniqueElementString));
+        if (getGroupElement is null) throw new ArgumentNullException(nameof(getGroupElement));
 
         this.getGroupElement = getGroupElement.Compile();
-        this.uniqueElementString = uniqueElementString;
+        this.uniqueElementString = uniqueElementString ?? throw new ArgumentNullException(nameof(uniqueElementString));
     }
 
     public ValidationResult GetValidationResult(IPropertyValidationContext<TSource, TProperty> context)

@@ -15,9 +15,7 @@ public class TestSecuritySubObjItem : BaseDirectory, IDetail<TestSecurityObjItem
 
     public TestSecuritySubObjItem(TestSecurityObjItem master)
     {
-        if (master == null) throw new ArgumentNullException(nameof(master));
-
-        this.innerMaster = master;
+        this.innerMaster = master ?? throw new ArgumentNullException(nameof(master));
         this.innerMaster.AddDetail(this);
     }
 

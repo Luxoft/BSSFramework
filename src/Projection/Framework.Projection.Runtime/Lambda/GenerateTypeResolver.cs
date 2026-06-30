@@ -14,7 +14,7 @@ internal class GenerateTypeResolver(ProjectionLambdaEnvironment environment) : I
 
     public Type TryResolve(IProjection projection)
     {
-        if (projection == null) throw new ArgumentNullException(nameof(projection));
+        if (projection is null) throw new ArgumentNullException(nameof(projection));
 
         return this.generateState.Dict.GetValueOrDefault(projection) ?? new GeneratedType(this.environment, projection, this.generateState);
     }

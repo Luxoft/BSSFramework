@@ -9,28 +9,28 @@ public partial class SecurityDomainBLLBase<TDomainObject>
 {
     private void ExecuteBasePersist(TDomainObject domainObject)
     {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
+        if (domainObject is null) throw new ArgumentNullException(nameof(domainObject));
 
         this.Validate(domainObject, SampleSystemOperationContext.Save);
     }
 
     private void Validate(TDomainObject domainObject, SampleSystemOperationContext operationContext)
     {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
+        if (domainObject is null) throw new ArgumentNullException(nameof(domainObject));
 
         this.GetValidationResult(domainObject, operationContext).TryThrow();
     }
 
     protected virtual ValidationResult GetValidationResult(TDomainObject domainObject, SampleSystemOperationContext operationContext)
     {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
+        if (domainObject is null) throw new ArgumentNullException(nameof(domainObject));
 
         return this.Context.Validator.GetValidationResult(domainObject, (int)operationContext);
     }
 
     protected internal void Save(TDomainObject value, bool validate)
     {
-        if (value == null) throw new ArgumentNullException(nameof(value));
+        if (value is null) throw new ArgumentNullException(nameof(value));
 
         if (validate) { this.Save(value); }
         else { base.Save(value); }
@@ -38,7 +38,7 @@ public partial class SecurityDomainBLLBase<TDomainObject>
 
     public override void Insert(TDomainObject value, Guid id)
     {
-        if (value == null) throw new ArgumentNullException(nameof(value));
+        if (value is null) throw new ArgumentNullException(nameof(value));
 
         this.ExecuteBasePersist(value);
         base.Insert(value, id);
@@ -46,7 +46,7 @@ public partial class SecurityDomainBLLBase<TDomainObject>
 
     public override void Save(TDomainObject value)
     {
-        if (value == null) throw new ArgumentNullException(nameof(value));
+        if (value is null) throw new ArgumentNullException(nameof(value));
 
         this.ExecuteBasePersist(value);
         base.Save(value);

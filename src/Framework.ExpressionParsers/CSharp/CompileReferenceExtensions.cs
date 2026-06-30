@@ -10,7 +10,7 @@ internal static class CompileReferenceExtensions
 {
     public static IEnumerable<Type> GetCompileReferencedTypes(this IEnumerable<Type> types)
     {
-        if (types == null) throw new ArgumentNullException(nameof(types));
+        if (types is null) throw new ArgumentNullException(nameof(types));
 
         var graph = new HashSet<Type>();
 
@@ -21,7 +21,7 @@ internal static class CompileReferenceExtensions
 
     public static IEnumerable<Assembly> GetCompileReferencedAssemblies(this IEnumerable<Assembly> assemblies)
     {
-        if (assemblies == null) throw new ArgumentNullException(nameof(assemblies));
+        if (assemblies is null) throw new ArgumentNullException(nameof(assemblies));
 
         var graph = new HashSet<Assembly>();
 
@@ -33,7 +33,7 @@ internal static class CompileReferenceExtensions
 
     private static void FillCompileReferencedTypes(this HashSet<Type> graph, IEnumerable<Type> types)
     {
-        if (types == null) throw new ArgumentNullException(nameof(types));
+        if (types is null) throw new ArgumentNullException(nameof(types));
 
         foreach (var type in types)
         {
@@ -74,7 +74,7 @@ internal static class CompileReferenceExtensions
 
     private static void FillCompileReferencedAssemblies(this HashSet<Assembly> graph, IEnumerable<Assembly> assemblies)
     {
-        if (assemblies == null) throw new ArgumentNullException(nameof(assemblies));
+        if (assemblies is null) throw new ArgumentNullException(nameof(assemblies));
 
         foreach (var assembly in assemblies)
         {
@@ -84,7 +84,7 @@ internal static class CompileReferenceExtensions
                 {
                     var startRefAssembly = refAssemblyName.TryLoad();
 
-                    if (startRefAssembly != null)
+                    if (startRefAssembly is not null)
                     {
                         graph.Add(startRefAssembly);
                         //graph.FillCompileReferencedAssemblies(new[] { startRefAssembly });

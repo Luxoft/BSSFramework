@@ -57,7 +57,7 @@ public class AuditEventListenerForke : AuditEventListener
         {
             var propertyName = propertyNames[i];
             var relDesc = this.VerCfg.EntCfg.GetRelationDescription(entityName, propertyName);
-            if (relDesc != null &&
+            if (relDesc is not null &&
                 relDesc.Bidirectional &&
                 relDesc.RelationType == RelationType.ToOne &&
                 relDesc.Insertable)
@@ -70,11 +70,11 @@ public class AuditEventListenerForke : AuditEventListener
                 {
                     // We have to generate changes both in the old collection (size decreases) and new collection
                     // (size increases).
-                    if (newValue != null)
+                    if (newValue is not null)
                     {
                         this.AddCollectionChangeWorkUnit(auditProcess, session, entityName, relDesc, newValue);
                     }
-                    if (oldValue != null)
+                    if (oldValue is not null)
                     {
                         this.AddCollectionChangeWorkUnit(auditProcess, session, entityName, relDesc, oldValue);
                     }
@@ -112,7 +112,7 @@ public class AuditEventListenerForke : AuditEventListener
 
     private static void CheckIfTransactionInProgress(ISessionImplementor session)
     {
-        if (!session.TransactionInProgress && session.TransactionContext == null)
+        if (!session.TransactionInProgress && session.TransactionContext is null)
         {
             // Historical data would not be flushed to audit tables if outside of active transaction
             // (AuditProcess#doBeforeTransactionCompletion(SessionImplementor) not executed).

@@ -24,9 +24,9 @@ public abstract class UpdateToDomainObjectPropertyAssignerBase<TConfiguration>(
 
     protected sealed override CodeStatement GetSecurityAssignStatementInternal(PropertyInfo property, CodeExpression justValueRefExpr, CodeStatement innerAssignStatement)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
-        if (justValueRefExpr == null) throw new ArgumentNullException(nameof(justValueRefExpr));
-        if (innerAssignStatement == null) throw new ArgumentNullException(nameof(innerAssignStatement));
+        if (property is null) throw new ArgumentNullException(nameof(property));
+        if (justValueRefExpr is null) throw new ArgumentNullException(nameof(justValueRefExpr));
+        if (innerAssignStatement is null) throw new ArgumentNullException(nameof(innerAssignStatement));
 
         var editAttr = configuration.Environment.MetadataProxyProvider.Wrap(property).GetEditDomainObjectAttribute();
 
@@ -34,7 +34,7 @@ public abstract class UpdateToDomainObjectPropertyAssignerBase<TConfiguration>(
         {
             TrueStatements =
                    {
-                       editAttr == null ? innerAssignStatement : new CodeConditionStatement
+                       editAttr is null ? innerAssignStatement : new CodeConditionStatement
                                                                  {
                                                                      Condition = this.GetCondition(property),
 

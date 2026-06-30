@@ -18,8 +18,8 @@ public abstract class DomainObjectToSecurityPropertyAssignerBase<TConfiguration>
 
     private CodeExpression GetCreateSecurityValueExpression(PropertyInfo property, CodeExpression resultVarDeclRef)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
-        if (resultVarDeclRef == null) throw new ArgumentNullException(nameof(resultVarDeclRef));
+        if (property is null) throw new ArgumentNullException(nameof(property));
+        if (resultVarDeclRef is null) throw new ArgumentNullException(nameof(resultVarDeclRef));
 
         return typeof(Maybe).ToTypeReferenceExpression()
                             .ToMethodReferenceExpression(nameof(Maybe.Return))
@@ -28,9 +28,9 @@ public abstract class DomainObjectToSecurityPropertyAssignerBase<TConfiguration>
 
     protected sealed override CodeStatement GetSecurityAssignStatement(PropertyInfo property, CodeExpression sourcePropertyRef, CodeExpression targetPropertyRef)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
-        if (sourcePropertyRef == null) throw new ArgumentNullException(nameof(sourcePropertyRef));
-        if (targetPropertyRef == null) throw new ArgumentNullException(nameof(targetPropertyRef));
+        if (property is null) throw new ArgumentNullException(nameof(property));
+        if (sourcePropertyRef is null) throw new ArgumentNullException(nameof(sourcePropertyRef));
+        if (targetPropertyRef is null) throw new ArgumentNullException(nameof(targetPropertyRef));
 
         var targetPropertyTypeRef = this.CodeTypeReferenceService!.GetCodeTypeReference(property);
 

@@ -14,7 +14,7 @@ public partial class SystemConstantBLL(
 {
     public override void Save(SystemConstant systemConstant)
     {
-        if (systemConstant == null) throw new ArgumentNullException(nameof(systemConstant));
+        if (systemConstant is null) throw new ArgumentNullException(nameof(systemConstant));
 
         if (!systemConstant.IsManual && trackingService.GetChanges(systemConstant).HasChange(e => e.Value, e => e.Description))
         {
@@ -26,7 +26,7 @@ public partial class SystemConstantBLL(
 
     public T GetValue<T>(ApplicationVariable<T> applicationVariable)
     {
-        if (applicationVariable == null) throw new ArgumentNullException(nameof(applicationVariable));
+        if (applicationVariable is null) throw new ArgumentNullException(nameof(applicationVariable));
 
         var systemConstant = this.GetObjectBy(sc => sc.Code == applicationVariable.Name, true)!;
 

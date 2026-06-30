@@ -23,9 +23,7 @@ public class GetListByFilterModelMethodGenerator<TConfiguration> : ViewCollectio
     public GetListByFilterModelMethodGenerator(TConfiguration configuration, Type domainType, ViewDTOType dtoType, Type filterType)
             : base(configuration, domainType, dtoType)
     {
-        if (filterType == null) throw new ArgumentNullException(nameof(filterType));
-
-        this.filterType = filterType;
+        this.filterType = filterType ?? throw new ArgumentNullException(nameof(filterType));
 
         this.Identity = new MethodIdentity(MethodIdentityType.GetListByFilter, this.filterType, this.DTOType);
     }

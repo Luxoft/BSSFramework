@@ -17,7 +17,7 @@ internal sealed partial class AuditPropertiesSetter
 
     public AuditPropertiesSetter(IEnumerable<IAuditProperty> auditProperties)
     {
-        if (auditProperties == null)
+        if (auditProperties is null)
         {
             throw new ArgumentNullException(nameof(auditProperties));
         }
@@ -27,7 +27,7 @@ internal sealed partial class AuditPropertiesSetter
         this.setCache = new DictionaryCache<DomainObjectDescription, Func<object[], bool>>(domainObjectDescription =>
         {
             var requests = (from auditProperty in auditProperties
-                            where auditProperty != null
+                            where auditProperty is not null
                             let propertyDomainObjectType = auditProperty.PropertyExpr?.Parameters?.Single()?.Type
                             let propertyType = auditProperty.PropertyExpr?.ReturnType
                             where propertyDomainObjectType?.IsAssignableFrom(domainObjectDescription.Type) == true
@@ -42,7 +42,7 @@ internal sealed partial class AuditPropertiesSetter
 
     public bool SetAuditFields(DomainObjectDescription domainObjectDescription, ref object[] state)
     {
-        if (domainObjectDescription == null)
+        if (domainObjectDescription is null)
         {
             throw new ArgumentNullException(nameof(domainObjectDescription));
         }
@@ -54,7 +54,7 @@ internal sealed partial class AuditPropertiesSetter
     private static Func<object[], bool> GetSetAuditAction<TDomainObject, TPropertyDomainObject, TProperty>(string[]? propertyNames, IAuditProperty<TPropertyDomainObject, TProperty>? auditProperty)
             where TDomainObject : TPropertyDomainObject
     {
-        if (propertyNames?.Any() == false || auditProperty?.PropertyExpr == null)
+        if (propertyNames?.Any() == false || auditProperty?.PropertyExpr is null)
         {
             return _ => false;
         }
@@ -75,7 +75,7 @@ internal sealed partial class AuditPropertiesSetter
                    var result = false;
                    if (propertyIndex.HasValue)
                    {
-                       var auditValue = (getAuditValue != null) ? getAuditValue.Invoke() : default(TProperty);
+                       var auditValue = (getAuditValue is not null) ? getAuditValue.Invoke() : default(TProperty);
                        state[propertyIndex.Value] = auditValue!;
                        result = true;
                    }
@@ -86,7 +86,7 @@ internal sealed partial class AuditPropertiesSetter
 
     private static int? GetPropertyIndex(IReadOnlyList<string>? source, string propertyName)
     {
-        if (source == null || string.IsNullOrEmpty(propertyName))
+        if (source is null || string.IsNullOrEmpty(propertyName))
         {
             return null;
         }

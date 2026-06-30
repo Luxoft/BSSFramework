@@ -17,9 +17,9 @@ public abstract class ExpandMaybeSecurityToDomainObjectPropertyAssignerBase<TCon
 
     protected override CodeStatement GetSecurityAssignStatement(PropertyInfo property, CodeExpression sourcePropertyRef, CodeExpression targetPropertyRef)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
-        if (sourcePropertyRef == null) throw new ArgumentNullException(nameof(sourcePropertyRef));
-        if (targetPropertyRef == null) throw new ArgumentNullException(nameof(targetPropertyRef));
+        if (property is null) throw new ArgumentNullException(nameof(property));
+        if (sourcePropertyRef is null) throw new ArgumentNullException(nameof(sourcePropertyRef));
+        if (targetPropertyRef is null) throw new ArgumentNullException(nameof(targetPropertyRef));
 
         var sourcePropertyTypeRef = this.CodeTypeReferenceService!.GetCodeTypeReference(property);
 

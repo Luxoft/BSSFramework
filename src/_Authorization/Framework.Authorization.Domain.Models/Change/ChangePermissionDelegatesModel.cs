@@ -13,7 +13,7 @@ public class ChangePermissionDelegatesModel : DomainObjectBase
 
     public void Merge(UpdatePermissionDelegatesModel updatePermissionDelegatesModel)
     {
-        if (updatePermissionDelegatesModel == null) throw new ArgumentNullException(nameof(updatePermissionDelegatesModel));
+        if (updatePermissionDelegatesModel is null) throw new ArgumentNullException(nameof(updatePermissionDelegatesModel));
 
         if (this.DelegateFromPermission != updatePermissionDelegatesModel.DelegateFromPermission)
         {

@@ -13,10 +13,10 @@ public class BLLFactoryContainerInterfaceGeneratorConfiguration<TConfiguration>(
 {
     public CodeExpression GetCreateSecurityBLLExpr(CodeExpression logicExpressionSource, Type domainType, object? securitySource)
     {
-        if (logicExpressionSource == null) throw new ArgumentNullException(nameof(logicExpressionSource));
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+        if (logicExpressionSource is null) throw new ArgumentNullException(nameof(logicExpressionSource));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
 
-        if (securitySource == null)
+        if (securitySource is null)
         {
             return logicExpressionSource.ToPropertyReference(domainType.Name);
         }

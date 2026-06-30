@@ -209,7 +209,7 @@ internal class GeneratedType : BaseTypeImpl, IWrappingObject
 
     public override InterfaceMapping GetInterfaceMap(Type interfaceType)
     {
-        if (interfaceType == null) throw new ArgumentNullException(nameof(interfaceType));
+        if (interfaceType is null) throw new ArgumentNullException(nameof(interfaceType));
 
         var realInterface = interfaceType.IsGenericType ? interfaceType.GetGenericTypeDefinition() : interfaceType;
 
@@ -232,7 +232,7 @@ internal class GeneratedType : BaseTypeImpl, IWrappingObject
     {
         foreach (var projectionProperty in this.Projection.Properties)
         {
-            if (projectionProperty.VirtualExplicitInterfaceProperty == null)
+            if (projectionProperty.VirtualExplicitInterfaceProperty is null)
             {
                 yield return new GeneratedProperty(this.environment, projectionProperty, this);
             }
@@ -282,7 +282,7 @@ internal class GeneratedType : BaseTypeImpl, IWrappingObject
     {
         foreach (var projectionProperty in this.Projection.Properties)
         {
-            if (projectionProperty.VirtualExplicitInterfaceProperty != null)
+            if (projectionProperty.VirtualExplicitInterfaceProperty is not null)
             {
                 var propType = this.environment.BuildPropertyType(projectionProperty.Type);
 

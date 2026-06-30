@@ -4,7 +4,7 @@ public static class LazyExtensions
 {
     public static IEnumerable<T> Unwrap<T>(this Lazy<IEnumerable<T>> lazyEnumerable)
     {
-        if (lazyEnumerable == null) throw new ArgumentNullException(nameof(lazyEnumerable));
+        if (lazyEnumerable is null) throw new ArgumentNullException(nameof(lazyEnumerable));
 
         return LazyInterfaceImplementHelper.CreateProxy(() => lazyEnumerable.Value);
     }

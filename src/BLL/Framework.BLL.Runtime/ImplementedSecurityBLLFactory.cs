@@ -18,7 +18,7 @@ public abstract class ImplementedSecurityBLLFactory<TBLLContext, TPersistentDoma
         var factory =
             this.Context.ServiceProvider.GetService<ISecurityBLLFactory<IDefaultSecurityDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent>, TDomainObject>>();
 
-        if (factory == null)
+        if (factory is null)
         {
             return this.CreateDefault(securityProvider);
         }

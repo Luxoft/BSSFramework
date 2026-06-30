@@ -28,21 +28,21 @@ public static class TypeExtensions
 
     public static bool HasSecurityNodeInterfaces(this Type sourceType)
     {
-        if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));
+        if (sourceType is null) throw new ArgumentNullException(nameof(sourceType));
 
         return sourceType.GetSecurityNodeInterfaces().Any();
     }
 
     public static IEnumerable<Type> GetSecurityNodeInterfaces(this Type sourceType)
     {
-        if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));
+        if (sourceType is null) throw new ArgumentNullException(nameof(sourceType));
 
         return sourceType.GetAllInterfaces().Where(i => (i.IsGenericType ? i.GetGenericTypeDefinition() : i).HasAttribute<SecurityNodeAttribute>() || i == typeof(ISecurityContext));
     }
 
     public static IEnumerable<Type> GetGenericSecurityNodeInterfaces(this Type sourceType)
     {
-        if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));
+        if (sourceType is null) throw new ArgumentNullException(nameof(sourceType));
 
         return sourceType.GetSecurityNodeInterfaces().Where(interfaceType => interfaceType.IsGenericType);
     }

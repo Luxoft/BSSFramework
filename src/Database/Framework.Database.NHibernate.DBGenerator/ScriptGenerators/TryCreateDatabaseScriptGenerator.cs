@@ -85,7 +85,7 @@ public class UnsafeApplyChangedDatabaseScriptGenerator : IDatabaseScriptGenerato
 
             context.SqlDatabaseFactory.Server.ConnectionContext.SqlExecutionModes = prevMode;
 
-            var tryCreateScript = source != null
+            var tryCreateScript = source is not null
                                           ? []
                                           : context.SqlDatabaseFactory.Server.ConnectionContext.CapturedSql.GetScriptsForBatchExecuting();
 
@@ -259,7 +259,7 @@ public class UnsafeApplyChangedDatabaseScriptGenerator : IDatabaseScriptGenerato
 
             var copyTables = (from schema in database.Schemas.OfType<Schema>()
                               from tableName in this.copyDataForTables
-                              select database.Tables[tableName, schema.Name]).Where(t => t != null).ToArray();
+                              select database.Tables[tableName, schema.Name]).Where(t => t is not null).ToArray();
 
             foreach (var copyTable in copyTables)
             {
@@ -273,21 +273,11 @@ public class UnsafeApplyChangedDatabaseScriptGenerator : IDatabaseScriptGenerato
         }
     }
 
-    internal class DatabaseScriptGeneratorContextWrapper : IDatabaseScriptGeneratorContext
+    internal class DatabaseScriptGeneratorContextWrapper(IDatabaseScriptGeneratorContext source) : IDatabaseScriptGeneratorContext
     {
         private static readonly string PostFix = DateTime.Now.ToString();
 
-        private readonly IDatabaseScriptGeneratorContext source;
-
-        public DatabaseScriptGeneratorContextWrapper(IDatabaseScriptGeneratorContext source)
-        {
-            if (source == null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
-
-            this.source = source;
-        }
+        private readonly IDatabaseScriptGeneratorContext source = source ?? throw new ArgumentNullException(nameof(source));
 
         public DatabaseName DatabaseName =>
 

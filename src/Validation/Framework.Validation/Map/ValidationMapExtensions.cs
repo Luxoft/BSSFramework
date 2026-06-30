@@ -10,31 +10,31 @@ public static class ValidationMapExtensions
 {
     public static IClassValidationMap<TSource> GetClassMap<TSource>(this IValidationMap validationMap)
     {
-        if (validationMap == null) throw new ArgumentNullException(nameof(validationMap));
+        if (validationMap is null) throw new ArgumentNullException(nameof(validationMap));
 
         return (IClassValidationMap<TSource>)validationMap.GetClassMap(typeof(TSource));
     }
 
     public static IValidationMap WithFixedTypes(this IValidationMap baseValidationMap, IEnumerable<Type> types)
     {
-        if (baseValidationMap == null) throw new ArgumentNullException(nameof(baseValidationMap));
-        if (types == null) throw new ArgumentNullException(nameof(types));
+        if (baseValidationMap is null) throw new ArgumentNullException(nameof(baseValidationMap));
+        if (types is null) throw new ArgumentNullException(nameof(types));
 
         return new FixedValidationMap(baseValidationMap, types);
     }
 
     public static IValidationMap WithFixedTypes<TDomainObjectBase>(this IValidationMap baseValidationMap, IEnumerable<Assembly> assemblies)
     {
-        if (baseValidationMap == null) throw new ArgumentNullException(nameof(baseValidationMap));
-        if (assemblies == null) throw new ArgumentNullException(nameof(assemblies));
+        if (baseValidationMap is null) throw new ArgumentNullException(nameof(baseValidationMap));
+        if (assemblies is null) throw new ArgumentNullException(nameof(assemblies));
 
         return baseValidationMap.WithFixedTypes<TDomainObjectBase>(assemblies.ToArray());
     }
 
     public static IValidationMap WithFixedTypes<TDomainObjectBase>(this IValidationMap baseValidationMap, params Assembly[] assemblies)
     {
-        if (baseValidationMap == null) throw new ArgumentNullException(nameof(baseValidationMap));
-        if (assemblies == null) throw new ArgumentNullException(nameof(assemblies));
+        if (baseValidationMap is null) throw new ArgumentNullException(nameof(baseValidationMap));
+        if (assemblies is null) throw new ArgumentNullException(nameof(assemblies));
 
 
         var types = from assembly in assemblies.Any() ? assemblies : [typeof(TDomainObjectBase).Assembly]
@@ -59,10 +59,9 @@ public static class ValidationMapExtensions
 
         public FixedValidationMap(IValidationMap baseValidationMap, IEnumerable<Type> types)
         {
-            if (baseValidationMap == null) throw new ArgumentNullException(nameof(baseValidationMap));
-            if (types == null) throw new ArgumentNullException(nameof(types));
+            if (types is null) throw new ArgumentNullException(nameof(types));
 
-            this.baseValidationMap = baseValidationMap;
+            this.baseValidationMap = baseValidationMap ?? throw new ArgumentNullException(nameof(baseValidationMap));
 
             this.classMapCache = types.ToDictionary(t => t, t => this.baseValidationMap.GetClassMap(t));
         }
@@ -73,7 +72,7 @@ public static class ValidationMapExtensions
 
         public IClassValidationMap GetClassMap(Type type)
         {
-            if (type == null) throw new ArgumentNullException(nameof(type));
+            if (type is null) throw new ArgumentNullException(nameof(type));
 
             var classValidator = this.classMapCache.GetMaybeValue(type);
 

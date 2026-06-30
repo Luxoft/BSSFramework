@@ -161,7 +161,7 @@ internal class ChangeIndexesStrategy(DatabaseScriptGeneratorStrategyInfo paramet
     {
         var sqlMappings = typeDescription.Fields.SelectMany(MapperFactory.GetMapping).ToList();
 
-        if (typeDescription.Parent != null)
+        if (typeDescription.Parent is not null)
         {
             sqlMappings = sqlMappings.Union(typeDescription.Root.Fields.SelectMany(MapperFactory.GetMapping).Where(f => f.IsPrimaryKey))
                                      .ToList();
@@ -171,7 +171,7 @@ internal class ChangeIndexesStrategy(DatabaseScriptGeneratorStrategyInfo paramet
         {
             var column = this.GetColumn(table, sqlMapping);
 
-            if (column == null || !column.Nullable)
+            if (column is null || !column.Nullable)
             {
                 continue;
             }

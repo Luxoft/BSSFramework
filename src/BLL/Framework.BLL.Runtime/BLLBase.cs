@@ -46,7 +46,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
 
     public virtual void Insert(TDomainObject domainObject, TIdent id)
     {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
+        if (domainObject is null) throw new ArgumentNullException(nameof(domainObject));
 
         if (id.IsDefault())
         {
@@ -58,7 +58,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
 
     public override void Remove(TDomainObject domainObject)
     {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
+        if (domainObject is null) throw new ArgumentNullException(nameof(domainObject));
 
         this.Dal.Remove(domainObject);
         base.Remove(domainObject);
@@ -140,7 +140,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         IQueryableInjector<TDomainObject> queryableInjector,
         FetchRule<TDomainObject>? fetchRule = null)
     {
-        if (queryableInjector == null) throw new ArgumentNullException(nameof(queryableInjector));
+        if (queryableInjector is null) throw new ArgumentNullException(nameof(queryableInjector));
 
         return this.GetSecureQueryable(fetchRule).Pipe(queryableInjector.Inject);
     }
@@ -163,8 +163,8 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         Func<Exception> getNotFoundException,
         FetchRule<TDomainObject>? fetchRule = null)
     {
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
-        if (getNotFoundException == null) throw new ArgumentNullException(nameof(getNotFoundException));
+        if (filter is null) throw new ArgumentNullException(nameof(filter));
+        if (getNotFoundException is null) throw new ArgumentNullException(nameof(getNotFoundException));
 
         return this.GetObjectBy(filter, false, fetchRule).FromMaybe(getNotFoundException);
     }

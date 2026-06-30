@@ -60,30 +60,30 @@ public partial class DataManager
 
         email = email ?? $"{nameEng.FirstName}{DefaultConstants.FAKE_MAIL}";
 
-        if (login == null)
+        if (login is null)
         {
             login = $"{Environment.MachineName}\\{nameEng.FirstName}";
         }
 
-        var hrDepartmentId = hrDepartment != null
+        var hrDepartmentId = hrDepartment is not null
                                      ? ((HRDepartmentIdentityDTO)hrDepartment).Id
-                                     : location == null
+                                     : location is null
                                              ? DefaultConstants.HRDEPARTMENT_PARENT_ID
                                              : this.SaveHRDepartment(location: location).Id;
 
-        var positionId = position != null
+        var positionId = position is not null
                                  ? ((EmployeePositionIdentityDTO)position).Id
                                  : DefaultConstants.EMPLOYEE_POSITION_TESTER_ID;
 
-        var registrationId = registrationType != null
+        var registrationId = registrationType is not null
                                      ? ((EmployeeRegistrationTypeIdentityDTO)registrationType).Id
                                      : DefaultConstants.EMPLOYEE_REGISTRATION_TYPE_STAFF_ID;
 
-        var roleId = role != null
+        var roleId = role is not null
                              ? ((EmployeeRoleIdentityDTO)role).Id
                              : DefaultConstants.EMPLOYEE_ROLE_TESTER_ID;
 
-        var roleDegreeId = roleDegree != null
+        var roleDegreeId = roleDegree is not null
                                    ? ((EmployeeRoleDegreeIdentityDTO)roleDegree).Id
                                    : DefaultConstants.EMPLOYEE_ROLE_DEGREE_REGULAR_ID;
 
@@ -134,7 +134,7 @@ public partial class DataManager
                                           Age = age
                                       };
 
-                                      if (coreBusinessUnit != null)
+                                      if (coreBusinessUnit is not null)
                                       {
                                           employee.CoreBusinessUnit = context.Logics.BusinessUnit.GetById(
                                            coreBusinessUnit.GetValueOrDefault().Id,
@@ -158,14 +158,14 @@ public partial class DataManager
         name = name ?? TextRandomizer.UniqueString("Position");
         englishName = englishName ?? name;
 
-        var locationId = location != null ? ((LocationIdentityDTO)location).Id : DefaultConstants.LOCATION_PARENT_ID;
+        var locationId = location is not null ? ((LocationIdentityDTO)location).Id : DefaultConstants.LOCATION_PARENT_ID;
 
         return this.EvaluateWrite(
                                   context =>
                                   {
                                       position = context.Logics.EmployeePosition.GetById(this.GetGuid(id));
 
-                                      if (position == null)
+                                      if (position is null)
                                       {
                                           position = new EmployeePosition
                                           {
@@ -197,7 +197,7 @@ public partial class DataManager
                                   {
                                       type = context.Logics.EmployeeRegistrationType.GetById(this.GetGuid(id));
 
-                                      if (type == null)
+                                      if (type is null)
                                       {
                                           type = new EmployeeRegistrationType
                                           {
@@ -226,7 +226,7 @@ public partial class DataManager
                                   {
                                       role = context.Logics.EmployeeRole.GetById(this.GetGuid(id));
 
-                                      if (role == null)
+                                      if (role is null)
                                       {
                                           role = new EmployeeRole { Active = active, Name = name };
 
@@ -250,7 +250,7 @@ public partial class DataManager
                                   {
                                       roleDegree = context.Logics.EmployeeRoleDegree.GetById(this.GetGuid(id));
 
-                                      if (roleDegree == null)
+                                      if (roleDegree is null)
                                       {
                                           roleDegree = new EmployeeRoleDegree { Active = active, Name = name };
 

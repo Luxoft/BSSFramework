@@ -32,14 +32,14 @@ public class DefaultSecurityDomainBLLBase<TBLLContext, TPersistentDomainObjectBa
 
     public virtual void CheckAccess(TDomainObject domainObject)
     {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
+        if (domainObject is null) throw new ArgumentNullException(nameof(domainObject));
 
         this.DefaultCancellationTokenSource.RunSync(async ct => await this.SecurityProvider.CheckAccessAsync(domainObject, this.Context.AccessDeniedExceptionService, ct));
     }
 
     public override void Save(TDomainObject domainObject)
     {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
+        if (domainObject is null) throw new ArgumentNullException(nameof(domainObject));
 
         this.CheckAccess(domainObject);
 
@@ -48,7 +48,7 @@ public class DefaultSecurityDomainBLLBase<TBLLContext, TPersistentDomainObjectBa
 
     public override void Insert(TDomainObject domainObject, TIdent id)
     {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
+        if (domainObject is null) throw new ArgumentNullException(nameof(domainObject));
 
         this.CheckAccess(domainObject);
 
@@ -57,7 +57,7 @@ public class DefaultSecurityDomainBLLBase<TBLLContext, TPersistentDomainObjectBa
 
     public override void Remove(TDomainObject domainObject)
     {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
+        if (domainObject is null) throw new ArgumentNullException(nameof(domainObject));
 
         this.CheckAccess(domainObject);
 
@@ -72,7 +72,7 @@ public class DefaultSecurityDomainBLLBase<TBLLContext, TPersistentDomainObjectBa
                           this.DefaultCancellationTokenSource.RunSync(async ct => await this.SecurityProvider.GetAccessResultAsync(objectWithoutPermission, ct))
                               as AccessResult.AccessDeniedResult
 
-                      where accessDeniedResult != null
+                      where accessDeniedResult is not null
 
                       select this.Context.AccessDeniedExceptionService.GetAccessDeniedException(accessDeniedResult);
 

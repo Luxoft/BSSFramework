@@ -20,7 +20,7 @@ public static class CustomAttributeProviderExtensions
     {
         var res = source.GetViewDomainObjectAttribute().Maybe(attr => attr.SecurityRule);
 
-        if (res == null && throwIfNull)
+        if (res is null && throwIfNull)
         {
             throw new ArgumentException($"ViewDomainObjectAttribute not initialized for element \"{source}\"");
         }
@@ -38,7 +38,7 @@ public static class CustomAttributeProviderExtensions
     {
         var res = source.GetEditDomainObjectAttribute().Maybe(attr => attr.SecurityRule);
 
-        if (res == null && throwIfNull)
+        if (res is null && throwIfNull)
         {
             throw new ArgumentException($"EditDomainObjectAttribute not initialized for element \"{source}\"");
         }
@@ -59,17 +59,17 @@ public static class CustomAttributeProviderExtensions
 
         let attr = source.GetDomainObjectAccessAttribute(flag)
 
-        where attr != null
+        where attr is not null
 
         select attr;
 
     public static bool IsSecurity(this ICustomAttributeProvider source)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
-        return source.GetViewDomainObjectAttribute() != null
-               || source.GetEditDomainObjectAttribute() != null
-               || source.GetDomainObjectAccessAttribute() != null
+        return source.GetViewDomainObjectAttribute() is not null
+               || source.GetEditDomainObjectAttribute() is not null
+               || source.GetDomainObjectAccessAttribute() is not null
                || source.HasAttribute<DependencySecurityAttribute>();
     }
 }

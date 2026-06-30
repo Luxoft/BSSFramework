@@ -43,7 +43,7 @@ public class CsprojValidationTests
             ?.Value
             ?.Trim();
 
-        if (packageId == null)
+        if (packageId is null)
             return;
 
         // Assert
@@ -63,7 +63,7 @@ public class CsprojValidationTests
         var slnxPath = Directory.GetFiles(root, "*.slnx", SearchOption.AllDirectories)
             .FirstOrDefault();
 
-        if (slnxPath == null)
+        if (slnxPath is null)
             throw new InvalidOperationException("No .slnx file found");
 
         var slnxProjects = LoadSlnxProjects(slnxPath);
@@ -126,7 +126,7 @@ public class CsprojValidationTests
     {
         var dir = new DirectoryInfo(AppContext.BaseDirectory);
 
-        while (dir != null)
+        while (dir is not null)
         {
             if (dir.GetFiles("*.slnx").Any())
                 return dir.FullName;

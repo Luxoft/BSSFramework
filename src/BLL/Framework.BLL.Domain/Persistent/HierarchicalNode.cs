@@ -4,7 +4,7 @@ public record HierarchicalNode<TValue, TIdent>(TValue Item, TIdent ParentId, boo
 {
     public HierarchicalNode<TNewItem, TIdent> ChangeItem<TNewItem>(Func<TValue, TNewItem> selector)
     {
-        if (selector == null) throw new ArgumentNullException(nameof(selector));
+        if (selector is null) throw new ArgumentNullException(nameof(selector));
 
         return new HierarchicalNode<TNewItem, TIdent>(Item: selector(this.Item), OnlyView: this.OnlyView, ParentId: this.ParentId);
     }

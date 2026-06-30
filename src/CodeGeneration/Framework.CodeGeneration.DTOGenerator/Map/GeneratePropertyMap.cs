@@ -4,32 +4,19 @@ using Framework.CodeGeneration.DTOGenerator.FileTypes;
 
 namespace Framework.CodeGeneration.DTOGenerator.Map;
 
-public class GeneratePropertyMap
+public class GeneratePropertyMap(PropertyInfo property, Type elementType, RoleFileType? elementFileType, bool isCollection, bool isNullable, bool isDetail)
 {
-    public GeneratePropertyMap(PropertyInfo property, Type elementType, RoleFileType? elementFileType, bool isCollection, bool isNullable, bool isDetail)
-    {
-        if (property == null) throw new ArgumentNullException(nameof(property));
-        if (elementType == null) throw new ArgumentNullException(nameof(elementType));
+    public PropertyInfo Property { get; } = property ?? throw new ArgumentNullException(nameof(property));
 
-        this.Property = property;
-        this.ElementType = elementType;
-        this.ElementFileType = elementFileType;
-        this.IsCollection = isCollection;
-        this.IsNullable = isNullable;
-        this.IsDetail = isDetail;
-    }
+    public Type ElementType { get; } = elementType ?? throw new ArgumentNullException(nameof(elementType));
 
-    public PropertyInfo Property { get; }
+    public bool IsCollection { get; } = isCollection;
 
-    public Type ElementType { get; }
+    public bool IsNullable { get; } = isNullable;
 
-    public bool IsCollection { get; }
+    public bool IsDetail { get; } = isDetail;
 
-    public bool IsNullable { get; }
-
-    public bool IsDetail { get; }
-
-    public RoleFileType? ElementFileType { get; }
+    public RoleFileType? ElementFileType { get; } = elementFileType;
 
     public override string ToString() => $"Name: {this.Property.Name} | ElementFileType: {this.ElementFileType} | ElementType: {this.ElementType}";
 }

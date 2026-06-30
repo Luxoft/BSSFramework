@@ -146,7 +146,7 @@ public class BssHangfireSettings : IBssHangfireSettings
             return;
         }
 
-        if (this.RunAs != null)
+        if (this.RunAs is not null)
         {
             services.AddSingleton(new JobImpersonateData(this.RunAs));
         }

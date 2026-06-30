@@ -49,12 +49,12 @@ public abstract class ProjectionGeneratorConfigurationBase<TEnvironment> : CodeG
     /// <inheritdoc />
     public virtual IEnumerable<CodeAttributeDeclaration> GetDomainTypeAttributeDeclarations(Type domainType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
 
         {
             var projectionAttr = domainType.GetCustomAttribute<ProjectionAttribute>();
 
-            if (projectionAttr != null)
+            if (projectionAttr is not null)
             {
                 yield return projectionAttr.ToAttributeDeclaration();
             }
@@ -64,7 +64,7 @@ public abstract class ProjectionGeneratorConfigurationBase<TEnvironment> : CodeG
         {
             var bllProjectionViewAttr = domainType.GetCustomAttribute<BLLProjectionViewRoleAttribute>();
 
-            if (bllProjectionViewAttr != null)
+            if (bllProjectionViewAttr is not null)
             {
                 yield return bllProjectionViewAttr.ToAttributeDeclaration();
             }
@@ -73,7 +73,7 @@ public abstract class ProjectionGeneratorConfigurationBase<TEnvironment> : CodeG
         {
             var dependencySecurityAttr = domainType.GetCustomAttribute<DependencySecurityAttribute>();
 
-            if (dependencySecurityAttr != null)
+            if (dependencySecurityAttr is not null)
             {
                 yield return dependencySecurityAttr.ToAttributeDeclaration();
             }
@@ -97,14 +97,14 @@ public abstract class ProjectionGeneratorConfigurationBase<TEnvironment> : CodeG
         {
             var tableAttr = domainType.GetCustomAttribute<TableAttribute>();
 
-            if (tableAttr != null)
+            if (tableAttr is not null)
             {
                 yield return tableAttr.ToAttributeDeclaration();
             }
 
             var inlineBaseTypeAttr = domainType.GetCustomAttribute<InlineBaseTypeMappingAttribute>();
 
-            if (inlineBaseTypeAttr != null)
+            if (inlineBaseTypeAttr is not null)
             {
                 yield return inlineBaseTypeAttr.ToAttributeDeclaration();
             }
@@ -114,7 +114,7 @@ public abstract class ProjectionGeneratorConfigurationBase<TEnvironment> : CodeG
     /// <inheritdoc />
     public virtual IEnumerable<CodeAttributeDeclaration> GetPropertyAttributeDeclarations(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         foreach (var securityAttribute in this.Environment.MetadataProxyProvider.Wrap(property).GetSecurityAttributes(this.Environment.SecurityRuleTypeList))
         {

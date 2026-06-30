@@ -83,7 +83,7 @@ public class Projection<TDomainObject> : IProjection
         bool ignoreSerialization = false,
         IEnumerable<Attribute>? propertyAttributes = null)
     {
-        if (path == null) throw new ArgumentNullException(nameof(path));
+        if (path is null) throw new ArgumentNullException(nameof(path));
 
         return this.AddProperty(new ProjectionSingleProperty<TDomainObject, TProperty>(path, name, null, ignoreSerialization, propertyAttributes ?? []));
     }
@@ -105,8 +105,8 @@ public class Projection<TDomainObject> : IProjection
         bool ignoreSerialization = false,
         IEnumerable<Attribute>? propertyAttributes = null)
     {
-        if (path == null) throw new ArgumentNullException(nameof(path));
-        if (getPropProjection == null) throw new ArgumentNullException(nameof(getPropProjection));
+        if (path is null) throw new ArgumentNullException(nameof(path));
+        if (getPropProjection is null) throw new ArgumentNullException(nameof(getPropProjection));
 
         return this.AddProperty(new ProjectionSingleProperty<TDomainObject, TProperty>(path, name, getPropProjection, ignoreSerialization, propertyAttributes ?? []));
     }
@@ -128,15 +128,15 @@ public class Projection<TDomainObject> : IProjection
         bool ignoreSerialization = false,
         IEnumerable<Attribute>? propertyAttributes = null)
     {
-        if (path == null) throw new ArgumentNullException(nameof(path));
-        if (getPropProjection == null) throw new ArgumentNullException(nameof(getPropProjection));
+        if (path is null) throw new ArgumentNullException(nameof(path));
+        if (getPropProjection is null) throw new ArgumentNullException(nameof(getPropProjection));
 
         return this.AddProperty(new ProjectionManyProperty<TDomainObject, TProperty>(path, name, getPropProjection, ignoreSerialization, propertyAttributes ?? []));
     }
 
     internal Projection<TDomainObject> AddProperty(IProjectionProperty newProp)
     {
-        if (newProp == null) throw new ArgumentNullException(nameof(newProp));
+        if (newProp is null) throw new ArgumentNullException(nameof(newProp));
 
         return new Projection<TDomainObject>(this.Name, this.BLLView, this.properties.Concat([newProp]), this.filterAttributes, this.customProperties, this.projectionAttributes);
     }
@@ -156,7 +156,7 @@ public class Projection<TDomainObject> : IProjection
         string[]? fetchs = null,
         IEnumerable<Attribute>? propertyAttributes = null)
     {
-        if (name == null)
+        if (name is null)
         {
             throw new ArgumentNullException(nameof(name));
         }
@@ -181,7 +181,7 @@ public class Projection<TDomainObject> : IProjection
         string[]? fetchs = null,
         IEnumerable<Attribute>? propertyAttributes = null)
     {
-        if (name == null)
+        if (name is null)
         {
             throw new ArgumentNullException(nameof(name));
         }
@@ -214,7 +214,7 @@ public class Projection<TDomainObject> : IProjection
         string[]? fetchs = null,
         IEnumerable<Attribute>? propertyAttributes = null)
     {
-        if (path == null)
+        if (path is null)
         {
             throw new ArgumentNullException(nameof(path));
         }
@@ -243,7 +243,7 @@ public class Projection<TDomainObject> : IProjection
         string[]? fetchs = null,
         IEnumerable<Attribute>? propertyAttributes = null)
     {
-        if (path == null)
+        if (path is null)
         {
             throw new ArgumentNullException(nameof(path));
         }
@@ -275,7 +275,7 @@ public class Projection<TDomainObject> : IProjection
         string[]? fetchs = null,
         IEnumerable<Attribute>? propertyAttributes = null)
     {
-        if (name == null)
+        if (name is null)
         {
             throw new ArgumentNullException(nameof(name));
         }
@@ -302,7 +302,7 @@ public class Projection<TDomainObject> : IProjection
     /// <returns></returns>
     public Projection<TDomainObject> CustomManyProperty<TProperty>(string name, bool writable, Func<Projection<TProperty>>? getPropProjection)
     {
-        if (name == null)
+        if (name is null)
         {
             throw new ArgumentNullException(nameof(name));
         }
@@ -319,7 +319,7 @@ public class Projection<TDomainObject> : IProjection
     /// <returns></returns>
     public Projection<TDomainObject> CustomManyProperty<TProperty>(string name, bool writable)
     {
-        if (name == null)
+        if (name is null)
         {
             throw new ArgumentNullException(nameof(name));
         }
@@ -335,7 +335,7 @@ public class Projection<TDomainObject> : IProjection
     /// <returns></returns>
     public Projection<TDomainObject> OverrideHeader(string name, bool? bllView = null)
     {
-        if (name == null) throw new ArgumentNullException(nameof(name));
+        if (name is null) throw new ArgumentNullException(nameof(name));
 
         return new Projection<TDomainObject>(
             name,
@@ -377,7 +377,7 @@ public class Projection<TDomainObject> : IProjection
     /// <returns></returns>
     public Projection<TDomainObject> Filter(Type filterType, ProjectionFilterTargets target = ProjectionFilterTargets.OData)
     {
-        if (filterType == null) throw new ArgumentNullException(nameof(filterType));
+        if (filterType is null) throw new ArgumentNullException(nameof(filterType));
 
         return new Projection<TDomainObject>(
             this.Name,
@@ -403,7 +403,7 @@ public class Projection<TDomainObject> : IProjection
     /// <returns></returns>
     public Projection<TDomainObject> Attribute(Attribute attribute)
     {
-        if (attribute == null)
+        if (attribute is null)
         {
             throw new ArgumentNullException(nameof(attribute));
         }

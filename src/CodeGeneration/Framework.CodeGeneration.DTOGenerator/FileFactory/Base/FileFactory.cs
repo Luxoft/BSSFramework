@@ -28,7 +28,7 @@ public abstract class FileFactory<TConfiguration, TFileType> : CodeFileFactory<T
     {
         var attr = this.DomainType.Maybe(domainType => domainType.GetCustomAttribute<DataContractAttribute>());
 
-        return attr == null
+        return attr is null
                        ? new CodeAttributeDeclaration(new CodeTypeReference(typeof(DataContractAttribute)),
                                                       new CodeAttributeArgument("Namespace", new CodePrimitiveExpression(overrideNamespace ?? this.Configuration.DataContractNamespace)))
 
@@ -38,7 +38,7 @@ public abstract class FileFactory<TConfiguration, TFileType> : CodeFileFactory<T
                                                       {
                                                               attr.Name.Maybe(name => new CodeAttributeArgument("Name", new CodePrimitiveExpression(name))),
                                                               attr.Namespace.Maybe(ns => new CodeAttributeArgument("Namespace", new CodePrimitiveExpression(ns)))
-                                                      }.Where(v => v != null).ToArray());
+                                                      }.Where(v => v is not null).ToArray());
     }
 }
 

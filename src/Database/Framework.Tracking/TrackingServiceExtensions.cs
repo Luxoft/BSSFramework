@@ -17,8 +17,8 @@ public static class TrackingServiceExtensions
             where TDomainObject : class, TPersistentDomainObjectBase
             where TRemovedItem : class, TPersistentDomainObjectBase
     {
-        if (trackingService == null) throw new ArgumentNullException(nameof(trackingService));
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (trackingService is null) throw new ArgumentNullException(nameof(trackingService));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         return InternalHelper<TPersistentDomainObjectBase, TDomainObject, TRemovedItem>.SourceFunc(trackingService, source);
     }
@@ -59,7 +59,7 @@ public static class TrackingServiceExtensions
         private static Func<ITrackingService<TPersistentDomainObjectBase>, TDomainObject, IEnumerable<TRemovedItem>> GetSourceFuncDirect<TDetail>(PropertyPath propertyPath, Expression<Func<TDomainObject, IEnumerable<TDetail>>> propertyExpression)
         {
             if (propertyPath is null) throw new ArgumentNullException(nameof(propertyPath));
-            if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));
+            if (propertyExpression is null) throw new ArgumentNullException(nameof(propertyExpression));
 
             var getItemsFunc = propertyPath.Tail.GetAllElements<TDetail, TRemovedItem>();
 
@@ -85,7 +85,7 @@ public static class TrackingServiceExtensions
                 where TDetail : class, TPersistentDomainObjectBase
         {
             if (propertyPath is null) throw new ArgumentNullException(nameof(propertyPath));
-            if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));
+            if (propertyExpression is null) throw new ArgumentNullException(nameof(propertyExpression));
 
             var getSubSourceFunc = InternalHelper<TPersistentDomainObjectBase, TDetail, TRemovedItem>.SourceFunc;
 
@@ -109,8 +109,8 @@ public static class TrackingServiceExtensions
 
     private static IEnumerable<PropertyPath> GetPropertyPaths(this Type sourceType, Type targetType)
     {
-        if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));
-        if (targetType == null) throw new ArgumentNullException(nameof(targetType));
+        if (sourceType is null) throw new ArgumentNullException(nameof(sourceType));
+        if (targetType is null) throw new ArgumentNullException(nameof(targetType));
 
         return sourceType.GetDetailProperties()
                          .Where(detailProp => !detailProp.IsHierarchical())
@@ -119,8 +119,8 @@ public static class TrackingServiceExtensions
 
     private static IEnumerable<PropertyPath> GetPropertyPaths(this PropertyInfo propertyInfo, Type targetType)
     {
-        if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
-        if (targetType == null) throw new ArgumentNullException(nameof(targetType));
+        if (propertyInfo is null) throw new ArgumentNullException(nameof(propertyInfo));
+        if (targetType is null) throw new ArgumentNullException(nameof(targetType));
 
         var detailType = propertyInfo.PropertyType.GetCollectionElementType()!;
 

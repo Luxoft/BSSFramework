@@ -65,7 +65,7 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
     /// <returns></returns>
     public Type BuildPropertyType(TypeReferenceBase typeReferenceBase)
     {
-        if (typeReferenceBase == null)
+        if (typeReferenceBase is null)
         {
             throw new ArgumentNullException(nameof(typeReferenceBase));
         }
@@ -84,7 +84,7 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
 
             case TypeReferenceBase.BuildTypeReference buildTypeRef:
                 {
-                    if (buildTypeRef.ElementProjection == null && this.IsPersistent(buildTypeRef.ElementType))
+                    if (buildTypeRef.ElementProjection is null && this.IsPersistent(buildTypeRef.ElementType))
                     {
                         throw new PropertyProjectionNotInitializedException(buildTypeRef.ElementType);
                     }
@@ -106,9 +106,9 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
 
     internal Type BuildPropertyType(TypeReferenceBase typeReferenceBase, GeneratedType generatedProjection, string propertyName)
     {
-        if (typeReferenceBase == null) throw new ArgumentNullException(nameof(typeReferenceBase));
-        if (generatedProjection == null) throw new ArgumentNullException(nameof(generatedProjection));
-        if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
+        if (typeReferenceBase is null) throw new ArgumentNullException(nameof(typeReferenceBase));
+        if (generatedProjection is null) throw new ArgumentNullException(nameof(generatedProjection));
+        if (propertyName is null) throw new ArgumentNullException(nameof(propertyName));
 
         if (propertyName == "BuPeriod")
         {
@@ -132,7 +132,7 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
     /// <returns></returns>
     protected internal virtual IAttributeSource GetProjectionTypeAttributeSource(IProjection projection)
     {
-        if (projection == null)
+        if (projection is null)
         {
             throw new ArgumentNullException(nameof(projection));
         }
@@ -147,7 +147,7 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
     /// <returns></returns>
     protected internal virtual IAttributeSource GetProjectionPropertyAttributeSource(IProjectionProperty projectionProperty)
     {
-        if (projectionProperty == null)
+        if (projectionProperty is null)
         {
             throw new ArgumentNullException(nameof(projectionProperty));
         }
@@ -163,7 +163,7 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
     protected internal virtual IAttributeSource GetProjectionCustomPropertyAttributeSource(
         IProjectionCustomProperty projectionCustomProperty)
     {
-        if (projectionCustomProperty == null)
+        if (projectionCustomProperty is null)
         {
             throw new ArgumentNullException(nameof(projectionCustomProperty));
         }

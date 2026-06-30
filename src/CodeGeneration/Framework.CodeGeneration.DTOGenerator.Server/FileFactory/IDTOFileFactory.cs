@@ -47,7 +47,7 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
         var domainTypeRef = this.DomainType!.ToTypeReference();
         var mappingTypeRef = this.CurrentReference;
 
-        if (this.MapDomainObjectToMappingObjectPropertyAssigner != null)
+        if (this.MapDomainObjectToMappingObjectPropertyAssigner is not null)
         {
             yield return new CodeMemberMethod
             {
@@ -61,7 +61,7 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
             };
         }
 
-        if (this.MapMappingObjectToDomainObjectPropertyAssigner != null)
+        if (this.MapMappingObjectToDomainObjectPropertyAssigner is not null)
         {
             yield return new CodeMemberMethod
             {
@@ -105,7 +105,7 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
         var mappingTypeParameter = this.CurrentReference.ToParameterDeclarationExpression("mappingObject");
         var mappingTypeParameterRef = mappingTypeParameter.ToVariableReferenceExpression();
 
-        if (this.MapDomainObjectToMappingObjectPropertyAssigner != null)
+        if (this.MapDomainObjectToMappingObjectPropertyAssigner is not null)
         {
             var assignStatements = this.GetProperties(false).Select(property =>
 
@@ -120,7 +120,7 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
             };
         }
 
-        if (this.MapMappingObjectToDomainObjectPropertyAssigner != null)
+        if (this.MapMappingObjectToDomainObjectPropertyAssigner is not null)
         {
             var properties = from property in this.GetProperties(true)
 
@@ -246,8 +246,8 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
 
     protected virtual CodeMemberField CreateFieldMember(PropertyInfo property, string fieldName)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
-        if (fieldName == null) throw new ArgumentNullException(nameof(fieldName));
+        if (property is null) throw new ArgumentNullException(nameof(property));
+        if (fieldName is null) throw new ArgumentNullException(nameof(fieldName));
 
         var fieldTypeRef = this.CodeTypeReferenceService!.GetCodeTypeReference(property, true);
 
@@ -280,7 +280,7 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
 
     private IEnumerable<CodeTypeMember> CreatePropertyMember(PropertyInfo sourceProperty)
     {
-        if (sourceProperty == null) throw new ArgumentNullException(nameof(sourceProperty));
+        if (sourceProperty is null) throw new ArgumentNullException(nameof(sourceProperty));
 
         if (!this.Configuration.ForceGenerateProperties(this.DomainType!, this.FileType))
         {
@@ -300,7 +300,7 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
 
     protected virtual IEnumerable<CodeAttributeDeclaration> GetPropertyCustomAttributes(PropertyInfo sourceProperty)
     {
-        if (sourceProperty == null) throw new ArgumentNullException(nameof(sourceProperty));
+        if (sourceProperty is null) throw new ArgumentNullException(nameof(sourceProperty));
 
         yield return typeof(DataMemberAttribute).ToTypeReference().ToAttributeDeclaration();
     }

@@ -33,7 +33,7 @@ public abstract class TypeReferenceBase
 
         public override TypeReferenceBase TryOverrideElementProjection(Func<IProjection, IProjection> mapFunc)
         {
-            if (mapFunc == null) { throw new ArgumentNullException(nameof(mapFunc)); }
+            if (mapFunc is null) { throw new ArgumentNullException(nameof(mapFunc)); }
 
             return this;
         }
@@ -54,7 +54,7 @@ public abstract class TypeReferenceBase
 
         public BuildTypeReference(LambdaExpression expression)
         {
-            if (expression == null) { throw new ArgumentNullException(nameof(expression)); }
+            if (expression is null) { throw new ArgumentNullException(nameof(expression)); }
 
             this.ElementType = expression.ReturnType.GetNullableElementType() ?? expression.ReturnType.GetCollectionElementTypeOrSelf();
             this.CollectionType = expression.ReturnType.GetProjectionCollectionType();
@@ -74,7 +74,7 @@ public abstract class TypeReferenceBase
         /// <summary>
         /// Свойство является коллекцией
         /// </summary>
-        public bool IsCollection => this.CollectionType != null;
+        public bool IsCollection => this.CollectionType is not null;
 
         /// <summary>
         /// Свойство имеет Nullable-тип
@@ -90,9 +90,9 @@ public abstract class TypeReferenceBase
 
         public override TypeReferenceBase TryOverrideElementProjection(Func<IProjection, IProjection> mapFunc)
         {
-            if (mapFunc == null) { throw new ArgumentNullException(nameof(mapFunc)); }
+            if (mapFunc is null) { throw new ArgumentNullException(nameof(mapFunc)); }
 
-            return this.ElementProjection == null ? this : new BuildTypeReference(this.ElementType, this.CollectionType, this.IsNullable, mapFunc(this.ElementProjection));
+            return this.ElementProjection is null ? this : new BuildTypeReference(this.ElementType, this.CollectionType, this.IsNullable, mapFunc(this.ElementProjection));
         }
     }
 }

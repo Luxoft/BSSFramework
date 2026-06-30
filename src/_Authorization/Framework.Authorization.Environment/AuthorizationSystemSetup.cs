@@ -87,7 +87,7 @@ public class AuthorizationSystemSetup : IAuthorizationSystemSetup, IServiceIniti
 
                 .AddExtensions(services =>
                 {
-                    if (this.uniquePermissionComparerType != null)
+                    if (this.uniquePermissionComparerType is not null)
                     {
                         services.AddScoped(typeof(IPermissionEqualityComparer<Permission, PermissionRestriction>), this.uniquePermissionComparerType);
                     }

@@ -6,8 +6,8 @@ public static class RecipientExtensions
 {
     public static IEnumerable<string> GetEmailMergeResult(this IEnumerable<string> recipientsByRoles, IEnumerable<string> recipientsByGeneration, RecipientMergeType mode)
     {
-        if (recipientsByRoles == null) throw new ArgumentNullException(nameof(recipientsByRoles));
-        if (recipientsByGeneration == null) throw new ArgumentNullException(nameof(recipientsByGeneration));
+        if (recipientsByRoles is null) throw new ArgumentNullException(nameof(recipientsByRoles));
+        if (recipientsByGeneration is null) throw new ArgumentNullException(nameof(recipientsByGeneration));
 
         var emailComparer = StringComparer.CurrentCultureIgnoreCase;
 

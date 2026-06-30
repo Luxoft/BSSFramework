@@ -80,7 +80,7 @@ public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvid
     {
         public async Task Invoke(HttpContext context, UserCredential? customUserCredential)
         {
-            if (customUserCredential == null)
+            if (customUserCredential is null)
             {
                 await next(context);
             }

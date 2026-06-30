@@ -13,7 +13,7 @@ public class FixDomainObjectEventRevisionNumberDALListener(
 {
     public async Task Process(DALChangesEventArgs eventArgs, CancellationToken ct)
     {
-        if (eventArgs == null) throw new ArgumentNullException(nameof(eventArgs));
+        if (eventArgs is null) throw new ArgumentNullException(nameof(eventArgs));
 
         var eventDALChanges = eventArgs.Changes.GetSubset(typeof(DomainObjectEvent));
 

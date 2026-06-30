@@ -12,9 +12,9 @@ public class DALChanges<T>
 {
     public DALChanges(IEnumerable<T> createdItems, IEnumerable<T> updatedItems, IEnumerable<T> removedItems)
     {
-        if (createdItems == null) throw new ArgumentNullException(nameof(createdItems));
-        if (updatedItems == null) throw new ArgumentNullException(nameof(updatedItems));
-        if (removedItems == null) throw new ArgumentNullException(nameof(removedItems));
+        if (createdItems is null) throw new ArgumentNullException(nameof(createdItems));
+        if (updatedItems is null) throw new ArgumentNullException(nameof(updatedItems));
+        if (removedItems is null) throw new ArgumentNullException(nameof(removedItems));
 
         this.CreatedItems = createdItems.ToReadOnlyCollection();
         this.UpdatedItems = updatedItems.ToReadOnlyCollection();
@@ -23,7 +23,7 @@ public class DALChanges<T>
 
     public DALChanges(IReadOnlyDictionary<T, DALObjectChangeType> dalChanges)
     {
-        if (dalChanges == null) throw new ArgumentNullException(nameof(dalChanges));
+        if (dalChanges is null) throw new ArgumentNullException(nameof(dalChanges));
 
         this.CreatedItems = dalChanges.Where(pair => pair.Value == DALObjectChangeType.Created).ToReadOnlyCollection(pair => pair.Key);
         this.UpdatedItems = dalChanges.Where(pair => pair.Value == DALObjectChangeType.Updated).ToReadOnlyCollection(pair => pair.Key);

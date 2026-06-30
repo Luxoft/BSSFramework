@@ -10,17 +10,12 @@ internal partial class AuditPropertiesSetter
 
         private DomainObjectDescription(Type type, string[] propertyNames)
         {
-            if (type == null)
-            {
-                throw new ArgumentNullException(nameof(type));
-            }
-
-            if (propertyNames == null || propertyNames.Length == 0)
+            if (propertyNames is null || propertyNames.Length == 0)
             {
                 throw new ArgumentNullException(nameof(propertyNames));
             }
 
-            this.Type = type;
+            this.Type = type ?? throw new ArgumentNullException(nameof(type));
             this.PropertyNames = propertyNames;
         }
 

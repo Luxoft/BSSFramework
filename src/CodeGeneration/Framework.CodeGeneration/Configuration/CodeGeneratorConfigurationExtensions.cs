@@ -9,7 +9,7 @@ public static class CodeGeneratorConfigurationExtensions
 {
     public static CodeTypeReference GetIdentityObjectCodeTypeReference(this ICodeGeneratorConfiguration<ICodeGenerationEnvironment> configuration)
     {
-        if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+        if (configuration is null) throw new ArgumentNullException(nameof(configuration));
 
         return typeof(IIdentityObject<>).MakeGenericType(configuration.Environment.IdentityProperty.PropertyType).ToTypeReference();
     }

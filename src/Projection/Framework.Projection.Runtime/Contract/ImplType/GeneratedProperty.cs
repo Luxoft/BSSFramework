@@ -23,12 +23,10 @@ internal class GeneratedProperty : BasePropertyInfoImpl, IWrappingObject
 
     public GeneratedProperty(ProjectionContractEnvironment environment, PropertyInfo contractProperty, GeneratedType reflectedType)
     {
-        if (environment == null) throw new ArgumentNullException(nameof(environment));
-        if (contractProperty == null) throw new ArgumentNullException(nameof(contractProperty));
-        if (reflectedType == null) throw new ArgumentNullException(nameof(reflectedType));
+        if (reflectedType is null) throw new ArgumentNullException(nameof(reflectedType));
 
-        this.environment = environment;
-        this.ContractProperty = contractProperty;
+        this.environment = environment ?? throw new ArgumentNullException(nameof(environment));
+        this.ContractProperty = contractProperty ?? throw new ArgumentNullException(nameof(contractProperty));
         this.sourceProperty = reflectedType.SourceType.GetImplementedProperty(contractProperty);
 
         this.ReflectedType = reflectedType;

@@ -1,15 +1,8 @@
 ﻿namespace Framework.Database.NHibernate.DBGenerator;
 
-public class ScriptResult
+public class ScriptResult(SmoObjectActionType smoObjectActionType, List<string> scripts)
 {
-    public ScriptResult(SmoObjectActionType smoObjectActionType, List<string> scripts)
-    {
-        if (scripts == null) throw new ArgumentNullException(nameof(scripts));
-        this.SmoObjectActionType = smoObjectActionType;
-        this.Scripts = scripts;
-    }
+    public SmoObjectActionType SmoObjectActionType { get; } = smoObjectActionType;
 
-    public SmoObjectActionType SmoObjectActionType { get; }
-
-    public List<string> Scripts { get; }
+    public List<string> Scripts { get; } = scripts ?? throw new ArgumentNullException(nameof(scripts));
 }

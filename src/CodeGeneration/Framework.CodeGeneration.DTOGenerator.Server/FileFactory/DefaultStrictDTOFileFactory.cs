@@ -98,7 +98,7 @@ public class DefaultStrictDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
                 yield return this.GetIdentityObjectContainerTypeReference();
             }
 
-            if (this.Configuration.VersionProperty != null)
+            if (this.Configuration.VersionProperty is not null)
             {
                 yield return this.Configuration.GetVersionObjectCodeTypeReference();
             }
@@ -135,7 +135,7 @@ public class DefaultStrictDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
 
             yield return this.GetIdentityObjectImplementation(true);
 
-            if (this.Configuration.VersionProperty != null)
+            if (this.Configuration.VersionProperty is not null)
             {
                 yield return this.Configuration.GetVersionObjectPrivateImplementation();
             }

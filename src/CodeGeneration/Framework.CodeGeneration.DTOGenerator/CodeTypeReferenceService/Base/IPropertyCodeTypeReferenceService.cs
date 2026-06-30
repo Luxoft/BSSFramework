@@ -25,7 +25,7 @@ public class PropertyCodeTypeReferenceService<TConfiguration>(TConfiguration con
 {
     public virtual bool IsOptional(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         return this.Configuration.Environment.MetadataProxyProvider.Wrap(property).IsSecurity();
     }
@@ -34,7 +34,7 @@ public class PropertyCodeTypeReferenceService<TConfiguration>(TConfiguration con
 
     public CodeTypeReference GetCodeTypeReference(PropertyInfo property, bool withOptional = false)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         var typeRef = this.GetCodeTypeReferenceByProperty(property);
 
@@ -43,7 +43,7 @@ public class PropertyCodeTypeReferenceService<TConfiguration>(TConfiguration con
 
     protected virtual bool IsDomainType(Type type)
     {
-        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (type is null) throw new ArgumentNullException(nameof(type));
 
         return this.Configuration.DomainTypes.Contains(type);
     }
@@ -52,7 +52,7 @@ public class PropertyCodeTypeReferenceService<TConfiguration>(TConfiguration con
 
     protected virtual CodeTypeReference GetCodeTypeReferenceByProperty(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         return this.GetCodeTypeReferenceByType(property.PropertyType);
     }

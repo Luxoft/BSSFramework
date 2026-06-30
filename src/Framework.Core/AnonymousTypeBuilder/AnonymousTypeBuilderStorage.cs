@@ -7,9 +7,7 @@ public class AnonymousTypeBuilderStorage : IAnonymousTypeBuilderStorage
 {
     protected AnonymousTypeBuilderStorage(ModuleBuilder moduleBuilder)
     {
-        if (moduleBuilder == null) throw new ArgumentNullException(nameof(moduleBuilder));
-
-        this.ModuleBuilder = moduleBuilder;
+        this.ModuleBuilder = moduleBuilder ?? throw new ArgumentNullException(nameof(moduleBuilder));
     }
 
     public AnonymousTypeBuilderStorage(AssemblyBuilder assemblyBuilder)

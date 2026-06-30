@@ -43,8 +43,8 @@ public class LambdaHelperFileFactory<TConfiguration>(TConfiguration configuratio
 
     private bool CanLambdaConvert(Type baseDomainType, DTOFileType fileType)
     {
-        if (baseDomainType == null) throw new ArgumentNullException(nameof(baseDomainType));
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (baseDomainType is null) throw new ArgumentNullException(nameof(baseDomainType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         var wrappedDomainType = this.Configuration.Environment.MetadataProxyProvider.Wrap(baseDomainType);
 
@@ -68,7 +68,7 @@ public class LambdaHelperFileFactory<TConfiguration>(TConfiguration configuratio
 
     private IEnumerable<CodeMemberMethod> GetConvertToDTOMethods(Type domainType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
 
         foreach (var fileType in this.Configuration.LambdaConvertTypes.Where(fileType => this.CanLambdaConvert(domainType, fileType)))
         {
@@ -80,7 +80,7 @@ public class LambdaHelperFileFactory<TConfiguration>(TConfiguration configuratio
 
     private CodeMemberMethod GetConvertToDTOMethod(Type domainType, BaseFileType fileType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
 
         var configuration = this.Configuration;
 
@@ -130,7 +130,7 @@ public class LambdaHelperFileFactory<TConfiguration>(TConfiguration configuratio
 
     private CodeMemberMethod GetConvertToDTOListMethod(Type domainType, BaseFileType fileType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
 
 
         var domainObjectsParameter = new CodeParameterDeclarationExpression(domainType, "domainObjects");

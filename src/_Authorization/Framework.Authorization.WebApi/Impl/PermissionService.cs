@@ -13,7 +13,7 @@ public partial class AuthMainController
     [HttpPost]
     public void ChangeDelegatePermissions([FromForm] ChangePermissionDelegatesModelStrictDTO changePermissionDelegatesModelStrictDTO)
     {
-        if (changePermissionDelegatesModelStrictDTO == null)
+        if (changePermissionDelegatesModelStrictDTO is null)
             throw new ArgumentNullException(nameof(changePermissionDelegatesModelStrictDTO));
 
         this.Evaluate(

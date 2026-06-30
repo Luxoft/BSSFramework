@@ -19,14 +19,14 @@ public class TargetSystemRootFilterModel : DomainObjectMultiFilterModel<TargetSy
     {
         var isMain = this.IsMain;
 
-        if (isMain != null)
+        if (isMain is not null)
         {
             yield return targetSystem => targetSystem.IsMain == isMain;
         }
 
         var isRevision = this.IsRevision;
 
-        if (isRevision != null)
+        if (isRevision is not null)
         {
             yield return targetSystem => targetSystem.IsRevision == isRevision;
         }

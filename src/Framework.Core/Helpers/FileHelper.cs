@@ -29,13 +29,13 @@ public static class FileHelper
 
     public static TResult TempProcess<TResult>(Func<string, TResult> getResult, string? pureExtension = null, byte[]? content = null)
     {
-        if (getResult == null) throw new ArgumentNullException(nameof(getResult));
+        if (getResult is null) throw new ArgumentNullException(nameof(getResult));
 
         var tempFileName = GetTempFileName(pureExtension);
 
         try
         {
-            if (content != null)
+            if (content is not null)
             {
                 File.WriteAllBytes(tempFileName, content);
             }
@@ -50,7 +50,7 @@ public static class FileHelper
 
     public static byte[] TempProcessBinary(Action<string> action, string? pureExtension = null, byte[]? content = null)
     {
-        if (action == null) throw new ArgumentNullException(nameof(action));
+        if (action is null) throw new ArgumentNullException(nameof(action));
 
         return TempProcess(fileName =>
                            {
@@ -65,7 +65,7 @@ public static class FileHelper
     ///</summary>
     public static void SafeRemove(string fileName)
     {
-        if (fileName == null) throw new ArgumentNullException(nameof(fileName));
+        if (fileName is null) throw new ArgumentNullException(nameof(fileName));
 
         if (File.Exists(fileName))
         {

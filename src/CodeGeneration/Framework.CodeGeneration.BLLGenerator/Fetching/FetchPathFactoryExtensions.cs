@@ -6,7 +6,7 @@ public static class FetchPathFactoryExtensions
 {
     public static IFetchPathFactory<TSource> WithCompress<TSource>(this IFetchPathFactory<TSource> fetchPathFactory)
     {
-        if (fetchPathFactory == null) throw new ArgumentNullException(nameof(fetchPathFactory));
+        if (fetchPathFactory is null) throw new ArgumentNullException(nameof(fetchPathFactory));
 
         return new FuncFetchPathFactory<TSource>((domainType, source) => fetchPathFactory.Create(domainType, source).Compress());
     }

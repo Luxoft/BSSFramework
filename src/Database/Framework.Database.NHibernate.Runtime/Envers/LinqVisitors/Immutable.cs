@@ -11,7 +11,7 @@ internal class Immutable<T>
 
         set
         {
-            if (this.source != null && value != this.source)
+            if (this.source is not null && value != this.source)
             {
                 throw new ArgumentException("Value also initialized");
             }
@@ -20,5 +20,5 @@ internal class Immutable<T>
         }
     }
 
-    public bool IsInit => this.source != null;
+    public bool IsInit => this.source is not null;
 }

@@ -4,25 +4,14 @@ using Framework.Core;
 
 namespace Framework.Validation.Validators;
 
-public class AlphabetValidator : IPropertyValidator<object, string>
+public class AlphabetValidator(string alphabet, string? externalChars = null) : IPropertyValidator<object, string>
 {
-    private readonly string alphabet;
-    private readonly char[] externalChars;
-
-
-    public AlphabetValidator(string alphabet, string? externalChars = null)
-    {
-        if (alphabet == null) throw new ArgumentNullException(nameof(alphabet));
-
-        this.alphabet = alphabet;
-
-        this.externalChars = externalChars.EmptyIfNull().ToArray();
-    }
-
+    private readonly string alphabet = alphabet ?? throw new ArgumentNullException(nameof(alphabet));
+    private readonly char[] externalChars = externalChars.EmptyIfNull().ToArray();
 
     public ValidationResult GetValidationResult(IPropertyValidationContext<object, string> context)
     {
-        if (context == null) throw new ArgumentNullException(nameof(context));
+        if (context is null) throw new ArgumentNullException(nameof(context));
 
         var invalidChars = context.Value.Except(this.alphabet).Except(this.externalChars).Concat();
 

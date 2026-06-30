@@ -30,12 +30,7 @@ public class BusinessUnitManagerCommissionLink : AuditPersistentDomainObjectBase
 
     public BusinessUnitManagerCommissionLink(BusinessUnit businessUnit)
     {
-        if (businessUnit == null)
-        {
-            throw new ArgumentNullException(nameof(businessUnit));
-        }
-
-        this.businessUnit = businessUnit;
+        this.businessUnit = businessUnit ?? throw new ArgumentNullException(nameof(businessUnit));
 
         businessUnit.AddDetail(this);
     }
@@ -47,11 +42,10 @@ public class BusinessUnitManagerCommissionLink : AuditPersistentDomainObjectBase
             Period period)
             : this(businessUnit)
     {
-        if (businessUnit == null) throw new ArgumentNullException(nameof(businessUnit));
-        if (manager == null) throw new ArgumentNullException(nameof(manager));
+        if (businessUnit is null) throw new ArgumentNullException(nameof(businessUnit));
 
         this.commission = commission;
-        this.manager = manager;
+        this.manager = manager ?? throw new ArgumentNullException(nameof(manager));
         this.period = period;
     }
 

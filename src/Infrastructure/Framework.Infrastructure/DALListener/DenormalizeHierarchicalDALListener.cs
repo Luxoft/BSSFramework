@@ -57,7 +57,7 @@ public class DenormalizeHierarchicalDALListener(
     {
         await this.LockChanges(fullAncestorLinkInfo, ct);
 
-        if (serviceProvider.GetService(typeof(DeepLevelInfo<>).MakeGenericType(typeof(TDomainObject))) != null)
+        if (serviceProvider.GetService(typeof(DeepLevelInfo<>).MakeGenericType(typeof(TDomainObject))) is not null)
         {
             await serviceProvider.GetRequiredService<IDeepLevelDenormalizer<TDomainObject>>().UpdateDeepLevels(modified, ct);
         }

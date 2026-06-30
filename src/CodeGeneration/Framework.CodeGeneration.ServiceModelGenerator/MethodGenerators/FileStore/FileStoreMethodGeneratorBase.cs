@@ -48,7 +48,7 @@ public abstract class FileStoreMethodGeneratorBase<TConfiguration>(TConfiguratio
 
     private CodeVariableDeclarationStatement GetTargetBLLVariableDeclaration(CodeExpression evaluateDataExpr, Type targetDomainType)
     {
-        if (evaluateDataExpr == null)
+        if (evaluateDataExpr is null)
         {
             throw new ArgumentNullException(nameof(evaluateDataExpr));
         }

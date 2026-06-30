@@ -15,7 +15,7 @@ public class ValidationResult
 
     internal ValidationResult(IEnumerable<ValidationExceptionBase> errors)
     {
-        if (errors == null) throw new ArgumentNullException(nameof(errors));
+        if (errors is null) throw new ArgumentNullException(nameof(errors));
 
         this.lazyErrors = LazyHelper.Create(() => errors.ToReadOnlyCollection());
     }
@@ -34,7 +34,7 @@ public class ValidationResult
 
     public static ValidationResult FromCondition(bool isSuccess, Func<string> getErrorMessage)
     {
-        if (getErrorMessage == null) throw new ArgumentNullException(nameof(getErrorMessage));
+        if (getErrorMessage is null) throw new ArgumentNullException(nameof(getErrorMessage));
 
         return FromCondition(isSuccess, () => new ValidationException(getErrorMessage()));
     }
@@ -45,7 +45,7 @@ public class ValidationResult
 
     public static ValidationResult FromCondition(bool isSuccess, Func<ValidationExceptionBase> getError)
     {
-        if (getError == null) throw new ArgumentNullException(nameof(getError));
+        if (getError is null) throw new ArgumentNullException(nameof(getError));
 
         return isSuccess ? Success
                        : CreateError(getError());
@@ -53,7 +53,7 @@ public class ValidationResult
 
     public static ValidationResult TryCatch(Action action)
     {
-        if (action == null) throw new ArgumentNullException(nameof(action));
+        if (action is null) throw new ArgumentNullException(nameof(action));
 
         try
         {
@@ -70,7 +70,7 @@ public class ValidationResult
 
     public static ValidationResult CreateError(string message)
     {
-        if (message == null) throw new ArgumentNullException(nameof(message));
+        if (message is null) throw new ArgumentNullException(nameof(message));
 
         return new ValidationResult([new ValidationException(message)]);
     }
@@ -83,7 +83,7 @@ public class ValidationResult
 
     public static ValidationResult CreateError(ValidationExceptionBase exception)
     {
-        if (exception == null) throw new ArgumentNullException(nameof(exception));
+        if (exception is null) throw new ArgumentNullException(nameof(exception));
 
         return new ValidationResult([exception]);
     }

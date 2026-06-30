@@ -120,7 +120,7 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase>(
                         eventArgs.Changes.GroupDALObjectByType().TryGetValue(z, out var dalChanges);
                         return ValueTuple.Create(z, dalChanges);
                     })
-                .Where(z => z.Item2 != null)
+                .Where(z => z.Item2 is not null)
                 .Select(z => z.Item2!)
                 .SelectMany(z => z.CreatedItems.Concat(z.UpdatedItems).Concat(z.RemovedItems).Select(q => q.Object))
                 .ToHashSet();
@@ -139,7 +139,7 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase>(
     {
         var dalChanges = GetDALChanges(domainObject, domainObjectEvent);
 
-        if (dalChanges != null)
+        if (dalChanges is not null)
         {
             await this.Process(new DALChangesEventArgs(dalChanges), ct);
         }

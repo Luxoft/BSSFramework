@@ -16,15 +16,15 @@ internal class LinkAllProjectionSource(IProjectionSource baseSource) : IProjecti
 
     public void FillProjectionsGraph(IProjection projection, HashSet<IProjection> graph)
     {
-        if (projection == null) { throw new ArgumentNullException(nameof(projection)); }
+        if (projection is null) { throw new ArgumentNullException(nameof(projection)); }
 
-        if (graph == null) { throw new ArgumentNullException(nameof(graph)); }
+        if (graph is null) { throw new ArgumentNullException(nameof(graph)); }
 
         if (graph.Add(projection))
         {
             foreach (var projectionProperty in projection.Properties)
             {
-                if (projectionProperty.Type.ElementProjection != null)
+                if (projectionProperty.Type.ElementProjection is not null)
                 {
                     this.FillProjectionsGraph(projectionProperty.Type.ElementProjection, graph);
                 }

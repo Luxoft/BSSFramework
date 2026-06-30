@@ -142,7 +142,7 @@ public class MethodIdentityType(string name) : IEquatable<MethodIdentityType>
     /// </summary>
     public static readonly MethodIdentityType GetODataTreeByQueryStringWithFilter = new(() => GetODataTreeByQueryStringWithFilter!);
 
-    public virtual bool Equals(MethodIdentityType? other) => !ReferenceEquals(other, null) && this.Name.Equals(other.Name, StringComparison.CurrentCultureIgnoreCase);
+    public virtual bool Equals(MethodIdentityType? other) => other is not null && this.Name.Equals(other.Name, StringComparison.CurrentCultureIgnoreCase);
 
     public override bool Equals(object? obj) => this.Equals(obj as MethodIdentityType);
 
@@ -150,17 +150,17 @@ public class MethodIdentityType(string name) : IEquatable<MethodIdentityType>
 
     public override string ToString() => this.Name;
 
-    public static bool operator ==(MethodIdentity? ident, MethodIdentityType type) => !ReferenceEquals(ident, null) && ident.Type == type;
+    public static bool operator ==(MethodIdentity? ident, MethodIdentityType type) => ident is not null && ident.Type == type;
 
     public static bool operator !=(MethodIdentity? ident, MethodIdentityType type) => !(ident == type);
 
-    public static bool operator ==(MethodIdentityType type, MethodIdentity? ident) => !ReferenceEquals(ident, null) && ident.Type == type;
+    public static bool operator ==(MethodIdentityType type, MethodIdentity? ident) => ident is not null && ident.Type == type;
 
     public static bool operator !=(MethodIdentityType type, MethodIdentity? ident) => !(ident == type);
 
     public static bool operator ==(MethodIdentityType? fileType, MethodIdentityType? other) =>
         ReferenceEquals(fileType, other)
-        || (!ReferenceEquals(fileType, null) && fileType.Equals(other));
+        || (fileType is not null && fileType.Equals(other));
 
     public static bool operator !=(MethodIdentityType? fileType, MethodIdentityType? other) => !(fileType == other);
 }

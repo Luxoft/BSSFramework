@@ -6,10 +6,9 @@ public class GenerateTypeMap
 {
     public GenerateTypeMap(Type domainType, DTOFileType fileType, IEnumerable<GeneratePropertyMap> properties)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (properties == null) throw new ArgumentNullException(nameof(properties));
+        if (properties is null) throw new ArgumentNullException(nameof(properties));
 
-        this.DomainType = domainType;
+        this.DomainType = domainType ?? throw new ArgumentNullException(nameof(domainType));
         this.FileType = fileType;
         this.Properties = properties.ToArray();
     }
@@ -30,8 +29,8 @@ public class GenerateTypeMap
     public bool UsedDetailRole(Type elementType, RoleFileType? elementFileType, bool? isDetail) =>
         this.GetNotSelfProperties().Any(prop =>
                                             prop.ElementType == elementType
-                                            && (elementFileType == null || prop.ElementFileType == null || prop.ElementFileType == elementFileType)
-                                            && (isDetail == null || prop.IsDetail == isDetail.Value));
+                                            && (elementFileType is null || prop.ElementFileType is null || prop.ElementFileType == elementFileType)
+                                            && (isDetail is null || prop.IsDetail == isDetail.Value));
 
     private IEnumerable<GeneratePropertyMap> GetNotSelfProperties() => this.Properties.Where(prop => prop.ElementType != this.DomainType || prop.ElementFileType != this.FileType);
 

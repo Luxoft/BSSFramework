@@ -42,7 +42,7 @@ public static class FieldMetadataExtensions
 {
     public static PropertyInfo GetReferencedProperty(this FieldMetadata fieldMetadata)
     {
-        if (fieldMetadata == null) throw new ArgumentNullException(nameof(fieldMetadata));
+        if (fieldMetadata is null) throw new ArgumentNullException(nameof(fieldMetadata));
 
         return fieldMetadata.DomainTypeMetadata.DomainType.GetProperty(fieldMetadata.Name.ToStartUpperCase(),
                                                                        () => new Exception($"Property for field {fieldMetadata.Name} not found of type:{fieldMetadata.DomainTypeMetadata.DomainType.Name}"))!;

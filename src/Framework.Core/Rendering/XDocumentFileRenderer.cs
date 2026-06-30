@@ -17,7 +17,7 @@ public class XDocumentFileRenderer(Func<StringBuilder, TextWriter> createWriter)
 
     public string Render(XDocument document)
     {
-        if (document == null) throw new ArgumentNullException(nameof(document));
+        if (document is null) throw new ArgumentNullException(nameof(document));
 
         var sb = new StringBuilder();
         using (var writer = this.createWriter(sb))

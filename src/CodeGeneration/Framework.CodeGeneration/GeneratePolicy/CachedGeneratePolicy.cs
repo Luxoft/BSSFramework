@@ -14,9 +14,7 @@ public class CachedGeneratePolicy<TIdent> : IGeneratePolicy<TIdent>
 
     public CachedGeneratePolicy(IGeneratePolicy<TIdent> baseGeneratePolicy)
     {
-        if (baseGeneratePolicy == null) throw new ArgumentNullException(nameof(baseGeneratePolicy));
-
-        this.baseGeneratePolicy = baseGeneratePolicy;
+        this.baseGeneratePolicy = baseGeneratePolicy ?? throw new ArgumentNullException(nameof(baseGeneratePolicy));
 
         this.cache = new DictionaryCache<Tuple<Type, TIdent>, bool>(t => t.Pipe(this.InternalUsed)).WithLock();
     }
@@ -25,8 +23,8 @@ public class CachedGeneratePolicy<TIdent> : IGeneratePolicy<TIdent>
 
     public bool Used(Type domainType, TIdent fileType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         return this.cache.GetValue(domainType, fileType);
     }
@@ -34,8 +32,8 @@ public class CachedGeneratePolicy<TIdent> : IGeneratePolicy<TIdent>
 
     protected virtual bool InternalUsed(Type domainType, TIdent fileType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         return this.baseGeneratePolicy.Used(domainType, fileType);
     }

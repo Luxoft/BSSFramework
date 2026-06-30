@@ -12,8 +12,8 @@ public class DefaultStringMaxLengthValidator : IManyPropertyDynamicClassValidato
 {
     public IPropertyValidator? GetValidator(PropertyInfo property, IServiceProvider serviceProvider)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
-        if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
+        if (property is null) throw new ArgumentNullException(nameof(property));
+        if (serviceProvider is null) throw new ArgumentNullException(nameof(serviceProvider));
 
         var availableValues = serviceProvider.GetRequiredService<IAvailableValues>();
 

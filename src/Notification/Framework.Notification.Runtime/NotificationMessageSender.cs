@@ -22,7 +22,7 @@ public class NotificationMessageSender(
 
         await mailMessageSender.SendAsync(notification.Message, ct);
 
-        if (sentNotificationLogger != null)
+        if (sentNotificationLogger is not null)
         {
             await sentNotificationLogger.LogAsync(notification, ct);
         }

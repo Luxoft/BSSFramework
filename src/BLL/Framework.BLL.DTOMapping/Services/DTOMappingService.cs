@@ -36,7 +36,7 @@ public abstract class DTOMappingService<TBLLContext, TPersistentDomainObjectBase
     protected virtual TDomainObject GetByIdOrCreate<TDomainObject>(TIdent ident, Func<TDomainObject> createFunc)
             where TDomainObject : class, TPersistentDomainObjectBase
     {
-        if (createFunc == null) throw new ArgumentNullException(nameof(createFunc));
+        if (createFunc is null) throw new ArgumentNullException(nameof(createFunc));
 
         return this.GetById<TDomainObject>(ident) ?? createFunc();
     }

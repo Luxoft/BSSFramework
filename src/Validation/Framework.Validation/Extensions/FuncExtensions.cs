@@ -4,8 +4,8 @@ internal static class FuncExtensions
 {
     public static Func<T, ValidationResult> Or<T>(this Func<T, ValidationResult> f1, Func<T, ValidationResult> f2)
     {
-        if (f1 == null) throw new ArgumentNullException(nameof(f1));
-        if (f2 == null) throw new ArgumentNullException(nameof(f2));
+        if (f1 is null) throw new ArgumentNullException(nameof(f1));
+        if (f2 is null) throw new ArgumentNullException(nameof(f2));
 
         return arg =>
                {
@@ -24,18 +24,18 @@ internal static class FuncExtensions
 
     public static Func<T, ValidationResult> And<T>(this Func<T, ValidationResult> f1, Func<T, ValidationResult> f2)
     {
-        if (f1 == null) throw new ArgumentNullException(nameof(f1));
-        if (f2 == null) throw new ArgumentNullException(nameof(f2));
+        if (f1 is null) throw new ArgumentNullException(nameof(f1));
+        if (f2 is null) throw new ArgumentNullException(nameof(f2));
 
         return arg => f1(arg) + f2(arg);
     }
 
     public static Func<T, ValidationResult> Sum<T>(this IEnumerable<Func<T, ValidationResult>> items)
     {
-        if (items == null) throw new ArgumentNullException(nameof(items));
+        if (items is null) throw new ArgumentNullException(nameof(items));
 
         return items.Aggregate((Func<T, ValidationResult>)(_ => ValidationResult.Success), (f1, f2) => f1.And(f2));
     }
 
-    public static Func<Validator, TSource, int, ValidationResult> WithTryEmptySource<TSource>(this Func<Validator, TSource, int, ValidationResult> baseFunc) => (validator, source, operationContext) => source == null ? ValidationResult.Success : baseFunc(validator, source, operationContext);
+    public static Func<Validator, TSource, int, ValidationResult> WithTryEmptySource<TSource>(this Func<Validator, TSource, int, ValidationResult> baseFunc) => (validator, source, operationContext) => source is null ? ValidationResult.Success : baseFunc(validator, source, operationContext);
 }

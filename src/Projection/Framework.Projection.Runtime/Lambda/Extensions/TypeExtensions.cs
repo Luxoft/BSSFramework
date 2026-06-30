@@ -13,7 +13,7 @@ internal static class TypeExtensions
 
     public static Type? GetProjectionCollectionType(this Type type)
     {
-        if (type == null) { throw new ArgumentNullException(nameof(type)); }
+        if (type is null) { throw new ArgumentNullException(nameof(type)); }
 
         return type.IsCollection() ? type.GetCollectionType()
                : type.IsArray && !type.GetElementType()!.IsPrimitive ? typeof(Array)
@@ -22,9 +22,9 @@ internal static class TypeExtensions
 
     public static Type SafeMakeProjectionCollectionType(this Type? collectionType, Type elementType)
     {
-        if (elementType == null) { throw new ArgumentNullException(nameof(elementType)); }
+        if (elementType is null) { throw new ArgumentNullException(nameof(elementType)); }
 
-        if (collectionType != null)
+        if (collectionType is not null)
         {
             return CollectionTypeCache[collectionType][elementType];
         }
@@ -36,8 +36,8 @@ internal static class TypeExtensions
 
     private static Type MakeProjectionCollectionType(this Type collectionType, Type elementType)
     {
-        if (collectionType == null) throw new ArgumentNullException(nameof(collectionType));
-        if (elementType == null) { throw new ArgumentNullException(nameof(elementType)); }
+        if (collectionType is null) throw new ArgumentNullException(nameof(collectionType));
+        if (elementType is null) { throw new ArgumentNullException(nameof(elementType)); }
 
         if (collectionType == typeof(Array))
         {

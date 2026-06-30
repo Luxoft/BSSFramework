@@ -70,7 +70,7 @@ public class CSharpCodeDomRenderer(CodeDomProvider provider, CodeGeneratorOption
 
         public override CodeStatementCollection VisitStatementCollection(CodeStatementCollection collection)
         {
-            if (collection == null) throw new ArgumentNullException(nameof(collection));
+            if (collection is null) throw new ArgumentNullException(nameof(collection));
 
             var request = from CodeStatement statement in base.VisitStatementCollection(collection)
 
@@ -87,7 +87,7 @@ public class CSharpCodeDomRenderer(CodeDomProvider provider, CodeGeneratorOption
 
         public override CodeExpression VisitBinaryOperatorExpression(CodeBinaryOperatorExpression binaryOperatorExpression)
         {
-            if (binaryOperatorExpression == null) throw new ArgumentNullException(nameof(binaryOperatorExpression));
+            if (binaryOperatorExpression is null) throw new ArgumentNullException(nameof(binaryOperatorExpression));
 
             if (binaryOperatorExpression.Operator == CodeBinaryOperatorType.ValueEquality && binaryOperatorExpression.Right.IsPrimitiveValue(false))
             {
@@ -139,7 +139,7 @@ public class CSharpCodeDomRenderer(CodeDomProvider provider, CodeGeneratorOption
 
         protected override CodeExpression NormalizeExpression(CodeLambdaExpression lambdaExpression)
         {
-            if (lambdaExpression == null) throw new ArgumentNullException(nameof(lambdaExpression));
+            if (lambdaExpression is null) throw new ArgumentNullException(nameof(lambdaExpression));
 
             var parameters = this.VisitParameterDeclarationExpressionCollection(lambdaExpression.Parameters)
                                  .ToArrayExceptNull(v => v)
@@ -158,14 +158,14 @@ public class CSharpCodeDomRenderer(CodeDomProvider provider, CodeGeneratorOption
 
         protected override CodeStatement NormalizeStatement(CodeMethodYieldBreakStatement statement)
         {
-            if (statement == null) throw new ArgumentNullException(nameof(statement));
+            if (statement is null) throw new ArgumentNullException(nameof(statement));
 
             return new CodeSnippetStatement($"{this.DeepOffset}yield break;");
         }
 
         protected override CodeStatement NormalizeStatement(CodeMethodYieldReturnStatement statement)
         {
-            if (statement == null) throw new ArgumentNullException(nameof(statement));
+            if (statement is null) throw new ArgumentNullException(nameof(statement));
 
             var renderedExpression = this.Renderer.Render(this.VisitExpression(statement.Expression));
 
@@ -188,7 +188,7 @@ public class CSharpCodeDomRenderer(CodeDomProvider provider, CodeGeneratorOption
 
         protected override CodeExpression NormalizeExpression(CodeBinaryOperatorCollectionExpression expression)
         {
-            if (expression == null) throw new ArgumentNullException(nameof(expression));
+            if (expression is null) throw new ArgumentNullException(nameof(expression));
 
             var result = expression.Expressions.ToArrayExceptNull(v => v).Select(item => this.Renderer.Render(item).SkipLast(Environment.NewLine)).Join($" {this.Renderer.BinaryOperators[expression.Operator]} ");
 
@@ -197,21 +197,21 @@ public class CSharpCodeDomRenderer(CodeDomProvider provider, CodeGeneratorOption
 
         protected override CodeExpression NormalizeExpression(CodeMaybePropertyReferenceExpression propertyReferenceExpression)
         {
-            if (propertyReferenceExpression == null) throw new ArgumentNullException(nameof(propertyReferenceExpression));
+            if (propertyReferenceExpression is null) throw new ArgumentNullException(nameof(propertyReferenceExpression));
 
             return new CodeSnippetExpression($"{this.Renderer.Render(propertyReferenceExpression.TargetObject)}?.{propertyReferenceExpression.PropertyName}");
         }
 
         protected override CodeExpression NormalizeExpression(CodeNameofExpression nameofExpression)
         {
-            if (nameofExpression == null) throw new ArgumentNullException(nameof(nameofExpression));
+            if (nameofExpression is null) throw new ArgumentNullException(nameof(nameofExpression));
 
             return new CodeSnippetExpression($"nameof({nameofExpression.Value})");
         }
 
         private string[] RenderLambdaExpressionBody(CodeStatement[] codeStatements)
         {
-            if (codeStatements == null) throw new ArgumentNullException(nameof(codeStatements));
+            if (codeStatements is null) throw new ArgumentNullException(nameof(codeStatements));
 
             if (codeStatements.Length == 1)
             {
@@ -219,7 +219,7 @@ public class CSharpCodeDomRenderer(CodeDomProvider provider, CodeGeneratorOption
                 {
                     var returnExpr = returnStatement.Expression;
 
-                    if (returnExpr != null)
+                    if (returnExpr is not null)
                     {
                         return [this.Renderer.Render(returnExpr)];
                     }
@@ -237,7 +237,7 @@ public class CSharpCodeDomRenderer(CodeDomProvider provider, CodeGeneratorOption
 
         protected override CodeTypeDeclaration NormalizeStaticClass(CodeTypeDeclaration decl)
         {
-            if (decl == null) throw new ArgumentNullException(nameof(decl));
+            if (decl is null) throw new ArgumentNullException(nameof(decl));
 
             decl.StartDirectives.Add(new CodeRegionDirective(CodeRegionMode.Start, Environment.NewLine + "\tstatic"));
 

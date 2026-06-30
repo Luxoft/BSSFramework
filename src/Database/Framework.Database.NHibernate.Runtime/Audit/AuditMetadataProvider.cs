@@ -164,7 +164,7 @@ internal class AuditMetadataProvider<TAuditRevisionEntity> : IMetaDataProvider
         foreach (var property in propertyIterator)
         {
             var propAsComponent = property.Value as Component;
-            if (propAsComponent == null || propAsComponent.IsDynamic)
+            if (propAsComponent is null || propAsComponent.IsDynamic)
             {
                 continue;
             }
@@ -184,7 +184,7 @@ internal class AuditMetadataProvider<TAuditRevisionEntity> : IMetaDataProvider
 
         props.AddRange(persistentClass.PropertyIterator);
 
-        if (persistentClass.IdentifierProperty != null && !persistentClass.IdentifierProperty.IsComposite)
+        if (persistentClass.IdentifierProperty is not null && !persistentClass.IdentifierProperty.IsComposite)
         {
             props.Add(persistentClass.IdentifierProperty);
         }

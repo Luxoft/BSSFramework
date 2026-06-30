@@ -34,7 +34,7 @@ public abstract class EventDTOMessageSenderBase<TPersistentDomainObjectBase> : I
         IDomainOperationSerializeData<TPersistentDomainObjectBase> domainObjectEventArgs,
         CancellationToken ct)
     {
-        if (domainObjectEventArgs == null) throw new ArgumentNullException(nameof(domainObjectEventArgs));
+        if (domainObjectEventArgs is null) throw new ArgumentNullException(nameof(domainObjectEventArgs));
 
         var func = new Func<TPersistentDomainObjectBase, EventOperation, object?, CancellationToken, Task>(this.InternalSend).CreateGenericMethod(
             domainObjectEventArgs.DomainObjectType);

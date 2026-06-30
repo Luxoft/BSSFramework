@@ -27,6 +27,6 @@ public static class Extensions
         return integrationVersionProperty;
     }
 
-    public static bool IsIntegrationVersion(this Type domainType) => domainType.TryGetIntegrationVersionProperty() != null;
+    public static bool IsIntegrationVersion(this Type domainType) => domainType.TryGetIntegrationVersionProperty() is not null;
 }
 

@@ -25,8 +25,8 @@ public static class PersistentDomainObjectBaseExtensions
     public static void SetValueSafe<TSource, TField, TIdent>(this TSource source, Expression<Func<TSource, TField>> fieldExpr, TField newValue)
             where TSource : class, IIdentityObject<TIdent>
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (fieldExpr == null) throw new ArgumentNullException(nameof(fieldExpr));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (fieldExpr is null) throw new ArgumentNullException(nameof(fieldExpr));
 
         var field = (fieldExpr.Body as MemberExpression)
                     .Maybe(expr => expr.Member as FieldInfo)
@@ -58,9 +58,9 @@ public static class PersistentDomainObjectBaseExtensions
     public static void SetValueSafe<TSource, TProperty, TIdent>(this TSource source, Expression<Func<TSource, TProperty>> propertyExpr, TProperty newValue, Action customSetAction)
             where TSource : class, IIdentityObject<TIdent>
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (propertyExpr == null) throw new ArgumentNullException(nameof(propertyExpr));
-        if (customSetAction == null) throw new ArgumentNullException(nameof(customSetAction));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (propertyExpr is null) throw new ArgumentNullException(nameof(propertyExpr));
+        if (customSetAction is null) throw new ArgumentNullException(nameof(customSetAction));
 
         var property = (propertyExpr.Body as MemberExpression)
                        .Maybe(expr => expr.Member as PropertyInfo)
@@ -83,8 +83,8 @@ public static class PersistentDomainObjectBaseExtensions
             where TSource : class, IIdentityObject<TIdent>
             where TProperty : class, IIdentityObject<TIdent>
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (propertyExpr == null) throw new ArgumentNullException(nameof(propertyExpr));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (propertyExpr is null) throw new ArgumentNullException(nameof(propertyExpr));
 
         return source.GetCollectionValue(propertyExpr)
                      .Match(() => (TProperty?)null,
@@ -96,8 +96,8 @@ public static class PersistentDomainObjectBaseExtensions
             where TSource : class, IIdentityObject<TIdent>
             where TProperty : class, IIdentityObject<TIdent>
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (propertyExpr == null) throw new ArgumentNullException(nameof(propertyExpr));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (propertyExpr is null) throw new ArgumentNullException(nameof(propertyExpr));
 
         if (!EqualityComparer<TProperty>.Default.Equals(source.GetOneToOne<TSource, TProperty, TIdent>(propertyExpr), newValue))
         {
@@ -110,7 +110,7 @@ public static class PersistentDomainObjectBaseExtensions
 
             collection.Clear();
 
-            if (newValue != null)
+            if (newValue is not null)
             {
                 collection.Add(newValue);
             }
@@ -119,7 +119,7 @@ public static class PersistentDomainObjectBaseExtensions
 
     private static ICollection<TProperty> GetCollectionValue<TSource, TProperty>(this TSource source, Expression<Func<TSource, IEnumerable<TProperty>>> propertyExpr)
     {
-        if (propertyExpr == null) throw new ArgumentNullException(nameof(propertyExpr));
+        if (propertyExpr is null) throw new ArgumentNullException(nameof(propertyExpr));
 
         var collectionRequest = from expr in (propertyExpr.Body as MemberExpression).ToMaybe()
 

@@ -86,7 +86,7 @@ public class DBGenerator(MappingSettings settings)
 
         migrationScriptFolderPaths.Foreach(z => builder.MainBuilder.MigrationBuilder.WithFolder(z));
 
-        if (customMigrationScriptReader != null)
+        if (customMigrationScriptReader is not null)
         {
             builder.MainBuilder.MigrationBuilder.WithCustom(customMigrationScriptReader);
         }
@@ -96,7 +96,7 @@ public class DBGenerator(MappingSettings settings)
         builder.MainBuilder.MigrationBuilder.WithTable(executedScriptsTable);
 
         builder.WithMainDatabase(dbName);
-        if (credentials != null)
+        if (credentials is not null)
         {
             builder.WithServerName(serverName, credentials);
         }

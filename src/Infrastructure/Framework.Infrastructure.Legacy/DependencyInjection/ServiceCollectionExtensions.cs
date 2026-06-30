@@ -100,7 +100,7 @@ public static class ServiceCollectionExtensions
 
                                      let projectionAttr = type.GetCustomAttribute<ProjectionAttribute>()
 
-                                     where projectionAttr != null && type.HasAttribute<DependencySecurityAttribute>()
+                                     where projectionAttr is not null && type.HasAttribute<DependencySecurityAttribute>()
 
                                      select new { DomainType = type, projectionAttr.SourceType, CustomViewSecurityRule = (DomainSecurityRule?)type.GetViewSecurityRule() };
 
@@ -110,7 +110,7 @@ public static class ServiceCollectionExtensions
                     typeof(IDomainSecurityService<>).MakeGenericType(pair.DomainType),
                     typeof(UntypedDependencyDomainSecurityService<,>).MakeGenericType(pair.DomainType, pair.SourceType));
 
-                if (pair.CustomViewSecurityRule != null)
+                if (pair.CustomViewSecurityRule is not null)
                 {
                     services.AddSingleton(
                         new DomainModeSecurityRuleInfo(SecurityRule.View.ToDomain(pair.DomainType), pair.CustomViewSecurityRule));

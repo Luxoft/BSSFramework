@@ -18,8 +18,8 @@ public readonly record struct TrackingProperty(string PropertyName, object? Prev
         {
             return new TrackingProperty<T>(
                 propertyName,
-                previousValue == null ? Maybe<T>.Nothing : Maybe.Return((T)previousValue),
-                currentValue == null ? Maybe<T>.Nothing : Maybe.Return<T>((T)currentValue));
+                previousValue is null ? Maybe<T>.Nothing : Maybe.Return((T)previousValue),
+                currentValue is null ? Maybe<T>.Nothing : Maybe.Return<T>((T)currentValue));
         }
     }
 }

@@ -16,7 +16,7 @@ public class ExpandFetchPathFactory(
 {
     protected override PropertyLoadNode ExpandNode(PropertyLoadNode node)
     {
-        if (node == null) throw new ArgumentNullException(nameof(node));
+        if (node is null) throw new ArgumentNullException(nameof(node));
 
         var withoutIgnoreNode = node.WhereP(property => !metadataProxyProvider.Wrap(property).HasAttribute<IgnoreFetchAttribute>(), false);
 

@@ -10,7 +10,7 @@ public class ConfigurationCodeTypeReferenceService<TConfiguration>(TConfiguratio
 {
     public override CodeTypeReference GetCodeTypeReferenceByType(Type type)
     {
-        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (type is null) throw new ArgumentNullException(nameof(type));
 
         return type.ToTypeReference();
     }

@@ -15,9 +15,7 @@ public class BusinessUnitEmployeeRole : AuditPersistentDomainObjectBase, IDetail
 
     public BusinessUnitEmployeeRole(BusinessUnit businessUnit)
     {
-        if (businessUnit == null) throw new ArgumentNullException(nameof(businessUnit));
-
-        this.businessUnit = businessUnit;
+        this.businessUnit = businessUnit ?? throw new ArgumentNullException(nameof(businessUnit));
         this.businessUnit.Maybe(z => z.AddDetail(this));
     }
 
@@ -48,12 +46,12 @@ public class BusinessUnitEmployeeRole : AuditPersistentDomainObjectBase, IDetail
             Employee.Employee employee,
             BusinessUnitEmployeeRoleType role)
     {
-        if (businessUnit == null)
+        if (businessUnit is null)
         {
             throw new ArgumentNullException(nameof(businessUnit));
         }
 
-        if (employee == null)
+        if (employee is null)
         {
             throw new ArgumentNullException(nameof(employee));
         }

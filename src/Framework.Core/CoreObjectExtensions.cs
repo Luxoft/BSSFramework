@@ -19,7 +19,7 @@ public static class CoreObjectExtensions
     [Obsolete("v10 This method will be protected in future")]
     public static string ToFormattedString(this object source, string? typeName = null)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         var sourceType = source.GetType();
         var printTypeName = typeName ?? sourceType.Name;

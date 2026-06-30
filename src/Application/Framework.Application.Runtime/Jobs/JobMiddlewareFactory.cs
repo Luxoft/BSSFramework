@@ -16,7 +16,7 @@ public class JobMiddlewareFactory(
     {
         yield return new TryCloseSessionEvaluatorMiddleware(serviceProvider.GetRequiredService<IDBSessionManager>());
 
-        if (jobImpersonateData?.RunAs != null)
+        if (jobImpersonateData?.RunAs is not null)
         {
             yield return new ImpersonateEvaluatorMiddleware(serviceProvider, jobImpersonateData?.RunAs);
         }

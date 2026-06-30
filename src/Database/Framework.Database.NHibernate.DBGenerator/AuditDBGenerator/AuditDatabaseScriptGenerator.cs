@@ -35,7 +35,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
     public AuditDatabaseScriptGenerator(IEnumerable<MappingSettings> mappingSettings,
                                         string auditTablePostfix)
     {
-        if (mappingSettings == null) throw new ArgumentNullException(nameof(mappingSettings));
+        if (mappingSettings is null) throw new ArgumentNullException(nameof(mappingSettings));
 
         this.AuditTablePostFix = auditTablePostfix;
 
@@ -89,7 +89,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
 
         finally
         {
-            if (stmt != null)
+            if (stmt is not null)
             {
                 stmt.Dispose();
             }
@@ -104,7 +104,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
         var cfg = this.CreateConfiguration(context.DatabaseName.Name, context);
 
         var auditClassMappings = cfg.ClassMappings
-                                    .Where(z => z.MappedClass == null || typeof(AuditRevisionEntity).IsAssignableFrom(z.MappedClass))
+                                    .Where(z => z.MappedClass is null || typeof(AuditRevisionEntity).IsAssignableFrom(z.MappedClass))
                                     .ToList();
 
         var dialect = global::NHibernate.Dialect.Dialect.GetDialect(cfg.Properties);
@@ -155,7 +155,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
 
         var auditAttributeService = generateContext.MappingSettings.GetAuditAttributeService(cfg.ClassMappings);
 
-        var auditClass2OriginalClassItems = cfg.ClassMappings.Where(m => m.MappedClass == null || !m.MappedClass.IsProjection())
+        var auditClass2OriginalClassItems = cfg.ClassMappings.Where(m => m.MappedClass is null || !m.MappedClass.IsProjection())
                                                .Join(
                                                      auditClassMappings,
                                                      z => z.Table.Name.ToLower().Replace("[", string.Empty).Replace("]", string.Empty),
@@ -170,7 +170,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
         foreach (var item in auditClass2OriginalClassItems)
         {
             // Skip not audited domain objects
-            if (Attribute.GetCustomAttribute(item.original.MappedClass, typeof(NotAuditedClassAttribute)) != null)
+            if (Attribute.GetCustomAttribute(item.original.MappedClass, typeof(NotAuditedClassAttribute)) is not null)
             {
                 continue;
             }
@@ -206,7 +206,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
 
             var context = new AuditTableGenerateContext(originalTableMetadata, tableMetadata, table, dialect, mapping, defaultCatalog, null, original, auditAttributeService, generateContext.Context);
 
-            var isCreateMode = tableMetadata == null && !alsoCreatedTable.Contains(table.Name);
+            var isCreateMode = tableMetadata is null && !alsoCreatedTable.Contains(table.Name);
 
             var createOrAlterTableScripts = CreateCreateOrAlterTableScripts(context, isCreateMode);
 
@@ -280,7 +280,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
 
                     var create = true;
 
-                    if (table != null)
+                    if (table is not null)
                     {
 
                         var expectedReferenceColumns =
@@ -324,7 +324,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
     }
 
     private static IEnumerable<string> CreateIndexScript(AuditTableGenerateContext context) =>
-        context.Table.IndexIterator.Where(z => z.Table == null || context.TableInfo.GetIndexMetadata(z.Name) == null).Select(
+        context.Table.IndexIterator.Where(z => z.Table is null || context.TableInfo.GetIndexMetadata(z.Name) is null).Select(
             z => z.SqlCreateString(context.Dialect, context.Mapping, context.DefaultCatalog, null));
 
     private IEnumerable<string> GetIterateScripts(DatabaseMetadata databaseMetadata, Configuration cfg, global::NHibernate.Dialect.Dialect dialect)
@@ -366,7 +366,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
                         pc.Identifier.CreateIdentifierGenerator(dialect, defaultCatalog, defaultSchema, (RootClass)pc) as
                                 IPersistentIdentifierGenerator;
 
-                if (ig != null)
+                if (ig is not null)
                 {
                     generators[ig.GeneratorKey()] = ig;
                 }
@@ -381,7 +381,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
                         ((IdentifierCollection)collection).Identifier.CreateIdentifierGenerator(dialect, defaultCatalog, defaultSchema,
                             null) as IPersistentIdentifierGenerator;
 
-                if (ig != null)
+                if (ig is not null)
                 {
                     generators[ig.GeneratorKey()] = ig;
                 }

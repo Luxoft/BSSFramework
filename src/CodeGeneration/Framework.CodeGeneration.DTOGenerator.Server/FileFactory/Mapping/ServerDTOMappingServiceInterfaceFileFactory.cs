@@ -21,7 +21,7 @@ public class ServerDTOMappingServiceInterfaceFileFactory<TConfiguration> : FileF
     public ServerDTOMappingServiceInterfaceFileFactory(TConfiguration configuration, IEnumerable<IServerMappingServiceExternalMethodGenerator> externalGenerators)
             : base(configuration, null)
     {
-        if (externalGenerators == null) throw new ArgumentNullException(nameof(externalGenerators));
+        if (externalGenerators is null) throw new ArgumentNullException(nameof(externalGenerators));
 
         this.externalGenerators = externalGenerators.ToReadOnlyCollection();
     }

@@ -6,7 +6,7 @@ public static class ActionExtensions
 {
     public static Action<T1, T2> Composite<T1, T2>(this IEnumerable<Action<T1, T2>> source)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         var cachedSource = source.ToArray();
 
@@ -15,8 +15,8 @@ public static class ActionExtensions
 
     public static Action<T1, T2> Composite<TSource, T1, T2>(this IEnumerable<TSource> source, Func<TSource, Action<T1, T2>> selector)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (selector == null) throw new ArgumentNullException(nameof(selector));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (selector is null) throw new ArgumentNullException(nameof(selector));
 
         return source.Select(selector).Composite();
     }

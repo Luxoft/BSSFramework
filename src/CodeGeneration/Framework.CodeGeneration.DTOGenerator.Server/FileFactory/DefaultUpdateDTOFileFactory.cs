@@ -124,7 +124,7 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
                 yield return this.GetIdentityObjectContainerTypeReference();
             }
 
-            if (this.Configuration.VersionProperty != null)
+            if (this.Configuration.VersionProperty is not null)
             {
                 yield return this.Configuration.GetVersionObjectCodeTypeReference();
             }
@@ -168,7 +168,7 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
 
             yield return this.GetIdentityObjectImplementation(true);
 
-            if (this.Configuration.VersionProperty != null)
+            if (this.Configuration.VersionProperty is not null)
             {
                 yield return this.Configuration.GetVersionObjectPrivateImplementation();
             }
@@ -201,7 +201,7 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
 
     private CodeExpression GetPropertyIsEmptyCondition(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         var propRef = new CodeThisReferenceExpression().ToPropertyReference(property);
 
@@ -217,7 +217,7 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
 
     private CodeStatement? TryGetPropertyCompressStatement(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         var propRef = new CodeThisReferenceExpression().ToPropertyReference(property);
 

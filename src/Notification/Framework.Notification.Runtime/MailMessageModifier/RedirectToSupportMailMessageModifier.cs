@@ -12,7 +12,7 @@ public class RedirectToSupportMailMessageModifier(IOptions<SmtpSettings> setting
 {
     public void Modify(MailMessage message)
     {
-        if (message.To.Count == 0 && settings.Value.DefaultReceiverEmails != null)
+        if (message.To.Count == 0 && settings.Value.DefaultReceiverEmails is not null)
         {
             message.To.AddRange(settings.Value.DefaultReceiverEmails.Select(x => new MailAddress(x)));
         }

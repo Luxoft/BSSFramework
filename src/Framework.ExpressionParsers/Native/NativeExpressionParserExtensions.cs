@@ -11,8 +11,8 @@ public static class NativeExpressionParserExtensions
     public static Expression<TDelegate> Parse<TDelegate>(this INativeExpressionParser expressionParserFactory, string expression)
         where TDelegate : Delegate
     {
-        if (expressionParserFactory == null) throw new ArgumentNullException(nameof(expressionParserFactory));
-        if (expression == null) throw new ArgumentNullException(nameof(expression));
+        if (expressionParserFactory is null) throw new ArgumentNullException(nameof(expressionParserFactory));
+        if (expression is null) throw new ArgumentNullException(nameof(expression));
 
         var delegateType = typeof(TDelegate);
 
@@ -31,7 +31,7 @@ public static class NativeExpressionParserExtensions
 
             var firstSuccess = preResult.FirstOrDefault(v => v.Value.IsSuccess());
 
-            if (firstSuccess != null)
+            if (firstSuccess is not null)
             {
                 return firstSuccess.Value.GetValue();
             }

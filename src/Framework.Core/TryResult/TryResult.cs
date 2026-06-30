@@ -11,14 +11,14 @@ public static class TryResult
 
     public static ITryResult<TResult> CreateFault<TResult>(Exception error)
     {
-        if (error == null) throw new ArgumentNullException(nameof(error));
+        if (error is null) throw new ArgumentNullException(nameof(error));
 
         return new FaultResult<TResult>(error);
     }
 
     public static ITryResult<TArgs, TResult> CreateFault<TArgs, TResult>(TArgs args, Exception error)
     {
-        if (error == null) throw new ArgumentNullException(nameof(error));
+        if (error is null) throw new ArgumentNullException(nameof(error));
 
         return new FaultResult<TArgs, TResult>(args, error);
     }
@@ -30,7 +30,7 @@ public static class TryResult
 
     public static ITryResult<Ignore> CreateFault(Exception error)
     {
-        if (error == null) throw new ArgumentNullException(nameof(error));
+        if (error is null) throw new ArgumentNullException(nameof(error));
 
         return CreateFault<Ignore>(error);
     }
@@ -86,16 +86,9 @@ public static class TryResult
         public T Result { get; } = result;
     }
 
-    private class FaultResult<T> : IFaultResult<T>
+    private class FaultResult<T>(Exception error) : IFaultResult<T>
     {
-        public FaultResult(Exception error)
-        {
-            if (error == null) throw new ArgumentNullException(nameof(error));
-
-            this.Error = error;
-        }
-
-        public Exception Error { get; }
+        public Exception Error { get; } = error ?? throw new ArgumentNullException(nameof(error));
     }
 
     private class SuccessResult<TArgs, TResult>(TArgs args, TResult result) : ISuccessResult<TArgs, TResult>
@@ -105,19 +98,11 @@ public static class TryResult
         public TArgs Args { get; } = args;
     }
 
-    private class FaultResult<TArgs, TResult> : IFaultResult<TArgs, TResult>
+    private class FaultResult<TArgs, TResult>(TArgs args, Exception error) : IFaultResult<TArgs, TResult>
     {
-        public FaultResult(TArgs args, Exception error)
-        {
-            if (error == null) throw new ArgumentNullException(nameof(error));
+        public Exception Error { get; } = error ?? throw new ArgumentNullException(nameof(error));
 
-            this.Error = error;
-            this.Args = args;
-        }
-
-        public Exception Error { get; }
-
-        public TArgs Args { get; }
+        public TArgs Args { get; } = args;
     }
 }
 

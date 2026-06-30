@@ -10,7 +10,7 @@ internal class AutoProjectionFactory(ProjectionLambdaEnvironment environment, Pr
 {
     public ProjectionBuilder.ProjectionBuilder Create()
     {
-        var defaultProperties = baseProjection.Properties.Where(prop => prop.ElementProjection == null || prop.ElementProjection.Role == ProjectionRole.Default).ToList();
+        var defaultProperties = baseProjection.Properties.Where(prop => prop.ElementProjection is null || prop.ElementProjection.Role == ProjectionRole.Default).ToList();
 
         var externalNodes = defaultProperties.Select(prop => new ProjectionPath(
                                                          environment.PropertyPathService.WithExpand(prop.Path),
@@ -21,8 +21,8 @@ internal class AutoProjectionFactory(ProjectionLambdaEnvironment environment, Pr
 
     private ProjectionBuilder.ProjectionBuilder InternalCreate(Type domainType, string projectionName, IEnumerable<Node<ProjectionNodeValue>> nodes)
     {
-        if (projectionName == null) throw new ArgumentNullException(nameof(projectionName));
-        if (nodes == null) throw new ArgumentNullException(nameof(nodes));
+        if (projectionName is null) throw new ArgumentNullException(nameof(projectionName));
+        if (nodes is null) throw new ArgumentNullException(nameof(nodes));
 
         var properties = from node in nodes
 
@@ -41,9 +41,9 @@ internal class AutoProjectionFactory(ProjectionLambdaEnvironment environment, Pr
 
     private IEnumerable<ProjectionPropertyBuilder> InternalCreateProperties(Type domainType, string projectionName, Node<ProjectionNodeValue> node)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (projectionName == null) throw new ArgumentNullException(nameof(projectionName));
-        if (node == null) throw new ArgumentNullException(nameof(node));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
+        if (projectionName is null) throw new ArgumentNullException(nameof(projectionName));
+        if (node is null) throw new ArgumentNullException(nameof(node));
 
         var property = node.Value.Property;
 

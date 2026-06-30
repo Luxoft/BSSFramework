@@ -28,7 +28,7 @@ public struct UniqueConstraint
     {
         var property = properties.FirstOrDefault(x => string.Equals(x.Name, GetFieldName(columnName), StringComparison.InvariantCultureIgnoreCase));
 
-        return property != null ? validationIdentitySource.GetPropertyValidationName(property) : columnName;
+        return property is not null ? validationIdentitySource.GetPropertyValidationName(property) : columnName;
     }
 
     private static string GetFieldName(string columnName)

@@ -41,7 +41,7 @@ public class LazyImplementDictionaryCache<TKey, TValue>(
     {
         var proxyType = getProxyType.Maybe(f => f(key));
 
-        if (proxyType == null || !proxyType.IsInterface || proxyType == typeof(TValue))
+        if (proxyType is null || !proxyType.IsInterface || proxyType == typeof(TValue))
         {
             return LazyInterfaceImplementHelper<TValue>.CreateProxy;
         }

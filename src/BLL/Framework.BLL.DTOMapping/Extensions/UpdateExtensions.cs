@@ -74,7 +74,7 @@ public static class UpdateExtensions
     public static void Compress<TItem, TIdentity>(this ICollection<UpdateItemData<TItem, TIdentity>> items)
             where TItem : IUpdateDTO
     {
-        if (items == null) throw new ArgumentNullException(nameof(items));
+        if (items is null) throw new ArgumentNullException(nameof(items));
 
         items.RemoveBy(item =>
                        {

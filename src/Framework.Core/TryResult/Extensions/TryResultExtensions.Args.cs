@@ -5,8 +5,8 @@ public static partial class TryResultExtensions
 {
     public static void Match<TArgs, TResult>(this ITryResult<TArgs, TResult> source, Action<TArgs, TResult> successAction, Action<TArgs, Exception>? faultAction = null)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (successAction == null) throw new ArgumentNullException(nameof(successAction));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (successAction is null) throw new ArgumentNullException(nameof(successAction));
 
 
         if (source is ISuccessResult<TArgs, TResult> successResult)
@@ -15,7 +15,7 @@ public static partial class TryResultExtensions
         }
         else if (source is IFaultResult<TArgs, TResult> faultResult)
         {
-            if (faultAction != null)
+            if (faultAction is not null)
             {
                 faultAction(faultResult.Args, faultResult.Error);
             }
@@ -31,9 +31,9 @@ public static partial class TryResultExtensions
             Func<TArgs, TResult, TNext> successAction,
             Func<TArgs, Exception, TNext> getFaultResult)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (successAction == null) throw new ArgumentNullException(nameof(successAction));
-        if (getFaultResult == null) throw new ArgumentNullException(nameof(getFaultResult));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (successAction is null) throw new ArgumentNullException(nameof(successAction));
+        if (getFaultResult is null) throw new ArgumentNullException(nameof(getFaultResult));
 
         if (source is ISuccessResult<TArgs, TResult> successResult)
         {
@@ -51,8 +51,8 @@ public static partial class TryResultExtensions
 
     public static void SuccessProgress<TArgs, TResult>(this ITryResult<TArgs, TResult> source, Action<TArgs, TResult> successAction)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (successAction == null) throw new ArgumentNullException(nameof(successAction));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (successAction is null) throw new ArgumentNullException(nameof(successAction));
 
 
         source.Match(successAction, (arg, error) => { throw error; });
@@ -60,7 +60,7 @@ public static partial class TryResultExtensions
 
     public static bool IsSuccess<TArgs, TResult>(this ITryResult<TArgs, TResult> source)
     {
-        if (source == null)
+        if (source is null)
         {
             throw new ArgumentNullException(nameof(source));
         }
@@ -70,7 +70,7 @@ public static partial class TryResultExtensions
 
     public static ISuccessResult<TArgs, TResult> ToSuccess<TArgs, TResult>(this ITryResult<TArgs, TResult> source)
     {
-        if (source == null)
+        if (source is null)
         {
             throw new ArgumentNullException(nameof(source));
         }
@@ -80,7 +80,7 @@ public static partial class TryResultExtensions
 
     public static IFaultResult<TArgs, TResult> ToFault<TArgs, TResult>(this ITryResult<TArgs, TResult> source)
     {
-        if (source == null)
+        if (source is null)
         {
             throw new ArgumentNullException(nameof(source));
         }
@@ -90,7 +90,7 @@ public static partial class TryResultExtensions
 
     public static bool IsFault<TArgs, TResult>(this ITryResult<TArgs, TResult> source)
     {
-        if (source == null)
+        if (source is null)
         {
             throw new ArgumentNullException(nameof(source));
         }

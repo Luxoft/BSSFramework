@@ -13,19 +13,11 @@ using Framework.Core;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Integration.Save;
 
-public class IntegrationSaveManyMethodGenerator<TConfiguration> : IntegrationBaseSaveMethodGenerator<TConfiguration>
-        where TConfiguration : class, IIntegrationGeneratorConfiguration<IServiceModelGenerationEnvironment>
+public class IntegrationSaveManyMethodGenerator<TConfiguration>(IntegrationSaveMethodGenerator<TConfiguration> singleSaveGenerator)
+    : IntegrationBaseSaveMethodGenerator<TConfiguration>(singleSaveGenerator.Configuration, singleSaveGenerator.DomainType)
+    where TConfiguration : class, IIntegrationGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
-    private readonly IntegrationSaveMethodGenerator<TConfiguration> singleSaveGenerator;
-
-    public IntegrationSaveManyMethodGenerator(IntegrationSaveMethodGenerator<TConfiguration> singleSaveGenerator)
-            : base(singleSaveGenerator.Configuration, singleSaveGenerator.DomainType)
-    {
-        if (singleSaveGenerator == null) throw new ArgumentNullException(nameof(singleSaveGenerator));
-
-        this.singleSaveGenerator = singleSaveGenerator;
-    }
-
+    private readonly IntegrationSaveMethodGenerator<TConfiguration> singleSaveGenerator = singleSaveGenerator ?? throw new ArgumentNullException(nameof(singleSaveGenerator));
 
     public override MethodIdentity Identity { get; } = MethodIdentityType.IntegrationSaveMany;
 
@@ -58,8 +50,8 @@ public class IntegrationSaveManyMethodGenerator<TConfiguration> : IntegrationBas
 
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
     {
-        if (evaluateDataExpr == null) throw new ArgumentNullException(nameof(evaluateDataExpr));
-        if (bllRefExpr == null) throw new ArgumentNullException(nameof(bllRefExpr));
+        if (evaluateDataExpr is null) throw new ArgumentNullException(nameof(evaluateDataExpr));
+        if (bllRefExpr is null) throw new ArgumentNullException(nameof(bllRefExpr));
 
         foreach (var baseStatement in base.GetFacadeMethodInternalStatements(evaluateDataExpr, bllRefExpr))
         {

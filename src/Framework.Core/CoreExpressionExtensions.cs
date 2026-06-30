@@ -44,7 +44,7 @@ public static class CoreExpressionExtensions
     /// <returns></returns>
     public static string GetInstanceMemberName<TFunc>(this Expression<TFunc> expr)
     {
-        if (expr == null) throw new ArgumentNullException(nameof(expr));
+        if (expr is null) throw new ArgumentNullException(nameof(expr));
 
         var request = from memberExpr in (expr.Body as MemberExpression).ToMaybe()
 
@@ -52,7 +52,7 @@ public static class CoreExpressionExtensions
 
                       where (member is PropertyInfo || member is FieldInfo)
 
-                            && memberExpr.Expression != null
+                            && memberExpr.Expression is not null
 
                       select member.Name;
 
@@ -75,7 +75,7 @@ public static class CoreExpressionExtensions
 
     public static PropertyPath ToPropertyPath(this LambdaExpression source)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         return source.GetReverseProperties().Reverse().ToPropertyPath();
     }
@@ -88,7 +88,7 @@ public static class CoreExpressionExtensions
     /// <returns></returns>
     public static string GetStaticMemberName<T>(this Expression<Func<T>> expr)
     {
-        if (expr == null) throw new ArgumentNullException(nameof(expr));
+        if (expr is null) throw new ArgumentNullException(nameof(expr));
 
         var request = from memberExpr in (expr.Body as MemberExpression).ToMaybe()
 
@@ -96,7 +96,7 @@ public static class CoreExpressionExtensions
 
                       where (member is PropertyInfo || member is FieldInfo)
 
-                            && memberExpr.Expression == null
+                            && memberExpr.Expression is null
 
                       select member.Name;
 
@@ -105,7 +105,7 @@ public static class CoreExpressionExtensions
 
     public static Node<Expression> ToNode(this Expression expression)
     {
-        if (expression == null) throw new ArgumentNullException(nameof(expression));
+        if (expression is null) throw new ArgumentNullException(nameof(expression));
 
         var visitor = new NodeExpressionVisitor(expression);
 
@@ -121,7 +121,7 @@ public static class CoreExpressionExtensions
 
     public static string GetMemberName<TSource, TResult>(this Expression<Func<TSource, TResult>> expr)
     {
-        if (expr == null) throw new ArgumentNullException(nameof(expr));
+        if (expr is null) throw new ArgumentNullException(nameof(expr));
 
         return expr.Body.GetMember().Select(member => member.Name)
                    .GetValue(() => new ArgumentException("not member expression", nameof(expr)));
@@ -129,7 +129,7 @@ public static class CoreExpressionExtensions
 
     public static string ToPath(this Expression source)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
 
         var result = string.Empty;
@@ -154,7 +154,7 @@ public static class CoreExpressionExtensions
                 return field!.GetValue(constantExpression.Value)!.ToString()!;
             }
 
-            if (leftExpression == null)
+            if (leftExpression is null)
             {
                 return rightPath;
             }
@@ -215,7 +215,7 @@ public static class CoreExpressionExtensions
 
     public static Expression TryLiftToNullable(this Expression expression)
     {
-        if (expression == null) throw new ArgumentNullException(nameof(expression));
+        if (expression is null) throw new ArgumentNullException(nameof(expression));
 
         if (expression.Type.IsNullable() || !expression.Type.IsValueType)
         {
@@ -228,22 +228,15 @@ public static class CoreExpressionExtensions
     }
 
 
-    private class NodeExpressionVisitor : ExpressionVisitor
+    private class NodeExpressionVisitor(Expression startNode) : ExpressionVisitor
     {
-        private readonly Expression startNode;
+        private readonly Expression startNode = startNode ?? throw new ArgumentNullException(nameof(startNode));
 
         private readonly List<NodeExpressionVisitor> childVisitors = [];
 
-        public NodeExpressionVisitor(Expression startNode)
-        {
-            if (startNode == null) throw new ArgumentNullException(nameof(startNode));
-
-            this.startNode = startNode;
-        }
-
         public override Expression? Visit(Expression? node)
         {
-            if (node == null || node == this.startNode)
+            if (node is null || node == this.startNode)
             {
                 return base.Visit(node);
             }

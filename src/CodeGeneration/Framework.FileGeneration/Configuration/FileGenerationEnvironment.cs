@@ -33,7 +33,7 @@ public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDo
 
     protected FileGenerationEnvironment(Expression<Func<TPersistentDomainObjectBase, TIdent>> identityPropertyExpr, Assembly? modelAssembly = null)
     {
-        if (identityPropertyExpr == null) throw new ArgumentNullException(nameof(identityPropertyExpr));
+        if (identityPropertyExpr is null) throw new ArgumentNullException(nameof(identityPropertyExpr));
 
         this.IdentityProperty = (identityPropertyExpr.Body as MemberExpression)
                                 .Maybe(expr => expr.Member as PropertyInfo)
@@ -87,7 +87,7 @@ public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDo
     {
         yield return this.PersistentDomainObjectBaseType.Assembly;
 
-        if (this.modelAssembly != null)
+        if (this.modelAssembly is not null)
         {
             yield return this.modelAssembly;
         }
@@ -102,7 +102,7 @@ public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDo
     {
         var baseProjectionEnvironment = this.GetProjectionEnvironment();
 
-        if (baseProjectionEnvironment != null)
+        if (baseProjectionEnvironment is not null)
         {
             yield return baseProjectionEnvironment;
         }
@@ -169,7 +169,7 @@ public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDo
 
     protected IProjectionEnvironment CreateManualProjectionLambdaEnvironment(Assembly assembly)
     {
-        if (assembly == null) throw new ArgumentNullException(nameof(assembly));
+        if (assembly is null) throw new ArgumentNullException(nameof(assembly));
 
         return new ManualProjectionEnvironment(assembly, this.PersistentDomainObjectBaseType, this.MetadataProxyProvider);
     }

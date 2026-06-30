@@ -18,7 +18,7 @@ public class DefaultDomainOperationEventDTOFileFactory<TConfiguration> : DTOFile
     public DefaultDomainOperationEventDTOFileFactory(TConfiguration configuration, Type domainType, EventOperation domainObjectEvent)
             : base(configuration, domainType)
     {
-        if (domainObjectEvent == null) throw new ArgumentNullException(nameof(domainObjectEvent));
+        if (domainObjectEvent is null) throw new ArgumentNullException(nameof(domainObjectEvent));
 
         this.FileType = new DomainOperationEventDTOFileType(domainObjectEvent);
     }

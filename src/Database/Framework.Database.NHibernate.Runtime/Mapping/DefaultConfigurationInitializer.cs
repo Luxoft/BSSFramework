@@ -51,7 +51,7 @@ public class DefaultConfigurationInitializer(
                     c.Properties.Add(Environment.SqlExceptionConverter, typeof(SqlExceptionConverter).AssemblyQualifiedName);
                     c.Properties.Add(Environment.CommandTimeout, databaseSettings.CommandTimeout.ToString());
 
-                    if (nhibernateSettings.SqlTypesKeepDateTime != null)
+                    if (nhibernateSettings.SqlTypesKeepDateTime is not null)
                     {
                         c.Properties.Add(Environment.SqlTypesKeepDateTime, nhibernateSettings.SqlTypesKeepDateTime.ToString());
                     }

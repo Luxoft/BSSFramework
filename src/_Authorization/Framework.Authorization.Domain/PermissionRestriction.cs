@@ -24,9 +24,7 @@ public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Pe
     /// <param name="permission">Пермиссия</param>
     public PermissionRestriction(Permission permission)
     {
-        if (permission == null) throw new ArgumentNullException(nameof(permission));
-
-        this.permission = permission;
+        this.permission = permission ?? throw new ArgumentNullException(nameof(permission));
         this.permission.AddDetail(this);
     }
 

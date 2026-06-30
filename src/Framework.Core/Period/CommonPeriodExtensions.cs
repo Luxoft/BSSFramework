@@ -56,7 +56,7 @@ public static class CommonPeriodExtensions
         /// </summary>
         /// <param name="date">Дата, которую нужно проверить на вхождение в период</param>
         /// <returns>true, если дата содержится в периоде, в противном случае — false</returns>
-        public bool NativeContains(DateTime date) => period.NativeStartDate <= date && (period.NativeEndDate == null || date <= period.NativeEndDateValue);
+        public bool NativeContains(DateTime date) => period.NativeStartDate <= date && (period.NativeEndDate is null || date <= period.NativeEndDateValue);
 
         /// <summary>
         /// Возвращает значение, указывающее, содержит ли указанный период <see cref="period"/> значение даты <see cref="date"/> переданной в качестве параметра

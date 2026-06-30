@@ -16,7 +16,7 @@ internal static class Base85Convert
     /// <returns>An Ascii85-encoded string representing the input byte array.</returns>
     public static string Encode(byte[] bytes)
     {
-        if (bytes == null)
+        if (bytes is null)
             throw new ArgumentNullException(nameof(bytes));
 
         // preallocate a StringBuilder with enough room to store the encoded bytes
@@ -57,7 +57,7 @@ internal static class Base85Convert
     /// <returns>The decoded byte array.</returns>
     public static byte[] Decode(string encoded)
     {
-        if (encoded == null)
+        if (encoded is null)
             throw new ArgumentNullException(nameof(encoded));
 
         // preallocate a memory stream with enough capacity to hold the decoded data

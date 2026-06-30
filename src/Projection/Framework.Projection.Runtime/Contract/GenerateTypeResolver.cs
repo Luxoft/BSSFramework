@@ -23,7 +23,7 @@ internal class GenerateTypeResolver : ITypeResolver<Type>
 
     public Type? TryResolve(Type contractType)
     {
-        if (contractType == null) throw new ArgumentNullException(nameof(contractType));
+        if (contractType is null) throw new ArgumentNullException(nameof(contractType));
 
         return this.generateState.Dict.GetValueOrDefault(contractType)
 

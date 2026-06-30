@@ -8,7 +8,7 @@ public static class NullableExtensions
             where TSource : struct
             where TResult : struct
     {
-        if (selector == null) throw new ArgumentNullException(nameof(selector));
+        if (selector is null) throw new ArgumentNullException(nameof(selector));
 
         return source.ToMaybe().Select(selector).ToNullable();
     }
@@ -19,8 +19,8 @@ public static class NullableExtensions
             where TResult : struct
             where TNextResult : struct
     {
-        if (nextSelector == null) throw new ArgumentNullException(nameof(nextSelector));
-        if (resultSelector == null) throw new ArgumentNullException(nameof(resultSelector));
+        if (nextSelector is null) throw new ArgumentNullException(nameof(nextSelector));
+        if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
 
         return source.ToMaybe().SelectMany(next => nextSelector(next).ToMaybe(), resultSelector).ToNullable();
     }
@@ -30,7 +30,7 @@ public static class NullableExtensions
     public static T? Where<T>(this T? source, Func<T, bool> filter)
             where T : struct
     {
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
+        if (filter is null) throw new ArgumentNullException(nameof(filter));
 
         return source.ToMaybe().Where(filter).ToNullable();
     }

@@ -9,8 +9,8 @@ public class DependencyGeneratePolicy : CachedGeneratePolicy<RoleFileType>
     public DependencyGeneratePolicy(IGeneratePolicy<RoleFileType> baseGeneratePolicy, IEnumerable<GenerateTypeMap> maps)
             : base(baseGeneratePolicy)
     {
-        if (baseGeneratePolicy == null) throw new ArgumentNullException(nameof(baseGeneratePolicy));
-        if (maps == null) throw new ArgumentNullException(nameof(maps));
+        if (baseGeneratePolicy is null) throw new ArgumentNullException(nameof(baseGeneratePolicy));
+        if (maps is null) throw new ArgumentNullException(nameof(maps));
 
         this.Maps = maps.ToArray();
 
@@ -25,12 +25,12 @@ public class DependencyGeneratePolicy : CachedGeneratePolicy<RoleFileType>
 
     protected bool IsUsedProperty(DTOFileType? ownerFileType, Type elementType, RoleFileType elementFileType, bool? detailFlag = null)
     {
-        if (elementFileType == null) throw new ArgumentNullException(nameof(elementFileType));
-        if (elementType == null) throw new ArgumentNullException(nameof(elementType));
+        if (elementFileType is null) throw new ArgumentNullException(nameof(elementFileType));
+        if (elementType is null) throw new ArgumentNullException(nameof(elementType));
 
         var elementMap = this.Maps.SingleOrDefault(map => map.DomainType == elementType && map.FileType == elementFileType);
 
-        var usedInTypes = this.Maps.Where(map => (ownerFileType == null || map.FileType == ownerFileType)) // Выкидываем лишние MAP-ы
+        var usedInTypes = this.Maps.Where(map => (ownerFileType is null || map.FileType == ownerFileType)) // Выкидываем лишние MAP-ы
                               .Where(map => map != elementMap) // Выкидываем Map текущего элемента
                               .Where(map => map.UsedDetailRole(elementType, elementFileType, detailFlag) && this.Used(map.DomainType, map.FileType));
 
@@ -39,8 +39,8 @@ public class DependencyGeneratePolicy : CachedGeneratePolicy<RoleFileType>
 
     protected override bool InternalUsed(Type domainType, RoleFileType fileType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         if (fileType == BaseFileType.BaseAbstractDTO)
         {

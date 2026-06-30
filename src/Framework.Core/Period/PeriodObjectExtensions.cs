@@ -5,7 +5,7 @@ public static class PeriodObjectExtensions
 {
     public static void OverridePeriodStartDate(this IMutablePeriodObject source, DateTime startDate)
     {
-        if (source == null)
+        if (source is null)
         {
             throw new ArgumentNullException(nameof(source));
         }
@@ -16,7 +16,7 @@ public static class PeriodObjectExtensions
 
     public static void OverridePeriodEndDate(this IMutablePeriodObject source, DateTime? endDate)
     {
-        if (source == null)
+        if (source is null)
         {
             throw new ArgumentNullException(nameof(source));
         }

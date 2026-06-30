@@ -346,7 +346,7 @@ public class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(root
             {
                 var objects = ctx.Logics.Default.Create<EmployeeCellPhone>(SecurityRule.View).GetFullList();
 
-                return objects != null;
+                return objects is not null;
             });
 
         // Assert

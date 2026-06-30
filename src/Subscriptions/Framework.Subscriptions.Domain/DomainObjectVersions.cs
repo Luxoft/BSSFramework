@@ -37,19 +37,19 @@ public record DomainObjectVersions<TDomainObject>(TDomainObject? Previous, TDoma
     public override string ToString() => $"DomainObjectType: {this.DomainObjectType}, Previous: {this.Previous}, Current: {this.Current}";
 
     public async ValueTask<DomainObjectVersions<TNewDomainObject>> ChangeDomainObjectAsync<TNewDomainObject>(Func<TDomainObject, ValueTask<TNewDomainObject>> selector)
-        where TNewDomainObject : class => new(this.Previous == null ? null : await selector(this.Previous), this.Current == null ? null : await selector(this.Current));
+        where TNewDomainObject : class => new(this.Previous is null ? null : await selector(this.Previous), this.Current is null ? null : await selector(this.Current));
 
     private static DomainObjectChangeType GetChangeType(TDomainObject? previous, TDomainObject? current)
     {
-        if (previous == null && current != null)
+        if (previous is null && current is not null)
         {
             return DomainObjectChangeType.Create;
         }
-        else if (previous != null && current != null)
+        else if (previous is not null && current is not null)
         {
             return DomainObjectChangeType.Update;
         }
-        else if (previous != null && current == null)
+        else if (previous is not null && current is null)
         {
             return DomainObjectChangeType.Delete;
         }

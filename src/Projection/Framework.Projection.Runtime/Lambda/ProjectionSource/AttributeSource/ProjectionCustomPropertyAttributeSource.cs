@@ -23,7 +23,7 @@ public class ProjectionCustomPropertyAttributeSource : AttributeSourceBase<IProj
         {
             this.TryCreateIgnoreFetchAttribute(),
             this.CreateProjectionPropertyAttribute()
-        }.Where(attr => attr != null).Select(v => v!).Concat(this.GetFetchPathAttributes());
+        }.Where(attr => attr is not null).Select(v => v!).Concat(this.GetFetchPathAttributes());
 
     protected virtual IgnoreFetchAttribute? TryCreateIgnoreFetchAttribute()
     {

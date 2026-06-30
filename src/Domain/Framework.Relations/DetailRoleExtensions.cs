@@ -18,7 +18,7 @@ public static class DetailRoleExtensions
 
     public static bool IsMaster(this PropertyInfo propertyInfo)
     {
-        if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
+        if (propertyInfo is null) throw new ArgumentNullException(nameof(propertyInfo));
 
         return propertyInfo.HasAttribute<IsMasterAttribute>();
     }

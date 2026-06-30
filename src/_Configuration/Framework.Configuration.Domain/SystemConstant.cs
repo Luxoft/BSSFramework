@@ -33,11 +33,8 @@ public class SystemConstant : AuditPersistentDomainObjectBase
     /// <param name="type">Тип</param>
     public SystemConstant(string code, DomainType type)
     {
-        if (code == null) throw new ArgumentNullException(nameof(code));
-        if (type == null) throw new ArgumentNullException(nameof(type));
-
-        this.code = code;
-        this.type = type;
+        this.code = code ?? throw new ArgumentNullException(nameof(code));
+        this.type = type ?? throw new ArgumentNullException(nameof(type));
     }
 
     /// <summary>

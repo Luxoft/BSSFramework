@@ -15,8 +15,8 @@ public class MaxLengthValidator : IDynamicPropertyValidator
 
     public IPropertyValidator GetValidator(PropertyInfo property, IServiceProvider serviceProvider)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
-        if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
+        if (property is null) throw new ArgumentNullException(nameof(property));
+        if (serviceProvider is null) throw new ArgumentNullException(nameof(serviceProvider));
 
         var validatorType = this.GetValidatorType(property);
 
@@ -27,7 +27,7 @@ public class MaxLengthValidator : IDynamicPropertyValidator
 
     public Type GetValidatorType(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         if (property.PropertyType == typeof(string))
         {
@@ -56,13 +56,13 @@ public class MaxLengthValidator : IDynamicPropertyValidator
 
         public ValidationResult GetValidationResult(IPropertyValidationContext<TSource, string> context)
         {
-            if (context == null)
+            if (context is null)
             {
                 throw new ArgumentNullException(nameof(context));
             }
 
             return ValidationResult.FromCondition(
-                                                  context.Value == null || context.Value.Length <= this.maxLength,
+                                                  context.Value is null || context.Value.Length <= this.maxLength,
                                                   () => $"The length of {context.GetPropertyName()} property of {context.GetSourceTypeName()} should not be more than {this.maxLength}");
         }
     }
@@ -71,10 +71,10 @@ public class MaxLengthValidator : IDynamicPropertyValidator
     {
         public ValidationResult GetValidationResult(IPropertyValidationContext<TSource, byte[]> context)
         {
-            if (context == null) throw new ArgumentNullException(nameof(context));
+            if (context is null) throw new ArgumentNullException(nameof(context));
 
             return ValidationResult.FromCondition(
-                                                  context.Value == null || context.Value.Length <= maxLength,
+                                                  context.Value is null || context.Value.Length <= maxLength,
                                                   () => $"The length of {context.GetPropertyName()} property of {context.GetSourceTypeName()} should not be more than {maxLength}");
         }
     }

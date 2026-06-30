@@ -11,7 +11,7 @@ internal static class FetchPropertyInfoExtensions
 {
     public static MainDTOType GetMainDTOType(this PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         return property.IsDetail() ? MainDTOType.RichDTO
                : property.IsNotDetail() ? MainDTOType.SimpleDTO
@@ -21,14 +21,14 @@ internal static class FetchPropertyInfoExtensions
 
     public static MainDTOType GetMainDTOType(this PropertyInfo property, MainDTOType maxDTOType)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         return property.GetMainDTOType().Min(maxDTOType);
     }
 
     public static bool IsNotMaster(this PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         var propertyType = property.PropertyType;
 

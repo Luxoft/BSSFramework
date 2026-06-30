@@ -18,9 +18,7 @@ public class Address : AuditPersistentDomainObjectBase, IDetail<LegalEntityBase>
 
     public Address(LegalEntityBase legalEntity)
     {
-        if (legalEntity == null) throw new ArgumentNullException(nameof(legalEntity));
-
-        this.legalEntity = legalEntity;
+        this.legalEntity = legalEntity ?? throw new ArgumentNullException(nameof(legalEntity));
         this.legalEntity.AddDetail(this);
     }
 

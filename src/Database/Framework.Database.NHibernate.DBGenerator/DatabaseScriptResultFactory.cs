@@ -44,20 +44,9 @@ public static class DatabaseScriptResultFactory
         public IDatabaseScriptResult Evaluate() => this;
     }
 
-    struct LazyDatabaseScriptResult : IDatabaseScriptResult
+    struct LazyDatabaseScriptResult(Dictionary<ApplyMigrationDbScriptMode, Lazy<IEnumerable<string>>> dictionary) : IDatabaseScriptResult
     {
-        private readonly Dictionary<ApplyMigrationDbScriptMode, Lazy<IEnumerable<string>>> dictionary;
-
-        public LazyDatabaseScriptResult(Dictionary<ApplyMigrationDbScriptMode, Lazy<IEnumerable<string>>> dictionary)
-                : this()
-        {
-            if (dictionary == null)
-            {
-                throw new ArgumentNullException(nameof(dictionary));
-            }
-
-            this.dictionary = dictionary;
-        }
+        private readonly Dictionary<ApplyMigrationDbScriptMode, Lazy<IEnumerable<string>>> dictionary = dictionary ?? throw new ArgumentNullException(nameof(dictionary));
 
         public IEnumerable<string> this[ApplyMigrationDbScriptMode mode]
         {

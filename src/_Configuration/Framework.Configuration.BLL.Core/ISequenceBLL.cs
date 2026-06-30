@@ -9,7 +9,7 @@ public static class SequenceBLLExtensions
 {
     public static long GetNextNumber<T>(this ISequenceBLL sequenceBLL)
     {
-        if (sequenceBLL == null) throw new ArgumentNullException(nameof(sequenceBLL));
+        if (sequenceBLL is null) throw new ArgumentNullException(nameof(sequenceBLL));
 
         return sequenceBLL.GetNextNumber(typeof(T).Name);
     }

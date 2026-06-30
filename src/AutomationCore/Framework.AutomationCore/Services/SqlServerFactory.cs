@@ -50,7 +50,7 @@ public class SqlServerFactory(
 
     public void Dispose()
     {
-        if (this.localDbInstanceName != null && automationFrameworkSettingsOptions.Value.DatabaseInitMode == DatabaseInitMode.RebuildSnapshot)
+        if (this.localDbInstanceName is not null && automationFrameworkSettingsOptions.Value.DatabaseInitMode == DatabaseInitMode.RebuildSnapshot)
         {
             using var localDbApi = new SqlLocalDbApi();
 

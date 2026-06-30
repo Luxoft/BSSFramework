@@ -37,7 +37,7 @@ public abstract class ValidationMapBase : IValidationMap
 
     public IClassValidationMap GetClassMap(Type type)
     {
-        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (type is null) throw new ArgumentNullException(nameof(type));
 
         return this.cache[type];
     }

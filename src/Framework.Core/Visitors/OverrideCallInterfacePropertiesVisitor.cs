@@ -9,7 +9,7 @@ public class OverrideCallInterfacePropertiesVisitor : ExpressionVisitor
 
     public OverrideCallInterfacePropertiesVisitor(Type interfaceType)
     {
-        if (interfaceType == null) throw new ArgumentNullException(nameof(interfaceType));
+        if (interfaceType is null) throw new ArgumentNullException(nameof(interfaceType));
 
         this.internalVisitor = interfaceType.GetProperties()
                                              .Select(property => new OverrideCallInterfacePropertyVisitor(property))

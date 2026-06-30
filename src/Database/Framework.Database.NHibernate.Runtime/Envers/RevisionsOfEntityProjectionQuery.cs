@@ -45,7 +45,7 @@ public class RevisionsOfEntityProjectionQuery<T> : RevisionsOfEntityQuery
         var revisionInfoObject = ((IDictionary)versionsEntity[originalId]!)[revisionPropertyName];
         var proxy = revisionInfoObject as INHibernateProxy;
 
-        return proxy != null ? Convert.ToInt64(proxy.HibernateLazyInitializer.Identifier) : this.VerCfg.RevisionInfoNumberReader.RevisionNumber(revisionInfoObject);
+        return proxy is not null ? Convert.ToInt64(proxy.HibernateLazyInitializer.Identifier) : this.VerCfg.RevisionInfoNumberReader.RevisionNumber(revisionInfoObject);
     }
 
     protected override void FillResult(IList result)

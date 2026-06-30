@@ -30,7 +30,7 @@ public class DTOServiceGeneratePolicy<TConfiguration> : GeneratorConfigurationCo
 
                       let typeFileType = typeReference.UserData["FileType"] as RoleFileType
 
-                      where typeRefDomainType != null && typeFileType != null
+                      where typeRefDomainType is not null && typeFileType is not null
 
                       select Tuple.Create(typeRefDomainType, typeFileType);
 
@@ -40,8 +40,8 @@ public class DTOServiceGeneratePolicy<TConfiguration> : GeneratorConfigurationCo
 
     public bool Used(Type domainType, RoleFileType fileType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         return this.cache.Contains(new Tuple<Type, RoleFileType>(domainType, fileType));
     }

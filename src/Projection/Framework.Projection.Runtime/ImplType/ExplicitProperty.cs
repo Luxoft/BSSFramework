@@ -42,7 +42,7 @@ internal class ExplicitProperty : BasePropertyInfoImpl, IWrappingObject
 
     private PropertyInfo GetGenericInterfaceProp(PropertyInfo baseProp)
     {
-        if (baseProp == null) throw new ArgumentNullException(nameof(baseProp));
+        if (baseProp is null) throw new ArgumentNullException(nameof(baseProp));
 
         if (baseProp.ReflectedType!.IsGenericType)
         {

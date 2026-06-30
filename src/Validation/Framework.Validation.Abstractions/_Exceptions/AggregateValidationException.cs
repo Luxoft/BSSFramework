@@ -9,7 +9,7 @@ public class AggregateValidationException : ValidationExceptionBase
 {
     public AggregateValidationException(IEnumerable<ValidationExceptionBase> innerExceptions)
     {
-        if (innerExceptions == null) throw new ArgumentNullException(nameof(innerExceptions));
+        if (innerExceptions is null) throw new ArgumentNullException(nameof(innerExceptions));
 
         this.InnerExceptions = innerExceptions.ToReadOnlyCollection();
     }

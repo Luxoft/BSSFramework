@@ -17,14 +17,14 @@ public abstract class OperationBLLBase<TBLLContext, TPersistentDomainObjectBase,
 
     public virtual void Save(TDomainObject domainObject)
     {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
+        if (domainObject is null) throw new ArgumentNullException(nameof(domainObject));
 
         this.DefaultCancellationTokenSource.RunSync(ct => this.Context.OperationSender.Send(domainObject, EventOperation.Save, ct));
     }
 
     public virtual void Remove(TDomainObject domainObject)
     {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
+        if (domainObject is null) throw new ArgumentNullException(nameof(domainObject));
 
         this.DefaultCancellationTokenSource.RunSync(ct => this.Context.OperationSender.Send(domainObject, EventOperation.Remove, ct));
     }

@@ -188,12 +188,12 @@ public static class CoreTypeExtensions
 
     public static Type GetCollectionOrArrayElementTypeOrSelf(this Type type) => type.GetCollectionOrArrayElementType() ?? type;
 
-    public static bool IsCollection(this Type type, Func<Type?, bool> elementTypeFilter)
+    public static bool IsCollection(this Type type, Func<Type, bool> elementTypeFilter)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (elementTypeFilter == null) throw new ArgumentNullException(nameof(elementTypeFilter));
 
-        return type.IsCollection() && elementTypeFilter(type.GetCollectionElementType());
+        return type.IsCollection() && elementTypeFilter(type.GetCollectionElementType()!);
     }
 
     public static Func<TResult> WithLock<TResult>(this Func<TResult> func, object? baseLocker = null)

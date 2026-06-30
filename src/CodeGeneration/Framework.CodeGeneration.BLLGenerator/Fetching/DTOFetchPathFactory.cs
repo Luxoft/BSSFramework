@@ -144,7 +144,7 @@ public class DTOFetchPathFactory(IMetadataProxyProvider metadataProxyProvider, T
                 }
             }
 
-            if (maxDTOType >= ViewDTOType.RichDTO && property.PropertyType.IsCollection(t => this.IsTransferType(t!)))
+            if (maxDTOType >= ViewDTOType.RichDTO && property.PropertyType.IsCollection(this.IsTransferType))
             {
                 return this.GetLoadNode(property.GetNestedType(), nextMaxDTOType, nextRecurseLevel, subProperty =>
 

@@ -35,13 +35,13 @@ namespace Framework.Database.Visitors;
 
 //        protected override Expression VisitMethodCall(MethodCallExpression node)
 //        {
-//            if (node == null) throw new ArgumentNullException("node");
+//            if (node is null) throw new ArgumentNullException("node");
 
 //            var request = from _ in Maybe.Return()
 
 //                          let method = node.Method
 
-//                          where node.Object == null && method.DeclaringType == typeof(Queryable)
+//                          where node.Object is null && method.DeclaringType == typeof(Queryable)
 
 //                          from newSource in this.ExtractConstList(node.Arguments[0])
 
@@ -85,7 +85,7 @@ public class RestoreQueryableCallsVisitor : ExpressionVisitor
 
                       let method = node.Method
 
-                      where node.Object == null && method.DeclaringType == typeof(Enumerable)
+                      where node.Object is null && method.DeclaringType == typeof(Enumerable)
 
                       from newSource in node.Arguments[0].GetConstantValue<IQueryable>()
 

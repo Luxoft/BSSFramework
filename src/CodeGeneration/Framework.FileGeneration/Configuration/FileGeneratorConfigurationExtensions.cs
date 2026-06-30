@@ -10,15 +10,15 @@ public static class FileGeneratorConfigurationExtensions
 
         public bool IsPersistentObject(Type? type)
         {
-            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+            if (configuration is null) throw new ArgumentNullException(nameof(configuration));
 
-            return type != null && !type.IsAbstract && configuration.Environment.PersistentDomainObjectBaseType.IsAssignableFrom(type);
+            return type is not null && !type.IsAbstract && configuration.Environment.PersistentDomainObjectBaseType.IsAssignableFrom(type);
         }
 
         public bool IsIdentityProperty(PropertyInfo property)
         {
-            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-            if (property == null) throw new ArgumentNullException(nameof(property));
+            if (configuration is null) throw new ArgumentNullException(nameof(configuration));
+            if (property is null) throw new ArgumentNullException(nameof(property));
 
             return configuration.Environment.IsIdentityProperty(property);
         }

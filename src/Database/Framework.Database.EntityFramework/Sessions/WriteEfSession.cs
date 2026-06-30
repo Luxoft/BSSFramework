@@ -53,7 +53,7 @@ public class WriteEfSession : EfSessionBase
             {
                 if (this.manualFault)
                 {
-                    if (this.Transaction.Connection != null)
+                    if (this.Transaction.Connection is not null)
                     {
                         await this.efTransaction.RollbackAsync(ct);
                     }

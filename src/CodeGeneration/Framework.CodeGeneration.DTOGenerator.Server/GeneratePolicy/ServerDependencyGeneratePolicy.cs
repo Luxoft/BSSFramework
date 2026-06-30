@@ -11,8 +11,8 @@ public class ServerDependencyGeneratePolicy(IGeneratePolicy<RoleFileType> baseGe
 {
     protected override bool InternalUsed(Type domainType, RoleFileType fileType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         if (fileType == ServerFileType.BaseEventDTO)
         {

@@ -27,7 +27,7 @@ public class RequiredGroupValidator : DynamicClassValidator
 
     protected override IClassValidator GetValidator<TSource>(IServiceProvider serviceProvider)
     {
-        if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
+        if (serviceProvider is null) throw new ArgumentNullException(nameof(serviceProvider));
 
         var uniProperties = typeof(TSource).GetUniqueElementProperties(this.groupKey, true);
 
@@ -40,7 +40,7 @@ public class RequiredGroupValidator : DynamicClassValidator
 
     private static Func<TSource, bool> GetPropertyRequiredValidator<TSource>(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         return new Func<Expression<Func<TSource, object>>, Func<TSource, bool>>(GetPropertyRequiredValidator)
                .CreateGenericMethod(typeof(TSource), property.PropertyType)
@@ -49,7 +49,7 @@ public class RequiredGroupValidator : DynamicClassValidator
 
     private static Func<TSource, bool> GetPropertyRequiredValidator<TSource, TProperty>(Expression<Func<TSource, TProperty>> propertyExpr)
     {
-        if (propertyExpr == null) throw new ArgumentNullException(nameof(propertyExpr));
+        if (propertyExpr is null) throw new ArgumentNullException(nameof(propertyExpr));
 
         var isValidExpr = from propertyValue in propertyExpr
 
@@ -64,7 +64,7 @@ public class RequiredGroupValidator<TSource>(RequiredGroupValidatorMode mode, Di
 {
     public ValidationResult GetValidationResult(IClassValidationContext<TSource> validationContext)
     {
-        if (validationContext == null) throw new ArgumentNullException(nameof(validationContext));
+        if (validationContext is null) throw new ArgumentNullException(nameof(validationContext));
 
         var validState = propertyValidators.ChangeValue(f => f(validationContext.Source))
                              .Where(pair => pair.Value).ToDictionary();

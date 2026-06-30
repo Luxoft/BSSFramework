@@ -9,7 +9,7 @@ public class CSharpNativeExpressionParser(INativeBodyExpressionParser parser) : 
 {
     public LambdaExpression Parse(NativeExpressionParsingData input)
     {
-        if (input == null) throw new ArgumentNullException(nameof(input));
+        if (input is null) throw new ArgumentNullException(nameof(input));
 
         var funcMethodInfo = input.ParsingInfo;
 

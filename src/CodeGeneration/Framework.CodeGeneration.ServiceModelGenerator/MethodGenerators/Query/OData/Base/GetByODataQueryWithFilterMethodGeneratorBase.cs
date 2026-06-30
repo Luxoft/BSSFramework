@@ -21,9 +21,7 @@ public abstract class GetByODataQueryWithFilterMethodGeneratorBase<TConfiguratio
     protected GetByODataQueryWithFilterMethodGeneratorBase(TConfiguration configuration, Type domainType, ViewDTOType dtoType, Type filterType)
             : base(configuration, domainType, dtoType)
     {
-        if (filterType == null) throw new ArgumentNullException(nameof(filterType));
-
-        this.FilterType = filterType;
+        this.FilterType = filterType ?? throw new ArgumentNullException(nameof(filterType));
 
         this.ReturnType = typeof(SelectOperationResult<>).ToTypeReference(this.Configuration.Environment.ServerDTO.GetCodeTypeReference(this.DomainType, this.DTOType));
     }

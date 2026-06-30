@@ -13,8 +13,8 @@ public static class SelectOperationResultExtensions
         where TSource : IIdentityObject<TIdent>
         where TResult : IIdentityObject<TIdent>
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (selector == null) throw new ArgumentNullException(nameof(selector));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (selector is null) throw new ArgumentNullException(nameof(selector));
 
         return source.Items.Select(node => node.ChangeItem(selector)).ToSelectOperationResult(source.TotalCount);
     }

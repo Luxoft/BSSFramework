@@ -33,8 +33,8 @@ internal class CreateSecurityNodesProjectionSource(ProjectionLambdaEnvironment e
 
     private ProjectionBuilder.ProjectionBuilder FillSecurityProjection(Type sourceType, IReadOnlyDictionary<Type, ProjectionBuilder.ProjectionBuilder> securityProjections)
     {
-        if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));
-        if (securityProjections == null) throw new ArgumentNullException(nameof(securityProjections));
+        if (sourceType is null) throw new ArgumentNullException(nameof(sourceType));
+        if (securityProjections is null) throw new ArgumentNullException(nameof(securityProjections));
 
         var projection = securityProjections[sourceType];
 
@@ -70,7 +70,7 @@ internal class CreateSecurityNodesProjectionSource(ProjectionLambdaEnvironment e
 
     private HashSet<Type> GetLinkedSecurityTypes(IEnumerable<Type> allTypes)
     {
-        if (allTypes == null) throw new ArgumentNullException(nameof(allTypes));
+        if (allTypes is null) throw new ArgumentNullException(nameof(allTypes));
 
         var securityTypes = new HashSet<Type>();
 
@@ -81,8 +81,8 @@ internal class CreateSecurityNodesProjectionSource(ProjectionLambdaEnvironment e
 
     private void FillLinkedSecurityTypes(IEnumerable<Type> allTypes, HashSet<Type> securityTypes)
     {
-        if (allTypes == null) throw new ArgumentNullException(nameof(allTypes));
-        if (securityTypes == null) throw new ArgumentNullException(nameof(securityTypes));
+        if (allTypes is null) throw new ArgumentNullException(nameof(allTypes));
+        if (securityTypes is null) throw new ArgumentNullException(nameof(securityTypes));
 
         var request = from type in allTypes
 
@@ -101,7 +101,7 @@ internal class CreateSecurityNodesProjectionSource(ProjectionLambdaEnvironment e
 
     private IEnumerable<Type> GetSecurityNodeArgsWithSelf(Type type)
     {
-        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (type is null) throw new ArgumentNullException(nameof(type));
 
         var securityNodeInterfaces = type.GetSecurityNodeInterfaces().ToArray();
 

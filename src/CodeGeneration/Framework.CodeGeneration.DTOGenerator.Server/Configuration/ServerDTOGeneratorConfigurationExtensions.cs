@@ -9,7 +9,7 @@ public static class ServerDTOGeneratorConfigurationExtensions
 {
     public static CodeMemberProperty GetVersionObjectPrivateImplementation(this IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment> configuration)
     {
-        if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+        if (configuration is null) throw new ArgumentNullException(nameof(configuration));
 
         return new CodeMemberProperty
         {
@@ -27,7 +27,7 @@ public static class ServerDTOGeneratorConfigurationExtensions
 
     public static CodeTypeReference GetVersionObjectCodeTypeReference(this IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment> configuration)
     {
-        if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+        if (configuration is null) throw new ArgumentNullException(nameof(configuration));
 
         return typeof(IVersionObject<>).MakeGenericType(configuration.VersionType).ToTypeReference();
     }

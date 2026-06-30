@@ -14,8 +14,8 @@ public static class CachedTypeExtensions
 
     public static Type CachedMakeGenericType(this Type type, params Type[] args)
     {
-        if (type == null) throw new ArgumentNullException(nameof(type));
-        if (args == null) throw new ArgumentNullException(nameof(args));
+        if (type is null) throw new ArgumentNullException(nameof(type));
+        if (args is null) throw new ArgumentNullException(nameof(args));
 
         return MakeGenericTypeCache[(type, args)];
     }

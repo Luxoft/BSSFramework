@@ -16,7 +16,7 @@ public class ProjectionCustomProperty<TProperty> : IProjectionCustomProperty
 
         this.Name = name;
         this.Writable = writable;
-        this.lazyType = LazyHelper.Create(() => getPropProjection == null ? (TypeReferenceBase)new TypeReferenceBase.FixedTypeReference(collectionType.SafeMakeProjectionCollectionType(typeof(TProperty)))
+        this.lazyType = LazyHelper.Create(() => getPropProjection is null ? (TypeReferenceBase)new TypeReferenceBase.FixedTypeReference(collectionType.SafeMakeProjectionCollectionType(typeof(TProperty)))
                                                           : new TypeReferenceBase.BuildTypeReference(typeof(TProperty), collectionType, false, getPropProjection()));
 
         this.Fetchs = fetchs.EmptyIfNull().ToList();

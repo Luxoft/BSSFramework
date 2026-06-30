@@ -36,10 +36,10 @@ public class SignValidator : IPropertyValidator<object, object>
     /// <returns>Validation result to be verified by caller</returns>
     protected ValidationResult GetValidateResult(SignType expectedSignType, IPropertyValidationContext<object, object> context)
     {
-        if (context == null) throw new ArgumentNullException(nameof(context));
+        if (context is null) throw new ArgumentNullException(nameof(context));
 
 
-        if (context.Value == null)
+        if (context.Value is null)
         {
             return ValidationResult.Success;
         }

@@ -27,9 +27,7 @@ public class IntegrationSaveModelMethodGenerator<TConfiguration> : IntegrationMe
     public IntegrationSaveModelMethodGenerator(TConfiguration configuration, Type domainType, Type modelType)
             : base(configuration, domainType)
     {
-        if (modelType == null) throw new ArgumentNullException(nameof(modelType));
-
-        this.modelType = modelType;
+        this.modelType = modelType ?? throw new ArgumentNullException(nameof(modelType));
 
         this.Identity = new MethodIdentity(MethodIdentityType.IntegrationSaveByModel, this.modelType);
     }

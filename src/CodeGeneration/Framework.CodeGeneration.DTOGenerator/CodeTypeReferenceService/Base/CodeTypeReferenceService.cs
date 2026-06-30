@@ -13,7 +13,7 @@ public abstract class CodeTypeReferenceService<TConfiguration>(TConfiguration co
 {
     public virtual CodeTypeReference GetCodeTypeReferenceByType(Type type)
     {
-        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (type is null) throw new ArgumentNullException(nameof(type));
 
         if (type.IsArray)
         {
@@ -27,7 +27,7 @@ public abstract class CodeTypeReferenceService<TConfiguration>(TConfiguration co
 
     public virtual RoleFileType? GetFileType(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         return null;
     }

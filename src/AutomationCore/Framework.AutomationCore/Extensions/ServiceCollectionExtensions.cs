@@ -47,7 +47,7 @@ public static class ServiceCollectionExtensions
 
         public IServiceCollection AddIntegrationTests(Action<AutomationFrameworkSettings>? setup = null)
         {
-            if (setup != null)
+            if (setup is not null)
             {
                 services.Configure(setup);
             }

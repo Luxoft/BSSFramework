@@ -10,28 +10,17 @@ using Framework.Relations;
 
 namespace Framework.CodeGeneration.DTOGenerator.CodeTypeReferenceService;
 
-public class DynamicCodeTypeReferenceService<TConfiguration> : LayerCodeTypeReferenceService<TConfiguration>
-        where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
+public class DynamicCodeTypeReferenceService<TConfiguration>(TConfiguration configuration, RoleFileType referenceFileType, RoleFileType detailFileType)
+    : LayerCodeTypeReferenceService<TConfiguration>(configuration)
+    where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
 {
-    private readonly RoleFileType referenceFileType;
+    private readonly RoleFileType referenceFileType = referenceFileType ?? throw new ArgumentNullException(nameof(referenceFileType));
 
-    private readonly RoleFileType detailFileType;
-
-
-    public DynamicCodeTypeReferenceService(TConfiguration configuration, RoleFileType referenceFileType, RoleFileType detailFileType)
-            : base(configuration)
-    {
-        if (referenceFileType == null) throw new ArgumentNullException(nameof(referenceFileType));
-        if (detailFileType == null) throw new ArgumentNullException(nameof(detailFileType));
-
-        this.referenceFileType = referenceFileType;
-        this.detailFileType = detailFileType;
-    }
-
+    private readonly RoleFileType detailFileType = detailFileType ?? throw new ArgumentNullException(nameof(detailFileType));
 
     public override RoleFileType GetReferenceFileType(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         return property.IsDetail() ? this.detailFileType : this.referenceFileType;
     }

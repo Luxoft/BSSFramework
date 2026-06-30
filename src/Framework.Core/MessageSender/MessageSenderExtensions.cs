@@ -5,8 +5,8 @@ public static class MessageSenderExtensions
 {
     public static IMessageSender<TNewSource> OverrideInput<TBaseSource, TNewSource>(this IMessageSender<TBaseSource> messageSender, Func<TNewSource, TBaseSource> selector)
     {
-        if (messageSender == null) throw new ArgumentNullException(nameof(messageSender));
-        if (selector == null) throw new ArgumentNullException(nameof(selector));
+        if (messageSender is null) throw new ArgumentNullException(nameof(messageSender));
+        if (selector is null) throw new ArgumentNullException(nameof(selector));
 
         return new ActionMessageSender<TNewSource>(async (newSource, ct) => await messageSender.SendAsync(selector(newSource), ct));
     }
@@ -15,12 +15,12 @@ public static class MessageSenderExtensions
 
     public static IMessageSender<TMessage> WithCatchFault<TMessage>(this IMessageSender<TMessage> messageSender)
     {
-        if (messageSender == null) throw new ArgumentNullException(nameof(messageSender));
+        if (messageSender is null) throw new ArgumentNullException(nameof(messageSender));
 
         return new ActionMessageSender<TMessage>(
             async (message, ct) =>
             {
-                if (message == null) throw new ArgumentNullException(nameof(message));
+                if (message is null) throw new ArgumentNullException(nameof(message));
 
                 try
                 {
@@ -35,13 +35,13 @@ public static class MessageSenderExtensions
 
     public static IMessageSender<TMessage> WithWrite<TMessage>(this IMessageSender<TMessage> messageSender, Action<TMessage> write)
     {
-        if (messageSender == null) throw new ArgumentNullException(nameof(messageSender));
-        if (write == null) throw new ArgumentNullException(nameof(write));
+        if (messageSender is null) throw new ArgumentNullException(nameof(messageSender));
+        if (write is null) throw new ArgumentNullException(nameof(write));
 
         return new ActionMessageSender<TMessage>(
             async (message, ct) =>
             {
-                if (message == null) throw new ArgumentNullException(nameof(message));
+                if (message is null) throw new ArgumentNullException(nameof(message));
 
                 write(message);
 
@@ -51,7 +51,7 @@ public static class MessageSenderExtensions
 
     public static IMessageSender<TMessage> WithTrace<TMessage>(this IMessageSender<TMessage> messageSender)
     {
-        if (messageSender == null) throw new ArgumentNullException(nameof(messageSender));
+        if (messageSender is null) throw new ArgumentNullException(nameof(messageSender));
 
         return messageSender.WithWrite(
             (message) => System.Diagnostics.Trace.Write(

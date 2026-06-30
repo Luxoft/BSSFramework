@@ -7,7 +7,7 @@ public class RestrictionExtensionAttribute : Attribute, IValidationData
 {
     public RestrictionExtensionAttribute(Type attributeType)
     {
-        if (attributeType == null) throw new ArgumentNullException(nameof(attributeType));
+        if (attributeType is null) throw new ArgumentNullException(nameof(attributeType));
 
         if (!typeof(IRestrictionAttribute).IsAssignableFrom(attributeType))
         {

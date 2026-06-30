@@ -49,7 +49,7 @@ public abstract class CodeGeneratorConfiguration<TEnvironment, TFileType> : Code
     {
         var res = this.fileFactoryHeadersLazy.Value.GetValueOrDefault(fileType);
 
-        if (res == null && raiseIfNotFound)
+        if (res is null && raiseIfNotFound)
         {
             throw new Exception("FileFactoryHeader not found");
         }

@@ -20,7 +20,7 @@ class AuditDBScriptGeneratorBuilder : IAuditDBScriptGeneratorBuilder
     {
         this.ValidateConfigurate();
 
-        if (this.auditPostfix != null && !string.Equals(this.auditPostfix, auditPostfix))
+        if (this.auditPostfix is not null && !string.Equals(this.auditPostfix, auditPostfix))
         {
             throw new ArgumentException("AuditBuilder can work with one db only");
         }
@@ -61,7 +61,7 @@ class AuditDBScriptGeneratorBuilder : IAuditDBScriptGeneratorBuilder
 
     public IDatabaseScriptGenerator Build(DBGenerateScriptMode mode)
     {
-        if (this.mappingSettings == null)
+        if (this.mappingSettings is null)
         {
             return EmptyDatabaseScriptGenerator.Value;
         }

@@ -13,7 +13,7 @@ public abstract class QueryGeneratorConfigurationBase<TEnvironment>(TEnvironment
 
     public override IEnumerable<IServiceMethodGenerator> GetMethodGenerators(Type domainType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
 
         foreach (var dtoType in this.Environment.MetadataProxyProvider.Wrap(domainType).GetViewDTOTypes())
         {

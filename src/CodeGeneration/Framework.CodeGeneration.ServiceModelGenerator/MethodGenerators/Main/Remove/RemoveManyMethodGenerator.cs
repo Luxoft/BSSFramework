@@ -11,19 +11,11 @@ using Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.Remov
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.Remove;
 
-public class RemoveManyMethodGenerator<TConfiguration> : BaseRemoveMethodGenerator<TConfiguration>
-        where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
+public class RemoveManyMethodGenerator<TConfiguration>(RemoveMethodGenerator<TConfiguration> singleRemoveGenerator)
+    : BaseRemoveMethodGenerator<TConfiguration>(singleRemoveGenerator.Configuration, singleRemoveGenerator.DomainType)
+    where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
-    private readonly RemoveMethodGenerator<TConfiguration> singleRemoveGenerator;
-
-    public RemoveManyMethodGenerator(RemoveMethodGenerator<TConfiguration> singleRemoveGenerator)
-            : base(singleRemoveGenerator.Configuration, singleRemoveGenerator.DomainType)
-    {
-        if (singleRemoveGenerator == null) throw new ArgumentNullException(nameof(singleRemoveGenerator));
-
-        this.singleRemoveGenerator = singleRemoveGenerator;
-    }
-
+    private readonly RemoveMethodGenerator<TConfiguration> singleRemoveGenerator = singleRemoveGenerator ?? throw new ArgumentNullException(nameof(singleRemoveGenerator));
 
     public override MethodIdentity Identity { get; } = MethodIdentityType.RemoveMany;
 

@@ -65,7 +65,7 @@ public class UniqueGroupDatabaseScriptGenerator(params IgnoreLink[] ignore) : Po
 
             result = ignore.SelectMany(z =>
                                                  {
-                                                     if (z.MemberInfo != null)
+                                                     if (z.MemberInfo is not null)
                                                      {
                                                          var targetDomainTypeMetadata = typeToMetadataDictionary[z.FromType];
                                                          var propertyMetadata =
@@ -75,7 +75,7 @@ public class UniqueGroupDatabaseScriptGenerator(params IgnoreLink[] ignore) : Po
 
                                                          var propertyMetadataUniqueGroupAttribute =
                                                                  propertyMetadata.Attributes.OfType<UniqueGroupAttribute>().FirstOrDefault();
-                                                         if (propertyMetadataUniqueGroupAttribute == null)
+                                                         if (propertyMetadataUniqueGroupAttribute is null)
                                                          {
                                                              throw new ArgumentException(
                                                               $"Property:{propertyMetadata.Name} not mark {typeof(UniqueGroupAttribute).Name} attribute");

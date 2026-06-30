@@ -21,7 +21,7 @@ public static class EnumHelper
 
     public static object[] GetValues(Type enumType)
     {
-        if (enumType == null) throw new ArgumentNullException(nameof(enumType));
+        if (enumType is null) throw new ArgumentNullException(nameof(enumType));
 
         return Enum.GetValues(enumType).Cast<object>().ToArray();
     }
@@ -45,14 +45,14 @@ public static class EnumHelper
 
     public static FieldInfo ToFieldInfo(this Enum value)
     {
-        if (value == null) throw new ArgumentNullException(nameof(value));
+        if (value is null) throw new ArgumentNullException(nameof(value));
 
         return value.GetType().GetField(value.ToString())!;
     }
 
     public static string ToCSharpCode(this Enum value)
     {
-        if (value == null) throw new ArgumentNullException(nameof(value));
+        if (value is null) throw new ArgumentNullException(nameof(value));
 
         return value.GetType().FullName + "." + value;
     }

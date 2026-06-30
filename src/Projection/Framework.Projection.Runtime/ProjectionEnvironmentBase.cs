@@ -42,7 +42,7 @@ public abstract class ProjectionEnvironmentBase : IProjectionEnvironment
     /// <returns></returns>
     public virtual bool IsIdentityProperty(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         return this.IdentityProperty.IsAssignableFrom(property);
     }
@@ -54,7 +54,7 @@ public abstract class ProjectionEnvironmentBase : IProjectionEnvironment
     /// <returns></returns>
     public bool IsPersistent(Type type)
     {
-        if (type == null) { throw new ArgumentNullException(nameof(type)); }
+        if (type is null) { throw new ArgumentNullException(nameof(type)); }
 
         return this.PersistentDomainObjectBaseType.IsAssignableFrom(type);
     }

@@ -15,7 +15,7 @@ public static class TypeExtensions
     /// <returns></returns>
     public static IEnumerable<Type> GetProjectionFilters(this Type projectionType, ProjectionFilterTargets target = ProjectionFilterTargets.All)
     {
-        if (projectionType == null) throw new ArgumentNullException(nameof(projectionType));
+        if (projectionType is null) throw new ArgumentNullException(nameof(projectionType));
 
         return projectionType.GetCustomAttributes<ProjectionFilterAttribute>()
                              .Where(attr => EnumHelper.GetValues<ProjectionFilterTargets>().Any(v => target.HasFlag(v) && attr.Target.HasFlag(v)))
@@ -30,11 +30,11 @@ public static class TypeExtensions
     /// <returns></returns>
     public static Type? GetProjectionContractSourceType(this Type contractType, bool raiseIfNull = true)
     {
-        if (contractType == null) throw new ArgumentNullException(nameof(contractType));
+        if (contractType is null) throw new ArgumentNullException(nameof(contractType));
 
         var attr = contractType.GetCustomAttribute<ProjectionContractAttribute>();
 
-        if (attr == null)
+        if (attr is null)
         {
             if (raiseIfNull)
             {
@@ -68,11 +68,11 @@ public static class TypeExtensions
     /// <returns></returns>
     public static Type? GetProjectionSourceType(this Type type, bool raiseIfNull = true)
     {
-        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (type is null) throw new ArgumentNullException(nameof(type));
 
         var attr = type.GetCustomAttribute<ProjectionAttribute>();
 
-        if (attr == null)
+        if (attr is null)
         {
             if (raiseIfNull)
             {
@@ -96,7 +96,7 @@ public static class TypeExtensions
     /// <returns></returns>
     public static Type GetProjectionSourceTypeOrSelf(this Type type)
     {
-        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (type is null) throw new ArgumentNullException(nameof(type));
 
         return type.GetProjectionSourceType(false) ?? type;
     }
@@ -109,11 +109,11 @@ public static class TypeExtensions
     /// <returns></returns>
     public static Type? GetProjectionContractType(this Type type, bool raiseIfNull = true)
     {
-        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (type is null) throw new ArgumentNullException(nameof(type));
 
         var attr = type.GetCustomAttribute<ProjectionAttribute>();
 
-        if (attr == null)
+        if (attr is null)
         {
             if (raiseIfNull)
             {
@@ -137,9 +137,9 @@ public static class TypeExtensions
     /// <returns></returns>
     public static bool IsProjection(this Type type)
     {
-        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (type is null) throw new ArgumentNullException(nameof(type));
 
-        return type.GetProjectionSourceType(false) != null;
+        return type.GetProjectionSourceType(false) is not null;
     }
 
     /// <summary>
@@ -150,7 +150,7 @@ public static class TypeExtensions
     /// <returns></returns>
     public static bool IsProjection(this Type type, Func<Type, bool> condition)
     {
-        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (type is null) throw new ArgumentNullException(nameof(type));
 
         return type.GetProjectionSourceType(false).Maybe(condition);
     }

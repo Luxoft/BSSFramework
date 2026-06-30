@@ -14,8 +14,8 @@ public static class CodeExpressionExtensions
 
     public static CodeExpression ToAsCastExpression(this CodeExpression expression, CodeTypeReference targetType)
     {
-        if (expression == null) throw new ArgumentNullException(nameof(expression));
-        if (targetType == null) throw new ArgumentNullException(nameof(targetType));
+        if (expression is null) throw new ArgumentNullException(nameof(expression));
+        if (targetType is null) throw new ArgumentNullException(nameof(targetType));
 
         var genericAsCastMethod = new Func<object, object?>(CorePipeObjectExtensions.AsCast<object>).Method.GetGenericMethodDefinition();
 
@@ -29,37 +29,37 @@ public static class CodeExpressionExtensions
 
     public static CodeExpression ToCastExpression(this CodeExpression expression, CodeTypeReference targetType)
     {
-        if (expression == null) throw new ArgumentNullException(nameof(expression));
-        if (targetType == null) throw new ArgumentNullException(nameof(targetType));
+        if (expression is null) throw new ArgumentNullException(nameof(expression));
+        if (targetType is null) throw new ArgumentNullException(nameof(targetType));
 
         return new CodeCastExpression(targetType, expression);
     }
 
     public static CodeExpression ToCastCollectionExpression(this CodeExpression expression, CodeTypeReference targetType)
     {
-        if (expression == null) throw new ArgumentNullException(nameof(expression));
-        if (targetType == null) throw new ArgumentNullException(nameof(targetType));
+        if (expression is null) throw new ArgumentNullException(nameof(expression));
+        if (targetType is null) throw new ArgumentNullException(nameof(targetType));
 
         return expression.ToStaticMethodInvokeExpression(typeof(Enumerable).ToTypeReferenceExpression().ToMethodReferenceExpression("Cast", targetType));
     }
 
     public static CodeExpression ToMethodToStringExpression(this CodeExpression codeExpression)
     {
-        if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
+        if (codeExpression is null) throw new ArgumentNullException(nameof(codeExpression));
 
         return codeExpression.ToMethodInvokeExpression("ToString");
     }
 
     public static CodeStatementCollection ToStatementCollection(this IEnumerable<CodeStatement> codeStatements)
     {
-        if (codeStatements == null) throw new ArgumentNullException(nameof(codeStatements));
+        if (codeStatements is null) throw new ArgumentNullException(nameof(codeStatements));
 
         return new CodeStatementCollection(codeStatements.ToArray());
     }
 
     public static CodeLambdaExpression ToCodeLambdaExpression(this PropertyInfo property, string varName = "source")
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
         if (string.IsNullOrWhiteSpace(varName)) throw new ArgumentException("Value cannot be null or whitespace.", nameof(varName));
 
         var varDecl = new CodeParameterDeclarationExpression { Name = varName };

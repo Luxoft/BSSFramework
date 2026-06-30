@@ -64,11 +64,11 @@ public class FioShort : ICloneable, IEquatable<FioShort>
     public override int GetHashCode() => 0;
 
     public bool Equals(FioShort? other) =>
-        other != null
+        other is not null
         && this.FirstName == other.FirstName
         && this.LastName == other.LastName;
 
-    public static bool operator ==(FioShort? v1, FioShort? v2) => ReferenceEquals(v1, v2) || (!ReferenceEquals(v1, null) && v1.Equals(v2));
+    public static bool operator ==(FioShort? v1, FioShort? v2) => ReferenceEquals(v1, v2) || (v1 is not null && v1.Equals(v2));
 
     public static bool operator !=(FioShort? v1, FioShort? v2) => !(v1 == v2);
 }

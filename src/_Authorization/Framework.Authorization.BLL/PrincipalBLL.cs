@@ -13,9 +13,9 @@ public partial class PrincipalBLL
 {
     public override void Save(Principal principal)
     {
-        if (principal == null) throw new ArgumentNullException(nameof(principal));
+        if (principal is null) throw new ArgumentNullException(nameof(principal));
 
-        if (this.Context.CurrentPrincipalSource.CurrentUser.RunAs != null)
+        if (this.Context.CurrentPrincipalSource.CurrentUser.RunAs is not null)
         {
             throw new BusinessLogicException("RunAs mode must be disabled");
         }

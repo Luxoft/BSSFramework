@@ -12,7 +12,7 @@ public static class CodeDomExtensions
     public static CodeTypeReference GetIdentityObjectTypeRef<TConfiguration>(this IFileGeneratorConfigurationContainer<TConfiguration> fileFactory)
             where TConfiguration : class, IDTOGeneratorConfiguration<IDTOGenerationEnvironment>
     {
-        if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
+        if (fileFactory is null) throw new ArgumentNullException(nameof(fileFactory));
 
         return typeof(IIdentityObject<>).ToTypeReference(fileFactory.Configuration.Environment.GetIdentityType().ToTypeReference());
     }

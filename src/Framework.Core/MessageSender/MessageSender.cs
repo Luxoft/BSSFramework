@@ -15,7 +15,7 @@ public abstract class MessageSender<TMessage> : IMessageSender<TMessage>
 
     public static IMessageSender<TMessage> Create(TextWriter writer)
     {
-        if (writer == null) throw new ArgumentNullException(nameof(writer));
+        if (writer is null) throw new ArgumentNullException(nameof(writer));
 
         return Empty.WithWrite((obj) => writer.WriteLine(obj));
     }

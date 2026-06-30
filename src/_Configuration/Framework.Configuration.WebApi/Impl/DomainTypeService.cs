@@ -15,7 +15,7 @@ public partial class ConfigMainController
     [HttpPost]
     public async Task ForceDomainTypeEvent(DomainTypeEventModelStrictDTO domainTypeEventModel, CancellationToken ct)
     {
-        if (domainTypeEventModel == null) throw new ArgumentNullException(nameof(domainTypeEventModel));
+        if (domainTypeEventModel is null) throw new ArgumentNullException(nameof(domainTypeEventModel));
 
         var evaluateData = this.HttpContext.RequestServices.GetRequiredService<EvaluatedData<IConfigurationBLLContext, IConfigurationDTOMappingService>>();
 

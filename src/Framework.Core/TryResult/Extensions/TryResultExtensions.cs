@@ -7,8 +7,8 @@ public static partial class TryResultExtensions
 {
     public static ITryResult<TResult> Select<TSource, TResult>(this ITryResult<TSource> source, Func<TSource, TResult> selector)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (selector == null) throw new ArgumentNullException(nameof(selector));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (selector is null) throw new ArgumentNullException(nameof(selector));
 
 
         return source.Match(result => TryResult.Return(selector(result)), TryResult.CreateFault<TResult>);
@@ -17,9 +17,9 @@ public static partial class TryResultExtensions
 
     public static ITryResult<TResult> SelectMany<TSource, TNextSource, TResult>(this ITryResult<TSource> source, Func<TSource, ITryResult<TNextSource>> nextSelector, Func<TSource, TNextSource, TResult> resultSelector)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (nextSelector == null) throw new ArgumentNullException(nameof(nextSelector));
-        if (resultSelector == null) throw new ArgumentNullException(nameof(resultSelector));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (nextSelector is null) throw new ArgumentNullException(nameof(nextSelector));
+        if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
 
 
         return source.Match(result => nextSelector(result).Match(nextResult => TryResult.Return(resultSelector(result, nextResult)),
@@ -30,8 +30,8 @@ public static partial class TryResultExtensions
 
     public static ITryResult<TResult> SelectMany<TSource, TResult>(this ITryResult<TSource> source, Func<TSource, ITryResult<TResult>> selector)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (selector == null) throw new ArgumentNullException(nameof(selector));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (selector is null) throw new ArgumentNullException(nameof(selector));
 
 
         return source.SelectMany(selector, (_, res) => res);
@@ -41,8 +41,8 @@ public static partial class TryResultExtensions
 
     public static void Match<T>(this ITryResult<T> source, Action<T> successAction, Action<Exception>? faultAction = null)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (successAction == null) throw new ArgumentNullException(nameof(successAction));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (successAction is null) throw new ArgumentNullException(nameof(successAction));
 
 
         switch (source)
@@ -63,9 +63,9 @@ public static partial class TryResultExtensions
 
     public static TResult Match<T, TResult>(this ITryResult<T> source, Func<T, TResult> successAction, Func<Exception, TResult> getFaultResult)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (successAction == null) throw new ArgumentNullException(nameof(successAction));
-        if (getFaultResult == null) throw new ArgumentNullException(nameof(getFaultResult));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (successAction is null) throw new ArgumentNullException(nameof(successAction));
+        if (getFaultResult is null) throw new ArgumentNullException(nameof(getFaultResult));
 
         if (source is ISuccessResult<T> successResult)
         {
@@ -84,8 +84,8 @@ public static partial class TryResultExtensions
 
     public static void SuccessProgress<T>(this ITryResult<T> source, Action<T> successAction)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (successAction == null) throw new ArgumentNullException(nameof(successAction));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (successAction is null) throw new ArgumentNullException(nameof(successAction));
 
 
         source.Match(successAction, error => { throw error; });
@@ -94,8 +94,8 @@ public static partial class TryResultExtensions
 
     public static TResult SuccessProgress<T, TResult>(this ITryResult<T> source, Func<T, TResult> successFunc)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (successFunc == null) throw new ArgumentNullException(nameof(successFunc));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (successFunc is null) throw new ArgumentNullException(nameof(successFunc));
 
 
         return source.Match(successFunc, error => { throw error; });
@@ -104,8 +104,8 @@ public static partial class TryResultExtensions
 
     public static void SuccessProgressOrSkipBreak<T>(this ITryResult<T> source, Action<T> successAction)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (successAction == null) throw new ArgumentNullException(nameof(successAction));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (successAction is null) throw new ArgumentNullException(nameof(successAction));
 
 
         source.Match(successAction, _ => source.Validate());
@@ -114,7 +114,7 @@ public static partial class TryResultExtensions
 
     public static void Validate<T>(this ITryResult<T> source, bool skipBreak = true)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         source.Match(_ => { }, error =>
                                {
@@ -125,21 +125,21 @@ public static partial class TryResultExtensions
 
     public static bool IsSuccess<T>(this ITryResult<T> source)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         return source is ISuccessResult<T>;
     }
 
     public static bool IsFault<T>(this ITryResult<T> source)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         return source is IFaultResult<T>;
     }
 
     public static bool IsBreak<T>(this ITryResult<T> source)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         return source.Match(_ => false, error => error is BreakException);
     }
@@ -147,21 +147,21 @@ public static partial class TryResultExtensions
 
     public static T GetValue<T>(this ITryResult<T> source)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         return source.GetValue(ex => ex);
     }
 
     public static T GetValue<T>(this ITryResult<T> source, Func<Exception, Exception> getThrowException)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         return source.Match(v => v, error => { throw getThrowException(error); });
     }
 
     public static T? GetValueOrDefault<T>(this ITryResult<T> source)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         return source.Match(v => (T?)v, error => default(T));
     }
@@ -173,7 +173,7 @@ public static partial class TryResultExtensions
 
         select tryRes.Match(_ => null!, ex => ex) into ex
 
-        where ex != null
+        where ex is not null
 
         select ex;
 
@@ -182,21 +182,21 @@ public static partial class TryResultExtensions
 
         select tryRes.Match(res => new { res }, _ => null!) into resCont
 
-        where resCont != null
+        where resCont is not null
 
         select resCont.res;
 
     public static void TryFault<T>(this IEnumerable<ITryResult<T>> source)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         source.TryFault(exceptions => new AggregateException(exceptions));
     }
 
     public static void TryFault<T>(this IEnumerable<ITryResult<T>> source, Func<Exception[], Exception> getAggregateException)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (getAggregateException == null) throw new ArgumentNullException(nameof(getAggregateException));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (getAggregateException is null) throw new ArgumentNullException(nameof(getAggregateException));
 
         var errors = source.GetErrors().ToArray();
 

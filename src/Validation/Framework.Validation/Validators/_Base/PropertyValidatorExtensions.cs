@@ -19,16 +19,16 @@ public static class PropertyValidatorExtensions
 
     public static IPropertyValidator<TSource, TProperty> ApplyCustomError<TSource, TProperty>(this IPropertyValidator<TSource, TProperty> baseValidator, object? customError)
     {
-        if (baseValidator == null) throw new ArgumentNullException(nameof(baseValidator));
+        if (baseValidator is null) throw new ArgumentNullException(nameof(baseValidator));
 
-        return customError != null ? new PropertyValidatorWithOverrideError<TSource, TProperty>(baseValidator, customError) : baseValidator;
+        return customError is not null ? new PropertyValidatorWithOverrideError<TSource, TProperty>(baseValidator, customError) : baseValidator;
     }
 
     public static IPropertyValidator<TSource, TProperty> ApplyCustomOperationContext<TSource, TProperty>(
         this IPropertyValidator<TSource, TProperty> baseValidator,
         int customOperationContext)
     {
-        if (baseValidator == null) throw new ArgumentNullException(nameof(baseValidator));
+        if (baseValidator is null) throw new ArgumentNullException(nameof(baseValidator));
 
         return customOperationContext != int.MaxValue
                    ? new PropertyValidatorWithOverrideOperationContext<TSource, TProperty>(baseValidator, customOperationContext)
@@ -37,13 +37,13 @@ public static class PropertyValidatorExtensions
 
     public static IPropertyValidator<TSource, TProperty> TryUnbox<TSource, TProperty>(this IPropertyValidator basePropertyValidator)
     {
-        if (basePropertyValidator == null) throw new ArgumentNullException(nameof(basePropertyValidator));
+        if (basePropertyValidator is null) throw new ArgumentNullException(nameof(basePropertyValidator));
 
         if (!(basePropertyValidator is IPropertyValidator<TSource, TProperty>))
         {
             var args = basePropertyValidator.GetType().GetInterfaceImplementationArguments(typeof(IPropertyValidator<,>));
 
-            if (args != null)
+            if (args is not null)
             {
                 var validatorSourceType = args[0];
                 var validatorPropertyType = args[1];
@@ -66,7 +66,7 @@ public static class PropertyValidatorExtensions
         where TExpectedProperty : TBaseProperty
         where TExpectedSource : TBaseSource
     {
-        if (baseValidator == null) throw new ArgumentNullException(nameof(baseValidator));
+        if (baseValidator is null) throw new ArgumentNullException(nameof(baseValidator));
 
         return new UnboxedPropertyValidator<TExpectedSource, TBaseSource, TExpectedProperty, TBaseProperty>(baseValidator);
     }

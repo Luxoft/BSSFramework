@@ -12,21 +12,12 @@ namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators;
 /// </summary>
 /// <typeparam name="TConfiguration"></typeparam>
 /// <typeparam name="TBLLRoleAttribute"></typeparam>
-public abstract class ModelMethodGenerator<TConfiguration, TBLLRoleAttribute> : MethodGenerator<TConfiguration, TBLLRoleAttribute>
+public abstract class ModelMethodGenerator<TConfiguration, TBLLRoleAttribute>(TConfiguration configuration, Type domainType, Type modelType)
+    : MethodGenerator<TConfiguration, TBLLRoleAttribute>(configuration, domainType)
     where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
     where TBLLRoleAttribute : BLLServiceRoleAttribute, new()
 {
-    protected readonly Type ModelType;
-
-
-    protected ModelMethodGenerator(TConfiguration configuration, Type domainType, Type modelType)
-        : base(configuration, domainType)
-    {
-        if (modelType == null) throw new ArgumentNullException(nameof(modelType));
-
-        this.ModelType = modelType;
-    }
-
+    protected readonly Type ModelType = modelType ?? throw new ArgumentNullException(nameof(modelType));
 
     protected override TBLLRoleAttribute Attribute =>
 

@@ -19,27 +19,18 @@ public interface ISerializer<TSerializedValue, TValue> :
 /// </summary>
 /// <typeparam name="TSerializedValue">Тип сериализованного значения</typeparam>
 /// <typeparam name="TValue">Сериализуемый тип</typeparam>
-public class Serializer<TSerializedValue, TValue> : ISerializer<TSerializedValue, TValue>
+public class Serializer<TSerializedValue, TValue>(Func<TSerializedValue, TValue> deserializeFunc, Func<TValue, TSerializedValue> serializeFunc)
+    : ISerializer<TSerializedValue, TValue>
 {
-    private readonly Func<TSerializedValue, TValue> deserializeFunc;
+    private readonly Func<TSerializedValue, TValue> deserializeFunc = deserializeFunc ?? throw new ArgumentNullException(nameof(deserializeFunc));
 
-    private readonly Func<TValue, TSerializedValue> serializeFunc;
+    private readonly Func<TValue, TSerializedValue> serializeFunc = serializeFunc ?? throw new ArgumentNullException(nameof(serializeFunc));
 
 
     public Serializer(IParser<TSerializedValue, TValue> parser, IFormatter<TValue, TSerializedValue> serializer)
             : this(parser.Parse, serializer.Format)
     {
     }
-
-    public Serializer(Func<TSerializedValue, TValue> deserializeFunc, Func<TValue, TSerializedValue> serializeFunc)
-    {
-        if (deserializeFunc == null) throw new ArgumentNullException(nameof(deserializeFunc));
-        if (serializeFunc == null) throw new ArgumentNullException(nameof(serializeFunc));
-
-        this.deserializeFunc = deserializeFunc;
-        this.serializeFunc = serializeFunc;
-    }
-
 
     public TValue Parse(TSerializedValue input) => this.deserializeFunc(input);
 
@@ -60,7 +51,7 @@ public class Serializer<TSerializedValue, TValue> : ISerializer<TSerializedValue
             {
                 var parser = new Parser<string, TValue>(ParserHelper.GetParseFunc<TValue>());
 
-                var formatter = new Formatter<TValue, string>(v => (v == null ? null : v.ToString())!);
+                var formatter = new Formatter<TValue, string>(v => (v is null ? null : v.ToString())!);
 
                 return (Serializer<TSerializedValue, TValue>)(object)new Serializer<string, TValue>(parser, formatter);
             }

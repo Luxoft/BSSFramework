@@ -16,7 +16,7 @@ public static class NumberExtensions
 
     public static decimal? RoundMoney(this decimal? value)
     {
-        if (value == null)
+        if (value is null)
         {
             return null;
         }
@@ -34,7 +34,7 @@ public static class NumberExtensions
 
     public static decimal? RoundPercent(this decimal? value)
     {
-        if (value == null)
+        if (value is null)
         {
             return null;
         }

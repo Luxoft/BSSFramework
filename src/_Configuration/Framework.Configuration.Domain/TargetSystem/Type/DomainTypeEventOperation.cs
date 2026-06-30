@@ -22,9 +22,7 @@ public class DomainTypeEventOperation : BaseDirectory, IDetail<DomainType>
     /// <param name="domainType">Доменный тип</param>
     public DomainTypeEventOperation(DomainType domainType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-
-        this.domainType = domainType;
+        this.domainType = domainType ?? throw new ArgumentNullException(nameof(domainType));
         this.domainType.AddDetail(this);
     }
 

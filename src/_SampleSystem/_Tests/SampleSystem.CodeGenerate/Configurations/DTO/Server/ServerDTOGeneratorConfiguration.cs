@@ -80,7 +80,7 @@ public class ServerDTOGeneratorConfiguration(ServerGenerationEnvironment environ
 
     protected override IEnumerable<PropertyInfo> GetInternalDomainTypeProperties(Type domainType, DTOFileType fileType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
 
         if (fileType == SampleSystemFileType.FullRefDTO)
         {

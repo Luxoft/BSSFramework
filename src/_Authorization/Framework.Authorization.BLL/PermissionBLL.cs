@@ -13,9 +13,9 @@ public partial class PermissionBLL
 {
     public override void Save(Permission permission)
     {
-        if (permission == null) throw new ArgumentNullException(nameof(permission));
+        if (permission is null) throw new ArgumentNullException(nameof(permission));
 
-        if (this.Context.CurrentPrincipalSource.CurrentUser.RunAs != null)
+        if (this.Context.CurrentPrincipalSource.CurrentUser.RunAs is not null)
         {
             throw new BusinessLogicException("RunAs mode must be disabled");
         }
@@ -32,7 +32,7 @@ public partial class PermissionBLL
 
     public void ChangeDelegatePermissions(ChangePermissionDelegatesModel changePermissionDelegatesModel)
     {
-        if (changePermissionDelegatesModel == null) throw new ArgumentNullException(nameof(changePermissionDelegatesModel));
+        if (changePermissionDelegatesModel is null) throw new ArgumentNullException(nameof(changePermissionDelegatesModel));
 
         this.Context.Validator.Validate(changePermissionDelegatesModel);
 
@@ -51,7 +51,7 @@ public partial class PermissionBLL
 
     public void UpdateDelegatePermissions(UpdatePermissionDelegatesModel updatePermissionDelegatesModel)
     {
-        if (updatePermissionDelegatesModel == null) throw new ArgumentNullException(nameof(updatePermissionDelegatesModel));
+        if (updatePermissionDelegatesModel is null) throw new ArgumentNullException(nameof(updatePermissionDelegatesModel));
 
         this.Context.Validator.Validate(updatePermissionDelegatesModel);
 

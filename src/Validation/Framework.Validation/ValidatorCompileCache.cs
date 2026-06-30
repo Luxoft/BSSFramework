@@ -16,9 +16,7 @@ public class ValidatorCompileCache
 
     public ValidatorCompileCache(IValidationMap validationMap)
     {
-        if (validationMap == null) throw new ArgumentNullException(nameof(validationMap));
-
-        this.validationMap = validationMap;
+        this.validationMap = validationMap ?? throw new ArgumentNullException(nameof(validationMap));
 
         this.validateFuncCache = new DictionaryCache<Type, Delegate>(type =>
                                                                      {
@@ -43,9 +41,9 @@ public class ValidatorCompileCache
     /// <returns></returns>
     public ValidationResult GetValidationResult<TSource>(IValidationContextBase<TSource> context)
     {
-        if (context == null) throw new ArgumentNullException(nameof(context));
+        if (context is null) throw new ArgumentNullException(nameof(context));
 
-        if (this.AllowNullSource && context.Source == null)
+        if (this.AllowNullSource && context.Source is null)
         {
             return ValidationResult.Success;
         }
@@ -80,13 +78,13 @@ public class ValidatorCompileCache
 
     private Func<IValidationContextBase<TSource>, ValidationResult> GetClassValidationFunc<TSource>(IClassValidationMap<TSource> classMap)
     {
-        if (classMap == null) throw new ArgumentNullException(nameof(classMap));
+        if (classMap is null) throw new ArgumentNullException(nameof(classMap));
 
         var classValidateFunc = classMap.Validators.Any()
 
                                         ? FuncHelper.Create((IValidationContextBase<TSource> context) =>
                                                             {
-                                                                if (this.AllowNullSource && context.Source == null)
+                                                                if (this.AllowNullSource && context.Source is null)
                                                                 {
                                                                     return ValidationResult.Success;
                                                                 }
@@ -113,7 +111,7 @@ public class ValidatorCompileCache
 
     private Func<IValidationContextBase<TSource>, ValidationResult> GetPropertyValidationFunc<TSource, TProperty>(IPropertyValidationMap<TSource, TProperty> propertyMap)
     {
-        if (propertyMap == null) throw new ArgumentNullException(nameof(propertyMap));
+        if (propertyMap is null) throw new ArgumentNullException(nameof(propertyMap));
 
         var getPropertyValueFunc = propertyMap.Property.ToGetLambdaExpression<TSource, TProperty>().Compile();
 
@@ -121,7 +119,7 @@ public class ValidatorCompileCache
 
                        ? FuncHelper.Create((IValidationContextBase<TSource> context) =>
                                            {
-                                               if (this.AllowNullSource && context.Source == null)
+                                               if (this.AllowNullSource && context.Source is null)
                                                {
                                                    return ValidationResult.Success;
                                                }
@@ -140,7 +138,7 @@ public static class ValidatorCompileCacheExtensions
 {
     public static ValidatorCompileCache ToCompileCache(this IValidationMap validationMap)
     {
-        if (validationMap == null) throw new ArgumentNullException(nameof(validationMap));
+        if (validationMap is null) throw new ArgumentNullException(nameof(validationMap));
 
         return new ValidatorCompileCache(validationMap);
     }

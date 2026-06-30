@@ -28,7 +28,7 @@ public class EventXsdExporter2 : IEventXsdExporter2
     {
         var baseEventDto = typeof(TBaseEventDto);
         var attribute = baseEventDto.GetCustomAttribute<DataContractAttribute>();
-        if (attribute == null)
+        if (attribute is null)
         {
             throw new NotSupportedException($"{baseEventDto} should contain DataContractAttribute");
         }
@@ -79,7 +79,7 @@ public class EventXsdExporter2 : IEventXsdExporter2
     }
 
     private static string ToFileName(string? targetNamespace) =>
-        targetNamespace == null
+        targetNamespace is null
             ? FileNameWithoutNamespace
             : $"{targetNamespace.Replace("http://", string.Empty).Replace("/", "_").Replace(".", "_")}.xsd";
 
@@ -183,7 +183,7 @@ public class EventXsdExporter2 : IEventXsdExporter2
     {
         foreach (var property in type.GetProperties())
         {
-            if (attributeOverrides[type, property.Name] != null || IsNotNullable(property.PropertyType))
+            if (attributeOverrides[type, property.Name] is not null || IsNotNullable(property.PropertyType))
             {
                 continue;
             }
@@ -201,7 +201,7 @@ public class EventXsdExporter2 : IEventXsdExporter2
     {
         foreach (var field in type.GetFields())
         {
-            if (attributeOverrides[type, field.Name] != null || IsNotNullable(field.FieldType))
+            if (attributeOverrides[type, field.Name] is not null || IsNotNullable(field.FieldType))
             {
                 continue;
             }

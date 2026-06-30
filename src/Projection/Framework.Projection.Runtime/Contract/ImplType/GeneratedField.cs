@@ -15,11 +15,8 @@ internal class GeneratedField : BaseFieldInfoImpl, IWrappingObject
 
     public GeneratedField(ProjectionContractEnvironment environment, GeneratedProperty property, GeneratedType reflectedType)
     {
-        if (environment == null) throw new ArgumentNullException(nameof(environment));
-        if (property == null) throw new ArgumentNullException(nameof(property));
-
-        this.environment = environment;
-        this.property = property;
+        this.environment = environment ?? throw new ArgumentNullException(nameof(environment));
+        this.property = property ?? throw new ArgumentNullException(nameof(property));
 
         this.ReflectedType = reflectedType;
         this.Name = this.property.Name.ToStartLowerCase();

@@ -113,7 +113,7 @@ public static class MetadataReader
                                                                                          foreach (var func in GetFieldConveyer())
                                                                                          {
                                                                                              var fieldMetadata = func(f, d);
-                                                                                             if (fieldMetadata != null)
+                                                                                             if (fieldMetadata is not null)
                                                                                              {
                                                                                                  return fieldMetadata;
                                                                                              }
@@ -139,7 +139,7 @@ public static class MetadataReader
                 foreach (var fieldInfo in fieldInfoCollection)
                 {
                     var z = fieldMetadataCreator(fieldInfo, result);
-                    if (z != null)
+                    if (z is not null)
                     {
                         r.Add(z);
                     }
@@ -160,7 +160,7 @@ public static class MetadataReader
                              .Where(z => z.BaseType!.IsAbstract)
                              .Where(
                                     z => z.BaseType.GetAllElements(q => q.BaseType)
-                                          .TakeWhile(q => q != null && q != persistentDomainObjectBase)
+                                          .TakeWhile(q => q is not null && q != persistentDomainObjectBase)
                                           .All(q => q.IsAbstract))
                              .Where(z => !z.HasAttribute<NotPersistentClassAttribute>());
 

@@ -112,7 +112,7 @@ public partial class HRDepartment :
     {
         get
         {
-            if (this.Location == null)
+            if (this.Location is null)
             {
                 return string.Empty;
             }
@@ -125,7 +125,7 @@ public partial class HRDepartment :
     {
         get
         {
-            if (this.CompanyLegalEntity == null)
+            if (this.CompanyLegalEntity is null)
             {
                 return string.Empty;
             }

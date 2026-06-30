@@ -10,15 +10,15 @@ public static class ExpressionVisitorExtensions
 {
     public static ExpressionVisitor ToComposite(this ExpressionVisitor visitor, params ExpressionVisitor[] otherVisitors)
     {
-        if (visitor == null) throw new ArgumentNullException(nameof(visitor));
-        if (otherVisitors == null) throw new ArgumentNullException(nameof(otherVisitors));
+        if (visitor is null) throw new ArgumentNullException(nameof(visitor));
+        if (otherVisitors is null) throw new ArgumentNullException(nameof(otherVisitors));
 
         return new[] { visitor }.Concat(otherVisitors).ToComposite();
     }
 
     public static ExpressionVisitor ToComposite(this IEnumerable<ExpressionVisitor> visitors)
     {
-        if (visitors == null) throw new ArgumentNullException(nameof(visitors));
+        if (visitors is null) throw new ArgumentNullException(nameof(visitors));
 
         return visitors.Match(
                               () => EmptyExpressionVisitor.Value,
@@ -28,15 +28,15 @@ public static class ExpressionVisitorExtensions
 
     public static ExpressionVisitor ToCyclic(this ExpressionVisitor visitor, params ExpressionVisitor[] otherVisitors)
     {
-        if (visitor == null) throw new ArgumentNullException(nameof(visitor));
-        if (otherVisitors == null) throw new ArgumentNullException(nameof(otherVisitors));
+        if (visitor is null) throw new ArgumentNullException(nameof(visitor));
+        if (otherVisitors is null) throw new ArgumentNullException(nameof(otherVisitors));
 
         return new[] { visitor }.Concat(otherVisitors).ToCyclic();
     }
 
     public static ExpressionVisitor ToCyclic(this IEnumerable<ExpressionVisitor> visitors)
     {
-        if (visitors == null) throw new ArgumentNullException(nameof(visitors));
+        if (visitors is null) throw new ArgumentNullException(nameof(visitors));
 
         return new CyclicExpressionVisitor(visitors);
     }
@@ -54,14 +54,14 @@ public static class ExpressionVisitorExtensions
 
         public CyclicExpressionVisitor(IEnumerable<ExpressionVisitor> visitors)
         {
-            if (visitors == null) throw new ArgumentNullException(nameof(visitors));
+            if (visitors is null) throw new ArgumentNullException(nameof(visitors));
 
             this.visitors = visitors.ToArray();
         }
 
         public override Expression? Visit(Expression? node)
         {
-            if (node == null)
+            if (node is null)
             {
                 return null;
             }

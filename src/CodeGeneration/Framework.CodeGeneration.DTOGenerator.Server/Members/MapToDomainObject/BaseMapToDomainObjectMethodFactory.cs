@@ -29,9 +29,7 @@ public class BaseMapToDomainObjectMethodFactory<TConfiguration, TFileFactory, TF
 
     public BaseMapToDomainObjectMethodFactory(TFileFactory fileFactory)
     {
-        if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
-
-        this.FileFactory = fileFactory;
+        this.FileFactory = fileFactory ?? throw new ArgumentNullException(nameof(fileFactory));
 
         this.TargetDomainParameter = this.FileFactory.GetDomainTypeTargetParameter();
         this.TargetDomainParameterRefExpr = this.TargetDomainParameter.ToVariableReferenceExpression();

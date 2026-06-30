@@ -5,26 +5,17 @@ using Anch.Core;
 
 namespace Framework.Core.AnonymousTypeBuilder;
 
-public abstract class AnonymousTypeByMemberBuilder<TMap, TMapMember, TMemberBuilder> : IAnonymousTypeBuilder<TMap>
-        where TMap : class, ITypeMap<TMapMember>
-        where TMapMember : ITypeMapMember
+public abstract class AnonymousTypeByMemberBuilder<TMap, TMapMember, TMemberBuilder>(IAnonymousTypeBuilderStorage storage) : IAnonymousTypeBuilder<TMap>
+    where TMap : class, ITypeMap<TMapMember>
+    where TMapMember : ITypeMapMember
 {
-    private readonly IAnonymousTypeBuilderStorage storage;
+    private readonly IAnonymousTypeBuilderStorage storage = storage ?? throw new ArgumentNullException(nameof(storage));
 
     private readonly Dictionary<Type, Type> typeBuilderCache = new();
 
-
-    protected AnonymousTypeByMemberBuilder(IAnonymousTypeBuilderStorage storage)
-    {
-        if (storage == null) throw new ArgumentNullException(nameof(storage));
-
-        this.storage = storage;
-    }
-
-
     protected virtual TypeBuilder DefineType(TMap typeMap)
     {
-        if (typeMap == null) throw new ArgumentNullException(nameof(typeMap));
+        if (typeMap is null) throw new ArgumentNullException(nameof(typeMap));
 
         return this.storage.ModuleBuilder.DefineType(typeMap.Name, TypeAttributes.Class | TypeAttributes.Public);
     }
@@ -41,7 +32,7 @@ public abstract class AnonymousTypeByMemberBuilder<TMap, TMapMember, TMemberBuil
 
     public Type GetAnonymousType(TMap typeMap)
     {
-        if (typeMap == null) throw new ArgumentNullException(nameof(typeMap));
+        if (typeMap is null) throw new ArgumentNullException(nameof(typeMap));
 
         var typeBuilder = this.DefineType(typeMap);
 

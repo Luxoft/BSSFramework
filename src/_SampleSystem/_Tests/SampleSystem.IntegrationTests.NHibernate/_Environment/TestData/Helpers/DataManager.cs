@@ -37,7 +37,7 @@ public partial class DataManager
                                       var countryBLL = context.Logics.Country;
                                       var country = countryBLL.GetById(this.GetGuid(id));
 
-                                      if (country == null)
+                                      if (country is null)
                                       {
                                           country = new Country
                                           {
@@ -67,15 +67,15 @@ public partial class DataManager
             int closeDate = 20)
     {
         name = name ?? TextRandomizer.UniqueString("Location");
-        var parentId = parent != null ? ((LocationIdentityDTO)parent).Id : DefaultConstants.LOCATION_PARENT_ID;
-        var countryId = country != null ? ((CountryIdentityDTO)country).Id : DefaultConstants.COUNTRY_RUSSIA_ID;
+        var parentId = parent is not null ? ((LocationIdentityDTO)parent).Id : DefaultConstants.LOCATION_PARENT_ID;
+        var countryId = country is not null ? ((CountryIdentityDTO)country).Id : DefaultConstants.COUNTRY_RUSSIA_ID;
 
         return this.EvaluateWrite(
                                   context =>
                                   {
                                       var location = context.Logics.Location.GetById(this.GetGuid(id));
 
-                                      if (location == null)
+                                      if (location is null)
                                       {
                                           location = new Location
                                           {
@@ -159,7 +159,7 @@ public partial class DataManager
                                }
                            });
 
-        if (possibleParents == null && transferTo == null && currentTypeInPossibleParents == false &&
+        if (possibleParents is null && transferTo is null && currentTypeInPossibleParents == false &&
             currentTypeInTransferTo == false)
         {
             return type.ToIdentityDTO();
@@ -195,7 +195,7 @@ public partial class DataManager
 
         buTypeStrict.PossibleParents = possibleParentsList;
 
-        if (transferTo != null)
+        if (transferTo is not null)
         {
             var transferToList =
                     new List<BusinessUnitTypeLinkWithTransferToStrictDTO>
@@ -222,7 +222,7 @@ public partial class DataManager
             buTypeStrict.TransferTo = transferToList;
         }
 
-        if (possibleFinancialProjectTypes != null)
+        if (possibleFinancialProjectTypes is not null)
         {
             buTypeStrict.PossibleFinancialProjectTypes =
                     possibleFinancialProjectTypes.Select(
@@ -261,11 +261,11 @@ public partial class DataManager
     {
         name = name ?? TextRandomizer.UniqueString("BusinessUnit");
 
-        var parentId = parent != null
+        var parentId = parent is not null
                                ? ((BusinessUnitIdentityDTO)parent).Id
                                : DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_ID;
 
-        var typeId = type != null
+        var typeId = type is not null
                              ? ((BusinessUnitTypeIdentityDTO)type).Id
                              : DefaultConstants.BUSINESS_UNIT_TYPE_PROGRAM_ID;
 
@@ -277,7 +277,7 @@ public partial class DataManager
                                       period = period ?? new Period(this.FinancialYearService.GetCurrentFinancialYear().StartDate.AddYears(-1));
                                       businessUnit = context.Logics.BusinessUnit.GetById(this.GetGuid(id));
 
-                                      if (businessUnit == null)
+                                      if (businessUnit is null)
                                       {
                                           businessUnit =
                                                   new BusinessUnit(parentIsNeeded ? context.Logics.BusinessUnit.GetById(parentId) : null)
@@ -318,7 +318,7 @@ public partial class DataManager
         ManagementUnit? unit;
         name = name ?? TextRandomizer.UniqueString("ManagementUnit");
 
-        var parentId = parent != null
+        var parentId = parent is not null
                                ? ((ManagementUnitIdentityDTO)parent).Id
                                : DefaultConstants.MANAGEMENT_UNIT_PARENT_COMPANY_ID;
 
@@ -327,7 +327,7 @@ public partial class DataManager
                                   {
                                       unit = context.Logics.ManagementUnit.GetById(this.GetGuid(id));
                                       period = period ?? new Period(this.FinancialYearService.GetCurrentFinancialYear().StartDate);
-                                      if (unit == null)
+                                      if (unit is null)
                                       {
                                           unit = new ManagementUnit
                                           {
@@ -366,15 +366,15 @@ public partial class DataManager
         code = code ?? name;
         codeNative = codeNative ?? name;
 
-        var locationId = location != null
+        var locationId = location is not null
                                  ? ((LocationIdentityDTO)location).Id
                                  : DefaultConstants.LOCATION_PARENT_ID;
 
-        var parentId = parent != null
+        var parentId = parent is not null
                                ? ((HRDepartmentIdentityDTO)parent).Id
                                : DefaultConstants.HRDEPARTMENT_PARENT_ID;
 
-        var companyLegalEntityId = companyLegalEntity != null
+        var companyLegalEntityId = companyLegalEntity is not null
                                            ? ((CompanyLegalEntityIdentityDTO)companyLegalEntity).Id
                                            : DefaultConstants.COMPANY_LEGAL_ENTITY_ID;
 
@@ -385,7 +385,7 @@ public partial class DataManager
                                   {
                                       var department = context.Logics.HRDepartment.GetById(this.GetGuid(id));
 
-                                      if (department == null)
+                                      if (department is null)
                                       {
                                           var head = context.Logics.Employee.GetById(employeeId, true)!;
 
@@ -431,9 +431,9 @@ public partial class DataManager
                                   {
                                       var legal = context.Logics.CompanyLegalEntity.GetById(this.GetGuid(id));
 
-                                      if (legal == null)
+                                      if (legal is null)
                                       {
-                                          var parentDomainObject = (parent == null)
+                                          var parentDomainObject = (parent is null)
                                                                        ? null
                                                                        : context.Logics.CompanyLegalEntity.GetById(parent.Value.Id);
 
@@ -464,7 +464,7 @@ public partial class DataManager
                                             employee.WorkPeriod = new Period(DateTime.Now.AddDays(-1), DateTime.Now);
                                             employee.EducationDuration = new Period(DateTime.Now.AddYears(-5), DateTime.Now.AddYears(-2));
 
-                                            if (login != null)
+                                            if (login is not null)
                                             {
                                                 employee.Login = login;
                                             }

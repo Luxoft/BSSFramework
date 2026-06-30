@@ -18,9 +18,9 @@ public abstract class StrictToDomainObjectPropertyAssignerBase<TConfiguration>(I
 
     protected override CodeStatement GetSecurityAssignStatementInternal(PropertyInfo property, CodeExpression justValueRefExpr, CodeStatement innerAssignStatement)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
-        if (justValueRefExpr == null) throw new ArgumentNullException(nameof(justValueRefExpr));
-        if (innerAssignStatement == null) throw new ArgumentNullException(nameof(innerAssignStatement));
+        if (property is null) throw new ArgumentNullException(nameof(property));
+        if (justValueRefExpr is null) throw new ArgumentNullException(nameof(justValueRefExpr));
+        if (innerAssignStatement is null) throw new ArgumentNullException(nameof(innerAssignStatement));
 
         return new CodeConditionStatement(justValueRefExpr.ToPropertyReference(nameof(Maybe<>.HasValue)))
         {

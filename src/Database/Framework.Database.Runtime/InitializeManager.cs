@@ -9,7 +9,7 @@ public class InitializeManager : IInitializeManager
 
     public async Task InitializeOperationAsync(Func<Task> operation)
     {
-        if (operation == null) throw new ArgumentNullException(nameof(operation));
+        if (operation is null) throw new ArgumentNullException(nameof(operation));
 
         if (this.IsInitialize)
         {

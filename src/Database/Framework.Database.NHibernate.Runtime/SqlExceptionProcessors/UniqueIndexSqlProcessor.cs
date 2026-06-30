@@ -30,7 +30,7 @@ internal class UniqueIndexSqlProcessor(IDalValidationIdentitySource dalValidatio
         var possiblePersistentClasses = context.GetPersistentClass(context.CreateTableDescription(string.Empty, string.Empty, tableValue));
         var persistentClass = possiblePersistentClasses.FirstOrDefault();
 
-        if (persistentClass == null)
+        if (persistentClass is null)
         {
             return sqlException;
         }
@@ -41,7 +41,7 @@ internal class UniqueIndexSqlProcessor(IDalValidationIdentitySource dalValidatio
 
         var uniqueKey = uniqueKeys.FirstOrDefault(z => string.Equals(indexNameValue, z.Name, StringComparison.InvariantCultureIgnoreCase));
 
-        if (uniqueKey != null)
+        if (uniqueKey is not null)
         {
             return new UniqueViolationConstraintDALException(
                 new UniqueConstraint(

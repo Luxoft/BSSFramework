@@ -48,7 +48,7 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
                       where t != typeof(TDomainObject) && !t.IsAbstract && !t.IsGenericTypeDefinition && typeof(TDomainObject).IsAssignableFrom(t)
                       let nestedDomainObject =
                           t.IsInstanceOfType(domainObject) ? domainObject : method.MakeGenericMethod(t).Invoke<TDomainObject>(this, [domainObject])
-                      where nestedDomainObject != null
+                      where nestedDomainObject is not null
                       select nestedDomainObject;
 
         return request.Single(() => new Exception($"Can't find nested type for {typeof(TDomainObject).Name}"));
@@ -63,7 +63,7 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
         SelectOperation<TDomainObject> selectOperation,
         FetchRule<TDomainObject>? fetchRule = null)
     {
-        if (selectOperation == null)
+        if (selectOperation is null)
         {
             throw new ArgumentNullException(nameof(selectOperation));
         }
@@ -82,11 +82,6 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
         FetchRule<TDomainObject>? fetchRule = null)
         where TIdentCollection : IEnumerable<TIdent>
     {
-        if (startProjections == null)
-        {
-            throw new ArgumentNullException(nameof(startProjections));
-        }
-
         var projectionsIdents = identsSelector(startProjections);
 
         var allowedExpandTreeParents = this.Context.ServiceProvider.GetService<ExpandTreeInfo<TDomainObject>>()?.ParentsExpandAllowed ?? true;
@@ -127,7 +122,7 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
 
     public List<TDomainObject> GetListByIdents(IEnumerable<TIdent> baseIdents, FetchRule<TDomainObject>? fetchRule = null)
     {
-        if (baseIdents == null)
+        if (baseIdents is null)
         {
             throw new ArgumentNullException(nameof(baseIdents));
         }
@@ -157,7 +152,7 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
         SelectOperation<TDomainObject> selectOperation,
         FetchRule<TDomainObject>? fetchRule = null)
     {
-        if (selectOperation == null)
+        if (selectOperation is null)
         {
             throw new ArgumentNullException(nameof(selectOperation));
         }
@@ -195,7 +190,7 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
 
     public List<TDomainObject> GetListByIdentsUnsafe(IEnumerable<TIdent> baseIdents, FetchRule<TDomainObject>? fetchRule = null)
     {
-        if (baseIdents == null)
+        if (baseIdents is null)
         {
             throw new ArgumentNullException(nameof(baseIdents));
         }
@@ -210,7 +205,7 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
     {
         var result = this.GetListBy(this.IdentityInfo.CreateFilter(id), fetchRule, lockRole).FirstOrDefault();
 
-        if (result == null && throwOnNotFound)
+        if (result is null && throwOnNotFound)
         {
             throw this.GetMissingObjectException(id);
         }
@@ -223,7 +218,7 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
 
     protected List<TDomainObject> GetListByIdentsQueryable(IQueryable<TIdent> baseIdents, FetchRule<TDomainObject>? fetchRule = null)
     {
-        if (baseIdents == null)
+        if (baseIdents is null)
         {
             throw new ArgumentNullException(nameof(baseIdents));
         }
@@ -238,7 +233,7 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
         Expression<Func<TDomainObject, TProjection>> projectionSelector,
         FetchRule<TDomainObject>? fetchRule = null)
     {
-        if (baseIdents == null) throw new ArgumentNullException(nameof(baseIdents));
+        if (baseIdents is null) throw new ArgumentNullException(nameof(baseIdents));
 
         var idents = baseIdents.ToList();
 
@@ -268,7 +263,7 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
 
     protected List<TDomainObject> GetListByIdentsNoSecurable(IEnumerable<TIdent> baseIdents, FetchRule<TDomainObject>? fetchRule = null)
     {
-        if (baseIdents == null)
+        if (baseIdents is null)
         {
             throw new ArgumentNullException(nameof(baseIdents));
         }

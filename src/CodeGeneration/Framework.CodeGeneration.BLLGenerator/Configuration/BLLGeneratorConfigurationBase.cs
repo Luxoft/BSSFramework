@@ -82,7 +82,7 @@ public abstract class BLLGeneratorConfigurationBase<TEnvironment>(TEnvironment e
     {
         var modeAttr = property.GetCustomAttribute<PropertyValidationModeAttribute>();
 
-        if (modeAttr != null && modeAttr.HasValue(true))
+        if (modeAttr is not null && modeAttr.HasValue(true))
         {
             return true;
         }
@@ -92,8 +92,8 @@ public abstract class BLLGeneratorConfigurationBase<TEnvironment>(TEnvironment e
 
     public virtual IValidatorGenerator GetValidatorGenerator(Type domainType, CodeExpression validatorMapExpr)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (validatorMapExpr == null) throw new ArgumentNullException(nameof(validatorMapExpr));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
+        if (validatorMapExpr is null) throw new ArgumentNullException(nameof(validatorMapExpr));
 
         return new DefaultValidatorGenerator<IBLLGeneratorConfiguration<TEnvironment>>(this, domainType, validatorMapExpr);
     }
@@ -104,7 +104,7 @@ public abstract class BLLGeneratorConfigurationBase<TEnvironment>(TEnvironment e
 
     public virtual bool GenerateBllConstructor(Type domainType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
 
         return true;
     }

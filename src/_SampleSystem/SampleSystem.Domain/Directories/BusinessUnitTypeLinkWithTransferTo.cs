@@ -16,12 +16,7 @@ public class BusinessUnitTypeLinkWithTransferTo :
 
     public BusinessUnitTypeLinkWithTransferTo(BusinessUnitType businessUnitType)
     {
-        if (businessUnitType == null)
-        {
-            throw new ArgumentNullException(nameof(businessUnitType));
-        }
-
-        this.businessUnitType = businessUnitType;
+        this.businessUnitType = businessUnitType ?? throw new ArgumentNullException(nameof(businessUnitType));
         this.businessUnitType.AddDetail(this);
     }
 

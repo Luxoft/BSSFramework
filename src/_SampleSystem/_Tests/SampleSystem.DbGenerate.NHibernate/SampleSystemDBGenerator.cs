@@ -20,7 +20,7 @@ public class SampleSystemDBGenerator(MappingSettings settings) : DBGenerator(set
     {
         var tableAttribute = domainTypeMetadata.DomainType.GetTableAttribute();
 
-        return tableAttribute == null || tableAttribute.Schema == "app";
+        return tableAttribute is null || tableAttribute.Schema == "app";
     }
 }
 

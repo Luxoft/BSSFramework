@@ -6,15 +6,15 @@ public static class ProjectionSourceExtensions
 {
     public static IProjectionSource Add(this IProjectionSource baseSource, IProjectionSource otherSource)
     {
-        if (baseSource == null) throw new ArgumentNullException(nameof(baseSource));
-        if (otherSource == null) throw new ArgumentNullException(nameof(otherSource));
+        if (baseSource is null) throw new ArgumentNullException(nameof(baseSource));
+        if (otherSource is null) throw new ArgumentNullException(nameof(otherSource));
 
         return new[] { baseSource, otherSource }.Composite();
     }
 
     public static IProjectionSource Composite(this IEnumerable<IProjectionSource> sources)
     {
-        if (sources == null) throw new ArgumentNullException(nameof(sources));
+        if (sources is null) throw new ArgumentNullException(nameof(sources));
 
         return new CompositeProjectionSource(sources);
     }

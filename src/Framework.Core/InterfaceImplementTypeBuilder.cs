@@ -24,9 +24,7 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
     /// <param name="moduleBuilder">Модуль, где будет генерировать анонимный тип</param>
     protected InterfaceImplementTypeBuilder(ModuleBuilder moduleBuilder, Type baseType)
     {
-        if (moduleBuilder == null) throw new ArgumentNullException(nameof(moduleBuilder));
-
-        this.moduleBuilder = moduleBuilder;
+        this.moduleBuilder = moduleBuilder ?? throw new ArgumentNullException(nameof(moduleBuilder));
         this.baseType = baseType ?? throw new ArgumentNullException(nameof(baseType));
     }
 
@@ -44,7 +42,7 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
     /// <returns></returns>
     public Delegate GetCreateProxyFunc(Type sourceType)
     {
-        if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));
+        if (sourceType is null) throw new ArgumentNullException(nameof(sourceType));
 
         var type = this.GetAnonymousType(sourceType);
 
@@ -62,7 +60,7 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
     /// <returns></returns>
     public Type GetAnonymousType(Type sourceType)
     {
-        if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));
+        if (sourceType is null) throw new ArgumentNullException(nameof(sourceType));
         if (!sourceType.IsInterface) throw new ArgumentException("Proxy Type must be interface");
 
         var lazyType = this.baseType.MakeGenericType(sourceType);
@@ -96,7 +94,7 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
                                                                                             {
                                                                                                 var genericOverride = genericMap.GetValueOrDefault(t);
 
-                                                                                                if (genericOverride != null)
+                                                                                                if (genericOverride is not null)
                                                                                                 {
                                                                                                     return genericOverride;
                                                                                                 }
@@ -131,9 +129,9 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
                                                                                                             .Partial(t => t.IsInterface, (interfaceTypes, classTypes) => new { InterfaceTypes = interfaceTypes, ClassTypes = classTypes });
 
                                                                                                     var baseTypeConstraint = constraints.ClassTypes.Aggregate(default(Type), (current, tryNested) =>
-                                                                                                            current == null || current.IsAssignableFrom(tryNested) ? tryNested : current);
+                                                                                                            current is null || current.IsAssignableFrom(tryNested) ? tryNested : current);
 
-                                                                                                    if (baseTypeConstraint != null && (baseTypeConstraint.DeclaringType == null || baseTypeConstraint.DeclaringType == typeBuilder))
+                                                                                                    if (baseTypeConstraint is not null && (baseTypeConstraint.DeclaringType is null || baseTypeConstraint.DeclaringType == typeBuilder))
                                                                                                     {
                                                                                                         pair.Value.SetBaseTypeConstraint(baseTypeConstraint);
                                                                                                     }
@@ -166,14 +164,14 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
 
                 var getMethod = prop.GetGetMethod();
 
-                if (getMethod != null)
+                if (getMethod is not null)
                 {
                     propertyBuilder.SetGetMethod(methods[getMethod]);
                 }
 
                 var setMethod = prop.GetSetMethod();
 
-                if (setMethod != null)
+                if (setMethod is not null)
                 {
                     propertyBuilder.SetSetMethod(methods[setMethod]);
                 }

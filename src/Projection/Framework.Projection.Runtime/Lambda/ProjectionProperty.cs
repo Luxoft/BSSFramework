@@ -70,7 +70,7 @@ public abstract class ProjectionProperty<TExpression, TElement> : IProjectionPro
     /// <summary>
     /// Свойство является коллекцией
     /// </summary>
-    public bool IsCollection => this.CollectionType != null;
+    public bool IsCollection => this.CollectionType is not null;
 
     /// <summary>
     /// Свойство имеет Nullable-тип

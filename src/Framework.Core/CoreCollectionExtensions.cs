@@ -4,12 +4,12 @@ public static class CoreCollectionExtensions
 {
     public static void RemoveBy<T>(this ICollection<T> source, Func<T, bool> selector)
     {
-        if (source == null)
+        if (source is null)
         {
             throw new ArgumentNullException(nameof(source));
         }
 
-        if (selector == null)
+        if (selector is null)
         {
             throw new ArgumentNullException(nameof(selector));
         }

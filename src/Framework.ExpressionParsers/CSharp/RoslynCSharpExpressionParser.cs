@@ -16,9 +16,9 @@ public class RoslynCSharpExpressionParser : INativeBodyExpressionParser
 {
     public Expression Parse(ParameterExpression[] parameters, Type returnType, string expression)
     {
-        if (parameters == null) throw new ArgumentNullException(nameof(parameters));
-        if (returnType == null) throw new ArgumentNullException(nameof(returnType));
-        if (expression == null) throw new ArgumentNullException(nameof(expression));
+        if (parameters is null) throw new ArgumentNullException(nameof(parameters));
+        if (returnType is null) throw new ArgumentNullException(nameof(returnType));
+        if (expression is null) throw new ArgumentNullException(nameof(expression));
 
         var types = parameters.Select(parameter => parameter.Type).Concat(
                                   [returnType]).Concat([typeof(Enumerable), typeof(EnumerableExtensions), typeof(Expression), typeof(object)])

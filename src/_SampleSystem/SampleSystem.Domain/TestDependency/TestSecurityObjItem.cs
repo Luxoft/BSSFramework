@@ -21,9 +21,7 @@ public class TestSecurityObjItem : BaseDirectory, IDetail<TestRootSecurityObj>, 
 
     public TestSecurityObjItem(TestRootSecurityObj master)
     {
-        if (master == null) throw new ArgumentNullException(nameof(master));
-
-        this.firstMaster = master;
+        this.firstMaster = master ?? throw new ArgumentNullException(nameof(master));
         this.firstMaster.AddDetail(this);
     }
 

@@ -29,7 +29,7 @@ public static class PeriodExtensions
     /// <returns>Новый период, дата старта которого является минимальной из дат старта переданных периодов, а дата окончания является максимальной из дат окончания переденных периодов</returns>
     public static Period Aggregate(this IEnumerable<Period> periods)
     {
-        if (periods == null)
+        if (periods is null)
         {
             throw new ArgumentNullException(nameof(periods));
         }

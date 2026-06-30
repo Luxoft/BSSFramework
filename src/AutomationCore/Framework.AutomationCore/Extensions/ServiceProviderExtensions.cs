@@ -21,7 +21,7 @@ public static class ServiceProviderExtensions
         {
             var controllerEvaluator = rootServiceProvider.GetRequiredService<ControllerEvaluator<TController>>();
 
-            return userCredential == null ? controllerEvaluator : controllerEvaluator.WithImpersonate(userCredential);
+            return userCredential is null ? controllerEvaluator : controllerEvaluator.WithImpersonate(userCredential);
         }
     }
 }

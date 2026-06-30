@@ -12,7 +12,7 @@ internal class ProjectionPropertyBuilder : IProjectionProperty
 {
     public ProjectionPropertyBuilder(IProjectionProperty projectionProperty)
     {
-        if (projectionProperty == null) throw new ArgumentNullException(nameof(projectionProperty));
+        if (projectionProperty is null) throw new ArgumentNullException(nameof(projectionProperty));
 
         this.SourceType = projectionProperty.SourceType;
         this.Expression = projectionProperty.Expression;
@@ -48,7 +48,7 @@ internal class ProjectionPropertyBuilder : IProjectionProperty
 
     public Type? CollectionType { get; }
 
-    public bool IsCollection => this.CollectionType != null;
+    public bool IsCollection => this.CollectionType is not null;
 
     public bool IsNullable { get; set; }
 

@@ -204,7 +204,7 @@ public partial class BusinessUnit :
     {
         get
         {
-            if (this.FirstNewBusinessStatusMonth == null)
+            if (this.FirstNewBusinessStatusMonth is null)
             {
                 return null;
             }
@@ -222,7 +222,7 @@ public partial class BusinessUnit :
     {
         get
         {
-            if (this.BusinessUnitType == null)
+            if (this.BusinessUnitType is null)
             {
                 return string.Empty;
             }

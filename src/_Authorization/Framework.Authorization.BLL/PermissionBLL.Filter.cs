@@ -10,7 +10,7 @@ public partial class PermissionBLL
 {
     public List<Permission> GetListBy(PermissionDirectFilterModel filter, FetchRule<Permission> fetchs)
     {
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
+        if (filter is null) throw new ArgumentNullException(nameof(filter));
 
         this.Context.Validator.Validate(filter);
 

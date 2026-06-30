@@ -16,7 +16,7 @@ public static class MethodGeneratorInfoExtensions
 {
     public static CodeParameterDeclarationExpression GetParameter(this IMethodGeneratorInfo info)
     {
-        if (info == null) throw new ArgumentNullException(nameof(info));
+        if (info is null) throw new ArgumentNullException(nameof(info));
 
         return info.Parameters.Single();
     }

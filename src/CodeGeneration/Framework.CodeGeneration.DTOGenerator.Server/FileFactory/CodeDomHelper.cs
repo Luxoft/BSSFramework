@@ -24,16 +24,16 @@ internal static class CodeDomHelper
 
     public static CodeConstructor GenerateFromDomainObjectConstructor(this IFileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>, DTOFileType> fileFactory, IPropertyAssigner propertyAssigner)
     {
-        if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
-        if (propertyAssigner == null) throw new ArgumentNullException(nameof(propertyAssigner));
+        if (fileFactory is null) throw new ArgumentNullException(nameof(fileFactory));
+        if (propertyAssigner is null) throw new ArgumentNullException(nameof(propertyAssigner));
 
         return fileFactory.GenerateFromDomainObjectConstructor(propertyAssigner, fileFactory.DomainType!);
     }
 
     public static CodeConstructor GenerateFromDomainObjectConstructor(this IFileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>, DTOFileType> fileFactory, IPropertyAssigner propertyAssigner, Type domainType)
     {
-        if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
-        if (propertyAssigner == null) throw new ArgumentNullException(nameof(propertyAssigner));
+        if (fileFactory is null) throw new ArgumentNullException(nameof(fileFactory));
+        if (propertyAssigner is null) throw new ArgumentNullException(nameof(propertyAssigner));
 
         var mappingServiceParameter = fileFactory.GetMappingServiceParameter();
         var mappingServiceParameterRefExpr = mappingServiceParameter.ToVariableReferenceExpression();
@@ -51,7 +51,7 @@ internal static class CodeDomHelper
                        }
         }.Self(decl =>
                {
-                   if (fileFactory.FileType == BaseFileType.ProjectionDTO || (fileFactory.FileType as MainDTOFileType).Maybe(fileType => fileType.BaseType != null))
+                   if (fileFactory.FileType == BaseFileType.ProjectionDTO || (fileFactory.FileType as MainDTOFileType).Maybe(fileType => fileType.BaseType is not null))
                    {
                        decl.BaseConstructorArgs.AddRange(
                        [
@@ -77,35 +77,35 @@ internal static class CodeDomHelper
 
     public static CodeParameterDeclarationExpression GetMappingServiceParameter(this IFileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>> fileFactory)
     {
-        if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
+        if (fileFactory is null) throw new ArgumentNullException(nameof(fileFactory));
 
         return new CodeParameterDeclarationExpression(fileFactory.Configuration.DTOMappingServiceInterfaceTypeReference, "mappingService");
     }
 
     public static CodeParameterDeclarationExpression GetDomainTypeTargetParameter(this IFileFactory fileFactory, Type? domainType = null)
     {
-        if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
+        if (fileFactory is null) throw new ArgumentNullException(nameof(fileFactory));
 
         return fileFactory.GetDomainObjectParameter(domainType);
     }
 
     public static CodeParameterDeclarationExpression GetDomainTypeSourceParameter(this IFileFactory fileFactory, Type? domainType = null)
     {
-        if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
+        if (fileFactory is null) throw new ArgumentNullException(nameof(fileFactory));
 
         return fileFactory.GetDomainObjectParameter(domainType);
     }
 
     public static CodeParameterDeclarationExpression GetDomainObjectParameter(this IFileFactory fileFactory, Type? domainType = null)
     {
-        if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
+        if (fileFactory is null) throw new ArgumentNullException(nameof(fileFactory));
 
         return new CodeParameterDeclarationExpression(domainType ?? fileFactory.DomainType!, DomainObjectParameterNameBase);
     }
 
     public static CodeParameterDeclarationExpression GetDomainObjectParameter(this Type domainType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
 
         return new CodeParameterDeclarationExpression(domainType, DomainObjectParameterNameBase);
     }
@@ -158,14 +158,14 @@ internal static class CodeDomHelper
 
     public static CodeParameterDeclarationExpression GetMappingServiceDomainObjectParameter(this IFileFactory fileFactory)
     {
-        if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
+        if (fileFactory is null) throw new ArgumentNullException(nameof(fileFactory));
 
         return fileFactory.CurrentReference.ToParameterDeclarationExpression(fileFactory.DomainType!.Name.ToStartLowerCase() + fileFactory.FileTypeName);
     }
 
     public static CodeMemberMethod GetMappingServiceInterfaceToDomainObjectMethod(this IFileFactory fileFactory)
     {
-        if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
+        if (fileFactory is null) throw new ArgumentNullException(nameof(fileFactory));
 
         var parameter = fileFactory.GetMappingServiceDomainObjectParameter();
 
@@ -179,7 +179,7 @@ internal static class CodeDomHelper
 
     public static CodeMemberMethod GetMappingServiceInterfaceToDomainObjectWithAllowCreateMethod(this IFileFactory fileFactory)
     {
-        if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
+        if (fileFactory is null) throw new ArgumentNullException(nameof(fileFactory));
 
         var parameter = fileFactory.GetMappingServiceDomainObjectParameter();
         var allowCreateParameter = typeof(bool).ToTypeReference().ToParameterDeclarationExpression("allowCreate");
@@ -194,8 +194,8 @@ internal static class CodeDomHelper
 
     public static CodeMemberMethod GetMappingServiceInterfaceToDomainObjectMethod(this IFileFactory fileFactory, Type masterType)
     {
-        if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
-        if (masterType == null) throw new ArgumentNullException(nameof(masterType));
+        if (fileFactory is null) throw new ArgumentNullException(nameof(fileFactory));
+        if (masterType is null) throw new ArgumentNullException(nameof(masterType));
 
         var parameter = fileFactory.GetMappingServiceDomainObjectParameter();
 
@@ -212,8 +212,8 @@ internal static class CodeDomHelper
     public static CodeMemberMethod GetMappingServiceToDomainObjectMethod<TConfiguration>(this IDTOFileFactory<TConfiguration, DTOFileType> fileFactory, Type masterType)
             where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
     {
-        if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
-        if (masterType == null) throw new ArgumentNullException(nameof(masterType));
+        if (fileFactory is null) throw new ArgumentNullException(nameof(fileFactory));
+        if (masterType is null) throw new ArgumentNullException(nameof(masterType));
 
         var parameter = fileFactory.GetMappingServiceDomainObjectParameter();
         var parameterExpr = parameter.ToVariableReferenceExpression();
@@ -251,7 +251,7 @@ internal static class CodeDomHelper
     public static CodeMemberMethod GetMappingServiceToDomainObjectMethod<TConfiguration>(this IDTOFileFactory<TConfiguration, DTOFileType> fileFactory)
             where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
     {
-        if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
+        if (fileFactory is null) throw new ArgumentNullException(nameof(fileFactory));
 
         var fileType = (fileFactory as IDTOSource).FileType;
 
@@ -275,7 +275,7 @@ internal static class CodeDomHelper
 
     private static CodeMemberMethod GetMappingServiceIdentityToDomainObjectMethod(this IFileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>, DTOFileType> fileFactory)
     {
-        if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
+        if (fileFactory is null) throw new ArgumentNullException(nameof(fileFactory));
 
         var parameter = fileFactory.GetMappingServiceDomainObjectParameter();
 
@@ -300,7 +300,7 @@ internal static class CodeDomHelper
 
     private static CodeMemberMethod GetMappingServiceIdentityToIntegrationVersionDomainObjectMethod(this IFileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>, DTOFileType> fileFactory)
     {
-        if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
+        if (fileFactory is null) throw new ArgumentNullException(nameof(fileFactory));
 
         var parameter = fileFactory.GetMappingServiceDomainObjectParameter();
 
@@ -326,7 +326,7 @@ internal static class CodeDomHelper
 
     private static CodeMemberMethod GetMappingServiceUnpersistentToDomainObjectMethod(this IFileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>, DTOFileType> fileFactory)
     {
-        if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
+        if (fileFactory is null) throw new ArgumentNullException(nameof(fileFactory));
 
         var parameter = fileFactory.GetMappingServiceDomainObjectParameter();
         var parameterExpr = parameter.ToVariableReferenceExpression();
@@ -353,7 +353,7 @@ internal static class CodeDomHelper
 
     private static CodeMemberMethod GetMappingServicePersistentToDomainObjectMethod(this IFileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>, DTOFileType> fileFactory)
     {
-        if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
+        if (fileFactory is null) throw new ArgumentNullException(nameof(fileFactory));
 
         var parameter = fileFactory.GetMappingServiceDomainObjectParameter();
         var parameterExpr = parameter.ToVariableReferenceExpression();
@@ -381,7 +381,7 @@ internal static class CodeDomHelper
 
     public static CodeMemberMethod GetMappingServiceToDomainObjectWithAllowCreateMethod(this IFileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>, DTOFileType> fileFactory)
     {
-        if (fileFactory == null) throw new ArgumentNullException(nameof(fileFactory));
+        if (fileFactory is null) throw new ArgumentNullException(nameof(fileFactory));
 
         var parameter = fileFactory.GetMappingServiceDomainObjectParameter();
         var parameterExpr = parameter.ToVariableReferenceExpression();

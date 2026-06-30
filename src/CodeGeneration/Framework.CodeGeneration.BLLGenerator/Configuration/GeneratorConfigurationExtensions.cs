@@ -14,8 +14,8 @@ public static class GeneratorConfigurationExtensions
         bool asAbstract,
         CodeTypeReference? containerType = null)
     {
-        if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-        if (typeName == null) throw new ArgumentNullException(nameof(typeName));
+        if (configuration is null) throw new ArgumentNullException(nameof(configuration));
+        if (typeName is null) throw new ArgumentNullException(nameof(typeName));
 
         var bllContextInterfaceTypeReference = configuration.Environment.BLLCore.BLLContextInterfaceTypeReference;
 

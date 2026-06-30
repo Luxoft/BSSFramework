@@ -23,28 +23,28 @@ public class ServerFileGenerator<TConfiguration>(TConfiguration configuration) :
 
     protected virtual ICodeFileFactory<DTOFileType> GetVisualDTOFileFactory(Type domainType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
 
         return new DefaultVisualDTOFileFactory<TConfiguration>(this.Configuration, domainType);
     }
 
     protected virtual ICodeFileFactory<DTOFileType> GetSimpleDTOFileFactory(Type domainType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
 
         return new DefaultSimpleDTOFileFactory<TConfiguration>(this.Configuration, domainType);
     }
 
     protected virtual ICodeFileFactory<DTOFileType> GetFullDTOFileFactory(Type domainType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
 
         return new DefaultFullDTOFileFactory<TConfiguration>(this.Configuration, domainType);
     }
 
     protected virtual ICodeFileFactory<DTOFileType> GetRichDTOFileFactory(Type domainType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
 
         return new DefaultRichDTOFileFactory<TConfiguration>(this.Configuration, domainType);
     }

@@ -23,7 +23,7 @@ public abstract class ClientDTOMappingServiceBase
     {
         var tryCurrentSourceValue = currentSource.GetValueOrDefault();
 
-        if (tryCurrentSourceValue == null)
+        if (tryCurrentSourceValue is null)
         {
             return [];
         }
@@ -42,7 +42,7 @@ public abstract class ClientDTOMappingServiceBase
         where TIdentity : notnull =>
         currentSource.ExtractUpdateData(
             baseSource,
-            (currentSourceItem, baseSourceItem) => baseSourceItem == null ? getTargetFromSingle(currentSourceItem) : getTargetFromPair(currentSourceItem, baseSourceItem),
+            (currentSourceItem, baseSourceItem) => baseSourceItem is null ? getTargetFromSingle(currentSourceItem) : getTargetFromPair(currentSourceItem, baseSourceItem),
             v => v.Identity).ToList();
 
     protected virtual List<UpdateItemData<TTarget, TIdentity>> ExtractSecurityUpdateDataL<TSource, TIdentity, TTarget>(
@@ -57,13 +57,13 @@ public abstract class ClientDTOMappingServiceBase
 
         var tryBaseSourceValue = baseSource.GetValueOrDefault();
 
-        if (tryCurrentSourceValue == null)
+        if (tryCurrentSourceValue is null)
         {
             return [];
         }
         else
         {
-            if (tryBaseSourceValue == null)
+            if (tryBaseSourceValue is null)
             {
                 return tryCurrentSourceValue.ToList(item => UpdateItemData.CreateSave<TTarget, TIdentity>(getTargetFromSingle(item)));
             }

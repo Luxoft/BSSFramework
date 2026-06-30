@@ -12,7 +12,7 @@ public class RequiredValidator(RequiredMode mode) : IPropertyValidator<object, o
 {
     public ValidationResult GetValidationResult(IPropertyValidationContext<object, object> context)
     {
-        if (context == null) throw new ArgumentNullException(nameof(context));
+        if (context is null) throw new ArgumentNullException(nameof(context));
 
         var property = context.Map.Property;
 
@@ -25,7 +25,7 @@ public class RequiredValidator(RequiredMode mode) : IPropertyValidator<object, o
 
     private ValidationResult GetValidationResult<TSource, TProperty>(IPropertyValidationContext<object, object> context)
     {
-        if (context == null) throw new ArgumentNullException(nameof(context));
+        if (context is null) throw new ArgumentNullException(nameof(context));
 
         return new RequiredValidator<TSource, TProperty>(mode).GetValidationResult(context.Cast(v => (TSource)v, v => (TProperty)v));
     }
@@ -33,8 +33,8 @@ public class RequiredValidator(RequiredMode mode) : IPropertyValidator<object, o
 
     public IPropertyValidator GetValidator(PropertyInfo property, IServiceProvider serviceProvider)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
-        if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
+        if (property is null) throw new ArgumentNullException(nameof(property));
+        if (serviceProvider is null) throw new ArgumentNullException(nameof(serviceProvider));
 
         mode.ValidateAppliedType(property.PropertyType);
 

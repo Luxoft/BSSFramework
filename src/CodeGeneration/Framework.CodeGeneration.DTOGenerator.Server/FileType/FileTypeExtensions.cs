@@ -6,7 +6,7 @@ public static class FileTypeExtensions
 {
     public static bool NeedMappingServiceForConvert(this BaseFileType fileType)
     {
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         return fileType != BaseFileType.IdentityDTO;
     }

@@ -56,7 +56,7 @@ internal class AddOrUpdateStrategy(DatabaseScriptGeneratorStrategyInfo parameter
         var sqlMappings = typeDescription.GetPersistentFields().SelectMany(MapperFactory.GetMapping).ToList();
         var mainDatabase = this.Parameter.Context.GetMainDatabase();
 
-        if (typeDescription.Parent != null)
+        if (typeDescription.Parent is not null)
         {
             sqlMappings = sqlMappings.Union(typeDescription.Root.Fields.SelectMany(MapperFactory.GetMapping).Where(f => f.IsPrimaryKey))
                                      .ToList();

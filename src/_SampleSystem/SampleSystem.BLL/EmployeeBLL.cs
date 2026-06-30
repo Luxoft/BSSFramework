@@ -19,7 +19,7 @@ public partial class EmployeeBLL
 
     public EmployeeEmailMassChangeModel GetMassChangeByEmail(List<Employee> employees)
     {
-        if (employees == null) throw new ArgumentNullException(nameof(employees));
+        if (employees is null) throw new ArgumentNullException(nameof(employees));
 
         return new EmployeeEmailMassChangeModel { ChangingObjects = employees };
     }
@@ -33,7 +33,7 @@ public partial class EmployeeBLL
     /// <returns></returns>
     public List<Employee> MassChangeByEmail(EmployeeEmailMassChangeModel changeModel)
     {
-        if (changeModel == null) throw new ArgumentNullException(nameof(changeModel));
+        if (changeModel is null) throw new ArgumentNullException(nameof(changeModel));
 
         changeModel.ChangingObjects.ForEach(employee => employee.Email = changeModel.Email);
 
@@ -44,7 +44,7 @@ public partial class EmployeeBLL
 
     public Employee ComplexChange(EmployeeComplexChangeModel changeModel)
     {
-        if (changeModel == null) throw new ArgumentNullException(nameof(changeModel));
+        if (changeModel is null) throw new ArgumentNullException(nameof(changeModel));
 
         changeModel.PrimaryChangingObject.Email = changeModel.Email;
 

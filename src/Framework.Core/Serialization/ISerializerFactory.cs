@@ -13,15 +13,15 @@ public static class SerializerFactoryExtensions
 {
     public static TSerializedValue Serialize<TSerializedValue, TValue>(this ISerializerFactory<TSerializedValue> serializerFactory, TValue value)
     {
-        if (serializerFactory == null) throw new ArgumentNullException(nameof(serializerFactory));
+        if (serializerFactory is null) throw new ArgumentNullException(nameof(serializerFactory));
 
         return serializerFactory.Create<TValue>().Serialize(value);
     }
 
     public static void Validate<TSerializedValue>(this ISerializerFactory<TSerializedValue> serializerFactory, Type valueType, TSerializedValue serializedValue)
     {
-        if (serializerFactory == null) throw new ArgumentNullException(nameof(serializerFactory));
-        if (serializedValue == null) throw new ArgumentNullException(nameof(serializedValue));
+        if (serializerFactory is null) throw new ArgumentNullException(nameof(serializerFactory));
+        if (serializedValue is null) throw new ArgumentNullException(nameof(serializedValue));
 
         try
         {
@@ -37,8 +37,8 @@ public static class SerializerFactoryExtensions
 
     private static void InternalValidate<TSerializedValue, TValue>(this ISerializerFactory<TSerializedValue> serializerFactory, TSerializedValue serializedValue)
     {
-        if (serializerFactory == null) throw new ArgumentNullException(nameof(serializerFactory));
-        if (serializedValue == null) throw new ArgumentNullException(nameof(serializedValue));
+        if (serializerFactory is null) throw new ArgumentNullException(nameof(serializerFactory));
+        if (serializedValue is null) throw new ArgumentNullException(nameof(serializedValue));
 
         serializerFactory.Create<TValue>().Deserialize(serializedValue);
     }

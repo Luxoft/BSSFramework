@@ -43,7 +43,7 @@ public class GenericNamedLockSetup : IGenericNamedLockSetup, IServiceInitializer
 
     public void Initialize(IServiceCollection services)
     {
-        if (this.mainInitAction == null)
+        if (this.mainInitAction is null)
         {
             throw new InvalidOperationException($"Use '{nameof(this.SetNameLockType)}' method");
         }

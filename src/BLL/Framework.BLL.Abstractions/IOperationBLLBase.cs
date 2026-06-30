@@ -13,16 +13,16 @@ public static class OperationBLLBaseExtensions
 {
     public static void Save<TDomainObject>(this IOperationBLLBase<TDomainObject> bll, IEnumerable<TDomainObject> domainObjects)
     {
-        if (bll == null) throw new ArgumentNullException(nameof(bll));
-        if (domainObjects == null) throw new ArgumentNullException(nameof(domainObjects));
+        if (bll is null) throw new ArgumentNullException(nameof(bll));
+        if (domainObjects is null) throw new ArgumentNullException(nameof(domainObjects));
 
         domainObjects.Foreach(bll.Save);
     }
 
     public static void Remove<TDomainObject>(this IOperationBLLBase<TDomainObject> bll, IEnumerable<TDomainObject> domainObjects)
     {
-        if (bll == null) throw new ArgumentNullException(nameof(bll));
-        if (domainObjects == null) throw new ArgumentNullException(nameof(domainObjects));
+        if (bll is null) throw new ArgumentNullException(nameof(bll));
+        if (domainObjects is null) throw new ArgumentNullException(nameof(domainObjects));
 
         domainObjects.Foreach(bll.Remove);
     }

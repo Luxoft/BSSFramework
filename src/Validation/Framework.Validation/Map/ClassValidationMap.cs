@@ -33,7 +33,7 @@ public class ClassValidationMap<TSource> : ClassValidationMap, IClassValidationM
     public ClassValidationMap(Func<IClassValidationMap<TSource>, IEnumerable<IPropertyValidationMap<TSource>>> getPropertyMaps, IEnumerable<IClassValidator<TSource>> validators)
             : base(typeof(TSource).GetValidationName())
     {
-        if (validators == null) throw new ArgumentNullException(nameof(validators));
+        if (validators is null) throw new ArgumentNullException(nameof(validators));
 
         this.PropertyMaps = getPropertyMaps(this).ToReadOnlyCollection();
         this.Validators = validators.ToReadOnlyCollection();
@@ -42,7 +42,7 @@ public class ClassValidationMap<TSource> : ClassValidationMap, IClassValidationM
     public ClassValidationMap(IEnumerable<IPropertyValidationMap<TSource>> propertyMaps, IEnumerable<IClassValidator<TSource>> validators)
             : base(typeof(TSource).GetValidationName())
     {
-        if (validators == null) throw new ArgumentNullException(nameof(validators));
+        if (validators is null) throw new ArgumentNullException(nameof(validators));
 
         this.PropertyMaps = propertyMaps.ToReadOnlyCollection();
         this.Validators = validators.ToReadOnlyCollection();

@@ -105,7 +105,7 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
 
         services.AddSingleton(this.settings);
 
-        if (this.defaultConnectionString != null)
+        if (this.defaultConnectionString is not null)
         {
             services.AddSingleton<IDefaultConnectionStringSource>(new ManualDefaultConnectionStringSource(this.defaultConnectionString));
         }

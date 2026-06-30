@@ -86,7 +86,7 @@ public class MainDTOFetchRuleExpanderBaseFileFactory<TConfiguration>(TConfigurat
 
     private CodeMemberMethod GetGetDomainContainerMethod(Type domainType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
 
         var dtoTypeParameter = new CodeParameterDeclarationExpression(typeof(ViewDTOType), "dtoType");
         var dtoTypeParameterExpr = dtoTypeParameter.ToVariableReferenceExpression();

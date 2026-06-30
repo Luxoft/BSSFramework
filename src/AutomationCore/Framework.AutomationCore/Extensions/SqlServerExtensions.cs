@@ -22,7 +22,7 @@ public static class SqlServerExtensions
 
     private static async Task SetModeRestrictedUserAsync(this Server server, string databaseName, CancellationToken ct)
     {
-        if (server.GetDatabase(databaseName) == null)
+        if (server.GetDatabase(databaseName) is null)
         {
             return;
         }

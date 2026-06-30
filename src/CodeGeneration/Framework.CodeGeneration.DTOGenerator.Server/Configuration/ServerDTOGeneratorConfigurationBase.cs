@@ -183,7 +183,7 @@ public abstract class ServerDTOGeneratorConfigurationBase<TEnvironment> : DTOGen
 
     public override ILayerCodeTypeReferenceService? GetLayerCodeTypeReferenceService(DTOFileType fileType)
     {
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         if (fileType == ServerFileType.SimpleIntegrationDTO || fileType == ServerFileType.RichIntegrationDTO)
         {
@@ -201,29 +201,29 @@ public abstract class ServerDTOGeneratorConfigurationBase<TEnvironment> : DTOGen
 
     public CodeMethodReferenceExpression GetConvertToDTOMethod(Type domainType, BaseFileType fileType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         return new CodeMethodReferenceExpression(this.GetCodeTypeReference(null, ServerFileType.LambdaHelper).ToTypeReferenceExpression(), "To" + fileType.Name);
     }
 
     public CodeMethodReferenceExpression GetConvertToDTOListMethod(Type domainType, BaseFileType fileType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         return new CodeMethodReferenceExpression(this.GetCodeTypeReference(null, ServerFileType.LambdaHelper).ToTypeReferenceExpression(), "To" + fileType.Name + "List");
     }
 
     public bool CanCreateDomainObject(PropertyInfo property, Type elementType, DTOFileType fileType)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
-        if (elementType == null) throw new ArgumentNullException(nameof(elementType));
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (property is null) throw new ArgumentNullException(nameof(property));
+        if (elementType is null) throw new ArgumentNullException(nameof(elementType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         var createRoleAttribute = property.GetCustomAttribute<CreateRoleAttribute>() ?? property.DeclaringType!.GetCustomAttribute<CreateRoleAttribute>();
 
-        if (createRoleAttribute != null)
+        if (createRoleAttribute is not null)
         {
             return createRoleAttribute.Value;
         }
@@ -238,7 +238,7 @@ public abstract class ServerDTOGeneratorConfigurationBase<TEnvironment> : DTOGen
 
     public Type? TryGetAllowCreateAttributeType(DTOFileType fileType)
     {
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         if (fileType.Role == DTORole.Integration)
         {
@@ -282,7 +282,7 @@ public abstract class ServerDTOGeneratorConfigurationBase<TEnvironment> : DTOGen
 
     public override ICodeFileFactoryHeader? GetFileFactoryHeader(BaseFileType fileType, bool raiseIfNotFound = true)
     {
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         if (fileType is DomainOperationEventDTOFileType eventFileType)
         {
@@ -299,8 +299,8 @@ public abstract class ServerDTOGeneratorConfigurationBase<TEnvironment> : DTOGen
 
     protected override IEnumerable<PropertyInfo> GetInternalDomainTypeProperties(Type domainType, DTOFileType baseFileType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (baseFileType == null) throw new ArgumentNullException(nameof(baseFileType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
+        if (baseFileType is null) throw new ArgumentNullException(nameof(baseFileType));
 
         if (baseFileType is DomainOperationEventDTOFileType || baseFileType == ServerFileType.BaseEventDTO)
         {
@@ -313,7 +313,7 @@ public abstract class ServerDTOGeneratorConfigurationBase<TEnvironment> : DTOGen
                                      ? BaseFileType.RichDTO
                                      : null;
 
-        if (clientFileType != null)
+        if (clientFileType is not null)
         {
             return new[] { clientFileType }.Concat(clientFileType.GetBaseTypes(false))
                                            .SelectMany(fileType => base.GetInternalDomainTypeProperties(domainType, fileType, baseFileType.Role))
@@ -361,8 +361,8 @@ public abstract class ServerDTOGeneratorConfigurationBase<TEnvironment> : DTOGen
 
     public IEnumerable<Type> GetDomainTypeMasters(Type domainType, DTOFileType fileType, bool isWritable)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         return this.domainTypeMastersCache.GetValue(domainType, fileType, isWritable);
     }
@@ -370,8 +370,8 @@ public abstract class ServerDTOGeneratorConfigurationBase<TEnvironment> : DTOGen
 
     private IEnumerable<Type> GetDomainTypeDetails(Type domainType, DTOFileType fileType, bool isWritable)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         return this.domainTypeDetailsCache.GetValue(domainType, fileType, isWritable);
     }

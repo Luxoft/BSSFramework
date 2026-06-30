@@ -14,7 +14,7 @@ public static class TypeResolverExtensions
 
                               let type = typeResolver.TryResolve(ident)
 
-                              where type != null
+                              where type is not null
 
                               select type;
 

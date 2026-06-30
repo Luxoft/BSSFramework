@@ -30,7 +30,7 @@ public record TypeEvent(Type Type, ImmutableArray<EventOperation> Operations, Fu
         var isSaveUntypedFunc = defaultFunc;
         var isRemoveUntypeFunc = defaultFunc;
 
-        if (isSaveProcessingFunc != null)
+        if (isSaveProcessingFunc is not null)
         {
             isSaveUntypedFunc = z => isSaveProcessingFunc((T)z);
         }

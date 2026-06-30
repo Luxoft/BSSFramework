@@ -18,7 +18,7 @@ public abstract class AuditEventListenerBase
 
     protected AuditEventListenerBase(IEnumerable<IAuditProperty> auditProperties)
     {
-        if (auditProperties == null) throw new ArgumentNullException(nameof(auditProperties));
+        if (auditProperties is null) throw new ArgumentNullException(nameof(auditProperties));
 
         this.auditProperties = auditProperties.ToArray();
 
@@ -28,7 +28,7 @@ public abstract class AuditEventListenerBase
         {
             var securityContextType = entityPersister.EntityMetamodel.Type;
 
-            if (securityContextType == null)
+            if (securityContextType is null)
             {
                 return (_, __) => { };
             }

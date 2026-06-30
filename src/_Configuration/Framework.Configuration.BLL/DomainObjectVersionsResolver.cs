@@ -28,7 +28,7 @@ public class DomainObjectVersionsResolver<TBLLContext, TDomainObject>(
     {
         var previousRevisionNumber = this.revisionBll.GetPreviousRevision(domainObjectId, revisionNumber);
 
-        if (previousRevisionNumber == null)
+        if (previousRevisionNumber is null)
         {
             return null;
         }

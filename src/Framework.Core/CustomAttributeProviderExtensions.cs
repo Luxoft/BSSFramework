@@ -10,8 +10,8 @@ public static class CustomAttributeProviderExtensions
 {
     public static bool HasAttribute(this ICustomAttributeProvider source, Func<Attribute, bool> predicate)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (predicate is null) throw new ArgumentNullException(nameof(predicate));
 
         return source.GetCustomAttributes<Attribute>().Any(predicate);
     }
@@ -32,7 +32,7 @@ public static class CustomAttributeProviderExtensions
     public static IEnumerable<T> GetCustomAttributes<T>(this ICustomAttributeProvider source, Func<T, bool> predicate)
         where T : Attribute
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         return AttributeCacheContainer<T>.TypeAttributeCache[source].Where(predicate);
     }
@@ -44,8 +44,8 @@ public static class CustomAttributeProviderExtensions
     public static bool HasAttribute<T>(this ICustomAttributeProvider source, Func<T, bool> predicate)
         where T : Attribute
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (predicate is null) throw new ArgumentNullException(nameof(predicate));
 
         return source.GetCustomAttributes<T>().Any(predicate);
     }
@@ -53,7 +53,7 @@ public static class CustomAttributeProviderExtensions
     public static bool HasAttribute<T>(this ICustomAttributeProvider source)
         where T : Attribute
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         return source.GetCustomAttributes<T>().Any();
     }
@@ -61,7 +61,7 @@ public static class CustomAttributeProviderExtensions
     public static T? GetCustomAttribute<T>(this ICustomAttributeProvider source, bool throwIfMany = true)
         where T : Attribute
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         return source.GetCustomAttribute<T>(_ => true, throwIfMany);
     }
@@ -69,7 +69,7 @@ public static class CustomAttributeProviderExtensions
     public static T? GetCustomAttribute<T>(this ICustomAttributeProvider source, Func<T, bool> predicate, bool throwIfMany = true)
         where T : Attribute
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         var attributes = source.GetCustomAttributes<T>();
 

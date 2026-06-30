@@ -73,7 +73,7 @@ public class HistoryQueryOptimized<TEntity, TRevisionEntity, TIdentity>(
     {
         const string typeKey = "$type$";
 
-        if (versionsEntity == null)
+        if (versionsEntity is null)
         {
             return null!;
         }

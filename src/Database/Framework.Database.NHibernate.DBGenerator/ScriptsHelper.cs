@@ -15,7 +15,7 @@ internal static class ScriptsHelper
     /// <param name="clearCapturedSql">Очистить источник скриптов</param>
     public static string GetScriptForBatchExecuting(this CapturedSql capturedSql, bool clearCapturedSql = true)
     {
-        if (capturedSql == null)
+        if (capturedSql is null)
         {
             throw new ArgumentNullException(nameof(capturedSql));
         }
@@ -39,7 +39,7 @@ internal static class ScriptsHelper
     /// <param name="capturedSql">Источник скриптов</param>
     private static IEnumerable<string> GetScriptsForBatchExecutingInternal(CapturedSql capturedSql)
     {
-        if (capturedSql == null)
+        if (capturedSql is null)
         {
             throw new ArgumentNullException(nameof(capturedSql));
         }
@@ -52,7 +52,7 @@ internal static class ScriptsHelper
     /// <param name="clear">Очистить</param>
     private static void TryClearCapturedSql(CapturedSql capturedSql, bool clear)
     {
-        if (capturedSql == null)
+        if (capturedSql is null)
         {
             throw new ArgumentNullException(nameof(capturedSql));
         }

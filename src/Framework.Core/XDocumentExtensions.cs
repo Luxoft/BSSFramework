@@ -7,7 +7,7 @@ public static class XDocumentExtensions
 {
     public static XDocument OverrideChildrenNamespace(this XDocument xDocument)
     {
-        if (xDocument == null) throw new ArgumentNullException(nameof(xDocument));
+        if (xDocument is null) throw new ArgumentNullException(nameof(xDocument));
 
         var root = xDocument.Root ?? throw new ArgumentException("XDocument has no root element.", nameof(xDocument));
 
@@ -16,8 +16,8 @@ public static class XDocumentExtensions
 
     private static XElement OverrideNamespace(this XElement xElement, XNamespace xNamespace)
     {
-        if (xElement == null) throw new ArgumentNullException(nameof(xElement));
-        if (xNamespace == null) throw new ArgumentNullException(nameof(xNamespace));
+        if (xElement is null) throw new ArgumentNullException(nameof(xElement));
+        if (xNamespace is null) throw new ArgumentNullException(nameof(xNamespace));
 
         var newElement = new XElement(xNamespace + xElement.Name.LocalName);
 

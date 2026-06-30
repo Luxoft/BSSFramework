@@ -2,26 +2,11 @@
 
 namespace Framework.Database.NHibernate.DBGenerator.Contracts;
 
-public class DatabaseScriptResultDecorator : IDatabaseScriptResult
+public class DatabaseScriptResultDecorator(IDatabaseScriptResult source, Func<string, string> resultSelector) : IDatabaseScriptResult
 {
-    private readonly IDatabaseScriptResult source;
+    private readonly IDatabaseScriptResult source = source ?? throw new ArgumentNullException(nameof(source));
 
-    private readonly Func<string, string> resultSelector;
-
-    public DatabaseScriptResultDecorator(IDatabaseScriptResult source, Func<string, string> resultSelector)
-    {
-        if (source == null)
-        {
-            throw new ArgumentNullException(nameof(source));
-        }
-        if (resultSelector == null)
-        {
-            throw new ArgumentNullException(nameof(resultSelector));
-        }
-
-        this.source = source;
-        this.resultSelector = resultSelector;
-    }
+    private readonly Func<string, string> resultSelector = resultSelector ?? throw new ArgumentNullException(nameof(resultSelector));
 
     public IEnumerable<string> this[ApplyMigrationDbScriptMode mode] => this.source[mode].Select(z => this.resultSelector(z));
 

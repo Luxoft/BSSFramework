@@ -43,7 +43,7 @@ public class NHibDal<TDomainObject, TIdent>(INHibSession session, IAsyncDal<TDom
     {
         var queryable = asyncDal.GetQueryable();
 
-        var withFetchQueryable = fetchRule == null ? queryable : queryable.WithFetch(fetchRule);
+        var withFetchQueryable = fetchRule is null ? queryable : queryable.WithFetch(fetchRule);
 
         if (lockRole == LockRole.None)
         {

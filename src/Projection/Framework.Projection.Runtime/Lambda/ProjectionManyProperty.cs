@@ -12,7 +12,7 @@ public class ProjectionManyProperty<TDomainObject, TElement> : ProjectionPropert
     public ProjectionManyProperty(Expression<Func<TDomainObject, IEnumerable<TElement>>> path, string? name, Func<Projection<TElement>> getPropProjection, bool ignoreSerialization, IEnumerable<Attribute> attributes)
         : base(path, name, getPropProjection, ignoreSerialization, attributes)
     {
-        if (getPropProjection == null) throw new ArgumentNullException(nameof(getPropProjection));
+        if (getPropProjection is null) throw new ArgumentNullException(nameof(getPropProjection));
     }
 
     /// <inheritdoc />

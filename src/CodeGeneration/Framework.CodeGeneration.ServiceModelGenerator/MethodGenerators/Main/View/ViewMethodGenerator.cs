@@ -50,9 +50,9 @@ public abstract class ViewMethodGenerator<TConfiguration>(TConfiguration configu
 
     protected CodeVariableDeclarationStatement ToDomainObjectVarDeclById(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr, bool withFetchs, CodeParameterDeclarationExpression parameter)
     {
-        if (evaluateDataExpr == null) throw new ArgumentNullException(nameof(evaluateDataExpr));
-        if (bllRefExpr == null) throw new ArgumentNullException(nameof(bllRefExpr));
-        if (parameter == null) throw new ArgumentNullException(nameof(parameter));
+        if (evaluateDataExpr is null) throw new ArgumentNullException(nameof(evaluateDataExpr));
+        if (bllRefExpr is null) throw new ArgumentNullException(nameof(bllRefExpr));
+        if (parameter is null) throw new ArgumentNullException(nameof(parameter));
 
         if (withFetchs)
         {
@@ -68,9 +68,9 @@ public abstract class ViewMethodGenerator<TConfiguration>(TConfiguration configu
 
     protected CodeVariableDeclarationStatement ToDomainObjectVarDeclByName(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr, CodeParameterDeclarationExpression parameter)
     {
-        if (evaluateDataExpr == null) throw new ArgumentNullException(nameof(evaluateDataExpr));
-        if (bllRefExpr == null) throw new ArgumentNullException(nameof(bllRefExpr));
-        if (parameter == null) throw new ArgumentNullException(nameof(parameter));
+        if (evaluateDataExpr is null) throw new ArgumentNullException(nameof(evaluateDataExpr));
+        if (bllRefExpr is null) throw new ArgumentNullException(nameof(bllRefExpr));
+        if (parameter is null) throw new ArgumentNullException(nameof(parameter));
 
         return this.ToDomainObjectVarDecl(this.Configuration.GetByNameExpr(bllRefExpr, parameter.ToVariableReferenceExpression(), this.GetFetchRule()));
     }
@@ -79,9 +79,9 @@ public abstract class ViewMethodGenerator<TConfiguration>(TConfiguration configu
 
     protected CodeVariableDeclarationStatement ToDomainObjectVarDeclByCode(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr, CodeParameterDeclarationExpression parameter)
     {
-        if (evaluateDataExpr == null) throw new ArgumentNullException(nameof(evaluateDataExpr));
-        if (bllRefExpr == null) throw new ArgumentNullException(nameof(bllRefExpr));
-        if (parameter == null) throw new ArgumentNullException(nameof(parameter));
+        if (evaluateDataExpr is null) throw new ArgumentNullException(nameof(evaluateDataExpr));
+        if (bllRefExpr is null) throw new ArgumentNullException(nameof(bllRefExpr));
+        if (parameter is null) throw new ArgumentNullException(nameof(parameter));
 
         return this.ToDomainObjectVarDecl(this.Configuration.GetByCodeExpr(bllRefExpr, parameter.ToVariableReferenceExpression(), this.GetFetchRule()));
     }

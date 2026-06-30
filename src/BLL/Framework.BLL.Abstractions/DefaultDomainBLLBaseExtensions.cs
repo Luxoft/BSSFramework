@@ -17,7 +17,7 @@ public static class DefaultDomainBLLBaseExtensions
             where TDomainObject : class, TPersistentDomainObjectBase, new()
             where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     {
-        if (bll == null) throw new ArgumentNullException(nameof(bll));
+        if (bll is null) throw new ArgumentNullException(nameof(bll));
 
         return bll.GetByIdOrCreate(id, () => new TDomainObject());
     }
@@ -26,8 +26,8 @@ public static class DefaultDomainBLLBaseExtensions
             where TDomainObject : class, TPersistentDomainObjectBase
             where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     {
-        if (bll == null) throw new ArgumentNullException(nameof(bll));
-        if (createFunc == null) throw new ArgumentNullException(nameof(createFunc));
+        if (bll is null) throw new ArgumentNullException(nameof(bll));
+        if (createFunc is null) throw new ArgumentNullException(nameof(createFunc));
 
         return bll.GetById(id, IdCheckMode.SkipEmpty) ?? createFunc();
     }
@@ -36,7 +36,7 @@ public static class DefaultDomainBLLBaseExtensions
             where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
             where TDomainObject : class, TPersistentDomainObjectBase, IVisualIdentityObject
     {
-        if (bll == null) throw new ArgumentNullException(nameof(bll));
+        if (bll is null) throw new ArgumentNullException(nameof(bll));
 
         Expression<Func<TDomainObject, bool>> filter = v => v.Name == name;
 
@@ -64,7 +64,7 @@ public static class DefaultDomainBLLBaseExtensions
             where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
             where TDomainObject : class, TPersistentDomainObjectBase, ICodeObject<TCode>
     {
-        if (bll == null) throw new ArgumentNullException(nameof(bll));
+        if (bll is null) throw new ArgumentNullException(nameof(bll));
 
         var filter = EqualsHelper<TCode>.GetEqualsExpression(code).OverrideInput((TDomainObject domainObject) => domainObject.Code);
 
@@ -93,8 +93,8 @@ public static class DefaultDomainBLLBaseExtensions
     public static void Insert<TDomainObject, TIdent>(this IDefaultDomainBLLBase<TDomainObject, TIdent> bll, TDomainObject domainObject)
             where TDomainObject : class, IIdentityObject<TIdent>
     {
-        if (bll == null) throw new ArgumentNullException(nameof(bll));
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
+        if (bll is null) throw new ArgumentNullException(nameof(bll));
+        if (domainObject is null) throw new ArgumentNullException(nameof(domainObject));
 
         bll.Insert(domainObject, domainObject.Id);
     }
@@ -102,9 +102,9 @@ public static class DefaultDomainBLLBaseExtensions
     public static void Insert<TDomainObject, TIdent>(this IDefaultDomainBLLBase<TDomainObject, TIdent> bll, IEnumerable<TDomainObject> domainObjects)
             where TDomainObject : class, IIdentityObject<TIdent>
     {
-        if (bll == null) throw new ArgumentNullException(nameof(bll));
-        if (domainObjects == null) throw new ArgumentNullException(nameof(domainObjects));
-
+        if (bll is null) throw new ArgumentNullException(nameof(bll));
+        if (domainObjects is null) throw new ArgumentNullException(nameof(domainObjects));
+        
         domainObjects.Foreach(bll.Insert);
     }
 
@@ -112,8 +112,8 @@ public static class DefaultDomainBLLBaseExtensions
             where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
             where TDomainObject : class, TPersistentDomainObjectBase
     {
-        if (bll == null) throw new ArgumentNullException(nameof(bll));
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
+        if (bll is null) throw new ArgumentNullException(nameof(bll));
+        if (domainObject is null) throw new ArgumentNullException(nameof(domainObject));
 
         if (domainObject.Id.IsDefault())
         {

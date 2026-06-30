@@ -7,7 +7,7 @@ public static class RequiredModeExtensions
 {
     public static void ValidateAppliedType(this RequiredMode requiredMode, Type appliedType)
     {
-        if (appliedType == null) throw new ArgumentNullException(nameof(appliedType));
+        if (appliedType is null) throw new ArgumentNullException(nameof(appliedType));
 
         if (!requiredMode.IsValidAppliedType(appliedType))
         {
@@ -17,7 +17,7 @@ public static class RequiredModeExtensions
 
     public static bool IsValidAppliedType(this RequiredMode requiredMode, Type appliedType)
     {
-        if (appliedType == null) throw new ArgumentNullException(nameof(appliedType));
+        if (appliedType is null) throw new ArgumentNullException(nameof(appliedType));
 
         switch (requiredMode)
         {

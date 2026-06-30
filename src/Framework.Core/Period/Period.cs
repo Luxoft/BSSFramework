@@ -324,7 +324,7 @@ public partial struct Period : IDeserializationCallback
     /// Если <see cref="EndDate"/> не задана, то возвращает максимальную дату, иначе дату окончания периода с учетом ограничей sql базы данных
     /// </summary>
     [IgnoreDataMember]
-    public DateTime EndDateValue => this.endDate == null ? Eternity.EndDateValue : this.endDate.Value.ToSqlDateTime();
+    public DateTime EndDateValue => this.endDate is null ? Eternity.EndDateValue : this.endDate.Value.ToSqlDateTime();
 
     /// <summary>
     /// Дата начала периода
@@ -342,7 +342,7 @@ public partial struct Period : IDeserializationCallback
     /// Если <see cref="EndDate"/> не задана, то возвращает максимальную дату, иначе дату окончания периода
     /// </summary>
     [IgnoreDataMember]
-    public DateTime NativeEndDateValue => this.endDate == null ? Eternity.NativeEndDateValue : this.endDate.Value;
+    public DateTime NativeEndDateValue => this.endDate is null ? Eternity.NativeEndDateValue : this.endDate.Value;
 
     #endregion
 

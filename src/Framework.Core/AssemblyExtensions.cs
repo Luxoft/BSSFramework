@@ -6,7 +6,7 @@ public static class AssemblyExtensions
 {
     public static Assembly? TryLoad(this AssemblyName assemblyName)
     {
-        if (assemblyName == null) throw new ArgumentNullException(nameof(assemblyName));
+        if (assemblyName is null) throw new ArgumentNullException(nameof(assemblyName));
 
         try
         {

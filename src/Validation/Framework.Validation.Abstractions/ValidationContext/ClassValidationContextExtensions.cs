@@ -13,7 +13,7 @@ public static class ClassValidationContextExtensions
     /// <returns></returns>
     public static string GetSourceTypeName<TSource>(this IClassValidationContext<TSource> context)
     {
-        if (context == null) throw new ArgumentNullException(nameof(context));
+        if (context is null) throw new ArgumentNullException(nameof(context));
 
         return context.Map.TypeName;
     }
@@ -30,7 +30,7 @@ public static class ClassValidationContextExtensions
         this IClassValidationContext<TBaseSource> context)
         where TBaseSource : TExpectedSource
     {
-        if (context == null) throw new ArgumentNullException(nameof(context));
+        if (context is null) throw new ArgumentNullException(nameof(context));
 
         return context.Cast<TBaseSource, TExpectedSource>(v => v);
     }
@@ -52,8 +52,8 @@ public static class ClassValidationContextExtensions
         this IClassValidationContext<TBaseSource> context,
         Func<TBaseSource, TExpectedSource> convertSource)
     {
-        if (context == null) throw new ArgumentNullException(nameof(context));
-        if (convertSource == null) throw new ArgumentNullException(nameof(convertSource));
+        if (context is null) throw new ArgumentNullException(nameof(context));
+        if (convertSource is null) throw new ArgumentNullException(nameof(convertSource));
 
         return new BoxedClassValidationContext<TBaseSource, TExpectedSource>(context, convertSource);
     }
@@ -62,8 +62,8 @@ public static class ClassValidationContextExtensions
     {
         public BoxedClassValidationContext(IClassValidationContext<TBaseSource> baseContext, Func<TBaseSource, TExpectedSource> convertSource)
         {
-            if (baseContext == null) throw new ArgumentNullException(nameof(baseContext));
-            if (convertSource == null) throw new ArgumentNullException(nameof(convertSource));
+            if (baseContext is null) throw new ArgumentNullException(nameof(baseContext));
+            if (convertSource is null) throw new ArgumentNullException(nameof(convertSource));
 
             this.Validator = baseContext.Validator;
             this.OperationContext = baseContext.OperationContext;

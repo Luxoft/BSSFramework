@@ -21,7 +21,7 @@ public static class ParserHelper
     {
         var expr = InternalHelper<T>.ParseExpression;
 
-        if (expr == null && raiseError)
+        if (expr is null && raiseError)
         {
             throw new Exception($"Parsing Func for type {typeof(T).Name} not found");
         }
@@ -38,7 +38,7 @@ public static class ParserHelper
     {
         var func = InternalHelper<T>.ParseFunc;
 
-        if (func == null && raiseError)
+        if (func is null && raiseError)
         {
             throw new Exception($"Parsing Func for type {typeof(T).Name} not found");
         }
@@ -56,7 +56,7 @@ public static class ParserHelper
     {
         var expr = InternalHelper<T>.TryParseExpression;
 
-        if (expr == null && raiseError)
+        if (expr is null && raiseError)
         {
             throw new Exception($"TryParsing Func for type {typeof(T).Name} not found");
         }
@@ -73,7 +73,7 @@ public static class ParserHelper
     {
         var func = InternalHelper<T>.TryParseFunc;
 
-        if (func == null && raiseError)
+        if (func is null && raiseError)
         {
             throw new Exception($"TryParsing Func for type {typeof(T).Name} not found");
         }

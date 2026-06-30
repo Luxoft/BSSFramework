@@ -8,7 +8,7 @@ internal static class ProjectionBuilderExtensions
 {
     public static IReadOnlyCollection<ProjectionBuilder.ProjectionBuilder> ToBuilders(this IEnumerable<IProjection> projections)
     {
-        if (projections == null) throw new ArgumentNullException(nameof(projections));
+        if (projections is null) throw new ArgumentNullException(nameof(projections));
 
         var builderDict = projections.ToDictionary(proj => proj, proj => new ProjectionBuilder.ProjectionBuilder(proj));
 

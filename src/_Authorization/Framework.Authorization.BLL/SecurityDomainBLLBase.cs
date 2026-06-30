@@ -7,7 +7,7 @@ public partial class SecurityDomainBLLBase<TDomainObject>
 {
     private void ExecuteBasePersist(TDomainObject domainObject)
     {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
+        if (domainObject is null) throw new ArgumentNullException(nameof(domainObject));
 
         this.Validate(domainObject, OperationContextBase.Save);
     }
@@ -16,7 +16,7 @@ public partial class SecurityDomainBLLBase<TDomainObject>
 
     protected void Save(TDomainObject domainObject, bool validate)
     {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
+        if (domainObject is null) throw new ArgumentNullException(nameof(domainObject));
 
         if (validate) { this.Save(domainObject); }
         else { base.Save(domainObject); }
@@ -24,7 +24,7 @@ public partial class SecurityDomainBLLBase<TDomainObject>
 
     public override void Insert(TDomainObject domainObject, Guid id)
     {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
+        if (domainObject is null) throw new ArgumentNullException(nameof(domainObject));
 
         this.ExecuteBasePersist(domainObject);
         base.Insert(domainObject, id);
@@ -32,7 +32,7 @@ public partial class SecurityDomainBLLBase<TDomainObject>
 
     public override void Save(TDomainObject domainObject)
     {
-        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
+        if (domainObject is null) throw new ArgumentNullException(nameof(domainObject));
 
         this.ExecuteBasePersist(domainObject);
         base.Save(domainObject);

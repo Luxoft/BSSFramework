@@ -66,7 +66,7 @@ public partial class AuthorizationBLLContext(
 
     public SecurityContextType GetSecurityContextType(Type type)
     {
-        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (type is null) throw new ArgumentNullException(nameof(type));
 
         return this.securityContextTypeCache[type];
     }

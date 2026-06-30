@@ -39,9 +39,7 @@ public class IgnoreLink
 
     private IgnoreLink(PropertyInfo propertyInfo) : this(propertyInfo.DeclaringType!)
     {
-        if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
-
-        this.MemberInfo = propertyInfo;
+        this.MemberInfo = propertyInfo ?? throw new ArgumentNullException(nameof(propertyInfo));
     }
 
     private IgnoreLink(Type fromType) => this.FromType = fromType;

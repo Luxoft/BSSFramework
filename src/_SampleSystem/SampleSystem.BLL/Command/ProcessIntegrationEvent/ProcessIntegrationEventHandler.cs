@@ -8,7 +8,7 @@ public class ProcessIntegrationEventHandler(ICountryBLLFactory countryBllFactory
     {
         var countryBll = countryBllFactory.Create();
         var c = countryBll.GetById(request.CountryId);
-        if (c != null) countryBll.Remove(c);
+        if (c is not null) countryBll.Remove(c);
 
         return Task.CompletedTask;
     }

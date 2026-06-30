@@ -14,8 +14,8 @@ public static class GeneratePolicyExtensions
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Except<TIdent>(this IGeneratePolicy<TIdent> policy, Func<Type, TIdent, bool> filter)
     {
-        if (policy == null) throw new ArgumentNullException(nameof(policy));
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
+        if (policy is null) throw new ArgumentNullException(nameof(policy));
+        if (filter is null) throw new ArgumentNullException(nameof(filter));
 
         return new FuncGeneratePolicy<TIdent>((domainType, identity) => !filter(domainType, identity) && policy.Used(domainType, identity));
     }
@@ -29,8 +29,8 @@ public static class GeneratePolicyExtensions
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Except<TIdent>(this IGeneratePolicy<TIdent> policy, Func<TIdent, bool> filter)
     {
-        if (policy == null) throw new ArgumentNullException(nameof(policy));
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
+        if (policy is null) throw new ArgumentNullException(nameof(policy));
+        if (filter is null) throw new ArgumentNullException(nameof(filter));
 
         return policy.Except((domainType, identity) => filter(identity));
     }
@@ -44,8 +44,8 @@ public static class GeneratePolicyExtensions
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Except<TIdent>(this IGeneratePolicy<TIdent> policy, Func<Type, bool> filter)
     {
-        if (policy == null) throw new ArgumentNullException(nameof(policy));
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
+        if (policy is null) throw new ArgumentNullException(nameof(policy));
+        if (filter is null) throw new ArgumentNullException(nameof(filter));
 
         return policy.Except((domainType, identity) => filter(domainType));
     }
@@ -60,9 +60,9 @@ public static class GeneratePolicyExtensions
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Except<TIdent>(this IGeneratePolicy<TIdent> policy, Type firstType, params Type[] otherTypes)
     {
-        if (policy == null) throw new ArgumentNullException(nameof(policy));
-        if (firstType == null) throw new ArgumentNullException(nameof(firstType));
-        if (otherTypes == null) { throw new ArgumentNullException(nameof(otherTypes)); }
+        if (policy is null) throw new ArgumentNullException(nameof(policy));
+        if (firstType is null) throw new ArgumentNullException(nameof(firstType));
+        if (otherTypes is null) { throw new ArgumentNullException(nameof(otherTypes)); }
 
         return policy.Except(new[] { firstType }.Concat(otherTypes));
     }
@@ -77,9 +77,9 @@ public static class GeneratePolicyExtensions
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Except<TIdent>(this IGeneratePolicy<TIdent> policy, TIdent firstIdent, params TIdent[] otherIdents)
     {
-        if (policy == null) throw new ArgumentNullException(nameof(policy));
-        if (firstIdent == null) throw new ArgumentNullException(nameof(firstIdent));
-        if (otherIdents == null) throw new ArgumentNullException(nameof(otherIdents));
+        if (policy is null) throw new ArgumentNullException(nameof(policy));
+        if (firstIdent is null) throw new ArgumentNullException(nameof(firstIdent));
+        if (otherIdents is null) throw new ArgumentNullException(nameof(otherIdents));
 
         return policy.Except(new[] { firstIdent }.Concat(otherIdents));
     }
@@ -93,8 +93,8 @@ public static class GeneratePolicyExtensions
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Except<TIdent>(this IGeneratePolicy<TIdent> policy, IEnumerable<Type> types)
     {
-        if (policy == null) throw new ArgumentNullException(nameof(policy));
-        if (types == null) throw new ArgumentNullException(nameof(types));
+        if (policy is null) throw new ArgumentNullException(nameof(policy));
+        if (types is null) throw new ArgumentNullException(nameof(types));
 
         var hash = types.ToHashSet();
 
@@ -110,8 +110,8 @@ public static class GeneratePolicyExtensions
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Except<TIdent>(this IGeneratePolicy<TIdent> policy, IEnumerable<TIdent> idents)
     {
-        if (policy == null) throw new ArgumentNullException(nameof(policy));
-        if (idents == null) throw new ArgumentNullException(nameof(idents));
+        if (policy is null) throw new ArgumentNullException(nameof(policy));
+        if (idents is null) throw new ArgumentNullException(nameof(idents));
 
         var hash = idents.ToHashSet();
 
@@ -127,8 +127,8 @@ public static class GeneratePolicyExtensions
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Add<TIdent>(this IGeneratePolicy<TIdent> policy, Func<Type, TIdent, bool> filter)
     {
-        if (policy == null) throw new ArgumentNullException(nameof(policy));
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
+        if (policy is null) throw new ArgumentNullException(nameof(policy));
+        if (filter is null) throw new ArgumentNullException(nameof(filter));
 
         return new FuncGeneratePolicy<TIdent>((domainType, identity) => filter(domainType, identity) || policy.Used(domainType, identity));
     }
@@ -142,8 +142,8 @@ public static class GeneratePolicyExtensions
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Add<TIdent>(this IGeneratePolicy<TIdent> policy, Func<TIdent, bool> filter)
     {
-        if (policy == null) throw new ArgumentNullException(nameof(policy));
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
+        if (policy is null) throw new ArgumentNullException(nameof(policy));
+        if (filter is null) throw new ArgumentNullException(nameof(filter));
 
         return policy.Add((domainType, identity) => filter(identity));
     }
@@ -157,8 +157,8 @@ public static class GeneratePolicyExtensions
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Add<TIdent>(this IGeneratePolicy<TIdent> policy, Func<Type, bool> filter)
     {
-        if (policy == null) throw new ArgumentNullException(nameof(policy));
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
+        if (policy is null) throw new ArgumentNullException(nameof(policy));
+        if (filter is null) throw new ArgumentNullException(nameof(filter));
 
         return policy.Add((domainType, identity) => filter(domainType));
     }
@@ -173,9 +173,9 @@ public static class GeneratePolicyExtensions
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Add<TIdent>(this IGeneratePolicy<TIdent> policy, Type firstType, params Type[] otherTypes)
     {
-        if (policy == null) throw new ArgumentNullException(nameof(policy));
-        if (firstType == null) throw new ArgumentNullException(nameof(firstType));
-        if (otherTypes == null) { throw new ArgumentNullException(nameof(otherTypes)); }
+        if (policy is null) throw new ArgumentNullException(nameof(policy));
+        if (firstType is null) throw new ArgumentNullException(nameof(firstType));
+        if (otherTypes is null) { throw new ArgumentNullException(nameof(otherTypes)); }
 
         return policy.Add(new[] { firstType }.Concat(otherTypes));
     }
@@ -190,9 +190,9 @@ public static class GeneratePolicyExtensions
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Add<TIdent>(this IGeneratePolicy<TIdent> policy, TIdent firstIdent, params TIdent[] otherIdents)
     {
-        if (policy == null) throw new ArgumentNullException(nameof(policy));
-        if (firstIdent == null) throw new ArgumentNullException(nameof(firstIdent));
-        if (otherIdents == null) throw new ArgumentNullException(nameof(otherIdents));
+        if (policy is null) throw new ArgumentNullException(nameof(policy));
+        if (firstIdent is null) throw new ArgumentNullException(nameof(firstIdent));
+        if (otherIdents is null) throw new ArgumentNullException(nameof(otherIdents));
 
         return policy.Add(new[] { firstIdent }.Concat(otherIdents));
     }
@@ -206,8 +206,8 @@ public static class GeneratePolicyExtensions
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Add<TIdent>(this IGeneratePolicy<TIdent> policy, IEnumerable<Type> types)
     {
-        if (policy == null) throw new ArgumentNullException(nameof(policy));
-        if (types == null) throw new ArgumentNullException(nameof(types));
+        if (policy is null) throw new ArgumentNullException(nameof(policy));
+        if (types is null) throw new ArgumentNullException(nameof(types));
 
         var hash = types.ToHashSet();
 
@@ -223,8 +223,8 @@ public static class GeneratePolicyExtensions
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Add<TIdent>(this IGeneratePolicy<TIdent> policy, IEnumerable<TIdent> idents)
     {
-        if (policy == null) throw new ArgumentNullException(nameof(policy));
-        if (idents == null) throw new ArgumentNullException(nameof(idents));
+        if (policy is null) throw new ArgumentNullException(nameof(policy));
+        if (idents is null) throw new ArgumentNullException(nameof(idents));
 
         var hash = idents.ToHashSet();
 
@@ -239,7 +239,7 @@ public static class GeneratePolicyExtensions
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> WithCache<TIdent>(this IGeneratePolicy<TIdent> policy)
     {
-        if (policy == null) throw new ArgumentNullException(nameof(policy));
+        if (policy is null) throw new ArgumentNullException(nameof(policy));
 
         return new CachedGeneratePolicy<TIdent>(policy);
     }
@@ -252,7 +252,7 @@ public static class GeneratePolicyExtensions
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Any<TIdent>(this IEnumerable<IGeneratePolicy<TIdent>> policies)
     {
-        if (policies == null) throw new ArgumentNullException(nameof(policies));
+        if (policies is null) throw new ArgumentNullException(nameof(policies));
 
         return policies.Aggregate(GeneratePolicy<TIdent>.DisableAll, (pol1, pol2) => pol1.Or(pol2));
     }
@@ -266,8 +266,8 @@ public static class GeneratePolicyExtensions
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Or<TIdent>(this IGeneratePolicy<TIdent> policy, IGeneratePolicy<TIdent> otherPolicy)
     {
-        if (policy == null) throw new ArgumentNullException(nameof(policy));
-        if (otherPolicy == null) throw new ArgumentNullException(nameof(otherPolicy));
+        if (policy is null) throw new ArgumentNullException(nameof(policy));
+        if (otherPolicy is null) throw new ArgumentNullException(nameof(otherPolicy));
 
         return new FuncGeneratePolicy<TIdent>((domainType, fileType) =>
 
@@ -282,7 +282,7 @@ public static class GeneratePolicyExtensions
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> All<TIdent>(this IEnumerable<IGeneratePolicy<TIdent>> policies)
     {
-        if (policies == null) throw new ArgumentNullException(nameof(policies));
+        if (policies is null) throw new ArgumentNullException(nameof(policies));
 
         return policies.Aggregate(GeneratePolicy<TIdent>.AllowAll, (pol1, pol2) => pol1.And(pol2));
     }
@@ -296,8 +296,8 @@ public static class GeneratePolicyExtensions
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> And<TIdent>(this IGeneratePolicy<TIdent> policy, IGeneratePolicy<TIdent> otherPolicy)
     {
-        if (policy == null) throw new ArgumentNullException(nameof(policy));
-        if (otherPolicy == null) throw new ArgumentNullException(nameof(otherPolicy));
+        if (policy is null) throw new ArgumentNullException(nameof(policy));
+        if (otherPolicy is null) throw new ArgumentNullException(nameof(otherPolicy));
 
         return new FuncGeneratePolicy<TIdent>((domainType, fileType) =>
 

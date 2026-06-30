@@ -152,7 +152,7 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
 
     private CodeMemberProperty CreateExpandProperty(PropertyInfo property, bool withAttr)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         var expandPathAttr = property.GetCustomAttribute<ExpandPathAttribute>()!;
 
@@ -212,7 +212,7 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
     {
         yield return new CodeConstructor { Attributes = this.Configuration.GeneratePublicCtors ? MemberAttributes.Public : MemberAttributes.Family };
 
-        if (this.contractType != null)
+        if (this.contractType is not null)
         {
             yield return this.GetSourceConstructor();
         }

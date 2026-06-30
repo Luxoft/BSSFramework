@@ -6,7 +6,7 @@ public static class CodeTypeDeclarationExtensions
 {
     public static CodeTypeReference WithGenerateInfo<TFileType>(this CodeTypeReference typeDecl, Type? domainType, TFileType fileType)
     {
-        if (typeDecl == null) throw new ArgumentNullException(nameof(typeDecl));
+        if (typeDecl is null) throw new ArgumentNullException(nameof(typeDecl));
 
         typeDecl.UserData["DomainType"] = domainType;
         typeDecl.UserData["FileType"] = fileType;

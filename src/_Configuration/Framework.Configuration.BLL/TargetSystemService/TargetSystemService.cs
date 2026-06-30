@@ -46,11 +46,11 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase>(
 
         foreach (var domainObjectId in eventModel.DomainObjectIdents)
         {
-            var actualRevision = eventModel.Revision == null && eventModel.Operation.Name == EventOperation.Remove.Name
+            var actualRevision = eventModel.Revision is null && eventModel.Operation.Name == EventOperation.Remove.Name
                                      ? bll.GetObjectRevisions(domainObjectId).RevisionInfos.Select(v => v.RevisionNumber).OrderByDescending(v => v).Skip(1).First()
                                      : eventModel.Revision;
 
-            var domainObject = actualRevision == null ? bll.GetById(domainObjectId, true)! : bll.GetObjectByRevision(domainObjectId, actualRevision.Value);
+            var domainObject = actualRevision is null ? bll.GetById(domainObjectId, true)! : bll.GetObjectByRevision(domainObjectId, actualRevision.Value);
 
             var domainObjectEvent = new EventOperation(eventModel.Operation.Name);
 

@@ -18,14 +18,14 @@ public static class RangePropertyValidatorHelper
 
         public RangePropertyValidator<TSource, TProperty, TRange> Create<TSource>(Range<TRange> availableRange)
         {
-            if (availableRange == null) throw new ArgumentNullException(nameof(availableRange));
+            if (availableRange is null) throw new ArgumentNullException(nameof(availableRange));
 
             return new RangePropertyValidator<TSource, TProperty, TRange>(availableRange, this.AvailableFunc);
         }
 
         public NullableRangePropertyValidator<TSource, TProperty, TRange> CreateNullable<TSource>(Range<TRange> availableRange)
         {
-            if (availableRange == null) throw new ArgumentNullException(nameof(availableRange));
+            if (availableRange is null) throw new ArgumentNullException(nameof(availableRange));
 
             return new NullableRangePropertyValidator<TSource, TProperty, TRange>(availableRange, this.AvailableFunc);
         }

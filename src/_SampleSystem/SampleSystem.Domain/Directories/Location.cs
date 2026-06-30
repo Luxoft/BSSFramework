@@ -38,7 +38,7 @@ public class Location :
 
     public Location(Location? parent)
     {
-        if (parent != null)
+        if (parent is not null)
         {
             this.parent = parent;
             this.parent.AddDetail(this);
@@ -72,7 +72,7 @@ public class Location :
     }
 
     [CustomSerialization(CustomSerializationMode.Ignore)]
-    public virtual Location Root => this.Parent == null ? this : this.Parent.Root;
+    public virtual Location Root => this.Parent is null ? this : this.Parent.Root;
 
     public virtual LocationType LocationType
     {

@@ -26,11 +26,11 @@ public class ValidationMap(IServiceProvider serviceProvider) : ValidationMapBase
 
     private PropertyValidationMap<TSource, TProperty> GetPropertyMap<TSource, TProperty>(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         var collectionElementType = property.PropertyType.GetCollectionElementType();
 
-        if (collectionElementType == null)
+        if (collectionElementType is null)
         {
             return this.GetSinglePropertyMap<TSource, TProperty>(property);
         }
@@ -47,7 +47,7 @@ public class ValidationMap(IServiceProvider serviceProvider) : ValidationMapBase
 
     protected virtual SinglePropertyValidationMap<TSource, TProperty> GetSinglePropertyMap<TSource, TProperty>(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         return new SinglePropertyValidationMap<TSource, TProperty>(
             property,
@@ -61,7 +61,7 @@ public class ValidationMap(IServiceProvider serviceProvider) : ValidationMapBase
     protected virtual CollectionPropertyValidationMap<TSource, TProperty, TElement> GetCollectionPropertyMap<TSource, TProperty, TElement>(PropertyInfo property)
         where TProperty : IEnumerable<TElement>
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         return new CollectionPropertyValidationMap<TSource, TProperty, TElement>(
             property,
@@ -74,7 +74,7 @@ public class ValidationMap(IServiceProvider serviceProvider) : ValidationMapBase
 
     private IEnumerable<IPropertyValidator<TSource, TProperty>> GetOperationContextPropertyValidators<TSource, TProperty>(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         var aggregateValidators = this.GetPropertyDynamicClassValidators<TSource, TProperty>(property);
 
@@ -92,7 +92,7 @@ public class ValidationMap(IServiceProvider serviceProvider) : ValidationMapBase
 
                               let baseClassValidator = pair.Key.GetLastClassValidator(typeof(TSource), this.ServiceProvider)
 
-                              where baseClassValidator != null
+                              where baseClassValidator is not null
 
                               let classValidator = (IClassValidator<TSource>)baseClassValidator
 
@@ -113,7 +113,7 @@ public class ValidationMap(IServiceProvider serviceProvider) : ValidationMapBase
 
     private IEnumerable<IPropertyValidator<TSource, TProperty>> GetPropertyDynamicClassValidators<TSource, TProperty>(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         return this.GetClassValidatorDict<TSource, IManyPropertyDynamicClassValidator>().Select(pair =>
         {
@@ -129,12 +129,12 @@ public class ValidationMap(IServiceProvider serviceProvider) : ValidationMapBase
                     $"Can't apply validator \"{basePropertyValidator?.GetType().Name}\" to property \"{property.Name}\" of type \"{property.DeclaringType}\"",
                     ex);
             }
-        }).Where(val => val != null).Select(v => v!);
+        }).Where(val => val is not null).Select(v => v!);
     }
 
     private IEnumerable<IPropertyValidator<TSource, TProperty>> GetBasePropertyValidators<TSource, TProperty>(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         return this.GetPropertyValidatorDict(property).Select(pair =>
         {
@@ -150,7 +150,7 @@ public class ValidationMap(IServiceProvider serviceProvider) : ValidationMapBase
                     $"Can't apply validator \"{basePropertyValidator?.GetType().Name}\" to property \"{property.Name}\" of type \"{property.DeclaringType}\"",
                     ex);
             }
-        }).Where(val => val != null).Select(v => v!);
+        }).Where(val => val is not null).Select(v => v!);
     }
 
     protected virtual IEnumerable<KeyValuePair<IClassValidator, IValidationData>> GetClassValidatorDict<TSource>() =>
@@ -164,13 +164,13 @@ public class ValidationMap(IServiceProvider serviceProvider) : ValidationMapBase
 
         let classValidator = pair.Key as TFilterValidator
 
-        where classValidator != null
+        where classValidator is not null
 
         select classValidator.ToKeyValuePair(pair.Value);
 
     protected virtual IEnumerable<PropertyValidatorAttribute> GetPropertyValidatorAttributes(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         var restrictionAttributes = property.TryGetRestrictionValidatorAttributes();
 
@@ -179,7 +179,7 @@ public class ValidationMap(IServiceProvider serviceProvider) : ValidationMapBase
 
     protected virtual IEnumerable<KeyValuePair<IPropertyValidator, IValidationData>> GetPropertyValidatorDict(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         return from attribute in this.GetPropertyValidatorAttributes(property)
 

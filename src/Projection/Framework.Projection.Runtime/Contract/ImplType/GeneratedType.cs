@@ -175,7 +175,7 @@ internal class GeneratedType : BaseTypeImpl, IWrappingObject
 
     public override InterfaceMapping GetInterfaceMap(Type interfaceType)
     {
-        if (interfaceType == null) throw new ArgumentNullException(nameof(interfaceType));
+        if (interfaceType is null) throw new ArgumentNullException(nameof(interfaceType));
 
         var request = from prop in this.generatedProperties
 

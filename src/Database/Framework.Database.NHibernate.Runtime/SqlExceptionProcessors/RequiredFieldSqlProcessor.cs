@@ -29,7 +29,7 @@ internal class RequiredFieldSqlProcessor : ISqlExceptionProcessor
         }
 
         var persistentClass = context.NhibernatePersistentClass.FirstOrDefault(z => CompareEntity(z, tableValue));
-        if (persistentClass != null)
+        if (persistentClass is not null)
         {
             return new RequiredConstraintDALException(new DomainObjectInfo(persistentClass.MappedClass, genericAdoException.EntityId), columnNameValue);
         }

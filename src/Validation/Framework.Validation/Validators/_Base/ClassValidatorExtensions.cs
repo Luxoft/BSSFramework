@@ -12,14 +12,14 @@ public static class ClassValidatorExtensions
 
     public static IClassValidator<TSource> ApplyCustomError<TSource>(this IClassValidator<TSource> baseValidator, object? customError)
     {
-        if (baseValidator == null) throw new ArgumentNullException(nameof(baseValidator));
+        if (baseValidator is null) throw new ArgumentNullException(nameof(baseValidator));
 
-        return customError != null ? new ClassValidatorWithOverrideError<TSource>(baseValidator, customError) : baseValidator;
+        return customError is not null ? new ClassValidatorWithOverrideError<TSource>(baseValidator, customError) : baseValidator;
     }
 
     public static IClassValidator<TSource> ApplyCustomOperationContext<TSource>(this IClassValidator<TSource> baseValidator, int customOperationContext)
     {
-        if (baseValidator == null) throw new ArgumentNullException(nameof(baseValidator));
+        if (baseValidator is null) throw new ArgumentNullException(nameof(baseValidator));
 
         return customOperationContext != int.MaxValue ? new ClassValidatorWithOverrideOperationContext<TSource>(baseValidator, customOperationContext) : baseValidator;
     }
@@ -33,13 +33,13 @@ public static class ClassValidatorExtensions
     /// <exception cref="ArgumentNullException">Аргумент <paramref name="baseClassValidator" /> равен null.</exception>
     public static IClassValidator<TSource> TryUnbox<TSource>(this IClassValidator baseClassValidator)
     {
-        if (baseClassValidator == null) throw new ArgumentNullException(nameof(baseClassValidator));
+        if (baseClassValidator is null) throw new ArgumentNullException(nameof(baseClassValidator));
 
         if (!(baseClassValidator is IClassValidator<TSource>))
         {
             var args = baseClassValidator.GetType().GetInterfaceImplementationArguments(typeof(IClassValidator<>));
 
-            if (args != null)
+            if (args is not null)
             {
                 var validatorSourceType = args[0];
 
@@ -68,7 +68,7 @@ public static class ClassValidatorExtensions
             this IClassValidator<TBaseSource> baseValidator)
             where TExpectedSource : TBaseSource
     {
-        if (baseValidator == null)
+        if (baseValidator is null)
         {
             throw new ArgumentNullException(nameof(baseValidator));
         }
@@ -80,7 +80,7 @@ public static class ClassValidatorExtensions
     {
         public ValidationResult GetValidationResult(IClassValidationContext<TSource> context)
         {
-            if (context == null) throw new ArgumentNullException(nameof(context));
+            if (context is null) throw new ArgumentNullException(nameof(context));
 
             var baseResult = baseValidator.GetValidationResult(context);
 
@@ -88,44 +88,25 @@ public static class ClassValidatorExtensions
         }
     }
 
-    private class ClassValidatorWithOverrideOperationContext<TSource> : IClassValidator<TSource>
+    private class ClassValidatorWithOverrideOperationContext<TSource>(IClassValidator<TSource> baseValidator, int customOperationContext)
+        : IClassValidator<TSource>
     {
-        private readonly IClassValidator<TSource> baseValidator;
-
-        private readonly int customOperationContext;
-
-
-        public ClassValidatorWithOverrideOperationContext(IClassValidator<TSource> baseValidator, int customOperationContext)
-        {
-            if (baseValidator == null) throw new ArgumentNullException(nameof(baseValidator));
-
-            this.baseValidator = baseValidator;
-            this.customOperationContext = customOperationContext;
-        }
+        private readonly IClassValidator<TSource> baseValidator = baseValidator ?? throw new ArgumentNullException(nameof(baseValidator));
 
         public ValidationResult GetValidationResult(IClassValidationContext<TSource> context)
         {
-            if (context == null) throw new ArgumentNullException(nameof(context));
+            if (context is null) throw new ArgumentNullException(nameof(context));
 
-            return context.OperationContext.IsIntersected(this.customOperationContext)
+            return context.OperationContext.IsIntersected(customOperationContext)
                            ? this.baseValidator.GetValidationResult(context)
                            : ValidationResult.Success;
         }
     }
 
-    private class UnboxedClassValidator<TExpectedSource, TBaseSource> : IClassValidator<TExpectedSource>
-            where TExpectedSource : TBaseSource
+    private class UnboxedClassValidator<TExpectedSource, TBaseSource>(IClassValidator<TBaseSource> baseClassValidator) : IClassValidator<TExpectedSource>
+        where TExpectedSource : TBaseSource
     {
-        private readonly IClassValidator<TBaseSource> baseClassValidator;
-
-
-        public UnboxedClassValidator(IClassValidator<TBaseSource> baseClassValidator)
-        {
-            if (baseClassValidator == null) throw new ArgumentNullException(nameof(baseClassValidator));
-
-            this.baseClassValidator = baseClassValidator;
-        }
-
+        private readonly IClassValidator<TBaseSource> baseClassValidator = baseClassValidator ?? throw new ArgumentNullException(nameof(baseClassValidator));
 
         public ValidationResult GetValidationResult(IClassValidationContext<TExpectedSource> context) => this.baseClassValidator.GetValidationResult(context.Box<TExpectedSource, TBaseSource>());
     }

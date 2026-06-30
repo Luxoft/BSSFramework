@@ -7,21 +7,12 @@ using Framework.Core;
 
 namespace Framework.Database.Visitors;
 
-public class OverrideInstanceContainsIdentMethodVisitor<TIdent> : ExpressionVisitor
+public class OverrideInstanceContainsIdentMethodVisitor<TIdent>(MethodInfo containsMethod) : ExpressionVisitor
 {
     private static readonly MethodInfo EnumerableContainsMethod = new Func<IEnumerable<TIdent>, TIdent, bool>(Enumerable.Contains).Method;
 
 
-    private readonly MethodInfo containsMethod;
-
-
-    public OverrideInstanceContainsIdentMethodVisitor(MethodInfo containsMethod)
-    {
-        if (containsMethod == null) throw new ArgumentNullException(nameof(containsMethod));
-
-        this.containsMethod = containsMethod;
-    }
-
+    private readonly MethodInfo containsMethod = containsMethod ?? throw new ArgumentNullException(nameof(containsMethod));
 
     protected override Expression VisitMethodCall(MethodCallExpression node)
     {

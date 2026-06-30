@@ -1,21 +1,10 @@
 ﻿namespace Framework.Core.AnonymousTypeBuilder;
 
-public class TypeMapMemberBase : ITypeMapMember
+public class TypeMapMemberBase(string name, Type type) : ITypeMapMember
 {
-    public TypeMapMemberBase(string name, Type type)
-    {
-        if (name == null) throw new ArgumentNullException(nameof(name));
-        if (type == null) throw new ArgumentNullException(nameof(type));
+    public string Name { get; } = name ?? throw new ArgumentNullException(nameof(name));
 
-        this.Name = name;
-        this.Type = type;
-    }
-
-
-    public string Name { get; }
-
-    public Type Type { get; }
-
+    public Type Type { get; } = type ?? throw new ArgumentNullException(nameof(type));
 
     public override string ToString() => this.Name;
 }

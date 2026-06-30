@@ -61,13 +61,13 @@ public abstract partial class RazorTemplate<TRenderingObject>
             foreach (var fragment in fragments)
             {
                 var sf = fragment as Tuple<Tuple<string, int>, Tuple<string, int>, bool>;
-                var of = sf == null ? (Tuple<Tuple<string, int>, Tuple<object, int>, bool>)fragment : null;
+                var of = sf is null ? (Tuple<Tuple<string, int>, Tuple<object, int>, bool>)fragment : null;
 
-                var ws = sf != null ? sf.Item1.Item1 : of!.Item1.Item1;
-                var literal = sf != null ? sf.Item3 : of!.Item3;
-                var val = sf != null ? sf.Item2.Item1 : of!.Item2.Item1;
+                var ws = sf is not null ? sf.Item1.Item1 : of!.Item1.Item1;
+                var literal = sf is not null ? sf.Item3 : of!.Item3;
+                var val = sf is not null ? sf.Item2.Item1 : of!.Item2.Item1;
 
-                if (val == null)
+                if (val is null)
                 {
                     continue; // nothing to write
                 }
@@ -100,7 +100,7 @@ public abstract partial class RazorTemplate<TRenderingObject>
 
                 // The extra branching here is to ensure that we call the Write*To(string) overload when
                 // possible.
-                if (literal && (str != null))
+                if (literal && (str is not null))
                 {
                     this.WriteLiteralTo(writer, str);
                 }
@@ -108,7 +108,7 @@ public abstract partial class RazorTemplate<TRenderingObject>
                 {
                     this.WriteLiteralTo(writer, (string)val);
                 }
-                else if (str != null)
+                else if (str is not null)
                 {
                     this.WriteTo(writer, str);
                 }

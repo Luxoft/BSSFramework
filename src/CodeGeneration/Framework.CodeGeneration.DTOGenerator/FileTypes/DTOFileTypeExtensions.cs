@@ -8,17 +8,17 @@ public static class DTOFileTypeExtensions
 {
     public static MainDTOFileType? GetBaseType(this MainDTOFileType fileType, bool exceptAbstract = true)
     {
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         return fileType.BaseType.Maybe(baseType => exceptAbstract && baseType.IsAbstract ? null : baseType);
     }
 
 
-    public static bool HasBaseType(this MainDTOFileType fileType, bool exceptAbstract = true) => fileType.GetBaseType(exceptAbstract) != null;
+    public static bool HasBaseType(this MainDTOFileType fileType, bool exceptAbstract = true) => fileType.GetBaseType(exceptAbstract) is not null;
 
     public static IEnumerable<MainDTOFileType> GetBaseTypes(this MainDTOFileType fileType, bool exceptAbstract = true)
     {
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         return fileType.GetAllElements(ft => ft.GetBaseType(exceptAbstract), true);
     }
@@ -27,9 +27,9 @@ public static class DTOFileTypeExtensions
 
     public static MemberAttributes ToMapToDomainObjectMemberAttributes(this MainDTOFileType fileType)
     {
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
-        return fileType.GetBaseType() == null ? MemberAttributes.Public : (MemberAttributes.Public | MemberAttributes.Override);
+        return fileType.GetBaseType() is null ? MemberAttributes.Public : (MemberAttributes.Public | MemberAttributes.Override);
     }
 }
 

@@ -46,7 +46,7 @@ class AuditTableGenerateContext(
             return "( " + this.Table.Subselect + " )";
         }
         var quotedName = this.GetQuotedName(this.Table.Name);
-        var usedSchema = this.Table.Schema == null ? this.DefaultSchema : this.GetQuotedName(this.Table.Schema);
+        var usedSchema = this.Table.Schema is null ? this.DefaultSchema : this.GetQuotedName(this.Table.Schema);
         var usedCatalog = this.Table.Catalog ?? this.DefaultCatalog;
         return this.Dialect.Qualify(usedCatalog, usedSchema, quotedName);
     }

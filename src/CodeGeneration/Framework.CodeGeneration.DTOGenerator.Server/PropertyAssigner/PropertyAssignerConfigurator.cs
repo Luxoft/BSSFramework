@@ -15,8 +15,8 @@ public class PropertyAssignerConfigurator<TConfiguration>(TConfiguration configu
 {
     protected override CodeExpression GetPropertyHasAccessCondition(IServerPropertyAssigner propertyAssigner, PropertyInfo property, bool isEdit)
     {
-        if (propertyAssigner == null) throw new ArgumentNullException(nameof(propertyAssigner));
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (propertyAssigner is null) throw new ArgumentNullException(nameof(propertyAssigner));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         var attr = this.GetDomainObjectAttribute(propertyAssigner, property, isEdit);
 
@@ -25,8 +25,8 @@ public class PropertyAssignerConfigurator<TConfiguration>(TConfiguration configu
 
     private DomainObjectAccessAttribute GetDomainObjectAttribute(IServerPropertyAssigner propertyAssigner, PropertyInfo property, bool isEdit)
     {
-        if (propertyAssigner == null) throw new ArgumentNullException(nameof(propertyAssigner));
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (propertyAssigner is null) throw new ArgumentNullException(nameof(propertyAssigner));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         if (isEdit)
         {

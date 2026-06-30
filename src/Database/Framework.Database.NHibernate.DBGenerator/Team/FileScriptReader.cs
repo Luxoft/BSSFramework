@@ -4,19 +4,9 @@ using Framework.Database.NHibernate.DBGenerator.Contracts;
 
 namespace Framework.Database.NHibernate.DBGenerator.Team;
 
-public class FileScriptReader : IMigrationScriptReader
+public class FileScriptReader(string directoryPath) : IMigrationScriptReader
 {
-    private readonly string directoryPath;
-
-    public FileScriptReader(string directoryPath)
-    {
-        if (directoryPath == null)
-        {
-            throw new ArgumentNullException(nameof(directoryPath));
-        }
-
-        this.directoryPath = directoryPath;
-    }
+    private readonly string directoryPath = directoryPath ?? throw new ArgumentNullException(nameof(directoryPath));
 
     public IEnumerable<MigrationDbScript> Read() => this.Read(this.directoryPath);
 
@@ -68,7 +58,7 @@ public class FileScriptReader : IMigrationScriptReader
 
     private T GetValue<T>(IEnumerable<string> commands, string param, Func<string, T> convert)
     {
-        if (commands == null)
+        if (commands is null)
         {
             throw new ArgumentNullException(nameof(commands));
         }

@@ -18,7 +18,7 @@ public class UpdateCodeTypeReferenceService<TConfiguration>(TConfiguration confi
 {
     public override bool IsOptional(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         var isIdOrVersion = this.Configuration.IsIdentityOrVersionProperty(property);
 

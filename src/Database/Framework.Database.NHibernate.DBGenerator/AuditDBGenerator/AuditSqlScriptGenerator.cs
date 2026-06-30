@@ -29,7 +29,7 @@ internal class AuditSqlScriptGenerator
                         .Append(' ')
                         .Append(context.GetQualifiedTableName()).Append(" (");
 
-        var identityColumn = table.IdentifierValue != null && table.IdentifierValue.IsIdentityColumn(dialect);
+        var identityColumn = table.IdentifierValue is not null && table.IdentifierValue.IsIdentityColumn(dialect);
 
         // try to find out the name of the pk to create it as identity if the
         // identitygenerator is used
@@ -159,7 +159,7 @@ internal class AuditSqlScriptGenerator
                                        z => z.Name.ToLower().Replace("[", string.Empty).Replace("]", string.Empty).Replace("id", string.Empty).Replace("_mod", string.Empty).ToLower())
                               .ToList();
 
-        if (context.Original == null)
+        if (context.Original is null)
         {
             return table.ColumnIterator;
         }
@@ -239,12 +239,12 @@ internal class AuditSqlScriptGenerator
 
             var columnInfo = columnInfoBase as IColumnMetadataExtended;
 
-            if (columnInfoBase != null && columnInfo == null)
+            if (columnInfoBase is not null && columnInfo is null)
             {
                 throw new ArgumentException($"Can't cast to {nameof(IColumnMetadataExtended)}");
             }
 
-            if (columnInfo != null)
+            if (columnInfo is not null)
             {
                 var expectedColumnTypes = new[]
                                           {
@@ -294,7 +294,7 @@ internal class AuditSqlScriptGenerator
             }
 
             var columnComment = column.Comment;
-            if (columnComment != null)
+            if (columnComment is not null)
             {
                 alter.Append(dialect.GetColumnComment(columnComment));
             }

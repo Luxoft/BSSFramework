@@ -32,11 +32,11 @@ public abstract class LayerCodeTypeReferenceService<TConfiguration>(TConfigurati
 
     public override RoleFileType? GetFileType(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         var elementType = property.PropertyType.GetCollectionElementType();
 
-        if (elementType != null && this.IsDomainType(elementType))
+        if (elementType is not null && this.IsDomainType(elementType))
         {
             return this.GetCollectionFileType(property);
         }
@@ -54,11 +54,11 @@ public abstract class LayerCodeTypeReferenceService<TConfiguration>(TConfigurati
 
     protected override CodeTypeReference GetCodeTypeReferenceByProperty(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         var elementType = property.PropertyType.GetCollectionElementType();
 
-        if (elementType != null && this.IsDomainType(elementType))
+        if (elementType is not null && this.IsDomainType(elementType))
         {
             return this.GetCollectionCodeTypeReference(elementType, this.GetCollectionFileType(property));
         }

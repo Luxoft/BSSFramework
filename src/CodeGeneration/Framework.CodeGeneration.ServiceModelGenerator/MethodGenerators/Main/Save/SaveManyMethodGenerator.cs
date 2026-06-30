@@ -12,20 +12,11 @@ using Framework.Core;
 
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators.Main.Save;
 
-public class SaveManyMethodGenerator<TConfiguration> : BaseSaveMethodGenerator<TConfiguration>
-        where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
+public class SaveManyMethodGenerator<TConfiguration>(SaveMethodGenerator<TConfiguration> singleSaveGenerator)
+    : BaseSaveMethodGenerator<TConfiguration>(singleSaveGenerator.Configuration, singleSaveGenerator.DomainType)
+    where TConfiguration : class, IServiceModelGeneratorConfiguration<IServiceModelGenerationEnvironment>
 {
-    private readonly SaveMethodGenerator<TConfiguration> singleSaveGenerator;
-
-
-    public SaveManyMethodGenerator(SaveMethodGenerator<TConfiguration> singleSaveGenerator)
-            : base(singleSaveGenerator.Configuration, singleSaveGenerator.DomainType)
-    {
-        if (singleSaveGenerator == null) throw new ArgumentNullException(nameof(singleSaveGenerator));
-
-        this.singleSaveGenerator = singleSaveGenerator;
-    }
-
+    private readonly SaveMethodGenerator<TConfiguration> singleSaveGenerator = singleSaveGenerator ?? throw new ArgumentNullException(nameof(singleSaveGenerator));
 
     public override MethodIdentity Identity { get; } = MethodIdentityType.SaveMany;
 

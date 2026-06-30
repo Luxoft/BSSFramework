@@ -16,8 +16,8 @@ public static class CustomAttributeProviderExtensions
             where TRestrictionAttribute : Attribute, IRestrictionAttribute
             where TResult : ValidatorAttribute
         {
-            if (attributeProvider == null) throw new ArgumentNullException(nameof(attributeProvider));
-            if (getValidatorAttribute == null) throw new ArgumentNullException(nameof(getValidatorAttribute));
+            if (attributeProvider is null) throw new ArgumentNullException(nameof(attributeProvider));
+            if (getValidatorAttribute is null) throw new ArgumentNullException(nameof(getValidatorAttribute));
 
             var extensionAttrLazy = LazyHelper.Create(() => attributeProvider.GetCustomAttribute<RestrictionExtensionAttribute>(attr => attr.AttributeType == typeof(TRestrictionAttribute)));
 
@@ -25,7 +25,7 @@ public static class CustomAttributeProviderExtensions
             {
                 var attr = getValidatorAttribute(restrictionAttr);
 
-                if (extensionAttrLazy.Value != null)
+                if (extensionAttrLazy.Value is not null)
                 {
                     attr.OperationContext = extensionAttrLazy.Value.OperationContext;
                     attr.CustomError = extensionAttrLazy.Value.CustomError;

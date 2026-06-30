@@ -13,13 +13,13 @@ public static class CheckOutServiceExtensions
         {
             this._baseCheckOutService = baseCheckOutService;
 
-            if (baseCheckOutService == null) throw new ArgumentNullException(nameof(baseCheckOutService));
+            if (baseCheckOutService is null) throw new ArgumentNullException(nameof(baseCheckOutService));
         }
 
 
         public override void CheckOutFile(string fileName)
         {
-            if (fileName == null) throw new ArgumentNullException(nameof(fileName));
+            if (fileName is null) throw new ArgumentNullException(nameof(fileName));
 
             try
             {

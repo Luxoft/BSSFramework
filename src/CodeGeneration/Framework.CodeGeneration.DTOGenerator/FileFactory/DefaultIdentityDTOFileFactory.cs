@@ -294,7 +294,7 @@ public class DefaultIdentityDTOFileFactory<TConfiguration>(TConfiguration config
     {
         yield return this.GetDataContractCodeAttributeDeclaration();
 
-        //foreach (var attr in new[] { true, false }.Select(flag => this.DomainType!.GetDomainObjectAccessAttribute(flag)).Where(attr => attr != null))
+        //foreach (var attr in new[] { true, false }.Select(flag => this.DomainType!.GetDomainObjectAccessAttribute(flag)).Where(attr => attr is not null))
         //{
         //    yield return attr.ToCodeAttributeDeclaration();
         //}

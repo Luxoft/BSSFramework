@@ -12,7 +12,7 @@ public static class PropertyInfoExtensions
 {
     public static string GetUniqueElementString(this IEnumerable<PropertyInfo> properties, bool withBrackets)
     {
-        if (properties == null) throw new ArgumentNullException(nameof(properties));
+        if (properties is null) throw new ArgumentNullException(nameof(properties));
 
         var body = properties.Select(prop => prop.GetValidationName()).Join(", ");
 
@@ -21,11 +21,11 @@ public static class PropertyInfoExtensions
 
     public static bool HasDeepValidation(this PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         var modeAttr = property.GetCustomAttribute<PropertyValidationModeAttribute>();
 
-        if (modeAttr != null)
+        if (modeAttr is not null)
         {
             if (modeAttr.Mode == PropertyValidationMode.Disabled)
             {

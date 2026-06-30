@@ -6,29 +6,19 @@ using Framework.Relations;
 
 namespace Framework.Database.Metadata;
 
-public class ListTypeFieldMetadata : FieldMetadata
+public class ListTypeFieldMetadata(
+    Type domainType,
+    string name,
+    bool isAutoGenerateField,
+    Type type,
+    IEnumerable<Attribute> attributes,
+    DomainTypeMetadata domainTypeMetadata)
+    : FieldMetadata(name, type, attributes, domainTypeMetadata)
 {
-    private readonly Type _domainType;
+    private readonly Type _domainType = domainType ?? throw new ArgumentNullException(nameof(domainType));
 
-    private readonly bool _isCompilerGenerated;
-    readonly Type elementType;
+    readonly Type elementType = type.GetGenericArguments()[0];
     public Type ElementType => this.elementType;
-
-    public ListTypeFieldMetadata(Type domainType,
-                                 string name,
-                                 bool isAutoGenerateField,
-                                 Type type,
-                                 IEnumerable<Attribute> attributes,
-                                 DomainTypeMetadata domainTypeMetadata)
-            : base(name, type, attributes, domainTypeMetadata)
-    {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-
-        this._domainType = domainType;
-        this._isCompilerGenerated = isAutoGenerateField;
-        this.elementType = type.GetGenericArguments()[0];
-    }
-
 
     public bool IsVirtual => !this._domainType.GetProperty(this.Name.ToStartUpperCase()).Maybe(prop => prop.PropertyType == this.Type);
 
@@ -61,6 +51,6 @@ public class ListTypeFieldMetadata : FieldMetadata
         }
     }
 
-    public bool IsCompilerGenerated => this._isCompilerGenerated;
+    public bool IsCompilerGenerated => isAutoGenerateField;
 }
 

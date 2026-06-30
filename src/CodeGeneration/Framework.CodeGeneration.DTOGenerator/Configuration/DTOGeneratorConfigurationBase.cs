@@ -130,24 +130,24 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
 
     public virtual bool ForceGenerateProperties(Type domainType, DTOFileType fileType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         return true;
     }
 
     public IEnumerable<PropertyInfo> GetDomainTypeProperties(Type domainType, DTOFileType fileType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         return this.domainTypePropertiesCache.GetValue(domainType, fileType);
     }
 
     public virtual IEnumerable<PropertyInfo> GetDomainTypeProperties(Type domainType, DTOFileType fileType, bool isWritable)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         var baseProperties = this.GetDomainTypeProperties(domainType, fileType);
 
@@ -219,23 +219,23 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
 
     public GenerateTypeMap GetTypeMap(Type domainType, DTOFileType fileType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         return new GenerateTypeMap(domainType, fileType, this.GetDomainTypeProperties(domainType, fileType).Select(property => this.GetPropertyMap(property, fileType)));
     }
 
     private GeneratePropertyMap GetPropertyMap(PropertyInfo property, DTOFileType fileType)
     {
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         var collectionElementType = property.PropertyType.GetCollectionOrArrayElementType();
 
         var nullableElementType = property.PropertyType.GetNullableElementType();
 
-        var isCollection = collectionElementType != null;
+        var isCollection = collectionElementType is not null;
 
-        var isNullable = nullableElementType != null;
+        var isNullable = nullableElementType is not null;
 
         var elementType = collectionElementType ?? nullableElementType ?? property.PropertyType;
 
@@ -250,7 +250,7 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
 
     public virtual ILayerCodeTypeReferenceService? GetLayerCodeTypeReferenceService(DTOFileType fileType)
     {
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         if (fileType == BaseFileType.ProjectionDTO)
         {
@@ -282,7 +282,7 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
             CodeExpression? baseStrictSource,
             CodeExpression mappingService)
     {
-        if (baseStrictSource == null)
+        if (baseStrictSource is null)
         {
             return this.GetCodeTypeReference(domainType, DTOType.UpdateDTO).ToObjectCreateExpression(currentStrictSource, mappingService);
         }
@@ -296,8 +296,8 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
 
     protected virtual IEnumerable<PropertyInfo> GetInternalDomainTypeProperties(Type domainType, DTOFileType fileType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         return this.GetInternalDomainTypeProperties(domainType, fileType, fileType.Role);
     }
@@ -316,14 +316,14 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
     /// </exception>
     protected IEnumerable<PropertyInfo> GetInternalDomainTypeProperties(Type domainType, DTOFileType fileType, DTORole role)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         var wrappedDomainObjectType = this.Environment.MetadataProxyProvider.TryWrap(domainType);
 
         var serializationProperties =
 
-            wrappedDomainObjectType == null
+            wrappedDomainObjectType is null
                 ? domainType.GetSerializationProperties(role)
                 : wrappedDomainObjectType.GetSerializationProperties(role).Select(prop => prop.GetUnderlyingSystemProperty());
 
@@ -383,7 +383,7 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
 
                    let elementType = type.GetCollectionOrArrayElementType()
 
-                   where property.IsDetail() || (elementType != null && (!this.Environment.DomainObjectBaseType.IsAssignableFrom(type) || !elementType.IsAbstractDTO()))
+                   where property.IsDetail() || (elementType is not null && (!this.Environment.DomainObjectBaseType.IsAssignableFrom(type) || !elementType.IsAbstractDTO()))
 
                    select property;
         }

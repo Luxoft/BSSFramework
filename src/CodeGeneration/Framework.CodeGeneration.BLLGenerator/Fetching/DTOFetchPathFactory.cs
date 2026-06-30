@@ -20,7 +20,7 @@ public class DTOFetchPathFactory(IMetadataProxyProvider metadataProxyProvider, T
 {
     public IEnumerable<PropertyPath> Create(Type startDomainType, ViewDTOType dtoType)
     {
-        if (startDomainType == null) throw new ArgumentNullException(nameof(startDomainType));
+        if (startDomainType is null) throw new ArgumentNullException(nameof(startDomainType));
         if (!Enum.IsDefined(typeof(ViewDTOType), dtoType)) throw new ArgumentOutOfRangeException(nameof(dtoType));
 
         return this.GetLoadNode(startDomainType, dtoType)
@@ -32,7 +32,7 @@ public class DTOFetchPathFactory(IMetadataProxyProvider metadataProxyProvider, T
 
     protected virtual bool IsTransferType(Type type)
     {
-        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (type is null) throw new ArgumentNullException(nameof(type));
 
         return persistentDomainObjectBase.IsAssignableFrom(type);
     }
@@ -84,7 +84,7 @@ public class DTOFetchPathFactory(IMetadataProxyProvider metadataProxyProvider, T
 
                        where (metadataProxyProvider.Wrap(property).IsDetail() && this.IsTransferType(property.PropertyType))
 
-                             || (elementType != null && this.IsTransferType(elementType))
+                             || (elementType is not null && this.IsTransferType(elementType))
 
                        select property;
 
@@ -110,13 +110,13 @@ public class DTOFetchPathFactory(IMetadataProxyProvider metadataProxyProvider, T
 
                               where !metadataProxyProvider.Wrap(property).GetPrivateField().Maybe(field => field.HasAttribute<NotPersistentFieldAttribute>())
 
-                              where subPropertyFilter == null || subPropertyFilter(property)
+                              where subPropertyFilter is null || subPropertyFilter(property)
 
                               orderby property.Name
 
                               let subNode = this.TryGetLoadNode(domainType, property, maxDTOType, recurseLevel)
 
-                              where subNode != null
+                              where subNode is not null
 
                               select new { Property = property, SubNode = subNode };
 
@@ -171,29 +171,20 @@ public class DTOFetchPathFactory(IMetadataProxyProvider metadataProxyProvider, T
         }
     }
 
-    protected class PropertyLoadNode
+    protected class PropertyLoadNode(
+        Type domainType,
+        IReadOnlyDictionary<PropertyInfo, PropertyLoadNode> properties,
+        IEnumerable<PropertyInfo> primitiveProperties)
     {
-        public PropertyLoadNode(Type domainType, IReadOnlyDictionary<PropertyInfo, PropertyLoadNode> properties, IEnumerable<PropertyInfo> primitiveProperties)
-        {
-            if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-            if (properties == null) throw new ArgumentNullException(nameof(properties));
+        public Type DomainType { get; } = domainType ?? throw new ArgumentNullException(nameof(domainType));
 
-            this.DomainType = domainType;
-            this.Properties = properties;
-            this.PrimitiveProperties = primitiveProperties.ToReadOnlyCollection();
-        }
+        public IReadOnlyDictionary<PropertyInfo, PropertyLoadNode> Properties { get; } = properties ?? throw new ArgumentNullException(nameof(properties));
 
-
-        public Type DomainType { get; }
-
-        public IReadOnlyDictionary<PropertyInfo, PropertyLoadNode> Properties { get; }
-
-        public ReadOnlyCollection<PropertyInfo> PrimitiveProperties { get; }
-
+        public ReadOnlyCollection<PropertyInfo> PrimitiveProperties { get; } = primitiveProperties.ToReadOnlyCollection();
 
         public PropertyLoadNode WhereP(Func<PropertyInfo, bool> propertyFilter, bool recurse)
         {
-            if (propertyFilter == null) throw new ArgumentNullException(nameof(propertyFilter));
+            if (propertyFilter is null) throw new ArgumentNullException(nameof(propertyFilter));
 
             return new PropertyLoadNode(
 
@@ -206,7 +197,7 @@ public class DTOFetchPathFactory(IMetadataProxyProvider metadataProxyProvider, T
 
         public PropertyLoadNode SelectN(Func<PropertyLoadNode, PropertyLoadNode> nodeSelector, bool recurse)
         {
-            if (nodeSelector == null) throw new ArgumentNullException(nameof(nodeSelector));
+            if (nodeSelector is null) throw new ArgumentNullException(nameof(nodeSelector));
 
             return new PropertyLoadNode(
 
@@ -220,8 +211,8 @@ public class DTOFetchPathFactory(IMetadataProxyProvider metadataProxyProvider, T
 
         public static PropertyLoadNode operator +(PropertyLoadNode node1, PropertyLoadNode node2)
         {
-            if (node1 == null) throw new ArgumentNullException(nameof(node1));
-            if (node2 == null) throw new ArgumentNullException(nameof(node2));
+            if (node1 is null) throw new ArgumentNullException(nameof(node1));
+            if (node2 is null) throw new ArgumentNullException(nameof(node2));
 
             if (node1.DomainType != node2.DomainType)
             {

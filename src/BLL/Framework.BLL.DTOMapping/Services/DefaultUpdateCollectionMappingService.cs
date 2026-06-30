@@ -27,8 +27,8 @@ public class DefaultUpdateCollectionMappingService<TSource, TSourceIdentity, TTa
 
     public void Map(IEnumerable<UpdateItemData<TSource, TSourceIdentity>> sourceItems, IEnumerable<TTarget> targetItems)
     {
-        if (sourceItems == null) throw new ArgumentNullException(nameof(sourceItems));
-        if (targetItems == null) throw new ArgumentNullException(nameof(targetItems));
+        if (sourceItems is null) throw new ArgumentNullException(nameof(sourceItems));
+        if (targetItems is null) throw new ArgumentNullException(nameof(targetItems));
 
         sourceItems.Update(targetItems, this.GetSourceId, this.GetSourceIdentityId, this.GetTargetId, this.AddDetail, this.RemoveDetail);
     }

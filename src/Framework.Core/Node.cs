@@ -8,7 +8,7 @@ public class Node<T> : IEnumerable<T>
 {
     public Node(T value, IEnumerable<Node<T>> children)
     {
-        if (children == null) throw new ArgumentNullException(nameof(children));
+        if (children is null) throw new ArgumentNullException(nameof(children));
 
         this.Value = value;
         this.Children = children.ToReadOnlyCollection();
@@ -48,16 +48,16 @@ public static class NodeExtensions
 {
     public static Node<TResult> Select<TSource, TResult>(this Node<TSource> source, Func<TSource, TResult> selector)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (selector == null) throw new ArgumentNullException(nameof(selector));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (selector is null) throw new ArgumentNullException(nameof(selector));
 
         return new Node<TResult>(selector(source.Value), source.Children.Select(child => child.Select(selector)));
     }
 
     public static Node<T> Select<T>(this Node<T> source, Func<T, IEnumerable<T>, T> selector)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (selector == null) throw new ArgumentNullException(nameof(selector));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (selector is null) throw new ArgumentNullException(nameof(selector));
 
         var children = source.Children.Select(child => child.Select(selector)).ToReadOnlyCollection();
 

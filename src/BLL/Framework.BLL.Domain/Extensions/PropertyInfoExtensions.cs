@@ -9,7 +9,7 @@ public static class PropertyInfoExtensions
 {
     public static bool IsVisualIdentity(this PropertyInfo propertyInfo)
     {
-        if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
+        if (propertyInfo is null) throw new ArgumentNullException(nameof(propertyInfo));
 
         return propertyInfo.HasAttribute<VisualIdentityAttribute>();
     }

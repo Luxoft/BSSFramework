@@ -2,16 +2,9 @@
 
 namespace Framework.Core.AnonymousTypeBuilder;
 
-public class TypeMapProperty : ITypeMapMember
+public class TypeMapProperty(PropertyInfo property) : ITypeMapMember
 {
-    public TypeMapProperty(PropertyInfo property)
-    {
-        if (property == null) throw new ArgumentNullException(nameof(property));
-
-        this.Property = property;
-    }
-
-    public PropertyInfo Property { get; }
+    public PropertyInfo Property { get; } = property ?? throw new ArgumentNullException(nameof(property));
 
     public virtual string Name => this.Property.Name;
 

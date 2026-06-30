@@ -22,11 +22,7 @@ public abstract class PersistentDomainObjectBase : DomainObjectBase, IIdentityOb
     /// ID доменного объекта
     /// </summary>
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
-    public virtual Guid Id
-    {
-        get => this.id;
-        set => this.id = value;
-    }
+    public virtual Guid Id { get => this.id; set => this.id = value; }
 
     /// <summary>
     /// Признак того, что класс еще не сохранен в базе
@@ -34,21 +30,20 @@ public abstract class PersistentDomainObjectBase : DomainObjectBase, IIdentityOb
     [CustomSerialization(CustomSerializationMode.Ignore)]
     public virtual bool IsNew => this.Id == Guid.Empty;
 
-    public static bool operator ==(PersistentDomainObjectBase? a, PersistentDomainObjectBase? b) => ReferenceEquals(a, b) || (!ReferenceEquals(a, null) && !ReferenceEquals(b, null) && a.Equals(b));
+    public static bool operator ==(PersistentDomainObjectBase? a, PersistentDomainObjectBase? b) =>
+        ReferenceEquals(a, b) || (a is not null && b is not null && a.Equals(b));
 
     public static bool operator !=(PersistentDomainObjectBase? a, PersistentDomainObjectBase? b) => !(a == b);
 
     public virtual bool Equals(PersistentDomainObjectBase? obj) =>
         ReferenceEquals(this, obj)
-        || (!ReferenceEquals(obj, null)
+        || (obj is not null
             && this.Id == obj.Id
             && this.Id != Guid.Empty
 
-            && (obj.GetType().IsAssignableFrom(this.GetType()) || this.GetType().IsAssignableFrom(obj.GetType()))
-           );
+            && (obj.GetType().IsAssignableFrom(this.GetType()) || this.GetType().IsAssignableFrom(obj.GetType())));
 
     public override bool Equals(object? obj) => this.Equals(obj as PersistentDomainObjectBase);
 
     public override int GetHashCode() => this.Id.IsDefault() ? base.GetHashCode() : this.Id.GetHashCode();
 }
-

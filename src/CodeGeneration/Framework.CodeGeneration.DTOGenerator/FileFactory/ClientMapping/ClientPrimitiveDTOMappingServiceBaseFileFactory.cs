@@ -20,7 +20,7 @@ public class ClientPrimitiveDTOMappingServiceBaseFileFactory<TConfiguration> : F
     public ClientPrimitiveDTOMappingServiceBaseFileFactory(TConfiguration configuration, IEnumerable<IClientMappingServiceExternalMethodGenerator> externalGenerators)
             : base(configuration, null)
     {
-        if (externalGenerators == null) throw new ArgumentNullException(nameof(externalGenerators));
+        if (externalGenerators is null) throw new ArgumentNullException(nameof(externalGenerators));
 
         this.externalGenerators = externalGenerators.ToReadOnlyCollection();
     }

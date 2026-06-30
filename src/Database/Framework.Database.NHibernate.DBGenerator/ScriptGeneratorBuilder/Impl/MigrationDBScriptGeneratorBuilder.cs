@@ -56,23 +56,12 @@ internal class MigrationDBScriptGeneratorBuilder : IMigrationScriptGeneratorBuil
         return this;
     }
 
-    protected class DatabaseScriptGeneratorAdapter : IDatabaseScriptGenerator
+    protected class DatabaseScriptGeneratorAdapter(
+        IMigrationScriptReader migrationScriptReader,
+        string tableName)
+        : IDatabaseScriptGenerator
     {
-        private readonly IMigrationScriptReader migrationScriptReader;
-        private readonly string tableName;
-
-        public DatabaseScriptGeneratorAdapter(
-                IMigrationScriptReader migrationScriptReader,
-                string tableName)
-        {
-            if (migrationScriptReader == null)
-            {
-                throw new ArgumentNullException(nameof(migrationScriptReader));
-            }
-
-            this.migrationScriptReader = migrationScriptReader;
-            this.tableName = tableName;
-        }
+        private readonly IMigrationScriptReader migrationScriptReader = migrationScriptReader ?? throw new ArgumentNullException(nameof(migrationScriptReader));
 
         public IDatabaseScriptResult GenerateScript(IDatabaseScriptGeneratorContext context)
         {
@@ -80,7 +69,7 @@ internal class MigrationDBScriptGeneratorBuilder : IMigrationScriptGeneratorBuil
 
             var executedMigrationScripts = new HashSet<MigrationDbScriptHeader>();
 
-            if (createExecutingScriptsTable == null)
+            if (createExecutingScriptsTable is null)
             {
                 executedMigrationScripts = this.GetExecutedMigrationScripts(context).ToHashSet();
             }
@@ -156,7 +145,7 @@ internal class MigrationDBScriptGeneratorBuilder : IMigrationScriptGeneratorBuil
             var result = new List<MigrationDbScriptHeader>();
             using var connection = context.SqlDatabaseFactory.Server.ConnectionContext.SqlConnectionObject;
             connection.Open();
-            var cmd = $"select name, scheme, version from {context.DatabaseName}.[{this.tableName}]";
+            var cmd = $"select name, scheme, version from {context.DatabaseName}.[{tableName}]";
             var command = new Microsoft.Data.SqlClient.SqlCommand(cmd, connection);
             var sqlResult = command.ExecuteReader();
 
@@ -171,7 +160,7 @@ internal class MigrationDBScriptGeneratorBuilder : IMigrationScriptGeneratorBuil
             return result;
         }
 
-        private string GetInsertScript(MigrationDbScript migrationDbScript, IDatabaseScriptGeneratorContext context) => $"INSERT INTO {context.DatabaseName.ToString()}.[{this.tableName}] ([name] ,[author] ,[date], [script], [version], [scheme]) VALUES ('{migrationDbScript.Header.Name}', system_user, GETDATE(), '{migrationDbScript.Script.Replace("'", "''")}','{migrationDbScript.Header.Version}','{migrationDbScript.Header.Scheme}')";
+        private string GetInsertScript(MigrationDbScript migrationDbScript, IDatabaseScriptGeneratorContext context) => $"INSERT INTO {context.DatabaseName.ToString()}.[{tableName}] ([name] ,[author] ,[date], [script], [version], [scheme]) VALUES ('{migrationDbScript.Header.Name}', system_user, GETDATE(), '{migrationDbScript.Script.Replace("'", "''")}','{migrationDbScript.Header.Version}','{migrationDbScript.Header.Scheme}')";
 
         private MigrationDbScript? TryCreateExecutionScriptTable(IDatabaseScriptGeneratorContext context)
         {
@@ -185,12 +174,12 @@ internal class MigrationDBScriptGeneratorBuilder : IMigrationScriptGeneratorBuil
 
             db.Tables.Refresh();
 
-            if (db.Tables.Contains(this.tableName, context.DatabaseName.Schema))
+            if (db.Tables.Contains(tableName, context.DatabaseName.Schema))
             {
                 return null;
             }
 
-            var table = new Table(db, this.tableName, context.DatabaseName.Schema);
+            var table = new Table(db, tableName, context.DatabaseName.Schema);
 
             var columnsInfo = new[]
                               {

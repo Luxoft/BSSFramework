@@ -175,7 +175,7 @@ public static class CoreStringExtensions
 
     public static string ToStartUpperCase(this string source)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         return source.Any() ? char.ToUpper(source.First()) + source.Substring(1) : source;
     }
@@ -194,7 +194,7 @@ public static class CoreStringExtensions
 
     public static string ToPluralize(this string source)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         return source.SkipLastMaybe("y").Select(v => v + "ies")
                      .Or(() => source.SkipLastMaybe("ss").Select(v => v + "sses"))

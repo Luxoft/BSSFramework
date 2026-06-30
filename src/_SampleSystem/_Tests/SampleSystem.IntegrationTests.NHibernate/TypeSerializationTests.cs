@@ -27,7 +27,7 @@ public class TypeSerializationTests
         var wrongTypes = AppDomain.CurrentDomain.GetAssemblies()
                                   .SelectMany(a => a.GetTypes())
                                   .Where(
-                                      t => t.Namespace != null
+                                      t => t.Namespace is not null
                                          && (t.Namespace.StartsWith(nameof(SampleSystem)) || t.Namespace.StartsWith(nameof(Framework))))
                                   .Where(
                                       t => t.HasAttribute<DataContractAttribute>()

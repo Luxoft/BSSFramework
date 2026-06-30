@@ -19,12 +19,12 @@ public static class EnumerableExtensions
     public static TSource? GetByName<TSource>(this IEnumerable<TSource> source, string name, StringComparison stringComparison, Func<Exception>? getFaultException)
             where TSource : class, IVisualIdentityObject
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (name == null) throw new ArgumentNullException(nameof(name));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (name is null) throw new ArgumentNullException(nameof(name));
 
         var res = source.SingleOrDefault(obj => string.Equals(obj.Name, name, stringComparison));
 
-        if (res == null && getFaultException != null)
+        if (res is null && getFaultException is not null)
         {
             throw getFaultException();
         }
@@ -35,7 +35,7 @@ public static class EnumerableExtensions
 
     private static Func<Exception>? TryGetNotFoundByNameExceptionFactory<TSource>(string name, bool raiseIfNotFound)
     {
-        if (name == null) throw new ArgumentNullException(nameof(name));
+        if (name is null) throw new ArgumentNullException(nameof(name));
 
         return raiseIfNotFound ? () => GetNotFoundException<TSource>(name, nameof(name)) : null;
     }

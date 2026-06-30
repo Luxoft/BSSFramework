@@ -46,11 +46,8 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
     public DefaultValidatorGenerator(TConfiguration configuration, Type domainType, CodeExpression validatorMapExpr)
         : base(configuration)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (validatorMapExpr == null) throw new ArgumentNullException(nameof(validatorMapExpr));
-
-        this.DomainType = domainType;
-        this.ValidatorMapExpr = validatorMapExpr;
+        this.DomainType = domainType ?? throw new ArgumentNullException(nameof(domainType));
+        this.ValidatorMapExpr = validatorMapExpr ?? throw new ArgumentNullException(nameof(validatorMapExpr));
 
         this.ClassValidators = LazyInterfaceImplementHelper.CreateProxy(() => this.GetClassValidators().ToReadOnlyDictionaryI());
         this.PropertyValidators = domainType.GetValidationProperties().ToDictionary(
@@ -102,7 +99,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
     protected virtual IEnumerable<ValidatorPairExpr> GetPropertyValidators(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         if (!property.HasPrivateField(true) && !this.Configuration.AllowVirtualValidation(property))
         {
@@ -127,7 +124,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
         {
             var collectionElementType = property.PropertyType.GetCollectionElementType();
 
-            if (collectionElementType != null)
+            if (collectionElementType is not null)
             {
                 var expr = typeof(DeepCollectionValidator<,,>)
                            .MakeGenericType(this.DomainType, property.PropertyType, collectionElementType)
@@ -150,7 +147,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
     protected virtual bool IsManyPropertyDynamicClassAttribute(ClassValidatorAttribute attribute)
     {
-        if (attribute == null) throw new ArgumentNullException(nameof(attribute));
+        if (attribute is null) throw new ArgumentNullException(nameof(attribute));
 
         return ManyPropertyDynamicClassAttributes.Contains(attribute.GetType()); //&& !(attribute is IDynamicClassValidator);
     }
@@ -169,7 +166,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
                 {
                     var autoExpr = this.TryAutoExpandPropertyAttributes(property, attribute);
 
-                    if (autoExpr != null)
+                    if (autoExpr is not null)
                     {
                         return autoExpr;
                     }
@@ -194,7 +191,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
             var ctor = instanceType.GetConstructors().SingleMaybe().GetValueOrDefault();
 
-            if (ctor != null)
+            if (ctor is not null)
             {
                 var preArgs = ctor.GetParameters().ToDictionary(
                     ctorP => ctorP,
@@ -215,7 +212,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
                 var singletonProp = instanceType.GetProperties(BindingFlags.Public | BindingFlags.Static).Where(prop => prop.PropertyType == instanceType).SingleMaybe()
                                                 .GetValueOrDefault();
 
-                if (singletonProp != null)
+                if (singletonProp is not null)
                 {
                     var createExpr = instanceType.ToTypeReferenceExpression().ToPropertyReference(singletonProp);
 
@@ -229,7 +226,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
     private CodeExpression? TryAutoExpandClassAttributes(ClassValidatorAttribute attribute)
     {
-        if (attribute == null) throw new ArgumentNullException(nameof(attribute));
+        if (attribute is null) throw new ArgumentNullException(nameof(attribute));
 
         var instanceType = attribute.CreateValidator()
                                     .GetLastClassValidator(this.DomainType, this.Configuration.Environment.ServiceProvider)!.GetType();
@@ -242,7 +239,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
             var ctor = instanceType.GetConstructors().SingleMaybe().GetValueOrDefault();
 
-            if (ctor != null)
+            if (ctor is not null)
             {
                 var preArgs = ctor.GetParameters().ToDictionary(
                     ctorP => ctorP,
@@ -263,7 +260,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
                 var singletonProp = instanceType.GetProperties(BindingFlags.Public | BindingFlags.Static).Where(prop => prop.PropertyType == instanceType).SingleMaybe()
                                                 .GetValueOrDefault();
 
-                if (singletonProp != null)
+                if (singletonProp is not null)
                 {
                     var createExpr = instanceType.ToTypeReferenceExpression().ToPropertyReference(singletonProp);
 
@@ -277,9 +274,9 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
     protected CodeExpression TryUnboxProperty(CodeExpression expression, Type propertyValidatorType, PropertyInfo property)
     {
-        if (expression == null) throw new ArgumentNullException(nameof(expression));
-        if (propertyValidatorType == null) throw new ArgumentNullException(nameof(propertyValidatorType));
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (expression is null) throw new ArgumentNullException(nameof(expression));
+        if (propertyValidatorType is null) throw new ArgumentNullException(nameof(propertyValidatorType));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         var expectedType = typeof(IPropertyValidator<,>).MakeGenericType(this.DomainType, property.PropertyType);
 
@@ -287,7 +284,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
         {
             var args = propertyValidatorType.GetInterfaceImplementationArguments(typeof(IPropertyValidator<,>));
 
-            if (args != null)
+            if (args is not null)
             {
                 var validatorSourceType = args[0];
                 var validatorPropertyType = args[1];
@@ -319,8 +316,8 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
     /// </exception>
     protected CodeExpression TryUnboxClass(CodeExpression expression, Type classValidatorType)
     {
-        if (expression == null) throw new ArgumentNullException(nameof(expression));
-        if (classValidatorType == null) throw new ArgumentNullException(nameof(classValidatorType));
+        if (expression is null) throw new ArgumentNullException(nameof(expression));
+        if (classValidatorType is null) throw new ArgumentNullException(nameof(classValidatorType));
 
         var expectedType = typeof(IClassValidator<>).MakeGenericType(this.DomainType);
 
@@ -328,7 +325,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
         {
             var args = classValidatorType.GetInterfaceImplementationArguments(typeof(IClassValidator<>));
 
-            if (args != null)
+            if (args is not null)
             {
                 var validatorSourceType = args[0];
 
@@ -347,7 +344,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
     private CodeExpression GetUniqueCollectionValidator(PropertyInfo property, UniqueCollectionValidatorAttribute attribute)
     {
-        if (attribute == null) throw new ArgumentNullException(nameof(attribute));
+        if (attribute is null) throw new ArgumentNullException(nameof(attribute));
 
         var elementType = property.PropertyType.GetCollectionElementType()!;
 
@@ -393,7 +390,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
     private CodeExpression GetFixedPropertyValidator(PropertyInfo property, FixedPropertyValidatorAttribute attribute)
     {
-        if (attribute == null) throw new ArgumentNullException(nameof(attribute));
+        if (attribute is null) throw new ArgumentNullException(nameof(attribute));
 
         var validatorType = typeof(FixedPropertyValidator<,,>).MakeGenericType(
             property.ReflectedType!,
@@ -421,7 +418,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
         {
             var autoExpr = this.TryAutoExpandClassAttributes(attribute);
 
-            if (autoExpr != null)
+            if (autoExpr is not null)
             {
                 return autoExpr;
             }
@@ -434,8 +431,8 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
     private static CodeLambdaExpression GetGetPropertyValuesExpression(Type domainObjectType, IEnumerable<PropertyInfo> properties)
     {
-        if (domainObjectType == null) throw new ArgumentNullException(nameof(domainObjectType));
-        if (properties == null) throw new ArgumentNullException(nameof(properties));
+        if (domainObjectType is null) throw new ArgumentNullException(nameof(domainObjectType));
+        if (properties is null) throw new ArgumentNullException(nameof(properties));
 
         var domainObjectParameter = new CodeParameterDeclarationExpression { Name = "source" };
 
@@ -451,9 +448,9 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
     private static CodeLambdaExpression GetGetFilterExpression(Type domainObjectType, Type identType, IEnumerable<PropertyInfo> properties)
     {
-        if (domainObjectType == null) throw new ArgumentNullException(nameof(domainObjectType));
-        if (identType == null) throw new ArgumentNullException(nameof(identType));
-        if (properties == null) throw new ArgumentNullException(nameof(properties));
+        if (domainObjectType is null) throw new ArgumentNullException(nameof(domainObjectType));
+        if (identType is null) throw new ArgumentNullException(nameof(identType));
+        if (properties is null) throw new ArgumentNullException(nameof(properties));
 
         var idProp = typeof(IIdentityObject<>).MakeGenericType(identType).GetProperties().Single();
 
@@ -485,7 +482,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
     private CodeExpression GetUniDbGroupValidator(UniDBGroupValidatorAttribute attribute)
     {
-        if (attribute == null) throw new ArgumentNullException(nameof(attribute));
+        if (attribute is null) throw new ArgumentNullException(nameof(attribute));
 
         var uniProperties = this.DomainType.GetUniqueElementProperties(attribute.GroupKey, true);
         var uniqueElementString = uniProperties.GetUniqueElementString(false);
@@ -506,7 +503,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
     private CodeExpression GetRequiredGroupValidator(RequiredGroupValidatorAttribute attribute)
     {
-        if (attribute == null) throw new ArgumentNullException(nameof(attribute));
+        if (attribute is null) throw new ArgumentNullException(nameof(attribute));
 
         var uniProperties = this.DomainType.GetUniqueElementProperties(attribute.GroupKey, true);
 
@@ -560,7 +557,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
     protected virtual IReadOnlyDictionary<PropertyInfo, CodeExpression> ConvertClassAttribute(ClassValidatorAttribute attribute)
     {
-        if (attribute == null) throw new ArgumentNullException(nameof(attribute));
+        if (attribute is null) throw new ArgumentNullException(nameof(attribute));
 
         if (attribute is DefaultStringMaxLengthValidatorAttribute)
         {

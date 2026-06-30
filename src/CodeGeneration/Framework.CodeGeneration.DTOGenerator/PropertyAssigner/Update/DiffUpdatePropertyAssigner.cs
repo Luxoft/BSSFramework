@@ -52,10 +52,10 @@ public class DiffUpdatePropertyAssigner<TConfiguration> : GeneratorConfiguration
             CodeExpression currentSourcePropertyRef,
             CodeExpression targetPropertyRef)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
-        if (baseSourcePropertyRef == null) throw new ArgumentNullException(nameof(baseSourcePropertyRef));
-        if (currentSourcePropertyRef == null) throw new ArgumentNullException(nameof(currentSourcePropertyRef));
-        if (targetPropertyRef == null) throw new ArgumentNullException(nameof(targetPropertyRef));
+        if (property is null) throw new ArgumentNullException(nameof(property));
+        if (baseSourcePropertyRef is null) throw new ArgumentNullException(nameof(baseSourcePropertyRef));
+        if (currentSourcePropertyRef is null) throw new ArgumentNullException(nameof(currentSourcePropertyRef));
+        if (targetPropertyRef is null) throw new ArgumentNullException(nameof(targetPropertyRef));
 
         var isSecurity = this.Configuration.Environment.MetadataProxyProvider.Wrap(property).IsSecurity();
 

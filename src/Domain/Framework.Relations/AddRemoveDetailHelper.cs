@@ -8,12 +8,12 @@ public static class AddRemoveDetailHelper
             where TMaster : class, IMaster<TChild>
             where TChild : class, IDetail<TMaster>
     {
-        if (master == null)
+        if (master is null)
         {
             throw new ArgumentNullException(nameof(master));
         }
 
-        if (child == null)
+        if (child is null)
         {
             throw new ArgumentNullException(nameof(child));
         }
@@ -35,12 +35,12 @@ public static class AddRemoveDetailHelper
             where TMaster : class, IMaster<TChild>
             where TChild : class, IDetail<TMaster>
     {
-        if (master == null)
+        if (master is null)
         {
             throw new ArgumentNullException(nameof(master));
         }
 
-        if (child == null)
+        if (child is null)
         {
             throw new ArgumentNullException(nameof(child));
         }
@@ -72,12 +72,12 @@ public static class AddRemoveDetailHelper
             where TMaster : class, IMaster<TChild>
             where TChild : class, IDetail<TMaster>
     {
-        if (master == null)
+        if (master is null)
         {
             throw new ArgumentNullException(nameof(master));
         }
 
-        if (child == null)
+        if (child is null)
         {
             throw new ArgumentNullException(nameof(child));
         }
@@ -92,7 +92,7 @@ public static class AddRemoveDetailHelper
             where TMaster : class, IMaster<TChild>
             where TChild : class, IDetail<TMaster>
     {
-        if (master == null)
+        if (master is null)
         {
             throw new ArgumentNullException(nameof(master));
         }

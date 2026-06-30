@@ -7,16 +7,16 @@ public static class DALChangesExtensions
 {
     public static DALChanges<TResult> Select<TSource, TResult>(this DALChanges<TSource> source, Func<TSource, TResult> selector)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (selector == null) throw new ArgumentNullException(nameof(selector));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (selector is null) throw new ArgumentNullException(nameof(selector));
 
         return new DALChanges<TResult>(source.CreatedItems.Select(selector), source.UpdatedItems.Select(selector), source.RemovedItems.Select(selector));
     }
 
     public static DALChanges<T> Where<T>(this DALChanges<T> source, Func<T, bool> filter)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (filter is null) throw new ArgumentNullException(nameof(filter));
 
         return new DALChanges<T>(source.CreatedItems.Where(filter), source.UpdatedItems.Where(filter), source.RemovedItems.Where(filter));
     }
@@ -24,7 +24,7 @@ public static class DALChangesExtensions
     public static Dictionary<T, DALObjectChangeType> ToChangeTypeDict<T>(this DALChanges<T> source)
         where T : notnull
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         var request = source.CreatedItems.Select(item => new { Key = item, Value = DALObjectChangeType.Created })
                             .Concat(source.UpdatedItems.Select(item => new { Key = item, Value = DALObjectChangeType.Updated }))
@@ -35,7 +35,7 @@ public static class DALChangesExtensions
 
     public static IEnumerable<ValueTuple<T, DALObjectChangeType>> ToPlainValues<T>(this DALChanges<T> source)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         var combined = source.CreatedItems.Select(item => ValueTuple.Create(item, DALObjectChangeType.Created))
                              .Concat(source.UpdatedItems.Select(item => ValueTuple.Create(item, DALObjectChangeType.Updated)))
@@ -57,7 +57,7 @@ public static class DALChangesExtensions
 
                       let finalState = changeGroup.ToDictionary().ToFinalState()
 
-                      where finalState != null
+                      where finalState is not null
 
                       select finalState.Value;
 
@@ -70,7 +70,7 @@ public static class DALChangesExtensions
     /// <param name="states">Череда изменений объекта</param>
     private static KeyValuePair<IDALObject, DALObjectChangeType>? ToFinalState(this IReadOnlyDictionary<IDALObject, DALObjectChangeType> states)
     {
-        if (states == null) throw new ArgumentNullException(nameof(states));
+        if (states is null) throw new ArgumentNullException(nameof(states));
 
         var sourceCache = states.ToArray();
 

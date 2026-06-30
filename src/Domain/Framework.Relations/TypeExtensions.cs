@@ -11,7 +11,7 @@ public static class TypeExtensions
     public static IEnumerable<Type> GetDetailTypes(this Type type) =>
         type.GetInterfaces()
             .Select(i => i.GetInterfaceImplementationArgument(typeof(IMaster<>)))
-            .Where(detailType => detailType != null)
+            .Where(detailType => detailType is not null)
             .Select(v => v!);
 
     public static IEnumerable<PropertyInfo> GetDetailProperties(this Type type) =>

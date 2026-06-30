@@ -73,7 +73,7 @@ internal class RemoveStrategy(DatabaseScriptGeneratorStrategyInfo parameter) : S
         var table = this.Parameter.Context.GetOrCreateTable(typeDescription.DomainType);
         var sqlMappings = typeDescription.Fields.SelectMany(MapperFactory.GetMapping).ToList();
 
-        if (typeDescription.Parent != null)
+        if (typeDescription.Parent is not null)
         {
             sqlMappings = sqlMappings.Union(typeDescription.Root.Fields.SelectMany(MapperFactory.GetMapping).Where(f => f.IsPrimaryKey))
                                      .ToList();

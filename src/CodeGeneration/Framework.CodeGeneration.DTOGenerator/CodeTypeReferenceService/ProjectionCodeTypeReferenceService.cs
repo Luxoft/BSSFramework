@@ -15,7 +15,7 @@ public class ProjectionCodeTypeReferenceService<TConfiguration>(TConfiguration c
 
     public override RoleFileType GetReferenceFileType(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         if (this.Configuration.ProjectionTypes.Contains(property.PropertyType))
         {
@@ -29,7 +29,7 @@ public class ProjectionCodeTypeReferenceService<TConfiguration>(TConfiguration c
 
     public override RoleFileType GetCollectionFileType(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         if (this.Configuration.ProjectionTypes.Contains(property.PropertyType.GetCollectionElementType()))
         {

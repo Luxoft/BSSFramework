@@ -73,7 +73,7 @@ public static class ServiceModelFileGeneratorExtensions
 
         private CodeTypeDeclaration GetAutoRequestType(CodeMemberMethod method)
         {
-            if (method == null) throw new ArgumentNullException(nameof(method));
+            if (method is null) throw new ArgumentNullException(nameof(method));
 
             var requestType = new CodeTypeDeclaration(method.Name + "AutoRequest")
             {

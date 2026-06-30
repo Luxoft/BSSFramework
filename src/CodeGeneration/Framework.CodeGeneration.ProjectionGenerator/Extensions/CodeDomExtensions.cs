@@ -22,11 +22,11 @@ internal static class CodeDomExtensions
 {
     public static IEnumerable<CodeAttributeDeclaration> GetSecurityAttributes(this ICustomAttributeProvider source, IEnumerable<Type> securityRuleTypeList)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source is null) throw new ArgumentNullException(nameof(source));
 
         var viewAttr = source.GetViewDomainObjectAttribute();
 
-        if (viewAttr != null)
+        if (viewAttr is not null)
         {
             var securityRuleType = securityRuleTypeList.First(t =>
                                                               {
@@ -56,7 +56,7 @@ internal static class CodeDomExtensions
 
     public static CodeAttributeDeclaration ToAttributeDeclaration(this CustomSerializationAttribute attr)
     {
-        if (attr == null) throw new ArgumentNullException(nameof(attr));
+        if (attr is null) throw new ArgumentNullException(nameof(attr));
 
         if (!attr.Role.HasFlag(DTORole.Client))
         {
@@ -70,7 +70,7 @@ internal static class CodeDomExtensions
 
     public static CodeAttributeDeclaration ToAttributeDeclaration(this ExpandPathAttribute expandPathAttr)
     {
-        if (expandPathAttr == null) throw new ArgumentNullException(nameof(expandPathAttr));
+        if (expandPathAttr is null) throw new ArgumentNullException(nameof(expandPathAttr));
 
         var arg = new CodeAttributeArgument { Value = expandPathAttr.Path.ToPrimitiveExpression() };
 
@@ -81,14 +81,14 @@ internal static class CodeDomExtensions
 
     public static CodeAttributeDeclaration ToAttributeDeclaration(this DependencySecurityAttribute dependencySecurityAttr)
     {
-        if (dependencySecurityAttr == null) throw new ArgumentNullException(nameof(dependencySecurityAttr));
+        if (dependencySecurityAttr is null) throw new ArgumentNullException(nameof(dependencySecurityAttr));
 
         return typeof(DependencySecurityAttribute).ToTypeReference().ToAttributeDeclaration(dependencySecurityAttr.GetArguments().ToArray());
     }
 
     private static IEnumerable<CodeAttributeArgument> GetArguments(this DependencySecurityAttribute dependencySecurityAttr)
     {
-        if (dependencySecurityAttr == null) throw new ArgumentNullException(nameof(dependencySecurityAttr));
+        if (dependencySecurityAttr is null) throw new ArgumentNullException(nameof(dependencySecurityAttr));
 
         yield return new CodeAttributeArgument { Value = dependencySecurityAttr.SourceType.ToTypeOfExpression() };
 
@@ -101,14 +101,14 @@ internal static class CodeDomExtensions
 
     public static CodeAttributeDeclaration ToAttributeDeclaration(this BLLProjectionViewRoleAttribute projectionAttr)
     {
-        if (projectionAttr == null) throw new ArgumentNullException(nameof(projectionAttr));
+        if (projectionAttr is null) throw new ArgumentNullException(nameof(projectionAttr));
 
         return typeof(BLLProjectionViewRoleAttribute).ToTypeReference().ToAttributeDeclaration(projectionAttr.GetArguments().ToArray());
     }
 
     private static IEnumerable<CodeAttributeArgument> GetArguments(this BLLProjectionViewRoleAttribute projectionAttr)
     {
-        if (projectionAttr == null) throw new ArgumentNullException(nameof(projectionAttr));
+        if (projectionAttr is null) throw new ArgumentNullException(nameof(projectionAttr));
 
         if (projectionAttr.MaxFetch != ViewDTOType.ProjectionDTO)
         {
@@ -119,14 +119,14 @@ internal static class CodeDomExtensions
 
     public static CodeAttributeDeclaration ToAttributeDeclaration(this ProjectionAttribute projectionAttr)
     {
-        if (projectionAttr == null) throw new ArgumentNullException(nameof(projectionAttr));
+        if (projectionAttr is null) throw new ArgumentNullException(nameof(projectionAttr));
 
         return typeof(ProjectionAttribute).ToTypeReference().ToAttributeDeclaration(projectionAttr.GetArguments().ToArray());
     }
 
     public static CodeAttributeDeclaration ToAttributeDeclaration(this ProjectionPropertyAttribute projectionAttr)
     {
-        if (projectionAttr == null) throw new ArgumentNullException(nameof(projectionAttr));
+        if (projectionAttr is null) throw new ArgumentNullException(nameof(projectionAttr));
 
         var arg = new CodeAttributeArgument { Value = projectionAttr.Role.ToPrimitiveExpression() };
 
@@ -135,7 +135,7 @@ internal static class CodeDomExtensions
 
     public static CodeAttributeDeclaration ToAttributeDeclaration(this ProjectionFilterAttribute projectionFilterAttr)
     {
-        if (projectionFilterAttr == null) throw new ArgumentNullException(nameof(projectionFilterAttr));
+        if (projectionFilterAttr is null) throw new ArgumentNullException(nameof(projectionFilterAttr));
 
         var arg1 = new CodeAttributeArgument { Value = new CodeTypeOfExpression(projectionFilterAttr.FilterType) };
 
@@ -146,13 +146,13 @@ internal static class CodeDomExtensions
 
     private static IEnumerable<CodeAttributeArgument> GetArguments(this ProjectionAttribute projectionAttr)
     {
-        if (projectionAttr == null) throw new ArgumentNullException(nameof(projectionAttr));
+        if (projectionAttr is null) throw new ArgumentNullException(nameof(projectionAttr));
 
         yield return new CodeAttributeArgument { Value = new CodeTypeOfExpression(projectionAttr.SourceType) };
 
         yield return new CodeAttributeArgument { Value = projectionAttr.Role.ToPrimitiveExpression() };
 
-        if (projectionAttr.ContractType != null)
+        if (projectionAttr.ContractType is not null)
         {
             yield return new CodeAttributeArgument { Value = new CodeTypeOfExpression(projectionAttr.ContractType) };
         }
@@ -160,14 +160,14 @@ internal static class CodeDomExtensions
 
     public static CodeAttributeDeclaration ToAttributeDeclaration(this TableAttribute tableAttr)
     {
-        if (tableAttr == null) throw new ArgumentNullException(nameof(tableAttr));
+        if (tableAttr is null) throw new ArgumentNullException(nameof(tableAttr));
 
         return typeof(TableAttribute).ToTypeReference().ToAttributeDeclaration(tableAttr.GetArguments().ToArray());
     }
 
     private static IEnumerable<CodeAttributeArgument> GetArguments(this TableAttribute tableAttr)
     {
-        if (tableAttr == null) throw new ArgumentNullException(nameof(tableAttr));
+        if (tableAttr is null) throw new ArgumentNullException(nameof(tableAttr));
 
         if (!tableAttr.Name.IsDefault())
         {
@@ -183,14 +183,14 @@ internal static class CodeDomExtensions
 
     public static CodeAttributeDeclaration ToAttributeDeclaration(this MappingAttribute mappingAttr)
     {
-        if (mappingAttr == null) throw new ArgumentNullException(nameof(mappingAttr));
+        if (mappingAttr is null) throw new ArgumentNullException(nameof(mappingAttr));
 
         return typeof(MappingAttribute).ToTypeReference().ToAttributeDeclaration(mappingAttr.GetArguments().ToArray());
     }
 
     public static CodeAttributeDeclaration ToAttributeDeclaration(this MappingPropertyAttribute attr)
     {
-        if (attr == null) throw new ArgumentNullException(nameof(attr));
+        if (attr is null) throw new ArgumentNullException(nameof(attr));
 
         var canInsertArg = new CodeAttributeArgument
         { Name = "CanInsert", Value = attr.CanInsert.ToPrimitiveExpression() };
@@ -202,14 +202,14 @@ internal static class CodeDomExtensions
 
     public static CodeAttributeDeclaration ToAttributeDeclaration(this InlineBaseTypeMappingAttribute mappingAttr)
     {
-        if (mappingAttr == null) throw new ArgumentNullException(nameof(mappingAttr));
+        if (mappingAttr is null) throw new ArgumentNullException(nameof(mappingAttr));
 
         return typeof(InlineBaseTypeMappingAttribute).ToTypeReference().ToAttributeDeclaration();
     }
 
     private static IEnumerable<CodeAttributeArgument> GetArguments(this MappingAttribute mappingAttr)
     {
-        if (mappingAttr == null) throw new ArgumentNullException(nameof(mappingAttr));
+        if (mappingAttr is null) throw new ArgumentNullException(nameof(mappingAttr));
 
         if (!mappingAttr.ColumnName.IsDefault())
         {
@@ -234,14 +234,14 @@ internal static class CodeDomExtensions
 
     public static CodeAttributeDeclaration ToAttributeDeclaration(this IgnoreFetchAttribute attr)
     {
-        if (attr == null) throw new ArgumentNullException(nameof(attr));
+        if (attr is null) throw new ArgumentNullException(nameof(attr));
 
         return typeof(IgnoreFetchAttribute).ToTypeReference().ToAttributeDeclaration();
     }
 
     public static CodeAttributeDeclaration ToAttributeDeclaration(this FetchPathAttribute attr)
     {
-        if (attr == null) throw new ArgumentNullException(nameof(attr));
+        if (attr is null) throw new ArgumentNullException(nameof(attr));
 
         var arg = new CodeAttributeArgument { Value = attr.Path.ToPrimitiveExpression() };
 

@@ -17,7 +17,7 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
 
     public RequiredRefDatabaseScriptGenerator(IEnumerable<IgnoreLink> ignoreDomainTypeLinks)
     {
-        if (ignoreDomainTypeLinks == null) throw new ArgumentNullException(nameof(ignoreDomainTypeLinks));
+        if (ignoreDomainTypeLinks is null) throw new ArgumentNullException(nameof(ignoreDomainTypeLinks));
 
         this.ignoreDomainTypeLinksHash = ignoreDomainTypeLinks.ToHashSet();
     }

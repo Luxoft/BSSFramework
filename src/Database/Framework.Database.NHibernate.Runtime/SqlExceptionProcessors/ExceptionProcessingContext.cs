@@ -24,11 +24,11 @@ public readonly struct TableDescription : IEquatable<TableDescription>
     public override string ToString()
     {
         var builder = new StringBuilder();
-        if (this.Catalog != null)
+        if (this.Catalog is not null)
         {
             builder.Append(this.Catalog + ".");
         }
-        if (this.Schema != null)
+        if (this.Schema is not null)
         {
             builder.Append(this.Schema + ".");
         }

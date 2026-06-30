@@ -29,7 +29,7 @@ public class ClassAAsyncController(
 
             var classA = await repository.GetQueryable().Where(x => x.Value == value).GenericSingleOrDefaultAsync(ct);
 
-            if (classA != null) throw new Exception("Should not exist yet");
+            if (classA is not null) throw new Exception("Should not exist yet");
         }
 
         await mediator.Send(new CreateClassAEvent(value), ct);

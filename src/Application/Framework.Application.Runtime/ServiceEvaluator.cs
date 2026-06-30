@@ -27,7 +27,7 @@ public class ServiceEvaluator<TService>(IServiceProvider rootServiceProvider) : 
     {
         yield return new SessionEvaluatorMiddleware(serviceProvider, sessionMode);
 
-        if (userCredential != null)
+        if (userCredential is not null)
         {
             yield return new ImpersonateEvaluatorMiddleware(serviceProvider, userCredential);
         }

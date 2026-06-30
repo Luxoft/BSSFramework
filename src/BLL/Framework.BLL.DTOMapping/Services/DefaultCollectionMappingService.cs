@@ -21,8 +21,8 @@ public class DefaultCollectionMappingService<TSource, TTarget, TIdent>(Func<TSou
 
     public void Map(IEnumerable<TSource> source, IEnumerable<TTarget> target)
     {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-        if (target == null) throw new ArgumentNullException(nameof(target));
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (target is null) throw new ArgumentNullException(nameof(target));
 
         target.Merge(source, this.GetSourceId,
                      this.GetTargetId,

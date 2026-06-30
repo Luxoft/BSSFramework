@@ -14,7 +14,7 @@ public static class TypeExtensions
 
     public static TableAttribute? GetTableAttribute(this Type type)
     {
-        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (type is null) throw new ArgumentNullException(nameof(type));
 
         if (type.IsAbstract)
         {

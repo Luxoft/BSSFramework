@@ -12,7 +12,7 @@ public class NHibObjectStatesService(ISession session) : IObjectStateService
 {
     public IEnumerable<ObjectState> GetModifiedObjectStates(object? entity)
     {
-        if (entity == null)
+        if (entity is null)
         {
             return [];
         }
@@ -61,7 +61,7 @@ public class NHibObjectStatesService(ISession session) : IObjectStateService
                 if (unTypedStateCollection is IPersistentCollection)
                 {
                     var persistentCollection = (IPersistentCollection)currentState[index];
-                    if (persistentCollection == null)
+                    if (persistentCollection is null)
                     {
                         return false;
                     }
@@ -89,7 +89,7 @@ public class NHibObjectStatesService(ISession session) : IObjectStateService
                 }
 
                 return currentCollection
-                       .SelectMany(z => session.GetEntityEntry(z) != null ? this.GetModifiedObjectStates(z) : [new ObjectState()])
+                       .SelectMany(z => session.GetEntityEntry(z) is not null ? this.GetModifiedObjectStates(z) : [new ObjectState()])
                        .Any();
             }
 
@@ -119,7 +119,7 @@ public class NHibObjectStatesService(ISession session) : IObjectStateService
 
     public bool IsNew(object entity)
     {
-        if (entity == null) throw new ArgumentNullException(nameof(entity));
+        if (entity is null) throw new ArgumentNullException(nameof(entity));
 
         var oldEntry = session.GetEntityEntry(entity);
 
@@ -133,7 +133,7 @@ public class NHibObjectStatesService(ISession session) : IObjectStateService
 
     public bool IsRemoving(object entity)
     {
-        if (entity == null) throw new ArgumentNullException(nameof(entity));
+        if (entity is null) throw new ArgumentNullException(nameof(entity));
 
         var entityEntry = session.GetEntityEntry(entity);
 

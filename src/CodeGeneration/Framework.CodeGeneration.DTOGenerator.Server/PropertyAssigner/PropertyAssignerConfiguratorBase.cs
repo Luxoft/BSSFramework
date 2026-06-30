@@ -20,7 +20,7 @@ public abstract class PropertyAssignerConfiguratorBase<TConfiguration>(TConfigur
 
     public virtual IPropertyAssigner GetStrictSecurityToDomainObjectPropertyAssigner(IPropertyAssigner innerAssigner)
     {
-        if (innerAssigner == null) throw new ArgumentNullException(nameof(innerAssigner));
+        if (innerAssigner is null) throw new ArgumentNullException(nameof(innerAssigner));
 
         if (this.Configuration.ExpandStrictMaybeToDefault)
         {
@@ -34,14 +34,14 @@ public abstract class PropertyAssignerConfiguratorBase<TConfiguration>(TConfigur
 
     public virtual IPropertyAssigner GetUpdateSecurityToDomainObjectPropertyAssigner(IPropertyAssigner innerAssigner)
     {
-        if (innerAssigner == null) throw new ArgumentNullException(nameof(innerAssigner));
+        if (innerAssigner is null) throw new ArgumentNullException(nameof(innerAssigner));
 
         return new UpdateToDomainObjectPropertyAssigner(innerAssigner.WithConfiguration(this.Configuration), this);
     }
 
     public virtual IPropertyAssigner GetDomainObjectToSecurityPropertyAssigner(IPropertyAssigner innerAssigner)
     {
-        if (innerAssigner == null) throw new ArgumentNullException(nameof(innerAssigner));
+        if (innerAssigner is null) throw new ArgumentNullException(nameof(innerAssigner));
 
         return new DomainObjectToSecurityPropertyAssigner(innerAssigner.WithConfiguration(this.Configuration), this);
     }

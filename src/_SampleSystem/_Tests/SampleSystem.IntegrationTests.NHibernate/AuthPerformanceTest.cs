@@ -104,10 +104,10 @@ public class AuthPerformanceTest(IServiceProvider rootServiceProvider) : TestBas
                             {
                                 var testObj = new AuthPerformanceObject
                                 {
-                                    BusinessUnit = fbu == null ? null : await fbuRep.LoadAsync(fbu.Value.Id, ct),
-                                    ManagementUnit = mbu == null ? null : await mbuRep.LoadAsync(mbu.Value.Id, ct),
-                                    Location = loc == null ? null : await locRep.LoadAsync(loc.Value.Id, ct),
-                                    Employee = emp == null ? null : await empRep.LoadAsync(emp.Value.Id, ct),
+                                    BusinessUnit = fbu is null ? null : await fbuRep.LoadAsync(fbu.Value.Id, ct),
+                                    ManagementUnit = mbu is null ? null : await mbuRep.LoadAsync(mbu.Value.Id, ct),
+                                    Location = loc is null ? null : await locRep.LoadAsync(loc.Value.Id, ct),
+                                    Employee = emp is null ? null : await empRep.LoadAsync(emp.Value.Id, ct),
                                 };
 
                                 await testObjRep.SaveAsync(testObj, ct);

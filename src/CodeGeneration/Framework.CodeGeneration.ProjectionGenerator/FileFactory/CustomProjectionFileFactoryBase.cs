@@ -32,7 +32,7 @@ public class CustomProjectionFileFactoryBase<TConfiguration>(TConfiguration conf
         {
             var projectionAttr = this.DomainType!.GetCustomAttribute<ProjectionAttribute>();
 
-            if (projectionAttr != null)
+            if (projectionAttr is not null)
             {
                 yield return projectionAttr.ToAttributeDeclaration();
             }
@@ -60,7 +60,7 @@ public class CustomProjectionFileFactoryBase<TConfiguration>(TConfiguration conf
 
     private CodeMemberProperty CreateCustomProperty(PropertyInfo property)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
+        if (property is null) throw new ArgumentNullException(nameof(property));
 
         return new CodeMemberProperty
         {

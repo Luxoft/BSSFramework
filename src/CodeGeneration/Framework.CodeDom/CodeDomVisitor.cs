@@ -20,14 +20,14 @@ public abstract class CodeDomVisitor
 
     public virtual CodeNamespaceImport VisitNamespaceImport(CodeNamespaceImport codeNamespaceImport)
     {
-        if (codeNamespaceImport == null) throw new ArgumentNullException(nameof(codeNamespaceImport));
+        if (codeNamespaceImport is null) throw new ArgumentNullException(nameof(codeNamespaceImport));
 
         return new CodeNamespaceImport(codeNamespaceImport.Namespace) { LinePragma = codeNamespaceImport.LinePragma };
     }
 
     public virtual CodeCompileUnit VisitCompileUnit(CodeCompileUnit codeCompileUnit)
     {
-        if (codeCompileUnit == null) throw new ArgumentNullException(nameof(codeCompileUnit));
+        if (codeCompileUnit is null) throw new ArgumentNullException(nameof(codeCompileUnit));
 
         var newCodeCompileUnit = new CodeCompileUnit();
 
@@ -42,7 +42,7 @@ public abstract class CodeDomVisitor
 
     public virtual CodeNamespace VisitNamespace(CodeNamespace codeNamespace)
     {
-        if (codeNamespace == null) throw new ArgumentNullException(nameof(codeNamespace));
+        if (codeNamespace is null) throw new ArgumentNullException(nameof(codeNamespace));
 
         var newCodeNamespace = new CodeNamespace(codeNamespace.Name);
 
@@ -58,14 +58,14 @@ public abstract class CodeDomVisitor
 
     public virtual CodeCommentStatement VisitCommentStatement(CodeCommentStatement codeCommentStatement)
     {
-        if (codeCommentStatement == null) throw new ArgumentNullException(nameof(codeCommentStatement));
+        if (codeCommentStatement is null) throw new ArgumentNullException(nameof(codeCommentStatement));
 
         return codeCommentStatement;
     }
 
     public virtual CodeTypeDeclaration VisitTypeDeclaration(CodeTypeDeclaration codeTypeDeclaration)
     {
-        if (codeTypeDeclaration == null) throw new ArgumentNullException(nameof(codeTypeDeclaration));
+        if (codeTypeDeclaration is null) throw new ArgumentNullException(nameof(codeTypeDeclaration));
 
         var newTypeDeclaration = new CodeTypeDeclaration
         {
@@ -91,7 +91,7 @@ public abstract class CodeDomVisitor
 
     public virtual CodeTypeMember VisitTypeMember(CodeTypeMember codeTypeMember)
     {
-        if (codeTypeMember == null) throw new ArgumentNullException(nameof(codeTypeMember));
+        if (codeTypeMember is null) throw new ArgumentNullException(nameof(codeTypeMember));
 
         switch (codeTypeMember)
         {
@@ -114,7 +114,7 @@ public abstract class CodeDomVisitor
 
     protected virtual CodeStatementCollection VisitMemberMethodStatements(CodeStatementCollection collection)
     {
-        if (collection == null) throw new ArgumentNullException(nameof(collection));
+        if (collection is null) throw new ArgumentNullException(nameof(collection));
 
         return this.VisitStatementCollection(collection);
     }
@@ -122,8 +122,8 @@ public abstract class CodeDomVisitor
     private void InitializeTypeMember<T>(T newInstance, T baseInstance)
             where T : CodeTypeMember
     {
-        if (newInstance == null) throw new ArgumentNullException(nameof(newInstance));
-        if (baseInstance == null) throw new ArgumentNullException(nameof(baseInstance));
+        if (newInstance is null) throw new ArgumentNullException(nameof(newInstance));
+        if (baseInstance is null) throw new ArgumentNullException(nameof(baseInstance));
 
         newInstance.Name = baseInstance.Name;
         newInstance.Attributes = baseInstance.Attributes;
@@ -140,8 +140,8 @@ public abstract class CodeDomVisitor
     private void InitializeMemberMethod<T>(T newInstance, T baseInstance)
             where T : CodeMemberMethod
     {
-        if (newInstance == null) throw new ArgumentNullException(nameof(newInstance));
-        if (baseInstance == null) throw new ArgumentNullException(nameof(baseInstance));
+        if (newInstance is null) throw new ArgumentNullException(nameof(newInstance));
+        if (baseInstance is null) throw new ArgumentNullException(nameof(baseInstance));
 
         this.InitializeTypeMember(newInstance, baseInstance);
 
@@ -160,7 +160,7 @@ public abstract class CodeDomVisitor
 
     public virtual CodeConstructor VisitConstructor(CodeConstructor codeConstructor)
     {
-        if (codeConstructor == null) throw new ArgumentNullException(nameof(codeConstructor));
+        if (codeConstructor is null) throw new ArgumentNullException(nameof(codeConstructor));
 
         var newConstructor = new CodeConstructor();
 
@@ -174,7 +174,7 @@ public abstract class CodeDomVisitor
 
     public virtual CodeMemberProperty VisitMemberProperty(CodeMemberProperty codeMemberProperty)
     {
-        if (codeMemberProperty == null) throw new ArgumentNullException(nameof(codeMemberProperty));
+        if (codeMemberProperty is null) throw new ArgumentNullException(nameof(codeMemberProperty));
 
         var newMemberProperty = new CodeMemberProperty
         {
@@ -201,7 +201,7 @@ public abstract class CodeDomVisitor
 
     public virtual CodeMemberMethod VisitMemberMethod(CodeMemberMethod codeMemberMethod)
     {
-        if (codeMemberMethod == null) throw new ArgumentNullException(nameof(codeMemberMethod));
+        if (codeMemberMethod is null) throw new ArgumentNullException(nameof(codeMemberMethod));
 
         if (codeMemberMethod is CodeConstructor method)
         {
@@ -215,7 +215,7 @@ public abstract class CodeDomVisitor
 
     public virtual CodeMemberField VisitMemberField(CodeMemberField codeMemberField)
     {
-        if (codeMemberField == null) throw new ArgumentNullException(nameof(codeMemberField));
+        if (codeMemberField is null) throw new ArgumentNullException(nameof(codeMemberField));
 
         return new CodeMemberField
         {
@@ -226,7 +226,7 @@ public abstract class CodeDomVisitor
 
     public virtual CodeTypeParameter VisitTypeParameter(CodeTypeParameter codeTypeParameter)
     {
-        if (codeTypeParameter == null) throw new ArgumentNullException(nameof(codeTypeParameter));
+        if (codeTypeParameter is null) throw new ArgumentNullException(nameof(codeTypeParameter));
 
         var newTypeParameter = new CodeTypeParameter(codeTypeParameter.Name) { HasConstructorConstraint = codeTypeParameter.HasConstructorConstraint };
 
@@ -250,28 +250,28 @@ public abstract class CodeDomVisitor
 
     public virtual CodeAttributeArgument VisitAttributeArgument(CodeAttributeArgument codeAttributeArgument)
     {
-        if (codeAttributeArgument == null) throw new ArgumentNullException(nameof(codeAttributeArgument));
+        if (codeAttributeArgument is null) throw new ArgumentNullException(nameof(codeAttributeArgument));
 
         return new CodeAttributeArgument(codeAttributeArgument.Name, codeAttributeArgument.Value.Maybe(v => this.VisitExpression(v)));
     }
 
     public virtual CodeParameterDeclarationExpressionCollection VisitParameterDeclarationExpressionCollection(CodeParameterDeclarationExpressionCollection collection)
     {
-        if (collection == null) throw new ArgumentNullException(nameof(collection));
+        if (collection is null) throw new ArgumentNullException(nameof(collection));
 
         return new CodeParameterDeclarationExpressionCollection(collection.ToArrayExceptNull(this.VisitParameterDeclarationExpression));
     }
 
     public virtual CodeStatementCollection VisitStatementCollection(CodeStatementCollection collection)
     {
-        if (collection == null) throw new ArgumentNullException(nameof(collection));
+        if (collection is null) throw new ArgumentNullException(nameof(collection));
 
         return new CodeStatementCollection(collection.ToArrayExceptNull(this.VisitStatement));
     }
 
     public virtual CodeParameterDeclarationExpression VisitParameterDeclarationExpression(CodeParameterDeclarationExpression codeParameterDeclarationExpression)
     {
-        if (codeParameterDeclarationExpression == null) throw new ArgumentNullException(nameof(codeParameterDeclarationExpression));
+        if (codeParameterDeclarationExpression is null) throw new ArgumentNullException(nameof(codeParameterDeclarationExpression));
 
         return new CodeParameterDeclarationExpression(this.VisitTypeReference(codeParameterDeclarationExpression.Type), codeParameterDeclarationExpression.Name)
         {
@@ -282,7 +282,7 @@ public abstract class CodeDomVisitor
 
     public virtual CodeExpression VisitExpression(CodeExpression codeExpression)
     {
-        if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
+        if (codeExpression is null) throw new ArgumentNullException(nameof(codeExpression));
 
         if (codeExpression is CodeCastExpression expression)
         {
@@ -332,14 +332,14 @@ public abstract class CodeDomVisitor
 
     public virtual CodeExpression VisitThisReferenceExpression(CodeThisReferenceExpression codeExpression)
     {
-        if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
+        if (codeExpression is null) throw new ArgumentNullException(nameof(codeExpression));
 
         return codeExpression;
     }
 
     public virtual CodeExpression VisitTypeReferenceExpression(CodeTypeReferenceExpression codeExpression)
     {
-        if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
+        if (codeExpression is null) throw new ArgumentNullException(nameof(codeExpression));
 
         return new CodeTypeReferenceExpression
         {
@@ -349,7 +349,7 @@ public abstract class CodeDomVisitor
 
     protected virtual CodeMethodReferenceExpression VisitMethodReferenceExpression(CodeMethodReferenceExpression codeMethodReferenceExpression)
     {
-        if (codeMethodReferenceExpression == null) throw new ArgumentNullException(nameof(codeMethodReferenceExpression));
+        if (codeMethodReferenceExpression is null) throw new ArgumentNullException(nameof(codeMethodReferenceExpression));
 
         return new CodeMethodReferenceExpression(
                                                  codeMethodReferenceExpression.TargetObject.Maybe(v => this.VisitExpression(v)),
@@ -359,14 +359,14 @@ public abstract class CodeDomVisitor
 
     protected virtual CodeExpressionCollection VisitExpressionCollection(CodeExpressionCollection collection)
     {
-        if (collection == null) throw new ArgumentNullException(nameof(collection));
+        if (collection is null) throw new ArgumentNullException(nameof(collection));
 
         return new CodeExpressionCollection(collection.ToArrayExceptNull(this.VisitExpression));
     }
 
     public virtual CodeExpression VisitMethodInvokeExpression(CodeMethodInvokeExpression codeMethodInvokeExpression)
     {
-        if (codeMethodInvokeExpression == null) throw new ArgumentNullException(nameof(codeMethodInvokeExpression));
+        if (codeMethodInvokeExpression is null) throw new ArgumentNullException(nameof(codeMethodInvokeExpression));
 
         return new CodeMethodInvokeExpression(
                                               this.VisitMethodReferenceExpression(codeMethodInvokeExpression.Method),
@@ -376,28 +376,28 @@ public abstract class CodeDomVisitor
 
     public virtual CodeExpression VisitCastExpression(CodeCastExpression codeCastExpression)
     {
-        if (codeCastExpression == null) throw new ArgumentNullException(nameof(codeCastExpression));
+        if (codeCastExpression is null) throw new ArgumentNullException(nameof(codeCastExpression));
 
         return new CodeCastExpression(this.VisitTypeReference(codeCastExpression.TargetType), this.VisitExpression(codeCastExpression.Expression));
     }
 
     public virtual CodeExpression VisitObjectCreateExpression(CodeObjectCreateExpression objectCreateExpression)
     {
-        if (objectCreateExpression == null) throw new ArgumentNullException(nameof(objectCreateExpression));
+        if (objectCreateExpression is null) throw new ArgumentNullException(nameof(objectCreateExpression));
 
         return new CodeObjectCreateExpression(this.VisitTypeReference(objectCreateExpression.CreateType), this.VisitExpressionCollection(objectCreateExpression.Parameters).ToArrayExceptNull(v => v));
     }
 
     public virtual CodeExpression VisitBinaryOperatorExpression(CodeBinaryOperatorExpression binaryOperatorExpression)
     {
-        if (binaryOperatorExpression == null) throw new ArgumentNullException(nameof(binaryOperatorExpression));
+        if (binaryOperatorExpression is null) throw new ArgumentNullException(nameof(binaryOperatorExpression));
 
         return new CodeBinaryOperatorExpression(this.VisitExpression(binaryOperatorExpression.Left), binaryOperatorExpression.Operator, this.VisitExpression(binaryOperatorExpression.Right));
     }
 
     public virtual CodeStatement VisitStatement(CodeStatement codeStatement)
     {
-        if (codeStatement == null) throw new ArgumentNullException(nameof(codeStatement));
+        if (codeStatement is null) throw new ArgumentNullException(nameof(codeStatement));
 
         if (codeStatement is CodeExpressionStatement statement)
         {
@@ -427,7 +427,7 @@ public abstract class CodeDomVisitor
 
     public virtual CodeStatement VisitConditionStatement(CodeConditionStatement codeConditionStatement)
     {
-        if (codeConditionStatement == null) throw new ArgumentNullException(nameof(codeConditionStatement));
+        if (codeConditionStatement is null) throw new ArgumentNullException(nameof(codeConditionStatement));
 
         return this.DeepOperation(() => new CodeConditionStatement(
                                                                    this.VisitExpression(codeConditionStatement.Condition),
@@ -437,28 +437,28 @@ public abstract class CodeDomVisitor
 
     public virtual CodeStatement VisitExpressionStatement(CodeExpressionStatement codeExpressionStatement)
     {
-        if (codeExpressionStatement == null) throw new ArgumentNullException(nameof(codeExpressionStatement));
+        if (codeExpressionStatement is null) throw new ArgumentNullException(nameof(codeExpressionStatement));
 
         return this.DeepOperation(() => new CodeExpressionStatement(this.VisitExpression(codeExpressionStatement.Expression)));
     }
 
     public virtual CodeStatement VisitMethodReturnStatement(CodeMethodReturnStatement codeExpressionStatement)
     {
-        if (codeExpressionStatement == null) throw new ArgumentNullException(nameof(codeExpressionStatement));
+        if (codeExpressionStatement is null) throw new ArgumentNullException(nameof(codeExpressionStatement));
 
         return new CodeMethodReturnStatement(this.VisitExpression(codeExpressionStatement.Expression));
     }
 
     public virtual CodeStatement VisitAssignStatement(CodeAssignStatement codeExpressionStatement)
     {
-        if (codeExpressionStatement == null) throw new ArgumentNullException(nameof(codeExpressionStatement));
+        if (codeExpressionStatement is null) throw new ArgumentNullException(nameof(codeExpressionStatement));
 
         return new CodeAssignStatement(this.VisitExpression(codeExpressionStatement.Left), this.VisitExpression(codeExpressionStatement.Right));
     }
 
     public virtual CodeStatement VisitVariableDeclarationStatement(CodeVariableDeclarationStatement codeVariableDeclarationStatement)
     {
-        if (codeVariableDeclarationStatement == null) throw new ArgumentNullException(nameof(codeVariableDeclarationStatement));
+        if (codeVariableDeclarationStatement is null) throw new ArgumentNullException(nameof(codeVariableDeclarationStatement));
 
         return new CodeVariableDeclarationStatement(this.VisitTypeReference(codeVariableDeclarationStatement.Type), codeVariableDeclarationStatement.Name, codeVariableDeclarationStatement.InitExpression.Maybe(v => this.VisitExpression(v)))
         {
@@ -468,7 +468,7 @@ public abstract class CodeDomVisitor
 
     public virtual CodeTypeReference VisitTypeReference(CodeTypeReference codeTypeReference)
     {
-        if (codeTypeReference == null) throw new ArgumentNullException(nameof(codeTypeReference));
+        if (codeTypeReference is null) throw new ArgumentNullException(nameof(codeTypeReference));
 
         var newTypeReference = new CodeTypeReference
         {
@@ -485,7 +485,7 @@ public abstract class CodeDomVisitor
 
     protected T DeepOperation<T>(Func<T> func, int deep = 1)
     {
-        if (func == null) throw new ArgumentNullException(nameof(func));
+        if (func is null) throw new ArgumentNullException(nameof(func));
         if (deep < 1) throw new ArgumentOutOfRangeException(nameof(deep));
 
         this.Deep += deep;
@@ -502,7 +502,7 @@ public abstract class CodeDomVisitor
 
     protected void DeepOperation(Action action, int deep = 1)
     {
-        if (action == null) throw new ArgumentNullException(nameof(action));
+        if (action is null) throw new ArgumentNullException(nameof(action));
         if (deep < 1) throw new ArgumentOutOfRangeException(nameof(deep));
 
         this.DeepOperation(() =>
@@ -514,7 +514,7 @@ public abstract class CodeDomVisitor
 
     protected T WithoutDeepOperation<T>(Func<T> func)
     {
-        if (func == null) throw new ArgumentNullException(nameof(func));
+        if (func is null) throw new ArgumentNullException(nameof(func));
 
         var prevDeep = this.Deep;
 

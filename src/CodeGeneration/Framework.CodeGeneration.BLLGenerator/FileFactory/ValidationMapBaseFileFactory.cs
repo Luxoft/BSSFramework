@@ -99,7 +99,7 @@ public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configu
 
                 yield return getPropertiesMethod;
 
-                if (getValidatorsMethod != null)
+                if (getValidatorsMethod is not null)
                 {
                     yield return getValidatorsMethod;
                 }
@@ -131,7 +131,7 @@ public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configu
 
     private CodeMemberMethod GetInternalClassMapMethod(CodeMemberField defaultValidatorMapField)
     {
-        if (defaultValidatorMapField == null) throw new ArgumentNullException(nameof(defaultValidatorMapField));
+        if (defaultValidatorMapField is null) throw new ArgumentNullException(nameof(defaultValidatorMapField));
 
         var sourceParameter = new CodeTypeParameter("TSource");
         var sourceTypeRef = sourceParameter.ToTypeReference();
@@ -212,8 +212,8 @@ public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configu
 
     private CodeMemberMethod GetClassPropertiesMethod(Type domainType, IValidatorGenerator validatorGenerator)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (validatorGenerator == null) throw new ArgumentNullException(nameof(validatorGenerator));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
+        if (validatorGenerator is null) throw new ArgumentNullException(nameof(validatorGenerator));
 
         var currentClassValidatorParam = typeof(IClassValidationMap<>).MakeGenericType(domainType).ToTypeReference().ToParameterDeclarationExpression("currentClass");
 
@@ -227,7 +227,7 @@ public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configu
 
                                            let collectionElementType = property.PropertyType.GetCollectionElementType()
 
-                                           let validatorType = collectionElementType != null
+                                           let validatorType = collectionElementType is not null
                                                                        ? typeof(CollectionPropertyValidationMap<,,>).MakeGenericType(domainType, property.PropertyType, collectionElementType)
                                                                        : typeof(SinglePropertyValidationMap<,>).MakeGenericType(domainType, property.PropertyType)
 
@@ -252,7 +252,7 @@ public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configu
 
     private CodeMemberMethod GetClassValidatorsMethod(Type domainType, IReadOnlyDictionary<CodeExpression, IValidationData?> classValidators)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
 
         var classValidatorType = typeof(IClassValidator<>).ToTypeReference(domainType);
 
@@ -292,7 +292,7 @@ public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configu
 
     private CodeMemberMethod GetPropertyValidatorsMethod(Type domainType, KeyValuePair<PropertyInfo, IReadOnlyDictionary<CodeExpression, IValidationData?>> propertyValidatorPair)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
 
         var propValidatorType = typeof(IPropertyValidator<,>).ToTypeReference(domainType, propertyValidatorPair.Key.PropertyType);
 
@@ -324,20 +324,20 @@ public class ValidationMapBaseFileFactory<TConfiguration>(TConfiguration configu
 
     private static CodeExpression TryApplyValidatorDataExpression(CodeExpression codeExpression, IValidationData validationData, Type extensionsClass)
     {
-        if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
-        if (extensionsClass == null) throw new ArgumentNullException(nameof(extensionsClass));
+        if (codeExpression is null) throw new ArgumentNullException(nameof(codeExpression));
+        if (extensionsClass is null) throw new ArgumentNullException(nameof(extensionsClass));
 
         return GetApplyValidatorDataFunc(codeExpression, validationData, extensionsClass).Aggregate(codeExpression, (state, f) => f(state));
     }
 
     private static IEnumerable<Func<CodeExpression, CodeExpression>> GetApplyValidatorDataFunc(CodeExpression codeExpression, IValidationData? validationData, Type extensionsClass)
     {
-        if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
-        if (extensionsClass == null) throw new ArgumentNullException(nameof(extensionsClass));
+        if (codeExpression is null) throw new ArgumentNullException(nameof(codeExpression));
+        if (extensionsClass is null) throw new ArgumentNullException(nameof(extensionsClass));
 
-        if (validationData != null)
+        if (validationData is not null)
         {
-            if (validationData.CustomError != null)
+            if (validationData.CustomError is not null)
             {
                 yield return state => extensionsClass.ToTypeReferenceExpression().ToMethodInvokeExpression("ApplyCustomError", state, validationData.CustomError.ToDynamicPrimitiveExpression());
             }

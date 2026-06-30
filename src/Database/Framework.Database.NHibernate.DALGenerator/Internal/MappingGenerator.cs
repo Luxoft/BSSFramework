@@ -120,7 +120,7 @@ public class MappingGenerator(IGrouping<Assembly, DomainTypeMetadata> assemblyGr
     }
 
     protected virtual void GenerateMappingForExternalTableColumns(DomainTypeMetadata domainTypeMetadata, XElement rootElement) =>
-        domainTypeMetadata.Fields.GroupBy(field => field.ExternalTableName).Where(g => g.Key != null).Foreach(g =>
+        domainTypeMetadata.Fields.GroupBy(field => field.ExternalTableName).Where(g => g.Key is not null).Foreach(g =>
         {
             var joinedSubclassElement = rootElement
                                         .CreateElementWithRootNamespaceHandled("join")
@@ -447,7 +447,7 @@ public class MappingGenerator(IGrouping<Assembly, DomainTypeMetadata> assemblyGr
 
         var mappingAttr = reference.Attributes.OfType<MappingAttribute>().SingleOrDefault();
 
-        var primitiveNamePrefix = mappingAttr == null ? reference.GetAllElements(z => z.Parent).Reverse().Concat(z => z.Name)
+        var primitiveNamePrefix = mappingAttr is null ? reference.GetAllElements(z => z.Parent).Reverse().Concat(z => z.Name)
                                           : mappingAttr.ColumnName;
 
         Func<SqlFieldMappingInfo, string> getColumnNameFunc = sqlFieldMappingInfo =>
@@ -542,7 +542,7 @@ public class MappingGenerator(IGrouping<Assembly, DomainTypeMetadata> assemblyGr
                                                 .Where(z => !z.DomainType.IsAbstract)
                                                 .SingleOrDefault(z => z.DomainType == elementType);
 
-            if (baseElementDomainTypeMetadata == null)
+            if (baseElementDomainTypeMetadata is null)
             {
                 continue;
             }

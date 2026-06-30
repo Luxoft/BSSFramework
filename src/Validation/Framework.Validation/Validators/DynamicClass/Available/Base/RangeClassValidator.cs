@@ -16,8 +16,8 @@ public abstract class RangeClassValidator<TProperty, TRange> : IManyPropertyDyna
 
     public IPropertyValidator? GetValidator(PropertyInfo property, IServiceProvider serviceProvider)
     {
-        if (property == null) throw new ArgumentNullException(nameof(property));
-        if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
+        if (property is null) throw new ArgumentNullException(nameof(property));
+        if (serviceProvider is null) throw new ArgumentNullException(nameof(serviceProvider));
 
         var availableValues = serviceProvider.GetRequiredService<IAvailableValues>();
 
@@ -58,6 +58,6 @@ public class RangePropertyValidator<TSource, TProperty, TRange>(Range<TRange> av
 }
 
 public class NullableRangePropertyValidator<TSource, TProperty, TRange>(Range<TRange> availableRange, Func<Range<TRange>, TProperty, bool> isValidValueFunc)
-    : RangePropertyValidator<TSource, TProperty?, TRange>(availableRange, (range, value) => value == null || isValidValueFunc(range, value.Value))
+    : RangePropertyValidator<TSource, TProperty?, TRange>(availableRange, (range, value) => value is null || isValidValueFunc(range, value.Value))
     where TProperty : struct;
 

@@ -10,8 +10,8 @@ public class DTORoleGeneratePolicy(DTORole filter, ClientDTORole clientFilter = 
 {
     public bool Used(Type domainType, RoleFileType fileType)
     {
-        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (domainType is null) throw new ArgumentNullException(nameof(domainType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         if (fileType is MainDTOFileType)
         {

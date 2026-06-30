@@ -74,7 +74,7 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
             this.TryCreateMappingAttribute(),
             this.CreateMappingPropertyAttribute(),
             this.TryCreateViewAccessAttribute()
-        }.Where(attr => attr != null).Select(v => v!);
+        }.Where(attr => attr is not null).Select(v => v!);
 
     protected virtual ExpandPathAttribute? TryCreateExpandPathAttributes()
     {
@@ -152,9 +152,9 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
 
             var propMapping = this.Environment.MetadataProxyProvider.Wrap(singlePathProp).GetCustomAttribute<MappingAttribute>();
 
-            if (propMapping != null)
+            if (propMapping is not null)
             {
-                if (propMapping.ExternalTableName == null)
+                if (propMapping.ExternalTableName is null)
                 {
                     propMapping.ExternalTableName = externalTableName;
                 }
@@ -171,7 +171,7 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
             }
         }
 
-        if (externalTableName != null)
+        if (externalTableName is not null)
         {
             return new MappingAttribute { ExternalTableName = externalTableName };
         }
@@ -184,7 +184,7 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
     {
         var property = this.ProjectionValue.Path.FirstOrDefault();
 
-        if (property != null)
+        if (property is not null)
         {
             var topProperty = property.GetTopProperty();
 

@@ -9,7 +9,7 @@ public static class FileTypeExtensions
     public static ICodeFileFactoryHeader<TFileType> ToHeader<TFileType>(this TFileType fileType)
             where TFileType : BaseFileType
     {
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         if (fileType == BaseFileType.ProjectionDTO)
         {
@@ -24,7 +24,7 @@ public static class FileTypeExtensions
     public static ICodeFileFactoryHeader<TFileType> ToHeader<TFileType>(this TFileType fileType, string relativePath, Func<Type, string> getTypeNameFunc)
             where TFileType : BaseFileType
     {
-        if (fileType == null) throw new ArgumentNullException(nameof(fileType));
+        if (fileType is null) throw new ArgumentNullException(nameof(fileType));
 
         return new CodeFileFactoryHeader<TFileType>(fileType, relativePath, t => getTypeNameFunc(t!));
     }

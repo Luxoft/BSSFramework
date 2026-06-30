@@ -16,20 +16,20 @@ public static class TypeExtensions
     /// <returns></returns>
     public static bool HasExpandValidation(this Type type)
     {
-        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (type is null) throw new ArgumentNullException(nameof(type));
 
         return type.HasAttribute<ExpandValidationAttribute>();
     }
 
     public static IEnumerable<PropertyInfo> GetValidationProperties(this Type type)
     {
-        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (type is null) throw new ArgumentNullException(nameof(type));
 
         return from property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
 
                let getMethod = property.GetGetMethod()
 
-               where getMethod != null && !property.GetIndexParameters().Any()
+               where getMethod is not null && !property.GetIndexParameters().Any()
                                        && !property.HasAttribute<PropertyValidationModeAttribute>(attr => attr.HasValue(false))
 
                orderby property.PropertyType.IsCollection()
@@ -39,21 +39,21 @@ public static class TypeExtensions
 
     internal static bool IsSystemOrCoreType(this Type type)
     {
-        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (type is null) throw new ArgumentNullException(nameof(type));
 
         return type.IsSystemType() || type.IsCoreType();
     }
 
     internal static bool IsSystemType(this Type type)
     {
-        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (type is null) throw new ArgumentNullException(nameof(type));
 
         return type.Assembly == typeof(object).Assembly;
     }
 
     internal static bool IsCoreType(this Type type)
     {
-        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (type is null) throw new ArgumentNullException(nameof(type));
 
         return type.Assembly == typeof(Ignore).Assembly;
     }

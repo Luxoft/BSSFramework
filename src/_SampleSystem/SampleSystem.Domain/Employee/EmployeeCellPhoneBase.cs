@@ -21,12 +21,7 @@ public class EmployeeCellPhoneBase : AuditPersistentDomainObjectBase, IDetail<Em
 
     protected EmployeeCellPhoneBase(Employee employee)
     {
-        if (employee == null)
-        {
-            throw new ArgumentNullException(nameof(employee));
-        }
-
-        this.employee = employee;
+        this.employee = employee ?? throw new ArgumentNullException(nameof(employee));
     }
 
     public virtual Employee Employee => this.employee;

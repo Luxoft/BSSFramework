@@ -32,32 +32,32 @@ public abstract class CodeDomProviderRenderer(CodeDomProvider provider, CodeGene
 
     protected string Render(CodeExpression codeExpression, CodeDomVisitor normalizeVisitor)
     {
-        if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
-        if (normalizeVisitor == null) throw new ArgumentNullException(nameof(normalizeVisitor));
+        if (codeExpression is null) throw new ArgumentNullException(nameof(codeExpression));
+        if (normalizeVisitor is null) throw new ArgumentNullException(nameof(normalizeVisitor));
 
         return this.Render(writer => this.provider.GenerateCodeFromExpression(normalizeVisitor.VisitExpression(codeExpression), writer, this.options));
     }
 
     protected string Render(CodeNamespace codeNamespace, CodeDomVisitor normalizeVisitor)
     {
-        if (codeNamespace == null) throw new ArgumentNullException(nameof(codeNamespace));
-        if (normalizeVisitor == null) throw new ArgumentNullException(nameof(normalizeVisitor));
+        if (codeNamespace is null) throw new ArgumentNullException(nameof(codeNamespace));
+        if (normalizeVisitor is null) throw new ArgumentNullException(nameof(normalizeVisitor));
 
         return this.Render(writer => this.provider.GenerateCodeFromNamespace(normalizeVisitor.VisitNamespace(codeNamespace), writer, this.options));
     }
 
     protected string Render(CodeCompileUnit compileUnit, CodeDomVisitor normalizeVisitor)
     {
-        if (compileUnit == null) throw new ArgumentNullException(nameof(compileUnit));
-        if (normalizeVisitor == null) throw new ArgumentNullException(nameof(normalizeVisitor));
+        if (compileUnit is null) throw new ArgumentNullException(nameof(compileUnit));
+        if (normalizeVisitor is null) throw new ArgumentNullException(nameof(normalizeVisitor));
 
         return this.Render(writer => this.provider.GenerateCodeFromCompileUnit(normalizeVisitor.VisitCompileUnit(compileUnit), writer, this.options));
     }
 
     protected string Render(CodeStatement statement, CodeDomVisitor normalizeVisitor)
     {
-        if (statement == null) throw new ArgumentNullException(nameof(statement));
-        if (normalizeVisitor == null) throw new ArgumentNullException(nameof(normalizeVisitor));
+        if (statement is null) throw new ArgumentNullException(nameof(statement));
+        if (normalizeVisitor is null) throw new ArgumentNullException(nameof(normalizeVisitor));
 
         return this.Render(writer => this.provider.GenerateCodeFromStatement(normalizeVisitor.VisitStatement(statement), writer, this.options));
     }
@@ -67,7 +67,7 @@ public abstract class CodeDomProviderRenderer(CodeDomProvider provider, CodeGene
 
     private string Render(Action<TextWriter> writeAction)
     {
-        if (writeAction == null) throw new ArgumentNullException(nameof(writeAction));
+        if (writeAction is null) throw new ArgumentNullException(nameof(writeAction));
 
         var sb = new StringBuilder();
 

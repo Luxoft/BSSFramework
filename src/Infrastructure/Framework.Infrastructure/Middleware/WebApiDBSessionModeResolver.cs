@@ -19,7 +19,7 @@ public class WebApiDBSessionModeResolver : IWebApiDBSessionModeResolver
             {
                 var attrs = new[] { methodInfo.GetCustomAttribute<DBSessionModeAttribute>(), methodInfo.ReflectedType!.GetCustomAttribute<DBSessionModeAttribute>() };
 
-                return attrs.FirstOrDefault(attr => attr != null)
+                return attrs.FirstOrDefault(attr => attr is not null)
                             .ToMaybe()
                             .Select(attr => attr.SessionMode)
                             .ToNullable();

@@ -81,12 +81,12 @@ public class DataScriptGeneratorBuilder(DBGenerateScriptMode scriptMode)
 
     private void ValidateConfiguration()
     {
-        if (this.sqlDatabaseFactory == null)
+        if (this.sqlDatabaseFactory is null)
         {
             throw new ArgumentException("SqlFactory or serverName must be initialized");
         }
 
-        if (this.assemblyMetadata == null)
+        if (this.assemblyMetadata is null)
         {
             throw new ArgumentException("AssemblyMetadata must be initialized");
         }

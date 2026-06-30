@@ -3,7 +3,7 @@
 internal class PropertyProjectionNotInitializedException(Type elementType, string? projectionName = null, string? propertyName = null) : Exception
 {
     public override string Message =>
-        this.ProjectionName == null || this.PropertyName == null
+        this.ProjectionName is null || this.PropertyName is null
             ? $"Pure persistent type \"{this.ElementType}\" for projection property not allowed. Parameter `getPropProjection` must be initialized."
             : $"Pure persistent type \"{this.ElementType}\" for projection property \"{this.ProjectionName}.{this.PropertyName}\" not allowed. Parameter `getPropProjection` must be initialized.";
 

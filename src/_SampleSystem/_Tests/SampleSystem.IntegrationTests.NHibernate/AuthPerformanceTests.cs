@@ -52,11 +52,11 @@ public class AuthPerformanceTests(IServiceProvider rootServiceProvider) : TestBa
 
                                                 var testPrincipal = new Framework.Authorization.Domain.Principal { Name = TestUser };
 
-                                                var adminRole = ctx.Authorization.Logics.BusinessRole.GetByName(SampleSystemSecurityRole.TestPerformance.Name);
+                                                var adminRole = ctx.Authorization.Logics.BusinessRole.GetByName(SampleSystemSecurityRole.TestPerformance.Name, true)!;
 
                                                 foreach (var genObjectSubEnumerable in genObjects.Split(SplitBy))
                                                 {
-                                                    var genPermission = new Framework.Authorization.Domain.Permission(testPrincipal) { Role = adminRole! };
+                                                    var genPermission = new Framework.Authorization.Domain.Permission(testPrincipal) { Role = adminRole };
 
                                                     foreach (var genObject in genObjectSubEnumerable)
                                                     {

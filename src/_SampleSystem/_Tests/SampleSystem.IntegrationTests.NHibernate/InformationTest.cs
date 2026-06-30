@@ -27,9 +27,9 @@ public class InformationTest(IServiceProvider rootServiceProvider) : TestBase(ro
 
         this.Evaluate(DBSessionMode.Write, context =>
                                            {
-                                               var obj = context.Logics.Information.GetById(id, true);
+                                               var obj = context.Logics.Information.GetById(id, true)!;
 
-                                               context.Logics.Information.Remove(obj!);
+                                               context.Logics.Information.Remove(obj);
                                            });
 
         // Assert

@@ -13,7 +13,7 @@ namespace Framework.BLL;
 
 public static class DefaultDomainBLLBaseExtensions
 {
-    public static TDomainObject? GetByIdOrCreate<TPersistentDomainObjectBase, TDomainObject, TIdent>(this IDefaultDomainBLLQueryBase<TPersistentDomainObjectBase, TDomainObject, TIdent> bll, TIdent id)
+    public static TDomainObject GetByIdOrCreate<TPersistentDomainObjectBase, TDomainObject, TIdent>(this IDefaultDomainBLLQueryBase<TPersistentDomainObjectBase, TDomainObject, TIdent> bll, TIdent id)
             where TDomainObject : class, TPersistentDomainObjectBase, new()
             where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     {
@@ -22,7 +22,7 @@ public static class DefaultDomainBLLBaseExtensions
         return bll.GetByIdOrCreate(id, () => new TDomainObject());
     }
 
-    public static TDomainObject? GetByIdOrCreate<TPersistentDomainObjectBase, TDomainObject, TIdent>(this IDefaultDomainBLLQueryBase<TPersistentDomainObjectBase, TDomainObject, TIdent> bll, TIdent id, Func<TDomainObject> createFunc)
+    public static TDomainObject GetByIdOrCreate<TPersistentDomainObjectBase, TDomainObject, TIdent>(this IDefaultDomainBLLQueryBase<TPersistentDomainObjectBase, TDomainObject, TIdent> bll, TIdent id, Func<TDomainObject> createFunc)
             where TDomainObject : class, TPersistentDomainObjectBase
             where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     {

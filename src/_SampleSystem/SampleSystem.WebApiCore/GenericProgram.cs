@@ -1,6 +1,5 @@
 ﻿using Anch.DependencyInjection;
 using Anch.SecuritySystem.Configurator;
-using Anch.SecuritySystem.Configurator.Interfaces;
 
 using Bss.Platform.Api.Documentation;
 using Bss.Platform.Api.Middlewares;
@@ -54,7 +53,6 @@ public static class GenericProgram
 
         builder.Services
                .AddGeneralDependencyInjection(builder.Configuration, builder.Environment, s => s.AddExtensions(extension))
-               .AddScoped<IConfiguratorIntegrationEvents, SampleConfiguratorIntegrationEvents>()
                .AddPlatformApiDocumentation(
                    builder.Environment,
                    "SampleSystem API",

@@ -2,7 +2,7 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
-    <Anch>3.7.1</Anch>
+    <Anch>3.7.3</Anch>
     <BssPlatform>[1.6.2]</BssPlatform>
     <DotNet>10.0.9</DotNet>
   </PropertyGroup>
@@ -67,7 +67,7 @@
     <PackageVersion Include="Dapper" Version="2.1.72" />
     <PackageVersion Include="Dapper.Contrib" Version="2.0.78" />
     <PackageVersion Include="FluentMigrator.Extensions.SqlServer" Version="8.0.1" />
-    <PackageVersion Include="MediatR" Version="14.1.0" />
+    <PackageVersion Include="MediatR" Version="14.2.0" />
     <PackageVersion Include="FluentValidation" Version="12.1.1" />
     <PackageVersion Include="FluentMigrator" Version="8.0.1" />
     <PackageVersion Include="FluentMigrator.Runner" Version="8.0.1" />
@@ -75,11 +75,11 @@
     <PackageVersion Include="Hangfire.AspNetCore" Version="1.8.23" />
     <PackageVersion Include="Hangfire.SqlServer" Version="1.8.23" />
     <PackageVersion Include="MartinCostello.SqlLocalDb" Version="[5.0.1]" />
-    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="5.3.0" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="5.6.0" />
     <PackageVersion Include="Microsoft.Data.SqlClient" Version="[6.1.4]" />
     <PackageVersion Include="Microsoft.SqlServer.SqlManagementObjects" Version="181.25.0" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
-    <PackageVersion Include="NHibernate" Version="5.6.1" />
+    <PackageVersion Include="NHibernate" Version="5.7.0" />
     <PackageVersion Include="NHibernate.Envers" Version="5.6.0" />
     <PackageVersion Include="Swashbuckle.AspNetCore.SwaggerGen" Version="[7.2.0]" />
   </ItemGroup>
@@ -87,7 +87,7 @@
   <ItemGroup>
     <PackageVersion Include="xunit.v3" Version="3.2.2" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.6.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.7.0" />
     <PackageVersion Include="NSubstitute" Version="5.3.0" />
   </ItemGroup>
 </Project>

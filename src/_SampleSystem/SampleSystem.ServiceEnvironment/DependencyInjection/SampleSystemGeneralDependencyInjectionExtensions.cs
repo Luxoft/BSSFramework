@@ -40,7 +40,8 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                                                .SetSecurityAdministratorRule(SampleSystemSecurityRole.PermissionAdministrator)
 
                                                .AddAuthorizationSystem()
-                                               .AddConfigurationSecurity())
+                                               .AddConfigurationSecurity()
+                                               .AddPrincipalManagementListener<SamplePrincipalManagementListener>())
 
                     .AddNamedLocks()
 

@@ -13,11 +13,7 @@
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Proxies" Version="$(DotNet)" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="$(DotNet)" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(DotNet)" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="$(DotNet)" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="$(DotNet)" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="$(DotNet)" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="$(DotNet)" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="$(DotNet)" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="$(DotNet)" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(DotNet)" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="$(DotNet)" />
@@ -64,8 +60,6 @@
   <!-- Other -->
   <ItemGroup>
     <PackageVersion Include="CommandLineParser" Version="2.9.1" />
-    <PackageVersion Include="Dapper" Version="2.1.72" />
-    <PackageVersion Include="Dapper.Contrib" Version="2.0.78" />
     <PackageVersion Include="FluentMigrator.Extensions.SqlServer" Version="8.0.1" />
     <PackageVersion Include="MediatR" Version="14.2.0" />
     <PackageVersion Include="FluentValidation" Version="12.1.1" />

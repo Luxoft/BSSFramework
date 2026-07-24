@@ -17,7 +17,6 @@
 
     <ProjectReference Include="..\..\Application\Framework.Application.Domain\Framework.Application.Domain.csproj" />
     <ProjectReference Include="..\..\Domain\Framework.Relations\Framework.Relations.csproj" />
-    <ProjectReference Include="..\..\Domain\Framework.Restriction\Framework.Restriction.csproj" />
   </ItemGroup>
 
 </Project>

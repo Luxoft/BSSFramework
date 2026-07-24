@@ -10,13 +10,7 @@
 
   <ItemGroup>
 
-    <ProjectReference Include="..\..\BLL\Framework.BLL\Framework.BLL.csproj" />
-
     <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Hangfire\Framework.Infrastructure.Hangfire.csproj" />
-
-    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Legacy.Default\Framework.Infrastructure.Legacy.Default.csproj" />
-
-    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Legacy\Framework.Infrastructure.Legacy.csproj" />
 
     <ProjectReference Include="..\..\Notification\Framework.Notification\Framework.Notification.csproj" />
 

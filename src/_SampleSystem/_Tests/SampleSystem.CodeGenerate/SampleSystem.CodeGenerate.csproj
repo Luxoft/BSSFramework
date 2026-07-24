@@ -14,8 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\CodeGeneration\Framework.CodeGeneration.ProjectionGenerator\Framework.CodeGeneration.ProjectionGenerator.csproj" />
-    <ProjectReference Include="..\..\..\CodeGeneration\Framework.CodeGeneration.WebApiGenerator\Framework.CodeGeneration.WebApiGenerator.csproj" />
-    <ProjectReference Include="..\..\..\CodeGeneration\Framework.CodeGeneration.BLLGenerator\Framework.CodeGeneration.BLLGenerator.csproj" />
     <ProjectReference Include="..\..\..\Database\Framework.Database.NHibernate.DALGenerator\Framework.Database.NHibernate.DALGenerator.csproj" />
 
     <ProjectReference Include="..\..\..\_Authorization\Framework.Authorization.TestGenerate\Framework.Authorization.TestGenerate.csproj" />

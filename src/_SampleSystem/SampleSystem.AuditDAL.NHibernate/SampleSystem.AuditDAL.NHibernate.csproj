@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <IsPackable>false</IsPackable>
@@ -7,10 +7,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Database\Framework.Database.NHibernate.Runtime\Framework.Database.NHibernate.Runtime.csproj" />
     <ProjectReference Include="..\SampleSystem.AuditDomain\SampleSystem.AuditDomain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="FluentNHibernate" />
   </ItemGroup>
 
   <ItemGroup>

@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Framework.CodeGeneration.DTOGenerator.Audit\Framework.CodeGeneration.DTOGenerator.Audit.csproj" />
     <ProjectReference Include="..\Framework.CodeGeneration.ServiceModelGenerator\Framework.CodeGeneration.ServiceModelGenerator.csproj" />
   </ItemGroup>
 

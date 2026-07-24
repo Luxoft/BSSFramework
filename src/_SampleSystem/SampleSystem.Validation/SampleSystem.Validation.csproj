@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Validation\Framework.Validation\Framework.Validation.csproj" />
     <ProjectReference Include="..\SampleSystem.Domain\SampleSystem.Domain.csproj" />
   </ItemGroup>
 

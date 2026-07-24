@@ -11,7 +11,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Domain\Framework.Restriction\Framework.Restriction.csproj" />
-    <ProjectReference Include="..\..\Framework.Core\Framework.Core.csproj" />
   </ItemGroup>
 
 </Project>

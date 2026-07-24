@@ -11,7 +11,6 @@
   <ItemGroup>
     <PackageReference Include="Hangfire.AspNetCore" />
     <PackageReference Include="Hangfire.SqlServer" />
-    <PackageReference Include="Anch.Core" />
     <PackageReference Include="Microsoft.Data.SqlClient" />
     <PackageReference Include="Newtonsoft.Json" />
   </ItemGroup>

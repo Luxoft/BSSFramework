@@ -10,10 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Anch.SecuritySystem.Notification.Abstractions" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Database\Framework.Database.Abstractions\Framework.Database.Abstractions.csproj" />
     <ProjectReference Include="..\..\Database\Framework.Tracking.Abstractions\Framework.Tracking.Abstractions.csproj" />
     <ProjectReference Include="..\..\Subscriptions\Framework.Subscriptions.Domain\Framework.Subscriptions.Domain.csproj" />

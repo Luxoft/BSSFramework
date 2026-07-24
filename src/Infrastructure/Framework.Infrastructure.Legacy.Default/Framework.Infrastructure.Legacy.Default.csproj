@@ -14,13 +14,11 @@
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.BLL\Framework.Authorization.BLL.csproj" />
 
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Events\Framework.Authorization.Events.csproj" />
-    <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Generated.DTO\Framework.Authorization.Generated.DTO.csproj" />
     <ProjectReference Include="..\..\_Configuration\Framework.Configuration.BLL\Framework.Configuration.BLL.csproj" />
     <ProjectReference Include="..\..\_Configuration\Framework.Configuration.Generated.DTO\Framework.Configuration.Generated.DTO.csproj" />
 
     <ProjectReference Include="..\Framework.Infrastructure.Legacy\Framework.Infrastructure.Legacy.csproj" />
 
-    <ProjectReference Include="..\Framework.Infrastructure\Framework.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

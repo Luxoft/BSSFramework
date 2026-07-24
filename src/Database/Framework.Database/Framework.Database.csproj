@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <PackageReference Include="Anch.DependencyInjection" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
   </ItemGroup>
 
   <ItemGroup>

@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Anch.IdentitySource.Abstractions" />
     <PackageReference Include="Anch.GenericQueryable.EntityFramework" />
 
     <PackageReference Include="Microsoft.EntityFrameworkCore" />
@@ -19,7 +18,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.DependencyInjection\Framework.DependencyInjection.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Abstractions\Framework.Infrastructure.Abstractions.csproj" />
-    <ProjectReference Include="..\Framework.Database.Domain\Framework.Database.Domain.csproj" />
     <ProjectReference Include="..\Framework.Database.Runtime\Framework.Database.Runtime.csproj" />
   </ItemGroup>
 

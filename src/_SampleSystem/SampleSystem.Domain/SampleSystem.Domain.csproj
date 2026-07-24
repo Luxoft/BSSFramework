@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\BLL\Framework.BLL.Domain\Framework.BLL.Domain.csproj" />
     <ProjectReference Include="..\..\Database\Framework.Tracking.Validation\Framework.Tracking.Validation.csproj" />
     <ProjectReference Include="..\..\Database\Framework.Database.Mapping\Framework.Database.Mapping.csproj" />
     <ProjectReference Include="..\..\Notification\Framework.Notification.Domain\Framework.Notification.Domain.csproj" />

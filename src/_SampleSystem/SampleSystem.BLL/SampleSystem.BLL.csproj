@@ -5,8 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Anch.OData.Abstractions" />
-
     <PackageReference Include="Luxoft.Bss.Platform.Events.Abstractions" />
   </ItemGroup>
 

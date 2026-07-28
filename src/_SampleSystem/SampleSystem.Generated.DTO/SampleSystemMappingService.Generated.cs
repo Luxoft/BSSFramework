@@ -6761,6 +6761,7 @@ namespace SampleSystem.Generated.DTO
             {
                 mappingObject.PositionName = Anch.Core.Maybe<string>.Nothing;
             }
+            mappingObject.PositionNameOrRoleName = domainObject.PositionNameOrRoleName;
             mappingObject.PpmNameNativeMiddleName = domainObject.PpmNameNativeMiddleName;
             mappingObject.RoleId = domainObject.RoleId;
             mappingObject.RoleName = domainObject.RoleName;

@@ -142,7 +142,9 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     {
         if (queryableInjector is null) throw new ArgumentNullException(nameof(queryableInjector));
 
-        return this.GetSecureQueryable(fetchRule).Pipe(queryableInjector.Inject);
+        var secureQueryable = this.GetSecureQueryable(fetchRule);
+
+        return queryableInjector.Inject(secureQueryable);
     }
 
     /// <summary>

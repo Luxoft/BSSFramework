@@ -47,6 +47,8 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
 
                     .SetDomainObjectEventMetadata<SampleSystemDomainObjectEventMetadata>()
 
+                    .AddDatabase(ds => ds.AddVisitorContainer<CalculatedProjectPropertyVisitorContainer>())
+
                     .AddListeners()
 
                     // Legacy
@@ -71,4 +73,3 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
 
             .AddGeneralApplicationServices(configuration, hostEnvironment);
 }
-

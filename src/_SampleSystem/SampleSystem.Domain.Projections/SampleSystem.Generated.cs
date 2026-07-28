@@ -799,6 +799,22 @@ namespace SampleSystem.Domain.Projections
         }
     }
     
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Employee.Employee), Framework.Projection.ProjectionRole.Default)]
+    public abstract partial class CustomTestEmployeeBase : SampleSystem.Domain.PersistentDomainObjectBase
+    {
+        
+        protected CustomTestEmployeeBase()
+        {
+        }
+        
+        [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
+        [Framework.BLL.Domain.Fetching.IgnoreFetchAttribute()]
+        public abstract string PositionNameOrRoleName
+        {
+            get;
+        }
+    }
+    
     [Framework.BLL.Domain.Attributes.DependencySecurityAttribute(typeof(SampleSystem.Domain.Employee.Employee))]
     [Framework.BLL.Domain.ServiceRole.BLLProjectionViewRoleAttribute()]
     [Framework.Database.Mapping.TableAttribute(Name="Employee")]
@@ -806,7 +822,7 @@ namespace SampleSystem.Domain.Projections
     [Framework.Projection.ProjectionFilterAttribute(typeof(SampleSystem.Domain.Models.Filters.Projection.TestEmployeeFilter), (Framework.Projection.ProjectionFilterTargets.Collection | Framework.Projection.ProjectionFilterTargets.OData))]
     [Framework.Projection.ProjectionFilterAttribute(typeof(SampleSystem.Domain.Models.Filters.EmployeeFilterModel), Framework.Projection.ProjectionFilterTargets.Collection)]
     [Framework.Projection.ProjectionFilterAttribute(typeof(SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel), Framework.Projection.ProjectionFilterTargets.Single)]
-    public partial class TestEmployee : SampleSystem.Domain.PersistentDomainObjectBase
+    public partial class TestEmployee : SampleSystem.Domain.Projections.CustomTestEmployeeBase
     {
         
         private SampleSystem.Domain.Projections.BusinessUnitIdentity coreBusinessUnit;

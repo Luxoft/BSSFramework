@@ -36,8 +36,10 @@ public class SampleSystemProjectionSource : ProjectionSource
                             .Property(employee => employee.CoreBusinessUnit!, () => this.BusinessUnitIdentity!)
 
                             .Property(employee => employee.CoreBusinessUnit!.Name)
-                            .Property(employee => employee.Position.Name)
                             .Property(employee => employee.CoreBusinessUnit!.Projects, () => this.VisualProject!)
+                            .Property(employee => employee.Position.Name)
+
+                            .CustomProperty<string>(e => "PositionNameOrRoleName")
 
                             .Filter<TestEmployeeFilter>(ProjectionFilterTargets.OData | ProjectionFilterTargets.Collection)
                             .Filter<EmployeeFilterModel>(ProjectionFilterTargets.Collection)

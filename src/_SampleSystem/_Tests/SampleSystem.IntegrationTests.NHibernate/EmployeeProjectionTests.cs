@@ -2,6 +2,7 @@
 
 using Framework.Core;
 
+using SampleSystem.Domain.Projections;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests._Environment.TestData;
 using SampleSystem.Security;
@@ -134,6 +135,36 @@ public class EmployeeProjectionTests(IServiceProvider rootServiceProvider) : Tes
 
         // Assert
         Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void EmployeeProjectionSortingByCalcPropsTest()
+    {
+        // Arrange
+
+        var role1 = this.DataManager.SaveEmployeeRole(name: "CalcEmployee_Role1");
+        var role2 = this.DataManager.SaveEmployeeRole(name: "CalcEmployee_Role2");
+        var role3 = this.DataManager.SaveEmployeeRole(name: "CalcEmployee_Role3");
+
+        var pos1 = this.DataManager.SaveEmployeePosition(name: "CalcEmployee_Pos1");
+        var pos2 = this.DataManager.SaveEmployeePosition(name: "CalcEmployee_Pos2");
+        var pos3 = this.DataManager.SaveEmployeePosition(name: "CalcEmployee_Pos3");
+
+        this.DataManager.SaveEmployee(login: "CalcEmployee_Emp1", role: role1, position: pos1);
+        this.DataManager.SaveEmployee(login: "CalcEmployee_Emp2", role: role2, position: pos2);
+        this.DataManager.SaveEmployee(login: "CalcEmployee_Emp3", role: role3, position: pos3);
+
+        var controller = this.GetControllerEvaluator<EmployeeQueryController>();
+
+        var expected = new[] { "CalcEmployee_Pos3", "CalcEmployee_Pos2", "CalcEmployee_Pos1" };
+
+        // Act
+        var result = controller.Evaluate(c => c.GetTestEmployeesByODataQueryString($"$orderby={nameof(TestEmployee.PositionNameOrRoleName)} desc"))
+                               .Items.Where(e => e.Login.ToString().StartsWith("CalcEmployee_")).Select(e => e.PositionNameOrRoleName);
+
+        // Assert
+
+        Assert.Equal(expected, result);
     }
 }
 

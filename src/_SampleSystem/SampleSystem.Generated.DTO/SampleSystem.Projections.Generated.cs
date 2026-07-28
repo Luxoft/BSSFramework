@@ -877,6 +877,8 @@ namespace SampleSystem.Generated.DTO
         
         private Anch.Core.Maybe<string> _positionName;
         
+        private string _positionNameOrRoleName;
+        
         private string _ppmNameNativeMiddleName;
         
         private System.Guid? _roleId;
@@ -990,6 +992,19 @@ namespace SampleSystem.Generated.DTO
             set
             {
                 this._positionName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PositionNameOrRoleName
+        {
+            get
+            {
+                return this._positionNameOrRoleName;
+            }
+            set
+            {
+                this._positionNameOrRoleName = value;
             }
         }
         

@@ -31,7 +31,7 @@ public abstract class Subscription<TDomainObject, TRenderingObject, TMessageTemp
 
     public abstract MailAddress Sender { get; }
 
-    //public virtual bool SendIndividualLetters { get; } = false;
+    public virtual bool SendIndividualLetters { get; } = false;
 
     public virtual bool InlineAttachments { get; } = true;
 

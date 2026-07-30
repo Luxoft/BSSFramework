@@ -43,7 +43,7 @@ public class NotificationExtractor<TDomainObject, TRenderingObject>(
             var copyTo = subscription.GetCopyTo(serviceProvider, versions);
             var replyTo = subscription.GetReplyTo(serviceProvider, versions);
 
-            await foreach (var mailMessage in ReGroup(resultTo, copyTo, replyTo).Select(this.ToMailMessage).WithCancellation(ct))
+            await foreach (var mailMessage in this.SplitLetters(ReGroup(resultTo, copyTo, replyTo)).Select(this.ToMailMessage).WithCancellation(ct))
             {
                 yield return mailMessage;
             }
@@ -78,6 +78,27 @@ public class NotificationExtractor<TDomainObject, TRenderingObject>(
 
         return mailMessage;
     }
+
+    /// <summary>
+    ///     Разбивает консолидированное письмо на индивидуальные, если подписка требует отправки индивидуальных писем.
+    /// </summary>
+    /// <remarks>
+    ///     Каждый адресат доставки (<see cref="RecipientRole.To" /> или <see cref="RecipientRole.Copy" />) получает
+    ///     собственное письмо с сохранением своей роли. Адресаты <see cref="RecipientRole.ReplyTo" /> не являются
+    ///     адресатами доставки, поэтому попадают в каждое сформированное письмо.
+    /// </remarks>
+    private IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject, NotificationRecipient>> SplitLetters(
+        IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject, NotificationRecipient>> source) =>
+
+        subscription.SendIndividualLetters
+            ? from info in source
+
+              let replyTo = info.Recipients.Where(recipient => recipient.Role == RecipientRole.ReplyTo).ToList()
+
+              from deliveryRecipient in info.Recipients.Where(recipient => recipient.Role != RecipientRole.ReplyTo)
+
+              select new NotificationMessageGenerationInfo<TRenderingObject, NotificationRecipient>([deliveryRecipient, .. replyTo], info.Versions)
+            : source;
 
     private static IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject, NotificationRecipient>> ReGroup(
         IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> to,

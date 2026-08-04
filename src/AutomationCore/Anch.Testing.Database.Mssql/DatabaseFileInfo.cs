@@ -1,4 +1,4 @@
-﻿namespace Framework.AutomationCore.Services;
+namespace Anch.Testing.Database.Mssql;
 
 public record DatabaseFileInfo(string DbPath, string LogPath)
 {

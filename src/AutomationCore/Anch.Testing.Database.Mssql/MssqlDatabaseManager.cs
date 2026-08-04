@@ -1,12 +1,10 @@
-﻿using Anch.Core;
+using Anch.Core;
 using Anch.Testing.Database.ConnectionStringManagement;
 
-using Microsoft.Extensions.Options;
+namespace Anch.Testing.Database.Mssql;
 
-namespace Framework.AutomationCore.Services;
-
-public class BssDatabaseManager(
-    IOptions<AutomationFrameworkSettings> automationFrameworkSettingsOptions,
+public class MssqlDatabaseManager(
+    MssqlDatabaseSettings settings,
     INativeDatabaseManager nativeDatabaseManager,
     IDatabaseCatalogResolver databaseCatalogResolver) : IDatabaseManager
 {
@@ -14,10 +12,9 @@ public class BssDatabaseManager(
     {
         ct.ThrowIfCancellationRequested();
 
-        if (!string.IsNullOrEmpty(automationFrameworkSettingsOptions.Value.BackupPath)
-            && !Directory.Exists(automationFrameworkSettingsOptions.Value.BackupPath))
+        if (!string.IsNullOrEmpty(settings.BackupPath) && !Directory.Exists(settings.BackupPath))
         {
-            Directory.CreateDirectory(automationFrameworkSettingsOptions.Value.BackupPath);
+            Directory.CreateDirectory(settings.BackupPath);
         }
 
         foreach (var initialCatalog in databaseCatalogResolver.GetCatalogs(connectionStringRole))
@@ -26,8 +23,18 @@ public class BssDatabaseManager(
         }
     }
 
-    public ValueTask<bool> Exists(TestConnectionStringRole connectionStringRole, CancellationToken ct) =>
-        databaseCatalogResolver.GetCatalogs(connectionStringRole).ToAsyncEnumerable().AllAsync(nativeDatabaseManager.Exists, ct);
+    public async ValueTask<bool> Exists(TestConnectionStringRole connectionStringRole, CancellationToken ct)
+    {
+        foreach (var initialCatalog in databaseCatalogResolver.GetCatalogs(connectionStringRole))
+        {
+            if (!await nativeDatabaseManager.Exists(initialCatalog, ct))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     public async ValueTask Remove(TestConnectionStringRole connectionStringRole, CancellationToken ct)
     {
@@ -57,4 +64,3 @@ public class BssDatabaseManager(
         }
     }
 }
-

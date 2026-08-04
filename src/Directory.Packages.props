@@ -8,6 +8,7 @@
   </PropertyGroup>
   <!-- DotNet -->
   <ItemGroup>
+    <PackageVersion Include="Anch.Testing.Database" Version="3.7.6" />
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.Negotiate" Version="$(DotNet)" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(DotNet)" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Proxies" Version="$(DotNet)" />
@@ -30,7 +31,7 @@
     <PackageVersion Include="Anch.DependencyInjection" Version="$(Anch)" />
     <PackageVersion Include="Anch.GenericRepository" Version="$(Anch)" />
     <PackageVersion Include="Anch.IdentitySource.Abstractions" Version="$(Anch)" />
-    <PackageVersion Include="Anch.Threading" Version="$(Anch)" />
+    <PackageVersion Include="Anch.Threading" Version="3.7.6" />
     <PackageVersion Include="Anch.VisualIdentitySource.Abstractions" Version="$(Anch)" />
     <PackageVersion Include="Anch.GenericQueryable.Abstractions" Version="$(Anch)" />
     <PackageVersion Include="Anch.GenericQueryable.EntityFramework" Version="$(Anch)" />

@@ -1,9 +1,8 @@
-﻿using Anch.Testing.Database.ConnectionStringManagement;
+using Anch.Testing.Database.ConnectionStringManagement;
 
-namespace Framework.AutomationCore.Services;
+namespace Anch.Testing.Database.Mssql;
 
 public interface IDatabaseCatalogResolver
 {
     IEnumerable<string> GetCatalogs(TestConnectionStringRole connectionStringRole);
 }
-

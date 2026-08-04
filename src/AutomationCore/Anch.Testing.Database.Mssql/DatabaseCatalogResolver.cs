@@ -1,13 +1,10 @@
-﻿using Anch.Testing.Database.ConnectionStringManagement;
+using Anch.Testing.Database.ConnectionStringManagement;
+using Anch.Testing.Database.Mssql.Extensions;
 
-using Framework.AutomationCore.Extensions;
-
-using Microsoft.Extensions.Options;
-
-namespace Framework.AutomationCore.Services;
+namespace Anch.Testing.Database.Mssql;
 
 public class DatabaseCatalogResolver(
-    IOptions<AutomationFrameworkSettings> automationFrameworkSettingsOptions,
+    MssqlDatabaseSettings settings,
     ITestConnectionStringPostfixFactory testConnectionStringPostfixFactory,
     ITestConnectionStringFactory testConnectionStringFactory) : IDatabaseCatalogResolver
 {
@@ -15,9 +12,9 @@ public class DatabaseCatalogResolver(
     {
         var postfix = testConnectionStringPostfixFactory.Create(connectionStringRole);
 
-        yield return testConnectionStringFactory.Create(postfix).InitialCatalog;
+        yield return testConnectionStringFactory.Create(postfix).GetInitialCatalog();
 
-        foreach (var database in automationFrameworkSettingsOptions.Value.SecondaryDatabases)
+        foreach (var database in settings.SecondaryDatabases)
         {
             if (string.IsNullOrWhiteSpace(postfix))
             {
@@ -30,4 +27,3 @@ public class DatabaseCatalogResolver(
         }
     }
 }
-

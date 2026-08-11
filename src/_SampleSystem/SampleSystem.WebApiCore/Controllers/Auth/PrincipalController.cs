@@ -1,5 +1,4 @@
-﻿using Framework.Authorization.Domain;
-using Framework.Authorization.Generated.DTO;
+﻿using Framework.Authorization.Generated.DTO;
 using Framework.Database;
 
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +10,8 @@ public partial class PrincipalController
 {
     [HttpPost]
     public PrincipalFullDTO GetCurrentPrincipal() =>
-        this.Evaluate(DBSessionMode.Read, evaluateData =>
-                          LambdaHelper.ToFullDTO((Principal)evaluateData.Context.Authorization.CurrentPrincipalSource.CurrentUser, evaluateData.MappingService));
+        this.Evaluate(
+            DBSessionMode.Read,
+            evaluateData =>
+                evaluateData.Context.CurrentPrincipalSource.CurrentUser.ToFullDTO(evaluateData.MappingService));
 }
-

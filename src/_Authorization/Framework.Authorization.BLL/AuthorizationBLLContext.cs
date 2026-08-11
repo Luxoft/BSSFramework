@@ -27,7 +27,6 @@ public partial class AuthorizationBLLContext(
     IRootSecurityService securityService,
     IAuthorizationBLLFactoryContainer logics,
     ISecurityContextStorage securityContextStorage,
-    ISecuritySystem securitySystem,
     IRunAsManager runAsManager,
     ICurrentUserSource<Principal> currentPrincipalSource,
     IPrincipalValidator<Principal, Permission, PermissionRestriction> principalValidator,
@@ -39,14 +38,12 @@ public partial class AuthorizationBLLContext(
         accessDeniedExceptionService,
         hierarchicalObjectExpanderFactory)
 {
-    private readonly IDictionaryCache<Type, SecurityContextType> securityContextTypeCache = new DictionaryCache<Type, SecurityContextType>(
-        securityContextType => logics.SecurityContextType.GetById(
-            (Guid)securityContextInfoSource.GetSecurityContextInfo(securityContextType).Identity.GetId(),
-            true)!).WithLock();
+    private readonly IDictionaryCache<Type, SecurityContextType> securityContextTypeCache =
+        new DictionaryCache<Type, SecurityContextType>(securityContextType => logics.SecurityContextType.GetById(
+                                                           (Guid)securityContextInfoSource.GetSecurityContextInfo(securityContextType).Identity.GetId(),
+                                                           true)!).WithLock();
 
     public ISecurityContextInfoSource SecurityContextInfoSource { get; } = securityContextInfoSource;
-
-    public ISecuritySystem SecuritySystem { get; } = securitySystem;
 
     public IValidator Validator { get; } = validator;
 
@@ -70,7 +67,4 @@ public partial class AuthorizationBLLContext(
 
         return this.securityContextTypeCache[type];
     }
-
-    IAuthorizationBLLContext IAuthorizationBLLContextContainer<IAuthorizationBLLContext>.Authorization => this;
 }
-

@@ -19,7 +19,7 @@ public partial class ConfigMainController
 
         var evaluateData = this.HttpContext.RequestServices.GetRequiredService<EvaluatedData<IConfigurationBLLContext, IConfigurationDTOMappingService>>();
 
-        await evaluateData.Context.Authorization.SecuritySystem.CheckAccessAsync(SecurityRole.Administrator, ct);
+        evaluateData.Context.SecurityService.CheckAccess(SecurityRole.Administrator);
 
         await evaluateData.Context.Logics.DomainType.ForceEventAsync(domainTypeEventModel.ToDomainObject(evaluateData.MappingService), ct);
     }

@@ -11,7 +11,7 @@ using Framework.Validation;
 
 namespace Framework.Authorization.BLL;
 
-public partial interface IAuthorizationBLLContext : ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, Guid>
+public partial interface IAuthorizationBLLContext : ISecurityBLLContext<PersistentDomainObjectBase, Guid>
 {
     IValidator Validator { get; }
 
@@ -22,8 +22,6 @@ public partial interface IAuthorizationBLLContext : ISecurityBLLContext<IAuthori
     ICurrentUser CurrentUser { get; }
 
     IRunAsManager RunAsManager { get; }
-
-    ISecuritySystem SecuritySystem { get; }
 
     ISecurityContextStorage SecurityContextStorage { get; }
 

@@ -18,7 +18,7 @@ public partial class ConfigMainController
     {
         var context = this.HttpContext.RequestServices.GetRequiredService<IConfigurationBLLContext>();
 
-        await context.Authorization.SecuritySystem.CheckAccessAsync(SecurityRole.SystemIntegration, ct);
+        context.SecurityService.CheckAccess(SecurityRole.SystemIntegration);
 
         var result = await context.Logics.DomainObjectModification.ProcessAsync(limit == 0 ? 1000 : limit, ct);
 
@@ -31,7 +31,7 @@ public partial class ConfigMainController
             DBSessionMode.Read,
             evaluateData =>
             {
-                evaluateData.Context.Authorization.SecurityService.CheckAccess(SecurityRole.SystemIntegration);
+                evaluateData.Context.SecurityService.CheckAccess(SecurityRole.SystemIntegration);
 
                 return evaluateData.Context.Logics.DomainObjectEvent.GetProcessingState().ToSimpleDTO(evaluateData.MappingService);
             });
@@ -42,7 +42,7 @@ public partial class ConfigMainController
             DBSessionMode.Read,
             evaluateData =>
             {
-                evaluateData.Context.Authorization.SecurityService.CheckAccess(SecurityRole.SystemIntegration);
+                evaluateData.Context.SecurityService.CheckAccess(SecurityRole.SystemIntegration);
 
                 return evaluateData.Context.Logics.DomainObjectModification.GetProcessingState().ToSimpleDTO(evaluateData.MappingService);
             });
@@ -53,7 +53,7 @@ public partial class ConfigMainController
             DBSessionMode.Read,
             evaluateData =>
             {
-                evaluateData.Context.Authorization.SecurityService.CheckAccess(SecurityRole.SystemIntegration);
+                evaluateData.Context.SecurityService.CheckAccess(SecurityRole.SystemIntegration);
 
                 return evaluateData.Context.Logics.DomainObjectNotification.GetProcessingState().ToSimpleDTO(evaluateData.MappingService);
             });

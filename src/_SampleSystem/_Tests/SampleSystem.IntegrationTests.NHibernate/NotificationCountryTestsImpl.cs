@@ -1,0 +1,3 @@
+﻿namespace SampleSystem.IntegrationTests;
+
+public class NotificationCountryTestsImpl(IServiceProvider rootServiceProvider) : NotificationCountryTests(rootServiceProvider);

@@ -1,0 +1,40 @@
+﻿using Framework.BLL;
+using Framework.Database;
+
+using SampleSystem.Domain.Employee;
+using SampleSystem.Generated.DTO;
+using SampleSystem.IntegrationTests._Environment.TestData;
+
+namespace SampleSystem.IntegrationTests;
+
+public abstract class InformationTest(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
+{
+    [Fact]
+    public void CreateAndRemoveInformation_ContainsIntegrationEvents()
+    {
+        // Arrange
+        this.ClearIntegrationEvents();
+
+        // Act
+        var id = this.Evaluate(DBSessionMode.Write, context =>
+                                                    {
+                                                        var newObj = new Information() { Name = "ololo" };
+
+                                                        context.Logics.Information.Save(newObj);
+
+                                                        return newObj.Id;
+                                                    });
+
+        this.Evaluate(DBSessionMode.Write, context =>
+                                           {
+                                               var obj = context.Logics.Information.GetById(id, true)!;
+
+                                               context.Logics.Information.Remove(obj);
+                                           });
+
+        // Assert
+        Assert.Single(this.GetIntegrationEvents<InformationSaveEventDTO>(), dto => dto.Information.Id == id);
+        Assert.Single(this.GetIntegrationEvents<InformationRemoveEventDTO>(), dto => dto.Information.Id == id);
+    }
+}
+

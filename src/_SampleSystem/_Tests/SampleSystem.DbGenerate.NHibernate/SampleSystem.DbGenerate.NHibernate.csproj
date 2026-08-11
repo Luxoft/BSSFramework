@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\SampleSystem.ServiceEnvironment.NHibernate\SampleSystem.ServiceEnvironment.NHibernate.csproj" />
     <ProjectReference Include="..\SampleSystem.CodeGenerate\SampleSystem.CodeGenerate.csproj" />
+    <ProjectReference Include="..\SampleSystem.DbGenerate\SampleSystem.DbGenerate.csproj" />
   </ItemGroup>
 
   <ItemGroup>

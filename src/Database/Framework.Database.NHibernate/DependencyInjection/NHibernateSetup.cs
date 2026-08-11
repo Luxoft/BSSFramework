@@ -131,7 +131,7 @@ public class NHibernateSetup : INHibernateSetup, IServiceInitializer
 
         services.AddScopedFrom<ISession, INHibSession>(session => session.NativeSession);
 
-        services.AddSingleton<INHibSessionEnvironmentSettings, NHibSessionEnvironmentSettings>();
+        services.AddSingleton(NHibSessionEnvironmentSettings.Default);
 
         services.AddSingleton<NHibSessionEnvironment>();
 

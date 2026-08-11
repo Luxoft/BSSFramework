@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Anch.Testing.Xunit" />
+    <PackageReference Include="FluentMigrator" />
+    <PackageReference Include="FluentMigrator.Extensions.SqlServer" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit.v3" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="__Support\*\**\*.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\AutomationCore\Framework.AutomationCore.Legacy\Framework.AutomationCore.Legacy.csproj" />
+    <ProjectReference Include="..\..\SampleSystem.WebApiCore\SampleSystem.WebApiCore.csproj" />
+    <ProjectReference Include="..\SampleSystem.DbGenerate\SampleSystem.DbGenerate.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="testAppSettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+</Project>

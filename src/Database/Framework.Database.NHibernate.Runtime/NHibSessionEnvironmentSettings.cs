@@ -1,6 +1,6 @@
 ﻿namespace Framework.Database.NHibernate;
 
-public class NHibSessionEnvironmentSettings : INHibSessionEnvironmentSettings
+public record NHibSessionEnvironmentSettings(TimeSpan TransactionTimeout)
 {
-    public TimeSpan TransactionTimeout { get; } = new(0, 20, 0);
+    public static NHibSessionEnvironmentSettings Default { get; } = new (new TimeSpan(0, 20, 0));
 }

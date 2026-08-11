@@ -2,35 +2,18 @@
 
   <PropertyGroup>
     <IsPackable>false</IsPackable>
+    <OutputType>Exe</OutputType>
     <RootNamespace>SampleSystem.IntegrationTests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Anch.Testing.Xunit" />
-    <PackageReference Include="FluentMigrator" />
-    <PackageReference Include="FluentMigrator.Extensions.SqlServer" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" />
-    <PackageReference Include="xunit.v3" />
     <PackageReference Include="xunit.runner.visualstudio" />
-
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="__Support\*\**\*.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\AutomationCore\Framework.AutomationCore.Legacy\Framework.AutomationCore.Legacy.csproj" />
     <ProjectReference Include="..\..\SampleSystem.WebApiCore.NHibernate\SampleSystem.WebApiCore.NHibernate.csproj" />
     <ProjectReference Include="..\SampleSystem.DbGenerate.NHibernate\SampleSystem.DbGenerate.NHibernate.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="testAppSettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <ProjectReference Include="..\SampleSystem.IntegrationTests\SampleSystem.IntegrationTests.csproj" />
   </ItemGroup>
 
   <ItemGroup>

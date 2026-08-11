@@ -22,7 +22,7 @@ public class NHibSessionEnvironment : IDisposable
             IEnumerable<MappingSettings> mappingSettings,
             IEnumerable<IConfigurationInitializer> initializers,
             [FromKeyedServices(ICurrentUser.DefaultKey)] ICurrentUser defaultCurrentUser,
-            INHibSessionEnvironmentSettings settings,
+            NHibSessionEnvironmentSettings settings,
             IDalValidationIdentitySource dalValidationIdentitySource)
     {
         var cachedMappingSettings = (mappingSettings ?? throw new ArgumentNullException(nameof(mappingSettings))).ToList();

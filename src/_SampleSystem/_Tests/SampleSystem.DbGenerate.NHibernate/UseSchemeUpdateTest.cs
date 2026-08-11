@@ -12,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using NHibernate.Tool.hbm2ddl;
 
-using SampleSystem.DbGenerate.NHibernate.Migrations;
+using SampleSystem.DbGenerate.Migrations;
 using SampleSystem.ServiceEnvironment.DependencyInjection;
 
 namespace SampleSystem.DbGenerate.NHibernate;

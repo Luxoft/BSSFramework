@@ -1,0 +1,3 @@
+﻿namespace SampleSystem.IntegrationTests;
+
+public class ManualAndLegacyProjectionSecurityTestsImpl(IServiceProvider rootServiceProvider) : ManualAndLegacyProjectionSecurityTests(rootServiceProvider);

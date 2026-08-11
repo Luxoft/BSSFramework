@@ -1,0 +1,170 @@
+﻿using Anch.Core;
+
+using Framework.Core;
+
+using SampleSystem.Domain.Projections;
+using SampleSystem.Generated.DTO;
+using SampleSystem.IntegrationTests._Environment.TestData;
+using SampleSystem.Security;
+using SampleSystem.WebApiCore.Controllers.MainQuery;
+
+namespace SampleSystem.IntegrationTests;
+
+public abstract class EmployeeProjectionTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
+{
+    private const string ProjectionPrincipalName = "Projection Tester";
+    private const string TestEmployee1Login = "Test Employee 1";
+    private const string TestEmployee2Login = "Test Employee 2";
+    private const string TestEmployee3Login = "Test Employee 3";
+
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
+    {
+        var buTypeId = this.DataManager.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
+
+        var luxoftBuId = this.DataManager.SaveBusinessUnit(
+                                                          id: DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_ID,
+                                                          name: DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_NAME,
+                                                          type: buTypeId);
+
+        var costBuId = this.DataManager.SaveBusinessUnit(
+                                                        id: DefaultConstants.BUSINESS_UNIT_PARENT_CC_ID,
+                                                        name: DefaultConstants.BUSINESS_UNIT_PARENT_CC_NAME,
+                                                        type: buTypeId,
+                                                        parent: luxoftBuId);
+
+        var profitBuId = this.DataManager.SaveBusinessUnit(
+                                                          id: DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID,
+                                                          name: DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME,
+                                                          type: buTypeId,
+                                                          parent: luxoftBuId);
+
+        this.DataManager.SaveEmployee(login: ProjectionPrincipalName, coreBusinessUnit: costBuId);
+        this.DataManager.SaveEmployee(login: TestEmployee1Login, coreBusinessUnit: costBuId);
+        this.DataManager.SaveEmployee(login: TestEmployee2Login, coreBusinessUnit: profitBuId);
+        this.DataManager.SaveEmployee(login: TestEmployee3Login, coreBusinessUnit: costBuId);
+
+        await this.AuthManager.For(ProjectionPrincipalName).SetRoleAsync(
+            new SampleSystemTestPermission(
+                SampleSystemSecurityRole.SeManager,
+                new BusinessUnitIdentityDTO(DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID)),
+            ct);
+
+        await this.AuthManager.For(TestEmployee1Login).SetRoleAsync(SampleSystemSecurityRole.TestRole1, ct);
+        await this.AuthManager.For(TestEmployee3Login).SetRoleAsync(SampleSystemSecurityRole.TestRole2, ct);
+    }
+
+    [Fact]
+    public void EmployeeProjectionTest()
+    {
+        // Arrange
+        var identity = this.DataManager.SaveEmployee(Guid.NewGuid());
+        var controller = this.GetControllerEvaluator<EmployeeQueryController>();
+
+        // Act
+        var result = controller.Evaluate(c => c.GetTestEmployeesByODataQueryString($"$filter=id eq GUID'{identity.Id}'"));
+        var employee = result.Items.SingleOrDefault(e => e.Id == identity.Id);
+
+        // Assert
+        Assert.NotNull(employee);
+    }
+
+    [Fact]
+    public void EmployeeProjectionColumnSecurityTest()
+    {
+        // Arrange
+        var expected = new[] { ProjectionPrincipalName, TestEmployee2Login }.Select(Maybe.Return).OrderBy(v => v.ToString()).ToArray();
+        var controller = this.GetControllerEvaluator<EmployeeQueryController>(ProjectionPrincipalName);
+
+        // Act
+        var employees = controller.Evaluate(c => c.GetTestEmployeesByODataQueryString("$filter=CoreBusinessUnit ne null"))
+                               .Items;
+
+        var logins = employees.Select(dto => dto.Login).OrderBy(v => v.ToString());
+
+        // Assert
+        Assert.Equal(expected, logins);
+    }
+
+    [Fact]
+    public void EmployeeProjectionSecurityTestNoAccess()
+    {
+        // Arrange
+        var controller = this.GetControllerEvaluator<EmployeeQueryController>(TestEmployee1Login);
+
+        // Act
+        var employees = controller.Evaluate(c => c.GetTestEmployeesByODataQueryString("$filter=CoreBusinessUnit ne null")).Items;
+
+        // Assert
+        var positions = employees.Select(dto => dto.PositionName);
+        var logins = employees.Select(dto => dto.Login);
+        Assert.False(positions.All(x => x.HasValue));
+        Assert.True(logins.All(x => x.HasValue));
+    }
+
+    [Fact]
+    public void EmployeeProjectionSecurityTestHasAccess()
+    {
+        // Arrange
+        var controller = this.GetControllerEvaluator<EmployeeQueryController>(TestEmployee3Login);
+
+        // Act
+        var result = controller.Evaluate(c => c.GetTestEmployeesByODataQueryString("$filter=CoreBusinessUnit ne null")).Items;
+        var positions = result.Select(dto => dto.PositionName);
+
+        // Assert
+        Assert.True(positions.All(x => x.HasValue));
+    }
+
+    [Fact]
+    public void EmployeeProjectionSortingTest()
+    {
+        // Arrange
+        var logins = new[] { "PST_AEmployee", "PST_BEmployee", "PST_ZEmployee" };
+
+        foreach (var login in logins)
+        {
+            this.DataManager.SaveEmployee(login: login);
+        }
+
+        var expected = logins.Reverse().ToArray(Maybe.Return);
+        var controller = this.GetControllerEvaluator<EmployeeQueryController>();
+
+        // Act
+        var actual = controller.Evaluate(c => c.GetTestEmployeesByODataQueryString("$orderby=Login desc"))
+                               .Items.Where(e => e.Login.ToString().StartsWith("PST_")).Select(e => e.Login);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void EmployeeProjectionSortingByCalcPropsTest()
+    {
+        // Arrange
+
+        var role1 = this.DataManager.SaveEmployeeRole(name: "CalcEmployee_Role1");
+        var role2 = this.DataManager.SaveEmployeeRole(name: "CalcEmployee_Role2");
+        var role3 = this.DataManager.SaveEmployeeRole(name: "CalcEmployee_Role3");
+
+        var pos1 = this.DataManager.SaveEmployeePosition(name: "CalcEmployee_Pos1");
+        var pos2 = this.DataManager.SaveEmployeePosition(name: "CalcEmployee_Pos2");
+        var pos3 = this.DataManager.SaveEmployeePosition(name: "CalcEmployee_Pos3");
+
+        this.DataManager.SaveEmployee(login: "CalcEmployee_Emp1", role: role1, position: pos1);
+        this.DataManager.SaveEmployee(login: "CalcEmployee_Emp2", role: role2, position: pos2);
+        this.DataManager.SaveEmployee(login: "CalcEmployee_Emp3", role: role3, position: pos3);
+
+        var controller = this.GetControllerEvaluator<EmployeeQueryController>();
+
+        var expected = new[] { "CalcEmployee_Pos3", "CalcEmployee_Pos2", "CalcEmployee_Pos1" };
+
+        // Act
+        var result = controller.Evaluate(c => c.GetTestEmployeesByODataQueryString($"$orderby={nameof(TestEmployee.PositionNameOrRoleName)} desc"))
+                               .Items.Where(e => e.Login.ToString().StartsWith("CalcEmployee_")).Select(e => e.PositionNameOrRoleName);
+
+        // Assert
+
+        Assert.Equal(expected, result);
+    }
+}
+

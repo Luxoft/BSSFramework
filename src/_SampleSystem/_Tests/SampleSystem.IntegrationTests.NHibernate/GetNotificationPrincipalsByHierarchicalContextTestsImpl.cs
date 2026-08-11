@@ -1,0 +1,3 @@
+﻿namespace SampleSystem.IntegrationTests;
+
+public class GetNotificationPrincipalsByHierarchicalContextTestsImpl(IServiceProvider rootServiceProvider) : GetNotificationPrincipalsByHierarchicalContextTests(rootServiceProvider);

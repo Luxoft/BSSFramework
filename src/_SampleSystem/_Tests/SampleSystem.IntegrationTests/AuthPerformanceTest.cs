@@ -1,0 +1,124 @@
+﻿using Anch.SecuritySystem;
+using Anch.Testing.Xunit;
+
+using Framework.Application;
+using Framework.Application.Repository;
+using Framework.Database;
+
+using Microsoft.Extensions.DependencyInjection;
+
+using SampleSystem.Domain;
+using SampleSystem.Domain.BU;
+using SampleSystem.Domain.Directories;
+using SampleSystem.Domain.Employee;
+using SampleSystem.Domain.MU;
+using SampleSystem.Generated.DTO;
+using SampleSystem.IntegrationTests._Environment.TestData;
+using SampleSystem.Security;
+
+namespace SampleSystem.IntegrationTests;
+
+public abstract class AuthPerformanceTest(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
+{
+    private IReadOnlyCollection<BusinessUnitIdentityDTO?> fbuSource = null!;
+
+    private IReadOnlyCollection<ManagementUnitIdentityDTO?> mbuSource = null!;
+
+    private IReadOnlyCollection<LocationIdentityDTO?> locationSource = null!;
+
+    private IReadOnlyCollection<EmployeeIdentityDTO?> employeeSource = null!;
+
+    private static readonly string PrincipalName = "AuthPerformance";
+
+    private static readonly int Size = 5;
+
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
+    {
+        this.fbuSource = [null, .. Enumerable.Range(0, Size - 1).Select(_ => (BusinessUnitIdentityDTO?)this.DataManager.SaveBusinessUnit())];
+
+        this.mbuSource = [null, .. Enumerable.Range(0, Size - 1).Select(_ => (ManagementUnitIdentityDTO?)this.DataManager.SaveManagementUnit())];
+
+        this.locationSource = [null, .. Enumerable.Range(0, Size - 1).Select(_ => (LocationIdentityDTO?)this.DataManager.SaveLocation())];
+
+        this.employeeSource = [null, this.DataManager.SaveEmployee()];
+
+        await this.AuthManager.For(PrincipalName).CreatePrincipalAsync(ct);
+
+        await this.GeneratePermissionAsync(ct);
+    }
+
+    [AnchFact]
+    public async Task LoadGenerateAuthPerformanceObjects_CountEquals(CancellationToken ct)
+    {
+        // Arrange
+        var authPerfCount = await this.GenerateAuthPerformanceObject(ct);
+
+        // Act
+        var findCount = await this.RootServiceProvider.GetRequiredService<IServiceEvaluator<IRepositoryFactory<AuthPerformanceObject>>>().EvaluateAsync(
+                            DBSessionMode.Write,
+                            async service =>
+                            {
+                                var testObjRep = service.Create(SecurityRule.View);
+
+                                return testObjRep.GetQueryable().Count();
+                            }, ct);
+
+        // Assert
+        Assert.Equal(findCount, authPerfCount);
+    }
+
+    private async Task GeneratePermissionAsync(CancellationToken ct)
+    {
+        var request = from fbu in this.fbuSource
+
+                      from mbu in this.mbuSource
+
+                      from location in this.locationSource
+
+                      from employee in this.employeeSource
+
+                      select new SampleSystemTestPermission(SampleSystemSecurityRole.TestPerformance, fbu, mbu, location, employee).ToManagedPermission();
+
+        await this.AuthManager.For(PrincipalName).SetRoleAsync([.. request], ct);
+    }
+
+    private async Task<int> GenerateAuthPerformanceObject(CancellationToken ct) =>
+        await this.RootServiceProvider.GetRequiredService<IDBSessionEvaluator>().EvaluateAsync(
+            DBSessionMode.Write,
+            async sp =>
+            {
+                var fbuRep = sp.GetRequiredService<IRepositoryFactory<BusinessUnit>>().Create();
+                var mbuRep = sp.GetRequiredService<IRepositoryFactory<ManagementUnit>>().Create();
+                var locRep = sp.GetRequiredService<IRepositoryFactory<Location>>().Create();
+                var empRep = sp.GetRequiredService<IRepositoryFactory<Employee>>().Create();
+                var testObjRep = sp.GetRequiredService<IRepositoryFactory<AuthPerformanceObject>>().Create();
+
+                var count = 0;
+                foreach (var fbu in this.fbuSource.Take(Size - 3))
+                {
+                    foreach (var mbu in this.mbuSource.Take(Size - 3))
+                    {
+                        foreach (var loc in this.locationSource.Take(Size - 3))
+                        {
+                            foreach (var emp in this.employeeSource)
+                            {
+                                var testObj = new AuthPerformanceObject
+                                {
+                                    BusinessUnit = fbu is null ? null : await fbuRep.LoadAsync(fbu.Value.Id, ct),
+                                    ManagementUnit = mbu is null ? null : await mbuRep.LoadAsync(mbu.Value.Id, ct),
+                                    Location = loc is null ? null : await locRep.LoadAsync(loc.Value.Id, ct),
+                                    Employee = emp is null ? null : await empRep.LoadAsync(emp.Value.Id, ct),
+                                };
+
+                                await testObjRep.SaveAsync(testObj, ct);
+
+                                count++;
+                            }
+                        }
+                    }
+                }
+
+                return count;
+            }, ct);
+}
+

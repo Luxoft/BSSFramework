@@ -1,0 +1,3 @@
+﻿namespace SampleSystem.IntegrationTests;
+
+public class CurrentUserSingleRelativePathTestsImpl(IServiceProvider rootServiceProvider) : CurrentUserSingleRelativePathTests(rootServiceProvider);

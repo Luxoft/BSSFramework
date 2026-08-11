@@ -1,0 +1,3 @@
+﻿namespace SampleSystem.IntegrationTests;
+
+public class WrongSecurityMessageTestsImpl(IServiceProvider rootServiceProvider) : WrongSecurityMessageTests(rootServiceProvider);

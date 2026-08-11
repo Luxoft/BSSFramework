@@ -1,0 +1,3 @@
+﻿namespace SampleSystem.IntegrationTests;
+
+public class FixedPropertyValidatorTestsImpl(IServiceProvider rootServiceProvider) : FixedPropertyValidatorTests(rootServiceProvider);

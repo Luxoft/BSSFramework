@@ -1,0 +1,3 @@
+﻿namespace SampleSystem.IntegrationTests;
+
+public class RepositoryWithoutSecurityTestsImpl(IServiceProvider rootServiceProvider) : RepositoryWithoutSecurityTests(rootServiceProvider);

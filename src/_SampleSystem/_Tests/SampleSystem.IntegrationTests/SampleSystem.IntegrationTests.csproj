@@ -1,24 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <IsPackable>false</IsPackable>
-    <StartupObject>SampleSystem.DbGenerate.NHibernate.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Anch.Testing.Xunit" />
+    <PackageReference Include="FluentMigrator" />
+    <PackageReference Include="FluentMigrator.Extensions.SqlServer" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="xunit.v3" />
     <PackageReference Include="xunit.runner.visualstudio" />
 
-    <PackageReference Include="CommandLineParser" />
-    <PackageReference Include="FluentMigrator.Runner" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\SampleSystem.ServiceEnvironment.NHibernate\SampleSystem.ServiceEnvironment.NHibernate.csproj" />
-    <ProjectReference Include="..\SampleSystem.CodeGenerate\SampleSystem.CodeGenerate.csproj" />
-    <ProjectReference Include="..\SampleSystem.DbGenerate\SampleSystem.DbGenerate.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,7 +21,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="hibernate.cfg.xml">
+    <ProjectReference Include="..\..\..\AutomationCore\Framework.AutomationCore.Legacy\Framework.AutomationCore.Legacy.csproj" />
+    <ProjectReference Include="..\..\SampleSystem.WebApiCore\SampleSystem.WebApiCore.csproj" />
+    <ProjectReference Include="..\SampleSystem.DbGenerate\SampleSystem.DbGenerate.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="testAppSettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

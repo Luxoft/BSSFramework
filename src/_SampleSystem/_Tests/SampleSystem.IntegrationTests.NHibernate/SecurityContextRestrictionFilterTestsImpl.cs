@@ -1,0 +1,3 @@
+﻿namespace SampleSystem.IntegrationTests;
+
+public class SecurityContextRestrictionFilterTestsImpl(IServiceProvider rootServiceProvider) : SecurityContextRestrictionFilterTests(rootServiceProvider);

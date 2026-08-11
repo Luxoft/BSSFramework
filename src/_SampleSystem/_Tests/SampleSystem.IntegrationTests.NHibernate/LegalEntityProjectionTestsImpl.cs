@@ -1,0 +1,3 @@
+﻿namespace SampleSystem.IntegrationTests;
+
+public class LegalEntityProjectionTestsImpl(IServiceProvider rootServiceProvider) : LegalEntityProjectionTests(rootServiceProvider);

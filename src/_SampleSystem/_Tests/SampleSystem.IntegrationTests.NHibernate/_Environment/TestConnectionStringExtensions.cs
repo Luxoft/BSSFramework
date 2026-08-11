@@ -15,4 +15,3 @@ public static class TestConnectionStringExtensions
                 connectionString.Password)
             : null;
 }
-

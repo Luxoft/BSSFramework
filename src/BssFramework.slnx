@@ -181,7 +181,9 @@
     <Project Path="_SampleSystem/_Tests/SampleSystem.CheckGenTests/SampleSystem.CheckGenTests.csproj" />
     <Project Path="_SampleSystem/_Tests/SampleSystem.CodeGenerate/SampleSystem.CodeGenerate.csproj" />
     <Project Path="_SampleSystem/_Tests/SampleSystem.DbGenerate.NHibernate/SampleSystem.DbGenerate.NHibernate.csproj" />
+    <Project Path="_SampleSystem/_Tests/SampleSystem.DbGenerate/SampleSystem.DbGenerate.csproj" />
     <Project Path="_SampleSystem/_Tests/SampleSystem.IntegrationTests.NHibernate/SampleSystem.IntegrationTests.NHibernate.csproj" />
+    <Project Path="_SampleSystem/_Tests/SampleSystem.IntegrationTests/SampleSystem.IntegrationTests.csproj" />
     <Project Path="_SampleSystem/_Tests/SampleSystem.UnitTests/SampleSystem.UnitTests.csproj" />
   </Folder>
 

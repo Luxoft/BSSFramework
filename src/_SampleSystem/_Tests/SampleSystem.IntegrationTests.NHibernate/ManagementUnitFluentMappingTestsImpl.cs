@@ -1,0 +1,3 @@
+﻿namespace SampleSystem.IntegrationTests;
+
+public class ManagementUnitFluentMappingTestsImpl(IServiceProvider rootServiceProvider) : ManagementUnitFluentMappingTests(rootServiceProvider);

@@ -1,0 +1,113 @@
+﻿using Anch.SecuritySystem;
+
+using Framework.AutomationCore.RootServiceProviderContainer;
+using Framework.BLL;
+using Framework.Core;
+
+using SampleSystem.Domain;
+using SampleSystem.Domain.TestDeserializedAuth;
+using SampleSystem.IntegrationTests._Environment.TestData;
+using SampleSystem.Security;
+using SampleSystem.WebApiCore.Controllers.Main;
+
+namespace SampleSystem.IntegrationTests;
+
+public abstract class AuthPerformanceTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
+{
+    private const string TestUser = "TestUser";
+
+    private const int Limit = 3;
+
+    private const int SplitBy = 25;
+
+    protected override async ValueTask InitializeAsync(CancellationToken ct)
+    {
+        var genLoc = Enumerable.Range(0, Limit).ToList(i => this.DataManager.SaveLocation());
+
+        var genEmployee = Enumerable.Range(0, Limit).ToList(i => this.DataManager.SaveEmployee());
+
+        var genBu = Enumerable.Range(0, Limit).ToList(i => this.DataManager.SaveBusinessUnit());
+
+        var genMbu = Enumerable.Range(0, Limit).ToList(i => this.DataManager.SaveManagementUnit());
+
+        var genObjects = this.EvaluateWrite(ctx =>
+                                            {
+                                                var gebObjectsRequest =
+                                                        from emplIdent in genEmployee
+                                                        from locIdent in genLoc
+                                                        from buIdent in genBu
+                                                        from mbuIdent in genMbu
+                                                        select new TestPerformanceObject
+                                                        {
+                                                            Employee = ctx.Logics.Employee.GetById(emplIdent.Id)!,
+                                                            Location = ctx.Logics.Location.GetById(locIdent.Id)!,
+                                                            BusinessUnit = ctx.Logics.BusinessUnit.GetById(buIdent.Id)!,
+                                                            ManagementUnit = ctx.Logics.ManagementUnit.GetById(mbuIdent.Id)!,
+                                                            Name = Guid.NewGuid().ToString()
+                                                        };
+
+                                                var genObjects = gebObjectsRequest.ToList();
+
+                                                ctx.Logics.TestPerformanceObject.Save(genObjects);
+
+                                                var testPrincipal = new Framework.Authorization.Domain.Principal { Name = TestUser };
+
+                                                var adminRole = ctx.Authorization.Logics.BusinessRole.GetByName(SampleSystemSecurityRole.TestPerformance.Name, true)!;
+
+                                                foreach (var genObjectSubEnumerable in genObjects.Split(SplitBy))
+                                                {
+                                                    var genPermission = new Framework.Authorization.Domain.Permission(testPrincipal) { Role = adminRole };
+
+                                                    foreach (var genObject in genObjectSubEnumerable)
+                                                    {
+                                                        void tryAddRestrictions<TSecurityContext>(Func<TestPerformanceObject, TSecurityContext> getSecurityContext)
+                                                            where TSecurityContext : PersistentDomainObjectBase, ISecurityContext
+                                                        {
+                                                            var securityContext = getSecurityContext(genObject);
+
+                                                            if (!genPermission.Restrictions.Select(fi => fi.SecurityContextId).Contains(securityContext.Id))
+                                                            {
+                                                                new Framework.Authorization.Domain.PermissionRestriction(genPermission)
+                                                                {
+                                                                    SecurityContextId = securityContext.Id,
+                                                                    SecurityContextType = ctx.Authorization.GetSecurityContextType(typeof(TSecurityContext))
+                                                                };
+                                                            }
+                                                        }
+
+                                                        tryAddRestrictions(v => v.Employee);
+                                                        tryAddRestrictions(v => v.Location);
+                                                        tryAddRestrictions(v => v.BusinessUnit);
+                                                        tryAddRestrictions(v => v.ManagementUnit);
+                                                    }
+                                                }
+
+                                                ctx.Authorization.Logics.Principal.Save(testPrincipal);
+
+                                                return genObjects.Select(obj => obj.Id);
+                                            });
+    }
+
+    [Fact]
+    public void CreateObjectsWithPermissions_HasAccessToAllObjects()
+    {
+        // Arrange
+        var testController = this.GetControllerEvaluator<TestPerformanceObjectController>(TestUser);
+
+        // Act
+        testController.Evaluate(c => c.GetSimpleTestPerformanceObjects());
+        testController.Evaluate(c => c.GetSimpleTestPerformanceObjects());
+
+        var start = DateTime.Now;
+
+        var testPerformanceObjects = testController.Evaluate(c => c.GetSimpleTestPerformanceObjects());
+
+        var duration = DateTime.Now - start;
+
+        Console.WriteLine("WorkTime: " + duration);
+
+        // Assert
+        Assert.Equal(Limit * Limit * Limit * Limit, testPerformanceObjects.Count());
+    }
+}
+

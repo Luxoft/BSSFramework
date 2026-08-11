@@ -1,0 +1,3 @@
+﻿namespace SampleSystem.IntegrationTests;
+
+public class SubscriptionCustomNotPersistentModelTestsImpl(IServiceProvider rootServiceProvider) : SubscriptionCustomNotPersistentModelTests(rootServiceProvider);

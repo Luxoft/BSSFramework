@@ -12,11 +12,11 @@ using SampleSystem.Domain.Employee;
 
 namespace SampleSystem.BLL;
 
-public partial interface ISampleSystemBLLContext :
-
-    ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, Guid>
+public partial interface ISampleSystemBLLContext : ISecurityBLLContext<PersistentDomainObjectBase, Guid>
 {
     ICurrentUserSource<Employee> CurrentEmployeeSource { get; }
+
+    IAuthorizationBLLContext Authorization { get; }
 
     IConfigurationBLLContext Configuration { get; }
 

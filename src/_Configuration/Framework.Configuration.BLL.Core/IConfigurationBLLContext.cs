@@ -2,7 +2,6 @@
 
 using Framework.Application.Events;
 using Framework.Application.Lock;
-using Framework.Authorization.BLL;
 using Framework.BLL;
 using Framework.BLL.Domain.TargetSystem;
 using Framework.Configuration.BLL.TargetSystemService;
@@ -14,9 +13,7 @@ using Framework.Validation;
 
 namespace Framework.Configuration.BLL;
 
-public partial interface IConfigurationBLLContext :
-
-    ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, Guid>
+public partial interface IConfigurationBLLContext : ISecurityBLLContext<PersistentDomainObjectBase, Guid>
 {
     IValidator Validator { get; }
 

@@ -8,7 +8,6 @@ using Anch.SecuritySystem.AccessDenied;
 using Framework.Application;
 using Framework.Application.Events;
 using Framework.Application.Lock;
-using Framework.Authorization.BLL;
 using Framework.BLL;
 using Framework.BLL.Domain.TargetSystem;
 using Framework.BLL.Services;
@@ -33,7 +32,6 @@ public partial class ConfigurationBLLContext(
     IConfigurationValidator validator,
     IRootSecurityService securityService,
     IConfigurationBLLFactoryContainer logics,
-    IAuthorizationBLLContext authorization,
     IDomainObjectEventMetadata eventOperationSource,
     INamedLockService namedLockService,
     IEnumerable<PersistentTargetSystemInfo> targetSystemInfoList,
@@ -54,8 +52,6 @@ public partial class ConfigurationBLLContext(
     public override IConfigurationBLLFactoryContainer Logics { get; } = logics;
 
     public IValidator Validator { get; } = validator;
-
-    public IAuthorizationBLLContext Authorization { get; } = authorization;
 
     public ISerializerFactory<string> SystemConstantSerializerFactory { get; } = systemConstantSerializerFactory;
 

@@ -53,8 +53,8 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
 
                     // Legacy
 
-                    .AddSubscriptions<IBssFrameworkSetup, Employee, Framework.Authorization.Domain.Principal>(
-                        e => e.Email,
+                    .AddSubscriptions(
+                        (Employee e) => e.Email,
                         [typeof(SampleSystem.Subscriptions.Metadata.Employee.Update.EmployeeUpdateSubscription).Assembly])
 
                     .AddSubscriptionManagers()

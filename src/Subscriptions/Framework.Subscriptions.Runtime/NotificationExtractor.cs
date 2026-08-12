@@ -14,7 +14,7 @@ namespace Framework.Subscriptions;
 public class NotificationExtractor<TDomainObject, TRenderingObject>(
     IServiceProvider serviceProvider,
     IIdentityInfoSource identityInfoSource,
-    IEmployeeEmailExtractor employeeEmailExtractor,
+    INotificationEmailExtractor notificationEmailExtractor,
     ISubscription<TDomainObject, TRenderingObject> subscription) : INotificationExtractor<TDomainObject>
     where TDomainObject : class
     where TRenderingObject : class
@@ -122,7 +122,7 @@ public class NotificationExtractor<TDomainObject, TRenderingObject>(
 
             if (notificationFilterGroups.Length > 0)
             {
-                var emails = await employeeEmailExtractor.GetEmails(subscription.SecurityRoles, notificationFilterGroups).ToImmutableHashSetAsync(ct);
+                var emails = await notificationEmailExtractor.GetEmails(subscription.SecurityRoles, notificationFilterGroups).ToImmutableHashSetAsync(ct);
 
                 if (emails.Count > 0)
                 {

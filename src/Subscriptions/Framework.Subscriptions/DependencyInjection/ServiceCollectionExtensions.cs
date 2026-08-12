@@ -16,17 +16,17 @@ public static class ServiceCollectionExtensions
     extension<TSelf>(IBssFrameworkSetup<TSelf> setup)
         where TSelf : IBssFrameworkSetup<TSelf>
     {
-        public TSelf AddSubscriptions<TEmployee, TPrincipal>(
+        public TSelf AddSubscriptions<TEmployee>(
             Expression<Func<TEmployee, string>> emailPath,
             ImmutableArray<Assembly> assemblies)
             where TEmployee : class =>
-            setup.AddServices(sc => sc.AddSubscriptions<TEmployee, TPrincipal>(emailPath, assemblies));
+            setup.AddServices(sc => sc.AddSubscriptions(emailPath, assemblies));
     }
 
 
     extension(IServiceCollection services)
     {
-        public void AddSubscriptions<TEmployee, TPrincipal>(
+        public void AddSubscriptions<TEmployee>(
             Expression<Func<TEmployee, string>> emailPath,
             ImmutableArray<Assembly> assemblies)
             where TEmployee : class
@@ -37,7 +37,7 @@ public static class ServiceCollectionExtensions
             services.AddScoped<ISyncSubscriptionService, SyncSubscriptionService>();
 
             services.AddSingleton(new EmployeeInfo<TEmployee>(emailPath.ToPropertyAccessors()));
-            services.AddScoped<IEmployeeEmailExtractor, EmployeeEmailExtractor<TEmployee, TPrincipal>>();
+            services.AddScoped<INotificationEmailExtractor, NotificationEmailExtractor<TEmployee>>();
 
             foreach (var assembly in assemblies)
             {

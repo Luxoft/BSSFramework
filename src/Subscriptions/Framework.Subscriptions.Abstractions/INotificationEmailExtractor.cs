@@ -5,7 +5,7 @@ using Anch.SecuritySystem.Notification.Domain;
 
 namespace Framework.Subscriptions;
 
-public interface IEmployeeEmailExtractor
+public interface INotificationEmailExtractor
 {
     IAsyncEnumerable<string> GetEmails(ImmutableArray<SecurityRole> securityRoles, ImmutableArray<NotificationFilterGroup> notificationFilterGroups);
 }

@@ -21,10 +21,10 @@ namespace Framework.Authorization.BLL;
 public partial class AuthorizationBLLContext(
     IServiceProvider serviceProvider,
     [FromKeyedServices(nameof(BLL))] IEventOperationSender operationSender,
-    IAccessDeniedExceptionService accessDeniedExceptionService,
     IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
-    IAuthorizationValidator validator,
     IRootSecurityService securityService,
+    IAccessDeniedExceptionService accessDeniedExceptionService,
+    IAuthorizationValidator validator,
     IAuthorizationBLLFactoryContainer logics,
     ISecurityContextStorage securityContextStorage,
     IRunAsManager runAsManager,
@@ -35,8 +35,9 @@ public partial class AuthorizationBLLContext(
     : SecurityBLLBaseContext<PersistentDomainObjectBase, Guid, IAuthorizationBLLFactoryContainer>(
         serviceProvider,
         operationSender,
-        accessDeniedExceptionService,
-        hierarchicalObjectExpanderFactory)
+        hierarchicalObjectExpanderFactory,
+        securityService,
+        accessDeniedExceptionService)
 {
     private readonly IDictionaryCache<Type, SecurityContextType> securityContextTypeCache =
         new DictionaryCache<Type, SecurityContextType>(securityContextType => logics.SecurityContextType.GetById(
@@ -54,8 +55,6 @@ public partial class AuthorizationBLLContext(
     public ICurrentUser CurrentUser { get; } = currentUser;
 
     public IRunAsManager RunAsManager { get; } = runAsManager;
-
-    public IRootSecurityService SecurityService { get; } = securityService;
 
     public override IAuthorizationBLLFactoryContainer Logics { get; } = logics;
 

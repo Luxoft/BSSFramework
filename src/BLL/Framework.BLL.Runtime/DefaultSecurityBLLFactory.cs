@@ -2,13 +2,12 @@
 using Anch.SecuritySystem.Providers;
 
 using Framework.Application.Domain;
-using Framework.BLL.Services;
 
 namespace Framework.BLL;
 
 public abstract class DefaultSecurityBLLFactory<TBLLContext, TPersistentDomainObjectBase, TIdent>(TBLLContext context) : BLLContextContainer<TBLLContext>(context),
     IDefaultSecurityBLLFactory<TPersistentDomainObjectBase, TIdent>
-    where TBLLContext : class, ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>, ISecurityServiceContainer<IRootSecurityService>
+    where TBLLContext : class, ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 {
     public virtual IDefaultDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>()

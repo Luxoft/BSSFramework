@@ -11,7 +11,7 @@ namespace Framework.Authorization.BLL
 {
     
     
-    public partial interface IAuthorizationBLLContext : Framework.BLL.IAccessDeniedExceptionServiceContainer, Framework.BLL.Services.ISecurityServiceContainer<Framework.BLL.Services.IRootSecurityService>, Framework.BLL.IBLLFactoryContainerContext<Framework.Authorization.BLL.IAuthorizationBLLFactoryContainer>
+    public partial interface IAuthorizationBLLContext : Framework.BLL.ISecurityBLLContext<Framework.Authorization.Domain.PersistentDomainObjectBase, System.Guid>, Framework.BLL.IBLLFactoryContainerContext<Framework.Authorization.BLL.IAuthorizationBLLFactoryContainer>
     {
         
         new Framework.Authorization.BLL.IAuthorizationBLLFactoryContainer Logics

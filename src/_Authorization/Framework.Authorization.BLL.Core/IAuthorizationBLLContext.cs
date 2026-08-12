@@ -6,12 +6,11 @@ using Anch.SecuritySystem.Services;
 using Anch.SecuritySystem.UserSource;
 
 using Framework.Authorization.Domain;
-using Framework.BLL;
 using Framework.Validation;
 
 namespace Framework.Authorization.BLL;
 
-public partial interface IAuthorizationBLLContext : ISecurityBLLContext<PersistentDomainObjectBase, Guid>
+public partial interface IAuthorizationBLLContext
 {
     IValidator Validator { get; }
 

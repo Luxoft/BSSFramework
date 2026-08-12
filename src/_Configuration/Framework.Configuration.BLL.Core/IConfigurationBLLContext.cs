@@ -2,7 +2,6 @@
 
 using Framework.Application.Events;
 using Framework.Application.Lock;
-using Framework.BLL;
 using Framework.BLL.Domain.TargetSystem;
 using Framework.Configuration.BLL.TargetSystemService;
 using Framework.Configuration.Domain;
@@ -13,7 +12,7 @@ using Framework.Validation;
 
 namespace Framework.Configuration.BLL;
 
-public partial interface IConfigurationBLLContext : ISecurityBLLContext<PersistentDomainObjectBase, Guid>
+public partial interface IConfigurationBLLContext
 {
     IValidator Validator { get; }
 
@@ -31,4 +30,3 @@ public partial interface IConfigurationBLLContext : ISecurityBLLContext<Persiste
 
     DomainType? TryGetDomainType(TypeNameIdentity type);
 }
-

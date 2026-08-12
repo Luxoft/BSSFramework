@@ -1,9 +1,17 @@
-﻿using Framework.Application.Domain;
+﻿using Anch.SecuritySystem.AccessDenied;
+
+using Framework.Application.Domain;
+using Framework.BLL.Services;
 
 namespace Framework.BLL;
 
-public interface ISecurityBLLContext<in TPersistentDomainObjectBase, TIdent> :
+public interface ISecurityBLLContext : IDefaultBLLContext
+{
+    IRootSecurityService SecurityService { get; }
 
-    IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>
+    IAccessDeniedExceptionService AccessDeniedExceptionService { get; }
+}
 
+
+public interface ISecurityBLLContext<in TPersistentDomainObjectBase, TIdent> : IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>, ISecurityBLLContext
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>;

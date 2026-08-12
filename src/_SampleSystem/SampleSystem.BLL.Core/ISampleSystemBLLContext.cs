@@ -3,16 +3,14 @@ using Anch.SecuritySystem.SecurityAccessor;
 using Anch.SecuritySystem.UserSource;
 
 using Framework.Authorization.BLL;
-using Framework.BLL;
 using Framework.Configuration.BLL;
 using Framework.Validation;
 
-using SampleSystem.Domain;
 using SampleSystem.Domain.Employee;
 
 namespace SampleSystem.BLL;
 
-public partial interface ISampleSystemBLLContext : ISecurityBLLContext<PersistentDomainObjectBase, Guid>
+public partial interface ISampleSystemBLLContext
 {
     ICurrentUserSource<Employee> CurrentEmployeeSource { get; }
 

@@ -20,8 +20,7 @@ public class DefaultSecurityDomainBLLBase<TBLLContext, TPersistentDomainObjectBa
 
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     where TDomainObject : class, TPersistentDomainObjectBase
-    where TBLLContext : class, ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>, IAccessDeniedExceptionServiceContainer,
-    IHierarchicalObjectExpanderFactoryContainer
+    where TBLLContext : class, ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>
     where TIdent : notnull
 {
     public ISecurityProvider<TDomainObject> SecurityProvider { get; } = securityProvider;

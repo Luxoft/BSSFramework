@@ -7,7 +7,6 @@ using Framework.BLL;
 using Framework.BLL.Domain.DTO;
 using Framework.BLL.Domain.Extensions;
 using Framework.BLL.DTOMapping.Domain;
-using Framework.BLL.Services;
 using Framework.Core;
 using Framework.Core.TypeResolving;
 using Framework.Database.Domain;
@@ -17,14 +16,12 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Infrastructure.Services;
 
-public class AuditService<TIdent, TBLLContext, TBllFactoryContainer, TRootSecurityService, TPersistentObjectBase,
+public class AuditService<TBLLContext, TPersistentDomainObjectBase, TIdent,
                           TDomainPropertyRevisionsDto, TPropertyRevisionDto>(TBLLContext bllContext)
     where TDomainPropertyRevisionsDto : DomainObjectPropertiesRevisionDTO<TIdent, TPropertyRevisionDto>, new()
     where TPropertyRevisionDto : PropertyRevisionDTOBase
-    where TPersistentObjectBase : class, IIdentityObject<TIdent>
-    where TBllFactoryContainer : IBLLFactoryContainer<IDefaultBLLFactory<TPersistentObjectBase, TIdent>>
-    where TBLLContext : IBLLFactoryContainerContext<TBllFactoryContainer>, ISecurityServiceContainer<TRootSecurityService>, IServiceProviderContainer
-    where TRootSecurityService : IRootSecurityService
+    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
+    where TBLLContext : ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>
 {
     private static readonly Lazy<Type> GenericTPropertyRevisionDtoType = new(
      () => typeof(TPropertyRevisionDto)
@@ -34,7 +31,7 @@ public class AuditService<TIdent, TBLLContext, TBllFactoryContainer, TRootSecuri
            .Single(z => typeof(TPropertyRevisionDto).IsAssignableFrom(z)), true);
 
     public TDomainPropertyRevisionsDto GetPropertyChanges<TDomain>(TIdent id, string propertyName, Period? period = null)
-            where TDomain : class, TPersistentObjectBase
+            where TDomain : class, TPersistentDomainObjectBase
     {
         var propertyInfo = typeof(TDomain).GetProperties().FirstOrDefault(z => string.Equals(z.Name, propertyName, StringComparison.InvariantCultureIgnoreCase));
 
@@ -51,7 +48,7 @@ public class AuditService<TIdent, TBLLContext, TBllFactoryContainer, TRootSecuri
     }
 
     private TDomainPropertyRevisionsDto GetPropertyChanged<TDomain, TProperty>(TIdent id, string propertyName, PropertyInfo propertyInfo, Period? period = null)
-            where TDomain : class, TPersistentObjectBase
+            where TDomain : class, TPersistentDomainObjectBase
     {
 
         var propertyChanged = bllContext.Logics.Default.Create<TDomain>().GetPropertyChanges<TProperty>(id, propertyName, period);
@@ -72,7 +69,7 @@ public class AuditService<TIdent, TBLLContext, TBllFactoryContainer, TRootSecuri
             }
         }
 
-        if (typeof(TPersistentObjectBase).IsAssignableFrom(typeof(TProperty)))
+        if (typeof(TPersistentDomainObjectBase).IsAssignableFrom(typeof(TProperty)))
         {
             var typeResolver = bllContext.ServiceProvider.GetRequiredKeyedService<ITypeResolver<TypeNameIdentity>>("DTO");
 
@@ -94,7 +91,7 @@ public class AuditService<TIdent, TBLLContext, TBllFactoryContainer, TRootSecuri
     }
 
     private bool HasAccess<TDomain>(TDomain domainObject, PropertyInfo propertyInfo)
-        where TDomain : class, TPersistentObjectBase
+        where TDomain : class, TPersistentDomainObjectBase
     {
         var viewSecurityRule = propertyInfo.GetViewSecurityRule()!;
 

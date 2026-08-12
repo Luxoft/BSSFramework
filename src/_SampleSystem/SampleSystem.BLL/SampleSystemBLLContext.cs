@@ -22,12 +22,12 @@ namespace SampleSystem.BLL;
 public partial class SampleSystemBLLContext(
     IServiceProvider serviceProvider,
     [FromKeyedServices(nameof(BLL))] IEventOperationSender operationSender,
-    IAccessDeniedExceptionService accessDeniedExceptionService,
     IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
+    IRootSecurityService securityService,
+    IAccessDeniedExceptionService accessDeniedExceptionService,
     ITrackingService<PersistentDomainObjectBase> trackingService,
     ISelectOperationParser selectOperationParser,
     ISampleSystemValidator validator,
-    IRootSecurityService securityService,
     ISampleSystemBLLFactoryContainer logics,
     IAuthorizationBLLContext authorization,
     IConfigurationBLLContext configuration,
@@ -36,11 +36,10 @@ public partial class SampleSystemBLLContext(
     : SecurityBLLBaseContext<PersistentDomainObjectBase, Guid, ISampleSystemBLLFactoryContainer>(
         serviceProvider,
         operationSender,
-        accessDeniedExceptionService,
-        hierarchicalObjectExpanderFactory)
+        hierarchicalObjectExpanderFactory,
+        securityService,
+        accessDeniedExceptionService)
 {
-    public IRootSecurityService SecurityService { get; } = securityService;
-
     public ISecurityAccessorResolver SecurityAccessorResolver { get; } = securityAccessorResolver;
 
     public override ISampleSystemBLLFactoryContainer Logics { get; } = logics;

@@ -1,7 +1,6 @@
 ﻿using Anch.SecuritySystem.Providers;
 
 using Framework.Application.Domain;
-using Framework.BLL.Services;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,7 +8,7 @@ namespace Framework.BLL;
 
 public abstract class ImplementedSecurityBLLFactory<TBLLContext, TPersistentDomainObjectBase, TIdent>(TBLLContext context) :
     DefaultSecurityBLLFactory<TBLLContext, TPersistentDomainObjectBase, TIdent>(context)
-    where TBLLContext : class, ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>, ISecurityServiceContainer<IRootSecurityService>
+    where TBLLContext : class, ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 {
     public sealed override IDefaultSecurityDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>(

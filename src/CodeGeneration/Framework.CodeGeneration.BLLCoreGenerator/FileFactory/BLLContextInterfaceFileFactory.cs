@@ -4,6 +4,7 @@ using Framework.BLL;
 using Framework.BLL.Services;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.Configuration;
+using Framework.FileGeneration.Configuration;
 
 namespace Framework.CodeGeneration.BLLCoreGenerator.FileFactory;
 
@@ -24,11 +25,10 @@ public class BLLContextInterfaceFileFactory<TConfiguration>(TConfiguration confi
 
     protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {
-        var securityServiceFieldTypeRef = this.Configuration.ActualRootSecurityServiceInterfaceType;
+        yield return typeof(ISecurityBLLContext<,>).MakeGenericType(
+            this.Configuration.Environment.PersistentDomainObjectBaseType,
+            this.Configuration.Environment.GetIdentityType()).ToTypeReference();
 
-        yield return new CodeTypeReference(typeof(IAccessDeniedExceptionServiceContainer));
-
-        yield return new CodeTypeReference(typeof(ISecurityServiceContainer<>)) { TypeArguments = { securityServiceFieldTypeRef } };
         yield return typeof(IBLLFactoryContainerContext<>).ToTypeReference(this.Configuration.GetCodeTypeReference(null, FileType.BLLFactoryContainerInterface));
     }
 

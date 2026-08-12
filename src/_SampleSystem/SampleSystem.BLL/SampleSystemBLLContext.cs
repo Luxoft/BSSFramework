@@ -25,7 +25,6 @@ public partial class SampleSystemBLLContext(
     IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
     IRootSecurityService securityService,
     IAccessDeniedExceptionService accessDeniedExceptionService,
-    ITrackingService<PersistentDomainObjectBase> trackingService,
     ISelectOperationParser selectOperationParser,
     ISampleSystemValidator validator,
     ISampleSystemBLLFactoryContainer logics,
@@ -49,8 +48,6 @@ public partial class SampleSystemBLLContext(
     public ICurrentUserSource<Employee> CurrentEmployeeSource { get; } = currentEmployeeSource;
 
     public IConfigurationBLLContext Configuration { get; } = configuration;
-
-    public ITrackingService<PersistentDomainObjectBase> TrackingService { get; } = trackingService;
 
     public ISelectOperationParser SelectOperationParser { get; } = selectOperationParser;
 

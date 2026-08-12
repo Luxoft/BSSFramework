@@ -29,4 +29,3 @@ public class BLLFactoryInterfaceFileFactory<TConfiguration>(TConfiguration confi
         yield return typeof(ISecurityBLLFactory<,>).ToTypeReference(bllInterfaceTypeRef, this.DomainType!.ToTypeReference());
     }
 }
-

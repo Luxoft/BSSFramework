@@ -8,4 +8,3 @@ public class IntegrationWebApi(IServiceProvider serviceProvider) : IntegrationWe
 {
     protected override string IntegrationUserName { get; } = DefaultConstants.INTEGRATION_BUS;
 }
-

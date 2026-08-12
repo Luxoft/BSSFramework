@@ -171,4 +171,3 @@ public static class SampleSystemDomainSecurityServiceExtensions
                 .AddDomainSecurity<TestLegacyEmployee>(b => b.SetUntypedDependency<Employee>());
     }
 }
-

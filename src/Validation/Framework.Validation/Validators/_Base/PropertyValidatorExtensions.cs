@@ -99,4 +99,3 @@ public static class PropertyValidatorExtensions
         public ValidationResult GetValidationResult(IPropertyValidationContext<TExpectedSource, TExpectedProperty> context) => basePropertyValidator.GetValidationResult(context.Box<TExpectedSource, TBaseSource, TExpectedProperty, TBaseProperty>());
     }
 }
-

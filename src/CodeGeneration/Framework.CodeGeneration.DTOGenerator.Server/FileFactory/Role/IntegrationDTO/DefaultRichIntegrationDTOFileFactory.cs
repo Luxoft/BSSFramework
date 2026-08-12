@@ -36,4 +36,3 @@ public class DefaultRichIntegrationDTOFileFactory<TConfiguration>(TConfiguration
         }
     }
 }
-

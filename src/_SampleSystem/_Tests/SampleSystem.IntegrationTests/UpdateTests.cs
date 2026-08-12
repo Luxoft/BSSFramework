@@ -132,4 +132,3 @@ public abstract class UpdateTests(IServiceProvider rootServiceProvider) : TestBa
         Assert.True(createdItems[0].Value.Field2.HasValue);
     }
 }
-

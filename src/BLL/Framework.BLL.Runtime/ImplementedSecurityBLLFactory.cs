@@ -31,4 +31,3 @@ public abstract class ImplementedSecurityBLLFactory<TBLLContext, TPersistentDoma
         ISecurityProvider<TDomainObject> securityProvider)
         where TDomainObject : class, TPersistentDomainObjectBase;
 }
-

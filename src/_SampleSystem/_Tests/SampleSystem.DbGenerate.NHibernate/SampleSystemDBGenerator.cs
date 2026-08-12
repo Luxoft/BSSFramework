@@ -23,4 +23,3 @@ public class SampleSystemDBGenerator(MappingSettings settings) : DBGenerator(set
         return tableAttribute is null || tableAttribute.Schema == "app";
     }
 }
-

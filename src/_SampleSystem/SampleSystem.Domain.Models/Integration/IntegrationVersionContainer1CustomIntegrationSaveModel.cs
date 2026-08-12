@@ -14,4 +14,3 @@ public class IntegrationVersionContainer1CustomIntegrationSaveModel : DomainObje
         set;
     } = null!;
 }
-

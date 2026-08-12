@@ -18,4 +18,3 @@ public interface IFileTypeSource<out TFileType>
 {
     TFileType FileType { get; }
 }
-

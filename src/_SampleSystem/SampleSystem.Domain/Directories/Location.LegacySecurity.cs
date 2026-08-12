@@ -10,4 +10,3 @@ public interface ILocationSecurityElement<out TLocation>
 {
     TLocation Location { get; }
 }
-

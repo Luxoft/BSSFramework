@@ -56,4 +56,3 @@ public abstract class FileStoreGeneratorConfigurationBase<TEnvironment> : Servic
 
     public record FileStoreBLLParameter(Type Type, SecurityRule SecurityRule, bool IsEdit);
 }
-

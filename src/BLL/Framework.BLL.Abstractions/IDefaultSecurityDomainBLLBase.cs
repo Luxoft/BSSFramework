@@ -21,4 +21,3 @@ public interface IDefaultSecurityDomainBLLBase<out TBLLContext, in TPersistentDo
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     where TDomainObject : class, TPersistentDomainObjectBase
     where TBLLContext : IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>;
-

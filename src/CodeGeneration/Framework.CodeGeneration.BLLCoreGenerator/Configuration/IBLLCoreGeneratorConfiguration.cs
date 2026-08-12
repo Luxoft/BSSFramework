@@ -70,4 +70,3 @@ public interface IBLLCoreGeneratorConfiguration : ICodeGeneratorConfiguration, I
     CodeExpression GetSecurityCodeExpression(SecurityRule securityRule);
 }
 #pragma warning restore S100 // Methods and properties should be named in camel case
-

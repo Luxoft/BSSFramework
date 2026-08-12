@@ -104,7 +104,7 @@ public static class DefaultDomainBLLBaseExtensions
     {
         if (bll is null) throw new ArgumentNullException(nameof(bll));
         if (domainObjects is null) throw new ArgumentNullException(nameof(domainObjects));
-        
+
         domainObjects.Foreach(bll.Insert);
     }
 
@@ -125,4 +125,3 @@ public static class DefaultDomainBLLBaseExtensions
         }
     }
 }
-

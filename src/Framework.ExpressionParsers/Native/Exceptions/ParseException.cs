@@ -8,4 +8,3 @@ public class ParseException(string message, int position) : Exception(message)
 
     public override string ToString() => string.Format(ExpressionParsersResources.ParseExceptionFormat, this.Message, position);
 }
-

@@ -35,4 +35,3 @@ public interface IDBSession : ICurrentRevisionService, IAsyncDisposable, IDispos
 
     void IDisposable.Dispose() => this.DisposeAsync().GetAwaiter().GetResult();
 }
-

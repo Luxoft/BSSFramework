@@ -40,4 +40,3 @@ public class DomainObjectNotification : AuditPersistentDomainObjectBase
         set => this.size = value;
     }
 }
-

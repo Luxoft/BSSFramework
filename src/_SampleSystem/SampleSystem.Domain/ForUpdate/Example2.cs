@@ -37,4 +37,3 @@ public class Example2 : AuditPersistentDomainObjectBase, IDetail<Example1>
 
     Example1 IDetail<Example1>.Master => this.Parent;
 }
-

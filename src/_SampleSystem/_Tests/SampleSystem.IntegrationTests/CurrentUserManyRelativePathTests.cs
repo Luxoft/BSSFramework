@@ -69,4 +69,3 @@ public abstract class CurrentUserManyRelativePathTests(IServiceProvider rootServ
         Assert.Equal(expectedResult, results);
     }
 }
-

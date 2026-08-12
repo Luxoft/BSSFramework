@@ -20,4 +20,3 @@ public abstract class TemplateRepositoryFactory<TRepository, TRepositoryImpl, TD
     public TRepository Create(ISecurityProvider<TDomainObject> securityProvider) =>
         serviceProxyFactory.Create<TRepository, TRepositoryImpl>(securityProvider);
 }
-

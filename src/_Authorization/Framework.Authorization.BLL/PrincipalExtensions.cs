@@ -12,4 +12,3 @@ public static class PrincipalExtensions
     public static PermissionData<Permission, PermissionRestriction> ToPermissionData(this Permission permission) =>
         new(permission, permission.Restrictions.ToArray());
 }
-

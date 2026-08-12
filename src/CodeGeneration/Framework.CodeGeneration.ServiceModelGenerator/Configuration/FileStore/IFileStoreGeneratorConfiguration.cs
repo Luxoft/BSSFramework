@@ -24,4 +24,3 @@ public interface IFileStoreGeneratorConfiguration : ICodeGeneratorConfiguration
 
     SecurityRule? TryGetSecurityAttribute(Type type, bool isEdit);
 }
-

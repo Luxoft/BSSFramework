@@ -6,4 +6,3 @@ public interface ISmtpClientFactory
 {
     SmtpClient CreateSmtpClient();
 }
-

@@ -60,4 +60,3 @@ public class ManagementUnitFluentMapping :
 
     ManagementUnitFluentMapping IUnit<ManagementUnitFluentMapping>.CurrentObject => this;
 }
-

@@ -35,4 +35,3 @@ public class DependencySecurityAttribute : Attribute, IPathAttribute
     /// </summary>
     public bool IsUntyped => this.Path == string.Empty;
 }
-

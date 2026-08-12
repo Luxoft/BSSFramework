@@ -15,4 +15,3 @@ public static class InlineAttachmentHelper
         return Regex.Replace(body, pattern, $"src=\"cid:{contentId}\"", RegexOptions.IgnoreCase);
     }
 }
-

@@ -11,4 +11,3 @@ public partial class CountryBLL(
 {
     // Manual BLL Constructor example. For configuration see BLLGeneratorConfiguration.cs
 }
-

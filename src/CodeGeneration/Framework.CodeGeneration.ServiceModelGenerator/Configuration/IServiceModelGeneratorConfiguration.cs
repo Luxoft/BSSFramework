@@ -25,4 +25,3 @@ public interface IServiceModelGeneratorConfiguration : ICodeGeneratorConfigurati
 
 public interface IServiceModelGeneratorConfiguration<out TEnvironment> : IServiceModelGeneratorConfiguration, ICodeGeneratorConfiguration<TEnvironment, FileType>
         where TEnvironment : IServiceModelGenerationEnvironment;
-

@@ -69,4 +69,3 @@ public partial class PermissionBLL
         this.ChangeDelegatePermissions(changePermissionDelegatesModel);
     }
 }
-

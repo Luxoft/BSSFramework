@@ -3,4 +3,3 @@
 namespace SampleSystem.CodeGenerate.Configurations.Services.Integration;
 
 public class IntegrationGeneratorConfiguration(ServerGenerationEnvironment environment) : IntegrationGeneratorConfigurationBase<ServerGenerationEnvironment>(environment);
-

@@ -60,4 +60,3 @@ public record BusinessUnitDto(Guid Id, string Name)
     {
     }
 }
-

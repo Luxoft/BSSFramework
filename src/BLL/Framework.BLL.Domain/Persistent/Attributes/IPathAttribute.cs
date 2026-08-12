@@ -8,4 +8,3 @@ public interface IPathAttribute
 
     public PropertyPath GetPropertyPath(Type domainType) => new(domainType, this.Path);
 }
-

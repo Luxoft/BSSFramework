@@ -273,4 +273,3 @@ public class CSharpCodeDomRenderer(CodeDomProvider provider, CodeGeneratorOption
         }
     }
 }
-

@@ -9,4 +9,3 @@ public interface IDomainObjectIntegrationSaveModel<out TDomainObject>
     [Required]
     TDomainObject SavingObject { get; }
 }
-

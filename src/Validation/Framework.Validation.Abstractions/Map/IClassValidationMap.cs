@@ -34,4 +34,3 @@ public interface IClassValidationMap<in TSource> : IClassValidationMap, IValidat
     /// </summary>
     new IReadOnlyCollection<IPropertyValidationMap<TSource>> PropertyMaps { get; }
 }
-

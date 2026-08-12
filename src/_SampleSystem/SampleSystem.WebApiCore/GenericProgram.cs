@@ -117,4 +117,3 @@ public static class GenericProgram
         await app.RunAsync();
     }
 }
-

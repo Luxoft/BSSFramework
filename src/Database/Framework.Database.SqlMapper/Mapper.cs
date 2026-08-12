@@ -17,4 +17,3 @@ public abstract class Mapper<TFieldMetadata> : IMapper
         return nullableAttributes.Any() || field.Type.IsClass;
     }
 }
-

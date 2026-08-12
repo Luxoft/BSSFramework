@@ -17,4 +17,3 @@ public class DomainTypeMap : ConfigurationBaseMap<DomainType>
         this.HasMany(x => x.EventOperations).AsSet().Inverse().Cascade.AllDeleteOrphan();
     }
 }
-

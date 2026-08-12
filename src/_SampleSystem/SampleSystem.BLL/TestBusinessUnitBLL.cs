@@ -16,4 +16,3 @@ public partial class TestBusinessUnitBLL
             FetchRule<TestBusinessUnit> fetchs) =>
         this.GetTreeByOData(selectOperation, fetchs);
 }
-

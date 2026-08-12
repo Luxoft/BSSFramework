@@ -29,4 +29,3 @@ public class BLLCoreFileGenerator<TConfiguration>(TConfiguration configuration) 
         }
     }
 }
-

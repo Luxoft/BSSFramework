@@ -11,4 +11,3 @@ public class IdentityRevisionEntityInfo<TRevisionEntity, TIdentity>(TRevisionEnt
 
     public RevisionType Operation { get; } = operation;
 }
-

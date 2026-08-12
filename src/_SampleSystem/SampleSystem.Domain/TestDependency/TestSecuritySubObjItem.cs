@@ -24,4 +24,3 @@ public class TestSecuritySubObjItem : BaseDirectory, IDetail<TestSecurityObjItem
 
     TestSecurityObjItem IDetail<TestSecurityObjItem>.Master => this.InnerMaster;
 }
-

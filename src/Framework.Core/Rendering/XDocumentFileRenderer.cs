@@ -32,4 +32,3 @@ public class XDocumentFileRenderer(Func<StringBuilder, TextWriter> createWriter)
 
     public static readonly XDocumentFileRenderer Default = new(Encoding.UTF8);
 }
-

@@ -14,4 +14,3 @@ public class DeepSingleValidator<TSource, TProperty> : IPropertyValidator<TSourc
     /// <inheritdoc />
     public ValidationResult GetValidationResult(IPropertyValidationContext<TSource, TProperty> validationContext) => validationContext.Value.Pipe(value => validationContext.Validator.GetValidationResult(value, validationContext.OperationContext, new ValidationState(validationContext.ParentState, validationContext.Map, validationContext.Source!)));
 }
-

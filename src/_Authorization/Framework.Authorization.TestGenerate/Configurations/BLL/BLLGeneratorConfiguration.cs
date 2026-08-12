@@ -3,4 +3,3 @@
 namespace Framework.Authorization.TestGenerate.Configurations.BLL;
 
 public class BLLGeneratorConfiguration(AuthorizationGenerationEnvironment environment) : BLLGeneratorConfigurationBase<AuthorizationGenerationEnvironment>(environment);
-

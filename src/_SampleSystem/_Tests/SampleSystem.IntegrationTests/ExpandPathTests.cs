@@ -89,4 +89,3 @@ public abstract class ExpandPathTests(IServiceProvider rootServiceProvider) : Te
         action();
     }
 }
-

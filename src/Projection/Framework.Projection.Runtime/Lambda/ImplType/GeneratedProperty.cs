@@ -65,4 +65,3 @@ internal class GeneratedProperty : BasePropertyInfoImpl, IWrappingObject
 
     public override string ToString() => $"GeneratedProperty: {this.Name}";
 }
-

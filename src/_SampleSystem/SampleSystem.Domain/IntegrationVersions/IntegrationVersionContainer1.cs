@@ -14,4 +14,3 @@ public class IntegrationVersionContainer1 : ExternalDomainObject
         set => this.name = value;
     }
 }
-

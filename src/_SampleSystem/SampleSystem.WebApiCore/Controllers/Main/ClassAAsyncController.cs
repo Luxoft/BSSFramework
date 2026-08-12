@@ -35,4 +35,3 @@ public class ClassAAsyncController(
         await mediator.Send(new CreateClassAEvent(value), ct);
     }
 }
-

@@ -264,4 +264,3 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration>(IDTOSource<TConfi
         return statement;
     }
 }
-

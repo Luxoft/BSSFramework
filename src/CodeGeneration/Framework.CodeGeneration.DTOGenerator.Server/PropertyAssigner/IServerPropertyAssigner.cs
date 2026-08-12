@@ -28,4 +28,3 @@ public abstract class ServerPropertyAssigner<TConfiguration>(IDTOSource<TConfigu
     public CodeParameterDeclarationExpression DomainParameter => this.DomainType!.GetDomainObjectParameter();
 
 }
-

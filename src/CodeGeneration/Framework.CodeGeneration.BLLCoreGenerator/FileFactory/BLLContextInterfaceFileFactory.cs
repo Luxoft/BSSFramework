@@ -43,4 +43,3 @@ public class BLLContextInterfaceFileFactory<TConfiguration>(TConfiguration confi
         };
     }
 }
-

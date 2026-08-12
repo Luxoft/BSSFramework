@@ -117,4 +117,3 @@ public class CSharpNativeExpressionParser(INativeBodyExpressionParser parser) : 
     /// <returns></returns>
     public static readonly CSharpNativeExpressionParser Compile = new(new RoslynCSharpExpressionParser());
 }
-

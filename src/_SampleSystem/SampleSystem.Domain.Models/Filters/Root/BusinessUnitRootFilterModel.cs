@@ -51,4 +51,3 @@ public class BusinessUnitRootFilterModel : DomainObjectRootFilterModel<BusinessU
     /// </value>
     public Period[]? ArrayPeriods { get; set; }
 }
-

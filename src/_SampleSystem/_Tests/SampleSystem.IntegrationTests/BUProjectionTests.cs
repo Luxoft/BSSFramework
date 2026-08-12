@@ -89,4 +89,3 @@ public abstract class BUProjectionTests(IServiceProvider rootServiceProvider) : 
         Assert.Equal(expectedHer, item.HerBusinessUnit_Full);
     }
 }
-

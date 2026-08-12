@@ -44,4 +44,3 @@ public class ValidationMapFileFactory<TConfiguration>(TConfiguration configurati
         }
     }
 }
-

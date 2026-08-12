@@ -32,4 +32,3 @@ public class LocalDbObjectModificationProcessor : BLLContextContainer<IConfigura
         this.Context.Logics.Default.Create<DomainObjectModification>().Save(domainObjectModification);
     }
 }
-

@@ -26,4 +26,3 @@ public static class EqualsHelper<T>
         return expr.Compile();
     }
 }
-

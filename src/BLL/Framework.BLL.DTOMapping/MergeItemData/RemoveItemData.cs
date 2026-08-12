@@ -22,4 +22,3 @@ public class RemoveItemData<TValue, TIdentity> : UpdateItemData<TValue, TIdentit
     [DataMember]
     public TIdentity Identity { get; private set; }
 }
-

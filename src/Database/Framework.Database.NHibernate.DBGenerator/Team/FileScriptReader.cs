@@ -81,4 +81,3 @@ public class FileScriptReader(string directoryPath) : IMigrationScriptReader
         }
     }
 }
-

@@ -15,4 +15,3 @@ public abstract class ExternalDomainObject : AuditPersistentDomainObjectBase
         set => this.integrationVersion = value;
     }
 }
-

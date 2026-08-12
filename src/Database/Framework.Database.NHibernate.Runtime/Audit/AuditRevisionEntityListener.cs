@@ -20,4 +20,3 @@ public class AuditRevisionEntityListener<TAuditRevisionEntity>(ICurrentUser defa
 
     private void SetAuthor(TAuditRevisionEntity revisionEntity) => revisionEntity.Author = defaultCurrentUser.Name;
 }
-

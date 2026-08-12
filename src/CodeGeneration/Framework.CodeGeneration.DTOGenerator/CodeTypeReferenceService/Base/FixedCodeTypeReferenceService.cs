@@ -23,4 +23,3 @@ public class FixedCodeTypeReferenceService<TConfiguration>(
 
     public override RoleFileType GetCollectionFileType(PropertyInfo _) => this.collectionFileType;
 }
-

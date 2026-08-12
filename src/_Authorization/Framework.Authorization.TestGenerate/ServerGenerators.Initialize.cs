@@ -8,4 +8,3 @@ public partial class ServerGenerators(AuthorizationGenerationEnvironment? enviro
 
     protected override string GeneratePath => this.FrameworkPath + @"/src/_Authorization";
 }
-

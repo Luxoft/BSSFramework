@@ -56,4 +56,3 @@ public class WebApiNetCoreFileFactory<TConfiguration>(
             .Concat(base.GetMembers())
             .OrderBy(z => z.Name);
 }
-

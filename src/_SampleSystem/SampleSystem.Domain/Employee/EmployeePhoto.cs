@@ -59,4 +59,3 @@ public class EmployeePhoto : AuditPersistentDomainObjectBase, IDetail<Employee>
 
     Employee IDetail<Employee>.Master => this.Employee;
 }
-

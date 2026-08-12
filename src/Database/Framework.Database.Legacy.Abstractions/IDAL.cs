@@ -29,4 +29,3 @@ public interface IDAL<TDomainObject, TIdent> : IAuditDAL<TDomainObject, TIdent>
 
     void Remove(TDomainObject domainObject);
 }
-

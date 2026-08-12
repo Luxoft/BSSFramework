@@ -10,4 +10,3 @@ public partial interface IDomainObjectEventBLL
     /// <returns></returns>
     QueueProcessingState GetProcessingState();
 }
-

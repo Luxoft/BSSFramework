@@ -22,4 +22,3 @@ public class ConfiguratorApplicationVariableModule : IConfiguratorModule
         endpointsBuilder.Get<IGetSystemConstantsHandler>($"{route}/api/constants")
                         .Post<IUpdateSystemConstantHandler>(route + "/api/constant/{name}");
 }
-

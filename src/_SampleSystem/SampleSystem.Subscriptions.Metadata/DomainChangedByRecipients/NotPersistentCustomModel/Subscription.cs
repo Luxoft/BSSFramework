@@ -49,4 +49,3 @@ public class Subscription : Subscription<Domain.Directories.Country, CustomNotif
         yield return new(new MemoryStream(Encoding.UTF8.GetBytes("Hello world!")), AttachmentName);
     }
 }
-

@@ -70,4 +70,3 @@ public class GetChangeModelMethodGenerator<TConfiguration> : ModelMethodGenerato
         return modelSecurityAttribute.SecurityRule;
     }
 }
-

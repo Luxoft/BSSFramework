@@ -33,4 +33,3 @@ public interface IMainDBScriptGeneratorBuilder : IConfigurable
 
     IMigrationScriptGeneratorBuilder MigrationBuilder { get; }
 }
-

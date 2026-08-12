@@ -9,4 +9,3 @@ public static class BssFrameworkBuilderSetupExtensions
 
         setup.AddExtensions(new BssFrameworkExtension(services => services.AddEntityFramework(setupAction)));
 }
-

@@ -299,4 +299,3 @@ public partial class DataManager
                 context.Logics.RoleRoleDegreeLink.Insert(result, result.Id);
             });
 }
-

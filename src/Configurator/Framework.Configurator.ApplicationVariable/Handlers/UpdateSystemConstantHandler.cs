@@ -24,4 +24,3 @@ public class UpdateSystemConstantHandler(
         await variableStorage.UpdateVariableAsync(variableName, newValue, ct);
     }
 }
-

@@ -102,4 +102,3 @@ public static class DTOGeneratorConfigurationExtensions
         return configuration.GetCodeTypeReference(domainType, dtoType);
     }
 }
-

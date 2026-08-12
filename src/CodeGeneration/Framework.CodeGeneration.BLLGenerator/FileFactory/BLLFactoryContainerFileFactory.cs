@@ -150,4 +150,3 @@ public class BLLFactoryContainerFileFactory<TConfiguration>(TConfiguration confi
         yield return serviceCollectionRef.ToStaticMethodInvokeExpression(addScopedMethod).ToExpressionStatement();
     }
 }
-

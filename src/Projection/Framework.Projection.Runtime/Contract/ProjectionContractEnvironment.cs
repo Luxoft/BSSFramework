@@ -64,4 +64,3 @@ public abstract class ProjectionContractEnvironment : ProjectionEnvironmentBase
         public override Type PersistentDomainObjectBaseType { get; } = persistentDomainObjectBaseType;
     }
 }
-

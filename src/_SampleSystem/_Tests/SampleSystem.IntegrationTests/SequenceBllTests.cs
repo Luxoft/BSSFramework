@@ -115,4 +115,3 @@ public abstract class SequenceBllTests(IServiceProvider rootServiceProvider) : T
         }
     }
 }
-

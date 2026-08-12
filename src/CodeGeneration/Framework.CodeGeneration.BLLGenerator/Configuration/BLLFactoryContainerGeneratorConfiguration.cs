@@ -20,4 +20,3 @@ public class BLLFactoryContainerGeneratorConfiguration<TConfiguration>(TConfigur
     }
 
 }
-

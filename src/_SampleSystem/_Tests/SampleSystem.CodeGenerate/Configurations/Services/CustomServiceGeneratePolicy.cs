@@ -41,4 +41,3 @@ public class CustomServiceGeneratePolicy(IServiceModelGenerationEnvironment gene
         return base.Used(domainType, identity);
     }
 }
-

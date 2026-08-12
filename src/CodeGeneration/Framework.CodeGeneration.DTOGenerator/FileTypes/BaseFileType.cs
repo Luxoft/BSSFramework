@@ -124,4 +124,3 @@ public record BaseFileType(string Name)
         }
     }
 }
-

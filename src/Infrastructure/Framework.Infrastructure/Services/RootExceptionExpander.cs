@@ -13,4 +13,3 @@ public class RootExceptionExpander([FromKeyedServices(IExceptionExpander.Element
         return result == exception ? null : result;
     }
 }
-

@@ -77,4 +77,3 @@ public abstract class SecurityRuleTests(IServiceProvider rootServiceProvider) : 
         Assert.Equal(faultMessage, accessDeniedException.Message);
     }
 }
-

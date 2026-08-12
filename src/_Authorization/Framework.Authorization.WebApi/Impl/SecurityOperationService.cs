@@ -19,4 +19,3 @@ public partial class AuthMainController
                      .ToListAsync(ct);
     }
 }
-

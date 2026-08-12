@@ -20,4 +20,3 @@ public class GeneratePropertyMap(PropertyInfo property, Type elementType, RoleFi
 
     public override string ToString() => $"Name: {this.Property.Name} | ElementFileType: {this.ElementFileType} | ElementType: {this.ElementType}";
 }
-

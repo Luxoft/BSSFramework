@@ -112,4 +112,3 @@ public class ProjectionTypeAttributeSource : AttributeSourceBase<IProjection>
 
     private ProjectionAttribute CreateProjectionAttribute() => new(this.SourceType, this.ProjectionValue.Role);
 }
-

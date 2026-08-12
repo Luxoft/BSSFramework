@@ -14,4 +14,3 @@ public abstract class ExpressionVisitorAggregator : IExpressionVisitorContainer
 
     protected abstract IEnumerable<ExpressionVisitor> GetVisitors();
 }
-

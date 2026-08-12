@@ -63,4 +63,3 @@ public class GetODataListByQueryStringWithOperationMethodGenerator<TConfiguratio
                              .ToMethodReturnStatement();
     }
 }
-

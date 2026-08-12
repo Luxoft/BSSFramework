@@ -73,4 +73,3 @@ public class RemoveManyMethodGenerator<TConfiguration>(RemoveMethodGenerator<TCo
                          .ToExpressionStatement();
     }
 }
-

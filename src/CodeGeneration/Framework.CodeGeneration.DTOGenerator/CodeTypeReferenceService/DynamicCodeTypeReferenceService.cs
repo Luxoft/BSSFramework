@@ -49,4 +49,3 @@ public class DynamicCodeTypeReferenceService<TConfiguration>(TConfiguration conf
         return this.detailFileType;
     }
 }
-

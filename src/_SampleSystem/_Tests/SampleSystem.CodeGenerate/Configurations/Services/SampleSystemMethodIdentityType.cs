@@ -12,4 +12,3 @@ public static class SampleSystemMethodIdentityType
     /// </summary>
     public static readonly MethodIdentityType ComplexChange = new(nameof(ComplexChange));
 }
-

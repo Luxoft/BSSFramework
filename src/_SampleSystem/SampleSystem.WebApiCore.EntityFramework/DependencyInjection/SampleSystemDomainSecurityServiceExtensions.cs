@@ -19,4 +19,3 @@ public static class SampleSystemDomainSecurityServiceExtensions
                         employee => employee.CoreBusinessUnit,
                         true));
 }
-

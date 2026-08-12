@@ -68,4 +68,3 @@ public class ManagementUnitAndHRDepartmentLink :
 
     string IVisualIdentityObject.Name => this.HRDepartment.Maybe(x => x.Name) + "-" + this.ManagementUnit.Maybe(x => x.Name);
 }
-

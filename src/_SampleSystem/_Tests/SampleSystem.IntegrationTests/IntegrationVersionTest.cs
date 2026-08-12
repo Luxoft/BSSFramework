@@ -355,4 +355,3 @@ public abstract class IntegrationVersionTest(IServiceProvider rootServiceProvide
         Assert.Equal(expectedIntegrationVersion + 1, actual.IntegrationVersion);
     }
 }
-

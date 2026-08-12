@@ -101,4 +101,3 @@ public abstract class EventsSubscriptionManager<TPersistentDomainObjectBase> : I
         public required Func<TDomainObject, EventOperation, DomainOperationSerializeData<TDomainObject>> CreateMessage { get; init; }
     }
 }
-

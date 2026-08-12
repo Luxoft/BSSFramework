@@ -11,4 +11,3 @@ public class FixedPropertyValidatorAttribute : PropertyValidatorAttribute
 {
     public override IPropertyValidator CreateValidator() => new FixedPropertyValidator();
 }
-

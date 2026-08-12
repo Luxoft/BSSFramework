@@ -40,4 +40,3 @@ public class TestRootSecurityObj : BaseDirectory, IMaster<TestSecurityObjItem>
 
     ICollection<TestSecurityObjItem> IMaster<TestSecurityObjItem>.Details => (ICollection<TestSecurityObjItem>)this.Items;
 }
-

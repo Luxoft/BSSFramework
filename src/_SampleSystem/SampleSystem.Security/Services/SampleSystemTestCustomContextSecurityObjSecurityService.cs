@@ -10,4 +10,3 @@ public class SampleSystemTestCustomContextSecurityObjSecurityService : DomainSec
 {
     protected override ISecurityProvider<TestCustomContextSecurityObj> CreateSecurityProvider(SecurityRule securityRule) => new AccessDeniedSecurityProvider<TestCustomContextSecurityObj>();
 }
-

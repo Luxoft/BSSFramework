@@ -25,4 +25,3 @@ public interface IRepository<TDomainObject>
 
     Task LockAsync(TDomainObject domainObject, LockRole lockRole, CancellationToken ct);
 }
-

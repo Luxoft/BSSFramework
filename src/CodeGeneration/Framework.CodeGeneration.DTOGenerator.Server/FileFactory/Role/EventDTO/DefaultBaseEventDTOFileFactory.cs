@@ -54,4 +54,3 @@ public class DefaultBaseEventDTOFileFactory<TConfiguration>(TConfiguration confi
             TypeAttributes = TypeAttributes.Public | TypeAttributes.Abstract
         };
 }
-

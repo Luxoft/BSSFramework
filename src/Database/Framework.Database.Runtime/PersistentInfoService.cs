@@ -12,4 +12,3 @@ public class PersistentInfoService : IPersistentInfoService
 
     public bool IsPersistent(PropertyInfo propertyInfo) => propertyInfo.IsPersistent();
 }
-

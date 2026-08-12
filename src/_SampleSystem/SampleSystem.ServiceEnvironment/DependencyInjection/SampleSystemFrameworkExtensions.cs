@@ -63,4 +63,3 @@ public static class SampleSystemFrameworkExtensions
             settings.SetDTOMapping<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService, PersistentDomainObjectBase, EventDTOBase>();
     }
 }
-

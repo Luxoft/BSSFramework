@@ -12,4 +12,3 @@ public record struct ObjectState(string PropertyName, object? CurrentValue, obje
         return new ObjectState(path, currentValue, previousValue, true);
     }
 }
-

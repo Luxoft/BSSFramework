@@ -30,4 +30,3 @@ public class DefaultProjectionLambdaEnvironment(
     /// <inheritdoc />
     public override bool UseDependencySecurity { get; } = useDependencySecurity;
 }
-

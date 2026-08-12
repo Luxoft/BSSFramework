@@ -82,4 +82,3 @@ public class ManagementUnit :
 
     public static bool operator !=(ManagementUnit? left, IUnit<ManagementUnit>? right) => !Equals(left, right);
 }
-

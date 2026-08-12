@@ -24,4 +24,3 @@ public class GenerateDBTests(IServiceProvider rootServiceProvider) : TestBase(ro
         Assert.Null(ex);
     }
 }
-

@@ -297,4 +297,3 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     #endregion
 
 }
-

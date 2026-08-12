@@ -70,4 +70,3 @@ public class Serializer<TSerializedValue, TValue>(Func<TSerializedValue, TValue>
         }
     }
 }
-

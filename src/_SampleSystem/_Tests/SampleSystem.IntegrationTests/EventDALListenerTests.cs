@@ -27,4 +27,3 @@ public abstract class EventDALListenerTests(IServiceProvider rootServiceProvider
         await action();
     }
 }
-

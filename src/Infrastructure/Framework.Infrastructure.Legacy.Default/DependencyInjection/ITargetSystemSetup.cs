@@ -12,4 +12,3 @@ public interface ITargetSystemSetup
 
     ITargetSystemSetup AddTargetSystem(PersistentTargetSystemInfo targetSystemInfo);
 }
-

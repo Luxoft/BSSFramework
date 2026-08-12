@@ -34,4 +34,3 @@ public static class PerformanceHelper
         return $"Health status is ok. SQL execution time: {duration} milliseconds";
     }
 }
-

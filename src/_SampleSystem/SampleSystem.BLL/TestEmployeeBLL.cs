@@ -41,4 +41,3 @@ public partial class TestEmployeeBLL
         return this.GetObjectsByOData(nextSelectOperation, fetchs);
     }
 }
-

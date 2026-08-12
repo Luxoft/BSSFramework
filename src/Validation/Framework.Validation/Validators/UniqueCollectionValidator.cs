@@ -84,4 +84,3 @@ public class UniqueCollectionValidator<TSource, TProperty, TElement, TGroupEleme
                                               () => $"{context.GetPropertyName()}{(context.GetSource() as IVisualIdentityObject).Maybe(x => " (" + x.Name + ")")} error. Duplicate fields ({this.uniqueElementString}) combination: {duplicates.Join(", ", d => d.Key)}");
     }
 }
-

@@ -60,4 +60,3 @@ public class RangePropertyValidator<TSource, TProperty, TRange>(Range<TRange> av
 public class NullableRangePropertyValidator<TSource, TProperty, TRange>(Range<TRange> availableRange, Func<Range<TRange>, TProperty, bool> isValidValueFunc)
     : RangePropertyValidator<TSource, TProperty?, TRange>(availableRange, (range, value) => value is null || isValidValueFunc(range, value.Value))
     where TProperty : struct;
-

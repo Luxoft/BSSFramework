@@ -11,4 +11,3 @@ public interface ISubscriptionResolver
 
     ImmutableArray<ISubscription> Resolve(Type domainType, DomainObjectChangeType domainObjectChangeType);
 }
-

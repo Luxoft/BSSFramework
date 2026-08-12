@@ -38,4 +38,3 @@ public abstract class PerformanceTests(IServiceProvider rootServiceProvider) : T
         Xunit.Assert.True(result);
     }
 }
-

@@ -9,4 +9,3 @@ public class RootExpressionVisitorContainer([FromKeyedServices(IExpressionVisito
 {
     protected override IEnumerable<ExpressionVisitor> GetVisitors() => items.Select(item => item.Visitor);
 }
-

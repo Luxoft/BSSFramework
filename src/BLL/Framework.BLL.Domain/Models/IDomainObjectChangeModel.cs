@@ -13,4 +13,3 @@ public interface IDomainObjectChangeModel<out TDomainObject>
     [Required]
     TDomainObject ChangingObject { get; }
 }
-

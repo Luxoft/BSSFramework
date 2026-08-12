@@ -15,4 +15,3 @@ public interface IRootServiceProviderContainer
         where TController : ControllerBase =>
         this.RootServiceProvider.GetDefaultControllerEvaluator<TController>(userCredential);
 }
-

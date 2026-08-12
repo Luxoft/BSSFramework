@@ -83,4 +83,3 @@ public class SignValidator : IPropertyValidator<object, object>
             context.GetSourceTypeName(),
             name.IsNullOrWhiteSpace() ? string.Empty : $":'{name}'");
 }
-

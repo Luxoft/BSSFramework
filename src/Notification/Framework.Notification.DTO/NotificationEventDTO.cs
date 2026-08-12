@@ -49,4 +49,3 @@ public class NotificationEventDTO
         this.TechnicalInformation = new(notification.TechnicalInformation);
     }
 }
-

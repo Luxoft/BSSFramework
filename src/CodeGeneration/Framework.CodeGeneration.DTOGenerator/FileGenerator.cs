@@ -69,4 +69,3 @@ public abstract class FileGenerator<TConfiguration>(TConfiguration configuration
         }
     }
 }
-

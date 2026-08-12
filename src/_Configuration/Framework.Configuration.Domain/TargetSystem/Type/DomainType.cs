@@ -67,4 +67,3 @@ public class DomainType : BaseDirectory, IDetail<TargetSystem>, IMaster<DomainTy
 
     ICollection<DomainTypeEventOperation> IMaster<DomainTypeEventOperation>.Details => (ICollection<DomainTypeEventOperation>)this.EventOperations;
 }
-

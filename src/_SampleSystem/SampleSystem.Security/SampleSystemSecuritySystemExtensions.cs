@@ -161,4 +161,3 @@ public static class SampleSystemSecuritySystemExtensions
                               v => v.AddFilter(link => link.Role == BusinessUnitEmployeeRoleType.Manager)));
     }
 }
-

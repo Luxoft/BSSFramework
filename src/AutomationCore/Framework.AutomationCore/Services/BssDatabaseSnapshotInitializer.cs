@@ -15,4 +15,3 @@ public class BssDatabaseSnapshotInitializer(
     IDatabaseManager databaseManager,
     TestDatabaseSettings settings)
     : DatabaseSnapshotInitializer(emptySchemaInitializer, testDataInitializer, databaseManager, settings);
-

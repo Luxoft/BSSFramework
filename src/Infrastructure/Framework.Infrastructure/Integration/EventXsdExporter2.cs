@@ -219,4 +219,3 @@ public class EventXsdExporter2 : IEventXsdExporter2
         || (type.IsGenericType && type.GetGenericTypeDefinition() != typeof(Nullable<>))
         || type.IsArray;
 }
-

@@ -19,4 +19,3 @@ public class PrimitivePropertyValidatorAttribute(Type validatorType) : PropertyV
             serviceProvider.GetRequiredService<IServiceProxyFactory>().Create<IPropertyValidator>(validatorType);
     }
 }
-

@@ -448,4 +448,3 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
             .SelectMany(projectionEnvironment => projectionEnvironment.Assembly.GetTypes())
             .Where(type => this.Environment.MetadataProxyProvider.Wrap(type).HasAttribute<ProjectionAttribute>(attr => attr.Role == ProjectionRole.Default));
 }
-

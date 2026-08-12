@@ -15,4 +15,3 @@ public class SecurityRuleController(IAvailableClientSecurityRuleSource available
                                                .Select(sr => sr.Name)
                                                .ToListAsync(ct);
 }
-

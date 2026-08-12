@@ -13,4 +13,3 @@ public class TestObj : DomainObjectBase
     public Fio FS { get; set; } = null!;
 }
 
-

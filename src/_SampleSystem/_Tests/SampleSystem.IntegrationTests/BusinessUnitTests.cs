@@ -189,4 +189,3 @@ public abstract class BusinessUnitTests(IServiceProvider rootServiceProvider) : 
             });
     }
 }
-

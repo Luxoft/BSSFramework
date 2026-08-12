@@ -19,4 +19,3 @@ public class LegacySampleSystemProjectionSource : ProjectionSource
 
     public Projection<Employee> TestLegacyEmployee { get; }
 }
-

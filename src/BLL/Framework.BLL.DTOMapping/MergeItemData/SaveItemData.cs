@@ -22,4 +22,3 @@ public class SaveItemData<TValue, TIdentity> : UpdateItemData<TValue, TIdentity>
     [DataMember]
     public TValue Value { get; private set; }
 }
-

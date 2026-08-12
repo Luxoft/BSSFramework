@@ -163,4 +163,3 @@ internal static class Base85Convert
 
     static readonly uint[] SPowersOf85 = [85u * 85u * 85u * 85u, 85u * 85u * 85u, 85u * 85u, 85u, 1];
 }
-

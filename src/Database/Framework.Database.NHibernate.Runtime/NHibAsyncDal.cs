@@ -111,4 +111,3 @@ public class NHibAsyncDal<TDomainObject, TIdent>(
         }
     }
 }
-

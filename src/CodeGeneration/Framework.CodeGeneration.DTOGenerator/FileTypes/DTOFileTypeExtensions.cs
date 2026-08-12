@@ -32,4 +32,3 @@ public static class DTOFileTypeExtensions
         return fileType.GetBaseType() is null ? MemberAttributes.Public : (MemberAttributes.Public | MemberAttributes.Override);
     }
 }
-

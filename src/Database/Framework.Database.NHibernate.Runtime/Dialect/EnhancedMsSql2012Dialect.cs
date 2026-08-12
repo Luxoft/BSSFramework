@@ -33,4 +33,3 @@ public class EnhancedMsSql2012Dialect : MsSql2012Dialect
         this.RegisterColumnType(DbType.String, MaxSizeForBlob, "NVARCHAR(MAX)");
     }
 }
-

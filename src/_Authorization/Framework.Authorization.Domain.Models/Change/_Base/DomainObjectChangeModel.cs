@@ -11,4 +11,3 @@ public abstract class DomainObjectChangeModel<TDomainObject> : DomainObjectBase,
     [Restriction.Required]
     public TDomainObject ChangingObject { get; set; } = null!;
 }
-

@@ -422,4 +422,3 @@ public class Projection<TDomainObject> : IProjection
 
     bool IProjection.IgnoreIdSerialization { get; } = false;
 }
-

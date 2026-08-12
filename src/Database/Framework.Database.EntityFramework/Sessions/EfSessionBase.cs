@@ -34,4 +34,3 @@ public abstract class EfSessionBase(DbContext nativeSession, DBSessionMode sessi
 
     public async ValueTask DisposeAsync() => await this.CloseAsync(CancellationToken.None);
 }
-

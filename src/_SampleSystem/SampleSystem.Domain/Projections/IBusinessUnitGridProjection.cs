@@ -13,4 +13,3 @@ public interface IBusinessUnitGridProjection : IIdentityObject<Guid>, IVisualIde
 {
     IBusinessUnitTypeVisualProjection BusinessUnitType { get; }
 }
-

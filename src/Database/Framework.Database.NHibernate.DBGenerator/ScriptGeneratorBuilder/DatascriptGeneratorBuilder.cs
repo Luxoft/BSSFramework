@@ -97,4 +97,3 @@ public class DataScriptGeneratorBuilder(DBGenerateScriptMode scriptMode)
         }
     }
 }
-

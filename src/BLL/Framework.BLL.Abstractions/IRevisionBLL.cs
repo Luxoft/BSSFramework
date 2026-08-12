@@ -21,4 +21,3 @@ public interface IRevisionBLL<TDomainObject, TIdent>
 
     DomainObjectPropertyRevisions<TIdent, TProperty> GetPropertyChanges<TProperty>(TIdent id, string propertyName, Period? period = null);
 }
-

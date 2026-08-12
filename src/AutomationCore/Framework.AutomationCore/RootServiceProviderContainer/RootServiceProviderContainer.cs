@@ -15,4 +15,3 @@ public class RootServiceProviderContainer(IServiceProvider rootServiceProvider) 
         where TController : ControllerBase =>
         this.RootServiceProvider.GetDefaultControllerEvaluator<TController>(userCredential);
 }
-

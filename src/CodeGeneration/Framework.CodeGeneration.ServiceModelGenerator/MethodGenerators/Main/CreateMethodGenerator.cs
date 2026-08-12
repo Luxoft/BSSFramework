@@ -67,4 +67,3 @@ public class CreateMethodGenerator<TConfiguration>(TConfiguration configuration,
                        : modelSecurityAttribute.SecurityRule;
     }
 }
-

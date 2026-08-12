@@ -77,4 +77,3 @@ public class GetODataTreeByQueryStringWithOperationMethodGenerator<TConfiguratio
                              .ToMethodReturnStatement();
     }
 }
-

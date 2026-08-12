@@ -25,4 +25,3 @@ public interface IDatabaseSetup
 
     IDatabaseSetup SetDefaultConnectionStringName(string connectionStringName);
 }
-

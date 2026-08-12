@@ -49,4 +49,3 @@ public partial class BusinessUnitProgramClassBLL
         return z => childQueryable.Contains(z.Id);
     }
 }
-

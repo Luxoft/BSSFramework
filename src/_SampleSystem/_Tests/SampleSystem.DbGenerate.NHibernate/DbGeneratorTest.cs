@@ -163,4 +163,3 @@ public class DbGeneratorTest
                     new NHibernateSettings { FluentAssemblyList = [typeof(SampleSystemMappingSettings).Assembly] }));
     }
 }
-

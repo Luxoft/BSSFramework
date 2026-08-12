@@ -41,4 +41,3 @@ public partial class AuthMainController
                                 .ToVisualDTO(evaluateData.MappingService))
     ];
 }
-

@@ -6,4 +6,3 @@ public static class AuthorizationSecurityRule
 {
     public static DomainSecurityRule.ProviderSecurityRule AvailableBusinessRole { get; } = new() { GenericSecurityProviderType = typeof(AvailableBusinessRoleSecurityProvider<>) };
 }
-

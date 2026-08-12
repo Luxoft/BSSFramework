@@ -32,4 +32,3 @@ internal static class ProjectionExtensions
         }
     }
 }
-

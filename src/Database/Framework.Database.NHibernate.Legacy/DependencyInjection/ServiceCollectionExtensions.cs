@@ -16,4 +16,3 @@ public static class ServiceCollectionExtensions
         return services.ReplaceSingleton<IDalValidationIdentitySource, LegacyDalValidationIdentitySource>();
     }
 }
-

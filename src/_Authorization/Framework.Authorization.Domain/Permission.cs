@@ -112,4 +112,3 @@ public class Permission : AuditPersistentDomainObjectBase,
 
     Permission? IDetail<Permission>.Master => this.DelegatedFrom;
 }
-

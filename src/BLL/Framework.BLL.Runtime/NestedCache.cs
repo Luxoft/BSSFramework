@@ -9,4 +9,3 @@ public class NestedCache<TBLLContext, TPersistentDomainObjectBase, TIdent, TDoma
     where TBLLContext : IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>
     where TDomainObject : class, TPersistentDomainObjectBase
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>;
-

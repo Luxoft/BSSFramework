@@ -14,4 +14,3 @@ public class AnonymousTypeBuilderStorageFactory
             assemblyBuilderName,
             builderName => new AnonymousTypeBuilderStorage(builderName));
 }
-

@@ -16,4 +16,3 @@ public class PropertyMetadataBuilder(PropertyInfo property) : IPropertyMetadataB
         return this;
     }
 }
-

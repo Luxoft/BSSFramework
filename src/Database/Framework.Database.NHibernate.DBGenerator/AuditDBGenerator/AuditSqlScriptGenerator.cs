@@ -305,4 +305,3 @@ internal class AuditSqlScriptGenerator
         return results.ToArray();
     }
 }
-

@@ -42,4 +42,3 @@ public class SampleSystemServerDependencyGeneratePolicy(IGeneratePolicy<RoleFile
         }
     }
 }
-

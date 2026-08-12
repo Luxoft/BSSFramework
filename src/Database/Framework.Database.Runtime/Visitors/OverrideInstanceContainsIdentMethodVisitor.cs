@@ -40,4 +40,3 @@ public class OverrideInstanceContainsIdentMethodVisitor<TIdent>(MethodInfo conta
 
     public static readonly OverrideInstanceContainsIdentMethodVisitor<TIdent> HashSet = new(new Func<TIdent, bool>(new HashSet<TIdent>().Contains).Method);
 }
-

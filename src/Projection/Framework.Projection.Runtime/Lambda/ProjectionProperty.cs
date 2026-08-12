@@ -89,4 +89,3 @@ public abstract class ProjectionProperty<TExpression, TElement> : IProjectionPro
 
     PropertyInfo? IProjectionProperty.VirtualExplicitInterfaceProperty { get; } = null;
 }
-

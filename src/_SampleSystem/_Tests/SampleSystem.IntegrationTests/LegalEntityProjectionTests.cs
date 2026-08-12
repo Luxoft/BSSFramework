@@ -62,4 +62,3 @@ public abstract class LegalEntityProjectionTests(IServiceProvider rootServicePro
         Assert.Equal(period.StartDate, result.PeriodStartDate);
     }
 }
-

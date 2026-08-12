@@ -10,4 +10,3 @@ public partial class BLLCoreGeneratorConfiguration(ConfigurationGenerationEnviro
 
     public override Type CreateModelType { get; } = typeof(DomainObjectCreateModel<>);
 }
-

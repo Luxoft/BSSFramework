@@ -14,4 +14,3 @@ public class ImpersonateEvaluatorMiddleware(IServiceProvider scopedServiceProvid
         return await impersonateService.WithImpersonateAsync(customUserCredential, getResult);
     }
 }
-

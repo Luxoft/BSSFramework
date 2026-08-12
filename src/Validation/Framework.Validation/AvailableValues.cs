@@ -24,4 +24,3 @@ public class AvailableValues(object source) : IAvailableValues
         public int GetAvailableSize<T>() => int.MaxValue;
     }
 }
-

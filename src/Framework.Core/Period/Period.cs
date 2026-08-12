@@ -362,4 +362,3 @@ public partial struct Period : IDeserializationCallback
 
     #endregion
 }
-

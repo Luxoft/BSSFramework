@@ -17,4 +17,3 @@ public class MasterDetailDalGenericInterceptor<TDomainObject, TMaster> : IDalGen
 
     public async Task RemoveAsync(TDomainObject data, CancellationToken ct) => data.Master?.RemoveDetail<TMaster, TDomainObject>(data);
 }
-

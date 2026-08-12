@@ -140,4 +140,3 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
         return services;
     }
 }
-

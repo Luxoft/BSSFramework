@@ -100,4 +100,3 @@ public static class AddRemoveDetailHelper
         master.Details.ToList().Foreach(master.RemoveDetail);
     }
 }
-

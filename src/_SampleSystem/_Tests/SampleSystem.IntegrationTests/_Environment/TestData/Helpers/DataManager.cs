@@ -478,4 +478,3 @@ public partial class DataManager
         return result;
     }
 }
-

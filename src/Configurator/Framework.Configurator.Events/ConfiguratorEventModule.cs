@@ -22,4 +22,3 @@ public class ConfiguratorEventModule : IConfiguratorModule
         endpointsBuilder.Get<IGetDomainTypesHandler>($"{route}/api/domainTypes")
                         .Post<IForcePushEventHandler>(route + "/api/domainType/{domainTypeName}");
 }
-

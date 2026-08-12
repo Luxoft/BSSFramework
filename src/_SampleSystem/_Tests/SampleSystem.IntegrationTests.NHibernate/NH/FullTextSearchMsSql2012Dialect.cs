@@ -12,4 +12,3 @@ public class FullTextSearchMsSql2012Dialect : EnhancedMsSql2012Dialect
         this.RegisterFunction("contains", new StandardSQLFunction("contains", null));
     }
 }
-

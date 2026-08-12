@@ -36,4 +36,3 @@ public class HRDepartmentEmployeePosition : AuditPersistentDomainObjectBase, IDe
 
     HRDepartment IDetail<HRDepartment>.Master => this.hrDepartment;
 }
-

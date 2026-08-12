@@ -38,4 +38,3 @@ public class ProjectionCustomProperty<TProperty> : IProjectionCustomProperty
     /// <inheritdoc />
     public TypeReferenceBase Type => this.lazyType.Value;
 }
-

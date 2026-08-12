@@ -29,4 +29,3 @@ public class EntityFrameworkSetup : IEntityFrameworkSetup, IServiceInitializer
         //services.AddSingleton<IDefaultConnectionStringSource, DefaultConnectionStringSource>();
     }
 }
-

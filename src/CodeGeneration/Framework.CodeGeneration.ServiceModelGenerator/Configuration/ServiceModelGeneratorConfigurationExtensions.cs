@@ -84,4 +84,3 @@ internal static class ServiceModelGeneratorConfigurationExtensions
         }
     }
 }
-

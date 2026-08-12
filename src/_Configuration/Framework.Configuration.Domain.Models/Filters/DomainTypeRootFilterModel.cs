@@ -15,4 +15,3 @@ public class DomainTypeRootFilterModel : DomainObjectFilterModel<DomainType>
         return domainType => targetSystem == null || targetSystem == domainType.TargetSystem;
     }
 }
-

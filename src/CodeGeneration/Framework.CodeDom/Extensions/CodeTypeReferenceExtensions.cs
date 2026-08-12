@@ -578,4 +578,3 @@ public static class CodeTypeReferenceExtensions
         }
     }
 }
-

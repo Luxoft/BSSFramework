@@ -29,4 +29,3 @@ public class EmployeeUpdateSubscription : Subscription<Domain.Employee.Employee,
         yield return new("replyTo@luxoft.com", versions);
     }
 }
-

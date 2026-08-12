@@ -56,4 +56,3 @@ public static class ReferenceTypeFieldMetadataExtension
 
     private static string? GetMappingName(this FieldMetadata source) => source.Attributes.OfType<MappingAttribute>().SingleOrDefault().Maybe(z => z.ColumnName);
 }
-

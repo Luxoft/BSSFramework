@@ -21,4 +21,3 @@ public partial class DomainTypeBLL
         await this.Context.TargetSystemServices.Values.Single(tss => tss.TargetSystem == targetSystem).ForceEventAsync(eventModel, ct);
     }
 }
-

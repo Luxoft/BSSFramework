@@ -9,4 +9,3 @@ public abstract class LocalRazorTemplate<T> : RazorTemplate<T>
 
     protected string GetEmployeeName(Domain.Employee.Employee employee) => employee.NameNative.FullName;
 }
-

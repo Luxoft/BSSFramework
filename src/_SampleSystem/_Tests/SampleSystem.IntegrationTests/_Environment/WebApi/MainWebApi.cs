@@ -13,4 +13,3 @@ public class MainWebApi(IServiceProvider serviceProvider) : WebApiBase(servicePr
 
     public ControllerEvaluator<CountryController> Country => this.GetControllerEvaluator<CountryController>();
 }
-

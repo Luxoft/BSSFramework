@@ -30,4 +30,3 @@ public class BLLCoreGeneratorConfiguration(ServerGenerationEnvironment environme
     /// <inheritdoc />
     public override bool UseDbUniquenessEvaluation { get; } = false;
 }
-

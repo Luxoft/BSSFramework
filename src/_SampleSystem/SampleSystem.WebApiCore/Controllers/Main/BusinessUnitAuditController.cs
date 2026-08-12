@@ -19,4 +19,3 @@ public class BusinessUnitAuditController(IAsyncDal<BusinessUnitAudit, Guid> dal)
         return (auditBu.Revision.Author, auditBu.Revision.Id, new BusinessUnitIdentityDTO(auditBu.Id));
     }
 }
-

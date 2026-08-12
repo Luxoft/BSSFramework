@@ -54,4 +54,3 @@ public class AttributeGeneratePolicy(IMetadataProxyProvider metadata) : IGenerat
         }
     }
 }
-

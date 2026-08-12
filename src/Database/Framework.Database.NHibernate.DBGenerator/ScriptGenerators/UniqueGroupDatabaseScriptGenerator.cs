@@ -121,4 +121,3 @@ public class UniqueGroupDatabaseScriptGenerator(params IgnoreLink[] ignore) : Po
         }
     }
 }
-

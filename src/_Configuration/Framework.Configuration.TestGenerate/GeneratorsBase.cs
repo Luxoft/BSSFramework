@@ -11,4 +11,3 @@ public abstract class GeneratorsBase
 
     protected abstract string GeneratePath { get; }
 }
-

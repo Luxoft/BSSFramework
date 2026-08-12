@@ -19,4 +19,3 @@ public class BssTestConnectionStringFactory(TestDatabaseSettings databaseSetting
         return new TestConnectionString(builder.ConnectionString);
     }
 }
-

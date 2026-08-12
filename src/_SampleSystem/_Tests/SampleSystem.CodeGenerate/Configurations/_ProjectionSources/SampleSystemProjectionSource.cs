@@ -201,4 +201,3 @@ public class SampleSystemProjectionSource : ProjectionSource
 
     public Projection<TestSecurityObjItem> TestSecurityObjItemProjection { get; }
 }
-

@@ -33,4 +33,3 @@ public class SqlExceptionConverter : ISQLExceptionConverter
                                                            ValueTuple<string, object> unTypedObjectInfo) =>
         new HandledGenericAdoException(message, sqlException, sql, unTypedObjectInfo);
 }
-

@@ -60,4 +60,3 @@ public interface IServerDTOGeneratorConfiguration : IDTOGeneratorConfiguration
 
     CodeAttributeDeclaration GetDTOFileAttribute(Type domainType, RoleFileType fileType);
 }
-

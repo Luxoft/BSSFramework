@@ -10,4 +10,3 @@ public class RepositoryFactory<TDomainObject>(IServiceProxyFactory serviceProxyF
       TDomainObject>(serviceProxyFactory, domainSecurityService),
       IRepositoryFactory<TDomainObject>
     where TDomainObject : class;
-

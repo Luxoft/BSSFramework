@@ -21,4 +21,3 @@ public class DomainObjectAccessAttribute : Attribute
 
     public SecurityRule SecurityRule { get; }
 }
-

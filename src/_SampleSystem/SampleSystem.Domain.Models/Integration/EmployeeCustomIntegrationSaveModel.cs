@@ -15,4 +15,3 @@ public class EmployeeCustomIntegrationSaveModel : DomainObjectIntegrationSaveMod
         set => base.SavingObject = value;
     }
 }
-

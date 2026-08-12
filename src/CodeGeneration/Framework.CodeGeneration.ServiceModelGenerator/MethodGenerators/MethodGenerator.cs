@@ -216,4 +216,3 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
         return bllRef.ToVariableDeclarationStatement(varName, bllCreateExpr);
     }
 }
-

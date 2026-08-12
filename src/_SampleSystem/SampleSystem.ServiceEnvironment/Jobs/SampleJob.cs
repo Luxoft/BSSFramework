@@ -24,4 +24,3 @@ public class SampleJob([DisabledSecurity] IRepository<TestJobObject> testReposit
         await testRepository.SaveAsync(new TestJobObject(), ct);
     }
 }
-

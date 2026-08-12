@@ -96,4 +96,3 @@ public abstract class ViewMethodGenerator<TConfiguration>(TConfiguration configu
 
     protected CodeExpression ConvertToDTOList(CodeExpression sourceExpr, CodeExpression mappingServiceExpr) => sourceExpr.ToStaticMethodInvokeExpression(this.GetConvertToDTOListMethod(), mappingServiceExpr);
 }
-

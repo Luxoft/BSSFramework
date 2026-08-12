@@ -46,4 +46,3 @@ public abstract class PropertyAssigner<TConfiguration> : GeneratorConfigurationC
         return sourcePropertyRef.ToAssignStatement(targetPropertyRef);
     }
 }
-

@@ -40,4 +40,3 @@ public record MappingSettings<TPersistentDomainObjectBase>(
                                            .Where(typeof(TPersistentDomainObjectBase).IsAssignableFrom)
                                            .ToList();
 }
-

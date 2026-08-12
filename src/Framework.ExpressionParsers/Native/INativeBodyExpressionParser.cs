@@ -6,4 +6,3 @@ public interface INativeBodyExpressionParser
 {
     Expression Parse(ParameterExpression[] parameters, Type resultType, string expression);
 }
-

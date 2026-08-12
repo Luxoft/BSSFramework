@@ -58,4 +58,3 @@ public class WebApiNetCoreFileGenerator : CodeFileGenerator<IServiceModelGenerat
         }
     }
 }
-

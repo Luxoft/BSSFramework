@@ -19,4 +19,3 @@ public interface IFileFactory : ICodeFileFactory
 
     IPropertyCodeTypeReferenceService CodeTypeReferenceService { get; }
 }
-

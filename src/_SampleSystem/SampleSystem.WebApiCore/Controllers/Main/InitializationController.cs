@@ -21,4 +21,3 @@ public class InitializationController(
         await service.InitializeAsync(ct);
     }
 }
-

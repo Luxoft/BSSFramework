@@ -145,4 +145,3 @@ public static class FieldInfoExtension
         return result;
     }
 }
-

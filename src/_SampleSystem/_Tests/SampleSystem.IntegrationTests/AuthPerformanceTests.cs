@@ -110,4 +110,3 @@ public abstract class AuthPerformanceTests(IServiceProvider rootServiceProvider)
         Assert.Equal(Limit * Limit * Limit * Limit, testPerformanceObjects.Count());
     }
 }
-

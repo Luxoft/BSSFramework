@@ -61,4 +61,3 @@ public static class DataContractSerializerHelper
 
     public static ISerializer<string, T> GetSerializer<T>() => new Serializer<string, T>(Deserialize<T>, value => Serialize(value));
 }
-

@@ -9,4 +9,3 @@ public class SampleSystemClientDomainModeSecurityRuleSource(IEnumerable<DomainMo
 {
     protected override bool Allowed(DomainModeSecurityRuleInfo info) => base.Allowed(info) && typeof(PersistentDomainObjectBase).IsAssignableFrom(info.SecurityRule.DomainType);
 }
-

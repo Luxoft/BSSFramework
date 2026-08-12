@@ -66,4 +66,3 @@ public class UpdateMethodGenerator<TConfiguration>(TConfiguration configuration,
     //    return new BLLSaveRoleAttribute { AllowCreate = this.DomainType.HasDefaultConstructor() };
     //}
 }
-

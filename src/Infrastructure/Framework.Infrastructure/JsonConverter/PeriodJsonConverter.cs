@@ -55,4 +55,3 @@ public class PeriodJsonConverter : JsonConverter<Period>
         writer.WriteEndObject();
     }
 }
-

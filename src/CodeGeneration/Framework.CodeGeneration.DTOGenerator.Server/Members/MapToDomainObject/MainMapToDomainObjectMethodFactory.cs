@@ -29,4 +29,3 @@ public class MainMapToDomainObjectMethodFactory<TConfiguration, TFileFactory>(TF
         }
     }
 }
-

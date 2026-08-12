@@ -292,4 +292,3 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
         where TNestedDomainObject : class, TDomainObject =>
         this.Context.Logics.Default.Create<TNestedDomainObject>().GetById(domainObject.Id);
 }
-

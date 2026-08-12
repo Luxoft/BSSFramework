@@ -12,4 +12,3 @@ public partial class SampleSystemValidationMap
         yield return new EmployeeExternalIdValidator();
     }
 }
-

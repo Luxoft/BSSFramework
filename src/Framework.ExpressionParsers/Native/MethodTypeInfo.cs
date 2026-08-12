@@ -34,4 +34,3 @@ public class MethodTypeInfo : IEquatable<MethodTypeInfo>
 
     public bool Equals(MethodTypeInfo? other) => other is not null && this.InputTypes.SequenceEqual(other.InputTypes) && this.ReturnType == other.ReturnType;
 }
-

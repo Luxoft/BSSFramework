@@ -53,4 +53,3 @@ public abstract class NHibSessionBase : INHibSession
 
     public async ValueTask DisposeAsync() => await this.CloseAsync(CancellationToken.None);
 }
-

@@ -29,4 +29,3 @@ public class BusinessRole : BaseDirectory
         set => this.description = value.TrimNull();
     }
 }
-

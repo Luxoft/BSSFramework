@@ -14,4 +14,3 @@ public static class PropertyInfoExtensions
         return propertyInfo.HasAttribute<VisualIdentityAttribute>();
     }
 }
-

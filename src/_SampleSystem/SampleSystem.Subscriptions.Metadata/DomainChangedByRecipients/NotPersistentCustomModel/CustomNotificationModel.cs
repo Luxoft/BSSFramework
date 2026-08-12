@@ -12,4 +12,3 @@ public class CustomNotificationModel(IServiceProvider serviceProvider, Domain.Di
 
     public int LocationsCount { get; } = serviceProvider.GetRequiredService<IQueryableSource>().GetQueryable<Location>().Count(x => x.Country == country);
 }
-

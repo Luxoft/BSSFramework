@@ -29,4 +29,3 @@ public static class FileTypeExtensions
         return new CodeFileFactoryHeader<TFileType>(fileType, relativePath, t => getTypeNameFunc(t!));
     }
 }
-

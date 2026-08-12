@@ -28,4 +28,3 @@ public abstract class IntegrationBaseSaveMethodGenerator<TConfiguration> : Integ
                                           .GetCodeTypeReference(this.DomainType, DTOGenerator.Server.ServerFileType.RichIntegrationDTO);
     }
 }
-

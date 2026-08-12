@@ -28,4 +28,3 @@ public class AppDbContext(DbContextOptions<AppDbContext> rootOptions, IExpressio
         options.AddInterceptors(new GeneralQueryExpressionInterceptor(expressionVisitorContainer));
     }
 }
-

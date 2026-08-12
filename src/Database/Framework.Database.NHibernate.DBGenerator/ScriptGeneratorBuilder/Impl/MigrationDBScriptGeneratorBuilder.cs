@@ -218,4 +218,3 @@ internal class MigrationDBScriptGeneratorBuilder : IMigrationScriptGeneratorBuil
         }
     }
 }
-

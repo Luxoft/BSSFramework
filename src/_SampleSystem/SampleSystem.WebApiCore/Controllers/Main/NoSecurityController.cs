@@ -52,4 +52,3 @@ public class NoSecurityController(IRepositoryFactory<NoSecurityObject> repositor
         return result.ToIdentityDTOList();
     }
 }
-

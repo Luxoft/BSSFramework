@@ -16,4 +16,3 @@ public interface IFinancialYearCalculator
 
     bool IsStartFinancialYearDate(DateTime dateTime);
 }
-

@@ -304,4 +304,3 @@ internal class ChangeIndexesStrategy(DatabaseScriptGeneratorStrategyInfo paramet
         return result;
     }
 }
-

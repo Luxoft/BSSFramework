@@ -21,4 +21,3 @@ public partial class SampleSystemValidator
         return base.GetEmployeeValidationResult(source, operationContext, ownerState);
     }
 }
-

@@ -6,4 +6,3 @@ public interface IBssFrameworkExtension
 {
     public void AddServices(IServiceCollection services);
 }
-

@@ -19,4 +19,3 @@ public abstract class SecurityBLLFactory<TBLLContext, TBLL, TBLLImpl, TDomainObj
 
     public virtual TBLL Create(ISecurityProvider<TDomainObject> securityProvider) => this.Context.ServiceProvider.GetRequiredService<IServiceProxyFactory>().Create<TBLL, TBLLImpl>(securityProvider);
 }
-

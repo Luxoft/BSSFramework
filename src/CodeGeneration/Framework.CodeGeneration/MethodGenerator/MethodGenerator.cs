@@ -43,4 +43,3 @@ public abstract class MethodGenerator : IMethodGenerator, IMethodGeneratorInfo
 
     IEnumerable<CodeParameterDeclarationExpression> IMethodGeneratorInfo.Parameters => this.Parameters;
 }
-

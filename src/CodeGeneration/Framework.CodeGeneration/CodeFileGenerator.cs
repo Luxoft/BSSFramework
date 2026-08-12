@@ -18,4 +18,3 @@ public abstract class CodeFileGenerator<TConfiguration>(TConfiguration configura
 
     protected abstract IEnumerable<ICodeFile> GetInternalFileGenerators();
 }
-

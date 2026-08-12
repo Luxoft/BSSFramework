@@ -15,4 +15,3 @@ public class ConfigurationCodeTypeReferenceService<TConfiguration>(TConfiguratio
         return type.ToTypeReference();
     }
 }
-

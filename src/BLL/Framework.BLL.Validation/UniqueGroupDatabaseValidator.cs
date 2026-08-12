@@ -114,4 +114,3 @@ public class UniqueGroupDatabaseValidator(string? groupKey) : IDynamicClassValid
         return Expression.Equal(e1, e2, property.PropertyType.IsNullable(), eqMethod);
     }
 }
-

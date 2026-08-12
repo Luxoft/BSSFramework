@@ -162,4 +162,3 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase>(
         }
     }
 }
-

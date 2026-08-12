@@ -9,4 +9,3 @@ public class WebApiCurrentDBSessionModeResolver(IWebApiCurrentMethodResolver met
 {
     public DBSessionMode? GetSessionMode() => methodResolver.TryGetCurrentMethod().Maybe(dbSessionModeResolver.GetSessionMode);
 }
-

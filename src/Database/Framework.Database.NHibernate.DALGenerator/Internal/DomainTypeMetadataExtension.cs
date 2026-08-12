@@ -49,4 +49,3 @@ internal static class DomainTypeMetadataExtension
     }
     public static string GetIdentityFieldName(this DomainTypeMetadata source, Func<DomainTypeMetadata, string> getIdentityFieldInBdFunc) => source.GetIdentityField().ToColumnName(z => getIdentityFieldInBdFunc(source));
 }
-

@@ -29,4 +29,3 @@ internal class ValueEvaluatorVisitor : ExpressionVisitor
         return node;
     }
 }
-

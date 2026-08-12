@@ -6,4 +6,3 @@ public interface IMapper
 {
     IEnumerable<SqlFieldMappingInfo> GetMapping(FieldMetadata field);
 }
-

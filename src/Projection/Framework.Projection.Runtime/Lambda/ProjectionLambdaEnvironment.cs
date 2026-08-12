@@ -171,4 +171,3 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
         return new ProjectionCustomPropertyAttributeSource(this, projectionCustomProperty);
     }
 }
-

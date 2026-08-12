@@ -15,4 +15,3 @@ public class AuditProperty<TDomainObject, TProperty>(
 
     Delegate IAuditProperty.GetCurrentValue => this.GetCurrentValue;
 }
-

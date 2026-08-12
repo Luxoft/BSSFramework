@@ -25,4 +25,3 @@ public class BLLGeneratorConfiguration(ServerGenerationEnvironment environment) 
 
     public override bool SquashPropertyValidators(PropertyInfo property) => property != typeof(Employee).GetProperty(nameof(Employee.ExternalId));
 }
-

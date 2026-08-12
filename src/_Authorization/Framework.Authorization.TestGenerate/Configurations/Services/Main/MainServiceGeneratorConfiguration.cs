@@ -7,4 +7,3 @@ public class MainServiceGeneratorConfiguration(AuthorizationGenerationEnvironmen
 {
     public override string ImplementClassName { get; } = "AuthFacade";
 }
-

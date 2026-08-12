@@ -57,4 +57,3 @@ public static class NullableExtensions
         where TSource : TResult =>
         v1.HasValue ? v1.Select(v => (TResult)v) : Maybe.Return(v2);
 }
-

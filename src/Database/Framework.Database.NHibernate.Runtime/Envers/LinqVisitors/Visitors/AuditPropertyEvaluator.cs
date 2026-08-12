@@ -16,4 +16,3 @@ internal class AuditPropertyEvaluator : ExpressionVisitor
         return base.VisitMember(node);
     }
 }
-

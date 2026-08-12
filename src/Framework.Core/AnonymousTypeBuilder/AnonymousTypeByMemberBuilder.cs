@@ -52,4 +52,3 @@ public abstract class AnonymousTypeByMemberBuilder<TMap, TMapMember, TMemberBuil
         return type;
     }
 }
-

@@ -15,4 +15,3 @@ public interface IAuditProperty<TDomainObject, TProperty> : IAuditProperty
 
     new Func<TProperty> GetCurrentValue { get; }
 }
-

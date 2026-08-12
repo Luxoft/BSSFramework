@@ -19,4 +19,3 @@ public static class MapperFactory
 
     public static IEnumerable<SqlFieldMappingInfo> GetMapping(FieldMetadata fieldMetadata) => GetMapper(fieldMetadata).GetMapping(fieldMetadata);
 }
-

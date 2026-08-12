@@ -101,4 +101,3 @@ public interface ISubscription
     /// </value>
     ImmutableArray<SecurityRole> SecurityRoles { get; }
 }
-

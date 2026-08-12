@@ -36,4 +36,3 @@ public class FinancialYearCalculator(FinancialYearServiceSettings settings) : IF
 
     public bool IsStartFinancialYearDate(DateTime dateTime) => dateTime.Day == 1 && dateTime.Month == settings.StartMonth;
 }
-

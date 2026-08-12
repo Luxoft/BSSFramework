@@ -23,4 +23,3 @@ public static class TypeExtensions
         select propertyGroup.Count() == 1 ? propertyGroup.Single() : propertyGroup.Single(property => property.HasPrivateField());
 
 }
-

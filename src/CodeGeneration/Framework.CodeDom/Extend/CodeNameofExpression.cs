@@ -12,4 +12,3 @@ public class CodeNameofExpression : CodeExpression
 
     public string Value { get; set; } = null!;
 }
-

@@ -6,4 +6,3 @@ public static class NHibernateSetupObjectExtensions
 {
     public static INHibernateSetup AddLegacyDatabaseSettings(this INHibernateSetup setupObject) => setupObject.AddExtension(new NHibernateSetupExtension(services => services.AddLegacyNHibernateSettings()));
 }
-

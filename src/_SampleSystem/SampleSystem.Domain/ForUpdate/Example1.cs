@@ -36,4 +36,3 @@ public class Example1 : AuditPersistentDomainObjectBase, IMaster<Example2>
 
     ICollection<Example2> IMaster<Example2>.Details => (ICollection<Example2>)this.Items2;
 }
-

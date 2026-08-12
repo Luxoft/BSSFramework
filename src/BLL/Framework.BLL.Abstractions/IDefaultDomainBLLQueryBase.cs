@@ -81,4 +81,3 @@ public interface IDefaultDomainBLLBase<out TBLLContext, in TPersistentDomainObje
         where TBLLContext : IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObject : class, TPersistentDomainObjectBase;
-

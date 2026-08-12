@@ -8,4 +8,3 @@ public class ConfigurationInitializer(Action<Configuration> initAction) : IConfi
 
     public static IConfigurationInitializer Empty { get; } = new ConfigurationInitializer(_ => { });
 }
-

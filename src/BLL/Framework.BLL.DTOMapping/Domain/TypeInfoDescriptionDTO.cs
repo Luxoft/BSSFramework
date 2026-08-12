@@ -17,4 +17,3 @@ public class TypeInfoDescriptionDTO
 
     public override string ToString() => $"Name: {this.Name}, Namespace: {this.Namespace}";
 }
-

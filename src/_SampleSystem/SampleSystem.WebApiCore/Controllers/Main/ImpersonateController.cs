@@ -47,4 +47,3 @@ public class ImpersonateController(
                 return result.ToSimpleDTOList(mappingService);
             }, ct);
 }
-

@@ -20,4 +20,3 @@ public class TestRepositoryController(IExampleServiceForRepository exampleServic
         return (pair.Employees.ToIdentityDTOList(), pair.BusinessUnits.ToIdentityDTOList());
     }
 }
-

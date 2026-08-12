@@ -18,4 +18,3 @@ public interface IDepartmentSecurityElement<out TDepartment, out TLocation> : ID
         where TLocation : ISecurityContext;
 
 public partial class HRDepartment : ILocationSecurityElement<Location>;
-

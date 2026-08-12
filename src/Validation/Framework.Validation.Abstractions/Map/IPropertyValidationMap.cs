@@ -91,4 +91,3 @@ public interface ICollectionPropertyValidationMap<in TSource, in TProperty, in T
     /// </summary>
     new IClassValidationMap<TElement> PropertyTypeMap { get; }
 }
-

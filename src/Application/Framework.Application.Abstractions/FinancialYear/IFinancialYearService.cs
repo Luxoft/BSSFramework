@@ -6,4 +6,3 @@ public interface IFinancialYearService
 {
     Period GetCurrentFinancialYear();
 }
-

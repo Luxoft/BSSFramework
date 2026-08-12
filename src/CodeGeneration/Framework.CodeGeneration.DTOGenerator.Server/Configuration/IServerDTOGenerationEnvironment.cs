@@ -4,4 +4,3 @@ using Framework.CodeGeneration.DTOGenerator.Configuration;
 namespace Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 
 public interface IServerDTOGenerationEnvironment : IDTOGenerationEnvironment, IBLLCoreGeneratorConfigurationContainer;
-

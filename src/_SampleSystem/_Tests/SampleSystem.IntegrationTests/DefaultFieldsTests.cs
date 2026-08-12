@@ -23,4 +23,3 @@ public abstract class DefaultFieldsTests
         Assert.Equal(TestDefaultFieldsMappingObj.EnumDefaultVal, dto.EnumVal);
     }
 }
-

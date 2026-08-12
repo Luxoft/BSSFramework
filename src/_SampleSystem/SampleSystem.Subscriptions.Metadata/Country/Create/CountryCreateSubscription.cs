@@ -24,4 +24,3 @@ public class CountryCreateSubscription : Subscription<Domain.Directories.Country
         yield return new("tester@luxoft.com", versions);
     }
 }
-

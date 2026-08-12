@@ -139,4 +139,3 @@ public class DBGenerator(MappingSettings settings)
     {
     }
 }
-

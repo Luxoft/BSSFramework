@@ -18,4 +18,3 @@ public class SubjectCleanerMailMessageModifier : IMailMessageModifier
 
     private string ReplaceUnsupportedCharactersForSubject(string subject) => subject.Replace(Environment.NewLine, " ").Replace('\r', ' ').Replace('\n', ' ');
 }
-

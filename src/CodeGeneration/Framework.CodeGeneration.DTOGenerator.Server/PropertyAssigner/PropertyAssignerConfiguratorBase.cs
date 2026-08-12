@@ -89,4 +89,3 @@ public abstract class PropertyAssignerConfiguratorBase<TConfiguration>(TConfigur
         protected override CodeExpression GetCondition(PropertyInfo property) => this.propertyAssignerConfigurator.GetPropertyHasAccessCondition(this, property, true);
     }
 }
-

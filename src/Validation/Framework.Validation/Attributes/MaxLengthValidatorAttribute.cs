@@ -10,4 +10,3 @@ public class MaxLengthValidatorAttribute : PropertyValidatorAttribute
 
     public override IPropertyValidator CreateValidator() => new MaxLengthValidator(this.MaxLength);
 }
-

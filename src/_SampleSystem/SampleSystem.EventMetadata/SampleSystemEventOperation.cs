@@ -6,4 +6,3 @@ public static class SampleSystemEventOperation
 {
     public static EventOperation CustomAction { get; } = new(nameof(CustomAction));
 }
-

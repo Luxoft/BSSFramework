@@ -616,4 +616,3 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
         }
     }
 }
-

@@ -7,4 +7,3 @@ public interface IExampleServiceForRepository
 {
     Task<(List<Employee> Employees, List<BusinessUnit> BusinessUnits)> LoadPair(CancellationToken ct);
 }
-

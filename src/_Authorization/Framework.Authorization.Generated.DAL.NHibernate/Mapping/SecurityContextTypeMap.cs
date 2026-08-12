@@ -7,4 +7,3 @@ public class SecurityContextTypeMap : AuthBaseMap<SecurityContextType>
 {
     public SecurityContextTypeMap() => this.Map(x => x.Name).Not.Nullable();
 }
-

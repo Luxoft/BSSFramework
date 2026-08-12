@@ -9,4 +9,3 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddNHibernate(this IServiceCollection services, Action<INHibernateSetup> setupAction) =>
         services.Initialize<NHibernateSetup>(setupAction);
 }
-

@@ -70,4 +70,3 @@ public class AddAttachmentMethodGenerator<TConfiguration>(TConfiguration configu
                              .ToMethodReturnStatement();
     }
 }
-

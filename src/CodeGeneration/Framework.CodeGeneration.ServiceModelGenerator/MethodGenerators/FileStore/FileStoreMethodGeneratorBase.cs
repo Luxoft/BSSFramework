@@ -74,4 +74,3 @@ public abstract class FileStoreMethodGeneratorBase<TConfiguration>(TConfiguratio
         return bllRef.ToVariableDeclarationStatement("targetBLL", bllCreateExpr);
     }
 }
-

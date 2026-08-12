@@ -21,4 +21,3 @@ public class SubscriptionManagerSetupObject : ISubscriptionManagerSetupObject
         return this;
     }
 }
-

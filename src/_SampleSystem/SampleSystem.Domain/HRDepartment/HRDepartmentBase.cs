@@ -104,4 +104,3 @@ public abstract class HRDepartmentBase : BaseDirectory, IExternalSynchronizable,
         set => this.externalId = value;
     }
 }
-

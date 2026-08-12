@@ -6,4 +6,3 @@ public interface IEfSession : IDBSession
 {
     DbContext NativeSession { get; }
 }
-

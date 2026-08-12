@@ -58,4 +58,3 @@ public abstract class GetObjectPropertyRevisionsMethodGeneratorBase<TConfigurati
         yield return this.PropertyNameParameter.ToVariableReferenceExpression();
     }
 }
-

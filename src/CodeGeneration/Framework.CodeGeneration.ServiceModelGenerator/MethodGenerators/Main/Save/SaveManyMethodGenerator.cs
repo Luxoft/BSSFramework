@@ -74,4 +74,3 @@ public class SaveManyMethodGenerator<TConfiguration>(SaveMethodGenerator<TConfig
                          .ToMethodReturnStatement();
     }
 }
-

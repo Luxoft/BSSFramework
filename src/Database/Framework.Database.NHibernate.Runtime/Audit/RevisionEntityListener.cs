@@ -19,4 +19,3 @@ public abstract class RevisionEntityListener<T> : IEntityTrackingRevisionListene
     protected abstract void ProcessEntityChanged(Type entityClass, object entityId, RevisionType revisionType,
                                                  T revisionEntity);
 }
-

@@ -19,4 +19,3 @@ public partial class AuthorizationGenerationEnvironment :
 
     IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment> IServerDTOGeneratorConfigurationContainer.ServerDTO => this.ServerDTO;
 }
-

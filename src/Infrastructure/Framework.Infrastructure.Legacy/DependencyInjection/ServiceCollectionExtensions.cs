@@ -121,4 +121,3 @@ public static class ServiceCollectionExtensions
         }
     }
 }
-

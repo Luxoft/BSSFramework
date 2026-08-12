@@ -9,4 +9,3 @@ public class EmployeeEmailChangeModel : DomainObjectChangeModel<Employee.Employe
 {
     public string Email { get; set; } = null!;
 }
-

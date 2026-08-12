@@ -6,4 +6,3 @@ public class NHibernateSetupExtension(Action<IServiceCollection> setupAction) : 
 {
     public void AddServices(IServiceCollection services) => setupAction(services);
 }
-

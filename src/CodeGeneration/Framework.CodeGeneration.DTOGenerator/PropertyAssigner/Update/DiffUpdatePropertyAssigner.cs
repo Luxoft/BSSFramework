@@ -160,4 +160,3 @@ public class DiffUpdatePropertyAssigner<TConfiguration> : GeneratorConfiguration
         }
     }
 }
-

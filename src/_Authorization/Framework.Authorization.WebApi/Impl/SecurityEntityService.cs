@@ -44,4 +44,3 @@ public partial class AuthMainController
                                    .ToList();
             });
 }
-

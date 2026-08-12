@@ -155,4 +155,3 @@ public static class TypeExtensions
         return type.GetProjectionSourceType(false).Maybe(condition);
     }
 }
-

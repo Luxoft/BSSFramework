@@ -85,4 +85,3 @@ public class CustomProjectionFileFactoryBase<TConfiguration>(TConfiguration conf
         };
     }
 }
-

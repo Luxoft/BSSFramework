@@ -26,4 +26,3 @@ public class TestRelativeEmployeeChildObject : AuditPersistentDomainObjectBase, 
         set => this.employee = value;
     }
 }
-

@@ -43,4 +43,3 @@ public record TypeEvent(Type Type, ImmutableArray<EventOperation> Operations, Fu
         return new TypeEvent(typeof(T), [.. eventOperations], isSaveUntypedFunc, isRemoveUntypeFunc);
     }
 }
-

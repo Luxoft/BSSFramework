@@ -87,4 +87,3 @@ public class UpdatePropertyAssigner<TConfiguration>(IDTOSource<TConfiguration> s
         return extractMethodExpr.ToAssignStatement(targetPropertyRef);
     }
 }
-

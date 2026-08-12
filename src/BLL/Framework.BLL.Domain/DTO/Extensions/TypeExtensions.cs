@@ -50,4 +50,3 @@ public static class TypeExtensions
         return request.SingleMaybe();
     }
 }
-

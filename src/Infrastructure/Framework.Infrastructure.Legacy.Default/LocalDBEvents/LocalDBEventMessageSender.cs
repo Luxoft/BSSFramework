@@ -47,4 +47,3 @@ public class LocalDBEventMessageSender<TPersistentDomainObjectBase>(
         configurationContext.Logics.Default.Create<Configuration.Domain.DomainObjectEvent>().Save(dbEvent);
     }
 }
-

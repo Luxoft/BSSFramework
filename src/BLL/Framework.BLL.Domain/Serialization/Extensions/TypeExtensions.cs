@@ -26,4 +26,3 @@ public static class TypeExtensions
         return type.GetSerializationProperties().Any(prop => prop.IsVisualIdentity());
     }
 }
-

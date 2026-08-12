@@ -251,4 +251,3 @@ public static class CoreExpressionExtensions
         public Node<Expression> ToNode() => new(this.startNode, this.childVisitors.Select(child => child.ToNode()));
     }
 }
-

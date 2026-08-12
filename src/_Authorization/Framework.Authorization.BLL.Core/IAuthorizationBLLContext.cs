@@ -28,4 +28,3 @@ public partial interface IAuthorizationBLLContext
 
     SecurityContextType GetSecurityContextType(Type type);
 }
-

@@ -3,4 +3,3 @@
 namespace SampleSystem.Domain.Models.Filters.Root;
 
 public class EmployeeRootFilterModel : DomainObjectRootFilterModel<Employee.Employee>;
-

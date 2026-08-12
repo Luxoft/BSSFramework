@@ -188,4 +188,3 @@ public abstract class PrincipalTests(IServiceProvider rootServiceProvider) : Tes
         Assert.Matches("^Principal with id = \".*\" not found$", notFoundException.Message);
     }
 }
-

@@ -10,4 +10,3 @@ public class EnglishAlphabetValidatorAttribute : PropertyValidatorAttribute
 
     public override IPropertyValidator CreateValidator() => new EnglishAlphabetValidator(this.ExternalChars);
 }
-

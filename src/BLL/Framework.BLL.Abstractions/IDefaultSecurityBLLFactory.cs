@@ -14,4 +14,3 @@ public interface IDefaultSecurityBLLFactory<in TPersistentDomainObjectBase, TIde
     IDefaultSecurityDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>(ISecurityProvider<TDomainObject> securityProvider)
         where TDomainObject : class, TPersistentDomainObjectBase;
 }
-

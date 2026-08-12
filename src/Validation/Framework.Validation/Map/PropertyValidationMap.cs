@@ -163,4 +163,3 @@ public class CollectionPropertyValidationMap<TSource, TProperty, TElement>(
 
     IClassValidationMap<TElement> ICollectionPropertyValidationMap<TSource, TProperty, TElement>.PropertyTypeMap => this.PropertyElementTypeMap;
 }
-

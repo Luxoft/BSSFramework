@@ -55,4 +55,3 @@ public class ReadOnlyEfSession : EfSessionBase
 
     public override async Task FlushAsync(CancellationToken ct) => throw new InvalidOperationException();
 }
-

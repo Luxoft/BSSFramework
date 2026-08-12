@@ -108,4 +108,3 @@ public class DALChanges : DALChanges<IDALObject>
 
     public Dictionary<Type, DALChanges<object>> GroupByType() => this.lazyGroupByType.Value;
 }
-

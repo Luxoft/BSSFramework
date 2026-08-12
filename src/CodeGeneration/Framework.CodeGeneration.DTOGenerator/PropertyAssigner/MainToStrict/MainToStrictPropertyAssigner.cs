@@ -130,4 +130,3 @@ public class MainToStrictPropertyAssigner<TConfiguration>(IDTOSource<TConfigurat
         return sourcePropertyRef.ToAssignStatement(targetPropertyRef);
     }
 }
-

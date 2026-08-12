@@ -47,4 +47,3 @@ public class OverrideEqualsDomainObjectVisitor(IServiceProxyFactory serviceProxy
                 }
             });
 }
-

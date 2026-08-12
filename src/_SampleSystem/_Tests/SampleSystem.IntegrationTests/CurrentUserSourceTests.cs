@@ -50,4 +50,3 @@ public abstract class CurrentUserSourceTests(IServiceProvider rootServiceProvide
         Assert.Equal($"{nameof(Employee)} \"{randomName}\" not found", userSourceException.Message);
     }
 }
-

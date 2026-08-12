@@ -43,4 +43,3 @@ internal class OverrideIdEqualsMethodVisitor<TIdent> : ExpressionVisitor
         return result;
     }
 }
-

@@ -25,4 +25,3 @@ public class ExampleSampleSystemEventsSubscriptionManager(
             (domainObject, _) => new EmployeeCustomEventModelSaveEventDTO(mappingService, new EmployeeCustomEventModel(domainObject)));
     }
 }
-

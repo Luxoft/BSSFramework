@@ -22,4 +22,3 @@ public class DomainObjectModificationMap : ConfigurationBaseMap<DomainObjectModi
         this.Version(x => x.Version).Generated.Never().Not.Nullable();
     }
 }
-

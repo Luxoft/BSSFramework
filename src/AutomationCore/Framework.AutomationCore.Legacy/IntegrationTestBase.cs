@@ -114,4 +114,3 @@ public abstract class IntegrationTestBase<TBLLContext>(IServiceProvider rootServ
         this.EvaluateRead(context => this.GetConfigurationBLLContext(context).Logics.DomainObjectNotification.GetFullList()
                                          .ToList(obj => DataContractSerializerHelper.Deserialize<NotificationEventDTO>(obj.SerializeData)));
 }
-

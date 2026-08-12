@@ -260,4 +260,3 @@ public partial class ServerGenerators
         return generator.Generate(TargetSystemPath + @"/SampleSystem.Generated.DAL.NHibernate/Mapping", this.CheckOutService);
     }
 }
-

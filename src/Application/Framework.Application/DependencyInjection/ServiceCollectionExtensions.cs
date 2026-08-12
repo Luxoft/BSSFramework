@@ -80,4 +80,3 @@ public static class ServiceCollectionExtensions
         }
     }
 }
-

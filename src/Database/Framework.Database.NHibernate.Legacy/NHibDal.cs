@@ -269,4 +269,3 @@ public class NHibDal<TDomainObject, TIdent>(INHibSession session, IAsyncDal<TDom
 }
 
 
-

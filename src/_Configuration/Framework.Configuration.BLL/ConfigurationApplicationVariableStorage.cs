@@ -50,4 +50,3 @@ public class ConfigurationApplicationVariableStorage(
         await systemConstantRepository.SaveAsync(systemConstant, ct);
     }
 }
-

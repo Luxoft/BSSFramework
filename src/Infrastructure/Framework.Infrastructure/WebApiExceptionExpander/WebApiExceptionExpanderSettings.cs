@@ -21,4 +21,3 @@ public record WebApiExceptionExpanderSettings(ImmutableArray<Type> HandledTypes)
         typeof(BusinessLogicException)
     ]);
 }
-

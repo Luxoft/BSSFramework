@@ -24,4 +24,3 @@ public static class GeneratorConfigurationExtensions
         return configuration.GetDomainTypeProperties(domainType, BaseFileType.RichDTO);
     }
 }
-

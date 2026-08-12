@@ -26,4 +26,3 @@ public class ImplementFileFactory<TConfiguration>(TConfiguration configuration, 
 
         select method;
 }
-

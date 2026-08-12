@@ -12,4 +12,3 @@ public interface ICodeGeneratorConfiguration : IFileGeneratorConfiguration
 
 public interface ICodeGeneratorConfiguration<out TEnvironment> : IFileGeneratorConfiguration<TEnvironment>, ICodeGeneratorConfiguration
     where TEnvironment : IFileGenerationEnvironment;
-

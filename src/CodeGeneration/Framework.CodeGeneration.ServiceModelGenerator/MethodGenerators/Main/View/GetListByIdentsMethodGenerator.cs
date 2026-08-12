@@ -40,4 +40,3 @@ public class GetListByIdentsMethodGenerator<TConfiguration> : ViewCollectionMeth
                                .ToMethodReturnStatement();
     }
 }
-

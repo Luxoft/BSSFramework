@@ -12,4 +12,3 @@ public class EmployeeCellPhone : EmployeeCellPhoneBase
     {
     }
 }
-

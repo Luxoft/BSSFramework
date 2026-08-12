@@ -46,4 +46,3 @@ public abstract class WrongSecurityMessageTests(IServiceProvider rootServiceProv
             accessDeniedException.Message);
     }
 }
-

@@ -12,4 +12,3 @@ public class DalQueryableSource(IServiceProvider serviceProvider) : IQueryableSo
         where TDomainObject : class =>
         serviceProvider.GetRequiredService<IAsyncDal<TDomainObject, Guid>>().GetQueryable();
 }
-

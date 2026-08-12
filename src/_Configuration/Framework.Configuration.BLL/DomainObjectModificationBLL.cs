@@ -89,4 +89,3 @@ public partial class DomainObjectModificationBLL(
             LastProcessedItemDateTime = this.GetUnsecureQueryable().Where(mod => mod.Processed).Max(mod => mod.ModifyDate)
         };
 }
-

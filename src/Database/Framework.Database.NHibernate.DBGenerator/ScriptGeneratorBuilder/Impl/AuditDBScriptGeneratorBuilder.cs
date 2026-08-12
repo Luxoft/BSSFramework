@@ -98,4 +98,3 @@ class AuditDBScriptGeneratorBuilder : IAuditDBScriptGeneratorBuilder
 
     public bool IsFrozen { get; set; }
 }
-

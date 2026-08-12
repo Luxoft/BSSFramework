@@ -16,4 +16,3 @@ public static class Program
         generators.GenerateDatabase(options);
     }
 }
-

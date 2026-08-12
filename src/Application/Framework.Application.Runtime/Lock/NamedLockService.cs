@@ -20,4 +20,3 @@ public class NamedLockService<TGenericNamedLock>(
         await namedLockRepository.LockAsync(genericNamedLock, lockRole, ct);
     }
 }
-

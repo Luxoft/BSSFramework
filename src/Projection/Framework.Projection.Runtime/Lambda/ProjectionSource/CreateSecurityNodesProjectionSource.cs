@@ -122,4 +122,3 @@ internal class CreateSecurityNodesProjectionSource(ProjectionLambdaEnvironment e
         }
     }
 }
-

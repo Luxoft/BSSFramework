@@ -60,4 +60,3 @@ public class ClassValidationMap<TSource> : ClassValidationMap, IClassValidationM
 
     public static readonly ClassValidationMap<TSource> Empty = new([], []);
 }
-

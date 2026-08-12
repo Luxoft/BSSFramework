@@ -6,4 +6,3 @@ public class FinancialYearService(TimeProvider timeProvider, IFinancialYearCalcu
 {
     public Period GetCurrentFinancialYear() => financialYearCalculator.GetFinancialYearPeriod(timeProvider.GetLocalNow().DateTime);
 }
-

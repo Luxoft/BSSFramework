@@ -20,4 +20,3 @@ public class AlphabetValidator(string alphabet, string? externalChars = null) : 
                                               () => $"The value of {context.GetPropertyName()} property of {context.GetSourceTypeName()} contains invalid chars: {invalidChars}");
     }
 }
-

@@ -60,4 +60,3 @@ public interface ITrackingService<in TPersistentDomainObjectBase>
     TProperty GetPrevValue<TDomainObject, TProperty>(TDomainObject domainObject, Expression<Func<TDomainObject, TProperty>> propertyExpression, TProperty defaultValue)
         where TDomainObject : class, TPersistentDomainObjectBase;
 }
-

@@ -12,4 +12,3 @@ public class Int64ValueValidatorAttribute : PropertyValidatorAttribute
 
     public override IPropertyValidator CreateValidator() => new Int64ValueValidator(this.Min, this.Max);
 }
-

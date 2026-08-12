@@ -59,4 +59,3 @@ public abstract class ProjectionEnvironmentBase : IProjectionEnvironment
         return this.PersistentDomainObjectBaseType.IsAssignableFrom(type);
     }
 }
-

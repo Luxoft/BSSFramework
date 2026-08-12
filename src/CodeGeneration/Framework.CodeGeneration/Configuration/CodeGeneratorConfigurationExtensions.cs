@@ -14,4 +14,3 @@ public static class CodeGeneratorConfigurationExtensions
         return typeof(IIdentityObject<>).MakeGenericType(configuration.Environment.IdentityProperty.PropertyType).ToTypeReference();
     }
 }
-

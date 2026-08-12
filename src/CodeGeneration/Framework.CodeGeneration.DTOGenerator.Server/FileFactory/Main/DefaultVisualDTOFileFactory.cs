@@ -41,4 +41,3 @@ public class DefaultVisualDTOFileFactory<TConfiguration>(TConfiguration configur
         }
     }
 }
-

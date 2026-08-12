@@ -9,4 +9,3 @@ public class ExpandPathVisitorContainer(IPropertyPathService propertyPathService
 {
     public ExpressionVisitor Visitor { get; } = new ExpandPathVisitor(propertyPathService);
 }
-

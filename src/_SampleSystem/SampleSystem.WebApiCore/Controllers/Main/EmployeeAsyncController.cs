@@ -35,4 +35,3 @@ public class EmployeeAsyncController(
         return employees.Single().ToSimpleDTO(mappingService);
     }
 }
-

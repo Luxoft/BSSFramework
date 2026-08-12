@@ -34,4 +34,3 @@ public abstract class JobTests(IServiceProvider rootServiceProvider) : TestBase(
                 c => c.Logics.Default.Create<TestJobObject>().GetUnsecureQueryable().Count());
     }
 }
-

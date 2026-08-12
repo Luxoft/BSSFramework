@@ -18,4 +18,3 @@ internal class BssJobFilterAttributeFilterProvider : JobFilterAttributeFilterPro
 
     protected override IEnumerable<JobFilterAttribute> GetTypeAttributes(Job job) => this.cache[job.Type];
 }
-

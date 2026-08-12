@@ -60,4 +60,3 @@ internal class EmptyAuditMetadataProvider(IRevisionListener entityTrackingRevisi
         return result;
     }
 }
-

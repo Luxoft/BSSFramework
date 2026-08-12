@@ -15,4 +15,3 @@ public interface IAuditDTOGeneratorConfiguration : ICodeGeneratorConfiguration
 
     string PropertyRevisionFullTypeName { get; }
 }
-

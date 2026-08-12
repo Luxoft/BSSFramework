@@ -23,4 +23,3 @@ public abstract class BaseRemoveMethodGenerator<TConfiguration> : MethodGenerato
 
     protected sealed override bool IsEdit { get; } = true;
 }
-

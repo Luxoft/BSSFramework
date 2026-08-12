@@ -14,4 +14,3 @@ public interface ITargetSystemService
 
     IEnumerable<ObjectModificationInfo<Guid>> GetObjectModifications(DALChanges changes);
 }
-

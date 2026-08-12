@@ -11,4 +11,3 @@ public interface IAuthorizationSystemSetup
     IAuthorizationSystemSetup SetUniquePermissionComparer<TComparer>()
         where TComparer : class, IPermissionEqualityComparer<Permission, PermissionRestriction>;
 }
-

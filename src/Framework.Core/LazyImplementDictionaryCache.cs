@@ -60,4 +60,3 @@ public class LazyImplementDictionaryCache<TKey, TValue>(
 
     IEnumerable<TValue> IDictionaryCache<TKey, TValue>.Values => this.dict.Values;
 }
-

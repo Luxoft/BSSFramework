@@ -25,4 +25,3 @@ public class LocalDbNotificationMessageSender([DisabledSecurity] IRepository<Dom
         await domainObjectNotificationRepository.SaveAsync(dbNotification, ct);
     }
 }
-

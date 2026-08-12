@@ -12,4 +12,3 @@ public interface IDBGenerator
                   MergeColumnMode mergeColumnMode);
 
 }
-

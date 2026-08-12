@@ -100,4 +100,3 @@ public abstract class PrincipalTests(IServiceProvider rootServiceProvider) : Tes
         Assert.Contains(this.GetIntegrationEvents<PrincipalSaveEventDTO>("authDALQuery"), dto => dto.Principal.Id == principalId);
     }
 }
-

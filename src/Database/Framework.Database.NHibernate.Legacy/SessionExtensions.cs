@@ -43,4 +43,3 @@ internal static class SessionExtensions
         return entity;
     }
 }
-

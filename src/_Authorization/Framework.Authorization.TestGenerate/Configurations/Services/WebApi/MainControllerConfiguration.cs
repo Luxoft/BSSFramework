@@ -8,4 +8,3 @@ public class MainControllerConfiguration(AuthorizationGenerationEnvironment envi
 
     public override string ImplementClassName { get; } = "AuthMainController";
 }
-

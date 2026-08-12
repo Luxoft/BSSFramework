@@ -2,9 +2,9 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
-    <Anch>3.7.6</Anch>
+    <Anch>3.7.9</Anch>
     <BssPlatform>[1.6.2]</BssPlatform>
-    <DotNet>10.0.10</DotNet>
+    <DotNet>10.0.11</DotNet>
   </PropertyGroup>
   <!-- DotNet -->
   <ItemGroup>
@@ -46,6 +46,7 @@
     <PackageVersion Include="Anch.SecuritySystem.Notification" Version="$(Anch)" />
     <PackageVersion Include="Anch.SecuritySystem.Notification.Abstractions" Version="$(Anch)" />
     <PackageVersion Include="Anch.SecuritySystem.Notification.Domain" Version="$(Anch)" />
+    <PackageVersion Include="Anch.SecuritySystem.Rules" Version="$(Anch)" />
     <PackageVersion Include="Anch.SecuritySystem.Testing" Version="$(Anch)" />
     <PackageVersion Include="Anch.SecuritySystem.VirtualPermission" Version="$(Anch)" />
   </ItemGroup>
@@ -82,6 +83,6 @@
     <PackageVersion Include="xunit.v3" Version="3.2.2" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.8.1" />
-    <PackageVersion Include="NSubstitute" Version="6.0.0" />
+    <PackageVersion Include="NSubstitute" Version="6.2.0" />
   </ItemGroup>
 </Project>

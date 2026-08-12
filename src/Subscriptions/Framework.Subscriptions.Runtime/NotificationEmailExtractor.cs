@@ -11,12 +11,11 @@ using Anch.VisualIdentitySource;
 
 namespace Framework.Subscriptions;
 
-public class EmployeeEmailExtractor<TEmployee, TPrincipal>(
-    INotificationPrincipalExtractor<TPrincipal> notificationPrincipalExtractor,
-    IVisualIdentityInfo<TPrincipal> principalVisualIdentityInfo,
+public class NotificationEmailExtractor<TEmployee>(
+    INotificationPrincipalNameExtractor notificationPrincipalNameExtractor,
     IVisualIdentityInfo<TEmployee> employeeVisualIdentityInfo,
     IQueryableSource queryableSource,
-    EmployeeInfo<TEmployee> employeeInfo) : IEmployeeEmailExtractor
+    EmployeeInfo<TEmployee> employeeInfo) : INotificationEmailExtractor
     where TEmployee : class
 {
     public IAsyncEnumerable<string> GetEmails(ImmutableArray<SecurityRole> securityRoles, ImmutableArray<NotificationFilterGroup> notificationFilterGroups) =>
@@ -27,9 +26,7 @@ public class EmployeeEmailExtractor<TEmployee, TPrincipal>(
         ImmutableArray<NotificationFilterGroup> notificationFilterGroups,
         [EnumeratorCancellation] CancellationToken ct = default)
     {
-        var principalNames = await notificationPrincipalExtractor.GetPrincipalsAsync(securityRoles, notificationFilterGroups)
-                                                                 .Select(principalVisualIdentityInfo.Name.Getter)
-                                                                 .ToHashSetAsync(null, ct);
+        var principalNames = await notificationPrincipalNameExtractor.GetPrincipalNamesAsync(securityRoles, notificationFilterGroups).ToHashSetAsync(null, ct);
 
         await foreach (var email in queryableSource.GetQueryable<TEmployee>()
                                                    .Where(employeeVisualIdentityInfo.Name.Path.Select(employeeName => principalNames.Contains(employeeName)))

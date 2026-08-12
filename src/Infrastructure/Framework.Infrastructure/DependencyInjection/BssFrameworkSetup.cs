@@ -90,7 +90,7 @@ public class BssFrameworkSetup : IBssFrameworkSetup, IServiceInitializer
     {
         services.AddSingleton<IExceptionExpander, RootExceptionExpander>();
 
-        services.AddSingleton<ICultureSource>(CultureSource.CurrentCulture);
+        services.AddSingleton<ICultureSource>(CultureSource.InvariantCulture);
 
         services.AddGenericApplicationServices();
 

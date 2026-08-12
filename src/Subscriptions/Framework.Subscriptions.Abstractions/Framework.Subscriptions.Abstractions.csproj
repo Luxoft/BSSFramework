@@ -10,9 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Framework.Core\Framework.Core.csproj" />
     <ProjectReference Include="..\Framework.Subscriptions.Metadata\Framework.Subscriptions.Metadata.csproj" />
   </ItemGroup>

@@ -6,4 +6,3 @@ public interface IMethodGenerator
 {
     CodeMemberMethod GetMethod();
 }
-

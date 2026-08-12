@@ -59,4 +59,3 @@ public abstract class FileStoreAttachmentGeneratorConfigurationBase<TEnvironment
         }
     }
 }
-

@@ -43,4 +43,3 @@ public partial class BusinessUnitController
                 return SelectOperationResultExtensions.ChangeItem<BusinessUnit, BusinessUnitFullDTO, Guid>(odataTree, x => LambdaHelper.ToFullDTO((BusinessUnit)x, evaluateData.MappingService));
             });
 }
-

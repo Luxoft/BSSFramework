@@ -16,4 +16,3 @@ public class SampleSystemCustomAribaLocalDBEventMessageSender(
         configurationContext,
         currentRevisionService,
         new LocalDBEventMessageSenderSettings<PersistentDomainObjectBase>() { QueueTag = "ariba" });
-

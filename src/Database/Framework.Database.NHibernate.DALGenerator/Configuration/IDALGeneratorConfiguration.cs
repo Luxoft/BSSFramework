@@ -10,4 +10,3 @@ public interface IDALGeneratorConfiguration : IFileGeneratorConfiguration
 {
     IEnumerable<IMappingGenerator> GetMappingGenerators();
 }
-

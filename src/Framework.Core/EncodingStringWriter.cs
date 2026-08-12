@@ -6,4 +6,3 @@ public class EncodingStringWriter(StringBuilder sb, Encoding encoding) : StringW
 {
     public override Encoding Encoding => encoding;
 }
-

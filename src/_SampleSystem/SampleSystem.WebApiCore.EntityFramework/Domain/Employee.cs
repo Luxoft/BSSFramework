@@ -15,4 +15,3 @@ public class Employee : IIdentityObject<Guid>
 
     public virtual BusinessUnit? CoreBusinessUnit { get; set; }
 }
-

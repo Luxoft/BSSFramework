@@ -93,4 +93,3 @@ public abstract class ExtraQueryableSecurityPathTests(IServiceProvider rootServi
         Assert.Equal(this.TestEmp2.Id, Assert.Single(items));
     }
 }
-

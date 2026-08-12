@@ -12,4 +12,3 @@ public class TestObjForNestedBase : BaseDirectory
         set => this.period = value;
     }
 }
-

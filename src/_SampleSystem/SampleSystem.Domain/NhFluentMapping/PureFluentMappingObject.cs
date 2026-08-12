@@ -30,4 +30,3 @@ public class PureFluentMappingObject : PersistentDomainObjectBase
         set => this.period456 = value;
     }
 }
-

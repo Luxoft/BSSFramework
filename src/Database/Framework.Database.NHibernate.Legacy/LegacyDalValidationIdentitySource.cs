@@ -10,4 +10,3 @@ public class LegacyDalValidationIdentitySource : IDalValidationIdentitySource
 
     public string GetPropertyValidationName(PropertyInfo property) => property.GetValidationName();
 }
-

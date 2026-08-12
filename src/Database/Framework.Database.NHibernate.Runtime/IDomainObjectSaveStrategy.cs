@@ -6,4 +6,3 @@ public interface IDomainObjectSaveStrategy<in TDomainObject>
 {
     Task SaveAsync(ISession session, TDomainObject domainObject, CancellationToken ct);
 }
-

@@ -39,4 +39,3 @@ public abstract class StrictToDomainObjectPropertyAssignerBase<TConfiguration>(I
         };
     }
 }
-

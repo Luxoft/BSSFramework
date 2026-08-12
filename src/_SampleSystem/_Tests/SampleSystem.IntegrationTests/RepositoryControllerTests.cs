@@ -24,4 +24,3 @@ public abstract class RepositoryControllerTests(IServiceProvider rootServiceProv
         Assert.Contains(currentEmployee.Identity, result.Employees);
     }
 }
-

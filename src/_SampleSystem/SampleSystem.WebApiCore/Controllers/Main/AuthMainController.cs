@@ -59,4 +59,3 @@ public class AuthMainController : Framework.Authorization.WebApi.AuthMainControl
         public PermissionStrictDTO PermissionDTO { get; set; } = null!;
     }
 }
-

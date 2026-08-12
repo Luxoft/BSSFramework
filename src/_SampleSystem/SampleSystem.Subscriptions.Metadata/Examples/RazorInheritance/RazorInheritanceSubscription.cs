@@ -24,4 +24,3 @@ public class RazorInheritanceSubscription : Subscription<Domain.Employee.Employe
         yield return new("tester@luxoft.com", versions);
     }
 }
-

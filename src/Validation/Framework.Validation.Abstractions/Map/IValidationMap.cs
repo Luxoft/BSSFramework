@@ -6,4 +6,3 @@ public interface IValidationMap : IServiceProviderContainer
 {
     IClassValidationMap GetClassMap(Type type);
 }
-

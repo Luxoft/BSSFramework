@@ -12,4 +12,3 @@ public class TestWebApiCurrentMethodResolver : IWebApiCurrentMethodResolver
 
     public void SetCurrentMethod(MethodInfo methodInfo) => this.currentMethod = methodInfo;
 }
-

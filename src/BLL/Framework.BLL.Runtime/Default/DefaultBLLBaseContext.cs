@@ -44,4 +44,3 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent,
 
     protected override IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>> BaseLogics => this.Logics;
 }
-

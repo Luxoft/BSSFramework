@@ -83,4 +83,3 @@ public class IntegrationSaveManyMethodGenerator<TConfiguration>(IntegrationSaveM
                          .ToMethodReturnStatement();
     }
 }
-

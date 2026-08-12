@@ -41,4 +41,3 @@ public abstract class PersistentDomainObjectBase : DomainObjectBase, IEquatable<
 #pragma warning restore S2349
     }
 }
-

@@ -11,4 +11,3 @@ public record DTOFetchRule<TSource>(ViewDTOType Value) : FetchRuleHeader<TSource
     {
     }
 }
-

@@ -45,4 +45,3 @@ internal partial class AuditPropertiesSetter
         public override string ToString() => this.Type.ToString();
     }
 }
-

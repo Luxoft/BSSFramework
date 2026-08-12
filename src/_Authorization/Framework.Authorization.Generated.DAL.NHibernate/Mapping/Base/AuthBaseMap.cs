@@ -21,4 +21,3 @@ public abstract class AuthBaseMap<TEntity> : ClassMap<TEntity>
         this.Map(x => x.ModifyDate);
     }
 }
-

@@ -9,4 +9,3 @@ public class BLLCoreGeneratorConfiguration(AuthorizationGenerationEnvironment en
 
     public override Type ChangeModelType { get; } = typeof(DomainObjectChangeModel<>);
 }
-

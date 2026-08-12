@@ -17,4 +17,3 @@ public class SchemeUpdateTests(IServiceProvider rootServiceProvider) : TestBase(
         Assert.Null(ex);
     }
 }
-

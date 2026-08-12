@@ -56,4 +56,3 @@ public abstract class DTOMappingService<TBLLContext, TPersistentDomainObjectBase
             where TTarget : class, IIdentityObject<TIdent> =>
         new DefaultUpdateCollectionMappingService<TSourceItem, TSourceIdentity, TTarget, TIdent>(createAndMapDetail, removeDetail);
 }
-

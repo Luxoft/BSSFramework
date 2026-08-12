@@ -211,4 +211,3 @@ public abstract class CodeDomProviderRenderer(CodeDomProvider provider, CodeGene
         protected abstract CodeExpression NormalizeExpression(CodeNameofExpression nameofExpression);
     }
 }
-

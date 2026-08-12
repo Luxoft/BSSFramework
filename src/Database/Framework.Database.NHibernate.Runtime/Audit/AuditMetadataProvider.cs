@@ -247,4 +247,3 @@ internal class AuditMetadataProvider<TAuditRevisionEntity> : IMetaDataProvider
         }
     }
 }
-

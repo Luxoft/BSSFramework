@@ -21,4 +21,3 @@ public interface IFileStoreAttachmentGeneratorConfiguration : ICodeGeneratorConf
 
     SecurityRule? TryGetSecurityAttribute(Type type, bool forEdit);
 }
-

@@ -48,4 +48,3 @@ public class IgnoreLink
 
     public PropertyInfo? MemberInfo { get; private set; }
 }
-

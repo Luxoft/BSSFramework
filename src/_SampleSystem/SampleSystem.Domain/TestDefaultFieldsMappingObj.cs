@@ -19,4 +19,3 @@ public class TestDefaultFieldsMappingObj : DomainObjectBase
     [DefaultValue(EnumDefaultVal)]
     public DayOfWeek EnumVal { get; set; } = EnumDefaultVal;
 }
-

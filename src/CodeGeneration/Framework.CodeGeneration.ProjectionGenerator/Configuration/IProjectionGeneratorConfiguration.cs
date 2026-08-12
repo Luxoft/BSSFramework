@@ -34,4 +34,3 @@ public interface IProjectionGeneratorConfiguration : ICodeGeneratorConfiguration
     /// <returns></returns>
     IEnumerable<CodeAttributeDeclaration> GetPropertyAttributeDeclarations(PropertyInfo property);
 }
-

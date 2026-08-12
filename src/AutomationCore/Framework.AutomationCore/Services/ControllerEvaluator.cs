@@ -114,4 +114,3 @@ public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvid
         public async Task Invoke() => await next(context);
     }
 }
-

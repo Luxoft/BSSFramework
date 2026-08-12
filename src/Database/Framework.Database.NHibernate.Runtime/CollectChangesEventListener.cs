@@ -67,4 +67,3 @@ internal class CollectChangesEventListener : IPostDeleteEventListener, IPostInse
         this.updatedObjects.Add(@event.ToDALObjects(this.counter++));
     }
 }
-

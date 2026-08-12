@@ -42,4 +42,3 @@ public class TestCompositeClass
     [RequiredValidator]
     public string SomeProperty { get; set; } = null!;
 }
-

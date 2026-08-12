@@ -10,4 +10,3 @@ public class GeneralQueryExpressionInterceptor(IExpressionVisitorContainer expre
 {
     public Expression QueryCompilationStarting(Expression queryExpression, QueryExpressionEventData eventData) => expressionVisitorContainer.Visitor.Visit(queryExpression);
 }
-

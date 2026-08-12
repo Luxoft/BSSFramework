@@ -9,4 +9,3 @@ public class DefaultFullDTOFileFactory<TConfiguration>(TConfiguration configurat
 {
     public override MainDTOFileType FileType { get; } = BaseFileType.FullDTO;
 }
-

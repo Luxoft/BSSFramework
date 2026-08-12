@@ -296,4 +296,3 @@ internal class GeneratedType : BaseTypeImpl, IWrappingObject
         }
     }
 }
-

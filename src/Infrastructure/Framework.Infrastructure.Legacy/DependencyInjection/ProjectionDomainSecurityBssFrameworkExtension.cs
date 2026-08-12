@@ -10,4 +10,3 @@ public class ProjectionDomainSecurityBssFrameworkExtension(Assembly assembly) : 
 {
     public void AddServices(IServiceCollection services) => services.AddProjectionDomainSecurityServices(assembly);
 }
-

@@ -96,4 +96,3 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
         Assert.DoesNotContain(changedTable.Indexes, x => x.Name == "IX_ChildEntity_parentId");
     }
 }
-

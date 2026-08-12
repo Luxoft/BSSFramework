@@ -309,4 +309,3 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
         public void Add(View view) => this.Add([view]);
     }
 }
-

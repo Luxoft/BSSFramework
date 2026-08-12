@@ -40,4 +40,3 @@ public class BusinessUnitHrDepartment : AuditPersistentDomainObjectBase, IDetail
 
     HRDepartment.HRDepartment IDetail<HRDepartment.HRDepartment>.Master => this.hRDepartment;
 }
-

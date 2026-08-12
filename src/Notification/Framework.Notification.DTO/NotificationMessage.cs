@@ -11,4 +11,3 @@ public class NotificationMessage
     [DataMember]
     public string Message { get; set; } = null!;
 }
-

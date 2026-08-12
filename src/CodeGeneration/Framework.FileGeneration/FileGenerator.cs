@@ -10,4 +10,3 @@ public abstract class FileGenerator<TConfiguration, TRenderingData, TRenderer>(T
 
     public abstract IEnumerable<TRenderingData> GetFileGenerators();
 }
-

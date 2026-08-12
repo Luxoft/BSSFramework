@@ -22,4 +22,3 @@ public class DatabaseScriptResultDecorator(IDatabaseScriptResult source, Func<st
 
     public IDatabaseScriptResult Evaluate() => this.source.Evaluate();
 }
-

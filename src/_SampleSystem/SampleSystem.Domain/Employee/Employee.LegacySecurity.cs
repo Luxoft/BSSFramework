@@ -43,4 +43,3 @@ public partial class Employee : IEmployeeSecurity<BusinessUnit, HRDepartment.HRD
     [ExpandPath(nameof(HRDepartment))]
     HRDepartment.HRDepartment IDepartmentSecurityElement<HRDepartment.HRDepartment>.Department => this.HRDepartment!;
 }
-

@@ -45,4 +45,3 @@ public abstract class RoleDTOFileFactory<TConfiguration>(TConfiguration configur
         yield return this.GenerateFromDomainObjectConstructor(this.MapDomainObjectToMappingObjectPropertyAssigner);
     }
 }
-

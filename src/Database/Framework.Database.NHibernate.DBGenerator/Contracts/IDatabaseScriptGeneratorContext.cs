@@ -23,4 +23,3 @@ public interface IDatabaseScriptGeneratorContext
     /// </summary>
     AssemblyMetadata AssemblyMetadata { get; }
 }
-

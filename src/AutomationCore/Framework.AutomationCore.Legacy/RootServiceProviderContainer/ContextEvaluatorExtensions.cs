@@ -13,4 +13,3 @@ public static class ContextEvaluatorExtensions
 
     public static TResult EvaluateRead<TBLLContext, TResult>(this ISyncServiceEvaluator<TBLLContext> serviceEvaluator, Func<TBLLContext, TResult> func) => serviceEvaluator.Evaluate(DBSessionMode.Read, func);
 }
-

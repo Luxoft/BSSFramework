@@ -15,4 +15,3 @@ public interface IGenericNamedLockSetup
 
     IGenericNamedLockSetup AddManual(Type domainType) => this.AddManual(new NamedLock(domainType));
 }
-

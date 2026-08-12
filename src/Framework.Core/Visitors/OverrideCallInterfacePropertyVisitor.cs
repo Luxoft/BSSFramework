@@ -30,4 +30,3 @@ public class OverrideCallInterfacePropertyVisitor(PropertyInfo property) : Expre
         return base.VisitMember(node);
     }
 }
-

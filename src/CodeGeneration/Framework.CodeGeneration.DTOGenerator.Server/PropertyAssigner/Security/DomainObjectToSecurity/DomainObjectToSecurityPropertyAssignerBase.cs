@@ -57,4 +57,3 @@ public abstract class DomainObjectToSecurityPropertyAssignerBase<TConfiguration>
         };
     }
 }
-

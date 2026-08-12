@@ -72,4 +72,3 @@ public class FioShort : ICloneable, IEquatable<FioShort>
 
     public static bool operator !=(FioShort? v1, FioShort? v2) => !(v1 == v2);
 }
-

@@ -26,4 +26,3 @@ public abstract class ImpersonateTests(IServiceProvider rootServiceProvider) : T
     }
 
 }
-

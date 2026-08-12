@@ -11,4 +11,3 @@ public static class BssFrameworkSetupExtensions
 
         settings.AddExtensions(new BssFrameworkExtension(services => services.AddNHibernate(setupAction)));
 }
-

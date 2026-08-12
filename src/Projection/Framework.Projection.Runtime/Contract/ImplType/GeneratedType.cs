@@ -239,4 +239,3 @@ internal class GeneratedType : BaseTypeImpl, IWrappingObject
         return request.ToDictionary();
     }
 }
-

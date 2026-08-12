@@ -62,4 +62,3 @@ public class GetTreeByOperationMethodGenerator<TConfiguration> : ViewMethodGener
                              .ToMethodReturnStatement();
     }
 }
-

@@ -42,4 +42,3 @@ public static class EnumerableExtensions
 
     private static Exception GetNotFoundException<TSource>(string identity, string identityName) => throw new Exception($"{typeof(TSource).Name} with {identityName} \"{identity}\" not found");
 }
-

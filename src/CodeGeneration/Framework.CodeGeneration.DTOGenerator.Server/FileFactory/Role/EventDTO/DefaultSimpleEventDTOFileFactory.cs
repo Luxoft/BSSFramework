@@ -9,4 +9,3 @@ public class DefaultSimpleEventDTOFileFactory<TConfiguration>(TConfiguration con
 {
     public override DTOFileType FileType { get; } = ServerFileType.SimpleEventDTO;
 }
-

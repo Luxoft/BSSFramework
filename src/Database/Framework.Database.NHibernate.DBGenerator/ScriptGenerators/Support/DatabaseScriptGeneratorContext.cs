@@ -24,4 +24,3 @@ public class DatabaseScriptGeneratorContext(DatabaseName databaseName, ISqlDatab
     /// </summary>
     public AssemblyMetadata AssemblyMetadata { get; } = assemblyMetadata ?? throw new ArgumentNullException(nameof(assemblyMetadata));
 }
-

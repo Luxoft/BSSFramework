@@ -19,4 +19,3 @@ public class ManualProjectionEnvironment(Assembly assembly, Type persistentDomai
 
     public IMetadataProxyProvider MetadataProxyProvider { get; } = metadataProxyProvider;
 }
-

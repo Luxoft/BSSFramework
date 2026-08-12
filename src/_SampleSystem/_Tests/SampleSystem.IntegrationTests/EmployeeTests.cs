@@ -336,4 +336,3 @@ public abstract class EmployeeTests(IServiceProvider rootServiceProvider) : Test
         Assert.True(notNull);
     }
 }
-

@@ -34,4 +34,3 @@ public class DalGenericRepository(IServiceProvider serviceProvider) : IGenericRe
         await dal.RemoveAsync(data, ct);
     }
 }
-

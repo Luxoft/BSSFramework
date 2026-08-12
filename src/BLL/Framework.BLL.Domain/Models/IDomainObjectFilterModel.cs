@@ -6,4 +6,3 @@ public interface IDomainObjectFilterModel<TDomainObject>
 {
     Expression<Func<TDomainObject, bool>> ToFilterExpression();
 }
-

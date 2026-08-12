@@ -15,4 +15,3 @@ public class EditRepository<TDomainObject>(
         accessDeniedExceptionService,
         domainSecurityService.GetSecurityProvider(SecurityRule.Edit))
     where TDomainObject : class;
-

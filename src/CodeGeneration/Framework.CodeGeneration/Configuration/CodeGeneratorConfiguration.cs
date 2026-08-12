@@ -63,4 +63,3 @@ public abstract class CodeGeneratorConfiguration<TEnvironment, TFileType> : Code
 
     protected abstract IEnumerable<ICodeFileFactoryHeader<TFileType>> GetFileFactoryHeaders();
 }
-

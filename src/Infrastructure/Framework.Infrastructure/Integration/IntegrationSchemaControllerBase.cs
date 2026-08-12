@@ -53,4 +53,3 @@ public abstract class IntegrationSchemaControllerBase(
 
     protected abstract IReadOnlyCollection<Type> GetAuthEventDTOTypes();
 }
-

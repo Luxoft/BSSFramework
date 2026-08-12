@@ -15,4 +15,3 @@ public class DomainObjectVersionsResolverFactory(IServiceProxyFactory servicePro
         return serviceProxyFactory.Create<IDomainObjectVersionsResolver>(domainObjectVersionsResolverType);
     }
 }
-

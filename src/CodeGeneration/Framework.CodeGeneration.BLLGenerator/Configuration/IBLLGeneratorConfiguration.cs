@@ -67,4 +67,3 @@ public interface IBLLGeneratorConfiguration : ICodeGeneratorConfiguration, ICode
     /// <returns></returns>
     bool SquashPropertyValidators(PropertyInfo property);
 }
-

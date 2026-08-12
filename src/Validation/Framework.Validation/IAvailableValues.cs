@@ -8,4 +8,3 @@ public interface IAvailableValues
 
     int GetAvailableSize<T>();
 }
-

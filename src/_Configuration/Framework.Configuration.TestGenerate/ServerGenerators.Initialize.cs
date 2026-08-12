@@ -8,4 +8,3 @@ public partial class ServerGenerators(ConfigurationGenerationEnvironment? enviro
 
     protected override string GeneratePath => this.FrameworkPath + @"/src/_Configuration";
 }
-

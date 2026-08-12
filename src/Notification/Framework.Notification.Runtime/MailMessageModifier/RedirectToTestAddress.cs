@@ -36,4 +36,3 @@ public class RedirectToTestAddress(IOptions<SmtpSettings> settings) : IMailMessa
         message.Body = $"{originalReceivers}{message.Body}";
     }
 }
-

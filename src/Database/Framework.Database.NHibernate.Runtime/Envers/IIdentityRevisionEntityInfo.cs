@@ -10,4 +10,3 @@ public interface IIdentityRevisionEntityInfo<out TRevisionEntity, out TIdentity>
 
     RevisionType Operation { get; }
 }
-

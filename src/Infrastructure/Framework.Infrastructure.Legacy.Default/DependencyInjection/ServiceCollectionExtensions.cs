@@ -90,4 +90,3 @@ public static class ServiceCollectionExtensions
             .AddDomainSecurity<TargetSystem>(b => b.SetView(SecurityRole.Administrator).SetEdit(SecurityRole.Administrator))
             .AddDomainSecurity<DomainType>(b => b.SetView(SecurityRule.Disabled));
 }
-

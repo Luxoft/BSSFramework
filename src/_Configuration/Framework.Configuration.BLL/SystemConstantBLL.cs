@@ -35,4 +35,3 @@ public partial class SystemConstantBLL(
         return serializer.Parse(systemConstant.Value);
     }
 }
-

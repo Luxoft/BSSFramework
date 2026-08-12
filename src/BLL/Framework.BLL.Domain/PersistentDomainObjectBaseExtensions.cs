@@ -132,4 +132,3 @@ public static class PersistentDomainObjectBaseExtensions
         return collectionRequest.GetValue(() => new ArgumentException("Invalid property expression", nameof(propertyExpr)));
     }
 }
-

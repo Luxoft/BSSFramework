@@ -10,4 +10,3 @@ public class GenericRepositoryFactory<TDomainObject, TIdent>(IServiceProxyFactor
       TDomainObject>(serviceProxyFactory, domainSecurityService),
       IGenericRepositoryFactory<TDomainObject, TIdent>
     where TDomainObject : class;
-

@@ -22,4 +22,3 @@ public class TypeSource(ImmutableHashSet<Type> types) : ITypeSource
 
     public static TypeSource FromSample<T>() => FromSample(typeof(T));
 }
-

@@ -218,4 +218,3 @@ public class DefaultStrictDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
         }
     }
 }
-

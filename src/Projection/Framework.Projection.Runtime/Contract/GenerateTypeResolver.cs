@@ -33,4 +33,3 @@ internal class GenerateTypeResolver : ITypeResolver<Type>
 
     public ImmutableHashSet<Type> Types => this.generateState.Types;
 }
-

@@ -8,4 +8,3 @@ public class DalValidationIdentitySource : IDalValidationIdentitySource
 
     public string GetPropertyValidationName(PropertyInfo property) => property.Name;
 }
-

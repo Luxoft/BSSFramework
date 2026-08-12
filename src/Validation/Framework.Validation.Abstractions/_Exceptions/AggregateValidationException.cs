@@ -21,4 +21,3 @@ public class AggregateValidationException : ValidationExceptionBase
 
     public override string ToString() => new AggregateException(this.InnerExceptions).ToString();
 }
-

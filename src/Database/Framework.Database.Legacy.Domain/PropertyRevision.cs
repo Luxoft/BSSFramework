@@ -20,4 +20,3 @@ public class PropertyRevision<TIdent, TProperty> : RevisionInfoBase, IDetail<Dom
 
     DomainObjectPropertyRevisions<TIdent, TProperty> IDetail<DomainObjectPropertyRevisions<TIdent, TProperty>>.Master => this.master;
 }
-

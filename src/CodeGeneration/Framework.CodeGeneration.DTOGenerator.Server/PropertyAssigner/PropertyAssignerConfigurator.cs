@@ -41,4 +41,3 @@ public class PropertyAssignerConfigurator<TConfiguration>(TConfiguration configu
         }
     }
 }
-

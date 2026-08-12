@@ -16,4 +16,3 @@ public abstract class EventDTOFileFactory<TConfiguration> : RoleDTOFileFactory<T
 
     protected override string DataContractNamespace => this.Configuration.EventDataContractNamespace;
 }
-

@@ -54,4 +54,3 @@ public class InlineTypeFieldMapper : IMapper
         return pairs.SelectMany(z => z.ReferenceTypes.SelectMany(q => mapper.GetMapping(q, z.Name)));
     }
 }
-

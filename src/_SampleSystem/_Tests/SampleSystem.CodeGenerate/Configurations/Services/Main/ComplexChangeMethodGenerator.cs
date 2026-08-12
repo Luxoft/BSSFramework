@@ -88,4 +88,3 @@ public class ComplexChangeMethodGenerator : ModelMethodGenerator<MainServiceGene
         return modelSecurityAttribute.SecurityRule;
     }
 }
-

@@ -10,4 +10,3 @@ public interface INHibSession : IDBSession
 
     ISession NativeSession { get; }
 }
-

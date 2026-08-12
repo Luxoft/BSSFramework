@@ -164,4 +164,3 @@ public class MethodIdentityType(string name) : IEquatable<MethodIdentityType>
 
     public static bool operator !=(MethodIdentityType? fileType, MethodIdentityType? other) => !(fileType == other);
 }
-

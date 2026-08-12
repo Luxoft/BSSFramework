@@ -88,4 +88,3 @@ internal class RemoveStrategy(DatabaseScriptGeneratorStrategyInfo parameter) : S
         this.RemoveColumns(table, removableColumns);
     }
 }
-

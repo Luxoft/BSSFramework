@@ -58,4 +58,3 @@ public abstract class CurrentUserSingleRelativePathTests(IServiceProvider rootSe
         [nameof(TestRelativeEmployeeObject.EmployeeRef2), 1],
     ];
 }
-

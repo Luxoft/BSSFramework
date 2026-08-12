@@ -8,4 +8,3 @@ public class ProjectionActualDomainTypeResolver : IActualDomainTypeResolver
 {
     public Type Resolve(Type identity) => identity.GetProjectionSourceTypeOrSelf();
 }
-

@@ -14,4 +14,3 @@ public class UtcDateTimeJsonConverter : JsonConverter<DateTime>
         writer.WriteStringValue(actualDateTime);
     }
 }
-

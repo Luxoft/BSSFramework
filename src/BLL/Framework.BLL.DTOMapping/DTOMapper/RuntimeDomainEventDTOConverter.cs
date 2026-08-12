@@ -43,4 +43,3 @@ public class RuntimeDomainEventDTOConverter<TPersistentDomainObjectBase, TMappin
         return accessor;
     }
 }
-

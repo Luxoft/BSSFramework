@@ -39,4 +39,3 @@ public class GetListByOperationMethodGenerator<TConfiguration> : ViewCollectionM
                                .ToMethodReturnStatement();
     }
 }
-

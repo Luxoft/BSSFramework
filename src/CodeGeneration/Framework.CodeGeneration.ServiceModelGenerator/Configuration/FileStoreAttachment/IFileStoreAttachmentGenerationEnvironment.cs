@@ -6,4 +6,3 @@ public interface IFileStoreAttachmentGenerationEnvironment : IServiceModelGenera
 {
     IFileStoreGeneratorConfiguration FileStore { get; }
 }
-

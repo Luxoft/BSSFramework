@@ -290,4 +290,3 @@ public class UnsafeApplyChangedDatabaseScriptGenerator : IDatabaseScriptGenerato
         public AssemblyMetadata AssemblyMetadata => this.source.AssemblyMetadata;
     }
 }
-

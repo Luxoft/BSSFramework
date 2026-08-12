@@ -30,4 +30,3 @@ public class DiffDaysHqlGenerator : BaseHqlGeneratorForMethod
                                    visitor.Visit(arguments[0]).AsExpression(),
                                    visitor.Visit(arguments[1]).AsExpression());
 }
-

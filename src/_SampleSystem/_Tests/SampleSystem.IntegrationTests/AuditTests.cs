@@ -287,4 +287,3 @@ public abstract class AuditTests(IServiceProvider rootServiceProvider) : TestBas
         Assert.Equal(newBu, auditBu.BuIdent);
     }
 }
-

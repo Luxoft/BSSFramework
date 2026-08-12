@@ -9,4 +9,3 @@ public abstract class DomainObjectFilterModel<TDomainObject> : DomainObjectBase,
 {
     public abstract Expression<Func<TDomainObject, bool>> ToFilterExpression();
 }
-

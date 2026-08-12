@@ -42,4 +42,3 @@ public abstract class AsyncControllerTests(IServiceProvider rootServiceProvider)
         Assert.IsType<InvalidOperationException>(ex);
     }
 }
-

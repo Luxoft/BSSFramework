@@ -30,4 +30,3 @@ public class AddDaysGenerator : BaseHqlGeneratorForMethod
             IHqlExpressionVisitor visitor) =>
         treeBuilder.MethodCall("AddDays", visitor.Visit(targetObject).AsExpression(), visitor.Visit(arguments[0]).AsExpression());
 }
-

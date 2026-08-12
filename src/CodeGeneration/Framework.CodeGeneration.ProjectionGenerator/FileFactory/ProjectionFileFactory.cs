@@ -290,4 +290,3 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
         }
     }
 }
-

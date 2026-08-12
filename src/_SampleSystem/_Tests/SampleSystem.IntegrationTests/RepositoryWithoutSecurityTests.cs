@@ -35,4 +35,3 @@ public abstract class RepositoryWithoutSecurityTests(IServiceProvider rootServic
         Assert.IsType<ArgumentOutOfRangeException>(ex);
     }
 }
-

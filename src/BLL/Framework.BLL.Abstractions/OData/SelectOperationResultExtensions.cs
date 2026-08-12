@@ -19,4 +19,3 @@ public static class SelectOperationResultExtensions
         return source.Items.Select(node => node.ChangeItem(selector)).ToSelectOperationResult(source.TotalCount);
     }
 }
-

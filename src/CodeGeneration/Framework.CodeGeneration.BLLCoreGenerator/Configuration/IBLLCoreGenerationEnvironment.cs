@@ -3,4 +3,3 @@
 namespace Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 
 public interface IBLLCoreGenerationEnvironment : ICodeGenerationEnvironment;
-

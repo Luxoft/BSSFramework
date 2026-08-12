@@ -6,4 +6,3 @@ public interface IWebApiCurrentDBSessionModeResolver
 {
     DBSessionMode? GetSessionMode();
 }
-

@@ -19,4 +19,3 @@ public abstract class WebApiTests(IServiceProvider rootServiceProvider) : TestBa
         Assert.Contains(employees, e => e.Id == employeeIdentity.Id);
     }
 }
-

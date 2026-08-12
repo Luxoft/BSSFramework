@@ -137,4 +137,3 @@ public class CsprojValidationTests
         throw new InvalidOperationException("Solution root not found");
     }
 }
-

@@ -32,4 +32,3 @@ public static class SampleSystemSecuritySystemExtensions
                           SampleSystemSecurityRole.SeManager,
                           v => v.AddFilter(link => link.Role == BusinessUnitEmployeeRoleType.Manager)));
 }
-

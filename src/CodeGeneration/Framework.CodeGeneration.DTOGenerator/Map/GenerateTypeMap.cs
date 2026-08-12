@@ -36,4 +36,3 @@ public class GenerateTypeMap
 
     public override string ToString() => $"DomainType: {this.DomainType.Name} | FileType: {this.FileType}";
 }
-

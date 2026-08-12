@@ -71,4 +71,3 @@ public partial struct Period
     [Obsolete("Only for reports. In plain code use CommonPeriodExtensions.GetDayAndMonthDateFormat instead")]
     public string GetDayAndMonthDateFormat(CultureInfo cultureInfo) => CommonPeriodExtensions.GetDayAndMonthDateFormat(this, cultureInfo);
 }
-

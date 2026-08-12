@@ -27,4 +27,3 @@ public class GetODataListByQueryStringMethodGenerator<TConfiguration> : GetByODa
         yield return typeof(string).ToTypeReference().ToParameterDeclarationExpression("odataQueryString");
     }
 }
-

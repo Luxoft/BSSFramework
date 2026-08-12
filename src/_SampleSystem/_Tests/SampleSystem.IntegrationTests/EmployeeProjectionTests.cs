@@ -167,4 +167,3 @@ public abstract class EmployeeProjectionTests(IServiceProvider rootServiceProvid
         Assert.Equal(expected, result);
     }
 }
-

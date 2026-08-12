@@ -47,4 +47,3 @@ public class ProjectionCustomPropertyAttributeSource : AttributeSourceBase<IProj
         }
     }
 }
-

@@ -29,4 +29,3 @@ public class AnonymousTypeByPropertyWithSerializeBuilder<TMap, TMapMember>(IAnon
 
     protected virtual CustomAttributeBuilder GetDataMemberAttribute(TMapMember member) => new(typeof(DataMemberAttribute).GetConstructor(Type.EmptyTypes)!, []);
 }
-

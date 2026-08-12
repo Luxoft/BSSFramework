@@ -11,4 +11,3 @@ public interface IEventSystem
 
     Task ForceEventAsync(EventModel eventModel, CancellationToken ct);
 }
-

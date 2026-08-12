@@ -248,4 +248,3 @@ internal static class CodeDomExtensions
         return typeof(FetchPathAttribute).ToTypeReference().ToAttributeDeclaration(arg);
     }
 }
-

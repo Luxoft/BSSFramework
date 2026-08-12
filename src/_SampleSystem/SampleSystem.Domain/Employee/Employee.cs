@@ -392,4 +392,3 @@ public partial class Employee :
 
     public override string ToString() => this.Pin + " - " + this.NameNative;
 }
-

@@ -17,4 +17,3 @@ public class PrimitiveClassValidatorAttribute(Type validatorType) : ClassValidat
             serviceProvider.GetRequiredService<IServiceProxyFactory>().Create<IClassValidator>(validatorType);
     }
 }
-

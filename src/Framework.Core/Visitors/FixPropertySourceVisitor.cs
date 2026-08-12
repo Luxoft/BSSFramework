@@ -46,4 +46,3 @@ public class FixPropertySourceVisitor : ExpressionVisitor
         return methodRequest.GetValueOrDefault(() => base.VisitMethodCall(node));
     }
 }
-

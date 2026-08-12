@@ -37,4 +37,3 @@ public abstract class InformationTest(IServiceProvider rootServiceProvider) : Te
         Assert.Single(this.GetIntegrationEvents<InformationRemoveEventDTO>(), dto => dto.Information.Id == id);
     }
 }
-

@@ -53,4 +53,3 @@ public class UniqueGroupDatabaseScriptGeneratorTests(IServiceProvider rootServic
         Assert.Contains(indexedColumns, x => x.Name == "roleId");
     }
 }
-

@@ -23,4 +23,3 @@ public static class BusinessLogicExceptionExtensions
     public static BusinessLogicException Aggregate(this IEnumerable<Exception> exceptions) =>
         exceptions.Select(ex => ex as BusinessLogicException ?? new BusinessLogicException(ex.Message, ex)).Aggregate();
 }
-

@@ -60,4 +60,3 @@ public class DomainObjectToDTOPropertyAssigner<TConfiguration>(IDTOSource<TConfi
         return sourcePropertyRef.ToAssignStatement(targetPropertyRef);
     }
 }
-

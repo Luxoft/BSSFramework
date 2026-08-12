@@ -33,4 +33,3 @@ public partial class ConfigurationValidator
         }
     }
 }
-

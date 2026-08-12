@@ -63,4 +63,3 @@ public class BusinessUnitEmployeeRole : AuditPersistentDomainObjectBase, IDetail
         };
     }
 }
-

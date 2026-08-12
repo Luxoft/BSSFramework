@@ -13,4 +13,3 @@ public static class AvailableValuesHelper
         new Range<DateTime>(SqlDateTime.MinValue.Value, SqlDateTime.MaxValue.Value),
         byte.MaxValue);
 }
-

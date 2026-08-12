@@ -7,4 +7,3 @@ public class RevisionNumberFieldPropertyName : IPropertyNameGetter
 {
     public string Get(AuditConfiguration auditCfg) => "id";
 }
-

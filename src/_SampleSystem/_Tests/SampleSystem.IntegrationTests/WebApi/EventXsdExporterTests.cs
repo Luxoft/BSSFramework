@@ -22,4 +22,3 @@ public abstract class EventXsdExporterTests
         public Guid[] Type { get; set; } = null!;
     }
 }
-

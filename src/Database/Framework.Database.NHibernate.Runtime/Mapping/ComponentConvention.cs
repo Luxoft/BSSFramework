@@ -17,4 +17,3 @@ public sealed class ComponentConvention : IComponentConvention, IComponentConven
 
     public void Accept(IAcceptanceCriteria<IComponentInspector> criteria) => criteria.Expect(_ => true);
 }
-

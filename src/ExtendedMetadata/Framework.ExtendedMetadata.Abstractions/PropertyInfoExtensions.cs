@@ -14,4 +14,3 @@ public static class PropertyInfoExtensions
                ?? throw new Exception("Base property not found");
     }
 }
-

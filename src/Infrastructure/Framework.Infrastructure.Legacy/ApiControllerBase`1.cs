@@ -23,4 +23,3 @@ public abstract class ApiControllerBase<TBLLContext> : ControllerBase
     [NonAction]
     public abstract TResult EvaluateC<TResult>(DBSessionMode sessionMode, Func<TBLLContext, TResult> getResult);
 }
-

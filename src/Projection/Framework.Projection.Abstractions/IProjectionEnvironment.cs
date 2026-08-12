@@ -26,4 +26,3 @@ public interface IProjectionEnvironment
 
     IMetadataProxyProvider MetadataProxyProvider { get; }
 }
-

@@ -13,4 +13,3 @@ public interface IBssFrameworkSetup<out TSelf>
 
     TSelf AddServices(Action<IServiceCollection> setupAction) => this.AddExtensions(new BssFrameworkExtension(setupAction));
 }
-

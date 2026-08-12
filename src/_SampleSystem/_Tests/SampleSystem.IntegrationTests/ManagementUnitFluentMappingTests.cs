@@ -56,4 +56,3 @@ public abstract class ManagementUnitFluentMappingTests(IServiceProvider rootServ
         Assert.Equal(employeeId.Id, item.EmployeeId);
     }
 }
-

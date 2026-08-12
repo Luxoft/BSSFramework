@@ -75,4 +75,3 @@ public class DenormalizeHierarchicalDALListener(
         await namedLockService.LockAsync(namedLock, LockRole.Update, ct);
     }
 }
-

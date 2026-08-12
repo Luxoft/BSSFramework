@@ -56,4 +56,3 @@ public partial class SampleSystemBLLContext(
 
     public IValidator Validator { get; } = validator;
 }
-

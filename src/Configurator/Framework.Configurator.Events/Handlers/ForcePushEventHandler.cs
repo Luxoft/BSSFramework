@@ -40,4 +40,3 @@ public class ForcePushEventHandler([WithoutRunAs] ISecuritySystem securitySystem
         public string Ids { get; set; } = null!;
     }
 }
-

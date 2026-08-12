@@ -44,4 +44,3 @@ internal class GeneratedField : BaseFieldInfoImpl, IWrappingObject
 
     public override string ToString() => $"GeneratedField: {this.Name}";
 }
-

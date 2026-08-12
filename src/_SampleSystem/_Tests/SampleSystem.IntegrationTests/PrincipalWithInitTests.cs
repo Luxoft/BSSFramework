@@ -104,4 +104,3 @@ public abstract class PrincipalWithInitTests(IServiceProvider rootServiceProvide
         Assert.Contains(expectedErrorMessage, validationException.Message);
     }
 }
-

@@ -13,4 +13,3 @@ public interface IConvertMappingObject<in TMappingService, out TDomainObject>
 {
     TDomainObject ToDomainObject(TMappingService mappingService);
 }
-

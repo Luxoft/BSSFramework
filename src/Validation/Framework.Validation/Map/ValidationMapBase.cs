@@ -50,4 +50,3 @@ public abstract class ValidationMapBase : IValidationMap
 
     protected abstract IClassValidationMap<TSource> GetInternalClassMap<TSource>();
 }
-

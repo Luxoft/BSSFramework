@@ -9,4 +9,3 @@ public partial class TestLegacyEmployeeBLL
 {
     public List<TestLegacyEmployee> GetListBy(EmployeeFilterModel filter, FetchRule<TestLegacyEmployee> fetchs) => throw new NotImplementedException();
 }
-

@@ -64,4 +64,3 @@ public static class NodeExtensions
         return new Node<T>(selector(source.Value, children.Select(v => v.Value)), children);
     }
 }
-

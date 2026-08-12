@@ -75,4 +75,3 @@ internal class SqlExceptionProcessorInterceptor : IExceptionExpander
 
     private Exception InternalProcess(StaleObjectStateException exception) => new StaleDomainObjectStateException(this.cfg.GetClassMapping(exception.EntityName).MappedClass, exception.Identifier, exception);
 }
-

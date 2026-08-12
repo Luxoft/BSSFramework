@@ -26,4 +26,3 @@ public static class CodePrimitiveExpressionExtensions
 
     public static CodeExpression ToPrimitiveExpression(this string value) => new CodePrimitiveExpression(value);
 }
-

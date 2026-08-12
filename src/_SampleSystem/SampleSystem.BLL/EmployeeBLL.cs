@@ -57,4 +57,3 @@ public partial class EmployeeBLL
         return changeModel.PrimaryChangingObject;
     }
 }
-

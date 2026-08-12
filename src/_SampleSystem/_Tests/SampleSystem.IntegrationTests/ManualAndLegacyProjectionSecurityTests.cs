@@ -90,4 +90,3 @@ public abstract class ManualAndLegacyProjectionSecurityTests(IServiceProvider ro
     //    item.Value.Should().Contain(TestEmployeeLogin);
     //}
 }
-

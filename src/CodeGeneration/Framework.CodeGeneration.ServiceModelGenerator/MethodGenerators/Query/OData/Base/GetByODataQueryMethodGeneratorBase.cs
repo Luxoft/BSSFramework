@@ -47,4 +47,3 @@ public abstract class GetByODataQueryMethodGeneratorBase<TConfiguration> : ViewM
                 .ToMethodReturnStatement();
     }
 }
-

@@ -24,4 +24,3 @@ public static class TrackingPropertyExtensions
         return request.GetValueOrDefault(MergeResult<T, T>.Empty);
     }
 }
-

@@ -26,4 +26,3 @@ public class ConfigurationEventSystem(
         return new DomainTypeEventModel { Operation = operation, DomainObjectIdents = [.. eventModel.DomainObjectIdents], Revision = eventModel.Revision, };
     }
 }
-

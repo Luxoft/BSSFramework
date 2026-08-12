@@ -13,4 +13,3 @@ public class GetEmployeesHandler([ViewSecurity] IEmployeeBLL employeeBll) : IReq
         return result.Select(x => new GetEmployeesResponse(x.Id, x.NameEng.FullName)).ToArray();
     }
 }
-

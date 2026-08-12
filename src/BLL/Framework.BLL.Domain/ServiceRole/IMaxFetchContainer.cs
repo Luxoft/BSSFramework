@@ -12,4 +12,3 @@ public interface IMaxFetchContainer
     /// </summary>
     ViewDTOType MaxFetch { get; }
 }
-

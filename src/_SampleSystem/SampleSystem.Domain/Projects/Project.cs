@@ -114,4 +114,3 @@ public class Project :
 
     public virtual DateTime GetCurrentDate() => DateTime.Today;
 }
-

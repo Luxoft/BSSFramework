@@ -15,4 +15,3 @@ public abstract class BLLFactoryContainerFileFactoryBase<TConfiguration>(TConfig
         yield return this.Configuration.Environment.BLLCore.GetCodeTypeReference(null, BLLCoreGenerator.FileType.BLLFactoryContainerInterface);
     }
 }
-

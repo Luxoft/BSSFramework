@@ -36,4 +36,3 @@ public class EmployeePosition : BaseDirectory, IExternalSynchronizable
         set => this.englishName = value.TrimNull();
     }
 }
-

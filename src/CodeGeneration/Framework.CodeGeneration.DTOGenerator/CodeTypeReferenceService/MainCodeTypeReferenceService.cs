@@ -9,4 +9,3 @@ public class MainCodeTypeReferenceService<TConfiguration>(TConfiguration configu
 {
     public override Type CollectionType => this.Configuration.ClientEditCollectionType;
 }
-

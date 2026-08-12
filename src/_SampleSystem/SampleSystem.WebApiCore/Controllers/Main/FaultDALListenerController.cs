@@ -48,4 +48,3 @@ public class FaultDALListenerController(
         yield return 234;
     }
 }
-

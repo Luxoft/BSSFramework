@@ -14,4 +14,3 @@ public interface ITypeSource
     /// <returns></returns>
     ImmutableHashSet<Type> Types { get; }
 }
-

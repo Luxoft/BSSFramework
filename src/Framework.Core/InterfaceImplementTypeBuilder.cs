@@ -213,4 +213,3 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
         return typeBuilder.CreateTypeInfo();
     }
 }
-

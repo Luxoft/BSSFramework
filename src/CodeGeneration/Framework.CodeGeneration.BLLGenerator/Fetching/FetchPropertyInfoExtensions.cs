@@ -37,4 +37,3 @@ internal static class FetchPropertyInfoExtensions
                        .Any(prop => prop != property && prop.PropertyType == propertyType && prop.IsMaster());
     }
 }
-

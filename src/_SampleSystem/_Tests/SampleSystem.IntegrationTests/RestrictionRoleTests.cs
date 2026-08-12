@@ -179,4 +179,3 @@ public abstract class RestrictionRoleTests(IServiceProvider rootServiceProvider)
             validationException.Message);
     }
 }
-

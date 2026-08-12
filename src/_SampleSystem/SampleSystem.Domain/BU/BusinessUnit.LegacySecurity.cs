@@ -17,4 +17,3 @@ public partial class BusinessUnit : IBusinessUnitSecurityElement<BusinessUnit>
     [ExpandPath("")]
     BusinessUnit IBusinessUnitSecurityElement<BusinessUnit>.BusinessUnit => this;
 }
-

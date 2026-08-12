@@ -29,4 +29,3 @@ public class IMRequest : Information
         set => this.oneToOneDetail = value;
     }
 }
-

@@ -42,4 +42,3 @@ public class SmtpMessageSender(
         return newMailMessage;
     }
 }
-

@@ -8,4 +8,3 @@ public interface IAuditPropertyFactory
 
     AuditPropertyPair GetModifyAuditProperty();
 }
-

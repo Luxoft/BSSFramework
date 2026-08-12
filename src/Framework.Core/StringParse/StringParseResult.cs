@@ -11,4 +11,3 @@ public class StringParseResult
 
     public string GetResultFor(MatchResultDescription matchResultDescription) => this.match.Groups[matchResultDescription.ResultIndex].Value;
 }
-

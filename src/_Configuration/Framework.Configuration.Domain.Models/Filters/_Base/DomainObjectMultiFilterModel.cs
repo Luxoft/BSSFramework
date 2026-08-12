@@ -12,4 +12,3 @@ public abstract class DomainObjectMultiFilterModel<TDomainObject> : DomainObject
 
     protected abstract IEnumerable<Expression<Func<TDomainObject, bool>>> ToFilterExpressionItems();
 }
-

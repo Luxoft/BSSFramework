@@ -18,4 +18,3 @@ public class CreateIntegrationEventHandler(IIntegrationEventPublisher eventPubli
         await eventPublisher.PublishAsync(new TestIntegrationEvent(country.Id), ct);
     }
 }
-

@@ -63,4 +63,3 @@ public class RemoveMethodGenerator<TConfiguration>(TConfiguration configuration,
         yield return bllRefExpr.ToMethodInvokeExpression("Remove", domainObjectVarDecl.ToVariableReferenceExpression()).ToExpressionStatement();
     }
 }
-

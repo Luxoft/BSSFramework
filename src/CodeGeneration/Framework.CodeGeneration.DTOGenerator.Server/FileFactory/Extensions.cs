@@ -29,4 +29,3 @@ public static class Extensions
 
     public static bool IsIntegrationVersion(this Type domainType) => domainType.TryGetIntegrationVersionProperty() is not null;
 }
-

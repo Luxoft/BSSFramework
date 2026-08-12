@@ -19,4 +19,3 @@ public abstract class EmptySchemaInitializer(IActualTestConnectionStringSource a
         new BssFluentMigrator(actualTestConnectionStringSource.ActualConnectionString.Value, typeof(InitNumberInDomainObjectEventMigration).Assembly).Migrate();
     }
 }
-

@@ -34,4 +34,3 @@ public class ExampleServiceForRepository(
         return (employees.ToList(), businessUnits.ToList());
     }
 }
-

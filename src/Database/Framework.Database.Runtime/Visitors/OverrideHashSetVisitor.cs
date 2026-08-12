@@ -35,4 +35,3 @@ public class OverrideHashSetVisitor<TIdent> : ExpressionVisitor
 
     public static readonly OverrideHashSetVisitor<TIdent> Value = new();
 }
-

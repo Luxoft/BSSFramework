@@ -52,4 +52,3 @@ public partial class SecurityDomainBLLBase<TDomainObject>
         base.Save(value);
     }
 }
-

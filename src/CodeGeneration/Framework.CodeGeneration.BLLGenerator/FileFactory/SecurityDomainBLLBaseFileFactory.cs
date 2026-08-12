@@ -55,4 +55,3 @@ public class SecurityDomainBLLBaseFileFactory<TConfiguration>(TConfiguration con
         };
     }
 }
-

@@ -12,4 +12,3 @@ public interface IFileGeneratorConfiguration<out TEnvironment> : IFileGeneratorC
 {
     TEnvironment Environment { get; }
 }
-

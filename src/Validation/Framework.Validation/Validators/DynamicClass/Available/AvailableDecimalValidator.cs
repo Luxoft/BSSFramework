@@ -15,4 +15,3 @@ public class AvailableDecimalValidator : RangeClassValidator<decimal, decimal>
 
     public static AvailableDecimalValidator Value { get; } = new();
 }
-

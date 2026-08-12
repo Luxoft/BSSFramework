@@ -9,4 +9,3 @@ public interface IValidatorGenerator
 
     IReadOnlyDictionary<PropertyInfo, ValidatorExpr> PropertyValidators { get; }
 }
-

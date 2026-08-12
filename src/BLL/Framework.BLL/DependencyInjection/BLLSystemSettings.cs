@@ -22,4 +22,3 @@ public class BLLSystemSettings
 
     public T GetSafe<T>(Expression<Func<BLLSystemSettings, T?>> expr, T? defaultValue = default) => expr.Compile().Invoke(this) ?? defaultValue ?? throw new Exception($"{expr.GetMemberName()} not initialized");
 }
-

@@ -174,4 +174,3 @@ public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDo
         return new ManualProjectionEnvironment(assembly, this.PersistentDomainObjectBaseType, this.MetadataProxyProvider);
     }
 }
-

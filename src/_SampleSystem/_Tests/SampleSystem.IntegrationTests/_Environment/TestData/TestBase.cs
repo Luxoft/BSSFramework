@@ -39,4 +39,3 @@ public class TestBase(IServiceProvider rootServiceProvider) : IntegrationTestBas
 
     ValueTask IAsyncDisposable.DisposeAsync() => ValueTask.CompletedTask;
 }
-

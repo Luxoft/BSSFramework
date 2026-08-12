@@ -4,4 +4,3 @@ public interface IDefaultConnectionStringSource
 {
     string ConnectionString { get; }
 }
-

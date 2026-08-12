@@ -18,4 +18,3 @@ public static class MailMessageExtensions
             notification.TechnicalInformation.ContextObjectId,
             string.Join(",", notification.Message.ReplyToList.Select(z => z.Address)));
 }
-

@@ -6,4 +6,3 @@ internal interface IColumnMetadataExtended : IColumnMetadata
 {
     int NumericalScale { get; }
 }
-

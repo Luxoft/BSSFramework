@@ -31,4 +31,3 @@ public class WebApiExceptionExpanderMiddleware(RequestDelegate next)
         }
     }
 }
-

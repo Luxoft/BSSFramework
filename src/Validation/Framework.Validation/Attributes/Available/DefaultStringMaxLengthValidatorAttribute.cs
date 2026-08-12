@@ -10,4 +10,3 @@ public class DefaultStringMaxLengthValidatorAttribute : ClassValidatorAttribute
 {
     public override IClassValidator CreateValidator() => DefaultStringMaxLengthValidator.Value;
 }
-

@@ -28,4 +28,3 @@ public class HandledGenericAdoException : ADOException
 
     public Microsoft.Data.SqlClient.SqlException SqlException => (Microsoft.Data.SqlClient.SqlException)this.InnerException!;
 }
-

@@ -26,4 +26,3 @@ public record TargetSystemDomainInfo(ImmutableArray<DomainTypeInfo> Types, IType
         new DomainTypeInfo(typeof(double), new("{68F69CA7-263B-4559-BD96-4A13A28823CC}")),
     ]);
 }
-

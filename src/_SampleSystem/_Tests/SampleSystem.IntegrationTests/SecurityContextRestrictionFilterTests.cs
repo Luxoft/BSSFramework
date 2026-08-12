@@ -172,4 +172,3 @@ public abstract class SecurityContextRestrictionFilterTests(IServiceProvider roo
         Assert.DoesNotContain(this.employeeLogin, accessors);
     }
 }
-

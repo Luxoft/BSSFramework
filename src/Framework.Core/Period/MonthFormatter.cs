@@ -66,4 +66,3 @@ public static class MonthFormatter
             ? period.StartDate.GetMonthAndYearStrRoman()
             : $"{RomanMonths[period.StartDate.Month - 1]}-{RomanMonths[period.EndDateValue.Month - 1]}'{period.StartDate:yy}";
 }
-

@@ -49,4 +49,3 @@ public static class CoreObjectExtensions
 
     public static KeyValuePair<TKey, TValue> ToKeyValuePair<TKey, TValue>(this TKey key, TValue value) => new(key, value);
 }
-

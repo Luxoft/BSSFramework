@@ -12,4 +12,3 @@ public readonly record struct TrackingProperty<T>(string PropertyName, Maybe<T> 
 {
     public string LowPropertyName { get; } = PropertyName.ToLower(CultureInfo.InvariantCulture);
 }
-

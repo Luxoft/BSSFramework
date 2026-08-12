@@ -160,4 +160,3 @@ public class NHibernateSetup : INHibernateSetup, IServiceInitializer
         this.extensions.ForEach(ex => ex.AddServices(services));
     }
 }
-

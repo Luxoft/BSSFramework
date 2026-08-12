@@ -3,4 +3,3 @@
 namespace Framework.CodeGeneration.ServiceModelGenerator.Configuration.Audit;
 
 public interface IAuditGenerationEnvironment : IServiceModelGenerationEnvironment, IAuditDTOGeneratorConfigurationContainer;
-

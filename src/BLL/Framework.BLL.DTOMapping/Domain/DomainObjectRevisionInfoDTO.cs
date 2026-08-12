@@ -16,4 +16,3 @@ public class DomainObjectRevisionInfoDTO<TIdent> : PropertyRevisionDTOBase
 
     }
 }
-

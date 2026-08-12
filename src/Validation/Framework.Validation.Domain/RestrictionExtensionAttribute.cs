@@ -26,4 +26,3 @@ public class RestrictionExtensionAttribute : Attribute, IValidationData
 
     public object? CustomError { get; set; }
 }
-

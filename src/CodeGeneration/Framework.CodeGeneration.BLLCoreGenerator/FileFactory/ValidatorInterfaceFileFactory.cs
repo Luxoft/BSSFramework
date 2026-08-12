@@ -22,4 +22,3 @@ public class ValidatorInterfaceFileFactory<TConfiguration>(TConfiguration config
             IsInterface = true
         };
 }
-

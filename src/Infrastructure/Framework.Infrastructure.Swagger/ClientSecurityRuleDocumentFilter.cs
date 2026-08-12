@@ -29,4 +29,3 @@ public class ClientSecurityRuleDocumentFilter(IClientSecurityRuleInfoSource sour
         return schema;
     }
 }
-

@@ -14,4 +14,3 @@ public class BusinessUnitToAncestorChildView : AuditPersistentDomainObjectBase
 
     public virtual BusinessUnit Source => this.source;
 }
-

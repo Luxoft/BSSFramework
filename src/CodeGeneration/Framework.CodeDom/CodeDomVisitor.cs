@@ -537,4 +537,3 @@ public abstract class CodeDomVisitor
 
     private class CloneVisitor : CodeDomVisitor;
 }
-

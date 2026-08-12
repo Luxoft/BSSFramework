@@ -118,4 +118,3 @@ internal class SquashWhereQueryableVisitor : ExpressionVisitor
                select v1 && !v2;
     }
 }
-

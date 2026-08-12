@@ -17,4 +17,3 @@ public class Information : BaseDirectory
         set => this.email = value.TrimNull();
     }
 }
-

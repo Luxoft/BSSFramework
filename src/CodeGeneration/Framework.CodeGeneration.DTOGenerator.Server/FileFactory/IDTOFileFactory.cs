@@ -335,4 +335,3 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
 //{
 //    IEnumerable<CodeTypeMember> CreatePropertyMember(PropertyInfo sourceProperty);
 //}
-

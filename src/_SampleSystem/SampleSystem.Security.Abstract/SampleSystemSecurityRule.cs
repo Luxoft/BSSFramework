@@ -8,4 +8,3 @@ public static class SampleSystemSecurityRule
 
     public static DomainSecurityRule.SecurityRuleHeader TestRoleGroup { get; } = new(nameof(TestRoleGroup));
 }
-

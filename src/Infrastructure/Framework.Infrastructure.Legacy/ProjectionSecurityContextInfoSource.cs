@@ -12,4 +12,3 @@ public class ProjectionSecurityContextInfoSource(
 {
     public override SecurityContextInfo GetSecurityContextInfo(Type type) => base.GetSecurityContextInfo(actualDomainTypeResolver.Resolve(type));
 }
-

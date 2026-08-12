@@ -85,4 +85,3 @@ public abstract class FixedPropertyValidatorTests(IServiceProvider rootServicePr
     }
 
 }
-

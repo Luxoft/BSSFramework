@@ -12,4 +12,3 @@ public partial class TestLocationCollectionProperties
 
     public override string[] Security_Codes { get; }
 }
-

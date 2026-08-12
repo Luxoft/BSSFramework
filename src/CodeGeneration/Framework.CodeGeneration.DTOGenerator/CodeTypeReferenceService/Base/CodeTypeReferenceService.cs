@@ -32,4 +32,3 @@ public abstract class CodeTypeReferenceService<TConfiguration>(TConfiguration co
         return null;
     }
 }
-

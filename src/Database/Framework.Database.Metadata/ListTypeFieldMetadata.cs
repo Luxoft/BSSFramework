@@ -53,4 +53,3 @@ public class ListTypeFieldMetadata(
 
     public bool IsCompilerGenerated => isAutoGenerateField;
 }
-

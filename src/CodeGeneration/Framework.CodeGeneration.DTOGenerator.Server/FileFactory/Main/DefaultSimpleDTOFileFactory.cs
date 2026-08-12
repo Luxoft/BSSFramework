@@ -71,4 +71,3 @@ public class DefaultSimpleDTOFileFactory<TConfiguration>(TConfiguration configur
         return base.GetFieldInitExpression(codeTypeReference, property);
     }
 }
-

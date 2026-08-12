@@ -91,4 +91,3 @@ public class HistoryQueryOptimized<TEntity, TRevisionEntity, TIdentity>(
         return primaryKey;
     }
 }
-

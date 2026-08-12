@@ -10,4 +10,3 @@ public static class ServiceCollectionExtensions
 
         services.Initialize<BssFrameworkSetup>(setupAction);
 }
-

@@ -21,4 +21,3 @@ public class SubscriptionResolver(IEnumerable<ISubscription> subscriptions) : IS
     public ImmutableArray<ISubscription> Resolve(Type domainType, DomainObjectChangeType domainObjectChangeType) =>
         this.cache.GetValueOrDefault((domainType, domainObjectChangeType), []);
 }
-

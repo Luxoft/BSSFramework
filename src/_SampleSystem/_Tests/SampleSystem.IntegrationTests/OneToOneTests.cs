@@ -41,4 +41,3 @@ public abstract class OneToOneTests(IServiceProvider rootServiceProvider) : Test
         Assert.Contains(result.Items, request => request.Id == idents.RequestId && request.OneToOneDetail.Id == idents.DetailId);
     }
 }
-

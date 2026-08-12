@@ -23,4 +23,3 @@ public interface IBssFrameworkSetup : IBssFrameworkSetup<IBssFrameworkSetup>
     IBssFrameworkSetup SetDomainObjectEventMetadata<T>()
         where T : IDomainObjectEventMetadata;
 }
-

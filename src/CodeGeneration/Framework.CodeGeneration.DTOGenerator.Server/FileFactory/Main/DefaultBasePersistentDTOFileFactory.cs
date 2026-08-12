@@ -61,4 +61,3 @@ public class DefaultBasePersistentDTOFileFactory<TConfiguration>(TConfiguration 
         yield return this.GetIdentityObjectImplementation(true);
     }
 }
-

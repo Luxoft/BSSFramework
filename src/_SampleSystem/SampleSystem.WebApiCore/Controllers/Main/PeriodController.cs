@@ -11,4 +11,3 @@ public class PeriodController(TimeProvider timeProvider) : ControllerBase
     [HttpGet]
     public Period GetCurrentMonth() => timeProvider.GetCurrentMonth();
 }
-

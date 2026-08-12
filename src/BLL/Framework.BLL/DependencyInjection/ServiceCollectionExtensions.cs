@@ -124,4 +124,3 @@ public static class ServiceCollectionExtensions
 
     private static IEnumerable<Type> GetSingleCtorParameterTypes(this Type type) => type.GetConstructors().Single().GetParameters().Select(p => p.ParameterType);
 }
-

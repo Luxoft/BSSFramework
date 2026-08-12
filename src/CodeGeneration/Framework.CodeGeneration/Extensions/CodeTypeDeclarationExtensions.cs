@@ -129,4 +129,3 @@ public static class CodeTypeDeclarationExtensions
         return systemName + suffix + ".Generated";
     }
 }
-

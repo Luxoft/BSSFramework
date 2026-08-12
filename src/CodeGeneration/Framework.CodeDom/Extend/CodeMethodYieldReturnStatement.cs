@@ -6,4 +6,3 @@ public class CodeMethodYieldReturnStatement : CodeStatement
 {
     public CodeExpression Expression { get; set; } = null!;
 }
-

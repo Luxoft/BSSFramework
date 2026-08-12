@@ -30,4 +30,3 @@ public class DefaultCollectionMappingService<TSource, TTarget, TIdent>(Func<TSou
                      removingItems => removingItems.Foreach(this.RemoveDetail));
     }
 }
-

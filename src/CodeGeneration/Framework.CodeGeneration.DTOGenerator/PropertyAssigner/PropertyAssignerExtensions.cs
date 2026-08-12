@@ -51,4 +51,3 @@ public static class PropertyAssignerExtensions
         }
     }
 }
-

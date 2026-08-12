@@ -78,4 +78,3 @@ internal class AutoProjectionFactory(ProjectionLambdaEnvironment environment, Pr
         }
     }
 }
-

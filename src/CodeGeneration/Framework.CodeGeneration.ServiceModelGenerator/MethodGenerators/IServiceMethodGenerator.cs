@@ -10,4 +10,3 @@ public interface IServiceMethodGenerator
 
     IEnumerable<CodeMemberMethod> GetFacadeMethods();
 }
-

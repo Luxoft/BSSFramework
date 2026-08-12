@@ -15,4 +15,3 @@ public interface IFileGenerationEnvironment : IDomainMetadata, IServiceProviderC
 
     IPropertyPathService PropertyPathService { get; }
 }
-

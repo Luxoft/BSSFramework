@@ -17,4 +17,3 @@ public partial class DataManager
         return database.Tables[tableName, schema];
     }
 }
-

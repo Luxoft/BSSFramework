@@ -63,4 +63,3 @@ public struct RevenueDocumentAribaStatus(AribaStatusType type, string descriptio
 
     public override int GetHashCode() => this.type.GetHashCode() ^ this.date.GetHashCode() ^ this.description.GetHashCode();
 }
-

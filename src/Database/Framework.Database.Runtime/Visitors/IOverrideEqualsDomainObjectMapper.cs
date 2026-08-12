@@ -9,4 +9,3 @@ public interface IOverrideEqualsDomainObjectMapper
     Maybe<BinaryExpression> TryReplace(BinaryExpression node);
 }
 
-

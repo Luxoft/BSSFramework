@@ -162,4 +162,3 @@ public class IntegrationSaveMethodGenerator<TConfiguration>(TConfiguration confi
                                                   evaluateDataExpr.GetMappingService(), saveObjectDecl.ToVariableReferenceExpression())
                         .ToExpressionStatement();
 }
-

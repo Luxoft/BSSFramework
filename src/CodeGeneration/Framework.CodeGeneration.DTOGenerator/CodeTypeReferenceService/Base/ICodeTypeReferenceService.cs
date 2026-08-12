@@ -11,4 +11,3 @@ public interface ICodeTypeReferenceService
 
     RoleFileType? GetFileType(PropertyInfo property);
 }
-

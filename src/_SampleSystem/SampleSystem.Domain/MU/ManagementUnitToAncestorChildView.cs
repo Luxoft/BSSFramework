@@ -12,4 +12,3 @@ public class ManagementUnitToAncestorChildView : AuditPersistentDomainObjectBase
 
     public virtual ManagementUnit Source => this.source;
 }
-

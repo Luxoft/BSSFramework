@@ -127,4 +127,3 @@ public abstract class DependencySecurityTests(IServiceProvider rootServiceProvid
         Assert.Equal(TestObjSubItem3, item.Name);
     }
 }
-

@@ -16,4 +16,3 @@ public class ServerDTOGeneratorConfiguration(AuthorizationGenerationEnvironment 
 
     protected override IGeneratePolicy<RoleFileType> CreateGeneratePolicy() => new DTORoleGeneratePolicy(DTORole.Client | DTORole.Event).Or(new DTORoleGeneratePolicy(DTORole.Event));
 }
-

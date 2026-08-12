@@ -59,4 +59,3 @@ public class RemoveAttachmentMethodGenerator<TConfiguration>(TConfiguration conf
 
     }
 }
-

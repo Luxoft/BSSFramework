@@ -99,4 +99,3 @@ IF NOT EXISTS ( SELECT * FROM sys.schemas WHERE name = N'authAudit' ) EXEC('CREA
         connection.Close();
     }
 }
-

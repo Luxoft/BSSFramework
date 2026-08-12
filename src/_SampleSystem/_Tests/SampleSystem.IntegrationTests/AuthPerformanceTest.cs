@@ -121,4 +121,3 @@ public abstract class AuthPerformanceTest(IServiceProvider rootServiceProvider) 
                 return count;
             }, ct);
 }
-

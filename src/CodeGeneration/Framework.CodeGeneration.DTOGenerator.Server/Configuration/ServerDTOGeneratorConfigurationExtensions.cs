@@ -32,4 +32,3 @@ public static class ServerDTOGeneratorConfigurationExtensions
         return typeof(IVersionObject<>).MakeGenericType(configuration.VersionType).ToTypeReference();
     }
 }
-

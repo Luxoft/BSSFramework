@@ -79,4 +79,3 @@ public class ExpandPathVisitor(IPropertyPathService propertyPathService) : Expre
         ExpressionType.LessThanOrEqual
     ];
 }
-

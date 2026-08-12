@@ -10,4 +10,3 @@ public class RequiredValidatorAttribute : PropertyValidatorAttribute
 
     public RequiredMode Mode { get; set; }
 }
-

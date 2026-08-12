@@ -104,4 +104,3 @@ internal sealed partial class AuditPropertiesSetter
         return result;
     }
 }
-

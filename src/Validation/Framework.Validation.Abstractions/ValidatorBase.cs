@@ -9,4 +9,3 @@ public abstract class ValidatorBase : IValidator
 
     public static readonly IValidator Success = new SuccessValidator();
 }
-

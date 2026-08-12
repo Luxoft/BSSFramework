@@ -80,4 +80,3 @@ class MainDBScriptGeneratorBuilder : DatabaseScriptGeneratorContainer, IMainDBSc
 
     public bool IsFrozen { get; internal set; }
 }
-

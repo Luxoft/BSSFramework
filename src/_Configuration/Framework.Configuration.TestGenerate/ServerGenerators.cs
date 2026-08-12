@@ -66,4 +66,3 @@ public partial class ServerGenerators
         yield return generator.GenerateSingle(outputPath, "Configuration.Generated", this.CheckOutService);
     }
 }
-

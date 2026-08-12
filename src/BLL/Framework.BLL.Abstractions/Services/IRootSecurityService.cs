@@ -15,4 +15,3 @@ public interface IRootSecurityService
 
     void CheckAccess(DomainSecurityRule securityRule);
 }
-

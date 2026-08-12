@@ -391,4 +391,3 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
         return generators.Values;
     }
 }
-

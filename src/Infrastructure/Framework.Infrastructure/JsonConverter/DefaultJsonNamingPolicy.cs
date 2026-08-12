@@ -8,4 +8,3 @@ public class DefaultJsonNamingPolicy : JsonNamingPolicy
 
     public static DefaultJsonNamingPolicy Default { get; } = new();
 }
-

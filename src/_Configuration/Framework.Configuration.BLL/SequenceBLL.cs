@@ -33,4 +33,3 @@ public partial class SequenceBLL
 
     public Sequence Create(SequenceCreateModel createModel) => new();
 }
-

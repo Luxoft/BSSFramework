@@ -79,4 +79,3 @@ public static class AnonymousTypeBuilderExtensions
         public Type GetAnonymousType(TMap typeMap) => this.func(typeMap);
     }
 }
-

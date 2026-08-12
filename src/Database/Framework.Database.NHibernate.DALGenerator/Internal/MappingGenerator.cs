@@ -565,4 +565,3 @@ public class MappingGenerator(IGrouping<Assembly, DomainTypeMetadata> assemblyGr
                 .WithClassAttribute(listTypeFieldMetadata.ElementType.FullName!);
     }
 }
-

@@ -21,4 +21,3 @@ public class ManagementUnitAncestorLink : AuditPersistentDomainObjectBase
         set => this.child = value;
     }
 }
-

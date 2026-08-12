@@ -68,4 +68,3 @@ public class BLLFileFactory<TConfiguration>(TConfiguration configuration, Type d
         return codeTypeDeclaration;
     }
 }
-

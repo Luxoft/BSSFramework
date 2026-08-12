@@ -53,4 +53,3 @@ public class DALGeneratorConfigurationBase<TEnvironment> : FileGeneratorConfigur
         return this.CreateMappingGenerator(assembly, metadata);
     }
 }
-

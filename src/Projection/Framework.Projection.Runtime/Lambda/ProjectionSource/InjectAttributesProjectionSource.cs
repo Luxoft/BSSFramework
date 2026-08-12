@@ -33,4 +33,3 @@ internal class InjectAttributesProjectionSource(ProjectionLambdaEnvironment envi
         return projections;
     }
 }
-

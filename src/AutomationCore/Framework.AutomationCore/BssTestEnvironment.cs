@@ -55,4 +55,3 @@ public abstract class BssTestEnvironment : ConfigurationTestEnvironment
                 .Validate()
                 .BuildServiceProvider(new ServiceProviderOptions { ValidateScopes = true, ValidateOnBuild = true });
 }
-

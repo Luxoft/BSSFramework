@@ -14,4 +14,3 @@ public abstract class ViewCollectionMethodGenerator<TConfiguration>(TConfigurati
                                                                   .GetCodeTypeReference(this.DomainType, this.DTOType)
                                                                   .ToEnumerableReference();
 }
-

@@ -16,4 +16,3 @@ public class DALFileFactory<TConfiguration>(TConfiguration configuration, IMappi
 
     public XDocument GetRenderData() => mappingGenerator.Generate();
 }
-

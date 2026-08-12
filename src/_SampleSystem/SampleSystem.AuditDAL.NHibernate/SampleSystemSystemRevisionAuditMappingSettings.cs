@@ -9,4 +9,3 @@ public record SampleSystemSystemRevisionAuditMappingSettings(DatabaseName Databa
     : MappingSettings<SystemAuditRevisionPersistentDomainObjectBase>(
         typeof(SystemAuditRevisionPersistentDomainObjectBase).Assembly,
         DatabaseName);
-

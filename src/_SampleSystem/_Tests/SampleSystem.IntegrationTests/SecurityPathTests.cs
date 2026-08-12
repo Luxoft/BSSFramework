@@ -41,4 +41,3 @@ public abstract class SecurityPathTests(IServiceProvider rootServiceProvider) : 
         Assert.Equal(employeeIdentity, result);
     }
 }
-

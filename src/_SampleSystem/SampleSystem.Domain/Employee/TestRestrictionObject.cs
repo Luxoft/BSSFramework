@@ -23,4 +23,3 @@ public class TestRestrictionObject : AuditPersistentDomainObjectBase
         set => this.businessUnit = value;
     }
 }
-

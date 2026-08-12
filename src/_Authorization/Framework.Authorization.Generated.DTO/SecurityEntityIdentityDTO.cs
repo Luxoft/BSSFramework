@@ -10,4 +10,3 @@ public struct SecurityEntityIdentityDTO(Guid id) : IIdentityObject<Guid>
     [DataMember]
     public Guid Id { get; set; } = id;
 }
-

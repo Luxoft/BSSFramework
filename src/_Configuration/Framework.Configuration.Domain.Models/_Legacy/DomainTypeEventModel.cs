@@ -27,4 +27,3 @@ public class DomainTypeEventModel : DomainObjectBase
     /// </summary>
     public long? Revision { get; set; }
 }
-

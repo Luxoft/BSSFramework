@@ -20,4 +20,3 @@ public static class TypeExtensions
         return property.GetCustomAttribute<CustomNameAttribute>().Maybe(v => v.Name) ?? property.Name;
     }
 }
-

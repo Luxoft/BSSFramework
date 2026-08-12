@@ -151,4 +151,3 @@ public class GetAttachmentWebGetMethodGenerator<TConfiguration>(TConfiguration c
         yield return result;
     }
 }
-

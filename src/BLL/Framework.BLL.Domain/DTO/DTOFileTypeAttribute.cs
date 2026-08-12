@@ -27,4 +27,3 @@ public class DTOFileTypeAttribute(Type domainType, string name, DTORole role) : 
     /// </summary>
     public string? ExternalData { get; init; }
 }
-

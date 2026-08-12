@@ -16,4 +16,3 @@ public class OperationController(IAvailableSecurityOperationSource availableSecu
               .Select(op => op.Name)
               .ToListAsync(ct);
 }
-

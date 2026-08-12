@@ -12,4 +12,3 @@ public class NHibConnectionInitializer(string serverAddress, string database) : 
         cfg.Properties["connection.connection_string"] = $"{serverAddress};Initial Catalog={database}";
     }
 }
-

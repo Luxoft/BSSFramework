@@ -348,4 +348,3 @@ public partial class BusinessUnit :
             ? this
             : this.Parent.Maybe(z => z.GetParentByTypeIds(businessUnitTypesIds));
 }
-

@@ -120,4 +120,3 @@ public static class DomainMetadataBaseExtensions
         return domainMetadata.IdentityProperty.IsAssignableFrom(property);
     }
 }
-

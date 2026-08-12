@@ -35,4 +35,3 @@ public class WebApiNetCoreFileFactoryBase<TConfiguration>(TConfiguration configu
         yield return result;
     }
 }
-

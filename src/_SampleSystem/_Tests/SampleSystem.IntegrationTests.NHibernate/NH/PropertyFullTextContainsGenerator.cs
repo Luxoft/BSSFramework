@@ -28,4 +28,3 @@ public class PropertyFullTextContainsGenerator : BaseHqlGeneratorForMethod
         return treeBuilder.BooleanMethodCall("contains", args);
     }
 }
-

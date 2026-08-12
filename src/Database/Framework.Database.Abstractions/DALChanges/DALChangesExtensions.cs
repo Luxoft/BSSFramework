@@ -105,4 +105,3 @@ public static class DALChangesExtensions
         }
     }
 }
-

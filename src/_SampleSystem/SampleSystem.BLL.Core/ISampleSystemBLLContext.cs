@@ -24,4 +24,3 @@ public partial interface ISampleSystemBLLContext
 
     ISelectOperationParser SelectOperationParser { get; }
 }
-

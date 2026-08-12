@@ -50,4 +50,3 @@ public struct DatabaseScriptGeneratorStrategyInfo
         this.TypeToDomainTypeMetadataDictionary = context.AssemblyMetadata.DomainTypes.ToDictionary(z => z.DomainType, z => z);
     }
 }
-

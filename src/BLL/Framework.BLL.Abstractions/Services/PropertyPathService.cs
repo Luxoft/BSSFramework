@@ -81,4 +81,3 @@ public class PropertyPathService(IMetadataProxyProvider metadataProxyProvider) :
 
     public PropertyPath WithExpand(PropertyPath propertyPath) => propertyPath.SelectMany(this.GetExpandPathOrSelf).ToPropertyPath();
 }
-

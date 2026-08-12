@@ -29,4 +29,3 @@ public class StrictCodeTypeReferenceService<TConfiguration>(TConfiguration confi
                        : BaseFileType.StrictDTO;
     }
 }
-

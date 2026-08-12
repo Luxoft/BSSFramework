@@ -306,4 +306,3 @@ public class DefaultIdentityDTOFileFactory<TConfiguration>(TConfiguration config
         yield return this.Configuration.GetIdentityObjectCodeTypeReference();
     }
 }
-

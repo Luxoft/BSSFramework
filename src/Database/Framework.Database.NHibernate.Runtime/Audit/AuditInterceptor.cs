@@ -41,4 +41,3 @@ internal sealed class AuditInterceptor(IEnumerable<IAuditProperty> createAuditPr
         return result;
     }
 }
-

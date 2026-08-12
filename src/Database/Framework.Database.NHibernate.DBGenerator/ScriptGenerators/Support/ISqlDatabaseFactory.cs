@@ -27,4 +27,3 @@ public interface ISqlDatabaseFactory
     /// <returns>База данных</returns>
     Microsoft.SqlServer.Management.Smo.Database GetOrCreateDatabase(DatabaseName databaseName);
 }
-

@@ -148,4 +148,3 @@ public struct TrackingResult<TDomainObject> : IEnumerable<TrackingProperty>
     /// <inheritdoc />
     IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
 }
-

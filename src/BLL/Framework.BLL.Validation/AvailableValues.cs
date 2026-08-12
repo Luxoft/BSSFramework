@@ -25,4 +25,3 @@ public record AvailableValues(Range<decimal> DecimalRange, Range<DateTime> DateT
                       new Range<DateTime>(SqlDateTime.MinValue.Value, SqlDateTime.MaxValue.Value),
                       byte.MaxValue));
 }
-

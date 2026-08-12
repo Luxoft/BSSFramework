@@ -13,4 +13,3 @@ public class DbGenerationOptions
     [Option('o', Required = false, HelpText = "Output script path. If set, output script file is produced")]
     public string? OutputPath { get; set; }
 }
-

@@ -12,4 +12,3 @@ public static class SampleSystemSystemConstant
 
     public static readonly ApplicationVariable<string> SampleStringConstant = new(nameof(SampleStringConstant), "HelloWorld") { Description = nameof(SampleStringConstant) };
 }
-

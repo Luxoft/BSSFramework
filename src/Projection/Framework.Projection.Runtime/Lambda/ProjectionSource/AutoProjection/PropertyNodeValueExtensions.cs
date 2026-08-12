@@ -46,4 +46,3 @@ internal static class PropertyNodeValueExtensions
         }
     }
 }
-

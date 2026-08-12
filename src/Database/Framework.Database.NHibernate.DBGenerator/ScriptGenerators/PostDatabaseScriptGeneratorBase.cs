@@ -75,4 +75,3 @@ public abstract class PostDatabaseScriptGeneratorBase : IDatabaseScriptGenerator
 
     protected abstract void Apply(IDatabaseScriptGeneratorContext context);
 }
-

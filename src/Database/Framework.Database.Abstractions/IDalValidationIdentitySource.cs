@@ -8,4 +8,3 @@ public interface IDalValidationIdentitySource
 
     string GetPropertyValidationName(PropertyInfo property);
 }
-

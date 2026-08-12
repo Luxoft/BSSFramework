@@ -24,4 +24,3 @@ public class RazorTemplateImplSubscription : Subscription<Domain.Employee.Employ
         yield return new("tester@luxoft.com", versions);
     }
 }
-

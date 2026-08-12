@@ -41,4 +41,3 @@ public class ProjectionCodeTypeReferenceService<TConfiguration>(TConfiguration c
         }
     }
 }
-

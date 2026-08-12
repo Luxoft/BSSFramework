@@ -74,4 +74,3 @@ public class InsuranceDetail : AuditPersistentDomainObjectBase
         set => this.residentalAddress = value;
     }
 }
-

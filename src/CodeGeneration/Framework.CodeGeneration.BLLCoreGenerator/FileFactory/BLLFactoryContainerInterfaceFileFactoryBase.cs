@@ -35,4 +35,3 @@ public class BLLFactoryContainerInterfaceFileFactoryBase<TConfiguration>(TConfig
         }
     }
 }
-

@@ -45,4 +45,3 @@ internal class RequiredFieldSqlProcessor : ISqlExceptionProcessor
         return classParts.Last().Equals(tableParts.Last(), StringComparison.InvariantCultureIgnoreCase);
     }
 }
-

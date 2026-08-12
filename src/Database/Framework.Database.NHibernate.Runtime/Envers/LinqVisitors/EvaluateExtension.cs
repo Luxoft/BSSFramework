@@ -29,4 +29,3 @@ public static class EvaluateExtension
         return visitor.EvaluatedValue;
     }
 }
-

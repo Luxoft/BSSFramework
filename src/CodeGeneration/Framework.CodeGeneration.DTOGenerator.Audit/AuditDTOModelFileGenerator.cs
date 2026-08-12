@@ -170,4 +170,3 @@ public class AuditDTOModelFileGenerator<TConfiguration>(TConfiguration configura
         public string Filename => this.Configuration.PropertyRevisionTypeName;
     }
 }
-

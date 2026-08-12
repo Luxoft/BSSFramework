@@ -38,4 +38,3 @@ public static class AuditReaderFactoryPatched
         await auditReader.GetCurrentRevisionAsync(true, ct);
     }
 }
-

@@ -31,4 +31,3 @@ public static class ContextEvaluatorWithMappingExtensions
 
     public static void EvaluateWrite<TBLLContext, TMappingService>(this IContextEvaluator<TBLLContext, TMappingService> contextEvaluator, Action<TBLLContext, TMappingService> action) => contextEvaluator.EvaluateWrite(null, action);
 }
-

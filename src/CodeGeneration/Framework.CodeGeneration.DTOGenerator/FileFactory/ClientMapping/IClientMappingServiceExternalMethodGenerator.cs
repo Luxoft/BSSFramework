@@ -8,4 +8,3 @@ public interface IClientMappingServiceExternalMethodGenerator
 
     IEnumerable<CodeMemberMethod> GetClientMappingServiceInterfaceMethods();
 }
-

@@ -10,4 +10,3 @@ public class TypeMapProperty(PropertyInfo property) : ITypeMapMember
 
     public virtual Type Type => this.Property.PropertyType;
 }
-

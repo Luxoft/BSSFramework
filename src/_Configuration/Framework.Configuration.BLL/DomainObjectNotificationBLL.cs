@@ -13,4 +13,3 @@ public partial class DomainObjectNotificationBLL
             LastProcessedItemDateTime = this.GetUnsecureQueryable().Where(mod => mod.Status == QueueProgressStatus.Processed).Max(mod => mod.ProcessDate)
         };
 }
-

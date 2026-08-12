@@ -39,4 +39,3 @@ public class AnyElementsValidator<TElement> : IPropertyValidator<object, IEnumer
                                               () => $"Collection {context.GetPropertyTypeName()} of {context.GetSourceTypeName()} can't be empty");
     }
 }
-

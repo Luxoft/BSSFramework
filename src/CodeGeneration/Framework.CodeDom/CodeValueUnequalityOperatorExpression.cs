@@ -6,4 +6,3 @@ public class CodeValueUnequalityOperatorExpression(CodeExpression left, CodeExpr
     new CodeValueEqualityOperatorExpression(left, right),
     CodeBinaryOperatorType.ValueEquality,
     new CodePrimitiveExpression(false));
-

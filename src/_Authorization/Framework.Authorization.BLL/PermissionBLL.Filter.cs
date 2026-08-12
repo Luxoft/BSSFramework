@@ -19,4 +19,3 @@ public partial class PermissionBLL
         return base.GetListBy(innerFilter, fetchs);
     }
 }
-

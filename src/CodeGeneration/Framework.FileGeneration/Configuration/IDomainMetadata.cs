@@ -15,4 +15,3 @@ public interface IDomainMetadata
 
     Type AuditPersistentDomainObjectBaseType { get; }
 }
-

@@ -8,4 +8,3 @@ public class RazorTemplateImpl : RazorTemplate<Domain.Employee.Employee>
 
     public override void Execute() => this.Writer.Write($"String.Concat it is good choice for {this.Current!.NameNative.FullName.Trim()}.");
 }
-

@@ -37,4 +37,3 @@ public class GetDomainTypesHandler([WithoutRunAs] ISecuritySystem securitySystem
         }
     }
 }
-

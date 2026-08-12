@@ -7,4 +7,3 @@ public class UniqueViolationConstraintDALException(UniqueConstraint args, IDalVa
 {
     private static string GetMessage(UniqueConstraint constraint, IDalValidationIdentitySource validationIdentitySource) => $"{validationIdentitySource.GetTypeValidationName(constraint.ObjectInfo.Type)} with same:'{constraint.Properties.Join(",")}' already exists";
 }
-

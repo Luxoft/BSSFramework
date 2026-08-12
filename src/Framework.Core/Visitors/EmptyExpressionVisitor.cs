@@ -10,4 +10,3 @@ public class EmptyExpressionVisitor : ExpressionVisitor
 
     public static readonly EmptyExpressionVisitor Value = new();
 }
-

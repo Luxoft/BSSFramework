@@ -27,4 +27,3 @@ public abstract class BaseDirectory : AuditPersistentDomainObjectBase, IVisualId
 
     public override string ToString() => this.Name;
 }
-

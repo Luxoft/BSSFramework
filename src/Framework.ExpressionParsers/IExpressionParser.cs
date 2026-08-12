@@ -21,4 +21,3 @@ public interface IExpressionParser<in TSource, out TDelegate, out TExpression> :
 
 public interface IExpressionParser<in TSource, TDelegate> : IExpressionParser<TSource, TDelegate, Expression<TDelegate>>
         where TDelegate : Delegate;
-

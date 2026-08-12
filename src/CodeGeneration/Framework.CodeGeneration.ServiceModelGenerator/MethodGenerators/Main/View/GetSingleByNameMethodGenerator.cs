@@ -39,4 +39,3 @@ public class GetSingleByNameMethodGenerator<TConfiguration>(TConfiguration confi
                                      .ToMethodReturnStatement();
     }
 }
-

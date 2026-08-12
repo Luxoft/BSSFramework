@@ -74,4 +74,3 @@ internal class ProjectionPropertyBuilder : IProjectionProperty
 
     public override string ToString() => this.Name;
 }
-

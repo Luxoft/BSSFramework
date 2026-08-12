@@ -20,4 +20,3 @@ public class AdminHangfireAuthorization(DomainSecurityRule.RoleBaseSecurityRule 
                              .GetResult();
     }
 }
-

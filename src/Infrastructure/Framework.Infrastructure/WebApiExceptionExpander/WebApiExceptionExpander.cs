@@ -23,4 +23,3 @@ public class WebApiExceptionExpander(IEnumerable<WebApiExceptionExpanderSettings
         exception.GetType(),
         exceptionType => settingsList.Any(settings => exceptionType.IsAssignableToAny(settings.HandledTypes)));
 }
-

@@ -32,4 +32,3 @@ public class IntegrationController(
                   .Where(z => typeof(Framework.Authorization.Generated.DTO.EventDTOBase).IsAssignableFrom(z))
                   .ToList();
 }
-

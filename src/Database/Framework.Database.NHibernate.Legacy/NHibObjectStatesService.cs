@@ -140,4 +140,3 @@ public class NHibObjectStatesService(ISession session) : IObjectStateService
         return entityEntry?.Status == Status.Deleted;
     }
 }
-

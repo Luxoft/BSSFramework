@@ -9,4 +9,3 @@ public class DisableSecurityCodeTypeReferenceService<TConfiguration>(TConfigurat
 {
     public override bool IsOptional(PropertyInfo property) => false;
 }
-

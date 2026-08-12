@@ -5,4 +5,3 @@ using IConfigurationBLLContext = Framework.Configuration.BLL.IConfigurationBLLCo
 namespace Framework.Configuration.WebApi;
 
 public abstract partial class ConfigMainController : ApiControllerBase<IConfigurationBLLContext, IConfigurationDTOMappingService>;
-

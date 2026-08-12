@@ -19,4 +19,3 @@ public abstract class DTOFetchRuleExpander<TPersistentObjectBase> : IFetchRuleEx
 
     protected abstract PropertyFetchRule<TSource>? TryExpand<TSource>(ViewDTOType dtoType);
 }
-

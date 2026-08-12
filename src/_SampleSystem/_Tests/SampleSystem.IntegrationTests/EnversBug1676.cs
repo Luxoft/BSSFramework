@@ -81,4 +81,3 @@ public abstract class EnversBug1676(IServiceProvider rootServiceProvider) : Test
                           });
     }
 }
-

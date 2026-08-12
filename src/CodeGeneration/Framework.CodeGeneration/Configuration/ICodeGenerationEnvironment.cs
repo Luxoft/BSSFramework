@@ -8,4 +8,3 @@ public interface ICodeGenerationEnvironment : FileGeneration.Configuration.IFile
 
     bool IsHierarchical(Type type);
 }
-

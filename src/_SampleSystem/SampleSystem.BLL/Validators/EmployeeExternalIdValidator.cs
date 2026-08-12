@@ -30,4 +30,3 @@ public class EmployeeExternalIdValidator : IPropertyValidator<Employee, long>
         return ValidationResult.Success;
     }
 }
-

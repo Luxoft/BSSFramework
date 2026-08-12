@@ -47,4 +47,3 @@ public static class TypeExtensions
         return sourceType.GetSecurityNodeInterfaces().Where(interfaceType => interfaceType.IsGenericType);
     }
 }
-

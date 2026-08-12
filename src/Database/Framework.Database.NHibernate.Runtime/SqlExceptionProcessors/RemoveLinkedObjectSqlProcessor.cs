@@ -74,4 +74,3 @@ internal class RemoveLinkedObjectSqlProcessor : ISqlExceptionProcessor
         }
     }
 }
-

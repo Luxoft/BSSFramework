@@ -53,4 +53,3 @@ internal static class TypeExtensions
         }
     }
 }
-

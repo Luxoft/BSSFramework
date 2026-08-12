@@ -16,4 +16,3 @@ public class EnumConvention : IUserTypeConvention
 
     public void Apply(IPropertyInstance instance) => instance.CustomType(instance.Property.PropertyType);
 }
-

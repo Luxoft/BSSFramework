@@ -44,4 +44,3 @@ public class AvailableBusinessRoleSecurityProvider<TDomainObject>(
                   .Select(principal => principal.Name)
                   .GenericToListAsync(ct));
 }
-

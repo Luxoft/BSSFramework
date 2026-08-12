@@ -20,4 +20,3 @@ public class CodeBinaryOperatorCollectionExpression : CodeExpression
 
     public CodeExpressionCollection Expressions { get; set; } = new();
 }
-

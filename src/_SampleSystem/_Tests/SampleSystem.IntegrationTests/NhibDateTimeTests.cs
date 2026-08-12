@@ -26,4 +26,3 @@ public abstract class NhibDateTimeTests(IServiceProvider rootServiceProvider) : 
         Assert.InRange((reloadedObj.CreateDate! - testDate).Value.Duration(), TimeSpan.Zero, TimeSpan.FromSeconds(60));
     }
 }
-

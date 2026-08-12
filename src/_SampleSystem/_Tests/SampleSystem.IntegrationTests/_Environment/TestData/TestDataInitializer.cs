@@ -244,4 +244,3 @@ public class TestDataInitializer(
             DefaultConstants.HRDEPARTMENT_PARENT_NAME);
     }
 }
-

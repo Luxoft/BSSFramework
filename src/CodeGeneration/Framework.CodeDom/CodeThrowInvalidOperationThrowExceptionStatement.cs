@@ -6,4 +6,3 @@ namespace Framework.CodeDom;
 
 public class CodeThrowInvalidOperationThrowExceptionStatement(string message)
     : CodeThrowExceptionStatement(typeof(InvalidOperationException).ToTypeReference().ToObjectCreateExpression(new CodePrimitiveExpression(message)));
-

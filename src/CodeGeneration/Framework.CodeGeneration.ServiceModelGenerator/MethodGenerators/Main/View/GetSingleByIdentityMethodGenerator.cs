@@ -41,4 +41,3 @@ public class GetSingleByIdentityMethodGenerator<TConfiguration>(TConfiguration c
                                      .ToMethodReturnStatement();
     }
 }
-

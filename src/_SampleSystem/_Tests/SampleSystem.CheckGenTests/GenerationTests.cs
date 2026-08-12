@@ -64,4 +64,3 @@ Modified files are:
                ? source.Select(x => "\t" + x.AbsolutePath).Aggregate((total, next) => total + Environment.NewLine + next)
                : string.Empty;
 }
-

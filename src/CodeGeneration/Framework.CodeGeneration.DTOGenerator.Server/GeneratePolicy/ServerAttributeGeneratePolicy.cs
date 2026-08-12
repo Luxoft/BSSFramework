@@ -30,4 +30,3 @@ public class ServerAttributeGeneratePolicy(IServerDTOGeneratorConfiguration<ISer
         }
     }
 }
-

@@ -39,4 +39,3 @@ public class TestPerformanceObject : BaseDirectory
         set => this.managementUnit = value;
     }
 }
-

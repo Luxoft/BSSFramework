@@ -8,4 +8,3 @@ public class ApplicationDefaultCancellationTokenSource(IHttpContextAccessor http
 {
     public CancellationToken CancellationToken => httpContextAccessor.HttpContext?.RequestAborted ?? CancellationToken.None;
 }
-

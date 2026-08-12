@@ -59,4 +59,3 @@ public interface IDTOGeneratorConfiguration : ICodeGeneratorConfiguration, ICode
 
     //GenerateTypeMap GetTypeMap(Type domainType, DTOFileType fileType);
 }
-

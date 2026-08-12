@@ -60,4 +60,3 @@ public static class PropertyPathExtensions
         return resultPaths;
     }
 }
-

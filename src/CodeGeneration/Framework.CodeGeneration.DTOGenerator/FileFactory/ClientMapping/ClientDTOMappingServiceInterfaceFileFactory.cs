@@ -42,4 +42,3 @@ public class ClientDTOMappingServiceInterfaceFileFactory<TConfiguration>(TConfig
         }
     }
 }
-

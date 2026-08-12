@@ -120,4 +120,3 @@ public class BssFrameworkSetup : IBssFrameworkSetup, IServiceInitializer
         this.extensions.ForEach(ex => ex.AddServices(services));
     }
 }
-

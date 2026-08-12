@@ -90,4 +90,3 @@ public class QueryServiceMethodGeneratorCollection<TConfiguration> : GeneratorCo
 
     IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
 }
-

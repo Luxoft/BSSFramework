@@ -15,4 +15,3 @@ public interface IIntegrationGeneratorConfiguration : ICodeGeneratorConfiguratio
 
 public interface IIntegrationGeneratorConfiguration<out TEnvironment> : IIntegrationGeneratorConfiguration, IServiceModelGeneratorConfiguration<TEnvironment>
         where TEnvironment : IServiceModelGenerationEnvironment;
-

@@ -734,4 +734,3 @@ public class TrackingServiceTests
         Assert.True(result);
     }
 }
-

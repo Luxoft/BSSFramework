@@ -15,4 +15,3 @@ public class ViewRepository<TDomainObject>(
         accessDeniedExceptionService,
         domainSecurityService.GetSecurityProvider(SecurityRule.View))
     where TDomainObject : class;
-

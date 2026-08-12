@@ -91,4 +91,3 @@ public abstract class ValidationTests(IServiceProvider rootServiceProvider) : Te
         Assert.Equal("Employee has ValidateVirtualProp value was too overflow for a DateTime", validationException.Message);
     }
 }
-

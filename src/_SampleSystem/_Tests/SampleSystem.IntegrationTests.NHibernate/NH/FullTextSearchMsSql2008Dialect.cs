@@ -13,4 +13,3 @@ public class FullTextSearchMsSql2008Dialect : EnhancedMsSql2008Dialect
         this.RegisterFunction("contains", new StandardSQLFunction("contains", null));
     }
 }
-

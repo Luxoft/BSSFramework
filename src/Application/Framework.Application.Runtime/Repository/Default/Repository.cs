@@ -13,4 +13,3 @@ public class Repository<TDomainObject>(
     : GenericRepository<TDomainObject, Guid>(dal, accessDeniedExceptionService, securityProvider),
       IRepository<TDomainObject>
     where TDomainObject : class;
-

@@ -31,4 +31,3 @@ public class BaseMethodInfoImpl : MethodInfo
 
     public override object[] GetCustomAttributes(Type attributeType, bool inherit) => throw new NotImplementedException();
 }
-

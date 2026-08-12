@@ -33,4 +33,3 @@ public class AttachmentInlineSubscription : Subscription<Domain.Employee.Employe
         };
     }
 }
-

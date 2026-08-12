@@ -120,4 +120,3 @@ public class Location :
 
     ICollection<Location> IMaster<Location>.Details => (ICollection<Location>)this.Children;
 }
-

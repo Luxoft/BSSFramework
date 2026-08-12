@@ -6,4 +6,3 @@ public interface IObjectModificationProcessor
 {
     Task ProcessChanged(ObjectModificationInfoDTO<Guid> changedObjectInfo, CancellationToken ct);
 }
-

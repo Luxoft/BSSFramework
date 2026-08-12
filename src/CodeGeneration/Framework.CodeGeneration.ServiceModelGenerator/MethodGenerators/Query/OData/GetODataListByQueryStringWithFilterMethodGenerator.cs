@@ -38,4 +38,3 @@ public class GetODataListByQueryStringWithFilterMethodGenerator<TConfiguration> 
                          .ToParameterDeclarationExpression("filter");
     }
 }
-

@@ -11,4 +11,3 @@ public static class ConfigurationNamedLock
 
     public static NamedLock ProcessModifications { get; } = new(nameof(ProcessModifications), typeof(DomainObjectModification));
 }
-

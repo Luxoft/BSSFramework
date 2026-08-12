@@ -37,4 +37,3 @@ public class BusinessUnitTypeLinkWithPossibleFinancialProjectType :
 
     BusinessUnitType IDetail<BusinessUnitType>.Master => this.businessUnitType;
 }
-

@@ -22,4 +22,3 @@ public abstract class CodeGenerationEnvironment<TDomainObjectBase, TPersistentDo
 
     public virtual bool IsHierarchical(Type type) => false;
 }
-

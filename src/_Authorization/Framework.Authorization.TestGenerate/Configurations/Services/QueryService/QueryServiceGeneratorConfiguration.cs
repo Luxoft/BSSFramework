@@ -3,4 +3,3 @@
 namespace Framework.Authorization.TestGenerate.Configurations.Services.QueryService;
 
 public class QueryServiceGeneratorConfiguration(AuthorizationGenerationEnvironment environment) : QueryGeneratorConfigurationBase<AuthorizationGenerationEnvironment>(environment);
-

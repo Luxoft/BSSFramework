@@ -6,4 +6,3 @@ public partial interface ISystemConstantBLL
 {
     T GetValue<T>(ApplicationVariable<T> systemConstant);
 }
-

@@ -10,4 +10,3 @@ public class ConfigurationSentNotificationLogger(IRepositoryFactory<SentMessage>
 
         sentMessageRepositoryFactory.Create().SaveAsync(notification.ToSentMessage(), ct);
 }
-

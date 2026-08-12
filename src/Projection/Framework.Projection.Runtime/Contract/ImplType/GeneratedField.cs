@@ -39,4 +39,3 @@ internal class GeneratedField : BaseFieldInfoImpl, IWrappingObject
 
     public override bool IsDefined(Type attributeType, bool inherit) => this.GetCustomAttributes(attributeType, inherit).Any();
 }
-

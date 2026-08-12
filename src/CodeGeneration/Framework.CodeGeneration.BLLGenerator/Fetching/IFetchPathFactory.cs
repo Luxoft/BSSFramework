@@ -6,4 +6,3 @@ public interface IFetchPathFactory<in T>
 {
     IEnumerable<PropertyPath> Create(Type startDomainType, T rule);
 }
-

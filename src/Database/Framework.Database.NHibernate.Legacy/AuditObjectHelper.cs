@@ -10,4 +10,3 @@ public static class AuditObjectHelper
 
     public static string ModifyByPropertyName = ExpressionHelper.Create((IAuditObject obj) => obj.ModifiedBy).ToPath();
 }
-

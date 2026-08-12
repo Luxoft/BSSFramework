@@ -19,4 +19,3 @@ public class QueryServiceGeneratorConfiguration : QueryGeneratorConfigurationBas
 
     public override IGeneratePolicy<MethodIdentity> GeneratePolicy { get; }
 }
-

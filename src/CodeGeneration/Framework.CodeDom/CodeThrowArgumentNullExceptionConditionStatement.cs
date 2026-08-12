@@ -9,4 +9,3 @@ public class CodeThrowArgumentNullExceptionConditionStatement(CodeParameterDecla
     new CodeThrowExceptionStatement(
         typeof(ArgumentNullException).ToTypeReference()
                                      .ToObjectCreateExpression(new CodePrimitiveExpression(parameter.Name))));
-

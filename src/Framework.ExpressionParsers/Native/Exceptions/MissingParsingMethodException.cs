@@ -13,4 +13,3 @@ public class MissingParsingMethodException(string message, int position, Type ob
 
     public readonly ReadOnlyCollection<Type> TryArgs = tryArgs.ToReadOnlyCollection();
 }
-

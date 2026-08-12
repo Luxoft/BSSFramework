@@ -7,4 +7,3 @@ public class BLLGeneratorConfiguration(ConfigurationGenerationEnvironment enviro
 {
     public override bool GenerateBllConstructor(Type domainType) => !new[] { typeof(DomainObjectModification), typeof(SystemConstant) }.Contains(domainType) && base.GenerateBllConstructor(domainType);
 }
-

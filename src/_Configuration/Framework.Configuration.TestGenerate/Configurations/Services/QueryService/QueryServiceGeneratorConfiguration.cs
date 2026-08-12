@@ -3,4 +3,3 @@
 namespace Framework.Configuration.TestGenerate.Configurations.Services.QueryService;
 
 public class QueryServiceGeneratorConfiguration(ConfigurationGenerationEnvironment environment) : QueryGeneratorConfigurationBase<ConfigurationGenerationEnvironment>(environment);
-

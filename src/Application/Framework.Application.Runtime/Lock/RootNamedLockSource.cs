@@ -8,4 +8,3 @@ public class RootNamedLockSource([FromKeyedServices(RootNamedLockSource.Elements
 
     public IReadOnlyList<NamedLock> NamedLocks { get; } = elements.SelectMany(el => el.NamedLocks).ToList();
 }
-

@@ -12,4 +12,3 @@ public static class RendererExtensions
         return renderer.Render(renderingFile.GetRenderData());
     }
 }
-

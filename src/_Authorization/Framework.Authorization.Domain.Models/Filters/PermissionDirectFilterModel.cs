@@ -13,4 +13,3 @@ public class PermissionDirectFilterModel : DomainObjectContextFilterModel<Permis
 
     public bool StrongDirect { get; set; }
 }
-

@@ -9,7 +9,7 @@ namespace Framework.BLL;
 
 public abstract class ImplementedSecurityBLLFactory<TBLLContext, TPersistentDomainObjectBase, TIdent>(TBLLContext context) :
     DefaultSecurityBLLFactory<TBLLContext, TPersistentDomainObjectBase, TIdent>(context)
-    where TBLLContext : class, ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>, ISecurityServiceContainer<IRootSecurityService>
+    where TBLLContext : class, IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>, ISecurityServiceContainer<IRootSecurityService>
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 {
     public sealed override IDefaultSecurityDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>(

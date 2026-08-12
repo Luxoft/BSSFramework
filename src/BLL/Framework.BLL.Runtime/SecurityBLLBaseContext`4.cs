@@ -17,7 +17,7 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent
       operationSender,
       hierarchicalObjectExpanderFactory),
       IAccessDeniedExceptionServiceContainer,
-      ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>
+      IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     where TBLLFactoryContainer : IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>>
 {

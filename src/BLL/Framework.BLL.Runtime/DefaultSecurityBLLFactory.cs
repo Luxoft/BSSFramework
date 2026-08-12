@@ -8,7 +8,7 @@ namespace Framework.BLL;
 
 public abstract class DefaultSecurityBLLFactory<TBLLContext, TPersistentDomainObjectBase, TIdent>(TBLLContext context) : BLLContextContainer<TBLLContext>(context),
     IDefaultSecurityBLLFactory<TPersistentDomainObjectBase, TIdent>
-    where TBLLContext : class, ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>, ISecurityServiceContainer<IRootSecurityService>
+    where TBLLContext : class, IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>, ISecurityServiceContainer<IRootSecurityService>
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 {
     public virtual IDefaultDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>()

@@ -27,11 +27,9 @@ public class BLLContextInterfaceFileFactory<TConfiguration>(TConfiguration confi
     {
         var securityServiceFieldTypeRef = this.Configuration.ActualRootSecurityServiceInterfaceType;
 
-        yield return typeof(IDefaultBLLContext<,>).MakeGenericType(
+        yield return typeof(ISecurityBLLContext<,>).MakeGenericType(
             this.Configuration.Environment.PersistentDomainObjectBaseType,
             this.Configuration.Environment.GetIdentityType()).ToTypeReference();
-
-        yield return typeof(IAccessDeniedExceptionServiceContainer).ToTypeReference();
 
         yield return new CodeTypeReference(typeof(ISecurityServiceContainer<>)) { TypeArguments = { securityServiceFieldTypeRef } };
         yield return typeof(IBLLFactoryContainerContext<>).ToTypeReference(this.Configuration.GetCodeTypeReference(null, FileType.BLLFactoryContainerInterface));

@@ -25,8 +25,8 @@ namespace Framework.Configuration.BLL;
 public partial class ConfigurationBLLContext(
     IServiceProvider serviceProvider,
     [FromKeyedServices(nameof(BLL))] IEventOperationSender operationSender,
-    IAccessDeniedExceptionService accessDeniedExceptionService,
     IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
+    IAccessDeniedExceptionService accessDeniedExceptionService,
     IServiceProxyFactory serviceProxyFactory,
     ITargetSystemTypeResolverContainer targetSystemTypeResolverContainer,
     IConfigurationValidator validator,
@@ -41,8 +41,8 @@ public partial class ConfigurationBLLContext(
     SecurityBLLBaseContext<PersistentDomainObjectBase, Guid, IConfigurationBLLFactoryContainer>(
     serviceProvider,
     operationSender,
-    accessDeniedExceptionService,
-    hierarchicalObjectExpanderFactory)
+    hierarchicalObjectExpanderFactory,
+    accessDeniedExceptionService)
 {
     public IRootSecurityService SecurityService { get; } = securityService;
 

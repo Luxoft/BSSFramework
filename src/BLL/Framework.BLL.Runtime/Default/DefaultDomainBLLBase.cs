@@ -22,7 +22,7 @@ public abstract class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectB
     IDefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent>
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     where TDomainObject : class, TPersistentDomainObjectBase
-    where TBLLContext : class, IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>, IHierarchicalObjectExpanderFactoryContainer,
+    where TBLLContext : class, IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>,
     IBLLBaseContext
     where TIdent : notnull
 {

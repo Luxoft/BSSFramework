@@ -10,17 +10,15 @@ namespace Framework.BLL;
 public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent, TBLLFactoryContainer>(
     IServiceProvider serviceProvider,
     IEventOperationSender operationSender,
-    IAccessDeniedExceptionService accessDeniedExceptionService,
-    IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory)
+    IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
+    IAccessDeniedExceptionService accessDeniedExceptionService)
     : DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent, TBLLFactoryContainer>(
       serviceProvider,
       operationSender,
       hierarchicalObjectExpanderFactory),
-      IAccessDeniedExceptionServiceContainer,
-      IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>
+      ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     where TBLLFactoryContainer : IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>>
 {
     public IAccessDeniedExceptionService AccessDeniedExceptionService { get; } = accessDeniedExceptionService;
 }
-

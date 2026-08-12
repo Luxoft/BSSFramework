@@ -26,11 +26,11 @@ public partial class ConfigurationBLLContext(
     IServiceProvider serviceProvider,
     [FromKeyedServices(nameof(BLL))] IEventOperationSender operationSender,
     IHierarchicalObjectExpanderFactory hierarchicalObjectExpanderFactory,
+    IRootSecurityService securityService,
     IAccessDeniedExceptionService accessDeniedExceptionService,
     IServiceProxyFactory serviceProxyFactory,
     ITargetSystemTypeResolverContainer targetSystemTypeResolverContainer,
     IConfigurationValidator validator,
-    IRootSecurityService securityService,
     IConfigurationBLLFactoryContainer logics,
     IDomainObjectEventMetadata eventOperationSource,
     INamedLockService namedLockService,
@@ -42,10 +42,9 @@ public partial class ConfigurationBLLContext(
     serviceProvider,
     operationSender,
     hierarchicalObjectExpanderFactory,
+    securityService,
     accessDeniedExceptionService)
 {
-    public IRootSecurityService SecurityService { get; } = securityService;
-
     public ITypeResolver<TypeNameIdentity> TargetSystemTypeResolver => targetSystemTypeResolverContainer.TypeResolver;
 
 
@@ -67,7 +66,9 @@ public partial class ConfigurationBLLContext(
                                           ts => ts.Id,
                                           (tsi, ts) =>
                                           {
-                                              var targetSystemServiceType = typeof(TargetSystemService<,>).MakeGenericType(tsi.BllContextType, tsi.PersistentDomainObjectBaseType);
+                                              var targetSystemServiceType = typeof(TargetSystemService<,>).MakeGenericType(
+                                                  tsi.BllContextType,
+                                                  tsi.PersistentDomainObjectBaseType);
 
                                               return (tsi, serviceProxyFactory.Create<ITargetSystemService>(targetSystemServiceType, tsi, ts));
                                           })
@@ -85,4 +86,3 @@ public partial class ConfigurationBLLContext(
 
         this.TryGetDomainType(typeNameIdentity) ?? throw new BusinessLogicException("TargetSystem with domainType \"{0}\" not found", typeNameIdentity);
 }
-

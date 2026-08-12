@@ -13,8 +13,6 @@ public interface IBLLCoreGeneratorConfiguration<out TEnvironment> : IBLLCoreGene
 #pragma warning disable S100 // Methods and properties should be named in camel case
 public interface IBLLCoreGeneratorConfiguration : ICodeGeneratorConfiguration, ICodeTypeReferenceService<FileType>
 {
-    CodeTypeReference ActualRootSecurityServiceInterfaceType { get; }
-
     Type DefaultBLLFactoryContainerType { get; }
 
     Type SecurityBLLFactoryType { get; }

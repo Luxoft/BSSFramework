@@ -4,7 +4,6 @@ using Framework.Application.Domain;
 using Framework.Application.Events;
 using Framework.BLL;
 using Framework.BLL.Domain.TargetSystem;
-using Framework.BLL.Services;
 using Framework.Configuration.Domain;
 using Framework.Core.TypeResolving;
 using Framework.Database;
@@ -21,7 +20,7 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase>(
     TargetSystem targetSystem,
     ICurrentRevisionService currentRevisionService) : ITargetSystemService
 
-    where TBLLContext : class, ISecurityServiceContainer<IRootSecurityService>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
+    where TBLLContext : class, ISecurityBLLContext<TPersistentDomainObjectBase, Guid>
     where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
 {
     public TargetSystem TargetSystem { get; } = targetSystem;
@@ -47,14 +46,15 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase>(
         foreach (var domainObjectId in eventModel.DomainObjectIdents)
         {
             var actualRevision = eventModel.Revision is null && eventModel.Operation.Name == EventOperation.Remove.Name
-                                     ? bll.GetObjectRevisions(domainObjectId).RevisionInfos.Select(v => v.RevisionNumber).OrderByDescending(v => v).Skip(1).First()
+                                     ? bll.GetObjectRevisions(domainObjectId).RevisionInfos.Select(v => v.RevisionNumber).OrderByDescending(v => v).Skip(1)
+                                          .First()
                                      : eventModel.Revision;
 
             var domainObject = actualRevision is null ? bll.GetById(domainObjectId, true)! : bll.GetObjectByRevision(domainObjectId, actualRevision.Value);
 
             var domainObjectEvent = new EventOperation(eventModel.Operation.Name);
 
-            await eventOperationSender.Send<TDomainObject>(domainObject, domainObjectEvent, ct);
+            await eventOperationSender.Send(domainObject, domainObjectEvent, ct);
         }
     }
 
@@ -86,4 +86,3 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase>(
         }
     }
 }
-

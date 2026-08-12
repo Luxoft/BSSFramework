@@ -2,9 +2,6 @@
 using Anch.SecuritySystem;
 using Anch.SecuritySystem.Providers;
 
-using Framework.BLL.Services;
-using Framework.Core;
-
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.BLL;
@@ -12,7 +9,7 @@ namespace Framework.BLL;
 public abstract class SecurityBLLFactory<TBLLContext, TBLL, TBLLImpl, TDomainObject>(TBLLContext context) :
     BLLContextContainer<TBLLContext>(context),
     ISecurityBLLFactory<TBLL, TDomainObject>
-    where TBLLContext : class, ISecurityServiceContainer<IRootSecurityService>, IServiceProviderContainer
+    where TBLLContext : class, ISecurityBLLContext
     where TDomainObject : class
     where TBLLImpl : TBLL
 {

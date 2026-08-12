@@ -1,8 +1,10 @@
 ﻿using System.CodeDom;
 using System.Collections.ObjectModel;
 using System.Reflection;
+
 using Anch.Core;
 using Anch.SecuritySystem;
+
 using Framework.BLL;
 using Framework.BLL.Domain.ServiceRole;
 using Framework.BLL.Services;
@@ -16,8 +18,9 @@ using Framework.Projection;
 #pragma warning disable S100 // Methods and properties should be named in camel case
 namespace Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 
-public abstract class BLLCoreGeneratorConfigurationBase<TEnvironment> : CodeGeneratorConfiguration<TEnvironment, FileType>, IBLLCoreGeneratorConfiguration<TEnvironment>
-        where TEnvironment : class, IBLLCoreGenerationEnvironment
+public abstract class BLLCoreGeneratorConfigurationBase<TEnvironment> : CodeGeneratorConfiguration<TEnvironment, FileType>,
+                                                                        IBLLCoreGeneratorConfiguration<TEnvironment>
+    where TEnvironment : class, IBLLCoreGenerationEnvironment
 {
     private readonly Lazy<ReadOnlyCollection<Type>> lazyBLLDomainTypes;
 
@@ -36,7 +39,9 @@ public abstract class BLLCoreGeneratorConfigurationBase<TEnvironment> : CodeGene
 
     public Type DefaultBLLFactoryContainerType => typeof(IBLLFactoryContainer<>).MakeGenericType(this.DefaultBLLFactoryType);
 
-    public virtual Type SecurityBLLFactoryType => typeof(IDefaultSecurityBLLFactory<,>).MakeGenericType(this.Environment.PersistentDomainObjectBaseType, this.Environment.GetIdentityType());
+    public virtual Type SecurityBLLFactoryType => typeof(IDefaultSecurityBLLFactory<,>).MakeGenericType(
+        this.Environment.PersistentDomainObjectBaseType,
+        this.Environment.GetIdentityType());
 
     public Type SecurityBLLFactoryContainerType => typeof(IBLLFactoryContainer<>).MakeGenericType(this.SecurityBLLFactoryType);
 
@@ -53,7 +58,7 @@ public abstract class BLLCoreGeneratorConfigurationBase<TEnvironment> : CodeGene
 
     protected virtual ICodeFileFactoryHeader<FileType> BLLContextInterfaceFileFactoryHeader =>
 
-            new CodeFileFactoryHeader<FileType>(FileType.BLLContextInterface, string.Empty, _ => $"I{this.Environment.TargetSystemName}BLLContext");
+        new CodeFileFactoryHeader<FileType>(FileType.BLLContextInterface, string.Empty, _ => $"I{this.Environment.TargetSystemName}BLLContext");
 
     protected virtual ICodeFileFactoryHeader<FileType> BLLInterfaceFileFactoryHeader { get; } =
 
@@ -65,7 +70,10 @@ public abstract class BLLCoreGeneratorConfigurationBase<TEnvironment> : CodeGene
 
     protected virtual ICodeFileFactoryHeader<FileType> BLLFactoryContainerInterfaceFileFactoryHeader =>
 
-            new CodeFileFactoryHeader<FileType>(FileType.BLLFactoryContainerInterface, string.Empty, _ => $"I{this.Environment.TargetSystemName}BLLFactoryContainer");
+        new CodeFileFactoryHeader<FileType>(
+            FileType.BLLFactoryContainerInterface,
+            string.Empty,
+            _ => $"I{this.Environment.TargetSystemName}BLLFactoryContainer");
 
     protected virtual ICodeFileFactoryHeader<FileType> ValidatorInterfaceFileFactoryHeader =>
 
@@ -74,7 +82,7 @@ public abstract class BLLCoreGeneratorConfigurationBase<TEnvironment> : CodeGene
 
     private Type DefaultBLLFactoryType =>
 
-            typeof(IDefaultBLLFactory<,>).MakeGenericType(this.Environment.PersistentDomainObjectBaseType, this.Environment.GetIdentityType());
+        typeof(IDefaultBLLFactory<,>).MakeGenericType(this.Environment.PersistentDomainObjectBaseType, this.Environment.GetIdentityType());
 
     protected override IEnumerable<Type> GetDomainTypes()
     {
@@ -83,7 +91,8 @@ public abstract class BLLCoreGeneratorConfigurationBase<TEnvironment> : CodeGene
                               from type in projectionEnvironment.Assembly.GetTypes()
 
                               where this.IsPersistentObject(type)
-                                    && this.Environment.MetadataProxyProvider.Wrap(type).HasAttribute<ProjectionAttribute>(attr => attr.Role == ProjectionRole.Default)
+                                    && this.Environment.MetadataProxyProvider.Wrap(type)
+                                           .HasAttribute<ProjectionAttribute>(attr => attr.Role == ProjectionRole.Default)
 
                               select type;
 
@@ -98,7 +107,8 @@ public abstract class BLLCoreGeneratorConfigurationBase<TEnvironment> : CodeGene
 
         select domainType;
 
-    protected virtual IBLLFactoryContainerInterfaceGeneratorConfiguration GetLogics() => new BLLFactoryContainerInterfaceGeneratorConfiguration<BLLCoreGeneratorConfigurationBase<TEnvironment>>(this);
+    protected virtual IBLLFactoryContainerInterfaceGeneratorConfiguration GetLogics() =>
+        new BLLFactoryContainerInterfaceGeneratorConfiguration<BLLCoreGeneratorConfigurationBase<TEnvironment>>(this);
 
     protected override IEnumerable<ICodeFileFactoryHeader<FileType>> GetFileFactoryHeaders() =>
     [
@@ -117,7 +127,8 @@ public abstract class BLLCoreGeneratorConfigurationBase<TEnvironment> : CodeGene
         }
         else if (securityRule is DomainSecurityRule.DomainModeSecurityRule domainModeSecurityRule)
         {
-            return this.GetSecurityCodeExpression(domainModeSecurityRule.Mode).ToMethodReferenceExpression("ToDomain", [domainModeSecurityRule.DomainType]).ToMethodInvokeExpression();
+            return this.GetSecurityCodeExpression(domainModeSecurityRule.Mode).ToMethodReferenceExpression("ToDomain", [domainModeSecurityRule.DomainType])
+                       .ToMethodInvokeExpression();
         }
         else if (securityRule is DomainSecurityRule.NonExpandedRolesSecurityRule)
         {
@@ -164,6 +175,7 @@ public abstract class BLLCoreGeneratorConfigurationBase<TEnvironment> : CodeGene
 
     public virtual Type? IntegrationSaveModelType { get; } = null;
 
-    public virtual CodeExpression GetSecurityService(CodeExpression contextExpr) => contextExpr.ToPropertyReference(nameof(ISecurityServiceContainer<>.SecurityService));
+    public virtual CodeExpression GetSecurityService(CodeExpression contextExpr) =>
+        contextExpr.ToPropertyReference(nameof(ISecurityBLLContext.SecurityService));
 }
 #pragma warning restore S100 // Methods and properties should be named in camel case

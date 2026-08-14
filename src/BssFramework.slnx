@@ -145,6 +145,7 @@
   </Folder>
   
   <Folder Name="/_Configuration/GeneratedLayout/">
+    <Project Path="_Configuration/Framework.Configuration.Generated.DAL.EntityFramework/Framework.Configuration.Generated.DAL.EntityFramework.csproj" />
     <Project Path="_Configuration/Framework.Configuration.Generated.DAL.NHibernate/Framework.Configuration.Generated.DAL.NHibernate.csproj" />
     <Project Path="_Configuration/Framework.Configuration.Generated.DTO/Framework.Configuration.Generated.DTO.csproj" />
   </Folder>

@@ -3,7 +3,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Framework.Authorization.Generated.DAL.NHibernate.Mapping.Base;
+namespace Framework.Authorization.Generated.DAL.EntityFramework.Mapping.Base;
 
 public abstract class AuthBaseMap<TEntity> : IEntityTypeConfiguration<TEntity>
     where TEntity : AuditPersistentDomainObjectBase

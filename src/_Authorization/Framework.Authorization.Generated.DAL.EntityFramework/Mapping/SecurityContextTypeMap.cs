@@ -1,9 +1,9 @@
 ﻿using Framework.Authorization.Domain;
-using Framework.Authorization.Generated.DAL.NHibernate.Mapping.Base;
+using Framework.Authorization.Generated.DAL.EntityFramework.Mapping.Base;
 
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Framework.Authorization.Generated.DAL.NHibernate.Mapping;
+namespace Framework.Authorization.Generated.DAL.EntityFramework.Mapping;
 
 public class SecurityContextTypeMap : AuthBaseMap<SecurityContextType>
 {

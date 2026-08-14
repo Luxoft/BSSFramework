@@ -127,6 +127,7 @@
   </Folder>
   
   <Folder Name="/_Authorization/GeneratedLayout/">
+    <Project Path="_Authorization/Framework.Authorization.Generated.DAL.EntityFramework/Framework.Authorization.Generated.DAL.EntityFramework.csproj" />
     <Project Path="_Authorization/Framework.Authorization.Generated.DAL.NHibernate/Framework.Authorization.Generated.DAL.NHibernate.csproj" />
     <Project Path="_Authorization/Framework.Authorization.Generated.DTO/Framework.Authorization.Generated.DTO.csproj" />
   </Folder>

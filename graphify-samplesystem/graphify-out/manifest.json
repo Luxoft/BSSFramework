@@ -1,0 +1,3837 @@
+{
+  "SampleSystem.AuditDAL.NHibernate/SampleSystem.AuditDAL.NHibernate.csproj": {
+    "mtime": 1784900157.2784493,
+    "ast_hash": "6a26c7ce5f8bbee9711043d98d6a5752",
+    "semantic_hash": "6a26c7ce5f8bbee9711043d98d6a5752"
+  },
+  "SampleSystem.AuditDAL.NHibernate/SampleSystemSystemAuditMappingSettings.cs": {
+    "mtime": 1786538079.2092602,
+    "ast_hash": "27bd36e3601f2ea0944b91e6ae0a85c1",
+    "semantic_hash": "27bd36e3601f2ea0944b91e6ae0a85c1"
+  },
+  "SampleSystem.AuditDAL.NHibernate/SampleSystemSystemRevisionAuditMappingSettings.cs": {
+    "mtime": 1786538079.21226,
+    "ast_hash": "78f3655927425f14db8c47c623d17ad7",
+    "semantic_hash": "78f3655927425f14db8c47c623d17ad7"
+  },
+  "SampleSystem.AuditDomain/BusinessUnitAudit.cs": {
+    "mtime": 1776241222.653664,
+    "ast_hash": "16d713d88ad69247ce2da769a94332bf",
+    "semantic_hash": "16d713d88ad69247ce2da769a94332bf"
+  },
+  "SampleSystem.AuditDomain/SampleSystem.AuditDomain.csproj": {
+    "mtime": 1775082271.9511967,
+    "ast_hash": "7053918165aa0605f7ddfb160f2efa7d",
+    "semantic_hash": "7053918165aa0605f7ddfb160f2efa7d"
+  },
+  "SampleSystem.AuditDomain/SampleSystemAuditRevisionEntity.cs": {
+    "mtime": 1782848741.0015457,
+    "ast_hash": "b053f278f26e79426f66e480619ce595",
+    "semantic_hash": "b053f278f26e79426f66e480619ce595"
+  },
+  "SampleSystem.AuditDomain/__Base/AuditIdentifier.cs": {
+    "mtime": 1782850018.175705,
+    "ast_hash": "0933fa1b8ad8ef6eb0d0c983d46e492f",
+    "semantic_hash": "0933fa1b8ad8ef6eb0d0c983d46e492f"
+  },
+  "SampleSystem.AuditDomain/__Base/SystemAuditPersistentDomainObjectBase.cs": {
+    "mtime": 1786538079.2152605,
+    "ast_hash": "308f35bd7f44379e2928d8f7509bf00a",
+    "semantic_hash": "308f35bd7f44379e2928d8f7509bf00a"
+  },
+  "SampleSystem.AuditDomain/__Base/SystemAuditRevisionPersistentDomainObjectBase.cs": {
+    "mtime": 1786538079.2182615,
+    "ast_hash": "b6e2497f6476e0fc44236754e2c269f6",
+    "semantic_hash": "b6e2497f6476e0fc44236754e2c269f6"
+  },
+  "SampleSystem.BLL.Core/IExampleServiceForRepository.cs": {
+    "mtime": 1786538079.2212617,
+    "ast_hash": "f195616f9f2481fa1bca7124cf75c9ba",
+    "semantic_hash": "f195616f9f2481fa1bca7124cf75c9ba"
+  },
+  "SampleSystem.BLL.Core/ISampleSystemBLLContext.cs": {
+    "mtime": 1786538079.2222598,
+    "ast_hash": "5842ae5d29f73ff4a5ad69da8d52d4e9",
+    "semantic_hash": "5842ae5d29f73ff4a5ad69da8d52d4e9"
+  },
+  "SampleSystem.BLL.Core/SampleSystem.BLL.Core.csproj": {
+    "mtime": 1786457100.8803449,
+    "ast_hash": "b1dc286cbddc2cb965e6ce1be7f12ce6",
+    "semantic_hash": "b1dc286cbddc2cb965e6ce1be7f12ce6"
+  },
+  "SampleSystem.BLL.Core/_Generated/SampleSystem.Generated.cs": {
+    "mtime": 1786536709.8667035,
+    "ast_hash": "d0e4f8b704a1cd81250bee906862f3a1",
+    "semantic_hash": "d0e4f8b704a1cd81250bee906862f3a1"
+  },
+  "SampleSystem.BLL/Base/SecurityDomainBLLBase.cs": {
+    "mtime": 1786538079.2252665,
+    "ast_hash": "5ad6d6c0730118dc414201dc2d2adf7e",
+    "semantic_hash": "5ad6d6c0730118dc414201dc2d2adf7e"
+  },
+  "SampleSystem.BLL/BusinessUnitProgramClassBLL.cs": {
+    "mtime": 1786538079.227269,
+    "ast_hash": "a46068cdd25939710ac5379a939062b2",
+    "semantic_hash": "a46068cdd25939710ac5379a939062b2"
+  },
+  "SampleSystem.BLL/Command/CreateClassA/CreateClassAEvent.cs": {
+    "mtime": 1776241222.66867,
+    "ast_hash": "756974a4a27e574c09eeda315b4a4dd5",
+    "semantic_hash": "756974a4a27e574c09eeda315b4a4dd5"
+  },
+  "SampleSystem.BLL/Command/CreateClassA/CreateClassAEventHandler.cs": {
+    "mtime": 1786538079.2302687,
+    "ast_hash": "4f044523bb5e206490cd5632db4108be",
+    "semantic_hash": "4f044523bb5e206490cd5632db4108be"
+  },
+  "SampleSystem.BLL/Command/CreateClassA/Integration/ClassACreatedEvent.cs": {
+    "mtime": 1786538079.233268,
+    "ast_hash": "9f7a6be5d7a022aaba7269af6cd70969",
+    "semantic_hash": "9f7a6be5d7a022aaba7269af6cd70969"
+  },
+  "SampleSystem.BLL/Command/CreateClassA/Integration/ClassACreatedEventHandler.cs": {
+    "mtime": 1786538079.2352698,
+    "ast_hash": "dcd0b6f4f71cdb44f0ce20b113c42b43",
+    "semantic_hash": "dcd0b6f4f71cdb44f0ce20b113c42b43"
+  },
+  "SampleSystem.BLL/Command/CreateIntegrationEvent/CreateIntegrationEventCommand.cs": {
+    "mtime": 1786538079.2377741,
+    "ast_hash": "244c3bbb9f925f2004d0e6df36b94290",
+    "semantic_hash": "244c3bbb9f925f2004d0e6df36b94290"
+  },
+  "SampleSystem.BLL/Command/CreateIntegrationEvent/CreateIntegrationEventHandler.cs": {
+    "mtime": 1786538079.2397869,
+    "ast_hash": "4a4b75dec6f268b86d2acc606bc0d37a",
+    "semantic_hash": "4a4b75dec6f268b86d2acc606bc0d37a"
+  },
+  "SampleSystem.BLL/Command/CreateManagementUnitFluentMapping/CreateManagementUnitFluentMappingCommand.cs": {
+    "mtime": 1786538079.2417846,
+    "ast_hash": "9420a573a85e731455110e5d0bf5b768",
+    "semantic_hash": "9420a573a85e731455110e5d0bf5b768"
+  },
+  "SampleSystem.BLL/Command/CreateManagementUnitFluentMapping/CreateManagementUnitFluentMappingHandler.cs": {
+    "mtime": 1786538079.2437832,
+    "ast_hash": "42193265a654225a482c6fc0bb594762",
+    "semantic_hash": "42193265a654225a482c6fc0bb594762"
+  },
+  "SampleSystem.BLL/Command/ProcessIntegrationEvent/ProcessIntegrationEventHandler.cs": {
+    "mtime": 1786538079.2457836,
+    "ast_hash": "668042bfb98a26bd4434989fb3856928",
+    "semantic_hash": "668042bfb98a26bd4434989fb3856928"
+  },
+  "SampleSystem.BLL/Command/ProcessIntegrationEvent/TestIntegrationEvent.cs": {
+    "mtime": 1786538079.2487876,
+    "ast_hash": "dcad69e6692cb4b6bac232b5be7fd4a4",
+    "semantic_hash": "dcad69e6692cb4b6bac232b5be7fd4a4"
+  },
+  "SampleSystem.BLL/CountryBLL.cs": {
+    "mtime": 1786538079.2507842,
+    "ast_hash": "dea0c999fcf116447ef25695a0d83070",
+    "semantic_hash": "dea0c999fcf116447ef25695a0d83070"
+  },
+  "SampleSystem.BLL/EmployeeBLL.cs": {
+    "mtime": 1786538079.2527843,
+    "ast_hash": "32163d2ae543b2daebba3eaaf4adb501",
+    "semantic_hash": "32163d2ae543b2daebba3eaaf4adb501"
+  },
+  "SampleSystem.BLL/ExampleServiceForRepository.cs": {
+    "mtime": 1786538079.255793,
+    "ast_hash": "330829e869e3039367f585815dcb2600",
+    "semantic_hash": "330829e869e3039367f585815dcb2600"
+  },
+  "SampleSystem.BLL/IntegrationVersionContainer1BLL.cs": {
+    "mtime": 1786538079.2587943,
+    "ast_hash": "d17027f6fd81b8ece06363dd2663721e",
+    "semantic_hash": "d17027f6fd81b8ece06363dd2663721e"
+  },
+  "SampleSystem.BLL/SampleSystem.BLL.csproj": {
+    "mtime": 1784900157.284449,
+    "ast_hash": "c2e80c4d9796558fc600b3b5db6cf23d",
+    "semantic_hash": "c2e80c4d9796558fc600b3b5db6cf23d"
+  },
+  "SampleSystem.BLL/SampleSystemBLLContext.cs": {
+    "mtime": 1786556776.6553721,
+    "ast_hash": "575032e2f69dae5d7a0a9fd4763a313a",
+    "semantic_hash": "575032e2f69dae5d7a0a9fd4763a313a"
+  },
+  "SampleSystem.BLL/SampleSystemException.cs": {
+    "mtime": 1786538079.263794,
+    "ast_hash": "f2956efcebe460eac0e4623b60ceba5b",
+    "semantic_hash": "f2956efcebe460eac0e4623b60ceba5b"
+  },
+  "SampleSystem.BLL/SampleSystemSystemConstant.cs": {
+    "mtime": 1786538079.266793,
+    "ast_hash": "3993937ce5c3f4e00f9cf626b964f516",
+    "semantic_hash": "3993937ce5c3f4e00f9cf626b964f516"
+  },
+  "SampleSystem.BLL/TestBusinessUnitBLL.cs": {
+    "mtime": 1786538079.2692995,
+    "ast_hash": "6dda09ad11f4aa83f6d020100cb960b7",
+    "semantic_hash": "6dda09ad11f4aa83f6d020100cb960b7"
+  },
+  "SampleSystem.BLL/TestEmployeeBLL.cs": {
+    "mtime": 1786538079.2713096,
+    "ast_hash": "652eb01f20b27a42f7c2cdae68ac38e0",
+    "semantic_hash": "652eb01f20b27a42f7c2cdae68ac38e0"
+  },
+  "SampleSystem.BLL/TestLegacyEmployeeBLL.cs": {
+    "mtime": 1786538079.2743104,
+    "ast_hash": "8928bc103aea9be1fdc43e3a70299152",
+    "semantic_hash": "8928bc103aea9be1fdc43e3a70299152"
+  },
+  "SampleSystem.BLL/Validators/EmployeeExternalIdValidator.cs": {
+    "mtime": 1786538079.2773075,
+    "ast_hash": "80a0a6e256d95e1f1e56ac78d9a8fcc0",
+    "semantic_hash": "80a0a6e256d95e1f1e56ac78d9a8fcc0"
+  },
+  "SampleSystem.BLL/Validators/SampleSystemValidationMap.cs": {
+    "mtime": 1786538079.2803082,
+    "ast_hash": "e4c0db52c2fc9371996391478e89367b",
+    "semantic_hash": "e4c0db52c2fc9371996391478e89367b"
+  },
+  "SampleSystem.BLL/Validators/SampleSystemValidator.Employee.cs": {
+    "mtime": 1786538079.2823117,
+    "ast_hash": "3b455b1256120098786047ae21e087c8",
+    "semantic_hash": "3b455b1256120098786047ae21e087c8"
+  },
+  "SampleSystem.BLL/_Generated/SampleSystem.FetchRuleExpander.Generated.cs": {
+    "mtime": 1785237328.6169214,
+    "ast_hash": "0ba9dc0880e2fe964840c5e0870590d2",
+    "semantic_hash": "0ba9dc0880e2fe964840c5e0870590d2"
+  },
+  "SampleSystem.BLL/_Generated/SampleSystem.Generated.cs": {
+    "mtime": 1785237328.592804,
+    "ast_hash": "a53cec507d59021b819dfe84f31af13e",
+    "semantic_hash": "a53cec507d59021b819dfe84f31af13e"
+  },
+  "SampleSystem.BLL/_Generated/SampleSystem.ValidationMap.Generated.cs": {
+    "mtime": 1776241222.702294,
+    "ast_hash": "37a8699225f3a7cffc88970343fd76ad",
+    "semantic_hash": "37a8699225f3a7cffc88970343fd76ad"
+  },
+  "SampleSystem.BLL/_Generated/SampleSystem.Validator.Generated.cs": {
+    "mtime": 1780651040.2743511,
+    "ast_hash": "8c4b61a0bb25e774a742315c8ebd5e7c",
+    "semantic_hash": "8c4b61a0bb25e774a742315c8ebd5e7c"
+  },
+  "SampleSystem.BLL/_Query/GetEmployees/GetEmployeesHandler.cs": {
+    "mtime": 1786538079.2893167,
+    "ast_hash": "79b069b8561be51a07f0e0b7100042e7",
+    "semantic_hash": "79b069b8561be51a07f0e0b7100042e7"
+  },
+  "SampleSystem.BLL/_Query/GetEmployees/GetEmployeesQuery.cs": {
+    "mtime": 1786538079.2923172,
+    "ast_hash": "d4d6fcc82ae5b87cacc07c6d51a15d7a",
+    "semantic_hash": "d4d6fcc82ae5b87cacc07c6d51a15d7a"
+  },
+  "SampleSystem.BLL/_Query/GetEmployees/GetEmployeesResponse.cs": {
+    "mtime": 1718973327.0763164,
+    "ast_hash": "e23958b6db1d3b3e331aa0419b3ef9f1",
+    "semantic_hash": "e23958b6db1d3b3e331aa0419b3ef9f1"
+  },
+  "SampleSystem.BLL/_Query/GetManagementUnitFluentMappings/GetManagementUnitFluentMappingsHandler.cs": {
+    "mtime": 1782848741.0085545,
+    "ast_hash": "d8cd186cf002b0b4c2d870df9f45accc",
+    "semantic_hash": "d8cd186cf002b0b4c2d870df9f45accc"
+  },
+  "SampleSystem.BLL/_Query/GetManagementUnitFluentMappings/GetManagementUnitFluentMappingsQuery.cs": {
+    "mtime": 1786538079.2953186,
+    "ast_hash": "2778b281e3db0ee10e66ea2d2f7dbf05",
+    "semantic_hash": "2778b281e3db0ee10e66ea2d2f7dbf05"
+  },
+  "SampleSystem.BLL/_Query/GetManagementUnitFluentMappings/GetManagementUnitFluentMappingsResponse.cs": {
+    "mtime": 1786538079.2983193,
+    "ast_hash": "c0d0e5d12b44223ebd9e7639d7d3ddbf",
+    "semantic_hash": "c0d0e5d12b44223ebd9e7639d7d3ddbf"
+  },
+  "SampleSystem.Domain.LegacyProjections/SampleSystem.Domain.LegacyProjections.csproj": {
+    "mtime": 1775082272.1540222,
+    "ast_hash": "41628333baa9637d43da5584e52ef26b",
+    "semantic_hash": "41628333baa9637d43da5584e52ef26b"
+  },
+  "SampleSystem.Domain.LegacyProjections/SampleSystem.Generated.cs": {
+    "mtime": 1778488663.7073061,
+    "ast_hash": "0da2ac510b7d0c9b93a0f1bd4ece339e",
+    "semantic_hash": "0da2ac510b7d0c9b93a0f1bd4ece339e"
+  },
+  "SampleSystem.Domain.ManualProjections/SampleSystem.Domain.ManualProjections.csproj": {
+    "mtime": 1775082272.1751747,
+    "ast_hash": "ac0ba45c04b2e321c97047eea7da7920",
+    "semantic_hash": "ac0ba45c04b2e321c97047eea7da7920"
+  },
+  "SampleSystem.Domain.ManualProjections/TestManualEmployeeProjection.cs": {
+    "mtime": 1786538079.3003166,
+    "ast_hash": "2758224a95e8da4fa82d36a0b0b577a2",
+    "semantic_hash": "2758224a95e8da4fa82d36a0b0b577a2"
+  },
+  "SampleSystem.Domain.Models/Change/EmployeeComplexChangeModel.cs": {
+    "mtime": 1786538079.3018324,
+    "ast_hash": "6e240385d856e0e14860d0201ce7f7d3",
+    "semantic_hash": "6e240385d856e0e14860d0201ce7f7d3"
+  },
+  "SampleSystem.Domain.Models/Change/EmployeeEmailChangeModel.cs": {
+    "mtime": 1786538079.3048327,
+    "ast_hash": "79dac44bb2fd3e885c6fa1446add6e87",
+    "semantic_hash": "79dac44bb2fd3e885c6fa1446add6e87"
+  },
+  "SampleSystem.Domain.Models/Change/EmployeeEmailMassChangeModel.cs": {
+    "mtime": 1786538079.306831,
+    "ast_hash": "d956ac08d385e99d943e7c305c0b7fbc",
+    "semantic_hash": "d956ac08d385e99d943e7c305c0b7fbc"
+  },
+  "SampleSystem.Domain.Models/Change/_Base/DomainObjectChangeModel.cs": {
+    "mtime": 1786538079.3088317,
+    "ast_hash": "ed5d190ea16e972fe230c0ded4c0147e",
+    "semantic_hash": "ed5d190ea16e972fe230c0ded4c0147e"
+  },
+  "SampleSystem.Domain.Models/Change/_Base/DomainObjectComplexChangeModel.cs": {
+    "mtime": 1786538079.3108313,
+    "ast_hash": "5d052da41fabf24b4864e635203d7d85",
+    "semantic_hash": "5d052da41fabf24b4864e635203d7d85"
+  },
+  "SampleSystem.Domain.Models/Change/_Base/DomainObjectMassChangeModel.cs": {
+    "mtime": 1786538079.3128295,
+    "ast_hash": "86f150941b32c72b13b7520aea7d081d",
+    "semantic_hash": "86f150941b32c72b13b7520aea7d081d"
+  },
+  "SampleSystem.Domain.Models/Create/_Base/TestUnpersistentObject.cs": {
+    "mtime": 1786538079.3148298,
+    "ast_hash": "16f390ff7818dbdff85b99e6780a3c5c",
+    "semantic_hash": "16f390ff7818dbdff85b99e6780a3c5c"
+  },
+  "SampleSystem.Domain.Models/Custom/DateModel.cs": {
+    "mtime": 1776241222.7202737,
+    "ast_hash": "9ddea64c59123400f0ba08a77f193e9a",
+    "semantic_hash": "9ddea64c59123400f0ba08a77f193e9a"
+  },
+  "SampleSystem.Domain.Models/Event/EmployeeCustomEventModel.cs": {
+    "mtime": 1782850186.7193987,
+    "ast_hash": "4a19a875f6aa86bd83bd870b64eab3ef",
+    "semantic_hash": "4a19a875f6aa86bd83bd870b64eab3ef"
+  },
+  "SampleSystem.Domain.Models/Filters/BusinessUnitProgramClassFilterModel.cs": {
+    "mtime": 1782848741.029351,
+    "ast_hash": "df890176a345b6b2472956a28b908f32",
+    "semantic_hash": "df890176a345b6b2472956a28b908f32"
+  },
+  "SampleSystem.Domain.Models/Filters/EmployeeFilterModel.cs": {
+    "mtime": 1786538079.3168309,
+    "ast_hash": "8b7808bee44a29f9eec896ed98fd41e7",
+    "semantic_hash": "8b7808bee44a29f9eec896ed98fd41e7"
+  },
+  "SampleSystem.Domain.Models/Filters/GuidBasedFilterModel.cs": {
+    "mtime": 1782848741.0313656,
+    "ast_hash": "77d8d5ea56d5d559a069f97cc3ab50c0",
+    "semantic_hash": "77d8d5ea56d5d559a069f97cc3ab50c0"
+  },
+  "SampleSystem.Domain.Models/Filters/HierarchicalBusinessUnitFilterModel.cs": {
+    "mtime": 1775082272.215381,
+    "ast_hash": "613243804186897cbfc180e3a17690c6",
+    "semantic_hash": "613243804186897cbfc180e3a17690c6"
+  },
+  "SampleSystem.Domain.Models/Filters/Projection/SampleEnumForStructDependency.cs": {
+    "mtime": 1776241222.7242749,
+    "ast_hash": "08326c8113669846d69ceb639d365a26",
+    "semantic_hash": "08326c8113669846d69ceb639d365a26"
+  },
+  "SampleSystem.Domain.Models/Filters/Projection/SampleStruct.cs": {
+    "mtime": 1776241222.7252736,
+    "ast_hash": "55f9e5e5001b84c722aa9a36456e1a72",
+    "semantic_hash": "55f9e5e5001b84c722aa9a36456e1a72"
+  },
+  "SampleSystem.Domain.Models/Filters/Projection/TestEmployeeFilter.cs": {
+    "mtime": 1786538079.3188393,
+    "ast_hash": "1bee5f21b65d03c717eeb266ba36e574",
+    "semantic_hash": "1bee5f21b65d03c717eeb266ba36e574"
+  },
+  "SampleSystem.Domain.Models/Filters/Root/BusinessUnitRootFilterModel.cs": {
+    "mtime": 1786538079.3208385,
+    "ast_hash": "57de56edb1fed49d7cef275e2c569171",
+    "semantic_hash": "57de56edb1fed49d7cef275e2c569171"
+  },
+  "SampleSystem.Domain.Models/Filters/Root/EmployeeRootFilterModel.cs": {
+    "mtime": 1786538079.3218381,
+    "ast_hash": "ad150b5ec76173d8ccac6864f57ae77e",
+    "semantic_hash": "ad150b5ec76173d8ccac6864f57ae77e"
+  },
+  "SampleSystem.Domain.Models/Filters/SingleEmployeeFilterModel.cs": {
+    "mtime": 1775082272.2238972,
+    "ast_hash": "848bf5abfc3387f829179fa5a4100d50",
+    "semantic_hash": "848bf5abfc3387f829179fa5a4100d50"
+  },
+  "SampleSystem.Domain.Models/Filters/_Base/DomainObjectContextFilterModel.cs": {
+    "mtime": 1776241222.730273,
+    "ast_hash": "8aeff4d65ee409a9abe712a97e89ba9b",
+    "semantic_hash": "8aeff4d65ee409a9abe712a97e89ba9b"
+  },
+  "SampleSystem.Domain.Models/Filters/_Base/DomainObjectFilterModel.cs": {
+    "mtime": 1786538079.3248398,
+    "ast_hash": "014da8201cf7e0ed8d4de0958b83375e",
+    "semantic_hash": "014da8201cf7e0ed8d4de0958b83375e"
+  },
+  "SampleSystem.Domain.Models/Filters/_Base/DomainObjectRootFilterModel.cs": {
+    "mtime": 1786538079.3268378,
+    "ast_hash": "a9b472b712e850c28c6fc5fbe90b69b9",
+    "semantic_hash": "a9b472b712e850c28c6fc5fbe90b69b9"
+  },
+  "SampleSystem.Domain.Models/Integration/EmployeeCustomIntegrationSaveModel.cs": {
+    "mtime": 1786538079.328837,
+    "ast_hash": "7af523c08a12e2f9f9e9dff9464f5096",
+    "semantic_hash": "7af523c08a12e2f9f9e9dff9464f5096"
+  },
+  "SampleSystem.Domain.Models/Integration/IntegrationVersionContainer1CustomIntegrationSaveModel.cs": {
+    "mtime": 1786538079.3318393,
+    "ast_hash": "f16c78c65e65f771f65ee2d4fb3c9076",
+    "semantic_hash": "f16c78c65e65f771f65ee2d4fb3c9076"
+  },
+  "SampleSystem.Domain.Models/Integration/_Base/DomainObjectIntegrationSaveModel.cs": {
+    "mtime": 1786538079.3340254,
+    "ast_hash": "74d0221bb53296d9bec6c8c74ea1ab91",
+    "semantic_hash": "74d0221bb53296d9bec6c8c74ea1ab91"
+  },
+  "SampleSystem.Domain.Models/SampleSystem.Domain.Models.csproj": {
+    "mtime": 1776254662.1838133,
+    "ast_hash": "ac0ba45c04b2e321c97047eea7da7920",
+    "semantic_hash": "ac0ba45c04b2e321c97047eea7da7920"
+  },
+  "SampleSystem.Domain.Projections/BusinessUnitProgramClass.cs": {
+    "mtime": 1776241222.7397823,
+    "ast_hash": "d8a258a8b104ddf999d6c78d721cf06a",
+    "semantic_hash": "d8a258a8b104ddf999d6c78d721cf06a"
+  },
+  "SampleSystem.Domain.Projections/NonPersistentContainer.cs": {
+    "mtime": 1785248173.282629,
+    "ast_hash": "dcb6be32a94cc37ea93ea2a9ac42a56e",
+    "semantic_hash": "dcb6be32a94cc37ea93ea2a9ac42a56e"
+  },
+  "SampleSystem.Domain.Projections/SampleSystem.Domain.Projections.csproj": {
+    "mtime": 1786527672.286832,
+    "ast_hash": "96b751e6dcac3ffa84f1382406a3106b",
+    "semantic_hash": "96b751e6dcac3ffa84f1382406a3106b"
+  },
+  "SampleSystem.Domain.Projections/SampleSystem.Generated.cs": {
+    "mtime": 1785248173.2846296,
+    "ast_hash": "8b8d4a6ef9d1aaab37586108b61f9a27",
+    "semantic_hash": "8b8d4a6ef9d1aaab37586108b61f9a27"
+  },
+  "SampleSystem.Domain.Projections/TestBusinessUnit.cs": {
+    "mtime": 1786538079.3360243,
+    "ast_hash": "8072bf89e11859fcb7fd36e03d05bdc2",
+    "semantic_hash": "8072bf89e11859fcb7fd36e03d05bdc2"
+  },
+  "SampleSystem.Domain.Projections/TestEmployee.cs": {
+    "mtime": 1785248173.287629,
+    "ast_hash": "6a771627820f9ac20ed0154a8410b109",
+    "semantic_hash": "6a771627820f9ac20ed0154a8410b109"
+  },
+  "SampleSystem.Domain.Projections/TestLocationCollectionProperties.cs": {
+    "mtime": 1786538079.3380258,
+    "ast_hash": "94d847a96864e9eaa5a88db625ef6e24",
+    "semantic_hash": "94d847a96864e9eaa5a88db625ef6e24"
+  },
+  "SampleSystem.Domain/AnotherSqlParserTestObj.cs": {
+    "mtime": 1786538079.3410242,
+    "ast_hash": "e89fede948b04c1669bd215f97d0d6d2",
+    "semantic_hash": "e89fede948b04c1669bd215f97d0d6d2"
+  },
+  "SampleSystem.Domain/Ariba/AribaStatusType.cs": {
+    "mtime": 1776241222.7457824,
+    "ast_hash": "6e5878c85ce1905456e017f8bbb6083c",
+    "semantic_hash": "6e5878c85ce1905456e017f8bbb6083c"
+  },
+  "SampleSystem.Domain/Ariba/RevenueDocumentAribaStatus.cs": {
+    "mtime": 1786538079.3430212,
+    "ast_hash": "feb090d79e65e183c77fe72651d366dc",
+    "semantic_hash": "feb090d79e65e183c77fe72651d366dc"
+  },
+  "SampleSystem.Domain/AuthPerformanceObject.cs": {
+    "mtime": 1786538079.346023,
+    "ast_hash": "5dc8b2637fe9080e2e75768fcbf9a2d9",
+    "semantic_hash": "5dc8b2637fe9080e2e75768fcbf9a2d9"
+  },
+  "SampleSystem.Domain/BU/BusinessUnit.LegacySecurity.cs": {
+    "mtime": 1786538079.348025,
+    "ast_hash": "c30464ca357ad0de0d79d269c098462a",
+    "semantic_hash": "c30464ca357ad0de0d79d269c098462a"
+  },
+  "SampleSystem.Domain/BU/BusinessUnit.Mini.cs": {
+    "mtime": 1776241222.750787,
+    "ast_hash": "075f609faffb8e16cccd4b1a7c305cb2",
+    "semantic_hash": "075f609faffb8e16cccd4b1a7c305cb2"
+  },
+  "SampleSystem.Domain/BU/BusinessUnit.cs": {
+    "mtime": 1786538079.350034,
+    "ast_hash": "1bab9e75027684ad2dc6c3600e9e9151",
+    "semantic_hash": "1bab9e75027684ad2dc6c3600e9e9151"
+  },
+  "SampleSystem.Domain/BU/BusinessUnitAncestorLink.cs": {
+    "mtime": 1786538079.3530324,
+    "ast_hash": "c8f3109495464b30a4ebb07dcf1b91c8",
+    "semantic_hash": "c8f3109495464b30a4ebb07dcf1b91c8"
+  },
+  "SampleSystem.Domain/BU/BusinessUnitEmployeeRole.cs": {
+    "mtime": 1786538079.356034,
+    "ast_hash": "85bb6c369d0d8e781739b92eed447095",
+    "semantic_hash": "85bb6c369d0d8e781739b92eed447095"
+  },
+  "SampleSystem.Domain/BU/BusinessUnitHrDepartment.cs": {
+    "mtime": 1786538079.3580348,
+    "ast_hash": "2ffe59582fe04ea011e7b1d5f8f25b8f",
+    "semantic_hash": "2ffe59582fe04ea011e7b1d5f8f25b8f"
+  },
+  "SampleSystem.Domain/BU/BusinessUnitManagerCommissionLink.cs": {
+    "mtime": 1786538079.3610373,
+    "ast_hash": "554cf6359001669844ae6c4ec88babcc",
+    "semantic_hash": "554cf6359001669844ae6c4ec88babcc"
+  },
+  "SampleSystem.Domain/BU/BusinessUnitToAncestorChildView.cs": {
+    "mtime": 1786538079.363036,
+    "ast_hash": "77fc1379b8ddf21ba659ab974f4052d2",
+    "semantic_hash": "77fc1379b8ddf21ba659ab974f4052d2"
+  },
+  "SampleSystem.Domain/BU/CommonUnitBase.cs": {
+    "mtime": 1786538079.365157,
+    "ast_hash": "9ce35bd746dc5c42110d4c3c83588da8",
+    "semantic_hash": "9ce35bd746dc5c42110d4c3c83588da8"
+  },
+  "SampleSystem.Domain/BU/IMiniBusinessUnit.cs": {
+    "mtime": 1786538079.3681564,
+    "ast_hash": "26dae46da5a374bcf1338e58dca823bf",
+    "semantic_hash": "26dae46da5a374bcf1338e58dca823bf"
+  },
+  "SampleSystem.Domain/BU/IUnit.cs": {
+    "mtime": 1786538079.3711548,
+    "ast_hash": "cc41bd4769df5f851fb313d9d2331794",
+    "semantic_hash": "cc41bd4769df5f851fb313d9d2331794"
+  },
+  "SampleSystem.Domain/Directories/Address.cs": {
+    "mtime": 1786538079.3731542,
+    "ast_hash": "c0e57e2b6ab31a1e30218fa301b4dc73",
+    "semantic_hash": "c0e57e2b6ab31a1e30218fa301b4dc73"
+  },
+  "SampleSystem.Domain/Directories/BusinessUnitType.VisualProjection.cs": {
+    "mtime": 1786538079.3751533,
+    "ast_hash": "8c8f40616cc928ca0fa5c870cc906196",
+    "semantic_hash": "8c8f40616cc928ca0fa5c870cc906196"
+  },
+  "SampleSystem.Domain/Directories/BusinessUnitType.cs": {
+    "mtime": 1786538079.3781538,
+    "ast_hash": "919db4c14394debdb18c5fac325968ee",
+    "semantic_hash": "919db4c14394debdb18c5fac325968ee"
+  },
+  "SampleSystem.Domain/Directories/BusinessUnitTypeLinkWithPossibleFinancialProjectType.cs": {
+    "mtime": 1786538079.3811698,
+    "ast_hash": "6be3bc44971e2fc3b8f950a274040975",
+    "semantic_hash": "6be3bc44971e2fc3b8f950a274040975"
+  },
+  "SampleSystem.Domain/Directories/BusinessUnitTypeLinkWithPossibleParent.cs": {
+    "mtime": 1786538079.383166,
+    "ast_hash": "63e992dc2d28410d5612b80e90029060",
+    "semantic_hash": "63e992dc2d28410d5612b80e90029060"
+  },
+  "SampleSystem.Domain/Directories/BusinessUnitTypeLinkWithTransferTo.cs": {
+    "mtime": 1786538079.3861642,
+    "ast_hash": "bbce8c0f0c5606f0fa817e9c34abc303",
+    "semantic_hash": "bbce8c0f0c5606f0fa817e9c34abc303"
+  },
+  "SampleSystem.Domain/Directories/CompanyLegalEntity.cs": {
+    "mtime": 1786538079.3891659,
+    "ast_hash": "d263642787c2664495da1c53648c21dc",
+    "semantic_hash": "d263642787c2664495da1c53648c21dc"
+  },
+  "SampleSystem.Domain/Directories/Country.cs": {
+    "mtime": 1786538079.391165,
+    "ast_hash": "e8d302179d4b367b0783e6504d48d518",
+    "semantic_hash": "e8d302179d4b367b0783e6504d48d518"
+  },
+  "SampleSystem.Domain/Directories/LegalEntityBase.cs": {
+    "mtime": 1786538079.3931656,
+    "ast_hash": "f791f7a2475439b4fd36bd210289af21",
+    "semantic_hash": "f791f7a2475439b4fd36bd210289af21"
+  },
+  "SampleSystem.Domain/Directories/Location.LegacySecurity.cs": {
+    "mtime": 1786538079.3946714,
+    "ast_hash": "9bca53639052ecde2bb0bc6aa9d65a33",
+    "semantic_hash": "9bca53639052ecde2bb0bc6aa9d65a33"
+  },
+  "SampleSystem.Domain/Directories/Location.cs": {
+    "mtime": 1786538079.3966813,
+    "ast_hash": "fa2c2f758dd9051647caad1f0e078c11",
+    "semantic_hash": "fa2c2f758dd9051647caad1f0e078c11"
+  },
+  "SampleSystem.Domain/Directories/LocationAncestorLink.cs": {
+    "mtime": 1786538079.3986797,
+    "ast_hash": "9278bb489574d73738eddb28c653f886",
+    "semantic_hash": "9278bb489574d73738eddb28c653f886"
+  },
+  "SampleSystem.Domain/Directories/LocationToAncestorChildView.cs": {
+    "mtime": 1786538079.4006793,
+    "ast_hash": "bd58088e606e48b40c99fa2a318c93fc",
+    "semantic_hash": "bd58088e606e48b40c99fa2a318c93fc"
+  },
+  "SampleSystem.Domain/Directories/TestObjForNested.cs": {
+    "mtime": 1776241222.7842119,
+    "ast_hash": "12f917522c3dfba08b195812e91ba9ee",
+    "semantic_hash": "12f917522c3dfba08b195812e91ba9ee"
+  },
+  "SampleSystem.Domain/Directories/TestObjForNestedBase.cs": {
+    "mtime": 1786538079.4026797,
+    "ast_hash": "1ada92bf92b11ea41e8f586b8c2812ca",
+    "semantic_hash": "1ada92bf92b11ea41e8f586b8c2812ca"
+  },
+  "SampleSystem.Domain/Employee/Employee.LegacySecurity.cs": {
+    "mtime": 1786538079.405681,
+    "ast_hash": "52cfb1115b7d41f81dde0685d06c22db",
+    "semantic_hash": "52cfb1115b7d41f81dde0685d06c22db"
+  },
+  "SampleSystem.Domain/Employee/Employee.cs": {
+    "mtime": 1786538079.4066815,
+    "ast_hash": "995da3198f966cb197ac371f6f98d522",
+    "semantic_hash": "995da3198f966cb197ac371f6f98d522"
+  },
+  "SampleSystem.Domain/Employee/EmployeeCellPhone.cs": {
+    "mtime": 1786538079.408681,
+    "ast_hash": "bf2f17830eeb294ef519a3cf3b4828de",
+    "semantic_hash": "bf2f17830eeb294ef519a3cf3b4828de"
+  },
+  "SampleSystem.Domain/Employee/EmployeeCellPhoneBase.cs": {
+    "mtime": 1786538079.4106886,
+    "ast_hash": "7ce92ef12e11d850a7e217aea969694a",
+    "semantic_hash": "7ce92ef12e11d850a7e217aea969694a"
+  },
+  "SampleSystem.Domain/Employee/EmployeeInformation.cs": {
+    "mtime": 1786538079.4136863,
+    "ast_hash": "ff7f4ac48ba266660dc67517af9dc432",
+    "semantic_hash": "ff7f4ac48ba266660dc67517af9dc432"
+  },
+  "SampleSystem.Domain/Employee/EmployeePersonalCellPhone.cs": {
+    "mtime": 1786538079.414687,
+    "ast_hash": "6f1820cb3617e5877f7b1902c2318b28",
+    "semantic_hash": "6f1820cb3617e5877f7b1902c2318b28"
+  },
+  "SampleSystem.Domain/Employee/EmployeePhoto.cs": {
+    "mtime": 1786538079.4186883,
+    "ast_hash": "4da921d415e588b80d675706302c921c",
+    "semantic_hash": "4da921d415e588b80d675706302c921c"
+  },
+  "SampleSystem.Domain/Employee/EmployeePosition.cs": {
+    "mtime": 1786538079.4206848,
+    "ast_hash": "f77f7923047a65818c3279d4adc43e7b",
+    "semantic_hash": "f77f7923047a65818c3279d4adc43e7b"
+  },
+  "SampleSystem.Domain/Employee/EmployeeRegistrationType.cs": {
+    "mtime": 1786538079.4226885,
+    "ast_hash": "70176883a03d205cb59a6c6bd5dadb25",
+    "semantic_hash": "70176883a03d205cb59a6c6bd5dadb25"
+  },
+  "SampleSystem.Domain/Employee/EmployeeRole.cs": {
+    "mtime": 1786538079.424686,
+    "ast_hash": "e4b376270c96f62b1e5e8647a710062a",
+    "semantic_hash": "e4b376270c96f62b1e5e8647a710062a"
+  },
+  "SampleSystem.Domain/Employee/EmployeeRoleDegree.cs": {
+    "mtime": 1786538079.426834,
+    "ast_hash": "90f86aefa0b08908b21a6acbad9f24f1",
+    "semantic_hash": "90f86aefa0b08908b21a6acbad9f24f1"
+  },
+  "SampleSystem.Domain/Employee/EmployeeSpecialization.cs": {
+    "mtime": 1786538079.428835,
+    "ast_hash": "7a97e1bf4ef808b8225ed321e7e9af25",
+    "semantic_hash": "7a97e1bf4ef808b8225ed321e7e9af25"
+  },
+  "SampleSystem.Domain/Employee/EmpoloyeeLink/EmployeeAndEmployeeSpecializationLink.cs": {
+    "mtime": 1786538079.431835,
+    "ast_hash": "210c67976b11cb1801a527c42b486851",
+    "semantic_hash": "210c67976b11cb1801a527c42b486851"
+  },
+  "SampleSystem.Domain/Employee/EmpoloyeeLink/EmployeeToEmployeeLink.cs": {
+    "mtime": 1786538079.433834,
+    "ast_hash": "a0577f501dde55936933dd4137fd36dc",
+    "semantic_hash": "a0577f501dde55936933dd4137fd36dc"
+  },
+  "SampleSystem.Domain/Employee/IMRequest.cs": {
+    "mtime": 1786538079.4368358,
+    "ast_hash": "14e28901aef8194d6ed7a48c5e341af7",
+    "semantic_hash": "14e28901aef8194d6ed7a48c5e341af7"
+  },
+  "SampleSystem.Domain/Employee/IMRequestDetail.cs": {
+    "mtime": 1782848741.099645,
+    "ast_hash": "f3d4687c23dcd9134ec92b48c37d9d04",
+    "semantic_hash": "f3d4687c23dcd9134ec92b48c37d9d04"
+  },
+  "SampleSystem.Domain/Employee/Information.cs": {
+    "mtime": 1786538079.4388337,
+    "ast_hash": "b6ca7b9333cba6a685f8f84c8c5124d7",
+    "semantic_hash": "b6ca7b9333cba6a685f8f84c8c5124d7"
+  },
+  "SampleSystem.Domain/Employee/Insurance.cs": {
+    "mtime": 1786538079.4418344,
+    "ast_hash": "7711df02f6a0658476a795fbbb8803c0",
+    "semantic_hash": "7711df02f6a0658476a795fbbb8803c0"
+  },
+  "SampleSystem.Domain/Employee/InsuranceDetail.cs": {
+    "mtime": 1786538079.4438424,
+    "ast_hash": "eff2eab0f9c32dcbbe1b4d11e759add7",
+    "semantic_hash": "eff2eab0f9c32dcbbe1b4d11e759add7"
+  },
+  "SampleSystem.Domain/Employee/RoleRoleDegreeLink.cs": {
+    "mtime": 1786538079.4458442,
+    "ast_hash": "d51d508fdd10a909a55d68ad59e272b2",
+    "semantic_hash": "d51d508fdd10a909a55d68ad59e272b2"
+  },
+  "SampleSystem.Domain/Employee/TestExceptObject.cs": {
+    "mtime": 1782848741.108996,
+    "ast_hash": "1d80d4930a6c34ec41261ddf4e3b2653",
+    "semantic_hash": "1d80d4930a6c34ec41261ddf4e3b2653"
+  },
+  "SampleSystem.Domain/Employee/TestRestrictionObject.cs": {
+    "mtime": 1786538079.4478445,
+    "ast_hash": "3ba0f4a0d6a785ad0150407547250e0f",
+    "semantic_hash": "3ba0f4a0d6a785ad0150407547250e0f"
+  },
+  "SampleSystem.Domain/Enums/AddressType.cs": {
+    "mtime": 1776241222.8202527,
+    "ast_hash": "afc75f41e40ac4c89c6900dc4eef0d73",
+    "semantic_hash": "afc75f41e40ac4c89c6900dc4eef0d73"
+  },
+  "SampleSystem.Domain/Enums/BusinessUnitEmployeeRoleType.cs": {
+    "mtime": 1776241222.822253,
+    "ast_hash": "8befd203b3f9bf2c8719fc6688b9dee4",
+    "semantic_hash": "8befd203b3f9bf2c8719fc6688b9dee4"
+  },
+  "SampleSystem.Domain/Enums/BusinessUnitOptions.cs": {
+    "mtime": 1776241222.823253,
+    "ast_hash": "c860b9c9a31a893cd605a4f20d62160c",
+    "semantic_hash": "c860b9c9a31a893cd605a4f20d62160c"
+  },
+  "SampleSystem.Domain/Enums/BusinessUnitStatus.cs": {
+    "mtime": 1776241222.8242526,
+    "ast_hash": "c2212d8243568d78294040374b857b37",
+    "semantic_hash": "c2212d8243568d78294040374b857b37"
+  },
+  "SampleSystem.Domain/Enums/CompanyLegalEntityType.cs": {
+    "mtime": 1776241222.8252754,
+    "ast_hash": "205aff8a33b74b9e3d89120c0c329a39",
+    "semantic_hash": "205aff8a33b74b9e3d89120c0c329a39"
+  },
+  "SampleSystem.Domain/Enums/EmployeeLinkType.cs": {
+    "mtime": 1776241222.827285,
+    "ast_hash": "347096cb965ca9b1a03c0898933a4c1f",
+    "semantic_hash": "347096cb965ca9b1a03c0898933a4c1f"
+  },
+  "SampleSystem.Domain/Enums/EmployeePhotoType.cs": {
+    "mtime": 1776241222.8282855,
+    "ast_hash": "bdc5086b25f2820822dd27b8ebdd6df3",
+    "semantic_hash": "bdc5086b25f2820822dd27b8ebdd6df3"
+  },
+  "SampleSystem.Domain/Enums/FinancialProjectType.cs": {
+    "mtime": 1776241222.8302886,
+    "ast_hash": "c605fd4a6710af651ddb56389480a8a9",
+    "semantic_hash": "c605fd4a6710af651ddb56389480a8a9"
+  },
+  "SampleSystem.Domain/Enums/Gender.cs": {
+    "mtime": 1718973327.770477,
+    "ast_hash": "5068a7b74c0bf07979298b0b42e10afb",
+    "semantic_hash": "5068a7b74c0bf07979298b0b42e10afb"
+  },
+  "SampleSystem.Domain/Enums/HRDepartmentEmployeeRoleType.cs": {
+    "mtime": 1776241222.8312848,
+    "ast_hash": "a841c9e9dec845f9b20f123fc9f51586",
+    "semantic_hash": "a841c9e9dec845f9b20f123fc9f51586"
+  },
+  "SampleSystem.Domain/Enums/LocationType.cs": {
+    "mtime": 1776241222.832286,
+    "ast_hash": "249b1712ac90b9bcb31e90aa415788b3",
+    "semantic_hash": "249b1712ac90b9bcb31e90aa415788b3"
+  },
+  "SampleSystem.Domain/Enums/PossibleStartDate.cs": {
+    "mtime": 1776241222.8332858,
+    "ast_hash": "7e8d9ed4e59aad1014ce757a08cdb126",
+    "semantic_hash": "7e8d9ed4e59aad1014ce757a08cdb126"
+  },
+  "SampleSystem.Domain/Enums/ProjectStatus.cs": {
+    "mtime": 1776241222.8342862,
+    "ast_hash": "0ebb8c91f534c255bb2ef09274b8b595",
+    "semantic_hash": "0ebb8c91f534c255bb2ef09274b8b595"
+  },
+  "SampleSystem.Domain/Enums/ProjectVersionType.cs": {
+    "mtime": 1776241222.836285,
+    "ast_hash": "e825db2c8471c0fc6deb476a0af2d2b0",
+    "semantic_hash": "e825db2c8471c0fc6deb476a0af2d2b0"
+  },
+  "SampleSystem.Domain/EnversBug1676/Coefficient1676.cs": {
+    "mtime": 1782848741.1129994,
+    "ast_hash": "d1519238dbc631cafd9b74cd472b583e",
+    "semantic_hash": "d1519238dbc631cafd9b74cd472b583e"
+  },
+  "SampleSystem.Domain/EnversBug1676/Location1676.cs": {
+    "mtime": 1786538079.4498434,
+    "ast_hash": "93a1c845653f602e40ae73fef45a9a01",
+    "semantic_hash": "93a1c845653f602e40ae73fef45a9a01"
+  },
+  "SampleSystem.Domain/EnversBug1676/WorkingCalendar1676.cs": {
+    "mtime": 1786538079.45185,
+    "ast_hash": "e4283d057a6a80f718db7176f99fe94b",
+    "semantic_hash": "e4283d057a6a80f718db7176f99fe94b"
+  },
+  "SampleSystem.Domain/ExternalPrincipal/Principal.cs": {
+    "mtime": 1786538079.45385,
+    "ast_hash": "a11f14835d157cbb3e5d231e7055ec91",
+    "semantic_hash": "a11f14835d157cbb3e5d231e7055ec91"
+  },
+  "SampleSystem.Domain/ForUpdate/Example1.cs": {
+    "mtime": 1786538079.455852,
+    "ast_hash": "4e94d21d2eefc4c1ecf4dc66c88ea6aa",
+    "semantic_hash": "4e94d21d2eefc4c1ecf4dc66c88ea6aa"
+  },
+  "SampleSystem.Domain/ForUpdate/Example2.cs": {
+    "mtime": 1786538079.4583707,
+    "ast_hash": "80be4d7f90e15cba2bb0dd2a95f389dd",
+    "semantic_hash": "80be4d7f90e15cba2bb0dd2a95f389dd"
+  },
+  "SampleSystem.Domain/HRDepartment/HRDepartment.LegacySecurity.cs": {
+    "mtime": 1786538079.45937,
+    "ast_hash": "5f5236a8a8b80b9d2d0e681f0785daf8",
+    "semantic_hash": "5f5236a8a8b80b9d2d0e681f0785daf8"
+  },
+  "SampleSystem.Domain/HRDepartment/HRDepartment.cs": {
+    "mtime": 1786538079.4623685,
+    "ast_hash": "16b76c2efbca35ec3441e30feb971a32",
+    "semantic_hash": "16b76c2efbca35ec3441e30feb971a32"
+  },
+  "SampleSystem.Domain/HRDepartment/HRDepartmentBase.cs": {
+    "mtime": 1786538079.4643705,
+    "ast_hash": "55e148fe4117ea9ad7ed23c0711c35be",
+    "semantic_hash": "55e148fe4117ea9ad7ed23c0711c35be"
+  },
+  "SampleSystem.Domain/HRDepartment/HRDepartmentEmployeePosition.cs": {
+    "mtime": 1786538079.466371,
+    "ast_hash": "03ba37ec6821531ff6c74c8bedf896aa",
+    "semantic_hash": "03ba37ec6821531ff6c74c8bedf896aa"
+  },
+  "SampleSystem.Domain/HRDepartment/HRDepartmentRoleEmployee.cs": {
+    "mtime": 1786538079.4683697,
+    "ast_hash": "b7c838a620d5859e8a47f9a4f1d2e2a4",
+    "semantic_hash": "b7c838a620d5859e8a47f9a4f1d2e2a4"
+  },
+  "SampleSystem.Domain/IExternalSynchronizable.cs": {
+    "mtime": 1718973327.8494756,
+    "ast_hash": "113c959789232fb11d993ac98c1753ce",
+    "semantic_hash": "113c959789232fb11d993ac98c1753ce"
+  },
+  "SampleSystem.Domain/Inline/Fio.cs": {
+    "mtime": 1786538079.4713674,
+    "ast_hash": "cf17eff801911cda2a0ebf0752e766f5",
+    "semantic_hash": "cf17eff801911cda2a0ebf0752e766f5"
+  },
+  "SampleSystem.Domain/Inline/FioShort.cs": {
+    "mtime": 1786538079.4733765,
+    "ast_hash": "3ce5637adee7d2c6aa6eb761eb3728c5",
+    "semantic_hash": "3ce5637adee7d2c6aa6eb761eb3728c5"
+  },
+  "SampleSystem.Domain/IntegrationVersions/ExternalDomainObject.cs": {
+    "mtime": 1786538079.47538,
+    "ast_hash": "aff469e7c4153712131160d126f4f341",
+    "semantic_hash": "aff469e7c4153712131160d126f4f341"
+  },
+  "SampleSystem.Domain/IntegrationVersions/IntegrationVersionContainer1.cs": {
+    "mtime": 1786538079.4773765,
+    "ast_hash": "4d321db7521210f97a0ed9821a2d0378",
+    "semantic_hash": "4d321db7521210f97a0ed9821a2d0378"
+  },
+  "SampleSystem.Domain/IntegrationVersions/IntegrationVersionContainer2.cs": {
+    "mtime": 1786538079.4803748,
+    "ast_hash": "2f6fe576415b2d0f46f523eaddcb8896",
+    "semantic_hash": "2f6fe576415b2d0f46f523eaddcb8896"
+  },
+  "SampleSystem.Domain/MU/ManagementUnit.cs": {
+    "mtime": 1786538079.483377,
+    "ast_hash": "c7fa74313dbfa4dc590bafe45d1682d8",
+    "semantic_hash": "c7fa74313dbfa4dc590bafe45d1682d8"
+  },
+  "SampleSystem.Domain/MU/ManagementUnitAncestorLink.cs": {
+    "mtime": 1786538079.486379,
+    "ast_hash": "1d7ec03781374d2e9b3f3c8f0f75f9c3",
+    "semantic_hash": "1d7ec03781374d2e9b3f3c8f0f75f9c3"
+  },
+  "SampleSystem.Domain/MU/ManagementUnitAndBusinessUnitLink.cs": {
+    "mtime": 1786538079.4958973,
+    "ast_hash": "510453196a4259768611d1d5ee45c688",
+    "semantic_hash": "510453196a4259768611d1d5ee45c688"
+  },
+  "SampleSystem.Domain/MU/ManagementUnitAndHRDepartmentLink.cs": {
+    "mtime": 1786538079.4998994,
+    "ast_hash": "2e4b42ca6daf5e6e6766d8d7ca9a0694",
+    "semantic_hash": "2e4b42ca6daf5e6e6766d8d7ca9a0694"
+  },
+  "SampleSystem.Domain/MU/ManagementUnitToAncestorChildView.cs": {
+    "mtime": 1786538079.5049052,
+    "ast_hash": "9b96508a12286bfb64ee1103c70a2d24",
+    "semantic_hash": "9b96508a12286bfb64ee1103c70a2d24"
+  },
+  "SampleSystem.Domain/NLock/GenericNamedLock.cs": {
+    "mtime": 1786538079.516904,
+    "ast_hash": "48b15edbd094e99ef1bc2e65cb85d82f",
+    "semantic_hash": "48b15edbd094e99ef1bc2e65cb85d82f"
+  },
+  "SampleSystem.Domain/NhFluentMapping/ManagementUnitFluentMapping.cs": {
+    "mtime": 1786538079.5274231,
+    "ast_hash": "2cc3752287872fbcadb10515fb917c0f",
+    "semantic_hash": "2cc3752287872fbcadb10515fb917c0f"
+  },
+  "SampleSystem.Domain/NhFluentMapping/MuComponent.cs": {
+    "mtime": 1786538079.5304227,
+    "ast_hash": "86aa4e733bbe364eff5f3f50dbee92d5",
+    "semantic_hash": "86aa4e733bbe364eff5f3f50dbee92d5"
+  },
+  "SampleSystem.Domain/NhFluentMapping/PureFluentMappingObject.cs": {
+    "mtime": 1786538079.5334222,
+    "ast_hash": "852a8404cc6510e969af0c5bd57426d7",
+    "semantic_hash": "852a8404cc6510e969af0c5bd57426d7"
+  },
+  "SampleSystem.Domain/NoSecurityObject.cs": {
+    "mtime": 1775082272.696651,
+    "ast_hash": "b8e067d1f9a8979622fd7efe99047825",
+    "semantic_hash": "b8e067d1f9a8979622fd7efe99047825"
+  },
+  "SampleSystem.Domain/Projections/IBusinessUnitGridProjection.cs": {
+    "mtime": 1786538079.5364292,
+    "ast_hash": "8f684396741c839492abcf7d18a2ae43",
+    "semantic_hash": "8f684396741c839492abcf7d18a2ae43"
+  },
+  "SampleSystem.Domain/Projections/IBusinessUnitTypeVisualProjection.cs": {
+    "mtime": 1786538079.5384302,
+    "ast_hash": "421d7006a5927d022932d70d05c59791",
+    "semantic_hash": "421d7006a5927d022932d70d05c59791"
+  },
+  "SampleSystem.Domain/Projects/Project.cs": {
+    "mtime": 1786538079.5404303,
+    "ast_hash": "4418c3eb43329deee6b2171fc3eff818",
+    "semantic_hash": "4418c3eb43329deee6b2171fc3eff818"
+  },
+  "SampleSystem.Domain/SampleSystem.Domain.csproj": {
+    "mtime": 1784900157.2884479,
+    "ast_hash": "9b457dba8faa16c01711177935be591f",
+    "semantic_hash": "9b457dba8faa16c01711177935be591f"
+  },
+  "SampleSystem.Domain/SqlParserTestObj.cs": {
+    "mtime": 1786538079.5434303,
+    "ast_hash": "b6210193dced55e10deba14c32e0339e",
+    "semantic_hash": "b6210193dced55e10deba14c32e0339e"
+  },
+  "SampleSystem.Domain/SqlParserTestObjContainer.cs": {
+    "mtime": 1786538079.5474298,
+    "ast_hash": "87589245f64788e88b38e5139e4c31db",
+    "semantic_hash": "87589245f64788e88b38e5139e4c31db"
+  },
+  "SampleSystem.Domain/TestCustomContextSecurityObj.cs": {
+    "mtime": 1786538079.5504298,
+    "ast_hash": "f33fc24b96e7e54fe18c0c741888bcde",
+    "semantic_hash": "f33fc24b96e7e54fe18c0c741888bcde"
+  },
+  "SampleSystem.Domain/TestDefaultFieldsMappingObj.cs": {
+    "mtime": 1786538079.5526636,
+    "ast_hash": "cc87154bcb2d98756fcfb9ff9581b7cd",
+    "semantic_hash": "cc87154bcb2d98756fcfb9ff9581b7cd"
+  },
+  "SampleSystem.Domain/TestDependency/TestRootSecurityObj.cs": {
+    "mtime": 1786538079.5556638,
+    "ast_hash": "6c87286c42b83731ed71f5b8bd565758",
+    "semantic_hash": "6c87286c42b83731ed71f5b8bd565758"
+  },
+  "SampleSystem.Domain/TestDependency/TestSecurityObjItem.cs": {
+    "mtime": 1786538079.5646617,
+    "ast_hash": "f222db8d68666bbe649161343ad75843",
+    "semantic_hash": "f222db8d68666bbe649161343ad75843"
+  },
+  "SampleSystem.Domain/TestDependency/TestSecuritySubObjItem.cs": {
+    "mtime": 1786538079.5666637,
+    "ast_hash": "e90f4fa5e2a1a7605fbc004f076f0fc7",
+    "semantic_hash": "e90f4fa5e2a1a7605fbc004f076f0fc7"
+  },
+  "SampleSystem.Domain/TestDependency/TestSecuritySubObjItem2.cs": {
+    "mtime": 1786538079.5686724,
+    "ast_hash": "6b947962d8e6a53596d9eeb7bd64358b",
+    "semantic_hash": "6b947962d8e6a53596d9eeb7bd64358b"
+  },
+  "SampleSystem.Domain/TestDependency/TestSecuritySubObjItem3.cs": {
+    "mtime": 1786538079.5716705,
+    "ast_hash": "08a8effec920ecf9e455c8ce33a68099",
+    "semantic_hash": "08a8effec920ecf9e455c8ce33a68099"
+  },
+  "SampleSystem.Domain/TestDeserializedAuth/TestItemAuthObject.cs": {
+    "mtime": 1786538079.5736725,
+    "ast_hash": "53e5f66be32252fec62e6113bfde21d9",
+    "semantic_hash": "53e5f66be32252fec62e6113bfde21d9"
+  },
+  "SampleSystem.Domain/TestDeserializedAuth/TestPerformanceObject.cs": {
+    "mtime": 1786538079.575671,
+    "ast_hash": "4aa3d68107e5e2ab76a0216831bdc69f",
+    "semantic_hash": "4aa3d68107e5e2ab76a0216831bdc69f"
+  },
+  "SampleSystem.Domain/TestDeserializedAuth/TestPlainAuthObject.cs": {
+    "mtime": 1786538079.5776742,
+    "ast_hash": "6f55fb90eb511d6baa1ba7b7bf269a02",
+    "semantic_hash": "6f55fb90eb511d6baa1ba7b7bf269a02"
+  },
+  "SampleSystem.Domain/TestForceAbstract/ClassA.cs": {
+    "mtime": 1786538079.5806737,
+    "ast_hash": "bc2cf746709da19ca0ff15bd2bcf319f",
+    "semantic_hash": "bc2cf746709da19ca0ff15bd2bcf319f"
+  },
+  "SampleSystem.Domain/TestForceAbstract/ClassAChild.cs": {
+    "mtime": 1782848741.1717467,
+    "ast_hash": "461632f3ed12fa944162f733584dbffe",
+    "semantic_hash": "461632f3ed12fa944162f733584dbffe"
+  },
+  "SampleSystem.Domain/TestForceAbstract/ConcreteClassA.cs": {
+    "mtime": 1786538079.5816708,
+    "ast_hash": "50dde09c551e0c5d7da07515f9feffd7",
+    "semantic_hash": "50dde09c551e0c5d7da07515f9feffd7"
+  },
+  "SampleSystem.Domain/TestImmutableObj.cs": {
+    "mtime": 1786538079.585778,
+    "ast_hash": "6c37af0c254faeae573a081150736e28",
+    "semantic_hash": "6c37af0c254faeae573a081150736e28"
+  },
+  "SampleSystem.Domain/TestJobObject.cs": {
+    "mtime": 1728288249.0244782,
+    "ast_hash": "9b1f1beb3c7a7ce5c7b0d55869ab9681",
+    "semantic_hash": "9b1f1beb3c7a7ce5c7b0d55869ab9681"
+  },
+  "SampleSystem.Domain/TestObj.cs": {
+    "mtime": 1786538079.5877762,
+    "ast_hash": "4f1188892b0a4502ed2f0ba2ab15f97b",
+    "semantic_hash": "4f1188892b0a4502ed2f0ba2ab15f97b"
+  },
+  "SampleSystem.Domain/TestRelativeEmployeeChildObject.cs": {
+    "mtime": 1786538079.5897758,
+    "ast_hash": "39479fa33fc403d81033eecb0d9440ae",
+    "semantic_hash": "39479fa33fc403d81033eecb0d9440ae"
+  },
+  "SampleSystem.Domain/TestRelativeEmployeeObject.cs": {
+    "mtime": 1782848741.1794605,
+    "ast_hash": "2b7560f9cd4747289d9691497ae79261",
+    "semantic_hash": "2b7560f9cd4747289d9691497ae79261"
+  },
+  "SampleSystem.Domain/TestRelativeEmployeeParentObject.cs": {
+    "mtime": 1786538079.592775,
+    "ast_hash": "e179ddd1dbf1955fad80b827a985e33d",
+    "semantic_hash": "e179ddd1dbf1955fad80b827a985e33d"
+  },
+  "SampleSystem.Domain/UniqueByParent/ChildEntity.cs": {
+    "mtime": 1786538079.595778,
+    "ast_hash": "5f2e3b913213509a3e5acecf27e83b01",
+    "semantic_hash": "5f2e3b913213509a3e5acecf27e83b01"
+  },
+  "SampleSystem.Domain/UniqueByParent/ParentEntity.cs": {
+    "mtime": 1776241222.8868308,
+    "ast_hash": "2565cd750275c3f5481527631a0c7b7a",
+    "semantic_hash": "2565cd750275c3f5481527631a0c7b7a"
+  },
+  "SampleSystem.Domain/Validation/SampleSystemOperationContext.cs": {
+    "mtime": 1776241222.8878307,
+    "ast_hash": "b1609c8faf83c2d4097a606652c675c6",
+    "semantic_hash": "b1609c8faf83c2d4097a606652c675c6"
+  },
+  "SampleSystem.Domain/_CustomProjectionAttribute/ExampleCustomProjectionAttribute.cs": {
+    "mtime": 1776241222.8899572,
+    "ast_hash": "5a2f1fabc09148d92359004aef3bdc6d",
+    "semantic_hash": "5a2f1fabc09148d92359004aef3bdc6d"
+  },
+  "SampleSystem.Domain/_CustomProjectionAttribute/ExampleCustomProjectionPropertyAttribute.cs": {
+    "mtime": 1776241222.890982,
+    "ast_hash": "f5efefb65a64e4373561c3dd68384c62",
+    "semantic_hash": "f5efefb65a64e4373561c3dd68384c62"
+  },
+  "SampleSystem.Domain/__Base/AuditPersistentDomainObjectBase.cs": {
+    "mtime": 1786538079.597776,
+    "ast_hash": "2bf0a7b5e1c99a7e2738a63249864cf0",
+    "semantic_hash": "2bf0a7b5e1c99a7e2738a63249864cf0"
+  },
+  "SampleSystem.Domain/__Base/BaseDirectory.cs": {
+    "mtime": 1786538079.5997818,
+    "ast_hash": "add28b5f066ad4b26c9509d34be9bed2",
+    "semantic_hash": "add28b5f066ad4b26c9509d34be9bed2"
+  },
+  "SampleSystem.Domain/__Base/DomainObjectBase.cs": {
+    "mtime": 1782850018.1827226,
+    "ast_hash": "125db0196cde9612d6c5342039d06274",
+    "semantic_hash": "125db0196cde9612d6c5342039d06274"
+  },
+  "SampleSystem.Domain/__Base/PersistentDomainObjectBase.cs": {
+    "mtime": 1782850186.7509463,
+    "ast_hash": "e8f731778e12aa1bb3b448b69440c722",
+    "semantic_hash": "e8f731778e12aa1bb3b448b69440c722"
+  },
+  "SampleSystem.EventMetadata/SampleSystem.EventMetadata.csproj": {
+    "mtime": 1775082273.1451063,
+    "ast_hash": "ff9bcd4853f3b8348a88f5e8219c3515",
+    "semantic_hash": "ff9bcd4853f3b8348a88f5e8219c3515"
+  },
+  "SampleSystem.EventMetadata/SampleSystemDomainObjectEventMetadata.cs": {
+    "mtime": 1786538079.6027853,
+    "ast_hash": "821ef417fbf54823cc3d717ecab8fd9b",
+    "semantic_hash": "821ef417fbf54823cc3d717ecab8fd9b"
+  },
+  "SampleSystem.EventMetadata/SampleSystemEventOperation.cs": {
+    "mtime": 1786538079.6057878,
+    "ast_hash": "c6fc6bebb606618efbe0df8c2809d220",
+    "semantic_hash": "c6fc6bebb606618efbe0df8c2809d220"
+  },
+  "SampleSystem.Events/ExampleSampleSystemAribaEventsSubscriptionManager.cs": {
+    "mtime": 1786538079.6077836,
+    "ast_hash": "c70c07a34c0e84f57067ac6dbe495656",
+    "semantic_hash": "c70c07a34c0e84f57067ac6dbe495656"
+  },
+  "SampleSystem.Events/ExampleSampleSystemEventsSubscriptionManager.cs": {
+    "mtime": 1786538079.610784,
+    "ast_hash": "7de91773cd437c61166f6436d5a926e9",
+    "semantic_hash": "7de91773cd437c61166f6436d5a926e9"
+  },
+  "SampleSystem.Events/SampleSystem.Events.csproj": {
+    "mtime": 1775082273.3769164,
+    "ast_hash": "8dec4776d269ecb72dc81d44a1a77b3f",
+    "semantic_hash": "8dec4776d269ecb72dc81d44a1a77b3f"
+  },
+  "SampleSystem.Events/SampleSystemCustomAribaLocalDBEventMessageSender.cs": {
+    "mtime": 1786538079.6139305,
+    "ast_hash": "4b8cb9b851413a79b27e7744b340316a",
+    "semantic_hash": "4b8cb9b851413a79b27e7744b340316a"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/AddressMap.cs": {
+    "mtime": 1786723832.5129006,
+    "ast_hash": "faedc0e48a7205d59265794a07ccd786",
+    "semantic_hash": "faedc0e48a7205d59265794a07ccd786"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/AnotherSqlParserTestObjMap.cs": {
+    "mtime": 1786723832.5394304,
+    "ast_hash": "fe5c7e3b874fdca833b69c552ff54164",
+    "semantic_hash": "fe5c7e3b874fdca833b69c552ff54164"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/AuthPerformanceObjectMap.cs": {
+    "mtime": 1786710348.0766058,
+    "ast_hash": "3fba88259040d7b713dd71db5fd4b7de",
+    "semantic_hash": "3fba88259040d7b713dd71db5fd4b7de"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/Base/SampleSystemBaseMap.cs": {
+    "mtime": 1786723834.7475934,
+    "ast_hash": "22702a1f8674a37da0427d89d0682f8c",
+    "semantic_hash": "22702a1f8674a37da0427d89d0682f8c"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/BusinessUnitAncestorLinkMap.cs": {
+    "mtime": 1786710347.9510112,
+    "ast_hash": "2d3ffda7e48c64cea6acc0f827cb8484",
+    "semantic_hash": "2d3ffda7e48c64cea6acc0f827cb8484"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/BusinessUnitEmployeeRoleMap.cs": {
+    "mtime": 1786723832.2915237,
+    "ast_hash": "57f19d83b2a4523f580f0c59f054afc6",
+    "semantic_hash": "57f19d83b2a4523f580f0c59f054afc6"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/BusinessUnitHrDepartmentMap.cs": {
+    "mtime": 1786710364.0632615,
+    "ast_hash": "a95e4918461923d7a619b891f9d1af87",
+    "semantic_hash": "a95e4918461923d7a619b891f9d1af87"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/BusinessUnitIdentityMap.cs": {
+    "mtime": 1786723835.3087482,
+    "ast_hash": "c6fae97048dea83d3f7cb936badd44ad",
+    "semantic_hash": "c6fae97048dea83d3f7cb936badd44ad"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/BusinessUnitManagerCommissionLinkMap.cs": {
+    "mtime": 1786723835.194623,
+    "ast_hash": "ebdfa85e61447676d816811a47380b87",
+    "semantic_hash": "ebdfa85e61447676d816811a47380b87"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/BusinessUnitMap.cs": {
+    "mtime": 1786723832.6880324,
+    "ast_hash": "2c2f98f1709c6330814068b3e7ad32e0",
+    "semantic_hash": "2c2f98f1709c6330814068b3e7ad32e0"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/BusinessUnitProgramClassMap.cs": {
+    "mtime": 1786724081.8075397,
+    "ast_hash": "42b48431d8319c0ce9dadea35eff7ab5",
+    "semantic_hash": "42b48431d8319c0ce9dadea35eff7ab5"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/BusinessUnitProgramClass_AutoProp_BusinessUnitTypeMap.cs": {
+    "mtime": 1786723835.3359714,
+    "ast_hash": "d63db15e1b8bf5c237358970af3e8923",
+    "semantic_hash": "d63db15e1b8bf5c237358970af3e8923"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/BusinessUnitToAncestorChildViewMap.cs": {
+    "mtime": 1786710363.9986322,
+    "ast_hash": "421a4a6c30b805670208e5128dad7895",
+    "semantic_hash": "421a4a6c30b805670208e5128dad7895"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/BusinessUnitTypeLinkWithPossibleFinancialProjectTypeMap.cs": {
+    "mtime": 1786723832.737092,
+    "ast_hash": "338f2cda4f78b3019bc752d31eab0987",
+    "semantic_hash": "338f2cda4f78b3019bc752d31eab0987"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/BusinessUnitTypeLinkWithPossibleParentMap.cs": {
+    "mtime": 1786712605.0102885,
+    "ast_hash": "953735a01506d109ea48f19922b8fef7",
+    "semantic_hash": "953735a01506d109ea48f19922b8fef7"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/BusinessUnitTypeLinkWithTransferToMap.cs": {
+    "mtime": 1786712605.0294898,
+    "ast_hash": "f119dcbd0c06f7fab7ec5953d02a93b5",
+    "semantic_hash": "f119dcbd0c06f7fab7ec5953d02a93b5"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/BusinessUnitTypeMap.cs": {
+    "mtime": 1786723833.112142,
+    "ast_hash": "215fbe0b214923d63986106534efe309",
+    "semantic_hash": "215fbe0b214923d63986106534efe309"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/ChildEntityMap.cs": {
+    "mtime": 1786722794.880102,
+    "ast_hash": "78cf45e4fdaab71b6e874ffe14618d58",
+    "semantic_hash": "78cf45e4fdaab71b6e874ffe14618d58"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/ClassAChildMap.cs": {
+    "mtime": 1786723835.34497,
+    "ast_hash": "5094dfe9bb98d28984511d272555e220",
+    "semantic_hash": "5094dfe9bb98d28984511d272555e220"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/ClassAMap.cs": {
+    "mtime": 1786723835.35698,
+    "ast_hash": "73ccf67fff413e2ae38887c01f1be92e",
+    "semantic_hash": "73ccf67fff413e2ae38887c01f1be92e"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/Coefficient1676Map.cs": {
+    "mtime": 1786723835.3720837,
+    "ast_hash": "4fd69830e82a0e4ffa443bb47a43fcaa",
+    "semantic_hash": "4fd69830e82a0e4ffa443bb47a43fcaa"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/ConcreteClassAMap.cs": {
+    "mtime": 1786723835.3875127,
+    "ast_hash": "b8226e118c77e9c0d255d2e056bf4973",
+    "semantic_hash": "b8226e118c77e9c0d255d2e056bf4973"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/CountryMap.cs": {
+    "mtime": 1786723833.0256846,
+    "ast_hash": "85bc175b0d61e87ec7584d81910bad63",
+    "semantic_hash": "85bc175b0d61e87ec7584d81910bad63"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/CustomCompanyLegalEntityMap.cs": {
+    "mtime": 1786723835.3989513,
+    "ast_hash": "b71928e172385fdfd07ba684c688d7b6",
+    "semantic_hash": "b71928e172385fdfd07ba684c688d7b6"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/CustomTestObjForNestedMap.cs": {
+    "mtime": 1786723835.4139602,
+    "ast_hash": "62560ff515a0a0c4fe3d71e1e1ec9ab7",
+    "semantic_hash": "62560ff515a0a0c4fe3d71e1e1ec9ab7"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/EmployeeAndEmployeeSpecializationLinkMap.cs": {
+    "mtime": 1786712700.9818187,
+    "ast_hash": "3e08a6fe2b0dd99903fee2f558552df0",
+    "semantic_hash": "3e08a6fe2b0dd99903fee2f558552df0"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/EmployeeCellPhoneBaseMap.cs": {
+    "mtime": 1786723833.1380112,
+    "ast_hash": "8b8440b8f300b7233135e144d6cd35a2",
+    "semantic_hash": "8b8440b8f300b7233135e144d6cd35a2"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/EmployeeMap.cs": {
+    "mtime": 1786723833.22294,
+    "ast_hash": "3938cbd26bcdcb2d86057af1ffa93b1b",
+    "semantic_hash": "3938cbd26bcdcb2d86057af1ffa93b1b"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/EmployeePhotoMap.cs": {
+    "mtime": 1786723833.2687795,
+    "ast_hash": "c2c80f4d6505516f495a5a1dd8701042",
+    "semantic_hash": "c2c80f4d6505516f495a5a1dd8701042"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/EmployeePositionMap.cs": {
+    "mtime": 1786723833.7905867,
+    "ast_hash": "04bbbddd96e15a9f9c44dbd6963939a8",
+    "semantic_hash": "04bbbddd96e15a9f9c44dbd6963939a8"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/EmployeeRegistrationTypeMap.cs": {
+    "mtime": 1786723835.4274733,
+    "ast_hash": "59690c30e40ab4f8c971c98a4d523e94",
+    "semantic_hash": "59690c30e40ab4f8c971c98a4d523e94"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/EmployeeRoleDegreeMap.cs": {
+    "mtime": 1786723833.834371,
+    "ast_hash": "4469c45a67d2c0ff2ea87c10030fb6d0",
+    "semantic_hash": "4469c45a67d2c0ff2ea87c10030fb6d0"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/EmployeeRoleMap.cs": {
+    "mtime": 1786723834.6222987,
+    "ast_hash": "2b3a66ce6eceb328d7c43af0d0a3046c",
+    "semantic_hash": "2b3a66ce6eceb328d7c43af0d0a3046c"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/EmployeeSpecializationMap.cs": {
+    "mtime": 1786723834.18811,
+    "ast_hash": "a2d61c27805e38326f5c6ea274201850",
+    "semantic_hash": "a2d61c27805e38326f5c6ea274201850"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/EmployeeToEmployeeLinkMap.cs": {
+    "mtime": 1786723834.3665974,
+    "ast_hash": "875a8ab4c35d1e26a7c4b3707e83a3bd",
+    "semantic_hash": "875a8ab4c35d1e26a7c4b3707e83a3bd"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/EmployeeWithBuPeriodMap.cs": {
+    "mtime": 1786723835.4434798,
+    "ast_hash": "2798cdaa1cd05d150358f65f15a329cd",
+    "semantic_hash": "2798cdaa1cd05d150358f65f15a329cd"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/EmployeeWithBuPeriod_AutoProp_CoreBusinessUnitMap.cs": {
+    "mtime": 1786723835.5481012,
+    "ast_hash": "2f267a01cc3e74db5615eb5ad0925270",
+    "semantic_hash": "2f267a01cc3e74db5615eb5ad0925270"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/Example1Map.cs": {
+    "mtime": 1786723835.4544795,
+    "ast_hash": "2022608b16d0e86879b029ca87dc2e06",
+    "semantic_hash": "2022608b16d0e86879b029ca87dc2e06"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/Example2Map.cs": {
+    "mtime": 1786723835.4669943,
+    "ast_hash": "1ab82d689e9cfd835138478e01c7842f",
+    "semantic_hash": "1ab82d689e9cfd835138478e01c7842f"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/GenericNamedLockMap.cs": {
+    "mtime": 1786723835.4789994,
+    "ast_hash": "111c18785ea065521d27485c89191846",
+    "semantic_hash": "111c18785ea065521d27485c89191846"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/HRDepartmentEmployeePositionMap.cs": {
+    "mtime": 1786714386.6416981,
+    "ast_hash": "5c62b30779e0f505dce6a625e55caaa2",
+    "semantic_hash": "5c62b30779e0f505dce6a625e55caaa2"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/HRDepartmentMap.cs": {
+    "mtime": 1786723835.499535,
+    "ast_hash": "0dbffaf59a5413f2e6329b8decca4249",
+    "semantic_hash": "0dbffaf59a5413f2e6329b8decca4249"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/HRDepartmentRoleEmployeeMap.cs": {
+    "mtime": 1786723835.5145426,
+    "ast_hash": "c7937227f330650c2907bfd6dbba6686",
+    "semantic_hash": "c7937227f330650c2907bfd6dbba6686"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/HerBusinessUnitMap.cs": {
+    "mtime": 1786723835.489539,
+    "ast_hash": "b03b1bbf6cf1396f53955e6f386762be",
+    "semantic_hash": "b03b1bbf6cf1396f53955e6f386762be"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/IMRequestDetailMap.cs": {
+    "mtime": 1786712701.5156443,
+    "ast_hash": "ebeca1f3e4237b04728aa0043bcae037",
+    "semantic_hash": "ebeca1f3e4237b04728aa0043bcae037"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/InsuranceDetailMap.cs": {
+    "mtime": 1786723835.5260634,
+    "ast_hash": "09bc2241d13d1f028c3df5aba0ec6c23",
+    "semantic_hash": "09bc2241d13d1f028c3df5aba0ec6c23"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/IntegrationVersionContainer1Map.cs": {
+    "mtime": 1786723835.5686522,
+    "ast_hash": "febb89af79ddda98e3c7ea45089bc2d8",
+    "semantic_hash": "febb89af79ddda98e3c7ea45089bc2d8"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/IntegrationVersionContainer2Map.cs": {
+    "mtime": 1786723835.5371015,
+    "ast_hash": "cbc969f0e14e1693482d4f95b3d3c255",
+    "semantic_hash": "cbc969f0e14e1693482d4f95b3d3c255"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/LegalEntityBaseMap.cs": {
+    "mtime": 1786723834.218232,
+    "ast_hash": "a3ce31918c2a9c0ae5b9e70f9a076e81",
+    "semantic_hash": "a3ce31918c2a9c0ae5b9e70f9a076e81"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/Location1676Map.cs": {
+    "mtime": 1786723835.5576172,
+    "ast_hash": "2dfe7d83fb878de8bd0e2c7f44396455",
+    "semantic_hash": "2dfe7d83fb878de8bd0e2c7f44396455"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/LocationAncestorLinkMap.cs": {
+    "mtime": 1786712605.0737617,
+    "ast_hash": "4d96bd49c9fa50ee2409387ee50d6e89",
+    "semantic_hash": "4d96bd49c9fa50ee2409387ee50d6e89"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/LocationMap.cs": {
+    "mtime": 1786723834.8156996,
+    "ast_hash": "6cc20b04a64e375a8d8be1fb720c0df4",
+    "semantic_hash": "6cc20b04a64e375a8d8be1fb720c0df4"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/LocationToAncestorChildViewMap.cs": {
+    "mtime": 1786712605.9640238,
+    "ast_hash": "b419a007339dd4cdd76cca728039d56e",
+    "semantic_hash": "b419a007339dd4cdd76cca728039d56e"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/ManagementUnitAncestorLinkMap.cs": {
+    "mtime": 1786714386.7932003,
+    "ast_hash": "c428df99c59821d96646ea21d39ab6e4",
+    "semantic_hash": "c428df99c59821d96646ea21d39ab6e4"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/ManagementUnitAndBusinessUnitLinkMap.cs": {
+    "mtime": 1786723835.5786507,
+    "ast_hash": "eb534fc5f47653945d3360816a0dcfa5",
+    "semantic_hash": "eb534fc5f47653945d3360816a0dcfa5"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/ManagementUnitAndHRDepartmentLinkMap.cs": {
+    "mtime": 1786714386.998761,
+    "ast_hash": "0eecc7875e8d9e1ab5359096d32685e5",
+    "semantic_hash": "0eecc7875e8d9e1ab5359096d32685e5"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/ManagementUnitMap.cs": {
+    "mtime": 1786723835.5921714,
+    "ast_hash": "0cb55c8ddb0599fb3ca751beb2b1f68d",
+    "semantic_hash": "0cb55c8ddb0599fb3ca751beb2b1f68d"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/ManagementUnitToAncestorChildViewMap.cs": {
+    "mtime": 1786714386.0460653,
+    "ast_hash": "617f93cab4fa16dba514c351177a37af",
+    "semantic_hash": "617f93cab4fa16dba514c351177a37af"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/MiniBusinessUnitEmployeeRoleMap.cs": {
+    "mtime": 1786723835.6041782,
+    "ast_hash": "26c14136abd2eb7ccf8eb40d8eabc71e",
+    "semantic_hash": "26c14136abd2eb7ccf8eb40d8eabc71e"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/NoSecurityObjectMap.cs": {
+    "mtime": 1786719970.283384,
+    "ast_hash": "44795d1418256b74d51bfbd48a316c53",
+    "semantic_hash": "44795d1418256b74d51bfbd48a316c53"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/ParentEntityMap.cs": {
+    "mtime": 1786722795.0151546,
+    "ast_hash": "ab522ca29bf171259823b361efed0272",
+    "semantic_hash": "ab522ca29bf171259823b361efed0272"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/PrincipalMap.cs": {
+    "mtime": 1786723835.6142397,
+    "ast_hash": "39dc3c350a119a6bc5487f07d9550d67",
+    "semantic_hash": "39dc3c350a119a6bc5487f07d9550d67"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/ProjectMap.cs": {
+    "mtime": 1786723835.6252456,
+    "ast_hash": "8c1bac6fa56181be86e5584c763cf5d7",
+    "semantic_hash": "8c1bac6fa56181be86e5584c763cf5d7"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/RoleRoleDegreeLinkMap.cs": {
+    "mtime": 1786714034.2807505,
+    "ast_hash": "2f77d748fa2eb78b1de5232b2c4dc632",
+    "semantic_hash": "2f77d748fa2eb78b1de5232b2c4dc632"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/SecurityBusinessUnitMap.cs": {
+    "mtime": 1786723835.6362467,
+    "ast_hash": "4e09710ee32c6c95974abdf787609860",
+    "semantic_hash": "4e09710ee32c6c95974abdf787609860"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/SecurityEmployeeMap.cs": {
+    "mtime": 1786723835.6473083,
+    "ast_hash": "c2e2fe617b1490034276957ac8ef73ae",
+    "semantic_hash": "c2e2fe617b1490034276957ac8ef73ae"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/SecurityHRDepartmentMap.cs": {
+    "mtime": 1786723835.657309,
+    "ast_hash": "9459f06894160bfaec0cc48e6aa6d88a",
+    "semantic_hash": "9459f06894160bfaec0cc48e6aa6d88a"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/SecurityLocationMap.cs": {
+    "mtime": 1786723835.6693263,
+    "ast_hash": "eeb98275880e73dae9493b68b5095645",
+    "semantic_hash": "eeb98275880e73dae9493b68b5095645"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/SqlParserTestObjContainerMap.cs": {
+    "mtime": 1786719970.0950818,
+    "ast_hash": "761239aff1bf0c7a16985ad248d0134c",
+    "semantic_hash": "761239aff1bf0c7a16985ad248d0134c"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/SqlParserTestObjMap.cs": {
+    "mtime": 1786723835.6838405,
+    "ast_hash": "dadd0882320341ddf853a4ba6fb60a9a",
+    "semantic_hash": "dadd0882320341ddf853a4ba6fb60a9a"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestBusinessUnitMap.cs": {
+    "mtime": 1786723835.7008452,
+    "ast_hash": "77712aa87e03b4a7cb9217160a23e2cd",
+    "semantic_hash": "77712aa87e03b4a7cb9217160a23e2cd"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestBusinessUnitTypeMap.cs": {
+    "mtime": 1786723835.7173612,
+    "ast_hash": "26910049b534106543b8676be4563c72",
+    "semantic_hash": "26910049b534106543b8676be4563c72"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestBusinessUnit_AutoProp_ParentMap.cs": {
+    "mtime": 1786723835.7933936,
+    "ast_hash": "c15df349d3b989ddb632ed8646d95d35",
+    "semantic_hash": "c15df349d3b989ddb632ed8646d95d35"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestCustomContextSecurityObjMap.cs": {
+    "mtime": 1786723835.7323687,
+    "ast_hash": "73816277493636a3881efa3aa43532b9",
+    "semantic_hash": "73816277493636a3881efa3aa43532b9"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestCustomContextSecurityObjProjectionMap.cs": {
+    "mtime": 1786723835.7618713,
+    "ast_hash": "2bf075efcb4f9ecd625e9459808f98c9",
+    "semantic_hash": "2bf075efcb4f9ecd625e9459808f98c9"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestDepartmentMap.cs": {
+    "mtime": 1786723835.746861,
+    "ast_hash": "0495ace0c20d137964cdcd8218ddba35",
+    "semantic_hash": "0495ace0c20d137964cdcd8218ddba35"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestDepartment_AutoProp_LocationMap.cs": {
+    "mtime": 1786723835.8648374,
+    "ast_hash": "eae2f720d8714938327866c2c3d174da",
+    "semantic_hash": "eae2f720d8714938327866c2c3d174da"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestEmployeeMap.cs": {
+    "mtime": 1786723835.778385,
+    "ast_hash": "a29a8a70563136525224083e884ca63b",
+    "semantic_hash": "a29a8a70563136525224083e884ca63b"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestEmployee_AutoProp_CoreBusinessUnitMap.cs": {
+    "mtime": 1786723836.1123686,
+    "ast_hash": "efafbf40cfa75bc4c5654ec94efa2964",
+    "semantic_hash": "efafbf40cfa75bc4c5654ec94efa2964"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestEmployee_AutoProp_PositionMap.cs": {
+    "mtime": 1786723835.9488826,
+    "ast_hash": "44d104726503ad06d8b60c931bfaa175",
+    "semantic_hash": "44d104726503ad06d8b60c931bfaa175"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestEmployee_AutoProp_PpmMap.cs": {
+    "mtime": 1786723835.95816,
+    "ast_hash": "f2e8e8406df970cf13a4705378bab76f",
+    "semantic_hash": "f2e8e8406df970cf13a4705378bab76f"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestEmployee_AutoProp_RoleMap.cs": {
+    "mtime": 1786723835.8049226,
+    "ast_hash": "2a82c1bd6b1147977b4763dde63b77f9",
+    "semantic_hash": "2a82c1bd6b1147977b4763dde63b77f9"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestExceptObjectMap.cs": {
+    "mtime": 1786714034.6006613,
+    "ast_hash": "92c656e455967371ecd0921e09697890",
+    "semantic_hash": "92c656e455967371ecd0921e09697890"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestIMRequestDetailMap.cs": {
+    "mtime": 1786723835.8373199,
+    "ast_hash": "8bcd6c26379a73de02e9f1b7ac511c8a",
+    "semantic_hash": "8bcd6c26379a73de02e9f1b7ac511c8a"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestIMRequestMap.cs": {
+    "mtime": 1786723835.8523269,
+    "ast_hash": "fca890b5ee44b1513c47865276c34c4b",
+    "semantic_hash": "fca890b5ee44b1513c47865276c34c4b"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestImmutableObjMap.cs": {
+    "mtime": 1786723835.8219273,
+    "ast_hash": "3a7762dbcd8a33bc5da6ada90c8f63a4",
+    "semantic_hash": "3a7762dbcd8a33bc5da6ada90c8f63a4"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestItemAuthObjectMap.cs": {
+    "mtime": 1786722599.3028126,
+    "ast_hash": "c4fe6de11c3d635ad16c0bd00c0859bb",
+    "semantic_hash": "c4fe6de11c3d635ad16c0bd00c0859bb"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestJobObjectMap.cs": {
+    "mtime": 1786722599.390566,
+    "ast_hash": "d71aa61235e197ed2995a9ca7b7d0f4b",
+    "semantic_hash": "d71aa61235e197ed2995a9ca7b7d0f4b"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestLegacyEmployeeMap.cs": {
+    "mtime": 1786723835.9003572,
+    "ast_hash": "bad22d7a5c9e08b11b89fce6cc4aef2b",
+    "semantic_hash": "bad22d7a5c9e08b11b89fce6cc4aef2b"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestLegacyEmployee_AutoProp_RoleMap.cs": {
+    "mtime": 1786723836.1233773,
+    "ast_hash": "ef6760b1b502603be588edb820c52a06",
+    "semantic_hash": "ef6760b1b502603be588edb820c52a06"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestLocationCollectionPropertiesMap.cs": {
+    "mtime": 1786723835.8748367,
+    "ast_hash": "14b468507a67140b47b5c70c4e8e4d0d",
+    "semantic_hash": "14b468507a67140b47b5c70c4e8e4d0d"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestLocationMap.cs": {
+    "mtime": 1786723835.8878436,
+    "ast_hash": "88ac8f931b579bab217e760ec28f40ca",
+    "semantic_hash": "88ac8f931b579bab217e760ec28f40ca"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestManualEmployeeProjectionMap.cs": {
+    "mtime": 1786723835.9123638,
+    "ast_hash": "a43aed253b16028291f16da92d487432",
+    "semantic_hash": "a43aed253b16028291f16da92d487432"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestObjForNestedBaseMap.cs": {
+    "mtime": 1786723835.168999,
+    "ast_hash": "566389227764a84ef5ff32c995adbee6",
+    "semantic_hash": "566389227764a84ef5ff32c995adbee6"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestPerformanceObjectMap.cs": {
+    "mtime": 1786723835.9368768,
+    "ast_hash": "32a0cb9e41c7bc1c9ebbbc953cf18d8f",
+    "semantic_hash": "32a0cb9e41c7bc1c9ebbbc953cf18d8f"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestPlainAuthObjectMap.cs": {
+    "mtime": 1786723835.9248695,
+    "ast_hash": "ec09c5b777cf3419574828eeb0ba5681",
+    "semantic_hash": "ec09c5b777cf3419574828eeb0ba5681"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestRelativeEmployeeChildObjectMap.cs": {
+    "mtime": 1786722642.1616168,
+    "ast_hash": "2ee7a59335418e40f9d2037803ff2072",
+    "semantic_hash": "2ee7a59335418e40f9d2037803ff2072"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestRelativeEmployeeObjectMap.cs": {
+    "mtime": 1786722795.4293778,
+    "ast_hash": "215fbed2b79eead4e0c095a0c57c6f4f",
+    "semantic_hash": "215fbed2b79eead4e0c095a0c57c6f4f"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestRelativeEmployeeParentObjectMap.cs": {
+    "mtime": 1786722795.265459,
+    "ast_hash": "1d5c4134b92b2e31181c50c83cb04231",
+    "semantic_hash": "1d5c4134b92b2e31181c50c83cb04231"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestRestrictionObjectMap.cs": {
+    "mtime": 1786723835.9681573,
+    "ast_hash": "8176cc921293d815c66d76e60a2265cf",
+    "semantic_hash": "8176cc921293d815c66d76e60a2265cf"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestRootSecurityObjMap.cs": {
+    "mtime": 1786723836.00936,
+    "ast_hash": "58cb1361bd272db1e276ea1866692b95",
+    "semantic_hash": "58cb1361bd272db1e276ea1866692b95"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestSecurityObjItemMap.cs": {
+    "mtime": 1786723835.9943612,
+    "ast_hash": "5c14da814a5c3c53f1db2d8b3dcd9f3f",
+    "semantic_hash": "5c14da814a5c3c53f1db2d8b3dcd9f3f"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestSecurityObjItemProjectionMap.cs": {
+    "mtime": 1786723835.9801648,
+    "ast_hash": "1dcdb8ddc9a775cfe6a35ed9b719e0c5",
+    "semantic_hash": "1dcdb8ddc9a775cfe6a35ed9b719e0c5"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestSecuritySubObjItem2Map.cs": {
+    "mtime": 1786723836.0228643,
+    "ast_hash": "668a09ceb21147cfab6242aa9d9ea32c",
+    "semantic_hash": "668a09ceb21147cfab6242aa9d9ea32c"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestSecuritySubObjItem3Map.cs": {
+    "mtime": 1786723836.0368695,
+    "ast_hash": "5254868a50e7e2669c1aa5f9849a157c",
+    "semantic_hash": "5254868a50e7e2669c1aa5f9849a157c"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/TestSecuritySubObjItemMap.cs": {
+    "mtime": 1786723836.0673287,
+    "ast_hash": "c9e089b2e315b493eee49c4045fc04fa",
+    "semantic_hash": "c9e089b2e315b493eee49c4045fc04fa"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/VisualEmployeeMap.cs": {
+    "mtime": 1786723836.082847,
+    "ast_hash": "5857074f38b592eef289673422177c8e",
+    "semantic_hash": "5857074f38b592eef289673422177c8e"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/VisualProjectMap.cs": {
+    "mtime": 1786723836.0513186,
+    "ast_hash": "5f345c0dd1a5ca90dc2089982594b607",
+    "semantic_hash": "5f345c0dd1a5ca90dc2089982594b607"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/Mapping/WorkingCalendar1676Map.cs": {
+    "mtime": 1786723836.0988545,
+    "ast_hash": "8fa24bcbacbe2d94ab6780ae1893cf19",
+    "semantic_hash": "8fa24bcbacbe2d94ab6780ae1893cf19"
+  },
+  "SampleSystem.Generated.DAL.EntityFramework/SampleSystem.Generated.DAL.EntityFramework.csproj": {
+    "mtime": 1786708242.4743593,
+    "ast_hash": "780d0261249333b537da8f69de11f158",
+    "semantic_hash": "780d0261249333b537da8f69de11f158"
+  },
+  "SampleSystem.Generated.DAL.NHibernate/FluentMapping/ManagementUnitFluentMappingMap.cs": {
+    "mtime": 1786538079.6159303,
+    "ast_hash": "a8cf2d20ee53d22e12856c4dc0110837",
+    "semantic_hash": "a8cf2d20ee53d22e12856c4dc0110837"
+  },
+  "SampleSystem.Generated.DAL.NHibernate/FluentMapping/PureFluentMappingObjectClassMap.cs": {
+    "mtime": 1786538079.6189313,
+    "ast_hash": "7809b65b27874a92a7c545db2ab1badf",
+    "semantic_hash": "7809b65b27874a92a7c545db2ab1badf"
+  },
+  "SampleSystem.Generated.DAL.NHibernate/SampleSystem.Generated.DAL.NHibernate.csproj": {
+    "mtime": 1784900157.2910411,
+    "ast_hash": "3fce3cb7d495f02ae0dba06212be021d",
+    "semantic_hash": "3fce3cb7d495f02ae0dba06212be021d"
+  },
+  "SampleSystem.Generated.DAL.NHibernate/SampleSystemMappingSettings.cs": {
+    "mtime": 1786538079.6209319,
+    "ast_hash": "f0fbea4a7d9e95369fb3601015220b79",
+    "semantic_hash": "f0fbea4a7d9e95369fb3601015220b79"
+  },
+  "SampleSystem.Generated.DTO/SampleSystem.Audit.Generated.cs": {
+    "mtime": 1776241222.9099584,
+    "ast_hash": "ec3b0014b6e053a2770c2600715ce6ae",
+    "semantic_hash": "ec3b0014b6e053a2770c2600715ce6ae"
+  },
+  "SampleSystem.Generated.DTO/SampleSystem.Event.Generated.cs": {
+    "mtime": 1780575321.5049515,
+    "ast_hash": "967bf2043e5e2dd670e780a5f3950779",
+    "semantic_hash": "967bf2043e5e2dd670e780a5f3950779"
+  },
+  "SampleSystem.Generated.DTO/SampleSystem.Generated.DTO.csproj": {
+    "mtime": 1775082273.4955006,
+    "ast_hash": "dad39961849b5f2344069eef70804bff",
+    "semantic_hash": "dad39961849b5f2344069eef70804bff"
+  },
+  "SampleSystem.Generated.DTO/SampleSystem.Generated.cs": {
+    "mtime": 1782849756.0239687,
+    "ast_hash": "e02442f4da861f88342d236851a439ed",
+    "semantic_hash": "e02442f4da861f88342d236851a439ed"
+  },
+  "SampleSystem.Generated.DTO/SampleSystem.Helpers.Generated.cs": {
+    "mtime": 1785237329.455091,
+    "ast_hash": "c275dc157e19effbd219947da4957f2b",
+    "semantic_hash": "c275dc157e19effbd219947da4957f2b"
+  },
+  "SampleSystem.Generated.DTO/SampleSystem.Integration.Generated.cs": {
+    "mtime": 1780575321.5194178,
+    "ast_hash": "a1089c5bbc7ccf5c6a922bc7ceeddc52",
+    "semantic_hash": "a1089c5bbc7ccf5c6a922bc7ceeddc52"
+  },
+  "SampleSystem.Generated.DTO/SampleSystem.Projections.Generated.cs": {
+    "mtime": 1785248173.2896326,
+    "ast_hash": "2fadaceb5e293f8b1d4f4b1ccd0b2a57",
+    "semantic_hash": "2fadaceb5e293f8b1d4f4b1ccd0b2a57"
+  },
+  "SampleSystem.Generated.DTO/SampleSystemClientMappingService.Generated.cs": {
+    "mtime": 1782849755.848189,
+    "ast_hash": "872730f0e209bae9a175202891616bcb",
+    "semantic_hash": "872730f0e209bae9a175202891616bcb"
+  },
+  "SampleSystem.Generated.DTO/SampleSystemMappingService.Generated.cs": {
+    "mtime": 1785248173.2946389,
+    "ast_hash": "aa198ec945562a810a2aa04d4da752ac",
+    "semantic_hash": "aa198ec945562a810a2aa04d4da752ac"
+  },
+  "SampleSystem.Security.Abstract/SampleSystem.Security.Abstract.csproj": {
+    "mtime": 1786530726.9942803,
+    "ast_hash": "14d0c7f74581b3da8188c2f360a6b894",
+    "semantic_hash": "14d0c7f74581b3da8188c2f360a6b894"
+  },
+  "SampleSystem.Security.Abstract/SampleSystemSecurityGroup.cs": {
+    "mtime": 1786538079.623932,
+    "ast_hash": "12e54b29ee34c912db0ae2decc9b9210",
+    "semantic_hash": "12e54b29ee34c912db0ae2decc9b9210"
+  },
+  "SampleSystem.Security.Abstract/SampleSystemSecurityOperation.cs": {
+    "mtime": 1786538079.6259298,
+    "ast_hash": "3f2115f55f8609e06f3cf3ae1501dd35",
+    "semantic_hash": "3f2115f55f8609e06f3cf3ae1501dd35"
+  },
+  "SampleSystem.Security.Abstract/SampleSystemSecurityRole.cs": {
+    "mtime": 1786538079.627932,
+    "ast_hash": "11a6b88edab9407eaf831dc1d8cb475e",
+    "semantic_hash": "11a6b88edab9407eaf831dc1d8cb475e"
+  },
+  "SampleSystem.Security.Abstract/SampleSystemSecurityRule.cs": {
+    "mtime": 1786538079.6309366,
+    "ast_hash": "d66f31712635b330d645b9fca16dfa1b",
+    "semantic_hash": "d66f31712635b330d645b9fca16dfa1b"
+  },
+  "SampleSystem.Security/SampleSystem.Security.csproj": {
+    "mtime": 1778488663.7664948,
+    "ast_hash": "ce05cea2c4e04c0afece5cce017d413e",
+    "semantic_hash": "ce05cea2c4e04c0afece5cce017d413e"
+  },
+  "SampleSystem.Security/SampleSystemClientDomainModeSecurityRuleSource.cs": {
+    "mtime": 1786538079.6329396,
+    "ast_hash": "d19135bbea7a2b0d261aac3f78ff5ae2",
+    "semantic_hash": "d19135bbea7a2b0d261aac3f78ff5ae2"
+  },
+  "SampleSystem.Security/SampleSystemDomainSecurityServiceExtensions.cs": {
+    "mtime": 1786538079.6339374,
+    "ast_hash": "0178bdbbfca8ba65f0d9c821d340990c",
+    "semantic_hash": "0178bdbbfca8ba65f0d9c821d340990c"
+  },
+  "SampleSystem.Security/SampleSystemSecuritySystemExtensions.cs": {
+    "mtime": 1786538079.636937,
+    "ast_hash": "03c127e99174e0c673effae12f3c18f4",
+    "semantic_hash": "03c127e99174e0c673effae12f3c18f4"
+  },
+  "SampleSystem.Security/Services/SampleSystemTestCustomContextSecurityObjSecurityService.cs": {
+    "mtime": 1786538079.6399393,
+    "ast_hash": "f87894af613f15dd7d0337a57ca013f2",
+    "semantic_hash": "f87894af613f15dd7d0337a57ca013f2"
+  },
+  "SampleSystem.ServiceEnvironment.NHibernate/DependencyInjection/SampleSystemNHibernateExtension.cs": {
+    "mtime": 1786538079.641937,
+    "ast_hash": "89648621d22c34e186504f1da30353de",
+    "semantic_hash": "89648621d22c34e186504f1da30353de"
+  },
+  "SampleSystem.ServiceEnvironment.NHibernate/SampleSystem.ServiceEnvironment.NHibernate.csproj": {
+    "mtime": 1775082274.0439527,
+    "ast_hash": "e940f9df9065ede3b2f646fb7bade793",
+    "semantic_hash": "e940f9df9065ede3b2f646fb7bade793"
+  },
+  "SampleSystem.ServiceEnvironment/CalculatedProjectPropertyVisitorContainer.cs": {
+    "mtime": 1785248173.2986386,
+    "ast_hash": "7b5070269277014dfdf3ea33091b282a",
+    "semantic_hash": "7b5070269277014dfdf3ea33091b282a"
+  },
+  "SampleSystem.ServiceEnvironment/DependencyInjection/SampleSystemApplicationExtensions.cs": {
+    "mtime": 1786538079.64294,
+    "ast_hash": "39cbcf4e7614e6fab74e590c8dcaa9dd",
+    "semantic_hash": "39cbcf4e7614e6fab74e590c8dcaa9dd"
+  },
+  "SampleSystem.ServiceEnvironment/DependencyInjection/SampleSystemFrameworkExtensions.cs": {
+    "mtime": 1786538079.6454544,
+    "ast_hash": "a310e2b47f0d9e5cb889645112225801",
+    "semantic_hash": "a310e2b47f0d9e5cb889645112225801"
+  },
+  "SampleSystem.ServiceEnvironment/DependencyInjection/SampleSystemGeneralDependencyInjectionExtensions.cs": {
+    "mtime": 1786537363.517512,
+    "ast_hash": "cec600094178cdb0e8ed7c2e85b6923b",
+    "semantic_hash": "cec600094178cdb0e8ed7c2e85b6923b"
+  },
+  "SampleSystem.ServiceEnvironment/ExampleFaultDALListener.cs": {
+    "mtime": 1786538079.6474528,
+    "ast_hash": "ec258cd37d44f6652809394b816468c2",
+    "semantic_hash": "ec258cd37d44f6652809394b816468c2"
+  },
+  "SampleSystem.ServiceEnvironment/Jobs/SampleJob.cs": {
+    "mtime": 1786538079.6494534,
+    "ast_hash": "83b137ab310fe10169ac6f75ee84b284",
+    "semantic_hash": "83b137ab310fe10169ac6f75ee84b284"
+  },
+  "SampleSystem.ServiceEnvironment/SamplePrincipalManagementListener.cs": {
+    "mtime": 1783343616.2704952,
+    "ast_hash": "3ccd914f9f64b4ff70f4d2d75806af09",
+    "semantic_hash": "3ccd914f9f64b4ff70f4d2d75806af09"
+  },
+  "SampleSystem.ServiceEnvironment/SampleSystem.ServiceEnvironment.csproj": {
+    "mtime": 1784900157.2940655,
+    "ast_hash": "0ed725677cc49bd7adaf81b412dd62ca",
+    "semantic_hash": "0ed725677cc49bd7adaf81b412dd62ca"
+  },
+  "SampleSystem.ServiceEnvironment/SampleSystemInitializer.cs": {
+    "mtime": 1781253371.0414512,
+    "ast_hash": "c1fbd06425c64c84de4fd782a37d2cf0",
+    "semantic_hash": "c1fbd06425c64c84de4fd782a37d2cf0"
+  },
+  "SampleSystem.ServiceEnvironment/SampleSystemSecurityFilterFactory.cs": {
+    "mtime": 1785503168.4743018,
+    "ast_hash": "c3f8e7e510c899b80b3dd3863a44ada9",
+    "semantic_hash": "c3f8e7e510c899b80b3dd3863a44ada9"
+  },
+  "SampleSystem.Subscriptions.Metadata/Country/Create/CountryCreateSubscription.cs": {
+    "mtime": 1786538079.6524532,
+    "ast_hash": "4df2531f1b806d76ecb991bd6480b9d4",
+    "semantic_hash": "4df2531f1b806d76ecb991bd6480b9d4"
+  },
+  "SampleSystem.Subscriptions.Metadata/Country/Create/MessageTemplate.cshtml": {
+    "mtime": 1776241222.949564,
+    "ast_hash": "9fabe48a7f00e0d784ec40759cf4fd0c",
+    "semantic_hash": "9fabe48a7f00e0d784ec40759cf4fd0c"
+  },
+  "SampleSystem.Subscriptions.Metadata/Country/Create/MessageTemplate.generated.cs": {
+    "mtime": 1776241222.9505541,
+    "ast_hash": "2c9d30f194179d4e200f783109598582",
+    "semantic_hash": "2c9d30f194179d4e200f783109598582"
+  },
+  "SampleSystem.Subscriptions.Metadata/DataModel/Create/DateModelCreateSubscription.cs": {
+    "mtime": 1786538079.6544535,
+    "ast_hash": "545cfbd245219b6c1b918a3a48f28437",
+    "semantic_hash": "545cfbd245219b6c1b918a3a48f28437"
+  },
+  "SampleSystem.Subscriptions.Metadata/DataModel/Create/MessageTemplate.cshtml": {
+    "mtime": 1775597371.0760179,
+    "ast_hash": "bab2c3920b1021ff3f168c1b89a24ea2",
+    "semantic_hash": "bab2c3920b1021ff3f168c1b89a24ea2"
+  },
+  "SampleSystem.Subscriptions.Metadata/DataModel/Create/MessageTemplate.generated.cs": {
+    "mtime": 1775597371.0770802,
+    "ast_hash": "eb543cf239611f2343ba6701b1ec922b",
+    "semantic_hash": "eb543cf239611f2343ba6701b1ec922b"
+  },
+  "SampleSystem.Subscriptions.Metadata/DomainChangedByRecipients/NotPersistentCustomModel/CustomNotificationModel.cs": {
+    "mtime": 1786538079.6564527,
+    "ast_hash": "d1d8e637e42d61c030ed5dc48035264d",
+    "semantic_hash": "d1d8e637e42d61c030ed5dc48035264d"
+  },
+  "SampleSystem.Subscriptions.Metadata/DomainChangedByRecipients/NotPersistentCustomModel/MessageTemplate.cshtml": {
+    "mtime": 1775597371.0790963,
+    "ast_hash": "0bfd7052a46078338b8981b7605e3982",
+    "semantic_hash": "0bfd7052a46078338b8981b7605e3982"
+  },
+  "SampleSystem.Subscriptions.Metadata/DomainChangedByRecipients/NotPersistentCustomModel/MessageTemplate.generated.cs": {
+    "mtime": 1776241222.954029,
+    "ast_hash": "fa24cbeca1649951bc7b171c73554ac1",
+    "semantic_hash": "fa24cbeca1649951bc7b171c73554ac1"
+  },
+  "SampleSystem.Subscriptions.Metadata/DomainChangedByRecipients/NotPersistentCustomModel/Subscription.cs": {
+    "mtime": 1786538079.6584532,
+    "ast_hash": "0d8683854f83e71b3c15c05833a08b66",
+    "semantic_hash": "0d8683854f83e71b3c15c05833a08b66"
+  },
+  "SampleSystem.Subscriptions.Metadata/Employee/Update/EmployeeUpdateSubscription.cs": {
+    "mtime": 1786538079.6594517,
+    "ast_hash": "b63b44b6c5e0b0f29c69b35b0c62e595",
+    "semantic_hash": "b63b44b6c5e0b0f29c69b35b0c62e595"
+  },
+  "SampleSystem.Subscriptions.Metadata/Employee/Update/MessageTemplate.cshtml": {
+    "mtime": 1776241222.9590278,
+    "ast_hash": "6a641689330f678bfea3cf3c535e5495",
+    "semantic_hash": "6a641689330f678bfea3cf3c535e5495"
+  },
+  "SampleSystem.Subscriptions.Metadata/Employee/Update/MessageTemplate.generated.cs": {
+    "mtime": 1776241222.9600277,
+    "ast_hash": "34d55cfe02bc436d3a9b6b7912e939e2",
+    "semantic_hash": "34d55cfe02bc436d3a9b6b7912e939e2"
+  },
+  "SampleSystem.Subscriptions.Metadata/Examples/AttachmentInline/AttachmentInlineSubscription.cs": {
+    "mtime": 1786538079.663458,
+    "ast_hash": "6809b4295eac6944230410a3f7b8a2c2",
+    "semantic_hash": "6809b4295eac6944230410a3f7b8a2c2"
+  },
+  "SampleSystem.Subscriptions.Metadata/Examples/AttachmentInline/MessageTemplate.cshtml": {
+    "mtime": 1776241222.9670491,
+    "ast_hash": "037e761f8803162566a0b85c34d84d58",
+    "semantic_hash": "037e761f8803162566a0b85c34d84d58"
+  },
+  "SampleSystem.Subscriptions.Metadata/Examples/AttachmentInline/MessageTemplate.generated.cs": {
+    "mtime": 1776241222.968059,
+    "ast_hash": "8d938e7457ee3d9d685dedbeecc6db59",
+    "semantic_hash": "8d938e7457ee3d9d685dedbeecc6db59"
+  },
+  "SampleSystem.Subscriptions.Metadata/Examples/AttachmentTemplateEvaluator/AttachmentTemplateEvaluatorSubscription.cs": {
+    "mtime": 1786538079.6654584,
+    "ast_hash": "3fbc8e087c4b19a86ae93024d275065c",
+    "semantic_hash": "3fbc8e087c4b19a86ae93024d275065c"
+  },
+  "SampleSystem.Subscriptions.Metadata/Examples/AttachmentTemplateEvaluator/MessageTemplate.cshtml": {
+    "mtime": 1776241222.9710584,
+    "ast_hash": "e3068c3e90e05382b4f849797a3b525c",
+    "semantic_hash": "e3068c3e90e05382b4f849797a3b525c"
+  },
+  "SampleSystem.Subscriptions.Metadata/Examples/AttachmentTemplateEvaluator/MessageTemplate.generated.cs": {
+    "mtime": 1776241222.9720755,
+    "ast_hash": "f4cface24be44ac2937679d1499b38dc",
+    "semantic_hash": "f4cface24be44ac2937679d1499b38dc"
+  },
+  "SampleSystem.Subscriptions.Metadata/Examples/Attachment/AttachmentSubscription.cs": {
+    "mtime": 1786538079.661459,
+    "ast_hash": "07982f8a40b87a5e5fe81b74a7297ee3",
+    "semantic_hash": "07982f8a40b87a5e5fe81b74a7297ee3"
+  },
+  "SampleSystem.Subscriptions.Metadata/Examples/Attachment/MessageTemplate.cshtml": {
+    "mtime": 1776241222.9620275,
+    "ast_hash": "e3068c3e90e05382b4f849797a3b525c",
+    "semantic_hash": "e3068c3e90e05382b4f849797a3b525c"
+  },
+  "SampleSystem.Subscriptions.Metadata/Examples/Attachment/MessageTemplate.generated.cs": {
+    "mtime": 1776241222.9640474,
+    "ast_hash": "a72f606942cbc76a684bdccd2185057d",
+    "semantic_hash": "a72f606942cbc76a684bdccd2185057d"
+  },
+  "SampleSystem.Subscriptions.Metadata/Examples/IndividualLetters/ConsolidatedLetterSubscription.cs": {
+    "mtime": 1785492540.0884311,
+    "ast_hash": "0e0b78a91f17e27c3697930b11a171fd",
+    "semantic_hash": "0e0b78a91f17e27c3697930b11a171fd"
+  },
+  "SampleSystem.Subscriptions.Metadata/Examples/IndividualLetters/IndividualLettersSubscription.cs": {
+    "mtime": 1785492540.0904286,
+    "ast_hash": "5a5f8721cfed9a76196b31a967b4caa9",
+    "semantic_hash": "5a5f8721cfed9a76196b31a967b4caa9"
+  },
+  "SampleSystem.Subscriptions.Metadata/Examples/IndividualLetters/IndividualLettersSubscriptionBase.cs": {
+    "mtime": 1785492540.0934322,
+    "ast_hash": "351c0c735f7e8b850c9f765cd3443d3b",
+    "semantic_hash": "351c0c735f7e8b850c9f765cd3443d3b"
+  },
+  "SampleSystem.Subscriptions.Metadata/Examples/IndividualLetters/IndividualLettersTemplate.cs": {
+    "mtime": 1785492540.0954313,
+    "ast_hash": "a570419d2d0dca23cbc9db8fde51b81c",
+    "semantic_hash": "a570419d2d0dca23cbc9db8fde51b81c"
+  },
+  "SampleSystem.Subscriptions.Metadata/Examples/RazorInheritance/LocalRazorTemplate.cs": {
+    "mtime": 1786538079.6674592,
+    "ast_hash": "593d7c2507dd930d19580daddb83aa5d",
+    "semantic_hash": "593d7c2507dd930d19580daddb83aa5d"
+  },
+  "SampleSystem.Subscriptions.Metadata/Examples/RazorInheritance/MessageTemplate.cshtml": {
+    "mtime": 1781709292.0117035,
+    "ast_hash": "1ccd81647e54de151e648e87e2418b8c",
+    "semantic_hash": "1ccd81647e54de151e648e87e2418b8c"
+  },
+  "SampleSystem.Subscriptions.Metadata/Examples/RazorInheritance/MessageTemplate.generated.cs": {
+    "mtime": 1781709292.0185654,
+    "ast_hash": "52a8b2f17eab2ad156ab13680d2b3980",
+    "semantic_hash": "52a8b2f17eab2ad156ab13680d2b3980"
+  },
+  "SampleSystem.Subscriptions.Metadata/Examples/RazorInheritance/RazorInheritanceSubscription.cs": {
+    "mtime": 1786538079.669461,
+    "ast_hash": "7e198eb66dbb33cd2a104912ffc6ae15",
+    "semantic_hash": "7e198eb66dbb33cd2a104912ffc6ae15"
+  },
+  "SampleSystem.Subscriptions.Metadata/Examples/RazorTemplateImpl/RazorTemplateImpl.cs": {
+    "mtime": 1786538079.67146,
+    "ast_hash": "adf8bfe965e5038f3e7de89fc3bca93b",
+    "semantic_hash": "adf8bfe965e5038f3e7de89fc3bca93b"
+  },
+  "SampleSystem.Subscriptions.Metadata/Examples/RazorTemplateImpl/RazorTemplateImplSubscription.cs": {
+    "mtime": 1786538079.673463,
+    "ast_hash": "f773292bb20045328ae41874f598cc87",
+    "semantic_hash": "f773292bb20045328ae41874f598cc87"
+  },
+  "SampleSystem.Subscriptions.Metadata/SampleSystem.Subscriptions.Metadata.csproj": {
+    "mtime": 1778488663.7924967,
+    "ast_hash": "8237fbc7b349210681071109c320abff",
+    "semantic_hash": "8237fbc7b349210681071109c320abff"
+  },
+  "SampleSystem.Validation/EmployeeValidator.cs": {
+    "mtime": 1786538079.6754584,
+    "ast_hash": "2ccf4796945ef245c9c639f135f90153",
+    "semantic_hash": "2ccf4796945ef245c9c639f135f90153"
+  },
+  "SampleSystem.Validation/EmployeeValidatorAttribute.cs": {
+    "mtime": 1786538079.677516,
+    "ast_hash": "2c056062a76b034c26dc5bd4d8691a41",
+    "semantic_hash": "2c056062a76b034c26dc5bd4d8691a41"
+  },
+  "SampleSystem.Validation/SampleSystem.Validation.csproj": {
+    "mtime": 1784900157.2970662,
+    "ast_hash": "ac0ba45c04b2e321c97047eea7da7920",
+    "semantic_hash": "ac0ba45c04b2e321c97047eea7da7920"
+  },
+  "SampleSystem.WebApiCore.EntityFramework/Controllers/TestSecurityController.cs": {
+    "mtime": 1786538079.6795132,
+    "ast_hash": "03a302ee66cfa5c219a4988244bc65ef",
+    "semantic_hash": "03a302ee66cfa5c219a4988244bc65ef"
+  },
+  "SampleSystem.WebApiCore.EntityFramework/DependencyInjection/AppDbContext.cs": {
+    "mtime": 1786704775.6323428,
+    "ast_hash": "082ee7111311f506886220093a9c8e1f",
+    "semantic_hash": "082ee7111311f506886220093a9c8e1f"
+  },
+  "SampleSystem.WebApiCore.EntityFramework/DependencyInjection/GeneralQueryExpressionInterceptor.cs": {
+    "mtime": 1786538079.6835148,
+    "ast_hash": "2e00663be3c61403ff62a9d18731459f",
+    "semantic_hash": "2e00663be3c61403ff62a9d18731459f"
+  },
+  "SampleSystem.WebApiCore.EntityFramework/DependencyInjection/SampleSystemDomainSecurityServiceExtensions.cs": {
+    "mtime": 1786538079.6855214,
+    "ast_hash": "06f79a570a200ead80484a55ba8d772e",
+    "semantic_hash": "06f79a570a200ead80484a55ba8d772e"
+  },
+  "SampleSystem.WebApiCore.EntityFramework/DependencyInjection/SampleSystemGeneralDependencyInjectionExtensions.cs": {
+    "mtime": 1786538079.6875124,
+    "ast_hash": "1b22807e21fdd7e3d5d44e75cb6a2ab9",
+    "semantic_hash": "1b22807e21fdd7e3d5d44e75cb6a2ab9"
+  },
+  "SampleSystem.WebApiCore.EntityFramework/DependencyInjection/SampleSystemSecuritySystemExtensions.cs": {
+    "mtime": 1786538079.6895132,
+    "ast_hash": "14ff392d690d8f0d71ce46100b167258",
+    "semantic_hash": "14ff392d690d8f0d71ce46100b167258"
+  },
+  "SampleSystem.WebApiCore.EntityFramework/Domain/BusinessUnit.cs": {
+    "mtime": 1786538079.691519,
+    "ast_hash": "6cec3dac20f9282a647225dc291fbec5",
+    "semantic_hash": "6cec3dac20f9282a647225dc291fbec5"
+  },
+  "SampleSystem.WebApiCore.EntityFramework/Domain/BusinessUnitEmployeeRole.cs": {
+    "mtime": 1786538079.6935265,
+    "ast_hash": "e4b14410606b0fc39dad9178373ace8e",
+    "semantic_hash": "e4b14410606b0fc39dad9178373ace8e"
+  },
+  "SampleSystem.WebApiCore.EntityFramework/Domain/BusinessUnitEmployeeRoleType.cs": {
+    "mtime": 1775082274.9169044,
+    "ast_hash": "f37db5a711d712cdd9f25a8c767c4609",
+    "semantic_hash": "f37db5a711d712cdd9f25a8c767c4609"
+  },
+  "SampleSystem.WebApiCore.EntityFramework/Domain/Employee.cs": {
+    "mtime": 1786538079.6945245,
+    "ast_hash": "37d6038066b6a69277bd40a109d9b8df",
+    "semantic_hash": "37d6038066b6a69277bd40a109d9b8df"
+  },
+  "SampleSystem.WebApiCore.EntityFramework/Program.cs": {
+    "mtime": 1786538079.6965258,
+    "ast_hash": "b878a0533e03bee155eb7a7e15f39570",
+    "semantic_hash": "b878a0533e03bee155eb7a7e15f39570"
+  },
+  "SampleSystem.WebApiCore.EntityFramework/Properties/launchSettings.json": {
+    "mtime": 1741273123.2597828,
+    "ast_hash": "ab4a19b393ac0343722950101be93ed0",
+    "semantic_hash": "ab4a19b393ac0343722950101be93ed0"
+  },
+  "SampleSystem.WebApiCore.EntityFramework/SampleSystem.WebApiCore.EntityFramework.csproj": {
+    "mtime": 1778488663.8080752,
+    "ast_hash": "4a9a355b3b43c4ab6b3a69440c84f2c5",
+    "semantic_hash": "4a9a355b3b43c4ab6b3a69440c84f2c5"
+  },
+  "SampleSystem.WebApiCore.EntityFramework/Security/SampleSystemSecurityRole.cs": {
+    "mtime": 1786538079.6985252,
+    "ast_hash": "a6b270649a4d4799e2d7ed2f87e4db5c",
+    "semantic_hash": "a6b270649a4d4799e2d7ed2f87e4db5c"
+  },
+  "SampleSystem.WebApiCore.EntityFramework/appsettings.json": {
+    "mtime": 1781709292.0558279,
+    "ast_hash": "a6141f2c42732189690910e77be15da7",
+    "semantic_hash": "a6141f2c42732189690910e77be15da7"
+  },
+  "SampleSystem.WebApiCore.NHibernate/Program.cs": {
+    "mtime": 1786538079.7005284,
+    "ast_hash": "c9929d6a7646215da61fe6d167b747de",
+    "semantic_hash": "c9929d6a7646215da61fe6d167b747de"
+  },
+  "SampleSystem.WebApiCore.NHibernate/Properties/launchSettings.json": {
+    "mtime": 1740653307.4794948,
+    "ast_hash": "ab4a19b393ac0343722950101be93ed0",
+    "semantic_hash": "ab4a19b393ac0343722950101be93ed0"
+  },
+  "SampleSystem.WebApiCore.NHibernate/SampleSystem.WebApiCore.NHibernate.csproj": {
+    "mtime": 1775082274.9527996,
+    "ast_hash": "111dab9d23a7e2e92f608832a823e80e",
+    "semantic_hash": "111dab9d23a7e2e92f608832a823e80e"
+  },
+  "SampleSystem.WebApiCore.NHibernate/appsettings.json": {
+    "mtime": 1781709292.0591187,
+    "ast_hash": "c89e19a5681225f7c270dc191d284b9c",
+    "semantic_hash": "c89e19a5681225f7c270dc191d284b9c"
+  },
+  "SampleSystem.WebApiCore/Controllers/Auth/OperationController.cs": {
+    "mtime": 1786538079.7025259,
+    "ast_hash": "05c7b3a9be1c926e138d216584d4c8bc",
+    "semantic_hash": "05c7b3a9be1c926e138d216584d4c8bc"
+  },
+  "SampleSystem.WebApiCore/Controllers/Auth/PrincipalController.cs": {
+    "mtime": 1786457100.8823528,
+    "ast_hash": "d8afe7a8b50a610ff76a0fa027d101b9",
+    "semantic_hash": "d8afe7a8b50a610ff76a0fa027d101b9"
+  },
+  "SampleSystem.WebApiCore/Controllers/Auth/SecurityRuleController.cs": {
+    "mtime": 1786538079.7045255,
+    "ast_hash": "248a5e0e55f1eb5ac177ea8cfe89879d",
+    "semantic_hash": "248a5e0e55f1eb5ac177ea8cfe89879d"
+  },
+  "SampleSystem.WebApiCore/Controllers/Main/AuthMainController.cs": {
+    "mtime": 1786538079.7055302,
+    "ast_hash": "3baf2f6d6bca655a100235e0371c7b93",
+    "semantic_hash": "3baf2f6d6bca655a100235e0371c7b93"
+  },
+  "SampleSystem.WebApiCore/Controllers/Main/AuthenticationController.cs": {
+    "mtime": 1786538079.7085829,
+    "ast_hash": "2cf57fa642991cb4db6541aef438eaed",
+    "semantic_hash": "2cf57fa642991cb4db6541aef438eaed"
+  },
+  "SampleSystem.WebApiCore/Controllers/Main/BusinessUnitAuditController.cs": {
+    "mtime": 1786538079.70958,
+    "ast_hash": "cea8e965ac5eb3b6a590cd090fa18870",
+    "semantic_hash": "cea8e965ac5eb3b6a590cd090fa18870"
+  },
+  "SampleSystem.WebApiCore/Controllers/Main/BusinessUnitController.cs": {
+    "mtime": 1786538079.711579,
+    "ast_hash": "094171a6e0559c0c9255d71345862a2a",
+    "semantic_hash": "094171a6e0559c0c9255d71345862a2a"
+  },
+  "SampleSystem.WebApiCore/Controllers/Main/ClassAAsyncController.cs": {
+    "mtime": 1786538079.7145774,
+    "ast_hash": "21759b02862afc6c98c7ef94962cbe46",
+    "semantic_hash": "21759b02862afc6c98c7ef94962cbe46"
+  },
+  "SampleSystem.WebApiCore/Controllers/Main/ConfigMainController.cs": {
+    "mtime": 1782740176.6495316,
+    "ast_hash": "0a6fe92ff5d10713352db77c77f4b9c0",
+    "semantic_hash": "0a6fe92ff5d10713352db77c77f4b9c0"
+  },
+  "SampleSystem.WebApiCore/Controllers/Main/CurrentUserController.cs": {
+    "mtime": 1786538079.7155786,
+    "ast_hash": "35344586ce8a4c21e89385f904ec60ba",
+    "semantic_hash": "35344586ce8a4c21e89385f904ec60ba"
+  },
+  "SampleSystem.WebApiCore/Controllers/Main/EmployeeAsyncController.cs": {
+    "mtime": 1786538079.7175791,
+    "ast_hash": "5d45309328deaa1f23a737692b1e7890",
+    "semantic_hash": "5d45309328deaa1f23a737692b1e7890"
+  },
+  "SampleSystem.WebApiCore/Controllers/Main/FaultDALListenerController.cs": {
+    "mtime": 1786538079.7205768,
+    "ast_hash": "6583b78880a13704cedd223bc6eecf47",
+    "semantic_hash": "6583b78880a13704cedd223bc6eecf47"
+  },
+  "SampleSystem.WebApiCore/Controllers/Main/ImpersonateController.cs": {
+    "mtime": 1786538079.7225783,
+    "ast_hash": "3fe5772fb28d09533e7006b42ebc6411",
+    "semantic_hash": "3fe5772fb28d09533e7006b42ebc6411"
+  },
+  "SampleSystem.WebApiCore/Controllers/Main/InitializationController.cs": {
+    "mtime": 1786538079.7255917,
+    "ast_hash": "80122f9f82589f5b6cb052a150de9396",
+    "semantic_hash": "80122f9f82589f5b6cb052a150de9396"
+  },
+  "SampleSystem.WebApiCore/Controllers/Main/IntegrationController.cs": {
+    "mtime": 1786538079.727587,
+    "ast_hash": "02a742a859e9b4bcd1fc64b047f98fe3",
+    "semantic_hash": "02a742a859e9b4bcd1fc64b047f98fe3"
+  },
+  "SampleSystem.WebApiCore/Controllers/Main/MediatrController.cs": {
+    "mtime": 1781253371.073192,
+    "ast_hash": "670feb3285ef6d72c73b2e4fbbe80dfe",
+    "semantic_hash": "670feb3285ef6d72c73b2e4fbbe80dfe"
+  },
+  "SampleSystem.WebApiCore/Controllers/Main/NoSecurityController.cs": {
+    "mtime": 1786538079.7295847,
+    "ast_hash": "85fbed1c1c4fe13a6220941990fcdae8",
+    "semantic_hash": "85fbed1c1c4fe13a6220941990fcdae8"
+  },
+  "SampleSystem.WebApiCore/Controllers/Main/PeriodController.cs": {
+    "mtime": 1786538079.7315855,
+    "ast_hash": "a4af15edcc611e09f43a4b37a84da62b",
+    "semantic_hash": "a4af15edcc611e09f43a4b37a84da62b"
+  },
+  "SampleSystem.WebApiCore/Controllers/Main/TestAsyncController.cs": {
+    "mtime": 1786538079.7335877,
+    "ast_hash": "d5ce767ad18e6a99ccd0eec7f73ce71b",
+    "semantic_hash": "d5ce767ad18e6a99ccd0eec7f73ce71b"
+  },
+  "SampleSystem.WebApiCore/Controllers/Main/TestRepositoryController.cs": {
+    "mtime": 1786538079.7365859,
+    "ast_hash": "a8011a2348185fa655dcccd306877afa",
+    "semantic_hash": "a8011a2348185fa655dcccd306877afa"
+  },
+  "SampleSystem.WebApiCore/Controllers/Main/TestSequenceController.cs": {
+    "mtime": 1786538079.7380948,
+    "ast_hash": "a9716843121822e0265ae905855e8a58",
+    "semantic_hash": "a9716843121822e0265ae905855e8a58"
+  },
+  "SampleSystem.WebApiCore/Controllers/Main/ValuesController.cs": {
+    "mtime": 1786538079.740104,
+    "ast_hash": "9afca9c3cba1e3d2ca8492bf9bdccd77",
+    "semantic_hash": "9afca9c3cba1e3d2ca8492bf9bdccd77"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/BusinessUnitHrDepartmentService.Generated.cs": {
+    "mtime": 1786536709.8727043,
+    "ast_hash": "7b7c990cd00e2b89a1768926131702cd",
+    "semantic_hash": "7b7c990cd00e2b89a1768926131702cd"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/BusinessUnitManagerCommissionLinkService.Generated.cs": {
+    "mtime": 1786536709.8759747,
+    "ast_hash": "73a5738c4d213ea26ca033562cffda77",
+    "semantic_hash": "73a5738c4d213ea26ca033562cffda77"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/BusinessUnitService.Generated.cs": {
+    "mtime": 1786536709.8789735,
+    "ast_hash": "9b90f7bba4dfac2d01972cb1659e6e10",
+    "semantic_hash": "9b90f7bba4dfac2d01972cb1659e6e10"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/BusinessUnitTypeService.Generated.cs": {
+    "mtime": 1786536709.883981,
+    "ast_hash": "d4ee5ddbee0747955b109dacedc10c57",
+    "semantic_hash": "d4ee5ddbee0747955b109dacedc10c57"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/CompanyLegalEntityService.Generated.cs": {
+    "mtime": 1786536709.8872173,
+    "ast_hash": "3f0b1c72780dfcdc42d2b3c27b266507",
+    "semantic_hash": "3f0b1c72780dfcdc42d2b3c27b266507"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/CountryService.Generated.cs": {
+    "mtime": 1786536709.8912294,
+    "ast_hash": "469589c26220503d049f3fe0b64937a9",
+    "semantic_hash": "469589c26220503d049f3fe0b64937a9"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/EmployeeInformationService.Generated.cs": {
+    "mtime": 1786536709.894039,
+    "ast_hash": "f0e67b9ca52916b3684c6c9be86abf46",
+    "semantic_hash": "f0e67b9ca52916b3684c6c9be86abf46"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/EmployeePhotoService.Generated.cs": {
+    "mtime": 1786536709.8974233,
+    "ast_hash": "c226f1ef08bf5c341252caf94a1bd590",
+    "semantic_hash": "c226f1ef08bf5c341252caf94a1bd590"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/EmployeePositionService.Generated.cs": {
+    "mtime": 1786536709.9008727,
+    "ast_hash": "11b384184fdf30ba9270e8906087fcbe",
+    "semantic_hash": "11b384184fdf30ba9270e8906087fcbe"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/EmployeeRegistrationTypeService.Generated.cs": {
+    "mtime": 1786536709.9033537,
+    "ast_hash": "8a5e9a8c437b29ea25f09c764fc5ca1c",
+    "semantic_hash": "8a5e9a8c437b29ea25f09c764fc5ca1c"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/EmployeeRoleDegreeService.Generated.cs": {
+    "mtime": 1786536709.907672,
+    "ast_hash": "ed67a7a63a8f288a72000897b3de1865",
+    "semantic_hash": "ed67a7a63a8f288a72000897b3de1865"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/EmployeeRoleService.Generated.cs": {
+    "mtime": 1786536709.9106896,
+    "ast_hash": "b56efe1a1d8e4374404996190d5790c1",
+    "semantic_hash": "b56efe1a1d8e4374404996190d5790c1"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/EmployeeService.Generated.cs": {
+    "mtime": 1786536709.9140298,
+    "ast_hash": "9e76d8df53c29a705e8ef3b02b050a20",
+    "semantic_hash": "9e76d8df53c29a705e8ef3b02b050a20"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/EmployeeSpecializationService.Generated.cs": {
+    "mtime": 1786536709.917292,
+    "ast_hash": "b7b5b0743c1bd44e352f252b2a646329",
+    "semantic_hash": "b7b5b0743c1bd44e352f252b2a646329"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/Example1Service.Generated.cs": {
+    "mtime": 1786536709.920514,
+    "ast_hash": "6561c7a42f7b427cb466782af5263d86",
+    "semantic_hash": "6561c7a42f7b427cb466782af5263d86"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/HRDepartmentService.Generated.cs": {
+    "mtime": 1786536709.9235423,
+    "ast_hash": "535928d9ad5ba7b9949ae51eaa2415d4",
+    "semantic_hash": "535928d9ad5ba7b9949ae51eaa2415d4"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/IMRequestService.Generated.cs": {
+    "mtime": 1786536709.9270592,
+    "ast_hash": "f6beb66edfcb88914f9b29b19602194d",
+    "semantic_hash": "f6beb66edfcb88914f9b29b19602194d"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/InformationService.Generated.cs": {
+    "mtime": 1786536709.9300737,
+    "ast_hash": "7149edca4c269f9fcf66ed8504b4c6a0",
+    "semantic_hash": "7149edca4c269f9fcf66ed8504b4c6a0"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/Location1676Service.Generated.cs": {
+    "mtime": 1786536709.9330595,
+    "ast_hash": "dfa45187c65953ddf6abeeabf6472250",
+    "semantic_hash": "dfa45187c65953ddf6abeeabf6472250"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/LocationService.Generated.cs": {
+    "mtime": 1786536709.9360592,
+    "ast_hash": "184f5c0f375bb863b38cae73185b2faf",
+    "semantic_hash": "184f5c0f375bb863b38cae73185b2faf"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/ManagementUnitAndBusinessUnitLinkService.Generated.cs": {
+    "mtime": 1786536709.939065,
+    "ast_hash": "e61de75310ac2822e2b06e1d485c2409",
+    "semantic_hash": "e61de75310ac2822e2b06e1d485c2409"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/ManagementUnitAndHRDepartmentLinkService.Generated.cs": {
+    "mtime": 1786536709.9420702,
+    "ast_hash": "6b92a455bc37dc04c499ad755dd37ab2",
+    "semantic_hash": "6b92a455bc37dc04c499ad755dd37ab2"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/ManagementUnitService.Generated.cs": {
+    "mtime": 1786536709.9455109,
+    "ast_hash": "a96d3860e5673f3a7391f38dd8a0cedc",
+    "semantic_hash": "a96d3860e5673f3a7391f38dd8a0cedc"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/PrincipalService.Generated.cs": {
+    "mtime": 1786536709.9482522,
+    "ast_hash": "8767b517481bef1681ceb16741dfcb63",
+    "semantic_hash": "8767b517481bef1681ceb16741dfcb63"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/SqlParserTestObjContainerService.Generated.cs": {
+    "mtime": 1786536709.9515283,
+    "ast_hash": "ff20b29be14258ae45fa29d837d45cb1",
+    "semantic_hash": "ff20b29be14258ae45fa29d837d45cb1"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/SqlParserTestObjService.Generated.cs": {
+    "mtime": 1786536709.9545288,
+    "ast_hash": "317c9ec3eaa0ffc0bbb8bf5e9e6b1128",
+    "semantic_hash": "317c9ec3eaa0ffc0bbb8bf5e9e6b1128"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/TestCustomContextSecurityObjService.Generated.cs": {
+    "mtime": 1786536709.957802,
+    "ast_hash": "00e54d638652eda3fb29482d04d1ef3d",
+    "semantic_hash": "00e54d638652eda3fb29482d04d1ef3d"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/TestImmutableObjService.Generated.cs": {
+    "mtime": 1786536709.9618335,
+    "ast_hash": "d7124335416c069b28f35d092ca7b64c",
+    "semantic_hash": "d7124335416c069b28f35d092ca7b64c"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/TestPerformanceObjectService.Generated.cs": {
+    "mtime": 1786536709.9642136,
+    "ast_hash": "d5dc96d48dfb9c5fb83dfb3e6f421d09",
+    "semantic_hash": "d5dc96d48dfb9c5fb83dfb3e6f421d09"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/TestPlainAuthObjectService.Generated.cs": {
+    "mtime": 1786536709.968213,
+    "ast_hash": "2d246615896fd9e51388446bcf5f7fc9",
+    "semantic_hash": "2d246615896fd9e51388446bcf5f7fc9"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/TestRestrictionObjectService.Generated.cs": {
+    "mtime": 1786536709.9712408,
+    "ast_hash": "5771f8b324941f58020f8ebedd428f91",
+    "semantic_hash": "5771f8b324941f58020f8ebedd428f91"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/TestRootSecurityObjService.Generated.cs": {
+    "mtime": 1786536709.9744353,
+    "ast_hash": "5e1bccab27cda17fe6a0206919552cd3",
+    "semantic_hash": "5e1bccab27cda17fe6a0206919552cd3"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/TestSecurityObjItemService.Generated.cs": {
+    "mtime": 1786536709.9774435,
+    "ast_hash": "0ec1191763c9d3df02bfabb20300dddd",
+    "semantic_hash": "0ec1191763c9d3df02bfabb20300dddd"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/TestSecuritySubObjItem2Service.Generated.cs": {
+    "mtime": 1786536709.9800434,
+    "ast_hash": "46df74dda01be3f1102efdd1491d0454",
+    "semantic_hash": "46df74dda01be3f1102efdd1491d0454"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/TestSecuritySubObjItem3Service.Generated.cs": {
+    "mtime": 1786536709.9832602,
+    "ast_hash": "025c6db641d55d76504a9e17cea08013",
+    "semantic_hash": "025c6db641d55d76504a9e17cea08013"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/TestSecuritySubObjItemService.Generated.cs": {
+    "mtime": 1786536709.986269,
+    "ast_hash": "6e1d245c4125db6c08ffeb30ce2e1cc5",
+    "semantic_hash": "6e1d245c4125db6c08ffeb30ce2e1cc5"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Audit/WorkingCalendar1676Service.Generated.cs": {
+    "mtime": 1786536709.9908004,
+    "ast_hash": "aa9b72a0c7a4b2c26f62824786e9b4ce",
+    "semantic_hash": "aa9b72a0c7a4b2c26f62824786e9b4ce"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Auth/BusinessRoleService.Generated.cs": {
+    "mtime": 1778488663.9157295,
+    "ast_hash": "5752b3f2c2c72868ef72d498b4504e60",
+    "semantic_hash": "5752b3f2c2c72868ef72d498b4504e60"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Auth/PermissionService.Generated.cs": {
+    "mtime": 1778488663.9177296,
+    "ast_hash": "8c6c29c2e20f57c6e1b258e08d457906",
+    "semantic_hash": "8c6c29c2e20f57c6e1b258e08d457906"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Auth/PrincipalService.Generated.cs": {
+    "mtime": 1778488663.9197307,
+    "ast_hash": "8669c0b1634c4389e4f15f81def9adc5",
+    "semantic_hash": "8669c0b1634c4389e4f15f81def9adc5"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Auth/SecurityContextTypeService.Generated.cs": {
+    "mtime": 1778488663.9227588,
+    "ast_hash": "a226ec62d3f5b6b9a26b122cd6cd4d26",
+    "semantic_hash": "a226ec62d3f5b6b9a26b122cd6cd4d26"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Configuration/DomainTypeService.Generated.cs": {
+    "mtime": 1778488663.9247558,
+    "ast_hash": "67ed0e8ad44d1e03cc20da30811051d5",
+    "semantic_hash": "67ed0e8ad44d1e03cc20da30811051d5"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Configuration/SequenceService.Generated.cs": {
+    "mtime": 1778488663.9267564,
+    "ast_hash": "d0c3642f46ede6e71bac55fa5da35139",
+    "semantic_hash": "d0c3642f46ede6e71bac55fa5da35139"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Configuration/SystemConstantService.Generated.cs": {
+    "mtime": 1778488663.9287548,
+    "ast_hash": "04f93fdad5f82e449f4fd46016b030de",
+    "semantic_hash": "04f93fdad5f82e449f4fd46016b030de"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Configuration/TargetSystemService.Generated.cs": {
+    "mtime": 1778488663.9317584,
+    "ast_hash": "8e7237a449fa374fbbf0de78abb1c904",
+    "semantic_hash": "8e7237a449fa374fbbf0de78abb1c904"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Integration/EmployeeService.Generated.cs": {
+    "mtime": 1782849760.6765728,
+    "ast_hash": "9f85f7e659320dadb1c450fb4a0c0e20",
+    "semantic_hash": "9f85f7e659320dadb1c450fb4a0c0e20"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Integration/IntegrationVersionContainer1Service.Generated.cs": {
+    "mtime": 1782849760.7305117,
+    "ast_hash": "38311dcf1a04e9a47af248981106dadd",
+    "semantic_hash": "38311dcf1a04e9a47af248981106dadd"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Integration/IntegrationVersionContainer2Service.Generated.cs": {
+    "mtime": 1782849760.779558,
+    "ast_hash": "75534c89b7e5a5e1548c713a0611d848",
+    "semantic_hash": "75534c89b7e5a5e1548c713a0611d848"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Integration/TestImmutableObjService.Generated.cs": {
+    "mtime": 1782849760.8251307,
+    "ast_hash": "1e08bab470f08ffd604d6153c40ebdb7",
+    "semantic_hash": "1e08bab470f08ffd604d6153c40ebdb7"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/BusinessUnitHrDepartmentServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0278037,
+    "ast_hash": "d2716b3e22be4a34f61907cc314e7044",
+    "semantic_hash": "d2716b3e22be4a34f61907cc314e7044"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/BusinessUnitManagerCommissionLinkServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0288002,
+    "ast_hash": "f2e8c45e5502615e334a09f0ec89a93c",
+    "semantic_hash": "f2e8c45e5502615e334a09f0ec89a93c"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/BusinessUnitServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0308056,
+    "ast_hash": "d4d4d2b44a6a1e1d2396f22f56d31b47",
+    "semantic_hash": "d4d4d2b44a6a1e1d2396f22f56d31b47"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/BusinessUnitTypeServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0328138,
+    "ast_hash": "8fb8c39ccb63fe605e6b650f78e8b25d",
+    "semantic_hash": "8fb8c39ccb63fe605e6b650f78e8b25d"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/CompanyLegalEntityServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0348127,
+    "ast_hash": "7c8d521d536bf504e4fe25a94687a533",
+    "semantic_hash": "7c8d521d536bf504e4fe25a94687a533"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/CountryServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0368192,
+    "ast_hash": "01615ac50df8fe73317e5e3f9e63442b",
+    "semantic_hash": "01615ac50df8fe73317e5e3f9e63442b"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/EmployeeInformationServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0378137,
+    "ast_hash": "2fc9dd22e111cccbe96ca6309a465e72",
+    "semantic_hash": "2fc9dd22e111cccbe96ca6309a465e72"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/EmployeePhotoServiceQuery.Generated.cs": {
+    "mtime": 1778488664.039812,
+    "ast_hash": "d79b36624a7799c2340cf0e3f161beeb",
+    "semantic_hash": "d79b36624a7799c2340cf0e3f161beeb"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/EmployeePositionServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0418153,
+    "ast_hash": "adb396be485e304f2a4f0cb3062c85be",
+    "semantic_hash": "adb396be485e304f2a4f0cb3062c85be"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/EmployeeRegistrationTypeServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0438132,
+    "ast_hash": "85b408024f3cd6e00ff479f17f278143",
+    "semantic_hash": "85b408024f3cd6e00ff479f17f278143"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/EmployeeRoleDegreeServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0458133,
+    "ast_hash": "7d26c880678294496a5dfd66a2b9a44e",
+    "semantic_hash": "7d26c880678294496a5dfd66a2b9a44e"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/EmployeeRoleServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0478878,
+    "ast_hash": "806dbac8afb9c33aac610565b95fbfd7",
+    "semantic_hash": "806dbac8afb9c33aac610565b95fbfd7"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/EmployeeServiceQuery.Generated.cs": {
+    "mtime": 1785237329.8409579,
+    "ast_hash": "9d4324e0bfa8e2741fd8a14c97c02a3b",
+    "semantic_hash": "9d4324e0bfa8e2741fd8a14c97c02a3b"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/EmployeeSpecializationServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0518887,
+    "ast_hash": "b516f5ba3cc9d01ec4bc3073ca0db995",
+    "semantic_hash": "b516f5ba3cc9d01ec4bc3073ca0db995"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/Example1ServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0538883,
+    "ast_hash": "f84f01142adcd0d3cb3e301561a0ab58",
+    "semantic_hash": "f84f01142adcd0d3cb3e301561a0ab58"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/HRDepartmentServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0559292,
+    "ast_hash": "abe6835d9bb0ebfb336ab146850fed34",
+    "semantic_hash": "abe6835d9bb0ebfb336ab146850fed34"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/IMRequestServiceQuery.Generated.cs": {
+    "mtime": 1778488664.057892,
+    "ast_hash": "e6e5277a9b5f67989abd3c0589cab756",
+    "semantic_hash": "e6e5277a9b5f67989abd3c0589cab756"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/InformationServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0598924,
+    "ast_hash": "fa85f8175e633c38b0fc1fe3fd5be19e",
+    "semantic_hash": "fa85f8175e633c38b0fc1fe3fd5be19e"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/Location1676ServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0618887,
+    "ast_hash": "e1d75d435b218bd3cfb91aa4502aa4da",
+    "semantic_hash": "e1d75d435b218bd3cfb91aa4502aa4da"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/LocationServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0638983,
+    "ast_hash": "cf6fe56e76a9d78829eeedc521ef2403",
+    "semantic_hash": "cf6fe56e76a9d78829eeedc521ef2403"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/ManagementUnitAndBusinessUnitLinkServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0658946,
+    "ast_hash": "e468a7355f7c56cd31f933d4be6a8808",
+    "semantic_hash": "e468a7355f7c56cd31f933d4be6a8808"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/ManagementUnitAndHRDepartmentLinkServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0668933,
+    "ast_hash": "89133755aa69f8c124a555fd94605c3b",
+    "semantic_hash": "89133755aa69f8c124a555fd94605c3b"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/ManagementUnitServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0688934,
+    "ast_hash": "b09ad72c1784d29e4592cac9dce75ce9",
+    "semantic_hash": "b09ad72c1784d29e4592cac9dce75ce9"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/PrincipalServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0708961,
+    "ast_hash": "ce8444a6c31741976b2e391953e131d7",
+    "semantic_hash": "ce8444a6c31741976b2e391953e131d7"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/SqlParserTestObjContainerServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0718932,
+    "ast_hash": "60a30324d21be5c71e948e1831a012b1",
+    "semantic_hash": "60a30324d21be5c71e948e1831a012b1"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/SqlParserTestObjServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0738943,
+    "ast_hash": "c0fc0a9232d936952974871af780c5af",
+    "semantic_hash": "c0fc0a9232d936952974871af780c5af"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/TestCustomContextSecurityObjServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0758934,
+    "ast_hash": "34b1b27dba32c337ef43a4c35a7ab518",
+    "semantic_hash": "34b1b27dba32c337ef43a4c35a7ab518"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/TestImmutableObjServiceQuery.Generated.cs": {
+    "mtime": 1778488664.076895,
+    "ast_hash": "c8f6d26a4bc32072e4444405ec7db284",
+    "semantic_hash": "c8f6d26a4bc32072e4444405ec7db284"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/TestPerformanceObjectServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0791826,
+    "ast_hash": "942d3e3e6d72a8496f75e3c27835a18d",
+    "semantic_hash": "942d3e3e6d72a8496f75e3c27835a18d"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/TestPlainAuthObjectServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0811818,
+    "ast_hash": "717891746a8939d0cb2ea5b540796596",
+    "semantic_hash": "717891746a8939d0cb2ea5b540796596"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/TestRestrictionObjectServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0831807,
+    "ast_hash": "f2fc9606edcef48296e51fce415d71e7",
+    "semantic_hash": "f2fc9606edcef48296e51fce415d71e7"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/TestRootSecurityObjServiceQuery.Generated.cs": {
+    "mtime": 1778488664.085181,
+    "ast_hash": "42a880b5e14feffebfceefa9011fe0ff",
+    "semantic_hash": "42a880b5e14feffebfceefa9011fe0ff"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/TestSecurityObjItemServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0861795,
+    "ast_hash": "b18959573240a6c352cbfa37c3925ef6",
+    "semantic_hash": "b18959573240a6c352cbfa37c3925ef6"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/TestSecuritySubObjItem2ServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0881808,
+    "ast_hash": "142c883aedd3e2253ed2b1335150e07c",
+    "semantic_hash": "142c883aedd3e2253ed2b1335150e07c"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/TestSecuritySubObjItem3ServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0901809,
+    "ast_hash": "3d240ef39c880c2e877b8f95e6ad2f80",
+    "semantic_hash": "3d240ef39c880c2e877b8f95e6ad2f80"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/TestSecuritySubObjItemServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0921795,
+    "ast_hash": "d702eaaf94b40ece69c0ee03d7bcf9e7",
+    "semantic_hash": "d702eaaf94b40ece69c0ee03d7bcf9e7"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/MainQuery/WorkingCalendar1676ServiceQuery.Generated.cs": {
+    "mtime": 1778488664.0941916,
+    "ast_hash": "ec1e99281a952e56b7ed9556d3087531",
+    "semantic_hash": "ec1e99281a952e56b7ed9556d3087531"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/BusinessUnitHrDepartmentService.Generated.cs": {
+    "mtime": 1778488663.9407666,
+    "ast_hash": "28395133b8ca0b374c3bcd8e5bcf4f66",
+    "semantic_hash": "28395133b8ca0b374c3bcd8e5bcf4f66"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/BusinessUnitManagerCommissionLinkService.Generated.cs": {
+    "mtime": 1778488663.9427605,
+    "ast_hash": "4a50b84d0f6c0d9a754cf02400fb64d9",
+    "semantic_hash": "4a50b84d0f6c0d9a754cf02400fb64d9"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/BusinessUnitService.Generated.cs": {
+    "mtime": 1778488663.944762,
+    "ast_hash": "a6342c4dd970b6c7983bb7ea11621b16",
+    "semantic_hash": "a6342c4dd970b6c7983bb7ea11621b16"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/BusinessUnitTypeService.Generated.cs": {
+    "mtime": 1778488663.9477658,
+    "ast_hash": "42096b62f2485b0f3e776b86f38dc940",
+    "semantic_hash": "42096b62f2485b0f3e776b86f38dc940"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/CompanyLegalEntityService.Generated.cs": {
+    "mtime": 1778488663.9497595,
+    "ast_hash": "bae7d592f1cb67769f80574830fc4427",
+    "semantic_hash": "bae7d592f1cb67769f80574830fc4427"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/CountryService.Generated.cs": {
+    "mtime": 1778488663.9522638,
+    "ast_hash": "3b6bbe5e434fc5af84ea4134fd583d5b",
+    "semantic_hash": "3b6bbe5e434fc5af84ea4134fd583d5b"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/EmployeeInformationService.Generated.cs": {
+    "mtime": 1778488663.9552977,
+    "ast_hash": "f558df99004fb14913fd013717d736ca",
+    "semantic_hash": "f558df99004fb14913fd013717d736ca"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/EmployeePhotoService.Generated.cs": {
+    "mtime": 1778488663.957271,
+    "ast_hash": "85746e3e44e8c47c7595d3d780442a12",
+    "semantic_hash": "85746e3e44e8c47c7595d3d780442a12"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/EmployeePositionService.Generated.cs": {
+    "mtime": 1778488663.9592693,
+    "ast_hash": "b20037e4cc336e2fbb5bf919faa014d7",
+    "semantic_hash": "b20037e4cc336e2fbb5bf919faa014d7"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/EmployeeRegistrationTypeService.Generated.cs": {
+    "mtime": 1778488663.9612696,
+    "ast_hash": "e5de26cda869976576e3b0e8435269bb",
+    "semantic_hash": "e5de26cda869976576e3b0e8435269bb"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/EmployeeRoleDegreeService.Generated.cs": {
+    "mtime": 1778488663.9632728,
+    "ast_hash": "f0b934fbe1a224e496f6ea7591b3e1ba",
+    "semantic_hash": "f0b934fbe1a224e496f6ea7591b3e1ba"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/EmployeeRoleService.Generated.cs": {
+    "mtime": 1778488663.9662702,
+    "ast_hash": "f63cdb3fb4c4294c1cde1a956f6c8507",
+    "semantic_hash": "f63cdb3fb4c4294c1cde1a956f6c8507"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/EmployeeService.Generated.cs": {
+    "mtime": 1785237329.768955,
+    "ast_hash": "3d6a191b1e4e4761eea140ab8b6f8d2f",
+    "semantic_hash": "3d6a191b1e4e4761eea140ab8b6f8d2f"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/EmployeeSpecializationService.Generated.cs": {
+    "mtime": 1778488663.9713447,
+    "ast_hash": "d7fc1c2fe9a072357bcee81dadcdfda7",
+    "semantic_hash": "d7fc1c2fe9a072357bcee81dadcdfda7"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/Example1Service.Generated.cs": {
+    "mtime": 1778488663.9733424,
+    "ast_hash": "91747c71224e1e270c7dca953a02b2ad",
+    "semantic_hash": "91747c71224e1e270c7dca953a02b2ad"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/HRDepartmentService.Generated.cs": {
+    "mtime": 1778488663.9753418,
+    "ast_hash": "9bebb6d7ad18d63c57ae0243fbbd8725",
+    "semantic_hash": "9bebb6d7ad18d63c57ae0243fbbd8725"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/IMRequestService.Generated.cs": {
+    "mtime": 1778488663.9773424,
+    "ast_hash": "cfb9a6b3a76c12926d508e0b8e75d602",
+    "semantic_hash": "cfb9a6b3a76c12926d508e0b8e75d602"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/InformationService.Generated.cs": {
+    "mtime": 1778488663.9813814,
+    "ast_hash": "fba16fd1f5712ac5fc62beb6812a85a2",
+    "semantic_hash": "fba16fd1f5712ac5fc62beb6812a85a2"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/Location1676Service.Generated.cs": {
+    "mtime": 1778488663.9833434,
+    "ast_hash": "6bbfb340b3e28f5097926279e5f065f1",
+    "semantic_hash": "6bbfb340b3e28f5097926279e5f065f1"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/LocationService.Generated.cs": {
+    "mtime": 1778488663.9863768,
+    "ast_hash": "322e83304c240ea04186435d5841bf36",
+    "semantic_hash": "322e83304c240ea04186435d5841bf36"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/ManagementUnitAndBusinessUnitLinkService.Generated.cs": {
+    "mtime": 1778488663.9883735,
+    "ast_hash": "f07fdebe2263f5851670148bd0cccb85",
+    "semantic_hash": "f07fdebe2263f5851670148bd0cccb85"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/ManagementUnitAndHRDepartmentLinkService.Generated.cs": {
+    "mtime": 1778488663.9903736,
+    "ast_hash": "18c46b79bc288a953d983d5aa5edfc70",
+    "semantic_hash": "18c46b79bc288a953d983d5aa5edfc70"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/ManagementUnitService.Generated.cs": {
+    "mtime": 1778488663.9933722,
+    "ast_hash": "0a23516b69d59f7a4a5084debe77fd97",
+    "semantic_hash": "0a23516b69d59f7a4a5084debe77fd97"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/PrincipalService.Generated.cs": {
+    "mtime": 1778488663.9953735,
+    "ast_hash": "bfa80fb3fe147648ddadfd4584a9faba",
+    "semantic_hash": "bfa80fb3fe147648ddadfd4584a9faba"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/SqlParserTestObjContainerService.Generated.cs": {
+    "mtime": 1778488663.9973736,
+    "ast_hash": "7a9010c3ce0f89e8e10d6b0bf16f96f4",
+    "semantic_hash": "7a9010c3ce0f89e8e10d6b0bf16f96f4"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/SqlParserTestObjService.Generated.cs": {
+    "mtime": 1778488663.9993777,
+    "ast_hash": "886154eabfa99271b0839b434c71dd5a",
+    "semantic_hash": "886154eabfa99271b0839b434c71dd5a"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/TestCustomContextSecurityObjService.Generated.cs": {
+    "mtime": 1778488664.0013838,
+    "ast_hash": "6f02ee166ed6452da6fa5a661ad870d2",
+    "semantic_hash": "6f02ee166ed6452da6fa5a661ad870d2"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/TestImmutableObjService.Generated.cs": {
+    "mtime": 1778488664.003383,
+    "ast_hash": "e39bf2998c7472918315daf5196dda48",
+    "semantic_hash": "e39bf2998c7472918315daf5196dda48"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/TestPerformanceObjectService.Generated.cs": {
+    "mtime": 1778488664.005385,
+    "ast_hash": "e3d5ee6297860cc49be502e1a109b2a4",
+    "semantic_hash": "e3d5ee6297860cc49be502e1a109b2a4"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/TestPlainAuthObjectService.Generated.cs": {
+    "mtime": 1778488664.0083833,
+    "ast_hash": "cad287fb417a5aaf50e962db9822bf2a",
+    "semantic_hash": "cad287fb417a5aaf50e962db9822bf2a"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/TestRestrictionObjectService.Generated.cs": {
+    "mtime": 1778488664.010384,
+    "ast_hash": "e6ff452862942f5eedeb7b7ba6724d95",
+    "semantic_hash": "e6ff452862942f5eedeb7b7ba6724d95"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/TestRootSecurityObjService.Generated.cs": {
+    "mtime": 1778488664.0133839,
+    "ast_hash": "765034abffbc692bb8b7ee0d4225ae87",
+    "semantic_hash": "765034abffbc692bb8b7ee0d4225ae87"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/TestSecurityObjItemService.Generated.cs": {
+    "mtime": 1778488664.0158024,
+    "ast_hash": "a5db166af7e656e7d1e683dcd8a53e9e",
+    "semantic_hash": "a5db166af7e656e7d1e683dcd8a53e9e"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/TestSecuritySubObjItem2Service.Generated.cs": {
+    "mtime": 1778488664.018822,
+    "ast_hash": "8f9e37d7edbe6945c38442f9bec6f0d7",
+    "semantic_hash": "8f9e37d7edbe6945c38442f9bec6f0d7"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/TestSecuritySubObjItem3Service.Generated.cs": {
+    "mtime": 1778488664.0208018,
+    "ast_hash": "8dd2d3f98177198770b111f939fc3757",
+    "semantic_hash": "8dd2d3f98177198770b111f939fc3757"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/TestSecuritySubObjItemService.Generated.cs": {
+    "mtime": 1778488664.022801,
+    "ast_hash": "7e8d420c5e2c46a119701e4229816d71",
+    "semantic_hash": "7e8d420c5e2c46a119701e4229816d71"
+  },
+  "SampleSystem.WebApiCore/Controllers/_Generated/Main/WorkingCalendar1676Service.Generated.cs": {
+    "mtime": 1778488664.0248,
+    "ast_hash": "1330d66f9a38563b851aa48f95c74d31",
+    "semantic_hash": "1330d66f9a38563b851aa48f95c74d31"
+  },
+  "SampleSystem.WebApiCore/GenericProgram.cs": {
+    "mtime": 1786538079.7421033,
+    "ast_hash": "c380c78a7b70763ed9a96ef286f93b33",
+    "semantic_hash": "c380c78a7b70763ed9a96ef286f93b33"
+  },
+  "SampleSystem.WebApiCore/SampleSystem.WebApiCore.csproj": {
+    "mtime": 1775127751.295873,
+    "ast_hash": "16ebe5488993e91bf5f0cf58ab5115c8",
+    "semantic_hash": "16ebe5488993e91bf5f0cf58ab5115c8"
+  },
+  "SampleSystem.WebApiCore/Services/IntegrationEventProcessor.cs": {
+    "mtime": 1786632928.3191378,
+    "ast_hash": "b07ae685d80f91d0f1082823c962e24b",
+    "semantic_hash": "b07ae685d80f91d0f1082823c962e24b"
+  },
+  "_Tests/SampleSystem.CheckGenTests/CsprojValidationTests.cs": {
+    "mtime": 1786538079.7441027,
+    "ast_hash": "cfefcfec2368534763ecec80cc9c36f1",
+    "semantic_hash": "cfefcfec2368534763ecec80cc9c36f1"
+  },
+  "_Tests/SampleSystem.CheckGenTests/GenerationTests.cs": {
+    "mtime": 1786538079.747104,
+    "ast_hash": "44872391c22b862c642381ea261e171a",
+    "semantic_hash": "44872391c22b862c642381ea261e171a"
+  },
+  "_Tests/SampleSystem.CheckGenTests/SampleSystem.CheckGenTests.csproj": {
+    "mtime": 1779461474.6184313,
+    "ast_hash": "94a43ffef1d90041dffc2309581f946c",
+    "semantic_hash": "94a43ffef1d90041dffc2309581f946c"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/BLLCore/BLLCoreGeneratorConfiguration.cs": {
+    "mtime": 1786538079.7521074,
+    "ast_hash": "213b83382ef4d8c6c4da7527c29e62f1",
+    "semantic_hash": "213b83382ef4d8c6c4da7527c29e62f1"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/BLLCore/SampleSystemBLLCoreFileGenerator.cs": {
+    "mtime": 1786538079.7541044,
+    "ast_hash": "7a3639b84dd0dc08943fb069f6618da7",
+    "semantic_hash": "7a3639b84dd0dc08943fb069f6618da7"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/BLLCore/SampleSystemBLLInterfaceFileFactory.cs": {
+    "mtime": 1786538079.7571125,
+    "ast_hash": "c58200ebddc5644908317b9fc7fbc9b7",
+    "semantic_hash": "c58200ebddc5644908317b9fc7fbc9b7"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/BLL/BLLGeneratorConfiguration.cs": {
+    "mtime": 1786538079.7501044,
+    "ast_hash": "3dcc6f620780cbeab66ebd11bea40b12",
+    "semantic_hash": "3dcc6f620780cbeab66ebd11bea40b12"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/DAL/DALGeneratorConfiguration.cs": {
+    "mtime": 1786538079.7591128,
+    "ast_hash": "45fcf37be2f47206671b5af2faf5d077",
+    "semantic_hash": "45fcf37be2f47206671b5af2faf5d077"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/DTO/FullRefCodeTypeReferenceService.cs": {
+    "mtime": 1786538079.7611108,
+    "ast_hash": "85f9775e97eae06478491838b93027bd",
+    "semantic_hash": "85f9775e97eae06478491838b93027bd"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/DTO/GeneratorConfigurationExtensions.cs": {
+    "mtime": 1786538079.7641141,
+    "ast_hash": "05825626420acc9cb44285532a2701b5",
+    "semantic_hash": "05825626420acc9cb44285532a2701b5"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/DTO/SampleSystemExtGeneratePolicy.cs": {
+    "mtime": 1786538079.766114,
+    "ast_hash": "395e77ef4e7d00d6639bdb79ebc8809a",
+    "semantic_hash": "395e77ef4e7d00d6639bdb79ebc8809a"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/DTO/SampleSystemFileType.cs": {
+    "mtime": 1786538079.7691157,
+    "ast_hash": "33c1c01666f331267c63fbd13dbd4d9f",
+    "semantic_hash": "33c1c01666f331267c63fbd13dbd4d9f"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/DTO/Server/FileFactory/Base/RefDTOFileFactory.cs": {
+    "mtime": 1786538079.7722497,
+    "ast_hash": "0bca028eac6e7393d2ddf79796351b73",
+    "semantic_hash": "0bca028eac6e7393d2ddf79796351b73"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/DTO/Server/FileFactory/DefaultFullRefDTOFileFactory.cs": {
+    "mtime": 1786538079.7742527,
+    "ast_hash": "05129ea2b8e2d8041b17c5845f174527",
+    "semantic_hash": "05129ea2b8e2d8041b17c5845f174527"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/DTO/Server/FileFactory/DefaultSimpleRefFullDetailDTOFileFactory.cs": {
+    "mtime": 1786538079.7762513,
+    "ast_hash": "df897b054cd6c30e8127c225e955584b",
+    "semantic_hash": "df897b054cd6c30e8127c225e955584b"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/DTO/Server/SampleSystemEventDTORoleGeneratePolicy.cs": {
+    "mtime": 1786538079.778249,
+    "ast_hash": "2411df6a98fe501fe75b04abf5e19ed7",
+    "semantic_hash": "2411df6a98fe501fe75b04abf5e19ed7"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/DTO/Server/SampleSystemServerDependencyGeneratePolicy.cs": {
+    "mtime": 1786538079.7812514,
+    "ast_hash": "60679981a5dbdbef4f02bbc8a66099b0",
+    "semantic_hash": "60679981a5dbdbef4f02bbc8a66099b0"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/DTO/Server/SampleSystemServerFileGenerator.cs": {
+    "mtime": 1786538079.7832499,
+    "ast_hash": "822251556cf5fc854b6a41cb95bd3ffc",
+    "semantic_hash": "822251556cf5fc854b6a41cb95bd3ffc"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/DTO/Server/ServerDTOGeneratorConfiguration.cs": {
+    "mtime": 1786538079.7852585,
+    "ast_hash": "a8f3834c5915bf59343b7d8587b27b75",
+    "semantic_hash": "a8f3834c5915bf59343b7d8587b27b75"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/Projection/LegacyProjectionGeneratorConfiguration.cs": {
+    "mtime": 1776241223.1979673,
+    "ast_hash": "746f9a8193a109e727a0a74f21bdfe01",
+    "semantic_hash": "746f9a8193a109e727a0a74f21bdfe01"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/Projection/MainProjectionGeneratorConfiguration.cs": {
+    "mtime": 1786538079.7872741,
+    "ast_hash": "ab58c897161b5d9286e9f328142eae2a",
+    "semantic_hash": "ab58c897161b5d9286e9f328142eae2a"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/ServerGenerationEnvironment.Impl.cs": {
+    "mtime": 1786538079.7892795,
+    "ast_hash": "42b1464b35b7d03fa33b1ada24237b20",
+    "semantic_hash": "42b1464b35b7d03fa33b1ada24237b20"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/ServerGenerationEnvironment.cs": {
+    "mtime": 1786538079.792268,
+    "ast_hash": "9f4c4d431347bec84f2ce0bc3db7f14a",
+    "semantic_hash": "9f4c4d431347bec84f2ce0bc3db7f14a"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/Services/Audit/AuditDTOGeneratorConfiguration.cs": {
+    "mtime": 1786538079.7942665,
+    "ast_hash": "9be3bbc508018825f6c4c0cb7300ebb9",
+    "semantic_hash": "9be3bbc508018825f6c4c0cb7300ebb9"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/Services/Audit/AuditServiceGeneratorConfiguration.cs": {
+    "mtime": 1786538079.7962682,
+    "ast_hash": "afc58e9bb8905343ec1466e0f1c6bed6",
+    "semantic_hash": "afc58e9bb8905343ec1466e0f1c6bed6"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/Services/CustomServiceGeneratePolicy.cs": {
+    "mtime": 1786538079.7982655,
+    "ast_hash": "4805f603c0e3c22ba982bee24286e052",
+    "semantic_hash": "4805f603c0e3c22ba982bee24286e052"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/Services/Integration/IntegrationGeneratorConfiguration.cs": {
+    "mtime": 1786538079.8014674,
+    "ast_hash": "03dc8c8b83b216147349ad934de91432",
+    "semantic_hash": "03dc8c8b83b216147349ad934de91432"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/Services/Main/ComplexChangeMethodGenerator.cs": {
+    "mtime": 1786538079.8044665,
+    "ast_hash": "ef036f427b395400df19b826ba13d006",
+    "semantic_hash": "ef036f427b395400df19b826ba13d006"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/Services/Main/MainServiceGeneratorConfiguration.cs": {
+    "mtime": 1786538079.8064678,
+    "ast_hash": "82cac1418c245c091d3b891241a7b731",
+    "semantic_hash": "82cac1418c245c091d3b891241a7b731"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/Services/QueryService/QueryServiceGeneratorConfiguration.cs": {
+    "mtime": 1786538079.8084724,
+    "ast_hash": "0dc78882c4addba028b952d47d13dce6",
+    "semantic_hash": "0dc78882c4addba028b952d47d13dce6"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/Services/SampleSystemMethodIdentityType.cs": {
+    "mtime": 1786538079.8104682,
+    "ast_hash": "ed520fb6be13d1930aa918a0bcb7b44a",
+    "semantic_hash": "ed520fb6be13d1930aa918a0bcb7b44a"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/Services/SampleSystemModelRole.cs": {
+    "mtime": 1786538079.812469,
+    "ast_hash": "a179f7f3f0d28b1b51a2e24de02f3e54",
+    "semantic_hash": "a179f7f3f0d28b1b51a2e24de02f3e54"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/_ProjectionSources/LegacySampleSystemProjectionSource.cs": {
+    "mtime": 1786538079.8144703,
+    "ast_hash": "07fb47ee2aae767aafb29dc684b1ef1a",
+    "semantic_hash": "07fb47ee2aae767aafb29dc684b1ef1a"
+  },
+  "_Tests/SampleSystem.CodeGenerate/Configurations/_ProjectionSources/SampleSystemProjectionSource.cs": {
+    "mtime": 1786538079.817476,
+    "ast_hash": "15f2cbff384c44f8e657b72fca3ea5cd",
+    "semantic_hash": "15f2cbff384c44f8e657b72fca3ea5cd"
+  },
+  "_Tests/SampleSystem.CodeGenerate/SampleSystem.CodeGenerate.csproj": {
+    "mtime": 1784900157.300068,
+    "ast_hash": "1688a3de3311e8f31aea94a658579ea2",
+    "semantic_hash": "1688a3de3311e8f31aea94a658579ea2"
+  },
+  "_Tests/SampleSystem.CodeGenerate/ServerGenerators.Initialize.cs": {
+    "mtime": 1786538079.8194788,
+    "ast_hash": "5f88873ba64d62c4da8fcfbbbfc4ad32",
+    "semantic_hash": "5f88873ba64d62c4da8fcfbbbfc4ad32"
+  },
+  "_Tests/SampleSystem.CodeGenerate/ServerGenerators.cs": {
+    "mtime": 1786538079.821476,
+    "ast_hash": "92de933380614796cef5402fc841b004",
+    "semantic_hash": "92de933380614796cef5402fc841b004"
+  },
+  "_Tests/SampleSystem.DbGenerate.NHibernate/DbGenerationOptions.cs": {
+    "mtime": 1786538079.8244762,
+    "ast_hash": "5b0dd82a6bd21b21c77dfa975d2bb161",
+    "semantic_hash": "5b0dd82a6bd21b21c77dfa975d2bb161"
+  },
+  "_Tests/SampleSystem.DbGenerate.NHibernate/DbGeneratorTest.cs": {
+    "mtime": 1786538079.826476,
+    "ast_hash": "db9ff704d20c58ab805522131f9ec402",
+    "semantic_hash": "db9ff704d20c58ab805522131f9ec402"
+  },
+  "_Tests/SampleSystem.DbGenerate.NHibernate/Program.cs": {
+    "mtime": 1786538079.829475,
+    "ast_hash": "a434f56018c5397a4ecb6701bed4fbd5",
+    "semantic_hash": "a434f56018c5397a4ecb6701bed4fbd5"
+  },
+  "_Tests/SampleSystem.DbGenerate.NHibernate/Properties/launchSettings.json": {
+    "mtime": 1740653307.5422852,
+    "ast_hash": "42924e98c4d99bfb28a88644def51f8e",
+    "semantic_hash": "42924e98c4d99bfb28a88644def51f8e"
+  },
+  "_Tests/SampleSystem.DbGenerate.NHibernate/SampleSystem.DbGenerate.NHibernate.csproj": {
+    "mtime": 1786454318.8835943,
+    "ast_hash": "a0eaefa219188414b02669590e137022",
+    "semantic_hash": "a0eaefa219188414b02669590e137022"
+  },
+  "_Tests/SampleSystem.DbGenerate.NHibernate/SampleSystemDBGenerator.cs": {
+    "mtime": 1786538079.8304749,
+    "ast_hash": "0de29bd5afd9a111a028c782534bd41e",
+    "semantic_hash": "0de29bd5afd9a111a028c782534bd41e"
+  },
+  "_Tests/SampleSystem.DbGenerate.NHibernate/UseSchemeUpdateTest.cs": {
+    "mtime": 1786538079.8329916,
+    "ast_hash": "b90933b95540f6491333169ec0249021",
+    "semantic_hash": "b90933b95540f6491333169ec0249021"
+  },
+  "_Tests/SampleSystem.DbGenerate/BssFluentMigrator.cs": {
+    "mtime": 1786538079.835992,
+    "ast_hash": "075def59f9f8fa961b8bddb620132123",
+    "semantic_hash": "075def59f9f8fa961b8bddb620132123"
+  },
+  "_Tests/SampleSystem.DbGenerate/Migrations/AddLogTable.cs": {
+    "mtime": 1786538079.8379934,
+    "ast_hash": "98f6eb4e273eace2131456ae7d8b16dd",
+    "semantic_hash": "98f6eb4e273eace2131456ae7d8b16dd"
+  },
+  "_Tests/SampleSystem.DbGenerate/SampleSystem.DbGenerate.csproj": {
+    "mtime": 1786454318.8898861,
+    "ast_hash": "ff1466344d999705b49ab7489068db95",
+    "semantic_hash": "ff1466344d999705b49ab7489068db95"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/AsyncControllerTestsImpl.cs": {
+    "mtime": 1786454318.8911393,
+    "ast_hash": "2b2b5067f0870dd0c5aa7bab7adfbf7c",
+    "semantic_hash": "2b2b5067f0870dd0c5aa7bab7adfbf7c"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/AuditTestsImpl.cs": {
+    "mtime": 1786454318.893603,
+    "ast_hash": "9d9d9ce9300eafeb6fe2fa33c74308b4",
+    "semantic_hash": "9d9d9ce9300eafeb6fe2fa33c74308b4"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/AuthPerformanceTestImpl.cs": {
+    "mtime": 1786454318.8971322,
+    "ast_hash": "2ea10758477cfeeb5d063c7bd0113f03",
+    "semantic_hash": "2ea10758477cfeeb5d063c7bd0113f03"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/AuthPerformanceTestsImpl.cs": {
+    "mtime": 1786454318.8981357,
+    "ast_hash": "64dba8579292861f9527370ffc745bfb",
+    "semantic_hash": "64dba8579292861f9527370ffc745bfb"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/Auth/PrincipalTestsImpl.cs": {
+    "mtime": 1786454318.8951218,
+    "ast_hash": "cd41b204b0f936d162b3389c41e8b59e",
+    "semantic_hash": "cd41b204b0f936d162b3389c41e8b59e"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/BUProjectionTestsImpl.cs": {
+    "mtime": 1786454318.8991203,
+    "ast_hash": "0f3f90bb7502fb9b73f88f559ebeda83",
+    "semantic_hash": "0f3f90bb7502fb9b73f88f559ebeda83"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/BusinessUnitTestsImpl.cs": {
+    "mtime": 1786454318.9011285,
+    "ast_hash": "eae09c4c4a7e5e5dc54cd33d75afb382",
+    "semantic_hash": "eae09c4c4a7e5e5dc54cd33d75afb382"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/CurrentUserManyRelativePathTestsImpl.cs": {
+    "mtime": 1786454318.9021285,
+    "ast_hash": "ed35899409e73b3e5090fe2ea7887265",
+    "semantic_hash": "ed35899409e73b3e5090fe2ea7887265"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/CurrentUserSingleRelativePathTestsImpl.cs": {
+    "mtime": 1786454318.9031844,
+    "ast_hash": "e65d440d3116c99055153466a1a44f89",
+    "semantic_hash": "e65d440d3116c99055153466a1a44f89"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/CurrentUserSourceTestsImpl.cs": {
+    "mtime": 1786454318.904131,
+    "ast_hash": "a9f2ccd3233ccc9f12631420fb7eadc8",
+    "semantic_hash": "a9f2ccd3233ccc9f12631420fb7eadc8"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/DBGeneration/ChangeIndexesStrategyTests.cs": {
+    "mtime": 1786538079.8399935,
+    "ast_hash": "a99116fd0c3f5c8aa26a376b056e0a5b",
+    "semantic_hash": "a99116fd0c3f5c8aa26a376b056e0a5b"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/DBGeneration/GenerateDBTests.cs": {
+    "mtime": 1786538079.8419914,
+    "ast_hash": "45f1f53e9e9ef7991a3320a8bcc71667",
+    "semantic_hash": "45f1f53e9e9ef7991a3320a8bcc71667"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/DBGeneration/SchemeUpdateTests.cs": {
+    "mtime": 1786538079.8439941,
+    "ast_hash": "6edf67e8c7a7e2c1bfcece125ebef19e",
+    "semantic_hash": "6edf67e8c7a7e2c1bfcece125ebef19e"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/DBGeneration/UniqueGroupDatabaseScriptGeneratorTests.cs": {
+    "mtime": 1786538079.845995,
+    "ast_hash": "0c231dfce6d4cc311ab27e41516cf9dd",
+    "semantic_hash": "0c231dfce6d4cc311ab27e41516cf9dd"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/DefaultFieldsTestsImpl.cs": {
+    "mtime": 1786454318.9061842,
+    "ast_hash": "bd4e2e828448413b945245c7b9962fed",
+    "semantic_hash": "bd4e2e828448413b945245c7b9962fed"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/DependencySecurityTestsImpl.cs": {
+    "mtime": 1786454318.907128,
+    "ast_hash": "a91e68b0f16281a01edc7e5951f23d4d",
+    "semantic_hash": "a91e68b0f16281a01edc7e5951f23d4d"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/EmployeeProjectionTestsImpl.cs": {
+    "mtime": 1786454318.908183,
+    "ast_hash": "f85b8267a4c852c78107c406b08151a3",
+    "semantic_hash": "f85b8267a4c852c78107c406b08151a3"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/EmployeeTestsImpl.cs": {
+    "mtime": 1786454318.909121,
+    "ast_hash": "fe42f201094be6d94ae50a37b94c9a84",
+    "semantic_hash": "fe42f201094be6d94ae50a37b94c9a84"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/EnversBug1676Impl.cs": {
+    "mtime": 1786454318.9102416,
+    "ast_hash": "b97d891e8519d709981c8cd21c83e89b",
+    "semantic_hash": "b97d891e8519d709981c8cd21c83e89b"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/EventDALListenerTestsImpl.cs": {
+    "mtime": 1786454318.9127715,
+    "ast_hash": "240a44ddb6b3f8dd862ae4b564c07f78",
+    "semantic_hash": "240a44ddb6b3f8dd862ae4b564c07f78"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/ExpandPathTestsImpl.cs": {
+    "mtime": 1786454318.9137619,
+    "ast_hash": "1fd09f767e416f7fb9b390799fb76ba8",
+    "semantic_hash": "1fd09f767e416f7fb9b390799fb76ba8"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/ExtraQueryableSecurityPathTestsImpl.cs": {
+    "mtime": 1786454318.914761,
+    "ast_hash": "882d0a81bac29b1da562dfa8880ed5db",
+    "semantic_hash": "882d0a81bac29b1da562dfa8880ed5db"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/FixedPropertyValidatorTestsImpl.cs": {
+    "mtime": 1786454318.9157686,
+    "ast_hash": "4d6163847a393ad6642d05227c963b36",
+    "semantic_hash": "4d6163847a393ad6642d05227c963b36"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/GetNotificationPrincipalsByHierarchicalContextTestsImpl.cs": {
+    "mtime": 1786454318.9167714,
+    "ast_hash": "97fb29528c8a1ccd07ce1a7cfa8def70",
+    "semantic_hash": "97fb29528c8a1ccd07ce1a7cfa8def70"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/ImpersonateTestsImpl.cs": {
+    "mtime": 1786454318.9178457,
+    "ast_hash": "645e96a8265114300379cc6910d0112e",
+    "semantic_hash": "645e96a8265114300379cc6910d0112e"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/InformationTestImpl.cs": {
+    "mtime": 1786454318.9200506,
+    "ast_hash": "4519e7327e71a886a27f7ceb521c7dc0",
+    "semantic_hash": "4519e7327e71a886a27f7ceb521c7dc0"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/IntegrationVersionTestImpl.cs": {
+    "mtime": 1786454318.9200506,
+    "ast_hash": "688d551dccbcb459eec758f92c57a719",
+    "semantic_hash": "688d551dccbcb459eec758f92c57a719"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/JobTestsImpl.cs": {
+    "mtime": 1786454318.9215326,
+    "ast_hash": "e21fe2c4a0a9776b4df6c2878ca670b3",
+    "semantic_hash": "e21fe2c4a0a9776b4df6c2878ca670b3"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/JsonConverterTestsImpl.cs": {
+    "mtime": 1786454318.923548,
+    "ast_hash": "bb5a029a4f6771250c07c40e3653f082",
+    "semantic_hash": "bb5a029a4f6771250c07c40e3653f082"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/LegalEntityProjectionTestsImpl.cs": {
+    "mtime": 1786454318.923548,
+    "ast_hash": "d272668a08ef06e2d7a2a925c0eae529",
+    "semantic_hash": "d272668a08ef06e2d7a2a925c0eae529"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/ManagementUnitFluentMappingTestsImpl.cs": {
+    "mtime": 1786454318.9253435,
+    "ast_hash": "2b7be6773f1de248f5ac920c2936c21a",
+    "semantic_hash": "2b7be6773f1de248f5ac920c2936c21a"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/ManualAndLegacyProjectionSecurityTestsImpl.cs": {
+    "mtime": 1786454318.9264479,
+    "ast_hash": "adcc09baa6d92703ca602c5aafb43e9e",
+    "semantic_hash": "adcc09baa6d92703ca602c5aafb43e9e"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/NH/DialectExtensions.cs": {
+    "mtime": 1786538079.8479955,
+    "ast_hash": "a89947d90f2ded15cc1d866e023c1c07",
+    "semantic_hash": "a89947d90f2ded15cc1d866e023c1c07"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/NH/FullTextSearchHqlGeneratorsRegistry.cs": {
+    "mtime": 1786538079.8500037,
+    "ast_hash": "dfbd7ae4290e4d7df15c72ee28f379c9",
+    "semantic_hash": "dfbd7ae4290e4d7df15c72ee28f379c9"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/NH/FullTextSearchMsSql2008Dialect.cs": {
+    "mtime": 1786538079.8520038,
+    "ast_hash": "3bc976007272d2fe4e54c4d775731ace",
+    "semantic_hash": "3bc976007272d2fe4e54c4d775731ace"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/NH/FullTextSearchMsSql2012Dialect.cs": {
+    "mtime": 1786538079.8540032,
+    "ast_hash": "2c5670a6e46b6c553ace8798a4e77ea4",
+    "semantic_hash": "2c5670a6e46b6c553ace8798a4e77ea4"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/NH/FullTextSearchTests.cs": {
+    "mtime": 1786538079.8560057,
+    "ast_hash": "f7e36de362b294da038c581d9c35538e",
+    "semantic_hash": "f7e36de362b294da038c581d9c35538e"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/NH/PropertyFullTextContainsGenerator.cs": {
+    "mtime": 1786538079.859003,
+    "ast_hash": "ce791ba65b94a3b5c472e2fa21f53733",
+    "semantic_hash": "ce791ba65b94a3b5c472e2fa21f53733"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/NHibFetchTestsImpl.cs": {
+    "mtime": 1786454318.9275732,
+    "ast_hash": "77448fae13cf2fcbfca14db93c5e9ba2",
+    "semantic_hash": "77448fae13cf2fcbfca14db93c5e9ba2"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/NhibArrayContainsTestImpl.cs": {
+    "mtime": 1786454318.9295914,
+    "ast_hash": "3bc50200541c9c691be01340d3f0f1fa",
+    "semantic_hash": "3bc50200541c9c691be01340d3f0f1fa"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/NhibDateTimeTestsImpl.cs": {
+    "mtime": 1786454318.9295914,
+    "ast_hash": "e73e1e921a4f392512956d54358a9cb3",
+    "semantic_hash": "e73e1e921a4f392512956d54358a9cb3"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/NotificationCountryTestsImpl.cs": {
+    "mtime": 1786454318.930951,
+    "ast_hash": "126e62c4cf1a73f2d33ca4fa0b6ca4ea",
+    "semantic_hash": "126e62c4cf1a73f2d33ca4fa0b6ca4ea"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/OneToOneTestsImpl.cs": {
+    "mtime": 1786454318.9329724,
+    "ast_hash": "2b0f3dd48e9d24182ffda08e99014148",
+    "semantic_hash": "2b0f3dd48e9d24182ffda08e99014148"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/PerformanceTestsImpl.cs": {
+    "mtime": 1786454318.9339714,
+    "ast_hash": "46c97d7559ae23e86834baef8799d017",
+    "semantic_hash": "46c97d7559ae23e86834baef8799d017"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/PrincipalTestsImpl.cs": {
+    "mtime": 1786454318.934978,
+    "ast_hash": "0c6e7e0d47df67ad2e5bf3b90d56bf0a",
+    "semantic_hash": "0c6e7e0d47df67ad2e5bf3b90d56bf0a"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/PrincipalWithInitTestsImpl.cs": {
+    "mtime": 1786454318.9359698,
+    "ast_hash": "da9d25f5962fdb70d7dc1b899c28e781",
+    "semantic_hash": "da9d25f5962fdb70d7dc1b899c28e781"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/RepositoryControllerTestsImpl.cs": {
+    "mtime": 1786454318.9369721,
+    "ast_hash": "44553221cdac184884cbf3d8e96cb7c1",
+    "semantic_hash": "44553221cdac184884cbf3d8e96cb7c1"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/RepositoryWithoutSecurityTestsImpl.cs": {
+    "mtime": 1786454318.938975,
+    "ast_hash": "9d59a16d1c538a11b7a92bd43a13690b",
+    "semantic_hash": "9d59a16d1c538a11b7a92bd43a13690b"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/RestrictionRoleTestsImpl.cs": {
+    "mtime": 1786454318.9399683,
+    "ast_hash": "4561d5ae59e11d86eb4b02a0f8e614fa",
+    "semantic_hash": "4561d5ae59e11d86eb4b02a0f8e614fa"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/SampleSystem.IntegrationTests.NHibernate.csproj": {
+    "mtime": 1786536709.994325,
+    "ast_hash": "62e036a41ebe8ffa1c60356efc564741",
+    "semantic_hash": "62e036a41ebe8ffa1c60356efc564741"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/SecurityContextRestrictionFilterTestsImpl.cs": {
+    "mtime": 1786454318.9444716,
+    "ast_hash": "899c5217ec25f029ca588516ce42acdc",
+    "semantic_hash": "899c5217ec25f029ca588516ce42acdc"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/SecurityPathTestsImpl.cs": {
+    "mtime": 1786454318.945473,
+    "ast_hash": "484718060a762be6740cb053cbfb1ff0",
+    "semantic_hash": "484718060a762be6740cb053cbfb1ff0"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/SecurityRuleTestsImpl.cs": {
+    "mtime": 1786454318.9464645,
+    "ast_hash": "bc996babfe62562035439413fd616932",
+    "semantic_hash": "bc996babfe62562035439413fd616932"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/SequenceBllTestsImpl.cs": {
+    "mtime": 1786454318.9474652,
+    "ast_hash": "57fc43fa33694ab6426a26e287c3641e",
+    "semantic_hash": "57fc43fa33694ab6426a26e287c3641e"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/SqlParserTestsImpl.cs": {
+    "mtime": 1786454318.9485216,
+    "ast_hash": "0d879c041ce167089ef12bb09ab35fde",
+    "semantic_hash": "0d879c041ce167089ef12bb09ab35fde"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/SubscriptionCustomNotPersistentModelTestsImpl.cs": {
+    "mtime": 1786454318.9497929,
+    "ast_hash": "922a43e2413d9f40c93c30bf1f2a1eec",
+    "semantic_hash": "922a43e2413d9f40c93c30bf1f2a1eec"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/Subscriptions_Metadata/MetadataSubscriptionSystemServiceTestsImpl.cs": {
+    "mtime": 1786454318.9518673,
+    "ast_hash": "f1ae29c769f65d1f1c1c0b1a67c66a15",
+    "semantic_hash": "f1ae29c769f65d1f1c1c0b1a67c66a15"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/Subscriptions_Metadata/SendIndividualLettersTestsImpl.cs": {
+    "mtime": 1786454318.9532988,
+    "ast_hash": "85bf48c8e091747b560c6ca398624d0d",
+    "semantic_hash": "85bf48c8e091747b560c6ca398624d0d"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/TransactionFlushBeforeCommitImpl.cs": {
+    "mtime": 1786454318.9543216,
+    "ast_hash": "575e3aaadb550190ff59d378ba30a454",
+    "semantic_hash": "575e3aaadb550190ff59d378ba30a454"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/TypeSerializationTestsImpl.cs": {
+    "mtime": 1786454318.9553185,
+    "ast_hash": "73707c0b946c7819cea305ea45b8583f",
+    "semantic_hash": "73707c0b946c7819cea305ea45b8583f"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/UniqueGroupTestsImpl.cs": {
+    "mtime": 1786454318.95672,
+    "ast_hash": "8fc71fea7aa1f4e315645df85a2f4a6d",
+    "semantic_hash": "8fc71fea7aa1f4e315645df85a2f4a6d"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/UpdateTestsImpl.cs": {
+    "mtime": 1786454318.9588225,
+    "ast_hash": "7b61c01114e63054b86ce81d2d1021c0",
+    "semantic_hash": "7b61c01114e63054b86ce81d2d1021c0"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/ValidationTestsImpl.cs": {
+    "mtime": 1786454318.959831,
+    "ast_hash": "f3d2cc0c59f110b02b466076f5ebd924",
+    "semantic_hash": "f3d2cc0c59f110b02b466076f5ebd924"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/VirtualPermissionTestsImpl.cs": {
+    "mtime": 1786454318.9608293,
+    "ast_hash": "cdd95b3bb44bfe0b52c3e6303a830f63",
+    "semantic_hash": "cdd95b3bb44bfe0b52c3e6303a830f63"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/WebApi/EventXsdExporterTestsImpl.cs": {
+    "mtime": 1786454318.9628208,
+    "ast_hash": "5da7bb51095b691a8ec5640b0aebc38f",
+    "semantic_hash": "5da7bb51095b691a8ec5640b0aebc38f"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/WebApi/WebApiTestsImpl.cs": {
+    "mtime": 1786454318.9638224,
+    "ast_hash": "0dfb36baa8f2364c31e600d418427330",
+    "semantic_hash": "0dfb36baa8f2364c31e600d418427330"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/WrongSecurityMessageTestsImpl.cs": {
+    "mtime": 1786454318.9648254,
+    "ast_hash": "33ee98b3f7c8444c546f31d58c30ded1",
+    "semantic_hash": "33ee98b3f7c8444c546f31d58c30ded1"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/_Environment/NHibEmptySchemaInitializer.cs": {
+    "mtime": 1786454318.9658215,
+    "ast_hash": "24b3df27d038378acef82016d4298827",
+    "semantic_hash": "24b3df27d038378acef82016d4298827"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/_Environment/NHibTestEnvironment.cs": {
+    "mtime": 1786454318.9678218,
+    "ast_hash": "9e0b36093157bfbe393c3fd9e7fbc9ff",
+    "semantic_hash": "9e0b36093157bfbe393c3fd9e7fbc9ff"
+  },
+  "_Tests/SampleSystem.IntegrationTests.NHibernate/_Environment/TestConnectionStringExtensions.cs": {
+    "mtime": 1786454318.9690864,
+    "ast_hash": "4bb29991211908d1f804fe0379a02c78",
+    "semantic_hash": "4bb29991211908d1f804fe0379a02c78"
+  },
+  "_Tests/SampleSystem.IntegrationTests/AsyncControllerTests.cs": {
+    "mtime": 1786538079.8620026,
+    "ast_hash": "344f98af30d69d576d07ad69cef0891c",
+    "semantic_hash": "344f98af30d69d576d07ad69cef0891c"
+  },
+  "_Tests/SampleSystem.IntegrationTests/AuditTests.cs": {
+    "mtime": 1786538079.8641367,
+    "ast_hash": "7d31f40f6bc401c5ccbb37e4f73ca194",
+    "semantic_hash": "7d31f40f6bc401c5ccbb37e4f73ca194"
+  },
+  "_Tests/SampleSystem.IntegrationTests/AuthPerformanceTest.cs": {
+    "mtime": 1786538079.8691342,
+    "ast_hash": "7f8cbe75720d8d24acb74ba7d80fe8c9",
+    "semantic_hash": "7f8cbe75720d8d24acb74ba7d80fe8c9"
+  },
+  "_Tests/SampleSystem.IntegrationTests/AuthPerformanceTests.cs": {
+    "mtime": 1786538079.8711343,
+    "ast_hash": "a87d1d68dfafb9b965c2ba4368a264f7",
+    "semantic_hash": "a87d1d68dfafb9b965c2ba4368a264f7"
+  },
+  "_Tests/SampleSystem.IntegrationTests/Auth/PrincipalTests.cs": {
+    "mtime": 1786538079.8671343,
+    "ast_hash": "7400499e5cdb2d3d782086149071f163",
+    "semantic_hash": "7400499e5cdb2d3d782086149071f163"
+  },
+  "_Tests/SampleSystem.IntegrationTests/BUProjectionTests.cs": {
+    "mtime": 1786538079.8731368,
+    "ast_hash": "936abc831b5dbffafed623f83011edbb",
+    "semantic_hash": "936abc831b5dbffafed623f83011edbb"
+  },
+  "_Tests/SampleSystem.IntegrationTests/BusinessUnitTests.cs": {
+    "mtime": 1786538079.876138,
+    "ast_hash": "47aa6de4335608519bd2f08111c4b3b5",
+    "semantic_hash": "47aa6de4335608519bd2f08111c4b3b5"
+  },
+  "_Tests/SampleSystem.IntegrationTests/CurrentUserManyRelativePathTests.cs": {
+    "mtime": 1786538079.8781357,
+    "ast_hash": "ddb4accd6c0e243632944433224453a0",
+    "semantic_hash": "ddb4accd6c0e243632944433224453a0"
+  },
+  "_Tests/SampleSystem.IntegrationTests/CurrentUserSingleRelativePathTests.cs": {
+    "mtime": 1786538079.8801472,
+    "ast_hash": "2d0839af06852b32ca6fbef2e70034f3",
+    "semantic_hash": "2d0839af06852b32ca6fbef2e70034f3"
+  },
+  "_Tests/SampleSystem.IntegrationTests/CurrentUserSourceTests.cs": {
+    "mtime": 1786538079.8821476,
+    "ast_hash": "2a7b4081154982f7cf18095d7429f50d",
+    "semantic_hash": "2a7b4081154982f7cf18095d7429f50d"
+  },
+  "_Tests/SampleSystem.IntegrationTests/DefaultFieldsTests.cs": {
+    "mtime": 1786538079.8841467,
+    "ast_hash": "0caba28bc8bc47f9f953a02d677b9548",
+    "semantic_hash": "0caba28bc8bc47f9f953a02d677b9548"
+  },
+  "_Tests/SampleSystem.IntegrationTests/DependencySecurityTests.cs": {
+    "mtime": 1786538079.8871467,
+    "ast_hash": "076119a58251788309c39b1ffe12c4f7",
+    "semantic_hash": "076119a58251788309c39b1ffe12c4f7"
+  },
+  "_Tests/SampleSystem.IntegrationTests/EmployeeProjectionTests.cs": {
+    "mtime": 1786538079.8891459,
+    "ast_hash": "252fed4ca2cccfebafec2c38388f1d1f",
+    "semantic_hash": "252fed4ca2cccfebafec2c38388f1d1f"
+  },
+  "_Tests/SampleSystem.IntegrationTests/EmployeeTests.cs": {
+    "mtime": 1786538079.8921454,
+    "ast_hash": "68e9a50f26ebd382b219b1c81684d407",
+    "semantic_hash": "68e9a50f26ebd382b219b1c81684d407"
+  },
+  "_Tests/SampleSystem.IntegrationTests/EnversBug1676.cs": {
+    "mtime": 1786538079.8941455,
+    "ast_hash": "2ffc1c19f6821d73b8162446e5dee057",
+    "semantic_hash": "2ffc1c19f6821d73b8162446e5dee057"
+  },
+  "_Tests/SampleSystem.IntegrationTests/EventDALListenerTests.cs": {
+    "mtime": 1786538079.8964274,
+    "ast_hash": "7e365895fb1b931510203a11a859590d",
+    "semantic_hash": "7e365895fb1b931510203a11a859590d"
+  },
+  "_Tests/SampleSystem.IntegrationTests/ExpandPathTests.cs": {
+    "mtime": 1786538079.8984265,
+    "ast_hash": "3f1acb8fb24bae6f758fcce12abbbf8b",
+    "semantic_hash": "3f1acb8fb24bae6f758fcce12abbbf8b"
+  },
+  "_Tests/SampleSystem.IntegrationTests/ExtraQueryableSecurityPathTests.cs": {
+    "mtime": 1786538079.9014316,
+    "ast_hash": "52363c838dbd46694a22c5dd4568f771",
+    "semantic_hash": "52363c838dbd46694a22c5dd4568f771"
+  },
+  "_Tests/SampleSystem.IntegrationTests/FixedPropertyValidatorTests.cs": {
+    "mtime": 1786538079.9034257,
+    "ast_hash": "6efa620b664282922e76f15c0f81af70",
+    "semantic_hash": "6efa620b664282922e76f15c0f81af70"
+  },
+  "_Tests/SampleSystem.IntegrationTests/GetNotificationPrincipalsByHierarchicalContextTests.cs": {
+    "mtime": 1786454318.999142,
+    "ast_hash": "781bbd15febb121fc3bf6598a622eca4",
+    "semantic_hash": "781bbd15febb121fc3bf6598a622eca4"
+  },
+  "_Tests/SampleSystem.IntegrationTests/ImpersonateTests.cs": {
+    "mtime": 1786538079.905427,
+    "ast_hash": "a752b67b3f4d4663323e91e587accaa2",
+    "semantic_hash": "a752b67b3f4d4663323e91e587accaa2"
+  },
+  "_Tests/SampleSystem.IntegrationTests/InformationTest.cs": {
+    "mtime": 1786538079.907427,
+    "ast_hash": "8208d3ef5ac72cc2eb73c3d4eaf35654",
+    "semantic_hash": "8208d3ef5ac72cc2eb73c3d4eaf35654"
+  },
+  "_Tests/SampleSystem.IntegrationTests/IntegrationVersionTest.cs": {
+    "mtime": 1786538079.9094338,
+    "ast_hash": "3633d6f6b82583481cd8853e48065c9b",
+    "semantic_hash": "3633d6f6b82583481cd8853e48065c9b"
+  },
+  "_Tests/SampleSystem.IntegrationTests/JobTests.cs": {
+    "mtime": 1786538079.9114325,
+    "ast_hash": "5e57313d6acef1289fcd83cc2625289d",
+    "semantic_hash": "5e57313d6acef1289fcd83cc2625289d"
+  },
+  "_Tests/SampleSystem.IntegrationTests/JsonConverterTests.cs": {
+    "mtime": 1786538079.9144313,
+    "ast_hash": "b75fa4ee58fe02c49e873efede6548fc",
+    "semantic_hash": "b75fa4ee58fe02c49e873efede6548fc"
+  },
+  "_Tests/SampleSystem.IntegrationTests/LegalEntityProjectionTests.cs": {
+    "mtime": 1786538079.9164329,
+    "ast_hash": "fc736a59fe2a5aca1f63c530a52eef66",
+    "semantic_hash": "fc736a59fe2a5aca1f63c530a52eef66"
+  },
+  "_Tests/SampleSystem.IntegrationTests/ManagementUnitFluentMappingTests.cs": {
+    "mtime": 1786538079.9184327,
+    "ast_hash": "036ea1afe47b7eecd9a235e16d047593",
+    "semantic_hash": "036ea1afe47b7eecd9a235e16d047593"
+  },
+  "_Tests/SampleSystem.IntegrationTests/ManualAndLegacyProjectionSecurityTests.cs": {
+    "mtime": 1786538079.9214332,
+    "ast_hash": "03897ff0ecc686ea1a6b9acd3f73c1de",
+    "semantic_hash": "03897ff0ecc686ea1a6b9acd3f73c1de"
+  },
+  "_Tests/SampleSystem.IntegrationTests/NHibFetchTests.cs": {
+    "mtime": 1786454319.0113964,
+    "ast_hash": "2d1d1a5253d1f2df9b29851a3c6b3f78",
+    "semantic_hash": "2d1d1a5253d1f2df9b29851a3c6b3f78"
+  },
+  "_Tests/SampleSystem.IntegrationTests/NhibArrayContainsTest.cs": {
+    "mtime": 1786538079.923434,
+    "ast_hash": "50d01b889a6a9295d7a59f71fd1a9450",
+    "semantic_hash": "50d01b889a6a9295d7a59f71fd1a9450"
+  },
+  "_Tests/SampleSystem.IntegrationTests/NhibDateTimeTests.cs": {
+    "mtime": 1786538079.926481,
+    "ast_hash": "a1239a804db97faef291bea245c0b955",
+    "semantic_hash": "a1239a804db97faef291bea245c0b955"
+  },
+  "_Tests/SampleSystem.IntegrationTests/NotificationCountryTests.cs": {
+    "mtime": 1786454319.0149443,
+    "ast_hash": "510ba7105dd213a3da716eb59b03ee02",
+    "semantic_hash": "510ba7105dd213a3da716eb59b03ee02"
+  },
+  "_Tests/SampleSystem.IntegrationTests/OneToOneTests.cs": {
+    "mtime": 1786538079.9284801,
+    "ast_hash": "0d87e85a0f7330189ee32ded2a0182a7",
+    "semantic_hash": "0d87e85a0f7330189ee32ded2a0182a7"
+  },
+  "_Tests/SampleSystem.IntegrationTests/PerformanceTests.cs": {
+    "mtime": 1786538079.9314814,
+    "ast_hash": "9f01dd93059fac7c7ed3d5ea63f22f7b",
+    "semantic_hash": "9f01dd93059fac7c7ed3d5ea63f22f7b"
+  },
+  "_Tests/SampleSystem.IntegrationTests/PrincipalTests.cs": {
+    "mtime": 1786538079.934484,
+    "ast_hash": "c993f5f2bb21475c76242e0262d79916",
+    "semantic_hash": "c993f5f2bb21475c76242e0262d79916"
+  },
+  "_Tests/SampleSystem.IntegrationTests/PrincipalWithInitTests.cs": {
+    "mtime": 1786538079.9374814,
+    "ast_hash": "ba77c0d7b5ba301e8af51cfb68cf7740",
+    "semantic_hash": "ba77c0d7b5ba301e8af51cfb68cf7740"
+  },
+  "_Tests/SampleSystem.IntegrationTests/RepositoryControllerTests.cs": {
+    "mtime": 1786538079.9394822,
+    "ast_hash": "70be3983d921b98a0bfe9757cd306e07",
+    "semantic_hash": "70be3983d921b98a0bfe9757cd306e07"
+  },
+  "_Tests/SampleSystem.IntegrationTests/RepositoryWithoutSecurityTests.cs": {
+    "mtime": 1786538079.941483,
+    "ast_hash": "3eb663810e4674ab2ef93a86f4d001a2",
+    "semantic_hash": "3eb663810e4674ab2ef93a86f4d001a2"
+  },
+  "_Tests/SampleSystem.IntegrationTests/RestrictionRoleTests.cs": {
+    "mtime": 1786538079.9434905,
+    "ast_hash": "012c763ff3e7b691806c335e5c00f2be",
+    "semantic_hash": "012c763ff3e7b691806c335e5c00f2be"
+  },
+  "_Tests/SampleSystem.IntegrationTests/SampleSystem.IntegrationTests.csproj": {
+    "mtime": 1786454319.025639,
+    "ast_hash": "9dd5f79f529a078ac5ecd7e6df5367c7",
+    "semantic_hash": "9dd5f79f529a078ac5ecd7e6df5367c7"
+  },
+  "_Tests/SampleSystem.IntegrationTests/SecurityContextRestrictionFilterTests.cs": {
+    "mtime": 1786538079.945492,
+    "ast_hash": "bb03c944d32cae2976e9e1a11a50f8f4",
+    "semantic_hash": "bb03c944d32cae2976e9e1a11a50f8f4"
+  },
+  "_Tests/SampleSystem.IntegrationTests/SecurityPathTests.cs": {
+    "mtime": 1786538079.9484894,
+    "ast_hash": "53593b6727c336d9449805e823a81610",
+    "semantic_hash": "53593b6727c336d9449805e823a81610"
+  },
+  "_Tests/SampleSystem.IntegrationTests/SecurityRuleTests.cs": {
+    "mtime": 1786538079.9504902,
+    "ast_hash": "ff80b1380c24fd2de8f0281cb5167cba",
+    "semantic_hash": "ff80b1380c24fd2de8f0281cb5167cba"
+  },
+  "_Tests/SampleSystem.IntegrationTests/SequenceBllTests.cs": {
+    "mtime": 1786538079.9534905,
+    "ast_hash": "b2bac59f8646f4baa37e78006df83fc7",
+    "semantic_hash": "b2bac59f8646f4baa37e78006df83fc7"
+  },
+  "_Tests/SampleSystem.IntegrationTests/SqlParserTests.cs": {
+    "mtime": 1786538079.9554913,
+    "ast_hash": "34ee9f05ce7a634eb90afdb97b2b78b9",
+    "semantic_hash": "34ee9f05ce7a634eb90afdb97b2b78b9"
+  },
+  "_Tests/SampleSystem.IntegrationTests/SubscriptionCustomNotPersistentModelTests.cs": {
+    "mtime": 1786454319.0336463,
+    "ast_hash": "589b0c4564cdd0784b8e49c710981a3a",
+    "semantic_hash": "589b0c4564cdd0784b8e49c710981a3a"
+  },
+  "_Tests/SampleSystem.IntegrationTests/Subscriptions_Metadata/MetadataSubscriptionSystemServiceTests.cs": {
+    "mtime": 1786454319.0358143,
+    "ast_hash": "3d013dafaf6016e33ce2af32c273baf7",
+    "semantic_hash": "3d013dafaf6016e33ce2af32c273baf7"
+  },
+  "_Tests/SampleSystem.IntegrationTests/Subscriptions_Metadata/SendIndividualLettersTests.cs": {
+    "mtime": 1786454319.0368228,
+    "ast_hash": "82cb88763ae03c7a2e142441c259619c",
+    "semantic_hash": "82cb88763ae03c7a2e142441c259619c"
+  },
+  "_Tests/SampleSystem.IntegrationTests/TransactionFlushBeforeCommit.cs": {
+    "mtime": 1786538079.9588444,
+    "ast_hash": "efe0fb2ce1b0c16457893ab621ecc86a",
+    "semantic_hash": "efe0fb2ce1b0c16457893ab621ecc86a"
+  },
+  "_Tests/SampleSystem.IntegrationTests/TypeSerializationTests.cs": {
+    "mtime": 1786538079.9608448,
+    "ast_hash": "231636ab171b2d3fa78188cd48257102",
+    "semantic_hash": "231636ab171b2d3fa78188cd48257102"
+  },
+  "_Tests/SampleSystem.IntegrationTests/UniqueGroupTests.cs": {
+    "mtime": 1786538079.962844,
+    "ast_hash": "23a26ee9b4803893c4a9468231135d88",
+    "semantic_hash": "23a26ee9b4803893c4a9468231135d88"
+  },
+  "_Tests/SampleSystem.IntegrationTests/UpdateTests.cs": {
+    "mtime": 1786538079.9648445,
+    "ast_hash": "eaecce26141753b8e666952fbdad5ea7",
+    "semantic_hash": "eaecce26141753b8e666952fbdad5ea7"
+  },
+  "_Tests/SampleSystem.IntegrationTests/ValidationTests.cs": {
+    "mtime": 1786538079.9668424,
+    "ast_hash": "494958641376594ad040fa07fc9da955",
+    "semantic_hash": "494958641376594ad040fa07fc9da955"
+  },
+  "_Tests/SampleSystem.IntegrationTests/VirtualPermissionTests.cs": {
+    "mtime": 1786457100.8843606,
+    "ast_hash": "c976860c1a5af384c54a983ea46974e1",
+    "semantic_hash": "c976860c1a5af384c54a983ea46974e1"
+  },
+  "_Tests/SampleSystem.IntegrationTests/WebApi/EventXsdExporterTests.cs": {
+    "mtime": 1786538079.968844,
+    "ast_hash": "5823d65fd361db61d7b9c05c1deec616",
+    "semantic_hash": "5823d65fd361db61d7b9c05c1deec616"
+  },
+  "_Tests/SampleSystem.IntegrationTests/WebApi/WebApiTests.cs": {
+    "mtime": 1786538079.971844,
+    "ast_hash": "87984035ffa143ba69016a782b8236e3",
+    "semantic_hash": "87984035ffa143ba69016a782b8236e3"
+  },
+  "_Tests/SampleSystem.IntegrationTests/WrongSecurityMessageTests.cs": {
+    "mtime": 1786538079.973849,
+    "ast_hash": "3b26230c2fbf3f68f0c753e55b2c54ed",
+    "semantic_hash": "3b26230c2fbf3f68f0c753e55b2c54ed"
+  },
+  "_Tests/SampleSystem.IntegrationTests/_Environment/EmptySchemaInitializer.cs": {
+    "mtime": 1786538079.975849,
+    "ast_hash": "ee3a161b8e2e66c8e01f95ce531d9b49",
+    "semantic_hash": "ee3a161b8e2e66c8e01f95ce531d9b49"
+  },
+  "_Tests/SampleSystem.IntegrationTests/_Environment/FluentMigration/InitNumberInDomainObjectEventMigration.cs": {
+    "mtime": 1786538079.9788547,
+    "ast_hash": "1772e41437cc6d6084fa5005a16cbe41",
+    "semantic_hash": "1772e41437cc6d6084fa5005a16cbe41"
+  },
+  "_Tests/SampleSystem.IntegrationTests/_Environment/TestData/DefaultConstants.cs": {
+    "mtime": 1786454319.0561323,
+    "ast_hash": "fa8325a861b3b52a3ae9de787bacc5ff",
+    "semantic_hash": "fa8325a861b3b52a3ae9de787bacc5ff"
+  },
+  "_Tests/SampleSystem.IntegrationTests/_Environment/TestData/Helpers/DataManager.Employee.cs": {
+    "mtime": 1786538079.9818497,
+    "ast_hash": "fb6f89b40d801d847ab87377967f2def",
+    "semantic_hash": "fb6f89b40d801d847ab87377967f2def"
+  },
+  "_Tests/SampleSystem.IntegrationTests/_Environment/TestData/Helpers/DataManager.Init.cs": {
+    "mtime": 1786538079.9838493,
+    "ast_hash": "ec78783bcbf667a850af7e4b1a7a2da7",
+    "semantic_hash": "ec78783bcbf667a850af7e4b1a7a2da7"
+  },
+  "_Tests/SampleSystem.IntegrationTests/_Environment/TestData/Helpers/DataManager.Smo.cs": {
+    "mtime": 1786538079.9858499,
+    "ast_hash": "441c320514ffc1fad5941c6de1070f3b",
+    "semantic_hash": "441c320514ffc1fad5941c6de1070f3b"
+  },
+  "_Tests/SampleSystem.IntegrationTests/_Environment/TestData/Helpers/DataManager.Subscriptions.cs": {
+    "mtime": 1786454319.061456,
+    "ast_hash": "4706a6d66be3e05acc0b832b372c5477",
+    "semantic_hash": "4706a6d66be3e05acc0b832b372c5477"
+  },
+  "_Tests/SampleSystem.IntegrationTests/_Environment/TestData/Helpers/DataManager.cs": {
+    "mtime": 1786538079.9878495,
+    "ast_hash": "9892c4922559665eabc97853259f8c12",
+    "semantic_hash": "9892c4922559665eabc97853259f8c12"
+  },
+  "_Tests/SampleSystem.IntegrationTests/_Environment/TestData/SampleSystemTestPermission.cs": {
+    "mtime": 1786538079.9903655,
+    "ast_hash": "f8ea0dcf95975d194e7bc7c0f2ca1fcb",
+    "semantic_hash": "f8ea0dcf95975d194e7bc7c0f2ca1fcb"
+  },
+  "_Tests/SampleSystem.IntegrationTests/_Environment/TestData/TestBase.cs": {
+    "mtime": 1786538079.9923668,
+    "ast_hash": "40fa4a1d4c06f754d6642da61203df89",
+    "semantic_hash": "40fa4a1d4c06f754d6642da61203df89"
+  },
+  "_Tests/SampleSystem.IntegrationTests/_Environment/TestData/TestDataInitializer.cs": {
+    "mtime": 1786538079.995368,
+    "ast_hash": "7f9684421baafd6e729c11ce628fcae3",
+    "semantic_hash": "7f9684421baafd6e729c11ce628fcae3"
+  },
+  "_Tests/SampleSystem.IntegrationTests/_Environment/TestEnvironment.cs": {
+    "mtime": 1786454319.0689094,
+    "ast_hash": "0080cd8773c708d01f4ab282b426262b",
+    "semantic_hash": "0080cd8773c708d01f4ab282b426262b"
+  },
+  "_Tests/SampleSystem.IntegrationTests/_Environment/Utils/SampleSystemTestDatabaseGenerator.cs": {
+    "mtime": 1786454319.069919,
+    "ast_hash": "9fbbf6ee74d0d7a4d0539d4344959b3d",
+    "semantic_hash": "9fbbf6ee74d0d7a4d0539d4344959b3d"
+  },
+  "_Tests/SampleSystem.IntegrationTests/_Environment/Utils/TestIntegrationEventPublisher.cs": {
+    "mtime": 1786538079.9973695,
+    "ast_hash": "bf0360f1f2615c10b265d58d5bb78f74",
+    "semantic_hash": "bf0360f1f2615c10b265d58d5bb78f74"
+  },
+  "_Tests/SampleSystem.IntegrationTests/_Environment/WebApi/IntegrationWebApi.cs": {
+    "mtime": 1786538080.0003653,
+    "ast_hash": "859256af9f72b706d5f8a72439adef91",
+    "semantic_hash": "859256af9f72b706d5f8a72439adef91"
+  },
+  "_Tests/SampleSystem.IntegrationTests/_Environment/WebApi/MainAuditWebApi.cs": {
+    "mtime": 1786538080.0023649,
+    "ast_hash": "974370c077592027b88a8d833724d76a",
+    "semantic_hash": "974370c077592027b88a8d833724d76a"
+  },
+  "_Tests/SampleSystem.IntegrationTests/_Environment/WebApi/MainWebApi.cs": {
+    "mtime": 1786538080.0043788,
+    "ast_hash": "d79ff3f9df4b04a6cb8334a6b6e7f023",
+    "semantic_hash": "d79ff3f9df4b04a6cb8334a6b6e7f023"
+  },
+  "_Tests/SampleSystem.IntegrationTests/__Support/Scripts/CheckConstraint.sql": {
+    "mtime": 1786454319.0761504,
+    "ast_hash": "0c3d0b189d962c77ff9e13012971070f",
+    "semantic_hash": "0c3d0b189d962c77ff9e13012971070f"
+  },
+  "_Tests/SampleSystem.IntegrationTests/__Support/Scripts/Configuration/Configuration.sql": {
+    "mtime": 1786454319.0773244,
+    "ast_hash": "dae75abc89c7dccc9636703cbda62d84",
+    "semantic_hash": "dae75abc89c7dccc9636703cbda62d84"
+  },
+  "_Tests/SampleSystem.IntegrationTests/__Support/Scripts/NoCheckConstraint.sql": {
+    "mtime": 1786454319.0783408,
+    "ast_hash": "c353c6a220a4686308bb347e0c11dc6b",
+    "semantic_hash": "c353c6a220a4686308bb347e0c11dc6b"
+  },
+  "_Tests/SampleSystem.IntegrationTests/__Support/Scripts/SampleSystem/Create AncestorChildView.sql": {
+    "mtime": 1786454319.0793412,
+    "ast_hash": "f3a0e94f5d8973e87d1f4fda9249409b",
+    "semantic_hash": "f3a0e94f5d8973e87d1f4fda9249409b"
+  },
+  "_Tests/SampleSystem.IntegrationTests/__Support/Scripts/SampleSystem/Sample.sql": {
+    "mtime": 1786454319.080338,
+    "ast_hash": "b41636ae08347dd85300524010b99d64",
+    "semantic_hash": "b41636ae08347dd85300524010b99d64"
+  },
+  "_Tests/SampleSystem.IntegrationTests/testAppSettings.json": {
+    "mtime": 1786454319.080338,
+    "ast_hash": "5c8af47fc1f7d1f83bf5b7d32d44de58",
+    "semantic_hash": "5c8af47fc1f7d1f83bf5b7d32d44de58"
+  },
+  "_Tests/SampleSystem.UnitTests/ExtractConstTests.cs": {
+    "mtime": 1786538080.006379,
+    "ast_hash": "60b55d20d295d52a119fbf85324e501f",
+    "semantic_hash": "60b55d20d295d52a119fbf85324e501f"
+  },
+  "_Tests/SampleSystem.UnitTests/SampleSystem.UnitTests.csproj": {
+    "mtime": 1779461474.7857523,
+    "ast_hash": "6f5b34cb27592d5fc4f7ac69fe6e7ae6",
+    "semantic_hash": "6f5b34cb27592d5fc4f7ac69fe6e7ae6"
+  }
+}

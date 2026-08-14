@@ -1,0 +1,16 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+using SampleSystem.Domain.Projections;
+
+namespace SampleSystem.Generated.DAL.EntityFramework.Mapping;
+
+public class SecurityLocationMap : IEntityTypeConfiguration<SecurityLocation>
+{
+    public void Configure(EntityTypeBuilder<SecurityLocation> builder)
+    {
+        builder.ToTable("Location", "dbo");
+        builder.HasKey(x => x.Id);
+        builder.Property(x => x.Id).ValueGeneratedOnAdd();
+    }
+}

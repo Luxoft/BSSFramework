@@ -176,6 +176,7 @@
     <Project Path="_SampleSystem/SampleSystem.AuditDAL.NHibernate/SampleSystem.AuditDAL.NHibernate.csproj" />
     <Project Path="_SampleSystem/SampleSystem.Domain.LegacyProjections/SampleSystem.Domain.LegacyProjections.csproj" />
     <Project Path="_SampleSystem/SampleSystem.Domain.Projections/SampleSystem.Domain.Projections.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.Generated.DAL.EntityFramework/SampleSystem.Generated.DAL.EntityFramework.csproj" />
     <Project Path="_SampleSystem/SampleSystem.Generated.DAL.NHibernate/SampleSystem.Generated.DAL.NHibernate.csproj" />
     <Project Path="_SampleSystem/SampleSystem.Generated.DTO/SampleSystem.Generated.DTO.csproj" />
   </Folder>

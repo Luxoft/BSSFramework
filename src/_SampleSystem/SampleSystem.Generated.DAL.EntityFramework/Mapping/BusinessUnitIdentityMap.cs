@@ -1,0 +1,16 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+using SampleSystem.Domain.Projections;
+
+namespace SampleSystem.Generated.DAL.EntityFramework.Mapping;
+
+public class BusinessUnitIdentityMap : IEntityTypeConfiguration<BusinessUnitIdentity>
+{
+    public void Configure(EntityTypeBuilder<BusinessUnitIdentity> builder)
+    {
+        builder.ToTable("BusinessUnit", "dbo");
+        builder.HasKey(x => x.Id);
+        builder.Property(x => x.Id).ValueGeneratedOnAdd();
+    }
+}

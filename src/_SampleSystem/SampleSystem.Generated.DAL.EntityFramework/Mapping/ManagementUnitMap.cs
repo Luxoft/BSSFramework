@@ -13,10 +13,10 @@ public class ManagementUnitMap : SampleSystemBaseMap<ManagementUnit>
     {
         base.Configure(builder);
         builder.ToTable("ManagementUnit", "dbo");
-        builder.Property(x => x.BusinessUnitStatus);
-        builder.Property(x => x.DeepLevel);
-        builder.Property(x => x.IsProduction);
-        builder.Property(x => x.Name);
+        builder.Property(x => x.BusinessUnitStatus).IsRequired();
+        builder.Property(x => x.DeepLevel).IsRequired();
+        builder.Property(x => x.IsProduction).IsRequired();
+        builder.Property(x => x.Name).IsRequired();
         builder.ComplexProperty(x => x.Period, period => { period.Property(x => x.EndDate).HasColumnName("periodendDate"); period.Property(x => x.StartDate).HasColumnName("periodstartDate"); });
         builder.HasOne(x => x.Parent).WithMany(x => x.Children).HasForeignKey("parentId").OnDelete(DeleteBehavior.Restrict);
         builder.HasMany(x => x.BusinessUnits).WithOne(x => x.ManagementUnit).HasForeignKey("managementUnitId").OnDelete(DeleteBehavior.Cascade);

@@ -13,7 +13,7 @@ public class Location1676Map : SampleSystemBaseMap<Location1676>
     {
         base.Configure(builder);
         builder.ToTable("Location1676", "dbo");
-        builder.Property(x => x.Name);
+        builder.Property(x => x.Name).IsRequired();
         builder.HasMany(x => x.Calendar).WithOne(x => x.Location).HasForeignKey("locationId").OnDelete(DeleteBehavior.Cascade);
     }
 }

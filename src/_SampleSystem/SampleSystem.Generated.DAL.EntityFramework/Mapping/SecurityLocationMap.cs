@@ -11,6 +11,6 @@ public class SecurityLocationMap : IEntityTypeConfiguration<SecurityLocation>
     {
         builder.ToTable("Location", "dbo");
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd();
+        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
     }
 }

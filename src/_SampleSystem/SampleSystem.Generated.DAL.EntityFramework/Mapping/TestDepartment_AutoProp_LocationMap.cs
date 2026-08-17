@@ -11,7 +11,7 @@ public class TestDepartmentAutoPropLocationMap : IEntityTypeConfiguration<TestDe
     {
         builder.ToTable("Location", "dbo");
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd();
+        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.Property(x => x.BinaryData_Last_LocationBinaryData).HasMaxLength(int.MaxValue);
     }
 }

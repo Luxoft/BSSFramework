@@ -13,6 +13,6 @@ public class TestCustomContextSecurityObjMap : SampleSystemBaseMap<TestCustomCon
     {
         base.Configure(builder);
         builder.ToTable("TestCustomContextSecurityObj", "dbo");
-        builder.Property(x => x.Name);
+        builder.Property(x => x.Name).IsRequired();
     }
 }

@@ -11,8 +11,8 @@ public class TestDepartmentMap : IEntityTypeConfiguration<TestDepartment>
     {
         builder.ToTable("HRDepartment", "dbo");
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd();
-        builder.Property(x => x.Name);
+        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
+        builder.Property(x => x.Name).IsRequired();
         builder.HasOne(x => x.Location).WithMany().HasForeignKey("locationId").OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.Location_Auto).WithMany().HasForeignKey("locationId").OnDelete(DeleteBehavior.Restrict);
     }

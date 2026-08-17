@@ -13,7 +13,7 @@ public class GenericNamedLockMap : SampleSystemBaseMap<GenericNamedLock>
     {
         base.Configure(builder);
         builder.ToTable("GenericNamedLock", "dbo");
-        builder.Property(x => x.Name);
+        builder.Property(x => x.Name).IsRequired();
         builder.HasIndex(x => x.Name).IsUnique().HasDatabaseName("UIX_nameGenericNamedLock");
     }
 }

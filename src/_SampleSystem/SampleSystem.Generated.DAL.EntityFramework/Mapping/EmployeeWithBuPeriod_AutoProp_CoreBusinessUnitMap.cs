@@ -11,7 +11,7 @@ public class EmployeeWithBuPeriodAutoPropCoreBusinessUnitMap : IEntityTypeConfig
     {
         builder.ToTable("BusinessUnit", "dbo");
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd();
+        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.ComplexProperty(x => x.Period_Last_BuPeriod, period =>
         {
             period.Property(x => x.EndDate).HasColumnName("periodendDate");

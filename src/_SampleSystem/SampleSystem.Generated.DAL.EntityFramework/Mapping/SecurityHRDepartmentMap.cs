@@ -11,7 +11,7 @@ public class SecurityHRDepartmentMap : IEntityTypeConfiguration<SecurityHRDepart
     {
         builder.ToTable("HRDepartment", "dbo");
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd();
+        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(x => x.Location_Security).WithMany().HasForeignKey("locationId").OnDelete(DeleteBehavior.Restrict);
     }
 }

@@ -13,8 +13,8 @@ public class InsuranceDetailMap : SampleSystemBaseMap<InsuranceDetail>
     {
         base.Configure(builder);
         builder.ToTable("InsuranceDetail", "dbo");
-        builder.Property(x => x.Cost).HasPrecision(19, 4);
-        builder.Property(x => x.Age);
+        builder.Property(x => x.Cost).HasPrecision(19, 4).IsRequired();
+        builder.Property(x => x.Age).IsRequired();
         builder.Property(x => x.BirthDate);
         builder.Property(x => x.CellPhone);
         builder.Property(x => x.LandlinePhone);

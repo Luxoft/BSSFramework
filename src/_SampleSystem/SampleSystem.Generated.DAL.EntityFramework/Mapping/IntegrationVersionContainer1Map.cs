@@ -13,7 +13,7 @@ public class IntegrationVersionContainer1Map : SampleSystemBaseMap<IntegrationVe
     {
         base.Configure(builder);
         builder.ToTable("IntegrationVersionContainer1", "dbo");
-        builder.Property(x => x.IntegrationVersion);
-        builder.Property(x => x.Name);
+        builder.Property(x => x.IntegrationVersion).IsRequired();
+        builder.Property(x => x.Name).IsRequired();
     }
 }

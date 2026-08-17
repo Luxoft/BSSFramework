@@ -13,8 +13,8 @@ public class SqlParserTestObjMap : SampleSystemBaseMap<SqlParserTestObj>
     {
         base.Configure(builder);
         builder.ToTable("SqlParserTestObj", "dbo");
-        builder.Property(x => x.NotNullColumn);
-        builder.Property(x => x.UniqueColumn);
+        builder.Property(x => x.NotNullColumn).IsRequired();
+        builder.Property(x => x.UniqueColumn).IsRequired();
         builder.HasIndex(x => x.UniqueColumn).IsUnique().HasDatabaseName("UIX_uniqueColumnSqlParserTestObj");
     }
 }

@@ -13,7 +13,7 @@ public class TestImmutableObjMap : SampleSystemBaseMap<TestImmutableObj>
     {
         base.Configure(builder);
         builder.ToTable("TestImmutableObj", "dbo");
-        builder.Property(x => x.TestImmutablePrimitiveProperty);
+        builder.Property(x => x.TestImmutablePrimitiveProperty).IsRequired();
         builder.HasOne(x => x.TestImmutableRefProperty).WithMany().HasForeignKey("testImmutableRefPropertyId").OnDelete(DeleteBehavior.Restrict);
     }
 }

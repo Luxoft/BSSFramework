@@ -13,13 +13,13 @@ public class HRDepartmentMap : SampleSystemBaseMap<HRDepartment>
     {
         base.Configure(builder);
         builder.ToTable("HRDepartment", "dbo");
-        builder.Property(x => x.Code).HasMaxLength(50);
-        builder.Property(x => x.CodeNative).HasMaxLength(50);
-        builder.Property(x => x.ExternalId);
-        builder.Property(x => x.IsLegal);
-        builder.Property(x => x.IsProduction);
-        builder.Property(x => x.Name);
-        builder.Property(x => x.NameNative);
+        builder.Property(x => x.Code).HasMaxLength(50).IsRequired();
+        builder.Property(x => x.CodeNative).HasMaxLength(50).IsRequired();
+        builder.Property(x => x.ExternalId).IsRequired();
+        builder.Property(x => x.IsLegal).IsRequired();
+        builder.Property(x => x.IsProduction).IsRequired();
+        builder.Property(x => x.Name).IsRequired();
+        builder.Property(x => x.NameNative).IsRequired();
         builder.HasIndex(x => x.Code).IsUnique().HasDatabaseName("uni_code_HRDepartment");
         builder.HasIndex(x => x.CodeNative).IsUnique().HasDatabaseName("uni_codenative_HRDepartment");
         builder.HasIndex(x => x.Name).IsUnique().HasDatabaseName("uni_name_HRDepartment");

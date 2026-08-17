@@ -13,9 +13,9 @@ public class Example1Map : SampleSystemBaseMap<Example1>
     {
         base.Configure(builder);
         builder.ToTable("Example1", "dbo");
-        builder.Property(x => x.Field1);
-        builder.Property(x => x.Field2);
-        builder.Property(x => x.Field3);
+        builder.Property(x => x.Field1).IsRequired();
+        builder.Property(x => x.Field2).IsRequired();
+        builder.Property(x => x.Field3).IsRequired();
         builder.HasMany(x => x.Items2).WithOne(x => x.Parent).HasForeignKey("parentId").OnDelete(DeleteBehavior.Cascade);
     }
 }

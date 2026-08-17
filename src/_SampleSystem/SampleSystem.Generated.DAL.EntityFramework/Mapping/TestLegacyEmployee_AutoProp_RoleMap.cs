@@ -11,7 +11,7 @@ public class TestLegacyEmployeeAutoPropRoleMap : IEntityTypeConfiguration<TestLe
     {
         builder.ToTable("EmployeeRole", "dbo");
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd();
+        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.Property(x => x.Name_Last_RoleName).IsRequired();
     }
 }

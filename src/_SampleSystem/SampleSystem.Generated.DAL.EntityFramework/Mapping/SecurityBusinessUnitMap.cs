@@ -11,6 +11,6 @@ public class SecurityBusinessUnitMap : IEntityTypeConfiguration<SecurityBusiness
     {
         builder.ToTable("BusinessUnit", "dbo");
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd();
+        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
     }
 }

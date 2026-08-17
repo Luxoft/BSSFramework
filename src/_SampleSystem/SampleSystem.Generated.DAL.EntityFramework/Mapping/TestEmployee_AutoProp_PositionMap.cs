@@ -11,7 +11,7 @@ public class TestEmployeeAutoPropPositionMap : IEntityTypeConfiguration<TestEmpl
     {
         builder.ToTable("EmployeePosition", "dbo");
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd();
-        builder.Property(x => x.Name_Last_PositionName);
+        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
+        builder.Property(x => x.Name_Last_PositionName).IsRequired();
     }
 }

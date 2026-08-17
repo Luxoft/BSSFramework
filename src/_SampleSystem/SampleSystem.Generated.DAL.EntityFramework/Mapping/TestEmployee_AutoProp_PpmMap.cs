@@ -11,7 +11,7 @@ public class TestEmployeeAutoPropPpmMap : IEntityTypeConfiguration<TestEmployee_
     {
         builder.ToTable("Employee", "dbo");
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd();
-        builder.Property(x => x.NameNativeMiddleName_Last_PpmNameNativeMiddleName);
+        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
+        builder.Property(x => x.NameNativeMiddleName_Last_PpmNameNativeMiddleName).IsRequired();
     }
 }

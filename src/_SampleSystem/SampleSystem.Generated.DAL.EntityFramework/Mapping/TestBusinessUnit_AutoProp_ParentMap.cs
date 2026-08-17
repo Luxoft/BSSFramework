@@ -11,8 +11,8 @@ public class TestBusinessUnitAutoPropParentMap : IEntityTypeConfiguration<TestBu
     {
         builder.ToTable("BusinessUnit", "dbo");
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd();
-        builder.Property(x => x.PeriodStartDate_Last_ParentPeriodStartDate);
+        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
+        builder.Property(x => x.PeriodStartDate_Last_ParentPeriodStartDate).IsRequired();
         builder.ComplexProperty(x => x.Period_Last_ParentPeriod, period =>
         {
             period.Property(x => x.EndDate).HasColumnName("periodendDate");

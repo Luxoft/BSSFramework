@@ -13,7 +13,7 @@ public class TestRestrictionObjectMap : SampleSystemBaseMap<TestRestrictionObjec
     {
         base.Configure(builder);
         builder.ToTable("TestRestrictionObject", "dbo");
-        builder.Property(x => x.RestrictionHandler);
+        builder.Property(x => x.RestrictionHandler).IsRequired();
         builder.HasOne(x => x.BusinessUnit).WithMany().HasForeignKey("businessUnitId").OnDelete(DeleteBehavior.Restrict);
     }
 }

@@ -9,7 +9,7 @@ public class BusinessUnitTypeLinkWithPossibleFinancialProjectTypeMap : SampleSys
     public override void Configure(EntityTypeBuilder<BusinessUnitTypeLinkWithPossibleFinancialProjectType> builder)
     {
         base.Configure(builder);
-        builder.Property(x => x.FinancialProjectType);
+        builder.Property(x => x.FinancialProjectType).IsRequired();
         builder.HasOne(x => x.BusinessUnitType).WithMany(x => x.PossibleFinancialProjectTypes).HasForeignKey("businessUnitTypeId").IsRequired().OnDelete(DeleteBehavior.Cascade);
     }
 }

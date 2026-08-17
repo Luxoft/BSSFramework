@@ -11,10 +11,10 @@ public class BusinessUnitProgramClassMap : IEntityTypeConfiguration<BusinessUnit
     {
         builder.ToTable("BusinessUnit", "dbo");
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd();
-        builder.Property(x => x.IsNewBusiness);
-        builder.Property(x => x.Name);
-        builder.Property(x => x.PeriodEndDate);
+        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
+        builder.Property(x => x.IsNewBusiness).IsRequired();
+        builder.Property(x => x.Name).IsRequired();
+        builder.Property(x => x.PeriodEndDate).IsRequired();
         builder.HasOne(x => x.BusinessUnitType_Auto).WithMany().HasForeignKey("businessUnitTypeId").OnDelete(DeleteBehavior.Restrict);
     }
 }

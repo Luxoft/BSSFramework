@@ -11,8 +11,8 @@ public class VisualEmployeeMap : IEntityTypeConfiguration<VisualEmployee>
     {
         builder.ToTable("Employee", "dbo");
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd();
-        builder.Property(x => x.NameEngFirstName);
+        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
+        builder.Property(x => x.NameEngFirstName).IsRequired();
         builder.ComplexProperty(x => x.NameEng, nameEng =>
         {
             nameEng.Property(x => x.FirstName).HasColumnName("nameEngfirstName").HasMaxLength(50);

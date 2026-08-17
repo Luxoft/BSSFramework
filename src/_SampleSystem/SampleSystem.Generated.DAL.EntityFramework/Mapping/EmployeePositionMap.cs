@@ -11,7 +11,7 @@ public class EmployeePositionMap : SampleSystemBaseMap<EmployeePosition>
         base.Configure(builder);
         builder.Property(x => x.Name).IsRequired();
         builder.Property(x => x.EnglishName).IsRequired();
-        builder.Property(x => x.ExternalId);
+        builder.Property(x => x.ExternalId).IsRequired();
         builder.HasOne(x => x.Location).WithMany().HasForeignKey("locationId").IsRequired().OnDelete(DeleteBehavior.Restrict);
         builder.HasIndex("englishName", "locationId", "name").IsUnique().HasDatabaseName("UIX_englishName_location_nameEmployeePosition");
     }

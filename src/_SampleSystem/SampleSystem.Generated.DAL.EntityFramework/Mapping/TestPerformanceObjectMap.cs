@@ -13,7 +13,7 @@ public class TestPerformanceObjectMap : SampleSystemBaseMap<TestPerformanceObjec
     {
         base.Configure(builder);
         builder.ToTable("TestPerformanceObject", "dbo");
-        builder.Property(x => x.Name);
+        builder.Property(x => x.Name).IsRequired();
         builder.HasOne(x => x.BusinessUnit).WithMany().HasForeignKey("businessUnitId").OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.Employee).WithMany().HasForeignKey("employeeId").OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.Location).WithMany().HasForeignKey("locationId").OnDelete(DeleteBehavior.Restrict);

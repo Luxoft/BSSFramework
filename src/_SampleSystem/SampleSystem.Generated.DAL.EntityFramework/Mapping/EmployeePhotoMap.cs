@@ -11,7 +11,7 @@ public class EmployeePhotoMap : SampleSystemBaseMap<EmployeePhoto>
         base.Configure(builder);
         builder.Property(x => x.ContentType).IsRequired();
         builder.Property(x => x.Data).HasMaxLength(1024 * 1024).IsRequired();
-        builder.Property(x => x.Type);
+        builder.Property(x => x.Type).IsRequired();
         builder.HasOne(x => x.Employee).WithMany(x => x.EmployeePhotos).HasForeignKey("employeeId").IsRequired().OnDelete(DeleteBehavior.Cascade);
         builder.HasIndex("employeeId", "type").IsUnique().HasDatabaseName("UIX_employee_typeEmployeePhoto");
     }

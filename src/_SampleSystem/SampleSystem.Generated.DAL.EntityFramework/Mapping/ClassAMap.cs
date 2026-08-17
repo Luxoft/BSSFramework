@@ -11,8 +11,8 @@ public class ClassAMap : IEntityTypeConfiguration<ClassA>
     {
         builder.ToTable("ClassA", "dbo");
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd();
-        builder.Property(x => x.Value);
+        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
+        builder.Property(x => x.Value).IsRequired();
         builder.HasMany(x => x.Child).WithOne(x => x.Parent).HasForeignKey("parentId").OnDelete(DeleteBehavior.Cascade);
     }
 }

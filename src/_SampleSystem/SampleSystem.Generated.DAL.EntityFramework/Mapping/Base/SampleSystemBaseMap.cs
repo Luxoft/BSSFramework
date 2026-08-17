@@ -14,9 +14,9 @@ public abstract class SampleSystemBaseMap<TEntity> : IEntityTypeConfiguration<TE
 
         builder.HasKey(x => x.Id);
 
-        builder.Property(x => x.Id).ValueGeneratedOnAdd();
-        builder.Property(x => x.Version).ValueGeneratedNever().IsConcurrencyToken();
-        builder.Property(x => x.Active);
+        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
+        builder.Property(x => x.Version).ValueGeneratedNever().IsConcurrencyToken().IsRequired();
+        builder.Property(x => x.Active).IsRequired();
         builder.Property(x => x.CreateDate);
         builder.Property(x => x.CreatedBy);
         builder.Property(x => x.ModifiedBy);

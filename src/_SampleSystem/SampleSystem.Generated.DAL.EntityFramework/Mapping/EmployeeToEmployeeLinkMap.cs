@@ -8,7 +8,7 @@ public class EmployeeToEmployeeLinkMap : SampleSystemBaseMap<EmployeeToEmployeeL
     public override void Configure(EntityTypeBuilder<EmployeeToEmployeeLink> builder)
     {
         base.Configure(builder);
-        builder.Property(x => x.EmployeeLinkType);
+        builder.Property(x => x.EmployeeLinkType).IsRequired();
         builder.HasOne(x => x.Owner).WithMany(x => x.EmployeeToEmployeeLinks).HasForeignKey("ownerId").IsRequired().OnDelete(DeleteBehavior.Cascade);
         builder.HasOne(x => x.LinkedEmployee).WithMany().HasForeignKey("linkedEmployeeId").IsRequired().OnDelete(DeleteBehavior.Restrict);
     }

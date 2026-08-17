@@ -10,7 +10,7 @@ public class EmployeeRegistrationTypeMap : SampleSystemBaseMap<EmployeeRegistrat
     {
         base.Configure(builder);
         builder.Property(x => x.Name).IsRequired();
-        builder.Property(x => x.ExternalId);
+        builder.Property(x => x.ExternalId).IsRequired();
         builder.HasIndex(x => x.Name).IsUnique().HasDatabaseName("UIX_nameEmployeeRegistrationType");
     }
 }

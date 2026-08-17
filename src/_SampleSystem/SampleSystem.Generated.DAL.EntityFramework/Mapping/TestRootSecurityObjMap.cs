@@ -13,7 +13,7 @@ public class TestRootSecurityObjMap : SampleSystemBaseMap<TestRootSecurityObj>
     {
         base.Configure(builder);
         builder.ToTable("TestRootSecurityObj", "dbo");
-        builder.Property(x => x.Name);
+        builder.Property(x => x.Name).IsRequired();
         builder.HasOne(x => x.BusinessUnit).WithMany().HasForeignKey("businessUnitId").OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.Location).WithMany().HasForeignKey("locationId").OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.ManagementUnitFluentMapping).WithMany().HasForeignKey("managementUnitFluentMappingId").OnDelete(DeleteBehavior.Restrict);

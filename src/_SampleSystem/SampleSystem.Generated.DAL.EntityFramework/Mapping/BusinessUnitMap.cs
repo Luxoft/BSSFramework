@@ -12,9 +12,9 @@ public class BusinessUnitMap : SampleSystemBaseMap<BusinessUnit>
     public override void Configure(EntityTypeBuilder<BusinessUnit> builder)
     {
         base.Configure(builder);
-        builder.Property(x => x.Name);
-        builder.Property(x => x.BusinessUnitStatus);
-        builder.Property(x => x.Commission).HasPrecision(19, 4);
+        builder.Property(x => x.Name).IsRequired();
+        builder.Property(x => x.BusinessUnitStatus).IsRequired();
+        builder.Property(x => x.Commission).HasPrecision(19, 4).IsRequired();
         builder.ComplexProperty(x => x.Period, period => { period.Property(x => x.EndDate).HasColumnName("periodendDate"); period.Property(x => x.StartDate).HasColumnName("periodstartDate"); });
         builder.HasOne(x => x.BusinessUnitForRent).WithMany().HasForeignKey("businessUnitForRentId").OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.BusinessUnitType).WithMany().HasForeignKey("businessUnitTypeId").OnDelete(DeleteBehavior.Restrict);

@@ -11,7 +11,7 @@ public class CustomCompanyLegalEntityMap : IEntityTypeConfiguration<CustomCompan
     {
         builder.ToTable("CompanyLegalEntity", "dbo");
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd();
+        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.Property(x => x.Code).IsRequired();
         builder.SplitToTable("LegalEntityBase", split =>
         {

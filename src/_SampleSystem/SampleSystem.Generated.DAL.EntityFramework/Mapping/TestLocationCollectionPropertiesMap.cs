@@ -11,8 +11,8 @@ public class TestLocationCollectionPropertiesMap : IEntityTypeConfiguration<Test
     {
         builder.ToTable("Location", "dbo");
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd();
-        builder.Property(x => x.Name);
+        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
+        builder.Property(x => x.Name).IsRequired();
         builder.HasMany(x => x.Children).WithOne(x => x.Parent).HasForeignKey("parentId").OnDelete(DeleteBehavior.Cascade);
     }
 }

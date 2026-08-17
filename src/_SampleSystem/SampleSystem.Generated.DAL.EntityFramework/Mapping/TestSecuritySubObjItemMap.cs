@@ -13,7 +13,7 @@ public class TestSecuritySubObjItemMap : SampleSystemBaseMap<TestSecuritySubObjI
     {
         base.Configure(builder);
         builder.ToTable("TestSecuritySubObjItem", "dbo");
-        builder.Property(x => x.Name);
+        builder.Property(x => x.Name).IsRequired();
         builder.HasOne(x => x.InnerMaster).WithMany(x => x.Items).HasForeignKey("innerMasterId").OnDelete(DeleteBehavior.Restrict);
     }
 }

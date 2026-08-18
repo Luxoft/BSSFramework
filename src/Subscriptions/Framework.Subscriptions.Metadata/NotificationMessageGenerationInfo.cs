@@ -8,8 +8,8 @@ public record NotificationMessageGenerationInfo<TRenderingObject>(ImmutableHashS
     : NotificationMessageGenerationInfo<TRenderingObject, string>(Recipients, Versions)
     where TRenderingObject : class
 {
-    public NotificationMessageGenerationInfo(string emails, DomainObjectVersions<TRenderingObject> version)
-        : this([.. CreateMany(emails).Distinct(StringComparer.CurrentCultureIgnoreCase)], version)
+    public NotificationMessageGenerationInfo(string emails, DomainObjectVersions<TRenderingObject> versions)
+        : this([.. CreateMany(emails).Distinct(StringComparer.CurrentCultureIgnoreCase)], versions)
     {
     }
 

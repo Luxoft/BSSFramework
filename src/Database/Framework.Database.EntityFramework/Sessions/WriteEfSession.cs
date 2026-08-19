@@ -9,6 +9,8 @@ public class WriteEfSession : EfSessionBase
 {
     private readonly IDBSessionEventListener[] eventListeners;
 
+    private readonly EfCollectChangesService collectChangesService = new();
+
     private readonly RelationalTransaction efTransaction;
 
     private bool manualFault;
@@ -78,31 +80,28 @@ public class WriteEfSession : EfSessionBase
 
             do
             {
+                var changes = this.collectChangesService.CollectChanges(this.NativeSession);
+
                 await this.NativeSession.SaveChangesAsync(ct);
 
-                break;
-                //var changes = this.collectChangedEventListener.EvictChanges();
+                if (changes.IsEmpty)
+                {
+                    break;
+                }
+                else
+                {
+                    dalHistory.Add(changes);
 
-                //if (changes.IsEmpty)
-                //{
-                //    break;
-                //}
-                //else
-                //{
-                //    dalHistory.Add(changes);
+                    var changedEventArgs = new DALChangesEventArgs(changes);
 
-                //    await this.AuditReader.SafeInitCurrentRevisionAsync(ct);
+                    // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!! Use UseTryCloseDbSession middleware
+                    foreach (var eventListener in this.eventListeners)
+                    {
+                        ct.ThrowIfCancellationRequested();
 
-                //    var changedEventArgs = new DALChangesEventArgs(changes);
-
-                //    // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!! Use UseTryCloseDbSession middleware
-                //    this.eventListeners.Foreach(eventListener =>
-                //                                {
-                //                                    ct.ThrowIfCancellationRequested();
-
-                //                                    eventListener.OnFlushed(changedEventArgs);
-                //                                });
-                //}
+                        await eventListener.OnFlushed(changedEventArgs, ct);
+                    }
+                }
             } while (true);
 
             if (withCompleteTransaction)
@@ -117,21 +116,30 @@ public class WriteEfSession : EfSessionBase
                     await eventListener.OnBeforeTransactionCompleted(new DALChangesEventArgs(beforeTransactionCompletedChangeState), ct);
                 }
 
+                var listenersChanges = this.collectChangesService.CollectChanges(this.NativeSession);
+
                 await this.NativeSession.SaveChangesAsync(ct);
 
-                //var afterTransactionCompletedChangeState =
-                //        new[] { beforeTransactionCompletedChangeState, this.collectChangedEventListener.EvictChanges() }
-                //                .Composite();
+                var afterTransactionCompletedChangeState =
+                        new[] { beforeTransactionCompletedChangeState, listenersChanges }
+                                .Composite();
 
                 // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!!!!! Use UseTryCloseDbSession middleware
-                //this.eventListeners.Foreach(eventListener => eventListener.OnAfterTransactionCompleted(new DALChangesEventArgs(afterTransactionCompletedChangeState)));
+                foreach (var eventListener in this.eventListeners)
+                {
+                    ct.ThrowIfCancellationRequested();
+
+                    await eventListener.OnAfterTransactionCompleted(new DALChangesEventArgs(afterTransactionCompletedChangeState), ct);
+                }
+
+                var finalChanges = this.collectChangesService.CollectChanges(this.NativeSession);
 
                 await this.NativeSession.SaveChangesAsync(ct); // Флашим для того, чтобы проверить, что никто ничего не менял в объектах после AfterTransactionCompleted-евента
 
-                //if (this.collectChangedEventListener.HasAny())
-                //{
-                //    throw new InvalidOperationException("DomainObjects can't be changed after TransactionCompleted event");
-                //}
+                if (!finalChanges.IsEmpty)
+                {
+                    throw new InvalidOperationException("DomainObjects can't be changed after TransactionCompleted event");
+                }
             }
         }
         catch (Exception e)

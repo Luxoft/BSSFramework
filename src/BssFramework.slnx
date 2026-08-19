@@ -164,6 +164,7 @@
     <Project Path="_SampleSystem/SampleSystem.Events/SampleSystem.Events.csproj" />
     <Project Path="_SampleSystem/SampleSystem.Security.Abstract/SampleSystem.Security.Abstract.csproj" />
     <Project Path="_SampleSystem/SampleSystem.Security/SampleSystem.Security.csproj" />
+    <Project Path="_SampleSystem/SampleSystem.ServiceEnvironment.EntityFramework/SampleSystem.ServiceEnvironment.EntityFramework.csproj" />
     <Project Path="_SampleSystem/SampleSystem.ServiceEnvironment.NHibernate/SampleSystem.ServiceEnvironment.NHibernate.csproj" />
     <Project Path="_SampleSystem/SampleSystem.ServiceEnvironment/SampleSystem.ServiceEnvironment.csproj" />
     <Project Path="_SampleSystem/SampleSystem.Subscriptions.Metadata/SampleSystem.Subscriptions.Metadata.csproj" />

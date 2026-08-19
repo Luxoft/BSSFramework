@@ -60,6 +60,7 @@
     <Project Path="Database/Framework.Tracking/Framework.Tracking.csproj" />
   </Folder>
   <Folder Name="/Database/EntityFramework/">
+    <Project Path="Database/Framework.Database.EntityFramework.Legacy/Framework.Database.EntityFramework.Legacy.csproj" />
     <Project Path="Database/Framework.Database.EntityFramework/Framework.Database.EntityFramework.csproj" />
   </Folder>
   <Folder Name="/Database/NHibernate/">

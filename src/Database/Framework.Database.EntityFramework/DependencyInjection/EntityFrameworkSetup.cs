@@ -14,8 +14,6 @@ public class EntityFrameworkSetup : IEntityFrameworkSetup, IServiceInitializer
 {
     public void Initialize(IServiceCollection services)
     {
-        //services.AddSingleton<IAuditRevisionUserAuthenticationService, AuditRevisionUserAuthenticationService>();
-
         services.AddScoped(typeof(IAsyncDal<,>), typeof(EfAsyncDal<,>));
 
         services.AddGenericQueryable(v => v.SetFetchService<EfFetchService>().SetTargetMethodExtractor<EfTargetMethodExtractor>());

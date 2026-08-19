@@ -7,4 +7,6 @@ public interface IEntityFrameworkSetup
     //bool AddDefaultInitializer { get; set; }
 
     //bool AutoAddFluentMapping { get; set; }
+
+    IEntityFrameworkSetup AddExtension(IEntityFrameworkSetupExtension extension);
 }

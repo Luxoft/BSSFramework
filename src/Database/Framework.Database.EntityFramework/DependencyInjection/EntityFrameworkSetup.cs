@@ -12,6 +12,8 @@ namespace Framework.Database.EntityFramework.DependencyInjection;
 
 public class EntityFrameworkSetup : IEntityFrameworkSetup, IServiceInitializer
 {
+    private readonly List<IEntityFrameworkSetupExtension> extensions = new List<IEntityFrameworkSetupExtension>();
+
     public void Initialize(IServiceCollection services)
     {
         services.AddScoped(typeof(IAsyncDal<,>), typeof(EfAsyncDal<,>));
@@ -25,5 +27,14 @@ public class EntityFrameworkSetup : IEntityFrameworkSetup, IServiceInitializer
         //services.AddSingleton<IEfSessionEnvironmentSettings, EfSessionEnvironmentSettings>();
 
         //services.AddSingleton<IDefaultConnectionStringSource, DefaultConnectionStringSource>();
+
+        this.extensions.ForEach(ex => ex.AddServices(services));
+    }
+
+    public IEntityFrameworkSetup AddExtension(IEntityFrameworkSetupExtension extension)
+    {
+        this.extensions.Add(extension);
+
+        return this;
     }
 }

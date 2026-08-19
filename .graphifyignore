@@ -1,0 +1,4 @@
+**/bin/**
+**/obj/**
+**/.vs/**
+graphify-out/**

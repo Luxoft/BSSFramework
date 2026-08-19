@@ -1,0 +1,22 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+using SampleSystem.AuditDomain;
+
+namespace SampleSystem.Generated.DAL.EntityFramework.Mapping;
+
+public class BusinessUnitAuditMap : IEntityTypeConfiguration<BusinessUnitAudit>
+{
+    public void Configure(EntityTypeBuilder<BusinessUnitAudit> builder)
+    {
+        builder.ToTable("BusinessUnitAudit", "appAudit");
+        builder.HasKey(nameof(BusinessUnitAudit.Id), "REV");
+        builder.Ignore(x => x.Identifier);
+        builder.Property(x => x.Id).HasColumnName("id").ValueGeneratedNever().IsRequired();
+        builder.Property<long>("REV").HasColumnName("REV").ValueGeneratedNever().IsRequired();
+        builder.HasOne(x => x.Revision).WithMany().HasForeignKey("REV").IsRequired().OnDelete(DeleteBehavior.Restrict);
+        builder.Property(x => x.ModifiedBy).HasColumnName("modifiedBy").IsRequired();
+        builder.Property(x => x.ModifyDate).HasColumnName("modifyDate");
+        builder.Property(x => x.RevType).HasColumnName("REVTYPE").IsRequired();
+    }
+}

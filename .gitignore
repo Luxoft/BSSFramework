@@ -246,3 +246,4 @@ ModelManifest.xml
 *.js.map
 *.js
 /.github/copilot-instructions.md
+/.tsupgrader/PROGRESS.md

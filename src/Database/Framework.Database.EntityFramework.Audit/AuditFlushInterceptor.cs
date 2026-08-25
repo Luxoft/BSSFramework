@@ -103,7 +103,7 @@ public class AuditFlushInterceptor(TimeProvider timeProvider) : SaveChangesInter
                 property => property.Name,
                 property => this.IsPropertyModified(entry, property.Name));
 
-        return new AuditEntry(entry.Entity, metadata, this.ToRevisionType(entry.State), modifiedProperties);
+        return new AuditEntry(entry, metadata, this.ToRevisionType(entry.State), modifiedProperties);
     }
 
     private void AddAuditEntities(
@@ -119,7 +119,7 @@ public class AuditFlushInterceptor(TimeProvider timeProvider) : SaveChangesInter
             var auditEntity = Activator.CreateInstance(audit.Metadata.AuditEntityType)!;
             foreach (var property in audit.Metadata.Properties)
             {
-                var value = audit.Entity.GetType().GetProperty(property.Name)!.GetValue(audit.Entity);
+                var value = audit.Entry.Property(property.Name).CurrentValue;
                 audit.Metadata.AuditEntityType.GetProperty(property.Name)!.SetValue(auditEntity, value);
                 if (!property.IsKey)
                 {
@@ -151,7 +151,7 @@ public class AuditFlushInterceptor(TimeProvider timeProvider) : SaveChangesInter
         entry.State == EntityState.Modified && entry.Property(propertyName).IsModified;
 
     private sealed record AuditEntry(
-        object Entity,
+        EntityEntry Entry,
         AuditEntityMetadata Metadata,
         AuditRevisionType RevisionType,
         IReadOnlyDictionary<string, bool> ModifiedProperties);

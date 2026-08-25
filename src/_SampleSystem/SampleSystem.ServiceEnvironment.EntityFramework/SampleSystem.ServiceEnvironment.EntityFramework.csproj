@@ -6,9 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Abstractions\Framework.Infrastructure.Abstractions.csproj" />
-    <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Generated.DAL.NHibernate\Framework.Authorization.Generated.DAL.NHibernate.csproj" />
-    <ProjectReference Include="..\..\_Configuration\Framework.Configuration.Generated.DAL.NHibernate\Framework.Configuration.Generated.DAL.NHibernate.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Database\Framework.Database.EntityFramework.Audit\Framework.Database.EntityFramework.Audit.csproj" />
+    <ProjectReference Include="..\..\Database\Framework.Database.EntityFramework.Legacy\Framework.Database.EntityFramework.Legacy.csproj" />
+
+    <ProjectReference Include="..\SampleSystem.Generated.DAL.EntityFramework\SampleSystem.Generated.DAL.EntityFramework.csproj" />
   </ItemGroup>
 
 </Project>

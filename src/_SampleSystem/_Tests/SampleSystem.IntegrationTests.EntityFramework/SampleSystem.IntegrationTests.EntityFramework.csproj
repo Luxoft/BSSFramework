@@ -13,13 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SampleSystem.WebApiCore.NHibernate\SampleSystem.WebApiCore.NHibernate.csproj" />
-    <ProjectReference Include="..\SampleSystem.DbGenerate.NHibernate\SampleSystem.DbGenerate.NHibernate.csproj" />
+    <ProjectReference Include="..\..\SampleSystem.WebApiCore.EntityFramework\SampleSystem.WebApiCore.EntityFramework.csproj" />
+    <ProjectReference Include="..\SampleSystem.DbGenerate.EntityFramework\SampleSystem.DbGenerate.EntityFramework.csproj" />
     <ProjectReference Include="..\SampleSystem.IntegrationTests\SampleSystem.IntegrationTests.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="..\SampleSystem.IntegrationTests.EntityFramework\**\*Impl.cs" />
   </ItemGroup>
 
   <ItemGroup>

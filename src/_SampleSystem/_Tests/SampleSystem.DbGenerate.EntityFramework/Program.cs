@@ -1,6 +1,8 @@
 ﻿using CommandLine;
 
-namespace SampleSystem.DbGenerate.NHibernate;
+using SampleSystem.DbGenerate.NHibernate;
+
+namespace SampleSystem.DbGenerate.EntityFramework;
 
 public static class Program
 {
@@ -12,7 +14,7 @@ public static class Program
 
     private static void GenerateDatabase(DbGenerationOptions options)
     {
-        //var generators = new DbGeneratorTest();
-        //generators.GenerateDatabase(options);
+        var generators = new DbGeneratorTest();
+        generators.GenerateDatabase(options);
     }
 }

@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Framework.Authorization.Generated.DAL.EntityFramework.Mapping.Base;
+using Framework.Configuration.Generated.DAL.EntityFramework.Mapping.Base;
+
+using Microsoft.EntityFrameworkCore;
 
 using SampleSystem.Generated.DAL.EntityFramework.Mapping.Base;
 
@@ -9,6 +12,8 @@ public class SampleSystemDbContext(DbContextOptions<SampleSystemDbContext> optio
 {
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        builder.ApplyConfigurationsFromAssembly(typeof(AuthBaseMap<>).Assembly);
+        builder.ApplyConfigurationsFromAssembly(typeof(ConfigurationBaseMap<>).Assembly);
         builder.ApplyConfigurationsFromAssembly(typeof(SampleSystemBaseMap<>).Assembly);
 
         builder.HasDefaultSchema("app");

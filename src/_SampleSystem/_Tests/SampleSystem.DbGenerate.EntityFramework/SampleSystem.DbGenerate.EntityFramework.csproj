@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <IsPackable>false</IsPackable>
-    <StartupObject>SampleSystem.DbGenerate.NHibernate.Program</StartupObject>
+    <StartupObject>SampleSystem.DbGenerate.EntityFramework.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

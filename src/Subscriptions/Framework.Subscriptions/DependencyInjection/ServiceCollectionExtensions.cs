@@ -17,8 +17,8 @@ public static class ServiceCollectionExtensions
         where TSelf : IBssFrameworkSetup<TSelf>
     {
         public TSelf AddSubscriptions<TEmployee>(
-            Expression<Func<TEmployee, string>> emailPath,
-            ImmutableArray<Assembly> assemblies)
+            ImmutableArray<Assembly> assemblies,
+            Expression<Func<TEmployee, string>> emailPath)
             where TEmployee : class =>
             setup.AddServices(sc => sc.AddSubscriptions(emailPath, assemblies));
     }

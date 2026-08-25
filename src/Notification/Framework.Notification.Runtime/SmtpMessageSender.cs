@@ -1,10 +1,4 @@
-﻿using System.Net.Mail;
-
-using Anch.Core;
-
-using Framework.Core;
-using Framework.Notification.Domain;
-using Framework.Notification.MailMessageModifier;
+﻿using Framework.Core;
 
 using Microsoft.Extensions.Logging;
 
@@ -12,18 +6,15 @@ namespace Framework.Notification;
 
 public class SmtpMessageSender(
     ISmtpClientFactory smtpClientFactory,
-    IEnumerable<IMailMessageModifier> mailMessageModifiers,
-    ILogger<SmtpMessageSender> logger) : IMessageSender<MailMessage>
+    ILogger<SmtpMessageSender> logger) : IMessageSender<Domain.Notification>
 {
-    public async Task SendAsync(MailMessage baseMessage, CancellationToken ct)
+    public async Task SendAsync(Domain.Notification notification, CancellationToken ct)
     {
         try
         {
-            var actualMailMessage = this.GetActualMailMessage(baseMessage);
-
             using var client = smtpClientFactory.CreateSmtpClient();
 
-            await client.SendMailAsync(actualMailMessage, ct);
+            await client.SendMailAsync(notification.Message, ct);
         }
         catch (Exception e)
         {
@@ -31,14 +22,5 @@ public class SmtpMessageSender(
 
             throw;
         }
-    }
-
-    protected virtual MailMessage GetActualMailMessage(MailMessage baseMessage)
-    {
-        var newMailMessage = baseMessage.Clone();
-
-        mailMessageModifiers.Foreach(m => m.Modify(newMailMessage));
-
-        return newMailMessage;
     }
 }

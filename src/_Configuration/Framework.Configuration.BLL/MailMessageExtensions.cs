@@ -12,7 +12,7 @@ public static class MailMessageExtensions
             notification.Message.Subject,
             notification.Message.Body,
             notification.TechnicalInformation.MessageTemplateCode,
-            "",
+            notification.TechnicalInformation.Comment,
             string.Join(",", notification.Message.CC.Select(z => z.Address)),
             notification.TechnicalInformation.ContextObjectType,
             notification.TechnicalInformation.ContextObjectId,

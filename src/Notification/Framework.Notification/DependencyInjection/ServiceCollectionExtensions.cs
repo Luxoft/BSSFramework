@@ -1,9 +1,6 @@
-﻿using System.Net.Mail;
+﻿using Anch.DependencyInjection;
 
-using Framework.Core;
 using Framework.Infrastructure.DependencyInjection;
-using Framework.Notification.MailMessageModifier;
-using Framework.Notification.Settings;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,31 +12,13 @@ public static class ServiceCollectionExtensions
     extension<TSelf>(IBssFrameworkSetup<TSelf> setup)
         where TSelf : IBssFrameworkSetup<TSelf>
     {
-        public TSelf AddSmtpNotification(IConfiguration configuration, bool isProd) =>
-            setup.AddServices(sc => sc.AddSmtpNotification(configuration, isProd));
+        public TSelf AddNotification(IConfiguration configuration, Action<INotificationSetup>? setupAction = null) =>
+            setup.AddServices(sc => sc.AddNotification(configuration, setupAction));
     }
 
     extension(IServiceCollection services)
     {
-        public void AddSmtpNotification(IConfiguration configuration, bool isProd)
-        {
-            services.AddSingleton<IMessageSender<Notification.Domain.Notification>, NotificationMessageSender>();
-
-            services.AddSingleton<IMailMessageModifier, HtmlMarkerMessageModifier>();
-            services.AddSingleton<IMailMessageModifier, SubjectCleanerMailMessageModifier>();
-            services.AddSingleton<IMailMessageModifier, RedirectToSupportMailMessageModifier>();
-
-            if (!isProd)
-            {
-                services.AddSingleton<IMailMessageModifier, RedirectToTestAddress>();
-                services.AddSingleton<IMailMessageModifier, RewriteReceiversMailMessageModifier>();
-            }
-
-            services.AddSingleton<ISmtpClientFactory, SmtpClientFactory>();
-            services.AddSingleton<IMessageSender<MailMessage>, SmtpMessageSender>();
-
-            services.Configure<SmtpSettings>(configuration.GetSection(nameof(SmtpSettings)));
-            services.Configure<RewriteReceiversSettings>(configuration.GetSection(nameof(RewriteReceiversSettings)));
-        }
+        public void AddNotification(IConfiguration configuration, Action<INotificationSetup>? setupAction = null)
+            => services.Initialize<IServiceCollection, NotificationSetup>(new NotificationSetup(configuration), setupAction);
     }
 }

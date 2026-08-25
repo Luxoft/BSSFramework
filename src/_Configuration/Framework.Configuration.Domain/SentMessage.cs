@@ -36,7 +36,7 @@ public class SentMessage : AuditPersistentDomainObjectBase
     /// <param name="copy">Дополнительные получатели в копии письма</param>
     /// <param name="contextObjectType">Доменный тип, на который зарегистрирована подписка</param>
     /// <param name="contextObjectId">ID доменного типа, на который зарегистрирована подписка</param>
-    public SentMessage(string @from, string to, string subject, string message, string templateName, string comment, string copy, string contextObjectType, Guid? contextObjectId, string replyTo)
+    public SentMessage(string @from, string to, string subject, string message, string templateName, string comment, string copy, string? contextObjectType, Guid? contextObjectId, string replyTo)
     {
         this.from = from;
         this.contextObjectId = contextObjectId;

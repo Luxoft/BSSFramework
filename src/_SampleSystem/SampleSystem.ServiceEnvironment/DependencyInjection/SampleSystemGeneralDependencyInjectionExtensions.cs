@@ -1,7 +1,9 @@
 ﻿using Anch.Core;
 
 using Framework.Authorization.Environment;
+using Framework.Configuration.BLL.Notification;
 using Framework.Infrastructure.DependencyInjection;
+using Framework.Notification.DependencyInjection;
 using Framework.Subscriptions.DependencyInjection;
 
 using Microsoft.Extensions.Configuration;
@@ -51,11 +53,12 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
 
                     .AddListeners()
 
-                    // Legacy
+                    .AddNotification(configuration, ns => ns.SetSender<LocalDbNotificationMessageSender>())
 
+                    // Legacy
                     .AddSubscriptions(
-                        (Employee e) => e.Email,
-                        [typeof(SampleSystem.Subscriptions.Metadata.Employee.Update.EmployeeUpdateSubscription).Assembly])
+                        [typeof(SampleSystem.Subscriptions.Metadata.Employee.Update.EmployeeUpdateSubscription).Assembly],
+                        (Employee e) => e.Email)
 
                     .AddSubscriptionManagers()
                     .AddLegacyGenericServices()

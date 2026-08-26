@@ -18,6 +18,7 @@ public sealed class AuditOptionsExtension() : IDbContextOptionsExtension
         services.AddSingleton<IAuditEntityFactory, AuditEntityFactory>();
         services.AddSingleton<IModelCustomizer, AuditModelCustomizer>();
         services.AddSingleton<IAuditInfoResolver, AuditInfoResolver>();
+        services.AddSingleton<IAuditableEntityFilter, AuditableEntityFilter>();
         services.AddSingleton(MainSchemaInfo.Default);
     }
 

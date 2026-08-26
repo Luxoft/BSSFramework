@@ -17,6 +17,7 @@ public class TestEmployeeMap : IEntityTypeConfiguration<TestEmployee>
         builder.Property(x => x.Login).IsRequired();
         builder.Property(x => x.NameEngFirstName).HasColumnName("nameEngfirstName").HasMaxLength(50).IsRequired();
         builder.Ignore(x => x.CoreBusinessUnit);
+        builder.Ignore(x => x.CoreBusinessUnitProjects);
         builder.HasOne(x => x.CoreBusinessUnit_Auto).WithMany().HasForeignKey("coreBusinessUnitId").OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.Position_Auto).WithMany().HasForeignKey("positionId").OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.Ppm_Auto).WithMany().HasForeignKey("ppmId").OnDelete(DeleteBehavior.Restrict);

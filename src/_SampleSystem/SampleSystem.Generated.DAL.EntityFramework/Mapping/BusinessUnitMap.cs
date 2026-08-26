@@ -21,5 +21,10 @@ public class BusinessUnitMap : SampleSystemBaseMap<BusinessUnit>
         builder.HasOne(x => x.Parent).WithMany(x => x.Children).HasForeignKey("parentId").OnDelete(DeleteBehavior.Restrict);
         builder.HasMany(x => x.BusinessUnitEmployeeRoles).WithOne(x => x.BusinessUnit).HasForeignKey("businessUnitId").OnDelete(DeleteBehavior.Cascade);
         builder.HasMany(x => x.ManagerCommissions).WithOne(x => x.BusinessUnit).HasForeignKey("businessUnitId").OnDelete(DeleteBehavior.Cascade);
+        builder.Ignore(x => x.AccountOrDivision);
+        builder.Ignore(x => x.LobOrService);
+        builder.Ignore(x => x.Account);
+        builder.Ignore(x => x.Program);
+        builder.Ignore(x => x.Lob);
     }
 }

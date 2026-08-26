@@ -28,7 +28,8 @@ public class AuditSetup : IAuditSetup, IServiceInitializer
         services.AddSingleton<IAuditEntityFactory, AuditEntityFactory>();
         services.AddSingleton<IModelCustomizer, AuditModelCustomizer>();
         services.AddSingleton<IAuditInfoResolver, AuditInfoResolver>();
-        services.AddSingleton(MainSchemaInfo.Default);
+        services.AddSingleton<IAuditTypeNameResolver, AuditTypeNameResolver>();
+        services.AddSingleton(MainAuditSchemaInfo.Default);
 
         this.initFilterAction(services);
     }

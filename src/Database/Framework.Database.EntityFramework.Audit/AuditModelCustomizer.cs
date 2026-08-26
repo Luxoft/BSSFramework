@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Framework.Database.EntityFramework.Audit;
 
@@ -8,7 +10,7 @@ public class AuditModelCustomizer(
     ModelCustomizerDependencies dependencies,
     IAuditInfoResolver auditInfoResolver,
     IAuditableEntityFilter auditableEntityFilter,
-    MainSchemaInfo mainSchemaInfo) : ModelCustomizer(dependencies)
+    MainAuditSchemaInfo mainSchemaInfo) : ModelCustomizer(dependencies)
 {
     private const string RevisionColumnName = "REV";
 
@@ -27,7 +29,7 @@ public class AuditModelCustomizer(
         var auditableEntityTypes = modelBuilder
                                    .Model
                                    .GetEntityTypes()
-                                   .Where(entityType => entityType.ClrType != typeof(AuditRevisionEntity))
+                                   .Where(entityType => entityType.GetViewName() == null)
                                    .Where(auditableEntityFilter.IsAuditable)
                                    .ToArray();
 

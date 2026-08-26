@@ -15,5 +15,6 @@ public class TestSecuritySubObjItem2Map : SampleSystemBaseMap<TestSecuritySubObj
         builder.ToTable("TestSecuritySubObjItem2");
         builder.Property(x => x.Name).IsRequired();
         builder.HasOne(x => x.InnerMaster).WithMany(x => x.Items2).HasForeignKey("innerMasterId").OnDelete(DeleteBehavior.Restrict);
+        builder.Ignore(x => x.RootSecurityObj);
     }
 }

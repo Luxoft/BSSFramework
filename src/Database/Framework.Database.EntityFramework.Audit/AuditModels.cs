@@ -3,7 +3,7 @@ using System.Reflection.Emit;
 
 namespace Framework.Database.EntityFramework.Audit;
 
-public sealed class AuditEntityFactory : IAuditEntityFactory
+public sealed class AuditEntityFactory(IAuditTypeNameResolver auditTypeNameResolver) : IAuditEntityFactory
 {
     public string RevisionIdPropertyName => "AuditRevisionId";
     public string RevisionPropertyName => "AuditRevision";
@@ -28,7 +28,7 @@ public sealed class AuditEntityFactory : IAuditEntityFactory
 
             var auditProperties = properties.ToArray();
             var typeBuilder = this.moduleBuilder.DefineType(
-                $"{entityType.Namespace}.{entityType.Name}Audit",
+                $"{entityType.Namespace}.{auditTypeNameResolver.GetName(entityType)}",
                 TypeAttributes.Public | TypeAttributes.Class);
 
             typeBuilder.DefineDefaultConstructor(MethodAttributes.Public);

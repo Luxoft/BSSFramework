@@ -1,6 +1,6 @@
 ﻿namespace Framework.Database.EntityFramework.Audit;
 
-public record MainSchemaInfo(string Name)
+public record MainAuditSchemaInfo(string Name)
 {
-    public static MainSchemaInfo Default = new("App");
+    public static MainAuditSchemaInfo Default = new("AppAudit");
 }

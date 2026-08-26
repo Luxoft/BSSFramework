@@ -16,6 +16,8 @@ public class SampleSystemAuditRevisionEntityMap : IEntityTypeConfiguration<Sampl
         builder.Property(x => x.Id).HasColumnName("Id").ValueGeneratedOnAdd().IsRequired();
         builder.Property(x => x.Author).HasColumnName("author").IsRequired();
         builder.Property(x => x.RevisionDate).HasColumnName("RevisionDate").IsRequired();
-        builder.HasOne(typeof(AuditRevisionEntity)).WithOne().HasForeignKey(typeof(SampleSystemAuditRevisionEntity), nameof(SampleSystemAuditRevisionEntity.Id));
+        builder.HasOne(typeof(AuditRevisionEntity)).WithOne().HasForeignKey(
+            typeof(SampleSystemAuditRevisionEntity),
+            nameof(SampleSystemAuditRevisionEntity.Id));
     }
 }

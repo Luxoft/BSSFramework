@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Framework.Database.EntityFramework.Audit;
 
@@ -25,6 +23,19 @@ public class AuditModelCustomizer(
             revision.HasKey(entity => entity.Id);
             revision.ToTable(nameof(AuditRevisionEntity), mainSchemaInfo.Name);
         });
+
+        var revisionTypedProjections = modelBuilder
+                                       .Model
+                                       .GetEntityTypes()
+                                       .Where(entityType => entityType.ClrType != typeof(AuditRevisionEntity))
+                                       .Where(entityType => string.Equals(entityType.GetTableName(), nameof(AuditRevisionEntity), StringComparison.OrdinalIgnoreCase))
+                                       .Where(entityType => string.Equals(entityType.GetSchema(), mainSchemaInfo.Name, StringComparison.OrdinalIgnoreCase))
+                                       .ToArray();
+
+        foreach (var typedProjection in revisionTypedProjections)
+        {
+            modelBuilder.Entity(typedProjection.ClrType).ToTable(nameof(AuditRevisionEntity), mainSchemaInfo.Name);
+        }
 
         var auditableEntityTypes = modelBuilder
                                    .Model

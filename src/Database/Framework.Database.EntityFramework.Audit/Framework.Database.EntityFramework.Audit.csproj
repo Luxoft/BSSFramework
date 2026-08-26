@@ -13,8 +13,4 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Framework.Database.Legacy.Domain\Framework.Database.Legacy.Domain.csproj" />
-  </ItemGroup>
-
 </Project>

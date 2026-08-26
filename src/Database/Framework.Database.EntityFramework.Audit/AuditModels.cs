@@ -1,8 +1,6 @@
 ﻿using System.Reflection;
 using System.Reflection.Emit;
 
-using Framework.Database.Domain;
-
 namespace Framework.Database.EntityFramework.Audit;
 
 public sealed class AuditEntityFactory : IAuditEntityFactory

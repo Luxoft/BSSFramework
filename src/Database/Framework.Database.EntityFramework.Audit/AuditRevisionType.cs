@@ -1,4 +1,4 @@
-﻿namespace Framework.Database.Domain;
+﻿namespace Framework.Database.EntityFramework.Audit;
 
 public enum AuditRevisionType
 {

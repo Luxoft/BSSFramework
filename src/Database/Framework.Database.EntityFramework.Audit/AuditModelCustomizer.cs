@@ -36,10 +36,9 @@ public class AuditModelCustomizer(
             var (auditSchema, auditTableName) = auditInfoResolver.GetInfo(entityType);
 
             auditEntity.ToTable(auditTableName, auditSchema);
-            auditEntity.HasKey(
-                primaryKey.Properties.Select(property => property.Name)
-                          .Append(auditEntityFactory.RevisionIdPropertyName)
-                          .ToArray());
+            auditEntity.HasKey(keyPropertyNames.Append(auditEntityFactory.RevisionIdPropertyName).ToArray());
+            auditEntity.Property(auditEntityFactory.RevisionIdPropertyName).HasColumnName(RevisionColumnName);
+            auditEntity.Property(auditEntityFactory.RevisionTypePropertyName).HasColumnName(RevisionTypeColumnName);
             auditEntity
                 .HasOne(typeof(AuditRevisionEntity), auditEntityFactory.RevisionPropertyName)
                 .WithMany()

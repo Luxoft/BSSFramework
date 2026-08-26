@@ -1,7 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
 
-using Framework.Database.Domain;
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;

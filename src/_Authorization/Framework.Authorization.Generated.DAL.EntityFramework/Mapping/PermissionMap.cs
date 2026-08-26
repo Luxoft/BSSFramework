@@ -39,11 +39,6 @@ public class PermissionMap : AuthBaseMap<Permission>
                 period.Property(x => x.StartDate).HasColumnName("periodstartDate").IsRequired();
             });
 
-        builder.HasMany(x => x.DelegatedTo)
-            .WithOne(x => x.DelegatedFrom)
-            .HasForeignKey("DelegatedFromId")
-            .OnDelete(DeleteBehavior.Cascade);
-
         builder.HasMany(x => x.Restrictions)
             .WithOne(x => x.Permission)
             .HasForeignKey("PermissionId")

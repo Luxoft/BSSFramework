@@ -9,7 +9,7 @@ public class TestObjForNestedBaseMap : SampleSystemBaseMap<TestObjForNestedBase>
     public override void Configure(EntityTypeBuilder<TestObjForNestedBase> builder)
     {
         base.Configure(builder);
-        builder.Property(x => x.Name).IsRequired();
+        builder.Property(x => x.Name).HasColumnName("name").IsRequired();
         builder.ComplexProperty(x => x.Period, period => { period.Property(x => x.EndDate).HasColumnName("periodendDate"); period.Property(x => x.StartDate).HasColumnName("periodstartDate"); });
     }
 }

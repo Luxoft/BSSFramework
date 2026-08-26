@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+using SampleSystem.Domain.Directories;
 using SampleSystem.Domain.Projections;
 
 namespace SampleSystem.Generated.DAL.EntityFramework.Mapping;
@@ -12,6 +13,7 @@ public class TestBusinessUnitTypeMap : IEntityTypeConfiguration<TestBusinessUnit
         builder.ToTable("BusinessUnitType", "dbo");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
+        builder.HasOne(typeof(BusinessUnitType)).WithOne().HasForeignKey(typeof(TestBusinessUnitType), nameof(TestBusinessUnitType.Id));
         builder.Property(x => x.Name).IsRequired();
     }
 }

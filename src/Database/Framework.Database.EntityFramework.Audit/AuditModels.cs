@@ -7,9 +7,9 @@ namespace Framework.Database.EntityFramework.Audit;
 
 public sealed class AuditEntityFactory : IAuditEntityFactory
 {
-    public string RevisionIdPropertyName => "RevisionId";
-    public string RevisionPropertyName => "Revision";
-    public string RevisionTypePropertyName => "RevisionType";
+    public string RevisionIdPropertyName => "AuditRevisionId";
+    public string RevisionPropertyName => "AuditRevision";
+    public string RevisionTypePropertyName => "AuditRevisionType";
 
     private readonly ModuleBuilder moduleBuilder = AssemblyBuilder
         .DefineDynamicAssembly(new AssemblyName("EF.Audit.DynamicAudits"), AssemblyBuilderAccess.Run)

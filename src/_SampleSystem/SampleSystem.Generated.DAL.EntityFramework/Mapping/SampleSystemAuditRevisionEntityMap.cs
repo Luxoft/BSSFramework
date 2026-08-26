@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Framework.Database.EntityFramework.Audit;
+
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using SampleSystem.AuditDomain;
@@ -11,8 +13,9 @@ public class SampleSystemAuditRevisionEntityMap : IEntityTypeConfiguration<Sampl
     {
         builder.ToTable("AuditRevisionEntity", "appAudit");
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).HasColumnName("id").ValueGeneratedOnAdd().IsRequired();
+        builder.Property(x => x.Id).HasColumnName("Id").ValueGeneratedOnAdd().IsRequired();
         builder.Property(x => x.Author).HasColumnName("author").IsRequired();
         builder.Property(x => x.RevisionDate).HasColumnName("RevisionDate").IsRequired();
+        builder.HasOne(typeof(AuditRevisionEntity)).WithOne().HasForeignKey(typeof(SampleSystemAuditRevisionEntity), nameof(SampleSystemAuditRevisionEntity.Id));
     }
 }

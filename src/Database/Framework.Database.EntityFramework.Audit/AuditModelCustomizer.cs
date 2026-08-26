@@ -34,7 +34,11 @@ public class AuditModelCustomizer(
                         primaryKey.Properties.Contains(property))));
             var auditEntity = modelBuilder.Entity(metadata.AuditEntityType);
 
-            auditEntity.ToTable($"{entityType.ClrType.Name}Audits", auditInfo.SchemaName);
+            var sourceSchema = entityType.GetSchema();
+            var auditTableName = string.IsNullOrEmpty(sourceSchema)
+                ? $"{entityType.ClrType.Name}Audits"
+                : $"{sourceSchema}_{entityType.ClrType.Name}Audits";
+            auditEntity.ToTable(auditTableName, auditInfo.SchemaName);
             auditEntity.HasKey(
                 primaryKey.Properties.Select(property => property.Name)
                     .Append(auditEntityFactory.RevisionIdPropertyName)

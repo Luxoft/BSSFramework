@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.Projections;
 
 namespace SampleSystem.Generated.DAL.EntityFramework.Mapping;
@@ -12,6 +13,7 @@ public class TestIMRequestDetailMap : IEntityTypeConfiguration<TestIMRequestDeta
         builder.ToTable("IMRequestDetail", "dbo");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.HasOne(x => x.Request).WithOne(x => x.OneToOneDetail).HasForeignKey<TestIMRequestDetail>("requestId").IsRequired().OnDelete(DeleteBehavior.Cascade);
+        builder.HasOne(x => x.Request).WithOne(x => x.OneToOneDetail).HasForeignKey<TestIMRequestDetail>("requestId").IsRequired().OnDelete(DeleteBehavior.ClientCascade);
+        builder.HasOne(typeof(IMRequestDetail)).WithOne().HasForeignKey(typeof(TestIMRequestDetail), nameof(TestIMRequestDetail.Id));
     }
 }

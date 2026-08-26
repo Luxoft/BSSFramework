@@ -10,10 +10,12 @@ namespace SampleSystem.DbGenerate.EntityFramework;
 public class DbGeneratorTest
 {
     [Fact]
-    public void GenerateLocal() => this.GenerateAllDB(@".");
+    public Task GenerateLocal() => this.GenerateAllDb(@".", nameof(SampleSystem), TestContext.Current.CancellationToken);
 
-    public void GenerateDatabase(DbGenerationOptions options)
+    public async Task GenerateDatabase(DbGenerationOptions options)
     {
+        var ct = TestContext.Current.CancellationToken;
+
         if (string.IsNullOrWhiteSpace(options.Server))
         {
             throw new ArgumentException("Server name is empty");
@@ -26,17 +28,17 @@ public class DbGeneratorTest
 
         Console.WriteLine($"Generate database:'{options.DataBase}' on {options.Server}");
 
-        this.GenerateAllDB(options.Server, options.DataBase);
+        await this.GenerateAllDb(options.Server, options.DataBase, ct);
     }
 
-    public void GenerateAllDB(string serverName, string mainDatabaseName = nameof(SampleSystem))
+    public async Task GenerateAllDb(string serverName, string mainDatabaseName, CancellationToken ct)
     {
-        var connectionString = $"Data Source={serverName};Initial Catalog={mainDatabaseName};Application Name=SampleSystem";
+        var connectionString = $"Data Source={serverName};Initial Catalog={mainDatabaseName};Integrated Security=True;Application Name=SampleSystem;TrustServerCertificate=true";
         var optionsBuilder = new DbContextOptionsBuilder<SampleSystemDbContext>();
         optionsBuilder.UseSqlServer(connectionString);
         optionsBuilder.AddAudit();
 
-        using var context = new SampleSystemDbContext(optionsBuilder.Options);
-        context.Database.EnsureCreated();
+        await using var context = new SampleSystemDbContext(optionsBuilder.Options);
+        await context.Database.EnsureCreatedAsync(ct);
     }
 }

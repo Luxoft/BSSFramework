@@ -12,6 +12,9 @@ public class SampleSystemDbContext(DbContextOptions<SampleSystemDbContext> optio
 {
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        builder.Ignore<SampleSystem.Domain.Inline.Fio>();
+        builder.Ignore<SampleSystem.Domain.Inline.FioShort>();
+
         builder.ApplyConfigurationsFromAssembly(typeof(AuthBaseMap<>).Assembly);
         builder.ApplyConfigurationsFromAssembly(typeof(ConfigurationBaseMap<>).Assembly);
         builder.ApplyConfigurationsFromAssembly(typeof(SampleSystemBaseMap<>).Assembly);

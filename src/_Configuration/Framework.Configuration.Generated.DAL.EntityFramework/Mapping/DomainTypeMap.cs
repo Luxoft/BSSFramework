@@ -13,15 +13,16 @@ public class DomainTypeMap : ConfigurationBaseMap<DomainType>
         base.Configure(builder);
 
         builder.Property(x => x.Name).IsRequired();
-        builder.HasIndex("Name", "Namespace", "TargetSystemId")
-            .IsUnique()
-            .HasDatabaseName("UIX_name_nameSpace_targetSystemDomainType");
 
         builder.HasOne(x => x.TargetSystem)
             .WithMany(x => x.DomainTypes)
             .HasForeignKey("TargetSystemId")
             .IsRequired()
             .OnDelete(Microsoft.EntityFrameworkCore.DeleteBehavior.Restrict);
+
+        builder.HasIndex("Name", "Namespace", "TargetSystemId")
+            .IsUnique()
+            .HasDatabaseName("UIX_name_nameSpace_targetSystemDomainType");
 
         builder.HasMany(x => x.EventOperations)
             .WithOne(x => x.DomainType)

@@ -69,7 +69,7 @@ public partial class Employee :
     private DateTime? lastActionDate;
     private string? interphone;
     private string? landlinephone;
-    private Employee vacationApprover = null!;
+    private Employee? vacationApprover;
 
     // ReSharper disable once InconsistentNaming
     private bool canBePPM;
@@ -331,7 +331,7 @@ public partial class Employee :
     }
 
     [Obsolete("#IAD-20612")]
-    public virtual Employee VacationApprover
+    public virtual Employee? VacationApprover
     {
         get => this.vacationApprover;
         set => this.vacationApprover = value;

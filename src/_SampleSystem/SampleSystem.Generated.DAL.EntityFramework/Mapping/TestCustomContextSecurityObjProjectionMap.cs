@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+using SampleSystem.Domain;
 using SampleSystem.Domain.Projections;
 
 namespace SampleSystem.Generated.DAL.EntityFramework.Mapping;
@@ -12,6 +13,7 @@ public class TestCustomContextSecurityObjProjectionMap : IEntityTypeConfiguratio
         builder.ToTable("TestCustomContextSecurityObj", "dbo");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
+        builder.HasOne(typeof(TestCustomContextSecurityObj)).WithOne().HasForeignKey(typeof(TestCustomContextSecurityObjProjection), nameof(TestCustomContextSecurityObjProjection.Id));
         builder.Property(x => x.Name).IsRequired();
     }
 }

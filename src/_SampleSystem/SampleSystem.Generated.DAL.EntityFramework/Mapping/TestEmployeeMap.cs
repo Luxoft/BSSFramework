@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.Projections;
 
 namespace SampleSystem.Generated.DAL.EntityFramework.Mapping;
@@ -12,9 +13,10 @@ public class TestEmployeeMap : IEntityTypeConfiguration<TestEmployee>
         builder.ToTable("Employee", "dbo");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
+        builder.HasOne(typeof(Employee)).WithOne().HasForeignKey(typeof(TestEmployee), nameof(TestEmployee.Id));
         builder.Property(x => x.Login).IsRequired();
-        builder.Property(x => x.NameEngFirstName).IsRequired();
-        builder.HasOne(x => x.CoreBusinessUnit).WithMany().HasForeignKey("coreBusinessUnitId").OnDelete(DeleteBehavior.Restrict);
+        builder.Property(x => x.NameEngFirstName).HasColumnName("nameEngfirstName").HasMaxLength(50).IsRequired();
+        builder.Ignore(x => x.CoreBusinessUnit);
         builder.HasOne(x => x.CoreBusinessUnit_Auto).WithMany().HasForeignKey("coreBusinessUnitId").OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.Position_Auto).WithMany().HasForeignKey("positionId").OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.Ppm_Auto).WithMany().HasForeignKey("ppmId").OnDelete(DeleteBehavior.Restrict);

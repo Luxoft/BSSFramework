@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.ManualProjections;
 
 namespace SampleSystem.Generated.DAL.EntityFramework.Mapping;
@@ -12,7 +13,8 @@ public class TestManualEmployeeProjectionMap : IEntityTypeConfiguration<TestManu
         builder.ToTable("Employee", "dbo");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.Property(x => x.CoreBusinessUnitId).IsRequired();
+        builder.HasOne(typeof(Employee)).WithOne().HasForeignKey(typeof(TestManualEmployeeProjection), nameof(TestManualEmployeeProjection.Id));
+        builder.Property(x => x.CoreBusinessUnitId).HasColumnName("coreBusinessUnitId").IsRequired();
         builder.Property(x => x.Login).IsRequired();
     }
 }

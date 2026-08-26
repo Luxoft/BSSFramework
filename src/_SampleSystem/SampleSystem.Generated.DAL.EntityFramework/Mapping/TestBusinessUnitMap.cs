@@ -13,9 +13,9 @@ public class TestBusinessUnitMap : IEntityTypeConfiguration<TestBusinessUnit>
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.Property(x => x.Name).IsRequired();
-        builder.Property(x => x.PeriodEndDate).IsRequired();
+        builder.Property(x => x.PeriodEndDate).HasColumnName("periodendDate").IsRequired();
         builder.HasOne(x => x.Her).WithMany().HasForeignKey("Id").OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.Parent_Auto).WithMany().HasForeignKey("parentId").OnDelete(DeleteBehavior.Restrict);
-        builder.HasMany(x => x.BusinessUnitEmployeeRoles).WithOne(x => x.BusinessUnit).HasForeignKey("businessUnitId").OnDelete(DeleteBehavior.Cascade);
+        builder.HasMany(x => x.BusinessUnitEmployeeRoles).WithOne(x => x.BusinessUnit).HasForeignKey("businessUnitId").OnDelete(DeleteBehavior.ClientCascade);
     }
 }

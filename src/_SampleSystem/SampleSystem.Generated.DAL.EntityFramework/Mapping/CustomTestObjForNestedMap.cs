@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+using SampleSystem.Domain.Directories;
 using SampleSystem.Domain.Projections;
 
 namespace SampleSystem.Generated.DAL.EntityFramework.Mapping;
@@ -9,13 +10,11 @@ public class CustomTestObjForNestedMap : IEntityTypeConfiguration<CustomTestObjF
 {
     public void Configure(EntityTypeBuilder<CustomTestObjForNested> builder)
     {
-        builder.ToTable("TestObjForNested", "dbo");
+        builder.ToTable("TestObjForNestedBase", "dbo");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.SplitToTable("TestObjForNestedBase", split =>
-        {
-            split.Property(x => x.Name).HasColumnName("name");
-            split.Property(x => x.PeriodStartDateXXX).HasColumnName("periodStartDate");
-        });
+        builder.HasOne(typeof(TestObjForNestedBase)).WithOne().HasForeignKey(typeof(CustomTestObjForNested), nameof(CustomTestObjForNested.Id));
+        builder.Property(x => x.Name).HasColumnName("name");
+        builder.Property(x => x.PeriodStartDateXXX).HasColumnName("periodstartDate");
     }
 }

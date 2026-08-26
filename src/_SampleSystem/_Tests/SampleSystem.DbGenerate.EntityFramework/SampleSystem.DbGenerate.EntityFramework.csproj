@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <!--<OutputType>Exe</OutputType>-->
     <IsPackable>false</IsPackable>
-    <StartupObject>SampleSystem.DbGenerate.EntityFramework.Program</StartupObject>
+    <!--<StartupObject>SampleSystem.DbGenerate.EntityFramework.Program</StartupObject>-->
   </PropertyGroup>
 
   <ItemGroup>

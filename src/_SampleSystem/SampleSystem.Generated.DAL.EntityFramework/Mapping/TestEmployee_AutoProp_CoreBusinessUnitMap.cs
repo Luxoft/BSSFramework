@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Projections;
 
 namespace SampleSystem.Generated.DAL.EntityFramework.Mapping;
@@ -12,6 +13,7 @@ public class TestEmployeeAutoPropCoreBusinessUnitMap : IEntityTypeConfiguration<
         builder.ToTable("BusinessUnit", "dbo");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
+        builder.HasOne(typeof(BusinessUnit)).WithOne().HasForeignKey(typeof(TestEmployee_AutoProp_CoreBusinessUnit), nameof(TestEmployee_AutoProp_CoreBusinessUnit.Id));
         builder.Property(x => x.Name_Last_CoreBusinessUnitName);
         builder.Property(x => x.PeriodEndDate_Last_BuEndDate);
         builder.HasMany(x => x.Projects_Last_CoreBusinessUnitProjects).WithOne().HasForeignKey("businessUnitId").OnDelete(DeleteBehavior.Cascade);

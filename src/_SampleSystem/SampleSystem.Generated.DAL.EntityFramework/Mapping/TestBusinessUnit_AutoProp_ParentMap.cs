@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Projections;
 
 namespace SampleSystem.Generated.DAL.EntityFramework.Mapping;
@@ -12,6 +13,7 @@ public class TestBusinessUnitAutoPropParentMap : IEntityTypeConfiguration<TestBu
         builder.ToTable("BusinessUnit", "dbo");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
+        builder.HasOne(typeof(BusinessUnit)).WithOne().HasForeignKey(typeof(TestBusinessUnit_AutoProp_Parent), nameof(TestBusinessUnit_AutoProp_Parent.Id));
         builder.Property(x => x.PeriodStartDate_Last_ParentPeriodStartDate).IsRequired();
         builder.ComplexProperty(x => x.Period_Last_ParentPeriod, period =>
         {

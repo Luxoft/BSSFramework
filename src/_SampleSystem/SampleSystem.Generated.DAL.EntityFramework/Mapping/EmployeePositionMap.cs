@@ -13,6 +13,6 @@ public class EmployeePositionMap : SampleSystemBaseMap<EmployeePosition>
         builder.Property(x => x.EnglishName).IsRequired();
         builder.Property(x => x.ExternalId).IsRequired();
         builder.HasOne(x => x.Location).WithMany().HasForeignKey("locationId").IsRequired().OnDelete(DeleteBehavior.Restrict);
-        builder.HasIndex("englishName", "locationId", "name").IsUnique().HasDatabaseName("UIX_englishName_location_nameEmployeePosition");
+        builder.HasIndex(nameof(EmployeePosition.EnglishName), "locationId", nameof(EmployeePosition.Name)).IsUnique().HasDatabaseName("UIX_englishName_location_nameEmployeePosition");
     }
 }

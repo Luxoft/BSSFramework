@@ -13,6 +13,5 @@ public class EmployeeCellPhoneBaseMap : SampleSystemBaseMap<EmployeeCellPhoneBas
         builder.Property(x => x.CityCode).HasMaxLength(5).IsRequired();
         builder.Property(x => x.Number).HasMaxLength(7).IsRequired();
         builder.Property(x => x.FullNumber).HasMaxLength(18).IsRequired();
-        builder.HasOne(x => x.Employee).WithMany().HasForeignKey("employeeId").IsRequired().OnDelete(DeleteBehavior.Cascade);
     }
 }

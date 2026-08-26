@@ -12,6 +12,7 @@ public class ManagementUnitToAncestorChildViewMap : SampleSystemBaseMap<Manageme
     public override void Configure(EntityTypeBuilder<ManagementUnitToAncestorChildView> builder)
     {
         base.Configure(builder);
+        builder.ToTable(default(string?));
         builder.ToView(nameof(ManagementUnitToAncestorChildView));
         builder.HasOne(x => x.ChildOrAncestor).WithMany().HasForeignKey("childOrAncestorId").IsRequired().OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.Source).WithMany().HasForeignKey("sourceId").IsRequired().OnDelete(DeleteBehavior.Restrict);

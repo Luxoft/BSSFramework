@@ -15,7 +15,7 @@ public class SampleSystemEntityFrameworkExtension : IBssFrameworkExtension
     public void AddServices(IServiceCollection services) =>
         services.AddDbContext<SampleSystemDbContext>((sp, options) => options
                                                                       .UseSqlServer(sp.GetRequiredService<IDefaultConnectionStringSource>().ConnectionString)
-                                                                      //.UseLazyLoadingProxies()
+                                                                      .UseLazyLoadingProxies()
                                                                       .AddAudit(auditSetup =>
                                                                                     auditSetup.SetFilter(et => !et.ClrType.IsProjection()
                                                                                                              && !et.ClrType

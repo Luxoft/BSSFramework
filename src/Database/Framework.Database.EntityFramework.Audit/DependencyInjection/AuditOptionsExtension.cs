@@ -5,17 +5,20 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Framework.Database.EntityFramework.Audit.DependencyInjection;
 
-public sealed class AuditOptionsExtension(string auditSchema) : IDbContextOptionsExtension
+public sealed class AuditOptionsExtension() : IDbContextOptionsExtension
 {
     public DbContextOptionsExtensionInfo Info => field ??= new ExtensionInfo(this);
 
     public void ApplyServices(IServiceCollection services)
     {
         services.TryAddSingleton(TimeProvider.System);
-        services.TryAddSingleton<IAuditEntityFactory, AuditEntityFactory>();
-        services.TryAddSingleton(new AuditInfo(auditSchema));
-        services.TryAddScoped<IInterceptor, AuditFlushInterceptor>();
+
+        services.AddScoped<IInterceptor, AuditFlushInterceptor>();
+
+        services.AddSingleton<IAuditEntityFactory, AuditEntityFactory>();
         services.AddSingleton<IModelCustomizer, AuditModelCustomizer>();
+        services.AddSingleton<IAuditInfoResolver, AuditInfoResolver>();
+        services.AddSingleton(MainSchemaInfo.Default);
     }
 
     public void Validate(IDbContextOptions options)

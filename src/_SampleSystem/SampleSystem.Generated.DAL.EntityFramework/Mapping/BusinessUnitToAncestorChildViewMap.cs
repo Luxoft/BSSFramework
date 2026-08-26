@@ -12,7 +12,7 @@ public class BusinessUnitToAncestorChildViewMap : SampleSystemBaseMap<BusinessUn
     public override void Configure(EntityTypeBuilder<BusinessUnitToAncestorChildView> builder)
     {
         base.Configure(builder);
-        builder.ToTable("BusinessUnitToAncestorChildView", table => table.ExcludeFromMigrations());
+        builder.ToView(nameof(BusinessUnitToAncestorChildView));
         builder.HasOne(x => x.ChildOrAncestor).WithMany().HasForeignKey("childOrAncestorId").IsRequired().OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.Source).WithMany().HasForeignKey("sourceId").IsRequired().OnDelete(DeleteBehavior.Restrict);
     }

@@ -11,16 +11,15 @@ public class BssFluentMigrator
     private readonly IServiceProvider serviceProvider;
 
     public BssFluentMigrator(string connectionString, params Assembly[] migrationAssemblies) =>
-            this.serviceProvider = new ServiceCollection()
-                                   .AddFluentMigratorCore()
-                                   .ConfigureRunner(
-                                                    rb => rb
-                                                          .AddSqlServer()
-                                                          .WithGlobalConnectionString(connectionString)
-                                                          .ScanIn(migrationAssemblies)
-                                                          .For.Migrations())
-                                   .AddLogging(lb => lb.AddFluentMigratorConsole())
-                                   .BuildServiceProvider(false);
+        this.serviceProvider = new ServiceCollection()
+                               .AddFluentMigratorCore()
+                               .ConfigureRunner(rb => rb
+                                                      .AddSqlServer()
+                                                      .WithGlobalConnectionString(connectionString)
+                                                      .ScanIn(migrationAssemblies.DefaultIfEmpty(typeof(BssFluentMigrator).Assembly).ToArray())
+                                                      .For.Migrations())
+                               .AddLogging(lb => lb.AddFluentMigratorConsole())
+                               .BuildServiceProvider(false);
 
     public void Migrate()
     {

@@ -36,7 +36,7 @@ public class UseSchemeUpdateTest
 
     private static void RunFluentMigrator(string connectionString)
     {
-        var migrator = new BssFluentMigrator(connectionString, typeof(AddLogTable).Assembly);
+        var migrator = new BssFluentMigrator(connectionString);
 
         migrator.Migrate();
     }

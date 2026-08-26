@@ -40,5 +40,7 @@ public class DbGeneratorTest
 
         await using var context = new SampleSystemDbContext(optionsBuilder.Options);
         await context.Database.EnsureCreatedAsync(ct);
+
+        new BssFluentMigrator(connectionString).Migrate();
     }
 }

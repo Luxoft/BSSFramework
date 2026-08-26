@@ -25,7 +25,7 @@
   <!-- Anch -->
   <ItemGroup>
     <PackageVersion Include="Anch.Testing.Database.Configuration" Version="$(Anch)" />
-    <PackageVersion Include="Anch.Testing.Xunit" Version="$(Anch)" />
+    <PackageVersion Include="Anch.Testing.Xunit" Version="3.7.10" />
     <PackageVersion Include="Anch.Core" Version="$(Anch)" />
     <PackageVersion Include="Anch.DependencyInjection" Version="3.7.10" />
     <PackageVersion Include="Anch.GenericRepository" Version="$(Anch)" />

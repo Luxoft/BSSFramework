@@ -1,4 +1,6 @@
-﻿namespace Framework.Database.EntityFramework.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Framework.Database.EntityFramework.DependencyInjection;
 
 public interface IEntityFrameworkSetup
 {
@@ -7,6 +9,9 @@ public interface IEntityFrameworkSetup
     //bool AddDefaultInitializer { get; set; }
 
     //bool AutoAddFluentMapping { get; set; }
+
+    IEntityFrameworkSetup SetDbContext<TDbContext>()
+        where TDbContext : DbContext;
 
     IEntityFrameworkSetup AddExtension(IEntityFrameworkSetupExtension extension);
 }

@@ -7,6 +7,7 @@ using SampleSystem.IntegrationTests._Environment;
 using SampleSystem.ServiceEnvironment.DependencyInjection;
 
 [assembly: AnchTestFramework<EntityFrameworkTestEnvironment>]
+[assembly: CollectionBehavior(DisableTestParallelization = true)]
 
 namespace SampleSystem.IntegrationTests._Environment;
 

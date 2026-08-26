@@ -1,22 +1,24 @@
 ﻿using Anch.Core;
+using Anch.Testing.Xunit;
 
 using Framework.Core;
 using Framework.Database;
 using Framework.Database.ConnectionStringSource;
-using Framework.Database.EntityFramework.Audit.DependencyInjection;
+using Framework.Database.Domain;
 
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.DbGenerate.NHibernate;
 using SampleSystem.ServiceEnvironment.DependencyInjection;
 
+[assembly: AnchTestFramework]
+
 namespace SampleSystem.DbGenerate.EntityFramework;
 
 public class DbGeneratorTest
 {
-    [Fact]
-    public Task GenerateLocal() => this.GenerateAllDb(@".", nameof(SampleSystem), TestContext.Current.CancellationToken);
+    [AnchFact]
+    public Task GenerateLocal(CancellationToken ct) => this.GenerateAllDb(@".", nameof(SampleSystem), null, ct);
 
     public async Task GenerateDatabase(DbGenerationOptions options)
     {
@@ -34,13 +36,15 @@ public class DbGeneratorTest
 
         Console.WriteLine($"Generate database:'{options.DataBase}' on {options.Server}");
 
-        await this.GenerateAllDb(options.Server, options.DataBase, ct);
+        await this.GenerateAllDb(options.Server, options.DataBase, null, ct);
     }
 
-    public async Task GenerateAllDb(string serverName, string mainDatabaseName, CancellationToken ct)
+    public async Task GenerateAllDb(string serverName, string mainDatabaseName, DbUserCredential? credentials, CancellationToken ct)
     {
+        var credStr = credentials == null ? "Integrated Security=True" : $"User ID={credentials.UserName};Password={credentials.Password}";
+
         var connectionString =
-            $"Data Source={serverName};Initial Catalog={mainDatabaseName};Integrated Security=True;Application Name=SampleSystem;TrustServerCertificate=true";
+            $"Data Source={serverName};Initial Catalog={mainDatabaseName};{credStr};Application Name=SampleSystem;TrustServerCertificate=true";
 
         var rootServiceProvider = new ServiceCollection()
                                   .AddSingleton<IDefaultConnectionStringSource>(new ManualDefaultConnectionStringSource(connectionString))

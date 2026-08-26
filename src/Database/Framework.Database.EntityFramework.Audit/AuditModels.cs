@@ -66,7 +66,7 @@ public sealed class AuditEntityFactory : IAuditEntityFactory
         var property = typeBuilder.DefineProperty(name, PropertyAttributes.None, propertyType, null);
         var getter = typeBuilder.DefineMethod(
             $"get_{name}",
-            MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig,
+            MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.SpecialName | MethodAttributes.HideBySig,
             propertyType,
             Type.EmptyTypes);
         var getterIl = getter.GetILGenerator();
@@ -76,7 +76,7 @@ public sealed class AuditEntityFactory : IAuditEntityFactory
 
         var setter = typeBuilder.DefineMethod(
             $"set_{name}",
-            MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig,
+            MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.SpecialName | MethodAttributes.HideBySig,
             null,
             [propertyType]);
         var setterIl = setter.GetILGenerator();

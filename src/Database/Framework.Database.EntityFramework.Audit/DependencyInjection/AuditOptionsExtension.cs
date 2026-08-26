@@ -1,26 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore.Diagnostics;
+﻿using Anch.DependencyInjection;
+
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Framework.Database.EntityFramework.Audit.DependencyInjection;
 
-public sealed class AuditOptionsExtension() : IDbContextOptionsExtension
+public sealed class AuditOptionsExtension(Action<IAuditSetup>? setupAction) : IDbContextOptionsExtension
 {
     public DbContextOptionsExtensionInfo Info => field ??= new ExtensionInfo(this);
 
-    public void ApplyServices(IServiceCollection services)
-    {
-        services.TryAddSingleton(TimeProvider.System);
-
-        services.AddScoped<IInterceptor, AuditFlushInterceptor>();
-
-        services.AddSingleton<IAuditEntityFactory, AuditEntityFactory>();
-        services.AddSingleton<IModelCustomizer, AuditModelCustomizer>();
-        services.AddSingleton<IAuditInfoResolver, AuditInfoResolver>();
-        services.AddSingleton<IAuditableEntityFilter, AuditableEntityFilter>();
-        services.AddSingleton(MainSchemaInfo.Default);
-    }
+    public void ApplyServices(IServiceCollection services) => services.Initialize<AuditSetup>(setupAction);
 
     public void Validate(IDbContextOptions options)
     {

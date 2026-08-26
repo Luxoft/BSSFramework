@@ -1,6 +1,12 @@
-﻿using Framework.Database.EntityFramework.Audit.DependencyInjection;
+﻿using Anch.Core;
+
+using Framework.Core;
+using Framework.Database;
+using Framework.Database.ConnectionStringSource;
+using Framework.Database.EntityFramework.Audit.DependencyInjection;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.DbGenerate.NHibernate;
 using SampleSystem.ServiceEnvironment.DependencyInjection;
@@ -33,13 +39,18 @@ public class DbGeneratorTest
 
     public async Task GenerateAllDb(string serverName, string mainDatabaseName, CancellationToken ct)
     {
-        var connectionString = $"Data Source={serverName};Initial Catalog={mainDatabaseName};Integrated Security=True;Application Name=SampleSystem;TrustServerCertificate=true";
-        var optionsBuilder = new DbContextOptionsBuilder<SampleSystemDbContext>();
-        optionsBuilder.UseSqlServer(connectionString);
-        optionsBuilder.AddAudit();
+        var connectionString =
+            $"Data Source={serverName};Initial Catalog={mainDatabaseName};Integrated Security=True;Application Name=SampleSystem;TrustServerCertificate=true";
 
-        await using var context = new SampleSystemDbContext(optionsBuilder.Options);
-        await context.Database.EnsureCreatedAsync(ct);
+        var rootServiceProvider = new ServiceCollection()
+                                  .AddSingleton<IDefaultConnectionStringSource>(new ManualDefaultConnectionStringSource(connectionString))
+                                  .Self(new SampleSystemEntityFrameworkExtension().AddServices)
+                                  .BuildServiceProvider(new ServiceProviderOptions { ValidateScopes = true, ValidateOnBuild = true });
+
+        await using var scope = rootServiceProvider.CreateAsyncScope();
+
+        await using var dbContext = scope.ServiceProvider.GetRequiredService<SampleSystemDbContext>();
+        await dbContext.Database.EnsureCreatedAsync(ct);
 
         new BssFluentMigrator(connectionString).Migrate();
     }

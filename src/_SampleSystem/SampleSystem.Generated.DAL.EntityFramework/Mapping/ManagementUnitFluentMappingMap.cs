@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using SampleSystem.Domain.NhFluentMapping;
@@ -12,7 +12,7 @@ public class ManagementUnitFluentMappingMap : SampleSystemBaseMap<ManagementUnit
     public override void Configure(EntityTypeBuilder<ManagementUnitFluentMapping> builder)
     {
         base.Configure(builder);
-        builder.ToTable("ManagementUnitFluentMapping", "app");
+        builder.ToTable("ManagementUnitFluentMapping");
         builder.Property(x => x.IsProduction).IsRequired();
         builder.ComplexProperty(x => x.Period, period => { period.Property(x => x.EndDate).HasColumnName("periodendDate"); period.Property(x => x.StartDate).HasColumnName("periodstartDate"); });
         builder.HasOne(x => x.Parent).WithMany(x => x.Children).HasForeignKey("parentId").OnDelete(DeleteBehavior.Restrict);

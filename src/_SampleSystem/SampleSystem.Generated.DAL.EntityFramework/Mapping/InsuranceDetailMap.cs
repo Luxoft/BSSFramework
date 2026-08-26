@@ -12,7 +12,7 @@ public class InsuranceDetailMap : SampleSystemBaseMap<InsuranceDetail>
     public override void Configure(EntityTypeBuilder<InsuranceDetail> builder)
     {
         base.Configure(builder);
-        builder.ToTable("InsuranceDetail", "dbo");
+        builder.ToTable("InsuranceDetail");
         builder.Property(x => x.Cost).HasPrecision(19, 4).IsRequired();
         builder.Property(x => x.Age).IsRequired();
         builder.Property(x => x.BirthDate);

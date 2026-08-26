@@ -12,6 +12,6 @@ public class NoSecurityObjectMap : SampleSystemBaseMap<NoSecurityObject>
     public override void Configure(EntityTypeBuilder<NoSecurityObject> builder)
     {
         base.Configure(builder);
-        builder.ToTable("NoSecurityObject", "dbo");
+        builder.ToTable("NoSecurityObject");
     }
 }

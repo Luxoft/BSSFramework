@@ -12,7 +12,7 @@ public class HRDepartmentMap : SampleSystemBaseMap<HRDepartment>
     public override void Configure(EntityTypeBuilder<HRDepartment> builder)
     {
         base.Configure(builder);
-        builder.ToTable("HRDepartment", "dbo");
+        builder.ToTable("HRDepartment");
         builder.Property(x => x.Code).HasMaxLength(50).IsRequired();
         builder.Property(x => x.CodeNative).HasMaxLength(50).IsRequired();
         builder.Property(x => x.ExternalId).IsRequired();

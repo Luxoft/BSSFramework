@@ -12,7 +12,7 @@ public class GenericNamedLockMap : SampleSystemBaseMap<GenericNamedLock>
     public override void Configure(EntityTypeBuilder<GenericNamedLock> builder)
     {
         base.Configure(builder);
-        builder.ToTable("GenericNamedLock", "dbo");
+        builder.ToTable("GenericNamedLock");
         builder.Property(x => x.Name).IsRequired();
         builder.HasIndex(x => x.Name).IsUnique().HasDatabaseName("UIX_nameGenericNamedLock");
     }

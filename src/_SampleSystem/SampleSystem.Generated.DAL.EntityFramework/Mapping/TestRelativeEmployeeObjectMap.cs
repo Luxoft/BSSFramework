@@ -12,7 +12,7 @@ public class TestRelativeEmployeeObjectMap : SampleSystemBaseMap<TestRelativeEmp
     public override void Configure(EntityTypeBuilder<TestRelativeEmployeeObject> builder)
     {
         base.Configure(builder);
-        builder.ToTable("TestRelativeEmployeeObject", "dbo");
+        builder.ToTable("TestRelativeEmployeeObject");
         builder.HasOne(x => x.EmployeeRef1).WithMany().HasForeignKey("employeeRef1Id").OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.EmployeeRef2).WithMany().HasForeignKey("employeeRef2Id").OnDelete(DeleteBehavior.Restrict);
     }

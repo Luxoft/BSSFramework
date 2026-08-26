@@ -12,7 +12,7 @@ public class TestSecuritySubObjItem3Map : SampleSystemBaseMap<TestSecuritySubObj
     public override void Configure(EntityTypeBuilder<TestSecuritySubObjItem3> builder)
     {
         base.Configure(builder);
-        builder.ToTable("TestSecuritySubObjItem3", "dbo");
+        builder.ToTable("TestSecuritySubObjItem3");
         builder.Property(x => x.Name).IsRequired();
         builder.HasOne(x => x.InnerMaster).WithMany(x => x.Items3).HasForeignKey("innerMasterId").OnDelete(DeleteBehavior.Restrict);
     }

@@ -12,7 +12,7 @@ public class Location1676Map : SampleSystemBaseMap<Location1676>
     public override void Configure(EntityTypeBuilder<Location1676> builder)
     {
         base.Configure(builder);
-        builder.ToTable("Location1676", "dbo");
+        builder.ToTable("Location1676");
         builder.Property(x => x.Name).IsRequired();
         builder.HasMany(x => x.Calendar).WithOne(x => x.Location).HasForeignKey("locationId").OnDelete(DeleteBehavior.Cascade);
     }

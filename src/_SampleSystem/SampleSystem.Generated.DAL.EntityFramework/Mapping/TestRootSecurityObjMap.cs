@@ -12,7 +12,7 @@ public class TestRootSecurityObjMap : SampleSystemBaseMap<TestRootSecurityObj>
     public override void Configure(EntityTypeBuilder<TestRootSecurityObj> builder)
     {
         base.Configure(builder);
-        builder.ToTable("TestRootSecurityObj", "dbo");
+        builder.ToTable("TestRootSecurityObj");
         builder.Property(x => x.Name).IsRequired();
         builder.HasOne(x => x.BusinessUnit).WithMany().HasForeignKey("businessUnitId").OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.Location).WithMany().HasForeignKey("locationId").OnDelete(DeleteBehavior.Restrict);

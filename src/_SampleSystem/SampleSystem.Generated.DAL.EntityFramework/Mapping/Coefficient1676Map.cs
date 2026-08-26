@@ -12,7 +12,7 @@ public class Coefficient1676Map : SampleSystemBaseMap<Coefficient1676>
     public override void Configure(EntityTypeBuilder<Coefficient1676> builder)
     {
         base.Configure(builder);
-        builder.ToTable("Coefficient1676", "dbo");
+        builder.ToTable("Coefficient1676");
         builder.Property(x => x.NormCoefficient).HasPrecision(19, 4).IsRequired();
         builder.HasOne(x => x.Location).WithOne(x => x.Coefficient).HasForeignKey<Coefficient1676>("locationId").OnDelete(DeleteBehavior.Restrict);
     }

@@ -10,11 +10,11 @@ public class CustomCompanyLegalEntityMap : IEntityTypeConfiguration<CustomCompan
 {
     public void Configure(EntityTypeBuilder<CustomCompanyLegalEntity> builder)
     {
-        builder.ToTable("CompanyLegalEntity", "dbo");
+        builder.ToTable("CompanyLegalEntity");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.Property(x => x.Code).IsRequired();
-        builder.SplitToTable("LegalEntityBase", "dbo", split =>
+        builder.SplitToTable("LegalEntityBase", "app", split =>
         {
             split.Property(x => x.AribaStatusDescription).HasColumnName("aribaStatusdescription");
             split.Property(x => x.AribaStatusType).HasColumnName("aribaStatustype");

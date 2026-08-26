@@ -10,7 +10,7 @@ public class TestLocationCollectionPropertiesMap : IEntityTypeConfiguration<Test
 {
     public void Configure(EntityTypeBuilder<TestLocationCollectionProperties> builder)
     {
-        builder.ToTable("Location", "dbo");
+        builder.ToTable("Location");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(Location)).WithOne().HasForeignKey(typeof(TestLocationCollectionProperties), nameof(TestLocationCollectionProperties.Id));

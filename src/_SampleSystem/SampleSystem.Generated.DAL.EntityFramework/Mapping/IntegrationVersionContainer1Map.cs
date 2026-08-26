@@ -12,7 +12,7 @@ public class IntegrationVersionContainer1Map : SampleSystemBaseMap<IntegrationVe
     public override void Configure(EntityTypeBuilder<IntegrationVersionContainer1> builder)
     {
         base.Configure(builder);
-        builder.ToTable("IntegrationVersionContainer1", "dbo");
+        builder.ToTable("IntegrationVersionContainer1");
         builder.Property(x => x.IntegrationVersion).IsRequired();
         builder.Property(x => x.Name).IsRequired();
     }

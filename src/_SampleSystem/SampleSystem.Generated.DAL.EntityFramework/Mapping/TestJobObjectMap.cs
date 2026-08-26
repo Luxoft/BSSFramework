@@ -12,6 +12,6 @@ public class TestJobObjectMap : SampleSystemBaseMap<TestJobObject>
     public override void Configure(EntityTypeBuilder<TestJobObject> builder)
     {
         base.Configure(builder);
-        builder.ToTable("TestJobObject", "dbo");
+        builder.ToTable("TestJobObject");
     }
 }

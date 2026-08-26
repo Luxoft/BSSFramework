@@ -10,7 +10,7 @@ public abstract class SampleSystemBaseMap<TEntity> : IEntityTypeConfiguration<TE
 {
     public virtual void Configure(EntityTypeBuilder<TEntity> builder)
     {
-        builder.ToTable(typeof(TEntity).Name, "dbo");
+        builder.ToTable(typeof(TEntity).Name);
 
         builder.HasKey(x => x.Id);
 

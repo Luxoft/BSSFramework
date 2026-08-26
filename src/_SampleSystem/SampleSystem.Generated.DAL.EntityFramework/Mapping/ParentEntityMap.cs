@@ -12,6 +12,6 @@ public class ParentEntityMap : SampleSystemBaseMap<ParentEntity>
     public override void Configure(EntityTypeBuilder<ParentEntity> builder)
     {
         base.Configure(builder);
-        builder.ToTable("ParentEntity", "dbo");
+        builder.ToTable("ParentEntity");
     }
 }

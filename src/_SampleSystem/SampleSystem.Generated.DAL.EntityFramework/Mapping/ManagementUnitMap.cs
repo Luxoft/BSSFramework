@@ -12,7 +12,7 @@ public class ManagementUnitMap : SampleSystemBaseMap<ManagementUnit>
     public override void Configure(EntityTypeBuilder<ManagementUnit> builder)
     {
         base.Configure(builder);
-        builder.ToTable("ManagementUnit", "dbo");
+        builder.ToTable("ManagementUnit");
         builder.Property(x => x.BusinessUnitStatus).IsRequired();
         builder.Property(x => x.DeepLevel).IsRequired();
         builder.Property(x => x.IsProduction).IsRequired();

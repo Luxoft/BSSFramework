@@ -12,7 +12,7 @@ public class ManagementUnitAncestorLinkMap : SampleSystemBaseMap<ManagementUnitA
     public override void Configure(EntityTypeBuilder<ManagementUnitAncestorLink> builder)
     {
         base.Configure(builder);
-        builder.ToTable("ManagementUnitAncestorLink", "dbo");
+        builder.ToTable("ManagementUnitAncestorLink");
         builder.HasOne(x => x.Ancestor).WithMany().HasForeignKey("ancestorId").OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.Child).WithMany().HasForeignKey("childId").OnDelete(DeleteBehavior.Restrict);
     }

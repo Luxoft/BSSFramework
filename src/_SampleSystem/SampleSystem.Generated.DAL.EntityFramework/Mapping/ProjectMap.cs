@@ -12,7 +12,7 @@ public class ProjectMap : SampleSystemBaseMap<Project>
     public override void Configure(EntityTypeBuilder<Project> builder)
     {
         base.Configure(builder);
-        builder.ToTable("Project", "dbo");
+        builder.ToTable("Project");
         builder.Property(x => x.Code).HasMaxLength(80).IsRequired();
         builder.Property(x => x.EndDate);
         builder.Property(x => x.PlannedEndDate).IsRequired();

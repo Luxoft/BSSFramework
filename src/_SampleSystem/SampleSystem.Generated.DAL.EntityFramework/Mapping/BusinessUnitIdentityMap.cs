@@ -10,7 +10,7 @@ public class BusinessUnitIdentityMap : IEntityTypeConfiguration<BusinessUnitIden
 {
     public void Configure(EntityTypeBuilder<BusinessUnitIdentity> builder)
     {
-        builder.ToTable("BusinessUnit", "dbo");
+        builder.ToTable("BusinessUnit");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(BusinessUnit)).WithOne().HasForeignKey(typeof(BusinessUnitIdentity), nameof(BusinessUnitIdentity.Id));

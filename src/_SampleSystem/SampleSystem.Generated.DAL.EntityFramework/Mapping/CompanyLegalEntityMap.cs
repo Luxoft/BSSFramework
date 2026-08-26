@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using SampleSystem.Domain.Directories;
@@ -9,7 +9,7 @@ public class CompanyLegalEntityMap : IEntityTypeConfiguration<CompanyLegalEntity
 {
     public void Configure(EntityTypeBuilder<CompanyLegalEntity> builder)
     {
-        builder.ToTable("CompanyLegalEntity", "dbo");
+        builder.ToTable("CompanyLegalEntity");
         builder.HasOne(typeof(LegalEntityBase)).WithOne().HasForeignKey(typeof(CompanyLegalEntity), nameof(CompanyLegalEntity.Id)).OnDelete(DeleteBehavior.ClientCascade);
         builder.Property(x => x.Code).HasMaxLength(100).IsRequired();
         builder.HasOne(x => x.CurrentObj).WithMany().HasForeignKey("currentObjId").OnDelete(DeleteBehavior.Restrict);

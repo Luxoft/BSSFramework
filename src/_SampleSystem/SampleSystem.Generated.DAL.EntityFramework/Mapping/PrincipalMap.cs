@@ -12,7 +12,7 @@ public class PrincipalMap : SampleSystemBaseMap<Principal>
     public override void Configure(EntityTypeBuilder<Principal> builder)
     {
         base.Configure(builder);
-        builder.ToTable("Principal", "dbo");
+        builder.ToTable("Principal");
         builder.Property(x => x.ExternalId);
     }
 }

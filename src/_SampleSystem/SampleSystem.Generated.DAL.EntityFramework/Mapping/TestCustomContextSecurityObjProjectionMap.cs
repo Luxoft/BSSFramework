@@ -10,7 +10,7 @@ public class TestCustomContextSecurityObjProjectionMap : IEntityTypeConfiguratio
 {
     public void Configure(EntityTypeBuilder<TestCustomContextSecurityObjProjection> builder)
     {
-        builder.ToTable("TestCustomContextSecurityObj", "dbo");
+        builder.ToTable("TestCustomContextSecurityObj");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(TestCustomContextSecurityObj)).WithOne().HasForeignKey(typeof(TestCustomContextSecurityObjProjection), nameof(TestCustomContextSecurityObjProjection.Id));

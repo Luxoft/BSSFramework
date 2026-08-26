@@ -10,7 +10,7 @@ public class TestEmployee_AutoProp_RoleMap : IEntityTypeConfiguration<TestEmploy
 {
     public void Configure(EntityTypeBuilder<TestEmployee_AutoProp_Role> builder)
     {
-        builder.ToTable("EmployeeRole", "dbo");
+        builder.ToTable("EmployeeRole");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(EmployeeRole)).WithOne().HasForeignKey(typeof(TestEmployee_AutoProp_Role), nameof(TestEmployee_AutoProp_Role.Id));

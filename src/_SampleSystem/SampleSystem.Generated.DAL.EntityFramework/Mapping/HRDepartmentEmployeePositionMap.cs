@@ -12,7 +12,7 @@ public class HRDepartmentEmployeePositionMap : SampleSystemBaseMap<HRDepartmentE
     public override void Configure(EntityTypeBuilder<HRDepartmentEmployeePosition> builder)
     {
         base.Configure(builder);
-        builder.ToTable("HRDepartmentEmployeePosition", "dbo");
+        builder.ToTable("HRDepartmentEmployeePosition");
         builder.HasOne(x => x.EmployeePosition).WithMany().HasForeignKey("employeePositionId").OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.HrDepartment).WithMany(x => x.EmployeePositions).HasForeignKey("hrDepartmentId").OnDelete(DeleteBehavior.Restrict);
         builder.HasIndex("employeePositionId", "hrDepartmentId").IsUnique().HasDatabaseName("UIX_employeePosition_hrDepartmentHRDepartmentEmployeePosition");

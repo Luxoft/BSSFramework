@@ -10,7 +10,7 @@ public class EmployeeWithBuPeriodMap : IEntityTypeConfiguration<EmployeeWithBuPe
 {
     public void Configure(EntityTypeBuilder<EmployeeWithBuPeriod> builder)
     {
-        builder.ToTable("Employee", "dbo");
+        builder.ToTable("Employee");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(Employee)).WithOne().HasForeignKey(typeof(EmployeeWithBuPeriod), nameof(EmployeeWithBuPeriod.Id));

@@ -10,7 +10,7 @@ public class TestSecurityObjItemProjectionMap : IEntityTypeConfiguration<TestSec
 {
     public void Configure(EntityTypeBuilder<TestSecurityObjItemProjection> builder)
     {
-        builder.ToTable("TestSecurityObjItem", "dbo");
+        builder.ToTable("TestSecurityObjItem");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(TestSecurityObjItem)).WithOne().HasForeignKey(typeof(TestSecurityObjItemProjection), nameof(TestSecurityObjItemProjection.Id));

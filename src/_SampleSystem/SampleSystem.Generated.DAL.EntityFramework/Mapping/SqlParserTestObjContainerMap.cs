@@ -12,7 +12,7 @@ public class SqlParserTestObjContainerMap : SampleSystemBaseMap<SqlParserTestObj
     public override void Configure(EntityTypeBuilder<SqlParserTestObjContainer> builder)
     {
         base.Configure(builder);
-        builder.ToTable("SqlParserTestObjContainer", "dbo");
+        builder.ToTable("SqlParserTestObjContainer");
         builder.HasOne(x => x.IncludedObject).WithMany().HasForeignKey("includedObjectId").OnDelete(DeleteBehavior.Restrict);
     }
 }

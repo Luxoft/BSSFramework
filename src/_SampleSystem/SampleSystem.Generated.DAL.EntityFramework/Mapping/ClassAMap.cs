@@ -9,7 +9,7 @@ public class ClassAMap : IEntityTypeConfiguration<ClassA>
 {
     public void Configure(EntityTypeBuilder<ClassA> builder)
     {
-        builder.ToTable("ClassA", "dbo");
+        builder.ToTable("ClassA");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.Property(x => x.Value).IsRequired();

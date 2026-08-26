@@ -10,7 +10,7 @@ public class SecurityHRDepartmentMap : IEntityTypeConfiguration<SecurityHRDepart
 {
     public void Configure(EntityTypeBuilder<SecurityHRDepartment> builder)
     {
-        builder.ToTable("HRDepartment", "dbo");
+        builder.ToTable("HRDepartment");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(HRDepartment)).WithOne().HasForeignKey(typeof(SecurityHRDepartment), nameof(SecurityHRDepartment.Id));

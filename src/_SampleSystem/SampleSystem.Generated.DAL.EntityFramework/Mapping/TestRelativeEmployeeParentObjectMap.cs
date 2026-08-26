@@ -12,7 +12,7 @@ public class TestRelativeEmployeeParentObjectMap : SampleSystemBaseMap<TestRelat
     public override void Configure(EntityTypeBuilder<TestRelativeEmployeeParentObject> builder)
     {
         base.Configure(builder);
-        builder.ToTable("TestRelativeEmployeeParentObject", "dbo");
+        builder.ToTable("TestRelativeEmployeeParentObject");
         builder.HasMany(x => x.Children).WithOne(x => x.Master).HasForeignKey("masterId").OnDelete(DeleteBehavior.Cascade);
     }
 }

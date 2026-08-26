@@ -10,7 +10,7 @@ public class TestIMRequestMap : IEntityTypeConfiguration<TestIMRequest>
 {
     public void Configure(EntityTypeBuilder<TestIMRequest> builder)
     {
-        builder.ToTable("IMRequest", "dbo");
+        builder.ToTable("IMRequest");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.Property(x => x.Message).IsRequired();

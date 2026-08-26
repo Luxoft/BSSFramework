@@ -12,7 +12,7 @@ public class ManagementUnitAndHRDepartmentLinkMap : SampleSystemBaseMap<Manageme
     public override void Configure(EntityTypeBuilder<ManagementUnitAndHRDepartmentLink> builder)
     {
         base.Configure(builder);
-        builder.ToTable("ManagementUnitAndHRDepartmentLink", "dbo");
+        builder.ToTable("ManagementUnitAndHRDepartmentLink");
         builder.HasOne(x => x.HRDepartment).WithMany(x => x.ManagementUnits).HasForeignKey("hRDepartmentId").OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.ManagementUnit).WithMany(x => x.HRDepartments).HasForeignKey("managementUnitId").OnDelete(DeleteBehavior.Restrict);
         builder.HasIndex("hRDepartmentId", "managementUnitId").IsUnique().HasDatabaseName("UIX_hRDepartment_managementUnitManagementUnitAndHRDepartmentLink");

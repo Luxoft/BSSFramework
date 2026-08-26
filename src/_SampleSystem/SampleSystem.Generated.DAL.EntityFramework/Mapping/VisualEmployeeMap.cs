@@ -10,7 +10,7 @@ public class VisualEmployeeMap : IEntityTypeConfiguration<VisualEmployee>
 {
     public void Configure(EntityTypeBuilder<VisualEmployee> builder)
     {
-        builder.ToTable("Employee", "dbo");
+        builder.ToTable("Employee");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(Employee)).WithOne().HasForeignKey(typeof(VisualEmployee), nameof(VisualEmployee.Id));

@@ -9,7 +9,7 @@ public class ClassAChildMap : IEntityTypeConfiguration<ClassAChild>
 {
     public void Configure(EntityTypeBuilder<ClassAChild> builder)
     {
-        builder.ToTable("ClassAChild", "dbo");
+        builder.ToTable("ClassAChild");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.Property(x => x.IsFake).IsRequired();

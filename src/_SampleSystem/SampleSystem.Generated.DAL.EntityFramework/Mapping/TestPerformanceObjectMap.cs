@@ -12,7 +12,7 @@ public class TestPerformanceObjectMap : SampleSystemBaseMap<TestPerformanceObjec
     public override void Configure(EntityTypeBuilder<TestPerformanceObject> builder)
     {
         base.Configure(builder);
-        builder.ToTable("TestPerformanceObject", "dbo");
+        builder.ToTable("TestPerformanceObject");
         builder.Property(x => x.Name).IsRequired();
         builder.HasOne(x => x.BusinessUnit).WithMany().HasForeignKey("businessUnitId").OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.Employee).WithMany().HasForeignKey("employeeId").OnDelete(DeleteBehavior.Restrict);

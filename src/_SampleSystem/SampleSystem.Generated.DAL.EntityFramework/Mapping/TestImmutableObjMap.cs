@@ -12,7 +12,7 @@ public class TestImmutableObjMap : SampleSystemBaseMap<TestImmutableObj>
     public override void Configure(EntityTypeBuilder<TestImmutableObj> builder)
     {
         base.Configure(builder);
-        builder.ToTable("TestImmutableObj", "dbo");
+        builder.ToTable("TestImmutableObj");
         builder.Property(x => x.TestImmutablePrimitiveProperty).IsRequired();
         builder.HasOne(x => x.TestImmutableRefProperty).WithMany().HasForeignKey("testImmutableRefPropertyId").OnDelete(DeleteBehavior.Restrict);
     }

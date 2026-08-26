@@ -10,7 +10,7 @@ public class CustomTestObjForNestedMap : IEntityTypeConfiguration<CustomTestObjF
 {
     public void Configure(EntityTypeBuilder<CustomTestObjForNested> builder)
     {
-        builder.ToTable("TestObjForNestedBase", "dbo");
+        builder.ToTable("TestObjForNestedBase");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(TestObjForNestedBase)).WithOne().HasForeignKey(typeof(CustomTestObjForNested), nameof(CustomTestObjForNested.Id));

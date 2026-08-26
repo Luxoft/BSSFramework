@@ -10,7 +10,7 @@ public class BusinessUnitProgramClassAutoPropBusinessUnitTypeMap : IEntityTypeCo
 {
     public void Configure(EntityTypeBuilder<BusinessUnitProgramClass_AutoProp_BusinessUnitType> builder)
     {
-        builder.ToTable("BusinessUnitType", "dbo");
+        builder.ToTable("BusinessUnitType");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(BusinessUnitType)).WithOne().HasForeignKey(typeof(BusinessUnitProgramClass_AutoProp_BusinessUnitType), nameof(BusinessUnitProgramClass_AutoProp_BusinessUnitType.Id));

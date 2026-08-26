@@ -12,7 +12,7 @@ public class TestCustomContextSecurityObjMap : SampleSystemBaseMap<TestCustomCon
     public override void Configure(EntityTypeBuilder<TestCustomContextSecurityObj> builder)
     {
         base.Configure(builder);
-        builder.ToTable("TestCustomContextSecurityObj", "dbo");
+        builder.ToTable("TestCustomContextSecurityObj");
         builder.Property(x => x.Name).IsRequired();
     }
 }

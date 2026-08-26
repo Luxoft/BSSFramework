@@ -12,7 +12,7 @@ public class ManagementUnitAndBusinessUnitLinkMap : SampleSystemBaseMap<Manageme
     public override void Configure(EntityTypeBuilder<ManagementUnitAndBusinessUnitLink> builder)
     {
         base.Configure(builder);
-        builder.ToTable("ManagementUnitAndBusinessUnitLink", "dbo");
+        builder.ToTable("ManagementUnitAndBusinessUnitLink");
         builder.Property(x => x.EqualBU).IsRequired();
         builder.HasOne(x => x.BusinessUnit).WithMany(x => x.ManagementUnits).HasForeignKey("businessUnitId").IsRequired().OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.ManagementUnit).WithMany(x => x.BusinessUnits).HasForeignKey("managementUnitId").IsRequired().OnDelete(DeleteBehavior.Restrict);

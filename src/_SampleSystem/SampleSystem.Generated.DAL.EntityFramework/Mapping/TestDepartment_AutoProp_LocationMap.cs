@@ -14,6 +14,6 @@ public class TestDepartmentAutoPropLocationMap : IEntityTypeConfiguration<TestDe
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(Location)).WithOne().HasForeignKey(typeof(TestDepartment_AutoProp_Location), nameof(TestDepartment_AutoProp_Location.Id));
-        builder.Property(x => x.BinaryData_Last_LocationBinaryData).HasMaxLength(int.MaxValue);
+        builder.Ignore(x => x.BinaryData_Last_LocationBinaryData);
     }
 }

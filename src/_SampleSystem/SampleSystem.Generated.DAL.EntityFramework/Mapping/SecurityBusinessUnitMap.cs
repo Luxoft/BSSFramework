@@ -13,6 +13,6 @@ public class SecurityBusinessUnitMap : IEntityTypeConfiguration<SecurityBusiness
         builder.ToTable("BusinessUnit");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.HasOne(typeof(BusinessUnit)).WithOne().HasForeignKey(typeof(SecurityBusinessUnit), nameof(SecurityBusinessUnit.Id));
+        builder.HasOne(typeof(BusinessUnit)).WithOne().HasForeignKey(typeof(SecurityBusinessUnit), nameof(SecurityBusinessUnit.Id)).IsRequired();
     }
 }

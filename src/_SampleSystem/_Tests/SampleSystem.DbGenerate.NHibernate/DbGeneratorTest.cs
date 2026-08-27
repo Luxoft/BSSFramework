@@ -14,7 +14,7 @@ public class DbGeneratorTest
     private readonly ServerGenerationEnvironment environment = new();
 
     [Fact]
-    public void GenerateLocal() => this.GenerateAllDb(@".");
+    public void GenerateLocal() => this.GenerateAllDb(@".", "SampleSystem_nh_empty");
 
     public void GenerateDatabase(DbGenerationOptions options)
     {

@@ -18,7 +18,7 @@ namespace SampleSystem.DbGenerate.EntityFramework;
 public class DbGeneratorTest
 {
     [AnchFact]
-    public Task GenerateLocal(CancellationToken ct) => this.GenerateAllDb(@".", nameof(SampleSystem), null, ct);
+    public Task GenerateLocal(CancellationToken ct) => this.GenerateAllDb(@".", "SampleSystem_ef_empty", null, ct);
 
     public async Task GenerateDatabase(DbGenerationOptions options)
     {

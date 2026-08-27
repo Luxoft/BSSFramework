@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using SampleSystem.Domain.BU;
@@ -13,8 +14,14 @@ public class HerBusinessUnitMap : IEntityTypeConfiguration<HerBusinessUnit>
         builder.ToTable("BusinessUnit");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.HasOne(typeof(BusinessUnit)).WithOne().HasForeignKey(typeof(HerBusinessUnit), nameof(HerBusinessUnit.Id));
-        builder.Property(x => x.Name).IsRequired();
-        builder.HasOne(x => x.Parent).WithMany().HasForeignKey("parentId").OnDelete(DeleteBehavior.Restrict);
+        ((IConventionForeignKey)builder.HasOne(typeof(BusinessUnit)).WithOne().HasForeignKey(typeof(HerBusinessUnit), nameof(HerBusinessUnit.Id)).IsRequired().Metadata).SetIsRequiredDependent(true);
+        var nameProperty = builder.Property(x => x.Name).HasColumnName("Name").IsRequired().Metadata;
+        nameProperty.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
+        nameProperty.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+        var parentIdProperty = builder.Property<System.Guid?>("parentId_HerBusinessUnit").HasColumnName("parentId").Metadata;
+        builder.HasOne(x => x.Parent).WithMany().HasForeignKey("parentId_HerBusinessUnit").IsRequired(false).OnDelete(DeleteBehavior.Restrict);
+        builder.HasIndex("parentId_HerBusinessUnit").HasDatabaseName("IX_BusinessUnit_parentId_HerBusinessUnit");
+        parentIdProperty.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
+        parentIdProperty.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
     }
 }

@@ -22,6 +22,7 @@ public class AuditModelCustomizer(
         {
             revision.HasKey(entity => entity.Id);
             revision.ToTable(nameof(AuditRevisionEntity), mainSchemaInfo.Name);
+            revision.Property(entity => entity.RevisionDate).HasColumnName(nameof(AuditRevisionEntity.RevisionDate));
         });
 
         var revisionTypedProjections = modelBuilder

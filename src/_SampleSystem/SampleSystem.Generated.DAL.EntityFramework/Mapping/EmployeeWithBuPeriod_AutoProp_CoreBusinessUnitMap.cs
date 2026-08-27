@@ -13,7 +13,7 @@ public class EmployeeWithBuPeriodAutoPropCoreBusinessUnitMap : IEntityTypeConfig
         builder.ToTable("BusinessUnit");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.HasOne(typeof(BusinessUnit)).WithOne().HasForeignKey(typeof(EmployeeWithBuPeriod_AutoProp_CoreBusinessUnit), nameof(EmployeeWithBuPeriod_AutoProp_CoreBusinessUnit.Id));
+        builder.HasOne(typeof(BusinessUnit)).WithOne().HasForeignKey(typeof(EmployeeWithBuPeriod_AutoProp_CoreBusinessUnit), nameof(EmployeeWithBuPeriod_AutoProp_CoreBusinessUnit.Id)).IsRequired();
         builder.ComplexProperty(x => x.Period_Last_BuPeriod, period =>
         {
             period.Property(x => x.EndDate).HasColumnName("periodendDate");

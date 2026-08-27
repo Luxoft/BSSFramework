@@ -5,19 +5,16 @@ namespace Framework.Database.EntityFramework.Audit;
 
 public class AuditModelCustomizer(
     IAuditEntityFactory auditEntityFactory,
-    ModelCustomizerDependencies dependencies,
     IAuditInfoResolver auditInfoResolver,
     IAuditableEntityFilter auditableEntityFilter,
-    MainAuditSchemaInfo mainSchemaInfo) : ModelCustomizer(dependencies)
+    MainAuditSchemaInfo mainSchemaInfo) : IModelCustomizer
 {
     private const string RevisionColumnName = "REV";
 
     private const string RevisionTypeColumnName = "REVTYPE";
 
-    public override void Customize(ModelBuilder modelBuilder, DbContext context)
+    public void Customize(ModelBuilder modelBuilder, DbContext context)
     {
-        base.Customize(modelBuilder, context);
-
         modelBuilder.Entity<AuditRevisionEntity>(revision =>
         {
             revision.HasKey(entity => entity.Id);

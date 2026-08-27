@@ -24,6 +24,5 @@ public class TestBusinessUnitMap : IEntityTypeConfiguration<TestBusinessUnit>
         parentIdProperty.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
         parentIdProperty.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
         builder.HasMany(x => x.BusinessUnitEmployeeRoles).WithOne(x => x.BusinessUnit).HasForeignKey("businessUnitId").OnDelete(DeleteBehavior.ClientCascade);
-        builder.Ignore(x => x.CalcProp);
     }
 }

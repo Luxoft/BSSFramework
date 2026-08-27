@@ -1,5 +1,7 @@
 ﻿using Anch.DependencyInjection;
 
+using Framework.Database.EntityFramework.Extensions;
+
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -26,10 +28,12 @@ public class AuditSetup : IAuditSetup, IServiceInitializer
         services.AddScoped<IInterceptor, AuditFlushInterceptor>();
 
         services.AddSingleton<IAuditEntityFactory, AuditEntityFactory>();
-        services.AddSingleton<IModelCustomizer, AuditModelCustomizer>();
         services.AddSingleton<IAuditInfoResolver, AuditInfoResolver>();
         services.AddSingleton<IAuditTypeNameResolver, AuditTypeNameResolver>();
         services.AddSingleton(MainAuditSchemaInfo.Default);
+
+        services.ReplaceSingleton<IModelCustomizer, RootModelCustomizer>()
+                .AddKeyedSingleton<IModelCustomizer, AuditModelCustomizer>(RootModelCustomizer.ElementKey);
 
         this.initFilterAction(services);
     }

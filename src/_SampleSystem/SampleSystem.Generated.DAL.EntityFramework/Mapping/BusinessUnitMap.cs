@@ -24,12 +24,5 @@ public class BusinessUnitMap : SampleSystemBaseMap<BusinessUnit>
         builder.HasOne(x => x.Parent).WithMany(x => x.Children).HasForeignKey("parentId").HasConstraintName("FK_BusinessUnit_parentId_BusinessUnit").OnDelete(DeleteBehavior.Restrict);
         builder.HasMany(x => x.BusinessUnitEmployeeRoles).WithOne(x => x.BusinessUnit).HasForeignKey("businessUnitId").OnDelete(DeleteBehavior.Cascade);
         builder.HasMany(x => x.ManagerCommissions).WithOne(x => x.BusinessUnit).HasForeignKey("businessUnitId").OnDelete(DeleteBehavior.Cascade);
-        builder.Ignore(x => x.AccountOrDivision);
-        builder.Ignore(x => x.LobOrService);
-        builder.Ignore(x => x.Account);
-        builder.Ignore(x => x.Program);
-        builder.Ignore(x => x.Lob);
-        builder.Ignore(x => x.IsSpecialCommission);
-        builder.Ignore(x => x.IsPool);
     }
 }

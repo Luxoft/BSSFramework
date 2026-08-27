@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Infrastructure;
+﻿using Anch.DependencyInjection;
+
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Framework.Database.EntityFramework.Extensions;
 
@@ -9,7 +10,8 @@ public sealed class IgnoreComputedPropertiesOptionsExtension : IDbContextOptions
     public DbContextOptionsExtensionInfo Info => field ??= new ExtensionInfo(this);
 
     public void ApplyServices(IServiceCollection services) =>
-        services.TryAddSingleton<IModelCustomizer, IgnoreComputedPropertiesModelCustomizer>();
+        services.ReplaceSingleton<IModelCustomizer, RootModelCustomizer>()
+                .AddKeyedSingleton<IModelCustomizer, IgnoreComputedPropertiesModelCustomizer>(RootModelCustomizer.ElementKey);
 
     public void Validate(IDbContextOptions options)
     {

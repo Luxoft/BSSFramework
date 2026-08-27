@@ -14,4 +14,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Database.EntityFramework\Framework.Database.EntityFramework.csproj" />
+  </ItemGroup>
+
 </Project>

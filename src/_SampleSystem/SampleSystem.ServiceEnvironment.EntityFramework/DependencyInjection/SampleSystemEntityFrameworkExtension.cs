@@ -18,8 +18,8 @@ public class SampleSystemEntityFrameworkExtension : IBssFrameworkExtension
         services.AddEntityFramework(s => s.SetDbContext<SampleSystemDbContext>())
                 .AddDbContext<SampleSystemDbContext>((sp, options) => options
                                                                       .UseSqlServer(sp.GetRequiredService<IDefaultConnectionStringSource>().ConnectionString)
-                                                                      .IgnoreComputedProperties()
                                                                       .UseLazyLoadingProxies()
+                                                                      .IgnoreComputedProperties()
                                                                       .AddAudit(auditSetup =>
                                                                                     auditSetup.SetFilter(et => !et.ClrType.IsProjection()
                                                                                                              && !et.ClrType

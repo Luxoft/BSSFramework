@@ -2,6 +2,7 @@
 using Framework.Database;
 using Framework.Database.EntityFramework.Audit.DependencyInjection;
 using Framework.Database.EntityFramework.DependencyInjection;
+using Framework.Database.EntityFramework.Extensions;
 using Framework.Database.Mapping;
 using Framework.Infrastructure.DependencyInjection;
 using Framework.Projection;
@@ -17,6 +18,7 @@ public class SampleSystemEntityFrameworkExtension : IBssFrameworkExtension
         services.AddEntityFramework(s => s.SetDbContext<SampleSystemDbContext>())
                 .AddDbContext<SampleSystemDbContext>((sp, options) => options
                                                                       .UseSqlServer(sp.GetRequiredService<IDefaultConnectionStringSource>().ConnectionString)
+                                                                      .IgnoreComputedProperties()
                                                                       .UseLazyLoadingProxies()
                                                                       .AddAudit(auditSetup =>
                                                                                     auditSetup.SetFilter(et => !et.ClrType.IsProjection()

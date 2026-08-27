@@ -19,6 +19,7 @@ public class ManagementUnitFluentMappingMap : SampleSystemBaseMap<ManagementUnit
         builder.OwnsOne(x => x.MuComponent, muComponent =>
         {
             muComponent.Property(x => x.LuxoftSignsFirst).HasColumnName("muComponentluxoftSignsFirst");
+            muComponent.Property<Guid?>("muComponentauthorizedLuxoftSignatoryId").HasColumnName("muComponentauthorizedLuxoftSignatoryId");
             muComponent.HasOne(x => x.AuthorizedLuxoftSignatory).WithMany().HasForeignKey("muComponentauthorizedLuxoftSignatoryId").OnDelete(DeleteBehavior.Restrict);
         });
     }

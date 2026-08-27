@@ -50,7 +50,7 @@ public class EmployeeMap : SampleSystemBaseMap<Employee>
         builder.HasOne(x => x.ManagementUnit).WithMany().HasForeignKey("managementUnitId").IsRequired(false).OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.Position).WithMany().HasForeignKey("positionId").IsRequired(false).OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.Ppm).WithMany().HasForeignKey("ppmId").IsRequired(false).OnDelete(DeleteBehavior.Restrict);
-        builder.HasMany(x => x.CellPhones).WithOne(x => x.Employee).HasForeignKey("employeeId").IsRequired().OnDelete(DeleteBehavior.Cascade);
-        builder.HasMany(x => x.PersonalCellPhones).WithOne(x => x.Employee).HasForeignKey("employeeId").IsRequired().OnDelete(DeleteBehavior.ClientCascade);
+        builder.Ignore(x => x.CellPhones);
+        builder.Ignore(x => x.PersonalCellPhones);
     }
 }

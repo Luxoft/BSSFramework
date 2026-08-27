@@ -9,7 +9,7 @@ public class LocationMap : SampleSystemBaseMap<Location>
     public override void Configure(EntityTypeBuilder<Location> builder)
     {
         base.Configure(builder);
-        builder.Property(x => x.BinaryData).HasMaxLength(int.MaxValue);
+        builder.Property(x => x.BinaryData).HasColumnType("image");
         builder.Property(x => x.CloseDate).IsRequired();
         builder.Property(x => x.Code).IsRequired();
         builder.Property(x => x.Name).IsRequired();

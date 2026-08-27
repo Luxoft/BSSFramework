@@ -13,14 +13,7 @@ public class IgnoreComputedPropertiesModelCustomizer : IModelCustomizer
     {
         foreach (var entityType in modelBuilder.Model.GetEntityTypes().ToList())
         {
-            foreach (var property in entityType.GetProperties().ToList())
-            {
-                if (property.PropertyInfo is { } propertyInfo && !propertyInfo.HasPrivateField(true))
-                {
-                    entityType.AddIgnored(property.Name);
-                    entityType.RemoveProperty(property);
-                }
-            }
+            this.IgnoreComputedProperties(entityType);
 
             foreach (var navigation in entityType.GetNavigations().ToList())
             {
@@ -33,6 +26,23 @@ public class IgnoreComputedPropertiesModelCustomizer : IModelCustomizer
                     foreignKey.DeclaringEntityType.RemoveForeignKey(foreignKey);
                 }
             }
+        }
+    }
+
+    private void IgnoreComputedProperties(IMutableTypeBase typeBase)
+    {
+        foreach (var property in typeBase.GetProperties().ToList())
+        {
+            if (property.PropertyInfo is { } propertyInfo && !propertyInfo.HasPrivateField(true))
+            {
+                typeBase.AddIgnored(property.Name);
+                typeBase.RemoveProperty(property);
+            }
+        }
+
+        foreach (var complexProperty in typeBase.GetComplexProperties().ToList())
+        {
+            this.IgnoreComputedProperties(complexProperty.ComplexType);
         }
     }
 }

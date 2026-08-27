@@ -35,10 +35,14 @@ public sealed class AuditEntityFactory(IAuditTypeNameResolver auditTypeNameResol
 
             foreach (var property in auditProperties)
             {
-                this.DefineAutoProperty(typeBuilder, property.Name, property.PropertyType);
+                if (!property.IsModOnly)
+                {
+                    this.DefineAutoProperty(typeBuilder, property.Name, property.PropertyType);
+                }
+
                 if (!property.IsKey)
                 {
-                    this.DefineAutoProperty(typeBuilder, $"{property.Name}_MOD", typeof(bool));
+                    this.DefineAutoProperty(typeBuilder, $"{property.ModName}_MOD", typeof(bool));
                 }
             }
 

@@ -22,8 +22,8 @@ public class CustomCompanyLegalEntityMap : IEntityTypeConfiguration<CustomCompan
             split.Property(x => x.Name).HasColumnName("Name");
             split.Property(x => x.NameEnglish).HasColumnName("NameEnglish");
         });
-        builder.HasOne(x => x.CurrentObj).WithMany().HasForeignKey("currentObjId").OnDelete(DeleteBehavior.Restrict);
-        builder.HasOne(x => x.BaseObj).WithMany().HasForeignKey("baseObjId").OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(typeof(CompanyLegalEntity)).WithOne().HasForeignKey(typeof(CustomCompanyLegalEntity), nameof(CustomCompanyLegalEntity.Id)).OnDelete(DeleteBehavior.ClientCascade);
+        builder.Ignore(x => x.CurrentObj);
+        builder.Ignore(x => x.BaseObj);
     }
 }

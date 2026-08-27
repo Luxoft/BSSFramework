@@ -20,7 +20,5 @@ public class TestEmployeeMap : IEntityTypeConfiguration<TestEmployee>
         builder.HasOne(x => x.Position_Auto).WithMany().HasForeignKey("positionId").OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.Ppm_Auto).WithMany().HasForeignKey("ppmId").OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.Role_Auto).WithMany().HasForeignKey("roleId").OnDelete(DeleteBehavior.Restrict);
-
-        builder.Ignore(x => x.CoreBusinessUnitProjects);
     }
 }

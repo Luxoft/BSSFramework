@@ -48,6 +48,7 @@ public class DbGeneratorTest
 
         var rootServiceProvider = new ServiceCollection()
                                   .AddSingleton<IDefaultConnectionStringSource>(new ManualDefaultConnectionStringSource(connectionString))
+                                  .AddSingleton(DBSessionSettings.Default)
                                   .Self(new SampleSystemEntityFrameworkExtension().AddServices)
                                   .BuildServiceProvider(new ServiceProviderOptions { ValidateScopes = true, ValidateOnBuild = true });
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using SampleSystem.Domain.Directories;
@@ -14,6 +15,8 @@ public class TestBusinessUnitTypeMap : IEntityTypeConfiguration<TestBusinessUnit
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(BusinessUnitType)).WithOne().HasForeignKey(typeof(TestBusinessUnitType), nameof(TestBusinessUnitType.Id));
-        builder.Property(x => x.Name).IsRequired();
+        var nameProperty = builder.Property(x => x.Name).HasColumnName("Name").IsRequired().Metadata;
+        nameProperty.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
+        nameProperty.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
     }
 }

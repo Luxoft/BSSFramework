@@ -13,7 +13,9 @@ public class BusinessUnitEmployeeRoleMap : SampleSystemBaseMap<BusinessUnitEmplo
     {
         base.Configure(builder);
         builder.Property(x => x.Role).IsRequired();
+        builder.Property<System.Guid>("businessUnitId").HasColumnName("businessUnitId");
         builder.HasOne(x => x.BusinessUnit).WithMany(x => x.BusinessUnitEmployeeRoles).HasForeignKey("businessUnitId").IsRequired().OnDelete(DeleteBehavior.Cascade);
+        builder.Property<System.Guid>("employeeId").HasColumnName("employeeId");
         builder.HasOne(x => x.Employee).WithMany().HasForeignKey("employeeId").IsRequired().OnDelete(DeleteBehavior.Restrict);
     }
 }

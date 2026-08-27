@@ -247,3 +247,5 @@ ModelManifest.xml
 *.js
 /.github/copilot-instructions.md
 /.tsupgrader/PROGRESS.md
+/ef_cols.txt
+/nh_cols.txt

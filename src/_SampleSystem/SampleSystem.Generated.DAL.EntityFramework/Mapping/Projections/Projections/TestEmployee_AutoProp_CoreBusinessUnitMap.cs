@@ -10,7 +10,7 @@ public class TestEmployeeAutoPropCoreBusinessUnitMap : IEntityTypeConfiguration<
 {
     public void Configure(EntityTypeBuilder<TestEmployee_AutoProp_CoreBusinessUnit> builder)
     {
-        builder.ToView("BusinessUnit");
+        builder.ToView(nameof(BusinessUnit));
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(BusinessUnit)).WithOne().HasForeignKey(typeof(TestEmployee_AutoProp_CoreBusinessUnit), nameof(TestEmployee_AutoProp_CoreBusinessUnit.Id)).IsRequired();

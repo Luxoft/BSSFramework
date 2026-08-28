@@ -11,7 +11,7 @@ public class TestLegacyEmployeeMap : IEntityTypeConfiguration<TestLegacyEmployee
     public void Configure(EntityTypeBuilder<TestLegacyEmployee> builder)
     {
         builder.HasBaseType((Type)null);
-        builder.ToView("Employee");
+        builder.ToView(nameof(Employee));
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(Employee)).WithOne().HasForeignKey(typeof(TestLegacyEmployee), nameof(TestLegacyEmployee.Id));

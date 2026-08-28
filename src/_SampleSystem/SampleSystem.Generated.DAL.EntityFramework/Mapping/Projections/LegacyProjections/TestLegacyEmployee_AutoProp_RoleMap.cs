@@ -10,7 +10,7 @@ public class TestLegacyEmployeeAutoPropRoleMap : IEntityTypeConfiguration<TestLe
 {
     public void Configure(EntityTypeBuilder<TestLegacyEmployee_AutoProp_Role> builder)
     {
-        builder.ToView("EmployeeRole");
+        builder.ToView(nameof(EmployeeRole));
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(EmployeeRole)).WithOne().HasForeignKey(typeof(TestLegacyEmployee_AutoProp_Role), nameof(TestLegacyEmployee_AutoProp_Role.Id));

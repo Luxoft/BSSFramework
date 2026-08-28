@@ -10,7 +10,7 @@ public class EmployeeWithBuPeriodAutoPropCoreBusinessUnitMap : IEntityTypeConfig
 {
     public void Configure(EntityTypeBuilder<EmployeeWithBuPeriod_AutoProp_CoreBusinessUnit> builder)
     {
-        builder.ToView("BusinessUnit");
+        builder.ToView(nameof(BusinessUnit));
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(BusinessUnit)).WithOne().HasForeignKey(typeof(EmployeeWithBuPeriod_AutoProp_CoreBusinessUnit), nameof(EmployeeWithBuPeriod_AutoProp_CoreBusinessUnit.Id)).IsRequired();

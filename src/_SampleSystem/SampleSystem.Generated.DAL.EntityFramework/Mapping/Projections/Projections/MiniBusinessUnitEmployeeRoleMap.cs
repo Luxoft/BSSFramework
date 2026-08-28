@@ -11,7 +11,7 @@ public class MiniBusinessUnitEmployeeRoleMap : IEntityTypeConfiguration<MiniBusi
 {
     public void Configure(EntityTypeBuilder<MiniBusinessUnitEmployeeRole> builder)
     {
-        builder.ToView("BusinessUnitEmployeeRole");
+        builder.ToView(nameof(BusinessUnitEmployeeRole));
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(BusinessUnitEmployeeRole)).WithOne().HasForeignKey(typeof(MiniBusinessUnitEmployeeRole), nameof(MiniBusinessUnitEmployeeRole.Id)).IsRequired();

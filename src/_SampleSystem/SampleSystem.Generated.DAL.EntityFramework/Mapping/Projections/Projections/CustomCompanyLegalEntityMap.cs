@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+using SampleSystem.Domain.Directories;
 using SampleSystem.Domain.Projections;
 
 namespace SampleSystem.Generated.DAL.EntityFramework.Mapping;
@@ -9,7 +10,7 @@ public class CustomCompanyLegalEntityMap : IEntityTypeConfiguration<CustomCompan
 {
     public void Configure(EntityTypeBuilder<CustomCompanyLegalEntity> builder)
     {
-        builder.ToView("CompanyLegalEntity");
+        builder.ToView(nameof(CompanyLegalEntity));
         //builder.HasKey(x => x.Id);
         //builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         //builder.Property(x => x.Code).IsRequired();

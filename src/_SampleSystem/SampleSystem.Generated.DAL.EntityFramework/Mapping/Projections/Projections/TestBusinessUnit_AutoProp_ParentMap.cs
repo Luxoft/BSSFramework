@@ -11,7 +11,7 @@ public class TestBusinessUnitAutoPropParentMap : IEntityTypeConfiguration<TestBu
 {
     public void Configure(EntityTypeBuilder<TestBusinessUnit_AutoProp_Parent> builder)
     {
-        builder.ToView("BusinessUnit");
+        builder.ToView(nameof(BusinessUnit));
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(BusinessUnit)).WithOne().HasForeignKey(typeof(TestBusinessUnit_AutoProp_Parent), nameof(TestBusinessUnit_AutoProp_Parent.Id)).IsRequired();

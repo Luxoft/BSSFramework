@@ -11,7 +11,7 @@ public class BusinessUnitProgramClassMap : IEntityTypeConfiguration<BusinessUnit
 {
     public void Configure(EntityTypeBuilder<BusinessUnitProgramClass> builder)
     {
-        builder.ToView("BusinessUnit");
+        builder.ToView(nameof(BusinessUnit));
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(BusinessUnit)).WithOne().HasForeignKey(typeof(BusinessUnitProgramClass), nameof(BusinessUnitProgramClass.Id)).IsRequired();

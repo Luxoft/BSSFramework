@@ -10,7 +10,7 @@ public class TestDepartmentAutoPropLocationMap : IEntityTypeConfiguration<TestDe
 {
     public void Configure(EntityTypeBuilder<TestDepartment_AutoProp_Location> builder)
     {
-        builder.ToView("Location");
+        builder.ToView(nameof(Location));
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(Location)).WithOne().HasForeignKey(typeof(TestDepartment_AutoProp_Location), nameof(TestDepartment_AutoProp_Location.Id));

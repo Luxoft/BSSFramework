@@ -11,7 +11,7 @@ public class HerBusinessUnitMap : IEntityTypeConfiguration<HerBusinessUnit>
 {
     public void Configure(EntityTypeBuilder<HerBusinessUnit> builder)
     {
-        builder.ToView("BusinessUnit");
+        builder.ToView(nameof(BusinessUnit));
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         ((IConventionForeignKey)builder.HasOne(typeof(BusinessUnit)).WithOne().HasForeignKey(typeof(HerBusinessUnit), nameof(HerBusinessUnit.Id)).IsRequired().Metadata).SetIsRequiredDependent(true);

@@ -10,7 +10,7 @@ public class TestEmployeeMap : IEntityTypeConfiguration<TestEmployee>
 {
     public void Configure(EntityTypeBuilder<TestEmployee> builder)
     {
-        builder.ToView("Employee");
+        builder.ToView(nameof(Employee));
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(Employee)).WithOne().HasForeignKey(typeof(TestEmployee), nameof(TestEmployee.Id));

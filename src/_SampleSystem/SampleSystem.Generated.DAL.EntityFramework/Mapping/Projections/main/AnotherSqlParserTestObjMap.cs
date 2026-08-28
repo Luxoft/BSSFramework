@@ -13,7 +13,7 @@ public class AnotherSqlParserTestObjMap : SampleSystemBaseMap<AnotherSqlParserTe
     {
         base.Configure(builder);
         builder.ToTable((string?)null);
-        builder.ToView("SqlParserTestObj");
+        builder.ToView(nameof(SqlParserTestObj));
         builder.HasOne(typeof(SqlParserTestObj)).WithOne().HasForeignKey(typeof(AnotherSqlParserTestObj), nameof(AnotherSqlParserTestObj.Id));
     }
 }

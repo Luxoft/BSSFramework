@@ -10,7 +10,7 @@ public class TestIMRequestMap : IEntityTypeConfiguration<TestIMRequest>
 {
     public void Configure(EntityTypeBuilder<TestIMRequest> builder)
     {
-        builder.ToView("IMRequest");
+        builder.ToView(nameof(IMRequest));
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(IMRequest)).WithOne().HasForeignKey(typeof(TestIMRequest), nameof(TestIMRequest.Id));

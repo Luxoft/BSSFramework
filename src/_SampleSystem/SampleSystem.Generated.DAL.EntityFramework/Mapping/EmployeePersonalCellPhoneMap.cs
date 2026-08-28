@@ -10,6 +10,6 @@ public class EmployeePersonalCellPhoneMap : IEntityTypeConfiguration<EmployeePer
     public void Configure(EntityTypeBuilder<EmployeePersonalCellPhone> builder)
     {
         builder.ToTable("EmployeePersonalCellPhone");
-        builder.HasOne(x => x.Employee).WithMany("personalCellPhones").HasForeignKey("employeeId").IsRequired().OnDelete(DeleteBehavior.Cascade);
+        builder.HasOne(x => x.Employee).WithMany(x => x.PersonalCellPhones).HasForeignKey("employeeId").IsRequired().OnDelete(DeleteBehavior.Cascade);
     }
 }

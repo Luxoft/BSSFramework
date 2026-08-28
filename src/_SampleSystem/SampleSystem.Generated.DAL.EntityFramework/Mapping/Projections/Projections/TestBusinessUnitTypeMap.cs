@@ -15,8 +15,6 @@ public class TestBusinessUnitTypeMap : IEntityTypeConfiguration<TestBusinessUnit
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(BusinessUnitType)).WithOne().HasForeignKey(typeof(TestBusinessUnitType), nameof(TestBusinessUnitType.Id));
-        var nameProperty = builder.Property(x => x.Name).HasColumnName("Name").IsRequired().Metadata;
-        nameProperty.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
-        nameProperty.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+        builder.Property(x => x.Name).HasColumnName("Name").IsRequired();
     }
 }

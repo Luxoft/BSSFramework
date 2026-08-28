@@ -11,7 +11,7 @@ public class SampleSystemAuditRevisionEntityMap : IEntityTypeConfiguration<Sampl
 {
     public void Configure(EntityTypeBuilder<SampleSystemAuditRevisionEntity> builder)
     {
-        builder.ToTable("AuditRevisionEntity", "appAudit");
+        builder.ToView(nameof(AuditRevisionEntity), "appAudit");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).HasColumnName("Id").ValueGeneratedOnAdd().IsRequired();
         builder.Property(x => x.Author).HasColumnName("author").IsRequired();

@@ -15,9 +15,7 @@ public class TestBusinessUnitAutoPropParentMap : IEntityTypeConfiguration<TestBu
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(BusinessUnit)).WithOne().HasForeignKey(typeof(TestBusinessUnit_AutoProp_Parent), nameof(TestBusinessUnit_AutoProp_Parent.Id)).IsRequired();
-        var periodStartDateProperty = builder.Property(x => x.PeriodStartDate_Last_ParentPeriodStartDate).HasColumnName("periodstartDate").IsRequired().Metadata;
-        periodStartDateProperty.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
-        periodStartDateProperty.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+        builder.Property(x => x.PeriodStartDate_Last_ParentPeriodStartDate).HasColumnName("periodstartDate").IsRequired();
         builder.ComplexProperty(x => x.Period_Last_ParentPeriod, period =>
         {
             period.Property(x => x.EndDate).HasColumnName("periodendDate");

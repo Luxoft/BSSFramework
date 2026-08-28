@@ -15,9 +15,13 @@ public class TestEmployeeMap : IEntityTypeConfiguration<TestEmployee>
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(Employee)).WithOne().HasForeignKey(typeof(TestEmployee), nameof(TestEmployee.Id));
         builder.Property(x => x.NameEngFirstName).HasColumnName("nameEngfirstName").HasMaxLength(50).IsRequired();
-        builder.Ignore(x => x.CoreBusinessUnit_Auto);
-        builder.Ignore(x => x.Position_Auto);
-        builder.Ignore(x => x.Ppm_Auto);
-        builder.Ignore(x => x.Role_Auto);
+        builder.Property<System.Guid?>("coreBusinessUnitId_TestEmployee").HasColumnName("coreBusinessUnitId");
+        builder.HasOne(x => x.CoreBusinessUnit_Auto).WithMany().HasForeignKey("coreBusinessUnitId_TestEmployee");
+        builder.Property<System.Guid?>("positionId_TestEmployee").HasColumnName("positionId");
+        builder.HasOne(x => x.Position_Auto).WithMany().HasForeignKey("positionId_TestEmployee");
+        builder.Property<System.Guid?>("ppmId_TestEmployee").HasColumnName("ppmId");
+        builder.HasOne(x => x.Ppm_Auto).WithMany().HasForeignKey("ppmId_TestEmployee");
+        builder.Property<System.Guid?>("roleId_TestEmployee").HasColumnName("roleId");
+        builder.HasOne(x => x.Role_Auto).WithMany().HasForeignKey("roleId_TestEmployee");
     }
 }

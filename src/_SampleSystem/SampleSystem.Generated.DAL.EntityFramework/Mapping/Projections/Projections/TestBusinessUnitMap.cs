@@ -23,6 +23,6 @@ public class TestBusinessUnitMap : IEntityTypeConfiguration<TestBusinessUnit>
         builder.HasIndex("parentId_TestBusinessUnit").HasDatabaseName("IX_BusinessUnit_parentId_TestBusinessUnit");
         parentIdProperty.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
         parentIdProperty.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
-        builder.Ignore(x => x.BusinessUnitEmployeeRoles);
+        builder.HasMany(x => x.BusinessUnitEmployeeRoles).WithOne(x => x.BusinessUnit).HasForeignKey("businessUnitId_MiniBusinessUnitEmployeeRole");
     }
 }

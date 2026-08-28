@@ -16,7 +16,9 @@ public class SecurityEmployeeMap : IEntityTypeConfiguration<SecurityEmployee>
         builder.HasOne(typeof(Employee)).WithOne().HasForeignKey(typeof(SecurityEmployee), nameof(SecurityEmployee.Id));
 
         builder.Property(x => x.Login_Security).HasColumnName("Login");
-        builder.Ignore(x => x.BusinessUnit_Security);
-        builder.Ignore(x => x.Department_Security);
+        builder.Property<System.Guid?>("coreBusinessUnitId_SecurityEmployee").HasColumnName("coreBusinessUnitId");
+        builder.HasOne(x => x.BusinessUnit_Security).WithMany().HasForeignKey("coreBusinessUnitId_SecurityEmployee");
+        builder.Property<System.Guid?>("hRDepartmentId_SecurityEmployee").HasColumnName("hRDepartmentId");
+        builder.HasOne(x => x.Department_Security).WithMany().HasForeignKey("hRDepartmentId_SecurityEmployee");
     }
 }

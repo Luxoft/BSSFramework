@@ -14,6 +14,6 @@ public class TestIMRequestMap : IEntityTypeConfiguration<TestIMRequest>
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(IMRequest)).WithOne().HasForeignKey(typeof(TestIMRequest), nameof(TestIMRequest.Id));
-        builder.Ignore(x => x.OneToOneDetail);
+        builder.HasOne(x => x.OneToOneDetail).WithOne().HasForeignKey(typeof(TestIMRequestDetail), "requestId_TestIMRequestDetail");
     }
 }

@@ -9,7 +9,7 @@ public class BusinessUnitAuditMap : IEntityTypeConfiguration<BusinessUnitAudit>
 {
     public void Configure(EntityTypeBuilder<BusinessUnitAudit> builder)
     {
-        builder.ToTable("BusinessUnitAudit", "appAudit");
+        builder.ToView("BusinessUnitAudit", "appAudit");
         builder.Ignore(x => x.Identifier);
         builder.Property(x => x.Id).HasColumnName("Id").ValueGeneratedNever().IsRequired();
         builder.Property<long>("REV").HasColumnName("REV").ValueGeneratedNever().IsRequired();

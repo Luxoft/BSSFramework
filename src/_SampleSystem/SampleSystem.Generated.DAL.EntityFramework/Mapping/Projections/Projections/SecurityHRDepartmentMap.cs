@@ -14,6 +14,7 @@ public class SecurityHRDepartmentMap : IEntityTypeConfiguration<SecurityHRDepart
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(HRDepartment)).WithOne().HasForeignKey(typeof(SecurityHRDepartment), nameof(SecurityHRDepartment.Id));
-        builder.Ignore(x => x.Location_Security);
+        builder.Property<System.Guid?>("locationId_SecurityHRDepartment").HasColumnName("locationId");
+        builder.HasOne(x => x.Location_Security).WithMany().HasForeignKey("locationId_SecurityHRDepartment");
     }
 }

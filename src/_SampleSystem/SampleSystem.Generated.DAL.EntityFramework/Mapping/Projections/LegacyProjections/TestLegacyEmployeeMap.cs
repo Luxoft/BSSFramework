@@ -15,6 +15,7 @@ public class TestLegacyEmployeeMap : IEntityTypeConfiguration<TestLegacyEmployee
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(Employee)).WithOne().HasForeignKey(typeof(TestLegacyEmployee), nameof(TestLegacyEmployee.Id));
-        builder.Ignore(x => x.Role_Auto);
+        builder.Property<System.Guid?>("roleId_TestLegacyEmployee").HasColumnName("roleId");
+        builder.HasOne(x => x.Role_Auto).WithMany().HasForeignKey("roleId_TestLegacyEmployee");
     }
 }

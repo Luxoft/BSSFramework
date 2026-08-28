@@ -14,6 +14,7 @@ public class TestLocationCollectionPropertiesMap : IEntityTypeConfiguration<Test
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(Location)).WithOne().HasForeignKey(typeof(TestLocationCollectionProperties), nameof(TestLocationCollectionProperties.Id));
-        builder.Ignore(x => x.Children);
+        builder.Property<System.Guid?>("parentId_TestLocation").HasColumnName("parentId");
+        builder.HasMany(x => x.Children).WithOne(x => x.Parent).HasForeignKey("parentId_TestLocation");
     }
 }

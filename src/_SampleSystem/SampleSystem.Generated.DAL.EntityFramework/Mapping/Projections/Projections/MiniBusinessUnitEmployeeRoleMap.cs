@@ -1,0 +1,27 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+using SampleSystem.Domain.BU;
+using SampleSystem.Domain.Projections;
+
+namespace SampleSystem.Generated.DAL.EntityFramework.Mapping;
+
+public class MiniBusinessUnitEmployeeRoleMap : IEntityTypeConfiguration<MiniBusinessUnitEmployeeRole>
+{
+    public void Configure(EntityTypeBuilder<MiniBusinessUnitEmployeeRole> builder)
+    {
+        builder.ToView("BusinessUnitEmployeeRole");
+        builder.HasKey(x => x.Id);
+        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
+        builder.HasOne(typeof(BusinessUnitEmployeeRole)).WithOne().HasForeignKey(typeof(MiniBusinessUnitEmployeeRole), nameof(MiniBusinessUnitEmployeeRole.Id)).IsRequired();
+        builder.Property<System.Guid?>("businessUnitId_MiniBusinessUnitEmployeeRole").HasColumnName("businessUnitId");
+        builder.HasOne(x => x.BusinessUnit).WithMany().HasForeignKey("businessUnitId_MiniBusinessUnitEmployeeRole").IsRequired(false).OnDelete(DeleteBehavior.Restrict);
+        builder.Metadata.FindProperty("businessUnitId_MiniBusinessUnitEmployeeRole")!.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
+        builder.Metadata.FindProperty("businessUnitId_MiniBusinessUnitEmployeeRole")!.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+        builder.Property<System.Guid?>("employeeId_MiniBusinessUnitEmployeeRole").HasColumnName("employeeId");
+        builder.HasOne(x => x.Employee).WithMany().HasForeignKey("employeeId_MiniBusinessUnitEmployeeRole").IsRequired(false).OnDelete(DeleteBehavior.Restrict);
+        builder.Metadata.FindProperty("employeeId_MiniBusinessUnitEmployeeRole")!.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
+        builder.Metadata.FindProperty("employeeId_MiniBusinessUnitEmployeeRole")!.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+    }
+}

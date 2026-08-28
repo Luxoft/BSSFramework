@@ -14,6 +14,6 @@ public class TestEmployeeAutoPropPositionMap : IEntityTypeConfiguration<TestEmpl
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(EmployeePosition)).WithOne().HasForeignKey(typeof(TestEmployee_AutoProp_Position), nameof(TestEmployee_AutoProp_Position.Id));
-        builder.Property(x => x.Name_Last_PositionName).IsRequired();
+        builder.Ignore(x => x.Name_Last_PositionName);
     }
 }

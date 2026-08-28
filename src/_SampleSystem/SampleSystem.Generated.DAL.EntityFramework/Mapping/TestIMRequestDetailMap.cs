@@ -13,7 +13,6 @@ public class TestIMRequestDetailMap : IEntityTypeConfiguration<TestIMRequestDeta
         builder.ToTable("IMRequestDetail");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.HasOne(x => x.Request).WithOne(x => x.OneToOneDetail).HasForeignKey<TestIMRequestDetail>("requestId").IsRequired().OnDelete(DeleteBehavior.ClientCascade);
         builder.HasOne(typeof(IMRequestDetail)).WithOne().HasForeignKey(typeof(TestIMRequestDetail), nameof(TestIMRequestDetail.Id));
     }
 }

@@ -14,6 +14,6 @@ public class TestCustomContextSecurityObjProjectionMap : IEntityTypeConfiguratio
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(TestCustomContextSecurityObj)).WithOne().HasForeignKey(typeof(TestCustomContextSecurityObjProjection), nameof(TestCustomContextSecurityObjProjection.Id));
-        builder.Property(x => x.Name).IsRequired();
+        builder.Ignore(x => x.Name);
     }
 }

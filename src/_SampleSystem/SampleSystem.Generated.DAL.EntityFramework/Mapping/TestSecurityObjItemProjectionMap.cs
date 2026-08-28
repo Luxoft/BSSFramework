@@ -14,6 +14,6 @@ public class TestSecurityObjItemProjectionMap : IEntityTypeConfiguration<TestSec
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(TestSecurityObjItem)).WithOne().HasForeignKey(typeof(TestSecurityObjItemProjection), nameof(TestSecurityObjItemProjection.Id));
-        builder.Property(x => x.Name).IsRequired();
+        builder.Ignore(x => x.Name);
     }
 }

@@ -14,6 +14,6 @@ public class TestEmployeeAutoPropPpmMap : IEntityTypeConfiguration<TestEmployee_
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(Employee)).WithOne().HasForeignKey(typeof(TestEmployee_AutoProp_Ppm), nameof(TestEmployee_AutoProp_Ppm.Id));
-        builder.Property(x => x.NameNativeMiddleName_Last_PpmNameNativeMiddleName).IsRequired();
+        builder.Ignore(x => x.NameNativeMiddleName_Last_PpmNameNativeMiddleName);
     }
 }

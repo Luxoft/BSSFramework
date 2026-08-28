@@ -14,11 +14,11 @@ public class TestEmployeeMap : IEntityTypeConfiguration<TestEmployee>
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(Employee)).WithOne().HasForeignKey(typeof(TestEmployee), nameof(TestEmployee.Id));
-        builder.Property(x => x.Login).IsRequired();
+        builder.Ignore(x => x.Login);
         builder.Property(x => x.NameEngFirstName).HasColumnName("nameEngfirstName").HasMaxLength(50).IsRequired();
-        builder.HasOne(x => x.CoreBusinessUnit_Auto).WithMany().HasForeignKey("coreBusinessUnitId").OnDelete(DeleteBehavior.Restrict);
-        builder.HasOne(x => x.Position_Auto).WithMany().HasForeignKey("positionId").OnDelete(DeleteBehavior.Restrict);
-        builder.HasOne(x => x.Ppm_Auto).WithMany().HasForeignKey("ppmId").OnDelete(DeleteBehavior.Restrict);
-        builder.HasOne(x => x.Role_Auto).WithMany().HasForeignKey("roleId").OnDelete(DeleteBehavior.Restrict);
+        builder.Ignore(x => x.CoreBusinessUnit_Auto);
+        builder.Ignore(x => x.Position_Auto);
+        builder.Ignore(x => x.Ppm_Auto);
+        builder.Ignore(x => x.Role_Auto);
     }
 }

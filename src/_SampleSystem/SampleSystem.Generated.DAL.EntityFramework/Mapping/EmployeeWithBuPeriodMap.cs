@@ -14,6 +14,6 @@ public class EmployeeWithBuPeriodMap : IEntityTypeConfiguration<EmployeeWithBuPe
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(Employee)).WithOne().HasForeignKey(typeof(EmployeeWithBuPeriod), nameof(EmployeeWithBuPeriod.Id));
-        builder.HasOne(x => x.CoreBusinessUnit_Auto).WithMany().HasForeignKey("coreBusinessUnitId").OnDelete(DeleteBehavior.Restrict);
+        builder.Ignore(x => x.CoreBusinessUnit_Auto);
     }
 }

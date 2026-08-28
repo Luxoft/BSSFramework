@@ -13,9 +13,8 @@ public class AnotherSqlParserTestObjMap : SampleSystemBaseMap<AnotherSqlParserTe
     {
         base.Configure(builder);
         builder.ToTable("SqlParserTestObj");
-        builder.Property(x => x.NotNullColumn).IsRequired();
-        builder.Property(x => x.UniqueColumn).IsRequired();
-        builder.HasIndex(x => x.UniqueColumn).IsUnique().HasDatabaseName("UIX_uniqueColumnAnotherSqlParserTestObj");
         builder.HasOne(typeof(SqlParserTestObj)).WithOne().HasForeignKey(typeof(AnotherSqlParserTestObj), nameof(AnotherSqlParserTestObj.Id));
+        builder.Ignore(x => x.NotNullColumn);
+        builder.Ignore(x => x.UniqueColumn);
     }
 }

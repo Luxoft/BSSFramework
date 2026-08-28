@@ -14,7 +14,7 @@ public class TestManualEmployeeProjectionMap : IEntityTypeConfiguration<TestManu
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.HasOne(typeof(Employee)).WithOne().HasForeignKey(typeof(TestManualEmployeeProjection), nameof(TestManualEmployeeProjection.Id));
-        builder.Property(x => x.CoreBusinessUnitId).HasColumnName("coreBusinessUnitId").IsRequired();
-        builder.Property(x => x.Login).IsRequired();
+        builder.Ignore(x => x.CoreBusinessUnitId);
+        builder.Ignore(x => x.Login);
     }
 }

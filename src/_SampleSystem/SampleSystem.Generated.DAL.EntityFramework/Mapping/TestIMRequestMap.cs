@@ -13,8 +13,8 @@ public class TestIMRequestMap : IEntityTypeConfiguration<TestIMRequest>
         builder.ToTable("IMRequest");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.Property(x => x.Message).IsRequired();
         builder.HasOne(typeof(IMRequest)).WithOne().HasForeignKey(typeof(TestIMRequest), nameof(TestIMRequest.Id));
-        builder.HasOne(x => x.OneToOneDetail).WithOne(x => x.Request).HasForeignKey<TestIMRequestDetail>("requestId").IsRequired().OnDelete(DeleteBehavior.ClientCascade);
+        builder.Ignore(x => x.Message);
+        builder.Ignore(x => x.OneToOneDetail);
     }
 }

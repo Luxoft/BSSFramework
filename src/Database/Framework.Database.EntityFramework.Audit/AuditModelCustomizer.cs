@@ -20,6 +20,7 @@ public class AuditModelCustomizer(
         {
             revision.HasKey(entity => entity.Id);
             revision.ToTable(nameof(AuditRevisionEntity), mainSchemaInfo.Name);
+            revision.Property(entity => entity.Author).HasColumnName(nameof(AuditRevisionEntity.Author));
             revision.Property(entity => entity.RevisionDate).HasColumnName(nameof(AuditRevisionEntity.RevisionDate));
         });
 

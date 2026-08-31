@@ -1,6 +1,5 @@
 ﻿using Framework.Authorization.Generated.DAL.EntityFramework.Mapping.Base;
 using Framework.Configuration.Generated.DAL.EntityFramework.Mapping.Base;
-using Framework.Projection;
 
 using Microsoft.EntityFrameworkCore;
 

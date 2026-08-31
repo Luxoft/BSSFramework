@@ -1,7 +1,6 @@
 ﻿using System.CodeDom;
 
 using Framework.BLL;
-using Framework.BLL.Services;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.BLLCoreGenerator.Configuration;
 using Framework.FileGeneration.Configuration;

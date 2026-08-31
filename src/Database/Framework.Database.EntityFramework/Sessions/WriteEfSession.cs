@@ -5,7 +5,8 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Framework.Database.EntityFramework.Sessions;
 
-public class WriteEfSession : EfSessionBase
+public class WriteEfSession<TDbContext> : IDBSession<TDbContext>
+    where TDbContext : DbContext
 {
     private readonly IDBSessionEventListener[] eventListeners;
 
@@ -15,43 +16,44 @@ public class WriteEfSession : EfSessionBase
 
     private bool manualFault;
 
-    private bool closed;
-
-    public WriteEfSession(DbContext nativeSession,
-                          IEnumerable<IDBSessionEventListener> eventListeners)
-            : base(nativeSession, DBSessionMode.Write)
+    public WriteEfSession(TDbContext nativeSession, IEnumerable<IDBSessionEventListener> eventListeners)
     {
+        this.NativeSession = nativeSession;
         this.eventListeners = eventListeners.ToArray();
 
-        this.efTransaction = (RelationalTransaction)this.NativeSession.Database.BeginTransaction();
+        this.efTransaction = (RelationalTransaction)nativeSession.Database.BeginTransaction();
         this.Transaction = this.efTransaction.GetDbTransaction();
     }
 
-    public override bool Closed => this.closed;
+    public DBSessionMode SessionMode { get; } = DBSessionMode.Write;
 
-    public override IDbTransaction Transaction { get; }
+    public TDbContext NativeSession { get; }
+
+    public bool Closed { get; private set; }
+
+    public IDbTransaction Transaction { get; }
 
 
-    public override void AsFault() => this.manualFault = true;
+    public void AsFault() => this.manualFault = true;
 
-    public override void AsReadOnly() => throw new InvalidOperationException("Writable session already created");
+    public void AsReadOnly() => throw new InvalidOperationException("Writable session already created");
 
-    public override void AsWritable()
+    public void AsWritable()
     {
     }
 
-    public override async Task CloseAsync(CancellationToken ct)
+    public async Task CloseAsync(CancellationToken ct)
     {
-        if (this.closed)
+        if (this.Closed)
         {
             return;
         }
 
-        this.closed = true;
+        this.Closed = true;
 
-        using (this.NativeSession)
+        await using (this.NativeSession)
         {
-            using (this.efTransaction)
+            await using (this.efTransaction)
             {
                 if (this.manualFault)
                 {
@@ -70,7 +72,7 @@ public class WriteEfSession : EfSessionBase
         }
     }
 
-    public override async Task FlushAsync(CancellationToken ct) => await this.FlushAsync(false, ct);
+    public async Task FlushAsync(CancellationToken ct) => await this.FlushAsync(false, ct);
 
     private async Task FlushAsync(bool withCompleteTransaction, CancellationToken ct)
     {
@@ -121,8 +123,8 @@ public class WriteEfSession : EfSessionBase
                 await this.NativeSession.SaveChangesAsync(ct);
 
                 var afterTransactionCompletedChangeState =
-                        new[] { beforeTransactionCompletedChangeState, listenersChanges }
-                                .Composite();
+                    new[] { beforeTransactionCompletedChangeState, listenersChanges }
+                        .Composite();
 
                 // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!!!!! Use UseTryCloseDbSession middleware
                 foreach (var eventListener in this.eventListeners)
@@ -134,7 +136,9 @@ public class WriteEfSession : EfSessionBase
 
                 var finalChanges = this.collectChangesService.CollectChanges(this.NativeSession);
 
-                await this.NativeSession.SaveChangesAsync(ct); // Флашим для того, чтобы проверить, что никто ничего не менял в объектах после AfterTransactionCompleted-евента
+                await this.NativeSession
+                          .SaveChangesAsync(
+                              ct); // Флашим для того, чтобы проверить, что никто ничего не менял в объектах после AfterTransactionCompleted-евента
 
                 if (!finalChanges.IsEmpty)
                 {
@@ -145,18 +149,8 @@ public class WriteEfSession : EfSessionBase
         catch (Exception e)
         {
             throw;
-
-
-            //var result = this.Environment.ExceptionProcessor.Process(e);
-
-            //if (result == e)
-            //{
-            //    throw;
-            //}
-            //else
-            //{
-            //    throw result;
-            //}
         }
     }
+
+    public async ValueTask DisposeAsync() => await this.CloseAsync(CancellationToken.None);
 }

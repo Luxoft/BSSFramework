@@ -4,31 +4,32 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Framework.Database.EntityFramework.Sessions;
 
-public class EfSession : IEfSession
+public class EfSession<TDbContext> : IDBSession<TDbContext>
+    where TDbContext : DbContext
 {
     private DBSessionMode? sessionMode;
 
-    private readonly Lazy<IEfSession> lazyInnerSession;
+    private readonly Lazy<IDBSession<TDbContext>> lazyInnerSession;
 
-    public EfSession(DbContext nativeSession, DBSessionSettings settings, IEnumerable<IDBSessionEventListener> eventListeners) =>
-        this.lazyInnerSession = new Lazy<IEfSession>(() =>
+    public EfSession(TDbContext nativeSession, DBSessionSettings settings, IEnumerable<IDBSessionEventListener> eventListeners) =>
+        this.lazyInnerSession = new Lazy<IDBSession<TDbContext>>(() =>
         {
             switch (this.sessionMode ?? settings.DefaultSessionMode)
             {
                 case DBSessionMode.Read:
-                    return new ReadOnlyEfSession(nativeSession);
+                    return new ReadOnlyEfSession<TDbContext>(nativeSession);
 
                 case DBSessionMode.Write:
-                    return new WriteEfSession(nativeSession, eventListeners);
+                    return new WriteEfSession<TDbContext>(nativeSession, eventListeners);
 
                 default:
                     throw new InvalidOperationException();
             }
         });
 
-    public virtual IDBSession InnerSession => this.lazyInnerSession.Value;
+    public virtual IDBSession<TDbContext> InnerSession => this.lazyInnerSession.Value;
 
-    public DbContext NativeSession => this.lazyInnerSession.Value.NativeSession;
+    public TDbContext NativeSession => this.InnerSession.NativeSession;
 
     public DBSessionMode SessionMode => this.InnerSession.SessionMode;
 
@@ -36,11 +37,7 @@ public class EfSession : IEfSession
 
     public async Task FlushAsync(CancellationToken ct) => await this.InnerSession.FlushAsync(ct);
 
-    public long GetCurrentRevision() => this.InnerSession.GetCurrentRevision();
-
     public void AsFault() => this.InnerSession.AsFault();
-
-    public long GetMaxRevision() => this.InnerSession.GetMaxRevision();
 
     public void AsReadOnly() => this.ApplySessionMode(DBSessionMode.Read);
 

@@ -1,47 +1,57 @@
 ﻿using System.Data;
 
+using Framework.Core;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Framework.Database.EntityFramework.Sessions;
 
-public class ReadOnlyEfSession : EfSessionBase
+public class ReadOnlyEfSession<TDbContext> : IDBSession<TDbContext>
+    where TDbContext : DbContext
 {
-    private bool closed;
+    private static readonly IDbTransaction DbTransaction = LazyInterfaceImplementHelper.CreateNotImplemented<IDbTransaction>("Readonly session");
+
     private readonly IDbContextTransaction transaction;
 
-    public ReadOnlyEfSession(DbContext nativeSession)
-            : base(nativeSession, DBSessionMode.Read)
+    public ReadOnlyEfSession(TDbContext nativeSession)
     {
-        nativeSession.Database.OpenConnection();
+        this.NativeSession = nativeSession;
+        this.NativeSession.Database.OpenConnection();
 
-        nativeSession.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
-        nativeSession.ChangeTracker.AutoDetectChangesEnabled = false;
+        this.NativeSession.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+        this.NativeSession.ChangeTracker.AutoDetectChangesEnabled = false;
 
         // need for support different isolation level (aka Snapshot)
-        this.transaction = this.NativeSession.Database.BeginTransaction();
+        this.transaction = nativeSession.Database.BeginTransaction();
     }
 
-    public override bool Closed => this.closed;
+    public DBSessionMode SessionMode { get; } = DBSessionMode.Read;
 
-    public override void AsFault()
+    public IDbTransaction Transaction { get; } = DbTransaction;
+
+    public TDbContext NativeSession { get; }
+
+    public bool Closed { get; private set; }
+
+    public void AsFault()
     {
     }
 
-    public override void AsReadOnly()
+    public void AsReadOnly()
     {
     }
 
-    public override void AsWritable() => throw new InvalidOperationException("Readonly session already created");
+    public void AsWritable() => throw new InvalidOperationException("Readonly session already created");
 
-    public override async Task CloseAsync(CancellationToken ct)
+    public async Task CloseAsync(CancellationToken ct)
     {
-        if (this.closed)
+        if (this.Closed)
         {
             return;
         }
 
-        this.closed = true;
+        this.Closed = true;
 
         await using (this.NativeSession)
         {
@@ -51,7 +61,7 @@ public class ReadOnlyEfSession : EfSessionBase
         }
     }
 
-    public override IDbTransaction Transaction { get; } = null!;
+    public async Task FlushAsync(CancellationToken ct) => throw new InvalidOperationException("Readonly session cannot be flushed");
 
-    public override async Task FlushAsync(CancellationToken ct) => throw new InvalidOperationException();
+    public async ValueTask DisposeAsync() => await this.CloseAsync(CancellationToken.None);
 }

@@ -1,6 +1,5 @@
 ﻿using System.Text;
 
-using Anch.Core;
 using Anch.Testing.Xunit;
 
 using Framework.Core;

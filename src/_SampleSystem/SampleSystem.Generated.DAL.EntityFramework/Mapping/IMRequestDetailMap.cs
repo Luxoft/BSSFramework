@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SampleSystem.Domain.Employee;
 using SampleSystem.Generated.DAL.EntityFramework.Mapping.Base;
 namespace SampleSystem.Generated.DAL.EntityFramework.Mapping;

@@ -2,9 +2,7 @@
 using Anch.GenericQueryable.DependencyInjection;
 using Anch.GenericQueryable.EntityFramework;
 
-using Framework.Core;
 using Framework.Database.EntityFramework.Sessions;
-using Framework.DependencyInjection;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,7 +11,7 @@ namespace Framework.Database.EntityFramework.DependencyInjection;
 
 public class EntityFrameworkSetup : IEntityFrameworkSetup, IServiceInitializer
 {
-    private readonly List<IEntityFrameworkSetupExtension> extensions = new List<IEntityFrameworkSetupExtension>();
+    private readonly List<IEntityFrameworkSetupExtension> extensions = [];
 
     private Action<IServiceCollection>? dbContextInit;
 
@@ -22,12 +20,6 @@ public class EntityFrameworkSetup : IEntityFrameworkSetup, IServiceInitializer
         services.AddScoped(typeof(IAsyncDal<,>), typeof(EfAsyncDal<,>));
 
         services.AddGenericQueryable(v => v.SetFetchService<EfFetchService>().SetTargetMethodExtractor<EfTargetMethodExtractor>());
-
-        //For close db session by middleware
-        services.AddScopedFromLazyObject<IEfSession, EfSession>();
-        services.AddScopedFrom<ILazyObject<IDBSession>, ILazyObject<IEfSession>>();
-
-        //services.AddSingleton<IDefaultConnectionStringSource, DefaultConnectionStringSource>();
 
         (this.dbContextInit ?? throw new InvalidOperationException("DbContext has not been initialized.")).Invoke(services);
 
@@ -39,7 +31,8 @@ public class EntityFrameworkSetup : IEntityFrameworkSetup, IServiceInitializer
     {
         this.dbContextInit = sc =>
         {
-            sc.AddScopedFrom<DbContext, TDbContext>();
+            sc.AddScoped<IDBSession, EfSession<TDbContext>>();
+            sc.AddScopedFrom((EfSession<TDbContext> efSession) => efSession.InnerSession);
         };
 
         return this;

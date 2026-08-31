@@ -84,8 +84,6 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
 
     public void Initialize(IServiceCollection services)
     {
-        services.AddScopedFrom<ICurrentRevisionService, IDBSession>();
-
         services.AddSingleton<IDalValidationIdentitySource, DalValidationIdentitySource>();
 
         services.AddScopedFrom<IDbTransaction, IDBSession>(session => session.Transaction);

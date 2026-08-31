@@ -1,15 +1,15 @@
 ﻿using System.Runtime.CompilerServices;
 
+using Framework.Database.EntityFramework.Sessions;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
-using Framework.Database.EntityFramework.Sessions;
-
 namespace Framework.Database.EntityFramework.Audit;
 
-public class AuditFlushInterceptor(TimeProvider timeProvider) : SaveChangesInterceptor
+public class AuditFlushInterceptor(TimeProvider timeProvider, EfCurrentRevisionState currentRevisionState) : SaveChangesInterceptor
 {
     private readonly ConditionalWeakTable<DbContext, List<AuditEntry>> pendingAudits = [];
 
@@ -76,7 +76,7 @@ public class AuditFlushInterceptor(TimeProvider timeProvider) : SaveChangesInter
         this.pendingAudits.Remove(context);
         var revision = this.AddAuditEntities(context, audits, context.GetService<IAuditEntityFactory>());
         context.SaveChanges();
-        EfCurrentRevisionStore.SetCurrentRevision(context, revision.Id);
+        currentRevisionState.CurrentRevision = revision.Id;
     }
 
     private async Task WriteAuditsAsync(DbContext? context, CancellationToken cancellationToken)
@@ -89,7 +89,7 @@ public class AuditFlushInterceptor(TimeProvider timeProvider) : SaveChangesInter
         this.pendingAudits.Remove(context);
         var revision = this.AddAuditEntities(context, audits, context.GetService<IAuditEntityFactory>());
         await context.SaveChangesAsync(cancellationToken);
-        EfCurrentRevisionStore.SetCurrentRevision(context, revision.Id);
+        currentRevisionState.CurrentRevision = revision.Id;
     }
 
     private AuditEntry? CreateAuditEntry(EntityEntry entry, IAuditEntityFactory auditEntityFactory)

@@ -1,40 +1,38 @@
 ﻿using Anch.IdentitySource;
 
 using Framework.Core;
-using Framework.Database.EntityFramework.Sessions;
 
 using Microsoft.EntityFrameworkCore;
 
 namespace Framework.Database.EntityFramework;
 
 public class EfAsyncDal<TDomainObject, TIdent>(
-    IEfSession session,
+    IDBSession session,
+    DbContext nativeSession,
     IIdentityInfo<TDomainObject, TIdent> identityInfo) : IAsyncDal<TDomainObject, TIdent>
 
     where TDomainObject : class
     where TIdent : notnull
 {
-    private DbContext NativeSession => session.NativeSession;
+    public IQueryable<TDomainObject> GetQueryable() => nativeSession.Set<TDomainObject>();
 
-    public IQueryable<TDomainObject> GetQueryable() => this.NativeSession.Set<TDomainObject>();
-
-    public TDomainObject Load(TIdent id) => this.NativeSession.Find<TDomainObject>(id) ?? throw new InvalidOperationException($"Entity of type {typeof(TDomainObject).Name} with ID {id} not found.");
+    public TDomainObject Load(TIdent id) => nativeSession.Find<TDomainObject>(id) ?? throw new InvalidOperationException($"Entity of type {typeof(TDomainObject).Name} with ID {id} not found.");
 
     public async Task<TDomainObject> LoadAsync(TIdent id, CancellationToken ct) =>
-        (await this.NativeSession.FindAsync<TDomainObject>([id], ct) ?? throw new InvalidOperationException($"Entity of type {typeof(TDomainObject).Name} with ID {id} not found.")); // Hack
+        (await nativeSession.FindAsync<TDomainObject>([id], ct) ?? throw new InvalidOperationException($"Entity of type {typeof(TDomainObject).Name} with ID {id} not found.")); // Hack
 
     public async Task RefreshAsync(TDomainObject domainObject, CancellationToken ct) =>
-        await this.NativeSession.Entry(domainObject).ReloadAsync(ct);
+        await nativeSession.Entry(domainObject).ReloadAsync(ct);
 
     public async Task SaveAsync(TDomainObject domainObject, CancellationToken ct)
     {
         this.CheckWrite();
 
-        var state = session.NativeSession.Entry(domainObject).State;
+        var state = nativeSession.Entry(domainObject).State;
 
         if (state == EntityState.Detached)
         {
-            await session.NativeSession.AddAsync(domainObject, ct);
+            await nativeSession.AddAsync(domainObject, ct);
         }
     }
 
@@ -49,11 +47,11 @@ public class EfAsyncDal<TDomainObject, TIdent>(
 
         identityInfo.Id.Setter(domainObject, id);
 
-        var state = this.NativeSession.Entry(domainObject).State;
+        var state = nativeSession.Entry(domainObject).State;
 
         if (state == EntityState.Detached)
         {
-            await this.NativeSession.AddAsync(domainObject, ct);
+            await nativeSession.AddAsync(domainObject, ct);
         }
     }
 
@@ -61,14 +59,14 @@ public class EfAsyncDal<TDomainObject, TIdent>(
     {
         this.CheckWrite();
 
-        this.NativeSession.Remove(domainObject);
+        nativeSession.Remove(domainObject);
     }
 
     public async Task LockAsync(TDomainObject domainObject, LockRole lockRole, CancellationToken ct)
     {
         this.CheckWrite();
 
-        var entityType = this.NativeSession.Model.FindEntityType(typeof(TDomainObject))
+        var entityType = nativeSession.Model.FindEntityType(typeof(TDomainObject))
                           ?? throw new InvalidOperationException($"Entity type \"{typeof(TDomainObject)}\" not found.");
 
         var tableName = entityType.GetTableName()
@@ -78,7 +76,7 @@ public class EfAsyncDal<TDomainObject, TIdent>(
 
         var fullTableName = schema is null ? $"[{tableName}]" : $"[{schema}].[{tableName}]";
 
-        await this.NativeSession.Set<TDomainObject>()
+        await nativeSession.Set<TDomainObject>()
                   .FromSqlRaw($"SELECT * FROM {fullTableName} WITH (UPDLOCK) WHERE Id = {{0}}", identityInfo.Id.Getter(domainObject))
                   .ToListAsync(ct);
     }

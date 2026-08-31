@@ -6,18 +6,19 @@ using NHibernate;
 
 namespace Framework.Database.NHibernate.Sessions;
 
-public class NHibSession : INHibSession
+public class NHibSession : IDBSession<ISession>
 {
     private DBSessionMode? customSessionMode;
 
-    private readonly Lazy<INHibSession> lazyInnerSession;
+    private readonly Lazy<IDBSession<ISession>> lazyInnerSession;
 
     public NHibSession(
         NHibSessionEnvironment environment,
         DBSessionSettings settings,
         IAuditPropertyFactory auditPropertyFactory,
+        IAuditReaderPatched auditReader,
         IEnumerable<IDBSessionEventListener> eventListeners) =>
-        this.lazyInnerSession = new Lazy<INHibSession>(() =>
+        this.lazyInnerSession = new Lazy<IDBSession<ISession>>(() =>
         {
             switch (this.customSessionMode ?? settings.DefaultSessionMode)
             {
@@ -25,30 +26,24 @@ public class NHibSession : INHibSession
                     return new ReadOnlyNHibSession(environment);
 
                 case DBSessionMode.Write:
-                    return new WriteNHibSession(environment, auditPropertyFactory, eventListeners);
+                    return new WriteNHibSession(environment, auditPropertyFactory, auditReader, eventListeners);
 
                 default:
                     throw new InvalidOperationException();
             }
         });
 
-    public IDBSession InnerSession => this.lazyInnerSession.Value;
-
-    public IAuditReaderPatched AuditReader => this.lazyInnerSession.Value.AuditReader;
-
-    public ISession NativeSession => this.lazyInnerSession.Value.NativeSession;
-
     public DBSessionMode SessionMode => this.InnerSession.SessionMode;
+
+    public IDBSession<ISession> InnerSession => this.lazyInnerSession.Value;
+
+    public ISession NativeSession => this.InnerSession.NativeSession;
 
     public IDbTransaction Transaction => this.InnerSession.Transaction;
 
     public Task FlushAsync(CancellationToken ct) => this.InnerSession.FlushAsync(ct);
 
-    public long GetCurrentRevision() => this.InnerSession.GetCurrentRevision();
-
     public void AsFault() => this.InnerSession.AsFault();
-
-    public long GetMaxRevision() => this.InnerSession.GetMaxRevision();
 
     public void AsReadOnly() => this.ApplySessionMode(DBSessionMode.Read);
 

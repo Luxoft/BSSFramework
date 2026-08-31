@@ -1,8 +1,4 @@
-﻿using CommandLine;
-
-using SampleSystem.DbGenerate.NHibernate;
-
-namespace SampleSystem.DbGenerate.EntityFramework;
+﻿namespace SampleSystem.DbGenerate.EntityFramework;
 
 //public static class Program
 //{

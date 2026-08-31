@@ -1,5 +1,6 @@
 ﻿using Anch.DependencyInjection;
 
+using Framework.Database.Audit;
 using Framework.Database.EntityFramework.Extensions;
 
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -34,6 +35,8 @@ public class AuditSetup : IAuditSetup, IServiceInitializer
 
         services.ReplaceSingleton<IModelCustomizer, RootModelCustomizer>()
                 .AddKeyedSingleton<IModelCustomizer, AuditModelCustomizer>(RootModelCustomizer.ElementKey);
+
+        services.AddScoped<IRevisionService, EfRevisionService>();
 
         this.initFilterAction(services);
     }

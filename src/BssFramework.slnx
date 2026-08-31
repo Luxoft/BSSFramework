@@ -46,6 +46,7 @@
   
   <Folder Name="/Database/">
     <Project Path="Database/Framework.Database.Abstractions/Framework.Database.Abstractions.csproj" />
+    <Project Path="Database/Framework.Database.Audit.Abstractions/Framework.Database.Audit.Abstractions.csproj" />
     <Project Path="Database/Framework.Database.Domain/Framework.Database.Domain.csproj" />
     <Project Path="Database/Framework.Database.Legacy.Abstractions/Framework.Database.Legacy.Abstractions.csproj" />
     <Project Path="Database/Framework.Database.Legacy.Domain/Framework.Database.Legacy.Domain.csproj" />

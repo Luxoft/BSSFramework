@@ -1,37 +1,35 @@
 ﻿using System.Data;
 
-using Framework.Core;
-
 using Microsoft.EntityFrameworkCore;
 
 namespace Framework.Database.EntityFramework.Sessions;
 
-public class EfSession<TDbContext> : IDBSession<TDbContext>
+public class EfSession<TDbContext> : IEfSession
     where TDbContext : DbContext
 {
     private DBSessionMode? sessionMode;
 
+    private readonly Lazy<IEfSession> lazyInnerSession;
+
     public EfSession(TDbContext nativeSession, DBSessionSettings settings, IEnumerable<IDBSessionEventListener> eventListeners) =>
-        this.LazyInnerSession = new LazyObject<IDBSession<TDbContext>>(() =>
+        this.lazyInnerSession = new Lazy<IEfSession>(() =>
         {
             switch (this.sessionMode ?? settings.DefaultSessionMode)
             {
                 case DBSessionMode.Read:
-                    return new ReadOnlyEfSession<TDbContext>(nativeSession);
+                    return new ReadOnlyEfSession(nativeSession);
 
                 case DBSessionMode.Write:
-                    return new WriteEfSession<TDbContext>(nativeSession, eventListeners);
+                    return new WriteEfSession(nativeSession, eventListeners);
 
                 default:
                     throw new InvalidOperationException();
             }
         });
 
-    public LazyObject<IDBSession<TDbContext>> LazyInnerSession { get; }
+    public IDBSession InnerSession => this.lazyInnerSession.Value;
 
-    public IDBSession<TDbContext> InnerSession => this.LazyInnerSession.Value;
-
-    public TDbContext NativeSession => this.InnerSession.NativeSession;
+    public DbContext NativeSession => this.lazyInnerSession.Value.NativeSession;
 
     public DBSessionMode SessionMode => this.InnerSession.SessionMode;
 
@@ -47,7 +45,7 @@ public class EfSession<TDbContext> : IDBSession<TDbContext>
 
     private void ApplySessionMode(DBSessionMode applySessionMode)
     {
-        if (!this.LazyInnerSession.IsValueCreated)
+        if (!this.lazyInnerSession.IsValueCreated)
         {
             this.sessionMode = applySessionMode;
         }
@@ -59,7 +57,7 @@ public class EfSession<TDbContext> : IDBSession<TDbContext>
 
     public async Task CloseAsync(CancellationToken ct)
     {
-        if (this.LazyInnerSession.IsValueCreated)
+        if (this.lazyInnerSession.IsValueCreated)
         {
             await this.InnerSession.CloseAsync(ct);
         }
@@ -67,7 +65,7 @@ public class EfSession<TDbContext> : IDBSession<TDbContext>
 
     public async ValueTask DisposeAsync()
     {
-        if (this.LazyInnerSession.IsValueCreated)
+        if (this.lazyInnerSession.IsValueCreated)
         {
             await this.InnerSession.DisposeAsync();
         }

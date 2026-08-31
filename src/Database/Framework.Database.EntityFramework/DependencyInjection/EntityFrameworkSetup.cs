@@ -4,6 +4,7 @@ using Anch.GenericQueryable.EntityFramework;
 
 using Framework.Core;
 using Framework.Database.EntityFramework.Sessions;
+using Framework.DependencyInjection;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +23,9 @@ public class EntityFrameworkSetup : IEntityFrameworkSetup, IServiceInitializer
 
         services.AddGenericQueryable(v => v.SetFetchService<EfFetchService>().SetTargetMethodExtractor<EfTargetMethodExtractor>());
 
+        services.AddScopedFrom<ILazyObject<IDBSession>, ILazyObject<IEfSession>>();
+        services.AddScopedFrom<DbContext, IEfSession>(session => session.NativeSession);
+
         (this.dbContextInit ?? throw new InvalidOperationException("DbContext has not been initialized.")).Invoke(services);
 
         this.extensions.ForEach(ex => ex.AddServices(services));
@@ -32,9 +36,7 @@ public class EntityFrameworkSetup : IEntityFrameworkSetup, IServiceInitializer
     {
         this.dbContextInit = services =>
         {
-            services.AddScoped<EfSession<TDbContext>>();
-            services.AddScopedFrom<DbContext, EfSession<TDbContext>>(session => session.NativeSession);
-            services.AddScopedFrom<ILazyObject<IDBSession>, EfSession<TDbContext>>(session => session.LazyInnerSession);
+            services.AddScopedFromLazyObject<IEfSession, EfSession<TDbContext>>();
         };
 
         return this;

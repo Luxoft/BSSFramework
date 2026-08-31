@@ -16,15 +16,16 @@ namespace SampleSystem.ServiceEnvironment.DependencyInjection;
 public class SampleSystemEntityFrameworkExtension : IBssFrameworkExtension
 {
     public void AddServices(IServiceCollection services) =>
-        services.AddEntityFramework(s =>
-                                        s.SetDbContext<SampleSystemDbContext>()
-                                         .AddLegacyDatabaseSettings())
-                .AddDbContext<SampleSystemDbContext>((sp, options) => options
-                                                                      .UseSqlServer(sp.GetRequiredService<IDefaultConnectionStringSource>().ConnectionString)
-                                                                      .UseLazyLoadingProxies()
-                                                                      .IgnoreComputedProperties()
-                                                                      .AddAudit(auditSetup =>
-                                                                                    auditSetup.SetFilter(et => !et.ClrType.IsProjection()
-                                                                                                             && !et.ClrType
-                                                                                                                 .HasAttribute<NotAuditedClassAttribute>())));
+        services
+            .AddDbContext<SampleSystemDbContext>((sp, options) => options
+                                                                  .UseSqlServer(sp.GetRequiredService<IDefaultConnectionStringSource>().ConnectionString)
+                                                                  .UseLazyLoadingProxies()
+                                                                  .IgnoreComputedProperties()
+                                                                  .AddAudit(auditSetup =>
+                                                                                auditSetup.SetFilter(et => !et.ClrType.IsProjection()
+                                                                                                         && !et.ClrType
+                                                                                                             .HasAttribute<NotAuditedClassAttribute>())))
+            .AddEntityFramework(s => s.SetDbContext<SampleSystemDbContext>()
+                                      .AddExtension(new AuditEntityFrameworkSetupExtension())
+                                      .AddLegacyDatabaseSettings());
 }

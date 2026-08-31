@@ -5,8 +5,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Framework.Database.EntityFramework.Sessions;
 
-public class WriteEfSession<TDbContext> : IDBSession<TDbContext>
-    where TDbContext : DbContext
+public class WriteEfSession : IEfSession
 {
     private readonly IDBSessionEventListener[] eventListeners;
 
@@ -16,7 +15,7 @@ public class WriteEfSession<TDbContext> : IDBSession<TDbContext>
 
     private bool manualFault;
 
-    public WriteEfSession(TDbContext nativeSession, IEnumerable<IDBSessionEventListener> eventListeners)
+    public WriteEfSession(DbContext nativeSession, IEnumerable<IDBSessionEventListener> eventListeners)
     {
         this.NativeSession = nativeSession;
         this.eventListeners = eventListeners.ToArray();
@@ -27,7 +26,7 @@ public class WriteEfSession<TDbContext> : IDBSession<TDbContext>
 
     public DBSessionMode SessionMode { get; } = DBSessionMode.Write;
 
-    public TDbContext NativeSession { get; }
+    public DbContext NativeSession { get; }
 
     public bool Closed { get; private set; }
 

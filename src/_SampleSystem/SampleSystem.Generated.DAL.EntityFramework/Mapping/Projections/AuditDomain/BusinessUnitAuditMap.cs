@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using SampleSystem.AuditDomain;
 
-namespace SampleSystem.Generated.DAL.EntityFramework.Mapping;
+namespace SampleSystem.Generated.DAL.EntityFramework.Mapping.Projections.AuditDomain;
 
 public class BusinessUnitAuditMap : IEntityTypeConfiguration<BusinessUnitAudit>
 {

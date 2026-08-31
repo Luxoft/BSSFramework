@@ -13,6 +13,7 @@ public class ClassAMap : IEntityTypeConfiguration<ClassA>
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.Property(x => x.Value).IsRequired();
+        builder.Property<int?>("age").HasColumnName("age");
         builder.HasMany(x => x.Child).WithOne(x => x.Parent).HasForeignKey("parentId").OnDelete(DeleteBehavior.Cascade);
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.Projections;
 
-namespace SampleSystem.Generated.DAL.EntityFramework.Mapping;
+namespace SampleSystem.Generated.DAL.EntityFramework.Mapping.Projections.LegacyProjections;
 
 public class TestLegacyEmployeeAutoPropRoleMap : IEntityTypeConfiguration<TestLegacyEmployee_AutoProp_Role>
 {

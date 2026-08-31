@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using SampleSystem.Domain.TestForceAbstract;
 
-namespace SampleSystem.Generated.DAL.EntityFramework.Mapping;
+namespace SampleSystem.Generated.DAL.EntityFramework.Mapping.Projections.Main;
 
 public class ConcreteClassAMap : IEntityTypeConfiguration<ConcreteClassA>
 {

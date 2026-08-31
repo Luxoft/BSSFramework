@@ -1,5 +1,6 @@
 ﻿using Framework.Authorization.Generated.DAL.EntityFramework.Mapping.Base;
 using Framework.Configuration.Generated.DAL.EntityFramework.Mapping.Base;
+using Framework.Projection;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +18,7 @@ public class SampleSystemDbContext(DbContextOptions<SampleSystemDbContext> optio
 
         builder.ApplyConfigurationsFromAssembly(typeof(AuthBaseMap<>).Assembly);
         builder.ApplyConfigurationsFromAssembly(typeof(ConfigurationBaseMap<>).Assembly);
-        builder.ApplyConfigurationsFromAssembly(typeof(SampleSystemBaseMap<>).Assembly);
+        builder.ApplyConfigurationsFromAssembly(typeof(SampleSystemBaseMap<>).Assembly, t => !t.Namespace!.Contains("Projection"));
 
         builder.HasDefaultSchema("app");
     }

@@ -2,10 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using SampleSystem.Domain;
-
 using SampleSystem.Generated.DAL.EntityFramework.Mapping.Base;
 
-namespace SampleSystem.Generated.DAL.EntityFramework.Mapping;
+namespace SampleSystem.Generated.DAL.EntityFramework.Mapping.Projections.Main;
 
 public class AnotherSqlParserTestObjMap : SampleSystemBaseMap<AnotherSqlParserTestObj>
 {

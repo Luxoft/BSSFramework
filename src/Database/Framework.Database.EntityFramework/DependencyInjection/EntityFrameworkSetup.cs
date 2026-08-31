@@ -28,6 +28,9 @@ public class EntityFrameworkSetup : IEntityFrameworkSetup, IServiceInitializer
 
         (this.dbContextInit ?? throw new InvalidOperationException("DbContext has not been initialized.")).Invoke(services);
 
+
+
+
         this.extensions.ForEach(ex => ex.AddServices(services));
     }
 

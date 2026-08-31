@@ -17,7 +17,7 @@ public abstract class EfSessionBase(DbContext nativeSession, DBSessionMode sessi
     public abstract Task FlushAsync(CancellationToken ct);
 
     /// <inheritdoc />
-    public long GetCurrentRevision() => throw new NotImplementedException("EF");
+    public long GetCurrentRevision() => EfCurrentRevisionStore.GetCurrentRevision(this.NativeSession);
 
     /// <inheritdoc />
     public long GetMaxRevision() => throw new NotImplementedException("EF");

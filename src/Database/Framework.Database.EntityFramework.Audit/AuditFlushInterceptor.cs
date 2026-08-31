@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
+using Framework.Database.EntityFramework.Sessions;
+
 namespace Framework.Database.EntityFramework.Audit;
 
 public class AuditFlushInterceptor(TimeProvider timeProvider) : SaveChangesInterceptor
@@ -72,8 +74,9 @@ public class AuditFlushInterceptor(TimeProvider timeProvider) : SaveChangesInter
         }
 
         this.pendingAudits.Remove(context);
-        this.AddAuditEntities(context, audits, context.GetService<IAuditEntityFactory>());
+        var revision = this.AddAuditEntities(context, audits, context.GetService<IAuditEntityFactory>());
         context.SaveChanges();
+        EfCurrentRevisionStore.SetCurrentRevision(context, revision.Id);
     }
 
     private async Task WriteAuditsAsync(DbContext? context, CancellationToken cancellationToken)
@@ -84,8 +87,9 @@ public class AuditFlushInterceptor(TimeProvider timeProvider) : SaveChangesInter
         }
 
         this.pendingAudits.Remove(context);
-        this.AddAuditEntities(context, audits, context.GetService<IAuditEntityFactory>());
+        var revision = this.AddAuditEntities(context, audits, context.GetService<IAuditEntityFactory>());
         await context.SaveChangesAsync(cancellationToken);
+        EfCurrentRevisionStore.SetCurrentRevision(context, revision.Id);
     }
 
     private AuditEntry? CreateAuditEntry(EntityEntry entry, IAuditEntityFactory auditEntityFactory)
@@ -104,7 +108,7 @@ public class AuditFlushInterceptor(TimeProvider timeProvider) : SaveChangesInter
         return new AuditEntry(entry, metadata, this.ToRevisionType(entry.State), modifiedProperties);
     }
 
-    private void AddAuditEntities(
+    private AuditRevisionEntity AddAuditEntities(
         DbContext context,
         List<AuditEntry> audits,
         IAuditEntityFactory auditEntityFactory)
@@ -138,6 +142,8 @@ public class AuditFlushInterceptor(TimeProvider timeProvider) : SaveChangesInter
                 .SetValue(auditEntity, audit.RevisionType);
             context.Add(auditEntity);
         }
+
+        return revision;
     }
 
     private AuditRevisionType ToRevisionType(EntityState state) => state switch

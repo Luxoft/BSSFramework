@@ -68,11 +68,19 @@ public class EfAsyncDal<TDomainObject, TIdent>(
     {
         this.CheckWrite();
 
-        await this.NativeSession.Set<TDomainObject>()
-                  .FromSqlRaw($"SELECT * FROM {nameof(TDomainObject)} WITH (UPDLOCK) WHERE Id = {0}", identityInfo.Id.Getter(domainObject))
-                  .ToListAsync(ct);
+        var entityType = this.NativeSession.Model.FindEntityType(typeof(TDomainObject))
+                          ?? throw new InvalidOperationException($"Entity type \"{typeof(TDomainObject)}\" not found.");
 
-        //throw new NotImplementedException();
+        var tableName = entityType.GetTableName()
+                         ?? throw new InvalidOperationException($"Table name for entity type \"{typeof(TDomainObject)}\" not found.");
+
+        var schema = entityType.GetSchema();
+
+        var fullTableName = schema is null ? $"[{tableName}]" : $"[{schema}].[{tableName}]";
+
+        await this.NativeSession.Set<TDomainObject>()
+                  .FromSqlRaw($"SELECT * FROM {fullTableName} WITH (UPDLOCK) WHERE Id = {{0}}", identityInfo.Id.Getter(domainObject))
+                  .ToListAsync(ct);
     }
 
     private void CheckWrite()

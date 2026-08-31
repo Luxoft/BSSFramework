@@ -70,6 +70,10 @@
       <key column="parentId" />
       <one-to-many class="SampleSystem.Domain.BU.BusinessUnit" />
     </set>
+    <set name="ManagementUnits" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="businessUnitId" />
+      <one-to-many class="SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink" />
+    </set>
     <set name="ManagerCommissions" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
       <key column="businessUnitId" />
       <one-to-many class="SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink" />

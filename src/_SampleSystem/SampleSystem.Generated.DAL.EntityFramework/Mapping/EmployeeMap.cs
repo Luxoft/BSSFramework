@@ -26,17 +26,20 @@ public class EmployeeMap : SampleSystemBaseMap<Employee>
         });
         builder.ComplexProperty(x => x.NameEng, nameEng =>
         {
+            nameEng.IsRequired(false);
             nameEng.Property(x => x.FirstName).HasColumnName("nameEngfirstName").HasMaxLength(50);
             nameEng.Property(x => x.LastName).HasColumnName("nameEnglastName").HasMaxLength(50);
         });
         builder.ComplexProperty(x => x.NameNative, nameNative =>
         {
+            nameNative.IsRequired(false);
             nameNative.Property(x => x.FirstName).HasColumnName("nameNativefirstName").HasMaxLength(50);
             nameNative.Property(x => x.LastName).HasColumnName("nameNativelastName").HasMaxLength(50);
             nameNative.Property(x => x.MiddleName).HasColumnName("nameNativemiddleName").HasMaxLength(50);
         });
         builder.ComplexProperty(x => x.NameRussian, nameRussian =>
         {
+            nameRussian.IsRequired(false);
             nameRussian.Property(x => x.FirstName).HasColumnName("nameRussianfirstName").HasMaxLength(50);
             nameRussian.Property(x => x.LastName).HasColumnName("nameRussianlastName").HasMaxLength(50);
             nameRussian.Property(x => x.MiddleName).HasColumnName("nameRussianmiddleName").HasMaxLength(50);

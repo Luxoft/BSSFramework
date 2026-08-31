@@ -2,6 +2,7 @@
 using Anch.GenericQueryable.DependencyInjection;
 using Anch.GenericQueryable.EntityFramework;
 
+using Framework.Core;
 using Framework.Database.EntityFramework.Sessions;
 
 using Microsoft.EntityFrameworkCore;
@@ -29,10 +30,11 @@ public class EntityFrameworkSetup : IEntityFrameworkSetup, IServiceInitializer
     public IEntityFrameworkSetup SetDbContext<TDbContext>()
         where TDbContext : DbContext
     {
-        this.dbContextInit = sc =>
+        this.dbContextInit = services =>
         {
-            sc.AddScoped<IDBSession, EfSession<TDbContext>>();
-            sc.AddScopedFrom((EfSession<TDbContext> efSession) => efSession.InnerSession);
+            services.AddScoped<EfSession<TDbContext>>();
+            services.AddScopedFrom<DbContext, EfSession<TDbContext>>(session => session.NativeSession);
+            services.AddScopedFrom<ILazyObject<IDBSession>, EfSession<TDbContext>>(session => session.LazyInnerSession);
         };
 
         return this;

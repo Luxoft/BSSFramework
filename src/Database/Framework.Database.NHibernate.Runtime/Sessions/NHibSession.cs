@@ -1,5 +1,6 @@
 ﻿using System.Data;
 
+using Framework.Core;
 using Framework.Database.NHibernate.Envers;
 
 using NHibernate;
@@ -10,15 +11,13 @@ public class NHibSession : IDBSession<ISession>
 {
     private DBSessionMode? customSessionMode;
 
-    private readonly Lazy<IDBSession<ISession>> lazyInnerSession;
-
     public NHibSession(
         NHibSessionEnvironment environment,
         DBSessionSettings settings,
         IAuditPropertyFactory auditPropertyFactory,
         IAuditReaderPatched auditReader,
         IEnumerable<IDBSessionEventListener> eventListeners) =>
-        this.lazyInnerSession = new Lazy<IDBSession<ISession>>(() =>
+        this.LazyInnerSession = new LazyObject<IDBSession<ISession>>(() =>
         {
             switch (this.customSessionMode ?? settings.DefaultSessionMode)
             {
@@ -33,9 +32,11 @@ public class NHibSession : IDBSession<ISession>
             }
         });
 
+    public LazyObject<IDBSession<ISession>> LazyInnerSession { get; }
+
     public DBSessionMode SessionMode => this.InnerSession.SessionMode;
 
-    public IDBSession<ISession> InnerSession => this.lazyInnerSession.Value;
+    public IDBSession<ISession> InnerSession => this.LazyInnerSession.Value;
 
     public ISession NativeSession => this.InnerSession.NativeSession;
 
@@ -51,7 +52,7 @@ public class NHibSession : IDBSession<ISession>
 
     private void ApplySessionMode(DBSessionMode applySessionMode)
     {
-        if (!this.lazyInnerSession.IsValueCreated)
+        if (!this.LazyInnerSession.IsValueCreated)
         {
             this.customSessionMode = applySessionMode;
         }
@@ -63,7 +64,7 @@ public class NHibSession : IDBSession<ISession>
 
     public async Task CloseAsync(CancellationToken ct)
     {
-        if (this.lazyInnerSession.IsValueCreated)
+        if (this.LazyInnerSession.IsValueCreated)
         {
             await this.InnerSession.CloseAsync(ct);
         }
@@ -71,7 +72,7 @@ public class NHibSession : IDBSession<ISession>
 
     public async ValueTask DisposeAsync()
     {
-        if (this.lazyInnerSession.IsValueCreated)
+        if (this.LazyInnerSession.IsValueCreated)
         {
             await this.InnerSession.DisposeAsync();
         }

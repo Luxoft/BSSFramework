@@ -1,5 +1,7 @@
 ﻿using System.Data;
 
+using Framework.Core;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace Framework.Database.EntityFramework.Sessions;
@@ -9,10 +11,8 @@ public class EfSession<TDbContext> : IDBSession<TDbContext>
 {
     private DBSessionMode? sessionMode;
 
-    private readonly Lazy<IDBSession<TDbContext>> lazyInnerSession;
-
     public EfSession(TDbContext nativeSession, DBSessionSettings settings, IEnumerable<IDBSessionEventListener> eventListeners) =>
-        this.lazyInnerSession = new Lazy<IDBSession<TDbContext>>(() =>
+        this.LazyInnerSession = new LazyObject<IDBSession<TDbContext>>(() =>
         {
             switch (this.sessionMode ?? settings.DefaultSessionMode)
             {
@@ -27,7 +27,9 @@ public class EfSession<TDbContext> : IDBSession<TDbContext>
             }
         });
 
-    public virtual IDBSession<TDbContext> InnerSession => this.lazyInnerSession.Value;
+    public LazyObject<IDBSession<TDbContext>> LazyInnerSession { get; }
+
+    public IDBSession<TDbContext> InnerSession => this.LazyInnerSession.Value;
 
     public TDbContext NativeSession => this.InnerSession.NativeSession;
 
@@ -45,7 +47,7 @@ public class EfSession<TDbContext> : IDBSession<TDbContext>
 
     private void ApplySessionMode(DBSessionMode applySessionMode)
     {
-        if (!this.lazyInnerSession.IsValueCreated)
+        if (!this.LazyInnerSession.IsValueCreated)
         {
             this.sessionMode = applySessionMode;
         }
@@ -57,7 +59,7 @@ public class EfSession<TDbContext> : IDBSession<TDbContext>
 
     public async Task CloseAsync(CancellationToken ct)
     {
-        if (this.lazyInnerSession.IsValueCreated)
+        if (this.LazyInnerSession.IsValueCreated)
         {
             await this.InnerSession.CloseAsync(ct);
         }
@@ -65,7 +67,7 @@ public class EfSession<TDbContext> : IDBSession<TDbContext>
 
     public async ValueTask DisposeAsync()
     {
-        if (this.lazyInnerSession.IsValueCreated)
+        if (this.LazyInnerSession.IsValueCreated)
         {
             await this.InnerSession.DisposeAsync();
         }

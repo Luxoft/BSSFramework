@@ -6,11 +6,11 @@ using Anch.GenericQueryable.NHibernate;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 
+using Framework.Core;
 using Framework.Database.Audit;
 using Framework.Database.NHibernate.Mapping;
 using Framework.Database.NHibernate.Sessions;
 using Framework.Database.NHibernate.Visitors;
-using Framework.DependencyInjection;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -126,8 +126,9 @@ public class NHibernateSetup : INHibernateSetup, IServiceInitializer
         services.AddNHibernateGenericQueryable();
 
         //For close db session by middleware
-        services.AddScopedFromLazyObject<IDBSession, NHibSession>();
+        services.AddScoped<NHibSession>();
         services.AddScopedFrom<ISession, NHibSession>(session => session.NativeSession);
+        services.AddScopedFrom<ILazyObject<IDBSession>, NHibSession>(session => session.LazyInnerSession);
 
         services.AddScoped<IRevisionService, NHibRevisionService>();
 

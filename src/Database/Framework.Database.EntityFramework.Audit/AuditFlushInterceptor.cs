@@ -99,7 +99,7 @@ public class AuditFlushInterceptor(TimeProvider timeProvider) : SaveChangesInter
             .Where(property => !property.IsKey)
             .ToDictionary(
                 property => property.Name,
-                property => this.IsPropertyModified(entry, property.Name));
+                property => this.IsPropertyModified(entry, property));
 
         return new AuditEntry(entry, metadata, this.ToRevisionType(entry.State), modifiedProperties);
     }
@@ -117,11 +117,15 @@ public class AuditFlushInterceptor(TimeProvider timeProvider) : SaveChangesInter
             var auditEntity = Activator.CreateInstance(audit.Metadata.AuditEntityType)!;
             foreach (var property in audit.Metadata.Properties)
             {
-                var value = audit.Entry.Property(property.Name).CurrentValue;
-                audit.Metadata.AuditEntityType.GetProperty(property.Name)!.SetValue(auditEntity, value);
+                if (!property.IsModOnly)
+                {
+                    var value = audit.Entry.Property(property.Name).CurrentValue;
+                    audit.Metadata.AuditEntityType.GetProperty(property.Name)!.SetValue(auditEntity, value);
+                }
+
                 if (!property.IsKey)
                 {
-                    audit.Metadata.AuditEntityType.GetProperty($"{property.Name}_MOD")!
+                    audit.Metadata.AuditEntityType.GetProperty($"{property.ModName}_MOD")!
                         .SetValue(auditEntity, audit.ModifiedProperties[property.Name]);
                 }
             }
@@ -144,9 +148,9 @@ public class AuditFlushInterceptor(TimeProvider timeProvider) : SaveChangesInter
         _ => throw new ArgumentOutOfRangeException(nameof(state), state, null)
     };
 
-    private bool IsPropertyModified(EntityEntry entry, string propertyName) =>
+    private bool IsPropertyModified(EntityEntry entry, AuditPropertyMetadata property) =>
         entry.State == EntityState.Added ||
-        entry.State == EntityState.Modified && entry.Property(propertyName).IsModified;
+        entry.State == EntityState.Modified && !property.IsModOnly && entry.Property(property.Name).IsModified;
 
     private sealed record AuditEntry(
         EntityEntry Entry,

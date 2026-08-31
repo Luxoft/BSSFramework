@@ -11,12 +11,8 @@ using NHibernate.Impl;
 
 namespace Framework.Database.NHibernate.Sessions;
 
-public class WriteNHibSession : IDBSession<ISession>
+public class WriteNHibSession : NHibSessionBase
 {
-    private readonly NHibSessionEnvironment environment;
-
-    private readonly IAuditReaderPatched auditReader;
-
     private readonly IDBSessionEventListener[] eventListeners;
 
 
@@ -31,20 +27,20 @@ public class WriteNHibSession : IDBSession<ISession>
 
     private bool manualFault;
 
+    private bool closed;
+
     public WriteNHibSession(
         NHibSessionEnvironment environment,
         IAuditPropertyFactory auditPropertyFactory,
-        IAuditReaderPatched auditReader,
         IEnumerable<IDBSessionEventListener> eventListeners)
+        : base(environment, DBSessionMode.Write)
     {
-        this.environment = environment;
-        this.auditReader = auditReader;
         this.eventListeners = eventListeners.ToArray();
         this.modifyAuditProperties = auditPropertyFactory.GetModifyAuditProperty();
         this.createAuditProperties = auditPropertyFactory.GetCreateAuditProperty();
         this.collectChangedEventListener = new CollectChangesEventListener();
 
-        this.NativeSession = environment.InternalSessionFactory.OpenSession();
+        this.NativeSession = this.Environment.InternalSessionFactory.OpenSession();
         this.NativeSession.FlushMode = FlushMode.Manual;
 
         this.nhibTransaction = this.NativeSession.BeginTransaction();
@@ -54,13 +50,11 @@ public class WriteNHibSession : IDBSession<ISession>
         this.ConfigureEventListeners();
     }
 
-    public DBSessionMode SessionMode { get; } = DBSessionMode.Write;
+    public override bool Closed => this.closed;
 
-    public ISession NativeSession { get; }
+    public sealed override ISession NativeSession { get; }
 
-    public bool Closed { get; private set; }
-
-    public IDbTransaction Transaction { get; }
+    public override IDbTransaction Transaction { get; }
 
     private void ConfigureEventListeners()
     {
@@ -75,30 +69,27 @@ public class WriteNHibSession : IDBSession<ISession>
 
     private void InjectListeners(EventListeners newSessionEventListeners)
     {
-        newSessionEventListeners.PostDeleteEventListeners =
-            newSessionEventListeners.PostDeleteEventListeners.Concat([this.collectChangedEventListener]).ToArray();
-        newSessionEventListeners.PostUpdateEventListeners =
-            newSessionEventListeners.PostUpdateEventListeners.Concat([this.collectChangedEventListener]).ToArray();
-        newSessionEventListeners.PostInsertEventListeners =
-            newSessionEventListeners.PostInsertEventListeners.Concat([this.collectChangedEventListener]).ToArray();
+        newSessionEventListeners.PostDeleteEventListeners = newSessionEventListeners.PostDeleteEventListeners.Concat([this.collectChangedEventListener]).ToArray();
+        newSessionEventListeners.PostUpdateEventListeners = newSessionEventListeners.PostUpdateEventListeners.Concat([this.collectChangedEventListener]).ToArray();
+        newSessionEventListeners.PostInsertEventListeners = newSessionEventListeners.PostInsertEventListeners.Concat([this.collectChangedEventListener]).ToArray();
     }
 
-    public void AsFault() => this.manualFault = true;
+    public override void AsFault() => this.manualFault = true;
 
-    public void AsReadOnly() => throw new InvalidOperationException("Writable session already created");
+    public override void AsReadOnly() => throw new InvalidOperationException("Writable session already created");
 
-    public void AsWritable()
+    public override void AsWritable()
     {
     }
 
-    public async Task CloseAsync(CancellationToken ct)
+    public override async Task CloseAsync(CancellationToken ct)
     {
-        if (this.Closed)
+        if (this.closed)
         {
             return;
         }
 
-        this.Closed = true;
+        this.closed = true;
 
         using (this.NativeSession)
         {
@@ -132,7 +123,7 @@ public class WriteNHibSession : IDBSession<ISession>
         return dbCommand.Transaction!;
     }
 
-    public async Task FlushAsync(CancellationToken ct) => await this.FlushAsync(false, ct);
+    public override async Task FlushAsync(CancellationToken ct) => await this.FlushAsync(false, ct);
 
     private async Task FlushAsync(bool withCompleteTransaction, CancellationToken ct)
     {
@@ -154,7 +145,7 @@ public class WriteNHibSession : IDBSession<ISession>
                 {
                     dalHistory.Add(changes);
 
-                    await this.auditReader.SafeInitCurrentRevisionAsync(ct);
+                    await this.AuditReader.SafeInitCurrentRevisionAsync(ct);
 
                     var changedEventArgs = new DALChangesEventArgs(changes);
 
@@ -205,7 +196,7 @@ public class WriteNHibSession : IDBSession<ISession>
         }
         catch (Exception ex)
         {
-            var expandedException = this.environment.InternalExceptionExpander.Expand(ex);
+            var expandedException = this.Environment.InternalExceptionExpander.Expand(ex);
 
             if (expandedException == ex)
             {
@@ -217,6 +208,4 @@ public class WriteNHibSession : IDBSession<ISession>
             }
         }
     }
-
-    public async ValueTask DisposeAsync() => await this.CloseAsync(CancellationToken.None);
 }

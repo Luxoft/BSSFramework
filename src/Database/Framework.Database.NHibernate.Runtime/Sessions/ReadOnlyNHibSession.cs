@@ -1,20 +1,18 @@
 ﻿using System.Data;
 
-using Framework.Core;
-
 using NHibernate;
 
 namespace Framework.Database.NHibernate.Sessions;
 
-public class ReadOnlyNHibSession : IDBSession<ISession>
+public class ReadOnlyNHibSession : NHibSessionBase
 {
-    private static readonly IDbTransaction DbTransaction = LazyInterfaceImplementHelper.CreateNotImplemented<IDbTransaction>("Readonly session");
-
+    private bool closed;
     private readonly ITransaction transaction;
 
     public ReadOnlyNHibSession(NHibSessionEnvironment environment)
+        : base(environment, DBSessionMode.Read)
     {
-        this.NativeSession = environment.InternalSessionFactory.OpenSession();
+        this.NativeSession = this.Environment.InternalSessionFactory.OpenSession();
         this.NativeSession.FlushMode = FlushMode.Manual;
         this.NativeSession.DefaultReadOnly = true;
 
@@ -22,32 +20,28 @@ public class ReadOnlyNHibSession : IDBSession<ISession>
         this.transaction = this.NativeSession.BeginTransaction();
     }
 
-    public DBSessionMode SessionMode { get; } = DBSessionMode.Read;
+    public override bool Closed => this.closed;
 
-    public ISession NativeSession { get; }
+    public sealed override ISession NativeSession { get; }
 
-    public IDbTransaction Transaction { get; } = DbTransaction;
-
-    public bool Closed { get; private set; }
-
-    public void AsFault()
+    public override void AsFault()
     {
     }
 
-    public void AsReadOnly()
+    public override void AsReadOnly()
     {
     }
 
-    public void AsWritable() => throw new InvalidOperationException("Readonly session already created");
+    public override void AsWritable() => throw new InvalidOperationException("Readonly session already created");
 
-    public async Task CloseAsync(CancellationToken ct)
+    public override async Task CloseAsync(CancellationToken ct)
     {
-        if (this.Closed)
+        if (this.closed)
         {
             return;
         }
 
-        this.Closed = true;
+        this.closed = true;
 
 
         using (this.NativeSession)
@@ -58,7 +52,7 @@ public class ReadOnlyNHibSession : IDBSession<ISession>
         }
     }
 
-    public async Task FlushAsync(CancellationToken ct) => throw new InvalidOperationException("Readonly session cannot be flushed");
+    public override IDbTransaction Transaction { get; } = null!;
 
-    public async ValueTask DisposeAsync() => await this.CloseAsync(CancellationToken.None);
+    public override async Task FlushAsync(CancellationToken ct) => throw new InvalidOperationException("Readonly session cannot be flushed");
 }

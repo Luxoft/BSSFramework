@@ -123,7 +123,7 @@ public class AuditFlushInterceptor(TimeProvider timeProvider, EfCurrentRevisionS
             {
                 if (!property.IsModOnly)
                 {
-                    var value = audit.Entry.Property(property.Name).CurrentValue;
+                    var value = this.GetCurrentValue(audit.Entry, property);
                     audit.Metadata.AuditEntityType.GetProperty(property.Name)!.SetValue(auditEntity, value);
                 }
 
@@ -156,7 +156,26 @@ public class AuditFlushInterceptor(TimeProvider timeProvider, EfCurrentRevisionS
 
     private bool IsPropertyModified(EntityEntry entry, AuditPropertyMetadata property) =>
         entry.State == EntityState.Added ||
-        entry.State == EntityState.Modified && !property.IsModOnly && entry.Property(property.Name).IsModified;
+        entry.State == EntityState.Modified && !property.IsModOnly && this.GetPropertyEntry(entry, property) is { IsModified: true };
+
+    private object? GetCurrentValue(EntityEntry entry, AuditPropertyMetadata property) =>
+        this.GetPropertyEntry(entry, property)?.CurrentValue;
+
+    private PropertyEntry? GetPropertyEntry(EntityEntry entry, AuditPropertyMetadata property)
+    {
+        if (property.NestedPropertyName is null)
+        {
+            return entry.Property(property.Name);
+        }
+
+        if (property.IsOwned)
+        {
+            var targetEntry = entry.Reference(property.ModName).TargetEntry;
+            return targetEntry?.Property(property.NestedPropertyName);
+        }
+
+        return entry.ComplexProperty(property.ModName).Property(property.NestedPropertyName);
+    }
 
     private sealed record AuditEntry(
         EntityEntry Entry,

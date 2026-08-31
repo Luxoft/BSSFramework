@@ -101,7 +101,8 @@ public class AuditModelCustomizer(
                                                                                                     leaf.GetColumnName(tableIdentifier) ?? leaf.Name,
                                                                                                     leaf.ClrType,
                                                                                                     false,
-                                                                                                    complexProperty.Name)));
+                                                                                                    complexProperty.Name,
+                                                                                                    NestedPropertyName: leaf.Name)));
 
             var ownedPropertyMetadata = entityType
                                         .GetDeclaredNavigations()
@@ -117,7 +118,9 @@ public class AuditModelCustomizer(
                                                                          property.GetColumnName(tableIdentifier) ?? property.Name,
                                                                          property.ClrType,
                                                                          false,
-                                                                         navigation.Name));
+                                                                         navigation.Name,
+                                                                         NestedPropertyName: property.Name,
+                                                                         IsOwned: true));
                                         });
 
             var collectionModFlagMetadata = entityType

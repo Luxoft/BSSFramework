@@ -43,6 +43,7 @@ public class AuditModelCustomizer(
                                    .Model
                                    .GetEntityTypes()
                                    .Where(entityType => entityType.GetViewName() == null)
+                                   .Where(entityType => entityType.GetTableName() != null)
                                    .Where(entityType => !entityType.IsOwned())
                                    .Where(entityType => !revisionClrTypes.Contains(entityType.ClrType))
                                    .Where(auditableEntityFilter.IsAuditable)
@@ -74,9 +75,12 @@ public class AuditModelCustomizer(
                                                       .Select(property => property.Name)
                                                       .ToHashSet();
 
-            var ownProperties = entityType.GetDeclaredProperties().Concat(primaryKey.Properties).Distinct();
-
             var tableIdentifier = StoreObjectIdentifier.Table(entityType.GetTableName()!, entityType.GetSchema());
+
+            var ownProperties = entityType.GetProperties()
+                                           .Where(property => primaryKey.Properties.Contains(property) || property.GetColumnName(tableIdentifier) != null)
+                                           .Concat(primaryKey.Properties)
+                                           .Distinct();
 
             var scalarPropertyMetadata = ownProperties
                                          .Where(property => !property.IsConcurrencyToken)
@@ -89,7 +93,8 @@ public class AuditModelCustomizer(
                                                      modNameByPropertyName.GetValueOrDefault(property.Name, property.Name)));
 
             var complexPropertyMetadata = entityType
-                                          .GetDeclaredComplexProperties()
+                                          .GetComplexProperties()
+                                          .Where(complexProperty => complexProperty.ComplexType.GetProperties().Any(leaf => leaf.GetColumnName(tableIdentifier) != null))
                                           .SelectMany(complexProperty => complexProperty.ComplexType
                                                                                         .GetProperties()
                                                                                         .Select(leaf => new AuditPropertyMetadata(

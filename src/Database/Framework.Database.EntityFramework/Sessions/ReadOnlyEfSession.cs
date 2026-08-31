@@ -18,7 +18,8 @@ public class ReadOnlyEfSession : IEfSession
         this.NativeSession = nativeSession;
         this.NativeSession.Database.OpenConnection();
 
-        this.NativeSession.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+        //this.NativeSession.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+
         this.NativeSession.ChangeTracker.AutoDetectChangesEnabled = false;
 
         // need for support different isolation level (aka Snapshot)

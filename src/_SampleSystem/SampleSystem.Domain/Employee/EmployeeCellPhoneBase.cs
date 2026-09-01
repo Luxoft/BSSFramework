@@ -5,7 +5,7 @@ using Framework.Validation.Attributes;
 
 namespace SampleSystem.Domain.Employee;
 
-public class EmployeeCellPhoneBase : AuditPersistentDomainObjectBase, IDetail<Employee>
+public abstract class EmployeeCellPhoneBase : AuditPersistentDomainObjectBase, IDetail<Employee>
 {
     protected readonly Employee employee = null!;
 

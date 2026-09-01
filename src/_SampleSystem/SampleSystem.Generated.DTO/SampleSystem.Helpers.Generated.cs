@@ -661,11 +661,6 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.EmployeeCellPhoneIdentityDTO(domainObject);
         }
         
-        public static SampleSystem.Generated.DTO.EmployeeCellPhoneBaseIdentityDTO ToIdentityDTO(this SampleSystem.Domain.Employee.EmployeeCellPhoneBase domainObject)
-        {
-            return new SampleSystem.Generated.DTO.EmployeeCellPhoneBaseIdentityDTO(domainObject);
-        }
-        
         public static SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO ToIdentityDTO(this SampleSystem.Domain.Employee.EmployeeInformation domainObject)
         {
             return new SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO(domainObject);
@@ -1072,11 +1067,6 @@ namespace SampleSystem.Generated.DTO
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeCellPhoneIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Employee.EmployeeCellPhone> domainObjects)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
-        }
-        
-        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeCellPhoneBaseIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Employee.EmployeeCellPhoneBase> domainObjects)
         {
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
@@ -2221,11 +2211,6 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.EmployeeCellPhoneEventRichDTO(mappingService, domainObject);
         }
         
-        public static SampleSystem.Generated.DTO.EmployeeCellPhoneBaseEventRichDTO ToRichEventDTO(this SampleSystem.Domain.Employee.EmployeeCellPhoneBase domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return new SampleSystem.Generated.DTO.EmployeeCellPhoneBaseEventRichDTO(mappingService, domainObject);
-        }
-        
         public static SampleSystem.Generated.DTO.EmployeeInformationEventRichDTO ToRichEventDTO(this SampleSystem.Domain.Employee.EmployeeInformation domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return new SampleSystem.Generated.DTO.EmployeeInformationEventRichDTO(mappingService, domainObject);
@@ -2727,11 +2712,6 @@ namespace SampleSystem.Generated.DTO
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeCellPhoneEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Employee.EmployeeCellPhone> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeCellPhoneBaseEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Employee.EmployeeCellPhoneBase> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
         }

@@ -1,5 +1,6 @@
 ﻿using Framework.Database;
 using Framework.Database.ConnectionStringSource;
+using Framework.Database.Domain;
 using Framework.Database.NHibernate.DBGenerator;
 using Framework.Database.NHibernate.Mapping;
 
@@ -13,7 +14,7 @@ public class DbGeneratorTest
     private readonly ServerGenerationEnvironment environment = new();
 
     [Fact]
-    public void GenerateLocal() => this.GenerateAllDB(@".");
+    public void GenerateLocal() => this.GenerateAllDb(@".", "SampleSystem_nh_empty");
 
     public void GenerateDatabase(DbGenerationOptions options)
     {
@@ -29,10 +30,10 @@ public class DbGeneratorTest
 
         Console.WriteLine($"Generate database:'{options.DataBase}' on {options.Server}");
 
-        this.GenerateAllDB(options.Server, options.DataBase);
+        this.GenerateAllDb(options.Server, options.DataBase);
     }
 
-    public string GenerateAllDB(
+    public string GenerateAllDb(
         string serverName,
         string mainDatabaseName = nameof(SampleSystem),
         DatabaseScriptGeneratorMode generatorMode = DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript,

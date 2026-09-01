@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Database\Framework.Database.EntityFramework.Audit\Framework.Database.EntityFramework.Audit.csproj" />
+    <ProjectReference Include="..\SampleSystem.AuditDomain\SampleSystem.AuditDomain.csproj" />
+    <ProjectReference Include="..\SampleSystem.Domain\SampleSystem.Domain.csproj" />
+    <ProjectReference Include="..\SampleSystem.Domain.Models\SampleSystem.Domain.Models.csproj" />
+    <ProjectReference Include="..\SampleSystem.Domain.LegacyProjections\SampleSystem.Domain.LegacyProjections.csproj" />
+    <ProjectReference Include="..\SampleSystem.Domain.ManualProjections\SampleSystem.Domain.ManualProjections.csproj" />
+    <ProjectReference Include="..\SampleSystem.Domain.Projections\SampleSystem.Domain.Projections.csproj" />
+  </ItemGroup>
+
+</Project>

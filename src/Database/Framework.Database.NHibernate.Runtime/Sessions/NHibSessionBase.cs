@@ -18,7 +18,7 @@ public abstract class NHibSessionBase : INHibSession
         this.Environment = environment;
         this.SessionMode = sessionMode;
 
-        this.LazyAuditReader = LazyHelper.Create(() => this.NativeSession.GetAuditReader());
+        this.LazyAuditReader = LazyHelper.Create(() => new AuditReaderPatchedFactory(this.NativeSession).Create());
     }
 
     public abstract bool Closed { get; }

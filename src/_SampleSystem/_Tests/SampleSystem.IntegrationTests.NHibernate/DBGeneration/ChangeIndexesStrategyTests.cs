@@ -36,7 +36,7 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
         newIndex.Create();
 
         // Act
-        generator.GenerateAllDB(
+        generator.GenerateAllDb(
             this.ActualConnectionString.DataSource,
             this.ActualConnectionString.InitialCatalog,
             credential: this.ActualConnectionString.TryGetDbUserCredential(),
@@ -65,7 +65,7 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
         index.Drop();
 
         // Act
-        generator.GenerateAllDB(
+        generator.GenerateAllDb(
             this.ActualConnectionString.DataSource,
             this.ActualConnectionString.InitialCatalog,
             credential: this.ActualConnectionString.TryGetDbUserCredential(),
@@ -84,7 +84,7 @@ public class ChangeIndexesStrategyTests(IServiceProvider rootServiceProvider) : 
         var generator = new DbGeneratorTest();
 
         // Act
-        generator.GenerateAllDB(
+        generator.GenerateAllDb(
             this.ActualConnectionString.DataSource,
             this.ActualConnectionString.InitialCatalog,
             credential: this.ActualConnectionString.TryGetDbUserCredential(),

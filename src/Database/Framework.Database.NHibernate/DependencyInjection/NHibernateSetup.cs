@@ -7,6 +7,8 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 
 using Framework.Core;
+using Framework.Database.Audit;
+using Framework.Database.NHibernate.Envers;
 using Framework.Database.NHibernate.Mapping;
 using Framework.Database.NHibernate.Sessions;
 using Framework.Database.NHibernate.Visitors;
@@ -128,8 +130,11 @@ public class NHibernateSetup : INHibernateSetup, IServiceInitializer
         //For close db session by middleware
         services.AddScopedFromLazyObject<INHibSession, NHibSession>();
         services.AddScopedFrom<ILazyObject<IDBSession>, ILazyObject<INHibSession>>();
-
         services.AddScopedFrom<ISession, INHibSession>(session => session.NativeSession);
+        services.AddScopedFrom<IAuditReaderPatched, INHibSession>(session => session.AuditReader);
+
+
+        services.AddScoped<IRevisionService, NHibRevisionService>();
 
         services.AddSingleton(NHibSessionEnvironmentSettings.Default);
 

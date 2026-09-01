@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>SampleSystem.IntegrationTests</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit.v3" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SampleSystem.WebApiCore.EntityFramework\SampleSystem.WebApiCore.EntityFramework.csproj" />
+    <ProjectReference Include="..\SampleSystem.DbGenerate.EntityFramework\SampleSystem.DbGenerate.EntityFramework.csproj" />
+    <ProjectReference Include="..\SampleSystem.IntegrationTests\SampleSystem.IntegrationTests.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+</Project>

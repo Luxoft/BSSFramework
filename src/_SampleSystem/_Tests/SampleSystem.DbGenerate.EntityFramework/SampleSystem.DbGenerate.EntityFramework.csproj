@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!--<OutputType>Exe</OutputType>-->
+    <IsPackable>false</IsPackable>
+    <!--<StartupObject>SampleSystem.DbGenerate.EntityFramework.Program</StartupObject>-->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Anch.Testing.Xunit" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit.v3" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+
+    <PackageReference Include="CommandLineParser" />
+    <PackageReference Include="FluentMigrator.Runner" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SampleSystem.ServiceEnvironment.EntityFramework\SampleSystem.ServiceEnvironment.EntityFramework.csproj" />
+    <ProjectReference Include="..\SampleSystem.CodeGenerate\SampleSystem.CodeGenerate.csproj" />
+    <ProjectReference Include="..\SampleSystem.DbGenerate\SampleSystem.DbGenerate.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="__Support\*\**\*.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="hibernate.cfg.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+</Project>

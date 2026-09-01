@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BLL\Framework.BLL.Runtime\Framework.BLL.Runtime.csproj" />
+    <ProjectReference Include="..\..\Database\Framework.Database.Audit.Abstractions\Framework.Database.Audit.Abstractions.csproj" />
     <ProjectReference Include="..\..\Notification\Framework.Notification.Abstractions\Framework.Notification.Abstractions.csproj" />
     <ProjectReference Include="..\..\Notification\Framework.Notification.DTO\Framework.Notification.DTO.csproj" />
     <ProjectReference Include="..\..\Subscriptions\Framework.Subscriptions.Abstractions\Framework.Subscriptions.Abstractions.csproj" />

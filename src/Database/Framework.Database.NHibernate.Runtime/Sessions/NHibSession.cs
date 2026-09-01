@@ -44,11 +44,7 @@ public class NHibSession : INHibSession
 
     public Task FlushAsync(CancellationToken ct) => this.InnerSession.FlushAsync(ct);
 
-    public long GetCurrentRevision() => this.InnerSession.GetCurrentRevision();
-
     public void AsFault() => this.InnerSession.AsFault();
-
-    public long GetMaxRevision() => this.InnerSession.GetMaxRevision();
 
     public void AsReadOnly() => this.ApplySessionMode(DBSessionMode.Read);
 

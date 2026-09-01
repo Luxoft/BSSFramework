@@ -6,7 +6,7 @@ using Framework.BLL.DTOMapping.DTOMapper;
 using Framework.BLL.Events.SubscriptionManager;
 using Framework.Configuration.BLL;
 using Framework.Core.Helpers;
-using Framework.Database;
+using Framework.Database.Audit;
 
 namespace Framework.Infrastructure.LocalDBEvents;
 
@@ -17,7 +17,7 @@ namespace Framework.Infrastructure.LocalDBEvents;
 public class LocalDBEventMessageSender<TPersistentDomainObjectBase>(
     IDomainEventDTOMapper<TPersistentDomainObjectBase> eventDtoMapper,
     IConfigurationBLLContext configurationContext,
-    ICurrentRevisionService currentRevisionService,
+    IRevisionService revisionService,
     LocalDBEventMessageSenderSettings<TPersistentDomainObjectBase>? settings = null)
     : EventDTOMessageSenderBase<TPersistentDomainObjectBase>
     where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
@@ -35,7 +35,7 @@ public class LocalDBEventMessageSender<TPersistentDomainObjectBase>(
             Size = serializedData.Length,
             SerializeType = dto.GetType().FullName!,
             DomainObjectId = domainObjectEventArgs.DomainObject.Id,
-            Revision = currentRevisionService.GetCurrentRevision(),
+            Revision = revisionService.GetCurrentRevision(),
             QueueTag = this.settings.QueueTag
         };
 

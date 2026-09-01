@@ -7,6 +7,7 @@ using Framework.BLL.Domain.TargetSystem;
 using Framework.Configuration.Domain;
 using Framework.Core.TypeResolving;
 using Framework.Database;
+using Framework.Database.Audit;
 using Framework.Database.Domain;
 using Framework.Subscriptions;
 
@@ -18,7 +19,7 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase>(
     IEventOperationSender eventOperationSender,
     ISubscriptionResolver subscriptionResolver,
     TargetSystem targetSystem,
-    ICurrentRevisionService currentRevisionService) : ITargetSystemService
+    IRevisionService revisionService) : ITargetSystemService
 
     where TBLLContext : class, ISecurityBLLContext<TPersistentDomainObjectBase, Guid>
     where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
@@ -68,7 +69,7 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase>(
     /// <exception cref="ArgumentNullException">Аргумент changes равен null.</exception>
     public IEnumerable<ObjectModificationInfo<Guid>> GetObjectModifications(DALChanges changes)
     {
-        var revisionNumber = currentRevisionService.GetCurrentRevision();
+        var revisionNumber = revisionService.GetCurrentRevision();
 
         if (revisionNumber != 0)
         {

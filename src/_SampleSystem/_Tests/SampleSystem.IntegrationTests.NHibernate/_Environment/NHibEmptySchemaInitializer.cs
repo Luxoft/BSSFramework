@@ -13,7 +13,7 @@ public class NHibEmptySchemaInitializer(IActualTestConnectionStringSource actual
     {
         var generator = new DbGeneratorTest();
 
-        generator.GenerateAllDB(
+        generator.GenerateAllDb(
             actualTestConnectionStringSource.ActualConnectionString.DataSource,
             actualTestConnectionStringSource.ActualConnectionString.InitialCatalog,
 

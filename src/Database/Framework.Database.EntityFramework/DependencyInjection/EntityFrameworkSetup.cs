@@ -6,26 +6,33 @@ using Framework.Core;
 using Framework.Database.EntityFramework.Sessions;
 using Framework.DependencyInjection;
 
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Database.EntityFramework.DependencyInjection;
 
-public class EntityFrameworkSetup : IEntityFrameworkSetup, IServiceInitializer
+public class EntityFrameworkSetup<TDbContext> : IEntityFrameworkSetup<TDbContext>, IServiceInitializer
+    where TDbContext : DbContext
 {
+    private readonly List<IEntityFrameworkSetupExtension> extensions = [];
+
     public void Initialize(IServiceCollection services)
     {
-        //services.AddSingleton<IAuditRevisionUserAuthenticationService, AuditRevisionUserAuthenticationService>();
-
         services.AddScoped(typeof(IAsyncDal<,>), typeof(EfAsyncDal<,>));
 
         services.AddGenericQueryable(v => v.SetFetchService<EfFetchService>().SetTargetMethodExtractor<EfTargetMethodExtractor>());
 
-        //For close db session by middleware
-        services.AddScopedFromLazyObject<IEfSession, EfSession>();
         services.AddScopedFrom<ILazyObject<IDBSession>, ILazyObject<IEfSession>>();
+        services.AddScopedFrom<DbContext, IEfSession>(session => session.NativeSession);
+        services.AddScopedFromLazyObject<IEfSession, EfSession<TDbContext>>();
 
-        //services.AddSingleton<IEfSessionEnvironmentSettings, EfSessionEnvironmentSettings>();
+        this.extensions.ForEach(ex => ex.AddServices(services));
+    }
 
-        //services.AddSingleton<IDefaultConnectionStringSource, DefaultConnectionStringSource>();
+    public IEntityFrameworkSetup<TDbContext> AddExtension(IEntityFrameworkSetupExtension extension)
+    {
+        this.extensions.Add(extension);
+
+        return this;
     }
 }

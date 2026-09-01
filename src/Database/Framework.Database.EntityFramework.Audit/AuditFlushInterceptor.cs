@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Framework.Database.EntityFramework.Audit;
 
-public class AuditFlushInterceptor() : SaveChangesInterceptor
+public class AuditFlushInterceptor : SaveChangesInterceptor
 {
     private readonly ConditionalWeakTable<DbContext, List<AuditEntry>> pendingAudits = [];
 

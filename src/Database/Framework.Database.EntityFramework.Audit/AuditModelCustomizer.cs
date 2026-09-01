@@ -14,7 +14,7 @@ public class AuditModelCustomizer(
 
     private const string RevisionTypeColumnName = "REVTYPE";
 
-    public void Customize(ModelBuilder modelBuilder, DbContext context)
+    public void Customize(ModelBuilder modelBuilder, DbContext dbContext)
     {
         modelBuilder.Entity<AuditRevisionEntity>(revision =>
         {

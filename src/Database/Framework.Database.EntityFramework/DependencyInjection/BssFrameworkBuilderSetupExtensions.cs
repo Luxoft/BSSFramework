@@ -1,11 +1,16 @@
 ﻿using Framework.Infrastructure.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 
 namespace Framework.Database.EntityFramework.DependencyInjection;
 
 public static class BssFrameworkBuilderSetupExtensions
 {
-    public static TSelf AddEntityFramework<TSelf>(this IBssFrameworkSetup<TSelf> setup, Action<IEntityFrameworkSetup>? setupAction = null)
-        where TSelf : IBssFrameworkSetup<TSelf> =>
+    extension<TSelf>(IBssFrameworkSetup<TSelf> setup)
+        where TSelf : IBssFrameworkSetup<TSelf>
+    {
+        public TSelf AddEntityFramework<TDbContext>(Action<IEntityFrameworkSetup<TDbContext>>? setupAction = null)
+            where TDbContext : DbContext =>
 
-        setup.AddExtensions(new BssFrameworkExtension(services => services.AddEntityFramework(setupAction)));
+            setup.AddExtensions(new BssFrameworkExtension(services => services.AddEntityFramework(setupAction)));
+    }
 }

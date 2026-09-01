@@ -2,7 +2,8 @@
 
 namespace Framework.Database.EntityFramework.DependencyInjection;
 
-public interface IEntityFrameworkSetup
+public interface IEntityFrameworkSetup<TDbContext>
+    where TDbContext : DbContext
 {
     //bool AddDefaultListener { get; set; }
 
@@ -10,8 +11,5 @@ public interface IEntityFrameworkSetup
 
     //bool AutoAddFluentMapping { get; set; }
 
-    IEntityFrameworkSetup SetDbContext<TDbContext>()
-        where TDbContext : DbContext;
-
-    IEntityFrameworkSetup AddExtension(IEntityFrameworkSetupExtension extension);
+    IEntityFrameworkSetup<TDbContext> AddExtension(IEntityFrameworkSetupExtension extension);
 }

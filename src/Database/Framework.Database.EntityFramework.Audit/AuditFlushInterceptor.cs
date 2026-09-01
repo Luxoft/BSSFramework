@@ -1,7 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
 
-using Framework.Database.EntityFramework.Sessions;
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -9,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Framework.Database.EntityFramework.Audit;
 
-public class AuditFlushInterceptor(TimeProvider timeProvider, EfCurrentRevisionState currentRevisionState) : SaveChangesInterceptor
+public class AuditFlushInterceptor() : SaveChangesInterceptor
 {
     private readonly ConditionalWeakTable<DbContext, List<AuditEntry>> pendingAudits = [];
 
@@ -45,51 +43,57 @@ public class AuditFlushInterceptor(TimeProvider timeProvider, EfCurrentRevisionS
         return await base.SavedChangesAsync(eventData, result, cancellationToken);
     }
 
-    private void CaptureChanges(DbContext? context)
+    private void CaptureChanges(DbContext? dbContext)
     {
-        if (context is null)
+        if (dbContext is null)
         {
             return;
         }
 
-        var auditEntityFactory = context.GetService<IAuditEntityFactory>();
-        var audits = context.ChangeTracker.Entries()
-            .Where(entry => entry.State is EntityState.Added or EntityState.Modified or EntityState.Deleted)
-            .Select(entry => this.CreateAuditEntry(entry, auditEntityFactory))
-            .OfType<AuditEntry>()
-            .ToList();
+        var auditEntityFactory = dbContext.GetService<IAuditEntityFactory>();
+        var audits = dbContext.ChangeTracker.Entries()
+                              .Where(entry => entry.State is EntityState.Added or EntityState.Modified or EntityState.Deleted)
+                              .Select(entry => this.CreateAuditEntry(entry, auditEntityFactory))
+                              .OfType<AuditEntry>()
+                              .ToList();
 
         if (audits.Count > 0)
         {
-            this.pendingAudits.Remove(context);
-            this.pendingAudits.Add(context, audits);
+            this.pendingAudits.Remove(dbContext);
+            this.pendingAudits.Add(dbContext, audits);
         }
     }
 
-    private void WriteAudits(DbContext? context)
+    private void WriteAudits(DbContext? dbContext)
     {
-        if (context is null || !this.pendingAudits.TryGetValue(context, out var audits))
+        if (dbContext is null
+            || !this.pendingAudits.TryGetValue(dbContext, out var audits)
+            || dbContext is not IAuditableDbContext auditableDbContext)
         {
             return;
         }
 
-        this.pendingAudits.Remove(context);
-        var revision = this.AddAuditEntities(context, audits, context.GetService<IAuditEntityFactory>());
-        context.SaveChanges();
-        currentRevisionState.CurrentRevision = revision.Id;
+        this.pendingAudits.Remove(dbContext);
+        var revision = this.AddAuditEntities(dbContext, auditableDbContext, audits, dbContext.GetService<IAuditEntityFactory>());
+        dbContext.SaveChanges();
+
+        auditableDbContext.CurrentRevisionState.CurrentRevision = revision.Id;
     }
 
-    private async Task WriteAuditsAsync(DbContext? context, CancellationToken cancellationToken)
+    private async Task WriteAuditsAsync(DbContext? dbContext, CancellationToken cancellationToken)
     {
-        if (context is null || !this.pendingAudits.TryGetValue(context, out var audits))
+        if (dbContext is null
+            || !this.pendingAudits.TryGetValue(dbContext, out var audits)
+            || dbContext is not IAuditableDbContext auditableDbContext)
         {
             return;
         }
 
-        this.pendingAudits.Remove(context);
-        var revision = this.AddAuditEntities(context, audits, context.GetService<IAuditEntityFactory>());
-        await context.SaveChangesAsync(cancellationToken);
-        currentRevisionState.CurrentRevision = revision.Id;
+        this.pendingAudits.Remove(dbContext);
+        var revision = this.AddAuditEntities(dbContext, auditableDbContext, audits, dbContext.GetService<IAuditEntityFactory>());
+        await dbContext.SaveChangesAsync(cancellationToken);
+
+        auditableDbContext.CurrentRevisionState.CurrentRevision = revision.Id;
     }
 
     private AuditEntry? CreateAuditEntry(EntityEntry entry, IAuditEntityFactory auditEntityFactory)
@@ -100,21 +104,25 @@ public class AuditFlushInterceptor(TimeProvider timeProvider, EfCurrentRevisionS
         }
 
         var modifiedProperties = metadata.Properties
-            .Where(property => !property.IsKey)
-            .ToDictionary(
-                property => property.Name,
-                property => this.IsPropertyModified(entry, property));
+                                         .Where(property => !property.IsKey)
+                                         .ToDictionary(
+                                             property => property.Name,
+                                             property => this.IsPropertyModified(entry, property));
 
         return new AuditEntry(entry, metadata, this.ToRevisionType(entry.State), modifiedProperties);
     }
 
     private AuditRevisionEntity AddAuditEntities(
-        DbContext context,
+        DbContext dbContext,
+        IAuditableDbContext auditableDbContext,
         List<AuditEntry> audits,
         IAuditEntityFactory auditEntityFactory)
     {
-        var revision = new AuditRevisionEntity { RevisionDate = timeProvider.GetUtcNow().DateTime };
-        context.Set<AuditRevisionEntity>().Add(revision);
+        var revision = new AuditRevisionEntity
+                       {
+                           RevisionDate = auditableDbContext.TimeProvider.GetUtcNow().DateTime, Author = auditableDbContext.CurrentUser.Name
+                       };
+        dbContext.Set<AuditRevisionEntity>().Add(revision);
 
         foreach (var audit in audits)
         {
@@ -130,17 +138,17 @@ public class AuditFlushInterceptor(TimeProvider timeProvider, EfCurrentRevisionS
                 if (!property.IsKey)
                 {
                     audit.Metadata.AuditEntityType.GetProperty($"{property.ModName}_MOD")!
-                        .SetValue(auditEntity, audit.ModifiedProperties[property.Name]);
+                         .SetValue(auditEntity, audit.ModifiedProperties[property.Name]);
                 }
             }
 
             audit.Metadata.AuditEntityType
-                .GetProperty(auditEntityFactory.RevisionPropertyName)!
-                .SetValue(auditEntity, revision);
+                 .GetProperty(auditEntityFactory.RevisionPropertyName)!
+                 .SetValue(auditEntity, revision);
             audit.Metadata.AuditEntityType
-                .GetProperty(auditEntityFactory.RevisionTypePropertyName)!
-                .SetValue(auditEntity, audit.RevisionType);
-            context.Add(auditEntity);
+                 .GetProperty(auditEntityFactory.RevisionTypePropertyName)!
+                 .SetValue(auditEntity, audit.RevisionType);
+            dbContext.Add(auditEntity);
         }
 
         return revision;
@@ -155,8 +163,8 @@ public class AuditFlushInterceptor(TimeProvider timeProvider, EfCurrentRevisionS
     };
 
     private bool IsPropertyModified(EntityEntry entry, AuditPropertyMetadata property) =>
-        entry.State == EntityState.Added ||
-        entry.State == EntityState.Modified && !property.IsModOnly && this.GetPropertyEntry(entry, property) is { IsModified: true };
+        entry.State == EntityState.Added
+        || entry.State == EntityState.Modified && !property.IsModOnly && this.GetPropertyEntry(entry, property) is { IsModified: true };
 
     private object? GetCurrentValue(EntityEntry entry, AuditPropertyMetadata property) =>
         this.GetPropertyEntry(entry, property)?.CurrentValue;

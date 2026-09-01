@@ -25,7 +25,6 @@ public class SampleSystemEntityFrameworkExtension : IBssFrameworkExtension
                                                                                 auditSetup.SetFilter(et => !et.ClrType.IsProjection()
                                                                                                          && !et.ClrType
                                                                                                              .HasAttribute<NotAuditedClassAttribute>())))
-            .AddEntityFramework(s => s.SetDbContext<SampleSystemDbContext>()
-                                      .AddExtension(new AuditEntityFrameworkSetupExtension())
-                                      .AddLegacyDatabaseSettings());
+            .AddEntityFramework<SampleSystemDbContext>(s => s.AddAudit()
+                                                             .AddLegacyDatabaseSettings());
 }

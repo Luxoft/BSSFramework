@@ -11,11 +11,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Database.EntityFramework.DependencyInjection;
 
-public class EntityFrameworkSetup : IEntityFrameworkSetup, IServiceInitializer
+public class EntityFrameworkSetup<TDbContext> : IEntityFrameworkSetup<TDbContext>, IServiceInitializer
+    where TDbContext : DbContext
 {
     private readonly List<IEntityFrameworkSetupExtension> extensions = [];
-
-    private Action<IServiceCollection>? dbContextInit;
 
     public void Initialize(IServiceCollection services)
     {
@@ -25,27 +24,12 @@ public class EntityFrameworkSetup : IEntityFrameworkSetup, IServiceInitializer
 
         services.AddScopedFrom<ILazyObject<IDBSession>, ILazyObject<IEfSession>>();
         services.AddScopedFrom<DbContext, IEfSession>(session => session.NativeSession);
-
-        (this.dbContextInit ?? throw new InvalidOperationException("DbContext has not been initialized.")).Invoke(services);
-
-
-
+        services.AddScopedFromLazyObject<IEfSession, EfSession<TDbContext>>();
 
         this.extensions.ForEach(ex => ex.AddServices(services));
     }
 
-    public IEntityFrameworkSetup SetDbContext<TDbContext>()
-        where TDbContext : DbContext
-    {
-        this.dbContextInit = services =>
-        {
-            services.AddScopedFromLazyObject<IEfSession, EfSession<TDbContext>>();
-        };
-
-        return this;
-    }
-
-    public IEntityFrameworkSetup AddExtension(IEntityFrameworkSetupExtension extension)
+    public IEntityFrameworkSetup<TDbContext> AddExtension(IEntityFrameworkSetupExtension extension)
     {
         this.extensions.Add(extension);
 

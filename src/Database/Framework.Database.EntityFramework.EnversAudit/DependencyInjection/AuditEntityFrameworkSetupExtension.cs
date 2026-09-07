@@ -4,7 +4,7 @@ using Framework.Database.EntityFramework.Sessions;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.Database.EntityFramework.Audit.DependencyInjection;
+namespace Framework.Database.EntityFramework.EnversAudit.DependencyInjection;
 
 public class AuditEntityFrameworkSetupExtension : IEntityFrameworkSetupExtension {
     public void AddServices(IServiceCollection services) =>

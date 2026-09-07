@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
-namespace Framework.Database.EntityFramework.Audit.DependencyInjection;
+namespace Framework.Database.EntityFramework.EnversAudit.DependencyInjection;
 
 public static class AuditDbContextOptionsBuilderExtensions
 {

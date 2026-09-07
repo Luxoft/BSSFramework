@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Framework.Database.EntityFramework.Audit.DependencyInjection;
+namespace Framework.Database.EntityFramework.EnversAudit.DependencyInjection;
 
 public interface IAuditSetup
 {

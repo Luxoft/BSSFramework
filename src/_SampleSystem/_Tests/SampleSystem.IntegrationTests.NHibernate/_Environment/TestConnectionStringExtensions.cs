@@ -1,6 +1,7 @@
 ﻿using Anch.Testing.Database.ConnectionStringManagement;
 
 using Framework.AutomationCore.Extensions;
+using Framework.Database;
 using Framework.Database.Domain;
 
 namespace SampleSystem.IntegrationTests._Environment;

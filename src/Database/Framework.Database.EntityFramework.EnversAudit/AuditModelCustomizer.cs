@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Framework.Database.EntityFramework.Audit;
+namespace Framework.Database.EntityFramework.EnversAudit;
 
 public class AuditModelCustomizer(
     IAuditEntityFactory auditEntityFactory,

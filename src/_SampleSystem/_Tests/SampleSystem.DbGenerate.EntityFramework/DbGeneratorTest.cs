@@ -10,7 +10,7 @@ using Framework.Database.Domain;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
 
-using SampleSystem.DbGenerate.NHibernate;
+using SampleSystem.ServiceEnvironment;
 using SampleSystem.ServiceEnvironment.DependencyInjection;
 
 [assembly: AnchTestFramework]

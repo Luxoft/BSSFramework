@@ -1,6 +1,6 @@
 ﻿using CommandLine;
 
-namespace SampleSystem.DbGenerate.NHibernate;
+namespace SampleSystem.DbGenerate;
 
 public class DbGenerationOptions
 {

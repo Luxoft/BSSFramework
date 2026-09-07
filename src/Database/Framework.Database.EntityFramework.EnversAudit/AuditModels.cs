@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Reflection.Emit;
 
-namespace Framework.Database.EntityFramework.Audit;
+namespace Framework.Database.EntityFramework.EnversAudit;
 
 public sealed class AuditEntityFactory(IAuditTypeNameResolver auditTypeNameResolver) : IAuditEntityFactory
 {

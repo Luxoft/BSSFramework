@@ -1,4 +1,4 @@
-﻿using Framework.Database.EntityFramework.Audit;
+﻿using Framework.Database.EntityFramework.EnversAudit;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

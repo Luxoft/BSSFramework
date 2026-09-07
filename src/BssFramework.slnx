@@ -48,6 +48,7 @@
     <Project Path="Database/Framework.Database.Abstractions/Framework.Database.Abstractions.csproj" />
     <Project Path="Database/Framework.Database.Audit.Abstractions/Framework.Database.Audit.Abstractions.csproj" />
     <Project Path="Database/Framework.Database.Domain/Framework.Database.Domain.csproj" />
+    <Project Path="Database/Framework.Database.InlineAudit/Framework.Database.InlineAudit.csproj" />
     <Project Path="Database/Framework.Database.Legacy.Abstractions/Framework.Database.Legacy.Abstractions.csproj" />
     <Project Path="Database/Framework.Database.Legacy.Domain/Framework.Database.Legacy.Domain.csproj" />
     <Project Path="Database/Framework.Database.Mapping/Framework.Database.Mapping.csproj" />
@@ -61,7 +62,8 @@
     <Project Path="Database/Framework.Tracking/Framework.Tracking.csproj" />
   </Folder>
   <Folder Name="/Database/EntityFramework/">
-    <Project Path="Database/Framework.Database.EntityFramework.Audit/Framework.Database.EntityFramework.Audit.csproj" />
+    <Project Path="Database/Framework.Database.EntityFramework.EnversAudit/Framework.Database.EntityFramework.EnversAudit.csproj" />
+    <Project Path="Database/Framework.Database.EntityFramework.InlineAudit/Framework.Database.EntityFramework.InlineAudit.csproj" />
     <Project Path="Database/Framework.Database.EntityFramework.Legacy/Framework.Database.EntityFramework.Legacy.csproj" />
     <Project Path="Database/Framework.Database.EntityFramework/Framework.Database.EntityFramework.csproj" />
   </Folder>

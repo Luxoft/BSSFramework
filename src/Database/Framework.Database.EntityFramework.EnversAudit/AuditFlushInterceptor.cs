@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
-namespace Framework.Database.EntityFramework.Audit;
+namespace Framework.Database.EntityFramework.EnversAudit;
 
 public class AuditFlushInterceptor : SaveChangesInterceptor
 {

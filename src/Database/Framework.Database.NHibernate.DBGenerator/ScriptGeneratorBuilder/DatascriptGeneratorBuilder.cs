@@ -1,5 +1,4 @@
-﻿using Framework.Database.Domain;
-using Framework.Database.Metadata;
+﻿using Framework.Database.Metadata;
 using Framework.Database.NHibernate.DBGenerator.Contracts;
 using Framework.Database.NHibernate.DBGenerator.ScriptGeneratorBuilder.Contracts;
 using Framework.Database.NHibernate.DBGenerator.ScriptGeneratorBuilder.Impl;

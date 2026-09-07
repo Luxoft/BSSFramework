@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.Database.EntityFramework.Audit.DependencyInjection;
+namespace Framework.Database.EntityFramework.EnversAudit.DependencyInjection;
 
 public class AuditSetup : IAuditSetup, IServiceInitializer
 {

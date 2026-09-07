@@ -3,7 +3,7 @@ using FluentMigrator.SqlServer;
 
 using Framework.Configuration.Domain;
 
-namespace SampleSystem.IntegrationTests._Environment.FluentMigration;
+namespace SampleSystem.DbGenerate.Migrations;
 
 [Migration(2022_11_18_16_09_00)]
 public class InitNumberInDomainObjectEventMigration : Migration

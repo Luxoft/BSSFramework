@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Framework.Database.EntityFramework.Audit;
+namespace Framework.Database.EntityFramework.EnversAudit;
 
 public class AuditInfoResolver(IAuditTypeNameResolver auditTypeNameResolver) : IAuditInfoResolver
 {

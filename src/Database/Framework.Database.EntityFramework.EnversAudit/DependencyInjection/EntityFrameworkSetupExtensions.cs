@@ -2,7 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 
-namespace Framework.Database.EntityFramework.Audit.DependencyInjection;
+namespace Framework.Database.EntityFramework.EnversAudit.DependencyInjection;
 
 public static class EntityFrameworkSetupExtensions
 {

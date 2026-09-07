@@ -1,5 +1,4 @@
 ﻿using Framework.Core;
-using Framework.Database.Domain;
 
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;

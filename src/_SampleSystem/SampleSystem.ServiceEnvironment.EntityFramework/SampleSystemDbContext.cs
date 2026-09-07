@@ -2,14 +2,14 @@
 
 using Framework.Authorization.Generated.DAL.EntityFramework.Mapping.Base;
 using Framework.Configuration.Generated.DAL.EntityFramework.Mapping.Base;
-using Framework.Database.EntityFramework.Audit;
+using Framework.Database.EntityFramework.EnversAudit;
 using Framework.Database.EntityFramework.Sessions;
 
 using Microsoft.EntityFrameworkCore;
 
 using SampleSystem.Generated.DAL.EntityFramework.Mapping.Base;
 
-namespace SampleSystem.ServiceEnvironment.DependencyInjection;
+namespace SampleSystem.ServiceEnvironment;
 
 public class SampleSystemDbContext(
     DbContextOptions<SampleSystemDbContext> options,

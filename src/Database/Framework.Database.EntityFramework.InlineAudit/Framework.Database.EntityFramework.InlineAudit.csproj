@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>Luxoft.Framework.Database.EntityFramework.Audit</PackageId>
+    <PackageId>Luxoft.Framework.Database.EntityFramework.InlineAudit</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

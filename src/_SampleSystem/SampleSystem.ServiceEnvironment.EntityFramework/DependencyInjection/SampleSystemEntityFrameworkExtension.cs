@@ -1,8 +1,8 @@
 ﻿using Framework.Core;
 using Framework.Database;
 using Framework.Database.EntityFramework;
-using Framework.Database.EntityFramework.Audit.DependencyInjection;
 using Framework.Database.EntityFramework.DependencyInjection;
+using Framework.Database.EntityFramework.EnversAudit.DependencyInjection;
 using Framework.Database.EntityFramework.Extensions;
 using Framework.Database.Mapping;
 using Framework.Infrastructure.DependencyInjection;

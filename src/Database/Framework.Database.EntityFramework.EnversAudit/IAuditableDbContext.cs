@@ -2,7 +2,7 @@
 
 using Framework.Database.EntityFramework.Sessions;
 
-namespace Framework.Database.EntityFramework.Audit;
+namespace Framework.Database.EntityFramework.EnversAudit;
 
 public interface IAuditableDbContext
 {

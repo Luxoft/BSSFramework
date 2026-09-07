@@ -1,7 +1,7 @@
 ﻿using Framework.Database.Audit;
 using Framework.Database.EntityFramework.Sessions;
 
-namespace Framework.Database.EntityFramework.Audit;
+namespace Framework.Database.EntityFramework.EnversAudit;
 
 public class EfRevisionService(EfCurrentRevisionState currentRevisionState) : IRevisionService
 {

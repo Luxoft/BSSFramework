@@ -13,6 +13,8 @@ namespace Framework.Database.NHibernate.Sessions;
 
 public class WriteNHibSession : NHibSessionBase
 {
+    private readonly NHibSessionEnvironment environment;
+
     private readonly IDBSessionEventListener[] eventListeners;
 
 
@@ -33,14 +35,14 @@ public class WriteNHibSession : NHibSessionBase
         NHibSessionEnvironment environment,
         IAuditPropertyFactory auditPropertyFactory,
         IEnumerable<IDBSessionEventListener> eventListeners)
-        : base(environment, DBSessionMode.Write)
     {
+        this.environment = environment;
         this.eventListeners = eventListeners.ToArray();
         this.modifyAuditProperties = auditPropertyFactory.GetModifyAuditProperty();
         this.createAuditProperties = auditPropertyFactory.GetCreateAuditProperty();
         this.collectChangedEventListener = new CollectChangesEventListener();
 
-        this.NativeSession = this.Environment.InternalSessionFactory.OpenSession();
+        this.NativeSession = this.environment.InternalSessionFactory.OpenSession();
         this.NativeSession.FlushMode = FlushMode.Manual;
 
         this.nhibTransaction = this.NativeSession.BeginTransaction();
@@ -51,6 +53,8 @@ public class WriteNHibSession : NHibSessionBase
     }
 
     public override bool Closed => this.closed;
+
+    public override DBSessionMode SessionMode { get; } = DBSessionMode.Write;
 
     public sealed override ISession NativeSession { get; }
 
@@ -196,7 +200,7 @@ public class WriteNHibSession : NHibSessionBase
         }
         catch (Exception ex)
         {
-            var expandedException = this.Environment.InternalExceptionExpander.Expand(ex);
+            var expandedException = this.environment.InternalExceptionExpander.Expand(ex);
 
             if (expandedException == ex)
             {

@@ -1,5 +1,5 @@
-﻿using Framework.Database.Audit;
-using Framework.Database.EntityFramework.Sessions;
+﻿using Framework.Database.EntityFramework.Sessions;
+using Framework.Database.EnversAudit;
 
 namespace Framework.Database.EntityFramework.EnversAudit;
 

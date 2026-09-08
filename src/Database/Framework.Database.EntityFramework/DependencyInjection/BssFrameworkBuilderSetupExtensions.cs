@@ -11,6 +11,6 @@ public static class BssFrameworkBuilderSetupExtensions
         public TSelf AddEntityFramework<TDbContext>(Action<IEntityFrameworkSetup<TDbContext>>? setupAction = null)
             where TDbContext : DbContext =>
 
-            setup.AddExtensions(new BssFrameworkExtension(services => services.AddEntityFramework(setupAction)));
+            setup.AddExtension(new BssFrameworkExtension(services => services.AddEntityFramework(setupAction)));
     }
 }

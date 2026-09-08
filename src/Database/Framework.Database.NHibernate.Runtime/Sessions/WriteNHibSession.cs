@@ -1,7 +1,7 @@
 ﻿using System.Data;
 
 using Framework.Core;
-using Framework.Database.AuditProperty;
+using Framework.Database.InlineAudit;
 using Framework.Database.NHibernate.Audit;
 using Framework.Database.NHibernate.Envers;
 
@@ -15,13 +15,9 @@ public class WriteNHibSession : NHibSessionBase
 {
     private readonly NHibSessionEnvironment environment;
 
+    private readonly IEnumerable<InlineAuditBinding> inlineAuditBindings;
+
     private readonly IDBSessionEventListener[] eventListeners;
-
-
-    private readonly AuditPropertyPair modifyAuditProperties;
-
-
-    private readonly AuditPropertyPair createAuditProperties;
 
     private readonly CollectChangesEventListener collectChangedEventListener;
 
@@ -33,13 +29,12 @@ public class WriteNHibSession : NHibSessionBase
 
     public WriteNHibSession(
         NHibSessionEnvironment environment,
-        IAuditPropertyFactory auditPropertyFactory,
+        IEnumerable<InlineAuditBinding> inlineAuditBindings,
         IEnumerable<IDBSessionEventListener> eventListeners)
     {
         this.environment = environment;
+        this.inlineAuditBindings = inlineAuditBindings;
         this.eventListeners = eventListeners.ToArray();
-        this.modifyAuditProperties = auditPropertyFactory.GetModifyAuditProperty();
-        this.createAuditProperties = auditPropertyFactory.GetCreateAuditProperty();
         this.collectChangedEventListener = new CollectChangesEventListener();
 
         this.NativeSession = this.environment.InternalSessionFactory.OpenSession();
@@ -68,7 +63,7 @@ public class WriteNHibSession : NHibSessionBase
 
         sessionImpl.OverrideListeners(sessionImpl.Listeners.Clone().Self(this.InjectListeners));
 
-        sessionImpl.OverrideInterceptor(new AuditInterceptor(this.createAuditProperties, this.modifyAuditProperties));
+        sessionImpl.OverrideInterceptor(new InlineAuditInterceptor(this.inlineAuditBindings));
     }
 
     private void InjectListeners(EventListeners newSessionEventListeners)

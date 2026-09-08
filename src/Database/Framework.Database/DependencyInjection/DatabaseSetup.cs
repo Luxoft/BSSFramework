@@ -18,6 +18,8 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
 
     private readonly List<Action<IServiceCollection>> initActions = [];
 
+    private readonly List<IDatabaseSetupExtension> extensions = [];
+
     private string? defaultConnectionString;
 
     private DefaultConnectionStringSettings defaultConnectionStringSettings = DefaultConnectionStringSettings.Default;
@@ -82,6 +84,13 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
         return this;
     }
 
+    public IDatabaseSetup AddExtension(IDatabaseSetupExtension extension)
+    {
+        this.extensions.Add(extension);
+
+        return this;
+    }
+
     public void Initialize(IServiceCollection services)
     {
         services.AddSingleton<IDalValidationIdentitySource, DalValidationIdentitySource>();
@@ -89,8 +98,6 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
         services.AddScopedFrom<IDbTransaction, IDBSession>(session => session.Transaction);
 
         services.AddSingleton(DBSessionSettings.Default);
-
-        services.AddScoped<IAuditPropertyFactory, AuditPropertyFactory>();
 
         services.AddSingleton<IInitializeManager, InitializeManager>();
 
@@ -123,6 +130,11 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
         foreach (var action in this.initActions)
         {
             action(services);
+        }
+
+        foreach (var extension in this.extensions)
+        {
+            extension.AddServices(services);
         }
     }
 

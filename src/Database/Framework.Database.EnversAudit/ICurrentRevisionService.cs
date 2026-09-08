@@ -1,4 +1,4 @@
-﻿namespace Framework.Database.Audit;
+﻿namespace Framework.Database.EnversAudit;
 
 public interface IRevisionService
 {

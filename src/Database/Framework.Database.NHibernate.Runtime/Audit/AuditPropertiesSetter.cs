@@ -2,7 +2,7 @@
 using Anch.Core.DictionaryCache;
 
 using Framework.Core;
-using Framework.Database.AuditProperty;
+using Framework.Database.InlineAudit;
 
 namespace Framework.Database.NHibernate.Audit;
 
@@ -15,14 +15,14 @@ internal sealed partial class AuditPropertiesSetter
 {
     private readonly IDictionaryCache<DomainObjectDescription, Func<object[], bool>> setCache;
 
-    public AuditPropertiesSetter(IEnumerable<IAuditProperty> auditProperties)
+    public AuditPropertiesSetter(IEnumerable<InlineAuditBinding> auditProperties)
     {
         if (auditProperties is null)
         {
             throw new ArgumentNullException(nameof(auditProperties));
         }
 
-        var getSetAuditActionMethod = new Func<string[], IAuditProperty<object, object>, Func<object[], bool>>(GetSetAuditAction<object, object, object>).Method.GetGenericMethodDefinition();
+        var getSetAuditActionMethod = new Func<string[], InlineAuditBinding<object, object>, Func<object[], bool>>(GetSetAuditAction<object, object, object>).Method.GetGenericMethodDefinition();
 
         this.setCache = new DictionaryCache<DomainObjectDescription, Func<object[], bool>>(domainObjectDescription =>
         {
@@ -40,7 +40,7 @@ internal sealed partial class AuditPropertiesSetter
         }).WithLock();
     }
 
-    public bool SetAuditFields(DomainObjectDescription domainObjectDescription, ref object[] state)
+    public bool SetAuditFields(DomainObjectDescription domainObjectDescription, object[] state)
     {
         if (domainObjectDescription is null)
         {
@@ -51,26 +51,24 @@ internal sealed partial class AuditPropertiesSetter
         return setAction(state);
     }
 
-    private static Func<object[], bool> GetSetAuditAction<TDomainObject, TPropertyDomainObject, TProperty>(string[]? propertyNames, IAuditProperty<TPropertyDomainObject, TProperty>? auditProperty)
+    private static Func<object[], bool> GetSetAuditAction<TDomainObject, TPropertyDomainObject, TProperty>(string[]? propertyNames, InlineAuditBinding<TPropertyDomainObject, TProperty> auditBinding)
             where TDomainObject : TPropertyDomainObject
     {
-        if (propertyNames?.Any() == false || auditProperty?.PropertyExpr is null)
+        if (propertyNames?.Any() == false)
         {
             return _ => false;
         }
 
         int? propertyIndex = null;
-        Func<TProperty>? getAuditValue = null;
 
-        var domainObjectPropertyName = auditProperty.PropertyExpr.GetMemberName();
+        var domainObjectPropertyName = auditBinding.PropertyAccessors.Path.GetMemberName();
         if (!string.IsNullOrEmpty(domainObjectPropertyName))
         {
             var property = typeof(TDomainObject).GetProperty(domainObjectPropertyName, true)!;
-            getAuditValue = auditProperty.GetCurrentValue;
             propertyIndex = GetPropertyIndex(propertyNames, property.Name);
         }
 
-        return (state) =>
+        return state =>
                {
                    var result = false;
                    if (propertyIndex.HasValue)

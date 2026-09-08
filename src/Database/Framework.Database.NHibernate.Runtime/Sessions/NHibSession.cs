@@ -1,5 +1,6 @@
 ﻿using System.Data;
 
+using Framework.Database.InlineAudit;
 using Framework.Database.NHibernate.Envers;
 
 using NHibernate;
@@ -15,7 +16,7 @@ public class NHibSession : INHibSession
     public NHibSession(
         NHibSessionEnvironment environment,
         DBSessionSettings settings,
-        IAuditPropertyFactory auditPropertyFactory,
+        IEnumerable<InlineAuditBinding> inlineAuditBindings,
         IEnumerable<IDBSessionEventListener> eventListeners) =>
         this.lazyInnerSession = new Lazy<INHibSession>(() =>
         {
@@ -25,7 +26,7 @@ public class NHibSession : INHibSession
                     return new ReadOnlyNHibSession(environment);
 
                 case DBSessionMode.Write:
-                    return new WriteNHibSession(environment, auditPropertyFactory, eventListeners);
+                    return new WriteNHibSession(environment, inlineAuditBindings, eventListeners);
 
                 default:
                     throw new InvalidOperationException();

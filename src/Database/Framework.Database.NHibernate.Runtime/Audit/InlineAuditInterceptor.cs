@@ -1,27 +1,25 @@
 ﻿using Framework.Database.AuditProperty;
+using Framework.Database.InlineAudit;
 
 using NHibernate;
 using NHibernate.Type;
 
 namespace Framework.Database.NHibernate.Audit;
 
-/// <summary> NHibernate Interceptor for setting Audit properties (<seealso cref="IAuditProperty"/>) on insert\update domain object
-/// </summary>
-internal sealed class AuditInterceptor(IEnumerable<IAuditProperty> createAuditProperties, IEnumerable<IAuditProperty> modifyAuditProperties)
+internal sealed class InlineAuditInterceptor(IEnumerable<InlineAuditBinding> inlineAuditBindings)
     : EmptyInterceptor
 {
     private readonly AuditPropertiesSetter createSetter = new(createAuditProperties);
+
     private readonly AuditPropertiesSetter modifySetter = new(modifyAuditProperties);
 
     public override bool OnFlushDirty(object entity, object id, object[] currentState, object[] previousState, string[] propertyNames, IType[] types)
     {
         var result = false;
+
         if (entity is IAuditObject)
         {
-            result =
-                    this.modifySetter.SetAuditFields(
-                                                     AuditPropertiesSetter.DomainObjectDescription.Get(entity.GetType(), propertyNames),
-                                                     ref currentState);
+            result = this.modifySetter.SetAuditFields(AuditPropertiesSetter.DomainObjectDescription.Get(entity.GetType(), propertyNames), currentState);
         }
 
         return result;
@@ -30,11 +28,12 @@ internal sealed class AuditInterceptor(IEnumerable<IAuditProperty> createAuditPr
     public override bool OnSave(object entity, object id, object[] state, string[] propertyNames, IType[] types)
     {
         var result = false;
+
         if (entity is IAuditObject)
         {
             var domainObjectDescription = AuditPropertiesSetter.DomainObjectDescription.Get(entity.GetType(), propertyNames);
-            var createSetterRes = this.createSetter.SetAuditFields(domainObjectDescription, ref state);
-            var modifySetterRes = this.modifySetter.SetAuditFields(domainObjectDescription, ref state);
+            var createSetterRes = this.createSetter.SetAuditFields(domainObjectDescription, state);
+            var modifySetterRes = this.modifySetter.SetAuditFields(domainObjectDescription, state);
             result = createSetterRes | modifySetterRes;
         }
 

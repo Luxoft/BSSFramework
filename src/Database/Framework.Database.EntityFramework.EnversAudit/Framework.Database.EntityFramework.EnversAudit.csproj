@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Framework.Database.Audit.Abstractions\Framework.Database.Audit.Abstractions.csproj" />
     <ProjectReference Include="..\Framework.Database.EntityFramework\Framework.Database.EntityFramework.csproj" />
+    <ProjectReference Include="..\Framework.Database.EnversAudit\Framework.Database.EnversAudit.csproj" />
   </ItemGroup>
 
 </Project>

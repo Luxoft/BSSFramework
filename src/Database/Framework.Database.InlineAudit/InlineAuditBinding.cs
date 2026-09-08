@@ -2,14 +2,14 @@
 
 namespace Framework.Database.InlineAudit;
 
-public record InlineAuditInfo<TDomainObject, TProperty>(PropertyAccessors<TDomainObject, TProperty?> PropertyAccessors) : InlineAuditInfo
+public record InlineAuditBinding<TDomainObject, TProperty>(PropertyAccessors<TDomainObject, TProperty?> PropertyAccessors) : InlineAuditBinding
 {
     public override Type DomainObjectType { get; } = typeof(TDomainObject);
 
     public override Type PropertyType { get; } = typeof(TProperty);
 }
 
-public abstract record InlineAuditInfo
+public abstract record InlineAuditBinding
 {
     public required InlineAuditType Type { get; init; }
 

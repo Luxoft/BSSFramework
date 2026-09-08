@@ -4,9 +4,8 @@ using Anch.Core;
 
 namespace Framework.Database.InlineAudit;
 
-public record InlineAuditBinding<TDomainObject, TProperty, TAuditValueResolver>(PropertyAccessors<TDomainObject, TProperty?> PropertyAccessors) : InlineAuditBinding
+public record InlineAuditBinding<TDomainObject, TProperty, TAuditValueResolver>(PropertyAccessors<TDomainObject, TProperty> PropertyAccessors) : InlineAuditBinding
     where TAuditValueResolver : IAuditValueResolver<TProperty>
-    where TProperty : notnull
 {
     public override Type AuditValueResolverType { get; } = typeof(TAuditValueResolver);
 

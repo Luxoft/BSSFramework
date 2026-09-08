@@ -11,8 +11,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Validation\Framework.Validation.Domain\Framework.Validation.Domain.csproj" />
-    <ProjectReference Include="..\Framework.Database.Domain\Framework.Database.Domain.csproj" />
-    <ProjectReference Include="..\Framework.Database.InlineAudit\Framework.Database.InlineAudit.csproj" />
     <ProjectReference Include="..\Framework.Database.Legacy.Abstractions\Framework.Database.Legacy.Abstractions.csproj" />
     <ProjectReference Include="..\Framework.Database.NHibernate\Framework.Database.NHibernate.csproj" />
     <ProjectReference Include="..\Framework.Tracking.Abstractions\Framework.Tracking.Abstractions.csproj" />

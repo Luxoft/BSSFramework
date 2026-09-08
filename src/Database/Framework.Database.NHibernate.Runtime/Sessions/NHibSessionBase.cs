@@ -1,7 +1,5 @@
 ﻿using System.Data;
 
-using Anch.Core;
-
 using Framework.Database.NHibernate.DAL.Revisions;
 using Framework.Database.NHibernate.Envers;
 

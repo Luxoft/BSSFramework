@@ -21,7 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Framework.Database.Domain\Framework.Database.Domain.csproj" />
     <ProjectReference Include="..\Framework.Database.EnversAudit\Framework.Database.EnversAudit.csproj" />
-    <ProjectReference Include="..\Framework.Database.InlineAudit\Framework.Database.InlineAudit.csproj" />
+    <ProjectReference Include="..\Framework.Database.InlineAudit.Runtime\Framework.Database.InlineAudit.Runtime.csproj" />
     <ProjectReference Include="..\Framework.Database.Mapping\Framework.Database.Mapping.csproj" />
     <ProjectReference Include="..\Framework.Database.Abstractions\Framework.Database.Abstractions.csproj" />
 

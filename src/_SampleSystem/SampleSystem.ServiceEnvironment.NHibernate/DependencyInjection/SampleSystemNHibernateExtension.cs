@@ -1,6 +1,5 @@
 ﻿using Anch.Core;
 
-using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DAL.NHibernate;
 using Framework.Configuration.Generated.DAL.NHibernate;
 using Framework.Database;
@@ -39,10 +38,30 @@ public class SampleSystemNHibernateExtension(bool includeTypedAudit) : IBssFrame
                                                .AddMapping(new SampleSystemSystemRevisionAuditMappingSettings(appAuditDatabase))
                                                .AddMapping(new SampleSystemMappingSettings(appDatabase)))
 
-                                     .AddInlineAudit(rootSetup => rootSetup
-                                                         .For<AuditPersistentDomainObjectBase>(innerSetup => innerSetup.Add(
-                                                                                                   v => v.CreateDate,
-                                                                                                   InlineAuditAction.Create,
-                                                                                                   AuditValueResolverHeader.Now))));
+                                     .AddInlineAudit(rootSetup =>
+                                     {
+                                         rootSetup
+                                             .For<Framework.Authorization.Domain.AuditPersistentDomainObjectBase>(innerSetup =>
+                                             {
+                                                 innerSetup.Add(v => v.CreateDate, InlineAuditAction.Create, AuditValueResolverHeader.Now)
+                                                           .Add(v => v.CreatedBy, InlineAuditAction.Create, AuditValueResolverHeader.CurrentUser)
+                                                           .Add(v => v.ModifyDate, InlineAuditAction.Modify, AuditValueResolverHeader.Now)
+                                                           .Add(v => v.ModifiedBy, InlineAuditAction.Modify, AuditValueResolverHeader.CurrentUser);
+                                             })
+                                             .For<Framework.Configuration.Domain.AuditPersistentDomainObjectBase>(innerSetup =>
+                                             {
+                                                 innerSetup.Add(v => v.CreateDate, InlineAuditAction.Create, AuditValueResolverHeader.Now)
+                                                           .Add(v => v.CreatedBy, InlineAuditAction.Create, AuditValueResolverHeader.CurrentUser)
+                                                           .Add(v => v.ModifyDate, InlineAuditAction.Modify, AuditValueResolverHeader.Now)
+                                                           .Add(v => v.ModifiedBy, InlineAuditAction.Modify, AuditValueResolverHeader.CurrentUser);
+                                             })
+                                             .For<SampleSystem.Domain.AuditPersistentDomainObjectBase>(innerSetup =>
+                                             {
+                                                 innerSetup.Add(v => v.CreateDate, InlineAuditAction.Create, AuditValueResolverHeader.Now)
+                                                           .Add(v => v.CreatedBy, InlineAuditAction.Create, AuditValueResolverHeader.CurrentUser)
+                                                           .Add(v => v.ModifyDate, InlineAuditAction.Modify, AuditValueResolverHeader.Now)
+                                                           .Add(v => v.ModifiedBy, InlineAuditAction.Modify, AuditValueResolverHeader.CurrentUser);
+                                             });
+                                     }));
     }
 }

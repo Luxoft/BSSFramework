@@ -5,7 +5,6 @@ using Anch.Testing.Xunit;
 using Framework.Core;
 using Framework.Database;
 using Framework.Database.ConnectionStringSource;
-using Framework.Database.Domain;
 
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;

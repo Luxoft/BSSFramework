@@ -9,7 +9,6 @@ using Framework.Application.Domain;
 using Framework.BLL.Services;
 using Framework.Core;
 using Framework.Core.TypeResolving;
-using Framework.Database;
 using Framework.ExtendedMetadata;
 using Framework.FileGeneration.Extensions;
 using Framework.Projection;
@@ -23,7 +22,7 @@ namespace Framework.FileGeneration.Configuration;
 
 public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDomainObjectBase, TAuditPersistentDomainObjectBase, TIdent> : IFileGenerationEnvironment
     where TPersistentDomainObjectBase : TDomainObjectBase, IIdentityObject<TIdent>
-    where TAuditPersistentDomainObjectBase : TPersistentDomainObjectBase, IAuditObject
+    where TAuditPersistentDomainObjectBase : TPersistentDomainObjectBase
 {
     private readonly Assembly? modelAssembly;
 

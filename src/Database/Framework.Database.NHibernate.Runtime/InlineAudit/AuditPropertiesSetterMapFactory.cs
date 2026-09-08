@@ -1,11 +1,14 @@
 ﻿using System.Collections.Concurrent;
 
+using Anch.Core;
+
 using Framework.Core;
 using Framework.Database.InlineAudit;
 
 namespace Framework.Database.NHibernate.InlineAudit;
 
-public class AuditPropertiesSetterMapFactory(IEnumerable<InlineAuditBinding> bindings) : IAuditPropertiesSetterMapFactory
+public class AuditPropertiesSetterMapFactory(IServiceProxyFactory serviceProxyFactory, IEnumerable<InlineAuditBinding> bindings)
+    : IAuditPropertiesSetterMapFactory
 {
     private readonly ConcurrentDictionary<(Type, InlineAuditAction), IAuditPropertiesSetterMap> cache = [];
 
@@ -22,7 +25,10 @@ public class AuditPropertiesSetterMapFactory(IEnumerable<InlineAuditBinding> bin
 
                            where propertyIndex != -1
 
-                           select new AuditPropertiesSetterMap(binding, propertyIndex);
+                           select serviceProxyFactory.Create<IAuditPropertiesSetterMap>(
+                               typeof(AuditPropertiesSetterMap<>).MakeGenericType(binding.Property.PropertyType),
+                               binding,
+                               propertyIndex);
 
                 return maps.Aggregate();
             });

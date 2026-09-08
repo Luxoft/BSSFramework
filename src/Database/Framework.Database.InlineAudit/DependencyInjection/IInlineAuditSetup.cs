@@ -10,13 +10,11 @@ public interface IInlineAuditSetup
 
 public interface IInlineAuditSetup<TDomainObject>
 {
-    IInlineAuditSetup<TDomainObject> Add<TProperty, TAuditValueResolver>(Expression<Func<TDomainObject, TProperty?>> path, InlineAuditAction inlineAuditAction)
-        where TAuditValueResolver : IAuditValueResolver<TProperty>
-        where TProperty : notnull;
+    IInlineAuditSetup<TDomainObject> Add<TProperty, TAuditValueResolver>(Expression<Func<TDomainObject, TProperty>> path, InlineAuditAction inlineAuditAction)
+        where TAuditValueResolver : IAuditValueResolver<TProperty>;
 
     IInlineAuditSetup<TDomainObject> Add<TProperty>(
-        Expression<Func<TDomainObject, TProperty?>> path,
+        Expression<Func<TDomainObject, TProperty>> path,
         InlineAuditAction inlineAuditAction,
-        AuditValueResolverHeader<TProperty> auditValueResolverHeader)
-        where TProperty : notnull;
+        AuditValueResolverHeader<TProperty> auditValueResolverHeader);
 }

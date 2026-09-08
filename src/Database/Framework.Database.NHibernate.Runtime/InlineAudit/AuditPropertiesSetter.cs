@@ -2,9 +2,9 @@
 
 namespace Framework.Database.NHibernate.InlineAudit
 {
-    public class AuditPropertiesSetter(IAuditValueResolver<object> auditValueResolver, int propertyIndex) : IAuditPropertiesSetter
+    public class AuditPropertiesSetter<TProperty>(IAuditValueResolver<TProperty> auditValueResolver, int propertyIndex) : IAuditPropertiesSetter
     {
-        public bool SetAuditFields(object[] state)
+        public bool SetAuditFields(object?[] state)
         {
             state[propertyIndex] = auditValueResolver.GetCurrentValue();
 

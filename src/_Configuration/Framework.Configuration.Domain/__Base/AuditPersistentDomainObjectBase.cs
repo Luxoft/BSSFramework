@@ -1,5 +1,4 @@
 ﻿using Framework.Core;
-using Framework.Database;
 using Framework.Database.Mapping;
 
 // ReSharper disable once CheckNamespace

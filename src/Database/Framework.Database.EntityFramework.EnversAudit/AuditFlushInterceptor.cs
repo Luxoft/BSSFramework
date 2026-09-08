@@ -120,7 +120,8 @@ public class AuditFlushInterceptor : SaveChangesInterceptor
     {
         var revision = new AuditRevisionEntity
                        {
-                           RevisionDate = auditableDbContext.TimeProvider.GetUtcNow().DateTime, Author = auditableDbContext.CurrentUser.Name
+                           RevisionDate = DateTime.SpecifyKind(auditableDbContext.TimeProvider.GetUtcNow().DateTime, DateTimeKind.Utc),
+                           Author = auditableDbContext.CurrentUser.Name
                        };
         dbContext.Set<AuditRevisionEntity>().Add(revision);
 

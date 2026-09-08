@@ -1,6 +1,5 @@
 ﻿using Framework.Database;
 using Framework.Database.ConnectionStringSource;
-using Framework.Database.Domain;
 using Framework.Database.NHibernate.DBGenerator;
 using Framework.Database.NHibernate.Mapping;
 

@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 
 using Anch.Core;
-using Framework.Database;
+
 using Framework.Database.NHibernate.Mapping;
 
 using NHibernate.Mapping;

@@ -12,9 +12,8 @@ public class InlineAuditSetup<TDomainObject> : IInlineAuditSetup<TDomainObject>,
     private readonly List<InlineAuditBinding> bindings = [];
 
     public IInlineAuditSetup<TDomainObject> Add<TProperty, TAuditValueResolver>(
-        Expression<Func<TDomainObject, TProperty?>> path,
+        Expression<Func<TDomainObject, TProperty>> path,
         InlineAuditAction inlineAuditAction)
-        where TProperty : notnull
         where TAuditValueResolver : IAuditValueResolver<TProperty>
     {
         this.bindings.Add(new InlineAuditBinding<TDomainObject, TProperty, TAuditValueResolver>(path.ToPropertyAccessors()) { Action = inlineAuditAction });
@@ -22,11 +21,10 @@ public class InlineAuditSetup<TDomainObject> : IInlineAuditSetup<TDomainObject>,
         return this;
     }
 
-    public IInlineAuditSetup<TDomainObject> Add<TProperty>(Expression<Func<TDomainObject, TProperty?>> path, InlineAuditAction inlineAuditAction, AuditValueResolverHeader<TProperty> auditValueResolverHeader)
-        where TProperty : notnull =>
+    public IInlineAuditSetup<TDomainObject> Add<TProperty>(Expression<Func<TDomainObject, TProperty>> path, InlineAuditAction inlineAuditAction, AuditValueResolverHeader<TProperty> auditValueResolverHeader)=>
         new Func<Expression<Func<TDomainObject, TProperty>>, InlineAuditAction, IInlineAuditSetup<TDomainObject>>(this.Add<TProperty, IAuditValueResolver<TProperty>>)
             .CreateGenericMethod(typeof(TProperty), auditValueResolverHeader.ResolverType)
-            .Invoke<IInlineAuditSetup<TDomainObject>>(path, inlineAuditAction);
+            .Invoke<IInlineAuditSetup<TDomainObject>>(this, path, inlineAuditAction);
 
     public void Initialize(IServiceCollection services)
     {

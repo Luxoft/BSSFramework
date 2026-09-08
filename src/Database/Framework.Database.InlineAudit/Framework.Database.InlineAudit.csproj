@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>Luxoft.Framework.Database.Domain</PackageId>
+    <PackageId>Luxoft.Framework.Database.InlineAudit</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,9 +9,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Anch.Core" />
     <PackageReference Include="Anch.DependencyInjection" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Database.InlineAudit.Runtime\Framework.Database.InlineAudit.Runtime.csproj" />
   </ItemGroup>
 
 </Project>

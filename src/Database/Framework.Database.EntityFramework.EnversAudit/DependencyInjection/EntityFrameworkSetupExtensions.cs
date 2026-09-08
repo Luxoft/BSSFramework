@@ -6,9 +6,7 @@ namespace Framework.Database.EntityFramework.EnversAudit.DependencyInjection;
 
 public static class EntityFrameworkSetupExtensions
 {
-    public static IEntityFrameworkSetup<TDbContext> AddAudit<TDbContext>(this IEntityFrameworkSetup<TDbContext> setup)
-        where TDbContext : DbContext, IAuditableDbContext
-    {
-        return setup.AddExtension(new AuditEntityFrameworkSetupExtension());
-    }
+    public static IEntityFrameworkSetup<TDbContext> AddEnversAudit<TDbContext>(this IEntityFrameworkSetup<TDbContext> setup)
+        where TDbContext : DbContext, IEnversAuditDbContext =>
+        setup.AddExtension(new EnversAuditEntityFrameworkSetupExtension());
 }

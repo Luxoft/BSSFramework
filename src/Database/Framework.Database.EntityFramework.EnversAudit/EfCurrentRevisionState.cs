@@ -1,4 +1,4 @@
-﻿namespace Framework.Database.EntityFramework.Sessions;
+﻿namespace Framework.Database.EntityFramework.EnversAudit;
 
 public record EfCurrentRevisionState
 {

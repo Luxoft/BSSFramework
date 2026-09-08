@@ -5,11 +5,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Database.EntityFramework.EnversAudit.DependencyInjection;
 
-public sealed class AuditOptionsExtension(Action<IAuditSetup>? setupAction) : IDbContextOptionsExtension
+public sealed class EnversAuditOptionsExtension(Action<IEnversAuditSetup>? setupAction) : IDbContextOptionsExtension
 {
     public DbContextOptionsExtensionInfo Info => field ??= new ExtensionInfo(this);
 
-    public void ApplyServices(IServiceCollection services) => services.Initialize<AuditSetup>(setupAction);
+    public void ApplyServices(IServiceCollection services) => services.Initialize<EnversAuditSetup>(setupAction);
 
     public void Validate(IDbContextOptions options)
     {
@@ -24,10 +24,7 @@ public sealed class AuditOptionsExtension(Action<IAuditSetup>? setupAction) : ID
 
         public override int GetServiceProviderHashCode() => 0;
 
-        public override void PopulateDebugInfo(IDictionary<string, string> debugInfo)
-        {
-            debugInfo["Audit"] = "1";
-        }
+        public override void PopulateDebugInfo(IDictionary<string, string> debugInfo) => debugInfo["Audit"] = "1";
 
         public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other) =>
             other is ExtensionInfo;

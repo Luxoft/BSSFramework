@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Database.EntityFramework.EnversAudit.DependencyInjection;
 
-public class AuditEntityFrameworkSetupExtension : IEntityFrameworkSetupExtension {
+public class EnversAuditEntityFrameworkSetupExtension : IEntityFrameworkSetupExtension {
     public void AddServices(IServiceCollection services) =>
         services.AddScoped<EfCurrentRevisionState>()
                 .AddScoped<IRevisionService, EfRevisionService>();

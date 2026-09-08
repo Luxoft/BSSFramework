@@ -11,12 +11,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Database\Framework.Database.EntityFramework.InlineAudit\Framework.Database.EntityFramework.InlineAudit.csproj" />
     <ProjectReference Include="..\..\Database\Framework.Database.EntityFramework.Legacy\Framework.Database.EntityFramework.Legacy.csproj" />
 
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Generated.DAL.EntityFramework\Framework.Authorization.Generated.DAL.EntityFramework.csproj" />
     <ProjectReference Include="..\..\_Configuration\Framework.Configuration.Generated.DAL.EntityFramework\Framework.Configuration.Generated.DAL.EntityFramework.csproj" />
 
     <ProjectReference Include="..\SampleSystem.Generated.DAL.EntityFramework\SampleSystem.Generated.DAL.EntityFramework.csproj" />
+
+    <ProjectReference Include="..\SampleSystem.ServiceEnvironment\SampleSystem.ServiceEnvironment.csproj" />
   </ItemGroup>
 
 </Project>

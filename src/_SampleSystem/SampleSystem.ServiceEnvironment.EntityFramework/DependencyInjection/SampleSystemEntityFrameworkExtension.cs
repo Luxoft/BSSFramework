@@ -4,6 +4,7 @@ using Framework.Database.EntityFramework;
 using Framework.Database.EntityFramework.DependencyInjection;
 using Framework.Database.EntityFramework.EnversAudit.DependencyInjection;
 using Framework.Database.EntityFramework.Extensions;
+using Framework.Database.EntityFramework.InlineAudit.DependencyInjection;
 using Framework.Database.Mapping;
 using Framework.Infrastructure.DependencyInjection;
 using Framework.Projection;
@@ -21,10 +22,11 @@ public class SampleSystemEntityFrameworkExtension : IBssFrameworkExtension
                                                                   .UseSqlServer(sp.GetRequiredService<IDefaultConnectionStringSource>().ConnectionString)
                                                                   .UseLazyLoadingProxies()
                                                                   .IgnoreComputedProperties()
-                                                                  .AddAudit(auditSetup =>
-                                                                                auditSetup.SetFilter(et => !et.ClrType.IsProjection()
-                                                                                                         && !et.ClrType
-                                                                                                             .HasAttribute<NotAuditedClassAttribute>())))
-            .AddEntityFramework<SampleSystemDbContext>(s => s.AddAudit()
+                                                                  .AddEnversAudit(auditSetup =>
+                                                                                      auditSetup.SetFilter(et => !et.ClrType.IsProjection()
+                                                                                              && !et.ClrType
+                                                                                                    .HasAttribute<NotAuditedClassAttribute>()))
+                                                                  .AddInlineAudit(ias => ias.AddSampleSystemInlineAudit()))
+            .AddEntityFramework<SampleSystemDbContext>(s => s.AddEnversAudit()
                                                              .AddLegacyDatabaseSettings());
 }

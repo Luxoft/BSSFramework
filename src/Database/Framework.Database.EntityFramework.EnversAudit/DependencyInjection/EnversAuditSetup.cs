@@ -9,11 +9,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Database.EntityFramework.EnversAudit.DependencyInjection;
 
-public class AuditSetup : IAuditSetup, IServiceInitializer
+public class EnversAuditSetup : IEnversAuditSetup, IServiceInitializer
 {
     private Action<IServiceCollection> initFilterAction = sc => sc.AddSingleton<IAuditableEntityFilter, AuditableEntityFilter>();
 
-    public IAuditSetup SetFilter(Func<IReadOnlyEntityType, bool> isAuditable)
+    public IEnversAuditSetup SetFilter(Func<IReadOnlyEntityType, bool> isAuditable)
     {
         this.initFilterAction = sc => sc.AddSingleton<IAuditableEntityFilter>(new CustomAuditableEntityFilter(isAuditable));
 

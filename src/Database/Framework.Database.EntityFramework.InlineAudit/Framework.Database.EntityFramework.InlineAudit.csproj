@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Framework.Database.EntityFramework\Framework.Database.EntityFramework.csproj" />
+    <ProjectReference Include="..\Framework.Database.InlineAudit\Framework.Database.InlineAudit.csproj" />
   </ItemGroup>
 
 </Project>

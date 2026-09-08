@@ -22,10 +22,10 @@ public class AuditFlushInterceptor : SaveChangesInterceptor
     public override ValueTask<InterceptionResult<int>> SavingChangesAsync(
         DbContextEventData eventData,
         InterceptionResult<int> result,
-        CancellationToken cancellationToken = default)
+        CancellationToken ct)
     {
         this.CaptureChanges(eventData.Context);
-        return base.SavingChangesAsync(eventData, result, cancellationToken);
+        return base.SavingChangesAsync(eventData, result, ct);
     }
 
     public override int SavedChanges(SaveChangesCompletedEventData eventData, int result)
@@ -37,10 +37,10 @@ public class AuditFlushInterceptor : SaveChangesInterceptor
     public override async ValueTask<int> SavedChangesAsync(
         SaveChangesCompletedEventData eventData,
         int result,
-        CancellationToken cancellationToken = default)
+        CancellationToken ct)
     {
-        await this.WriteAuditsAsync(eventData.Context, cancellationToken);
-        return await base.SavedChangesAsync(eventData, result, cancellationToken);
+        await this.WriteAuditsAsync(eventData.Context, ct);
+        return await base.SavedChangesAsync(eventData, result, ct);
     }
 
     private void CaptureChanges(DbContext? dbContext)
@@ -68,7 +68,7 @@ public class AuditFlushInterceptor : SaveChangesInterceptor
     {
         if (dbContext is null
             || !this.pendingAudits.TryGetValue(dbContext, out var audits)
-            || dbContext is not IAuditableDbContext auditableDbContext)
+            || dbContext is not IEnversAuditDbContext auditableDbContext)
         {
             return;
         }
@@ -80,18 +80,18 @@ public class AuditFlushInterceptor : SaveChangesInterceptor
         auditableDbContext.CurrentRevisionState.CurrentRevision = revision.Id;
     }
 
-    private async Task WriteAuditsAsync(DbContext? dbContext, CancellationToken cancellationToken)
+    private async Task WriteAuditsAsync(DbContext? dbContext, CancellationToken ct)
     {
         if (dbContext is null
             || !this.pendingAudits.TryGetValue(dbContext, out var audits)
-            || dbContext is not IAuditableDbContext auditableDbContext)
+            || dbContext is not IEnversAuditDbContext auditableDbContext)
         {
             return;
         }
 
         this.pendingAudits.Remove(dbContext);
         var revision = this.AddAuditEntities(dbContext, auditableDbContext, audits, dbContext.GetService<IAuditEntityFactory>());
-        await dbContext.SaveChangesAsync(cancellationToken);
+        await dbContext.SaveChangesAsync(ct);
 
         auditableDbContext.CurrentRevisionState.CurrentRevision = revision.Id;
     }
@@ -114,7 +114,7 @@ public class AuditFlushInterceptor : SaveChangesInterceptor
 
     private AuditRevisionEntity AddAuditEntities(
         DbContext dbContext,
-        IAuditableDbContext auditableDbContext,
+        IEnversAuditDbContext auditableDbContext,
         List<AuditEntry> audits,
         IAuditEntityFactory auditEntityFactory)
     {

@@ -2,7 +2,7 @@
 
 namespace Framework.Database.EntityFramework.EnversAudit.DependencyInjection;
 
-public interface IAuditSetup
+public interface IEnversAuditSetup
 {
-    IAuditSetup SetFilter(Func<IReadOnlyEntityType, bool> isAuditable);
+    IEnversAuditSetup SetFilter(Func<IReadOnlyEntityType, bool> isAuditable);
 }

@@ -1,10 +1,8 @@
 ﻿using Anch.Core.Auth;
 
-using Framework.Database.EntityFramework.Sessions;
-
 namespace Framework.Database.EntityFramework.EnversAudit;
 
-public interface IAuditableDbContext
+public interface IEnversAuditDbContext
 {
     TimeProvider TimeProvider { get; }
 

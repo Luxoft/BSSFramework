@@ -10,6 +10,8 @@
 
   <ItemGroup>
 
+    <ProjectReference Include="..\..\Database\Framework.Database.InlineAudit\Framework.Database.InlineAudit.csproj" />
+
     <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Hangfire\Framework.Infrastructure.Hangfire.csproj" />
 
     <ProjectReference Include="..\..\Notification\Framework.Notification\Framework.Notification.csproj" />

@@ -3,14 +3,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Framework.Database.EntityFramework.EnversAudit.DependencyInjection;
 
-public static class AuditDbContextOptionsBuilderExtensions
+public static class EnversAuditDbContextOptionsBuilderExtensions
 {
-    public static DbContextOptionsBuilder AddAudit(this DbContextOptionsBuilder optionsBuilder, Action<IAuditSetup>? setupAction = null)
+    public static DbContextOptionsBuilder AddEnversAudit(this DbContextOptionsBuilder optionsBuilder, Action<IEnversAuditSetup>? setupAction = null)
     {
         ArgumentNullException.ThrowIfNull(optionsBuilder);
 
-        var extension = optionsBuilder.Options.FindExtension<AuditOptionsExtension>()
-                        ?? new AuditOptionsExtension(setupAction);
+        var extension = optionsBuilder.Options.FindExtension<EnversAuditOptionsExtension>()
+                        ?? new EnversAuditOptionsExtension(setupAction);
 
         ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(extension);
 

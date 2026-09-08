@@ -1,6 +1,6 @@
 ﻿namespace Framework.Database.InlineAudit;
 
-public enum InlineAuditType
+public enum InlineAuditAction
 {
     Create,
 

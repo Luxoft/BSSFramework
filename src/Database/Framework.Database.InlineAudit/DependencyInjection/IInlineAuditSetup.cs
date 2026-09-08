@@ -4,17 +4,19 @@ namespace Framework.Database.InlineAudit.DependencyInjection;
 
 public interface IInlineAuditSetup
 {
-    IInlineAuditSetup<TDomainObject> For<TDomainObject>(Action<IInlineAuditSetup<TDomainObject>> domainSetup);
+    IInlineAuditSetup For<TDomainObject>(Action<IInlineAuditSetup<TDomainObject>> domainSetup);
 }
 
 
 public interface IInlineAuditSetup<TDomainObject>
 {
-    IInlineAuditSetup Add<TProperty, TAuditValueResolver>(Expression<Func<TDomainObject, TProperty?>> path, InlineAuditType inlineAuditType)
-        where TAuditValueResolver : IAuditValueResolver<TProperty>;
+    IInlineAuditSetup<TDomainObject> Add<TProperty, TAuditValueResolver>(Expression<Func<TDomainObject, TProperty?>> path, InlineAuditAction inlineAuditAction)
+        where TAuditValueResolver : IAuditValueResolver<TProperty>
+        where TProperty : notnull;
 
-    IInlineAuditSetup Add<TProperty>(
+    IInlineAuditSetup<TDomainObject> Add<TProperty>(
         Expression<Func<TDomainObject, TProperty?>> path,
-        InlineAuditType inlineAuditType,
-        AuditValueResolverHeader<TProperty> auditValueResolverHeader);
+        InlineAuditAction inlineAuditAction,
+        AuditValueResolverHeader<TProperty> auditValueResolverHeader)
+        where TProperty : notnull;
 }

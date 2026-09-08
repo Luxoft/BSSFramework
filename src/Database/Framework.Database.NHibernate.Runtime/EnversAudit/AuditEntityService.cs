@@ -1,7 +1,7 @@
 ﻿using NHibernate.Envers.Configuration.Attributes;
 using NHibernate.Mapping;
 
-namespace Framework.Database.NHibernate.Audit;
+namespace Framework.Database.NHibernate.EnversAudit;
 
 public class AuditEntityService : IAuditAttributeService
 {

@@ -1,5 +1,5 @@
 ﻿using System.Linq.Expressions;
-
+using Framework.Database;
 using Framework.Database.Mapping;
 using Framework.Database.NHibernate.DAL.Revisions;
 using Framework.Database.NHibernate.Mapping;
@@ -15,7 +15,7 @@ using NHibernate.Envers.Tools.Reflection;
 using NHibernate.Mapping;
 using NHibernate.Mapping.ByCode;
 
-namespace Framework.Database.NHibernate.Audit;
+namespace Framework.Database.NHibernate.EnversAudit;
 
 /// <summary>
 /// Knows how to create configuration data

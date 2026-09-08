@@ -1,6 +1,6 @@
 ﻿using Framework.BLL.DTOMapping.DTOMapper;
 using Framework.Configuration.BLL;
-using Framework.Database.Audit;
+using Framework.Database.EnversAudit;
 using Framework.Infrastructure.LocalDBEvents;
 
 using SampleSystem.Domain;

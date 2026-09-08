@@ -3,7 +3,6 @@
 using Framework.Application.Domain;
 using Framework.BLL.Domain.Serialization;
 using Framework.Core;
-using Framework.Database;
 using Framework.Database.Attributes;
 
 // ReSharper disable once CheckNamespace
@@ -12,7 +11,7 @@ namespace SampleSystem.Domain;
 /// <summary>
 ///     Базовый персистентный класс
 /// </summary>
-public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBase, IAuditObject, IVersionObject<long>
+public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBase, IVersionObject<long>
 {
     private bool active = true;
 

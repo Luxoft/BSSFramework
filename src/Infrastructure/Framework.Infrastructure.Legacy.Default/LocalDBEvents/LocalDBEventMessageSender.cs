@@ -6,7 +6,7 @@ using Framework.BLL.DTOMapping.DTOMapper;
 using Framework.BLL.Events.SubscriptionManager;
 using Framework.Configuration.BLL;
 using Framework.Core.Helpers;
-using Framework.Database.Audit;
+using Framework.Database.EnversAudit;
 
 namespace Framework.Infrastructure.LocalDBEvents;
 

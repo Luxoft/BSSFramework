@@ -1,6 +1,6 @@
 ﻿using NHibernate.Envers;
 
-namespace Framework.Database.NHibernate.Audit;
+namespace Framework.Database.NHibernate.EnversAudit;
 
 /// <summary>
 /// Base Typed Implement of IEntityTrackingRevisionListener

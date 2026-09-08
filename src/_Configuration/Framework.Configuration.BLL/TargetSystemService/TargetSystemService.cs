@@ -7,8 +7,8 @@ using Framework.BLL.Domain.TargetSystem;
 using Framework.Configuration.Domain;
 using Framework.Core.TypeResolving;
 using Framework.Database;
-using Framework.Database.Audit;
 using Framework.Database.Domain;
+using Framework.Database.EnversAudit;
 using Framework.Subscriptions;
 
 namespace Framework.Configuration.BLL.TargetSystemService;

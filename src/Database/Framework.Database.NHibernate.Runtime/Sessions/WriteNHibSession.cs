@@ -2,9 +2,8 @@
 
 using Framework.Core;
 using Framework.Database.InlineAudit;
-using Framework.Database.NHibernate.Audit;
 using Framework.Database.NHibernate.Envers;
-
+using Framework.Database.NHibernate.InlineAudit;
 using NHibernate;
 using NHibernate.Event;
 using NHibernate.Impl;
@@ -15,7 +14,7 @@ public class WriteNHibSession : NHibSessionBase
 {
     private readonly NHibSessionEnvironment environment;
 
-    private readonly IEnumerable<InlineAuditBinding> inlineAuditBindings;
+    private readonly IInlineAuditInterceptor inlineAuditInterceptor;
 
     private readonly IDBSessionEventListener[] eventListeners;
 
@@ -29,11 +28,11 @@ public class WriteNHibSession : NHibSessionBase
 
     public WriteNHibSession(
         NHibSessionEnvironment environment,
-        IEnumerable<InlineAuditBinding> inlineAuditBindings,
+        IInlineAuditInterceptor inlineAuditInterceptor,
         IEnumerable<IDBSessionEventListener> eventListeners)
     {
         this.environment = environment;
-        this.inlineAuditBindings = inlineAuditBindings;
+        this.inlineAuditInterceptor = inlineAuditInterceptor;
         this.eventListeners = eventListeners.ToArray();
         this.collectChangedEventListener = new CollectChangesEventListener();
 
@@ -63,7 +62,7 @@ public class WriteNHibSession : NHibSessionBase
 
         sessionImpl.OverrideListeners(sessionImpl.Listeners.Clone().Self(this.InjectListeners));
 
-        sessionImpl.OverrideInterceptor(new InlineAuditInterceptor(this.inlineAuditBindings));
+        sessionImpl.OverrideInterceptor(this.inlineAuditInterceptor);
     }
 
     private void InjectListeners(EventListeners newSessionEventListeners)

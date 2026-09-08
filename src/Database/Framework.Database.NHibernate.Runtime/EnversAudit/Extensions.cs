@@ -1,12 +1,12 @@
 ﻿using System.Reflection;
 
 using Anch.Core;
-
+using Framework.Database;
 using Framework.Database.NHibernate.Mapping;
 
 using NHibernate.Mapping;
 
-namespace Framework.Database.NHibernate.Audit;
+namespace Framework.Database.NHibernate.EnversAudit;
 
 public static class Extensions
 {

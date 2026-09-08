@@ -1,10 +1,8 @@
 ﻿using Anch.Core.Auth;
-
 using Framework.Database.NHibernate.DAL.Revisions;
-
 using NHibernate.Envers;
 
-namespace Framework.Database.NHibernate.Audit;
+namespace Framework.Database.NHibernate.EnversAudit;
 
 /// <summary>
 /// Concrete implement for revision object type AuditRevisionEntity

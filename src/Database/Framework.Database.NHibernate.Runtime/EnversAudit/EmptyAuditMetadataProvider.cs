@@ -1,7 +1,5 @@
 ﻿using System.Linq.Expressions;
-
 using Framework.Database.NHibernate.DAL.Revisions;
-
 using NHibernate.Cfg;
 using NHibernate.Cfg.MappingSchema;
 using NHibernate.Envers;
@@ -10,7 +8,7 @@ using NHibernate.Envers.Configuration.Fluent;
 using NHibernate.Envers.Configuration.Store;
 using NHibernate.Mapping.ByCode;
 
-namespace Framework.Database.NHibernate.Audit;
+namespace Framework.Database.NHibernate.EnversAudit;
 
 /// <summary>
 /// Empty implement

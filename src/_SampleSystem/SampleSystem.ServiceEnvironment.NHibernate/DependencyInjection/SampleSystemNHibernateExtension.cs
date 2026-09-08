@@ -1,8 +1,11 @@
 ﻿using Anch.Core;
 
+using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DAL.NHibernate;
 using Framework.Configuration.Generated.DAL.NHibernate;
 using Framework.Database;
+using Framework.Database.InlineAudit;
+using Framework.Database.InlineAudit.DependencyInjection;
 using Framework.Database.NHibernate;
 using Framework.Database.NHibernate.DependencyInjection;
 using Framework.Infrastructure.DependencyInjection;
@@ -26,16 +29,20 @@ public class SampleSystemNHibernateExtension(bool includeTypedAudit) : IBssFrame
         var appDatabase = new DatabaseName(string.Empty, "app");
         var appAuditDatabase = new DatabaseName(string.Empty, "appAudit");
 
-        services.AddNHibernate(
-                    setupObj => setupObj.AddLegacyDatabaseSettings()
-                                        .AddMapping(new AuthorizationMappingSettings())
-                                        .AddMapping(new ConfigurationMappingSettings())
-                                        .Pipe(
-                                            includeTypedAudit,
-                                            s => s
+        services.AddNHibernate(s => s.AddLegacyDatabaseSettings()
+                                     .AddMapping(new AuthorizationMappingSettings())
+                                     .AddMapping(new ConfigurationMappingSettings())
+                                     .Pipe(
+                                         includeTypedAudit,
+                                         sp => sp
+                                               .AddMapping(new SampleSystemSystemAuditMappingSettings(appAuditDatabase))
+                                               .AddMapping(new SampleSystemSystemRevisionAuditMappingSettings(appAuditDatabase))
+                                               .AddMapping(new SampleSystemMappingSettings(appDatabase)))
 
-                                                 .AddMapping(new SampleSystemSystemAuditMappingSettings(appAuditDatabase))
-                                                 .AddMapping(new SampleSystemSystemRevisionAuditMappingSettings(appAuditDatabase))
-                                                 .AddMapping(new SampleSystemMappingSettings(appDatabase))));
+                                     .AddInlineAudit(rootSetup => rootSetup
+                                                         .For<AuditPersistentDomainObjectBase>(innerSetup => innerSetup.Add(
+                                                                                                   v => v.CreateDate,
+                                                                                                   InlineAuditAction.Create,
+                                                                                                   AuditValueResolverHeader.Now))));
     }
 }

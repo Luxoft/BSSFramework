@@ -7,9 +7,11 @@ using Anch.GenericQueryable.Fetching;
 
 using Framework.Core;
 using Framework.Database.Domain;
+using Framework.Database.InlineAudit;
 using Framework.Database.NHibernate.DAL.Revisions;
 using Framework.Database.NHibernate.Envers;
 using Framework.Database.NHibernate.Envers.LinqVisitors;
+
 using NHibernate;
 using NHibernate.Envers.Query;
 using NHibernate.Envers.Query.Criteria;
@@ -17,7 +19,12 @@ using NHibernate.Linq;
 
 namespace Framework.Database.NHibernate;
 
-public class NHibDal<TDomainObject, TIdent>(IDBSession session, ISession nativeSession, IAuditReaderPatched auditReader, IAsyncDal<TDomainObject, TIdent> asyncDal, IDefaultCancellationTokenSource? defaultCancellationTokenSource = null) : IDAL<TDomainObject, TIdent>
+public class NHibDal<TDomainObject, TIdent>(
+    ISession nativeSession,
+    IAuditReaderPatched auditReader,
+    IAsyncDal<TDomainObject, TIdent> asyncDal,
+    IEnumerable<InlineAuditBinding> inlineAuditBindings,
+    IDefaultCancellationTokenSource? defaultCancellationTokenSource = null) : IDAL<TDomainObject, TIdent>
     where TDomainObject : class
     where TIdent : notnull
 {
@@ -218,12 +225,13 @@ public class NHibDal<TDomainObject, TIdent>(IDBSession session, ISession nativeS
 
         query = this.TryInjectPeriodQuery(query, period);
 
-        var isAuditedType = typeof(IAuditObject).IsAssignableFrom(typeof(TDomainObject));
+        var actualInlineAuditBindings = inlineAuditBindings.Where(binding => binding.DomainObjectType.IsAssignableFrom(typeof(TDomainObject))).ToArray();
 
-        if (isAuditedType)
+        var isAuditedType = actualInlineAuditBindings.Length != 0;
+
+        foreach (var actualInlineAuditBinding in actualInlineAuditBindings.Where(b => b.Action == InlineAuditAction.Modify))
         {
-            query = query.AddProjection(AuditEntity.Property(AuditObjectHelper.ModifyDatePropertyName))
-                         .AddProjection(AuditEntity.Property(AuditObjectHelper.ModifyByPropertyName));
+            query = query.AddProjection(AuditEntity.Property(actualInlineAuditBinding.Property.Name));
         }
 
         var result = new DomainObjectPropertyRevisions<TIdent, TProperty>(id, propertyName);

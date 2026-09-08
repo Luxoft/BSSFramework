@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Database\Framework.Database.InlineAudit\Framework.Database.InlineAudit.csproj" />
     <ProjectReference Include="..\..\Database\Framework.Database.NHibernate.Legacy\Framework.Database.NHibernate.Legacy.csproj" />
 
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Generated.DAL.NHibernate\Framework.Authorization.Generated.DAL.NHibernate.csproj" />

@@ -13,6 +13,8 @@ public sealed class InlineAuditOptionsExtension(Action<IInlineAuditSetup> setupA
     public DbContextOptionsExtensionInfo Info => field ??= new ExtensionInfo(this);
 
     public void ApplyServices(IServiceCollection services) => services.AddScoped<IInterceptor, AuditFlushInterceptor>()
+                                                                      .AddServiceProxyFactory()
+                                                                      .AddSingleton<IAuditPropertiesSetterMapFactory, AuditPropertiesSetterMapFactory>()
                                                                       .Initialize<InlineAuditSetup>(setupAction);
 
     public void Validate(IDbContextOptions options)

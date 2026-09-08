@@ -2,6 +2,7 @@
 
 using Framework.Database.InlineAudit.DependencyInjection;
 
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,7 +12,8 @@ public sealed class InlineAuditOptionsExtension(Action<IInlineAuditSetup> setupA
 {
     public DbContextOptionsExtensionInfo Info => field ??= new ExtensionInfo(this);
 
-    public void ApplyServices(IServiceCollection services) => services.Initialize<InlineAuditSetup>(setupAction);
+    public void ApplyServices(IServiceCollection services) => services.AddScoped<IInterceptor, AuditFlushInterceptor>()
+                                                                      .Initialize<InlineAuditSetup>(setupAction);
 
     public void Validate(IDbContextOptions options)
     {

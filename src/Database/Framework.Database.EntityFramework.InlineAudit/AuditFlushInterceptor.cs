@@ -10,7 +10,10 @@ public class AuditFlushInterceptor(IEnumerable<InlineAuditBinding> inlineAuditBi
         DbContextEventData eventData,
         InterceptionResult<int> result)
     {
-        //var
+        if (eventData.Context is IInlineAuditDbContext { ServiceProvider: { } serviceProvider })
+        {
+
+        }
 
         return base.SavingChanges(eventData, result);
     }

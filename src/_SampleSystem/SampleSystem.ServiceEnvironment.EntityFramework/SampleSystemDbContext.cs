@@ -16,7 +16,8 @@ public class SampleSystemDbContext(
     DbContextOptions<SampleSystemDbContext> options,
     TimeProvider timeProvider,
     ICurrentUser currentUser,
-    EfCurrentRevisionState currentRevisionState)
+    EfCurrentRevisionState currentRevisionState,
+    IServiceProvider serviceProvider)
     : DbContext(options), IEnversAuditDbContext, IInlineAuditDbContext
 {
     public TimeProvider TimeProvider { get; } = timeProvider;
@@ -37,4 +38,6 @@ public class SampleSystemDbContext(
 
         builder.HasDefaultSchema("app");
     }
+
+    public IServiceProvider ServiceProvider { get; } = serviceProvider;
 }

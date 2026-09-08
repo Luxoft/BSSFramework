@@ -1,10 +1,5 @@
-﻿using Anch.Core.Auth;
+﻿using Framework.Core;
 
 namespace Framework.Database.EntityFramework.InlineAudit;
 
-public interface IInlineAuditDbContext
-{
-    TimeProvider TimeProvider { get; }
-
-    ICurrentUser CurrentUser { get; }
-}
+public interface IInlineAuditDbContext : IServiceProviderContainer;

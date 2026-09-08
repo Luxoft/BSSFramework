@@ -9,5 +9,6 @@ namespace Framework.Database.EntityFramework.EnversAudit.DependencyInjection;
 public class EnversAuditEntityFrameworkSetupExtension : IEntityFrameworkSetupExtension {
     public void AddServices(IServiceCollection services) =>
         services.AddScoped<EfCurrentRevisionState>()
-                .AddScoped<IRevisionService, EfRevisionService>();
+                .AddScoped<IRevisionService, EfRevisionService>()
+                .AddScoped<IEfAuditReader, EfAuditReader>();
 }

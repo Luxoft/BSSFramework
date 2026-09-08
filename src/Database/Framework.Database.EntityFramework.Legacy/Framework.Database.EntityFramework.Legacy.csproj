@@ -13,6 +13,7 @@
     <ProjectReference Include="..\..\Validation\Framework.Validation.Domain\Framework.Validation.Domain.csproj" />
     <ProjectReference Include="..\Framework.Database.Legacy.Abstractions\Framework.Database.Legacy.Abstractions.csproj" />
     <ProjectReference Include="..\Framework.Database.EntityFramework\Framework.Database.EntityFramework.csproj" />
+    <ProjectReference Include="..\Framework.Database.EntityFramework.EnversAudit\Framework.Database.EntityFramework.EnversAudit.csproj" />
     <ProjectReference Include="..\Framework.Tracking.Abstractions\Framework.Tracking.Abstractions.csproj" />
   </ItemGroup>
 

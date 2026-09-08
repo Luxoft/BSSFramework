@@ -14,6 +14,6 @@ public class TestRestrictionObjectMap : SampleSystemBaseMap<TestRestrictionObjec
         base.Configure(builder);
         builder.ToTable("TestRestrictionObject");
         builder.Property(x => x.RestrictionHandler).IsRequired();
-        builder.HasOne(x => x.BusinessUnit).WithMany().HasForeignKey("businessUnitId").OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(x => x.BusinessUnit).WithMany().HasForeignKey("businessUnitId").IsRequired(false).OnDelete(DeleteBehavior.Restrict);
     }
 }

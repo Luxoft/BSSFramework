@@ -44,9 +44,9 @@ public class EmployeeMap : SampleSystemBaseMap<Employee>
             nameRussian.Property(x => x.LastName).HasColumnName("nameRussianlastName").HasMaxLength(50);
             nameRussian.Property(x => x.MiddleName).HasColumnName("nameRussianmiddleName").HasMaxLength(50);
         });
-        builder.HasOne(x => x.Role).WithMany().HasForeignKey("roleId").IsRequired().OnDelete(DeleteBehavior.Restrict);
-        builder.HasOne(x => x.RoleDegree).WithMany().HasForeignKey("roleDegreeId").IsRequired().OnDelete(DeleteBehavior.Restrict);
-        builder.HasOne(x => x.RegistrationType).WithMany().HasForeignKey("registrationTypeId").IsRequired().OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(x => x.Role).WithMany().HasForeignKey("roleId").IsRequired(false).OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(x => x.RoleDegree).WithMany().HasForeignKey("roleDegreeId").IsRequired(false).OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(x => x.RegistrationType).WithMany().HasForeignKey("registrationTypeId").IsRequired(false).OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.VacationApprover).WithMany().HasForeignKey("vacationApproverId").IsRequired(false).OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.CoreBusinessUnit).WithMany().HasForeignKey("coreBusinessUnitId").IsRequired(false).OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.HRDepartment).WithMany().HasForeignKey("hRDepartmentId").IsRequired(false).OnDelete(DeleteBehavior.Restrict);

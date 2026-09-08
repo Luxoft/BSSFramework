@@ -13,7 +13,7 @@ public class TestRelativeEmployeeObjectMap : SampleSystemBaseMap<TestRelativeEmp
     {
         base.Configure(builder);
         builder.ToTable("TestRelativeEmployeeObject");
-        builder.HasOne(x => x.EmployeeRef1).WithMany().HasForeignKey("employeeRef1Id").OnDelete(DeleteBehavior.Restrict);
-        builder.HasOne(x => x.EmployeeRef2).WithMany().HasForeignKey("employeeRef2Id").OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(x => x.EmployeeRef1).WithMany().HasForeignKey("employeeRef1Id").IsRequired(false).OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(x => x.EmployeeRef2).WithMany().HasForeignKey("employeeRef2Id").IsRequired(false).OnDelete(DeleteBehavior.Restrict);
     }
 }

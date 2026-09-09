@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using SampleSystem.AuditDomain;
 
-namespace SampleSystem.Generated.DAL.EntityFramework.Mapping;
+namespace SampleSystem.Generated.DAL.EntityFramework.Mapping.Projections.AuditDomain;
 
 public class SampleSystemAuditRevisionEntityMap : IEntityTypeConfiguration<SampleSystemAuditRevisionEntity>
 {
     public void Configure(EntityTypeBuilder<SampleSystemAuditRevisionEntity> builder)
     {
-        builder.ToView(nameof(AuditRevisionEntity), "appAudit");
+        builder.ToTable(nameof(AuditRevisionEntity), "appAudit");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).HasColumnName("Id").ValueGeneratedOnAdd().IsRequired();
         builder.Property(x => x.Author).HasColumnName("author").IsRequired();

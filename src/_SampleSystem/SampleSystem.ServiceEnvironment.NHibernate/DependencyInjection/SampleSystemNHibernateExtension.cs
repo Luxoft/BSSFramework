@@ -3,8 +3,6 @@
 using Framework.Authorization.Generated.DAL.NHibernate;
 using Framework.Configuration.Generated.DAL.NHibernate;
 using Framework.Database;
-using Framework.Database.InlineAudit;
-using Framework.Database.InlineAudit.DependencyInjection;
 using Framework.Database.NHibernate;
 using Framework.Database.NHibernate.DependencyInjection;
 using Framework.Infrastructure.DependencyInjection;

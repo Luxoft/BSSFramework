@@ -1,5 +1,4 @@
 ﻿using Framework.BLL.Domain.ServiceRole;
-using Framework.Core;
 using Framework.Restriction;
 
 namespace SampleSystem.Domain.Employee;

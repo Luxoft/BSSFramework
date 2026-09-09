@@ -1,5 +1,4 @@
 ﻿using Framework.BLL.Domain.ServiceRole;
-using Framework.Core;
 
 namespace SampleSystem.Domain.ExternalPrincipal;
 

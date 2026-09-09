@@ -1,5 +1,4 @@
-﻿using Framework.Core;
-using Framework.Database.Mapping;
+﻿using Framework.Database.Mapping;
 using Framework.Restriction;
 
 namespace Framework.Configuration.Domain;

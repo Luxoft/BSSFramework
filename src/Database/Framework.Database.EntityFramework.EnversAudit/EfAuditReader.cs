@@ -1,4 +1,4 @@
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -15,7 +15,7 @@ public class EfAuditReader(DbContext dbContext) : IEfAuditReader
     {
         var metadata = this.GetMetadataOrThrow(typeof(TEntity));
 
-        var revisionIdProp = metadata.AuditEntityType.GetProperty(auditEntityFactory.RevisionIdPropertyName)!;
+        var revisionIdProp = metadata.AuditEntityType.GetProperty(this.auditEntityFactory.RevisionIdPropertyName)!;
 
         var row = this.QueryAuditRowsForKey(metadata, id)
                       .FirstOrDefault(r => (long)revisionIdProp.GetValue(r)! == revision)
@@ -31,7 +31,7 @@ public class EfAuditReader(DbContext dbContext) : IEfAuditReader
     public IReadOnlyList<long> GetRevisions(Type entityType, object id)
     {
         var metadata = this.GetMetadataOrThrow(entityType);
-        var revisionIdProp = metadata.AuditEntityType.GetProperty(auditEntityFactory.RevisionIdPropertyName)!;
+        var revisionIdProp = metadata.AuditEntityType.GetProperty(this.auditEntityFactory.RevisionIdPropertyName)!;
 
         return this.QueryAuditRowsForKey(metadata, id)
                    .Select(row => (long)revisionIdProp.GetValue(row)!)
@@ -53,7 +53,7 @@ public class EfAuditReader(DbContext dbContext) : IEfAuditReader
         where TEntity : class
     {
         var metadata = this.GetMetadataOrThrow(typeof(TEntity));
-        var revisionIdProp = metadata.AuditEntityType.GetProperty(auditEntityFactory.RevisionIdPropertyName)!;
+        var revisionIdProp = metadata.AuditEntityType.GetProperty(this.auditEntityFactory.RevisionIdPropertyName)!;
 
         var rows = this.QueryAuditRowsForKey(metadata, id)
                        .OrderByDescending(row => (long)revisionIdProp.GetValue(row)!)
@@ -67,8 +67,8 @@ public class EfAuditReader(DbContext dbContext) : IEfAuditReader
     {
         var metadata = this.GetMetadataOrThrow(entityType);
 
-        var revisionIdProp = metadata.AuditEntityType.GetProperty(auditEntityFactory.RevisionIdPropertyName)!;
-        var revisionTypeProp = metadata.AuditEntityType.GetProperty(auditEntityFactory.RevisionTypePropertyName)!;
+        var revisionIdProp = metadata.AuditEntityType.GetProperty(this.auditEntityFactory.RevisionIdPropertyName)!;
+        var revisionTypeProp = metadata.AuditEntityType.GetProperty(this.auditEntityFactory.RevisionTypePropertyName)!;
 
         var rows = this.QueryAuditRowsForKey(metadata, id)
                        .Select(row => (
@@ -92,8 +92,8 @@ public class EfAuditReader(DbContext dbContext) : IEfAuditReader
         var property = metadata.Properties.FirstOrDefault(p => !p.IsModOnly && string.Equals(p.ModName, propertyName, StringComparison.OrdinalIgnoreCase))
                         ?? throw new InvalidOperationException($"Property \"{propertyName}\" not found in audit metadata for \"{entityType.Name}\".");
 
-        var revisionIdProp = metadata.AuditEntityType.GetProperty(auditEntityFactory.RevisionIdPropertyName)!;
-        var revisionTypeProp = metadata.AuditEntityType.GetProperty(auditEntityFactory.RevisionTypePropertyName)!;
+        var revisionIdProp = metadata.AuditEntityType.GetProperty(this.auditEntityFactory.RevisionIdPropertyName)!;
+        var revisionTypeProp = metadata.AuditEntityType.GetProperty(this.auditEntityFactory.RevisionTypePropertyName)!;
         var valueProp = metadata.AuditEntityType.GetProperty(property.Name)!;
         var modFlagProp = property.IsKey ? null : metadata.AuditEntityType.GetProperty($"{property.ModName}_MOD");
 
@@ -264,7 +264,7 @@ public class EfAuditReader(DbContext dbContext) : IEfAuditReader
     }
 
     private AuditEntityMetadata GetMetadataOrThrow(Type entityType) =>
-        auditEntityFactory.TryGet(entityType, out var metadata)
+        this.auditEntityFactory.TryGet(entityType, out var metadata)
             ? metadata
             : throw new InvalidOperationException($"Entity \"{entityType.Name}\" is not audited.");
 

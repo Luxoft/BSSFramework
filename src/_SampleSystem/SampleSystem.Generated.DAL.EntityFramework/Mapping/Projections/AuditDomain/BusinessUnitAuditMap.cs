@@ -9,7 +9,7 @@ public class BusinessUnitAuditMap : IEntityTypeConfiguration<BusinessUnitAudit>
 {
     public void Configure(EntityTypeBuilder<BusinessUnitAudit> builder)
     {
-        builder.ToView(nameof(BusinessUnitAudit), "appAudit");
+        builder.ToTable(nameof(BusinessUnitAudit), "appAudit");
         builder.ComplexProperty(
             x => x.Identifier,
             identifier =>

@@ -27,6 +27,13 @@ public class SampleSystemEntityFrameworkExtension : IBssFrameworkExtension
                                                                                               && !et.ClrType
                                                                                                     .HasAttribute<NotAuditedClassAttribute>()))
                                                                   .AddInlineAudit(ias => ias.AddSampleSystemInlineAudit()))
+
+            .AddDbContext<SampleSystemAuditDbContext>((sp, options) => options
+                                                                       .UseSqlServer(sp.GetRequiredService<IDefaultConnectionStringSource>().ConnectionString)
+                                                                       .UseLazyLoadingProxies()
+                                                                       .IgnoreComputedProperties())
+
             .AddEntityFramework<SampleSystemDbContext>(s => s.AddEnversAudit()
-                                                             .AddLegacyDatabaseSettings());
+                                                             .AddLegacyDatabaseSettings()
+                                                             .AddSecondaryContext<SampleSystemAuditDbContext>());
 }

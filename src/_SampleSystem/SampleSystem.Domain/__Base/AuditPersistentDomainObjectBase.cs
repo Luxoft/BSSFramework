@@ -2,7 +2,6 @@
 
 using Framework.Application.Domain;
 using Framework.BLL.Domain.Serialization;
-using Framework.Core;
 using Framework.Database.Attributes;
 
 // ReSharper disable once CheckNamespace

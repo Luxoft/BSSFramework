@@ -4,7 +4,6 @@ using Framework.Authorization.Generated.DAL.EntityFramework.Mapping.Base;
 using Framework.Configuration.Generated.DAL.EntityFramework.Mapping.Base;
 using Framework.Database.EntityFramework.EnversAudit;
 using Framework.Database.EntityFramework.InlineAudit;
-using Framework.Database.EntityFramework.Sessions;
 
 using Microsoft.EntityFrameworkCore;
 

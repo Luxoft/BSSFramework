@@ -1,6 +1,5 @@
 ﻿using System.Runtime.Serialization;
 
-using Framework.Core;
 using Framework.Restriction;
 using Framework.Validation.Attributes;
 

@@ -6,4 +6,7 @@ public interface IEntityFrameworkSetup<TDbContext>
     where TDbContext : DbContext
 {
     IEntityFrameworkSetup<TDbContext> AddExtension(IEntityFrameworkSetupExtension extension);
+
+    IEntityFrameworkSetup<TDbContext> AddSecondaryContext<TSecondaryDbContext>()
+        where TSecondaryDbContext : DbContext;
 }

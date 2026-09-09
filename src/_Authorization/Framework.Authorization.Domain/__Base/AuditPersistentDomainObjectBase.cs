@@ -1,4 +1,4 @@
-﻿using Framework.Core;
+﻿
 
 // ReSharper disable once CheckNamespace
 namespace Framework.Authorization.Domain;

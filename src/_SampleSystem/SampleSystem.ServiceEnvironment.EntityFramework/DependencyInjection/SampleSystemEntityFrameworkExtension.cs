@@ -24,16 +24,17 @@ public class SampleSystemEntityFrameworkExtension : IBssFrameworkExtension
                                                                   .IgnoreComputedProperties()
                                                                   .AddEnversAudit(auditSetup =>
                                                                                       auditSetup.SetFilter(et => !et.ClrType.IsProjection()
-                                                                                              && !et.ClrType
-                                                                                                    .HasAttribute<NotAuditedClassAttribute>()))
+                                                                                          && !et.ClrType
+                                                                                                .HasAttribute<NotAuditedClassAttribute>()))
                                                                   .AddInlineAudit(ias => ias.AddSampleSystemInlineAudit()))
 
-            .AddDbContext<SampleSystemAuditDbContext>((sp, options) => options
-                                                                       .UseSqlServer(sp.GetRequiredService<IDefaultConnectionStringSource>().ConnectionString)
-                                                                       .UseLazyLoadingProxies()
-                                                                       .IgnoreComputedProperties())
+            .AddDbContext<SampleSystemEnversAuditDbContext>((sp, options) => options
+                                                                             .UseSqlServer(
+                                                                                 sp.GetRequiredService<IDefaultConnectionStringSource>().ConnectionString)
+                                                                             .UseLazyLoadingProxies()
+                                                                             .IgnoreComputedProperties())
 
             .AddEntityFramework<SampleSystemDbContext>(s => s.AddEnversAudit()
                                                              .AddLegacyDatabaseSettings()
-                                                             .AddSecondaryContext<SampleSystemAuditDbContext>());
+                                                             .AddSecondaryContext<SampleSystemEnversAuditDbContext>());
 }

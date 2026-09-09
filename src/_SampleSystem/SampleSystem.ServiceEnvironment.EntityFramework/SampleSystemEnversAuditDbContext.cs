@@ -4,7 +4,7 @@ using SampleSystem.Generated.DAL.EntityFramework.Mapping.Projections.AuditDomain
 
 namespace SampleSystem.ServiceEnvironment;
 
-public class SampleSystemAuditDbContext(DbContextOptions<SampleSystemAuditDbContext> options) : DbContext(options)
+public class SampleSystemEnversAuditDbContext(DbContextOptions<SampleSystemEnversAuditDbContext> options) : DbContext(options)
 {
     protected override void OnModelCreating(ModelBuilder builder)
     {

@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using SampleSystem.Domain.BU;
 using SampleSystem.Domain.Projections;
 
 namespace SampleSystem.Generated.DAL.EntityFramework.Mapping.Projections.Generated;
@@ -10,7 +9,7 @@ public class TestBusinessUnitMap : IEntityTypeConfiguration<TestBusinessUnit>
 {
     public void Configure(EntityTypeBuilder<TestBusinessUnit> builder)
     {
-        builder.ToView(nameof(BusinessUnit));
+        builder.ToView(nameof(TestBusinessUnit));
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         builder.Property(x => x.Name).HasColumnName("Name").IsRequired();

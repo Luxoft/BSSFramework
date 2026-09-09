@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
 using SampleSystem.AuditDomain;
 
-namespace SampleSystem.Generated.DAL.EntityFramework.Mapping.Projections.AuditDomain;
+namespace SampleSystem.Generated.DAL.EntityFramework.Mapping.Envers;
 
 public class BusinessUnitAuditMap : IEntityTypeConfiguration<BusinessUnitAudit>
 {

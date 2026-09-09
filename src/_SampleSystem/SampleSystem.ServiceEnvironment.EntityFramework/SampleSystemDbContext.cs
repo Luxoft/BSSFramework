@@ -8,6 +8,7 @@ using Framework.Database.EntityFramework.InlineAudit;
 using Microsoft.EntityFrameworkCore;
 
 using SampleSystem.Generated.DAL.EntityFramework.Mapping.Base;
+using SampleSystem.Generated.DAL.EntityFramework.Mapping.Projections.Generated;
 
 namespace SampleSystem.ServiceEnvironment;
 
@@ -33,7 +34,11 @@ public class SampleSystemDbContext(
 
         builder.ApplyConfigurationsFromAssembly(typeof(AuthBaseMap<>).Assembly);
         builder.ApplyConfigurationsFromAssembly(typeof(ConfigurationBaseMap<>).Assembly);
-        builder.ApplyConfigurationsFromAssembly(typeof(SampleSystemBaseMap<>).Assembly, t => !t.Namespace!.Contains("Projection"));
+        builder.ApplyConfigurationsFromAssembly(
+            typeof(SampleSystemBaseMap<>).Assembly,
+            t => !t.Namespace!.Contains("Projection") && !t.Namespace!.Contains("Envers"));
+
+        builder.ApplyConfiguration(new TestBusinessUnitMap());
 
         builder.HasDefaultSchema("app");
     }

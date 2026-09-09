@@ -23,6 +23,6 @@ public class BusinessUnitAuditMap : IEntityTypeConfiguration<BusinessUnitAudit>
         builder.HasOne(x => x.Revision).WithMany().HasForeignKey("REV").IsRequired().OnDelete(DeleteBehavior.Restrict);
         builder.Property(x => x.ModifiedBy).HasColumnName("ModifiedBy").IsRequired();
         builder.Property(x => x.ModifyDate).HasColumnName("ModifyDate");
-        builder.Property(x => x.RevType).HasColumnName("REVTYPE").IsRequired();
+        builder.Property(x => x.RevType).HasColumnName("REVTYPE").HasColumnType("smallint").IsRequired();
     }
 }

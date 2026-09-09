@@ -1,9 +1,12 @@
 ﻿using System.Runtime.CompilerServices;
 
+using Anch.Core.Auth;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Database.EntityFramework.EnversAudit;
 
@@ -77,7 +80,7 @@ public class AuditFlushInterceptor : SaveChangesInterceptor
         var revision = this.AddAuditEntities(dbContext, auditableDbContext, audits, dbContext.GetService<IAuditEntityFactory>());
         dbContext.SaveChanges();
 
-        auditableDbContext.CurrentRevisionState.CurrentRevision = revision.Id;
+        auditableDbContext.ServiceProvider.GetRequiredService<EfCurrentRevisionState>().CurrentRevision = revision.Id;
     }
 
     private async Task WriteAuditsAsync(DbContext? dbContext, CancellationToken ct)
@@ -93,7 +96,7 @@ public class AuditFlushInterceptor : SaveChangesInterceptor
         var revision = this.AddAuditEntities(dbContext, auditableDbContext, audits, dbContext.GetService<IAuditEntityFactory>());
         await dbContext.SaveChangesAsync(ct);
 
-        auditableDbContext.CurrentRevisionState.CurrentRevision = revision.Id;
+        auditableDbContext.ServiceProvider.GetRequiredService<EfCurrentRevisionState>().CurrentRevision = revision.Id;
     }
 
     private AuditEntry? CreateAuditEntry(EntityEntry entry, IAuditEntityFactory auditEntityFactory)
@@ -120,8 +123,8 @@ public class AuditFlushInterceptor : SaveChangesInterceptor
     {
         var revision = new AuditRevisionEntity
                        {
-                           RevisionDate = DateTime.SpecifyKind(auditableDbContext.TimeProvider.GetUtcNow().DateTime, DateTimeKind.Utc),
-                           Author = auditableDbContext.CurrentUser.Name
+                           RevisionDate = DateTime.SpecifyKind(auditableDbContext.ServiceProvider.GetRequiredService<TimeProvider>().GetUtcNow().DateTime, DateTimeKind.Utc),
+                           Author = auditableDbContext.ServiceProvider.GetRequiredService<ICurrentUser>().Name
                        };
         dbContext.Set<AuditRevisionEntity>().Add(revision);
 

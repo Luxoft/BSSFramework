@@ -1,7 +1,11 @@
-﻿using Anch.Testing.Xunit;
+﻿using Anch.Core;
+using Anch.Testing.Database.Initializers;
+using Anch.Testing.Xunit;
 
 using Framework.Application;
 using Framework.Database;
+
+using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.IntegrationTests._Environment.TestData;
 
@@ -10,22 +14,10 @@ namespace SampleSystem.IntegrationTests;
 public class EmptyTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [AnchFact]
-    public async Task Test1(CancellationToken ct)
+    public async Task InitTest(CancellationToken ct)
     {
-        // Arrange
+        var initializer = this.RootServiceProvider.GetRequiredKeyedService<IInitializer>(TestDatabaseInitializer.TestDataKey);
 
-        await this.EvaluateAsync(DBSessionMode.Write,
-                                 async ctx =>
-                                 {
-                                     var v = ctx.Logics.BusinessUnit.GetFullList();
-                                     return;
-                                 }, ct);
-
-        await this.EvaluateAsync(DBSessionMode.Write,
-                                 async ctx =>
-                                 {
-                                     var v = ctx.Logics.BusinessUnit.GetFullList();
-                                     return;
-                                 }, ct);
+        await initializer.Initialize(ct);
     }
 }

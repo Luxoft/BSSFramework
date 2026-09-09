@@ -1,12 +1,5 @@
-﻿using Anch.Core.Auth;
+﻿using Framework.Core;
 
 namespace Framework.Database.EntityFramework.EnversAudit;
 
-public interface IEnversAuditDbContext
-{
-    TimeProvider TimeProvider { get; }
-
-    ICurrentUser CurrentUser { get; }
-
-    EfCurrentRevisionState CurrentRevisionState { get; }
-}
+public interface IEnversAuditDbContext : IServiceProviderContainer;

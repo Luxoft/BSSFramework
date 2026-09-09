@@ -1,6 +1,4 @@
-﻿using Anch.Core.Auth;
-
-using Framework.Authorization.Generated.DAL.EntityFramework.Mapping.Base;
+﻿using Framework.Authorization.Generated.DAL.EntityFramework.Mapping.Base;
 using Framework.Configuration.Generated.DAL.EntityFramework.Mapping.Base;
 using Framework.Database.EntityFramework.EnversAudit;
 using Framework.Database.EntityFramework.InlineAudit;
@@ -8,25 +6,12 @@ using Framework.Database.EntityFramework.InlineAudit;
 using Microsoft.EntityFrameworkCore;
 
 using SampleSystem.Generated.DAL.EntityFramework.Mapping.Base;
-using SampleSystem.Generated.DAL.EntityFramework.Mapping.Projections.Generated;
 
 namespace SampleSystem.ServiceEnvironment;
 
-public class SampleSystemDbContext(
-    DbContextOptions<SampleSystemDbContext> options,
-    TimeProvider timeProvider,
-    ICurrentUser currentUser,
-    EfCurrentRevisionState currentRevisionState,
-    IServiceProvider serviceProvider)
+public class SampleSystemDbContext(DbContextOptions<SampleSystemDbContext> options, IServiceProvider serviceProvider)
     : DbContext(options), IEnversAuditDbContext, IInlineAuditDbContext
 {
-    public TimeProvider TimeProvider { get; } = timeProvider;
-
-    public ICurrentUser CurrentUser { get; } = currentUser;
-
-    public EfCurrentRevisionState CurrentRevisionState { get; } = currentRevisionState;
-
-
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.Ignore<SampleSystem.Domain.Inline.Fio>();
@@ -38,7 +23,7 @@ public class SampleSystemDbContext(
             typeof(SampleSystemBaseMap<>).Assembly,
             t => !t.Namespace!.Contains("Projection") && !t.Namespace!.Contains("Envers"));
 
-        builder.ApplyConfiguration(new TestBusinessUnitMap());
+        //builder.ApplyConfiguration(new TestBusinessUnitMap());
 
         builder.HasDefaultSchema("app");
     }

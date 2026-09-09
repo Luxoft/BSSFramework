@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-using SampleSystem.Generated.DAL.EntityFramework.Mapping.Projections.AuditDomain;
+using SampleSystem.Generated.DAL.EntityFramework.Mapping.Envers;
 
 namespace SampleSystem.ServiceEnvironment;
 

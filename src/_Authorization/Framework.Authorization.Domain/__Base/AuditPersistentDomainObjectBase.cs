@@ -8,13 +8,14 @@ namespace Framework.Authorization.Domain;
 /// </summary>
 public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBase
 {
-    private string? createdBy;
-
     private DateTime? createDate;
+
+    private string? createdBy = "";
 
     private DateTime? modifyDate;
 
-    private string? modifiedBy;
+    private string? modifiedBy = "";
+
 
     /// <summary>
     /// Дата создания доменного объекта
@@ -39,8 +40,8 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     /// </summary>
     public virtual string? ModifiedBy
     {
-        get => this.modifiedBy.TrimNull();
-        protected internal set => this.modifiedBy = value.TrimNull();
+        get => this.modifiedBy;
+        protected internal set => this.modifiedBy = value;
     }
 
     /// <summary>
@@ -48,7 +49,7 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     /// </summary>
     public virtual string? CreatedBy
     {
-        get => this.createdBy.TrimNull();
-        protected internal set => this.createdBy = value.TrimNull();
+        get => this.createdBy;
+        protected internal set => this.createdBy = value;
     }
 }

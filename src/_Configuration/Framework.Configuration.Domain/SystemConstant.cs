@@ -14,11 +14,11 @@ public class SystemConstant : AuditPersistentDomainObjectBase
     private DomainType type = null!;
 
 
-    private string code = null!;
+    private string code = "";
 
-    private string? value;
+    private string value = "";
 
-    private string? description;
+    private string description = "";
 
     private bool isManual;
 
@@ -54,8 +54,8 @@ public class SystemConstant : AuditPersistentDomainObjectBase
     [Required]
     public virtual string Code
     {
-        get => this.code.TrimNull();
-        set => this.code = value.TrimNull();
+        get => this.code;
+        set => this.code = value;
     }
 
     /// <summary>
@@ -64,8 +64,8 @@ public class SystemConstant : AuditPersistentDomainObjectBase
     [MaxLength]
     public virtual string Value
     {
-        get => this.value.TrimNull();
-        set => this.value = value.TrimNull();
+        get => this.value;
+        set => this.value = value;
     }
 
     /// <summary>
@@ -74,8 +74,8 @@ public class SystemConstant : AuditPersistentDomainObjectBase
     [MaxLength]
     public virtual string Description
     {
-        get => this.description.TrimNull();
-        set => this.description = value.TrimNull();
+        get => this.description;
+        set => this.description = value;
     }
 
     /// <summary>

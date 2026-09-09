@@ -15,9 +15,9 @@ namespace SampleSystem.Domain.HRDepartment;
 [UniqueGroup("Uni_NameNative")]
 public abstract class HRDepartmentBase : BaseDirectory, IExternalSynchronizable, ICodeObject
 {
-    private string? code;
-    private string? codeNative;
-    private string? nameNative;
+    private string code = "";
+    private string codeNative = "";
+    private string nameNative = "";
     private Location location = null!;
     private Employee.Employee head = null!;
     private long externalId;
@@ -66,8 +66,8 @@ public abstract class HRDepartmentBase : BaseDirectory, IExternalSynchronizable,
     [UniqueElement("Uni_Code")]
     public virtual string Code
     {
-        get => this.code.TrimNull();
-        set => this.code = value.TrimNull();
+        get => this.code;
+        set => this.code = value;
     }
 
     [RequiredValidator(OperationContext = (int)(SampleSystemOperationContext.Request | SampleSystemOperationContext.Register))]
@@ -76,8 +76,8 @@ public abstract class HRDepartmentBase : BaseDirectory, IExternalSynchronizable,
     [UniqueElement("Uni_CodeNative")]
     public virtual string CodeNative
     {
-        get => this.codeNative.TrimNull();
-        set => this.codeNative = value.TrimNull();
+        get => this.codeNative;
+        set => this.codeNative = value;
     }
 
     [RequiredValidator(OperationContext = (int)(SampleSystemOperationContext.Request | SampleSystemOperationContext.Register))]
@@ -86,8 +86,8 @@ public abstract class HRDepartmentBase : BaseDirectory, IExternalSynchronizable,
     [UniqueElement("Uni_NameNative")]
     public virtual string NameNative
     {
-        get => this.nameNative.TrimNull();
-        set => this.nameNative = value.TrimNull();
+        get => this.nameNative;
+        set => this.nameNative = value;
     }
 
     [Required]

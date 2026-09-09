@@ -60,7 +60,7 @@ public class DefaultSimpleDTOFileFactory<TConfiguration>(TConfiguration configur
 
     protected override CodeExpression? GetFieldInitExpression(CodeTypeReference codeTypeReference, PropertyInfo property)
     {
-        if (!this.CodeTypeReferenceService!.IsOptional(property))
+        if (!this.CodeTypeReferenceService.IsOptional(property))
         {
             if (property.PropertyType == typeof(Period))
             {

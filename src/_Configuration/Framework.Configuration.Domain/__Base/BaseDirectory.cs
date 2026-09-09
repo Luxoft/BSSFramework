@@ -10,7 +10,7 @@ namespace Framework.Configuration.Domain;
 /// </summary>
 public abstract class BaseDirectory : AuditPersistentDomainObjectBase, IVisualIdentityObject
 {
-    private string name = null!;
+    private string name = "";
 
     /// <summary>
     /// Название типа
@@ -19,8 +19,8 @@ public abstract class BaseDirectory : AuditPersistentDomainObjectBase, IVisualId
     [UniqueElement]
     public virtual string Name
     {
-        get => this.name.TrimNull();
-        set => this.name = value.TrimNull();
+        get => this.name;
+        set => this.name = value;
     }
 
     public override string ToString() => this.Name;

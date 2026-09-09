@@ -10,11 +10,11 @@ public class Address : AuditPersistentDomainObjectBase, IDetail<LegalEntityBase>
 {
     private readonly LegalEntityBase legalEntity = null!;
     private AddressType addressType;
-    private string? cityName;
+    private string cityName = "";
     private Country countryName = null!;
-    private string? regionName;
-    private string? street;
-    private string? zip;
+    private string regionName = "";
+    private string street = "";
+    private string zip = "";
 
     public Address(LegalEntityBase legalEntity)
     {
@@ -48,29 +48,29 @@ public class Address : AuditPersistentDomainObjectBase, IDetail<LegalEntityBase>
     [MaxLength(100)]
     public virtual string RegionName
     {
-        get => this.regionName.TrimNull();
-        set => this.regionName = value.TrimNull();
+        get => this.regionName;
+        set => this.regionName = value;
     }
 
     [MaxLength(100)]
     public virtual string CityName
     {
-        get => this.cityName.TrimNull();
-        set => this.cityName = value.TrimNull();
+        get => this.cityName;
+        set => this.cityName = value;
     }
 
     [MaxLength(100)]
     public virtual string Zip
     {
-        get => this.zip.TrimNull();
-        set => this.zip = value.TrimNull();
+        get => this.zip;
+        set => this.zip = value;
     }
 
     [MaxLength(100)]
     public virtual string Street
     {
-        get => this.street.TrimNull();
-        set => this.street = value.TrimNull();
+        get => this.street;
+        set => this.street = value;
     }
 
     LegalEntityBase IDetail<LegalEntityBase>.Master => this.LegalEntity;

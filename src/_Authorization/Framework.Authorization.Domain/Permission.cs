@@ -37,7 +37,7 @@ public class Permission : AuditPersistentDomainObjectBase,
 
     private Period period = Period.Eternity;
 
-    private string? comment;
+    private string comment = "";
 
     public Permission()
     {
@@ -102,7 +102,7 @@ public class Permission : AuditPersistentDomainObjectBase,
     /// Комментарий к пермиссии
     /// </summary>
     [MaxLength]
-    public virtual string Comment { get => this.comment.TrimNull(); set => this.comment = value.TrimNull(); }
+    public virtual string Comment { get => this.comment; set => this.comment = value; }
 
     ICollection<PermissionRestriction> IMaster<PermissionRestriction>.Details => (ICollection<PermissionRestriction>)this.Restrictions;
 

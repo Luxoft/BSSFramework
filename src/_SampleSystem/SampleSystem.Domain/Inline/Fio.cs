@@ -10,15 +10,15 @@ namespace SampleSystem.Domain.Inline;
 [DataContract(Namespace = "")]
 public class Fio : FioShort, ICloneable
 {
-    private string? middleName;
+    private string middleName = "";
 
 
     [MaxLength(50)]
     [DataMember]
     public string MiddleName
     {
-        get => this.middleName.TrimNull();
-        set => this.middleName = value.TrimNull();
+        get => this.middleName;
+        set => this.middleName = value;
     }
 
     [DataMember]

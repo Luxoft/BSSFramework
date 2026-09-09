@@ -9,28 +9,28 @@ namespace SampleSystem.Domain.Directories;
 [UniqueGroup]
 public class Country : BaseDirectory, ICodeObject
 {
-    private string? code;
-    private string? nameNative;
-    private string? culture;
+    private string code = "";
+    private string nameNative = "";
+    private string culture = "";
 
     [Required]
     public virtual string Code
     {
-        get => this.code.TrimNull();
-        set => this.code = value.TrimNull();
+        get => this.code;
+        set => this.code = value;
     }
 
     [Required]
     public virtual string NameNative
     {
-        get => this.nameNative.TrimNull();
-        set => this.nameNative = value.TrimNull();
+        get => this.nameNative;
+        set => this.nameNative = value;
     }
 
     [Required]
     public virtual string Culture
     {
-        get => this.culture.TrimNull();
-        set => this.culture = value.TrimNull();
+        get => this.culture;
+        set => this.culture = value;
     }
 }

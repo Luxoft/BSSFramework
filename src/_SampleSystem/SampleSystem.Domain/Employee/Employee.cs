@@ -46,8 +46,8 @@ public partial class Employee :
 
     private BusinessUnit? coreBusinessUnit;
     private HRDepartment.HRDepartment? hRDepartment;
-    private EmployeePosition position = null!;
-    private Employee ppm = null!;
+    private EmployeePosition? position;
+    private Employee? ppm;
 
     private Period educationDuration;
     private Gender gender;
@@ -55,10 +55,10 @@ public partial class Employee :
     private FioShort nameEng = new();
     private Fio nameNative = new();
     private Fio nameRussian = new();
-    private EmployeeRegistrationType registrationType = null!;
+    private EmployeeRegistrationType? registrationType;
 
-    private string? email;
-    private string? login;
+    private string email = "";
+    private string login = "";
     private int? pin;
     private long externalId;
     private DateTime? plannedHireDate;
@@ -66,18 +66,18 @@ public partial class Employee :
     private DateTime? dismissDate;
     private DateTime? birthDate;
     private DateTime? lastActionDate;
-    private string? interphone;
-    private string? landlinephone;
+    private string interphone = "";
+    private string landlinephone = "";
     private Employee? vacationApprover;
 
     // ReSharper disable once InconsistentNaming
     private bool canBePPM;
 
-    private string? cellPhone;
-    private string? personalCellPhone;
-    private ManagementUnit managementUnit = null!;
-    private EmployeeRole role = null!;
-    private EmployeeRoleDegree roleDegree = null!;
+    private string cellPhone = "";
+    private string personalCellPhone = "";
+    private ManagementUnit? managementUnit;
+    private EmployeeRole? role;
+    private EmployeeRoleDegree? roleDegree;
     private Period workPeriod;
 
     private int age;
@@ -131,13 +131,13 @@ public partial class Employee :
         this.EmployeeToEmployeeLinks.FirstOrDefault(
             x => x.EmployeeLinkType == EmployeeLinkType.PersonalAssistant).Maybe(x => x.LinkedEmployee);
 
-    public virtual EmployeeRole Role
+    public virtual EmployeeRole? Role
     {
         get => this.role;
         set => this.role = value;
     }
 
-    public virtual EmployeeRoleDegree RoleDegree
+    public virtual EmployeeRoleDegree? RoleDegree
     {
         get => this.roleDegree;
         set => this.roleDegree = value;
@@ -165,46 +165,46 @@ public partial class Employee :
     [MaxLength(50)]
     public virtual string Email
     {
-        get => this.email.TrimNull();
-        set => this.email = value.TrimNull();
+        get => this.email;
+        set => this.email = value;
     }
 
     [MaxLength(30)]
     [UniqueElement]
     public virtual string Login
     {
-        get => this.login.TrimNull();
-        set => this.login = value.TrimNull();
+        get => this.login;
+        set => this.login = value;
     }
 
     [MaxLength(25)]
     public virtual string Interphone
     {
-        get => this.interphone.TrimNull();
-        set => this.interphone = value.TrimNull();
+        get => this.interphone;
+        set => this.interphone = value;
     }
 
     [PropertyValidationMode(false)]
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual string CellPhone
     {
-        get => this.cellPhone.TrimNull();
-        set => this.cellPhone = value.TrimNull();
+        get => this.cellPhone;
+        set => this.cellPhone = value;
     }
 
     [MaxLength(40)]
     public virtual string Landlinephone
     {
-        get => this.landlinephone.TrimNull();
-        set => this.landlinephone = value.TrimNull();
+        get => this.landlinephone;
+        set => this.landlinephone = value;
     }
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Event | DTORole.Integration)]
     [CustomSerialization(CustomSerializationMode.ReadOnly, DTORole.Client)]
     public virtual string PersonalCellPhone
     {
-        get => this.personalCellPhone.TrimNull();
-        set => this.personalCellPhone = value.TrimNull();
+        get => this.personalCellPhone;
+        set => this.personalCellPhone = value;
     }
 
     public virtual bool IsCandidate => this.Pin.GetValueOrDefault(0) == 0;
@@ -279,7 +279,7 @@ public partial class Employee :
     public virtual Period? CoreBusinessUnitPeriod => this.CoreBusinessUnit?.Period;
 
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
-    public virtual ManagementUnit ManagementUnit
+    public virtual ManagementUnit? ManagementUnit
     {
         get => this.managementUnit;
         set => this.managementUnit = value;
@@ -304,7 +304,7 @@ public partial class Employee :
         set => this.lastActionDate = value;
     }
 
-    public virtual EmployeePosition Position
+    public virtual EmployeePosition? Position
     {
         get => this.position;
         set => this.position = value;
@@ -316,14 +316,14 @@ public partial class Employee :
     ////    set { this.workplace = value; }
     ////}
 
-    public virtual EmployeeRegistrationType RegistrationType
+    public virtual EmployeeRegistrationType? RegistrationType
     {
         get => this.registrationType;
         set => this.registrationType = value;
     }
 
     [Obsolete("#IAD-20612")]
-    public virtual Employee Ppm
+    public virtual Employee? Ppm
     {
         get => this.ppm;
         set => this.ppm = value;

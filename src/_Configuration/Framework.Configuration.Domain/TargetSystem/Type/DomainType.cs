@@ -16,7 +16,7 @@ public class DomainType : BaseDirectory, IDetail<TargetSystem>, IMaster<DomainTy
 
     private readonly TargetSystem targetSystem = null!;
 
-    private string? @namespace;
+    private string @namespace = "";
 
     protected DomainType()
     {
@@ -47,7 +47,7 @@ public class DomainType : BaseDirectory, IDetail<TargetSystem>, IMaster<DomainTy
     /// Пространство имен
     /// </summary>
     [UniqueElement]
-    public virtual string Namespace { get => this.@namespace.TrimNull(); set => this.@namespace = value.TrimNull(); }
+    public virtual string Namespace { get => this.@namespace; set => this.@namespace = value; }
 
     /// <summary>
     /// Полное имя типа

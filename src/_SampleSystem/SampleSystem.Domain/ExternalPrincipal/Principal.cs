@@ -13,11 +13,11 @@ namespace SampleSystem.Domain.ExternalPrincipal;
 [BLLSaveRole]
 public class Principal : AuditPersistentDomainObjectBase
 {
-    private string? externalId;
+    private string externalId = "";
 
-    public virtual string? ExternalId
+    public virtual string ExternalId
     {
         get => this.externalId;
-        set => this.externalId = value.TrimNull();
+        set => this.externalId = value;
     }
 }

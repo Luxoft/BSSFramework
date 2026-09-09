@@ -11,7 +11,7 @@ namespace SampleSystem.Domain.Employee;
 public class EmployeePosition : BaseDirectory, IExternalSynchronizable
 {
     private long externalId;
-    private string? englishName;
+    private string englishName = "";
     private Location location = null!;
 
     public virtual long ExternalId
@@ -32,7 +32,7 @@ public class EmployeePosition : BaseDirectory, IExternalSynchronizable
     [UniqueElement]
     public virtual string EnglishName
     {
-        get => this.englishName.TrimNull();
-        set => this.englishName = value.TrimNull();
+        get => this.englishName;
+        set => this.englishName = value;
     }
 }

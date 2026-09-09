@@ -9,11 +9,13 @@ namespace Framework.Configuration.Domain;
 /// </summary>
 public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBase
 {
-    private string? createdBy;
     private DateTime? createDate;
 
+    private string? createdBy = "";
+
     private DateTime? modifyDate;
-    private string? modifiedBy;
+
+    private string? modifiedBy = "";
 
     #region Constructor
 
@@ -40,6 +42,16 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     }
 
     /// <summary>
+    /// Логин сотрудника, создавшего доменный объект
+    /// </summary>
+    [NotAuditedProperty]
+    public virtual string? CreatedBy
+    {
+        get => this.createdBy;
+        protected internal set => this.createdBy = value;
+    }
+
+    /// <summary>
     /// Дата изменения доменного объекта
     /// </summary>
     [NotAuditedProperty]
@@ -55,18 +67,7 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     [NotAuditedProperty]
     public virtual string? ModifiedBy
     {
-        get => this.modifiedBy.TrimNull();
-        protected internal set => this.modifiedBy = value.TrimNull();
-    }
-
-
-    /// <summary>
-    /// Логин сотрудника, создавшего доменный объект
-    /// </summary>
-    [NotAuditedProperty]
-    public virtual string? CreatedBy
-    {
-        get => this.createdBy.TrimNull();
-        protected internal set => this.createdBy = value.TrimNull();
+        get => this.modifiedBy;
+        protected internal set => this.modifiedBy = value;
     }
 }

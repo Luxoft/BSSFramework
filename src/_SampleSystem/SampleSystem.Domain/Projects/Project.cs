@@ -24,7 +24,7 @@ public class Project :
 {
     [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
     protected DateTime? startDate;
-    private string? code;
+    private string code = "";
     private BusinessUnit businessUnit = null!;
     private DateTime? plannedEndDate;
     private DateTime? endDate;
@@ -34,8 +34,8 @@ public class Project :
     [VisualIdentity]
     public virtual string Code
     {
-        get => this.code.TrimNull();
-        set => this.code = value.TrimNull();
+        get => this.code;
+        set => this.code = value;
     }
 
     [RequiredValidator(OperationContext = (int)SampleSystemOperationContext.Save)]

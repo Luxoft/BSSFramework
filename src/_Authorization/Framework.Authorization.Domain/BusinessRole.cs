@@ -12,7 +12,7 @@ public class BusinessRole : BaseDirectory
 {
     private readonly ICollection<Permission> permissions = new List<Permission>();
 
-    private string? description;
+    private string description = "";
 
     /// <summary>
     /// Коллекция пермиссий принципалов, выданных по одной бизнес-роль
@@ -25,7 +25,7 @@ public class BusinessRole : BaseDirectory
     /// </summary>
     public virtual string Description
     {
-        get => this.description.TrimNull();
-        set => this.description = value.TrimNull();
+        get => this.description;
+        set => this.description = value;
     }
 }

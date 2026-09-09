@@ -50,7 +50,7 @@ public sealed class AuditEntityFactory(IAuditTypeNameResolver auditTypeNameResol
             this.DefineAutoProperty(typeBuilder, this.RevisionPropertyName, typeof(AuditRevisionEntity));
             this.DefineAutoProperty(typeBuilder, this.RevisionTypePropertyName, typeof(AuditRevisionType));
 
-            metadata = new AuditEntityMetadata(entityType, typeBuilder.CreateType()!, auditProperties);
+            metadata = new AuditEntityMetadata(entityType, typeBuilder.CreateType(), auditProperties);
             this.metadataByEntityType.Add(entityType, metadata);
             return metadata;
         }

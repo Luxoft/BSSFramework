@@ -15,7 +15,7 @@ public class EmployeePhoto : AuditPersistentDomainObjectBase, IDetail<Employee>
 
     private readonly Employee employee = null!;
 
-    private string? contentType;
+    private string contentType = "";
     private byte[] data = [];
 
     private EmployeePhotoType type;
@@ -35,8 +35,8 @@ public class EmployeePhoto : AuditPersistentDomainObjectBase, IDetail<Employee>
     [Required]
     public virtual string ContentType
     {
-        get => this.contentType.TrimNull();
-        protected internal set => this.contentType = value.TrimNull();
+        get => this.contentType;
+        protected internal set => this.contentType = value;
     }
 
     public virtual bool IsDefault => this.Type == EmployeePhotoType.Default;

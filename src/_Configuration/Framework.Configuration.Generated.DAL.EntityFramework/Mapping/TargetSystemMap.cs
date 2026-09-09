@@ -13,9 +13,9 @@ public class TargetSystemMap : ConfigurationBaseMap<TargetSystem>
         base.Configure(builder);
 
         builder.Property(x => x.Name).IsRequired();
-        builder.Property(x => x.IsBase).IsRequired();
-        builder.Property(x => x.IsMain).IsRequired();
-        builder.Property(x => x.IsRevision).IsRequired();
+        builder.Property(x => x.IsBase).HasField("isBase").UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
+        builder.Property(x => x.IsMain).HasField("isMain").UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
+        builder.Property(x => x.IsRevision).HasField("isRevision").UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
         builder.Property(x => x.SubscriptionEnabled).IsRequired();
         builder.HasIndex(x => x.Name).IsUnique().HasDatabaseName("UIX_nameTargetSystem");
 

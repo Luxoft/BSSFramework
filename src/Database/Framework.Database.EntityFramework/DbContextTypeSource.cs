@@ -24,7 +24,7 @@ public class DbContextTypeSource<TPrimaryDbContextType>(
 
                 return request.SingleOrDefault()
 
-                       ?? throw new InvalidOperationException($"No DbContext type for {domainObjectType} not found.");
+                       ?? throw new InvalidOperationException($"No {nameof(DbContext)} type for {domainObjectType}");
             });
 
     public Type PrimaryDbContextType { get; } = typeof(TPrimaryDbContextType);

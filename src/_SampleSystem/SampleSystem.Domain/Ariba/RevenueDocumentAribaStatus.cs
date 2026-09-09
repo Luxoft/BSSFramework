@@ -5,14 +5,19 @@ using Framework.Restriction;
 namespace SampleSystem.Domain.Ariba;
 
 [DataContract(Namespace = "")]
-public struct RevenueDocumentAribaStatus(AribaStatusType type, string description, DateTime? date) : IEquatable<RevenueDocumentAribaStatus>
+public class RevenueDocumentAribaStatus(AribaStatusType type, string description, DateTime? date) : IEquatable<RevenueDocumentAribaStatus>
 {
     private AribaStatusType type = type;
     private string description = description;
     private DateTime? date = date;
 
+    public RevenueDocumentAribaStatus()
+        : this(default, "", null)
+    {
+    }
+
     [DataMember]
-    public AribaStatusType Type
+    public virtual AribaStatusType Type
     {
         get => this.type;
         set => this.type = value;
@@ -20,14 +25,14 @@ public struct RevenueDocumentAribaStatus(AribaStatusType type, string descriptio
 
     [DataMember]
     [MaxLength(int.MaxValue)]
-    public string Description
+    public virtual string Description
     {
         get => this.description;
         set => this.description = value;
     }
 
     [DataMember]
-    public DateTime? Date
+    public virtual DateTime? Date
     {
         get => this.date;
         set => this.date = value;
@@ -53,13 +58,14 @@ public struct RevenueDocumentAribaStatus(AribaStatusType type, string descriptio
 
     public static RevenueDocumentAribaStatus Create(AribaStatusType status, string description, DateTime? date) => new(status, description, date);
 
-    public static bool operator !=(RevenueDocumentAribaStatus arg1, RevenueDocumentAribaStatus arg2) => !arg1.Equals(arg2);
+    public static bool operator !=(RevenueDocumentAribaStatus? arg1, RevenueDocumentAribaStatus? arg2) => !(arg1 == arg2);
 
-    public static bool operator ==(RevenueDocumentAribaStatus arg1, RevenueDocumentAribaStatus arg2) => !(arg1 != arg2);
+    public static bool operator ==(RevenueDocumentAribaStatus? arg1, RevenueDocumentAribaStatus? arg2) =>
+        ReferenceEquals(arg1, arg2) || (arg1 is not null && arg1.Equals(arg2));
 
-    public override bool Equals(object? obj) => obj is RevenueDocumentAribaStatus && this.Equals((RevenueDocumentAribaStatus)obj);
+    public override bool Equals(object? obj) => obj is RevenueDocumentAribaStatus other && this.Equals(other);
 
-    public bool Equals(RevenueDocumentAribaStatus target) => this.type == target.type && this.date == target.date && this.description == target.description;
+    public bool Equals(RevenueDocumentAribaStatus? target) => target is not null && this.type == target.type && this.date == target.date && this.description == target.description;
 
     public override int GetHashCode() => this.type.GetHashCode() ^ this.date.GetHashCode() ^ this.description.GetHashCode();
 }

@@ -25,14 +25,30 @@ public class DbGeneratorTest
     private const string NhDatabaseName = "SampleSystem_nh_empty";
 
     private static readonly HashSet<string> DateTypeFamily = new(StringComparer.OrdinalIgnoreCase)
-    {
-        "date", "datetime", "datetime2", "datetimeoffset", "smalldatetime", "time",
-    };
+                                                             {
+                                                                 "date",
+                                                                 "datetime",
+                                                                 "datetime2",
+                                                                 "datetimeoffset",
+                                                                 "smalldatetime",
+                                                                 "time",
+                                                             };
 
     private static readonly HashSet<string> PrimitiveTypeFamily = new(StringComparer.OrdinalIgnoreCase)
-    {
-        "bit", "tinyint", "smallint", "int", "bigint", "decimal", "numeric", "float", "real", "money", "smallmoney", "uniqueidentifier",
-    };
+                                                                  {
+                                                                      "bit",
+                                                                      "tinyint",
+                                                                      "smallint",
+                                                                      "int",
+                                                                      "bigint",
+                                                                      "decimal",
+                                                                      "numeric",
+                                                                      "float",
+                                                                      "real",
+                                                                      "money",
+                                                                      "smallmoney",
+                                                                      "uniqueidentifier",
+                                                                  };
 
     [AnchFact]
     public Task GenerateLocal(CancellationToken ct) => this.GenerateAllDb(@".", "SampleSystem_ef_empty", null, ct);
@@ -58,50 +74,53 @@ public class DbGeneratorTest
 
     private void DropDatabaseIfExists(string serverName, string databaseName)
     {
-        var masterConnectionString = $"Data Source={serverName};Initial Catalog=master;Integrated Security=True;Application Name=SampleSystem;TrustServerCertificate=true";
+        var masterConnectionString =
+            $"Data Source={serverName};Initial Catalog=master;Integrated Security=True;Application Name=SampleSystem;TrustServerCertificate=true";
 
         using var connection = new SqlConnection(masterConnectionString);
         connection.Open();
 
         using var command = connection.CreateCommand();
         command.CommandText = $"""
-                                IF DB_ID('{databaseName}') IS NOT NULL
-                                BEGIN
-                                    ALTER DATABASE [{databaseName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-                                    DROP DATABASE [{databaseName}];
-                                END
-                                """;
+                               IF DB_ID('{databaseName}') IS NOT NULL
+                               BEGIN
+                                   ALTER DATABASE [{databaseName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+                                   DROP DATABASE [{databaseName}];
+                               END
+                               """;
         command.ExecuteNonQuery();
     }
 
     private static List<ColumnInfo> GetColumns(string serverName, string databaseName)
     {
-        var connectionString = $"Data Source={serverName};Initial Catalog={databaseName};Integrated Security=True;Application Name=SampleSystem;TrustServerCertificate=true";
+        var connectionString =
+            $"Data Source={serverName};Initial Catalog={databaseName};Integrated Security=True;Application Name=SampleSystem;TrustServerCertificate=true";
 
         using var connection = new SqlConnection(connectionString);
         connection.Open();
 
         using var command = connection.CreateCommand();
         command.CommandText = """
-                               SELECT s.name AS SchemaName, t.name AS TableName, c.name AS ColumnName, ty.name AS TypeName, c.is_nullable AS IsNullable
-                               FROM sys.columns c
-                               JOIN sys.tables t ON c.object_id = t.object_id
-                               JOIN sys.schemas s ON t.schema_id = s.schema_id
-                               JOIN sys.types ty ON c.user_type_id = ty.user_type_id
-                               ORDER BY s.name, t.name, c.name
-                               """;
+                              SELECT s.name AS SchemaName, t.name AS TableName, c.name AS ColumnName, ty.name AS TypeName, c.is_nullable AS IsNullable
+                              FROM sys.columns c
+                              JOIN sys.tables t ON c.object_id = t.object_id
+                              JOIN sys.schemas s ON t.schema_id = s.schema_id
+                              JOIN sys.types ty ON c.user_type_id = ty.user_type_id
+                              ORDER BY s.name, t.name, c.name
+                              """;
 
         var result = new List<ColumnInfo>();
 
         using var reader = command.ExecuteReader();
         while (reader.Read())
         {
-            result.Add(new ColumnInfo(
-                            reader.GetString(0),
-                            reader.GetString(1),
-                            reader.GetString(2),
-                            reader.GetString(3),
-                            reader.GetBoolean(4)));
+            result.Add(
+                new ColumnInfo(
+                    reader.GetString(0),
+                    reader.GetString(1),
+                    reader.GetString(2),
+                    reader.GetString(3),
+                    reader.GetBoolean(4)));
         }
 
         return result;
@@ -112,10 +131,10 @@ public class DbGeneratorTest
         var sb = new StringBuilder();
 
         var efTables = efColumns.GroupBy(c => $"{c.Schema}.{c.Table}", StringComparer.OrdinalIgnoreCase)
-                                 .ToDictionary(g => g.Key, g => g.ToList(), StringComparer.OrdinalIgnoreCase);
+                                .ToDictionary(g => g.Key, g => g.ToList(), StringComparer.OrdinalIgnoreCase);
 
         var nhTables = nhColumns.GroupBy(c => $"{c.Schema}.{c.Table}", StringComparer.OrdinalIgnoreCase)
-                                 .ToDictionary(g => g.Key, g => g.ToList(), StringComparer.OrdinalIgnoreCase);
+                                .ToDictionary(g => g.Key, g => g.ToList(), StringComparer.OrdinalIgnoreCase);
 
         var onlyInEf = efTables.Keys.Except(nhTables.Keys, StringComparer.OrdinalIgnoreCase).OrderBy(k => k).ToList();
         var onlyInNh = nhTables.Keys.Except(efTables.Keys, StringComparer.OrdinalIgnoreCase).OrderBy(k => k).ToList();
@@ -239,6 +258,6 @@ public class DbGeneratorTest
         await using var dbContext = scope.ServiceProvider.GetRequiredService<SampleSystemDbContext>();
         await dbContext.Database.EnsureCreatedAsync(ct);
 
-        new BssFluentMigrator(connectionString).Migrate();
+        new BssFluentMigrator(connectionString, typeof(BssFluentMigrator).Assembly, typeof(DbGeneratorTest).Assembly).Migrate();
     }
 }

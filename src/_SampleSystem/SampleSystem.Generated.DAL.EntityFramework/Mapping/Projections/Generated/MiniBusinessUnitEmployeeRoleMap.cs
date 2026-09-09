@@ -10,10 +10,9 @@ public class MiniBusinessUnitEmployeeRoleMap : IEntityTypeConfiguration<MiniBusi
 {
     public void Configure(EntityTypeBuilder<MiniBusinessUnitEmployeeRole> builder)
     {
-        builder.ToView(nameof(BusinessUnitEmployeeRole));
+        builder.ToView(nameof(MiniBusinessUnitEmployeeRole));
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.HasOne(typeof(BusinessUnitEmployeeRole)).WithOne().HasForeignKey(typeof(MiniBusinessUnitEmployeeRole), nameof(MiniBusinessUnitEmployeeRole.Id)).IsRequired();
+        builder.Property(x => x.Id).ValueGeneratedNever();
         builder.Property<System.Guid?>("businessUnitId_MiniBusinessUnitEmployeeRole").HasColumnName("businessUnitId");
         builder.HasOne(x => x.BusinessUnit).WithMany().HasForeignKey("businessUnitId_MiniBusinessUnitEmployeeRole").IsRequired(false).OnDelete(DeleteBehavior.Restrict);
         builder.Property<System.Guid?>("employeeId_MiniBusinessUnitEmployeeRole").HasColumnName("employeeId");

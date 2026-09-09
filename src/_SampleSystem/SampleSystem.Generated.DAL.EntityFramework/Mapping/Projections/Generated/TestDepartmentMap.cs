@@ -10,13 +10,11 @@ public class TestDepartmentMap : IEntityTypeConfiguration<TestDepartment>
 {
     public void Configure(EntityTypeBuilder<TestDepartment> builder)
     {
-        builder.ToView(nameof(HRDepartment));
+        builder.ToView(nameof(TestDepartment));
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.HasOne(typeof(HRDepartment)).WithOne().HasForeignKey(typeof(TestDepartment), nameof(TestDepartment.Id));
+        builder.Property(x => x.Id).ValueGeneratedNever();
         builder.Property<System.Guid?>("locationId_TestDepartment").HasColumnName("locationId");
         builder.HasOne(x => x.Location).WithMany().HasForeignKey("locationId_TestDepartment");
-        builder.Property<System.Guid?>("locationId_TestDepartment_Auto").HasColumnName("locationId");
-        builder.HasOne(x => x.Location_Auto).WithMany().HasForeignKey("locationId_TestDepartment_Auto");
+        builder.HasOne(x => x.Location_Auto).WithMany().HasForeignKey("locationId_TestDepartment");
     }
 }

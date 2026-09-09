@@ -11,9 +11,9 @@ public class TestBusinessUnitMap : IEntityTypeConfiguration<TestBusinessUnit>
     {
         builder.ToView(nameof(TestBusinessUnit));
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
+        builder.Property(x => x.Id).ValueGeneratedNever();
         builder.Property(x => x.Name).HasColumnName("Name").IsRequired();
-        builder.Property(x => x.PeriodEndDate).HasColumnName("periodendDate").IsRequired();
+        builder.Property(x => x.PeriodEndDate).HasColumnName("periodendDate");
         builder.HasOne(x => x.Her).WithMany().HasForeignKey("Id").IsRequired().OnDelete(DeleteBehavior.Restrict);
         builder.Property<System.Guid?>("parentId_TestBusinessUnit").HasColumnName("parentId");
         builder.HasOne(x => x.Parent_Auto).WithMany().HasForeignKey("parentId_TestBusinessUnit").IsRequired(false).OnDelete(DeleteBehavior.Restrict);

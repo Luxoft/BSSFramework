@@ -10,9 +10,8 @@ public class SecurityLocationMap : IEntityTypeConfiguration<SecurityLocation>
 {
     public void Configure(EntityTypeBuilder<SecurityLocation> builder)
     {
-        builder.ToView(nameof(Location));
+        builder.ToView(nameof(SecurityLocation));
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.HasOne(typeof(Location)).WithOne().HasForeignKey(typeof(SecurityLocation), nameof(SecurityLocation.Id));
+        builder.Property(x => x.Id).ValueGeneratedNever();
     }
 }

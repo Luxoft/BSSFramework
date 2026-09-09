@@ -10,10 +10,9 @@ public class CustomTestObjForNestedMap : IEntityTypeConfiguration<CustomTestObjF
 {
     public void Configure(EntityTypeBuilder<CustomTestObjForNested> builder)
     {
-        builder.ToView(nameof(TestObjForNestedBase));
+        builder.ToView(nameof(CustomTestObjForNested));
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.HasOne(typeof(TestObjForNestedBase)).WithOne().HasForeignKey(typeof(CustomTestObjForNested), nameof(CustomTestObjForNested.Id));
+        builder.Property(x => x.Id).ValueGeneratedNever();
         builder.Property(x => x.Name).HasColumnName("name");
         builder.Property(x => x.PeriodStartDateXXX).HasColumnName("periodstartDate");
     }

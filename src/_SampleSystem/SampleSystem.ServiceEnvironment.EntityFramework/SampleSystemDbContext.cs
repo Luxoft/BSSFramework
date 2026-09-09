@@ -21,7 +21,7 @@ public class SampleSystemDbContext(DbContextOptions<SampleSystemDbContext> optio
         builder.ApplyConfigurationsFromAssembly(typeof(ConfigurationBaseMap<>).Assembly);
         builder.ApplyConfigurationsFromAssembly(
             typeof(SampleSystemBaseMap<>).Assembly,
-            t => !t.Namespace!.Contains("Projection") && !t.Namespace!.Contains("Envers"));
+            t => !t.Namespace!.Contains("Envers"));
 
         //builder.ApplyConfiguration(new TestBusinessUnitMap());
 

@@ -10,10 +10,9 @@ public class SecurityEmployeeMap : IEntityTypeConfiguration<SecurityEmployee>
 {
     public void Configure(EntityTypeBuilder<SecurityEmployee> builder)
     {
-        builder.ToView(nameof(Employee));
+        builder.ToView(nameof(SecurityEmployee));
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.HasOne(typeof(Employee)).WithOne().HasForeignKey(typeof(SecurityEmployee), nameof(SecurityEmployee.Id));
+        builder.Property(x => x.Id).ValueGeneratedNever();
 
         builder.Property(x => x.Login_Security).HasColumnName("Login");
         builder.Property<System.Guid?>("coreBusinessUnitId_SecurityEmployee").HasColumnName("coreBusinessUnitId");

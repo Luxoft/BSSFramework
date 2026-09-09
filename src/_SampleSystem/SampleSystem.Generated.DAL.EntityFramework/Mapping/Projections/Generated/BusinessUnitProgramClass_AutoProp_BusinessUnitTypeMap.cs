@@ -10,9 +10,8 @@ public class BusinessUnitProgramClassAutoPropBusinessUnitTypeMap : IEntityTypeCo
 {
     public void Configure(EntityTypeBuilder<BusinessUnitProgramClass_AutoProp_BusinessUnitType> builder)
     {
-        builder.ToView(nameof(BusinessUnitType));
+        builder.ToView(nameof(BusinessUnitProgramClass_AutoProp_BusinessUnitType));
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.HasOne(typeof(BusinessUnitType)).WithOne().HasForeignKey(typeof(BusinessUnitProgramClass_AutoProp_BusinessUnitType), nameof(BusinessUnitProgramClass_AutoProp_BusinessUnitType.Id));
+        builder.Property(x => x.Id).ValueGeneratedNever();
     }
 }

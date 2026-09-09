@@ -10,10 +10,9 @@ public class TestEmployeeAutoPropPpmMap : IEntityTypeConfiguration<TestEmployee_
 {
     public void Configure(EntityTypeBuilder<TestEmployee_AutoProp_Ppm> builder)
     {
-        builder.ToView(nameof(Employee));
+        builder.ToView(nameof(TestEmployee_AutoProp_Ppm));
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.HasOne(typeof(Employee)).WithOne().HasForeignKey(typeof(TestEmployee_AutoProp_Ppm), nameof(TestEmployee_AutoProp_Ppm.Id));
+        builder.Property(x => x.Id).ValueGeneratedNever();
         builder.Property(x => x.NameNativeMiddleName_Last_PpmNameNativeMiddleName).HasColumnName("nameNativemiddleName");
     }
 }

@@ -10,9 +10,8 @@ public class TestManualEmployeeProjectionMap : IEntityTypeConfiguration<TestManu
 {
     public void Configure(EntityTypeBuilder<TestManualEmployeeProjection> builder)
     {
-        builder.ToView(nameof(Employee));
+        builder.ToView(nameof(TestManualEmployeeProjection));
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.HasOne(typeof(Employee)).WithOne().HasForeignKey(typeof(TestManualEmployeeProjection), nameof(TestManualEmployeeProjection.Id));
+        builder.Property(x => x.Id).ValueGeneratedNever();
     }
 }

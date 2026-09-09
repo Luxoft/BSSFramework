@@ -10,9 +10,9 @@ public class TestSecurityObjItemProjectionMap : IEntityTypeConfiguration<TestSec
 {
     public void Configure(EntityTypeBuilder<TestSecurityObjItemProjection> builder)
     {
-        builder.ToView(nameof(TestSecurityObjItem));
+        builder.ToView(nameof(TestSecurityObjItemProjection));
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.HasOne(typeof(TestSecurityObjItem)).WithOne().HasForeignKey(typeof(TestSecurityObjItemProjection), nameof(TestSecurityObjItemProjection.Id));
+        builder.Property(x => x.Id).ValueGeneratedNever();
+        builder.Property(x => x.Name).HasColumnName("Name").IsRequired();
     }
 }

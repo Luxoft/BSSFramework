@@ -12,8 +12,7 @@ public class BusinessUnitProgramClassMap : IEntityTypeConfiguration<BusinessUnit
     {
         builder.ToView(nameof(BusinessUnitProgramClass));
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.HasOne(typeof(BusinessUnit)).WithOne().HasForeignKey(typeof(BusinessUnitProgramClass), nameof(BusinessUnitProgramClass.Id)).IsRequired();
+        builder.Property(x => x.Id).ValueGeneratedNever();
         builder.Property(x => x.IsNewBusiness).HasColumnName("IsNewBusiness").IsRequired();
         builder.Property(x => x.Name).HasColumnName("Name").IsRequired();
         builder.Property(x => x.PeriodEndDate).HasColumnName("periodendDate").IsRequired();

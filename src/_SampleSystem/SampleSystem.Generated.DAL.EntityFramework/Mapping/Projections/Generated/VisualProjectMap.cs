@@ -10,9 +10,9 @@ public class VisualProjectMap : IEntityTypeConfiguration<VisualProject>
 {
     public void Configure(EntityTypeBuilder<VisualProject> builder)
     {
-        builder.ToView(nameof(Project));
+        builder.ToView(nameof(VisualProject));
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.HasOne(typeof(Project)).WithOne().HasForeignKey(typeof(VisualProject), nameof(VisualProject.Id));
+        builder.Property(x => x.Id).ValueGeneratedNever();
+        builder.Property<System.Guid?>("businessUnitId_VisualProject").HasColumnName("businessUnitId");
     }
 }

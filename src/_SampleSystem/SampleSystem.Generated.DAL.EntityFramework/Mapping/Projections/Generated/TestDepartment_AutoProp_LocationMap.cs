@@ -10,10 +10,9 @@ public class TestDepartmentAutoPropLocationMap : IEntityTypeConfiguration<TestDe
 {
     public void Configure(EntityTypeBuilder<TestDepartment_AutoProp_Location> builder)
     {
-        builder.ToView(nameof(Location));
+        builder.ToView(nameof(TestDepartment_AutoProp_Location));
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.HasOne(typeof(Location)).WithOne().HasForeignKey(typeof(TestDepartment_AutoProp_Location), nameof(TestDepartment_AutoProp_Location.Id));
+        builder.Property(x => x.Id).ValueGeneratedNever();
         builder.Property(x => x.BinaryData_Last_LocationBinaryData).HasColumnName("BinaryData");
     }
 }

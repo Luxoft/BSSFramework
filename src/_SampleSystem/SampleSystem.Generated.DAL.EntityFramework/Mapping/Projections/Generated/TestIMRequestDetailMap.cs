@@ -10,10 +10,9 @@ public class TestIMRequestDetailMap : IEntityTypeConfiguration<TestIMRequestDeta
 {
     public void Configure(EntityTypeBuilder<TestIMRequestDetail> builder)
     {
-        builder.ToView(nameof(IMRequestDetail));
+        builder.ToView(nameof(TestIMRequestDetail));
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.HasOne(typeof(IMRequestDetail)).WithOne().HasForeignKey(typeof(TestIMRequestDetail), nameof(TestIMRequestDetail.Id));
+        builder.Property(x => x.Id).ValueGeneratedNever();
         builder.Property<System.Guid?>("requestId_TestIMRequestDetail").HasColumnName("requestId");
     }
 }

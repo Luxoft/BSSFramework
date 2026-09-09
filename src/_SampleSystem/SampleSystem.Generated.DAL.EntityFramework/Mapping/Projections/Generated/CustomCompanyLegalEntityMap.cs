@@ -10,7 +10,7 @@ public class CustomCompanyLegalEntityMap : IEntityTypeConfiguration<CustomCompan
 {
     public void Configure(EntityTypeBuilder<CustomCompanyLegalEntity> builder)
     {
-        builder.ToView(nameof(CompanyLegalEntity));
+        builder.ToView(nameof(CustomCompanyLegalEntity));
         //builder.HasKey(x => x.Id);
         //builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
         //builder.Property(x => x.Code).IsRequired();

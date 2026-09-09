@@ -17,7 +17,7 @@ public class EfSession<TDbContext> : IEfSession
             switch (this.sessionMode ?? settings.DefaultSessionMode)
             {
                 case DBSessionMode.Read:
-                    return new ReadOnlyEfSession(nativeSession);
+                    return new ReadOnlyEfSession<TDbContext>(nativeSession);
 
                 case DBSessionMode.Write:
                     return new WriteEfSession(nativeSession, eventListeners);

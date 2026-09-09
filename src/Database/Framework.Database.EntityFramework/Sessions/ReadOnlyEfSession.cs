@@ -7,13 +7,14 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Framework.Database.EntityFramework.Sessions;
 
-public class ReadOnlyEfSession : IEfSession
+public class ReadOnlyEfSession<TDbContext> : IEfSession
+    where TDbContext : DbContext
 {
     private static readonly IDbTransaction DbTransaction = LazyInterfaceImplementHelper.CreateNotImplemented<IDbTransaction>("Readonly session");
 
     private readonly IDbContextTransaction transaction;
 
-    public ReadOnlyEfSession(DbContext nativeSession)
+    public ReadOnlyEfSession(TDbContext nativeSession)
     {
         this.NativeSession = nativeSession;
         this.NativeSession.Database.OpenConnection();

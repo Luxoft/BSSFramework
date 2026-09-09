@@ -38,7 +38,7 @@ public class EntityFrameworkSetup<TDbContext> : IEntityFrameworkSetup<TDbContext
             services.AddScoped(typeof(SecondaryEfAsyncDal<,,>));
             services.AddScoped(typeof(IAsyncDal<,>), typeof(ComplexAsyncDal<,>));
 
-            services.AddScoped(typeof(EfSession<>));
+            services.AddScoped(typeof(ReadOnlyEfSession<>));
         }
 
         services.AddGenericQueryable(v => v.SetFetchService<EfFetchService>().SetTargetMethodExtractor<EfTargetMethodExtractor>());

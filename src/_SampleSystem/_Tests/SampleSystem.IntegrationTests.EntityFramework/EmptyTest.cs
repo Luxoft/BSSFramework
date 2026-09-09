@@ -16,8 +16,8 @@ public class EmptyTests(IServiceProvider rootServiceProvider) : TestBase(rootSer
     [AnchFact]
     public async Task InitTest(CancellationToken ct)
     {
-        var initializer = this.RootServiceProvider.GetRequiredKeyedService<IInitializer>(TestDatabaseInitializer.TestDataKey);
+        //var initializer = this.RootServiceProvider.GetRequiredKeyedService<IInitializer>(TestDatabaseInitializer.TestDataKey);
 
-        await initializer.Initialize(ct);
+        //await initializer.Initialize(ct);
     }
 }

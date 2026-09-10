@@ -10,7 +10,7 @@ public class TestBusinessUnitAutoPropParentMap : IEntityTypeConfiguration<TestBu
 {
     public void Configure(EntityTypeBuilder<TestBusinessUnit_AutoProp_Parent> builder)
     {
-        builder.ToView(nameof(TestBusinessUnit_AutoProp_Parent));
+        builder.ToTable(nameof(TestBusinessUnit_AutoProp_Parent), t => t.ExcludeFromMigrations());
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedNever();
         builder.Property(x => x.PeriodStartDate_Last_ParentPeriodStartDate).HasColumnName("periodstartDate").IsRequired();

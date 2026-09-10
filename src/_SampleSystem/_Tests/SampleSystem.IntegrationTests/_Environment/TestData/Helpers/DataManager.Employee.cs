@@ -114,7 +114,7 @@ public partial class DataManager
                                           HireDate = hireDate,
                                           PlannedHireDate = hireDate,
                                           Login = login,
-                                          NameEng = nameEng,
+                                          NameEng = new FioShort { FirstName = nameEng.FirstName, LastName = nameEng.LastName },
                                           NameNative = nameNative,
                                           NameRussian = nameRussian,
                                           Pin = pin,

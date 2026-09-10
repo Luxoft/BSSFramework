@@ -8,7 +8,6 @@ namespace SampleSystem.Domain.Inline;
 
 [ExpandValidation]
 [DataContract(Namespace = "")]
-[KnownType(typeof(Fio))]
 public class FioShort : ICloneable, IEquatable<FioShort>
 {
     private string firstName = "";

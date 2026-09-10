@@ -1,11 +1,4 @@
-﻿using Anch.Core;
-using Anch.Testing.Database.Initializers;
-using Anch.Testing.Xunit;
-
-using Framework.Application;
-using Framework.Database;
-
-using Microsoft.Extensions.DependencyInjection;
+﻿using Anch.Testing.Xunit;
 
 using SampleSystem.IntegrationTests._Environment.TestData;
 

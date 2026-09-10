@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.ManualProjections;
 
 namespace SampleSystem.Generated.DAL.EntityFramework.Mapping.Projections.ManualProjections;

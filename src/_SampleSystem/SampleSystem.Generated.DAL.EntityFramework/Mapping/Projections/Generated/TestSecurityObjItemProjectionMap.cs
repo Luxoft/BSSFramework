@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using SampleSystem.Domain.Projections;
-using SampleSystem.Domain.TestDependency;
 
 namespace SampleSystem.Generated.DAL.EntityFramework.Mapping.Projections.Generated;
 

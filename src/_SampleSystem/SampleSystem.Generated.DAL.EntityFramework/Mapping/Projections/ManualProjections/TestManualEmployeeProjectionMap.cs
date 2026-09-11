@@ -12,5 +12,8 @@ public class TestManualEmployeeProjectionMap : IEntityTypeConfiguration<TestManu
         builder.ToView(nameof(TestManualEmployeeProjection));
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedNever();
+
+        builder.Property(x => x.Login).HasColumnName("login");
+        builder.Property(x => x.CoreBusinessUnitId).HasColumnName("coreBusinessUnitId");
     }
 }

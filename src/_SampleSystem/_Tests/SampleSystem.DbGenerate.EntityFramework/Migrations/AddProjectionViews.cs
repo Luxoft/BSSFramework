@@ -208,13 +208,13 @@ FROM [app].[ClassA]");
         this.Execute.Sql(@"
 CREATE VIEW [app].[TestManualEmployeeProjection]
 AS
-SELECT [Id]
+SELECT [Id], [login], [coreBusinessUnitId]
 FROM [app].[Employee]");
 
         this.Execute.Sql(@"
 CREATE VIEW [app].[TestLegacyEmployee]
 AS
-SELECT [Id], [roleId]
+SELECT [Id], [login], [coreBusinessUnitId], [hRDepartmentId], [roleId]
 FROM [app].[Employee]");
 
         this.Execute.Sql(@"

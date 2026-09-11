@@ -77,17 +77,33 @@ public class WriteEfSession : IEfSession
     {
         foreach (var entry in this.NativeSession.ChangeTracker.Entries())
         {
-            if (entry.State != EntityState.Modified)
+            switch (entry.State)
             {
-                continue;
-            }
+                case EntityState.Added:
 
-            foreach (var property in entry.Properties)
-            {
-                if (property.Metadata.IsConcurrencyToken && property.Metadata.ClrType == typeof(long) && !property.IsModified)
-                {
-                    property.CurrentValue = (long)property.CurrentValue! + 1;
-                }
+                    // NHibernate seeds a versioned property to 1 on insert (IVersionType.Seed); mirror that here so a
+                    // freshly inserted entity's Version doesn't stay at its default(long) value of 0 across providers.
+                    foreach (var property in entry.Properties)
+                    {
+                        if (property.Metadata.IsConcurrencyToken && property.Metadata.ClrType == typeof(long) && Equals(property.CurrentValue, 0L))
+                        {
+                            property.CurrentValue = 1L;
+                        }
+                    }
+
+                    break;
+
+                case EntityState.Modified:
+
+                    foreach (var property in entry.Properties)
+                    {
+                        if (property.Metadata.IsConcurrencyToken && property.Metadata.ClrType == typeof(long) && !property.IsModified)
+                        {
+                            property.CurrentValue = (long)property.CurrentValue! + 1;
+                        }
+                    }
+
+                    break;
             }
         }
     }

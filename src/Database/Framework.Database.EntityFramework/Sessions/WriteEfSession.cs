@@ -73,6 +73,25 @@ public class WriteEfSession : IEfSession
 
     public async Task FlushAsync(CancellationToken ct) => await this.FlushAsync(false, ct);
 
+    private void IncrementConcurrencyVersionTokens()
+    {
+        foreach (var entry in this.NativeSession.ChangeTracker.Entries())
+        {
+            if (entry.State != EntityState.Modified)
+            {
+                continue;
+            }
+
+            foreach (var property in entry.Properties)
+            {
+                if (property.Metadata.IsConcurrencyToken && property.Metadata.ClrType == typeof(long) && !property.IsModified)
+                {
+                    property.CurrentValue = (long)property.CurrentValue! + 1;
+                }
+            }
+        }
+    }
+
     private async Task FlushAsync(bool withCompleteTransaction, CancellationToken ct)
     {
         try
@@ -82,6 +101,8 @@ public class WriteEfSession : IEfSession
             do
             {
                 var changes = this.collectChangesService.CollectChanges(this.NativeSession);
+
+                this.IncrementConcurrencyVersionTokens();
 
                 await this.NativeSession.SaveChangesAsync(ct);
 
@@ -118,6 +139,8 @@ public class WriteEfSession : IEfSession
                 }
 
                 var listenersChanges = this.collectChangesService.CollectChanges(this.NativeSession);
+
+                this.IncrementConcurrencyVersionTokens();
 
                 await this.NativeSession.SaveChangesAsync(ct);
 

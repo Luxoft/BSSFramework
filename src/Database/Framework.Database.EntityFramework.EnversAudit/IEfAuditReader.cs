@@ -4,7 +4,7 @@ namespace Framework.Database.EntityFramework.EnversAudit;
 
 public interface IEfAuditReader
 {
-    TEntity Find<TEntity>(object id, long revision)
+    TEntity? Find<TEntity>(object id, long revision)
         where TEntity : class;
 
     IReadOnlyList<TEntity> FindObjects<TEntity>(IEnumerable<object> ids, long revision)

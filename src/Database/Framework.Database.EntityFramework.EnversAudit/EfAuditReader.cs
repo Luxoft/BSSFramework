@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using System.Reflection;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -10,7 +11,7 @@ public class EfAuditReader(DbContext dbContext) : IEfAuditReader
     private readonly IAuditEntityFactory auditEntityFactory = dbContext.GetService<IAuditEntityFactory>();
 
 
-    public TEntity Find<TEntity>(object id, long revision)
+    public TEntity? Find<TEntity>(object id, long revision)
         where TEntity : class
     {
         var metadata = this.GetMetadataOrThrow(typeof(TEntity));
@@ -18,15 +19,14 @@ public class EfAuditReader(DbContext dbContext) : IEfAuditReader
         var revisionIdProp = metadata.AuditEntityType.GetProperty(this.auditEntityFactory.RevisionIdPropertyName)!;
 
         var row = this.QueryAuditRowsForKey(metadata, id)
-                      .FirstOrDefault(r => (long)revisionIdProp.GetValue(r)! == revision)
-                  ?? throw new InvalidOperationException($"No audit data found for \"{typeof(TEntity).Name}\" id \"{id}\" at revision {revision}.");
+                      .FirstOrDefault(r => (long)revisionIdProp.GetValue(r)! == revision);
 
-        return this.ReconstructEntity<TEntity>(metadata, row);
+        return row is null ? null : this.ReconstructEntity<TEntity>(metadata, row);
     }
 
     public IReadOnlyList<TEntity> FindObjects<TEntity>(IEnumerable<object> ids, long revision)
         where TEntity : class =>
-        ids.Select(id => this.Find<TEntity>(id, revision)).ToList();
+        ids.Select(id => this.Find<TEntity>(id, revision)).Where(entity => entity is not null).ToList()!;
 
     public IReadOnlyList<long> GetRevisions(Type entityType, object id)
     {
@@ -162,7 +162,66 @@ public class EfAuditReader(DbContext dbContext) : IEfAuditReader
             }
         }
 
+        var inverseReferenceProperties = metadata.Properties.Where(p => p.InverseReferenceEntityType != null).ToList();
+
+        if (inverseReferenceProperties.Count > 0)
+        {
+            var keyProperty = metadata.Properties.First(p => p.IsKey);
+            var principalId = metadata.AuditEntityType.GetProperty(keyProperty.Name)!.GetValue(auditRow)!;
+            var revisionIdProp = metadata.AuditEntityType.GetProperty(this.auditEntityFactory.RevisionIdPropertyName)!;
+            var revision = (long)revisionIdProp.GetValue(auditRow)!;
+
+            foreach (var property in inverseReferenceProperties)
+            {
+                this.SetInverseReferenceValue(instance, property, principalId, revision);
+            }
+        }
+
         return instance;
+    }
+
+    private void SetInverseReferenceValue<TEntity>(TEntity instance, AuditPropertyMetadata property, object principalId, long revision)
+        where TEntity : class
+    {
+        var domainProperty = typeof(TEntity).GetProperty(property.ModName);
+
+        if (domainProperty is null || !domainProperty.CanWrite)
+        {
+            return;
+        }
+
+        var targetType = property.InverseReferenceEntityType!;
+        var targetMetadata = this.GetMetadataOrThrow(targetType);
+
+        var dependentEfType = dbContext.Model.FindEntityType(targetType)!;
+        var foreignKey = dependentEfType.GetForeignKeys().First(fk => fk.PrincipalEntityType.ClrType == typeof(TEntity));
+        var fkNavigationName = foreignKey.DependentToPrincipal!.Name;
+
+        var fkAuditProperty = targetMetadata.Properties.First(p => !p.IsModOnly && p.NestedPropertyName is null && p.ModName == fkNavigationName);
+
+        var revisionIdProp = targetMetadata.AuditEntityType.GetProperty(this.auditEntityFactory.RevisionIdPropertyName)!;
+        var revisionTypeProp = targetMetadata.AuditEntityType.GetProperty(this.auditEntityFactory.RevisionTypePropertyName)!;
+
+        var row = this.QueryAuditRowsForProperty(targetMetadata, fkAuditProperty.Name, principalId)
+                      .Select(r => new { Row = r, RevisionId = (long)revisionIdProp.GetValue(r)! })
+                      .Where(r => r.RevisionId <= revision)
+                      .OrderByDescending(r => r.RevisionId)
+                      .Select(r => r.Row)
+                      .FirstOrDefault();
+
+        if (row is null || (AuditRevisionType)revisionTypeProp.GetValue(row)! == AuditRevisionType.Deleted)
+        {
+            domainProperty.SetValue(instance, null);
+            return;
+        }
+
+        var reconstructMethod = typeof(EfAuditReader)
+                                .GetMethod(nameof(this.ReconstructEntity), BindingFlags.NonPublic | BindingFlags.Instance)!
+                                .MakeGenericMethod(targetType);
+
+        var nestedEntity = reconstructMethod.Invoke(this, [targetMetadata, row]);
+
+        domainProperty.SetValue(instance, nestedEntity);
     }
 
     private void SetScalarOrReferenceValue(object instance, string domainPropertyName, object? rawValue)
@@ -272,6 +331,11 @@ public class EfAuditReader(DbContext dbContext) : IEfAuditReader
     {
         var keyProperty = metadata.Properties.First(p => p.IsKey);
 
+        return this.QueryAuditRowsForProperty(metadata, keyProperty.Name, id);
+    }
+
+    private List<object> QueryAuditRowsForProperty(AuditEntityMetadata metadata, string propertyName, object value)
+    {
         var setMethod = typeof(DbContext)
                         .GetMethods()
                         .First(m => m.Name == nameof(DbContext.Set) && m.IsGenericMethodDefinition && m.GetParameters().Length == 0)
@@ -280,8 +344,8 @@ public class EfAuditReader(DbContext dbContext) : IEfAuditReader
         var queryable = (IQueryable)setMethod.Invoke(dbContext, null)!;
 
         var parameter = Expression.Parameter(metadata.AuditEntityType, "x");
-        var keyAccess = Expression.Property(parameter, keyProperty.Name);
-        var lambda = Expression.Lambda(Expression.Equal(keyAccess, Expression.Constant(id, keyAccess.Type)), parameter);
+        var propertyAccess = Expression.Property(parameter, propertyName);
+        var lambda = Expression.Lambda(Expression.Equal(propertyAccess, Expression.Constant(value, propertyAccess.Type)), parameter);
 
         var whereMethod = typeof(Queryable)
                           .GetMethods()

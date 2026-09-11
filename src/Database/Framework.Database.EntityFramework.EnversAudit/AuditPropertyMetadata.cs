@@ -7,4 +7,5 @@ public sealed record AuditPropertyMetadata(
     string ModName,
     bool IsModOnly = false,
     string? NestedPropertyName = null,
-    bool IsOwned = false);
+    bool IsOwned = false,
+    Type? InverseReferenceEntityType = null);

@@ -123,16 +123,27 @@ public class AuditModelCustomizer(
                                                                          IsOwned: true));
                                         });
 
+            var inverseOneToOneMetadata = entityType
+                                          .GetDeclaredNavigations()
+                                          .Where(navigation => !navigation.IsCollection && !navigation.IsOnDependent)
+                                          .Select(navigation => new AuditPropertyMetadata(
+                                                      navigation.Name,
+                                                      typeof(bool),
+                                                      false,
+                                                      navigation.Name,
+                                                      IsModOnly: true,
+                                                      InverseReferenceEntityType: navigation.TargetEntityType.ClrType));
+
             var collectionModFlagMetadata = entityType
                                             .GetDeclaredNavigations()
-                                            .Where(navigation => navigation.IsCollection || !navigation.IsOnDependent)
+                                            .Where(navigation => navigation.IsCollection)
                                             .Select(navigation => navigation.Name)
                                             .Concat(entityType.GetDeclaredSkipNavigations().Select(navigation => navigation.Name))
                                             .Select(navigationName => new AuditPropertyMetadata(navigationName, typeof(bool), false, navigationName, IsModOnly: true));
 
             var metadata = auditEntityFactory.GetOrCreate(
                 entityType.ClrType,
-                scalarPropertyMetadata.Concat(complexPropertyMetadata).Concat(ownedPropertyMetadata).Concat(collectionModFlagMetadata));
+                scalarPropertyMetadata.Concat(complexPropertyMetadata).Concat(ownedPropertyMetadata).Concat(inverseOneToOneMetadata).Concat(collectionModFlagMetadata));
 
             var auditEntity = modelBuilder.Entity(metadata.AuditEntityType);
 

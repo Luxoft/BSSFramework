@@ -1,4 +1,6 @@
-﻿using Framework.Core;
+﻿using Anch.GenericQueryable.EntityFramework;
+
+using Framework.Core;
 using Framework.Database;
 using Framework.Database.EntityFramework;
 using Framework.Database.EntityFramework.DependencyInjection;
@@ -20,6 +22,10 @@ public class SampleSystemEntityFrameworkExtension : IBssFrameworkExtension
         services
             .AddDbContext<SampleSystemDbContext>((sp, options) => options
                                                                   .UseSqlServer(sp.GetRequiredService<IDefaultConnectionStringSource>().ConnectionString)
+                                                                  .UseGenericQueryable(s => s.SetVisitor(sp.GetRequiredService<IExpressionVisitorContainer>().Visitor)
+                                                                                             .AddFetchRuleExpander<Framework.Authorization.BLL.AuthorizationMainDTOFetchRuleExpander>()
+                                                                                             .AddFetchRuleExpander<Framework.Configuration.BLL.ConfigurationMainDTOFetchRuleExpander>()
+                                                                                             .AddFetchRuleExpander<SampleSystem.BLL.SampleSystemMainDTOFetchRuleExpander>())
                                                                   .UseLazyLoadingProxies()
                                                                   .IgnoreComputedProperties()
                                                                   .AddEnversAudit(auditSetup =>
@@ -31,6 +37,7 @@ public class SampleSystemEntityFrameworkExtension : IBssFrameworkExtension
             .AddDbContext<SampleSystemEnversAuditDbContext>((sp, options) => options
                                                                              .UseSqlServer(
                                                                                  sp.GetRequiredService<IDefaultConnectionStringSource>().ConnectionString)
+                                                                             .UseGenericQueryable()
                                                                              .UseLazyLoadingProxies()
                                                                              .IgnoreComputedProperties())
 

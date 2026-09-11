@@ -18,10 +18,5 @@ public class PrincipalMap : AuthBaseMap<Principal>
             .WithMany()
             .HasForeignKey("RunAsId")
             .OnDelete(Microsoft.EntityFrameworkCore.DeleteBehavior.Restrict);
-
-        builder.HasMany(x => x.Permissions)
-            .WithOne(x => x.Principal)
-            .HasForeignKey("PrincipalId")
-            .OnDelete(Microsoft.EntityFrameworkCore.DeleteBehavior.Restrict);
     }
 }

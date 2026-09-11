@@ -23,7 +23,7 @@ public class PermissionMap : AuthBaseMap<Permission>
             .WithMany(x => x.Permissions)
             .HasForeignKey("PrincipalId")
             .IsRequired()
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.ClientCascade);
 
         builder.HasOne(x => x.Role)
             .WithMany(x => x.Permissions)

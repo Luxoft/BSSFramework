@@ -9,5 +9,5 @@ public static class BssFrameworkSetupExtensions
         Action<INHibernateSetup> setupAction)
         where TSelf : IBssFrameworkSetup<TSelf> =>
 
-        settings.AddExtensions(new BssFrameworkExtension(services => services.AddNHibernate(setupAction)));
+        settings.AddExtension(new BssFrameworkExtension(services => services.AddNHibernate(setupAction)));
 }

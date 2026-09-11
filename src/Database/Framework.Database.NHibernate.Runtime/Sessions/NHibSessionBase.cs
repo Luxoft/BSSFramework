@@ -1,7 +1,5 @@
 ﻿using System.Data;
 
-using Anch.Core;
-
 using Framework.Database.NHibernate.DAL.Revisions;
 using Framework.Database.NHibernate.Envers;
 
@@ -11,27 +9,15 @@ namespace Framework.Database.NHibernate.Sessions;
 
 public abstract class NHibSessionBase : INHibSession
 {
-    private Lazy<IAuditReaderPatched> LazyAuditReader { get; }
-
-    internal NHibSessionBase(NHibSessionEnvironment environment, DBSessionMode sessionMode)
-    {
-        this.Environment = environment;
-        this.SessionMode = sessionMode;
-
-        this.LazyAuditReader = LazyHelper.Create(() => this.NativeSession.GetAuditReader());
-    }
-
     public abstract bool Closed { get; }
 
-    public DBSessionMode SessionMode { get; }
+    public abstract DBSessionMode SessionMode { get; }
 
     public abstract IDbTransaction Transaction { get; }
 
-    public IAuditReaderPatched AuditReader => this.LazyAuditReader.Value;
+    public IAuditReaderPatched AuditReader => field ??= new AuditReaderPatchedFactory(this.NativeSession).Create();
 
     public abstract ISession NativeSession { get; }
-
-    protected internal NHibSessionEnvironment Environment { get; }
 
     public abstract Task FlushAsync(CancellationToken ct);
 

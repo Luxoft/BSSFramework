@@ -34,7 +34,7 @@ public class UniqueGroupDatabaseScriptGeneratorTests(IServiceProvider rootServic
         newIndex.Create();
 
         // Act
-        generator.GenerateAllDB(
+        generator.GenerateAllDb(
             this.ActualConnectionString.DataSource,
             this.ActualConnectionString.InitialCatalog,
             credential: this.ActualConnectionString.TryGetDbUserCredential(),

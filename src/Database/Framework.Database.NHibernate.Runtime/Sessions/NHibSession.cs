@@ -1,7 +1,7 @@
 ﻿using System.Data;
 
 using Framework.Database.NHibernate.Envers;
-
+using Framework.Database.NHibernate.InlineAudit;
 using NHibernate;
 
 namespace Framework.Database.NHibernate.Sessions;
@@ -15,7 +15,7 @@ public class NHibSession : INHibSession
     public NHibSession(
         NHibSessionEnvironment environment,
         DBSessionSettings settings,
-        IAuditPropertyFactory auditPropertyFactory,
+        IInlineAuditInterceptor inlineAuditInterceptor,
         IEnumerable<IDBSessionEventListener> eventListeners) =>
         this.lazyInnerSession = new Lazy<INHibSession>(() =>
         {
@@ -25,7 +25,7 @@ public class NHibSession : INHibSession
                     return new ReadOnlyNHibSession(environment);
 
                 case DBSessionMode.Write:
-                    return new WriteNHibSession(environment, auditPropertyFactory, eventListeners);
+                    return new WriteNHibSession(environment, inlineAuditInterceptor, eventListeners);
 
                 default:
                     throw new InvalidOperationException();
@@ -44,11 +44,7 @@ public class NHibSession : INHibSession
 
     public Task FlushAsync(CancellationToken ct) => this.InnerSession.FlushAsync(ct);
 
-    public long GetCurrentRevision() => this.InnerSession.GetCurrentRevision();
-
     public void AsFault() => this.InnerSession.AsFault();
-
-    public long GetMaxRevision() => this.InnerSession.GetMaxRevision();
 
     public void AsReadOnly() => this.ApplySessionMode(DBSessionMode.Read);
 

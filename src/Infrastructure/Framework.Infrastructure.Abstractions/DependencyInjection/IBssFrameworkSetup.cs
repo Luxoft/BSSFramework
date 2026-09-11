@@ -5,11 +5,11 @@ namespace Framework.Infrastructure.DependencyInjection;
 public interface IBssFrameworkSetup<out TSelf>
     where TSelf : IBssFrameworkSetup<TSelf>
 {
-    TSelf AddExtensions(IBssFrameworkExtension extension);
+    TSelf AddExtension(IBssFrameworkExtension extension);
 
-    TSelf AddExtensions<TBssFrameworkExtension>()
+    TSelf AddExtension<TBssFrameworkExtension>()
         where TBssFrameworkExtension : IBssFrameworkExtension, new() =>
-        this.AddExtensions(new TBssFrameworkExtension());
+        this.AddExtension(new TBssFrameworkExtension());
 
-    TSelf AddServices(Action<IServiceCollection> setupAction) => this.AddExtensions(new BssFrameworkExtension(setupAction));
+    TSelf AddServices(Action<IServiceCollection> setupAction) => this.AddExtension(new BssFrameworkExtension(setupAction));
 }

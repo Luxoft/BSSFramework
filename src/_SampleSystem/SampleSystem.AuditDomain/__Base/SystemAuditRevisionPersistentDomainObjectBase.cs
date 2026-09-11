@@ -7,9 +7,5 @@ public abstract class SystemAuditRevisionPersistentDomainObjectBase : IIdentityO
 {
     private long id;
 
-    protected SystemAuditRevisionPersistentDomainObjectBase()
-    {
-    }
-
     public virtual long Id => this.id;
 }

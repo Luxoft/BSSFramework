@@ -15,7 +15,7 @@ public class GenerateDBTests(IServiceProvider rootServiceProvider) : TestBase(ro
         var generator = new DbGeneratorTest();
 
         // Act
-        var ex = Record.Exception(() => generator.GenerateAllDB(
+        var ex = Record.Exception(() => generator.GenerateAllDb(
                                       this.ActualConnectionString.DataSource,
                                       this.ActualConnectionString.InitialCatalog,
                                       credential: this.ActualConnectionString.TryGetDbUserCredential()));

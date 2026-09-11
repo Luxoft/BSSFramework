@@ -8,15 +8,15 @@ public abstract class SystemAuditPersistentDomainObjectBase : IIdentityObject<Gu
 {
     private AuditIdentifier identifier;
 
-    private SampleSystemAuditRevisionEntity revision = null!;
+    private readonly SampleSystemAuditRevisionEntity revision = null!;
 
     private Guid id;
 
     private AuditRevisionType revType;
 
-    private string modifiedBy = null!;
-
     private DateTime? modifyDate;
+
+    private string modifiedBy = null!;
 
     protected SystemAuditPersistentDomainObjectBase()
     {
@@ -36,7 +36,7 @@ public abstract class SystemAuditPersistentDomainObjectBase : IIdentityObject<Gu
 
     public virtual AuditRevisionType RevType => this.revType;
 
-    public virtual string ModifiedBy => this.modifiedBy;
-
     public virtual DateTime? ModifyDate => this.modifyDate;
+
+    public virtual string ModifiedBy => this.modifiedBy;
 }

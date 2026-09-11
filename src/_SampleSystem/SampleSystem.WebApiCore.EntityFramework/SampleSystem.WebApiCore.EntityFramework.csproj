@@ -6,22 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Anch.SecuritySystem.Configurator" />
-    <PackageReference Include="Anch.SecuritySystem.VirtualPermission" />
-
-    <PackageReference Include="Luxoft.Bss.Platform.Api.Documentation" />
-    <PackageReference Include="Luxoft.Bss.Platform.Api.Middlewares" />
-    <PackageReference Include="Luxoft.Bss.Platform.Logging" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Negotiate" />
-
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+    <ProjectReference Include="..\SampleSystem.ServiceEnvironment.EntityFramework\SampleSystem.ServiceEnvironment.EntityFramework.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Database\Framework.Database.EntityFramework\Framework.Database.EntityFramework.csproj" />
-    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure.Swagger\Framework.Infrastructure.Swagger.csproj" />
-    <ProjectReference Include="..\..\Infrastructure\Framework.Infrastructure\Framework.Infrastructure.csproj" />
+    <ProjectReference Include="..\SampleSystem.WebApiCore\SampleSystem.WebApiCore.csproj" />
   </ItemGroup>
 
 </Project>

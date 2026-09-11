@@ -1,19 +1,18 @@
-﻿using Framework.Core;
-using Framework.Relations;
+﻿using Framework.Relations;
 using Framework.Restriction;
 using Framework.Validation.Attributes;
 
 namespace SampleSystem.Domain.Employee;
 
-public class EmployeeCellPhoneBase : AuditPersistentDomainObjectBase, IDetail<Employee>
+public abstract class EmployeeCellPhoneBase : AuditPersistentDomainObjectBase, IDetail<Employee>
 {
     protected readonly Employee employee = null!;
 
-    protected string? countryCode;
-    protected string? cityCode;
-    protected string? number;
+    protected string countryCode = "";
+    protected string cityCode = "";
+    protected string number = "";
 
-    protected string? fullNumber;
+    protected string fullNumber = "";
 
     protected EmployeeCellPhoneBase()
     {
@@ -31,8 +30,8 @@ public class EmployeeCellPhoneBase : AuditPersistentDomainObjectBase, IDetail<Em
     [MaxLength(3)]
     public virtual string CountryCode
     {
-        get => this.countryCode.TrimNull();
-        set => this.countryCode = value.TrimNull();
+        get => this.countryCode;
+        set => this.countryCode = value;
     }
 
     [Required]
@@ -40,8 +39,8 @@ public class EmployeeCellPhoneBase : AuditPersistentDomainObjectBase, IDetail<Em
     [MaxLength(5)]
     public virtual string CityCode
     {
-        get => this.cityCode.TrimNull();
-        set => this.cityCode = value.TrimNull();
+        get => this.cityCode;
+        set => this.cityCode = value;
     }
 
     [Required]
@@ -49,8 +48,8 @@ public class EmployeeCellPhoneBase : AuditPersistentDomainObjectBase, IDetail<Em
     [MaxLength(7)]
     public virtual string Number
     {
-        get => this.number.TrimNull();
-        set => this.number = value.TrimNull();
+        get => this.number;
+        set => this.number = value;
     }
 
     [Required]
@@ -58,8 +57,8 @@ public class EmployeeCellPhoneBase : AuditPersistentDomainObjectBase, IDetail<Em
     [MaxLength(18)]
     public virtual string FullNumber
     {
-        get => this.fullNumber.TrimNull();
-        protected internal set => this.fullNumber = value.TrimNull();
+        get => this.fullNumber;
+        protected internal set => this.fullNumber = value;
     }
 
     Employee IDetail<Employee>.Master => this.employee;

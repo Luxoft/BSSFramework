@@ -25,7 +25,7 @@ public abstract class AuditTests(IServiceProvider rootServiceProvider) : TestBas
 
         var employeeStrictDto = new EmployeeStrictDTO
         {
-            NameEng = new Fio() { FirstName = "firstName", LastName = "lastName" },
+            NameEng = new FioShort() { FirstName = "firstName", LastName = "lastName" },
             WorkPeriod = new Period(DateTime.Now.AddDays(-1), DateTime.Now),
             ValidateVirtualProp = DateTime.Now,
             EducationDuration = new Period(DateTime.Now.AddYears(-5), DateTime.Now.AddYears(-2)),
@@ -58,7 +58,7 @@ public abstract class AuditTests(IServiceProvider rootServiceProvider) : TestBas
 
         var employeeStrictDto = new EmployeeStrictDTO
         {
-            NameEng = new Fio() { FirstName = "firstName", LastName = "lastName" },
+            NameEng = new FioShort() { FirstName = "firstName", LastName = "lastName" },
             WorkPeriod = new Period(DateTime.Now.AddDays(-1), DateTime.Now),
             ValidateVirtualProp = DateTime.Now,
             EducationDuration = new Period(DateTime.Now.AddYears(-5), DateTime.Now.AddYears(-2)),
@@ -103,7 +103,7 @@ public abstract class AuditTests(IServiceProvider rootServiceProvider) : TestBas
         var employeeAuditController = this.MainAuditWebApi.Employee;
         var employeeStrictDto = new EmployeeStrictDTO
         {
-            NameEng = new Fio() { FirstName = "firstName", LastName = "lastName" },
+            NameEng = new FioShort() { FirstName = "firstName", LastName = "lastName" },
             WorkPeriod = new Period(DateTime.Now.AddDays(-1), DateTime.Now),
             ValidateVirtualProp = DateTime.Now,
             EducationDuration = new Period(DateTime.Now.AddYears(-5), DateTime.Now.AddYears(-2)),
@@ -133,7 +133,7 @@ public abstract class AuditTests(IServiceProvider rootServiceProvider) : TestBas
 
         var employeeStrictDto = new EmployeeStrictDTO
         {
-            NameEng = new Fio() { FirstName = "firstName", LastName = "lastName" },
+            NameEng = new FioShort() { FirstName = "firstName", LastName = "lastName" },
             WorkPeriod = new Period(DateTime.Now.AddDays(-1), DateTime.Now),
             ValidateVirtualProp = DateTime.Now,
             EducationDuration = new Period(DateTime.Now.AddYears(-5), DateTime.Now.AddYears(-2)),
@@ -178,7 +178,7 @@ public abstract class AuditTests(IServiceProvider rootServiceProvider) : TestBas
 
         var employeeStrictDto = new EmployeeStrictDTO
         {
-            NameEng = new Fio() { FirstName = "firstName", LastName = "lastName" },
+            NameEng = new FioShort() { FirstName = "firstName", LastName = "lastName" },
             WorkPeriod = new Period(DateTime.Now.AddDays(-1), DateTime.Now),
             ValidateVirtualProp = DateTime.Now,
             EducationDuration = new Period(DateTime.Now.AddYears(-5), DateTime.Now.AddYears(-2)),
@@ -223,7 +223,7 @@ public abstract class AuditTests(IServiceProvider rootServiceProvider) : TestBas
 
         var employeeStrictDto = new EmployeeStrictDTO
         {
-            NameEng = new Fio() { FirstName = "firstName", LastName = "lastName" },
+            NameEng = new FioShort() { FirstName = "firstName", LastName = "lastName" },
             WorkPeriod = new Period(DateTime.Now.AddDays(-1), DateTime.Now),
             ValidateVirtualProp = DateTime.Now,
             EducationDuration = new Period(DateTime.Now.AddYears(-5), DateTime.Now.AddYears(-2)),

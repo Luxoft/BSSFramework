@@ -12,7 +12,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 using NHibernate.Tool.hbm2ddl;
 
-using SampleSystem.DbGenerate.Migrations;
 using SampleSystem.ServiceEnvironment.DependencyInjection;
 
 namespace SampleSystem.DbGenerate.NHibernate;
@@ -36,7 +35,7 @@ public class UseSchemeUpdateTest
 
     private static void RunFluentMigrator(string connectionString)
     {
-        var migrator = new BssFluentMigrator(connectionString, typeof(AddLogTable).Assembly);
+        var migrator = new BssFluentMigrator(connectionString);
 
         migrator.Migrate();
     }

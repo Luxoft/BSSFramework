@@ -26,7 +26,7 @@ public partial class SecurityDomainBLLBase<TDomainObject>
         return this.Context.Validator.GetValidationResult(domainObject, (int)context);
     }
 
-    internal protected void Save(TDomainObject value, bool validate)
+    protected internal void Save(TDomainObject value, bool validate)
     {
         if (value is null) throw new ArgumentNullException(nameof(value));
 

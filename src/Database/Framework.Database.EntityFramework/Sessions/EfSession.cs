@@ -1,32 +1,39 @@
 ﻿using System.Data;
 
+using Framework.Database.EntityFramework.SqlExceptionProcessors;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace Framework.Database.EntityFramework.Sessions;
 
-public class EfSession : IEfSession
+public class EfSession<TDbContext> : IEfSession
+    where TDbContext : DbContext
 {
     private DBSessionMode? sessionMode;
 
     private readonly Lazy<IEfSession> lazyInnerSession;
 
-    public EfSession(DbContext nativeSession, DBSessionSettings settings, IEnumerable<IDBSessionEventListener> eventListeners) =>
+    public EfSession(
+        TDbContext nativeSession,
+        DBSessionSettings settings,
+        IEnumerable<IDBSessionEventListener> eventListeners,
+        IEfSqlExceptionExpander exceptionExpander) =>
         this.lazyInnerSession = new Lazy<IEfSession>(() =>
         {
             switch (this.sessionMode ?? settings.DefaultSessionMode)
             {
                 case DBSessionMode.Read:
-                    return new ReadOnlyEfSession(nativeSession);
+                    return new ReadOnlyEfSession<TDbContext>(nativeSession);
 
                 case DBSessionMode.Write:
-                    return new WriteEfSession(nativeSession, eventListeners);
+                    return new WriteEfSession(nativeSession, eventListeners, exceptionExpander);
 
                 default:
                     throw new InvalidOperationException();
             }
         });
 
-    public virtual IDBSession InnerSession => this.lazyInnerSession.Value;
+    public IDBSession InnerSession => this.lazyInnerSession.Value;
 
     public DbContext NativeSession => this.lazyInnerSession.Value.NativeSession;
 
@@ -36,11 +43,7 @@ public class EfSession : IEfSession
 
     public async Task FlushAsync(CancellationToken ct) => await this.InnerSession.FlushAsync(ct);
 
-    public long GetCurrentRevision() => this.InnerSession.GetCurrentRevision();
-
     public void AsFault() => this.InnerSession.AsFault();
-
-    public long GetMaxRevision() => this.InnerSession.GetMaxRevision();
 
     public void AsReadOnly() => this.ApplySessionMode(DBSessionMode.Read);
 

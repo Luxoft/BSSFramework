@@ -1,0 +1,22 @@
+﻿using Framework.Database.EntityFramework.EnversAudit;
+
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using SampleSystem.AuditDomain;
+
+namespace SampleSystem.Generated.DAL.EntityFramework.Mapping.Envers;
+
+public class SampleSystemAuditRevisionEntityMap : IEntityTypeConfiguration<SampleSystemAuditRevisionEntity>
+{
+    public void Configure(EntityTypeBuilder<SampleSystemAuditRevisionEntity> builder)
+    {
+        builder.ToTable(nameof(AuditRevisionEntity), "appAudit");
+        builder.HasKey(x => x.Id);
+        builder.Property(x => x.Id).HasColumnName("Id").ValueGeneratedOnAdd().IsRequired();
+        builder.Property(x => x.Author).HasColumnName("author").IsRequired();
+        builder.Property(x => x.RevisionDate).HasColumnName("RevisionDate").IsRequired();
+        builder.HasOne(typeof(AuditRevisionEntity)).WithOne().HasForeignKey(
+            typeof(SampleSystemAuditRevisionEntity),
+            nameof(SampleSystemAuditRevisionEntity.Id));
+    }
+}

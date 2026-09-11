@@ -10,18 +10,16 @@ public class CustomCompanyLegalEntityMap : IEntityTypeConfiguration<CustomCompan
     public void Configure(EntityTypeBuilder<CustomCompanyLegalEntity> builder)
     {
         builder.ToView(nameof(CustomCompanyLegalEntity));
-        //builder.HasKey(x => x.Id);
-        //builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
-        //builder.Property(x => x.Code).IsRequired();
-        //builder.SplitToTable("LegalEntityBase", "app", split =>
-        //{
-        //    split.Property(x => x.AribaStatusDescription).HasColumnName("aribaStatusdescription");
-        //    split.Property(x => x.AribaStatusType).HasColumnName("aribaStatustype");
-        //    split.Property(x => x.Name).HasColumnName("Name");
-        //    split.Property(x => x.NameEnglish).HasColumnName("NameEnglish");
-        //});
-        //builder.HasOne(typeof(CompanyLegalEntity)).WithOne().HasForeignKey(typeof(CustomCompanyLegalEntity), nameof(CustomCompanyLegalEntity.Id)).OnDelete(DeleteBehavior.ClientCascade);
-        //builder.Ignore(x => x.CurrentObj);
-        //builder.Ignore(x => x.BaseObj);
+        builder.HasKey(x => x.Id);
+        builder.Property(x => x.Id).ValueGeneratedNever();
+        builder.Property(x => x.Code).HasColumnName("Code").IsRequired();
+        builder.Property(x => x.Name).HasColumnName("Name").IsRequired();
+        builder.Property(x => x.NameEnglish).HasColumnName("NameEnglish").IsRequired();
+        builder.Property(x => x.AribaStatusDescription).HasColumnName("aribaStatusdescription");
+        builder.Property(x => x.AribaStatusType).HasColumnName("aribaStatustype");
+        builder.Property<System.Guid?>("baseObjId").HasColumnName("baseObjId");
+        builder.HasOne(x => x.BaseObj).WithMany().HasForeignKey("baseObjId");
+        builder.Property<System.Guid?>("currentObjId").HasColumnName("currentObjId");
+        builder.HasOne(x => x.CurrentObj).WithMany().HasForeignKey("currentObjId");
     }
 }

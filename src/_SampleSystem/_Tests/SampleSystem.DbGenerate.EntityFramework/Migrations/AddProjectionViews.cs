@@ -112,8 +112,9 @@ FROM [app].[BusinessUnitType]");
         this.Execute.Sql(@"
 CREATE VIEW [app].[CustomCompanyLegalEntity]
 AS
-SELECT [Id]
-FROM [app].[CompanyLegalEntity]");
+SELECT [t0].[Id], [t0].[Code], [t0].[currentObjId], [t1].[Name], [t1].[NameEnglish], [t1].[baseObjId], [t1].[aribaStatusdescription], [t1].[aribaStatustype]
+FROM [app].[CompanyLegalEntity] [t0]
+INNER JOIN [app].[LegalEntityBase] [t1] ON [t0].[Id] = [t1].[Id]");
 
         this.Execute.Sql(@"
 CREATE VIEW [app].[CustomTestObjForNested]

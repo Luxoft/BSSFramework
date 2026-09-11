@@ -8,4 +8,5 @@ public sealed record AuditPropertyMetadata(
     bool IsModOnly = false,
     string? NestedPropertyName = null,
     bool IsOwned = false,
-    Type? InverseReferenceEntityType = null);
+    Type? InverseReferenceEntityType = null,
+    string? EntryPropertyName = null);

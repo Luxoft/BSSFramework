@@ -177,7 +177,7 @@ public class AuditFlushInterceptor : SaveChangesInterceptor
     {
         if (property.NestedPropertyName is null)
         {
-            return entry.Property(property.Name);
+            return entry.Property(property.EntryPropertyName ?? property.Name);
         }
 
         if (property.IsOwned)

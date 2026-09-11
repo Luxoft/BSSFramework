@@ -1,5 +1,8 @@
 ﻿using System.Data;
 
+using Framework.Core;
+using Framework.Database.EntityFramework.SqlExceptionProcessors;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
@@ -9,16 +12,19 @@ public class WriteEfSession : IEfSession
 {
     private readonly IDBSessionEventListener[] eventListeners;
 
+    private readonly IExceptionExpander exceptionExpander;
+
     private readonly EfCollectChangesService collectChangesService = new();
 
     private readonly RelationalTransaction efTransaction;
 
     private bool manualFault;
 
-    public WriteEfSession(DbContext nativeSession, IEnumerable<IDBSessionEventListener> eventListeners)
+    public WriteEfSession(DbContext nativeSession, IEnumerable<IDBSessionEventListener> eventListeners, IEfSqlExceptionExpander exceptionExpander)
     {
         this.NativeSession = nativeSession;
         this.eventListeners = eventListeners.ToArray();
+        this.exceptionExpander = exceptionExpander;
 
         this.efTransaction = (RelationalTransaction)nativeSession.Database.BeginTransaction();
         this.Transaction = this.efTransaction.GetDbTransaction();
@@ -184,9 +190,18 @@ public class WriteEfSession : IEfSession
                 }
             }
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            throw;
+            var expandedException = this.exceptionExpander.Expand(ex);
+
+            if (expandedException == ex)
+            {
+                throw;
+            }
+            else
+            {
+                throw expandedException;
+            }
         }
     }
 

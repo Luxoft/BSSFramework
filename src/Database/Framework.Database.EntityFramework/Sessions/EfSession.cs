@@ -1,5 +1,7 @@
 ﻿using System.Data;
 
+using Framework.Database.EntityFramework.SqlExceptionProcessors;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace Framework.Database.EntityFramework.Sessions;
@@ -11,7 +13,11 @@ public class EfSession<TDbContext> : IEfSession
 
     private readonly Lazy<IEfSession> lazyInnerSession;
 
-    public EfSession(TDbContext nativeSession, DBSessionSettings settings, IEnumerable<IDBSessionEventListener> eventListeners) =>
+    public EfSession(
+        TDbContext nativeSession,
+        DBSessionSettings settings,
+        IEnumerable<IDBSessionEventListener> eventListeners,
+        IEfSqlExceptionExpander exceptionExpander) =>
         this.lazyInnerSession = new Lazy<IEfSession>(() =>
         {
             switch (this.sessionMode ?? settings.DefaultSessionMode)
@@ -20,7 +26,7 @@ public class EfSession<TDbContext> : IEfSession
                     return new ReadOnlyEfSession<TDbContext>(nativeSession);
 
                 case DBSessionMode.Write:
-                    return new WriteEfSession(nativeSession, eventListeners);
+                    return new WriteEfSession(nativeSession, eventListeners, exceptionExpander);
 
                 default:
                     throw new InvalidOperationException();

@@ -90,7 +90,8 @@ public class AuditModelCustomizer(
                                                      primaryKey.Properties.Contains(property) ? property.Name : property.GetColumnName(tableIdentifier) ?? property.Name,
                                                      property.ClrType,
                                                      primaryKey.Properties.Contains(property),
-                                                     modNameByPropertyName.GetValueOrDefault(property.Name, property.Name)));
+                                                     modNameByPropertyName.GetValueOrDefault(property.Name, property.Name),
+                                                     EntryPropertyName: property.Name));
 
             var complexPropertyMetadata = entityType
                                           .GetComplexProperties()

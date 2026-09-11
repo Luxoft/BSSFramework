@@ -3,6 +3,7 @@ using Anch.GenericQueryable.DependencyInjection;
 using Anch.GenericQueryable.EntityFramework;
 
 using Framework.Core;
+using Framework.Database.EntityFramework.SqlExceptionProcessors;
 using Framework.Database.EntityFramework.Sessions;
 using Framework.DependencyInjection;
 
@@ -40,6 +41,8 @@ public class EntityFrameworkSetup<TDbContext> : IEntityFrameworkSetup<TDbContext
 
             services.AddScoped(typeof(ReadOnlyEfSession<>));
         }
+
+        services.AddSingleton<IEfSqlExceptionExpander, SqlExceptionProcessorInterceptor>();
 
         services.AddGenericQueryable(v => v.SetFetchService<EfFetchService>().SetTargetMethodExtractor<EfTargetMethodExtractor>());
 

@@ -24,7 +24,7 @@ public partial class BusinessUnitController
             {
                 var bll = evaluateData.Context.Logics.BusinessUnit;
                 var tree = bll.GetTree(new DTOFetchRule<BusinessUnit>(ViewDTOType.FullDTO));
-                return HierarchicalNodeExtensions.ChangeItem<BusinessUnit, BusinessUnitFullDTO, Guid>(tree, unit => LambdaHelper.ToFullDTO((BusinessUnit)unit, evaluateData.MappingService));
+                return tree.ChangeItem<BusinessUnit, BusinessUnitFullDTO, Guid>(unit => ((BusinessUnit)unit).ToFullDTO(evaluateData.MappingService));
             });
 
     [HttpPost]
@@ -40,6 +40,6 @@ public partial class BusinessUnitController
                     selectOperation,
                     new DTOFetchRule<BusinessUnit>(ViewDTOType.FullDTO));
 
-                return SelectOperationResultExtensions.ChangeItem<BusinessUnit, BusinessUnitFullDTO, Guid>(odataTree, x => LambdaHelper.ToFullDTO((BusinessUnit)x, evaluateData.MappingService));
+                return SelectOperationResultExtensions.ChangeItem<BusinessUnit, BusinessUnitFullDTO, Guid>(odataTree, x => ((BusinessUnit)x).ToFullDTO(evaluateData.MappingService));
             });
 }

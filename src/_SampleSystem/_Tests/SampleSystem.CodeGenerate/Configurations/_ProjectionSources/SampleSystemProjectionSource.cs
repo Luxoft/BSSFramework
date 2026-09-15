@@ -81,7 +81,7 @@ public class SampleSystemProjectionSource : ProjectionSource
 
         this.TestDepartment = new Projection<HRDepartment>(() => this.TestDepartment!, true)
                               .Property(department => department.Name)
-                              .Property(department => department.Location, () => this.TestLocation!)
+                              .Property(department => department.Location, () => this.TestLocation)
                               .Property(department => department.Location.BinaryData);
 
         this.HerBusinessUnit = new Projection<BusinessUnit>(() => this.HerBusinessUnit!)
@@ -97,7 +97,7 @@ public class SampleSystemProjectionSource : ProjectionSource
 
         this.TestLocationCollectionProperties = new Projection<Location>(() => this.TestLocationCollectionProperties!, true)
                                                 .Property(location => location.Name)
-                                                .Property(x => x.Children, () => this.TestLocation!)
+                                                .Property(x => x.Children, () => this.TestLocation)
                                                 .CustomProperty<Guid[]>("Child_Identities")
                                                 .CustomProperty<Period[]>("Child_Periods")
                                                 .CustomProperty<DateTime[]>("Date_Intervals")
@@ -131,9 +131,9 @@ public class SampleSystemProjectionSource : ProjectionSource
 
         this.NonPersistentContainer = new Projection<DomainObjectBase>(() => this.NonPersistentContainer!)
                                     .CustomProperty<string>("TestString", true)
-                                    .CustomProperty("TestBU", true, () => this.TestBusinessUnit!)
+                                    .CustomProperty("TestBU", true, () => this.TestBusinessUnit)
                                     .CustomManyProperty<Period>("PeriodArray", true, null, typeof(Array))
-                                    .CustomManyProperty("Locations", true, () => this.TestLocation!, typeof(List<>));
+                                    .CustomManyProperty("Locations", true, () => this.TestLocation, typeof(List<>));
 
         this.VisualProject = new Projection<Project>(() => this.VisualProject!)
             .Property(proj => proj.Code);

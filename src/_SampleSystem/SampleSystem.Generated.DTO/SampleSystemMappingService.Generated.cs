@@ -244,8 +244,6 @@ namespace SampleSystem.Generated.DTO
         
         void MapEmployeeCellPhone(SampleSystem.Domain.Employee.EmployeeCellPhone domainObject, SampleSystem.Generated.DTO.EmployeeCellPhoneEventRichDTO mappingObject);
         
-        void MapEmployeeCellPhoneBase(SampleSystem.Domain.Employee.EmployeeCellPhoneBase domainObject, SampleSystem.Generated.DTO.EmployeeCellPhoneBaseEventRichDTO mappingObject);
-        
         void MapEmployeeComplexChangeModel(SampleSystem.Generated.DTO.EmployeeComplexChangeModelStrictDTO mappingObject, SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel domainObject);
         
         void MapEmployeeComplexChangeModel(SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeComplexChangeModelEventRichDTO mappingObject);
@@ -1021,8 +1019,6 @@ namespace SampleSystem.Generated.DTO
         SampleSystem.Domain.Employee.EmployeeCellPhone ToEmployeeCellPhone(SampleSystem.Generated.DTO.EmployeeCellPhoneUpdateDTO employeeCellPhoneUpdateDTO, SampleSystem.Domain.Employee.Employee master);
         
         SampleSystem.Domain.Employee.EmployeeCellPhone ToEmployeeCellPhone(SampleSystem.Generated.DTO.EmployeeCellPhoneIntegrationRichDTO employeeCellPhoneRichIntegrationDTO);
-        
-        SampleSystem.Domain.Employee.EmployeeCellPhoneBase ToEmployeeCellPhoneBase(SampleSystem.Generated.DTO.EmployeeCellPhoneBaseIdentityDTO employeeCellPhoneBaseIdentityDTO);
         
         SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel ToEmployeeComplexChangeModel(SampleSystem.Generated.DTO.EmployeeComplexChangeModelStrictDTO employeeComplexChangeModelStrictDTO);
         
@@ -3925,29 +3921,6 @@ namespace SampleSystem.Generated.DTO
         }
         
         public virtual void MapEmployeeCellPhone(SampleSystem.Domain.Employee.EmployeeCellPhone domainObject, SampleSystem.Generated.DTO.EmployeeCellPhoneEventRichDTO mappingObject)
-        {
-            mappingObject.Active = domainObject.Active;
-            mappingObject.CityCode = domainObject.CityCode;
-            mappingObject.CountryCode = domainObject.CountryCode;
-            mappingObject.CreateDate = domainObject.CreateDate;
-            mappingObject.CreatedBy = domainObject.CreatedBy;
-            if (!object.ReferenceEquals(domainObject.Employee, null))
-            {
-                mappingObject.Employee = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Employee, this);
-            }
-            else
-            {
-                mappingObject.Employee = null;
-            }
-            mappingObject.FullNumber = domainObject.FullNumber;
-            mappingObject.Id = domainObject.Id;
-            mappingObject.ModifiedBy = domainObject.ModifiedBy;
-            mappingObject.ModifyDate = domainObject.ModifyDate;
-            mappingObject.Number = domainObject.Number;
-            mappingObject.Version = domainObject.Version;
-        }
-        
-        public virtual void MapEmployeeCellPhoneBase(SampleSystem.Domain.Employee.EmployeeCellPhoneBase domainObject, SampleSystem.Generated.DTO.EmployeeCellPhoneBaseEventRichDTO mappingObject)
         {
             mappingObject.Active = domainObject.Active;
             mappingObject.CityCode = domainObject.CityCode;
@@ -8245,11 +8218,6 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.Employee.EmployeeCellPhone ToEmployeeCellPhone(SampleSystem.Generated.DTO.EmployeeCellPhoneIntegrationRichDTO employeeCellPhoneRichIntegrationDTO, SampleSystem.Domain.Employee.Employee employee)
         {
             return this.ToDomainObject(employeeCellPhoneRichIntegrationDTO, () => new SampleSystem.Domain.Employee.EmployeeCellPhone(employee));
-        }
-        
-        public virtual SampleSystem.Domain.Employee.EmployeeCellPhoneBase ToEmployeeCellPhoneBase(SampleSystem.Generated.DTO.EmployeeCellPhoneBaseIdentityDTO employeeCellPhoneBaseIdentityDTO)
-        {
-            return this.GetById<SampleSystem.Domain.Employee.EmployeeCellPhoneBase>(employeeCellPhoneBaseIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel ToEmployeeComplexChangeModel(SampleSystem.Generated.DTO.EmployeeComplexChangeModelStrictDTO employeeComplexChangeModelStrictDTO)

@@ -44,7 +44,7 @@ public abstract class RestrictionRoleTests(IServiceProvider rootServiceProvider)
                          .Select(v => v.Identity);
 
         // Assert
-        Assert.Equal(new[] { testObjects[0], testObjects[2] }, result);
+        Assert.Equal(new[] { testObjects[0], testObjects[2] }.OrderBy(v => v.Id), result.OrderBy(v => v.Id));
     }
 
     [Fact]

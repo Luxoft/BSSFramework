@@ -16,5 +16,5 @@ public class BssDatabaseTestingProvider : IDatabaseTestingProvider
                 .AddSingleton<ISqlServerFactory, SqlServerFactory>()
                 .AddSingleton<IDatabaseFileInfoResolver, DatabaseFileInfoResolver>()
                 .AddKeyedSingleton<IInitializer, BssEmptySchemaInitializer>(BssEmptySchemaInitializer.Key)
-                .AddSingleton(new ExecuteScriptInfo(@"__Support\Scripts"));
+                .AddSingleton(new ExecuteScriptInfo(Path.Combine("__Support", "Scripts")));
 }

@@ -2,14 +2,13 @@
 
   <PropertyGroup>
     <IsPackable>false</IsPackable>
-    <OutputType>Exe</OutputType>
     <RootNamespace>SampleSystem.IntegrationTests</RootNamespace>
+    <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="xunit.v3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
-    <PackageReference Include="xunit.runner.visualstudio" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,7 +18,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="..\SampleSystem.IntegrationTests.EntityFramework\**\*Impl.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\SampleSystem.IntegrationTests.EntityFramework\testAppSettings.json" Link="testAppSettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+
+    <Content Include="..\SampleSystem.IntegrationTests.EntityFramework\__Support\**\*.sql"
+             LinkBase="__Support"
+             CopyToOutputDirectory="PreserveNewest" />
+
   </ItemGroup>
 
 </Project>

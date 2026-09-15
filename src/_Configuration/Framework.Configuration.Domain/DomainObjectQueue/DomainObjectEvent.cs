@@ -22,11 +22,11 @@ public class DomainObjectEvent : AuditPersistentDomainObjectBase
 
     private long revision;
 
-    private string serializeData = null!;
+    private string serializeData = "";
 
-    private string serializeType = null!;
+    private string serializeType = "";
 
-    private string queueTag = null!;
+    private string queueTag = "";
 
     private int size;
 

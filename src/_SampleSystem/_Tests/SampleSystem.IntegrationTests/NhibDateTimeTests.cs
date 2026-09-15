@@ -12,7 +12,7 @@ public abstract class NhibDateTimeTests(IServiceProvider rootServiceProvider) : 
     public void CreateObject_CreatedDateOverride()
     {
         // Arrange
-        var testDate = new DateTime(2000, 5, 5);
+        var testDate = new DateTime(2000, 5, 5, 0, 0, 0, DateTimeKind.Utc);
         this.SetCurrentDateTime(testDate);
 
         var example1Controller = this.GetControllerEvaluator<Example1Controller>();

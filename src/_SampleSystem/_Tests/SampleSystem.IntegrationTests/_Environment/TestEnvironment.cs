@@ -26,7 +26,7 @@ public abstract class TestEnvironment : BssTestEnvironment
     private const string SettingsFileName = "testAppSettings.json";
 
     protected override IConfiguration RawConfiguration { get; } = new ConfigurationBuilder()
-                                                                  .SetBasePath(Directory.GetCurrentDirectory())
+                                                                  .SetBasePath(AppContext.BaseDirectory)
                                                                   .AddJsonFile(SettingsFileName, false, true)
                                                                   .AddJsonFile($"{Environment.MachineName}.{SettingsFileName}", true)
                                                                   .AddEnvironmentVariables($"{nameof(SampleSystem)}_").Build();
@@ -38,7 +38,7 @@ public abstract class TestEnvironment : BssTestEnvironment
 
     protected override void InitializeServices(IServiceCollection services, IConfiguration configuration) =>
 
-        services.AddGeneralDependencyInjection(configuration, new HostingEnvironment(), s => s.AddExtensions(this.BssFrameworkExtension))
+        services.AddGeneralDependencyInjection(configuration, new HostingEnvironment(), s => s.AddExtension(this.BssFrameworkExtension))
 
                 .AddSingleton<SampleSystemInitializer>()
 

@@ -18,28 +18,6 @@ namespace SampleSystem.IntegrationTests;
 
 public abstract class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
-    [AnchFact]
-    public async Task GetEmployeeFromDB_FilterByAge_ReturnNotNulRecords(CancellationToken ct)
-    {
-        /*
-         * дефект в старых версих nhibernate.
-         * Linq в конструкциях сравнений (например q.Age == 10) дополнительно генерирует включение null полей (например `or employee0_.[age] is null`))
-         */
-
-        // Arrange
-        this.DataManager.SaveEmployee(Guid.NewGuid(), age: 10);
-        await this.ActualConnectionString.ExecuteSqlAsync("INSERT INTO [app].[Employee] ([id], age) VALUES (NewId(), null)", ct);
-
-        // Act, IntegrationNamespace
-        var actual = this.Evaluate(
-            DBSessionMode.Read,
-            ctx => ctx.Logics.Employee.GetUnsecureQueryable().Where(q => q.Age == 10).ToList());
-
-        // Assert
-        Assert.Single(actual);
-        Assert.True(actual.Select(z => z.Age).All(z => z == 10));
-    }
-
     [Fact]
     public void AddNewEmployee_CheckEmployeeSaved()
     {

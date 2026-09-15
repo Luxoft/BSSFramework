@@ -7,7 +7,7 @@ public class PermissionMap : AuthBaseMap<Permission>
 {
     public PermissionMap()
     {
-        this.Map(x => x.Comment).Length(int.MaxValue);
+        this.Map(x => x.Comment).Length(int.MaxValue).Not.Nullable();
         this.References(x => x.DelegatedFrom).Column($"{nameof(Permission.DelegatedFrom)}Id");
         this.References(x => x.Principal).Column($"{nameof(Permission.Principal)}Id").Not.Nullable();
         this.References(x => x.Role).Column($"{nameof(Permission.Role)}Id").Not.Nullable();

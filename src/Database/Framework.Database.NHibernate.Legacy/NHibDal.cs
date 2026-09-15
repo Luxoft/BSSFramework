@@ -7,10 +7,10 @@ using Anch.GenericQueryable.Fetching;
 
 using Framework.Core;
 using Framework.Database.Domain;
+using Framework.Database.InlineAudit;
 using Framework.Database.NHibernate.DAL.Revisions;
 using Framework.Database.NHibernate.Envers;
 using Framework.Database.NHibernate.Envers.LinqVisitors;
-using Framework.Database.NHibernate.Sessions;
 
 using NHibernate;
 using NHibernate.Envers.Query;
@@ -19,19 +19,22 @@ using NHibernate.Linq;
 
 namespace Framework.Database.NHibernate;
 
-public class NHibDal<TDomainObject, TIdent>(INHibSession session, IAsyncDal<TDomainObject, TIdent> asyncDal, IDefaultCancellationTokenSource? defaultCancellationTokenSource = null) : IDAL<TDomainObject, TIdent>
+public class NHibDal<TDomainObject, TIdent>(
+    ISession nativeSession,
+    IAuditReaderPatched auditReader,
+    IAsyncDal<TDomainObject, TIdent> asyncDal,
+    IEnumerable<InlineAuditBinding> inlineAuditBindings,
+    IDefaultCancellationTokenSource? defaultCancellationTokenSource = null) : IDAL<TDomainObject, TIdent>
     where TDomainObject : class
     where TIdent : notnull
 {
     private static readonly LambdaCompileCache LambdaCompileCache = new(LambdaCompileMode.None);
 
-    private ISession NativeSession => session.NativeSession;
-
-    public TDomainObject GetById(TIdent id, LockRole lockRole) => this.NativeSession.Get<TDomainObject>(id, lockRole.ToLockMode());
+    public TDomainObject GetById(TIdent id, LockRole lockRole) => nativeSession.Get<TDomainObject>(id, lockRole.ToLockMode());
 
     public void Lock(TDomainObject domainObject, LockRole lockRole) => defaultCancellationTokenSource.RunSync(ct => asyncDal.LockAsync(domainObject, lockRole, ct));
 
-    public void Refresh(TDomainObject domainObject) => this.NativeSession.Refresh(domainObject);
+    public void Refresh(TDomainObject domainObject) => nativeSession.Refresh(domainObject);
 
     public virtual void Save(TDomainObject domainObject) => defaultCancellationTokenSource.RunSync(ct => asyncDal.SaveAsync(domainObject, ct));
 
@@ -53,24 +56,24 @@ public class NHibDal<TDomainObject, TIdent>(INHibSession session, IAsyncDal<TDom
         return withFetchQueryable.WithLock(lockRole.ToLockMode());
     }
 
-    public TDomainObject GetObjectByRevision(TIdent id, long revision) => this.GetAuditReader().Find<TDomainObject>(id, revision);
+    public TDomainObject GetObjectByRevision(TIdent id, long revision) => auditReader.Find<TDomainObject>(id, revision);
 
     public IEnumerable<TDomainObject> GetObjectsByRevision(IEnumerable<TIdent> idCollection, long revisionNumber) =>
-        this.GetAuditReader().FindObjects<TDomainObject>(idCollection.Cast<object>(), revisionNumber);
+        auditReader.FindObjects<TDomainObject>(idCollection.Cast<object>(), revisionNumber);
 
-    public IEnumerable<long> GetRevisions(TIdent id) => this.GetAuditReader().GetRevisions(typeof(TDomainObject), id).ToList();
+    public IEnumerable<long> GetRevisions(TIdent id) => auditReader.GetRevisions(typeof(TDomainObject), id).ToList();
 
     public IReadOnlyList<Tuple<T, long>> GetDomainObjectRevisions<T>(TIdent id, int takeCount)
         where T : class =>
-        this.GetAuditReader().GetDomainObjectRevisions<T>(id, takeCount);
+        auditReader.GetDomainObjectRevisions<T>(id, takeCount);
 
     public IEnumerable<long> GetRevisions(TIdent id, long maxRevision) =>
-        this.GetAuditReader().GetRevisions(typeof(TDomainObject), id, maxRevision).ToList();
+        auditReader.GetRevisions(typeof(TDomainObject), id, maxRevision).ToList();
 
     public long? GetPreviousRevision(TIdent id, long maxRevision) =>
-        this.GetAuditReader().GetPreviousRevision(typeof(TDomainObject), id, maxRevision);
+        auditReader.GetPreviousRevision(typeof(TDomainObject), id, maxRevision);
 
-    public long GetCurrentRevision() => this.GetAuditReader().GetCurrentRevision<AuditRevisionEntity>(false).Id;
+    public long GetCurrentRevision() => auditReader.GetCurrentRevision<AuditRevisionEntity>(false).Id;
 
     public DomainObjectPropertyRevisions<TIdent, TProperty> GetPropertyRevisions<TProperty>(
         TIdent id,
@@ -131,7 +134,7 @@ public class NHibDal<TDomainObject, TIdent>(INHibSession session, IAsyncDal<TDom
             return this.GetPrimitivePropertiesRevision(id, propertyExpression, period);
         }
 
-        var queryCreator = this.GetAuditReader().CreatePatchedQuery();
+        var queryCreator = auditReader.CreatePatchedQuery();
 
         var rootPropertyName = new string(propertyPath.TakeWhile(z => z != '.').ToArray());
 
@@ -170,11 +173,9 @@ public class NHibDal<TDomainObject, TIdent>(INHibSession session, IAsyncDal<TDom
 
     public DomainObjectRevision<TIdent> GetObjectRevisions(TIdent identity, Period? period = null)
     {
-        var auditReaderPatched = this.GetAuditReader();
-
-        var auditQuery = auditReaderPatched.CreatePatchedQuery()
-                                           .ForHistoryOf<TDomainObject, AuditRevisionEntity, TIdent>(true)
-                                           .Add(AuditEntity.Id().Eq(identity));
+        var auditQuery = auditReader.CreatePatchedQuery()
+                                    .ForHistoryOf<TDomainObject, AuditRevisionEntity, TIdent>(true)
+                                    .Add(AuditEntity.Id().Eq(identity));
 
         auditQuery = this.TryInjectPeriodQuery(auditQuery, period);
 
@@ -197,9 +198,9 @@ public class NHibDal<TDomainObject, TIdent>(INHibSession session, IAsyncDal<TDom
     }
 
     public IEnumerable<TIdent> GetIdentiesWithHistory(Expression<Func<TDomainObject, bool>> query) =>
-        this.GetAuditReader().GetIdentsBy<TDomainObject, TIdent>(query.ToCriterion());
+        auditReader.GetIdentsBy<TDomainObject, TIdent>(query.ToCriterion());
 
-    public TDomainObject Load(TIdent id) => this.NativeSession.Load<TDomainObject>(id);
+    public TDomainObject Load(TIdent id) => nativeSession.Load<TDomainObject>(id);
 
     public DomainObjectPropertyRevisions<TIdent, TProperty> GetPrimitivePropertiesRevision<TProperty>(
         TIdent id,
@@ -208,7 +209,7 @@ public class NHibDal<TDomainObject, TIdent>(INHibSession session, IAsyncDal<TDom
     {
         var propertyName = propertyExpression.ToPath();
 
-        var queryCreator = this.GetAuditReader().CreateQuery();
+        var queryCreator = auditReader.CreateQuery();
 
         var changeOrFirstCriterion = AuditEntity.Or(
             AuditEntity.Property(propertyName).HasChanged(),
@@ -224,12 +225,13 @@ public class NHibDal<TDomainObject, TIdent>(INHibSession session, IAsyncDal<TDom
 
         query = this.TryInjectPeriodQuery(query, period);
 
-        var isAuditedType = typeof(IAuditObject).IsAssignableFrom(typeof(TDomainObject));
+        var actualInlineAuditBindings = inlineAuditBindings.Where(binding => binding.DomainObjectType.IsAssignableFrom(typeof(TDomainObject))).ToArray();
 
-        if (isAuditedType)
+        var isAuditedType = actualInlineAuditBindings.Length != 0;
+
+        foreach (var actualInlineAuditBinding in actualInlineAuditBindings.Where(b => b.Action == InlineAuditAction.Modify))
         {
-            query = query.AddProjection(AuditEntity.Property(AuditObjectHelper.ModifyDatePropertyName))
-                         .AddProjection(AuditEntity.Property(AuditObjectHelper.ModifyByPropertyName));
+            query = query.AddProjection(AuditEntity.Property(actualInlineAuditBinding.Property.Name));
         }
 
         var result = new DomainObjectPropertyRevisions<TIdent, TProperty>(id, propertyName);
@@ -264,8 +266,6 @@ public class NHibDal<TDomainObject, TIdent>(INHibSession session, IAsyncDal<TDom
             yield return AuditEntity.RevisionProperty("RevisionDate").Le(period.Value.EndDate);
         }
     }
-
-    private IAuditReaderPatched GetAuditReader() => session.AuditReader;
 }
 
 

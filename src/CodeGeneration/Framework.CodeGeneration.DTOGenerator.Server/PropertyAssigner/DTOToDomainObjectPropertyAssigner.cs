@@ -49,7 +49,7 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration>(IDTOSource<TConfi
 
                 if (isDetail)
                 {
-                    if (this.Configuration.IsPersistentObject(this.DomainType!))
+                    if (this.Configuration.IsPersistentObject(this.DomainType))
                     {
                         return this.MappingServiceRefExpr.ToMethodInvokeExpression(
                             methodName,
@@ -227,7 +227,7 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration>(IDTOSource<TConfi
                                                              new CodeObjectCreateExpression(
                                                               this.Configuration.ExceptionType,
                                                               new CodePrimitiveExpression(
-                                                               $"{property.Name} property of {this.DomainType!.Name} can not modified")));
+                                                               $"{property.Name} property of {this.DomainType.Name} can not modified")));
 
         fixReferenceValidationStatement.TrueStatements.Add(throwStatement);
 

@@ -98,5 +98,7 @@ public abstract class EnversTests(IServiceProvider rootServiceProvider) : TestBa
         Assert.Equal(businessUnitB.Id, revisions[2].BusinessUnitId);
 
         Assert.Equal((short)2, revisions[3].RevType); // Deleted: NHibernate.Envers is configured with StoreDataAtDelete = false, so no field snapshot is kept on the delete revision
+        Assert.Null(revisions[3].EqualBU);
+        Assert.Null(revisions[3].BusinessUnitId);
     }
 }

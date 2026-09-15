@@ -135,7 +135,11 @@ public class AuditFlushInterceptor : SaveChangesInterceptor
             {
                 if (!property.IsModOnly)
                 {
-                    var value = this.GetCurrentValue(audit.Entry, property);
+                    // Mirrors NHibernate.Envers StoreDataAtDelete = false: no field snapshot is kept on the delete revision.
+                    var value = audit.RevisionType == AuditRevisionType.Deleted && !property.IsKey
+                                    ? null
+                                    : this.GetCurrentValue(audit.Entry, property);
+
                     audit.Metadata.AuditEntityType.GetProperty(property.Name)!.SetValue(auditEntity, value);
                 }
 

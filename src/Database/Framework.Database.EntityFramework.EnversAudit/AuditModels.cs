@@ -37,7 +37,10 @@ public sealed class AuditEntityFactory(IAuditTypeNameResolver auditTypeNameResol
             {
                 if (!property.IsModOnly)
                 {
-                    this.DefineAutoProperty(typeBuilder, property.Name, property.PropertyType);
+                    // Non-key properties must tolerate null, since no field snapshot is kept on the delete revision (mirrors NHibernate.Envers StoreDataAtDelete = false).
+                    var propertyType = !property.IsKey ? MakeNullable(property.PropertyType) : property.PropertyType;
+
+                    this.DefineAutoProperty(typeBuilder, property.Name, propertyType);
                 }
 
                 if (!property.IsKey)
@@ -63,6 +66,11 @@ public sealed class AuditEntityFactory(IAuditTypeNameResolver auditTypeNameResol
             return this.metadataByEntityType.TryGetValue(entityType, out metadata!);
         }
     }
+
+    private static Type MakeNullable(Type type) =>
+        type.IsValueType && Nullable.GetUnderlyingType(type) is null
+            ? typeof(Nullable<>).MakeGenericType(type)
+            : type;
 
     private void DefineAutoProperty(TypeBuilder typeBuilder, string name, Type propertyType)
     {

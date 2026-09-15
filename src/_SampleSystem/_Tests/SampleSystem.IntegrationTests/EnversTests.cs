@@ -4,7 +4,7 @@ using Framework.AutomationCore.RootServiceProviderContainer;
 
 using Microsoft.Data.SqlClient;
 
-using SampleSystem.Domain.Directories;
+using SampleSystem.Domain.MU;
 using SampleSystem.IntegrationTests._Environment.TestData;
 
 namespace SampleSystem.IntegrationTests;
@@ -15,48 +15,48 @@ public abstract class EnversTests(IServiceProvider rootServiceProvider) : TestBa
     public async Task FullLifecycle_CreateUpdatePrimitiveUpdateReferenceRemove_AuditRowsMatchNHibernate(CancellationToken ct)
     {
         // Arrange
-        var countryA = this.DataManager.SaveCountry();
-        var countryB = this.DataManager.SaveCountry();
+        var managementUnit = this.DataManager.SaveManagementUnit();
+        var businessUnitA = this.DataManager.SaveBusinessUnit();
+        var businessUnitB = this.DataManager.SaveBusinessUnit();
 
-        var locationId = Guid.NewGuid();
+        var linkId = Guid.NewGuid();
 
         // Act
 
         this.EvaluateWrite(
                            context =>
                            {
-                               var location = new Location
+                               var link = new ManagementUnitAndBusinessUnitLink(
+                                                                                context.Logics.ManagementUnit.GetById(managementUnit.Id)!,
+                                                                                context.Logics.BusinessUnit.GetById(businessUnitA.Id)!)
                                {
-                                   Name = "InitialName",
-                                   Country = context.Logics.Country.GetById(countryA.Id),
-                                   Code = 1,
-                                   CloseDate = 10,
+                                   EqualBU = false
                                };
 
-                               context.Logics.Location.Insert(location, locationId);
+                               context.Logics.ManagementUnitAndBusinessUnitLink.Insert(link, linkId);
                            });
 
         this.EvaluateWrite(
                            context =>
                            {
-                               var location = context.Logics.Location.GetById(locationId, true)!;
-                               location.Name = "UpdatedName";
-                               context.Logics.Location.Save(location);
+                               var link = context.Logics.ManagementUnitAndBusinessUnitLink.GetById(linkId, true)!;
+                               link.EqualBU = true;
+                               context.Logics.ManagementUnitAndBusinessUnitLink.Save(link);
                            });
 
         this.EvaluateWrite(
                            context =>
                            {
-                               var location = context.Logics.Location.GetById(locationId, true)!;
-                               location.Country = context.Logics.Country.GetById(countryB.Id);
-                               context.Logics.Location.Save(location);
+                               var link = context.Logics.ManagementUnitAndBusinessUnitLink.GetById(linkId, true)!;
+                               link.BusinessUnit = context.Logics.BusinessUnit.GetById(businessUnitB.Id)!;
+                               context.Logics.ManagementUnitAndBusinessUnitLink.Save(link);
                            });
 
         this.EvaluateWrite(
                            context =>
                            {
-                               var location = context.Logics.Location.GetById(locationId, true)!;
-                               context.Logics.Location.Remove(location);
+                               var link = context.Logics.ManagementUnitAndBusinessUnitLink.GetById(linkId, true)!;
+                               context.Logics.ManagementUnitAndBusinessUnitLink.Remove(link);
                            });
 
         // Assert
@@ -65,40 +65,38 @@ public abstract class EnversTests(IServiceProvider rootServiceProvider) : TestBa
 
         await using var command = connection.CreateCommand();
         command.CommandText = """
-                              SELECT REV, REVTYPE, Name, countryId
-                              FROM appAudit.LocationAudit
+                              SELECT REV, REVTYPE, EqualBU, businessUnitId
+                              FROM appAudit.ManagementUnitAndBusinessUnitLinkAudit
                               WHERE Id = @id
                               ORDER BY REV
                               """;
-        command.Parameters.AddWithValue("@id", locationId);
+        command.Parameters.AddWithValue("@id", linkId);
 
-        var revisions = new List<(short RevType, string Name, Guid? CountryId)>();
+        var revisions = new List<(short RevType, bool? EqualBU, Guid? BusinessUnitId)>();
 
         await using var reader = await command.ExecuteReaderAsync(ct);
         while (await reader.ReadAsync(ct))
         {
             revisions.Add((
                               reader.GetInt16(1),
-                              reader.GetString(2),
+                              reader.IsDBNull(2) ? null : reader.GetBoolean(2),
                               reader.IsDBNull(3) ? null : reader.GetGuid(3)));
         }
 
         Assert.Equal(4, revisions.Count);
 
         Assert.Equal((short)0, revisions[0].RevType); // Added
-        Assert.Equal("InitialName", revisions[0].Name);
-        Assert.Equal(countryA.Id, revisions[0].CountryId);
+        Assert.False(revisions[0].EqualBU);
+        Assert.Equal(businessUnitA.Id, revisions[0].BusinessUnitId);
 
         Assert.Equal((short)1, revisions[1].RevType); // Modified: primitive field
-        Assert.Equal("UpdatedName", revisions[1].Name);
-        Assert.Equal(countryA.Id, revisions[1].CountryId);
+        Assert.True(revisions[1].EqualBU);
+        Assert.Equal(businessUnitA.Id, revisions[1].BusinessUnitId);
 
         Assert.Equal((short)1, revisions[2].RevType); // Modified: reference field
-        Assert.Equal("UpdatedName", revisions[2].Name);
-        Assert.Equal(countryB.Id, revisions[2].CountryId);
+        Assert.True(revisions[2].EqualBU);
+        Assert.Equal(businessUnitB.Id, revisions[2].BusinessUnitId);
 
-        Assert.Equal((short)2, revisions[3].RevType); // Deleted
-        Assert.Equal("UpdatedName", revisions[3].Name);
-        Assert.Equal(countryB.Id, revisions[3].CountryId);
+        Assert.Equal((short)2, revisions[3].RevType); // Deleted: NHibernate.Envers is configured with StoreDataAtDelete = false, so no field snapshot is kept on the delete revision
     }
 }

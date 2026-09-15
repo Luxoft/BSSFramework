@@ -41,8 +41,8 @@ jobs:
           
       - name: NHibernate Integration Tests
         run: |
-          dotnet test --project src/_SampleSystem/_Tests/SampleSystem.IntegrationTests.NHibernate --no-build --blame --verbosity normal -c Release
+          dotnet test --project src/_SampleSystem/_Tests/SampleSystem.IntegrationTests.NHibernate --no-build --blame --verbosity normal -c Release --diagnostic --diagnostic-verbosity trace
 
       - name: EntityFramework Integration Tests
         run: |
-          dotnet test --project src/_SampleSystem/_Tests/SampleSystem.IntegrationTests.EntityFramework --no-build --blame --verbosity normal -c Release
+          dotnet test --project src/_SampleSystem/_Tests/SampleSystem.IntegrationTests.EntityFramework --no-build --blame --verbosity normal -c Release --diagnostic --diagnostic-verbosity trace

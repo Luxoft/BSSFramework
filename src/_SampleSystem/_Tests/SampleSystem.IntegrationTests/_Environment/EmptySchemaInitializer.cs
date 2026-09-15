@@ -11,9 +11,9 @@ public abstract class EmptySchemaInitializer(IActualTestConnectionStringSource a
 {
     public virtual async Task Initialize(CancellationToken ct)
     {
-        await actualTestConnectionStringSource.ActualConnectionString.ExecuteSqlFromFolderAsync("__Support/Scripts/Authorization", ct);
-        await actualTestConnectionStringSource.ActualConnectionString.ExecuteSqlFromFolderAsync("__Support/Scripts/Configuration", ct);
-        await actualTestConnectionStringSource.ActualConnectionString.ExecuteSqlFromFolderAsync("__Support/Scripts/SampleSystem", ct);
+        await actualTestConnectionStringSource.ActualConnectionString.ExecuteSqlFromFolderAsync(Path.Combine("__Support", "Scripts", "Authorization"), ct);
+        await actualTestConnectionStringSource.ActualConnectionString.ExecuteSqlFromFolderAsync(Path.Combine("__Support", "Scripts", "Configuration"), ct);
+        await actualTestConnectionStringSource.ActualConnectionString.ExecuteSqlFromFolderAsync(Path.Combine("__Support", "Scripts", "SampleSystem"), ct);
 
         new BssFluentMigrator(actualTestConnectionStringSource.ActualConnectionString.Value).Migrate();
     }

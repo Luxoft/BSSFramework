@@ -26,9 +26,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="testAppSettings.json">
+    <Content Include="..\SampleSystem.IntegrationTests.EntityFramework\testAppSettings.json" Link="testAppSettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
+
+    <Content Include="..\SampleSystem.IntegrationTests.EntityFramework\__Support\**\*.sql"
+             LinkBase="__Support"
+             CopyToOutputDirectory="PreserveNewest" />
+
   </ItemGroup>
 
 </Project>

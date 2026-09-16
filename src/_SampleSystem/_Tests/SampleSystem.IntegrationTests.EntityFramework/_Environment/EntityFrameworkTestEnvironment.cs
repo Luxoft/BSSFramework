@@ -10,7 +10,7 @@ using Xunit.Sdk;
 using Xunit.v3;
 
 [assembly: AnchTestFramework<EntityFrameworkTestEnvironment>]
-[assembly: Parallelization(Mode = ParallelMode.None)]
+//[assembly: Parallelization(Mode = ParallelMode.None)]
 
 namespace SampleSystem.IntegrationTests._Environment;
 

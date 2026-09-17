@@ -22,7 +22,6 @@ public class EntityFrameworkEmptySchemaInitializer(IActualTestConnectionStringSo
                 actualTestConnectionStringSource.ActualConnectionString.Password),
             ct);
 
-
         await base.Initialize(ct);
     }
 }

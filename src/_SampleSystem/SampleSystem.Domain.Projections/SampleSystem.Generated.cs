@@ -146,7 +146,7 @@ namespace SampleSystem.Domain.Projections
         
         private string aribaStatusDescription;
         
-        private SampleSystem.Domain.Ariba.AribaStatusType aribaStatusType;
+        private SampleSystem.Domain.Ariba.AribaStatusType? aribaStatusType;
         
         private SampleSystem.Domain.Projections.CustomTestObjForNested baseObj;
         
@@ -176,7 +176,7 @@ namespace SampleSystem.Domain.Projections
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
         [Framework.Database.Mapping.MappingAttribute(ColumnName="aribaStatusType", ExternalTableName="LegalEntityBase")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual SampleSystem.Domain.Ariba.AribaStatusType AribaStatusType
+        public virtual SampleSystem.Domain.Ariba.AribaStatusType? AribaStatusType
         {
             get
             {

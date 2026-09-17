@@ -7,6 +7,10 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 
 using Framework.Core;
+using Framework.Database.EnversAudit;
+using Framework.Database.InlineAudit.DependencyInjection;
+using Framework.Database.NHibernate.Envers;
+using Framework.Database.NHibernate.InlineAudit;
 using Framework.Database.NHibernate.Mapping;
 using Framework.Database.NHibernate.Sessions;
 using Framework.Database.NHibernate.Visitors;
@@ -71,13 +75,13 @@ public class NHibernateSetup : INHibernateSetup, IServiceInitializer
         var prevAction = this.settings.RawMappingAction;
 
         this.settings = this.settings with
-        {
-            RawMappingAction = v =>
-                               {
-                                   prevAction(v);
-                                   initAction(v);
-                               }
-        };
+                        {
+                            RawMappingAction = v =>
+                            {
+                                prevAction(v);
+                                initAction(v);
+                            }
+                        };
 
         return this;
     }
@@ -87,13 +91,13 @@ public class NHibernateSetup : INHibernateSetup, IServiceInitializer
         var prevAction = this.settings.RawDatabaseAction;
 
         this.settings = this.settings with
-        {
-            RawDatabaseAction = v =>
-                                {
-                                    prevAction(v);
-                                    initAction(v);
-                                }
-        };
+                        {
+                            RawDatabaseAction = v =>
+                            {
+                                prevAction(v);
+                                initAction(v);
+                            }
+                        };
 
         return this;
     }
@@ -108,6 +112,13 @@ public class NHibernateSetup : INHibernateSetup, IServiceInitializer
     public INHibernateSetup SetSqlTypesKeepDateTime(bool value)
     {
         this.settings = this.settings with { SqlTypesKeepDateTime = value };
+
+        return this;
+    }
+
+    public INHibernateSetup AddInlineAudit(Action<IInlineAuditSetup> setupAction)
+    {
+        this.initActions.Add(services => services.Initialize<InlineAuditSetup>(setupAction));
 
         return this;
     }
@@ -128,14 +139,20 @@ public class NHibernateSetup : INHibernateSetup, IServiceInitializer
         //For close db session by middleware
         services.AddScopedFromLazyObject<INHibSession, NHibSession>();
         services.AddScopedFrom<ILazyObject<IDBSession>, ILazyObject<INHibSession>>();
-
         services.AddScopedFrom<ISession, INHibSession>(session => session.NativeSession);
+        services.AddScopedFrom<IAuditReaderPatched, INHibSession>(session => session.AuditReader);
+
+        services.AddSingleton<IAuditPropertiesSetterMapFactory, AuditPropertiesSetterMapFactory>();
+        services.AddScoped<IInlineAuditInterceptor, InlineAuditInterceptor>();
+        services.AddScoped<IRevisionService, NHibRevisionService>();
 
         services.AddSingleton(NHibSessionEnvironmentSettings.Default);
 
         services.AddSingleton<NHibSessionEnvironment>();
 
-        services.AddKeyedSingleton<IExpressionVisitorContainer>(IExpressionVisitorContainer.ElementKey, new ExpressionVisitorContainer(new FixNHibArrayContainsVisitor()));
+        services.AddKeyedSingleton<IExpressionVisitorContainer>(
+            IExpressionVisitorContainer.ElementKey,
+            new ExpressionVisitorContainer(new FixNHibArrayContainsVisitor()));
         services.AddKeyedSingleton<IExpressionVisitorContainer, MathExpressionVisitorContainer>(IExpressionVisitorContainer.ElementKey);
 
         if (this.AddDefaultInitializer)

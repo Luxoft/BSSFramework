@@ -49,7 +49,6 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.Directories.TestObjForNestedBase>(this.GetTestObjForNestedBaseValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Employee.Employee>(this.GetEmployeeValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Employee.EmployeeCellPhone>(this.GetEmployeeCellPhoneValidationResult);
-            base.RegisterHandler<SampleSystem.Domain.Employee.EmployeeCellPhoneBase>(this.GetEmployeeCellPhoneBaseValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Employee.EmployeeInformation>(this.GetEmployeeInformationValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Employee.EmployeePersonalCellPhone>(this.GetEmployeePersonalCellPhoneValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Employee.EmployeePhoto>(this.GetEmployeePhotoValidationResult);
@@ -248,11 +247,6 @@ namespace SampleSystem.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetEmployeeAndEmployeeSpecializationLinkValidationResult(SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetEmployeeCellPhoneBaseValidationResult(SampleSystem.Domain.Employee.EmployeeCellPhoneBase source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

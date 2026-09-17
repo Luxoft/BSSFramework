@@ -1,7 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
 using Framework.BLL.Domain.Serialization;
-using Framework.Core;
 using Framework.Restriction;
 using Framework.Validation.Attributes;
 
@@ -9,11 +8,10 @@ namespace SampleSystem.Domain.Inline;
 
 [ExpandValidation]
 [DataContract(Namespace = "")]
-[KnownType(typeof(Fio))]
 public class FioShort : ICloneable, IEquatable<FioShort>
 {
-    private string? firstName;
-    private string? lastName;
+    private string firstName = "";
+    private string lastName = "";
 
 
     public FioShort()
@@ -27,8 +25,8 @@ public class FioShort : ICloneable, IEquatable<FioShort>
     [DataMember]
     public string FirstName
     {
-        get => this.firstName.TrimNull();
-        set => this.firstName = value.TrimNull();
+        get => this.firstName;
+        set => this.firstName = value;
     }
 
 
@@ -36,8 +34,8 @@ public class FioShort : ICloneable, IEquatable<FioShort>
     [DataMember]
     public string LastName
     {
-        get => this.lastName.TrimNull();
-        set => this.lastName = value.TrimNull();
+        get => this.lastName;
+        set => this.lastName = value;
     }
 
 

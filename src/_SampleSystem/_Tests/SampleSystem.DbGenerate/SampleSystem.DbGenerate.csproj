@@ -15,4 +15,8 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\_Configuration\Framework.Configuration.Domain\Framework.Configuration.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

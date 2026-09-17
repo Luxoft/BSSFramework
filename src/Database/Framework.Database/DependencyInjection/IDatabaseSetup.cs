@@ -24,4 +24,6 @@ public interface IDatabaseSetup
     IDatabaseSetup SetDefaultConnectionString(string connectionString);
 
     IDatabaseSetup SetDefaultConnectionStringName(string connectionStringName);
+
+    IDatabaseSetup AddExtension(IDatabaseSetupExtension extension);
 }

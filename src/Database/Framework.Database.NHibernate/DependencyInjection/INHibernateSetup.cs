@@ -3,6 +3,7 @@
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 
+using Framework.Database.InlineAudit.DependencyInjection;
 using Framework.Database.NHibernate.Mapping;
 
 namespace Framework.Database.NHibernate.DependencyInjection;
@@ -30,6 +31,8 @@ public interface INHibernateSetup
     INHibernateSetup SetComponentConvention(bool enabled);
 
     INHibernateSetup SetSqlTypesKeepDateTime(bool value);
+
+    INHibernateSetup AddInlineAudit(Action<IInlineAuditSetup> setupAction);
 
     INHibernateSetup AddExtension(INHibernateSetupExtension extension);
 }

@@ -1,5 +1,4 @@
-﻿using Framework.Core;
-using Framework.Relations;
+﻿using Framework.Relations;
 using Framework.Restriction;
 
 using SampleSystem.Domain.Ariba;
@@ -10,7 +9,7 @@ public class LegalEntityBase : BaseDirectory, IMaster<Address>
 {
     private readonly ICollection<Address> addresses = new List<Address>();
 
-    private string? nameEnglish;
+    private string nameEnglish = "";
 
     private TestObjForNested? baseObj;
 
@@ -37,8 +36,8 @@ public class LegalEntityBase : BaseDirectory, IMaster<Address>
     [Required]
     public virtual string NameEnglish
     {
-        get => this.nameEnglish.TrimNull();
-        set => this.nameEnglish = value.TrimNull();
+        get => this.nameEnglish;
+        set => this.nameEnglish = value;
     }
 
     ICollection<Address> IMaster<Address>.Details => (ICollection<Address>)this.Addresses;

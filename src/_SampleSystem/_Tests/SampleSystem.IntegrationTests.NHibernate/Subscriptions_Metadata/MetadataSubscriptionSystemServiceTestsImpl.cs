@@ -1,3 +1,0 @@
-﻿namespace SampleSystem.IntegrationTests.Subscriptions_Metadata;
-
-public class MetadataSubscriptionSystemServiceTestsImpl(IServiceProvider rootServiceProvider) : MetadataSubscriptionSystemServiceTests(rootServiceProvider);

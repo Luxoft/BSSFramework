@@ -2294,99 +2294,6 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeCellPhoneBase), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct EmployeeCellPhoneBaseIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeeCellPhoneBaseIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.EmployeeCellPhoneBaseIdentityDTO EmptyField = new SampleSystem.Generated.DTO.EmployeeCellPhoneBaseIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public EmployeeCellPhoneBaseIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public EmployeeCellPhoneBaseIdentityDTO(SampleSystem.Domain.Employee.EmployeeCellPhoneBase domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public EmployeeCellPhoneBaseIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static SampleSystem.Generated.DTO.EmployeeCellPhoneBaseIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.EmployeeCellPhoneBaseIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.EmployeeCellPhoneBaseIdentityDTO identity1, SampleSystem.Generated.DTO.EmployeeCellPhoneBaseIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.EmployeeCellPhoneBaseIdentityDTO identity1, SampleSystem.Generated.DTO.EmployeeCellPhoneBaseIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.EmployeeCellPhoneBaseIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.EmployeeCellPhoneBaseIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.EmployeeCellPhoneBaseIdentityDTO other)
-        {
-            return (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public SampleSystem.Domain.Employee.EmployeeCellPhoneBase ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToEmployeeCellPhoneBase(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee.EmployeeInformation), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct EmployeeInformationIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
@@ -8967,7 +8874,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkStrictDTO> _managerCommissions = new System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkStrictDTO>();
         
-        private string _name;
+        private string _name = "";
         
         private int _newBusinessStatusLeft;
         
@@ -10502,19 +10409,19 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Domain.Enums.AddressType _addressType;
         
-        private string _cityName;
+        private string _cityName = "";
         
         private SampleSystem.Generated.DTO.CountryIdentityDTO _countryName;
         
         private System.Guid _id;
         
-        private string _regionName;
+        private string _regionName = "";
         
-        private string _street;
+        private string _street = "";
         
         private long _version;
         
-        private string _zip;
+        private string _zip = "";
         
         public AddressStrictDTO()
         {
@@ -11179,7 +11086,7 @@ namespace SampleSystem.Generated.DTO
         
         private bool _isAdministrative;
         
-        private string _name;
+        private string _name = "";
         
         private bool _needVertical;
         
@@ -12756,15 +12663,15 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO _baseObj;
         
-        private string _code;
+        private string _code = "";
         
         private SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO _currentObj;
         
         private System.Guid _id;
         
-        private string _name;
+        private string _name = "";
         
-        private string _nameEnglish;
+        private string _nameEnglish = "";
         
         private SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO _parent;
         
@@ -13219,15 +13126,15 @@ namespace SampleSystem.Generated.DTO
     public partial class CountryStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Directories.Country, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Directories.Country>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.CountryIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
-        private string _code;
+        private string _code = "";
         
-        private string _culture;
+        private string _culture = "";
         
         private System.Guid _id;
         
-        private string _name;
+        private string _name = "";
         
-        private string _nameNative;
+        private string _nameNative = "";
         
         private long _version;
         
@@ -13824,7 +13731,7 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Domain.Enums.LocationType _locationType;
         
-        private string _name;
+        private string _name = "";
         
         private SampleSystem.Generated.DTO.LocationIdentityDTO _parent;
         
@@ -14907,7 +14814,7 @@ namespace SampleSystem.Generated.DTO
         
         private Framework.Core.Period _educationDuration;
         
-        private string _email;
+        private string _email = "";
         
         private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkStrictDTO> _employeeToEmployeeLinks = new System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkStrictDTO>();
         
@@ -14917,9 +14824,9 @@ namespace SampleSystem.Generated.DTO
         
         private System.Guid _id;
         
-        private string _interphone;
+        private string _interphone = "";
         
-        private string _landlinephone;
+        private string _landlinephone = "";
         
         private System.DateTime? _lastActionDate;
         
@@ -16201,13 +16108,13 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeCellPhoneStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmployeeCellPhone, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmployeeCellPhone>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeCellPhoneIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
-        private string _cityCode;
+        private string _cityCode = "";
         
-        private string _countryCode;
+        private string _countryCode = "";
         
         private System.Guid _id;
         
-        private string _number;
+        private string _number = "";
         
         private long _version;
         
@@ -16861,13 +16768,13 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePersonalCellPhoneStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmployeePersonalCellPhone, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.EmployeePersonalCellPhone>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
-        private string _cityCode;
+        private string _cityCode = "";
         
-        private string _countryCode;
+        private string _countryCode = "";
         
         private System.Guid _id;
         
-        private string _number;
+        private string _number = "";
         
         private long _version;
         
@@ -19741,7 +19648,7 @@ namespace SampleSystem.Generated.DTO
     public partial class PrincipalStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ExternalPrincipal.Principal, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.ExternalPrincipal.Principal>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.PrincipalIdentityDTO>, Framework.Application.Domain.IVersionObject<long>
     {
         
-        private string _externalId;
+        private string _externalId = "";
         
         private System.Guid _id;
         
@@ -21307,9 +21214,9 @@ namespace SampleSystem.Generated.DTO
         
         private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitHrDepartmentStrictDTO> _businessUnitHrDepartments = new System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitHrDepartmentStrictDTO>();
         
-        private string _code;
+        private string _code = "";
         
-        private string _codeNative;
+        private string _codeNative = "";
         
         private Anch.Core.Maybe<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO> _companyLegalEntity = Anch.Core.Maybe<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO>.Nothing;
         
@@ -21329,9 +21236,9 @@ namespace SampleSystem.Generated.DTO
         
         private System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO> _managementUnits = new System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO>();
         
-        private string _name;
+        private string _name = "";
         
-        private string _nameNative;
+        private string _nameNative = "";
         
         private SampleSystem.Generated.DTO.HRDepartmentIdentityDTO _parent;
         
@@ -22293,7 +22200,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeComplexChangeModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel>
     {
         
-        private string _email;
+        private string _email = "";
         
         private SampleSystem.Generated.DTO.EmployeeIdentityDTO _primaryChangingObject;
         
@@ -22456,7 +22363,7 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Generated.DTO.EmployeeIdentityDTO _changingObject;
         
-        private string _email;
+        private string _email = "";
         
         public EmployeeEmailChangeModelStrictDTO()
         {
@@ -22646,7 +22553,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO> _changingObjects = new System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeIdentityDTO>();
         
-        private string _email;
+        private string _email = "";
         
         public EmployeeEmailMassChangeModelStrictDTO()
         {
@@ -23293,7 +23200,7 @@ namespace SampleSystem.Generated.DTO
         
         private bool _isProduction;
         
-        private string _name;
+        private string _name = "";
         
         private Framework.Core.Period _period;
         
@@ -24498,9 +24405,9 @@ namespace SampleSystem.Generated.DTO
         
         private System.Guid _id;
         
-        private string _notNullColumn;
+        private string _notNullColumn = "";
         
-        private string _uniqueColumn;
+        private string _uniqueColumn = "";
         
         private long _version;
         
@@ -26503,7 +26410,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.Guid _id;
         
-        private string _testImmutablePrimitiveProperty;
+        private string _testImmutablePrimitiveProperty = "";
         
         private SampleSystem.Generated.DTO.EmployeeIdentityDTO _testImmutableRefProperty;
         

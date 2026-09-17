@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SampleSystem.DbGenerate": {
+      "commandName": "Project",
+      "commandLineArgs": "-s \".\" -d \"SampleSystem\""
+    }
+  }
+}

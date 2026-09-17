@@ -535,7 +535,7 @@ public class MappingGenerator(IGrouping<Assembly, DomainTypeMetadata> assemblyGr
 
         while (0 == reverseReferenceArray.Length && elementType != typeof(object))
         {
-            elementType = elementType!.BaseType!;
+            elementType = elementType.BaseType!;
             var domainTypeMetadatas = listTypeFieldMetadata.DomainTypeMetadata.AssemblyMetadata.DomainTypes.SelectMany(z => z.NotAbstractChildrenDomainTypes.Concat([z])).ToList();
 
             var baseElementDomainTypeMetadata = domainTypeMetadatas

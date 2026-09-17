@@ -1,10 +1,12 @@
-﻿namespace Framework.Database.EntityFramework.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
 
-public interface IEntityFrameworkSetup
+namespace Framework.Database.EntityFramework.DependencyInjection;
+
+public interface IEntityFrameworkSetup<TDbContext>
+    where TDbContext : DbContext
 {
-    //bool AddDefaultListener { get; set; }
+    IEntityFrameworkSetup<TDbContext> AddExtension(IEntityFrameworkSetupExtension extension);
 
-    //bool AddDefaultInitializer { get; set; }
-
-    //bool AutoAddFluentMapping { get; set; }
+    IEntityFrameworkSetup<TDbContext> AddSecondaryContext<TSecondaryDbContext>()
+        where TSecondaryDbContext : DbContext;
 }

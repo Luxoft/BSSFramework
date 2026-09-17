@@ -4,14 +4,14 @@ using Anch.GenericQueryable.Services;
 using Anch.IdentitySource;
 
 using Framework.Core;
-using Framework.Database.NHibernate.Sessions;
 
 using NHibernate;
 
 namespace Framework.Database.NHibernate;
 
 public class NHibAsyncDal<TDomainObject, TIdent>(
-    INHibSession session,
+    IDBSession session,
+    ISession nativeSession,
     IExpressionVisitorContainer expressionVisitorContainer,
     IGenericQueryableExecutor genericQueryableExecutor,
     IIdentityInfo<TDomainObject, TIdent> identityInfo)
@@ -19,11 +19,9 @@ public class NHibAsyncDal<TDomainObject, TIdent>(
     where TDomainObject : class
     where TIdent : notnull
 {
-    private ISession NativeSession => session.NativeSession;
-
     public IQueryable<TDomainObject> GetQueryable()
     {
-        var queryable = this.NativeSession.Query<TDomainObject>();
+        var queryable = nativeSession.Query<TDomainObject>();
 
         var queryProvider = (queryable.Provider as VisitedNHibQueryProvider).FromMaybe(() => "Register VisitedQueryProvider in Nhib configuration");
 
@@ -33,13 +31,13 @@ public class NHibAsyncDal<TDomainObject, TIdent>(
         return queryable;
     }
 
-    public TDomainObject Load(TIdent id) => this.NativeSession.Load<TDomainObject>(id);
+    public TDomainObject Load(TIdent id) => nativeSession.Load<TDomainObject>(id);
 
     public Task<TDomainObject> LoadAsync(TIdent id, CancellationToken ct) =>
-        this.NativeSession.LoadAsync<TDomainObject>(id, ct);
+        nativeSession.LoadAsync<TDomainObject>(id, ct);
 
     public Task RefreshAsync(TDomainObject domainObject, CancellationToken ct) =>
-        this.NativeSession.RefreshAsync(domainObject, ct);
+        nativeSession.RefreshAsync(domainObject, ct);
 
     public async Task SaveAsync(TDomainObject domainObject, CancellationToken ct)
     {
@@ -50,17 +48,17 @@ public class NHibAsyncDal<TDomainObject, TIdent>(
 
     private Task ActualSaveAsync(TDomainObject domainObject, CancellationToken ct)
     {
-        if (!session.NativeSession.Contains(domainObject))
+        if (!nativeSession.Contains(domainObject))
         {
             var id = identityInfo.Id.Getter(domainObject);
 
             if (!EqualityComparer<TIdent>.Default.Equals(id, default))
             {
-                return session.NativeSession.SaveAsync(domainObject, id, ct);
+                return nativeSession.SaveAsync(domainObject, id, ct);
             }
         }
 
-        return session.NativeSession.SaveOrUpdateAsync(domainObject, ct);
+        return nativeSession.SaveOrUpdateAsync(domainObject, ct);
     }
 
     public async Task InsertAsync(TDomainObject domainObject, TIdent id, CancellationToken ct)
@@ -81,11 +79,11 @@ public class NHibAsyncDal<TDomainObject, TIdent>(
 
         if (EqualityComparer<TIdent>.Default.Equals(id, default))
         {
-            return session.NativeSession.SaveOrUpdateAsync(domainObject, ct);
+            return nativeSession.SaveOrUpdateAsync(domainObject, ct);
         }
         else
         {
-            return this.NativeSession.SaveAsync(domainObject, id, ct);
+            return nativeSession.SaveAsync(domainObject, id, ct);
         }
     }
 
@@ -93,14 +91,14 @@ public class NHibAsyncDal<TDomainObject, TIdent>(
     {
         this.CheckWrite();
 
-        await this.NativeSession.DeleteAsync(domainObject, ct);
+        await nativeSession.DeleteAsync(domainObject, ct);
     }
 
     public async Task LockAsync(TDomainObject domainObject, LockRole lockRole, CancellationToken ct)
     {
         this.CheckWrite();
 
-        await this.NativeSession.LockAsync(domainObject, lockRole.ToLockMode(), ct);
+        await nativeSession.LockAsync(domainObject, lockRole.ToLockMode(), ct);
     }
 
     private void CheckWrite()

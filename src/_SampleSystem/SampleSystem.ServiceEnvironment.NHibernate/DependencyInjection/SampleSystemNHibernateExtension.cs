@@ -26,16 +26,15 @@ public class SampleSystemNHibernateExtension(bool includeTypedAudit) : IBssFrame
         var appDatabase = new DatabaseName(string.Empty, "app");
         var appAuditDatabase = new DatabaseName(string.Empty, "appAudit");
 
-        services.AddNHibernate(
-                    setupObj => setupObj.AddLegacyDatabaseSettings()
-                                        .AddMapping(new AuthorizationMappingSettings())
-                                        .AddMapping(new ConfigurationMappingSettings())
-                                        .Pipe(
-                                            includeTypedAudit,
-                                            s => s
-
-                                                 .AddMapping(new SampleSystemSystemAuditMappingSettings(appAuditDatabase))
-                                                 .AddMapping(new SampleSystemSystemRevisionAuditMappingSettings(appAuditDatabase))
-                                                 .AddMapping(new SampleSystemMappingSettings(appDatabase))));
+        services.AddNHibernate(s => s.AddLegacyDatabaseSettings()
+                                     .AddMapping(new AuthorizationMappingSettings())
+                                     .AddMapping(new ConfigurationMappingSettings())
+                                     .Pipe(
+                                         includeTypedAudit,
+                                         sp => sp
+                                               .AddMapping(new SampleSystemSystemAuditMappingSettings(appAuditDatabase))
+                                               .AddMapping(new SampleSystemSystemRevisionAuditMappingSettings(appAuditDatabase))
+                                               .AddMapping(new SampleSystemMappingSettings(appDatabase)))
+                                     .AddInlineAudit(rootSetup => rootSetup.AddSampleSystemInlineAudit()));
     }
 }

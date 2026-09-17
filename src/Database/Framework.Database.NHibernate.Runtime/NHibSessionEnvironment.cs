@@ -16,8 +16,6 @@ namespace Framework.Database.NHibernate;
 
 public class NHibSessionEnvironment : IDisposable
 {
-    private readonly Configuration cfg;
-
     public NHibSessionEnvironment(
             IEnumerable<MappingSettings> mappingSettings,
             IEnumerable<IConfigurationInitializer> initializers,
@@ -31,28 +29,26 @@ public class NHibSessionEnvironment : IDisposable
 
         try
         {
-            this.cfg = new Configuration();
-
             this.RegisteredTypes = cachedMappingSettings.Select(ms => ms.PersistentDomainObjectBaseType).ToHashSet();
 
             foreach (var initializer in cachedMappingSettings.Select(ms => ms.Initializer).Concat(initializers))
             {
-                initializer.Initialize(this.cfg);
+                initializer.Initialize(this.Configuration);
             }
 
             this.Configuration.SessionFactory().ParsingLinqThrough<VisitedNHibQueryProvider>();
 
-            this.cfg.InitializeAudit(cachedMappingSettings, defaultCurrentUser);
+            this.Configuration.InitializeAudit(cachedMappingSettings, defaultCurrentUser);
 
-            SchemaMetadataUpdater.QuoteTableAndColumns(this.cfg, global::NHibernate.Dialect.Dialect.GetDialect(this.cfg.Properties));
+            SchemaMetadataUpdater.QuoteTableAndColumns(this.Configuration, global::NHibernate.Dialect.Dialect.GetDialect(this.Configuration.Properties));
 
-            this.InternalSessionFactory = this.cfg.BuildSessionFactory();
+            this.InternalSessionFactory = this.Configuration.BuildSessionFactory();
 
-            this.InternalExceptionExpander = new SqlExceptionProcessorInterceptor(this.InternalSessionFactory, this.cfg, dalValidationIdentitySource);
+            this.InternalExceptionExpander = new SqlExceptionProcessorInterceptor(this.InternalSessionFactory, this.Configuration, dalValidationIdentitySource);
         }
         catch (Exception ex)
         {
-            throw new ApplicationException("Could not initialize ServiceFactory.", ex);
+            throw new ApplicationException($"Could not initialize {nameof(NHibSessionEnvironment)}.", ex);
         }
     }
 
@@ -64,14 +60,14 @@ public class NHibSessionEnvironment : IDisposable
 
     internal IExceptionExpander InternalExceptionExpander { get; }
 
-    public Configuration Configuration => this.cfg;
+    public Configuration Configuration { get; } = new ();
 
     /// <inheritdoc />
     public void Dispose()
     {
         using (this.InternalSessionFactory)
         {
-            AuditConfiguration.Remove(this.cfg);
+            AuditConfiguration.Remove(this.Configuration);
         }
     }
 }

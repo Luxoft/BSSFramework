@@ -22,10 +22,7 @@ public class SampleSystemEntityFrameworkExtension : IBssFrameworkExtension
         services
             .AddDbContext<SampleSystemDbContext>((sp, options) => options
                                                                   .UseSqlServer(sp.GetRequiredService<IDefaultConnectionStringSource>().ConnectionString)
-                                                                  .UseGenericQueryable(s => s.SetVisitor(sp.GetRequiredService<IExpressionVisitorContainer>().Visitor)
-                                                                                             .AddFetchRuleExpander<Framework.Authorization.BLL.AuthorizationMainDTOFetchRuleExpander>()
-                                                                                             .AddFetchRuleExpander<Framework.Configuration.BLL.ConfigurationMainDTOFetchRuleExpander>()
-                                                                                             .AddFetchRuleExpander<SampleSystem.BLL.SampleSystemMainDTOFetchRuleExpander>())
+                                                                  .UseGenericQueryable(s => s.SetSetupType<SampleSystemGenericQueryableSetup>())
                                                                   .UseLazyLoadingProxies()
                                                                   .IgnoreComputedProperties()
                                                                   .AddEnversAudit(auditSetup =>
@@ -44,4 +41,14 @@ public class SampleSystemEntityFrameworkExtension : IBssFrameworkExtension
             .AddEntityFramework<SampleSystemDbContext>(s => s.AddEnversAudit()
                                                              .AddLegacyDatabaseSettings()
                                                              .AddSecondaryContext<SampleSystemEnversAuditDbContext>());
+
+    private class SampleSystemGenericQueryableSetup : IEfGenericQueryableExtensionInnerSetup
+    {
+        public void Init(IEfGenericQueryableSetup s) => s.SetVisitor<RootExpressionVisitor>();
+
+        public void Initialize(IEfGenericQueryableSetup setup)
+        {
+            setup.SetVisitor<RootExpressionVisitor>();
+        }
+    }
 }

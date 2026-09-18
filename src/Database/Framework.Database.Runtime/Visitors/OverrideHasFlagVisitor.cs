@@ -10,12 +10,6 @@ public class OverrideHasFlagVisitor : ExpressionVisitor
     private static readonly MethodInfo EnumHasFlagMethod = new Func<Enum, bool>(ConsoleColor.Blue.HasFlag).Method;
 
 
-    private OverrideHasFlagVisitor()
-    {
-
-    }
-
-
     protected override Expression VisitMethodCall(MethodCallExpression node)
     {
         var request = from _ in Maybe.Return()

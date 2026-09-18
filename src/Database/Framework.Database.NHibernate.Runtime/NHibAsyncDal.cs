@@ -1,9 +1,13 @@
-﻿using Anch.Core;
+﻿using System.Linq.Expressions;
+
+using Anch.Core;
 using Anch.GenericQueryable.NHibernate;
 using Anch.GenericQueryable.Services;
 using Anch.IdentitySource;
 
 using Framework.Core;
+
+using Microsoft.Extensions.DependencyInjection;
 
 using NHibernate;
 
@@ -12,7 +16,8 @@ namespace Framework.Database.NHibernate;
 public class NHibAsyncDal<TDomainObject, TIdent>(
     IDBSession session,
     ISession nativeSession,
-    IExpressionVisitorContainer expressionVisitorContainer,
+    [FromKeyedServices(RootExpressionVisitor.RootKey)]
+    ExpressionVisitor rootExpressionVisitor,
     IGenericQueryableExecutor genericQueryableExecutor,
     IIdentityInfo<TDomainObject, TIdent> identityInfo)
     : IAsyncDal<TDomainObject, TIdent>
@@ -25,7 +30,7 @@ public class NHibAsyncDal<TDomainObject, TIdent>(
 
         var queryProvider = (queryable.Provider as VisitedNHibQueryProvider).FromMaybe(() => "Register VisitedQueryProvider in Nhib configuration");
 
-        queryProvider.Visitor = expressionVisitorContainer.Visitor;
+        queryProvider.Visitor = rootExpressionVisitor;
         queryProvider.Executor = genericQueryableExecutor;
 
         return queryable;

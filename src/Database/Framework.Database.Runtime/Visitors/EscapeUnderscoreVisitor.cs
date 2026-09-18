@@ -9,13 +9,6 @@ public class EscapeUnderscoreVisitor : ExpressionVisitor
 {
     private static readonly MethodInfo StringContainsMethod = new Func<string, bool>("".Contains).Method;
 
-
-    private EscapeUnderscoreVisitor()
-    {
-
-    }
-
-
     protected override Expression VisitMethodCall(MethodCallExpression node)
     {
         var visitRequest = from _ in Maybe.Return()

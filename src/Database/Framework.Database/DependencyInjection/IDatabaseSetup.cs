@@ -10,8 +10,8 @@ public interface IDatabaseSetup
     IDatabaseSetup AddEventListener<TEventListener>()
         where TEventListener : class, IDBSessionEventListener;
 
-    IDatabaseSetup AddVisitorContainer<TExpressionVisitorContainer>()
-        where TExpressionVisitorContainer : class, IExpressionVisitorContainer;
+    IDatabaseSetup AddVisitor<TExpressionVisitor>()
+        where TExpressionVisitor : ExpressionVisitor;
 
     IDatabaseSetup AddVisitor(ExpressionVisitor expressionVisitor);
 

@@ -1,6 +1,7 @@
 ﻿using Anch.Core;
 
 using Framework.Authorization.Environment;
+using Framework.Core.Visitors;
 using Framework.Infrastructure.DependencyInjection;
 using Framework.Subscriptions.DependencyInjection;
 
@@ -9,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using SampleSystem.Domain.Employee;
+using SampleSystem.Domain.Projections;
 using SampleSystem.EventMetadata;
 using SampleSystem.Security;
 
@@ -47,7 +49,7 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
 
                     .SetDomainObjectEventMetadata<SampleSystemDomainObjectEventMetadata>()
 
-                    .AddDatabase(ds => ds.AddVisitorContainer<CalculatedProjectPropertyVisitorContainer>())
+                    .AddDatabase(ds => ds.AddVisitor(new OverridePropertyVisitor<TestEmployee, string>(e => e.PositionNameOrRoleName, TestEmployee.GetPositionNameOrRoleNameExpr)))
 
                     .AddListeners()
 

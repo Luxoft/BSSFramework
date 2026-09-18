@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Linq.Expressions;
+using System.Reflection;
 
 using Anch.DependencyInjection;
 using Anch.GenericQueryable.NHibernate;
@@ -7,6 +8,7 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 
 using Framework.Core;
+using Framework.Core.Visitors;
 using Framework.Database.EnversAudit;
 using Framework.Database.InlineAudit.DependencyInjection;
 using Framework.Database.NHibernate.Envers;
@@ -150,10 +152,12 @@ public class NHibernateSetup : INHibernateSetup, IServiceInitializer
 
         services.AddSingleton<NHibSessionEnvironment>();
 
-        services.AddKeyedSingleton<IExpressionVisitorContainer>(
-            IExpressionVisitorContainer.ElementKey,
-            new ExpressionVisitorContainer(new FixNHibArrayContainsVisitor()));
-        services.AddKeyedSingleton<IExpressionVisitorContainer, MathExpressionVisitorContainer>(IExpressionVisitorContainer.ElementKey);
+        services.AddKeyedSingleton<ExpressionVisitor, FixNHibArrayContainsVisitor>(RootExpressionVisitor.ElementKey);
+
+        foreach (var expressionVisitor in GetMathExpressionVisitors())
+        {
+            services.AddKeyedSingleton(RootExpressionVisitor.ElementKey, expressionVisitor);
+        }
 
         if (this.AddDefaultInitializer)
         {
@@ -175,5 +179,16 @@ public class NHibernateSetup : INHibernateSetup, IServiceInitializer
         }
 
         this.extensions.ForEach(ex => ex.AddServices(services));
+    }
+
+    private static IEnumerable<ExpressionVisitor> GetMathExpressionVisitors()
+    {
+        yield return new OverrideMethodInfoVisitor<Func<int, int, int>>(
+            Math.Max,
+            (v1, v2) => v1 > v2 ? v1 : v2);
+
+        yield return new OverrideMethodInfoVisitor<Func<int, int, int>>(
+            Math.Min,
+            (v1, v2) => v1 < v2 ? v1 : v2);
     }
 }

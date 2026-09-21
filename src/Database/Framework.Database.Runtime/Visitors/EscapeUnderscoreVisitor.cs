@@ -26,7 +26,4 @@ public class EscapeUnderscoreVisitor : ExpressionVisitor
 
         return base.VisitMethodCall(visitRequest.GetValueOrDefault(node));
     }
-
-
-    public static readonly EscapeUnderscoreVisitor Value = new();
 }

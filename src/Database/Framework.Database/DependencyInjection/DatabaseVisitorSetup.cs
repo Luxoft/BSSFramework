@@ -37,6 +37,11 @@ public class DatabaseVisitorSetup : IDatabaseVisitorSetup, IServiceInitializer
 
     private static IServiceCollection RegistryGenericDatabaseVisitors(IServiceCollection services)
     {
+        if (services.AlreadyInitialized<ExpressionVisitor, RootExpressionVisitor>(isKeyed: true))
+        {
+            return services;
+        }
+
         services.AddKeyedSingleton<ExpressionVisitor, RootExpressionVisitor>(RootExpressionVisitor.RootKey);
 
         foreach (var visitor in GetPeriodVisitors())
@@ -50,7 +55,6 @@ public class DatabaseVisitorSetup : IDatabaseVisitorSetup, IServiceInitializer
         services.AddKeyedSingleton<ExpressionVisitor, EscapeUnderscoreVisitor>(RootExpressionVisitor.ElementKey);
 
         services.AddKeyedSingleton<ExpressionVisitor, OverrideEqualsDomainObjectVisitor>(RootExpressionVisitor.ElementKey);
-
 
         return services;
     }

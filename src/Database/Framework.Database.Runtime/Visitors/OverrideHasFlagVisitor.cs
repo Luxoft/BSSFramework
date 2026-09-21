@@ -29,7 +29,4 @@ public class OverrideHasFlagVisitor : ExpressionVisitor
 
         return request.GetValueOrDefault(() => base.VisitMethodCall(node));
     }
-
-
-    public static readonly OverrideHasFlagVisitor Value = new();
 }

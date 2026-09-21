@@ -1,6 +1,9 @@
-﻿using Anch.GenericQueryable.DependencyInjection;
+﻿using Anch.DependencyInjection;
+using Anch.GenericQueryable.DependencyInjection;
 using Anch.GenericQueryable.EntityFramework;
+using Anch.IdentitySource.DependencyInjection;
 
+using Framework.BLL.Services;
 using Framework.BLL.Visitors;
 using Framework.Core;
 using Framework.Database;
@@ -12,6 +15,7 @@ using Framework.Database.EntityFramework.Extensions;
 using Framework.Database.EntityFramework.InlineAudit.DependencyInjection;
 using Framework.Database.InlineAudit.DependencyInjection;
 using Framework.Database.Mapping;
+using Framework.ExtendedMetadata;
 using Framework.Infrastructure.DependencyInjection;
 using Framework.Projection;
 
@@ -46,8 +50,15 @@ public class SampleSystemEntityFrameworkExtension : IBssFrameworkExtension
     private class SampleSystemGenericQueryableSetup : IEfGenericQueryableExtensionInnerSetup
     {
         public void Initialize(IGenericQueryableSetup setup) =>
-            setup.SetVisitor<RootExpressionVisitor>()
-                 .AddServices(sc => sc.AddDatabaseVisitors(dvs => dvs.AddVisitor<ExpandPathVisitor>()
+            setup.AddFetchRuleExpander<Framework.Authorization.BLL.AuthorizationMainDTOFetchRuleExpander>()
+                 .AddFetchRuleExpander<Framework.Configuration.BLL.ConfigurationMainDTOFetchRuleExpander>()
+                 .AddFetchRuleExpander<SampleSystem.BLL.SampleSystemMainDTOFetchRuleExpander>()
+                 .SetVisitor<RootExpressionVisitor>()
+                 .AddServices(sc => sc.AddIdentitySource()
+                                      .AddServiceProxyFactory()
+                                      .AddSingleton<IPropertyPathService, PropertyPathService>()
+                                      .AddSingleton<IMetadataProxyProvider, MetadataProxyProvider>()
+                                      .AddDatabaseVisitors(dvs => dvs.AddVisitor<ExpandPathVisitor>()
                                                                      .AddVisitor<TestEmployeeExpressionVisitor>()));
     }
 

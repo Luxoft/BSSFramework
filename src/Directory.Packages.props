@@ -2,7 +2,7 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
-    <Anch>3.8.9</Anch>
+    <Anch>3.9.0</Anch>
     <BssPlatform>[1.6.2]</BssPlatform>
     <DotNet>10.0.12</DotNet>
   </PropertyGroup>

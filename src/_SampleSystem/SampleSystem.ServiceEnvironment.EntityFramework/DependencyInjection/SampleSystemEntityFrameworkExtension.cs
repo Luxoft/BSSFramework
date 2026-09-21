@@ -1,7 +1,10 @@
-﻿using Anch.GenericQueryable.EntityFramework;
+﻿using Anch.GenericQueryable.DependencyInjection;
+using Anch.GenericQueryable.EntityFramework;
 
+using Framework.BLL.Visitors;
 using Framework.Core;
 using Framework.Database;
+using Framework.Database.DependencyInjection;
 using Framework.Database.EntityFramework;
 using Framework.Database.EntityFramework.DependencyInjection;
 using Framework.Database.EntityFramework.EnversAudit.DependencyInjection;
@@ -27,8 +30,8 @@ public class SampleSystemEntityFrameworkExtension : IBssFrameworkExtension
                                                                   .IgnoreComputedProperties()
                                                                   .AddEnversAudit(auditSetup =>
                                                                                       auditSetup.SetFilter(et => !et.ClrType.IsProjection()
-                                                                                          && !et.ClrType
-                                                                                                .HasAttribute<NotAuditedClassAttribute>()))
+                                                                                              && !et.ClrType
+                                                                                                    .HasAttribute<NotAuditedClassAttribute>()))
                                                                   .AddInlineAudit(ias => ias.AddSampleSystemInlineAudit()))
 
             .AddDbContext<SampleSystemEnversAuditDbContext>((sp, options) => options
@@ -44,11 +47,9 @@ public class SampleSystemEntityFrameworkExtension : IBssFrameworkExtension
 
     private class SampleSystemGenericQueryableSetup : IEfGenericQueryableExtensionInnerSetup
     {
-        public void Init(IEfGenericQueryableSetup s) => s.SetVisitor<RootExpressionVisitor>();
-
-        public void Initialize(IEfGenericQueryableSetup setup)
-        {
-            setup.SetVisitor<RootExpressionVisitor>();
-        }
+        public void Initialize(IGenericQueryableSetup setup) =>
+            setup.SetVisitor<RootExpressionVisitor>()
+                 .AddServices(sc => sc.AddDatabaseVisitors(dvs => dvs.AddVisitor<ExpandPathVisitor>()
+                                                                     .AddVisitor<TestEmployeeExpressionVisitor>()));
     }
 }

@@ -3,6 +3,7 @@
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 
+using Framework.Database.DependencyInjection;
 using Framework.Database.InlineAudit.DependencyInjection;
 using Framework.Database.NHibernate.Mapping;
 
@@ -35,4 +36,6 @@ public interface INHibernateSetup
     INHibernateSetup AddInlineAudit(Action<IInlineAuditSetup> setupAction);
 
     INHibernateSetup AddExtension(INHibernateSetupExtension extension);
+
+    INHibernateSetup AddVisitors(Action<IDatabaseVisitorSetup> setupAction);
 }

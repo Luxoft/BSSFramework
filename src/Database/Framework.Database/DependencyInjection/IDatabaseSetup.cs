@@ -10,11 +10,6 @@ public interface IDatabaseSetup
     IDatabaseSetup AddEventListener<TEventListener>()
         where TEventListener : class, IDBSessionEventListener;
 
-    IDatabaseSetup AddVisitor<TExpressionVisitor>()
-        where TExpressionVisitor : ExpressionVisitor;
-
-    IDatabaseSetup AddVisitor(ExpressionVisitor expressionVisitor);
-
     IDatabaseSetup SetIsolationLevel(IsolationLevel isolationLevel);
 
     IDatabaseSetup SetBatchSize(int batchSize);

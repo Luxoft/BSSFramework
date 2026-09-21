@@ -49,8 +49,6 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
 
                     .SetDomainObjectEventMetadata<SampleSystemDomainObjectEventMetadata>()
 
-                    .AddDatabase(ds => ds.AddVisitor(new OverridePropertyVisitor<TestEmployee, string>(e => e.PositionNameOrRoleName, TestEmployee.GetPositionNameOrRoleNameExpr)))
-
                     .AddListeners()
 
                     // Legacy

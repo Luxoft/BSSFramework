@@ -24,7 +24,7 @@ public sealed class IgnoreComputedPropertiesOptionsExtension : IDbContextOptions
 
         public override string LogFragment => "using IgnoreComputedProperties ";
 
-        public override int GetServiceProviderHashCode() => 0;
+        public override int GetServiceProviderHashCode() => typeof(ExtensionInfo).GetHashCode();
 
         public override void PopulateDebugInfo(IDictionary<string, string> debugInfo)
         {

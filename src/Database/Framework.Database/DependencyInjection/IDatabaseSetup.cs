@@ -1,5 +1,4 @@
 ﻿using System.Data;
-using System.Linq.Expressions;
 
 namespace Framework.Database.DependencyInjection;
 

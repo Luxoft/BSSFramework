@@ -1,13 +1,11 @@
-﻿using Framework.Database.InlineAudit.DependencyInjection;
-
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Framework.Database.EntityFramework.InlineAudit.DependencyInjection;
 
 public static class InlineAuditDbContextOptionsBuilderExtensions
 {
-    public static DbContextOptionsBuilder AddInlineAudit(this DbContextOptionsBuilder optionsBuilder, Action<IInlineAuditSetup> setupAction)
+    public static DbContextOptionsBuilder AddInlineAudit(this DbContextOptionsBuilder optionsBuilder, Action<IInlineAuditExtensionSetup> setupAction)
     {
         ArgumentNullException.ThrowIfNull(optionsBuilder);
 

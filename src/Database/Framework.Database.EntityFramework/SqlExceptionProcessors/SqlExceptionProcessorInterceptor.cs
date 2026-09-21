@@ -1,8 +1,4 @@
-using Framework.Core;
-using Framework.Database.DALExceptions;
-using Framework.Database;
-
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace Framework.Database.EntityFramework.SqlExceptionProcessors;

@@ -10,6 +10,7 @@ using Framework.Database.EntityFramework.DependencyInjection;
 using Framework.Database.EntityFramework.EnversAudit.DependencyInjection;
 using Framework.Database.EntityFramework.Extensions;
 using Framework.Database.EntityFramework.InlineAudit.DependencyInjection;
+using Framework.Database.InlineAudit.DependencyInjection;
 using Framework.Database.Mapping;
 using Framework.Infrastructure.DependencyInjection;
 using Framework.Projection;
@@ -29,7 +30,7 @@ public class SampleSystemEntityFrameworkExtension : IBssFrameworkExtension
                                                                   .UseLazyLoadingProxies()
                                                                   .IgnoreComputedProperties()
                                                                   .AddEnversAudit(s => s.SetSetupType<SampleSystemEnversAuditSetup>())
-                                                                  .AddInlineAudit(ias => ias.AddSampleSystemInlineAudit()))
+                                                                  .AddInlineAudit(s => s.SetSetupType<SampleSystemInlineAuditSetup>()))
 
             .AddDbContext<SampleSystemEnversAuditDbContext>((sp, options) => options
                                                                              .UseSqlServer(
@@ -53,8 +54,11 @@ public class SampleSystemEntityFrameworkExtension : IBssFrameworkExtension
     private class SampleSystemEnversAuditSetup : IEnversAuditExtensionInnerSetup
     {
         public void Initialize(IEnversAuditSetup setup) =>
-            setup.SetFilter(et => !et.ClrType.IsProjection()
-                                  && !et.ClrType
-                                        .HasAttribute<NotAuditedClassAttribute>());
+            setup.SetFilter(et => !et.ClrType.IsProjection() && !et.ClrType.HasAttribute<NotAuditedClassAttribute>());
+    }
+
+    private class SampleSystemInlineAuditSetup : IInlineAuditExtensionInnerSetup
+    {
+        public void Initialize(IInlineAuditSetup setup) => setup.AddSampleSystemInlineAudit();
     }
 }

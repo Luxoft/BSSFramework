@@ -37,7 +37,7 @@ public sealed class EnversAuditOptionsExtension(Action<IEnversAuditExtensionSetu
 
         public override bool IsDatabaseProvider => false;
 
-        public override string LogFragment => "using Audit ";
+        public override string LogFragment => "using Envers Audit ";
 
         public override int GetServiceProviderHashCode() => (this.ExtensionSetup.SetupType ?? typeof(ExtensionInfo)).GetHashCode();
 

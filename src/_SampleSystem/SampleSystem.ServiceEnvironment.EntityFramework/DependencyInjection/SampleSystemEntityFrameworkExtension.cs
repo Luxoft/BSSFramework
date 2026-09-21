@@ -58,8 +58,8 @@ public class SampleSystemEntityFrameworkExtension : IBssFrameworkExtension
                                       .AddServiceProxyFactory()
                                       .AddSingleton<IPropertyPathService, PropertyPathService>()
                                       .AddSingleton<IMetadataProxyProvider, MetadataProxyProvider>()
-                                      .AddDatabaseVisitors(dvs => dvs.AddVisitor<ExpandPathVisitor>()
-                                                                     .AddVisitor<TestEmployeeExpressionVisitor>()));
+                                      .AddDatabaseVisitors(dvs => dvs.AddVisitor<TestEmployeeExpressionVisitor>()
+                                                                     .AddVisitor<ExpandPathVisitor>()));
     }
 
     private class SampleSystemEnversAuditSetup : IEnversAuditExtensionInnerSetup

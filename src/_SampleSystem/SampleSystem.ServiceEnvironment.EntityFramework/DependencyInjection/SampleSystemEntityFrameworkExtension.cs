@@ -28,10 +28,7 @@ public class SampleSystemEntityFrameworkExtension : IBssFrameworkExtension
                                                                   .UseGenericQueryable(s => s.SetSetupType<SampleSystemGenericQueryableSetup>())
                                                                   .UseLazyLoadingProxies()
                                                                   .IgnoreComputedProperties()
-                                                                  .AddEnversAudit(auditSetup =>
-                                                                                      auditSetup.SetFilter(et => !et.ClrType.IsProjection()
-                                                                                              && !et.ClrType
-                                                                                                    .HasAttribute<NotAuditedClassAttribute>()))
+                                                                  .AddEnversAudit(s => s.SetSetupType<SampleSystemEnversAuditSetup>())
                                                                   .AddInlineAudit(ias => ias.AddSampleSystemInlineAudit()))
 
             .AddDbContext<SampleSystemEnversAuditDbContext>((sp, options) => options
@@ -51,5 +48,13 @@ public class SampleSystemEntityFrameworkExtension : IBssFrameworkExtension
             setup.SetVisitor<RootExpressionVisitor>()
                  .AddServices(sc => sc.AddDatabaseVisitors(dvs => dvs.AddVisitor<ExpandPathVisitor>()
                                                                      .AddVisitor<TestEmployeeExpressionVisitor>()));
+    }
+
+    private class SampleSystemEnversAuditSetup : IEnversAuditExtensionInnerSetup
+    {
+        public void Initialize(IEnversAuditSetup setup) =>
+            setup.SetFilter(et => !et.ClrType.IsProjection()
+                                  && !et.ClrType
+                                        .HasAttribute<NotAuditedClassAttribute>());
     }
 }

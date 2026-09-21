@@ -5,7 +5,7 @@ namespace Framework.Database.EntityFramework.EnversAudit.DependencyInjection;
 
 public static class EnversAuditDbContextOptionsBuilderExtensions
 {
-    public static DbContextOptionsBuilder AddEnversAudit(this DbContextOptionsBuilder optionsBuilder, Action<IEnversAuditSetup>? setupAction = null)
+    public static DbContextOptionsBuilder AddEnversAudit(this DbContextOptionsBuilder optionsBuilder, Action<IEnversAuditExtensionSetup>? setupAction = null)
     {
         ArgumentNullException.ThrowIfNull(optionsBuilder);
 

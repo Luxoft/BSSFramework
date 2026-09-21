@@ -1,4 +1,4 @@
-using Anch.Testing.Database.DependencyInjection;
+﻿using Anch.Testing.Database.DependencyInjection;
 using Anch.Testing.Xunit;
 
 using Framework.Infrastructure.DependencyInjection;
@@ -6,11 +6,8 @@ using Framework.Infrastructure.DependencyInjection;
 using SampleSystem.IntegrationTests._Environment;
 using SampleSystem.ServiceEnvironment.DependencyInjection;
 
-using Xunit.Sdk;
-using Xunit.v3;
-
 [assembly: AnchTestFramework<EntityFrameworkTestEnvironment>]
-[assembly: Parallelization(Mode = ParallelMode.None)]
+[assembly: Xunit.v3.Parallelization(Mode = Xunit.Sdk.ParallelMode.None)]
 
 namespace SampleSystem.IntegrationTests._Environment;
 

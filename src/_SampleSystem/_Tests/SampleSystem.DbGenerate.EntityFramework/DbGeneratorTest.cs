@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Linq.Expressions;
+using System.Text;
 
 using Anch.Testing.Xunit;
 
@@ -250,7 +251,7 @@ public class DbGeneratorTest
         var rootServiceProvider = new ServiceCollection()
                                   .AddSingleton<IDefaultConnectionStringSource>(new ManualDefaultConnectionStringSource(connectionString))
                                   .AddSingleton(DBSessionSettings.Default)
-                                  .AddSingleton<IExpressionVisitorContainer, RootExpressionVisitorContainer>()
+                                  .AddSingleton<ExpressionVisitor, RootExpressionVisitor>()
                                   .Self(new SampleSystemEntityFrameworkExtension().AddServices)
                                   .BuildServiceProvider(new ServiceProviderOptions { ValidateScopes = true, ValidateOnBuild = true });
 

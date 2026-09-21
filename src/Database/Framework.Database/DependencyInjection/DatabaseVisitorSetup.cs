@@ -1,15 +1,65 @@
 ﻿using System.Linq.Expressions;
 
 using Anch.Core;
+using Anch.Core.Visitor;
+using Anch.DependencyInjection;
 
 using Framework.Core;
 using Framework.Core.Visitors;
+using Framework.Database.Visitors;
 
-namespace Framework.Database.Visitors.Containers;
+using Microsoft.Extensions.DependencyInjection;
 
-public class PeriodExpressionVisitorContainer : ExpressionVisitorAggregator
+namespace Framework.Database.DependencyInjection;
+
+public class DatabaseVisitorSetup : IDatabaseVisitorSetup, IServiceInitializer
 {
-    protected override IEnumerable<ExpressionVisitor> GetVisitors()
+    private readonly List<Action<IServiceCollection>> initActions = [];
+
+    public IDatabaseVisitorSetup AddVisitor<TExpressionVisitor>()
+        where TExpressionVisitor : ExpressionVisitor
+    {
+        this.initActions.Add(sc => sc.AddKeyedSingleton<ExpressionVisitor, TExpressionVisitor>(RootExpressionVisitor.ElementKey));
+
+        return this;
+    }
+
+    public void Initialize(IServiceCollection services)
+    {
+        RegistryGenericDatabaseVisitors(services);
+
+        foreach (var action in this.initActions)
+        {
+            action(services);
+        }
+    }
+
+
+    private static IServiceCollection RegistryGenericDatabaseVisitors(IServiceCollection services)
+    {
+        if (services.AlreadyInitialized<ExpressionVisitor, RootExpressionVisitor>(isKeyed: true))
+        {
+            return services;
+        }
+
+        services.AddKeyedSingleton<ExpressionVisitor, RootExpressionVisitor>(RootExpressionVisitor.RootKey);
+
+        foreach (var visitor in GetPeriodVisitors())
+        {
+            services.AddKeyedSingleton(RootExpressionVisitor.ElementKey, visitor);
+        }
+
+        services.AddKeyedSingleton<ExpressionVisitor, OptimizeBooleanLogicVisitor>(RootExpressionVisitor.ElementKey);
+        services.AddKeyedSingleton<ExpressionVisitor, SquashWhereQueryableVisitor>(RootExpressionVisitor.ElementKey);
+        services.AddKeyedSingleton<ExpressionVisitor, OverrideHasFlagVisitor>(RootExpressionVisitor.ElementKey);
+        services.AddKeyedSingleton<ExpressionVisitor, EscapeUnderscoreVisitor>(RootExpressionVisitor.ElementKey);
+
+        services.AddKeyedSingleton<ExpressionVisitor, OverrideEqualsDomainObjectVisitor>(RootExpressionVisitor.ElementKey);
+
+        return services;
+    }
+
+    private static IEnumerable<ExpressionVisitor> GetPeriodVisitors()
     {
         yield return new OverrideMethodInfoVisitor<Func<Period, DateTime, bool>>(
             CommonPeriodExtensions.Contains,
@@ -66,11 +116,11 @@ public class PeriodExpressionVisitorContainer : ExpressionVisitorAggregator
         yield return new OverrideMethodInfoVisitor(
             typeof(Period).GetEqualityMethod()!,
             ExpressionHelper.Create((Period period, Period otherPeriod) =>
-                                            period.StartDate == otherPeriod.StartDate && period.EndDate == otherPeriod.EndDate));
+                                        period.StartDate == otherPeriod.StartDate && period.EndDate == otherPeriod.EndDate));
 
         yield return new OverrideMethodInfoVisitor(
             typeof(Period).GetInequalityMethod()!,
             ExpressionHelper.Create((Period period, Period otherPeriod) =>
-                                            period.StartDate != otherPeriod.StartDate || period.EndDate != otherPeriod.EndDate));
+                                        period.StartDate != otherPeriod.StartDate || period.EndDate != otherPeriod.EndDate));
     }
 }

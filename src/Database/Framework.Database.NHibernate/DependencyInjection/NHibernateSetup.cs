@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Linq.Expressions;
+using System.Reflection;
 
 using Anch.DependencyInjection;
 using Anch.GenericQueryable.NHibernate;
@@ -7,6 +8,8 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 
 using Framework.Core;
+using Framework.Core.Visitors;
+using Framework.Database.DependencyInjection;
 using Framework.Database.EnversAudit;
 using Framework.Database.InlineAudit.DependencyInjection;
 using Framework.Database.NHibernate.Envers;
@@ -31,6 +34,8 @@ public class NHibernateSetup : INHibernateSetup, IServiceInitializer
     private NHibernateSettings settings = new();
 
     private readonly List<Action<IServiceCollection>> initActions = [];
+
+    private Action<IDatabaseVisitorSetup> databaseVisitorSetupAction = _ => { };
 
     public bool AddDefaultInitializer { get; set; } = true;
 
@@ -130,6 +135,13 @@ public class NHibernateSetup : INHibernateSetup, IServiceInitializer
         return this;
     }
 
+    public INHibernateSetup AddVisitors(Action<IDatabaseVisitorSetup> setupAction)
+    {
+        this.databaseVisitorSetupAction = setupAction;
+
+        return this;
+    }
+
     public void Initialize(IServiceCollection services)
     {
         services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
@@ -150,10 +162,12 @@ public class NHibernateSetup : INHibernateSetup, IServiceInitializer
 
         services.AddSingleton<NHibSessionEnvironment>();
 
-        services.AddKeyedSingleton<IExpressionVisitorContainer>(
-            IExpressionVisitorContainer.ElementKey,
-            new ExpressionVisitorContainer(new FixNHibArrayContainsVisitor()));
-        services.AddKeyedSingleton<IExpressionVisitorContainer, MathExpressionVisitorContainer>(IExpressionVisitorContainer.ElementKey);
+        services.AddKeyedSingleton<ExpressionVisitor, FixNHibArrayContainsVisitor>(RootExpressionVisitor.ElementKey);
+
+        foreach (var expressionVisitor in GetMathExpressionVisitors())
+        {
+            services.AddKeyedSingleton(RootExpressionVisitor.ElementKey, expressionVisitor);
+        }
 
         if (this.AddDefaultInitializer)
         {
@@ -169,11 +183,24 @@ public class NHibernateSetup : INHibernateSetup, IServiceInitializer
             this.AddInitializer<DefaultConfigurationInitializer>();
         }
 
+        this.initActions.Add(sc => sc.AddDatabaseVisitors(this.databaseVisitorSetupAction));
+
         foreach (var action in this.initActions)
         {
             action(services);
         }
 
         this.extensions.ForEach(ex => ex.AddServices(services));
+    }
+
+    private static IEnumerable<ExpressionVisitor> GetMathExpressionVisitors()
+    {
+        yield return new OverrideMethodInfoVisitor<Func<int, int, int>>(
+            Math.Max,
+            (v1, v2) => v1 > v2 ? v1 : v2);
+
+        yield return new OverrideMethodInfoVisitor<Func<int, int, int>>(
+            Math.Min,
+            (v1, v2) => v1 < v2 ? v1 : v2);
     }
 }

@@ -14,20 +14,25 @@ public class FixNHibArrayContainsVisitor : ExpressionVisitor
             new Func<ReadOnlySpan<Ignore>, Ignore, IEqualityComparer<Ignore>, bool>(MemoryExtensions.Contains).Method.GetGenericMethodDefinition()
         };
 
-    private static readonly MethodInfo EnumerableContainsMethod = new Func<IEnumerable<Ignore>, Ignore, bool>(Enumerable.Contains).Method.GetGenericMethodDefinition();
+    private static readonly MethodInfo EnumerableContainsMethod =
+        new Func<IEnumerable<Ignore>, Ignore, bool>(Enumerable.Contains).Method.GetGenericMethodDefinition();
 
     public override Expression? Visit(Expression? node)
     {
         if (node is MethodCallExpression { Method: { IsGenericMethod: true } method } callExpr
             && ArrayContainsMethods.Contains(method.GetGenericMethodDefinition())
-            && callExpr.Arguments[0] is MethodCallExpression { Method: var castMethod } castExpr
-            && castMethod.Name == "op_Implicit")
+            && callExpr.Arguments[0] is MethodCallExpression { Method.Name: "op_Implicit" } castExpr)
         {
-            var newNode = Expression.Call(EnumerableContainsMethod.MakeGenericMethod(method.GetGenericArguments()), castExpr.Arguments.Single(), callExpr.Arguments[1]);
+            var newNode = Expression.Call(
+                EnumerableContainsMethod.MakeGenericMethod(method.GetGenericArguments()),
+                castExpr.Arguments.Single(),
+                callExpr.Arguments[1]);
 
             return base.Visit(newNode);
         }
-
-        return base.Visit(node);
+        else
+        {
+            return base.Visit(node);
+        }
     }
 }

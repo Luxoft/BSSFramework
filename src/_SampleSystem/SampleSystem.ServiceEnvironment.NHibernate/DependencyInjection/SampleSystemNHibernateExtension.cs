@@ -35,6 +35,9 @@ public class SampleSystemNHibernateExtension(bool includeTypedAudit) : IBssFrame
                                                .AddMapping(new SampleSystemSystemAuditMappingSettings(appAuditDatabase))
                                                .AddMapping(new SampleSystemSystemRevisionAuditMappingSettings(appAuditDatabase))
                                                .AddMapping(new SampleSystemMappingSettings(appDatabase)))
-                                     .AddInlineAudit(rootSetup => rootSetup.AddSampleSystemInlineAudit()));
+                                     .AddInlineAudit(rootSetup => rootSetup.AddSampleSystemInlineAudit())
+
+
+                                     .AddVisitors(vs => vs.AddVisitor<TestEmployeeExpressionVisitor>()));
     }
 }

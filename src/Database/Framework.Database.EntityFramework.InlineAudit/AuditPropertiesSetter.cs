@@ -8,7 +8,16 @@ public class AuditPropertiesSetter<TProperty>(IAuditValueResolver<TProperty> aud
 {
     public bool SetAuditFields(EntityEntry entry)
     {
-        entry.Property(propertyName).CurrentValue = auditValueResolver.GetCurrentValue();
+        var value = auditValueResolver.GetCurrentValue();
+
+        if (entry.Metadata.FindNavigation(propertyName) != null)
+        {
+            entry.Reference(propertyName).CurrentValue = value;
+        }
+        else
+        {
+            entry.Property(propertyName).CurrentValue = value;
+        }
 
         return true;
     }

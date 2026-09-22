@@ -1,6 +1,8 @@
 ﻿using Framework.Database.InlineAudit;
 using Framework.Database.InlineAudit.DependencyInjection;
 
+using SampleSystem.Domain.Employee;
+
 namespace SampleSystem.ServiceEnvironment.DependencyInjection;
 
 public static class InlineAuditSetupExtensions
@@ -27,5 +29,10 @@ public static class InlineAuditSetupExtensions
                           .Add(v => v.CreatedBy, InlineAuditAction.Create, AuditValueResolverHeader.CurrentUser)
                           .Add(v => v.ModifyDate, InlineAuditAction.Modify, AuditValueResolverHeader.Now)
                           .Add(v => v.ModifiedBy, InlineAuditAction.Modify, AuditValueResolverHeader.CurrentUser);
+            })
+            .For<SampleSystem.Domain.ExtendedInlineAuditObj>(innerSetup =>
+            {
+                innerSetup.Add<Employee?, CurrentUserAuditValueResolver<Employee?>>(v => v.CreatedByEmployee, InlineAuditAction.Create)
+                          .Add<Employee?, CurrentUserAuditValueResolver<Employee?>>(v => v.ModifiedByEmployee, InlineAuditAction.Modify);
             });
 }

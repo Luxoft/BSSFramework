@@ -4298,6 +4298,99 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ExtendedInlineAuditObj), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct ExtendedInlineAuditObjIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.ExtendedInlineAuditObjIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.ExtendedInlineAuditObjIdentityDTO EmptyField = new SampleSystem.Generated.DTO.ExtendedInlineAuditObjIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public ExtendedInlineAuditObjIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public ExtendedInlineAuditObjIdentityDTO(SampleSystem.Domain.ExtendedInlineAuditObj domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public ExtendedInlineAuditObjIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.ExtendedInlineAuditObjIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.ExtendedInlineAuditObjIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.ExtendedInlineAuditObjIdentityDTO identity1, SampleSystem.Generated.DTO.ExtendedInlineAuditObjIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.ExtendedInlineAuditObjIdentityDTO identity1, SampleSystem.Generated.DTO.ExtendedInlineAuditObjIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.ExtendedInlineAuditObjIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.ExtendedInlineAuditObjIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.ExtendedInlineAuditObjIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.ExtendedInlineAuditObj ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToExtendedInlineAuditObj(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ExternalPrincipal.Principal), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct PrincipalIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.PrincipalIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>

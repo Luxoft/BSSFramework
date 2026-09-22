@@ -70,6 +70,7 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.EnversBug1676.Coefficient1676>(this.GetCoefficient1676ValidationResult);
             base.RegisterHandler<SampleSystem.Domain.EnversBug1676.Location1676>(this.GetLocation1676ValidationResult);
             base.RegisterHandler<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>(this.GetWorkingCalendar1676ValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.ExtendedInlineAuditObj>(this.GetExtendedInlineAuditObjValidationResult);
             base.RegisterHandler<SampleSystem.Domain.ExternalPrincipal.Principal>(this.GetPrincipalValidationResult);
             base.RegisterHandler<SampleSystem.Domain.ForUpdate.Example1>(this.GetExample1ValidationResult);
             base.RegisterHandler<SampleSystem.Domain.ForUpdate.Example2>(this.GetExample2ValidationResult);
@@ -347,6 +348,11 @@ namespace SampleSystem.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetExample2ValidationResult(SampleSystem.Domain.ForUpdate.Example2 source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetExtendedInlineAuditObjValidationResult(SampleSystem.Domain.ExtendedInlineAuditObj source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

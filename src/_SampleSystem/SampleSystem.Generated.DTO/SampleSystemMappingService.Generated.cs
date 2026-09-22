@@ -438,6 +438,8 @@ namespace SampleSystem.Generated.DTO
         
         void MapExample2(SampleSystem.Domain.ForUpdate.Example2 domainObject, SampleSystem.Generated.DTO.Example2EventRichDTO mappingObject);
         
+        void MapExtendedInlineAuditObj(SampleSystem.Domain.ExtendedInlineAuditObj domainObject, SampleSystem.Generated.DTO.ExtendedInlineAuditObjEventRichDTO mappingObject);
+        
         void MapGenericNamedLock(SampleSystem.Domain.NLock.GenericNamedLock domainObject, SampleSystem.Generated.DTO.GenericNamedLockEventRichDTO mappingObject);
         
         void MapGuidBasedFilterModel(SampleSystem.Domain.Models.Filters.GuidBasedFilterModel domainObject, SampleSystem.Generated.DTO.GuidBasedFilterModelEventRichDTO mappingObject);
@@ -1097,6 +1099,8 @@ namespace SampleSystem.Generated.DTO
         SampleSystem.Domain.ForUpdate.Example2 ToExample2(SampleSystem.Generated.DTO.Example2UpdateDTO example2UpdateDTO);
         
         SampleSystem.Domain.ForUpdate.Example2 ToExample2(SampleSystem.Generated.DTO.Example2UpdateDTO example2UpdateDTO, SampleSystem.Domain.ForUpdate.Example1 master);
+        
+        SampleSystem.Domain.ExtendedInlineAuditObj ToExtendedInlineAuditObj(SampleSystem.Generated.DTO.ExtendedInlineAuditObjIdentityDTO extendedInlineAuditObjIdentityDTO);
         
         SampleSystem.Domain.NLock.GenericNamedLock ToGenericNamedLock(SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO genericNamedLockIdentityDTO);
         
@@ -4885,6 +4889,33 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Version = domainObject.Version;
         }
         
+        public virtual void MapExtendedInlineAuditObj(SampleSystem.Domain.ExtendedInlineAuditObj domainObject, SampleSystem.Generated.DTO.ExtendedInlineAuditObjEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            if (!object.ReferenceEquals(domainObject.CreatedByEmployee, null))
+            {
+                mappingObject.CreatedByEmployee = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.CreatedByEmployee, this);
+            }
+            else
+            {
+                mappingObject.CreatedByEmployee = null;
+            }
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            if (!object.ReferenceEquals(domainObject.ModifiedByEmployee, null))
+            {
+                mappingObject.ModifiedByEmployee = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.ModifiedByEmployee, this);
+            }
+            else
+            {
+                mappingObject.ModifiedByEmployee = null;
+            }
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Version = domainObject.Version;
+        }
+        
         public virtual void MapGenericNamedLock(SampleSystem.Domain.NLock.GenericNamedLock domainObject, SampleSystem.Generated.DTO.GenericNamedLockEventRichDTO mappingObject)
         {
             mappingObject.Active = domainObject.Active;
@@ -8432,6 +8463,11 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.ForUpdate.Example2 ToExample2(SampleSystem.Generated.DTO.Example2UpdateDTO example2UpdateDTO, SampleSystem.Domain.ForUpdate.Example1 example1)
         {
             return this.ToDomainObject(example2UpdateDTO, () => new SampleSystem.Domain.ForUpdate.Example2(example1));
+        }
+        
+        public virtual SampleSystem.Domain.ExtendedInlineAuditObj ToExtendedInlineAuditObj(SampleSystem.Generated.DTO.ExtendedInlineAuditObjIdentityDTO extendedInlineAuditObjIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.ExtendedInlineAuditObj>(extendedInlineAuditObjIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.NLock.GenericNamedLock ToGenericNamedLock(SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO genericNamedLockIdentityDTO)

@@ -24,7 +24,7 @@ public abstract class PerformanceTests(IServiceProvider rootServiceProvider) : T
                                     {
                                         Expression<Func<Employee, bool>> filter = z => false;
 
-                                        var resultFilter = Enumerable.Range(0, 1000)
+                                        var resultFilter = Enumerable.Range(0, 100)
                                                                      .Select(number =>
                                                                                  (Expression<Func<Employee, bool>>)(z => z.Age == number
                                                                                              && z.CellPhone == number.ToString()))

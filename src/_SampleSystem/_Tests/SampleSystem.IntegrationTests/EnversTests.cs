@@ -4,6 +4,8 @@ using Framework.AutomationCore.RootServiceProviderContainer;
 
 using Microsoft.Data.SqlClient;
 
+using SampleSystem.Domain.Directories;
+using SampleSystem.Domain.Enums;
 using SampleSystem.Domain.MU;
 using SampleSystem.IntegrationTests._Environment.TestData;
 
@@ -100,5 +102,85 @@ public abstract class EnversTests(IServiceProvider rootServiceProvider) : TestBa
         Assert.Equal((short)2, revisions[3].RevType); // Deleted: NHibernate.Envers is configured with StoreDataAtDelete = false, so no field snapshot is kept on the delete revision
         Assert.Null(revisions[3].EqualBU);
         Assert.Null(revisions[3].BusinessUnitId);
+    }
+
+    [AnchFact]
+    public async Task TptHierarchy_CreateUpdateBaseField_BaseAuditRowMatchesLeafAuditRow(CancellationToken ct)
+    {
+        // Arrange
+        var legalEntityId = Guid.NewGuid();
+
+        // Act
+
+        this.EvaluateWrite(
+                           context =>
+                           {
+                               var legalEntity = new CompanyLegalEntity
+                                                  {
+                                                      Active = true,
+                                                      Name = "TptAuditTest",
+                                                      NameEnglish = "TptAuditTestEnglish",
+                                                      Code = "TptAuditTestCode",
+                                                      Type = CompanyLegalEntityType.LegalEntity
+                                                  };
+
+                               context.Logics.CompanyLegalEntity.Insert(legalEntity, legalEntityId);
+                           });
+
+        this.EvaluateWrite(
+                           context =>
+                           {
+                               var legalEntity = context.Logics.CompanyLegalEntity.GetById(legalEntityId, true)!;
+                               legalEntity.NameEnglish = "TptAuditTestEnglishUpdated";
+                               context.Logics.CompanyLegalEntity.Save(legalEntity);
+                           });
+
+        // Assert
+        await using var connection = new SqlConnection(this.ActualConnectionString.Value);
+        await connection.OpenAsync(ct);
+
+        await using var leafCommand = connection.CreateCommand();
+        leafCommand.CommandText = """
+                                  SELECT REV
+                                  FROM appAudit.CompanyLegalEntityAudit
+                                  WHERE Id = @id
+                                  ORDER BY REV
+                                  """;
+        leafCommand.Parameters.AddWithValue("@id", legalEntityId);
+
+        var leafRevisions = new List<long>();
+        await using (var reader = await leafCommand.ExecuteReaderAsync(ct))
+        {
+            while (await reader.ReadAsync(ct))
+            {
+                leafRevisions.Add(reader.GetInt64(0));
+            }
+        }
+
+        await using var baseCommand = connection.CreateCommand();
+        baseCommand.CommandText = """
+                                  SELECT REV, NameEnglish
+                                  FROM appAudit.LegalEntityBaseAudit
+                                  WHERE Id = @id
+                                  ORDER BY REV
+                                  """;
+        baseCommand.Parameters.AddWithValue("@id", legalEntityId);
+
+        var baseRevisions = new List<(long Rev, string? NameEnglish)>();
+        await using (var reader = await baseCommand.ExecuteReaderAsync(ct))
+        {
+            while (await reader.ReadAsync(ct))
+            {
+                baseRevisions.Add((reader.GetInt64(0), reader.IsDBNull(1) ? null : reader.GetString(1)));
+            }
+        }
+
+        Assert.Equal(2, leafRevisions.Count);
+
+        // Every leaf-type (CompanyLegalEntityAudit) revision must have a matching row in the base-type (LegalEntityBaseAudit) table sharing the same (Id, REV).
+        Assert.Equal(leafRevisions, baseRevisions.Select(z => z.Rev));
+
+        Assert.Equal("TptAuditTestEnglish", baseRevisions[0].NameEnglish);
+        Assert.Equal("TptAuditTestEnglishUpdated", baseRevisions[1].NameEnglish);
     }
 }

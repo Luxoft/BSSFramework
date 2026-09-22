@@ -7,7 +7,7 @@ using SampleSystem.IntegrationTests._Environment;
 using SampleSystem.ServiceEnvironment.DependencyInjection;
 
 [assembly: AnchTestFramework<EntityFrameworkTestEnvironment>]
-[assembly: Xunit.v3.Parallelization(Mode = Xunit.Sdk.ParallelMode.None)]
+//[assembly: Xunit.v3.Parallelization(Mode = Xunit.Sdk.ParallelMode.None)]
 
 namespace SampleSystem.IntegrationTests._Environment;
 

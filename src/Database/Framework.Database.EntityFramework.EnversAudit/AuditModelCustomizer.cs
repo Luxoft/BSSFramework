@@ -55,6 +55,8 @@ public class AuditModelCustomizer(
                                       .GroupBy(entityType => (entityType.GetSchema(), entityType.GetTableName()))
                                       .ToDictionary(g => g.Key, g => g.ToArray());
 
+        var auditMetadataByEntityType = new Dictionary<IReadOnlyEntityType, AuditEntityMetadata>();
+
         foreach (var entityType in auditableEntityTypes)
         {
             var primaryKey = entityType.FindPrimaryKey()!;
@@ -146,6 +148,8 @@ public class AuditModelCustomizer(
                 entityType.ClrType,
                 scalarPropertyMetadata.Concat(complexPropertyMetadata).Concat(ownedPropertyMetadata).Concat(inverseOneToOneMetadata).Concat(collectionModFlagMetadata));
 
+            auditMetadataByEntityType.Add(entityType, metadata);
+
             var auditEntity = modelBuilder.Entity(metadata.AuditEntityType);
 
             var (auditSchema, auditTableName) = auditInfoResolver.GetInfo(entityType);
@@ -177,6 +181,23 @@ public class AuditModelCustomizer(
                                 .WithOne()
                                 .HasForeignKey(typedProjection.ClrType, keyPropertyNames.Append(RevisionColumnName).ToArray());
                 }
+            }
+        }
+
+        foreach (var entityType in auditableEntityTypes)
+        {
+            if (entityType.BaseType is { } baseEntityType &&
+                auditMetadataByEntityType.TryGetValue(baseEntityType, out var baseMetadata))
+            {
+                var metadata = auditMetadataByEntityType[entityType];
+                var keyPropertyNames = entityType.FindPrimaryKey()!.Properties.Select(property => property.Name).ToArray();
+
+                // NHibernate.Envers physically links a subclass audit row to its base audit row via (key..., REV); EF's TPT mapping doesn't add this on its own.
+                modelBuilder.Entity(metadata.AuditEntityType)
+                            .HasOne(baseMetadata.AuditEntityType)
+                            .WithMany()
+                            .HasForeignKey(keyPropertyNames.Append(auditEntityFactory.RevisionIdPropertyName).ToArray())
+                            .OnDelete(DeleteBehavior.NoAction);
             }
         }
     }

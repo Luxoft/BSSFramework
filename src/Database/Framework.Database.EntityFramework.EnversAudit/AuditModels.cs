@@ -45,7 +45,8 @@ public sealed class AuditEntityFactory(IAuditTypeNameResolver auditTypeNameResol
 
                 if (!property.IsKey)
                 {
-                    this.DefineAutoProperty(typeBuilder, $"{property.ModName}_MOD", typeof(bool));
+                    // Nullable to match NHibernate.Envers' modified-flag columns (GlobalWithModifiedFlag), which allow NULL.
+                    this.DefineAutoProperty(typeBuilder, $"{property.ModName}_MOD", typeof(bool?));
                 }
             }
 

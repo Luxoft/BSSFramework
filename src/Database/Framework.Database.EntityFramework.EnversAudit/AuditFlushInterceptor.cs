@@ -56,8 +56,7 @@ public class AuditFlushInterceptor : SaveChangesInterceptor
         var auditEntityFactory = dbContext.GetService<IAuditEntityFactory>();
         var audits = dbContext.ChangeTracker.Entries()
                               .Where(entry => entry.State is EntityState.Added or EntityState.Modified or EntityState.Deleted)
-                              .Select(entry => this.CreateAuditEntry(entry, auditEntityFactory))
-                              .OfType<AuditEntry>()
+                              .SelectMany(entry => this.CreateAuditEntries(entry, auditEntityFactory))
                               .ToList();
 
         if (audits.Count > 0)
@@ -99,20 +98,25 @@ public class AuditFlushInterceptor : SaveChangesInterceptor
         auditableDbContext.ServiceProvider.GetRequiredService<EfCurrentRevisionState>().CurrentRevision = revision.Id;
     }
 
-    private AuditEntry? CreateAuditEntry(EntityEntry entry, IAuditEntityFactory auditEntityFactory)
+    private IEnumerable<AuditEntry> CreateAuditEntries(EntityEntry entry, IAuditEntityFactory auditEntityFactory)
     {
-        if (!auditEntityFactory.TryGet(entry.Metadata.ClrType, out var metadata))
+        // NHibernate.Envers writes one audit row per level of a TPT hierarchy (e.g. CompanyLegalEntityAudit and LegalEntityBaseAudit);
+        // walk the CLR base-type chain so EF mirrors that instead of auditing only the leaf entity type.
+        for (var type = entry.Metadata.ClrType; type != null; type = type.BaseType)
         {
-            return null;
+            if (!auditEntityFactory.TryGet(type, out var metadata))
+            {
+                continue;
+            }
+
+            var modifiedProperties = metadata.Properties
+                                             .Where(property => !property.IsKey)
+                                             .ToDictionary(
+                                                 property => property.Name,
+                                                 property => this.IsPropertyModified(entry, property));
+
+            yield return new AuditEntry(entry, metadata, this.ToRevisionType(entry.State), modifiedProperties);
         }
-
-        var modifiedProperties = metadata.Properties
-                                         .Where(property => !property.IsKey)
-                                         .ToDictionary(
-                                             property => property.Name,
-                                             property => this.IsPropertyModified(entry, property));
-
-        return new AuditEntry(entry, metadata, this.ToRevisionType(entry.State), modifiedProperties);
     }
 
     private AuditRevisionEntity AddAuditEntities(

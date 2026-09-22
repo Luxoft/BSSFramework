@@ -101,6 +101,8 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.Location1676RemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.WorkingCalendar1676SaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.WorkingCalendar1676RemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ExtendedInlineAuditObjSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ExtendedInlineAuditObjRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.PrincipalSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.PrincipalRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.Example1SaveEventDTO))]
@@ -15127,6 +15129,216 @@ namespace SampleSystem.Generated.DTO
             set
             {
                 this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                this._version = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ExtendedInlineAuditObj), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class ExtendedInlineAuditObjSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.ExtendedInlineAuditObjEventRichDTO extendedInlineAuditObj;
+        
+        public ExtendedInlineAuditObjSaveEventDTO()
+        {
+        }
+        
+        public ExtendedInlineAuditObjSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ExtendedInlineAuditObj domainObject)
+        {
+            this.extendedInlineAuditObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ExtendedInlineAuditObjEventRichDTO ExtendedInlineAuditObj
+        {
+            get
+            {
+                return this.extendedInlineAuditObj;
+            }
+            set
+            {
+                this.extendedInlineAuditObj = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ExtendedInlineAuditObj), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class ExtendedInlineAuditObjRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.ExtendedInlineAuditObjEventRichDTO extendedInlineAuditObj;
+        
+        public ExtendedInlineAuditObjRemoveEventDTO()
+        {
+        }
+        
+        public ExtendedInlineAuditObjRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ExtendedInlineAuditObj domainObject)
+        {
+            this.extendedInlineAuditObj = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ExtendedInlineAuditObjEventRichDTO ExtendedInlineAuditObj
+        {
+            get
+            {
+                return this.extendedInlineAuditObj;
+            }
+            set
+            {
+                this.extendedInlineAuditObj = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ExtendedInlineAuditObj), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class ExtendedInlineAuditObjEventRichDTO
+    {
+        
+        private bool _active;
+        
+        private System.DateTime? _createDate;
+        
+        private string _createdBy;
+        
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _createdByEmployee;
+        
+        private System.Guid _id;
+        
+        private string _modifiedBy;
+        
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _modifiedByEmployee;
+        
+        private System.DateTime? _modifyDate;
+        
+        private long _version;
+        
+        public ExtendedInlineAuditObjEventRichDTO()
+        {
+        }
+        
+        public ExtendedInlineAuditObjEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ExtendedInlineAuditObj domainObject)
+        {
+            mappingService.MapExtendedInlineAuditObj(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO CreatedByEmployee
+        {
+            get
+            {
+                return this._createdByEmployee;
+            }
+            set
+            {
+                this._createdByEmployee = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO ModifiedByEmployee
+        {
+            get
+            {
+                return this._modifiedByEmployee;
+            }
+            set
+            {
+                this._modifiedByEmployee = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
             }
         }
         

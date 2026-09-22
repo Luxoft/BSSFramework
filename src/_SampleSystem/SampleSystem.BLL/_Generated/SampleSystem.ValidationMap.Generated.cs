@@ -1795,6 +1795,39 @@ namespace SampleSystem.BLL
             return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.ForUpdate.Example2>(this.GetExample2Properties);
         }
         
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.ExtendedInlineAuditObj, System.DateTime?>> GetExtendedInlineAuditObj_CreateDateValidators()
+        {
+            yield return Framework.Validation.Validators.DynamicClass.Available.Base.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.ExtendedInlineAuditObj>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.ExtendedInlineAuditObj, string>> GetExtendedInlineAuditObj_CreatedByValidators()
+        {
+            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.ExtendedInlineAuditObj>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.ExtendedInlineAuditObj, string>> GetExtendedInlineAuditObj_ModifiedByValidators()
+        {
+            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.ExtendedInlineAuditObj>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.ExtendedInlineAuditObj, System.DateTime?>> GetExtendedInlineAuditObj_ModifyDateValidators()
+        {
+            yield return Framework.Validation.Validators.DynamicClass.Available.Base.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.ExtendedInlineAuditObj>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<SampleSystem.Domain.ExtendedInlineAuditObj>> GetExtendedInlineAuditObjProperties(Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.ExtendedInlineAuditObj> currentClass)
+        {
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.ExtendedInlineAuditObj, System.DateTime?>(source => source.CreateDate, currentClass, this.GetExtendedInlineAuditObj_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.ExtendedInlineAuditObj, string>(source => source.CreatedBy, currentClass, this.GetExtendedInlineAuditObj_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.ExtendedInlineAuditObj, string>(source => source.ModifiedBy, currentClass, this.GetExtendedInlineAuditObj_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.ExtendedInlineAuditObj, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetExtendedInlineAuditObj_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+        }
+        
+        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.ExtendedInlineAuditObj> GetExtendedInlineAuditObjValidationMap()
+        {
+            return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.ExtendedInlineAuditObj>(this.GetExtendedInlineAuditObjProperties);
+        }
+        
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Inline.Fio, string>> GetFio_FirstNameValidators()
         {
             yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.Inline.Fio>(50);
@@ -2617,6 +2650,10 @@ namespace SampleSystem.BLL
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.EnversBug1676.WorkingCalendar1676)))
             {
                 return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetWorkingCalendar1676ValidationMap()));
+            }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.ExtendedInlineAuditObj)))
+            {
+                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetExtendedInlineAuditObjValidationMap()));
             }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.ExternalPrincipal.Principal)))
             {

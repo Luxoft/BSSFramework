@@ -77,10 +77,25 @@ public class DefaultStrictDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
             Attributes = MemberAttributes.Public
         };
 
-    protected override CodeExpression? GetFieldInitExpression(CodeTypeReference codeTypeReference, PropertyInfo property) =>
-        this.CodeTypeReferenceService!.IsOptional(property) ? this.CodeTypeReferenceService!.GetCodeTypeReference(property).ToNothingValueExpression()
-        : property.PropertyType.IsCollection() ? (CodeExpression)new CodeObjectCreateExpression(codeTypeReference)
-        : property.GetCustomAttribute<DefaultValueAttribute>().Maybe(attr => attr.Value.ToDynamicPrimitiveExpression());
+    protected override CodeExpression? GetFieldInitExpression(CodeTypeReference codeTypeReference, PropertyInfo property)
+    {
+        if (this.CodeTypeReferenceService.IsOptional(property))
+        {
+            return this.CodeTypeReferenceService.GetCodeTypeReference(property).ToNothingValueExpression();
+        }
+        else if (property.PropertyType == typeof(string)
+                 && new NullabilityInfoContext().Create(property).ReadState == NullabilityState.NotNull
+                 && !property.HasAttribute<DefaultValueAttribute>())
+        {
+            return "".ToPrimitiveExpression();
+        }
+        else
+        {
+            return property.PropertyType.IsCollection()
+                       ? (CodeExpression)new CodeObjectCreateExpression(codeTypeReference)
+                       : property.GetCustomAttribute<DefaultValueAttribute>().Maybe(attr => attr.Value.ToDynamicPrimitiveExpression());
+        }
+    }
 
     protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {

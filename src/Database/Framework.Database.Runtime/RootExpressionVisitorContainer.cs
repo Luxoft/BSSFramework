@@ -1,11 +1,19 @@
-﻿using System.Linq.Expressions;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq.Expressions;
+
+using Anch.Core;
 
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Database;
 
-public class RootExpressionVisitorContainer([FromKeyedServices(IExpressionVisitorContainer.ElementKey)] IEnumerable<IExpressionVisitorContainer> items)
-    : ExpressionVisitorAggregator
+public class RootExpressionVisitor([FromKeyedServices(RootExpressionVisitor.ElementKey)] IEnumerable<ExpressionVisitor> items)
+    : ExpressionVisitor
 {
-    protected override IEnumerable<ExpressionVisitor> GetVisitors() => items.Select(item => item.Visitor);
+    public const string RootKey = "Root";
+
+    public const string ElementKey = "Element";
+
+    [return: NotNullIfNotNull("node")]
+    public override Expression? Visit(Expression? node) => node?.UpdateBase(items);
 }

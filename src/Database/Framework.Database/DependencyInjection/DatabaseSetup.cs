@@ -1,12 +1,10 @@
 ﻿using System.Data;
-using System.Linq.Expressions;
 
 using Anch.DependencyInjection;
 
 using Framework.Core;
 using Framework.Database.ConnectionStringSource;
 using Framework.Database.DALExceptions;
-using Framework.Database.Visitors.Containers;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,6 +16,8 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
 
     private readonly List<Action<IServiceCollection>> initActions = [];
 
+    private readonly List<IDatabaseSetupExtension> extensions = [];
+
     private string? defaultConnectionString;
 
     private DefaultConnectionStringSettings defaultConnectionStringSettings = DefaultConnectionStringSettings.Default;
@@ -28,21 +28,6 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
         where TEventListener : class, IDBSessionEventListener
     {
         this.initActions.Add(services => services.AddScoped<IDBSessionEventListener, TEventListener>());
-
-        return this;
-    }
-
-    public IDatabaseSetup AddVisitorContainer<TExpressionVisitorContainer>()
-        where TExpressionVisitorContainer : class, IExpressionVisitorContainer
-    {
-        this.initActions.Add(sc => sc.AddKeyedSingleton<IExpressionVisitorContainer, TExpressionVisitorContainer>(IExpressionVisitorContainer.ElementKey));
-
-        return this;
-    }
-
-    public IDatabaseSetup AddVisitor(ExpressionVisitor expressionVisitor)
-    {
-        this.initActions.Add(sc => sc.AddKeyedSingleton<IExpressionVisitorContainer>(IExpressionVisitorContainer.ElementKey, new ExpressionVisitorContainer(expressionVisitor)));
 
         return this;
     }
@@ -82,17 +67,20 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
         return this;
     }
 
+    public IDatabaseSetup AddExtension(IDatabaseSetupExtension extension)
+    {
+        this.extensions.Add(extension);
+
+        return this;
+    }
+
     public void Initialize(IServiceCollection services)
     {
-        services.AddScopedFrom<ICurrentRevisionService, IDBSession>();
-
         services.AddSingleton<IDalValidationIdentitySource, DalValidationIdentitySource>();
 
         services.AddScopedFrom<IDbTransaction, IDBSession>(session => session.Transaction);
 
         services.AddSingleton(DBSessionSettings.Default);
-
-        services.AddScoped<IAuditPropertyFactory, AuditPropertyFactory>();
 
         services.AddSingleton<IInitializeManager, InitializeManager>();
 
@@ -120,23 +108,15 @@ public class DatabaseSetup : IDatabaseSetup, IServiceInitializer
             this.AddEventListener<DefaultDBSessionEventListener>();
         }
 
-        RegistryGenericDatabaseVisitors(services);
-
         foreach (var action in this.initActions)
         {
             action(services);
         }
+
+        foreach (var extension in this.extensions)
+        {
+            extension.AddServices(services);
+        }
     }
 
-    private static IServiceCollection RegistryGenericDatabaseVisitors(IServiceCollection services)
-    {
-        services.AddSingleton<IExpressionVisitorContainer, RootExpressionVisitorContainer>();
-
-        //services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPersistentItem>();
-        services.AddKeyedSingleton<IExpressionVisitorContainer, PeriodExpressionVisitorContainer>(IExpressionVisitorContainer.ElementKey);
-        services.AddKeyedSingleton<IExpressionVisitorContainer, DefaultExpressionVisitorContainer>(IExpressionVisitorContainer.ElementKey);
-        services.AddKeyedSingleton<IExpressionVisitorContainer, OverrideEqualsDomainObjectVisitorContainer>(IExpressionVisitorContainer.ElementKey);
-
-        return services;
-    }
 }

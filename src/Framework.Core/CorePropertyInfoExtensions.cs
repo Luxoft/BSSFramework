@@ -118,10 +118,7 @@ public static class CorePropertyInfoExtensions
     {
         if (propertyInfo is null) throw new ArgumentNullException(nameof(propertyInfo));
 
-        return propertyInfo.HasPrivateFieldInternal(declaringType, preFieldName)
-
-            // || (preFieldName is null && propertyInfo.HasPrivateFieldInternal("_" + propertyInfo.Name.ToStartLowerCase()))
-            ;
+        return propertyInfo.HasPrivateFieldInternal(declaringType, preFieldName);
     }
 
     private static bool HasPrivateFieldInternal(this PropertyInfo propertyInfo, Type declaringType, string? preFieldName = null)

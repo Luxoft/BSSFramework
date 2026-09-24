@@ -5,7 +5,6 @@ using System.Reflection;
 using Anch.SecuritySystem;
 
 using Framework.Application.Domain;
-using Framework.Database;
 using Framework.FileGeneration.Configuration;
 
 namespace Framework.CodeGeneration.Configuration;
@@ -16,7 +15,7 @@ public abstract class CodeGenerationEnvironment<TDomainObjectBase, TPersistentDo
     : FileGenerationEnvironment<TDomainObjectBase, TPersistentDomainObjectBase, TAuditPersistentDomainObjectBase, TIdent>(identityPropertyExpr, modelAssembly),
         ICodeGenerationEnvironment
     where TPersistentDomainObjectBase : TDomainObjectBase, IIdentityObject<TIdent>
-    where TAuditPersistentDomainObjectBase : TPersistentDomainObjectBase, IAuditObject
+    where TAuditPersistentDomainObjectBase : TPersistentDomainObjectBase
 {
     public virtual ImmutableArray<Type> SecurityRuleTypeList { get; } = [typeof(SecurityRole)];
 

@@ -40,11 +40,11 @@ public class DefaultRichDTOFileFactory<TConfiguration>(TConfiguration configurat
 
     protected override CodeExpression? GetFieldInitExpression(CodeTypeReference codeTypeReference, PropertyInfo property)
     {
-        if (!this.CodeTypeReferenceService!.IsOptional(property))
+        if (!this.CodeTypeReferenceService.IsOptional(property))
         {
             if (property.PropertyType.IsCollection())
             {
-                return this.CodeTypeReferenceService!.GetCodeTypeReference(property, true).ToObjectCreateExpression();
+                return this.CodeTypeReferenceService.GetCodeTypeReference(property, true).ToObjectCreateExpression();
             }
         }
 

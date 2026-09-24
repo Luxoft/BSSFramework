@@ -112,7 +112,7 @@ public struct TrackingResult<TDomainObject> : IEnumerable<TrackingProperty>
     /// <param name="propertyChanged">Property get expression</param>
     public Maybe<TrackingProperty<IEnumerable<TProperty>>> GetChange<TProperty>(Expression<Func<TDomainObject, IEnumerable<TProperty>>> propertyChanged)
     {
-        var hasChange = this.HasChange(propertyChanged.Select(v => (object)v!));
+        var hasChange = this.HasChange(propertyChanged.Select(v => (object)v));
 
         if (hasChange)
         {

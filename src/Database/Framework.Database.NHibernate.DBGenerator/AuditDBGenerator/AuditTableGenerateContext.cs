@@ -1,6 +1,5 @@
-﻿using Framework.Database.NHibernate.Audit;
-using Framework.Database.NHibernate.DBGenerator.Contracts;
-
+﻿using Framework.Database.NHibernate.DBGenerator.Contracts;
+using Framework.Database.NHibernate.EnversAudit;
 using NHibernate.Dialect.Schema;
 using NHibernate.Engine;
 using NHibernate.Mapping;

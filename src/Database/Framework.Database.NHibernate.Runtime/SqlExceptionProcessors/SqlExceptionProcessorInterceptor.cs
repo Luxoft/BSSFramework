@@ -42,6 +42,7 @@ internal class SqlExceptionProcessorInterceptor : IExceptionExpander
         yield return new RemoveLinkedObjectSqlProcessor();
         yield return new ArithmeticOverflowSqlProcessor();
         yield return new UniqueIndexSqlProcessor(this.dalValidationIdentitySource);
+        yield return new UniqueConstraintIndexSqlProcessor(this.dalValidationIdentitySource);
         yield return new RequiredFieldSqlProcessor();
     }
 

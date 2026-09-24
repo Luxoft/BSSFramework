@@ -126,7 +126,7 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
 
                              orderby !property.HasAttribute<VersionAttribute>(),
 
-                                     this.CodeTypeReferenceService!.IsOptional(property),
+                                     this.CodeTypeReferenceService.IsOptional(property),
 
                                      property.GetCustomAttribute<MappingPriorityAttribute>().Maybe(attr => attr.Value)
 
@@ -249,7 +249,7 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
         if (property is null) throw new ArgumentNullException(nameof(property));
         if (fieldName is null) throw new ArgumentNullException(nameof(fieldName));
 
-        var fieldTypeRef = this.CodeTypeReferenceService!.GetCodeTypeReference(property, true);
+        var fieldTypeRef = this.CodeTypeReferenceService.GetCodeTypeReference(property, true);
 
         return new CodeMemberField
         {

@@ -28,7 +28,10 @@ public partial class BusinessUnit :
         ISecurityContext
 {
     private readonly ICollection<BusinessUnitEmployeeRole> businessUnitEmployeeRoles = new List<BusinessUnitEmployeeRole>();
+
     private readonly ICollection<BusinessUnitManagerCommissionLink> managerCommissions = new List<BusinessUnitManagerCommissionLink>();
+
+    private readonly  ICollection<ManagementUnitAndBusinessUnitLink> managementUnits = new List<ManagementUnitAndBusinessUnitLink>();
 
     private readonly ICollection<BusinessUnit> children = new List<BusinessUnit>();
 
@@ -71,7 +74,7 @@ public partial class BusinessUnit :
     }
 
     [UniqueGroup]
-    public virtual IEnumerable<ManagementUnitAndBusinessUnitLink> ManagementUnits { get; } = new List<ManagementUnitAndBusinessUnitLink>();
+    public virtual IEnumerable<ManagementUnitAndBusinessUnitLink> ManagementUnits => this.managementUnits;
 
     public virtual bool AllowedForFilterRole
     {

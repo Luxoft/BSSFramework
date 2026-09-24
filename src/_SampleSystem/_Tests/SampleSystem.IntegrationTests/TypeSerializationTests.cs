@@ -11,7 +11,7 @@ public abstract class TypeSerializationTests
     public void GetTypesWithFieldSerialization_TypesNotExists()
     {
         // Act
-        var wrongTypes = AppDomain.CurrentDomain.GetAssemblies()
+        var wrongTypes = GetNonDynamicAssemblies()
                                   .SelectMany(a => a.GetTypes())
                                   .Where(t => t.GetFields().Any(f => f.HasAttribute<DataMemberAttribute>()))
                                   .ToArray();
@@ -24,7 +24,7 @@ public abstract class TypeSerializationTests
     public void GetDataContractTypesWithMissedPropertyDataMemberDeclaration_TypesNotExists()
     {
         // Act
-        var wrongTypes = AppDomain.CurrentDomain.GetAssemblies()
+        var wrongTypes = GetNonDynamicAssemblies()
                                   .SelectMany(a => a.GetTypes())
                                   .Where(
                                       t => t.Namespace is not null
@@ -42,4 +42,7 @@ public abstract class TypeSerializationTests
         // Assert
         Assert.Empty(wrongTypes);
     }
+
+    private static IEnumerable<Assembly> GetNonDynamicAssemblies() =>
+        AppDomain.CurrentDomain.GetAssemblies().Where(a => !a.IsDynamic);
 }

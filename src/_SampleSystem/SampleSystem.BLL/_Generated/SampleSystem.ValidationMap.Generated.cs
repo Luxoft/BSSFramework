@@ -1141,71 +1141,6 @@ namespace SampleSystem.BLL
             yield return new Framework.Validation.Validators.NumberAlphabetValidator(null);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Employee.EmployeeCellPhoneBase, string>> GetEmployeeCellPhoneBase_CityCodeValidators()
-        {
-            yield return new Framework.Validation.Validators.RequiredValidator<SampleSystem.Domain.Employee.EmployeeCellPhoneBase, string>(Framework.Restriction.RequiredMode.Default);
-            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.Employee.EmployeeCellPhoneBase>(5);
-            yield return new Framework.Validation.Validators.NumberAlphabetValidator(null);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Employee.EmployeeCellPhoneBase, string>> GetEmployeeCellPhoneBase_CountryCodeValidators()
-        {
-            yield return new Framework.Validation.Validators.RequiredValidator<SampleSystem.Domain.Employee.EmployeeCellPhoneBase, string>(Framework.Restriction.RequiredMode.Default);
-            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.Employee.EmployeeCellPhoneBase>(3);
-            yield return new Framework.Validation.Validators.NumberAlphabetValidator(null);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Employee.EmployeeCellPhoneBase, System.DateTime?>> GetEmployeeCellPhoneBase_CreateDateValidators()
-        {
-            yield return Framework.Validation.Validators.DynamicClass.Available.Base.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.Employee.EmployeeCellPhoneBase>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Employee.EmployeeCellPhoneBase, string>> GetEmployeeCellPhoneBase_CreatedByValidators()
-        {
-            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.Employee.EmployeeCellPhoneBase>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Employee.EmployeeCellPhoneBase, string>> GetEmployeeCellPhoneBase_FullNumberValidators()
-        {
-            yield return new Framework.Validation.Validators.RequiredValidator<SampleSystem.Domain.Employee.EmployeeCellPhoneBase, string>(Framework.Restriction.RequiredMode.Default);
-            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.Employee.EmployeeCellPhoneBase>(18);
-            yield return new Framework.Validation.Validators.NumberAlphabetValidator("+()");
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Employee.EmployeeCellPhoneBase, string>> GetEmployeeCellPhoneBase_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.Employee.EmployeeCellPhoneBase>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Employee.EmployeeCellPhoneBase, System.DateTime?>> GetEmployeeCellPhoneBase_ModifyDateValidators()
-        {
-            yield return Framework.Validation.Validators.DynamicClass.Available.Base.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.Employee.EmployeeCellPhoneBase>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Employee.EmployeeCellPhoneBase, string>> GetEmployeeCellPhoneBase_NumberValidators()
-        {
-            yield return new Framework.Validation.Validators.RequiredValidator<SampleSystem.Domain.Employee.EmployeeCellPhoneBase, string>(Framework.Restriction.RequiredMode.Default);
-            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.Employee.EmployeeCellPhoneBase>(7);
-            yield return new Framework.Validation.Validators.NumberAlphabetValidator(null);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<SampleSystem.Domain.Employee.EmployeeCellPhoneBase>> GetEmployeeCellPhoneBaseProperties(Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.Employee.EmployeeCellPhoneBase> currentClass)
-        {
-            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.Employee.EmployeeCellPhoneBase, string>(source => source.CityCode, currentClass, this.GetEmployeeCellPhoneBase_CityCodeValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.Employee.EmployeeCellPhoneBase, string>(source => source.CountryCode, currentClass, this.GetEmployeeCellPhoneBase_CountryCodeValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.Employee.EmployeeCellPhoneBase, System.DateTime?>(source => source.CreateDate, currentClass, this.GetEmployeeCellPhoneBase_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.Employee.EmployeeCellPhoneBase, string>(source => source.CreatedBy, currentClass, this.GetEmployeeCellPhoneBase_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.Employee.EmployeeCellPhoneBase, string>(source => source.FullNumber, currentClass, this.GetEmployeeCellPhoneBase_FullNumberValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.Employee.EmployeeCellPhoneBase, string>(source => source.ModifiedBy, currentClass, this.GetEmployeeCellPhoneBase_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.Employee.EmployeeCellPhoneBase, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetEmployeeCellPhoneBase_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.Employee.EmployeeCellPhoneBase, string>(source => source.Number, currentClass, this.GetEmployeeCellPhoneBase_NumberValidators(), this.GetClassMap<string>(true));
-        }
-        
-        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.Employee.EmployeeCellPhoneBase> GetEmployeeCellPhoneBaseValidationMap()
-        {
-            return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.Employee.EmployeeCellPhoneBase>(this.GetEmployeeCellPhoneBaseProperties);
-        }
-        
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<SampleSystem.Domain.Employee.EmployeeCellPhone>> GetEmployeeCellPhoneProperties(Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.Employee.EmployeeCellPhone> currentClass)
         {
             yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.Employee.EmployeeCellPhone, string>(source => source.CityCode, currentClass, this.GetEmployeeCellPhone_CityCodeValidators(), this.GetClassMap<string>(true));
@@ -1858,6 +1793,39 @@ namespace SampleSystem.BLL
         protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.ForUpdate.Example2> GetExample2ValidationMap()
         {
             return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.ForUpdate.Example2>(this.GetExample2Properties);
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.ExtendedInlineAuditObj, System.DateTime?>> GetExtendedInlineAuditObj_CreateDateValidators()
+        {
+            yield return Framework.Validation.Validators.DynamicClass.Available.Base.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.ExtendedInlineAuditObj>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.ExtendedInlineAuditObj, string>> GetExtendedInlineAuditObj_CreatedByValidators()
+        {
+            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.ExtendedInlineAuditObj>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.ExtendedInlineAuditObj, string>> GetExtendedInlineAuditObj_ModifiedByValidators()
+        {
+            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.ExtendedInlineAuditObj>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.ExtendedInlineAuditObj, System.DateTime?>> GetExtendedInlineAuditObj_ModifyDateValidators()
+        {
+            yield return Framework.Validation.Validators.DynamicClass.Available.Base.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.ExtendedInlineAuditObj>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<SampleSystem.Domain.ExtendedInlineAuditObj>> GetExtendedInlineAuditObjProperties(Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.ExtendedInlineAuditObj> currentClass)
+        {
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.ExtendedInlineAuditObj, System.DateTime?>(source => source.CreateDate, currentClass, this.GetExtendedInlineAuditObj_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.ExtendedInlineAuditObj, string>(source => source.CreatedBy, currentClass, this.GetExtendedInlineAuditObj_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.ExtendedInlineAuditObj, string>(source => source.ModifiedBy, currentClass, this.GetExtendedInlineAuditObj_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.ExtendedInlineAuditObj, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetExtendedInlineAuditObj_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+        }
+        
+        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.ExtendedInlineAuditObj> GetExtendedInlineAuditObjValidationMap()
+        {
+            return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.ExtendedInlineAuditObj>(this.GetExtendedInlineAuditObjProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.Inline.Fio, string>> GetFio_FirstNameValidators()
@@ -2599,10 +2567,6 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetEmployeeCellPhoneValidationMap()));
             }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.Employee.EmployeeCellPhoneBase)))
-            {
-                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetEmployeeCellPhoneBaseValidationMap()));
-            }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.Employee.EmployeeInformation)))
             {
                 return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetEmployeeInformationValidationMap()));
@@ -2686,6 +2650,10 @@ namespace SampleSystem.BLL
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.EnversBug1676.WorkingCalendar1676)))
             {
                 return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetWorkingCalendar1676ValidationMap()));
+            }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.ExtendedInlineAuditObj)))
+            {
+                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetExtendedInlineAuditObjValidationMap()));
             }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.ExternalPrincipal.Principal)))
             {

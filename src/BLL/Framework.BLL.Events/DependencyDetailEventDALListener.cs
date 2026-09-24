@@ -99,15 +99,17 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase>(
                                                        .Concat(
                                                            z.Item1.Value.RemovedItems.Where(
                                                                q => z.Item2.SourceTypeEvent.IsRemoveProcessingFunc(q.Object)))
-                                                       .Where(
-                                                           q => z.Item2.TargetTypeEvent.IsSaveProcessingFunc(
-                                                               z.Item2.GetTargetValue(q.Object)))
                                                        .Select(
                                                            q => new
                                                            {
                                                                TargetObject = z.Item2.GetTargetValue(q.Object),
                                                                TargetObjectType = z.Item2.TargetTypeEvent.Type,
-                                                           }))
+                                                           })
+                                                       // TargetObject может быть null, если целевая сущность каскадно удалена в той же транзакции
+                                                       // и её навигационное свойство не подгружено (актуально для EF Core cascade delete)
+                                                       .Where(
+                                                           q => q.TargetObject is not null
+                                                                && z.Item2.TargetTypeEvent.IsSaveProcessingFunc(q.TargetObject)))
                                               .Distinct(z => z.TargetObject)
                                               .ToList();
 

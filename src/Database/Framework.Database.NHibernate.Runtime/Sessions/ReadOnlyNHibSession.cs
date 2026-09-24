@@ -10,9 +10,8 @@ public class ReadOnlyNHibSession : NHibSessionBase
     private readonly ITransaction transaction;
 
     public ReadOnlyNHibSession(NHibSessionEnvironment environment)
-            : base(environment, DBSessionMode.Read)
     {
-        this.NativeSession = this.Environment.InternalSessionFactory.OpenSession();
+        this.NativeSession = environment.InternalSessionFactory.OpenSession();
         this.NativeSession.FlushMode = FlushMode.Manual;
         this.NativeSession.DefaultReadOnly = true;
 
@@ -21,6 +20,8 @@ public class ReadOnlyNHibSession : NHibSessionBase
     }
 
     public override bool Closed => this.closed;
+
+    public override DBSessionMode SessionMode { get; } = DBSessionMode.Read;
 
     public sealed override ISession NativeSession { get; }
 
@@ -54,5 +55,5 @@ public class ReadOnlyNHibSession : NHibSessionBase
 
     public override IDbTransaction Transaction { get; } = null!;
 
-    public override async Task FlushAsync(CancellationToken ct) => throw new InvalidOperationException();
+    public override async Task FlushAsync(CancellationToken ct) => throw new InvalidOperationException("Readonly session cannot be flushed");
 }

@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Linq.Expressions;
+using System.Reflection;
 
 using Anch.DependencyInjection;
 using Anch.HierarchicalExpand;
@@ -59,7 +60,7 @@ public static class ServiceCollectionExtensions
 
             services.AddSingleton(new WebApiExceptionExpanderSettings([typeof(ValidationException)]));
 
-            services.AddKeyedSingleton<IExpressionVisitorContainer, ExpandPathVisitorContainer>(IExpressionVisitorContainer.ElementKey);
+            services.AddKeyedSingleton<ExpressionVisitor, ExpandPathVisitor>(RootExpressionVisitor.ElementKey);
 
             services.AddOData();
 

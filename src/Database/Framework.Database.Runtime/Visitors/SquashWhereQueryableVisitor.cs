@@ -5,7 +5,7 @@ using Anch.Core;
 
 namespace Framework.Database.Visitors;
 
-internal class SquashWhereQueryableVisitor : ExpressionVisitor
+public class SquashWhereQueryableVisitor : ExpressionVisitor
 {
     private static readonly MethodInfo GenericUnionMethod = new Func<IQueryable<object>, IEnumerable<object>, IQueryable<object>>(Queryable.Union).Method.GetGenericMethodDefinition();
 
@@ -19,10 +19,6 @@ internal class SquashWhereQueryableVisitor : ExpressionVisitor
 
     private static readonly MethodInfo GenericBuildExceptMethod = new Func<Expression<Func<object, bool>>, Expression<Func<object, bool>>, Expression<Func<object, bool>>>(BuildExcept).Method.GetGenericMethodDefinition();
 
-    private SquashWhereQueryableVisitor()
-    {
-
-    }
 
     protected override Expression VisitMethodCall(MethodCallExpression node) =>
 

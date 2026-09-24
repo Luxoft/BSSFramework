@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Linq.Expressions;
+using System.Reflection;
 
 using Anch.DependencyInjection;
 using Anch.GenericQueryable.NHibernate;
@@ -7,6 +8,12 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 
 using Framework.Core;
+using Framework.Core.Visitors;
+using Framework.Database.DependencyInjection;
+using Framework.Database.EnversAudit;
+using Framework.Database.InlineAudit.DependencyInjection;
+using Framework.Database.NHibernate.Envers;
+using Framework.Database.NHibernate.InlineAudit;
 using Framework.Database.NHibernate.Mapping;
 using Framework.Database.NHibernate.Sessions;
 using Framework.Database.NHibernate.Visitors;
@@ -27,6 +34,8 @@ public class NHibernateSetup : INHibernateSetup, IServiceInitializer
     private NHibernateSettings settings = new();
 
     private readonly List<Action<IServiceCollection>> initActions = [];
+
+    private Action<IDatabaseVisitorSetup> databaseVisitorSetupAction = _ => { };
 
     public bool AddDefaultInitializer { get; set; } = true;
 
@@ -71,13 +80,13 @@ public class NHibernateSetup : INHibernateSetup, IServiceInitializer
         var prevAction = this.settings.RawMappingAction;
 
         this.settings = this.settings with
-        {
-            RawMappingAction = v =>
-                               {
-                                   prevAction(v);
-                                   initAction(v);
-                               }
-        };
+                        {
+                            RawMappingAction = v =>
+                            {
+                                prevAction(v);
+                                initAction(v);
+                            }
+                        };
 
         return this;
     }
@@ -87,13 +96,13 @@ public class NHibernateSetup : INHibernateSetup, IServiceInitializer
         var prevAction = this.settings.RawDatabaseAction;
 
         this.settings = this.settings with
-        {
-            RawDatabaseAction = v =>
-                                {
-                                    prevAction(v);
-                                    initAction(v);
-                                }
-        };
+                        {
+                            RawDatabaseAction = v =>
+                            {
+                                prevAction(v);
+                                initAction(v);
+                            }
+                        };
 
         return this;
     }
@@ -112,9 +121,23 @@ public class NHibernateSetup : INHibernateSetup, IServiceInitializer
         return this;
     }
 
+    public INHibernateSetup AddInlineAudit(Action<IInlineAuditSetup> setupAction)
+    {
+        this.initActions.Add(services => services.Initialize<InlineAuditSetup>(setupAction));
+
+        return this;
+    }
+
     public INHibernateSetup AddExtension(INHibernateSetupExtension extension)
     {
         this.extensions.Add(extension);
+
+        return this;
+    }
+
+    public INHibernateSetup AddVisitors(Action<IDatabaseVisitorSetup> setupAction)
+    {
+        this.databaseVisitorSetupAction = setupAction;
 
         return this;
     }
@@ -128,15 +151,23 @@ public class NHibernateSetup : INHibernateSetup, IServiceInitializer
         //For close db session by middleware
         services.AddScopedFromLazyObject<INHibSession, NHibSession>();
         services.AddScopedFrom<ILazyObject<IDBSession>, ILazyObject<INHibSession>>();
-
         services.AddScopedFrom<ISession, INHibSession>(session => session.NativeSession);
+        services.AddScopedFrom<IAuditReaderPatched, INHibSession>(session => session.AuditReader);
+
+        services.AddSingleton<IAuditPropertiesSetterMapFactory, AuditPropertiesSetterMapFactory>();
+        services.AddScoped<IInlineAuditInterceptor, InlineAuditInterceptor>();
+        services.AddScoped<IRevisionService, NHibRevisionService>();
 
         services.AddSingleton(NHibSessionEnvironmentSettings.Default);
 
         services.AddSingleton<NHibSessionEnvironment>();
 
-        services.AddKeyedSingleton<IExpressionVisitorContainer>(IExpressionVisitorContainer.ElementKey, new ExpressionVisitorContainer(new FixNHibArrayContainsVisitor()));
-        services.AddKeyedSingleton<IExpressionVisitorContainer, MathExpressionVisitorContainer>(IExpressionVisitorContainer.ElementKey);
+        services.AddKeyedSingleton<ExpressionVisitor, FixNHibArrayContainsVisitor>(RootExpressionVisitor.ElementKey);
+
+        foreach (var expressionVisitor in GetMathExpressionVisitors())
+        {
+            services.AddKeyedSingleton(RootExpressionVisitor.ElementKey, expressionVisitor);
+        }
 
         if (this.AddDefaultInitializer)
         {
@@ -152,11 +183,24 @@ public class NHibernateSetup : INHibernateSetup, IServiceInitializer
             this.AddInitializer<DefaultConfigurationInitializer>();
         }
 
+        this.initActions.Add(sc => sc.AddDatabaseVisitors(this.databaseVisitorSetupAction));
+
         foreach (var action in this.initActions)
         {
             action(services);
         }
 
         this.extensions.ForEach(ex => ex.AddServices(services));
+    }
+
+    private static IEnumerable<ExpressionVisitor> GetMathExpressionVisitors()
+    {
+        yield return new OverrideMethodInfoVisitor<Func<int, int, int>>(
+            Math.Max,
+            (v1, v2) => v1 > v2 ? v1 : v2);
+
+        yield return new OverrideMethodInfoVisitor<Func<int, int, int>>(
+            Math.Min,
+            (v1, v2) => v1 < v2 ? v1 : v2);
     }
 }

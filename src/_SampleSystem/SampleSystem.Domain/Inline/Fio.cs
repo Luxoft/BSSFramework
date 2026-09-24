@@ -1,6 +1,5 @@
-﻿using System.Runtime.Serialization;
+using System.Runtime.Serialization;
 
-using Framework.Core;
 using Framework.Restriction;
 using Framework.Validation.Attributes;
 
@@ -8,27 +7,52 @@ namespace SampleSystem.Domain.Inline;
 
 [ExpandValidation]
 [DataContract(Namespace = "")]
-public class Fio : FioShort, ICloneable
+public class Fio : ICloneable, IEquatable<Fio>
 {
-    private string? middleName;
+    private string firstName = "";
+    private string lastName = "";
+    private string middleName = "";
 
+    [MaxLength(50)]
+    [DataMember]
+    public string FirstName
+    {
+        get => this.firstName;
+        set => this.firstName = value;
+    }
+
+    [MaxLength(50)]
+    [DataMember]
+    public string LastName
+    {
+        get => this.lastName;
+        set => this.lastName = value;
+    }
 
     [MaxLength(50)]
     [DataMember]
     public string MiddleName
     {
-        get => this.middleName.TrimNull();
-        set => this.middleName = value.TrimNull();
+        get => this.middleName;
+        set => this.middleName = value;
     }
 
     [DataMember]
-    public override string FullName => $"{base.FullName} {this.MiddleName}";
+    public string FullName
+    {
+        get => $"{this.LastName} {this.FirstName} {this.MiddleName}";
+        private set
+        {
+        }
+    }
 
-    public new Fio Clone() => (Fio)this.MemberwiseClone();
+    public override string ToString() => this.FullName;
+
+    public Fio Clone() => (Fio)this.MemberwiseClone();
 
     object ICloneable.Clone() => this.Clone();
 
-    public override bool Equals(object? obj) => this.Equals(obj as FioShort);
+    public override bool Equals(object? obj) => this.Equals(obj as Fio);
 
     public override int GetHashCode() => 0;
 

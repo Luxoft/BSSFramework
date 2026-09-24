@@ -25,6 +25,6 @@ public abstract class ServerPropertyAssigner<TConfiguration>(IDTOSource<TConfigu
 
     public CodeExpression ContextRef => this.MappingServiceRefExpr.ToPropertyReference("Context");
 
-    public CodeParameterDeclarationExpression DomainParameter => this.DomainType!.GetDomainObjectParameter();
+    public CodeParameterDeclarationExpression DomainParameter => this.DomainType.GetDomainObjectParameter();
 
 }

@@ -1,0 +1,5 @@
+﻿using SampleSystem.IntegrationTests.Subscriptions_Metadata;
+
+namespace SampleSystem.IntegrationTests;
+
+public class SendIndividualLettersTestsImpl(IServiceProvider rootServiceProvider) : SendIndividualLettersTests(rootServiceProvider);

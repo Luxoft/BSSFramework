@@ -244,8 +244,6 @@ namespace SampleSystem.Generated.DTO
         
         void MapEmployeeCellPhone(SampleSystem.Domain.Employee.EmployeeCellPhone domainObject, SampleSystem.Generated.DTO.EmployeeCellPhoneEventRichDTO mappingObject);
         
-        void MapEmployeeCellPhoneBase(SampleSystem.Domain.Employee.EmployeeCellPhoneBase domainObject, SampleSystem.Generated.DTO.EmployeeCellPhoneBaseEventRichDTO mappingObject);
-        
         void MapEmployeeComplexChangeModel(SampleSystem.Generated.DTO.EmployeeComplexChangeModelStrictDTO mappingObject, SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel domainObject);
         
         void MapEmployeeComplexChangeModel(SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel domainObject, SampleSystem.Generated.DTO.EmployeeComplexChangeModelEventRichDTO mappingObject);
@@ -439,6 +437,8 @@ namespace SampleSystem.Generated.DTO
         void MapExample2(SampleSystem.Generated.DTO.Example2UpdateDTO mappingObject, SampleSystem.Domain.ForUpdate.Example2 domainObject);
         
         void MapExample2(SampleSystem.Domain.ForUpdate.Example2 domainObject, SampleSystem.Generated.DTO.Example2EventRichDTO mappingObject);
+        
+        void MapExtendedInlineAuditObj(SampleSystem.Domain.ExtendedInlineAuditObj domainObject, SampleSystem.Generated.DTO.ExtendedInlineAuditObjEventRichDTO mappingObject);
         
         void MapGenericNamedLock(SampleSystem.Domain.NLock.GenericNamedLock domainObject, SampleSystem.Generated.DTO.GenericNamedLockEventRichDTO mappingObject);
         
@@ -1022,8 +1022,6 @@ namespace SampleSystem.Generated.DTO
         
         SampleSystem.Domain.Employee.EmployeeCellPhone ToEmployeeCellPhone(SampleSystem.Generated.DTO.EmployeeCellPhoneIntegrationRichDTO employeeCellPhoneRichIntegrationDTO);
         
-        SampleSystem.Domain.Employee.EmployeeCellPhoneBase ToEmployeeCellPhoneBase(SampleSystem.Generated.DTO.EmployeeCellPhoneBaseIdentityDTO employeeCellPhoneBaseIdentityDTO);
-        
         SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel ToEmployeeComplexChangeModel(SampleSystem.Generated.DTO.EmployeeComplexChangeModelStrictDTO employeeComplexChangeModelStrictDTO);
         
         SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel ToEmployeeCustomIntegrationSaveModel(SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelIntegrationRichDTO employeeCustomIntegrationSaveModelRichIntegrationDTO);
@@ -1101,6 +1099,8 @@ namespace SampleSystem.Generated.DTO
         SampleSystem.Domain.ForUpdate.Example2 ToExample2(SampleSystem.Generated.DTO.Example2UpdateDTO example2UpdateDTO);
         
         SampleSystem.Domain.ForUpdate.Example2 ToExample2(SampleSystem.Generated.DTO.Example2UpdateDTO example2UpdateDTO, SampleSystem.Domain.ForUpdate.Example1 master);
+        
+        SampleSystem.Domain.ExtendedInlineAuditObj ToExtendedInlineAuditObj(SampleSystem.Generated.DTO.ExtendedInlineAuditObjIdentityDTO extendedInlineAuditObjIdentityDTO);
         
         SampleSystem.Domain.NLock.GenericNamedLock ToGenericNamedLock(SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO genericNamedLockIdentityDTO);
         
@@ -3947,29 +3947,6 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Version = domainObject.Version;
         }
         
-        public virtual void MapEmployeeCellPhoneBase(SampleSystem.Domain.Employee.EmployeeCellPhoneBase domainObject, SampleSystem.Generated.DTO.EmployeeCellPhoneBaseEventRichDTO mappingObject)
-        {
-            mappingObject.Active = domainObject.Active;
-            mappingObject.CityCode = domainObject.CityCode;
-            mappingObject.CountryCode = domainObject.CountryCode;
-            mappingObject.CreateDate = domainObject.CreateDate;
-            mappingObject.CreatedBy = domainObject.CreatedBy;
-            if (!object.ReferenceEquals(domainObject.Employee, null))
-            {
-                mappingObject.Employee = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Employee, this);
-            }
-            else
-            {
-                mappingObject.Employee = null;
-            }
-            mappingObject.FullNumber = domainObject.FullNumber;
-            mappingObject.Id = domainObject.Id;
-            mappingObject.ModifiedBy = domainObject.ModifiedBy;
-            mappingObject.ModifyDate = domainObject.ModifyDate;
-            mappingObject.Number = domainObject.Number;
-            mappingObject.Version = domainObject.Version;
-        }
-        
         public virtual void MapEmployeeComplexChangeModel(SampleSystem.Generated.DTO.EmployeeComplexChangeModelStrictDTO mappingObject, SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel domainObject)
         {
             domainObject.Email = mappingObject.Email;
@@ -4909,6 +4886,33 @@ namespace SampleSystem.Generated.DTO
             {
                 mappingObject.Parent = null;
             }
+            mappingObject.Version = domainObject.Version;
+        }
+        
+        public virtual void MapExtendedInlineAuditObj(SampleSystem.Domain.ExtendedInlineAuditObj domainObject, SampleSystem.Generated.DTO.ExtendedInlineAuditObjEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            if (!object.ReferenceEquals(domainObject.CreatedByEmployee, null))
+            {
+                mappingObject.CreatedByEmployee = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.CreatedByEmployee, this);
+            }
+            else
+            {
+                mappingObject.CreatedByEmployee = null;
+            }
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            if (!object.ReferenceEquals(domainObject.ModifiedByEmployee, null))
+            {
+                mappingObject.ModifiedByEmployee = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.ModifiedByEmployee, this);
+            }
+            else
+            {
+                mappingObject.ModifiedByEmployee = null;
+            }
+            mappingObject.ModifyDate = domainObject.ModifyDate;
             mappingObject.Version = domainObject.Version;
         }
         
@@ -8247,11 +8251,6 @@ namespace SampleSystem.Generated.DTO
             return this.ToDomainObject(employeeCellPhoneRichIntegrationDTO, () => new SampleSystem.Domain.Employee.EmployeeCellPhone(employee));
         }
         
-        public virtual SampleSystem.Domain.Employee.EmployeeCellPhoneBase ToEmployeeCellPhoneBase(SampleSystem.Generated.DTO.EmployeeCellPhoneBaseIdentityDTO employeeCellPhoneBaseIdentityDTO)
-        {
-            return this.GetById<SampleSystem.Domain.Employee.EmployeeCellPhoneBase>(employeeCellPhoneBaseIdentityDTO.Id);
-        }
-        
         public virtual SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel ToEmployeeComplexChangeModel(SampleSystem.Generated.DTO.EmployeeComplexChangeModelStrictDTO employeeComplexChangeModelStrictDTO)
         {
             return this.ToDomainObjectBase<SampleSystem.Generated.DTO.EmployeeComplexChangeModelStrictDTO, SampleSystem.Domain.Models.Change.EmployeeComplexChangeModel>(employeeComplexChangeModelStrictDTO);
@@ -8464,6 +8463,11 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.ForUpdate.Example2 ToExample2(SampleSystem.Generated.DTO.Example2UpdateDTO example2UpdateDTO, SampleSystem.Domain.ForUpdate.Example1 example1)
         {
             return this.ToDomainObject(example2UpdateDTO, () => new SampleSystem.Domain.ForUpdate.Example2(example1));
+        }
+        
+        public virtual SampleSystem.Domain.ExtendedInlineAuditObj ToExtendedInlineAuditObj(SampleSystem.Generated.DTO.ExtendedInlineAuditObjIdentityDTO extendedInlineAuditObjIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.ExtendedInlineAuditObj>(extendedInlineAuditObjIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.NLock.GenericNamedLock ToGenericNamedLock(SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO genericNamedLockIdentityDTO)

@@ -71,7 +71,7 @@ public class BssFrameworkSetup : IBssFrameworkSetup, IServiceInitializer
         return this;
     }
 
-    public IBssFrameworkSetup AddExtensions(IBssFrameworkExtension extension)
+    public IBssFrameworkSetup AddExtension(IBssFrameworkExtension extension)
     {
         this.extensions.Add(extension);
 

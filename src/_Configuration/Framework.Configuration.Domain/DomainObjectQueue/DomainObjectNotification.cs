@@ -16,7 +16,7 @@ public class DomainObjectNotification : AuditPersistentDomainObjectBase
 
     private readonly DateTime? processDate;
 
-    private string serializeData = null!;
+    private string serializeData = "";
 
     private int size;
 

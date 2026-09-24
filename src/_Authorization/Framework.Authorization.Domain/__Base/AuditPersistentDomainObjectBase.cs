@@ -1,5 +1,4 @@
-﻿using Framework.Core;
-using Framework.Database;
+﻿
 
 // ReSharper disable once CheckNamespace
 namespace Framework.Authorization.Domain;
@@ -7,15 +6,16 @@ namespace Framework.Authorization.Domain;
 /// <summary>
 /// Базовый персистентные класс
 /// </summary>
-public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBase, IAuditObject
+public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBase
 {
-    private string? createdBy;
-
     private DateTime? createDate;
+
+    private string? createdBy = "";
 
     private DateTime? modifyDate;
 
-    private string? modifiedBy;
+    private string? modifiedBy = "";
+
 
     /// <summary>
     /// Дата создания доменного объекта
@@ -23,7 +23,7 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     public virtual DateTime? CreateDate
     {
         get => this.createDate;
-        internal protected set => this.createDate = value;
+        protected internal set => this.createDate = value;
     }
 
     /// <summary>
@@ -40,8 +40,8 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     /// </summary>
     public virtual string? ModifiedBy
     {
-        get => this.modifiedBy.TrimNull();
-        protected internal set => this.modifiedBy = value.TrimNull();
+        get => this.modifiedBy;
+        protected internal set => this.modifiedBy = value;
     }
 
     /// <summary>
@@ -49,7 +49,7 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     /// </summary>
     public virtual string? CreatedBy
     {
-        get => this.createdBy.TrimNull();
-        internal protected set => this.createdBy = value.TrimNull();
+        get => this.createdBy;
+        protected internal set => this.createdBy = value;
     }
 }

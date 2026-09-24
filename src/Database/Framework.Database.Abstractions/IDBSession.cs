@@ -2,7 +2,7 @@
 
 namespace Framework.Database;
 
-public interface IDBSession : ICurrentRevisionService, IAsyncDisposable, IDisposable
+public interface IDBSession : IAsyncDisposable, IDisposable
 {
     DBSessionMode SessionMode { get; }
 
@@ -14,12 +14,6 @@ public interface IDBSession : ICurrentRevisionService, IAsyncDisposable, IDispos
     /// Закрывает текущую транзакцию без применения изменений.
     /// </summary>
     void AsFault();
-
-    /// <summary>
-    /// Gets the maximum audit revision.
-    /// </summary>
-    /// <returns>System.Int64.</returns>
-    long GetMaxRevision();
 
     /// <summary>
     /// Перевод сессию в режим "только для чтения" (доступно только перед фактическим использованием сессии)
@@ -34,4 +28,9 @@ public interface IDBSession : ICurrentRevisionService, IAsyncDisposable, IDispos
     Task CloseAsync(CancellationToken ct);
 
     void IDisposable.Dispose() => this.DisposeAsync().GetAwaiter().GetResult();
+}
+
+public interface IDBSession<out TNativeSession> : IDBSession
+{
+    TNativeSession NativeSession { get; }
 }

@@ -1,5 +1,4 @@
 ﻿using Framework.Application.Domain;
-using Framework.Core;
 using Framework.Restriction;
 
 // ReSharper disable once CheckNamespace
@@ -13,14 +12,14 @@ public abstract class BaseDirectory : AuditPersistentDomainObjectBase, IVisualId
     /// <summary>
     /// Название типа
     /// </summary>
-    private string name = null!;
+    private string name = "";
 
     [Required]
     [UniqueElement]
     public virtual string Name
     {
-        get => this.name.TrimNull();
-        set => this.name = value.TrimNull();
+        get => this.name;
+        set => this.name = value;
     }
 
     public override string ToString() => this.Name;

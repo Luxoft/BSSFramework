@@ -1497,7 +1497,7 @@ namespace Framework.Authorization.Generated.DTO
         
         private System.Guid _id;
         
-        private string _name;
+        private string _name = "";
         
         public BusinessRoleStrictDTO()
         {
@@ -2731,7 +2731,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.Permission, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.Permission>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PermissionIdentityDTO>
     {
         
-        private string _comment;
+        private string _comment = "";
         
         private System.Guid _id;
         
@@ -4405,7 +4405,7 @@ namespace Framework.Authorization.Generated.DTO
         
         private System.Guid _id;
         
-        private string _name;
+        private string _name = "";
         
         private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionStrictDTO> _permissions = new System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionStrictDTO>();
         

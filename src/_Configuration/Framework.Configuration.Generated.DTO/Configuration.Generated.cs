@@ -2390,13 +2390,13 @@ namespace Framework.Configuration.Generated.DTO
         
         private Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO _operation;
         
-        private string _queueTag;
+        private string _queueTag = "";
         
         private long _revision;
         
-        private string _serializeData;
+        private string _serializeData = "";
         
-        private string _serializeType;
+        private string _serializeType = "";
         
         private int _size;
         
@@ -3232,7 +3232,7 @@ namespace Framework.Configuration.Generated.DTO
         
         private System.Guid _id;
         
-        private string _serializeData;
+        private string _serializeData = "";
         
         private int _size;
         
@@ -4170,7 +4170,7 @@ namespace Framework.Configuration.Generated.DTO
         
         private System.Guid _id;
         
-        private string _name;
+        private string _name = "";
         
         public DomainTypeEventOperationStrictDTO()
         {
@@ -5275,7 +5275,7 @@ namespace Framework.Configuration.Generated.DTO
         
         private System.Guid _id;
         
-        private string _name;
+        private string _name = "";
         
         private long _number;
         
@@ -5970,11 +5970,11 @@ namespace Framework.Configuration.Generated.DTO
     public partial class SystemConstantStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstant, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstant>, Framework.Application.Domain.IIdentityObject<System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO>
     {
         
-        private string _description;
+        private string _description = "";
         
         private System.Guid _id;
         
-        private string _value;
+        private string _value = "";
         
         public SystemConstantStrictDTO()
         {
@@ -6527,7 +6527,7 @@ namespace Framework.Configuration.Generated.DTO
         
         private System.Guid _id;
         
-        private string _name;
+        private string _name = "";
         
         private bool _subscriptionEnabled;
         

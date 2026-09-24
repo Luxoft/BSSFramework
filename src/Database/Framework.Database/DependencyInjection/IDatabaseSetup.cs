@@ -1,5 +1,4 @@
 ﻿using System.Data;
-using System.Linq.Expressions;
 
 namespace Framework.Database.DependencyInjection;
 
@@ -10,11 +9,6 @@ public interface IDatabaseSetup
     IDatabaseSetup AddEventListener<TEventListener>()
         where TEventListener : class, IDBSessionEventListener;
 
-    IDatabaseSetup AddVisitorContainer<TExpressionVisitorContainer>()
-        where TExpressionVisitorContainer : class, IExpressionVisitorContainer;
-
-    IDatabaseSetup AddVisitor(ExpressionVisitor expressionVisitor);
-
     IDatabaseSetup SetIsolationLevel(IsolationLevel isolationLevel);
 
     IDatabaseSetup SetBatchSize(int batchSize);
@@ -24,4 +18,6 @@ public interface IDatabaseSetup
     IDatabaseSetup SetDefaultConnectionString(string connectionString);
 
     IDatabaseSetup SetDefaultConnectionStringName(string connectionStringName);
+
+    IDatabaseSetup AddExtension(IDatabaseSetupExtension extension);
 }

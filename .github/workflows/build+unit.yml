@@ -42,4 +42,5 @@ jobs:
           dotnet test --project src/Framework.ExpressionParsers.Tests --no-build --verbosity normal -c Release
           dotnet test --project src/Validation/Framework.Validation.Tests --no-build --verbosity normal -c Release
           dotnet test --project src/Application/Framework.Application.Tests --no-build --verbosity normal -c Release
+          dotnet test --project src/Notification/Framework.Notification.Tests --no-build --verbosity normal -c Release
           dotnet test --project src/Database/Framework.Database.NHibernate.DBGenerator.Tests --no-build --verbosity normal -c Release

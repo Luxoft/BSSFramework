@@ -9,8 +9,8 @@ using Framework.Core;
 using Framework.Database.Domain;
 using Framework.Database.InlineAudit;
 using Framework.Database.NHibernate.DAL.Revisions;
-using Framework.Database.NHibernate.Envers;
-using Framework.Database.NHibernate.Envers.LinqVisitors;
+using Framework.Database.NHibernate.EnversAudit;
+using Framework.Database.NHibernate.EnversAudit.LinqVisitors;
 
 using NHibernate;
 using NHibernate.Envers.Query;

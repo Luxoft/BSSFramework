@@ -12,7 +12,7 @@ using Framework.Core.Visitors;
 using Framework.Database.DependencyInjection;
 using Framework.Database.EnversAudit;
 using Framework.Database.InlineAudit.DependencyInjection;
-using Framework.Database.NHibernate.Envers;
+using Framework.Database.NHibernate.EnversAudit;
 using Framework.Database.NHibernate.InlineAudit;
 using Framework.Database.NHibernate.Mapping;
 using Framework.Database.NHibernate.Sessions;

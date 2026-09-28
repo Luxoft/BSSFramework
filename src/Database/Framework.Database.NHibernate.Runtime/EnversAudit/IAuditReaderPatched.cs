@@ -1,7 +1,7 @@
 ﻿using NHibernate.Envers;
 using NHibernate.Envers.Query.Criteria;
 
-namespace Framework.Database.NHibernate.Envers;
+namespace Framework.Database.NHibernate.EnversAudit;
 
 public interface IAuditReaderPatched : IAuditReader
 {

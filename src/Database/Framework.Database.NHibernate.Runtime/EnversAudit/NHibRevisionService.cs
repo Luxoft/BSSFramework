@@ -1,7 +1,7 @@
 ﻿using Framework.Database.EnversAudit;
 using Framework.Database.NHibernate.DAL.Revisions;
 
-namespace Framework.Database.NHibernate.Envers;
+namespace Framework.Database.NHibernate.EnversAudit;
 
 public class NHibRevisionService(IAuditReaderPatched auditReader) : IRevisionService
 {

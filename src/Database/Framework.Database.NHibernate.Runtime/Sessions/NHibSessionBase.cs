@@ -1,7 +1,7 @@
 ﻿using System.Data;
 
 using Framework.Database.NHibernate.DAL.Revisions;
-using Framework.Database.NHibernate.Envers;
+using Framework.Database.NHibernate.EnversAudit;
 
 using NHibernate;
 

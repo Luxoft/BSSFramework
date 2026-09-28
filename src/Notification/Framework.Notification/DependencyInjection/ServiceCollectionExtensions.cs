@@ -15,19 +15,22 @@ public static class ServiceCollectionExtensions
     extension<TSelf>(IBssFrameworkSetup<TSelf> setup)
         where TSelf : IBssFrameworkSetup<TSelf>
     {
-        public TSelf AddSmtpNotification(IConfiguration configuration, bool isProd) =>
-            setup.AddServices(sc => sc.AddSmtpNotification(configuration, isProd));
+        public TSelf AddNotification(IConfiguration configuration, bool isProd) =>
+            setup.AddServices(sc => sc.AddNotification(configuration, isProd));
     }
 
     extension(IServiceCollection services)
     {
-        public void AddSmtpNotification(IConfiguration configuration, bool isProd)
+        public void AddNotification(IConfiguration configuration, bool isProd)
         {
             services.AddSingleton<IMessageSender<Notification.Domain.Notification>, NotificationMessageSender>();
+
+            services.AddSingleton<IActualMailMessageProcessor, ActualMailMessageProcessor>();
 
             services.AddSingleton<IMailMessageModifier, HtmlMarkerMessageModifier>();
             services.AddSingleton<IMailMessageModifier, SubjectCleanerMailMessageModifier>();
             services.AddSingleton<IMailMessageModifier, RedirectToSupportMailMessageModifier>();
+            services.AddSingleton<IMailMessageModifier, GdprMailMessageModifier>();
 
             if (!isProd)
             {

@@ -1,7 +1,14 @@
-﻿using Framework.BLL.Domain.TargetSystem;
+﻿using Anch.DependencyInjection;
+
+using Framework.BLL.Domain.TargetSystem;
 using Framework.BLL.Events;
+using Framework.Configuration.BLL.Notification;
+using Framework.Core;
 using Framework.Infrastructure.DALListeners;
 using Framework.Infrastructure.DependencyInjection;
+using Framework.Notification.DependencyInjection;
+
+using Microsoft.Extensions.Configuration;
 
 using SampleSystem.BLL;
 using SampleSystem.Domain;
@@ -58,6 +65,11 @@ public static class SampleSystemFrameworkExtensions
                                                                    new(typeof(Employee), new Guid("{AA46DA53-9B21-4DEC-9C70-720BDA1CB198}")),
                                                                ])
                                                            }));
+
+        public IBssFrameworkSetup AddLegacyNotification(IConfiguration configuration) =>
+
+            settings.AddNotification(configuration, true)
+                    .AddServices(sc => sc.ReplaceScoped<IMessageSender<Framework.Notification.Domain.Notification>, LocalDbNotificationMessageSender>());
 
         public IBssFrameworkSetup AddSupportLegacyServices() =>
             settings.SetDTOMapping<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService, PersistentDomainObjectBase, EventDTOBase>();

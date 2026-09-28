@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Database.InlineAudit.Runtime</PackageId>
+    <RootNamespace>Framework.Database.InlineAudit</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

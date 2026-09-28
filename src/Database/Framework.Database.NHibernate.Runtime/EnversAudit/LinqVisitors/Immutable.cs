@@ -1,4 +1,4 @@
-﻿namespace Framework.Database.NHibernate.Envers.LinqVisitors;
+﻿namespace Framework.Database.NHibernate.EnversAudit.LinqVisitors;
 
 internal class Immutable<T>
         where T : class

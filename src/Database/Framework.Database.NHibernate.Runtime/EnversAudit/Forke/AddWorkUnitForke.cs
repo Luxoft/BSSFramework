@@ -4,7 +4,7 @@ using NHibernate.Envers.Configuration;
 using NHibernate.Envers.Synchronization.Work;
 using NHibernate.Persister.Entity;
 
-namespace Framework.Database.NHibernate.Envers.Forke;
+namespace Framework.Database.NHibernate.EnversAudit.Forke;
 
 //TODO: Remove after fix Envers bugs (// https://nhibernate.jira.com/projects/NHE/issues/NHE-166)
 public class AddWorkUnitForke : AbstractAuditWorkUnit

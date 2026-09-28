@@ -12,10 +12,8 @@ using Framework.BLL.DTOMapping.DTOMapper;
 using Framework.BLL.Events.SubscriptionManager;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Jobs;
-using Framework.Configuration.BLL.Notification;
 using Framework.Configuration.Domain;
 using Framework.Configuration.Generated.DTO;
-using Framework.Core;
 using Framework.Core.Serialization;
 using Framework.Infrastructure.LocalDBEvents;
 using Framework.Infrastructure.SubscriptionService;
@@ -72,9 +70,7 @@ public static class ServiceCollectionExtensions
         private IServiceCollection AddConfigurationBLL() =>
             services
                 .AddBLLSystem<IConfigurationBLLContext, ConfigurationBLLContext>()
-                .AddKeyedSingleton<ISerializerFactory<string>>(nameof(SystemConstant), SerializerFactory.Default)
-
-                .AddScoped<IMessageSender<Notification.Domain.Notification>, LocalDbNotificationMessageSender>();
+                .AddKeyedSingleton<ISerializerFactory<string>>(nameof(SystemConstant), SerializerFactory.Default);
 
         private IServiceCollection AddConfigurationNamedLocks() =>
             services.AddKeyedSingleton<INamedLockSource>(

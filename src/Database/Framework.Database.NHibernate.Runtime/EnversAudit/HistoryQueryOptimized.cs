@@ -6,7 +6,7 @@ using NHibernate.Envers.Entities.Mapper.Relation.Query;
 using NHibernate.Envers.Query.Impl;
 using NHibernate.Envers.Reader;
 
-namespace Framework.Database.NHibernate.Envers;
+namespace Framework.Database.NHibernate.EnversAudit;
 
 public class HistoryQueryOptimized<TEntity, TRevisionEntity, TIdentity>(
     AuditConfiguration auditConfiguration,

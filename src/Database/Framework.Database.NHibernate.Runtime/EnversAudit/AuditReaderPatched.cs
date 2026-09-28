@@ -12,7 +12,7 @@ using NHibernate.Envers.Query.Criteria;
 using NHibernate.Envers.Reader;
 using NHibernate.Envers.Tools;
 
-namespace Framework.Database.NHibernate.Envers;
+namespace Framework.Database.NHibernate.EnversAudit;
 
 public class AuditReaderPatched(AuditConfiguration verCfg, ISession session, ISessionImplementor sessionImplementor)
     : AuditReader(verCfg, session, sessionImplementor), IAuditReaderPatched

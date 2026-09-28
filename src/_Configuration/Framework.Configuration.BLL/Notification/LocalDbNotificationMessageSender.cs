@@ -4,6 +4,7 @@ using Framework.Application.Repository;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Core.Helpers;
+using Framework.Notification;
 using Framework.Notification.DTO;
 
 namespace Framework.Configuration.BLL.Notification;
@@ -11,12 +12,16 @@ namespace Framework.Configuration.BLL.Notification;
 /// <summary>
 /// Sender для отправки нотификакий в локальную бд
 /// </summary>
-public class LocalDbNotificationMessageSender([DisabledSecurity] IRepository<DomainObjectNotification> domainObjectNotificationRepository)
+public class LocalDbNotificationMessageSender(
+    [DisabledSecurity] IRepository<DomainObjectNotification> domainObjectNotificationRepository,
+    IActualMailMessageProcessor actualMailMessageProcessor)
     : IMessageSender<Framework.Notification.Domain.Notification>
 {
     /// <inheritdoc />
-    public async Task SendAsync(Framework.Notification.Domain.Notification notification, CancellationToken ct)
+    public async Task SendAsync(Framework.Notification.Domain.Notification baseNotification, CancellationToken ct)
     {
+        var notification = baseNotification with { Message = actualMailMessageProcessor.GetActualMailMessage(baseNotification.Message) };
+
         var dto = new NotificationEventDTO(notification);
 
         var serializedData = DataContractSerializerHelper.Serialize(dto);

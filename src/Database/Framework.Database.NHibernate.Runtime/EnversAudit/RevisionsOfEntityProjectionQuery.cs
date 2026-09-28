@@ -7,7 +7,7 @@ using NHibernate.Envers.Query.Impl;
 using NHibernate.Envers.Reader;
 using NHibernate.Proxy;
 
-namespace Framework.Database.NHibernate.Envers;
+namespace Framework.Database.NHibernate.EnversAudit;
 
 public class RevisionsOfEntityProjectionQuery<T> : RevisionsOfEntityQuery
 {

@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Framework.Database.NHibernate.Envers.LinqVisitors.Visitors;
+namespace Framework.Database.NHibernate.EnversAudit.LinqVisitors.Visitors;
 
 internal class ValueEvaluatorVisitor : ExpressionVisitor
 {

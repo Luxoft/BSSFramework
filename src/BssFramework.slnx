@@ -119,6 +119,7 @@
     <Project Path="Notification/Framework.Notification.Domain/Framework.Notification.Domain.csproj" />
     <Project Path="Notification/Framework.Notification.DTO/Framework.Notification.DTO.csproj" />
     <Project Path="Notification/Framework.Notification.Runtime/Framework.Notification.Runtime.csproj" />
+    <Project Path="Notification/Framework.Notification.Tests/Framework.Notification.Tests.csproj" />
     <Project Path="Notification/Framework.Notification/Framework.Notification.csproj" />
   </Folder>
   

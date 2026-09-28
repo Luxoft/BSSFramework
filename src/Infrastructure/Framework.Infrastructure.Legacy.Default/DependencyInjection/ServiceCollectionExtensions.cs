@@ -1,4 +1,5 @@
-﻿using Anch.SecuritySystem;
+﻿using Anch.DependencyInjection;
+using Anch.SecuritySystem;
 using Anch.SecuritySystem.DependencyInjection;
 
 using Framework.Application.ApplicationVariable;
@@ -74,7 +75,7 @@ public static class ServiceCollectionExtensions
                 .AddBLLSystem<IConfigurationBLLContext, ConfigurationBLLContext>()
                 .AddKeyedSingleton<ISerializerFactory<string>>(nameof(SystemConstant), SerializerFactory.Default)
 
-                .AddScoped<IMessageSender<Notification.Domain.Notification>, LocalDbNotificationMessageSender>();
+                .ReplaceScoped<IMessageSender<Notification.Domain.Notification>, LocalDbNotificationMessageSender>();
 
         private IServiceCollection AddConfigurationNamedLocks() =>
             services.AddKeyedSingleton<INamedLockSource>(

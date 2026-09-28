@@ -30,6 +30,7 @@ public static class ServiceCollectionExtensions
             services.AddSingleton<IMailMessageModifier, HtmlMarkerMessageModifier>();
             services.AddSingleton<IMailMessageModifier, SubjectCleanerMailMessageModifier>();
             services.AddSingleton<IMailMessageModifier, RedirectToSupportMailMessageModifier>();
+            services.AddSingleton<IMailMessageModifier, GdprMailMessageModifier>();
 
             if (!isProd)
             {

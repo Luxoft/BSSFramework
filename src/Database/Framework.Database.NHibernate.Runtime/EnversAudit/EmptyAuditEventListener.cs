@@ -1,6 +1,6 @@
 ﻿using NHibernate.Event;
 
-namespace Framework.Database.NHibernate.Envers;
+namespace Framework.Database.NHibernate.EnversAudit;
 
 public class EmptyAuditEventListener : IPostInsertEventListener,
                                        IPostUpdateEventListener,

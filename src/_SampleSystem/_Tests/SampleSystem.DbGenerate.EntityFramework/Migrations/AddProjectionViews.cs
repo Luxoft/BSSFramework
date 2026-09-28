@@ -1,6 +1,6 @@
 using FluentMigrator;
 
-namespace SampleSystem.DbGenerate.Migrations;
+namespace SampleSystem.DbGenerate.EntityFramework.Migrations;
 
 [Migration(4)]
 public class AddProjectionViews : Migration

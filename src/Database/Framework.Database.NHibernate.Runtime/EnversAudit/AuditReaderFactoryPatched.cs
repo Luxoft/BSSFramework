@@ -1,6 +1,6 @@
 ﻿using Framework.Core;
 
-namespace Framework.Database.NHibernate.Envers;
+namespace Framework.Database.NHibernate.EnversAudit;
 
 public static class AuditReaderFactoryPatched
 {

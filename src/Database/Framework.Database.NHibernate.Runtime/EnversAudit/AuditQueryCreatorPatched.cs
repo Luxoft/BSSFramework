@@ -3,7 +3,7 @@ using NHibernate.Envers.Query;
 using NHibernate.Envers.Query.Impl;
 using NHibernate.Envers.Reader;
 
-namespace Framework.Database.NHibernate.Envers;
+namespace Framework.Database.NHibernate.EnversAudit;
 
 public class AuditQueryCreatorPatched(AuditConfiguration auditCfg, IAuditReaderImplementor auditReaderImplementor) : AuditQueryCreator(auditCfg, auditReaderImplementor)
 {

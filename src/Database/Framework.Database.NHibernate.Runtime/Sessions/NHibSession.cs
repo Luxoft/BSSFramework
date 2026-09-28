@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-using Framework.Database.NHibernate.Envers;
+using Framework.Database.NHibernate.EnversAudit;
 using Framework.Database.NHibernate.InlineAudit;
 using NHibernate;
 

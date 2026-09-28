@@ -2,7 +2,7 @@
 
 using NHibernate.Envers.Query;
 
-namespace Framework.Database.NHibernate.Envers.LinqVisitors.Visitors;
+namespace Framework.Database.NHibernate.EnversAudit.LinqVisitors.Visitors;
 
 internal class AuditPropertyEvaluator : ExpressionVisitor
 {

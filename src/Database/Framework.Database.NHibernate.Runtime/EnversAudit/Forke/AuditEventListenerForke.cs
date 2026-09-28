@@ -9,7 +9,7 @@ using NHibernate.Event;
 using NHibernate.Persister.Entity;
 using NHibernate.Proxy;
 
-namespace Framework.Database.NHibernate.Envers.Forke;
+namespace Framework.Database.NHibernate.EnversAudit.Forke;
 
 //TODO: fork only for fork AddModUnit. #IADFRAME-1676
 // https://nhibernate.jira.com/projects/NHE/issues/NHE-166

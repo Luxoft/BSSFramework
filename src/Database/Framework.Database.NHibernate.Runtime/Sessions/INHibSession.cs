@@ -1,4 +1,4 @@
-﻿using Framework.Database.NHibernate.Envers;
+﻿using Framework.Database.NHibernate.EnversAudit;
 
 using NHibernate;
 

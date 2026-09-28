@@ -1,7 +1,9 @@
 ﻿using System.Net.Mail;
 using System.Text;
 
-namespace Framework.Notification;
+using Framework.Notification.MailMessageModifier;
+
+namespace Framework.Notification.Tests;
 
 public class GdprMailMessageModifierTests
 {

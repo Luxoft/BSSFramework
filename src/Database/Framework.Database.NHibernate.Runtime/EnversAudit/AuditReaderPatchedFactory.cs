@@ -2,7 +2,7 @@
 using NHibernate.Engine;
 using NHibernate.Envers.Event;
 
-namespace Framework.Database.NHibernate.Envers;
+namespace Framework.Database.NHibernate.EnversAudit;
 
 public class AuditReaderPatchedFactory(ISession session) : IAuditReaderPatchedFactory
 {

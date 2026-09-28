@@ -1,6 +1,6 @@
 ﻿using NHibernate.Envers;
 
-namespace Framework.Database.NHibernate.Envers;
+namespace Framework.Database.NHibernate.EnversAudit;
 
 public interface IIdentityRevisionEntityInfo<out TRevisionEntity, out TIdentity>
 {

@@ -1,4 +1,4 @@
-﻿namespace Framework.Database.NHibernate.Envers;
+﻿namespace Framework.Database.NHibernate.EnversAudit;
 
 public interface IAuditReaderPatchedFactory
 {

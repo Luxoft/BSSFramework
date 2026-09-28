@@ -1,10 +1,10 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.Database.NHibernate.Envers.LinqVisitors.Visitors;
+using Framework.Database.NHibernate.EnversAudit.LinqVisitors.Visitors;
 
 using NHibernate.Envers.Query.Criteria;
 
-namespace Framework.Database.NHibernate.Envers.LinqVisitors;
+namespace Framework.Database.NHibernate.EnversAudit.LinqVisitors;
 
 public static class EvaluateExtension
 {

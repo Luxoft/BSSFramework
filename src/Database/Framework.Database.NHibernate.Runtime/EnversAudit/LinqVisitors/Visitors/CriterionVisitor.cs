@@ -6,7 +6,7 @@ using NHibernate.Envers.Query.Criteria;
 
 using Expression = System.Linq.Expressions.Expression;
 
-namespace Framework.Database.NHibernate.Envers.LinqVisitors.Visitors;
+namespace Framework.Database.NHibernate.EnversAudit.LinqVisitors.Visitors;
 
 internal class CriterionVisitor : ExpressionVisitor
 {

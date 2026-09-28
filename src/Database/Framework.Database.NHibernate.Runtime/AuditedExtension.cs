@@ -2,8 +2,8 @@
 using Anch.Core.Auth;
 
 using Framework.Database.NHibernate.DAL.Revisions;
-using Framework.Database.NHibernate.Envers.Forke;
 using Framework.Database.NHibernate.EnversAudit;
+using Framework.Database.NHibernate.EnversAudit.Forke;
 using Framework.Database.NHibernate.Mapping;
 
 using NHibernate.Cfg;

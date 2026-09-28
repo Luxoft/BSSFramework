@@ -1,8 +1,6 @@
 ﻿using System.Net.Mail;
 
-using Framework.Notification.MailMessageModifier;
-
-namespace Framework.Notification;
+namespace Framework.Notification.MailMessageModifier;
 
 public class GdprMailMessageModifier : IMailMessageModifier
 {

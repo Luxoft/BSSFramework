@@ -60,11 +60,11 @@ public interface IBLLQueryBase<TDomainObject> : IBLLSimpleQueryBase<TDomainObjec
 
     List<TDomainObject> GetListBy(IDomainObjectFilterModel<TDomainObject> filter, FetchRule<TDomainObject>? fetchRule = null, LockRole lockRole = LockRole.None);
 
-    List<TDomainObject> GetListBy(IDomainObjectFilterModel<TDomainObject> filter, Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule);
+    List<TDomainObject> GetListBy(IDomainObjectFilterModel<TDomainObject> filter, Func<PropertyFetchRule<TDomainObject>, FetchRule<TDomainObject>> buildFetchRule);
 
     List<TDomainObject> GetListBy(Expression<Func<TDomainObject, bool>> filter, FetchRule<TDomainObject>? fetchRule = null, LockRole lockRole = LockRole.None);
 
-    List<TDomainObject> GetListBy(Expression<Func<TDomainObject, bool>> filter, Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule);
+    List<TDomainObject> GetListBy(Expression<Func<TDomainObject, bool>> filter, Func<PropertyFetchRule<TDomainObject>, FetchRule<TDomainObject>> buildFetchRule);
 
     /// <summary>
     /// Выполняет поиск доменного объекта по условию.
@@ -83,5 +83,5 @@ public interface IBLLQueryBase<TDomainObject> : IBLLSimpleQueryBase<TDomainObjec
     TDomainObject? GetObjectBy(
         Expression<Func<TDomainObject, bool>> filter,
         bool throwOnNotFound,
-        Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule);
+        Func<PropertyFetchRule<TDomainObject>, FetchRule<TDomainObject>> buildFetchRule);
 }

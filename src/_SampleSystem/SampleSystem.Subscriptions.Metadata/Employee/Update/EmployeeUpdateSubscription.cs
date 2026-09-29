@@ -10,8 +10,6 @@ public class EmployeeUpdateSubscription : Subscription<Domain.Employee.Employee,
 {
     public override DomainObjectChangeType DomainObjectChangeType { get; } = DomainObjectChangeType.Update;
 
-    public override MailAddress Sender { get; } = new("SampleSystem@luxoft.com", "SampleSystem");
-
     public override bool InlineAttachments { get; } = false;
 
     public override async IAsyncEnumerable<NotificationMessageGenerationInfo<Domain.Employee.Employee>> GetTo(IServiceProvider _, DomainObjectVersions<Domain.Employee.Employee> versions)

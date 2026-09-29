@@ -53,7 +53,8 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
 
                     .AddSubscriptions(
                         (Employee e) => e.Email,
-                        [typeof(SampleSystem.Subscriptions.Metadata.Employee.Update.EmployeeUpdateSubscription).Assembly])
+                        [typeof(SampleSystem.Subscriptions.Metadata.Employee.Update.EmployeeUpdateSubscription).Assembly],
+                        new("SampleSystem@luxoft.com", "SampleSystem"))
 
                     .AddSubscriptionManagers()
                     .AddLegacyGenericServices()

@@ -53,7 +53,7 @@ public interface ISubscription
     string MessageTemplateCode { get; }
 
 
-    MailAddress Sender { get; }
+    MailAddress? Sender { get; }
 
     /// <summary>
     ///     Получает признак необходимости отправки адресату(ам) индивидуального или консолидированного письма

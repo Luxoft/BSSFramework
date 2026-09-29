@@ -1,5 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.Linq.Expressions;
+using System.Net.Mail;
 using System.Reflection;
 
 using Anch.Core;
@@ -18,9 +19,10 @@ public static class ServiceCollectionExtensions
     {
         public TSelf AddSubscriptions<TEmployee>(
             Expression<Func<TEmployee, string>> emailPath,
-            ImmutableArray<Assembly> assemblies)
+            ImmutableArray<Assembly> assemblies,
+            MailAddress? defaultSender = null)
             where TEmployee : class =>
-            setup.AddServices(sc => sc.AddSubscriptions(emailPath, assemblies));
+            setup.AddServices(sc => sc.AddSubscriptions(emailPath, assemblies, defaultSender));
     }
 
 
@@ -28,7 +30,8 @@ public static class ServiceCollectionExtensions
     {
         public void AddSubscriptions<TEmployee>(
             Expression<Func<TEmployee, string>> emailPath,
-            ImmutableArray<Assembly> assemblies)
+            ImmutableArray<Assembly> assemblies,
+            MailAddress? defaultSender = null)
             where TEmployee : class
         {
             services.AddSingleton<ISubscriptionResolver, SubscriptionResolver>();
@@ -38,6 +41,11 @@ public static class ServiceCollectionExtensions
 
             services.AddSingleton(new EmployeeInfo<TEmployee>(emailPath.ToPropertyAccessors()));
             services.AddScoped<INotificationEmailExtractor, NotificationEmailExtractor<TEmployee>>();
+
+            if (defaultSender is not null)
+            {
+                services.AddKeyedSingleton(nameof(Subscriptions), (_, __) => defaultSender);
+            }
 
             foreach (var assembly in assemblies)
             {

@@ -9,13 +9,16 @@ using Framework.Notification.Domain;
 using Framework.Subscriptions.Domain;
 using Framework.Subscriptions.Metadata;
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Framework.Subscriptions;
 
 public class NotificationExtractor<TDomainObject, TRenderingObject>(
     IServiceProvider serviceProvider,
     IIdentityInfoSource identityInfoSource,
     INotificationEmailExtractor notificationEmailExtractor,
-    ISubscription<TDomainObject, TRenderingObject> subscription) : INotificationExtractor<TDomainObject>
+    ISubscription<TDomainObject, TRenderingObject> subscription,
+    [FromKeyedServices(nameof(Subscriptions))]MailAddress? defaultSender = null) : INotificationExtractor<TDomainObject>
     where TDomainObject : class
     where TRenderingObject : class
 {
@@ -61,7 +64,7 @@ public class NotificationExtractor<TDomainObject, TRenderingObject>(
         var mailMessage = new MailMessage
         {
             IsBodyHtml = true,
-            From = subscription.Sender,
+            From = subscription.Sender ?? defaultSender ?? throw new InvalidOperationException("No sender specified."),
             Subject = subject,
             Body = body,
             Recipients = [.. notificationMessageGenerationInfo.Recipients],

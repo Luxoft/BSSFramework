@@ -14,8 +14,6 @@ public class Subscription : Subscription<Domain.Directories.Country, CustomNotif
 
     public override DomainObjectChangeType DomainObjectChangeType { get; } = DomainObjectChangeType.Update;
 
-    public override MailAddress Sender { get; } = new("SampleSystem@luxoft.com", "SampleSystem");
-
     public override async ValueTask<CustomNotificationModel> ConvertToRenderingObject(
         IServiceProvider serviceProvider,
         Domain.Directories.Country domainObject,

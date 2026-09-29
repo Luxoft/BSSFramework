@@ -29,7 +29,7 @@ public abstract class Subscription<TDomainObject, TRenderingObject, TMessageTemp
 
     public string MessageTemplateCode { get; } = typeof(TMessageTemplate).FullName!;
 
-    public abstract MailAddress Sender { get; }
+    public virtual MailAddress? Sender { get; } = null;
 
     public virtual bool SendIndividualLetters { get; } = false;
 

@@ -1,6 +1,4 @@
-﻿using System.Net.Mail;
-
-using Framework.Subscriptions.Domain;
+﻿using Framework.Subscriptions.Domain;
 using Framework.Subscriptions.Metadata;
 
 namespace SampleSystem.Subscriptions.Metadata.Country.Create;
@@ -9,8 +7,6 @@ namespace SampleSystem.Subscriptions.Metadata.Country.Create;
 public class CountryCreateSubscription : Subscription<Domain.Directories.Country, _Country_Create_MessageTemplate_cshtml>
 {
     public override DomainObjectChangeType DomainObjectChangeType { get; } = DomainObjectChangeType.Create;
-
-    public override MailAddress Sender { get; } = new("SampleSystem@luxoft.com", "SampleSystem");
 
     public override bool InlineAttachments { get; } = false;
 

@@ -1,4 +1,7 @@
-﻿using Framework.Database.InlineAudit;
+﻿using Framework.Authorization.Environment;
+using Framework.Configuration.Environment;
+
+using Framework.Database.InlineAudit;
 using Framework.Database.InlineAudit.DependencyInjection;
 
 using SampleSystem.Domain.Employee;
@@ -9,27 +12,9 @@ public static class InlineAuditSetupExtensions
 {
     public static IInlineAuditSetup AddSampleSystemInlineAudit(this IInlineAuditSetup rootSetup) =>
         rootSetup
-            .For<Framework.Authorization.Domain.AuditPersistentDomainObjectBase>(innerSetup =>
-            {
-                innerSetup.Add(v => v.CreateDate, InlineAuditAction.Create, AuditValueResolverHeader.Now)
-                          .Add(v => v.CreatedBy, InlineAuditAction.Create, AuditValueResolverHeader.CurrentUser)
-                          .Add(v => v.ModifyDate, InlineAuditAction.Modify, AuditValueResolverHeader.Now)
-                          .Add(v => v.ModifiedBy, InlineAuditAction.Modify, AuditValueResolverHeader.CurrentUser);
-            })
-            .For<Framework.Configuration.Domain.AuditPersistentDomainObjectBase>(innerSetup =>
-            {
-                innerSetup.Add(v => v.CreateDate, InlineAuditAction.Create, AuditValueResolverHeader.Now)
-                          .Add(v => v.CreatedBy, InlineAuditAction.Create, AuditValueResolverHeader.CurrentUser)
-                          .Add(v => v.ModifyDate, InlineAuditAction.Modify, AuditValueResolverHeader.Now)
-                          .Add(v => v.ModifiedBy, InlineAuditAction.Modify, AuditValueResolverHeader.CurrentUser);
-            })
-            .For<SampleSystem.Domain.AuditPersistentDomainObjectBase>(innerSetup =>
-            {
-                innerSetup.Add(v => v.CreateDate, InlineAuditAction.Create, AuditValueResolverHeader.Now)
-                          .Add(v => v.CreatedBy, InlineAuditAction.Create, AuditValueResolverHeader.CurrentUser)
-                          .Add(v => v.ModifyDate, InlineAuditAction.Modify, AuditValueResolverHeader.Now)
-                          .Add(v => v.ModifiedBy, InlineAuditAction.Modify, AuditValueResolverHeader.CurrentUser);
-            })
+            .AddAuthorizationInlineAudit()
+            .AddConfigurationInlineAudit()
+            .AddDefault<SampleSystem.Domain.AuditPersistentDomainObjectBase>(v => v.CreateDate, v => v.CreatedBy, v => v.ModifyDate, v => v.ModifiedBy)
             .For<SampleSystem.Domain.ExtendedInlineAuditObj>(innerSetup =>
             {
                 innerSetup.Add<Employee?, CurrentUserAuditValueResolver<Employee?>>(v => v.CreatedByEmployee, InlineAuditAction.Create)

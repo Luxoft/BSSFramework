@@ -20,6 +20,8 @@
 
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Environment\Framework.Authorization.Environment.csproj" />
 
+    <ProjectReference Include="..\..\_Configuration\Framework.Configuration.Environment\Framework.Configuration.Environment.csproj" />
+
     <ProjectReference Include="..\SampleSystem.AuditDomain\SampleSystem.AuditDomain.csproj" />
     <ProjectReference Include="..\SampleSystem.BLL\SampleSystem.BLL.csproj" />
     <ProjectReference Include="..\SampleSystem.EventMetadata\SampleSystem.EventMetadata.csproj" />

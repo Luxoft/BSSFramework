@@ -926,6 +926,21 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.ConcreteClassAIdentityDTO(domainObject);
         }
         
+        public static SampleSystem.Generated.DTO.TestCommentIdentityDTO ToIdentityDTO(this SampleSystem.Domain.TestIdComment.TestComment domainObject)
+        {
+            return new SampleSystem.Generated.DTO.TestCommentIdentityDTO(domainObject);
+        }
+        
+        public static SampleSystem.Generated.DTO.TestCommentCategoryIdentityDTO ToIdentityDTO(this SampleSystem.Domain.TestIdComment.TestCommentCategory domainObject)
+        {
+            return new SampleSystem.Generated.DTO.TestCommentCategoryIdentityDTO(domainObject);
+        }
+        
+        public static SampleSystem.Generated.DTO.TestCommentParentIdentityDTO ToIdentityDTO(this SampleSystem.Domain.TestIdComment.TestCommentParent domainObject)
+        {
+            return new SampleSystem.Generated.DTO.TestCommentParentIdentityDTO(domainObject);
+        }
+        
         public static SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO ToIdentityDTO(this SampleSystem.Domain.TestImmutableObj domainObject)
         {
             return new SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO(domainObject);
@@ -1337,6 +1352,21 @@ namespace SampleSystem.Generated.DTO
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.ConcreteClassAIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestForceAbstract.ConcreteClassA> domainObjects)
+        {
+            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.TestCommentIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestIdComment.TestComment> domainObjects)
+        {
+            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.TestCommentCategoryIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestIdComment.TestCommentCategory> domainObjects)
+        {
+            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.TestCommentParentIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestIdComment.TestCommentParent> domainObjects)
         {
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
@@ -2576,6 +2606,21 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.ConcreteClassAEventRichDTO(mappingService, domainObject);
         }
         
+        public static SampleSystem.Generated.DTO.TestCommentEventRichDTO ToRichEventDTO(this SampleSystem.Domain.TestIdComment.TestComment domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return new SampleSystem.Generated.DTO.TestCommentEventRichDTO(mappingService, domainObject);
+        }
+        
+        public static SampleSystem.Generated.DTO.TestCommentCategoryEventRichDTO ToRichEventDTO(this SampleSystem.Domain.TestIdComment.TestCommentCategory domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return new SampleSystem.Generated.DTO.TestCommentCategoryEventRichDTO(mappingService, domainObject);
+        }
+        
+        public static SampleSystem.Generated.DTO.TestCommentParentEventRichDTO ToRichEventDTO(this SampleSystem.Domain.TestIdComment.TestCommentParent domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return new SampleSystem.Generated.DTO.TestCommentParentEventRichDTO(mappingService, domainObject);
+        }
+        
         public static SampleSystem.Generated.DTO.TestImmutableObjEventRichDTO ToRichEventDTO(this SampleSystem.Domain.TestImmutableObj domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return new SampleSystem.Generated.DTO.TestImmutableObjEventRichDTO(mappingService, domainObject);
@@ -3082,6 +3127,21 @@ namespace SampleSystem.Generated.DTO
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.ConcreteClassAEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestForceAbstract.ConcreteClassA> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.TestCommentEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestIdComment.TestComment> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.TestCommentCategoryEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestIdComment.TestCommentCategory> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.TestCommentParentEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestIdComment.TestCommentParent> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
         }
@@ -3926,6 +3986,16 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.ClassAEventSimpleDTO(mappingService, domainObject);
         }
         
+        public static SampleSystem.Generated.DTO.TestCommentCategoryEventSimpleDTO ToSimpleEventDTO(this SampleSystem.Domain.TestIdComment.TestCommentCategory domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return new SampleSystem.Generated.DTO.TestCommentCategoryEventSimpleDTO(mappingService, domainObject);
+        }
+        
+        public static SampleSystem.Generated.DTO.TestCommentParentEventSimpleDTO ToSimpleEventDTO(this SampleSystem.Domain.TestIdComment.TestCommentParent domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return new SampleSystem.Generated.DTO.TestCommentParentEventSimpleDTO(mappingService, domainObject);
+        }
+        
         public static SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectEventSimpleDTO ToSimpleEventDTO(this SampleSystem.Domain.TestRelativeEmployeeParentObject domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return new SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectEventSimpleDTO(mappingService, domainObject);
@@ -4062,6 +4132,16 @@ namespace SampleSystem.Generated.DTO
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.ClassAEventSimpleDTO> ToSimpleEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestForceAbstract.ClassA> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.TestCommentCategoryEventSimpleDTO> ToSimpleEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestIdComment.TestCommentCategory> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.TestCommentParentEventSimpleDTO> ToSimpleEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestIdComment.TestCommentParent> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject, mappingService));
         }

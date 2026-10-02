@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Database\Framework.Database.InlineAudit\Framework.Database.InlineAudit.csproj" />
     <ProjectReference Include="..\Framework.Authorization.Domain\Framework.Authorization.Domain.csproj" />
 
     <ProjectReference Include="..\..\Application\Framework.Application.Runtime\Framework.Application.Runtime.csproj" />

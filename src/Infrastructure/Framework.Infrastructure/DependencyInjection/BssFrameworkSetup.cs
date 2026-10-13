@@ -111,7 +111,7 @@ public class BssFrameworkSetup : IBssFrameworkSetup, IServiceInitializer
 
         services.AddSingleton<IWebApiDBSessionModeResolver, WebApiDBSessionModeResolver>();
 
-        services.AddScoped(typeof(IDomainObjectEventMetadata), this.domainObjectEventMetadataType);
+        services.AddSingleton(typeof(IDomainObjectEventMetadata), this.domainObjectEventMetadataType);
 
         services.AddGeneralDatabase(this.databaseSetupAction);
 

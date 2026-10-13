@@ -18,7 +18,9 @@ public class NotificationExtractor<TDomainObject, TRenderingObject>(
     IIdentityInfoSource identityInfoSource,
     INotificationEmailExtractor notificationEmailExtractor,
     ISubscription<TDomainObject, TRenderingObject> subscription,
-    [FromKeyedServices(nameof(Subscriptions))]MailAddress? defaultSender = null) : INotificationExtractor<TDomainObject>
+    INotificationCommentSource notificationCommentSource,
+    [FromKeyedServices(nameof(Subscriptions))]
+    MailAddress? defaultSender = null) : INotificationExtractor<TDomainObject>
     where TDomainObject : class
     where TRenderingObject : class
 {
@@ -32,10 +34,16 @@ public class NotificationExtractor<TDomainObject, TRenderingObject>(
 
         return from mailMessage in this.GetMailMessages(versions)
 
-               select new Notification.Domain.Notification(technicalInformation, mailMessage);
+               let comment = notificationCommentSource.GetComment(mailMessage)
+
+               let actualTechnicalInformation = comment == "" ? technicalInformation : technicalInformation with { Comment = comment }
+
+               select new Notification.Domain.Notification(actualTechnicalInformation, mailMessage);
     }
 
-    private async IAsyncEnumerable<MailMessage> GetMailMessages(DomainObjectVersions<TDomainObject> versions, [EnumeratorCancellation] CancellationToken ct = default)
+    private async IAsyncEnumerable<MailMessage> GetMailMessages(
+        DomainObjectVersions<TDomainObject> versions,
+        [EnumeratorCancellation] CancellationToken ct = default)
     {
         if (await subscription.IsProcessed(serviceProvider, versions, ct))
         {
@@ -62,14 +70,14 @@ public class NotificationExtractor<TDomainObject, TRenderingObject>(
         var attachments = await subscription.GetAttachments(serviceProvider, notificationMessageGenerationInfo.Versions).ToImmutableArrayAsync(ct);
 
         var mailMessage = new MailMessage
-        {
-            IsBodyHtml = true,
-            From = subscription.Sender ?? defaultSender ?? throw new InvalidOperationException("No sender specified."),
-            Subject = subject,
-            Body = body,
-            Recipients = [.. notificationMessageGenerationInfo.Recipients],
-            AttachmentList = [.. attachments]
-        };
+                          {
+                              IsBodyHtml = true,
+                              From = subscription.Sender ?? defaultSender ?? throw new InvalidOperationException("No sender specified."),
+                              Subject = subject,
+                              Body = body,
+                              Recipients = [.. notificationMessageGenerationInfo.Recipients],
+                              AttachmentList = [.. attachments]
+                          };
 
         if (subscription.InlineAttachments)
         {
@@ -129,7 +137,8 @@ public class NotificationExtractor<TDomainObject, TRenderingObject>(
 
                 if (emails.Count > 0)
                 {
-                    var renderingVersions = await versions.ChangeDomainObjectAsync(domainObject => subscription.ConvertToRenderingObject(serviceProvider, domainObject, ct));
+                    var renderingVersions =
+                        await versions.ChangeDomainObjectAsync(domainObject => subscription.ConvertToRenderingObject(serviceProvider, domainObject, ct));
 
                     yield return new NotificationMessageGenerationInfo<TRenderingObject>(emails, renderingVersions);
                 }

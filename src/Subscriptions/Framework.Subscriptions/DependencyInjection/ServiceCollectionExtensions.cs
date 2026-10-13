@@ -35,6 +35,7 @@ public static class ServiceCollectionExtensions
             where TEmployee : class
         {
             services.AddSingleton<ISubscriptionResolver, SubscriptionResolver>();
+            services.AddSingleton<INotificationCommentSource, NotificationCommentSource>();
 
             services.AddScoped<ISubscriptionService, SubscriptionService>();
             services.AddScoped<ISyncSubscriptionService, SyncSubscriptionService>();

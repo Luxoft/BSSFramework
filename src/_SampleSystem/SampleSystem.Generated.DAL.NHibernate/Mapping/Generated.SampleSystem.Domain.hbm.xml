@@ -1325,6 +1325,54 @@
       <one-to-many class="SampleSystem.Domain.TestForceAbstract.ClassAChild" />
     </set>
   </class>
+  <class name="SampleSystem.Domain.TestIdComment.TestComment" table="TestComment">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Text" column="text" access="field.camelcase" />
+    <many-to-one name="Parent" column="parentId" class="SampleSystem.Domain.TestIdComment.TestCommentParent" access="field.camelcase" />
+  </class>
+  <class name="SampleSystem.Domain.TestIdComment.TestCommentCategory" table="TestCommentCategory">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" access="field.camelcase" />
+  </class>
+  <class name="SampleSystem.Domain.TestIdComment.TestCommentParent" table="TestCommentParent">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" access="field.camelcase" />
+    <many-to-one name="Category" column="categoryId" class="SampleSystem.Domain.TestIdComment.TestCommentCategory" access="field.camelcase" />
+    <set name="Comments" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="parentId" />
+      <one-to-many class="SampleSystem.Domain.TestIdComment.TestComment" />
+    </set>
+  </class>
   <class name="SampleSystem.Domain.TestImmutableObj" table="TestImmutableObj">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />

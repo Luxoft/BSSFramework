@@ -120,6 +120,9 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.TestForceAbstract.ClassA>(this.GetClassAValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestForceAbstract.ClassAChild>(this.GetClassAChildValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestForceAbstract.ConcreteClassA>(this.GetConcreteClassAValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.TestIdComment.TestComment>(this.GetTestCommentValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.TestIdComment.TestCommentCategory>(this.GetTestCommentCategoryValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.TestIdComment.TestCommentParent>(this.GetTestCommentParentValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestImmutableObj>(this.GetTestImmutableObjValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestJobObject>(this.GetTestJobObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestObj>(this.GetTestObjValidationResult);
@@ -533,6 +536,21 @@ namespace SampleSystem.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetSqlParserTestObjValidationResult(SampleSystem.Domain.SqlParserTestObj source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetTestCommentCategoryValidationResult(SampleSystem.Domain.TestIdComment.TestCommentCategory source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetTestCommentParentValidationResult(SampleSystem.Domain.TestIdComment.TestCommentParent source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetTestCommentValidationResult(SampleSystem.Domain.TestIdComment.TestComment source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

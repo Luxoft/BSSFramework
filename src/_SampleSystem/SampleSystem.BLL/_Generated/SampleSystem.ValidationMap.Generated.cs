@@ -2851,6 +2851,18 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetConcreteClassAValidationMap()));
             }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.TestIdComment.TestComment)))
+            {
+                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetTestCommentValidationMap()));
+            }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.TestIdComment.TestCommentCategory)))
+            {
+                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetTestCommentCategoryValidationMap()));
+            }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.TestIdComment.TestCommentParent)))
+            {
+                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetTestCommentParentValidationMap()));
+            }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.TestImmutableObj)))
             {
                 return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetTestImmutableObjValidationMap()));
@@ -3694,6 +3706,129 @@ namespace SampleSystem.BLL
         protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.SqlParserTestObj> GetSqlParserTestObjValidationMap()
         {
             return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.SqlParserTestObj>(this.GetSqlParserTestObjProperties);
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.TestIdComment.TestComment, System.DateTime?>> GetTestComment_CreateDateValidators()
+        {
+            yield return Framework.Validation.Validators.DynamicClass.Available.Base.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.TestIdComment.TestComment>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.TestIdComment.TestComment, string>> GetTestComment_CreatedByValidators()
+        {
+            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestIdComment.TestComment>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.TestIdComment.TestComment, string>> GetTestComment_ModifiedByValidators()
+        {
+            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestIdComment.TestComment>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.TestIdComment.TestComment, System.DateTime?>> GetTestComment_ModifyDateValidators()
+        {
+            yield return Framework.Validation.Validators.DynamicClass.Available.Base.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.TestIdComment.TestComment>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.TestIdComment.TestComment, string>> GetTestComment_TextValidators()
+        {
+            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestIdComment.TestComment>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.TestIdComment.TestCommentCategory, System.DateTime?>> GetTestCommentCategory_CreateDateValidators()
+        {
+            yield return Framework.Validation.Validators.DynamicClass.Available.Base.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.TestIdComment.TestCommentCategory>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.TestIdComment.TestCommentCategory, string>> GetTestCommentCategory_CreatedByValidators()
+        {
+            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestIdComment.TestCommentCategory>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.TestIdComment.TestCommentCategory, string>> GetTestCommentCategory_ModifiedByValidators()
+        {
+            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestIdComment.TestCommentCategory>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.TestIdComment.TestCommentCategory, System.DateTime?>> GetTestCommentCategory_ModifyDateValidators()
+        {
+            yield return Framework.Validation.Validators.DynamicClass.Available.Base.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.TestIdComment.TestCommentCategory>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.TestIdComment.TestCommentCategory, string>> GetTestCommentCategory_NameValidators()
+        {
+            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestIdComment.TestCommentCategory>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<SampleSystem.Domain.TestIdComment.TestCommentCategory>> GetTestCommentCategoryProperties(Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.TestIdComment.TestCommentCategory> currentClass)
+        {
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.TestIdComment.TestCommentCategory, System.DateTime?>(source => source.CreateDate, currentClass, this.GetTestCommentCategory_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.TestIdComment.TestCommentCategory, string>(source => source.CreatedBy, currentClass, this.GetTestCommentCategory_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.TestIdComment.TestCommentCategory, string>(source => source.ModifiedBy, currentClass, this.GetTestCommentCategory_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.TestIdComment.TestCommentCategory, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetTestCommentCategory_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.TestIdComment.TestCommentCategory, string>(source => source.Name, currentClass, this.GetTestCommentCategory_NameValidators(), this.GetClassMap<string>(true));
+        }
+        
+        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.TestIdComment.TestCommentCategory> GetTestCommentCategoryValidationMap()
+        {
+            return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.TestIdComment.TestCommentCategory>(this.GetTestCommentCategoryProperties);
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.TestIdComment.TestCommentParent, System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestIdComment.TestComment>>> GetTestCommentParent_CommentsValidators()
+        {
+            yield return new Framework.Validation.Validators.Deep.DeepCollectionValidator<SampleSystem.Domain.TestIdComment.TestCommentParent, System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestIdComment.TestComment>, SampleSystem.Domain.TestIdComment.TestComment>();
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.TestIdComment.TestCommentParent, System.DateTime?>> GetTestCommentParent_CreateDateValidators()
+        {
+            yield return Framework.Validation.Validators.DynamicClass.Available.Base.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.TestIdComment.TestCommentParent>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.TestIdComment.TestCommentParent, string>> GetTestCommentParent_CreatedByValidators()
+        {
+            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestIdComment.TestCommentParent>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.TestIdComment.TestCommentParent, string>> GetTestCommentParent_ModifiedByValidators()
+        {
+            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestIdComment.TestCommentParent>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.TestIdComment.TestCommentParent, System.DateTime?>> GetTestCommentParent_ModifyDateValidators()
+        {
+            yield return Framework.Validation.Validators.DynamicClass.Available.Base.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.TestIdComment.TestCommentParent>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.TestIdComment.TestCommentParent, string>> GetTestCommentParent_NameValidators()
+        {
+            yield return new Framework.Validation.Validators.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestIdComment.TestCommentParent>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<SampleSystem.Domain.TestIdComment.TestCommentParent>> GetTestCommentParentProperties(Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.TestIdComment.TestCommentParent> currentClass)
+        {
+            yield return new Framework.Validation.Map.CollectionPropertyValidationMap<SampleSystem.Domain.TestIdComment.TestCommentParent, System.Collections.Generic.IEnumerable<SampleSystem.Domain.TestIdComment.TestComment>, SampleSystem.Domain.TestIdComment.TestComment>(source => source.Comments, currentClass, this.GetTestCommentParent_CommentsValidators(), this.GetClassMap<SampleSystem.Domain.TestIdComment.TestComment>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.TestIdComment.TestCommentParent, System.DateTime?>(source => source.CreateDate, currentClass, this.GetTestCommentParent_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.TestIdComment.TestCommentParent, string>(source => source.CreatedBy, currentClass, this.GetTestCommentParent_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.TestIdComment.TestCommentParent, string>(source => source.ModifiedBy, currentClass, this.GetTestCommentParent_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.TestIdComment.TestCommentParent, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetTestCommentParent_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.TestIdComment.TestCommentParent, string>(source => source.Name, currentClass, this.GetTestCommentParent_NameValidators(), this.GetClassMap<string>(true));
+        }
+        
+        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.TestIdComment.TestCommentParent> GetTestCommentParentValidationMap()
+        {
+            return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.TestIdComment.TestCommentParent>(this.GetTestCommentParentProperties);
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Map.IPropertyValidationMap<SampleSystem.Domain.TestIdComment.TestComment>> GetTestCommentProperties(Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.TestIdComment.TestComment> currentClass)
+        {
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.TestIdComment.TestComment, System.DateTime?>(source => source.CreateDate, currentClass, this.GetTestComment_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.TestIdComment.TestComment, string>(source => source.CreatedBy, currentClass, this.GetTestComment_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.TestIdComment.TestComment, string>(source => source.ModifiedBy, currentClass, this.GetTestComment_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.TestIdComment.TestComment, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetTestComment_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.Map.SinglePropertyValidationMap<SampleSystem.Domain.TestIdComment.TestComment, string>(source => source.Text, currentClass, this.GetTestComment_TextValidators(), this.GetClassMap<string>(true));
+        }
+        
+        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.TestIdComment.TestComment> GetTestCommentValidationMap()
+        {
+            return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.TestIdComment.TestComment>(this.GetTestCommentProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.TestCustomContextSecurityObj, System.DateTime?>> GetTestCustomContextSecurityObj_CreateDateValidators()

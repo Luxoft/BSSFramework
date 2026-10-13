@@ -694,6 +694,16 @@ namespace SampleSystem.Generated.DTO
         
         void MapTestBusinessUnitType(SampleSystem.Domain.Projections.TestBusinessUnitType domainObject, SampleSystem.Generated.DTO.TestBusinessUnitTypeProjectionDTO mappingObject);
         
+        void MapTestComment(SampleSystem.Domain.TestIdComment.TestComment domainObject, SampleSystem.Generated.DTO.TestCommentEventRichDTO mappingObject);
+        
+        void MapTestCommentCategory(SampleSystem.Domain.TestIdComment.TestCommentCategory domainObject, SampleSystem.Generated.DTO.TestCommentCategoryEventRichDTO mappingObject);
+        
+        void MapTestCommentCategory(SampleSystem.Domain.TestIdComment.TestCommentCategory domainObject, SampleSystem.Generated.DTO.TestCommentCategoryEventSimpleDTO mappingObject);
+        
+        void MapTestCommentParent(SampleSystem.Domain.TestIdComment.TestCommentParent domainObject, SampleSystem.Generated.DTO.TestCommentParentEventRichDTO mappingObject);
+        
+        void MapTestCommentParent(SampleSystem.Domain.TestIdComment.TestCommentParent domainObject, SampleSystem.Generated.DTO.TestCommentParentEventSimpleDTO mappingObject);
+        
         void MapTestCustomContextSecurityObj(SampleSystem.Domain.TestCustomContextSecurityObj domainObject, SampleSystem.Generated.DTO.TestCustomContextSecurityObjVisualDTO mappingObject);
         
         void MapTestCustomContextSecurityObj(SampleSystem.Domain.TestCustomContextSecurityObj domainObject, SampleSystem.Generated.DTO.TestCustomContextSecurityObjSimpleDTO mappingObject);
@@ -1235,6 +1245,12 @@ namespace SampleSystem.Generated.DTO
         SampleSystem.Domain.SqlParserTestObjContainer ToSqlParserTestObjContainer(SampleSystem.Generated.DTO.SqlParserTestObjContainerStrictDTO sqlParserTestObjContainerStrictDTO);
         
         SampleSystem.Domain.SqlParserTestObjContainer ToSqlParserTestObjContainer(SampleSystem.Generated.DTO.SqlParserTestObjContainerStrictDTO sqlParserTestObjContainerStrictDTO, bool allowCreate);
+        
+        SampleSystem.Domain.TestIdComment.TestComment ToTestComment(SampleSystem.Generated.DTO.TestCommentIdentityDTO testCommentIdentityDTO);
+        
+        SampleSystem.Domain.TestIdComment.TestCommentCategory ToTestCommentCategory(SampleSystem.Generated.DTO.TestCommentCategoryIdentityDTO testCommentCategoryIdentityDTO);
+        
+        SampleSystem.Domain.TestIdComment.TestCommentParent ToTestCommentParent(SampleSystem.Generated.DTO.TestCommentParentIdentityDTO testCommentParentIdentityDTO);
         
         SampleSystem.Domain.TestCustomContextSecurityObj ToTestCustomContextSecurityObj(SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentityDTO);
         
@@ -6661,6 +6677,83 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Name = domainObject.Name;
         }
         
+        public virtual void MapTestComment(SampleSystem.Domain.TestIdComment.TestComment domainObject, SampleSystem.Generated.DTO.TestCommentEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            if (!object.ReferenceEquals(domainObject.Parent, null))
+            {
+                mappingObject.Parent = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Parent, this);
+            }
+            else
+            {
+                mappingObject.Parent = null;
+            }
+            mappingObject.Text = domainObject.Text;
+            mappingObject.Version = domainObject.Version;
+        }
+        
+        public virtual void MapTestCommentCategory(SampleSystem.Domain.TestIdComment.TestCommentCategory domainObject, SampleSystem.Generated.DTO.TestCommentCategoryEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Name = domainObject.Name;
+            mappingObject.Version = domainObject.Version;
+        }
+        
+        public virtual void MapTestCommentCategory(SampleSystem.Domain.TestIdComment.TestCommentCategory domainObject, SampleSystem.Generated.DTO.TestCommentCategoryEventSimpleDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Name = domainObject.Name;
+            mappingObject.Version = domainObject.Version;
+        }
+        
+        public virtual void MapTestCommentParent(SampleSystem.Domain.TestIdComment.TestCommentParent domainObject, SampleSystem.Generated.DTO.TestCommentParentEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            if (!object.ReferenceEquals(domainObject.Category, null))
+            {
+                mappingObject.Category = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Category, this);
+            }
+            else
+            {
+                mappingObject.Category = null;
+            }
+            mappingObject.Comments = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTOList(domainObject.Comments, this);
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Name = domainObject.Name;
+            mappingObject.Version = domainObject.Version;
+        }
+        
+        public virtual void MapTestCommentParent(SampleSystem.Domain.TestIdComment.TestCommentParent domainObject, SampleSystem.Generated.DTO.TestCommentParentEventSimpleDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Name = domainObject.Name;
+            mappingObject.Version = domainObject.Version;
+        }
+        
         public virtual void MapTestCustomContextSecurityObj(SampleSystem.Domain.TestCustomContextSecurityObj domainObject, SampleSystem.Generated.DTO.TestCustomContextSecurityObjVisualDTO mappingObject)
         {
             mappingObject.Name = domainObject.Name;
@@ -8887,6 +8980,21 @@ namespace SampleSystem.Generated.DTO
             {
                 return this.ToSqlParserTestObjContainer(sqlParserTestObjContainerStrictDTO);
             }
+        }
+        
+        public virtual SampleSystem.Domain.TestIdComment.TestComment ToTestComment(SampleSystem.Generated.DTO.TestCommentIdentityDTO testCommentIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.TestIdComment.TestComment>(testCommentIdentityDTO.Id);
+        }
+        
+        public virtual SampleSystem.Domain.TestIdComment.TestCommentCategory ToTestCommentCategory(SampleSystem.Generated.DTO.TestCommentCategoryIdentityDTO testCommentCategoryIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.TestIdComment.TestCommentCategory>(testCommentCategoryIdentityDTO.Id);
+        }
+        
+        public virtual SampleSystem.Domain.TestIdComment.TestCommentParent ToTestCommentParent(SampleSystem.Generated.DTO.TestCommentParentIdentityDTO testCommentParentIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.TestIdComment.TestCommentParent>(testCommentParentIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.TestCustomContextSecurityObj ToTestCustomContextSecurityObj(SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentityDTO)

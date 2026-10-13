@@ -7565,6 +7565,285 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestIdComment.TestComment), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct TestCommentIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestCommentIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.TestCommentIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestCommentIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public TestCommentIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public TestCommentIdentityDTO(SampleSystem.Domain.TestIdComment.TestComment domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public TestCommentIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.TestCommentIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.TestCommentIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.TestCommentIdentityDTO identity1, SampleSystem.Generated.DTO.TestCommentIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.TestCommentIdentityDTO identity1, SampleSystem.Generated.DTO.TestCommentIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestCommentIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestCommentIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.TestCommentIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.TestIdComment.TestComment ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTestComment(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestIdComment.TestCommentCategory), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct TestCommentCategoryIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestCommentCategoryIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.TestCommentCategoryIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestCommentCategoryIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public TestCommentCategoryIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public TestCommentCategoryIdentityDTO(SampleSystem.Domain.TestIdComment.TestCommentCategory domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public TestCommentCategoryIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.TestCommentCategoryIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.TestCommentCategoryIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.TestCommentCategoryIdentityDTO identity1, SampleSystem.Generated.DTO.TestCommentCategoryIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.TestCommentCategoryIdentityDTO identity1, SampleSystem.Generated.DTO.TestCommentCategoryIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestCommentCategoryIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestCommentCategoryIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.TestCommentCategoryIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.TestIdComment.TestCommentCategory ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTestCommentCategory(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestIdComment.TestCommentParent), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct TestCommentParentIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestCommentParentIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.TestCommentParentIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestCommentParentIdentityDTO(System.Guid.Empty);
+        
+        private System.Guid _id;
+        
+        public TestCommentParentIdentityDTO(System.Guid id)
+        {
+            this._id = id;
+        }
+        
+        public TestCommentParentIdentityDTO(SampleSystem.Domain.TestIdComment.TestCommentParent domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this._id = domainObject.Id;
+        }
+        
+        public TestCommentParentIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.TestCommentParentIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.TestCommentParentIdentityDTO.EmptyField;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Application.Domain.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.TestCommentParentIdentityDTO identity1, SampleSystem.Generated.DTO.TestCommentParentIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.TestCommentParentIdentityDTO identity1, SampleSystem.Generated.DTO.TestCommentParentIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestCommentParentIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestCommentParentIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.TestCommentParentIdentityDTO other)
+        {
+            return (this._id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.TestIdComment.TestCommentParent ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTestCommentParent(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
     [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestImmutableObj), "IdentityDTO", Framework.BLL.Domain.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct TestImmutableObjIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO>, Framework.Application.Domain.IIdentityObject<System.Guid>

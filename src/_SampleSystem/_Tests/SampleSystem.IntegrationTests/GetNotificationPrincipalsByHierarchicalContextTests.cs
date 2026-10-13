@@ -112,7 +112,7 @@ public abstract class GetNotificationPrincipalsByHierarchicalContextTests(IServi
     public async Task GetPrincipals_Direct_Test2_Missed(CancellationToken ct)
     {
         // Arrange
-        this.AuthManager.For(
+        await this.AuthManager.For(
             this.searchNotificationEmployeeLogin1).SetRoleAsync(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
@@ -144,7 +144,7 @@ public abstract class GetNotificationPrincipalsByHierarchicalContextTests(IServi
     public async Task GetPrincipals_Direct_Test3_Missed(CancellationToken ct)
     {
         // Arrange
-        this.AuthManager.For(
+        await this.AuthManager.For(
             this.searchNotificationEmployeeLogin1).SetRoleAsync(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
@@ -184,7 +184,7 @@ public abstract class GetNotificationPrincipalsByHierarchicalContextTests(IServi
     public async Task GetPrincipals_Direct_Test4_Searched(CancellationToken ct)
     {
         // Arrange
-        this.AuthManager.For(
+        await this.AuthManager.For(
             this.searchNotificationEmployeeLogin1).SetRoleAsync(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
@@ -226,13 +226,13 @@ public abstract class GetNotificationPrincipalsByHierarchicalContextTests(IServi
     public async Task GetPrincipals_DirectOrEmpty_Test1_Searched(CancellationToken ct)
     {
         // Arrange
-        this.AuthManager.For(this.searchNotificationEmployeeLogin1).SetRoleAsync(
+        await this.AuthManager.For(this.searchNotificationEmployeeLogin1).SetRoleAsync(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
                 null,
                 this.child_1_1_ManagementUnit), ct);
 
-        this.AuthManager.For(this.searchNotificationEmployeeLogin2).SetRoleAsync(
+        await this.AuthManager.For(this.searchNotificationEmployeeLogin2).SetRoleAsync(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
                 this.rootBusinessUnit,
@@ -265,13 +265,13 @@ public abstract class GetNotificationPrincipalsByHierarchicalContextTests(IServi
     public async Task GetPrincipals_DirectOrFirstParentOrEmpty_Test1_Searched(CancellationToken ct)
     {
         // Arrange
-        this.AuthManager.For(this.searchNotificationEmployeeLogin1).SetRoleAsync(
+        await this.AuthManager.For(this.searchNotificationEmployeeLogin1).SetRoleAsync(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
                 this.child_1_0_BusinessUnit,
                 this.child_1_1_ManagementUnit), ct);
 
-        this.AuthManager.For(this.searchNotificationEmployeeLogin2).SetRoleAsync(
+        await this.AuthManager.For(this.searchNotificationEmployeeLogin2).SetRoleAsync(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
                 this.rootBusinessUnit,
@@ -303,13 +303,13 @@ public abstract class GetNotificationPrincipalsByHierarchicalContextTests(IServi
     public async Task GetPrincipals_DirectOrFirstParentOrEmpty_Test2_Searched(CancellationToken ct)
     {
         // Arrange
-        this.AuthManager.For(this.searchNotificationEmployeeLogin1).SetRoleAsync(
+        await this.AuthManager.For(this.searchNotificationEmployeeLogin1).SetRoleAsync(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
                 this.rootBusinessUnit,
                 this.child_1_0_ManagementUnit), ct);
 
-        this.AuthManager.For(this.searchNotificationEmployeeLogin2).SetRoleAsync(
+        await this.AuthManager.For(this.searchNotificationEmployeeLogin2).SetRoleAsync(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
                 this.rootBusinessUnit,
@@ -343,13 +343,13 @@ public abstract class GetNotificationPrincipalsByHierarchicalContextTests(IServi
     public async Task GetPrincipals_DirectOrFirstParentOrEmpty_Test3_Searched(bool swapPriority, CancellationToken ct)
     {
         // Arrange
-        this.AuthManager.For(this.searchNotificationEmployeeLogin1).SetRoleAsync(
+        await this.AuthManager.For(this.searchNotificationEmployeeLogin1).SetRoleAsync(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
                 this.child_1_0_BusinessUnit,
                 this.rootManagementUnit), ct);
 
-        this.AuthManager.For(this.searchNotificationEmployeeLogin2).SetRoleAsync(
+        await this.AuthManager.For(this.searchNotificationEmployeeLogin2).SetRoleAsync(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
                 this.rootBusinessUnit,
@@ -384,13 +384,13 @@ public abstract class GetNotificationPrincipalsByHierarchicalContextTests(IServi
     public async Task GetPrincipals_All_Test1_Searched(CancellationToken ct)
     {
         // Arrange
-        this.AuthManager.For(this.searchNotificationEmployeeLogin1).SetRoleAsync(
+        await this.AuthManager.For(this.searchNotificationEmployeeLogin1).SetRoleAsync(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
                 this.child_1_0_BusinessUnit,
                 this.child_1_1_ManagementUnit), ct);
 
-        this.AuthManager.For(this.searchNotificationEmployeeLogin2).SetRoleAsync(
+        await this.AuthManager.For(this.searchNotificationEmployeeLogin2).SetRoleAsync(
             new SampleSystemTestPermission(
                 SampleSystemSecurityRole.SearchTestBusinessRole,
                 this.rootBusinessUnit,

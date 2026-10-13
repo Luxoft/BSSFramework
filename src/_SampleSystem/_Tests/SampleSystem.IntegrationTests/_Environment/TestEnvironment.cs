@@ -38,7 +38,10 @@ public abstract class TestEnvironment : BssTestEnvironment
 
     protected override void InitializeServices(IServiceCollection services, IConfiguration configuration) =>
 
-        services.AddGeneralDependencyInjection(configuration, new HostingEnvironment(), s => s.AddExtension(this.BssFrameworkExtension))
+        services.AddGeneralDependencyInjection(
+                    configuration,
+                    new HostingEnvironment(),
+                    s => s.AddExtension(this.BssFrameworkExtension))
 
                 .AddSingleton<SampleSystemInitializer>()
 

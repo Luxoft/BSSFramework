@@ -9,6 +9,7 @@ using Framework.Infrastructure.DependencyInjection;
 using Framework.Notification.DependencyInjection;
 
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 
 using SampleSystem.BLL;
 using SampleSystem.Domain;
@@ -66,9 +67,9 @@ public static class SampleSystemFrameworkExtensions
                                                                ])
                                                            }));
 
-        public IBssFrameworkSetup AddLegacyNotification(IConfiguration configuration) =>
+        public IBssFrameworkSetup AddLegacyNotification(IConfiguration configuration, IHostEnvironment hostEnvironment) =>
 
-            settings.AddNotification(configuration, true)
+            settings.AddNotification(configuration, hostEnvironment.IsProduction())
                     .AddServices(sc => sc.ReplaceScoped<IMessageSender<Framework.Notification.Domain.Notification>, LocalDbNotificationMessageSender>());
 
         public IBssFrameworkSetup AddSupportLegacyServices() =>

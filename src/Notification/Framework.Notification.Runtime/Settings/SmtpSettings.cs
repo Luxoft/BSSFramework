@@ -11,15 +11,15 @@ public class SmtpSettings
 
     public string? Server { get; set; }
 
-    public int Port { get; set; }
+    public int Port { get; set; } = 25;
 
     /// <summary>
     /// Ящик, на который будут перенаправлены нотификации без получателей (те нотификации, которые без получателей впринципе разрешены)
     /// </summary>
-    public string[]? DefaultReceiverEmails { get; set; }
+    public string[] DefaultReceiverEmails { get; set; } = [];
 
     /// <summary>
     /// Тестовый ящик, на который будут перенаправлены нотификации тестовых стендов (которые !environment.IsProduction())
     /// </summary>
-    public required string[] TestEmails { get; set; }
+    public string[] TestEmails { get; set; } = [];
 }

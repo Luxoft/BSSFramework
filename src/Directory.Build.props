@@ -36,7 +36,8 @@
   <PropertyGroup>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NoWarn>1591, CS9107, CS9124, xUnit1041</NoWarn>
+    <NoWarn>$(NoWarn);CS9107, CS9124, xUnit1041, CS1591</NoWarn>
+    <WarningsAsErrors>$(WarningsAsErrors);CS4014, CS1998, CA2016</WarningsAsErrors>
     <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
     <!-- https://github.com/dotnet/sdk/issues/3329 -->
     <GenerateErrorForMissingTargetingPacks>false</GenerateErrorForMissingTargetingPacks>

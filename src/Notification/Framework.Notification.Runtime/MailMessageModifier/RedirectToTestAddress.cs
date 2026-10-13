@@ -12,15 +12,15 @@ public class RedirectToTestAddress(IOptions<SmtpSettings> settings) : IMailMessa
 {
     public void Modify(MailMessage message)
     {
-        this.AddRecipientsToBody(message);
-
-        message.To.Clear();
-        message.CC.Clear();
-        message.Bcc.Clear();
-        message.ReplyToList.Clear();
-
         if (settings.Value.TestEmails.Any())
         {
+            this.AddRecipientsToBody(message);
+
+            message.To.Clear();
+            message.CC.Clear();
+            message.Bcc.Clear();
+            message.ReplyToList.Clear();
+
             message.To.AddRange(RecipientsHelper.ToRecipients(settings.Value.TestEmails));
         }
     }

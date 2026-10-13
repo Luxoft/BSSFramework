@@ -59,7 +59,7 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
                     .AddSubscriptionManagers()
                     .AddLegacyGenericServices()
                     .AddContextEvaluators()
-                    .AddLegacyNotification(configuration)
+                    .AddLegacyNotification(configuration, hostEnvironment)
                     .AddLegacyDefaultGenericServices()
                     .AddConfigurationSystemConstants()
                     .AddConfigurationTargetSystems()

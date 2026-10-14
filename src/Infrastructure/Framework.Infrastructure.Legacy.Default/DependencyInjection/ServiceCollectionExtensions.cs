@@ -31,7 +31,7 @@ public static class ServiceCollectionExtensions
 
         public IServiceCollection AddLegacyDefaultGenericServices()
         {
-            services.AddScoped<ISentNotificationLogger, ConfigurationSentNotificationLogger>();
+            services.AddKeyedScoped<ISentNotificationLogger, ConfigurationSentNotificationLogger>(ISentNotificationLogger.InnerKey);
 
             services.AddScoped<IApplicationVariableStorage, ConfigurationApplicationVariableStorage>();
             services.AddScoped<IEventSystem, ConfigurationEventSystem>();

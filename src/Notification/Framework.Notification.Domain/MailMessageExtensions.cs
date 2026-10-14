@@ -31,7 +31,7 @@ public static class MailMessageExtensions
         {
             var result = new MailMessage
             {
-                Sender = mailMessage.Sender,
+                Sender = mailMessage.Sender!,
                 Subject = mailMessage.Subject,
                 SubjectEncoding = mailMessage.SubjectEncoding,
                 Body = mailMessage.Body,

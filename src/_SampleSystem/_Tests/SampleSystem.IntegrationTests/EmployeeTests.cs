@@ -225,12 +225,14 @@ public abstract class EmployeeTests(IServiceProvider rootServiceProvider) : Test
             notifications,
             dto => dto.From == "SampleSystem@luxoft.com"
                    && dto.Message.Message.Contains("Hi there!!!")
+                   && dto.Message.Message.Contains("TestGDPR")
                    && dto.TechnicalInformation.ContextObjectId == employeeIdentity.Id);
 
         Assert.Single(
             sendMessages,
             dto => dto.From == "SampleSystem@luxoft.com"
                    && dto.Message.Contains("Hi there!!!")
+                   && !dto.Message.Contains("TestGDPR")
                    && dto.ContextObjectId == employeeIdentity.Id);
     }
 

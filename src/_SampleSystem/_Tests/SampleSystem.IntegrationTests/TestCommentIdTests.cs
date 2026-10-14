@@ -13,6 +13,7 @@ namespace SampleSystem.IntegrationTests;
 
 public abstract class TestCommentIdTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
+    [AnchFact]
     public async Task AddComment_BeforeExplicitSave_IdStaysDefaultAfterLazyNavigationAccess(CancellationToken ct)
     {
         // Arrange: persist the parent (with a Category reference) in its own transaction first, mirroring how

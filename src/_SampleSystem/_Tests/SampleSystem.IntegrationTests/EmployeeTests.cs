@@ -214,6 +214,10 @@ public abstract class EmployeeTests(IServiceProvider rootServiceProvider) : Test
         var modifications = this.GetModifications();
         var notifications = this.GetNotifications();
 
+        var sendMessages = this.Evaluate(
+            DBSessionMode.Read,
+            ctx => ctx.Configuration.Logics.SentMessage.GetUnsecureQueryable().Select(sm => new { sm.ContextObjectId, sm.From, sm.Message }).ToList());
+
         Assert.True(processedModCount > 0);
 
         Assert.Single(modifications, dto => dto.ModificationType == ModificationType.Save && dto.Identity == employeeIdentity.Id);
@@ -222,6 +226,12 @@ public abstract class EmployeeTests(IServiceProvider rootServiceProvider) : Test
             dto => dto.From == "SampleSystem@luxoft.com"
                    && dto.Message.Message.Contains("Hi there!!!")
                    && dto.TechnicalInformation.ContextObjectId == employeeIdentity.Id);
+
+        Assert.Single(
+            sendMessages,
+            dto => dto.From == "SampleSystem@luxoft.com"
+                   && dto.Message.Contains("Hi there!!!")
+                   && dto.ContextObjectId == employeeIdentity.Id);
     }
 
     [AnchFact]

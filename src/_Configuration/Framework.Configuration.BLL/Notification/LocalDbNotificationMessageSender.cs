@@ -14,7 +14,8 @@ namespace Framework.Configuration.BLL.Notification;
 /// </summary>
 public class LocalDbNotificationMessageSender(
     [DisabledSecurity] IRepository<DomainObjectNotification> domainObjectNotificationRepository,
-    IActualMailMessageProcessor actualMailMessageProcessor)
+    IActualMailMessageProcessor actualMailMessageProcessor,
+    ISentNotificationLogger? sentNotificationLogger = null)
     : IMessageSender<Framework.Notification.Domain.Notification>
 {
     /// <inheritdoc />
@@ -28,5 +29,10 @@ public class LocalDbNotificationMessageSender(
         var dbNotification = new DomainObjectNotification { SerializeData = serializedData, Size = serializedData.Length };
 
         await domainObjectNotificationRepository.SaveAsync(dbNotification, ct);
+
+        if (sentNotificationLogger is not null)
+        {
+            await sentNotificationLogger.LogAsync(notification, ct);
+        }
     }
 }

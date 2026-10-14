@@ -12,16 +12,16 @@ public class SentMessageMap : ConfigurationBaseMap<SentMessage>
     {
         base.Configure(builder);
 
-        builder.Property(x => x.Copy).HasMaxLength(int.MaxValue);
-        builder.Property(x => x.Message).HasMaxLength(int.MaxValue);
-        builder.Property(x => x.ReplyTo).HasMaxLength(int.MaxValue);
-        builder.Property(x => x.Subject).HasMaxLength(1000);
-        builder.Property(x => x.To).HasMaxLength(int.MaxValue);
+        builder.Property(x => x.Copy).HasMaxLength(int.MaxValue).IsRequired();
+        builder.Property(x => x.Message).HasMaxLength(int.MaxValue).IsRequired();
+        builder.Property(x => x.ReplyTo).HasMaxLength(int.MaxValue).IsRequired();
+        builder.Property(x => x.Subject).HasMaxLength(1000).IsRequired();
+        builder.Property(x => x.To).HasMaxLength(int.MaxValue).IsRequired();
 
-        builder.Property(x => x.Comment).HasField("comment").UsePropertyAccessMode(PropertyAccessMode.Field);
+        builder.Property(x => x.Comment).HasField("comment").UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
         builder.Property(x => x.ContextObjectId).HasField("contextObjectId").UsePropertyAccessMode(PropertyAccessMode.Field);
-        builder.Property(x => x.ContextObjectType).HasField("contextObjectType").UsePropertyAccessMode(PropertyAccessMode.Field);
-        builder.Property(x => x.From).HasField("from").UsePropertyAccessMode(PropertyAccessMode.Field);
-        builder.Property(x => x.TemplateName).HasField("templateName").UsePropertyAccessMode(PropertyAccessMode.Field);
+        builder.Property(x => x.ContextObjectType).HasField("contextObjectType").UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
+        builder.Property(x => x.From).HasField("from").UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
+        builder.Property(x => x.TemplateName).HasField("templateName").UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
     }
 }

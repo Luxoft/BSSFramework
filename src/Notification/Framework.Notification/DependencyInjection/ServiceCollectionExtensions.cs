@@ -25,12 +25,14 @@ public static class ServiceCollectionExtensions
         {
             services.AddSingleton<IMessageSender<Notification.Domain.Notification>, NotificationMessageSender>();
 
+            services.AddSingleton<ISentNotificationLogger, RootSentNotificationLogger>();
             services.AddSingleton<IActualMailMessageProcessor, ActualMailMessageProcessor>();
 
             services.AddSingleton<IMailMessageModifier, HtmlMarkerMessageModifier>();
             services.AddSingleton<IMailMessageModifier, SubjectCleanerMailMessageModifier>();
             services.AddSingleton<IMailMessageModifier, RedirectToSupportMailMessageModifier>();
-            services.AddSingleton<IMailMessageModifier, GdprMailMessageModifier>();
+
+            services.AddKeyedSingleton<IMailMessageModifier, GdprMailMessageModifier>(IMailMessageModifier.LoggerKey);
 
             if (!isProd)
             {

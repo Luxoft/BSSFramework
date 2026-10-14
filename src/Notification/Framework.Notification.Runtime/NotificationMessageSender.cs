@@ -9,7 +9,7 @@ namespace Framework.Notification;
 public class NotificationMessageSender(
     IMessageSender<MailMessage> mailMessageSender,
     ILogger<NotificationMessageSender> logger,
-    ISentNotificationLogger? sentNotificationLogger = null) : IMessageSender<Notification.Domain.Notification>
+    ISentNotificationLogger sentNotificationLogger) : IMessageSender<Notification.Domain.Notification>
 {
     public async Task SendAsync(Domain.Notification notification, CancellationToken ct)
     {
@@ -22,9 +22,6 @@ public class NotificationMessageSender(
 
         await mailMessageSender.SendAsync(notification.Message, ct);
 
-        if (sentNotificationLogger is not null)
-        {
-            await sentNotificationLogger.LogAsync(notification, ct);
-        }
+        await sentNotificationLogger.LogAsync(notification, ct);
     }
 }

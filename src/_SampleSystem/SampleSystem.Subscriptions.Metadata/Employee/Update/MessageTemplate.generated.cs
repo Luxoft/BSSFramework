@@ -38,6 +38,9 @@ this.WriteLiteral("\n<h2>Hi there!!!</h2>\n\nMy test employee Name: ");
                   this.Write(this.Current.NameNative);
 
 
+this.WriteLiteral("<!--GDPR-->TestGDPR<!--/GDPR-->");
+
+
         }
     }
 }

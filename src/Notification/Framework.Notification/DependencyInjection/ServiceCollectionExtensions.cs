@@ -25,7 +25,7 @@ public static class ServiceCollectionExtensions
         {
             services.AddSingleton<IMessageSender<Notification.Domain.Notification>, NotificationMessageSender>();
 
-            services.AddSingleton<ISentNotificationLogger, RootSentNotificationLogger>();
+            services.AddScoped<ISentNotificationLogger, RootSentNotificationLogger>();
             services.AddSingleton<IActualMailMessageProcessor, ActualMailMessageProcessor>();
 
             services.AddSingleton<IMailMessageModifier, HtmlMarkerMessageModifier>();

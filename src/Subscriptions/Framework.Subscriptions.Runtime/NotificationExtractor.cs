@@ -51,13 +51,54 @@ public class NotificationExtractor<TDomainObject, TRenderingObject>(
             var authTo = this.GetAuthTo(versions, ct);
 
             var resultTo = this.GetMergeResult(preTo, authTo);
+
+            var actualResultTo = subscription.AllowEmptyListOfRecipients
+                                     ? this.EnsureAtLeastOneTo(resultTo, versions, ct)
+                                     : resultTo;
+
             var copyTo = subscription.GetCopyTo(serviceProvider, versions);
             var replyTo = subscription.GetReplyTo(serviceProvider, versions);
 
-            await foreach (var mailMessage in this.SplitLetters(ReGroup(resultTo, copyTo, replyTo)).Select(this.ToMailMessage).WithCancellation(ct))
+            await foreach (var mailMessage in this.SplitLetters(ReGroup(actualResultTo, copyTo, replyTo)).Select(this.ToMailMessage).WithCancellation(ct))
             {
                 yield return mailMessage;
             }
+        }
+    }
+
+    /// <summary>
+    ///     Гарантирует, что для подписки с <see cref="ISubscription.AllowEmptyListOfRecipients" /> == <c>true</c>
+    ///     поток прямых получателей (To) будет содержать хотя бы один (пустой) элемент, даже если ни один
+    ///     источник прямых получателей (GetTo/роли) не вернул ни одного адресата.
+    /// </summary>
+    /// <remarks>
+    ///     Без этого, если при этом пусты ещё и CopyTo/ReplyTo, письмо вообще не формируется (группировка по
+    ///     DomainObjectVersions просто не получает ключа), и модификаторы письма вроде RedirectToSupportMailMessageModifier,
+    ///     подставляющие адрес поддержки в пустое поле To, не успевают отработать.
+    ///     Признак сознательно применяется только к прямым получателям (To) - к CopyTo/ReplyTo он не относится.
+    /// </remarks>
+    private async IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> EnsureAtLeastOneTo(
+        IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> resultTo,
+        DomainObjectVersions<TDomainObject> versions,
+        [EnumeratorCancellation] CancellationToken ct = default)
+    {
+        await using var enumerator = resultTo.GetAsyncEnumerator(ct);
+
+        if (await enumerator.MoveNextAsync())
+        {
+            yield return enumerator.Current;
+
+            while (await enumerator.MoveNextAsync())
+            {
+                yield return enumerator.Current;
+            }
+        }
+        else
+        {
+            var renderingVersions =
+                await versions.ChangeDomainObjectAsync(domainObject => subscription.ConvertToRenderingObject(serviceProvider, domainObject, ct));
+
+            yield return new NotificationMessageGenerationInfo<TRenderingObject>([], renderingVersions);
         }
     }
 

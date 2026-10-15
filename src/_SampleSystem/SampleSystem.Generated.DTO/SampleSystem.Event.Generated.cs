@@ -129,6 +129,8 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestUnpersistentObjectRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.DateModelSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.DateModelRemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.NoRecipientModelSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.NoRecipientModelRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeCustomEventModelSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeCustomEventModelRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitProgramClassFilterModelSaveEventDTO))]
@@ -18380,6 +18382,126 @@ namespace SampleSystem.Generated.DTO
         public DateModelEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Custom.DateModel domainObject)
         {
             mappingService.MapDateModel(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int? Day
+        {
+            get
+            {
+                return this._day;
+            }
+            set
+            {
+                this._day = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int? Month
+        {
+            get
+            {
+                return this._month;
+            }
+            set
+            {
+                this._month = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Year
+        {
+            get
+            {
+                return this._year;
+            }
+            set
+            {
+                this._year = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Custom.NoRecipientModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class NoRecipientModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.NoRecipientModelEventRichDTO noRecipientModel;
+        
+        public NoRecipientModelSaveEventDTO()
+        {
+        }
+        
+        public NoRecipientModelSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Custom.NoRecipientModel domainObject)
+        {
+            this.noRecipientModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.NoRecipientModelEventRichDTO NoRecipientModel
+        {
+            get
+            {
+                return this.noRecipientModel;
+            }
+            set
+            {
+                this.noRecipientModel = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Custom.NoRecipientModel), "OperationEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class NoRecipientModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        private SampleSystem.Generated.DTO.NoRecipientModelEventRichDTO noRecipientModel;
+        
+        public NoRecipientModelRemoveEventDTO()
+        {
+        }
+        
+        public NoRecipientModelRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Custom.NoRecipientModel domainObject)
+        {
+            this.noRecipientModel = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.NoRecipientModelEventRichDTO NoRecipientModel
+        {
+            get
+            {
+                return this.noRecipientModel;
+            }
+            set
+            {
+                this.noRecipientModel = value;
+            }
+        }
+    }
+    
+    [Framework.BLL.Domain.DTO.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Custom.NoRecipientModel), "RichEventDTO", Framework.BLL.Domain.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class NoRecipientModelEventRichDTO
+    {
+        
+        private int? _day;
+        
+        private int? _month;
+        
+        private int _year;
+        
+        public NoRecipientModelEventRichDTO()
+        {
+        }
+        
+        public NoRecipientModelEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Models.Custom.NoRecipientModel domainObject)
+        {
+            mappingService.MapNoRecipientModel(domainObject, this);
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]

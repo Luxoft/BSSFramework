@@ -33,6 +33,8 @@ public abstract class Subscription<TDomainObject, TRenderingObject, TMessageTemp
 
     public virtual bool SendIndividualLetters { get; } = false;
 
+    public virtual bool AllowEmptyListOfRecipients { get; } = false;
+
     public virtual bool InlineAttachments { get; } = true;
 
     public virtual RecipientMergeType RecipientMergeType { get; } = RecipientMergeType.Union;

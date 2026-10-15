@@ -40,7 +40,7 @@ public abstract class TestEnvironment : BssTestEnvironment
 
         services.AddGeneralDependencyInjection(
                     configuration,
-                    new HostingEnvironment(),
+                    new HostingEnvironment { EnvironmentName = Microsoft.Extensions.Hosting.Environments.Production },
                     s => s.AddExtension(this.BssFrameworkExtension))
 
                 .AddSingleton<SampleSystemInitializer>()

@@ -1,0 +1,3 @@
+namespace SampleSystem.IntegrationTests.Subscriptions_Metadata;
+
+public class NoRecipientsRedirectToSupportTestsImpl(IServiceProvider rootServiceProvider) : NoRecipientsRedirectToSupportTests(rootServiceProvider);

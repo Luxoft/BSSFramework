@@ -7,5 +7,10 @@
 
   "ConnectionStrings": {
     "DefaultConnection": "Data Source=.;Initial Catalog=SampleSystem;User Id=sa;Password=P@ssw0rd;Application Name=SampleSystem;TrustServerCertificate=True;MultipleActiveResultSets=True"
+  },
+  "SmtpSettings": {
+    "DefaultReceiverEmails": [
+      "SampleSystemSupport@luxoft.com"
+    ]
   }
 }

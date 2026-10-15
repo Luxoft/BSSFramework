@@ -76,6 +76,16 @@ public interface ISubscription
     /// </value>
     bool InlineAttachments { get; }
 
+    /// <summary>
+    ///     Получае признак того, что уведомление можно отправлять с пустым списком получателей
+    ///     (например, в случае тестирования).
+    /// </summary>
+    /// <value>
+    ///     <c>true</c> если уведомление можно отправлять с пустым списком получателей;
+    ///     в противном случае, <c>false</c>.
+    /// </value>
+    bool AllowEmptyListOfRecipients { get; }
+
     DomainObjectChangeType DomainObjectChangeType { get; }
 
     /// <summary>

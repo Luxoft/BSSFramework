@@ -2707,6 +2707,10 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetDateModelValidationMap()));
             }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.Models.Custom.NoRecipientModel)))
+            {
+                return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetNoRecipientModelValidationMap()));
+            }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.Models.Event.EmployeeCustomEventModel)))
             {
                 return ((Framework.Validation.Map.IClassValidationMap<TSource>)(this.GetEmployeeCustomEventModelValidationMap()));
@@ -3392,6 +3396,11 @@ namespace SampleSystem.BLL
         protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.MU.ManagementUnit> GetManagementUnitValidationMap()
         {
             return new Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.MU.ManagementUnit>(this.GetManagementUnitProperties);
+        }
+        
+        protected virtual Framework.Validation.Map.IClassValidationMap<SampleSystem.Domain.Models.Custom.NoRecipientModel> GetNoRecipientModelValidationMap()
+        {
+            return Framework.Validation.Map.ClassValidationMap<SampleSystem.Domain.Models.Custom.NoRecipientModel>.Empty;
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.Validators.IPropertyValidator<SampleSystem.Domain.NoSecurityObject, System.DateTime?>> GetNoSecurityObject_CreateDateValidators()

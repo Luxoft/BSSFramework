@@ -84,6 +84,7 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.Models.Change.EmployeeEmailMassChangeModel>(this.GetEmployeeEmailMassChangeModelValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Models.Create._Base.TestUnpersistentObject>(this.GetTestUnpersistentObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Models.Custom.DateModel>(this.GetDateModelValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.Models.Custom.NoRecipientModel>(this.GetNoRecipientModelValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Models.Event.EmployeeCustomEventModel>(this.GetEmployeeCustomEventModelValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel>(this.GetBusinessUnitProgramClassFilterModelValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Models.Filters.EmployeeFilterModel>(this.GetEmployeeFilterModelValidationResult);
@@ -491,6 +492,11 @@ namespace SampleSystem.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetManagementUnitValidationResult(SampleSystem.Domain.MU.ManagementUnit source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetNoRecipientModelValidationResult(SampleSystem.Domain.Models.Custom.NoRecipientModel source, SampleSystem.Domain.Validation.SampleSystemOperationContext operationContext, Framework.Validation.Map.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

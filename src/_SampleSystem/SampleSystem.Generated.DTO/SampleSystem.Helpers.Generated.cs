@@ -2426,6 +2426,11 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.DateModelEventRichDTO(mappingService, domainObject);
         }
         
+        public static SampleSystem.Generated.DTO.NoRecipientModelEventRichDTO ToRichEventDTO(this SampleSystem.Domain.Models.Custom.NoRecipientModel domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return new SampleSystem.Generated.DTO.NoRecipientModelEventRichDTO(mappingService, domainObject);
+        }
+        
         public static SampleSystem.Generated.DTO.EmployeeCustomEventModelEventRichDTO ToRichEventDTO(this SampleSystem.Domain.Models.Event.EmployeeCustomEventModel domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return new SampleSystem.Generated.DTO.EmployeeCustomEventModelEventRichDTO(mappingService, domainObject);
@@ -2947,6 +2952,11 @@ namespace SampleSystem.Generated.DTO
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.DateModelEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Models.Custom.DateModel> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.NoRecipientModelEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Models.Custom.NoRecipientModel> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return Framework.Core.CoreEnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
         }

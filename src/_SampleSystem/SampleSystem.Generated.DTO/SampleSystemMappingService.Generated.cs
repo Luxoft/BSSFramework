@@ -640,6 +640,8 @@ namespace SampleSystem.Generated.DTO
         
         void MapNonPersistentContainer(SampleSystem.Domain.Projections.NonPersistentContainer domainObject, SampleSystem.Generated.DTO.NonPersistentContainerProjectionDTO mappingObject);
         
+        void MapNoRecipientModel(SampleSystem.Domain.Models.Custom.NoRecipientModel domainObject, SampleSystem.Generated.DTO.NoRecipientModelEventRichDTO mappingObject);
+        
         void MapNoSecurityObject(SampleSystem.Domain.NoSecurityObject domainObject, SampleSystem.Generated.DTO.NoSecurityObjectSimpleDTO mappingObject);
         
         void MapNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO mappingObject, SampleSystem.Domain.NoSecurityObject domainObject);
@@ -6406,6 +6408,13 @@ namespace SampleSystem.Generated.DTO
                 mappingObject.TestBU = null;
             }
             mappingObject.TestString = domainObject.TestString;
+        }
+        
+        public virtual void MapNoRecipientModel(SampleSystem.Domain.Models.Custom.NoRecipientModel domainObject, SampleSystem.Generated.DTO.NoRecipientModelEventRichDTO mappingObject)
+        {
+            mappingObject.Day = domainObject.Day;
+            mappingObject.Month = domainObject.Month;
+            mappingObject.Year = domainObject.Year;
         }
         
         public virtual void MapNoSecurityObject(SampleSystem.Domain.NoSecurityObject domainObject, SampleSystem.Generated.DTO.NoSecurityObjectSimpleDTO mappingObject)

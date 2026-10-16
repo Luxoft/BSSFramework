@@ -23,10 +23,11 @@ public static class ServiceCollectionExtensions
     {
         public void AddNotification(IConfiguration configuration, bool isProd)
         {
-            services.AddSingleton<IMessageSender<Notification.Domain.Notification>, NotificationMessageSender>();
-
+            services.AddScoped<IMessageSender<Notification.Domain.Notification>, RootNotificationMessageSender>();
             services.AddScoped<ISentNotificationLogger, RootSentNotificationLogger>();
+
             services.AddSingleton<IActualMailMessageProcessor, ActualMailMessageProcessor>();
+            services.AddSingleton<IActualNotificationProcessor, ActualNotificationProcessor>();
 
             services.AddSingleton<IMailMessageModifier, HtmlMarkerMessageModifier>();
             services.AddSingleton<IMailMessageModifier, SubjectCleanerMailMessageModifier>();
@@ -41,6 +42,7 @@ public static class ServiceCollectionExtensions
             }
 
             services.AddSingleton<ISmtpClientFactory, SmtpClientFactory>();
+            services.AddKeyedSingleton<IMessageSender<Notification.Domain.Notification>, SmtpNotificationMessageSender>(RootNotificationMessageSender.InnerKey);
             services.AddSingleton<IMessageSender<MailMessage>, SmtpMessageSender>();
 
             services.Configure<SmtpSettings>(configuration.GetSection(nameof(SmtpSettings)));

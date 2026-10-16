@@ -8,18 +8,15 @@ namespace Framework.Notification;
 
 public class SmtpMessageSender(
     ISmtpClientFactory smtpClientFactory,
-    IActualMailMessageProcessor actualMailMessageProcessor,
     ILogger<SmtpMessageSender> logger) : IMessageSender<MailMessage>
 {
-    public async Task SendAsync(MailMessage baseMessage, CancellationToken ct)
+    public async Task SendAsync(MailMessage message, CancellationToken ct)
     {
         try
         {
-            var actualMailMessage = actualMailMessageProcessor.GetActualMailMessage(baseMessage);
-
             using var client = smtpClientFactory.CreateSmtpClient();
 
-            await client.SendMailAsync(actualMailMessage, ct);
+            await client.SendMailAsync(message, ct);
         }
         catch (Exception e)
         {

@@ -6,9 +6,12 @@ using Framework.Configuration.BLL.Notification;
 using Framework.Core;
 using Framework.Infrastructure.DALListeners;
 using Framework.Infrastructure.DependencyInjection;
+using Framework.Notification;
 using Framework.Notification.DependencyInjection;
 
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 
 using SampleSystem.BLL;
@@ -70,7 +73,7 @@ public static class SampleSystemFrameworkExtensions
         public IBssFrameworkSetup AddLegacyNotification(IConfiguration configuration, IHostEnvironment hostEnvironment) =>
 
             settings.AddNotification(configuration, hostEnvironment.IsProduction())
-                    .AddServices(sc => sc.ReplaceScoped<IMessageSender<Framework.Notification.Domain.Notification>, LocalDbNotificationMessageSender>());
+                    .AddServices(sc => sc.Replace(ServiceDescriptor.KeyedScoped<IMessageSender<Framework.Notification.Domain.Notification>, LocalDbNotificationMessageSender>(RootNotificationMessageSender.InnerKey)));
 
         public IBssFrameworkSetup AddSupportLegacyServices() =>
             settings.SetDTOMapping<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService, PersistentDomainObjectBase, EventDTOBase>();

@@ -14,6 +14,9 @@ namespace SampleSystem.IntegrationTests._Environment.TestData.Helpers;
 
 public partial class DataManager
 {
+    // Pin 1234 запрещён EmployeeValidator-ом, случайная генерация не должна его выдавать
+    private const int ForbiddenPin = 1234;
+
     public EmployeeIdentityDTO SaveEmployee(
             Guid? id = null,
             string? login = null,
@@ -93,7 +96,7 @@ public partial class DataManager
 
         pin ??= 0.RangeInfinity()
                  .Select(_ => rnd.Next(10000))
-                 .First(rndPin => !this.EvaluateRead(c => c.Logics.Employee.GetUnsecureQueryable().Any(e => e.Pin == rndPin)));
+                 .First(rndPin => rndPin != ForbiddenPin && !this.EvaluateRead(c => c.Logics.Employee.GetUnsecureQueryable().Any(e => e.Pin == rndPin)));
 
         return this.EvaluateWrite(
                                   context =>

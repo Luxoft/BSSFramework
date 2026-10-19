@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SampleSystem.Domain.Employee;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;
+using SampleSystem.Validation;
 
 namespace SampleSystem.IntegrationTests._Environment.TestData.Helpers;
 
@@ -93,7 +94,7 @@ public partial class DataManager
 
         pin ??= 0.RangeInfinity()
                  .Select(_ => rnd.Next(10000))
-                 .First(rndPin => !this.EvaluateRead(c => c.Logics.Employee.GetUnsecureQueryable().Any(e => e.Pin == rndPin)));
+                 .First(rndPin => rndPin != EmployeeValidator.ForbiddenPin && !this.EvaluateRead(c => c.Logics.Employee.GetUnsecureQueryable().Any(e => e.Pin == rndPin)));
 
         return this.EvaluateWrite(
                                   context =>

@@ -22,4 +22,6 @@ public class SmtpSettings
     /// Тестовый ящик, на который будут перенаправлены нотификации тестовых стендов (которые !environment.IsProduction())
     /// </summary>
     public string[] TestEmails { get; set; } = [];
+
+    public int MaxSubjectLength { get; set; } = int.MaxValue;
 }

@@ -1,10 +1,13 @@
 ﻿using System.Net.Mail;
 
 using Framework.Core;
+using Framework.Notification.Settings;
+
+using Microsoft.Extensions.Options;
 
 namespace Framework.Notification.MailMessageModifier;
 
-public class SubjectCleanerMailMessageModifier : IMailMessageModifier
+public class SubjectCleanerMailMessageModifier(IOptions<SmtpSettings> smtpSettings) : IMailMessageModifier
 {
     public void Modify(MailMessage message) => message.Subject = this.Clean(message.Subject);
 
@@ -12,8 +15,7 @@ public class SubjectCleanerMailMessageModifier : IMailMessageModifier
 
     private string CutSubjectOnRight(string subject)
     {
-        var recommendationLimitCharactersInSubject = 78;
-        return subject.SubStringUnsafe(recommendationLimitCharactersInSubject);
+        return subject.SubStringUnsafe(smtpSettings.Value.MaxSubjectLength);
     }
 
     private string ReplaceUnsupportedCharactersForSubject(string subject) => subject.Replace(Environment.NewLine, " ").Replace('\r', ' ').Replace('\n', ' ');

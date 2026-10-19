@@ -1,4 +1,5 @@
 ﻿using SampleSystem.IntegrationTests._Environment.TestData;
+using SampleSystem.Validation;
 
 using ValidationException = Framework.Validation.ValidationException;
 
@@ -25,11 +26,11 @@ public abstract class ValidationTests(IServiceProvider rootServiceProvider) : Te
         // Arrange
 
         // Act
-        var ex = Record.Exception(() => this.DataManager.SaveEmployee(pin: 1234));
+        var ex = Record.Exception(() => this.DataManager.SaveEmployee(pin: EmployeeValidator.ForbiddenPin));
 
         // Assert
         var validationException = Assert.IsType<ValidationException>(ex);
-        Assert.Equal("Employee Pin could not be set as '1234'", validationException.Message);
+        Assert.Equal($"Employee Pin could not be set as '{EmployeeValidator.ForbiddenPin}'", validationException.Message);
     }
 
     [Fact]

@@ -18,8 +18,9 @@ public static class PersistentTargetSystemInfoHelper
             Domain = new(
             [
                 new(typeof(BusinessRole), new("{3823172C-B703-46FD-A82F-B55833EBCD38}")),
+                new(typeof(Principal), new("{fa27cd64-c5e6-4356-9efa-a35b00ff69dd}")),
                 new(typeof(Permission), new("{5d774041-bc69-4841-b64e-a2ee0131e632}")),
-                new(typeof(Principal), new("{fa27cd64-c5e6-4356-9efa-a35b00ff69dd}"))
+                new(typeof(PermissionRestriction), new("{48880DB2-1BC0-4130-BC87-F0E8E0D246CC}")),
             ])
         };
 

@@ -15,6 +15,7 @@ public static class PersistentTargetSystemInfoHelper
             Id = new("{f065289e-4dc5-48c9-be44-a2ee0131e631}"),
             IsMain = false,
             IsRevision = true,
+
             Domain = new(
             [
                 new(typeof(BusinessRole), new("{3823172C-B703-46FD-A82F-B55833EBCD38}")),

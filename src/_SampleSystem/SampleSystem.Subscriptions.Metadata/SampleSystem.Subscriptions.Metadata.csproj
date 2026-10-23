@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Subscriptions\Framework.Subscriptions.Metadata\Framework.Subscriptions.Metadata.csproj" />
     <ProjectReference Include="..\SampleSystem.Domain.Models\SampleSystem.Domain.Models.csproj" />
+    <ProjectReference Include="..\SampleSystem.Security.Abstract\SampleSystem.Security.Abstract.csproj" />
   </ItemGroup>
 
   <ItemGroup>

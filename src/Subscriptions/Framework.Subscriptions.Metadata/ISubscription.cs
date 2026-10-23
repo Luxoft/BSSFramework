@@ -1,5 +1,4 @@
-﻿using System.Collections.Immutable;
-using System.Net.Mail;
+﻿using System.Net.Mail;
 
 using Anch.SecuritySystem;
 using Anch.SecuritySystem.Notification.Domain;
@@ -109,5 +108,5 @@ public interface ISubscription
     /// <value>
     ///     Идентификаторы бизнес-ролей..
     /// </value>
-    ImmutableArray<SecurityRole> SecurityRoles { get; }
+    DomainSecurityRule.RoleBaseSecurityRule? SecurityRule { get; }
 }

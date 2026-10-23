@@ -39,7 +39,7 @@ public abstract class Subscription<TDomainObject, TRenderingObject, TMessageTemp
 
     public virtual RecipientMergeType RecipientMergeType { get; } = RecipientMergeType.Union;
 
-    public virtual ImmutableArray<SecurityRole> SecurityRoles { get; } = [];
+    public virtual DomainSecurityRule.RoleBaseSecurityRule? SecurityRule { get; } = null;
 
     public ValueTask<(string Subject, string Body)> GetMessage(
         IServiceProvider serviceProvider,

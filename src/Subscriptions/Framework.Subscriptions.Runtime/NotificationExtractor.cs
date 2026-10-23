@@ -168,22 +168,16 @@ public class NotificationExtractor<TDomainObject, TRenderingObject>(
         DomainObjectVersions<TDomainObject> versions,
         [EnumeratorCancellation] CancellationToken ct = default)
     {
-        if (subscription.SecurityRoles.Length > 0)
+        if (subscription.SecurityRule != null)
         {
             var notificationFilterGroups = await subscription.GetNotificationFilterGroups(serviceProvider, versions).ToImmutableArrayAsync(ct);
 
-            if (notificationFilterGroups.Length > 0)
-            {
-                var emails = await notificationEmailExtractor.GetEmails(subscription.SecurityRoles, notificationFilterGroups).ToImmutableHashSetAsync(ct);
+            var emails = await notificationEmailExtractor.GetEmails(subscription.SecurityRule, notificationFilterGroups).ToImmutableHashSetAsync(ct);
 
-                if (emails.Count > 0)
-                {
-                    var renderingVersions =
-                        await versions.ChangeDomainObjectAsync(domainObject => subscription.ConvertToRenderingObject(serviceProvider, domainObject, ct));
+            var renderingVersions =
+                await versions.ChangeDomainObjectAsync(domainObject => subscription.ConvertToRenderingObject(serviceProvider, domainObject, ct));
 
-                    yield return new NotificationMessageGenerationInfo<TRenderingObject>(emails, renderingVersions);
-                }
-            }
+            yield return new NotificationMessageGenerationInfo<TRenderingObject>(emails, renderingVersions);
         }
     }
 

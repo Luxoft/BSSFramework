@@ -7,5 +7,5 @@ namespace Framework.Subscriptions;
 
 public interface INotificationEmailExtractor
 {
-    IAsyncEnumerable<string> GetEmails(ImmutableArray<SecurityRole> securityRoles, ImmutableArray<NotificationFilterGroup> notificationFilterGroups);
+    IAsyncEnumerable<string> GetEmails(DomainSecurityRule.RoleBaseSecurityRule securityRule, ImmutableArray<NotificationFilterGroup> notificationFilterGroups);
 }

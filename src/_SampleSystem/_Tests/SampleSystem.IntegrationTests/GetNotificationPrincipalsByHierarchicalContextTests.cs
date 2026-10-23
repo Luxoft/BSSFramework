@@ -1,4 +1,5 @@
-﻿using Anch.SecuritySystem.Notification;
+﻿using Anch.SecuritySystem;
+using Anch.SecuritySystem.Notification;
 using Anch.SecuritySystem.Notification.Domain;
 using Anch.Testing.Xunit;
 
@@ -425,7 +426,7 @@ public abstract class GetNotificationPrincipalsByHierarchicalContextTests(IServi
         this.EvaluateAsync(
             DBSessionMode.Read,
             async context => await context.ServiceProvider.GetRequiredService<INotificationPrincipalExtractor<Framework.Authorization.Domain.Principal>>()
-                                          .GetPrincipalsAsync([SampleSystemSecurityRole.SearchTestBusinessRole], [.. notificationFilterGroups])
+                                          .GetPrincipalsAsync(new DomainSecurityRule.ExpandedRolesSecurityRule([SampleSystemSecurityRole.SearchTestBusinessRole]), [.. notificationFilterGroups])
                                           .Select(p => p.Name)
                                           .ToArrayAsync(ct),
             ct);

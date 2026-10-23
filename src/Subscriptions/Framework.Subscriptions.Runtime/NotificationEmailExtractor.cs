@@ -18,15 +18,15 @@ public class NotificationEmailExtractor<TEmployee>(
     EmployeeInfo<TEmployee> employeeInfo) : INotificationEmailExtractor
     where TEmployee : class
 {
-    public IAsyncEnumerable<string> GetEmails(ImmutableArray<SecurityRole> securityRoles, ImmutableArray<NotificationFilterGroup> notificationFilterGroups) =>
-        this.GetEmailsInternal(securityRoles, notificationFilterGroups);
+    public IAsyncEnumerable<string> GetEmails(DomainSecurityRule.RoleBaseSecurityRule securityRule, ImmutableArray<NotificationFilterGroup> notificationFilterGroups) =>
+        this.GetEmailsInternal(securityRule, notificationFilterGroups);
 
     private async IAsyncEnumerable<string> GetEmailsInternal(
-        ImmutableArray<SecurityRole> securityRoles,
+        DomainSecurityRule.RoleBaseSecurityRule securityRule,
         ImmutableArray<NotificationFilterGroup> notificationFilterGroups,
         [EnumeratorCancellation] CancellationToken ct = default)
     {
-        var principalNames = await notificationPrincipalNameExtractor.GetPrincipalNamesAsync(securityRoles, notificationFilterGroups).ToHashSetAsync(null, ct);
+        var principalNames = await notificationPrincipalNameExtractor.GetPrincipalNamesAsync(securityRule, notificationFilterGroups).ToHashSetAsync(null, ct);
 
         await foreach (var email in queryableSource.GetQueryable<TEmployee>()
                                                    .Where(employeeVisualIdentityInfo.Name.Path.Select(employeeName => principalNames.Contains(employeeName)))

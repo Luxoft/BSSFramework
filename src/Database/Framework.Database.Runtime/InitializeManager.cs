@@ -3,7 +3,7 @@
 public class InitializeManager : IInitializeManager
 {
     /// <summary>
-    /// Флаг, указывающий, что происходит инициализация системы (в этом состояния отключены подписки на все евенты)
+    /// Flag indicating that the system is being initialized (subscriptions to all events are disabled in this state)
     /// </summary>
     public bool IsInitialize { get; private set; }
 

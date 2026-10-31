@@ -36,9 +36,9 @@ public abstract class ProjectionEnvironmentBase : IProjectionEnvironment
     protected virtual PropertyInfo GetIdentityProperty() => this.PersistentDomainObjectBaseType.GetProperty("Id", true)!;
 
     /// <summary>
-    /// Проверка на то, что свойство является Id-ом
+    /// Check that the property is an Id
     /// </summary>
-    /// <param name="property">свойство</param>
+    /// <param name="property">property</param>
     /// <returns></returns>
     public virtual bool IsIdentityProperty(PropertyInfo property)
     {
@@ -48,9 +48,9 @@ public abstract class ProjectionEnvironmentBase : IProjectionEnvironment
     }
 
     /// <summary>
-    /// Проверка на то, что тип является персистентным
+    /// Check that the type is persistent
     /// </summary>
-    /// <param name="type">проверяемый тип</param>
+    /// <param name="type">type to check</param>
     /// <returns></returns>
     public bool IsPersistent(Type type)
     {

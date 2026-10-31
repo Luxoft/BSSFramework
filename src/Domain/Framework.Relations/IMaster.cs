@@ -1,13 +1,13 @@
 ﻿namespace Framework.Relations;
 
 /// <summary>
-/// Описывает мастер-объект в связке мастер-деталь
+/// Describes a master object in a master-detail relationship
 /// </summary>
-/// <typeparam name="TDetail">Тип детали</typeparam>
+/// <typeparam name="TDetail">Detail type</typeparam>
 public interface IMaster<TDetail>
 {
     /// <summary>
-    /// Ссылка на коллекцию деталей
+    /// Reference to the details collection
     /// </summary>
     ICollection<TDetail> Details { get; }
 }

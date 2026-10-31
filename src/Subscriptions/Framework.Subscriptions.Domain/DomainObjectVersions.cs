@@ -11,25 +11,25 @@ public abstract record DomainObjectVersions
 }
 
 /// <summary>
-/// Контейнер версий доменного объекта.
+/// Domain object version container.
 /// </summary>
-/// <typeparam name="TDomainObject">Тип доменного объекта</typeparam>
+/// <typeparam name="TDomainObject">Domain object type</typeparam>
 public record DomainObjectVersions<TDomainObject>(TDomainObject? Previous, TDomainObject? Current) : DomainObjectVersions
     where TDomainObject : class
 {
     /// <summary>
-    /// Тип доменного объекта
+    /// Domain object type
     /// </summary>
     /// <value>
-    /// Тип доменного объекта.
+    /// Domain object type.
     /// </value>
     public override Type DomainObjectType { get; } = typeof(TDomainObject);
 
     /// <summary>
-    /// Возвращает тип изменения, произошедшего с доменным объектом.
+    /// Returns the type of change that occurred to the domain object.
     /// </summary>
     /// <value>
-    /// Тип изменения, произошедшего с доменным объектом.
+    /// Type of change that occurred to the domain object.
     /// </value>
     public override DomainObjectChangeType ChangeType { get; } = GetChangeType(Previous, Current);
 

@@ -38,9 +38,9 @@ public partial class AuthorizationGenerationEnvironment(DatabaseName databaseNam
     public MainControllerConfiguration MainController => field ??= new MainControllerConfiguration(this);
 
     /// <summary>
-    /// Свойства содержащиеся в MappingSettings
-    /// DatabaseName - Берётся из namespace'а сборки, которая сдержит тип PersistentDomainObjectBase (метод GetTargetSystemName);
-    /// Types - Список доменных объектов. Это все типы наследованные от PersistentDomainObjectBase той сборки, в которой содеержится PersistentDomainObjectBase.
+    /// Properties contained in MappingSettings
+    /// DatabaseName - taken from the namespace of the assembly that contains the PersistentDomainObjectBase type (GetTargetSystemName method);
+    /// Types - list of domain objects. These are all types inherited from PersistentDomainObjectBase in the assembly that contains PersistentDomainObjectBase.
     /// </summary>
     public MappingSettings MappingSettings => field ??= this.GetMappingSettings(databaseName, databaseName.ToDefaultAudit());
 

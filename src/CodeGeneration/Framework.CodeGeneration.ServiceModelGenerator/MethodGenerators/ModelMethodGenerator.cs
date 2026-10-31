@@ -8,7 +8,7 @@ using Framework.Database;
 namespace Framework.CodeGeneration.ServiceModelGenerator.MethodGenerators;
 
 /// <summary>
-/// Генератор фасадного метода по модели
+/// Generator of a facade method from a model
 /// </summary>
 /// <typeparam name="TConfiguration"></typeparam>
 /// <typeparam name="TBLLRoleAttribute"></typeparam>

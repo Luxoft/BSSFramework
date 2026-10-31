@@ -1,37 +1,37 @@
 ﻿namespace Framework.Projection;
 
 /// <summary>
-/// Роль свойства проекции
+/// Projection property role
 /// </summary>
 public enum ProjectionPropertyRole
 {
     /// <summary>
-    /// Обычное свойство
+    /// Regular property
     /// </summary>
     Default,
 
     /// <summary>
-    /// Автоматически достраиваемое свойство в цепочке переходов
+    /// Automatically completed property in the transition chain
     /// </summary>
     AutoNode,
 
     /// <summary>
-    /// Последнее автоматически достраиваемое свойство в цепочке переходов
+    /// Last automatically completed property in the transition chain
     /// </summary>
     LastAutoNode,
 
     /// <summary>
-    /// Автоматически достраиваемое Parent-свойство во внутренней коллекции
+    /// Automatically completed Parent property in an inner collection
     /// </summary>
     MissedParent,
 
     /// <summary>
-    /// Автоматически достраиваемое свойства для безопасности
+    /// Automatically completed property for security
     /// </summary>
     Security,
 
     /// <summary>
-    /// Расчётное свойство
+    /// Calculated property
     /// </summary>
     Custom
 }

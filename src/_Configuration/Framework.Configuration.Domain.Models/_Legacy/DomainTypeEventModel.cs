@@ -5,25 +5,25 @@ using Framework.Validation.Attributes;
 namespace Framework.Configuration.Domain;
 
 /// <summary>
-/// Модель для форсирования ручного вызова евента по объекту
+/// Model for forcing a manual event call for an object
 /// </summary>
 public class DomainTypeEventModel : DomainObjectBase
 {
     /// <summary>
-    /// Вызываемая операция
+    /// Called operation
     /// </summary>
     [Required]
     public DomainTypeEventOperation Operation { get; set; } = null!;
 
     /// <summary>
-    /// Идент объекта
+    /// Object ident
     /// </summary>
     [Required]
     [AnyElementsValidator]
     public List<Guid> DomainObjectIdents { get; set; } = [];
 
     /// <summary>
-    /// Ревизия
+    /// Revision
     /// </summary>
     public long? Revision { get; set; }
 }

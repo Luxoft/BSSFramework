@@ -18,7 +18,7 @@ using Framework.Projection;
 namespace Framework.CodeGeneration.BLLCoreGenerator.FileFactory;
 
 /// <summary>
-/// Фабричный класс для BLL-интерфейсов к доменным объектам
+/// Factory class for BLL interfaces to domain objects
 /// </summary>
 /// <typeparam name="TConfiguration"></typeparam>
 public class BLLInterfaceFileFactory<TConfiguration>(TConfiguration configuration, Type domainType) : FileFactory<TConfiguration>(configuration, domainType)

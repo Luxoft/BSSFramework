@@ -8,7 +8,7 @@ using Framework.Projection;
 namespace SampleSystem.CodeGenerate.Configurations.Services.Main;
 
 /// <summary>
-/// Конфигурация для генерации основного фасада SampleSystem-системы (пример с добавлением генерации фасадных методов по ComplexChange-модели)
+/// Configuration for generating the main facade of the SampleSystem system (an example with added generation of facade methods from a ComplexChange model)
 /// </summary>
 public class MainServiceGeneratorConfiguration : MainGeneratorConfigurationBase<ServerGenerationEnvironment>
 {

@@ -1,16 +1,16 @@
 ﻿namespace Framework.CodeGeneration.GeneratePolicy;
 
 /// <summary>
-/// Расширения для работы с политиками генерации
+/// Extensions for working with generation policies
 /// </summary>
 public static class GeneratePolicyExtensions
 {
     /// <summary>
-    /// Исключение из генерации по фильтру
+    /// Exclude from generation by filter
     /// </summary>
     /// <typeparam name="TIdent"></typeparam>
-    /// <param name="policy">Политика генерации</param>
-    /// <param name="filter">Фильтр</param>
+    /// <param name="policy">Generation policy</param>
+    /// <param name="filter">Filter</param>
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Except<TIdent>(this IGeneratePolicy<TIdent> policy, Func<Type, TIdent, bool> filter)
     {
@@ -21,11 +21,11 @@ public static class GeneratePolicyExtensions
     }
 
     /// <summary>
-    /// Исключение из генерации по фильтру
+    /// Exclude from generation by filter
     /// </summary>
     /// <typeparam name="TIdent"></typeparam>
-    /// <param name="policy">Политика генерации</param>
-    /// <param name="filter">Фильтр</param>
+    /// <param name="policy">Generation policy</param>
+    /// <param name="filter">Filter</param>
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Except<TIdent>(this IGeneratePolicy<TIdent> policy, Func<TIdent, bool> filter)
     {
@@ -36,11 +36,11 @@ public static class GeneratePolicyExtensions
     }
 
     /// <summary>
-    /// Исключение из генерации по фильтру
+    /// Exclude from generation by filter
     /// </summary>
     /// <typeparam name="TIdent"></typeparam>
-    /// <param name="policy">Политика генерации</param>
-    /// <param name="filter">Фильтр</param>
+    /// <param name="policy">Generation policy</param>
+    /// <param name="filter">Filter</param>
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Except<TIdent>(this IGeneratePolicy<TIdent> policy, Func<Type, bool> filter)
     {
@@ -51,12 +51,12 @@ public static class GeneratePolicyExtensions
     }
 
     /// <summary>
-    /// Исключение из генерации по доменным типам
+    /// Exclude from generation by domain types
     /// </summary>
     /// <typeparam name="TIdent"></typeparam>
-    /// <param name="policy">Политика генерации</param>
-    /// <param name="firstType">Первый доменный тип</param>
-    /// <param name="otherTypes">Прочие доменные типы</param>
+    /// <param name="policy">Generation policy</param>
+    /// <param name="firstType">First domain type</param>
+    /// <param name="otherTypes">Other domain types</param>
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Except<TIdent>(this IGeneratePolicy<TIdent> policy, Type firstType, params Type[] otherTypes)
     {
@@ -68,12 +68,12 @@ public static class GeneratePolicyExtensions
     }
 
     /// <summary>
-    /// Исключение из генерации по идентификаторам
+    /// Exclude from generation by identifiers
     /// </summary>
     /// <typeparam name="TIdent"></typeparam>
-    /// <param name="policy">Политика генерации</param>
-    /// <param name="firstIdent">Первый идентификатор</param>
-    /// <param name="otherIdents">Прочие идентификаторы</param>
+    /// <param name="policy">Generation policy</param>
+    /// <param name="firstIdent">First identifier</param>
+    /// <param name="otherIdents">Other identifiers</param>
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Except<TIdent>(this IGeneratePolicy<TIdent> policy, TIdent firstIdent, params TIdent[] otherIdents)
     {
@@ -85,11 +85,11 @@ public static class GeneratePolicyExtensions
     }
 
     /// <summary>
-    /// Исключение из генерации по доменным типам
+    /// Exclude from generation by domain types
     /// </summary>
     /// <typeparam name="TIdent"></typeparam>
-    /// <param name="policy">Политика генерации</param>
-    /// <param name="types">Доменные типы</param>
+    /// <param name="policy">Generation policy</param>
+    /// <param name="types">Domain types</param>
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Except<TIdent>(this IGeneratePolicy<TIdent> policy, IEnumerable<Type> types)
     {
@@ -102,11 +102,11 @@ public static class GeneratePolicyExtensions
     }
 
     /// <summary>
-    /// Исключение из генерации по идентификаторам
+    /// Exclude from generation by identifiers
     /// </summary>
     /// <typeparam name="TIdent"></typeparam>
-    /// <param name="policy">Политика генерации</param>
-    /// <param name="idents">Идентификаторы</param>
+    /// <param name="policy">Generation policy</param>
+    /// <param name="idents">Identifiers</param>
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Except<TIdent>(this IGeneratePolicy<TIdent> policy, IEnumerable<TIdent> idents)
     {
@@ -119,11 +119,11 @@ public static class GeneratePolicyExtensions
     }
 
     /// <summary>
-    /// Добавление в генерацию по фильтру
+    /// Add to generation by filter
     /// </summary>
     /// <typeparam name="TIdent"></typeparam>
-    /// <param name="policy">Политика генерации</param>
-    /// <param name="filter">Фильтр</param>
+    /// <param name="policy">Generation policy</param>
+    /// <param name="filter">Filter</param>
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Add<TIdent>(this IGeneratePolicy<TIdent> policy, Func<Type, TIdent, bool> filter)
     {
@@ -134,11 +134,11 @@ public static class GeneratePolicyExtensions
     }
 
     /// <summary>
-    /// Добавление в генерацию по фильтру
+    /// Add to generation by filter
     /// </summary>
     /// <typeparam name="TIdent"></typeparam>
-    /// <param name="policy">Политика генерации</param>
-    /// <param name="filter">Фильтр</param>
+    /// <param name="policy">Generation policy</param>
+    /// <param name="filter">Filter</param>
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Add<TIdent>(this IGeneratePolicy<TIdent> policy, Func<TIdent, bool> filter)
     {
@@ -149,11 +149,11 @@ public static class GeneratePolicyExtensions
     }
 
     /// <summary>
-    /// Добавление в генерацию по фильтру
+    /// Add to generation by filter
     /// </summary>
     /// <typeparam name="TIdent"></typeparam>
-    /// <param name="policy">Политика генерации</param>
-    /// <param name="filter">Фильтр</param>
+    /// <param name="policy">Generation policy</param>
+    /// <param name="filter">Filter</param>
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Add<TIdent>(this IGeneratePolicy<TIdent> policy, Func<Type, bool> filter)
     {
@@ -164,12 +164,12 @@ public static class GeneratePolicyExtensions
     }
 
     /// <summary>
-    /// Добавление в генерацию по доменным типам
+    /// Add to generation by domain types
     /// </summary>
     /// <typeparam name="TIdent"></typeparam>
-    /// <param name="policy">Политика генерации</param>
-    /// <param name="firstType">Первый доменный тип</param>
-    /// <param name="otherTypes">Прочие доменные типы</param>
+    /// <param name="policy">Generation policy</param>
+    /// <param name="firstType">First domain type</param>
+    /// <param name="otherTypes">Other domain types</param>
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Add<TIdent>(this IGeneratePolicy<TIdent> policy, Type firstType, params Type[] otherTypes)
     {
@@ -181,12 +181,12 @@ public static class GeneratePolicyExtensions
     }
 
     /// <summary>
-    /// Добавление в генерацию по идентификаторам
+    /// Add to generation by identifiers
     /// </summary>
     /// <typeparam name="TIdent"></typeparam>
-    /// <param name="policy">Политика генерации</param>
-    /// <param name="firstIdent">Первый идентификатор</param>
-    /// <param name="otherIdents">Прочие идентификаторы</param>
+    /// <param name="policy">Generation policy</param>
+    /// <param name="firstIdent">First identifier</param>
+    /// <param name="otherIdents">Other identifiers</param>
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Add<TIdent>(this IGeneratePolicy<TIdent> policy, TIdent firstIdent, params TIdent[] otherIdents)
     {
@@ -198,11 +198,11 @@ public static class GeneratePolicyExtensions
     }
 
     /// <summary>
-    /// Добавление в генерацию по доменным типам
+    /// Add to generation by domain types
     /// </summary>
     /// <typeparam name="TIdent"></typeparam>
-    /// <param name="policy">Политика генерации</param>
-    /// <param name="types">Доменные типы</param>
+    /// <param name="policy">Generation policy</param>
+    /// <param name="types">Domain types</param>
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Add<TIdent>(this IGeneratePolicy<TIdent> policy, IEnumerable<Type> types)
     {
@@ -215,11 +215,11 @@ public static class GeneratePolicyExtensions
     }
 
     /// <summary>
-    /// Добавление в генерацию по идентификаторам
+    /// Add to generation by identifiers
     /// </summary>
     /// <typeparam name="TIdent"></typeparam>
-    /// <param name="policy">Политика генерации</param>
-    /// <param name="idents">Идентификаторы</param>
+    /// <param name="policy">Generation policy</param>
+    /// <param name="idents">Identifiers</param>
     /// <returns></returns>
     public static IGeneratePolicy<TIdent> Add<TIdent>(this IGeneratePolicy<TIdent> policy, IEnumerable<TIdent> idents)
     {
@@ -232,7 +232,7 @@ public static class GeneratePolicyExtensions
     }
 
     /// <summary>
-    /// Кеширование политики
+    /// Policy caching
     /// </summary>
     /// <typeparam name="TIdent"></typeparam>
     /// <param name="policy"></param>
@@ -245,7 +245,7 @@ public static class GeneratePolicyExtensions
     }
 
     /// <summary>
-    /// Агрегация политик, для выполенения условий требуется выполнение любой политики
+    /// Policy aggregation; any policy must be satisfied to meet the conditions
     /// </summary>
     /// <typeparam name="TIdent"></typeparam>
     /// <param name="policies"></param>
@@ -258,7 +258,7 @@ public static class GeneratePolicyExtensions
     }
 
     /// <summary>
-    /// Агрегация политик, для выполенения условий требуется выполнение любой из 2-х политик
+    /// Policy aggregation; either of the 2 policies must be satisfied to meet the conditions
     /// </summary>
     /// <typeparam name="TIdent"></typeparam>
     /// <param name="policy"></param>
@@ -275,7 +275,7 @@ public static class GeneratePolicyExtensions
     }
 
     /// <summary>
-    /// Агрегация политик, для выполенения условий требуется выполнение всех политики
+    /// Policy aggregation; all policies must be satisfied to meet the conditions
     /// </summary>
     /// <typeparam name="TIdent"></typeparam>
     /// <param name="policies"></param>
@@ -288,7 +288,7 @@ public static class GeneratePolicyExtensions
     }
 
     /// <summary>
-    /// Агрегация политик, для выполенения условий требуется выполнение обеих политик
+    /// Policy aggregation; both policies must be satisfied to meet the conditions
     /// </summary>
     /// <typeparam name="TIdent"></typeparam>
     /// <param name="policy"></param>

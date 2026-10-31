@@ -83,7 +83,7 @@ public class UniqueGroupDatabaseScriptGenerator(params IgnoreLink[] ignore) : Po
 
                                                          var propertyTypeMetadata = typeToMetadataDictionary[propertyMetadata.ElementType];
 
-                                                         // Уникальные индексы, построенные на основе ссылки на свойстве коллекции
+                                                         // Unique indexes built on a reference to a collection property
                                                          var uniqueIndexesFromRef =
                                                                  new UniqueIndexMetadataReader(propertyTypeMetadata.AssemblyMetadata).ReadFromReferenceTo(
                                                                   propertyTypeMetadata);

@@ -1,17 +1,17 @@
 ﻿namespace Framework.Projection;
 
 /// <summary>
-/// Атрибут указывающий, что данный тип является проекцией
+/// Attribute indicating that this type is a projection
 /// </summary>
 [AttributeUsage(AttributeTargets.Class)]
 public class ProjectionAttribute : Attribute
 {
     /// <summary>
-    /// Конструктор
+    /// Constructor
     /// </summary>
-    /// <param name="sourceType">Исходный тип, по которому строилась проекция</param>
-    /// <param name="role">Роль проекции</param>
-    /// <param name="contractType">Контракт, по которому строилась проекция</param>
+    /// <param name="sourceType">Source type the projection was built from</param>
+    /// <param name="role">Projection role</param>
+    /// <param name="contractType">Contract the projection was built from</param>
     public ProjectionAttribute(Type sourceType, ProjectionRole role, Type? contractType = null)
     {
         if (!Enum.IsDefined(typeof(ProjectionRole), role)) throw new ArgumentOutOfRangeException(nameof(role));
@@ -22,17 +22,17 @@ public class ProjectionAttribute : Attribute
     }
 
     /// <summary>
-    /// Исходный тип, по которому строилась проекция
+    /// Source type the projection was built from
     /// </summary>
     public Type SourceType { get; }
 
     /// <summary>
-    /// Роль проекции
+    /// Projection role
     /// </summary>
     public ProjectionRole Role { get; }
 
     /// <summary>
-    /// Контракт, по которому строилась проекция
+    /// Contract the projection was built from
     /// </summary>
     public Type? ContractType { get; }
 }

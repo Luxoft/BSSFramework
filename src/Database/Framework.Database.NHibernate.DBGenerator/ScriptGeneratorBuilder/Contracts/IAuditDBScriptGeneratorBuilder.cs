@@ -11,7 +11,7 @@ public interface IAuditDBScriptGeneratorBuilder : IConfigurable
     IAuditDBScriptGeneratorBuilder WithMappingSettings(List<MappingSettings> mappingSettings);
 
     /// <summary>
-    /// Настройка, предотвращающая удаление временной БД, предназначенной для накатывания схемы.
+    /// Setting that prevents deletion of the temporary DB intended for applying the schema.
     /// </summary>
     /// <returns><see cref="IAuditDBScriptGeneratorBuilder"/>.</returns>
     IAuditDBScriptGeneratorBuilder WithPreserveSchemaDatabase();

@@ -6,7 +6,7 @@ using Microsoft.SqlServer.Management.Smo;
 namespace Framework.Database.NHibernate.DBGenerator.ScriptGenerators.Support;
 
 /// <summary>
-/// Создает объект, который подключен к экземпляру SQL сервера и умеющего создавать базу даных
+/// Creates an object that is connected to an SQL server instance and can create a database
 /// </summary>
 public class SqlDatabaseFactory : ISqlDatabaseFactory
 {
@@ -26,34 +26,34 @@ public class SqlDatabaseFactory : ISqlDatabaseFactory
             this.serverLazy = new Lazy<Server>(createServerFunc);
 
     /// <summary>
-    /// Экземпляр SQL сервера
+    /// SQL server instance
     /// </summary>
     public Server Server => this.serverLazy.Value;
 
     /// <summary>
-    /// Создает стандартное подключение к экземпляру SQL сервера с именем <param name="serverName"></param>.
-    /// Проверка доллинности выполняется с текущими учетными данными Windows
+    /// Creates a standard connection to the SQL server instance named <paramref name="serverName"/>.
+    /// The validity check is performed with the current Windows credentials
     /// </summary>
-    /// <param name="serverName">Имя экземпляра SQL сервера</param>
-    /// <returns>Подключенный к SQL серверу объект</returns>
+    /// <param name="serverName">SQL server instance name</param>
+    /// <returns>Object connected to the SQL server</returns>
     public static SqlDatabaseFactory CreateDefault(string serverName) =>
             new(new SqlConnectionInfo(serverName).Self(z => z.UseIntegratedSecurity = true));
 
     /// <summary>
-    /// Создает стандартное подключение к экземпляру SQL сервера с именем <param name="serverName"></param>.
-    /// Проверка доллинности выполняется с переданными учетными данными
+    /// Creates a standard connection to the SQL server instance named <paramref name="serverName"/>.
+    /// The validity check is performed with the provided credentials
     /// </summary>
-    /// <param name="serverName">Имя экземпляра SQL сервера</param>
-    /// <param name="credentials">Учетная запись используемая для подключения к экземпляру SQL сервера</param>
-    /// <returns>Подключенный к SQL серверу объект</returns>
+    /// <param name="serverName">SQL server instance name</param>
+    /// <param name="credentials">Account used to connect to the SQL server instance</param>
+    /// <returns>Object connected to the SQL server</returns>
     public static SqlDatabaseFactory Create(string serverName, DbUserCredential credentials) =>
             new(new SqlConnectionInfo(serverName, credentials.UserName, credentials.Password));
 
     /// <summary>
-    /// Возвращает базу данных из экземпляра SQL сервера <see cref="ISqlDatabaseFactory.Server"/> с именем <paramref name="databaseName"/>
+    /// Returns a database from the SQL server instance <see cref="ISqlDatabaseFactory.Server"/> with the name <paramref name="databaseName"/>
     /// </summary>
-    /// <param name="databaseName">Имя базы данных</param>
-    /// <returns>База данных если она есть, иначе null</returns>
+    /// <param name="databaseName">Database name</param>
+    /// <returns>The database if it exists, otherwise null</returns>
     public Microsoft.SqlServer.Management.Smo.Database? GetDatabase(DatabaseName databaseName)
     {
         var server = this.serverLazy.Value;
@@ -78,10 +78,10 @@ public class SqlDatabaseFactory : ISqlDatabaseFactory
     }
 
     /// <summary>
-    /// Возвращает базу данных или создает новую если такой нет из экземпляра SQL сервера <see cref="ISqlDatabaseFactory.Server"/> с именем <paramref name="databaseName"/>
+    /// Returns a database or creates a new one if none exists from the SQL server instance <see cref="ISqlDatabaseFactory.Server"/> with the name <paramref name="databaseName"/>
     /// </summary>
-    /// <param name="databaseName">Имя базы данных</param>
-    /// <returns>База данных</returns>
+    /// <param name="databaseName">Database name</param>
+    /// <returns>Database</returns>
     public Microsoft.SqlServer.Management.Smo.Database GetOrCreateDatabase(DatabaseName databaseName)
     {
         var server = this.serverLazy.Value;

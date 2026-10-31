@@ -8,7 +8,7 @@ using Framework.Database.Attributes;
 namespace SampleSystem.Domain;
 
 /// <summary>
-///     Базовый персистентный класс
+///     Base persistent class
 /// </summary>
 public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBase, IVersionObject<long>
 {
@@ -25,7 +25,7 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     private long version;
 
     /// <summary>
-    ///     Дата создания доменного объекта
+    ///     Domain object creation date
     /// </summary>
     public virtual DateTime? CreateDate
     {
@@ -34,7 +34,7 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     }
 
     /// <summary>
-    ///     Логин сотрудника, изменившего доменный объект
+    ///     Login of the employee who modified the domain object
     /// </summary>
     public virtual string? CreatedBy
     {
@@ -43,7 +43,7 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     }
 
     /// <summary>
-    ///     Логин сотрудника, создавшего доменный объект
+    ///     Login of the employee who created the domain object
     /// </summary>
     public virtual DateTime? ModifyDate
     {
@@ -52,7 +52,7 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     }
 
     /// <summary>
-    ///     Дата изменения доменного объекта
+    ///     Domain object modification date
     /// </summary>
     public virtual string? ModifiedBy
     {
@@ -61,7 +61,7 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     }
 
     /// <summary>
-    ///     Признак активности доменного объекта
+    ///     Domain object activity flag
     /// </summary>
     [DefaultValue(true)]
     [CustomSerialization(CustomSerializationMode.ReadOnly)]

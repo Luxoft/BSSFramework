@@ -5,7 +5,7 @@ using Framework.CodeGeneration.FileFactory;
 namespace SampleSystem.CodeGenerate.Configurations.BLLCore;
 
 /// <summary>
-/// Кастомный генератор BLL-core (пример с подменой стандартного BLLInterfaceFileFactory)
+/// Custom BLL-core generator (an example with replacing the standard BLLInterfaceFileFactory)
 /// </summary>
 public class SampleSystemBLLCoreFileGenerator(BLLCoreGeneratorConfiguration configuration) : BLLCoreFileGenerator<BLLCoreGeneratorConfiguration>(configuration)
 {

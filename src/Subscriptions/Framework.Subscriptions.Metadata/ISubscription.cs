@@ -33,15 +33,15 @@ public interface ISubscription<TDomainObject, TRenderingObject> : ISubscription
 }
 
 /// <summary>
-///     Определяет интерфейс экземпляра метаданных Code first подписки.
+///     Defines the interface of a Code first subscription metadata instance.
 /// </summary>
 public interface ISubscription
 {
     /// <summary>
-    ///     Получает тип доменного объекта подписки.
+    ///     Gets the domain object type of the subscription.
     /// </summary>
     /// <value>
-    ///     Тип доменного объекта.
+    ///     Domain object type.
     /// </value>
     Type DomainObjectType { get; }
 
@@ -55,58 +55,58 @@ public interface ISubscription
     MailAddress? Sender { get; }
 
     /// <summary>
-    ///     Получает признак необходимости отправки адресату(ам) индивидуального или консолидированного письма
+    ///     Gets a flag indicating whether an individual or a consolidated letter is sent to the addressee(s)
     /// </summary>
     /// <value>
-    ///     <c>true</c> если необходимо отправлять индивидуальные письма; в противном случае, <c>false</c>.
+    ///     <c>true</c> if individual letters must be sent; otherwise, <c>false</c>.
     /// </value>
     /// <remarks>
-    ///     При <c>true</c> вместо одного письма на всех адресатов формируется отдельное письмо на каждого
-    ///     адресата доставки (To и Copy) с сохранением его роли. Адресаты ReplyTo не являются адресатами доставки
-    ///     и добавляются в каждое сформированное письмо.
+    ///     With <c>true</c>, instead of one letter for all addressees, a separate letter is formed for each
+    ///     a delivery addressee (To and Copy), keeping its role. ReplyTo addressees are not delivery addressees
+    ///     and are added to every formed letter.
     /// </remarks>
     bool SendIndividualLetters { get; }
 
     /// <summary>
-    ///     Получает признак того, что к письму необходимо прикрепить вложения из шаблона.
+    ///     Gets a flag indicating that attachments from the template must be attached to the letter.
     /// </summary>
     /// <value>
-    ///     <c>true</c> если необходимо прикрепить вложения; в противном случае, <c>false</c>.
+    ///     <c>true</c> if attachments must be attached; otherwise, <c>false</c>.
     /// </value>
     bool InlineAttachments { get; }
 
     /// <summary>
-    ///     Получае признак того, что уведомление можно отправлять с пустым списком получателей
-    ///     (например, в случае тестирования).
+    ///     Gets a flag indicating that the notification can be sent with an empty list of recipients
+    ///     (for example, when testing).
     /// </summary>
     /// <value>
-    ///     <c>true</c> если уведомление можно отправлять с пустым списком получателей;
-    ///     в противном случае, <c>false</c>.
+    ///     <c>true</c> if the notification can be sent with an empty list of recipients;
+    ///     otherwise, <c>false</c>.
     /// </value>
     bool AllowEmptyListOfRecipients { get; }
 
     DomainObjectChangeType DomainObjectChangeType { get; }
 
     /// <summary>
-    ///     Получает способ комбинации адресатов рассылки по SubBusinessRoles и Generation.
+    ///     Gets the way recipients are combined by SubBusinessRoles and Generation.
     /// </summary>
     /// <value>
-    ///     Способ комбинации адресатов рассылки по SubBusinessRoles и Generation..
+    ///     The way recipients are combined by SubBusinessRoles and Generation..
     /// </value>
     RecipientMergeType RecipientMergeType { get; }
 
     /// <summary>
-    ///     Получает тип расширения прав по дереву.
+    ///     Gets the tree permission extension type.
     /// </summary>
     /// <value>
-    ///     Тип расширения прав по дереву.
+    ///     Tree permission extension type.
     /// </value>
 
     /// <summary>
-    ///     Получает идентификаторы бизнес-ролей.
+    ///     Gets business role identifiers.
     /// </summary>
     /// <value>
-    ///     Идентификаторы бизнес-ролей..
+    ///     Business role identifiers..
     /// </value>
     DomainSecurityRule.RoleBaseSecurityRule? SecurityRule { get; }
 }

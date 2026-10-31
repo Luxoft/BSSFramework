@@ -20,20 +20,20 @@ public interface IBLLGeneratorConfiguration : ICodeGeneratorConfiguration, ICode
     ReadOnlyCollection<Type> ValidationTypes { get; }
 
     /// <summary>
-    /// Добавление глобальных валидаторов для классов
+    /// Add global validators for classes
     /// </summary>
     bool GenerateExternalClassValidators { get; }
 
     /// <summary>
-    /// Добавление глобальных валидаторов для свойств
+    /// Add global validators for properties
     /// </summary>
     bool GenerateExternalPropertyValidators { get; }
 
 
     /// <summary>
-    /// Валидация виртуальных свойств (свойства, без одноимённого поля). По умолчанию включена только для свойств с хотя бы одним явно указаным атрибутом валидации "PropertyValidatorAttribute" или "IRestrictionAttribute"
+    /// Validation of virtual properties (properties without a field of the same name). By default enabled only for properties with at least one explicitly specified validation attribute "PropertyValidatorAttribute" or "IRestrictionAttribute"
     /// </summary>
-    /// <param name="property">Cвойство</param>
+    /// <param name="property">Property</param>
     /// <returns></returns>
     bool AllowVirtualValidation(PropertyInfo property);
 
@@ -54,16 +54,16 @@ public interface IBLLGeneratorConfiguration : ICodeGeneratorConfiguration, ICode
     bool GenerateBllConstructor(Type domainType);
 
     /// <summary>
-    /// Схлопывание пустого списка валидаторов класса
+    /// Collapsing an empty list of class validators
     /// </summary>
-    /// <param name="domainType">Доменный тип</param>
+    /// <param name="domainType">Domain type</param>
     /// <returns></returns>
     bool SquashClassValidators(Type domainType);
 
     /// <summary>
-    /// Схлопывание пустого списка валидаторов свойства
+    /// Collapsing an empty list of property validators
     /// </summary>
-    /// <param name="property">Свойство</param>
+    /// <param name="property">Property</param>
     /// <returns></returns>
     bool SquashPropertyValidators(PropertyInfo property);
 }

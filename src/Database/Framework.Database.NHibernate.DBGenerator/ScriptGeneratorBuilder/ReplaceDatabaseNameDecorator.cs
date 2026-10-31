@@ -4,7 +4,7 @@ using Framework.Database.NHibernate.DBGenerator.ScriptGenerators.Support;
 namespace Framework.Database.NHibernate.DBGenerator.ScriptGeneratorBuilder;
 
 /// <summary>
-/// Генерирует коллекцию скриптов для модификации основной базы данных с измененым именем, таких, чтобы она соответсвовала доменной медели
+/// Generates a collection of scripts to modify the main database with a changed name so that it matches the domain model
 /// </summary>
 internal class ReplaceDatabaseNameDecorator(Func<IDatabaseScriptGeneratorContext, DatabaseName> nextDatabaseNameFunc, IDatabaseScriptGenerator source)
     : IDatabaseScriptGenerator
@@ -13,9 +13,9 @@ internal class ReplaceDatabaseNameDecorator(Func<IDatabaseScriptGeneratorContext
     private readonly Func<IDatabaseScriptGeneratorContext, DatabaseName> nextDatabaseNameFunc = nextDatabaseNameFunc ?? throw new ArgumentNullException(nameof(nextDatabaseNameFunc));
 
     /// <summary>
-    /// Генерирует sql скрипт, который создает и обновляет таблицы и добавляет или удаляет колонки в этих таблицах, а так же создает индексы в этих таблицах
+    /// Generates an sql script that creates and updates tables and adds or removes columns in those tables, and also creates indexes in those tables
     /// </summary>
-    /// <param name="context">Экземпляр sql сервера и доменная модель</param>
-    /// <returns>Скрипт модификации</returns>
+    /// <param name="context">SQL server instance and the domain model</param>
+    /// <returns>Modification script</returns>
     public IDatabaseScriptResult GenerateScript(IDatabaseScriptGeneratorContext context) => this.source.GenerateScript(new DatabaseScriptGeneratorContext(this.nextDatabaseNameFunc(context), context.SqlDatabaseFactory, context.AssemblyMetadata));
 }

@@ -27,7 +27,7 @@ public class SqlExceptionConverter : ISQLExceptionConverter
     /// <param name="sqlException">The exception to be handled. </param>
     /// <param name="message">An optional message </param>
     /// <param name="sql">Optionally, the sql being performed when the exception occurred. </param>
-    /// <param name="create"> </param>
+    /// <param name="unTypedObjectInfo">Optional untyped info (name and value) of the domain object the operation was performed on</param>
     /// <returns> The converted exception; should <b>never</b> be null. </returns>
     public static ADOException HandledNonSpecificException(Exception sqlException, string message, string sql,
                                                            ValueTuple<string, object> unTypedObjectInfo) =>

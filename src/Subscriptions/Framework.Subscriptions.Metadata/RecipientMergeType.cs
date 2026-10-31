@@ -1,22 +1,22 @@
 ﻿namespace Framework.Subscriptions.Metadata;
 
 /// <summary>
-/// Перечисление принципов комбинации адресатов рассылки
+/// Enumeration of principles for combining mailing recipients
 /// </summary>
 /// <remarks>
-/// Recipients Mode объясняет, как система должна получить рецепиентов в случае, когда оба типа заполнены
+/// Recipients Mode explains how the system should obtain recipients when both types are filled
 /// </remarks>
 public enum RecipientMergeType
 {
-    /// <summary>Объединение списков</summary>
+    /// <summary>Union of the lists</summary>
     Union,
 
-    /// <summary>Общее пересечение списков</summary>
+    /// <summary>Common intersection of the lists</summary>
     Intersect,
 
-    /// <summary>Левый список за исключением получателей, указанных в правом списке.</summary>
+    /// <summary>The left list excluding the recipients specified in the right list.</summary>
     LeftExceptRight,
 
-    /// <summary>Правый список за исключением получателей, указанных в левом списке.</summary>
+    /// <summary>The right list excluding the recipients specified in the left list.</summary>
     RightExceptLeft
 }

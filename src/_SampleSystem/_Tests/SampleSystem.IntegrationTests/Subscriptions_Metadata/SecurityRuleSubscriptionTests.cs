@@ -22,7 +22,7 @@ public abstract class SecurityRuleSubscriptionTests(IServiceProvider rootService
     private const string MissedEmail = "securityRuleMissed@luxoft.com";
 
     /// <summary>
-    /// Получателями подписки с SecurityRule становятся сотрудники, чьи принципалы имеют роль на контекст из GetNotificationFilterGroups
+    /// Recipients of a subscription with SecurityRule are employees whose principals have a role on a context from GetNotificationFilterGroups
     /// </summary>
     [AnchFact]
     public async Task SecurityRuleSubscription_PrincipalWithRoleOnFilterContext_ReceivesNotification(CancellationToken ct)
@@ -53,7 +53,7 @@ public abstract class SecurityRuleSubscriptionTests(IServiceProvider rootService
     }
 
     /// <summary>
-    /// Принципал с ролью на другой контекст (не из GetNotificationFilterGroups) не получает уведомление
+    /// A principal with a role on another context (not from GetNotificationFilterGroups) does not receive the notification
     /// </summary>
     [AnchFact]
     public async Task SecurityRuleSubscription_PrincipalWithRoleOnOtherContext_NotReceivesNotification(CancellationToken ct)

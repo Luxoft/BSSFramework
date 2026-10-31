@@ -12,7 +12,7 @@ namespace Framework.BLL.Validation;
 
 /// <summary>
 /// /// <summary>
-/// Класс для проверки уникальности полей доменного объекта через запрос к БД.
+/// Class for checking uniqueness of domain object fields by querying the database.
 /// </summary>
 /// <seealso cref="IDynamicClassValidator" />
 /// </summary>

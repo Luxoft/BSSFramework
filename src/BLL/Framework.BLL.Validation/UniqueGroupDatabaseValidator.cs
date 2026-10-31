@@ -13,21 +13,21 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Framework.BLL.Validation;
 
 /// <summary>
-/// Класс для проверки уникальности полей доменного объекта через запрос к БД.
+/// Class for checking uniqueness of domain object fields by querying the database.
 /// </summary>
 /// <seealso cref="IDynamicClassValidator" />
 public class UniqueGroupDatabaseValidator(string? groupKey) : IDynamicClassValidator
 {
     /// <summary>
-    /// Возвращает экземпляр валидатора..
+    /// Returns the validator instance..
     /// </summary>
-    /// <param name="domainObjectType">Тип доменного объекта.</param>
-    /// <param name="serviceProvider">Данные, необходимые для создания валидатора.</param>
-    /// <returns>Экземпляр <see cref="IClassValidator"/>.</returns>
-    /// <exception cref="ArgumentNullException">Аргумент
+    /// <param name="domainObjectType">Domain object type.</param>
+    /// <param name="serviceProvider">Data required to create the validator.</param>
+    /// <returns>Instance of <see cref="IClassValidator"/>.</returns>
+    /// <exception cref="ArgumentNullException">Argument
     /// <paramref name="domainObjectType"/>
-    /// или
-    /// <paramref name="serviceProvider"/> равен null.
+    /// or
+    /// <paramref name="serviceProvider"/> is null.
     /// </exception>
     public IClassValidator GetValidator(Type domainObjectType, IServiceProvider serviceProvider)
     {

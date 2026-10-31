@@ -11,7 +11,7 @@ using SampleSystem.CodeGenerate.Configurations.Services;
 namespace SampleSystem.CodeGenerate.Configurations.BLLCore;
 
 /// <summary>
-/// Кастомный фабричный класс для BLL-интерфейсов к доменным объектам (пример расширения с добавленеим обработки ComplexChangeModelType)
+/// Custom factory class for BLL interfaces to domain objects (an example of extension with added ComplexChangeModelType handling)
 /// </summary>
 public class SampleSystemBLLInterfaceFileFactory(BLLCoreGeneratorConfiguration configuration, Type domainType)
     : BLLInterfaceFileFactory<BLLCoreGeneratorConfiguration>(configuration, domainType)

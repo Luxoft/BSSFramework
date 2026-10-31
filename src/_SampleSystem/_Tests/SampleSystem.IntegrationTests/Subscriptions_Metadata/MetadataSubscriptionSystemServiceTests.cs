@@ -79,9 +79,9 @@ public abstract class MetadataSubscriptionSystemServiceTests(IServiceProvider ro
     }
 
     /// <summary>
-    /// IADFRAME-1525 Сделать пример использования аттачей в CodeFirst подписках
+    /// IADFRAME-1525 Make an example of using attachments in CodeFirst subscriptions
     /// </summary>
-    /// <remarks>Создать тест: подписка с аттачем, который добавляется в нотификацию</remarks>
+    /// <remarks>Create a test: a subscription with an attachment that is added to the notification</remarks>
     [AnchFact]
     public async Task AttachTest(CancellationToken ct)
     {
@@ -103,9 +103,9 @@ public abstract class MetadataSubscriptionSystemServiceTests(IServiceProvider ro
     }
 
     /// <summary>
-    /// IADFRAME-1525 Сделать пример использования аттачей в CodeFirst подписках
+    /// IADFRAME-1525 Make an example of using attachments in CodeFirst subscriptions
     /// </summary>
-    /// <remarks>Создать тест: подписка с аттачем который провернут через шаблонизатор (TemplateEvaluatorFactory) просто текст, который добавляется в нотификацию</remarks>
+    /// <remarks>Create a test: a subscription with an attachment passed through the templater (TemplateEvaluatorFactory) - plain text that is added to the notification</remarks>
     [AnchFact]
     public async Task AttachTemplateEvaluatorTest(CancellationToken ct)
     {
@@ -126,9 +126,9 @@ public abstract class MetadataSubscriptionSystemServiceTests(IServiceProvider ro
     }
 
     /// <summary>
-    /// IADFRAME-1525 Сделать пример использования аттачей в CodeFirst подписках
+    /// IADFRAME-1525 Make an example of using attachments in CodeFirst subscriptions
     /// </summary>
-    /// <remarks>Создать тест: подписка с inline аттачем (ContentId), который добавляется в нотификацию</remarks>
+    /// <remarks>Create a test: a subscription with an inline attachment (ContentId) that is added to the notification</remarks>
     [AnchFact]
     public async Task AttachInlinedTest(CancellationToken ct)
     {

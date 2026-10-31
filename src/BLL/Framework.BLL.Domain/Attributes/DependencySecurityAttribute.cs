@@ -3,16 +3,16 @@
 namespace Framework.BLL.Domain.Attributes;
 
 /// <summary>
-/// Атрибут указывающий, что безопасность используется из другого типа
+/// Attribute indicating that security is used from another type
 /// </summary>
 [AttributeUsage(AttributeTargets.Class)]
 public class DependencySecurityAttribute : Attribute, IPathAttribute
 {
     /// <summary>
-    /// Конструктор атрибута
+    /// Attribute constructor
     /// </summary>
-    /// <param name="sourceType">Тип исходного объекта, в котором определена безопасность</param>
-    /// <param name="path">Путь до исходного объекта, в котором определена безопасность, если пусть оставить пустым, то сравнение будет нетипизированно производиться по Id-шникам (актуально для проекций и вьюх)</param>
+    /// <param name="sourceType">Type of the source object in which security is defined</param>
+    /// <param name="path">Path to the source object in which security is defined; if left empty, comparison will be performed untyped by Ids (relevant for projections and views)</param>
     public DependencySecurityAttribute(Type sourceType, string path = "")
     {
         this.SourceType = sourceType;
@@ -21,17 +21,17 @@ public class DependencySecurityAttribute : Attribute, IPathAttribute
 
 
     /// <summary>
-    /// Тип исходного объекта, в котором определена безопасность
+    /// Type of the source object in which security is defined
     /// </summary>
     public Type SourceType { get; }
 
     /// <summary>
-    /// Путь до исходного объекта, в котором определена безопасность
+    /// Path to the source object in which security is defined
     /// </summary>
     public string Path { get; }
 
     /// <summary>
-    /// Является ли наследуемое секурити нетизированным (для проекций и вьюх)
+    /// Whether the inherited security is untyped (for projections and views)
     /// </summary>
     public bool IsUntyped => this.Path == string.Empty;
 }

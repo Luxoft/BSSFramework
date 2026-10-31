@@ -3,11 +3,11 @@
 namespace Framework.Validation.Validators.Deep;
 
 /// <summary>
-/// Внутренняя валидация коллекции
+/// Internal collection validation
 /// </summary>
-/// <typeparam name="TSource">Тип текущего объекта</typeparam>
-/// <typeparam name="TProperty">Тип свойства</typeparam>
-/// <typeparam name="TElement">Тип элемента свойства</typeparam>
+/// <typeparam name="TSource">Current object type</typeparam>
+/// <typeparam name="TProperty">Property type</typeparam>
+/// <typeparam name="TElement">Property element type</typeparam>
 public class DeepCollectionValidator<TSource, TProperty, TElement> : IPropertyValidator<TSource, TProperty>
         where TProperty : IEnumerable<TElement>
 {

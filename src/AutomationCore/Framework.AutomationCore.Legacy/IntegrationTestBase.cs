@@ -37,13 +37,13 @@ public abstract class IntegrationTestBase<TBLLContext>(IServiceProvider rootServ
     protected IConfigurationBLLContext GetConfigurationBLLContext(TBLLContext context) => context.ServiceProvider.GetRequiredService<IConfigurationBLLContext>();
 
     /// <summary>
-    /// Отчистка списка нотифицаций
+    /// Cleanup of the notification list
     /// </summary>
     public virtual void ClearNotifications() =>
         this.EvaluateWrite(context => this.GetConfigurationBLLContext(context).Logics.DomainObjectNotification.Pipe(bll => bll.GetFullList().ForEach(bll.Remove)));
 
     /// <summary>
-    /// Получение списка модификаций
+    /// Getting the list of modifications
     /// </summary>
     /// <returns></returns>
     protected virtual List<ObjectModificationInfoDTO<Guid>> GetModifications() =>
@@ -69,13 +69,13 @@ public abstract class IntegrationTestBase<TBLLContext>(IServiceProvider rootServ
     }
 
     /// <summary>
-    /// Отчистка списка модификаций
+    /// Cleanup of the modification list
     /// </summary>
     protected virtual void ClearModifications() =>
         this.EvaluateWrite(context => this.GetConfigurationBLLContext(context).Logics.DomainObjectModification.Pipe(bll => bll.GetFullList().ForEach(bll.Remove)));
 
     /// <summary>
-    /// Отчистка интеграционных евентов
+    /// Cleanup of integration events
     /// </summary>
     public virtual void ClearIntegrationEvents()
     {
@@ -94,7 +94,7 @@ public abstract class IntegrationTestBase<TBLLContext>(IServiceProvider rootServ
 
 
     /// <summary>
-    /// Получение интегационных евентов
+    /// Getting integration events
     /// </summary>
     /// <returns></returns>
     protected virtual List<T> GetIntegrationEvents<T>(string queueTag = "default")
@@ -107,7 +107,7 @@ public abstract class IntegrationTestBase<TBLLContext>(IServiceProvider rootServ
     }
 
     /// <summary>
-    /// Получение списка нотификаций
+    /// Getting the list of notifications
     /// </summary>
     /// <returns></returns>
     protected virtual List<NotificationEventDTO> GetNotifications() =>

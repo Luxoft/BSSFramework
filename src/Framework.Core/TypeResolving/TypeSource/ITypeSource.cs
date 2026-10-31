@@ -4,12 +4,12 @@
 namespace Framework.Core.TypeResolving;
 
 /// <summary>
-/// Источник типов
+/// Type source
 /// </summary>
 public interface ITypeSource
 {
     /// <summary>
-    /// Получение типов
+    /// Getting types
     /// </summary>
     /// <returns></returns>
     ImmutableHashSet<Type> Types { get; }

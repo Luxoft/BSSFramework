@@ -344,6 +344,10 @@ public partial class BusinessUnit :
 
     public static bool operator !=(BusinessUnit? left, IUnit<BusinessUnit>? right) => !Equals(left, right);
 
+    public override bool Equals(object? obj) => base.Equals(obj);
+
+    public override int GetHashCode() => base.GetHashCode();
+
     public override string ToString() => $"{base.ToString()}";
 
     public virtual BusinessUnit? GetParentByTypeIds(IEnumerable<Guid> businessUnitTypesIds) =>

@@ -51,10 +51,10 @@ public static class CorePropertyInfoExtensions
     }
 
     /// <summary>
-    /// Получение приватного филда по свойству
+    /// Getting a private field by property
     /// </summary>
-    /// <param name="propertyInfo">Свойство</param>
-    /// <param name="preFieldName">Кастомное имя филда</param>
+    /// <param name="propertyInfo">Property</param>
+    /// <param name="preFieldName">Custom field name</param>
     /// <returns></returns>
     public static FieldInfo? GetPrivateField(this PropertyInfo propertyInfo, string? preFieldName = null)
     {

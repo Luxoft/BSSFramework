@@ -109,7 +109,7 @@ public class ScriptEngineService
         {
             var errorTextBuilder = compileResult.Errors.Cast<CompilerError>().Aggregate(new StringBuilder(), (builder, error) => builder.Append(error.ErrorNumber).Self(z => z.AppendLine(error.ErrorText)));
             var fullError = new[] { errorTextBuilder.ToString(), source }.Join(Environment.NewLine);
-            var exception = new ParseException("Ошибки компиляции. \n" + fullError, 0);
+            var exception = new ParseException("Compilation errors. \n" + fullError, 0);
             throw exception;
         }
         var type = compileResult.CompiledAssembly.GetType($"{namespaceName}.{typeName}");

@@ -4,7 +4,7 @@ using Framework.Validation.Validators.DynamicClass;
 namespace Framework.Validation.Attributes.Available;
 
 /// <summary>
-/// Ограничение максимальной длинны строк, применяемое для всех строковых свойств, на которых нет явного аттрибута ограничения Framework.Restriction.MaxLengthAttribute
+/// Maximum string length limit applied to all string properties that have no explicit Framework.Restriction.MaxLengthAttribute restriction attribute
 /// </summary>
 public class DefaultStringMaxLengthValidatorAttribute : ClassValidatorAttribute
 {

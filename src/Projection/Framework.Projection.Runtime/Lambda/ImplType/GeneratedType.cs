@@ -73,7 +73,7 @@ internal class GeneratedType : BaseTypeImpl, IWrappingObject
     public override Type UnderlyingSystemType => this.isPersistent ? this.environment.PersistentDomainObjectBaseType : this.environment.DomainObjectBaseType;
 
     /// <summary>
-    /// Флаг указания, что проекция наследуется от базовой секурной проекции.
+    /// Flag indicating that the projection inherits from a base secure projection.
     /// </summary>
     private bool HasBaseSecurityType => this.Projection.Role == ProjectionRole.Default
                                         && !this.environment.UseDependencySecurity

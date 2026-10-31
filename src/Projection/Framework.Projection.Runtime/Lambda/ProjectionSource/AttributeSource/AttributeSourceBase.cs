@@ -3,17 +3,17 @@
 namespace Framework.Projection.Lambda.ProjectionSource.AttributeSource;
 
 /// <summary>
-/// Источник атрибутов
+/// Attribute source
 /// </summary>
-/// <typeparam name="TProjectionValue">Проекционный тип, содержащий атрибуты</typeparam>
+/// <typeparam name="TProjectionValue">Projection type that contains attributes</typeparam>
 public abstract class AttributeSourceBase<TProjectionValue> : IAttributeSource
     where TProjectionValue : class, IProjectionAttributeProvider
 {
     /// <summary>
-    /// Конструктор
+    /// Constructor
     /// </summary>
-    /// <param name="environment">Окружение</param>
-    /// <param name="projectionValue">Проекционный объект</param>
+    /// <param name="environment">Environment</param>
+    /// <param name="projectionValue">Projection object</param>
     protected AttributeSourceBase(ProjectionLambdaEnvironment environment, TProjectionValue projectionValue)
     {
         this.Environment = environment ?? throw new ArgumentNullException(nameof(environment));
@@ -21,13 +21,13 @@ public abstract class AttributeSourceBase<TProjectionValue> : IAttributeSource
     }
 
     /// <summary>
-    /// Окружение
+    /// Environment
     /// </summary>
     public ProjectionLambdaEnvironment Environment { get; }
 
 
     /// <summary>
-    /// Проекционный объект
+    /// Projection object
     /// </summary>
     public TProjectionValue ProjectionValue { get; }
 
@@ -40,7 +40,7 @@ public abstract class AttributeSourceBase<TProjectionValue> : IAttributeSource
     }
 
     /// <summary>
-    /// Получение дефолтовых атрибутов объекта
+    /// Getting default object attributes
     /// </summary>
     /// <returns></returns>
     protected abstract IEnumerable<Attribute> GetDefaultAttributes();

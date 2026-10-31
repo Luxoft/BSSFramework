@@ -5,10 +5,10 @@ using Framework.Validation.Map;
 namespace Framework.Validation.Validators.Deep;
 
 /// <summary>
-/// Внутренняя валидация
+/// Internal validation
 /// </summary>
-/// <typeparam name="TSource">Тип текущего объекта</typeparam>
-/// <typeparam name="TProperty">Тип свойства</typeparam>
+/// <typeparam name="TSource">Current object type</typeparam>
+/// <typeparam name="TProperty">Property type</typeparam>
 public class DeepSingleValidator<TSource, TProperty> : IPropertyValidator<TSource, TProperty>
 {
     /// <inheritdoc />

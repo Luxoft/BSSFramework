@@ -20,7 +20,7 @@ public class BLLCoreGeneratorConfiguration(ServerGenerationEnvironment environme
     public override Type MassChangeModelType { get; } = typeof(DomainObjectMassChangeModel<>);
 
     /// <summary>
-    /// Тип базовой произвольной модели для изменений объектов (пример, для которого будет расширена генерация)
+    /// Type of the base arbitrary model for object changes (an example for which generation will be extended)
     /// </summary>
     public Type ComplexChangeModelType { get; } = typeof(DomainObjectComplexChangeModel<>);
 

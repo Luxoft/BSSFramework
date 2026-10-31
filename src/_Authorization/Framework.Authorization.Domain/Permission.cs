@@ -6,10 +6,10 @@ using Framework.Restriction;
 namespace Framework.Authorization.Domain;
 
 /// <summary>
-/// Право доступа принципала на выполнение определенных действий в системе
+/// Principal's right to perform certain actions in the system
 /// </summary>
 /// <remarks>
-/// Пермиссии могут выдаваться в рамках контекстов
+/// Permissions can be granted within contexts
 /// </remarks>
 /// <seealso cref="SecurityContextType"/>
 [System.Diagnostics.DebuggerDisplay("Principal={Principal.Name}, Role={Role.Name}")]
@@ -44,9 +44,9 @@ public class Permission : AuditPersistentDomainObjectBase,
     }
 
     /// <summary>
-    /// Конструктор создает пермиссию с ссылкой на принципала
+    /// The constructor creates a permission with a reference to a principal
     /// </summary>
-    /// <param name="principal">принципал</param>
+    /// <param name="principal">principal</param>
     public Permission(Principal principal)
     {
         this.principal = principal ?? throw new ArgumentNullException(nameof(principal));
@@ -54,10 +54,10 @@ public class Permission : AuditPersistentDomainObjectBase,
     }
 
     /// <summary>
-    /// Конструктор создает делегированную пермиссию для принципала
+    /// The constructor creates a delegated permission for a principal
     /// </summary>
-    /// <param name="principal">Принципал</param>
-    /// <param name="delegatedFrom">Пермиссия, от которой происходит делегирование</param>
+    /// <param name="principal">Principal</param>
+    /// <param name="delegatedFrom">Permission from which delegation occurs</param>
     public Permission(Principal principal, Permission delegatedFrom)
         : this(principal)
     {
@@ -66,40 +66,40 @@ public class Permission : AuditPersistentDomainObjectBase,
     }
 
     /// <summary>
-    /// Коллекция контекстов пермиссии
+    /// Collection of permission contexts
     /// </summary>
     [UniqueGroup]
     public virtual IEnumerable<PermissionRestriction> Restrictions => this.restrictions;
 
     /// <summary>
-    /// Коллекция пермиссий, которым данная пермиссия была делегирована
+    /// Collection of permissions to which this permission was delegated
     /// </summary>
     [Mapping(CascadeMode = CascadeMode.Enabled)]
     public virtual IEnumerable<Permission> DelegatedTo => this.delegatedTo;
 
     /// <summary>
-    /// Пермиссия, от которой была делегирована данная пермиссия
+    /// Permission from which this permission was delegated
     /// </summary>
     public virtual Permission? DelegatedFrom { get => this.delegatedFrom; set => this.delegatedFrom = value; }
 
     /// <summary>
-    /// Период действия пермиссии
+    /// Permission validity period
     /// </summary>
     public virtual Period Period { get => this.period.Round(); set => this.period = value.Round(); }
 
     /// <summary>
-    /// Приниципал, к которому относится данная пермиссия
+    /// Principal to which this permission belongs
     /// </summary>
     public virtual Principal Principal { get => this.principal; set => this.principal = value; }
 
     /// <summary>
-    /// Бизнес-роль, которую содержит пермиссия
+    /// Business role contained in the permission
     /// </summary>
     [Required]
     public virtual BusinessRole Role { get => this.role; set => this.role = value; }
 
     /// <summary>
-    /// Комментарий к пермиссии
+    /// Permission comment
     /// </summary>
     [MaxLength]
     public virtual string Comment { get => this.comment; set => this.comment = value; }

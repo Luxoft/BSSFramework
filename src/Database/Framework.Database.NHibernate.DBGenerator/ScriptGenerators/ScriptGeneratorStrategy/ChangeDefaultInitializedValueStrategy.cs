@@ -10,17 +10,17 @@ using Microsoft.SqlServer.Management.Smo;
 namespace Framework.Database.NHibernate.DBGenerator.ScriptGenerators.ScriptGeneratorStrategy;
 
 /// <summary>
-/// Проинициализирует все соданные колонки, из коллекции AddedColumns, с атрибутом <code>VersionAttribute</code> значением по умолчанию
+/// Initializes all created columns from the AddedColumns collection that have the <code>VersionAttribute</code> attribute with a default value
 /// </summary>
 public class ChangeDefaultInitializedValueStrategy(DatabaseScriptGeneratorStrategyInfo parameter) : ScriptGeneratorStrategyBase(parameter)
 {
     /// <summary>
-    /// Мод применяемого миграционого скрипта
+    /// Mode of the applied migration script
     /// </summary>
     public override ApplyMigrationDbScriptMode ApplyMigrationDbScriptMode => ApplyMigrationDbScriptMode.ChangeDefaultValue;
 
     /// <summary>
-    /// Модификации базы данных по определенной стратегии
+    /// Database modifications using a specific strategy
     /// </summary>
     protected override void ExecuteBase()
     {

@@ -1,7 +1,7 @@
 ﻿namespace Framework.Projection;
 
 /// <summary>
-/// Атрибут марркировки свойсва проекции
+/// Attribute marking a projection property
 /// </summary>
 [AttributeUsage(AttributeTargets.Property)]
 public class ProjectionPropertyAttribute : Attribute
@@ -15,7 +15,7 @@ public class ProjectionPropertyAttribute : Attribute
 
 
     /// <summary>
-    /// Роль свойства проекции
+    /// Projection property role
     /// </summary>
     public ProjectionPropertyRole Role { get; }
 }

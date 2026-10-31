@@ -8,6 +8,11 @@ public class GdprMailMessageModifier : IMailMessageModifier
 
     private const string EndToken = "<!--/GDPR-->";
 
+    /// <summary>
+    /// Cuts out every <c>&lt;!--GDPR--&gt;...&lt;!--/GDPR--&gt;</c> section from the body (tokens are case-insensitive).
+    /// Sections are removed starting from the LAST opening token, so nested sections collapse correctly from the inside out.
+    /// An opening token without a closing one stops processing and the rest of the text stays as is - the unclosed part is NOT removed.
+    /// </summary>
     public void Modify(MailMessage baseMessage)
     {
         var messageText = baseMessage.Body;

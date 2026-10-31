@@ -24,12 +24,12 @@ public class SampleSystemProjectionSource : ProjectionSource
     {
         this.TestEmployee = new Projection<Employee>(nameof(this.TestEmployee), true)
                             .Property(employee => employee.Login)
-                            .Property(employee => employee.Role.Name)
-                            .Property(employee => employee.Role.Id)
+                            .Property(employee => employee.Role!.Name)
+                            .Property(employee => employee.Role!.Id)
 
                             .Property(employee => employee.NameEng.FirstName)
 
-                            .Property(employee => employee.Ppm.NameNative.MiddleName)
+                            .Property(employee => employee.Ppm!.NameNative.MiddleName)
 
                             .Property(employee => employee.CoreBusinessUnit!.Period.EndDate, "BuEndDate")
 
@@ -37,7 +37,7 @@ public class SampleSystemProjectionSource : ProjectionSource
 
                             .Property(employee => employee.CoreBusinessUnit!.Name)
                             .Property(employee => employee.CoreBusinessUnit!.Projects, () => this.VisualProject!)
-                            .Property(employee => employee.Position.Name)
+                            .Property(employee => employee.Position!.Name)
 
                             .CustomProperty<string>(e => "PositionNameOrRoleName")
 
@@ -56,24 +56,24 @@ public class SampleSystemProjectionSource : ProjectionSource
                                 .Property(bu => bu.Parent!.Period)
 
                                 .Property(bu => bu, () => this.HerBusinessUnit!, "Her", ignoreSerialization: true)
-                                .CustomProperty<string>("HerBusinessUnit_Full") // Расчётное свойство типа "string"
+                                .CustomProperty<string>("HerBusinessUnit_Full") // Calculated property of type "string"
 
                                 .Property(bu => bu.BusinessUnitEmployeeRoles, () => this.MiniBusinessUnitEmployeeRole!, ignoreSerialization: true)
                                 .CustomProperty<
                                     string>(
                                     "Employees",
                                     fetchs:
-                                    ["BusinessUnitEmployeeRoles.Employee"]) // Расчётное свойство типа "string" и подгрузка для него из базы "BusinessUnitEmployeeRoles.Employee"
+                                    ["BusinessUnitEmployeeRoles.Employee"]) // Calculated property of type "string" with loading from the database "BusinessUnitEmployeeRoles.Employee"
 
-                                .CustomProperty<string>("CalcProp", writable: true) // Расчётное свойство типа "string" с разрешенной записью в него
-                                .CustomProperty<string[][]>("CalcMatrix") // Расчётное свойство типа "string[][]"
-                                .CustomProperty("CalcProjectionProp", () => this.TestBusinessUnitType!) // Расчётное свойство типа "TestBusinessUnitType"
+                                .CustomProperty<string>("CalcProp", writable: true) // Calculated property of type "string" with write access enabled
+                                .CustomProperty<string[][]>("CalcMatrix") // Calculated property of type "string[][]"
+                                .CustomProperty("CalcProjectionProp", () => this.TestBusinessUnitType!) // Calculated property of type "TestBusinessUnitType"
                                 .Filter<HierarchicalBusinessUnitFilterModel>(ProjectionFilterTargets.ODataTree);
 
         this.TestBusinessUnitType = new Projection<BusinessUnitType>(() => this.TestBusinessUnitType!)
                                     .Property(
                                         employee => employee.Id,
-                                        ignoreSerialization: true) // Id-поле исключается из сериализации, наследование этой ProjectionDTO будет производится от BaseAbstractDTO
+                                        ignoreSerialization: true) // The Id field is excluded from serialization; this ProjectionDTO will inherit from BaseAbstractDTO
                                     .Property(bu => bu.Name);
 
         this.TestLocation = new Projection<Location>(() => this.TestLocation!, true)
@@ -110,14 +110,14 @@ public class SampleSystemProjectionSource : ProjectionSource
         this.TestIMRequestDetail = new Projection<IMRequestDetail>(() => this.TestIMRequestDetail!);
 
         this.CustomCompanyLegalEntity = new Projection<CompanyLegalEntity>(() => this.CustomCompanyLegalEntity!, true)
-                                        .Attribute(new ExampleCustomProjectionAttribute()) // Добавлям кастомный атрибут в проекцию
-                                        .Attribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.BusinessUnitEdit)) // Подменяем атрибут доступа проекции
+                                        .Attribute(new ExampleCustomProjectionAttribute()) // Add a custom attribute to the projection
+                                        .Attribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.BusinessUnitEdit)) // Replace the projection access attribute
                                         .Property(
                                             legalEntity => legalEntity.Code,
                                             propertyAttributes:
                                             [
                                                 new ViewDomainObjectAttribute(SampleSystemSecurityOperation.CompanyLegalEntityView)
-                                            ]) // Добавляем свойство и атрибут доступа к нему
+                                            ]) // Add a property and an access attribute to it
                                         .Property(legalEntity => legalEntity.Name)
                                         .Property(legalEntity => legalEntity.NameEnglish)
                                         .Property(legalEntity => legalEntity.CurrentObj!, () => this.CustomTestObjForNested!)

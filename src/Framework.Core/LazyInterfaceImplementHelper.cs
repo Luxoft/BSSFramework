@@ -3,22 +3,22 @@
 namespace Framework.Core;
 
 /// <summary>
-/// Класс, для автоматического создания Lazy-адаптера интерфейса
+/// Class for automatic creation of a Lazy adapter of an interface
 /// </summary>
 public static class LazyInterfaceImplementHelper
 {
     /// <summary>
-    /// Создание фекового адаптера (без имплементации)
+    /// Creating a fake adapter (without implementation)
     /// </summary>
-    /// <typeparam name="T">Тип интерфейса</typeparam>
+    /// <typeparam name="T">Interface type</typeparam>
     /// <returns></returns>
     public static T CreateNotImplemented<T>(string? message = null) => LazyInterfaceImplementHelper<T>.CreateProxy(() => throw new NotImplementedException(message));
 
     /// <summary>
-    /// Создание адаптера
+    /// Adapter creation
     /// </summary>
-    /// <typeparam name="T">Тип интерфейса</typeparam>
-    /// <param name="factory">Фабричная функция</param>
+    /// <typeparam name="T">Interface type</typeparam>
+    /// <param name="factory">Factory function</param>
     /// <returns></returns>
     public static T CreateProxy<T>(Func<T> factory)
     {
@@ -31,9 +31,9 @@ public static class LazyInterfaceImplementHelper
 }
 
 /// <summary>
-/// Класс, для автоматического создания Lazy-адаптера интерфейса
+/// Class for automatic creation of a Lazy adapter of an interface
 /// </summary>
-/// <typeparam name="T">Тип интерфейса</typeparam>
+/// <typeparam name="T">Interface type</typeparam>
 public static class LazyInterfaceImplementHelper<T>
 {
     public static readonly Func<Func<T>, T> CreateProxy = LazyInterfaceImplementTypeBuilder.Default.GetCreateProxyFunc<T>();

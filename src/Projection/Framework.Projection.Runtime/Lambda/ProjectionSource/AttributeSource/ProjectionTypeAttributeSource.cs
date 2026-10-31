@@ -9,30 +9,30 @@ using Framework.Validation.Attributes;
 namespace Framework.Projection.Lambda.ProjectionSource.AttributeSource;
 
 /// <summary>
-/// Источник атрибутов для типа проекции
+/// Attribute source for a projection type
 /// </summary>
 public class ProjectionTypeAttributeSource : AttributeSourceBase<IProjection>
 {
     private readonly bool isPersistent;
 
     /// <summary>
-    /// Конструктор
+    /// Constructor
     /// </summary>
-    /// <param name="environment">Окружение</param>
-    /// <param name="projection">Тип на основе которого строится проекция</param>
+    /// <param name="environment">Environment</param>
+    /// <param name="projection">Type on which the projection is based</param>
     public ProjectionTypeAttributeSource(ProjectionLambdaEnvironment environment, IProjection projection)
         : base(environment, projection) =>
         this.isPersistent = environment.PersistentDomainObjectBaseType.IsAssignableFrom(this.SourceType);
 
     /// <summary>
-    /// Тип на основе которого строится проекция
+    /// Type on which the projection is based
     /// </summary>
     public Type SourceType => this.ProjectionValue.SourceType;
 
     private Type WrappedSourceType => field ??= this.Environment.MetadataProxyProvider.Wrap(this.SourceType);
 
     /// <summary>
-    /// Флаг указания, что проекция наследуется от базовой секурной проекции.
+    /// Flag indicating that the projection inherits from a base secure projection.
     /// </summary>
     protected bool HasBaseSecurityType => this.ProjectionValue.Role == ProjectionRole.Default
                                           && !this.Environment.UseDependencySecurity

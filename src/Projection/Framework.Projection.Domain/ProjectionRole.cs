@@ -1,22 +1,22 @@
 ﻿namespace Framework.Projection;
 
 /// <summary>
-/// Роль проекции
+/// Projection role
 /// </summary>
 public enum ProjectionRole
 {
     /// <summary>
-    /// Обычная проекция
+    /// Regular projection
     /// </summary>
     Default,
 
     /// <summary>
-    /// Автоматически достраиваемая проекция (для переходов через ExpandPath)
+    /// Automatically completed projection (for transitions via ExpandPath)
     /// </summary>
     AutoNode,
 
     /// <summary>
-    /// Проекция для безопасности
+    /// Projection for security
     /// </summary>
     SecurityNode
 }

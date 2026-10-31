@@ -1,27 +1,27 @@
 ﻿namespace Framework.Validation.Map;
 
 /// <summary>
-/// Текущая позиция валидации
+/// Current validation position
 /// </summary>
 public interface IValidationState
 {
     /// <summary>
-    /// Стейт верхнего уровня
+    /// Top-level state
     /// </summary>
     IValidationState? Parent { get; }
 
     /// <summary>
-    /// Валидируемое свойство
+    /// Validated property
     /// </summary>
     IPropertyValidationMap PropertyMap { get; }
 
     /// <summary>
-    /// Валидируемый объект
+    /// Validated object
     /// </summary>
     object Source { get; }
 
     /// <summary>
-    /// Валидируемый тип
+    /// Validated type
     /// </summary>
     IClassValidationMap SourceTypeMap { get; }
 }

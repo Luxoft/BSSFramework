@@ -10,9 +10,9 @@ namespace Framework.Validation.Extensions;
 public static class TypeExtensions
 {
     /// <summary>
-    /// Проверка типа на глубокую комопзитную валидацию
+    /// Check a type for deep composite validation
     /// </summary>
-    /// <param name="type">Тип</param>
+    /// <param name="type">Type</param>
     /// <returns></returns>
     public static bool HasExpandValidation(this Type type)
     {

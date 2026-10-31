@@ -77,7 +77,7 @@ public static class DataContractSerializerHelper
 
         private static readonly ConcurrentDictionary<Type, (XmlDictionaryString Name, XmlDictionaryString Namespace)> ContractNameCache = new();
 
-        public override bool TryResolveType(Type dataContractType, Type declaredType, DataContractResolver? knownTypeResolver, out XmlDictionaryString typeName, out XmlDictionaryString typeNamespace)
+        public override bool TryResolveType(Type dataContractType, Type? declaredType, DataContractResolver knownTypeResolver, out XmlDictionaryString? typeName, out XmlDictionaryString? typeNamespace)
         {
             var realType = dataContractType.Namespace == "Castle.Proxies" ? dataContractType.BaseType ?? dataContractType : dataContractType;
 
@@ -87,13 +87,11 @@ public static class DataContractSerializerHelper
                 return true;
             }
 
-            typeName = null!;
-            typeNamespace = null!;
-            return knownTypeResolver!.TryResolveType(dataContractType, declaredType, null, out typeName, out typeNamespace);
+            return knownTypeResolver.TryResolveType(dataContractType, declaredType, null!, out typeName, out typeNamespace);
         }
 
-        public override Type ResolveName(string typeName, string? typeNamespace, Type declaredType, DataContractResolver? knownTypeResolver) =>
-            knownTypeResolver!.ResolveName(typeName, typeNamespace, declaredType, null);
+        public override Type? ResolveName(string typeName, string? typeNamespace, Type? declaredType, DataContractResolver knownTypeResolver) =>
+            knownTypeResolver.ResolveName(typeName, typeNamespace, declaredType, null!);
 
         private static (XmlDictionaryString Name, XmlDictionaryString Namespace) GetContractName(Type type)
         {

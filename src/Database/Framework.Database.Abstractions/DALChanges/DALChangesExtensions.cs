@@ -45,7 +45,7 @@ public static class DALChangesExtensions
     }
 
     /// <summary>
-    /// Схлопывание коллекции изменений по объекту
+    /// Collapsing the collection of changes of an object
     /// </summary>
     public static DALChanges Composite(this IEnumerable<DALChanges> source)
     {
@@ -65,9 +65,9 @@ public static class DALChangesExtensions
     }
 
     /// <summary>
-    /// Приведение череды изменения объекта к конечному состоянию
+    /// Reducing the chain of object changes to the final state
     /// </summary>
-    /// <param name="states">Череда изменений объекта</param>
+    /// <param name="states">Chain of object changes</param>
     private static KeyValuePair<IDALObject, DALObjectChangeType>? ToFinalState(this IReadOnlyDictionary<IDALObject, DALObjectChangeType> states)
     {
         if (states is null) throw new ArgumentNullException(nameof(states));

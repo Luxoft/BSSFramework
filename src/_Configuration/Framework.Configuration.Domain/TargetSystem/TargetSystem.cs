@@ -6,10 +6,10 @@ using Framework.Restriction;
 namespace Framework.Configuration.Domain;
 
 /// <summary>
-/// Целевая сиcтема
+/// Target system
 /// </summary>
 /// <remarks>
-/// Целевая сиcтема может содержать подсистемы
+/// A target system can contain subsystems
 /// </remarks>
 [UniqueGroup]
 [NotAuditedClass]
@@ -26,11 +26,11 @@ public class TargetSystem : BaseDirectory, IMaster<DomainType>
     private bool subscriptionEnabled;
 
     /// <summary>
-    /// Конструктор
+    /// Constructor
     /// </summary>
-    /// <param name="isBase">Признак целевой системы типов, содержащихся в системных библиотеках</param>
-    /// <param name="isMain">Признак главной целевой системы</param>
-    /// <param name="isRevision">Признак поддержки системой ревизии баз данных</param>
+    /// <param name="isBase">Flag of the target system for types contained in system libraries</param>
+    /// <param name="isMain">Flag of the main target system</param>
+    /// <param name="isRevision">Flag of the system's database revision support</param>
     public TargetSystem(bool isBase, bool isMain, bool isRevision)
     {
         this.isBase = isBase;
@@ -43,28 +43,28 @@ public class TargetSystem : BaseDirectory, IMaster<DomainType>
     }
 
     /// <summary>
-    /// Коллекция доменных типов целевой системы
+    /// Collection of target system domain types
     /// </summary>
     [UniqueGroup]
     public virtual IEnumerable<DomainType> DomainTypes => this.domainTypes;
 
     /// <summary>
-    /// Признак целевой системы, которая создана для типов, содержащихся в системных библиотеках
+    /// Flag of a target system created for types contained in system libraries
     /// </summary>
     public virtual bool IsBase => this.isBase;
 
     /// <summary>
-    /// Признак главной целевой системы
+    /// Flag of the main target system
     /// </summary>
     public virtual bool IsMain => this.isMain;
 
     /// <summary>
-    /// Признак поддержки целевой системой ревизизи баз данных
+    /// Flag of the target system's database revision support
     /// </summary>
     public virtual bool IsRevision => this.isRevision;
 
     /// <summary>
-    /// Признак того, что включен механизм подписки
+    /// Flag indicating that the subscription mechanism is enabled
     /// </summary>
     public virtual bool SubscriptionEnabled
     {

@@ -12,7 +12,7 @@ namespace SampleSystem.IntegrationTests.Subscriptions_Metadata;
 public abstract class SendIndividualLettersTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     /// <summary>
-    /// Подписка с SendIndividualLetters == true формирует отдельное письмо на каждого адресата доставки
+    /// A subscription with SendIndividualLetters == true forms a separate letter for each delivery addressee
     /// </summary>
     [AnchFact]
     public async Task SendIndividualLetters_IndividualNotificationSentToEachRecipient(CancellationToken ct)
@@ -37,7 +37,7 @@ public abstract class SendIndividualLettersTests(IServiceProvider rootServicePro
             IndividualLettersSubscriptionBase.CopyRecipient,
             Assert.Single(notifications.SelectMany(n => n.Recipients), r => r.Type == RecipientRole.Copy).Name);
 
-        // ReplyTo не является адресатом доставки, поэтому попадает в каждое письмо
+        // ReplyTo is not a delivery addressee, so it goes into every letter
         Assert.All(
             notifications,
             n => Assert.Equal(
@@ -48,7 +48,7 @@ public abstract class SendIndividualLettersTests(IServiceProvider rootServicePro
     }
 
     /// <summary>
-    /// Подписка с SendIndividualLetters == false формирует одно консолидированное письмо на всех адресатов
+    /// A subscription with SendIndividualLetters == false forms one consolidated letter for all addressees
     /// </summary>
     [AnchFact]
     public async Task SendIndividualLetters_Disabled_ConsolidatedNotificationSent(CancellationToken ct)
@@ -77,7 +77,7 @@ public abstract class SendIndividualLettersTests(IServiceProvider rootServicePro
     }
 
     /// <summary>
-    /// Индивидуальные письма формируются для каждой версии доменного объекта независимо
+    /// Individual letters are formed for each version of the domain object independently
     /// </summary>
     [AnchFact]
     public async Task SendIndividualLetters_SeveralDomainObjects_IndividualNotificationsSentForEach(CancellationToken ct)

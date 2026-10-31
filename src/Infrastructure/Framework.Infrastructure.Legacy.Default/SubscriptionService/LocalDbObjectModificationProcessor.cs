@@ -6,14 +6,14 @@ using Framework.Configuration.Domain;
 namespace Framework.Infrastructure.SubscriptionService;
 
 /// <summary>
-/// Сервис для сохрания модификаций в локальную бд
+/// Service for saving modifications to the local db
 /// </summary>
 public class LocalDbObjectModificationProcessor : BLLContextContainer<IConfigurationBLLContext>, IObjectModificationProcessor
 {
     /// <summary>
-    /// Конструктор
+    /// Constructor
     /// </summary>
-    /// <param name="context">Контекст утилит</param>
+    /// <param name="context">Utilities context</param>
     public LocalDbObjectModificationProcessor(IConfigurationBLLContext context)
         : base(context)
     {

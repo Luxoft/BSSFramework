@@ -1,18 +1,18 @@
 ﻿namespace Framework.BLL.Domain.DirectMode;
 
 /// <summary>
-/// Параметры управления генерацией по модели
+/// Model-based generation control parameters
 /// </summary>
 [Flags]
 public enum DirectMode
 {
     /// <summary>
-    /// Модель отдаётся в качестве резльтата метода
+    /// The model is returned as the result of the method
     /// </summary>
     Out = 1,
 
     /// <summary>
-    /// Модель принимается в качестве параметра метода
+    /// The model is accepted as a method parameter
     /// </summary>
     In = 2,
 }

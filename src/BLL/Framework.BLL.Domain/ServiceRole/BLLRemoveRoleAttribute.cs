@@ -1,12 +1,12 @@
 ﻿namespace Framework.BLL.Domain.ServiceRole;
 
 /// <summary>
-///  Атрибут удаления объекта через клиенсткий фасадный слой
+///  Attribute for deleting an object through the client facade layer
 /// </summary>
 public class BLLRemoveRoleAttribute : BLLServiceRoleAttribute, ICountTypeContainer
 {
     /// <summary>
-    /// Удаление единственного объекта и/или коллекции объектов
+    /// Deleting a single object and/or a collection of objects
     /// </summary>
     public CountType CountType { get; set; } = CountType.Single;
 }

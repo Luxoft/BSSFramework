@@ -279,7 +279,7 @@ public class TrackingServiceTests
     }
 
     /// <summary>
-    /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
+    /// IADFRAME-300 TrackingResult.HasChange() and an unsaved object
     /// </summary>
     [Fact]
     public void HasChange_RealChangedReferenceProperty_ResultTrue()
@@ -298,7 +298,7 @@ public class TrackingServiceTests
     }
 
     /// <summary>
-    /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
+    /// IADFRAME-300 TrackingResult.HasChange() and an unsaved object
     /// </summary>
     [Fact]
     public void HasChange_RealChangedNullableProperty_ResultTrue()
@@ -317,7 +317,7 @@ public class TrackingServiceTests
     }
 
     /// <summary>
-    /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
+    /// IADFRAME-300 TrackingResult.HasChange() and an unsaved object
     /// </summary>
     [Fact]
     public void HasChange_RealChangedValueProperty_ResultTrue()
@@ -336,7 +336,7 @@ public class TrackingServiceTests
     }
 
     /// <summary>
-    /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
+    /// IADFRAME-300 TrackingResult.HasChange() and an unsaved object
     /// </summary>
     [Fact]
     public void HasChange_RealChangedCollectionProperty_ResultTrue()
@@ -355,7 +355,7 @@ public class TrackingServiceTests
     }
 
     /// <summary>
-    /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
+    /// IADFRAME-300 TrackingResult.HasChange() and an unsaved object
     /// </summary>
     [Fact]
     public void HasChange_RealNotChangedReferencePropertyNewMode_ResultFalse()
@@ -374,7 +374,7 @@ public class TrackingServiceTests
     }
 
     /// <summary>
-    /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
+    /// IADFRAME-300 TrackingResult.HasChange() and an unsaved object
     /// </summary>
     [Fact]
     public void HasChange_RealNotChangedReferencePropertyDefaultMode_ResultTrue()
@@ -393,7 +393,7 @@ public class TrackingServiceTests
     }
 
     /// <summary>
-    /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
+    /// IADFRAME-300 TrackingResult.HasChange() and an unsaved object
     /// </summary>
     [Fact]
     public void HasChange_RealNotChangedNullablePropertyNewMode_ResultFalse()
@@ -412,7 +412,7 @@ public class TrackingServiceTests
     }
 
     /// <summary>
-    /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
+    /// IADFRAME-300 TrackingResult.HasChange() and an unsaved object
     /// </summary>
     [Fact]
     public void HasChange_RealNotChangedNullablePropertyDefaultMode_ResultTrue()
@@ -431,7 +431,7 @@ public class TrackingServiceTests
     }
 
     /// <summary>
-    /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
+    /// IADFRAME-300 TrackingResult.HasChange() and an unsaved object
     /// </summary>
     [Fact]
     public void HasChange_RealNotChangedValuePropertyNewMode_ResultFalse()
@@ -450,7 +450,7 @@ public class TrackingServiceTests
     }
 
     /// <summary>
-    /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
+    /// IADFRAME-300 TrackingResult.HasChange() and an unsaved object
     /// </summary>
     [Fact]
     public void HasChange_RealNotChangedValuePropertyDefaultMode_ResultTrue()
@@ -469,7 +469,7 @@ public class TrackingServiceTests
     }
 
     /// <summary>
-    /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
+    /// IADFRAME-300 TrackingResult.HasChange() and an unsaved object
     /// </summary>
     [Fact]
     public void HasChange_RealNotChangedArrayPropertyNewMode_ResultFalse()
@@ -488,7 +488,7 @@ public class TrackingServiceTests
     }
 
     /// <summary>
-    /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
+    /// IADFRAME-300 TrackingResult.HasChange() and an unsaved object
     /// </summary>
     [Fact]
     public void HasChange_RealNotChangedArrayPropertyDefaultMode_ResultTrue()
@@ -507,7 +507,7 @@ public class TrackingServiceTests
     }
 
     /// <summary>
-    /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
+    /// IADFRAME-300 TrackingResult.HasChange() and an unsaved object
     /// </summary>
     [Fact]
     public void HasChange_ObjectVersionRealChangedValueProperty_ResultTrue()
@@ -526,7 +526,7 @@ public class TrackingServiceTests
     }
 
     /// <summary>
-    /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
+    /// IADFRAME-300 TrackingResult.HasChange() and an unsaved object
     /// </summary>
     [Fact]
     public void HasChange_ObjectVersionRealChangedReferenceProperty_ResultTrue()
@@ -545,7 +545,7 @@ public class TrackingServiceTests
     }
 
     /// <summary>
-    /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
+    /// IADFRAME-300 TrackingResult.HasChange() and an unsaved object
     /// </summary>
     [Fact]
     public void HasChange_ObjectVersionRealChangedNullableProperty_ResultTrue()
@@ -564,7 +564,7 @@ public class TrackingServiceTests
     }
 
     /// <summary>
-    /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
+    /// IADFRAME-300 TrackingResult.HasChange() and an unsaved object
     /// </summary>
     [Fact]
     public void HasChange_ObjectVersionRealChangedArrayProperty_ResultTrue()
@@ -583,7 +583,7 @@ public class TrackingServiceTests
     }
 
     /// <summary>
-    /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
+    /// IADFRAME-300 TrackingResult.HasChange() and an unsaved object
     /// </summary>
     [Fact]
     public void HasChange_ObjectVersionRealNotChangedReferencePropertyNewMode_ResultFalse()
@@ -602,7 +602,7 @@ public class TrackingServiceTests
     }
 
     /// <summary>
-    /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
+    /// IADFRAME-300 TrackingResult.HasChange() and an unsaved object
     /// </summary>
     [Fact]
     public void HasChange_ObjectVersionRealNotChangedReferencePropertyDefaultMode_ResultTrue()
@@ -621,7 +621,7 @@ public class TrackingServiceTests
     }
 
     /// <summary>
-    /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
+    /// IADFRAME-300 TrackingResult.HasChange() and an unsaved object
     /// </summary>
     [Fact]
     public void HasChange_ObjectVersionRealNotChangedNullablePropertyNewMode_ResultFalse()
@@ -640,7 +640,7 @@ public class TrackingServiceTests
     }
 
     /// <summary>
-    /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
+    /// IADFRAME-300 TrackingResult.HasChange() and an unsaved object
     /// </summary>
     [Fact]
     public void HasChange_ObjectVersionRealNotChangedNullablePropertyDefaultMode_ResultTrue()
@@ -659,7 +659,7 @@ public class TrackingServiceTests
     }
 
     /// <summary>
-    /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
+    /// IADFRAME-300 TrackingResult.HasChange() and an unsaved object
     /// </summary>
     [Fact]
     public void HasChange_ObjectVersionRealNotChangedValuePropertyNewMode_ResultFalse()
@@ -678,7 +678,7 @@ public class TrackingServiceTests
     }
 
     /// <summary>
-    /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
+    /// IADFRAME-300 TrackingResult.HasChange() and an unsaved object
     /// </summary>
     [Fact]
     public void HasChange_ObjectVersionRealNotChangedValuePropertyDefault_ResultTrue()
@@ -697,7 +697,7 @@ public class TrackingServiceTests
     }
 
     /// <summary>
-    /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
+    /// IADFRAME-300 TrackingResult.HasChange() and an unsaved object
     /// </summary>
     [Fact]
     public void HasChange_ObjectVersionRealNotChangedArrayPropertyNewMode_ResultFalse()
@@ -716,7 +716,7 @@ public class TrackingServiceTests
     }
 
     /// <summary>
-    /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
+    /// IADFRAME-300 TrackingResult.HasChange() and an unsaved object
     /// </summary>
     [Fact]
     public void HasChange_ObjectVersionRealNotChangedArrayPropertyDefaultMode_ResultTrue()

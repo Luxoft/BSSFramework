@@ -10,6 +10,14 @@ namespace Framework.Database.NHibernate;
 
 public class NHibObjectStatesService(ISession session) : IObjectStateService
 {
+    /// <summary>
+    /// Returns the properties of an entity that differ from the state loaded in the session (dirty-check against <c>LoadedState</c>).
+    /// Empty for null, read-only sessions and entities not attached to the session.
+    /// A collection property counts as modified if the collection itself is dirty, or - recursively - if any of its
+    /// attached elements is modified, or if it contains an element that is not in the session yet (a new element yields a blank <see cref="ObjectState"/>).
+    /// For collections the "previous value" is <c>StoredSnapshot</c>, not the loaded reference.
+    /// Not cheap: it recurses through collections, call only for entities that were changed.
+    /// </summary>
     public IEnumerable<ObjectState> GetModifiedObjectStates(object? entity)
     {
         if (entity is null)
@@ -117,6 +125,10 @@ public class NHibObjectStatesService(ISession session) : IObjectStateService
                         });
     }
 
+    /// <summary>
+    /// <c>true</c> if the entity is not in the session or has not been written to the database yet
+    /// (a persisted-then-flushed entity is not new even before the transaction commits).
+    /// </summary>
     public bool IsNew(object entity)
     {
         if (entity is null) throw new ArgumentNullException(nameof(entity));

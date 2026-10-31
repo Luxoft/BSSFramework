@@ -6,7 +6,7 @@ namespace Framework.Application.Tests;
 public class PeriodTests
 {
     /// <summary>
-    /// IADFRAME-796 Ошибка в методе GetFinancialYear
+    /// IADFRAME-796 Error in the GetFinancialYear method
     /// </summary>
     [Theory]
     [InlineData(2017, 1, 2017)]
@@ -29,7 +29,7 @@ public class PeriodTests
     }
 
     /// <summary>
-    /// IADFRAME-796 Ошибка в методе GetFinancialYear
+    /// IADFRAME-796 Error in the GetFinancialYear method
     /// </summary>
     [Theory]
     [InlineData(-1)]
@@ -48,7 +48,7 @@ public class PeriodTests
     }
 
     /// <summary>
-    /// IADFRAME-796 Ошибка в методе GetFinancialYear
+    /// IADFRAME-796 Error in the GetFinancialYear method
     /// </summary>
     [Theory]
     [InlineData(-1, 12)]

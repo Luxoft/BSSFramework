@@ -8,7 +8,7 @@ using Framework.Restriction;
 namespace Framework.Configuration.Domain;
 
 /// <summary>
-/// Модификация объекта хранимая в бд
+/// Object modification stored in the db
 /// </summary>
 [UniqueGroup]
 [NotAuditedClass]
@@ -27,7 +27,7 @@ public class DomainObjectModification : AuditPersistentDomainObjectBase, IVersio
     private long version;
 
     /// <summary>
-    /// Доменный тип
+    /// Domain type
     /// </summary>
     [Required]
     [UniqueElement]

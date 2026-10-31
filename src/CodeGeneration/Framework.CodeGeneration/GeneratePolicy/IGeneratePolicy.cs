@@ -1,16 +1,16 @@
 ﻿namespace Framework.CodeGeneration.GeneratePolicy;
 
 /// <summary>
-/// Политика генерации
+/// Generation policy
 /// </summary>
 /// <typeparam name="TIdent"></typeparam>
 public interface IGeneratePolicy<in TIdent>
 {
     /// <summary>
-    /// Проверка использования
+    /// Usage check
     /// </summary>
-    /// <param name="domainType">доменный тип</param>
-    /// <param name="identity">Идентефикатор</param>
+    /// <param name="domainType">domain type</param>
+    /// <param name="identity">Identifier</param>
     /// <returns></returns>
     bool Used(Type domainType, TIdent identity);
 }

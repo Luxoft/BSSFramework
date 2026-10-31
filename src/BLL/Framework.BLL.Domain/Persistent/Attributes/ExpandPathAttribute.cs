@@ -1,7 +1,7 @@
 ﻿namespace Framework.BLL.Domain.Persistent.Attributes;
 
 /// <summary>
-/// Раскрывает цепочку виртуальных свойств, превращает виртуальные вызовы свойств в реальные. Атрибут нужен для "уплощения" выбранного доменного объекта, - т. е. вытащить часть информации из одного или нескольких вложенных в друг друга сложных объектов, в корневой объект. Необходим для возможности построения OData запросов к виртуальным свойствам.
+/// Expands a chain of virtual properties, turning virtual property calls into real ones. The attribute is needed to "flatten" the selected domain object, i.e. to pull part of the information from one or several nested complex objects into the root object. Required for building OData queries against virtual properties.
 /// <see href="confluence/display/IADFRAME/ExpandPathAttribute"/>
 /// </summary>
 [AttributeUsage(AttributeTargets.Property)]

@@ -17,6 +17,12 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.AutomationCore.Services;
 
+/// <summary>
+/// Invokes a controller method in tests as if it were a real web request: a new DI scope, a fake <see cref="HttpContext"/>
+/// and the same middleware chain as in production (impersonation, db session, current method, exception expander).
+/// The synchronous <c>Evaluate</c> overloads block on async code (sync-over-async); this is safe only because tests
+/// run without a SynchronizationContext - don't use them from UI/ASP.NET request threads.
+/// </summary>
 public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvider, UserCredential? customUserCredential = null)
     where TController : ControllerBase
 {
@@ -53,6 +59,9 @@ public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvid
             RequestAborted = scope.ServiceProvider.GetService<IDefaultCancellationTokenSource>()?.CancellationToken ?? CancellationToken.None
         };
 
+        // WithMiddleware wraps the previously added delegate, so the LAST call below is the OUTERMOST middleware.
+        // Execution order: ExceptionExpander → InitCurrentMethod → TryProcessDbSession → Impersonate → controller.
+        // Note: the db session is closed (committed) after Impersonate has already finished, i.e. outside the substituted user scope.
         await new WebApiInvoker(c, context => InvokeController(context, func))
               .WithMiddleware(next => new ImpersonateMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, customUserCredential))
               .WithMiddleware(next => new TryProcessDbSessionMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, httpContext.RequestServices.GetRequiredService<IDBSessionManager>(), httpContext.RequestServices.GetRequiredService<IWebApiCurrentDBSessionModeResolver>()))
@@ -60,6 +69,7 @@ public class ControllerEvaluator<TController>(IServiceProvider rootServiceProvid
               .WithMiddleware(next => new WebApiExceptionExpanderMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, httpContext.RequestServices.GetRequiredService<IWebApiExceptionExpander>()))
               .Invoke();
 
+        // The pipeline delegates return Task, so the controller result is passed back through HttpContext.Items (see InvokeController).
         return (T)c.Items["Result"]!;
     }
 

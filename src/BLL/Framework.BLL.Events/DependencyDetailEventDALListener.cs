@@ -7,7 +7,7 @@ using Framework.Database.DALListener;
 namespace Framework.BLL.Events;
 
 /// <summary>
-/// Базовый класс для DAL-евентов
+/// Base class for DAL events
 /// </summary>
 /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
 public class DependencyDetailEventDALListener<TPersistentDomainObjectBase>(
@@ -26,10 +26,10 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase>(
             return;
         }
 
-        // фильтруем изменения по тем типам, ко которым есть подписка
+        // filter changes by the types that have a subscription
         var joinItems = eventArgs.Changes.GroupDALObjectByType().Join(this.settings.TypeEvents, z => z.Key, z => z.Type, ValueTuple.Create);
 
-        // сопоставляем измененных объект с его описанием его изменения (save, remove) и функцией, определяющей необходимость отсылки события
+        // match the changed object with its change description (save, remove) and the function that determines whether the event needs to be sent
         var values = joinItems.SelectMany(
                                   z =>
                                       new[]
@@ -45,20 +45,20 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase>(
                                       })
                               .ToList();
 
-        // применяем функцию, определяющая необходимость отсылки события
+        // apply the function that determines whether the event needs to be sent
         var allFilteredValues = values.SelectMany(z => z.Item1.Where(q => z.Item3(q.Object)).Select(q => ValueTuple.Create(q, z.Item2)))
                                       .ToList();
 
-        // группируем по порядку получения(применения в базу) инфы о коммите данной сущности
-        // могут быть ньюансы, если сущность была сначало создана в базе, потом обновлена, в этом наборе будут две записи, с разными индексами
-        // но по факту с одним набором полей (ссылка одна и таже будет)
-        // на текущий момент: все такие кейсы решать в конкретных системах конкретным образом
-        // в общем случае пока сложно написать.
+        // group by the order in which commit info of the given entity was received (applied to the database)
+        // there may be nuances if the entity was first created in the database and then updated - this set will contain two records with different indexes
+        // but in fact with the same set of fields (the reference will be the same)
+        // for now: all such cases should be resolved in specific systems in a specific way
+        // is hard to write in the general case for now.
         var allFilteredOrderedValues = allFilteredValues.OrderBy(z => z.Item1.ApplyIndex);
 
         var processedValues = this.ProcessFinalAllFilteredOrderedValues(eventArgs, allFilteredOrderedValues);
 
-        // отсылаем во внешние системы.
+        // send to external systems.
         foreach (var item in processedValues)
         {
             var domainObject = (TPersistentDomainObjectBase)item.Item1.Object;
@@ -91,7 +91,7 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase>(
             return allFilteredOrderedValues;
         }
 
-        // потенциальные target-объекты для добавления
+        // potential target objects to add
         var targetObjectCandidates = joinItems.SelectMany(
                                                   z =>
                                                       z.Item1.Value.CreatedItems.Concat(z.Item1.Value.UpdatedItems).Where(
@@ -105,15 +105,15 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase>(
                                                                TargetObject = z.Item2.GetTargetValue(q.Object),
                                                                TargetObjectType = z.Item2.TargetTypeEvent.Type,
                                                            })
-                                                       // TargetObject может быть null, если целевая сущность каскадно удалена в той же транзакции
-                                                       // и её навигационное свойство не подгружено (актуально для EF Core cascade delete)
+                                                       // TargetObject can be null if the target entity was cascade-deleted in the same transaction
+                                                       // and its navigation property is not loaded (relevant for EF Core cascade delete)
                                                        .Where(
                                                            q => q.TargetObject is not null
                                                                 && z.Item2.TargetTypeEvent.IsSaveProcessingFunc(q.TargetObject)))
                                               .Distinct(z => z.TargetObject)
                                               .ToList();
 
-        // находим те target, которых еще нет в наборе
+        // find those targets that are not in the set yet
         var allTargetObjects =
             this.settings.Dependencies.Select(z => z.TargetTypeEvent.Type)
                 .Select(
@@ -131,7 +131,7 @@ public class DependencyDetailEventDALListener<TPersistentDomainObjectBase>(
             allTargetObjects,
             (anon, alwaysObject) => anon.TargetObject.Equals(alwaysObject)).ToList();
 
-        // фильруем которые нужно обработать
+        // filter those that need processing
         return allFilteredOrderedValues.Concat(
             allAbsentsTargetObjects.Select(
                 z => ValueTuple.Create((IDALObject)(new DALObject(z.TargetObject, z.TargetObjectType, 1)), EventOperation.Save)));

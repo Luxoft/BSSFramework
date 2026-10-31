@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 
 using Anch.Core;
+using Anch.Testing.Xunit;
 
 using Framework.BLL;
 using Framework.Database;
@@ -12,8 +13,8 @@ namespace SampleSystem.IntegrationTests;
 
 public abstract class PerformanceTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
-    [Fact]
-    public void GetEmployee_ToManyFilterParameters_CheckTimeTest()
+    [AnchFact]
+    public void GetEmployee_ToManyFilterParameters_CheckTimeTest(CancellationToken ct)
     {
         var preEvaluate = this.Evaluate(DBSessionMode.Write, context => context.Logics.Employee.GetUnsecureQueryable().First());
 
@@ -31,9 +32,10 @@ public abstract class PerformanceTests(IServiceProvider rootServiceProvider) : T
                                                                      .Aggregate(filter, (prev, current) => prev.BuildOr(current));
 
                                         return context.Logics.Employee.GetUnsecureQueryable().Where(resultFilter).ToList();
-                                    }));
+                                    }),
+                            ct);
 
-        var result = task.Wait(TimeSpan.FromSeconds(3));
+        var result = task.Wait(TimeSpan.FromSeconds(3), ct);
 
         Xunit.Assert.True(result);
     }

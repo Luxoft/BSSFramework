@@ -12,4 +12,6 @@ internal class PropertyMethodInfoImpl(MethodInfo? baseDefinition = null) : BaseM
     public override MethodInfo GetBaseDefinition() => baseDefinition!;
 
     public override bool Equals(object? obj) => ReferenceEquals(this, obj);
+
+    public override int GetHashCode() => System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(this);
 }

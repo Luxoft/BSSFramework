@@ -1,7 +1,7 @@
 ﻿namespace Framework.Relations;
 
 /// <summary>
-/// Маркер Master-объекта. Применяется, когда есть 2 или больше поля, которые могут выступать Master-ссылкой.
+/// Master object marker. Applied when there are 2 or more fields that can act as a Master reference.
 /// <see href="confluence/display/IADFRAME/IsMasterAttribute"/>
 /// </summary>
 [AttributeUsage(AttributeTargets.Property)]

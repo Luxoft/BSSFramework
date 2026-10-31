@@ -1,33 +1,33 @@
 ﻿namespace Framework.Projection;
 
 /// <summary>
-/// Применимость фильтра проекций
+/// Projection filter applicability
 /// </summary>
 [Flags]
 public enum ProjectionFilterTargets
 {
     /// <summary>
-    /// Для выгрузки обычных коллекций
+    /// For fetching regular collections
     /// </summary>
     Collection = 1,
 
     /// <summary>
-    /// Для выгрузки OData
+    /// For OData fetching
     /// </summary>
     OData = 2,
 
     /// <summary>
-    /// Для выгрузки единственного экземпляра
+    /// For fetching a single instance
     /// </summary>
     Single = 4,
 
     /// <summary>
-    /// Для выгрузки дерева
+    /// For tree fetching
     /// </summary>
     ODataTree = 8,
 
     /// <summary>
-    /// Все варианты применимости фильтра
+    /// All variants of filter applicability
     /// </summary>
     All = Collection + OData + Single + ODataTree
 }

@@ -3,12 +3,12 @@
 namespace Framework.BLL.Domain.ServiceRole;
 
 /// <summary>
-/// Базовый атрибут отображения объектов через фасадный слой (Visual, Simple, Full, Rich, Projection)
+/// Base attribute for viewing objects through the facade layer (Visual, Simple, Full, Rich, Projection)
 /// </summary>
 public abstract class BLLViewRoleBaseAttribute : BLLServiceRoleAttribute, IMaxFetchContainer
 {
     /// <summary>
-    /// Максимальный уровень выгрузки из базы
+    /// Maximum database fetch level
     /// </summary>
     protected abstract ViewDTOType BaseMaxFetch { get; }
 

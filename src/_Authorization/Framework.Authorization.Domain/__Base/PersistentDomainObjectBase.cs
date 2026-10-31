@@ -13,7 +13,7 @@ public abstract class PersistentDomainObjectBase : DomainObjectBase, IEquatable<
     }
 
     /// <summary>
-    /// ID доменного объекта
+    /// Domain object ID
     /// </summary>
     public virtual Guid Id
     {
@@ -22,7 +22,7 @@ public abstract class PersistentDomainObjectBase : DomainObjectBase, IEquatable<
     }
 
     /// <summary>
-    /// Признак того, что класс еще не сохранен в базе
+    /// Flag indicating that the class has not been saved to the database yet
     /// </summary>
     public virtual bool IsNew => this.Id == Guid.Empty;
 

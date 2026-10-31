@@ -263,8 +263,6 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
 
     protected virtual CodeMemberProperty CreatePropertyMember(PropertyInfo sourceProperty, CodeMemberField fieldMember)
     {
-        var preSetVariableName = "newValue";
-
         var fieldMemberRef = new CodeThisReferenceExpression().ToFieldReference(fieldMember);
 
         return new CodeMemberProperty

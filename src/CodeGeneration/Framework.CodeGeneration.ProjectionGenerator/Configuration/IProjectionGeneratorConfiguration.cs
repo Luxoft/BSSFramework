@@ -11,26 +11,26 @@ public interface IProjectionGeneratorConfiguration<out TEnvironment> : IProjecti
 public interface IProjectionGeneratorConfiguration : ICodeGeneratorConfiguration, ICodeTypeReferenceService<FileType>
 {
     /// <summary>
-    /// Генерировать set-акцессор для IsOneToOne-свойств
+    /// Generate a set accessor for IsOneToOne properties
     /// </summary>
     bool OneToOneSetter { get; }
 
     /// <summary>
-    /// Генерирование публичных конструкторов у проекций
+    /// Generating public constructors for projections
     /// </summary>
     bool GeneratePublicCtors { get; }
 
     /// <summary>
-    /// Получение генрируемых аттрибутов для проекционного типа
+    /// Getting generated attributes for a projection type
     /// </summary>
-    /// <param name="domainType">Свойство</param>
+    /// <param name="domainType">Property</param>
     /// <returns></returns>
     IEnumerable<CodeAttributeDeclaration> GetDomainTypeAttributeDeclarations(Type domainType);
 
     /// <summary>
-    /// Получение генрируемых аттрибутов для проекционного свойства
+    /// Getting generated attributes for a projection property
     /// </summary>
-    /// <param name="property">Свойство</param>
+    /// <param name="property">Property</param>
     /// <returns></returns>
     IEnumerable<CodeAttributeDeclaration> GetPropertyAttributeDeclarations(PropertyInfo property);
 }

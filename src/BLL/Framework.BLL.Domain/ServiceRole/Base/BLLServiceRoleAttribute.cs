@@ -2,19 +2,19 @@
 namespace Framework.BLL.Domain.ServiceRole;
 
 /// <summary>
-/// Базовый атрибут для фасадной роли
+/// Base attribute for a facade role
 /// </summary>
 public abstract class BLLServiceRoleAttribute : BLLRoleAttribute
 {
     /// <summary>
-    /// Конструктор
+    /// Constructor
     /// </summary>
     protected BLLServiceRoleAttribute()
     {
     }
 
     /// <summary>
-    /// Ручная имплементация фасадного метода
+    /// Manual implementation of a facade method
     /// </summary>
     public bool CustomImplementation { get; set; }
 }

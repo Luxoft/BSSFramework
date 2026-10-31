@@ -5,22 +5,22 @@ using Framework.ExtendedMetadata;
 namespace Framework.Projection;
 
 /// <summary>
-/// Окружение проекций
+/// Projection environment
 /// </summary>
 public interface IProjectionEnvironment
 {
     /// <summary>
-    /// Пространтсво имён
+    /// Namespace
     /// </summary>
     string Namespace { get; }
 
     /// <summary>
-    /// Сборка
+    /// Assembly
     /// </summary>
     Assembly Assembly { get; }
 
     /// <summary>
-    /// Использование безопасности через атрибут `DependencySecurityAttribute`
+    /// Use of security through the `DependencySecurityAttribute` attribute
     /// </summary>
     bool UseDependencySecurity { get; }
 

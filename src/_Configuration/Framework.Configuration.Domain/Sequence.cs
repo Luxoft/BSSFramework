@@ -4,7 +4,7 @@ using Framework.Restriction;
 namespace Framework.Configuration.Domain;
 
 /// <summary>
-/// Уникальный номер элемента системы
+/// Unique number of the system element
 /// </summary>
 [UniqueGroup]
 [NotAuditedClass]
@@ -13,7 +13,7 @@ public class Sequence : BaseDirectory
     private long number;
 
     /// <summary>
-    /// Значение элемента
+    /// Element value
     /// </summary>
     public virtual long Number
     {

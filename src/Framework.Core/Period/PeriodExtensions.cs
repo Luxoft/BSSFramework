@@ -2,31 +2,31 @@
 namespace Framework.Core;
 
 /// <summary>
-/// Методы расширения для периода
+/// Extension methods for the period
 /// </summary>
 public static class PeriodExtensions
 {
     /// <summary>
-    /// Возвращает значение, указывающее, пересекает ли указанный период <see cref="period"/> значение периода <see cref="target"/> переданного в качестве параметра
+    /// Returns a value indicating whether the specified period <paramref name="period"/> intersects the <paramref name="target"/> period passed as a parameter
     /// </summary>
     /// <remarks>
-    /// Сравнение происходит с учетом ограничения sql базы данных
+    /// The comparison takes the sql database limit into account
     /// </remarks>
-    /// <param name="period">Период, в котором проверяется пересечение</param>
-    /// <param name="target">Период, с которым проверяется пересечение</param>
-    /// <returns>true, если дата начала или дата окончания переданного периода содержатся в указанном периоде, в противном случае — false</returns>
+    /// <param name="period">Period in which the intersection is checked</param>
+    /// <param name="target">Period to check the intersection with</param>
+    /// <returns>true if the start or end date of the given period is within the specified period; otherwise false</returns>
     public static bool IsIntersected(this Period period, Period target) => !period.Intersect(target).IsEmpty;
 
     public static bool IsIntersected(this Period? period, Period? target) => period.HasValue && target.HasValue && period.Value.IsIntersected(target.Value);
 
     /// <summary>
-    /// Возвращает новый период являющийся суммой переданных периодов <see cref="periods"/>
+    /// Returns a new period that is the sum of the given periods <paramref name="periods"/>
     /// </summary>
     /// <remarks>
-    /// Сравнение происходит с учетом ограничения sql базы данных
+    /// The comparison takes the sql database limit into account
     /// </remarks>
-    /// <param name="periods">Список периодов, которые необходимо просуммировать</param>
-    /// <returns>Новый период, дата старта которого является минимальной из дат старта переданных периодов, а дата окончания является максимальной из дат окончания переденных периодов</returns>
+    /// <param name="periods">List of periods to sum</param>
+    /// <returns>A new period whose start date is the minimum of the start dates of the given periods and whose end date is the maximum of the end dates of the given periods</returns>
     public static Period Aggregate(this IEnumerable<Period> periods)
     {
         if (periods is null)

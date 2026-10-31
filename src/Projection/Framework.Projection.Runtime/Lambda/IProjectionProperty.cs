@@ -6,47 +6,47 @@ using Framework.Core;
 namespace Framework.Projection.Lambda;
 
 /// <summary>
-/// Интерфейс проекционного свойства
+/// Projection property interface
 /// </summary>
 public interface IProjectionProperty : IProjectionAttributeProvider
 {
     /// <summary>
-    /// Имя свойства
+    /// Property name
     /// </summary>
     string Name { get; }
 
     /// <summary>
-    /// Роль свойства
+    /// Property role
     /// </summary>
     ProjectionPropertyRole Role { get; }
 
     /// <summary>
-    /// Expression-путь до свойства
+    /// Expression path to the property
     /// </summary>
     LambdaExpression Expression { get; }
 
     /// <summary>
-    /// Property-путь до свойства
+    /// Property path to the property
     /// </summary>
     PropertyPath Path { get; }
 
     /// <summary>
-    /// Исходный тип от которого строится проекция
+    /// Source type from which the projection is built
     /// </summary>
     Type SourceType { get; }
 
     /// <summary>
-    /// Тип свойства проекции
+    /// Projection property type
     /// </summary>
     TypeReferenceBase.BuildTypeReference Type { get; }
 
     /// <summary>
-    /// Отключение сериализации свойства в DTO
+    /// Disable serialization of the property in DTO
     /// </summary>
     bool IgnoreSerialization { get; }
 
     /// <summary>
-    /// Виртуальное свойство интерфейса, которое имплементируется explicit-ом
+    /// Virtual interface property implemented explicitly
     /// </summary>
     PropertyInfo? VirtualExplicitInterfaceProperty { get; }
 }

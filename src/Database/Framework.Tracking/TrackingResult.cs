@@ -12,6 +12,7 @@ internal static class TrackingResult
     /// <summary>
     /// Creates new TrackingResult instance using domain object specified
     /// </summary>
+    /// <param name="persistentInfoService">Service that provides persistence info of the object</param>
     /// <param name="source">Domain object</param>
     /// <param name="mode">Mode that defines changes detection algorithm on not persistent objects (that not exist in DB)</param>
     public static TrackingResult<TDomainObject> Create<TDomainObject>(IPersistentInfoService persistentInfoService, TDomainObject source, GetChangesMode mode)

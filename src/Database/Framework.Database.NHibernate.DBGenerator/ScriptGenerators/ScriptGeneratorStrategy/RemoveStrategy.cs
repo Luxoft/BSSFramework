@@ -10,18 +10,18 @@ using Microsoft.SqlServer.Management.Smo;
 namespace Framework.Database.NHibernate.DBGenerator.ScriptGenerators.ScriptGeneratorStrategy;
 
 /// <summary>
-/// Удаляет колонки лежащие в RemovableColumns
+/// Removes the columns in RemovableColumns
 /// </summary>
-/// <remarks>Если установлен флаг DatabaseScriptGeneratorMode.RemoveObsoleteColumns, то удаляет все колонки имен которых нету среди названий полей соответствующего доменного типа</remarks>
+/// <remarks>If the DatabaseScriptGeneratorMode.RemoveObsoleteColumns flag is set, removes all columns whose names are not among the field names of the corresponding domain type</remarks>
 internal class RemoveStrategy(DatabaseScriptGeneratorStrategyInfo parameter) : ScriptGeneratorStrategyBase(parameter)
 {
     /// <summary>
-    /// Мод применяемого миграционого скрипта
+    /// Mode of the applied migration script
     /// </summary>
     public override ApplyMigrationDbScriptMode ApplyMigrationDbScriptMode => ApplyMigrationDbScriptMode.Remove;
 
     /// <summary>
-    /// Модификации базы данных по определенной стратегии
+    /// Database modifications using a specific strategy
     /// </summary>
     protected override void ExecuteBase()
     {

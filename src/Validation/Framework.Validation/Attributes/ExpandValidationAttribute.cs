@@ -1,7 +1,7 @@
 ﻿namespace Framework.Validation.Attributes;
 
 /// <summary>
-/// Атрибут, указывающий на то, что валидация будет происходить с раскрытием свойств класса
+/// Attribute indicating that validation will expand class properties
 /// </summary>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
 public class ExpandValidationAttribute : Attribute;

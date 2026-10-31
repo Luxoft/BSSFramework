@@ -6,7 +6,7 @@ using Anch.Core;
 namespace Framework.Core.Visitors;
 
 /// <summary>
-/// Выправление MemberExpression со свойствами, которых ReflectedType не текущий, а базовый
+/// Fixing a MemberExpression with properties whose ReflectedType is the base type rather than the current one
 /// </summary>
 public class FixPropertySourceVisitor : ExpressionVisitor
 {

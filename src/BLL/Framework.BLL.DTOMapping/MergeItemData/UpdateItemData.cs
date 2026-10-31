@@ -3,10 +3,10 @@
 namespace Framework.BLL.DTOMapping.MergeItemData;
 
 /// <summary>
-/// Данные по изменению объектв в коллекции
+/// Data about changes of objects in the collection
 /// </summary>
-/// <typeparam name="TValue">Элемент</typeparam>
-/// <typeparam name="TIdentity">Идент элемента</typeparam>
+/// <typeparam name="TValue">Element</typeparam>
+/// <typeparam name="TIdentity">Element identifier</typeparam>
 [DataContract(Name = "UpdateItemData{0}Of{1}", Namespace = "Framework.Persistent")]
 public abstract class UpdateItemData<TValue, TIdentity>;
 

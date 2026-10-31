@@ -75,7 +75,7 @@ public class ExceptionProcessingContext
         IReadOnlyList<PersistentClass>? result;
         if (!this.tableNameToPersistentClass.TryGetValue(tableDescription, out result))
         {
-            //костыль
+            // hack
             var results = this.tableNameToPersistentClass.Where(z => string.Equals(z.Key.Name, tableDescription.Name, StringComparison.InvariantCultureIgnoreCase)).ToList();
 
             if (results.Count == 1)

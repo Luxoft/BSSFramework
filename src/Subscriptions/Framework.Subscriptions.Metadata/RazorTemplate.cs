@@ -16,23 +16,23 @@ public abstract partial class RazorTemplate<TRenderingObject> : IMessageTemplate
     protected RenderingState State => this.state ?? throw new InvalidOperationException("State not initialized");
 
     /// <summary>
-    ///     Получает предыдущую версию доменного объекта.
+    ///     Gets the previous version of the domain object.
     /// </summary>
     /// <value>
-    ///     Предыдущая версия доменного объекта.
+    ///     Previous version of the domain object.
     /// </value>
     protected TRenderingObject? Previous => this.State.Versions.Previous;
 
     /// <summary>
-    ///     Получает текущую версию доменного объекта.
+    ///     Gets the current version of the domain object.
     /// </summary>
     /// <value>
-    ///     Текущая версия доменного объекта.
+    ///     Current version of the domain object.
     /// </value>
     protected TRenderingObject? Current => this.State.Versions.Current;
 
     /// <summary>
-    /// Контекст системы
+    /// System context
     /// </summary>
     protected IServiceProvider ServiceProvider => this.State.ServiceProvider;
 

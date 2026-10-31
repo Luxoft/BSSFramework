@@ -1,7 +1,7 @@
 ﻿namespace Framework.BLL.Domain.Models;
 
 /// <summary>
-/// Роль модели в системе
+/// Role of the model in the system
 /// </summary>
 public record ModelRole(string Name, DirectMode.DirectMode DirectMode)
 {

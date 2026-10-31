@@ -22,6 +22,11 @@ public static class CoreFuncExtensions
         where TImplement : TInterface =>
         LazyInterfaceImplementHelper<TInterface>.CreateProxy(() => getValueFunc());
 
+    /// <summary>
+    /// Memoizes <paramref name="func"/> by argument. The cache is a plain <see cref="Dictionary{TKey,TValue}"/> and is NOT thread-safe:
+    /// for shared use combine with <see cref="WithLock{TArg,TResult}"/> and apply the lock last (<c>func.WithCache().WithLock()</c>),
+    /// otherwise the cache is accessed outside the lock. Results are never evicted.
+    /// </summary>
     public static Func<TArg, TResult> WithCache<TArg, TResult>(this Func<TArg, TResult> func, IEqualityComparer<TArg>? equalityComparer = null)
         where TArg : notnull
     {
@@ -32,6 +37,11 @@ public static class CoreFuncExtensions
         return arg => cache.GetValueOrCreate(arg, () => func(arg));
     }
 
+    /// <summary>
+    /// Serializes calls through a single lock. If no <paramref name="baseLocker"/> is passed, a private one is created per wrapper,
+    /// so two wrappers over the same resource don't exclude each other unless they share a locker.
+    /// The lock is held while <paramref name="func"/> runs: don't call back into the wrapper from <paramref name="func"/> on another thread.
+    /// </summary>
     public static Func<TArg, TResult> WithLock<TArg, TResult>(this Func<TArg, TResult> func, object? baseLocker = null)
     {
         if (func is null) throw new ArgumentNullException(nameof(func));

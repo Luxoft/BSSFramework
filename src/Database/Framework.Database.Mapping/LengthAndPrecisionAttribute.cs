@@ -1,7 +1,7 @@
 ﻿namespace Framework.Database.Mapping;
 
 /// <summary>
-/// Указание размера и точности для decimal типа
+/// Specifying size and precision for the decimal type
 /// <see href="confluence/display/IADFRAME/LengthAndPrecisionAttribute"/>
 /// </summary>
 [AttributeUsage(AttributeTargets.Property)]

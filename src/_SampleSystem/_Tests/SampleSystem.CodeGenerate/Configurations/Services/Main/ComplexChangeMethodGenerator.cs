@@ -19,7 +19,7 @@ using SampleSystem.Domain.Models.Change._Base;
 namespace SampleSystem.CodeGenerate.Configurations.Services.Main;
 
 /// <summary>
-/// Генератор кастомного фасадного метода по ComplexChange-модели
+/// Generator of a custom facade method from a ComplexChange model
 /// </summary>
 public class ComplexChangeMethodGenerator : ModelMethodGenerator<MainServiceGeneratorConfiguration, BLLSaveRoleAttribute>
 {

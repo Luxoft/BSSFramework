@@ -4,12 +4,12 @@ using Framework.BLL.Domain.Models;
 namespace SampleSystem.CodeGenerate.Configurations.Services;
 
 /// <summary>
-/// Кастомные роли SampleSystem-моделей
+/// Custom roles of SampleSystem models
 /// </summary>
 public static class SampleSystemModelRole
 {
     /// <summary>
-    /// Роль моделей для генерации изменений коллекции объектов
+    /// Role of models for generating collection changes
     /// </summary>
     public static readonly ModelRole ComplexChange = new(nameof(ComplexChange), DirectMode.In);
 }

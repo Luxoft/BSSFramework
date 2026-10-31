@@ -16,7 +16,7 @@ using Framework.Projection.Lambda.ProjectionSource.AttributeSource;
 namespace Framework.Projection.Lambda;
 
 /// <summary>
-/// Окружение для проекций формируемых через лямбды
+/// Environment for projections built via lambdas
 /// </summary>
 public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
 {
@@ -59,9 +59,9 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
     public Type GetSecurityProjectionType(Type sourceType) => this.ProjectionTypeResolver.Resolve(this.projections.TryGetSecurityProjection(sourceType)!);
 
     /// <summary>
-    /// Получение типа свойства из ссылки на тип
+    /// Getting the property type from a type reference
     /// </summary>
-    /// <param name="typeReferenceBase">Ссылка на тип</param>
+    /// <param name="typeReferenceBase">Type reference</param>
     /// <returns></returns>
     public Type BuildPropertyType(TypeReferenceBase typeReferenceBase)
     {
@@ -126,9 +126,9 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
     }
 
     /// <summary>
-    /// Получение провайдера, вычисляющего все атрибуты проекции
+    /// Getting a provider that computes all attributes of a projection
     /// </summary>
-    /// <param name="projection">Проекция</param>
+    /// <param name="projection">Projection</param>
     /// <returns></returns>
     protected internal virtual IAttributeSource GetProjectionTypeAttributeSource(IProjection projection)
     {
@@ -141,9 +141,9 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
     }
 
     /// <summary>
-    /// Получение провайдера, вычисляющего все атрибуты проекционного свойства
+    /// Getting a provider that computes all attributes of a projection property
     /// </summary>
-    /// <param name="projectionProperty">Свойство проекции</param>
+    /// <param name="projectionProperty">Projection property</param>
     /// <returns></returns>
     protected internal virtual IAttributeSource GetProjectionPropertyAttributeSource(IProjectionProperty projectionProperty)
     {
@@ -156,9 +156,9 @@ public abstract class ProjectionLambdaEnvironment : ProjectionEnvironmentBase
     }
 
     /// <summary>
-    /// Получение провайдера, вычисляющего все атрибуты кастомного проекционного свойства
+    /// Getting a provider that computes all attributes of a custom projection property
     /// </summary>
-    /// <param name="projectionCustomProperty">Кастомное проекционное свойство</param>
+    /// <param name="projectionCustomProperty">Custom projection property</param>
     /// <returns></returns>
     protected internal virtual IAttributeSource GetProjectionCustomPropertyAttributeSource(
         IProjectionCustomProperty projectionCustomProperty)

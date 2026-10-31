@@ -9,7 +9,7 @@ public struct Parameters(
     string generatedAssemblyName)
 {
     /// <summary>
-    /// ѕуть генерации cs файлов
+    /// Path of cs file generation
     /// </summary>
     public string OutputPath { get; private set; } = outputPath;
 

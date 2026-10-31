@@ -4,7 +4,7 @@
 namespace Framework.Configuration.Domain;
 
 /// <summary>
-/// Базовый персистентные класс
+/// Base persistent class
 /// </summary>
 public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBase
 {
@@ -31,7 +31,7 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     #endregion
 
     /// <summary>
-    /// Дата создания доменного объекта
+    /// Domain object creation date
     /// </summary>
     [NotAuditedProperty]
     public virtual DateTime? CreateDate
@@ -41,7 +41,7 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     }
 
     /// <summary>
-    /// Логин сотрудника, создавшего доменный объект
+    /// Login of the employee who created the domain object
     /// </summary>
     [NotAuditedProperty]
     public virtual string? CreatedBy
@@ -51,7 +51,7 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     }
 
     /// <summary>
-    /// Дата изменения доменного объекта
+    /// Domain object modification date
     /// </summary>
     [NotAuditedProperty]
     public virtual DateTime? ModifyDate
@@ -61,7 +61,7 @@ public abstract class AuditPersistentDomainObjectBase : PersistentDomainObjectBa
     }
 
     /// <summary>
-    /// Логин сотрудника, изменившего доменный объект
+    /// Login of the employee who modified the domain object
     /// </summary>
     [NotAuditedProperty]
     public virtual string? ModifiedBy

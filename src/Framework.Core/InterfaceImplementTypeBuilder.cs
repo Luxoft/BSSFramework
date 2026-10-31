@@ -8,7 +8,7 @@ using Framework.Core.AnonymousTypeBuilder;
 namespace Framework.Core;
 
 /// <summary>
-/// Класс, для автоматического создания адаптера интерфейса посредством генерации его имплементации в рантайме
+/// Class for automatic creation of an interface adapter by generating its implementation at runtime
 /// </summary>
 public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type>
 {
@@ -19,9 +19,10 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
     private readonly Type baseType;
 
     /// <summary>
-    /// Конструктор
+    /// Constructor
     /// </summary>
-    /// <param name="moduleBuilder">Модуль, где будет генерировать анонимный тип</param>
+    /// <param name="moduleBuilder">Module in which the anonymous type will be generated</param>
+    /// <param name="baseType">Base type of the generated type</param>
     protected InterfaceImplementTypeBuilder(ModuleBuilder moduleBuilder, Type baseType)
     {
         this.moduleBuilder = moduleBuilder ?? throw new ArgumentNullException(nameof(moduleBuilder));
@@ -29,16 +30,16 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
     }
 
     /// <summary>
-    /// Получение фабричной функции для создания прокси-типа
+    /// Getting a factory function for creating a proxy type
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
     public Func<Func<T>, T> GetCreateProxyFunc<T>() => (Func<Func<T>, T>)this.GetCreateProxyFunc(typeof(T));
 
     /// <summary>
-    /// Получение фабричной функции для создания прокси-типа
+    /// Getting a factory function for creating a proxy type
     /// </summary>
-    /// <param name="sourceType">Тип базого интерфейса</param>
+    /// <param name="sourceType">Base interface type</param>
     /// <returns></returns>
     public Delegate GetCreateProxyFunc(Type sourceType)
     {
@@ -54,9 +55,9 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
     }
 
     /// <summary>
-    /// Создание анонимного тип
+    /// Anonymous type creation
     /// </summary>
-    /// <param name="sourceType">Тип базого интерфейса</param>
+    /// <param name="sourceType">Base interface type</param>
     /// <returns></returns>
     public Type GetAnonymousType(Type sourceType)
     {

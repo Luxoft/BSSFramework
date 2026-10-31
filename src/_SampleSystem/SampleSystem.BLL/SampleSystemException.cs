@@ -3,7 +3,7 @@
 namespace SampleSystem.BLL;
 
 /// <summary>
-///     Исключение SampleSystem.
+///     SampleSystem exception.
 /// </summary>
 /// <seealso cref="System.Exception" />
 [Serializable]

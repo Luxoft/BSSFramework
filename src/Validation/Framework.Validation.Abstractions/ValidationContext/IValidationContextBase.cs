@@ -3,33 +3,33 @@
 // ReSharper disable once CheckNamespace
 namespace Framework.Validation;
 /// <summary>
-/// Контекст валидации
+/// Validation context
 /// </summary>
 public interface IValidationContextBase : IValidatorContainer<IValidator>, IOperationContextData
 {
     /// <summary>
-    /// Верхний (по стеку) стейт валидации
+    /// Top (by stack) validation state
     /// </summary>
     IValidationState? ParentState { get; }
 }
 
 /// <summary>
-/// Контекст валидации
+/// Validation context
 /// </summary>
-/// <typeparam name="TSource">Тип объекта</typeparam>
+/// <typeparam name="TSource">Object type</typeparam>
 public interface IValidationContextBase<out TSource> : IValidationContextBase
 {
     /// <summary>
-    /// Валидируемый объект
+    /// Validated object
     /// </summary>
     TSource Source { get; }
 }
 
 /// <summary>
-/// Контекст валидации
+/// Validation context
 /// </summary>
-/// <typeparam name="TSource">Тип объекта</typeparam>
-/// <typeparam name="TValidationMap">Метаданные</typeparam>
+/// <typeparam name="TSource">Object type</typeparam>
+/// <typeparam name="TValidationMap">Metadata</typeparam>
 public interface IValidationContextBase<out TSource, out TValidationMap> : IValidationContextBase<TSource>
 {
     TValidationMap Map { get; }

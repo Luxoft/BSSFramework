@@ -13,19 +13,19 @@ using Microsoft.SqlServer.Management.Smo;
 namespace Framework.Database.NHibernate.DBGenerator.ScriptGenerators.ScriptGeneratorStrategy;
 
 /// <summary>
-/// Создает таблицы и колонки в этих таблицах для всех доменных типов
+/// Creates tables and columns in those tables for all domain types
 /// </summary>
-/// <remarks>Если установлен флаг DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript и в доменном объекте поменялся тип колонки, то колонка будет переименовано с постфиксом '_previousVersion' и в скрипт допишется строка update {0} set [{1}]=[{2}].
-/// Созданные колонки добавляются в parameter.AddedColumns</remarks>
+/// <remarks>If the DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript flag is set and the column type changed in the domain object, the column will be renamed with the '_previousVersion' postfix and the line update {0} set [{1}]=[{2}] will be appended to the script.
+/// Created columns are added to parameter.AddedColumns</remarks>
 internal class AddOrUpdateStrategy(DatabaseScriptGeneratorStrategyInfo parameter) : ScriptGeneratorStrategyBase(parameter)
 {
     /// <summary>
-    /// Мод применяемого миграционого скрипта
+    /// Mode of the applied migration script
     /// </summary>
     public override ApplyMigrationDbScriptMode ApplyMigrationDbScriptMode => ApplyMigrationDbScriptMode.AddOrUpdate;
 
     /// <summary>
-    /// Модификации базы данных по определенной стратегии
+    /// Database modifications using a specific strategy
     /// </summary>
     protected override void ExecuteBase()
     {

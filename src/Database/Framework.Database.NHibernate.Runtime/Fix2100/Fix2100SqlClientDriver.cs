@@ -10,9 +10,9 @@ using NHibernate.Driver;
 
 namespace Framework.Database.NHibernate.Fix2100;
 
-// <summary>
-/// Костыль для обхода ограничения в 2100 параметров в sql запросе (в основном для секьюрити - оптимизирует только in запрос по guid-ам)
-/// <see cref="https://iad-tfs-12.luxoft.com/tfs/DefaultCollection/_git/LuxStaff/pullrequest/44424?_a=files&amp;path=%2Fsrc%2FIntHR2.Core%2FNHibernate%2FIntHR2SqlClientDriver.cs"/>
+/// <summary>
+/// A hack to work around the 2100 parameter limit in an sql query (mainly for security - optimizes only the in query by guids)
+/// <see href="https://iad-tfs-12.luxoft.com/tfs/DefaultCollection/_git/LuxStaff/pullrequest/44424?_a=files&amp;path=%2Fsrc%2FIntHR2.Core%2FNHibernate%2FIntHR2SqlClientDriver.cs"/>
 /// </summary>
 public class Fix2100SqlClientDriver : MicrosoftDataSqlClientDriver
 {

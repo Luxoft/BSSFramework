@@ -1,12 +1,12 @@
 ﻿namespace Framework.Projection.Lambda.ProjectionSource.AttributeSource;
 
 /// <summary>
-/// Источник атрибутов для типов/свойств проекций
+/// Attribute source for projection types/properties
 /// </summary>
 public interface IAttributeSource
 {
     /// <summary>
-    /// Получение всех атрибутов объекта
+    /// Getting all object attributes
     /// </summary>
     /// <returns></returns>
     IEnumerable<Attribute> GetAttributes();

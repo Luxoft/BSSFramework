@@ -6,7 +6,7 @@ public class MappingAttribute : Attribute
     private CascadeMode? actualCascadeMode;
 
     /// <summary>
-    /// Имя колонки в бд
+    /// Column name in the db
     /// </summary>
     public string? ColumnName
     {
@@ -27,7 +27,7 @@ public class MappingAttribute : Attribute
     }
 
     /// <summary>
-    /// Поддержка каскадности удаления
+    /// Support for cascade deletion
     /// </summary>
     public CascadeMode CascadeMode
     {
@@ -38,7 +38,7 @@ public class MappingAttribute : Attribute
     public CascadeMode? GetActualCascadeMode() => this.actualCascadeMode;
 
     /// <summary>
-    /// Имя из сторонней таблицы которая join-тся по id и из которой берётся данная колонка
+    /// Name from a third-party table joined by id from which this column is taken
     /// </summary>
     public string? ExternalTableName { get; set; }
 }

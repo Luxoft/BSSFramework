@@ -62,11 +62,11 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase>(
     public bool IsAssignable(Type domainType) => typeof(TPersistentDomainObjectBase).IsAssignableFrom(domainType);
 
     /// <summary>
-    ///     Возвращает данные об изменениях доменного объекта.
+    ///     Returns data about changes of the domain object.
     /// </summary>
-    /// <param name="changes">Описатель операций, проведенных над объектом в слое доступа к данным.</param>
-    /// <returns>Экземпляр <see cref="IEnumerable{ObjectModificationInfo}" />.</returns>
-    /// <exception cref="ArgumentNullException">Аргумент changes равен null.</exception>
+    /// <param name="changes">Descriptor of operations performed on the object in the data access layer.</param>
+    /// <returns>Instance of <see cref="IEnumerable{ObjectModificationInfo}" />.</returns>
+    /// <exception cref="ArgumentNullException">Argument changes is null.</exception>
     public IEnumerable<ObjectModificationInfo<Guid>> GetObjectModifications(DALChanges changes)
     {
         var revisionNumber = revisionService.GetCurrentRevision();

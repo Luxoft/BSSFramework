@@ -27,7 +27,7 @@ public partial class EmployeeBLL
     public Employee IntegrationSave(EmployeeCustomIntegrationSaveModel integrationSaveModel) => throw new NotImplementedException();
 
     /// <summary>
-    /// Изменением всем сотрудникам из модели email
+    /// Changing the email of all employees from the model
     /// </summary>
     /// <param name="changeModel"></param>
     /// <returns></returns>

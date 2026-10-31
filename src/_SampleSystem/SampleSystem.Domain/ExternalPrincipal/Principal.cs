@@ -4,9 +4,9 @@ namespace SampleSystem.Domain.ExternalPrincipal;
 
 /// <summary>
 /// #IADFRAME-1300
-/// Если в основной системе есть объект Principal c полей ExternalId:string
-/// То при генерации базы данных аудита получается PrincipalAudit.ExternalId : guid
-/// Так как такая точно таблица и поле есть в Auth
+/// If the main system has a Principal object with a field ExternalId:string
+/// Then generating the audit database yields PrincipalAudit.ExternalId : guid
+/// Because exactly such a table and field exist in Auth
 /// </summary>
 [BLLViewRole]
 [BLLSaveRole]

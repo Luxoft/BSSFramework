@@ -62,7 +62,7 @@ public static class AddRemoveDetailHelper
         childs.Foreach(master.RemoveDetail);
 
     /// <summary>
-    /// Удаление детали без валидации мастера
+    /// Deleting a detail without validating the master
     /// </summary>
     /// <typeparam name="TMaster"></typeparam>
     /// <typeparam name="TChild"></typeparam>

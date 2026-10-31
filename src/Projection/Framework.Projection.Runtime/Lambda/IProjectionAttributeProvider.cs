@@ -1,12 +1,12 @@
 ﻿namespace Framework.Projection.Lambda;
 
 /// <summary>
-/// Объект с дополнительными атрибутами для генерации
+/// Object with additional attributes for generation
 /// </summary>
 public interface IProjectionAttributeProvider
 {
     /// <summary>
-    /// Дополнительные атрибуты генерации
+    /// Additional generation attributes
     /// </summary>
     IReadOnlyList<Attribute> Attributes { get; }
 }

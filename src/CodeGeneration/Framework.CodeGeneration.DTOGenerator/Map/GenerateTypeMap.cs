@@ -20,11 +20,11 @@ public class GenerateTypeMap
     public IReadOnlyCollection<GeneratePropertyMap> Properties { get; }
 
     /// <summary>
-    /// Проверка на использование подтипа в каком-либо свойстве
+    /// Check whether a subtype is used in any property
     /// </summary>
-    /// <param name="elementType">Тип элемента свойства</param>
-    /// <param name="elementFileType">Тип DTO свойства</param>
-    /// <param name="isDetail">Свойство является деталью</param>
+    /// <param name="elementType">Property element type</param>
+    /// <param name="elementFileType">DTO type of the property</param>
+    /// <param name="isDetail">Property is a detail</param>
     /// <returns></returns>
     public bool UsedDetailRole(Type elementType, RoleFileType? elementFileType, bool? isDetail) =>
         this.GetNotSelfProperties().Any(prop =>

@@ -1,12 +1,12 @@
 ﻿namespace Framework.BLL.Domain.ServiceRole;
 
 /// <summary>
-/// Контейнер маркировки количественной обработки
+/// Container for marking quantitative processing
 /// </summary>
 public interface ICountTypeContainer
 {
     /// <summary>
-    /// Обработка единственного объекта и/или коллекции объектов
+    /// Processing of a single object and/or a collection of objects
     /// </summary>
     CountType CountType { get; }
 }

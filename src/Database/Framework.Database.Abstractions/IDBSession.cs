@@ -11,22 +11,26 @@ public interface IDBSession : IAsyncDisposable, IDisposable
     Task FlushAsync(CancellationToken ct);
 
     /// <summary>
-    /// Закрывает текущую транзакцию без применения изменений.
+    /// Closes the current transaction without applying changes.
     /// </summary>
     void AsFault();
 
     /// <summary>
-    /// Перевод сессию в режим "только для чтения" (доступно только перед фактическим использованием сессии)
+    /// Switches the session to read-only mode (available only before the session is actually used)
     /// </summary>
     void AsReadOnly();
 
     /// <summary>
-    /// Переводит сессию в режим для записи (доступно только перед фактическим использованием сессии)
+    /// Switches the session to write mode (available only before the session is actually used)
     /// </summary>
     void AsWritable();
 
     Task CloseAsync(CancellationToken ct);
 
+    /// <summary>
+    /// Synchronous dispose blocks on <see cref="IAsyncDisposable.DisposeAsync"/>, which commits the transaction (see <see cref="CloseAsync"/>).
+    /// Prefer <c>await using</c>: blocking here can deadlock under a SynchronizationContext.
+    /// </summary>
     void IDisposable.Dispose() => this.DisposeAsync().GetAwaiter().GetResult();
 }
 

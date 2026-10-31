@@ -23,10 +23,10 @@ public static class PropertyPathExtensions
     }
 
     /// <summary>
-    /// Приведение пути к лямбде
+    /// Converting a path to a lambda
     /// </summary>
-    /// <param name="propertyPath">Путь</param>
-    /// <param name="sourceType">Стартовый тип от которого строится лямбда</param>
+    /// <param name="propertyPath">Path</param>
+    /// <param name="sourceType">Starting type from which the lambda is built</param>
     /// <returns></returns>
     public static LambdaExpression ToLambdaExpression(this PropertyPath propertyPath, Type? sourceType = null)
     {

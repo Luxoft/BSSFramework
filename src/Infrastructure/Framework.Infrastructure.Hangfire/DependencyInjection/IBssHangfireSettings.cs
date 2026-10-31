@@ -10,7 +10,7 @@ public interface IBssHangfireSettings
     IBssHangfireSettings SetJobNameExtractPolicy(IJobNameExtractPolicy policy);
 
     /// <summary>
-    /// Автоматическая регистрация job-ов в scope (по умолчанию уже регистрируюся)
+    /// Automatic registration of jobs in scope (registered by default already)
     /// </summary>
     /// <param name="enabled"></param>
     /// <returns></returns>

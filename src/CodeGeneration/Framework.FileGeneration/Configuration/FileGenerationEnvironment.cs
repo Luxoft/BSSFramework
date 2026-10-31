@@ -93,7 +93,7 @@ public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDo
     }
 
     /// <summary>
-    /// Получение окружения для работы с проекциями
+    /// Getting the environment for working with projections
     /// </summary>
     /// <returns></returns>
 
@@ -110,7 +110,7 @@ public abstract class FileGenerationEnvironment<TDomainObjectBase, TPersistentDo
     protected virtual IProjectionEnvironment? GetProjectionEnvironment() => null;
 
     /// <summary>
-    /// Создание окружения проекций через атрибуты
+    /// Creating the projection environment via attributes
     /// </summary>
     /// <returns></returns>
     protected IProjectionEnvironment CreateDefaultProjectionContractEnvironment()

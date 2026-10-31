@@ -3,7 +3,7 @@
 public class SmtpSettings
 {
     /// <summary>
-    /// false чтобы не отправлять нотификации на смтп сервер (для разработческих нужд в основном)
+    /// false to not send notifications to the smtp server (mainly for development needs)
     /// </summary>
     public bool SmtpEnabled { get; set; }
 
@@ -14,12 +14,12 @@ public class SmtpSettings
     public int Port { get; set; } = 25;
 
     /// <summary>
-    /// Ящик, на который будут перенаправлены нотификации без получателей (те нотификации, которые без получателей впринципе разрешены)
+    /// Mailbox to which notifications without recipients will be redirected (notifications for which having no recipients is allowed at all)
     /// </summary>
     public string[] DefaultReceiverEmails { get; set; } = [];
 
     /// <summary>
-    /// Тестовый ящик, на который будут перенаправлены нотификации тестовых стендов (которые !environment.IsProduction())
+    /// Test mailbox to which notifications from test environments (where !environment.IsProduction()) will be redirected
     /// </summary>
     public string[] TestEmails { get; set; } = [];
 

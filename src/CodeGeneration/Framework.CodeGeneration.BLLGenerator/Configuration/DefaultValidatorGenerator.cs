@@ -304,15 +304,15 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
     }
 
     /// <summary>
-    /// Вовзращает выражение, содержащее вызов Unbox для переданного classValidatorType.
+    /// Returns an expression that calls Unbox for the given classValidatorType.
     /// </summary>
-    /// <param name="expression">Исходное выражение.</param>
-    /// <param name="classValidatorType">Тип валидатора.</param>
-    /// <returns>Экземпляр <see cref="CodeExpression"/>.</returns>
-    /// <exception cref="ArgumentNullException">Аргумент
+    /// <param name="expression">Source expression.</param>
+    /// <param name="classValidatorType">Validator type.</param>
+    /// <returns>Instance of <see cref="CodeExpression"/>.</returns>
+    /// <exception cref="ArgumentNullException">Argument
     /// <paramref name="expression"/>
-    /// или
-    /// <paramref name="classValidatorType"/> равен null.
+    /// or
+    /// <paramref name="classValidatorType"/> is null.
     /// </exception>
     protected CodeExpression TryUnboxClass(CodeExpression expression, Type classValidatorType)
     {

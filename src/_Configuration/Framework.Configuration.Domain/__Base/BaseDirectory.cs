@@ -5,14 +5,14 @@ using Framework.Restriction;
 namespace Framework.Configuration.Domain;
 
 /// <summary>
-/// Базовый персистентный класс для типов с именем
+/// Base persistent class for named types
 /// </summary>
 public abstract class BaseDirectory : AuditPersistentDomainObjectBase, IVisualIdentityObject
 {
     private string name = "";
 
     /// <summary>
-    /// Название типа
+    /// Type name
     /// </summary>
     [Required]
     [UniqueElement]

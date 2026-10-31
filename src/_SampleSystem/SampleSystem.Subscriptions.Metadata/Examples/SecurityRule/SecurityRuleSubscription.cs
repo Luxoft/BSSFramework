@@ -13,8 +13,8 @@ using SampleSystem.Security;
 namespace SampleSystem.Subscriptions.Metadata.Examples.SecurityRule;
 
 /// <summary>
-/// Пример подписки, получатели которой определяются через SecurityRule + GetNotificationFilterGroups:
-/// письмо получают сотрудники, чьи принципалы имеют роль SearchTestBusinessRole на BusinessUnit с идентификатором <see cref="BusinessUnitId" />.
+/// Example of a subscription whose recipients are determined via SecurityRule + GetNotificationFilterGroups:
+/// the letter is received by employees whose principals have the SearchTestBusinessRole role on the BusinessUnit with the identifier <see cref="BusinessUnitId" />.
 /// </summary>
 public class SecurityRuleSubscription : Subscription<NoRecipientModel, SecurityRuleTemplate>
 {

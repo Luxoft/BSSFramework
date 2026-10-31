@@ -7,7 +7,7 @@ using Framework.Core;
 namespace Framework.Infrastructure.LocalDBEvents;
 
 /// <summary>
-/// Класс для отправки доменных евентов
+/// Class for sending domain events
 /// </summary>
 /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
 public abstract class EventDTOMessageSenderBase<TPersistentDomainObjectBase> : IEventDTOMessageSender<TPersistentDomainObjectBase>

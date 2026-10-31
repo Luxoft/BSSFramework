@@ -1,7 +1,7 @@
 ﻿namespace Framework.AutomationCore.Services;
 
 /// <summary>
-/// Реализация класса <see cref="TimeProvider"/> для интеграционных тестов
+/// Implementation of <see cref="TimeProvider"/> for integration tests
 /// </summary>
 public class IntegrationTestTimeProvider : TimeProvider
 {

@@ -1,27 +1,27 @@
 ﻿namespace Framework.Projection.Lambda;
 
 /// <summary>
-/// Кастомное проекционное свойство
+/// Custom projection property
 /// </summary>
 public interface IProjectionCustomProperty : IProjectionAttributeProvider
 {
     /// <summary>
-    /// Имя свойства
+    /// Property name
     /// </summary>
     string Name { get; }
 
     /// <summary>
-    /// Доступна запись
+    /// Writable
     /// </summary>
     bool Writable { get; }
 
     /// <summary>
-    /// Тип свойства
+    /// Property type
     /// </summary>
     TypeReferenceBase Type { get; }
 
     /// <summary>
-    /// Дополнительная подгрузка свойств
+    /// Additional property fetching
     /// </summary>
     IReadOnlyList<string> Fetchs { get; }
 }

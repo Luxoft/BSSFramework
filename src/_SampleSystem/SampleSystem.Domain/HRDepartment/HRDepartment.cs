@@ -100,7 +100,6 @@ public partial class HRDepartment :
     [UniqueGroup]
     public virtual IEnumerable<HRDepartmentRoleEmployee> HrDepartmentRoleEmployees => this.hrDepartmentRoleEmployees;
 
-    [Obsolete("Now HRDepartment linked to ManagementBusinessUnit")]
     [UniqueGroup]
     public virtual IEnumerable<BusinessUnitHrDepartment> BusinessUnitHrDepartments => this.businessUnitHrDepartments;
 

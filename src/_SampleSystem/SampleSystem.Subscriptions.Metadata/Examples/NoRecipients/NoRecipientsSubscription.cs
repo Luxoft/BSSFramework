@@ -8,12 +8,12 @@ using SampleSystem.Domain.Models.Custom;
 namespace SampleSystem.Subscriptions.Metadata.Examples.NoRecipients;
 
 /// <summary>
-/// Пример подписки без единого получателя: GetTo/GetCopyTo/GetReplyTo/SecurityRoles не переопределены,
-/// поэтому все три источника получателей пусты.
-/// Воспроизводит проблему: когда получателей нет совсем, уведомление вообще не формируется
-/// (NotificationExtractor группирует получателей по ключу DomainObjectVersions, и при пустых
-/// источниках такой ключ просто не появляется), поэтому модификатор RedirectToSupportMailMessageModifier,
-/// который должен подставлять адрес поддержки в пустое поле To, не успевает сработать - письмо не уходит никуда.
+/// Example of a subscription without a single recipient: GetTo/GetCopyTo/GetReplyTo/SecurityRoles are not overridden,
+/// so all three recipient sources are empty.
+/// Reproduces the problem: when there are no recipients at all, the notification is not formed at all
+/// (NotificationExtractor groups recipients by the DomainObjectVersions key, and when empty
+/// sources such a key simply does not appear), so the RedirectToSupportMailMessageModifier modifier,
+/// which should substitute the support address into an empty To field, does not manage to run - the letter goes nowhere.
 /// </summary>
 public class NoRecipientsSubscription : Subscription<NoRecipientModel, NoRecipientsTemplate>
 {

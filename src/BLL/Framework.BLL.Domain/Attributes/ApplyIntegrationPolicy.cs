@@ -1,7 +1,7 @@
 ﻿namespace Framework.BLL.Domain.Attributes;
 
 /// <summary>
-/// Константы, описывающие политику приема интеграционных сообщений
+/// Constants describing the policy of accepting integration messages
 /// </summary>
 public enum ApplyIntegrationPolicy
 {

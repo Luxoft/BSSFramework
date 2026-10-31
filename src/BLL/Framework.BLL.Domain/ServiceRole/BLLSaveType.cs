@@ -1,23 +1,23 @@
 ﻿namespace Framework.BLL.Domain.ServiceRole;
 
 /// <summary>
-/// Тип сохранения объекта
+/// Object save type
 /// </summary>
 [Flags]
 public enum BLLSaveType
 {
     /// <summary>
-    /// Обычное сохранение через полную Strict-модель
+    /// Regular saving through the full Strict model
     /// </summary>
     Save = 1,
 
     /// <summary>
-    /// Обновление через Update-модель
+    /// Update via an Update model
     /// </summary>
     Update = 2,
 
     /// <summary>
-    /// Оба типа сохранения
+    /// Both save types
     /// </summary>
     Both = Save + Update
 }

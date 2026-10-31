@@ -4,7 +4,7 @@ using Framework.Restriction;
 namespace Framework.Authorization.Domain;
 
 /// <summary>
-/// Связь между пермиссией и контекстом
+/// Relation between a permission and a context
 /// </summary>
 public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Permission>
 {
@@ -19,9 +19,9 @@ public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Pe
     }
 
     /// <summary>
-    /// Конструктор создает контекст с ссылкой на пермиссию
+    /// The constructor creates a context with a reference to a permission
     /// </summary>
-    /// <param name="permission">Пермиссия</param>
+    /// <param name="permission">Permission</param>
     public PermissionRestriction(Permission permission)
     {
         this.permission = permission ?? throw new ArgumentNullException(nameof(permission));
@@ -29,7 +29,7 @@ public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Pe
     }
 
     /// <summary>
-    /// Пермиссия по связке контекст+пермиссия
+    /// Permission by the context+permission combination
     /// </summary>
     public virtual Permission Permission
     {
@@ -38,7 +38,7 @@ public class PermissionRestriction : AuditPersistentDomainObjectBase, IDetail<Pe
     }
 
     /// <summary>
-    /// Вычисляемый доменный тип по связке контекст+пермиссия
+    /// Computed domain type for the context+permission combination
     /// </summary>
     [Required]
     [UniqueElement]

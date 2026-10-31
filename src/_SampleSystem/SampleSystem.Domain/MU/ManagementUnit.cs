@@ -81,4 +81,8 @@ public class ManagementUnit :
     public static bool operator ==(ManagementUnit? left, IUnit<ManagementUnit>? right) => Equals(left, right);
 
     public static bool operator !=(ManagementUnit? left, IUnit<ManagementUnit>? right) => !Equals(left, right);
+
+    public override bool Equals(object? obj) => base.Equals(obj);
+
+    public override int GetHashCode() => base.GetHashCode();
 }

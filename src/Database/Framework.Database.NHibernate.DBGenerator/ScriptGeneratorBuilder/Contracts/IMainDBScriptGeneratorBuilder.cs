@@ -26,7 +26,7 @@ public interface IMainDBScriptGeneratorBuilder : IConfigurable
     IMainDBScriptGeneratorBuilder WithRequireRef(params IgnoreLink[] ignoreLinks);
 
     /// <summary>
-    /// Настройка, предотвращающая удаление временной БД, предназначенной для накатывания схемы.
+    /// Setting that prevents deletion of the temporary DB intended for applying the schema.
     /// </summary>
     /// <returns><see cref="IMainDBScriptGeneratorBuilder"/>.</returns>
     IMainDBScriptGeneratorBuilder WithPreserveSchemaDatabase();

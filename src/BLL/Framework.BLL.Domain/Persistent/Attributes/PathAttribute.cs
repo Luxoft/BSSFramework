@@ -1,12 +1,12 @@
 ﻿namespace Framework.BLL.Domain.Persistent.Attributes;
 
 /// <summary>
-/// Атрибут пути объкта
+/// Object path attribute
 /// </summary>
 public abstract class PathAttribute(string path) : Attribute, IPathAttribute
 {
     /// <summary>
-    /// Путь
+    /// Path
     /// </summary>
     public string Path { get; } = path;
 }

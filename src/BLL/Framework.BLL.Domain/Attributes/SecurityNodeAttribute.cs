@@ -1,7 +1,7 @@
 ﻿namespace Framework.BLL.Domain.Attributes;
 
 /// <summary>
-/// Атрибут для описания универсального пути безопасности (для проекций)
+/// Attribute describing a universal security path (for projections)
 /// </summary>
 [AttributeUsage(AttributeTargets.Interface)]
 public class SecurityNodeAttribute : Attribute;

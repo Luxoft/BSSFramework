@@ -3,7 +3,7 @@
 namespace Framework.BLL.Domain.Attributes;
 
 /// <summary>
-/// Атрибут для редактирования объекта (или его свойства)
+/// Attribute for editing an object (or its property)
 /// </summary>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Property)]
 public class EditDomainObjectAttribute : DomainObjectAccessAttribute

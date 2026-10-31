@@ -3,12 +3,12 @@
 namespace Framework.BLL.Domain.ServiceRole;
 
 /// <summary>
-/// Контейнер для маркировки размера выгрузки данных их базы
+/// Container for marking the size of data fetched from the database
 /// </summary>
 public interface IMaxFetchContainer
 {
     /// <summary>
-    /// Максимальный уровень выгрузки из базы
+    /// Maximum database fetch level
     /// </summary>
     ViewDTOType MaxFetch { get; }
 }

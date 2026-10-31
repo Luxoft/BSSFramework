@@ -6,68 +6,68 @@ namespace Framework.Core;
 public partial struct Period
 {
     /// <summary>
-    /// Преобразует дату начала периода в строковое представление месяца и года в предложном падеже для Российского стандарта
+    /// Converts the period start date into a string representation of the month and year in the prepositional case for the Russian standard
     /// </summary>
-    /// <returns>Строка, содержащая полное имя месяца и год в предложном падеже</returns>
+    /// <returns>String containing the full month name and year in the prepositional case</returns>
     [Obsolete("Only for reports. In plain code use CommonPeriodExtensions.GetInMonthAndYearStrRus instead")]
     public string GetInMonthAndYearStrRus() => CommonPeriodExtensions.GetInMonthAndYearStrRus(this);
 
     /// <summary>
-    /// Преобразует дату начала и конца периода в строковое описание интервала представленый месяцами и годом для Российского стандарта
+    /// Converts the start and end dates of the period into a string description of the interval represented by months and year for the Russian standard
     /// </summary>
-    /// <returns>Строка, содержащая содержащая имя месяца и год если период в одном месяце, иначе содержащяя имя начального и конечного месяца с годом</returns>
+    /// <returns>String containing the month name and year if the period is within one month, otherwise the names of the start and end months with the year</returns>
     [Obsolete("Only for reports. In plain code use CommonPeriodExtensions.GetMonthAndYearStrRus instead")]
     public string GetMonthAndYearStrRus() => CommonPeriodExtensions.GetMonthAndYearStrRus(this);
 
     /// <summary>
-    /// Преобразует дату начала и конца периода в строковое описание интервала представленый месяцами и годом
+    /// Converts the start and end dates of the period into a string description of the interval represented by months and year
     /// </summary>
-    /// <returns>Строка, содержащая содержащая имя месяца и год если период в одном месяце, иначе содержащяя имя начального и конечного месяца с годом</returns>
+    /// <returns>String containing the month name and year if the period is within one month, otherwise the names of the start and end months with the year</returns>
     [Obsolete("Only for reports. In plain code use CommonPeriodExtensions.GetMonthAndYearStr instead")]
     public string GetMonthAndYearStr() => CommonPeriodExtensions.GetMonthAndYearStr(this);
 
     /// <summary>
-    /// Преобразует дату начала и конца периода в строковое описание интервала представленый месяцами и годом для Римского стандарта
+    /// Converts the start and end dates of the period into a string description of the interval represented by months and year for the Roman standard
     /// </summary>
-    /// <returns>Строка, содержащая содержащая римский номер месяца и год если период в одном месяце, иначе содержащяя римские номера начального и конечного месяца с годом</returns>
+    /// <returns>String containing the Roman month numeral and year if the period is within one month, otherwise the Roman numerals of the start and end months with the year</returns>
     [Obsolete("Only for reports. In plain code use CommonPeriodExtensions.GetMonthAndYearStrRoman instead")]
     public string GetMonthAndYearStrRoman() => CommonPeriodExtensions.GetMonthAndYearStrRoman(this);
 
     /// <summary>
-    /// Возвращает неделю года, к которой относится дата начала периода для текущего стандарта
+    /// Returns the week of the year to which the period start date belongs for the current standard
     /// </summary>
-    /// <returns>Положительное целое число, представляющее неделю года, к которой относится дата начала периода для текущего стандарта</returns>
+    /// <returns>A positive integer representing the week of the year to which the period start date belongs for the current standard</returns>
     [Obsolete("Only for reports. In plain code use CommonPeriodExtensions.GetWeekNumber instead")]
     public int GetWeekNumber() => CommonPeriodExtensions.GetWeekNumber(this);
 
     /// <summary>
-    /// Возвращает неделю года, к которой относится дата начала периода для <see cref="isoCultureName"/> стандарта
+    /// Returns the week of the year to which the period start date belongs for the <paramref name="isoCultureName"/> standard
     /// </summary>
-    /// <param name="isoCultureName">Предварительно определенное имя CultureInfo, существующего объекта CultureInfo или имя языка и региональных параметров, свойственных только Windows, не учитывая регистр</param>
-    /// <returns>Положительное целое число, представляющее неделю года, к которой относится дата начала периода для указанного стандарта</returns>
+    /// <param name="isoCultureName">Predefined CultureInfo name, name of an existing CultureInfo object, or a Windows-only culture name, case-insensitive</param>
+    /// <returns>A positive integer representing the week of the year to which the period start date belongs for the specified standard</returns>
     [Obsolete("Only for reports. In plain code use CommonPeriodExtensions.GetWeekNumber instead")]
     public int GetWeekNumber(string isoCultureName) => CommonPeriodExtensions.GetWeekNumber(this, isoCultureName);
 
     /// <summary>
-    /// Преобразует дату начала и конца периода в короткое строковое описание интервала представленый месяцами и годом
+    /// Converts the start and end dates of the period into a short string description of the interval represented by months and year
     /// </summary>
-    /// <returns>Строка, содержащая содержащая номер месяца и год если период в одном месяце, иначе содержащяя намера начального и конечного месяца с годом</returns>
+    /// <returns>String containing the month number and year if the period is within one month, otherwise the numbers of the start and end months with the year</returns>
     [Obsolete("Only for reports. In plain code use CommonPeriodExtensions.ToExtraShortString instead")]
     public string ToExtraShortString() => CommonPeriodExtensions.ToExtraShortString(this);
 
     /// <summary>
-    /// Преобразует дату начала и конца периода в короткое строковое описание интервала представленый месяцами и годом для <see cref="cultureInfo"/> региональных параметров
+    /// Converts the start and end dates of the period into a short string description of the interval represented by months and year for the <paramref name="cultureInfo"/> regional settings
     /// </summary>
-    /// <param name="cultureInfo">Предоставляет сведения об определенном языке и региональных параметрах используемое для форматирование дат периода</param>
-    /// <returns>Строка, содержащая содержащая номер месяца и год если период в одном месяце, иначе содержащяя намера начального и конечного месяца с годом</returns>
+    /// <param name="cultureInfo">Provides information about a specific language and regional settings used to format period dates</param>
+    /// <returns>String containing the month number and year if the period is within one month, otherwise the numbers of the start and end months with the year</returns>
     [Obsolete("Only for reports. In plain code use CommonPeriodExtensions.ToExtraShortString instead")]
     public string ToExtraShortString(CultureInfo cultureInfo) => CommonPeriodExtensions.ToExtraShortString(this, cultureInfo);
 
     /// <summary>
-    /// Возвращает формат даты для <see cref="cultureInfo"/> региональных параметров содержащий только месяц и год
+    /// Returns the date format for the <paramref name="cultureInfo"/> regional settings containing only month and year
     /// </summary>
-    /// <param name="cultureInfo">Предоставляет сведения об определенном языке и региональных параметрах используемое для форматирование дат периода</param>
-    /// <returns>Строка, представляющая формат даты, в указанных региональных параметрах, для вывода только месяца и года</returns>
+    /// <param name="cultureInfo">Provides information about a specific language and regional settings used to format period dates</param>
+    /// <returns>String representing the date format in the specified regional settings for displaying only the month and year</returns>
     [Obsolete("Only for reports. In plain code use CommonPeriodExtensions.GetDayAndMonthDateFormat instead")]
     public string GetDayAndMonthDateFormat(CultureInfo cultureInfo) => CommonPeriodExtensions.GetDayAndMonthDateFormat(this, cultureInfo);
 }

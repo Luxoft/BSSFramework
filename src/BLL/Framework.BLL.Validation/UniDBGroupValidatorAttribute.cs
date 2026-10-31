@@ -4,25 +4,25 @@ using Framework.Validation.Validators;
 namespace Framework.BLL.Validation;
 
 /// <summary>
-/// Атрибут проверки уникальности через запрос к БД.
+/// Attribute for uniqueness check by querying the database.
 /// </summary>
 /// <seealso cref="ClassValidatorAttribute" />
 [AttributeUsage(AttributeTargets.Class)]
 public class UniDBGroupValidatorAttribute : ClassValidatorAttribute
 {
     /// <summary>
-    ///     Возвращает строковый ключ группы.
+    ///     Returns the string key of the group.
     /// </summary>
     /// <value>
-    ///     Строковый ключ группы.
+    ///     String key of the group.
     /// </value>
     public string? GroupKey { get; init; }
 
     /// <summary>
-    ///     Получает или возвращает флаг, указывающий на необходимость проверки уникальности путем запроса к БД.
+    ///     Gets or sets a flag indicating that uniqueness must be checked by querying the database.
     /// </summary>
     /// <value>
-    ///     <c>true</c> если еобходимо проверять уникальность путем запроса к БД; в противном случае, <c>false</c>.
+    ///     <c>true</c> if uniqueness must be checked by querying the database; otherwise, <c>false</c>.
     /// </value>
     public bool UseDbEvaluation { get; set; }
 

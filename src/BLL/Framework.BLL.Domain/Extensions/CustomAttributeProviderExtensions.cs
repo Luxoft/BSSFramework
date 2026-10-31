@@ -11,10 +11,10 @@ namespace Framework.BLL.Domain.Extensions;
 public static class CustomAttributeProviderExtensions
 {
     /// <summary>
-    /// Получение операции просмотра (объекта или свойства)
+    /// Getting the view operation (of an object or property)
     /// </summary>
-    /// <param name="source">Источник</param>
-    /// <param name="throwIfNull">Ошибка, если операция отсутствует</param>
+    /// <param name="source">Source</param>
+    /// <param name="throwIfNull">Error if the operation is missing</param>
     /// <returns></returns>
     public static SecurityRule? GetViewSecurityRule(this ICustomAttributeProvider source, bool throwIfNull = false)
     {
@@ -29,10 +29,10 @@ public static class CustomAttributeProviderExtensions
     }
 
     /// <summary>
-    /// Получение операции редактирования (объекта или свойства)
+    /// Getting the edit operation (of an object or property)
     /// </summary>
-    /// <param name="source">Источник</param>
-    /// <param name="throwIfNull">Ошибка, если операция отсутствует</param>
+    /// <param name="source">Source</param>
+    /// <param name="throwIfNull">Error if the operation is missing</param>
     /// <returns></returns>
     public static SecurityRule? GetEditSecurityRule(this ICustomAttributeProvider source, bool throwIfNull = false)
     {

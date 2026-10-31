@@ -40,7 +40,7 @@ public class TryCreateDatabaseScriptGenerator(IDatabaseScriptGenerator source) :
     }
 }
 /// <summary>
-/// Копирует схему базу данных и на ней выполняет скрипты
+/// Copies the database schema and executes scripts on it
 /// </summary>
 public class UnsafeApplyChangedDatabaseScriptGenerator : IDatabaseScriptGenerator
 {
@@ -165,9 +165,9 @@ public class UnsafeApplyChangedDatabaseScriptGenerator : IDatabaseScriptGenerato
         }
 
         /*
-         * Трансфер уже выполнен.
-         * Это происходит в том случае, когда генерация всех систем
-         * выполняется в одну базу.
+         * Transfer has already been performed.
+         * This happens when generation of all systems
+         * is performed into a single database.
          */
         if (target.Tables.Count > 0)
         {

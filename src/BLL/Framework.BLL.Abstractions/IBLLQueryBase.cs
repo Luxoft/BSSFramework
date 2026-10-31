@@ -12,33 +12,33 @@ namespace Framework.BLL;
 public interface IBLLQueryBase<TDomainObject> : IBLLSimpleQueryBase<TDomainObject>
 {
     /// <summary>
-    /// Получение IQueryable с учётом безопасности
+    /// Getting IQueryable with security
     /// </summary>
-    /// <param name="fetchRule">Подгружаемые свойства</param>
+    /// <param name="fetchRule">Properties to fetch</param>
     /// /// <param name="lockRole">lockRole</param>
     /// <returns></returns>
     IQueryable<TDomainObject> GetSecureQueryable(FetchRule<TDomainObject>? fetchRule = null, LockRole lockRole = LockRole.None);
 
     /// <summary>
-    /// Получение IQueryable с учётом безопасности
+    /// Getting IQueryable with security
     /// </summary>
-    /// <param name="buildFetchRule">Подгружаемые свойства</param>
+    /// <param name="buildFetchRule">Properties to fetch</param>
     /// <returns></returns>
     IQueryable<TDomainObject> GetSecureQueryable(Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule);
 
 
     /// <summary>
-    /// Получение IQueryable без учёта безопасности
+    /// Getting IQueryable without security
     /// </summary>
-    /// <param name="fetchRule">Подгружаемые свойства</param>
+    /// <param name="fetchRule">Properties to fetch</param>
     /// <param name="lockRole">lockRole</param>
     /// <returns></returns>
     IQueryable<TDomainObject> GetUnsecureQueryable(FetchRule<TDomainObject> fetchRule, LockRole lockRole = LockRole.None);
 
     /// <summary>
-    /// Получение IQueryable без учёта безопасности
+    /// Getting IQueryable without security
     /// </summary>
-    /// <param name="buildFetchRule">Подгружаемые свойства</param>
+    /// <param name="buildFetchRule">Properties to fetch</param>
     /// <returns></returns>
     IQueryable<TDomainObject> GetUnsecureQueryable(Func<PropertyFetchRule<TDomainObject>, PropertyFetchRule<TDomainObject>> buildFetchRule);
 
@@ -67,17 +67,17 @@ public interface IBLLQueryBase<TDomainObject> : IBLLSimpleQueryBase<TDomainObjec
     List<TDomainObject> GetListBy(Expression<Func<TDomainObject, bool>> filter, Func<PropertyFetchRule<TDomainObject>, FetchRule<TDomainObject>> buildFetchRule);
 
     /// <summary>
-    /// Выполняет поиск доменного объекта по условию.
+    /// Searches for a domain object by condition.
     /// </summary>
-    /// <param name="filter">Выражение, определяющее условие поиска.</param>
+    /// <param name="filter">Expression that defines the search condition.</param>
     /// <param name="throwOnNotFound">
-    ///   Когда передано <c>true</c> будет выброшено <see cref="BusinessLogicException"/>.
-    ///   если объект по условию не найден.
+    ///   When <c>true</c> is passed, <see cref="BusinessLogicException"/> will be thrown.
+    ///   if the object is not found by the condition.
     /// </param>
-    /// <param name="fetchRule">Пути, определяющие выгрузку графа.</param>
-    /// <returns>Экземпляр найденного объекта или null, если объект не найден.</returns>
-    /// <exception cref="BusinessLogicException">Если параметр throwOnNotFound задан как true и объект не найден.</exception>
-    /// <exception cref="InvalidOperationException">По заданному условию найден более чем один объект.</exception>
+    /// <param name="fetchRule">Paths that define the graph fetch.</param>
+    /// <returns>Instance of the found object, or null if the object is not found.</returns>
+    /// <exception cref="BusinessLogicException">If the throwOnNotFound parameter is true and the object is not found.</exception>
+    /// <exception cref="InvalidOperationException">More than one object was found for the given condition.</exception>
     TDomainObject? GetObjectBy(Expression<Func<TDomainObject, bool>> filter, bool throwOnNotFound = false, FetchRule<TDomainObject>? fetchRule = null);
 
     TDomainObject? GetObjectBy(

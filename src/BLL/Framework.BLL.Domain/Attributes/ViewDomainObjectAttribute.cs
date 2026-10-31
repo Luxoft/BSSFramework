@@ -3,7 +3,7 @@
 namespace Framework.BLL.Domain.Attributes;
 
 /// <summary>
-/// Атрибут для отображения объекта (или его свойства)
+/// Attribute for viewing an object (or its property)
 /// </summary>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct | AttributeTargets.Property)]
 public class ViewDomainObjectAttribute : DomainObjectAccessAttribute

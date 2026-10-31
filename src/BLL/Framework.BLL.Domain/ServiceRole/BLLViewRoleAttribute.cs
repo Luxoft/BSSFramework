@@ -4,7 +4,7 @@ using Framework.Core.Helpers;
 namespace Framework.BLL.Domain.ServiceRole;
 
 /// <summary>
-/// Атрибут указания генерации фасадного и BLL слоёв
+/// Attribute specifying generation of the facade and BLL layers
 /// </summary>
 public class BLLViewRoleAttribute : BLLViewRoleBaseAttribute
 {

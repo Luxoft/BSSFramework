@@ -303,16 +303,16 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
     }
 
     /// <summary>
-    /// Возвращает список описателей свойств доменного типа.
+    /// Returns the list of descriptors of domain type properties.
     /// </summary>
-    /// <param name="domainType">Тип доменного типа.</param>
-    /// <param name="fileType">Тип генерируемого файла.</param>
-    /// <param name="role">Роль DTO.</param>
-    /// <returns>Экземпляр <see cref="IEnumerable{PropertyInfo}"/>.</returns>
-    /// <exception cref="ArgumentNullException">Аргумент
+    /// <param name="domainType">Domain type type.</param>
+    /// <param name="fileType">Type of the generated file.</param>
+    /// <param name="role">DTO role.</param>
+    /// <returns>Instance of <see cref="IEnumerable{PropertyInfo}"/>.</returns>
+    /// <exception cref="ArgumentNullException">Argument
     /// <paramref name="domainType"/>
-    /// или
-    /// <paramref name="fileType"/> равен null.
+    /// or
+    /// <paramref name="fileType"/> is null.
     /// </exception>
     protected IEnumerable<PropertyInfo> GetInternalDomainTypeProperties(Type domainType, DTOFileType fileType, DTORole role)
     {
@@ -414,9 +414,9 @@ public abstract class DTOGeneratorConfigurationBase<TEnvironment> : CodeGenerato
     }
 
     /// <summary>
-    /// Возвращает список доменных типов.
+    /// Returns the list of domain types.
     /// </summary>
-    /// <returns>Экземпляр <see cref="IEnumerable{Type}"/></returns>
+    /// <returns>Instance of <see cref="IEnumerable{Type}"/></returns>
     protected override IEnumerable<Type> GetDomainTypes() => this.Environment.GetDefaultDomainTypes(false).Concat(this.ProjectionTypes);
 
     protected override IEnumerable<ICodeFileFactoryHeader<BaseFileType>> GetFileFactoryHeaders()

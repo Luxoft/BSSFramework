@@ -40,12 +40,12 @@ public interface IBLLCoreGeneratorConfiguration : ICodeGeneratorConfiguration, I
     Type? FormatModelType { get; }
 
     /// <summary>
-    /// Тип базовой модели для изменения единичного объекта
+    /// Type of the base model for changing a single object
     /// </summary>
     Type? ChangeModelType { get; }
 
     /// <summary>
-    /// Тип базовой модели для изменения коллекции объектов
+    /// Type of the base model for changing a collection of objects
     /// </summary>
     Type? MassChangeModelType { get; }
 
@@ -56,10 +56,10 @@ public interface IBLLCoreGeneratorConfiguration : ICodeGeneratorConfiguration, I
     bool GenerateValidation { get; }
 
     /// <summary>
-    ///     Получает или возвращает флаг, указывающий на необходимость проверки уникальности путем запроса к БД.
+    ///     Gets or sets a flag indicating that uniqueness must be checked by querying the database.
     /// </summary>
     /// <value>
-    ///     <c>true</c> если необходимо проверять уникальность путем запроса к БД; в противном случае, <c>false</c>.
+    ///     <c>true</c> if uniqueness must be checked by querying the database; otherwise, <c>false</c>.
     /// </value>
     bool UseDbUniquenessEvaluation { get; }
 

@@ -1,14 +1,14 @@
 ﻿namespace Framework.Relations;
 
 /// <summary>
-/// Описывает деталь в связке мастер-деталь
+/// Describes a detail in a master-detail relationship
 /// </summary>
-/// <typeparam name="TMaster">Тип мастера</typeparam>
+/// <typeparam name="TMaster">Master type</typeparam>
 public interface IDetail<out TMaster>
         where TMaster : class
 {
     /// <summary>
-    /// Ссылка на мастера
+    /// Reference to the master
     /// </summary>
     TMaster? Master { get; }
 }

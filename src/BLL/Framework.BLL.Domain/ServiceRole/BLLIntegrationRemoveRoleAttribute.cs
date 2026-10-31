@@ -1,12 +1,12 @@
 ﻿namespace Framework.BLL.Domain.ServiceRole;
 
 /// <summary>
-/// Атрибут для удаления объекта через интеграцию
+/// Attribute for deleting an object through integration
 /// </summary>
 public class BLLIntegrationRemoveRoleAttribute : BLLServiceRoleAttribute, ICountTypeContainer
 {
     /// <summary>
-    /// Удаление единственного объекта и/или коллекции объектов
+    /// Deleting a single object and/or a collection of objects
     /// </summary>
     public CountType CountType { get; set; } = CountType.Single;
 }

@@ -7,7 +7,7 @@ public class ExtendedInlineAuditObj : AuditPersistentDomainObjectBase
     private Employee.Employee? modifiedByEmployee;
 
     /// <summary>
-    ///     Сотрудник, создавший доменный объект
+    ///     Employee who created the domain object
     /// </summary>
     public virtual Employee.Employee? CreatedByEmployee
     {
@@ -16,7 +16,7 @@ public class ExtendedInlineAuditObj : AuditPersistentDomainObjectBase
     }
 
     /// <summary>
-    ///     Сотрудник, изменивший доменный объект
+    ///     Employee who modified the domain object
     /// </summary>
     public virtual Employee.Employee? ModifiedByEmployee
     {

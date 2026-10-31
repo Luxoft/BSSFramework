@@ -1,47 +1,47 @@
 ﻿namespace Framework.Projection.Lambda;
 
 /// <summary>
-/// Интерфейс проекции
+/// Projection interface
 /// </summary>
 public interface IProjection : IProjectionAttributeProvider
 {
     /// <summary>
-    /// Тип на основе которого строится проекциея
+    /// Type on which the projection is based
     /// </summary>
     Type SourceType { get; }
 
     /// <summary>
-    /// Имя проекции
+    /// Projection name
     /// </summary>
     string Name { get; }
 
     /// <summary>
-    /// Генерация BLLViewRole логики и фасадов
+    /// Generation of BLLViewRole logic and facades
     /// </summary>
     bool BLLView { get; }
 
     /// <summary>
-    /// Роль проекции
+    /// Projection role
     /// </summary>
     ProjectionRole Role { get; }
 
     /// <summary>
-    /// Список свойств
+    /// List of properties
     /// </summary>
     IReadOnlyList<IProjectionProperty> Properties { get; }
 
     /// <summary>
-    /// Список расчётных свойств
+    /// List of calculated properties
     /// </summary>
     IReadOnlyList<IProjectionCustomProperty> CustomProperties { get; }
 
     /// <summary>
-    /// Дополнительные фильтры
+    /// Additional filters
     /// </summary>
     IReadOnlyList<ProjectionFilterAttribute> FilterAttributes { get; }
 
     /// <summary>
-    /// Игнорирование Id-свойства при сереализации
+    /// Ignore the Id property during serialization
     /// </summary>
     bool IgnoreIdSerialization { get; }
 }

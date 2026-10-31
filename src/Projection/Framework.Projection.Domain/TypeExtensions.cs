@@ -8,10 +8,10 @@ namespace Framework.Projection;
 public static class TypeExtensions
 {
     /// <summary>
-    /// Получние списка фильтров проекции
+    /// Getting the list of projection filters
     /// </summary>
-    /// <param name="projectionType">Тип проекции</param>
-    /// <param name="target">Применимость фильтра</param>
+    /// <param name="projectionType">Projection type</param>
+    /// <param name="target">Filter applicability</param>
     /// <returns></returns>
     public static IEnumerable<Type> GetProjectionFilters(this Type projectionType, ProjectionFilterTargets target = ProjectionFilterTargets.All)
     {
@@ -23,10 +23,10 @@ public static class TypeExtensions
     }
 
     /// <summary>
-    /// Получение исходного типа проекции по её контракту
+    /// Getting the source type of the projection by its contract
     /// </summary>
-    /// <param name="contractType">Тип контракта проекции</param>
-    /// <param name="raiseIfNull">Проверка на существоание</param>
+    /// <param name="contractType">Projection contract type</param>
+    /// <param name="raiseIfNull">Existence check</param>
     /// <returns></returns>
     public static Type? GetProjectionContractSourceType(this Type contractType, bool raiseIfNull = true)
     {
@@ -61,10 +61,10 @@ public static class TypeExtensions
     }
 
     /// <summary>
-    /// Получение исходного типа проекции
+    /// Getting the source type of the projection
     /// </summary>
-    /// <param name="type">Тип проекции</param>
-    /// <param name="raiseIfNull">Проверка на существоание</param>
+    /// <param name="type">Projection type</param>
+    /// <param name="raiseIfNull">Existence check</param>
     /// <returns></returns>
     public static Type? GetProjectionSourceType(this Type type, bool raiseIfNull = true)
     {
@@ -90,9 +90,9 @@ public static class TypeExtensions
     }
 
     /// <summary>
-    /// Получение исходного типа проекции или самого себя
+    /// Getting the source type of the projection or itself
     /// </summary>
-    /// <param name="type">Тип проекции</param>
+    /// <param name="type">Projection type</param>
     /// <returns></returns>
     public static Type GetProjectionSourceTypeOrSelf(this Type type)
     {
@@ -102,10 +102,10 @@ public static class TypeExtensions
     }
 
     /// <summary>
-    /// Получение контрактка из проекции
+    /// Getting the contract from the projection
     /// </summary>
-    /// <param name="type">Тип проекции</param>
-    /// <param name="raiseIfNull">Проверка на существоание</param>
+    /// <param name="type">Projection type</param>
+    /// <param name="raiseIfNull">Existence check</param>
     /// <returns></returns>
     public static Type? GetProjectionContractType(this Type type, bool raiseIfNull = true)
     {
@@ -131,9 +131,9 @@ public static class TypeExtensions
     }
 
     /// <summary>
-    /// Проверка типа на то, что он является проекцией
+    /// Check that the type is a projection
     /// </summary>
-    /// <param name="type">Тип проекции</param>
+    /// <param name="type">Projection type</param>
     /// <returns></returns>
     public static bool IsProjection(this Type type)
     {
@@ -143,10 +143,10 @@ public static class TypeExtensions
     }
 
     /// <summary>
-    /// Проверка типа на то, что он является проекцией с условием на базовый тип
+    /// Check that the type is a projection with a condition on the base type
     /// </summary>
-    /// <param name="type">Тип проекции</param>
-    /// <param name="condition">Условие на базовый тип</param>
+    /// <param name="type">Projection type</param>
+    /// <param name="condition">Condition on the base type</param>
     /// <returns></returns>
     public static bool IsProjection(this Type type, Func<Type, bool> condition)
     {

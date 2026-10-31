@@ -15,7 +15,7 @@ public abstract class DefaultFieldsTests
 
         // Assert
         Assert.NotEqual(0, dto.IntVal);
-        Assert.NotEqual(null, dto.StrVal);
+        Assert.NotNull(dto.StrVal);
         Assert.NotEqual(default(DayOfWeek), dto.EnumVal);
 
         Assert.Equal(TestDefaultFieldsMappingObj.IntDefaultVal, dto.IntVal);

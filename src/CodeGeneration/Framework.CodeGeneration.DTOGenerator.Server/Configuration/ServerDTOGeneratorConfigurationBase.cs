@@ -340,7 +340,7 @@ public abstract class ServerDTOGeneratorConfigurationBase<TEnvironment> : DTOGen
     protected virtual IPropertyAssignerConfigurator GetPropertyAssignerConfigurator() => new PropertyAssignerConfigurator<ServerDTOGeneratorConfigurationBase<TEnvironment>>(this);
 
     /// <summary>
-    /// Возвращает типы преобразователей DTO.
+    /// Returns DTO converter types.
     /// </summary>
     /// <returns><see cref="IEnumerable{DTOFileType}"/>.</returns>
     protected virtual IEnumerable<DTOFileType> GetLambdaConvertTypes() =>

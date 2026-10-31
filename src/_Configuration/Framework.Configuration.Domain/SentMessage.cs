@@ -4,7 +4,7 @@ using Framework.Restriction;
 namespace Framework.Configuration.Domain;
 
 /// <summary>
-/// Сообщение, отправленное пользователю
+/// Message sent to the user
 /// </summary>
 [NotAuditedClass]
 public class SentMessage : AuditPersistentDomainObjectBase
@@ -25,17 +25,18 @@ public class SentMessage : AuditPersistentDomainObjectBase
     }
 
     /// <summary>
-    /// Конструктор
+    /// Constructor
     /// </summary>
-    /// <param name="from">Отправитель</param>
-    /// <param name="to">Получатель</param>
-    /// <param name="subject">Шаблон темы сообщения</param>
-    /// <param name="message">Сообщение</param>
-    /// <param name="templateName">Имя шаблона</param>
-    /// <param name="comment">Комментарий</param>
-    /// <param name="copy">Дополнительные получатели в копии письма</param>
-    /// <param name="contextObjectType">Доменный тип, на который зарегистрирована подписка</param>
-    /// <param name="contextObjectId">ID доменного типа, на который зарегистрирована подписка</param>
+    /// <param name="from">Sender</param>
+    /// <param name="to">Recipient</param>
+    /// <param name="subject">Message subject template</param>
+    /// <param name="message">Message</param>
+    /// <param name="templateName">Template name</param>
+    /// <param name="comment">Comment</param>
+    /// <param name="copy">Additional recipients in copy of the letter</param>
+    /// <param name="contextObjectType">Domain type the subscription is registered for</param>
+    /// <param name="contextObjectId">ID of the domain type the subscription is registered for</param>
+    /// <param name="replyTo">Reply-to recipients of the letter</param>
     public SentMessage(string @from, string to, string subject, string message, string templateName, string comment, string copy, string contextObjectType, Guid? contextObjectId, string replyTo)
     {
         this.from = from;
@@ -51,56 +52,56 @@ public class SentMessage : AuditPersistentDomainObjectBase
     }
 
     /// <summary>
-    /// ID доменного типа, на который зарегистрирована подписка
+    /// ID of the domain type the subscription is registered for
     /// </summary>
     public virtual Guid? ContextObjectId => this.contextObjectId;
 
     /// <summary>
-    /// Доменный тип, на который зарегистрирована подписка
+    /// Domain type the subscription is registered for
     /// </summary>
     public virtual string ContextObjectType => this.contextObjectType;
 
     /// <summary>
-    /// Дополнительный получатель в копии письма
+    /// Additional recipient in copy of the letter
     /// </summary>
     [MaxLength]
     public virtual string Copy => this.copy;
 
     /// <summary>
-    /// Получатель(и) нотификации
+    /// Notification recipient(s)
     /// </summary>
     [MaxLength]
     public virtual string To => this.to;
 
     /// <summary>
-    /// Шаблон темы нотификации
+    /// Notification subject template
     /// </summary>
     [MaxLength(1000)]
     public virtual string Subject => this.subject;
 
     /// <summary>
-    /// Шаблон текста нотифкации
+    /// Notification text template
     /// </summary>
     [MaxLength]
     public virtual string Message => this.message;
 
     /// <summary>
-    /// Название шаблона нотификации
+    /// Notification template name
     /// </summary>
     public virtual string TemplateName => this.templateName;
 
     /// <summary>
-    /// Комментарии
+    /// Comments
     /// </summary>
     public virtual string Comment => this.comment;
 
     /// <summary>
-    /// Отправитель нотификации
+    /// Notification sender
     /// </summary>
     public virtual string From => this.from;
 
     /// <summary>
-    /// ReplyTo нотификации
+    /// ReplyTo of the notification
     /// </summary>
     [MaxLength]
     public virtual string ReplyTo => this.replyTo;

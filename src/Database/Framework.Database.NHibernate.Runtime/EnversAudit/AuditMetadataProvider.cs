@@ -37,8 +37,8 @@ internal class AuditMetadataProvider<TAuditRevisionEntity> : IMetaDataProvider
     /// <summary>
     /// Initializes a new instance of the <see cref="AuditMetadataProvider{TAuditRevisionEntity}"/> class.
     /// </summary>
-    /// <param name="monitorableTypes">The monitorable types.</param>
-    /// <param name="auditDatabaseName">The audit schema.</param>
+    /// <param name="mappingSettings">The mapping settings of the monitorable types.</param>
+    /// <param name="auditEntityRevisionSchema">The audit schema.</param>
     /// <param name="auditTableSuffix">The audit table suffix.</param>
     /// <param name="entityTrackingRevisionListener">The entity tracking revision listener.</param>
     public AuditMetadataProvider(

@@ -143,7 +143,6 @@ public partial class Employee :
         set => this.roleDegree = value;
     }
 
-    [Obsolete("#IAD-20612")]
     public virtual bool CanBePPM
     {
         get => this.canBePPM;
@@ -322,14 +321,12 @@ public partial class Employee :
         set => this.registrationType = value;
     }
 
-    [Obsolete("#IAD-20612")]
     public virtual Employee? Ppm
     {
         get => this.ppm;
         set => this.ppm = value;
     }
 
-    [Obsolete("#IAD-20612")]
     public virtual Employee? VacationApprover
     {
         get => this.vacationApprover;

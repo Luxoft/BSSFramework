@@ -151,7 +151,7 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
                                                                    {
                                                                        return database.Parent.GetSmoObject(z.Urn);
                                                                    }
-                                                                   catch (Exception e)
+                                                                   catch (Exception)
                                                                    {
                                                                        return null;
                                                                    }

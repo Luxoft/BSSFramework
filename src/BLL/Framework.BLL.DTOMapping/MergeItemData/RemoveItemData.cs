@@ -3,21 +3,21 @@
 namespace Framework.BLL.DTOMapping.MergeItemData;
 
 /// <summary>
-/// Удаление элемента из коллекции
+/// Removing an element from the collection
 /// </summary>
-/// <typeparam name="TValue">Элемент</typeparam>
-/// <typeparam name="TIdentity">Идент элемента</typeparam>
+/// <typeparam name="TValue">Element</typeparam>
+/// <typeparam name="TIdentity">Element identifier</typeparam>
 [DataContract(Name = "RemoveItemData{0}Of{1}", Namespace = "Framework.Persistent")]
 public class RemoveItemData<TValue, TIdentity> : UpdateItemData<TValue, TIdentity>
 {
     /// <summary>
-    /// Конструктор
+    /// Constructor
     /// </summary>
-    /// <param name="identity">Идентификатор удаляемого элемента</param>
+    /// <param name="identity">Identifier of the element being removed</param>
     public RemoveItemData(TIdentity identity) => this.Identity = identity;
 
     /// <summary>
-    /// Идентификатор удаляемого элемента
+    /// Identifier of the element being removed
     /// </summary>
     [DataMember]
     public TIdentity Identity { get; private set; }

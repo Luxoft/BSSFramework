@@ -15,9 +15,9 @@ internal static class NhibSessionImplExtensions
     private static readonly Action<SessionImpl, IInterceptor> SetInterceptorAction = ExpressionHelper.Create((SessionImpl s) => s.Interceptor).GetProperty().GetSetValueAction<SessionImpl, IInterceptor>();
 
     /// <summary>
-    /// Специальный костыль для NHibernate по переопределению Listeners
-    /// Применяется для работы с несколькими базами данных.
-    /// Обычное изменение Listeners не подходит, так как это повлечет изменение Listeners в SessionConfiguration
+    /// Special hack for NHibernate to override Listeners
+    /// Used for working with several databases.
+    /// A regular change of Listeners is not suitable because it would change Listeners in SessionConfiguration
     /// </summary>
     /// <param name="source"></param>
     /// <param name="listeners"></param>

@@ -6,12 +6,12 @@ using Anch.Core;
 namespace Framework.Core;
 
 /// <summary>
-/// Класс, для автоматического создания адаптера интерфейса посредством генерации его имплементации в рантайме через CallProxy{T}
+/// Class for automatic creation of an interface adapter by generating its implementation at runtime via CallProxy{T}
 /// </summary>
 public class CallProxyInterfaceImplementTypeBuilder : InterfaceImplementTypeBuilder
 {
     /// <summary>
-    /// Дефолтовый инстанс
+    /// Default instance
     /// </summary>
     public static readonly CallProxyInterfaceImplementTypeBuilder Default =
             AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Default_CallProxyInterfaceImplement"), AssemblyBuilderAccess.Run)
@@ -19,9 +19,9 @@ public class CallProxyInterfaceImplementTypeBuilder : InterfaceImplementTypeBuil
                            .Pipe(moduleBuilder => new CallProxyInterfaceImplementTypeBuilder(moduleBuilder));
 
     /// <summary>
-    /// Конструктор
+    /// Constructor
     /// </summary>
-    /// <param name="moduleBuilder">Модуль, где будет генерировать анонимный тип</param>
+    /// <param name="moduleBuilder">Module in which the anonymous type will be generated</param>
     public CallProxyInterfaceImplementTypeBuilder(ModuleBuilder moduleBuilder)
             : base(moduleBuilder, typeof(CallProxy<>))
     {

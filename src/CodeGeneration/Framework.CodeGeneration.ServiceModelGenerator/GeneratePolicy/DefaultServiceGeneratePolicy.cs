@@ -11,7 +11,7 @@ using Framework.Projection;
 namespace Framework.CodeGeneration.ServiceModelGenerator.GeneratePolicy;
 
 /// <summary>
-/// Стандартная политика для управления генерацией фасадных методов
+/// Standard policy for controlling facade method generation
 /// </summary>
 public class DefaultServiceGeneratePolicy(IServiceModelGenerationEnvironment generationEnvironment) : IGeneratePolicy<MethodIdentity>
 {

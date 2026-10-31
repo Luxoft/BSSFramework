@@ -8,12 +8,12 @@ namespace Framework.Validation;
 public static class PropertyValidationContextExtensions
 {
     /// <summary>
-    /// Получение имени валидируемого свойства объекта
+    /// Getting the name of the validated object property
     /// </summary>
     /// <typeparam name="TSource"></typeparam>
     /// <typeparam name="TProperty"></typeparam>
-    /// <param name="context">Контекст</param>
-    /// <param name="withParent">Флаг разворачивания "наверх" стека валидации (цепочки expandable-свойств) и соединением их через '.'</param>
+    /// <param name="context">Context</param>
+    /// <param name="withParent">Flag to expand "up" the validation stack (chain of expandable properties) and join them with '.'</param>
     /// <returns></returns>
     public static string GetPropertyName<TSource, TProperty>(this IPropertyValidationContext<TSource, TProperty> context, bool withParent = true)
     {
@@ -30,10 +30,10 @@ public static class PropertyValidationContextExtensions
     }
 
     /// <summary>
-    /// Полученеи типа свойства
+    /// Getting the property type
     /// </summary>
-    /// <typeparam name="TSource">Тип объекта</typeparam>
-    /// <typeparam name="TProperty">Тип свойства</typeparam>
+    /// <typeparam name="TSource">Object type</typeparam>
+    /// <typeparam name="TProperty">Property type</typeparam>
     /// <param name="context"></param>
     /// <returns></returns>
     public static string GetPropertyTypeName<TSource, TProperty>(this IPropertyValidationContext<TSource, TProperty> context)
@@ -44,12 +44,12 @@ public static class PropertyValidationContextExtensions
     }
 
     /// <summary>
-    /// Получение имени типа объекта валидации
+    /// Getting the validation object type name
     /// </summary>
-    /// <typeparam name="TSource">Тип объекта</typeparam>
-    /// <typeparam name="TProperty">Тип свойства</typeparam>
-    /// <param name="context">Контекст</param>
-    /// <param name="withParent">Флаг разворачивания "наверх" стека валидации (цепочки expandable-свойств) и выборкой самого самого верхнего объекта валидации</param>
+    /// <typeparam name="TSource">Object type</typeparam>
+    /// <typeparam name="TProperty">Property type</typeparam>
+    /// <param name="context">Context</param>
+    /// <param name="withParent">Flag to expand "up" the validation stack (chain of expandable properties) and select the topmost validation object itself</param>
     /// <returns></returns>
     public static string GetSourceTypeName<TSource, TProperty>(this IPropertyValidationContext<TSource, TProperty> context, bool withParent = true)
     {

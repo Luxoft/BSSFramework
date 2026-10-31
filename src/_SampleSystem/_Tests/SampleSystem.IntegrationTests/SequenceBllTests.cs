@@ -1,4 +1,6 @@
-﻿using Framework.BLL;
+﻿using Anch.Testing.Xunit;
+
+using Framework.BLL;
 using Framework.Configuration.BLL;
 using Framework.Database;
 
@@ -8,8 +10,8 @@ namespace SampleSystem.IntegrationTests;
 
 public abstract class SequenceBllTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
-    [Fact]
-    public void GetNextNumber_TwoCallsInParallelTransactions_ShouldGiveDifferentNumbers()
+    [AnchFact]
+    public void GetNextNumber_TwoCallsInParallelTransactions_ShouldGiveDifferentNumbers(CancellationToken ct)
     {
         // Arrange
         const string name = "Test";
@@ -37,7 +39,8 @@ public abstract class SequenceBllTests(IServiceProvider rootServiceProvider) : T
 
                         autoResetEvent2.WaitOne();
                     });
-            });
+            },
+            ct);
 
         var taskWithWait = Task.Factory.StartNew(
             () =>
@@ -52,7 +55,8 @@ public abstract class SequenceBllTests(IServiceProvider rootServiceProvider) : T
                         numberWithWait1 = sequenceBllMock.GetNextNumber(name);
                         numberWithWait2 = sequenceBllMock.GetNextNumber(name);
                     });
-            });
+            },
+            ct);
 
         // Assert
         Task.WaitAll(taskWithWait, taskFast);

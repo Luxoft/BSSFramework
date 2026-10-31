@@ -7,7 +7,7 @@ public record CreateProjectionLambdaSetupParams
     public required string FullAssemblyName { get; init; }
 
     /// <summary>
-    /// Использование безопасности через атрибут `DependencySecurityAttribute`
+    /// Use of security through the `DependencySecurityAttribute` attribute
     /// </summary>
     public required bool UseDependencySecurity { get; init; }
 }

@@ -8,9 +8,9 @@ namespace Framework.Subscriptions;
 public static class NotificationMessageGenerationInfoExtensions
 {
     /// <remarks>
-    ///     Группировка ведётся по самому <paramref name="source" />-элементу (а не по его получателям), чтобы
-    ///     элемент с пустым списком получателей (см. <see cref="ISubscription.AllowEmptyListOfRecipients" />)
-    ///     не терялся, а порождал группу без элементов вместо того, чтобы бесследно исчезнуть при распрямлении.
+    ///     Grouping is done by the <paramref name="source" /> element itself (not by its recipients) so that
+    ///     an element with an empty list of recipients (see <see cref="ISubscription.AllowEmptyListOfRecipients" />)
+    ///     is not lost but produces a group without elements instead of vanishing without a trace on flattening.
     /// </remarks>
     public static IAsyncEnumerable<IGrouping<DomainObjectVersions<TRenderingObject>, (TRecipient Recipient, TTag Tag)>>
         GroupRecipients<TRenderingObject, TRecipient, TTag>(this IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject, TRecipient>> source, TTag tag)
@@ -24,9 +24,9 @@ public static class NotificationMessageGenerationInfoExtensions
         select CreateGrouping(g.Key, g.SelectMany(item => item.Recipients.Select(recipient => (recipient, tag))));
 
     /// <remarks>
-    ///     Группировка ведётся по ключу уже построенных группировок (а не по их элементам), чтобы пустая
-    ///     группировка (см. <see cref="GroupRecipients{TRenderingObject,TRecipient,TTag}" />) не терялась при
-    ///     объединении потоков To/CopyTo/ReplyTo, а сохраняла свой ключ версии с пустым набором элементов.
+    ///     Grouping is done by the key of the already built groupings (not by their elements) so that an empty
+    ///     grouping (see <see cref="GroupRecipients{TRenderingObject,TRecipient,TTag}" />) is not lost during
+    ///     merging of the To/CopyTo/ReplyTo streams, and kept its version key with an empty set of elements.
     /// </remarks>
     public static IAsyncEnumerable<IGrouping<DomainObjectVersions<TRenderingObject>, TValue>>
         RegroupRecipients<TRenderingObject, TValue>(

@@ -6,7 +6,7 @@ using Framework.ExtendedMetadata;
 namespace Framework.Projection;
 
 /// <summary>
-/// Для генерации подменяет проекции в памяти на реально скомпилированные проекции в сборке
+/// For generation, replaces in-memory projections with actually compiled projections in the assembly
 /// </summary>
 public class AlreadyImplementedRuntimeProjectionEnvironment(IProjectionEnvironment baseEnvironment) : IProjectionEnvironment
 {

@@ -25,12 +25,12 @@ public static class ClassValidatorExtensions
     }
 
     /// <summary>
-    ///     Выполняет преобразование текущего валидатора к IClassValidator{TSource}/>.
+    ///     Converts the current validator to IClassValidator{TSource}/>.
     /// </summary>
-    /// <typeparam name="TSource">>Параметр результирующего типа.</typeparam>
-    /// <param name="baseClassValidator">Экземпляр текущего валидатора.</param>
-    /// <returns>Преобразованный валидатор.</returns>
-    /// <exception cref="ArgumentNullException">Аргумент <paramref name="baseClassValidator" /> равен null.</exception>
+    /// <typeparam name="TSource">Resulting type parameter.</typeparam>
+    /// <param name="baseClassValidator">Instance of the current validator.</param>
+    /// <returns>Converted validator.</returns>
+    /// <exception cref="ArgumentNullException">Argument <paramref name="baseClassValidator" /> is null.</exception>
     public static IClassValidator<TSource> TryUnbox<TSource>(this IClassValidator baseClassValidator)
     {
         if (baseClassValidator is null) throw new ArgumentNullException(nameof(baseClassValidator));
@@ -57,13 +57,13 @@ public static class ClassValidatorExtensions
     }
 
     /// <summary>
-    ///     Выполняет преобразование текущего валидатора к IClassValidator{TExpectedSource}/>.
+    ///     Converts the current validator to IClassValidator{TExpectedSource}/>.
     /// </summary>
-    /// <typeparam name="TExpectedSource">Параметр результирующего типа.</typeparam>
-    /// <typeparam name="TBaseSource">Параметр исходного типа.</typeparam>
-    /// <param name="baseValidator">Экземпляр текущего валидатора.</param>
-    /// <returns>Преобразованный валидатор.</returns>
-    /// <exception cref="ArgumentNullException">Аргумент <paramref name="baseValidator" /> равен null.</exception>
+    /// <typeparam name="TExpectedSource">Resulting type parameter.</typeparam>
+    /// <typeparam name="TBaseSource">Source type parameter.</typeparam>
+    /// <param name="baseValidator">Instance of the current validator.</param>
+    /// <returns>Converted validator.</returns>
+    /// <exception cref="ArgumentNullException">Argument <paramref name="baseValidator" /> is null.</exception>
     public static IClassValidator<TExpectedSource> Unbox<TExpectedSource, TBaseSource>(
             this IClassValidator<TBaseSource> baseValidator)
             where TExpectedSource : TBaseSource

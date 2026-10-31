@@ -1,7 +1,7 @@
 ﻿namespace SampleSystem.Domain.Validation;
 
 /// <summary>
-/// Перечень действий, который можно делать c объектом
+/// List of actions that can be performed on an object
 /// </summary>
 [Flags]
 public enum SampleSystemOperationContext : int

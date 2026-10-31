@@ -3,6 +3,13 @@ using System.Reflection.Emit;
 
 namespace Framework.Database.EntityFramework.EnversAudit;
 
+/// <summary>
+/// Builds audit entity CLR types at runtime (Reflection.Emit) - one per audited entity type, cached for the lifetime of the factory.
+/// A generated type has the audited properties (non-key ones are nullable), a nullable <c>{Name}_MOD</c> flag per property,
+/// plus revision id/reference/type. Properties are emitted as virtual auto-properties.
+/// Must be registered as a singleton: the dynamic assembly cannot be unloaded and a second factory would produce
+/// a different CLR type for the same audit table, which EF model building would treat as a different entity.
+/// </summary>
 public sealed class AuditEntityFactory(IAuditTypeNameResolver auditTypeNameResolver) : IAuditEntityFactory
 {
     public string RevisionIdPropertyName => "AuditRevisionId";

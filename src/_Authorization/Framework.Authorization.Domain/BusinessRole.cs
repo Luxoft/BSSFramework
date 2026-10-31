@@ -4,7 +4,7 @@ using Framework.Restriction;
 namespace Framework.Authorization.Domain;
 
 /// <summary>
-/// Набор секьюрных операций, который выдается принципалу вместе с контекcтом их применения
+/// Set of security operations granted to a principal together with the context of their application
 /// </summary>
 [UniqueGroup]
 public class BusinessRole : BaseDirectory
@@ -14,13 +14,13 @@ public class BusinessRole : BaseDirectory
     private string description = "";
 
     /// <summary>
-    /// Коллекция пермиссий принципалов, выданных по одной бизнес-роль
+    /// Collection of principal permissions granted for a single business role
     /// </summary>
     [DetailRole(false)]
     public virtual IEnumerable<Permission> Permissions => this.permissions;
 
     /// <summary>
-    /// Описание бизнес-роли
+    /// Business role description
     /// </summary>
     public virtual string Description
     {

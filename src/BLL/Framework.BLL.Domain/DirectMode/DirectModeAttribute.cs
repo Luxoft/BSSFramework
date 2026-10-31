@@ -1,18 +1,18 @@
 ﻿namespace Framework.BLL.Domain.DirectMode;
 
 /// <summary>
-/// Атрибут управления генерацией по модели
+/// Attribute controlling model-based generation
 /// </summary>
 public class DirectModeAttribute : Attribute
 {
     /// <summary>
-    /// Конструктор
+    /// Constructor
     /// </summary>
-    /// <param name="directMode">Параметры управления генерацией по модели</param>
+    /// <param name="directMode">Model-based generation control parameters</param>
     public DirectModeAttribute(DirectMode directMode) => this.DirectMode = directMode;
 
     /// <summary>
-    /// Параметры управления генерацией по модели
+    /// Model-based generation control parameters
     /// </summary>
     public DirectMode DirectMode { get; }
 }

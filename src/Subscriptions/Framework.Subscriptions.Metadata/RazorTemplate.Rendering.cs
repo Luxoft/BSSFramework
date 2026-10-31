@@ -5,15 +5,15 @@ public abstract partial class RazorTemplate<TRenderingObject>
     public abstract void Execute();
 
     /// <summary>
-    ///     Записывает значение.
+    ///     Writes the value.
     /// </summary>
-    /// <param name="value">Записываемое значение.</param>
+    /// <param name="value">Value to write.</param>
     protected void Write(object value) => this.WriteObject(value);
 
     /// <summary>
-    ///     Записывает значение.
+    ///     Writes the value.
     /// </summary>
-    /// <param name="value">Записываемое значение.</param>
+    /// <param name="value">Value to write.</param>
     protected void WriteLiteral(object value) => this.WriteObject(value);
 
     /// <summary>

@@ -85,21 +85,21 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
     public override string ToString() => this.ToDisplayName(true);
 
     /// <summary>
-    /// Используя текущий период возвращает новый период, который начинается с первого дня начального месяца периода и заканчивается последним днем конечного месяца периода
+    /// Using the current period, returns a new period that starts on the first day of the period's start month and ends on the last day of the period's end month
     /// </summary>
-    /// <returns>Новый период, который начинается и заканчивается в первом и последнем дне граничных месяцев</returns>
+    /// <returns>A new period that starts and ends on the first and last days of the boundary months</returns>
     public Period RoundByMouths() => new(this.StartDate.ToStartMonthDate(), this.EndDate.MaybeNullableToNullable(d => d.ToEndMonthDate()));
 
     /// <summary>
-    /// Используя текущий период возвращает новый период, дата начала и конца (при возможности) которого имеет значение времени 00:00:00
+    /// Using the current period, returns a new period whose start and end dates (where possible) have the time value 00:00:00
     /// </summary>
     /// <returns></returns>
     public Period Round() => new(this.StartDate.Date, this.EndDate.MaybeNullableToNullable(d => d.Date));
 
     /// <summary>
-    /// Для всех дней содержащихся в периоде создается новый период длинною в один этот день
+    /// For every day in the period a new one-day period is created
     /// </summary>
-    /// <returns>Перечисление всех периодов длинною в один день, которые находятся в переданном временном интервале</returns>
+    /// <returns>Enumeration of all one-day periods within the given time interval</returns>
     public IEnumerable<Period> SplitToDays()
     {
         for (var date = this.StartDate.Date; date <= this.EndDateValue; date = date.AddDay())
@@ -109,15 +109,15 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
     }
 
     /// <summary>
-    /// Для всех недель содержащихся в периоде создается новый период длинною в одину эту неделю, последняя неделя может быть не полной
+    /// For every week in the period a new one-week period is created; the last week may be incomplete
     /// </summary>
-    /// <returns>Перечисление всех периодов длинною в одину неделю, которые находятся в переданном временном интервале</returns>
+    /// <returns>Enumeration of all one-week periods within the given time interval</returns>
     public IEnumerable<Period> SplitToWeeks(DayOfWeek firstDay = DayOfWeek.Monday) => this.SplitToWeeksInternal(firstDay).OrderBy(v => v);
 
     /// <summary>
-    /// Для всех месяцев содержащихся в периоде создается новый период длинною в одинин этот месяц, последний месяц может быть не полном
+    /// For every month in the period a new one-month period is created; the last month may be incomplete
     /// </summary>
-    /// <returns>Перечисление всех периодов длинною в один месяц, которые находятся в переданном временном интервале</returns>
+    /// <returns>Enumeration of all one-month periods within the given time interval</returns>
     public IEnumerable<Period> SplitToMonths()
     {
         if (this.IsEmpty)
@@ -152,20 +152,20 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
     }
 
     /// <summary>
-    /// Возвращает новый период, который является пересечением текущего периода с переданным в качестве параметра периода <see cref="otherPeriod"/>
+    /// Returns a new period that is the intersection of the current period with the period <paramref name="otherPeriod"/> passed as a parameter
     /// </summary>
     /// <remarks>
-    /// Сравнение происходит с учетом ограничения sql базы данных
+    /// The comparison takes the sql database limit into account
     /// </remarks>
-    /// <param name="otherPeriod">Период, из которого извлекаются даты, входящие также в указанный период</param>
-    /// <returns>Новый период представляющий собой пересечение дат заданных двух периодов. Если пересечение дат нету, то период будет пустым</returns>
+    /// <param name="otherPeriod">Period from which dates that are also within the specified period are extracted</param>
+    /// <returns>A new period that is the intersection of the dates of the two given periods. If the dates do not intersect, the period will be empty</returns>
     public Period Intersect(Period otherPeriod) => new(this.StartDate.Max(otherPeriod.StartDate), this.EndDate.UnsafeOperation(otherPeriod.EndDate, (d1, d2) => d1.Min(d2)));
 
     /// <summary>
-    /// Возвращает новый период, который является пересечением текущего периода с переданным в качестве параметра периода <see cref="target"/>
+    /// Returns a new period that is the intersection of the current period with the period <paramref name="target"/> passed as a parameter
     /// </summary>
-    /// <param name="target">Период, из которого извлекаются даты, входящие также в указанный период</param>
-    /// <returns>Новый период представляющий собой пересечение дат заданных двух периодов. Если пересечение дат нету, то период будет пустым</returns>
+    /// <param name="target">Period from which dates that are also within the specified period are extracted</param>
+    /// <returns>A new period that is the intersection of the dates of the two given periods. If the dates do not intersect, the period will be empty</returns>
     public Period NativeIntersect(Period target)
     {
         var result = new Period(
@@ -176,8 +176,8 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
     }
 
     /// <summary>
-    /// Возвращает значение, указывающее, пересекает ли текущий период значение периода <see cref="target"/> переданного в качестве параметра
-    /// Если полученный при вычислении период имеет нулевую продолжительность, то читается, что периоды не пересекаются
+    /// Returns a value indicating whether the current period intersects the <paramref name="target"/> period passed as a parameter
+    /// If the period obtained by the calculation has zero duration, the periods are considered not intersecting
     /// </summary>
     /// <param name="target"></param>
     /// <returns></returns>
@@ -194,10 +194,10 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
     }
 
     /// <summary>
-    /// Возвращает значение, указывающее, пересекает ли текущий период значение периода <see cref="target"/> переданного в качестве параметра
+    /// Returns a value indicating whether the current period intersects the <paramref name="target"/> period passed as a parameter
     /// </summary>
-    /// <param name="target">Период, с которым проверяется пересечение</param>
-    /// <returns>true, если дата начала или дата окончания переданного периода содержатся в указанном периоде, в противном случае — false</returns>
+    /// <param name="target">Period to check the intersection with</param>
+    /// <returns>true if the start or end date of the given period is within the specified period; otherwise false</returns>
     public bool IsNativeIntersected(Period target)
     {
         var nativeIntersectedResult = this.NativeIntersect(target);
@@ -283,7 +283,7 @@ public partial struct Period : IEquatable<Period>, IComparable<Period>, ICompara
 }
 
 /// <summary>
-/// Интервал времени выраженный двумя датами
+/// Time interval expressed by two dates
 /// </summary>
 [Serializable]
 public partial struct Period : IDeserializationCallback
@@ -301,7 +301,7 @@ public partial struct Period : IDeserializationCallback
     #region Public.Property
 
     /// <summary>
-    /// Дата начала периода с учетом ограничей sql базы данных
+    /// Period start date taking into account sql database limits
     /// </summary>
     [DataMember]
     public DateTime StartDate
@@ -311,7 +311,7 @@ public partial struct Period : IDeserializationCallback
     }
 
     /// <summary>
-    /// Дата окончания периода с учетом ограничей sql базы данных
+    /// Period end date taking into account sql database limits
     /// </summary>
     [DataMember]
     public DateTime? EndDate
@@ -321,25 +321,25 @@ public partial struct Period : IDeserializationCallback
     }
 
     /// <summary>
-    /// Если <see cref="EndDate"/> не задана, то возвращает максимальную дату, иначе дату окончания периода с учетом ограничей sql базы данных
+    /// If <see cref="EndDate"/> is not set, returns the maximum date, otherwise the period end date taking into account sql database limits
     /// </summary>
     [IgnoreDataMember]
     public DateTime EndDateValue => this.endDate is null ? Eternity.EndDateValue : this.endDate.Value.ToSqlDateTime();
 
     /// <summary>
-    /// Дата начала периода
+    /// Period start date
     /// </summary>
     [IgnoreDataMember]
     public DateTime NativeStartDate => this.startDate;
 
     /// <summary>
-    /// Дата окончания периода
+    /// Period end date
     /// </summary>
     [IgnoreDataMember]
     public DateTime? NativeEndDate => this.endDate;
 
     /// <summary>
-    /// Если <see cref="EndDate"/> не задана, то возвращает максимальную дату, иначе дату окончания периода
+    /// If <see cref="EndDate"/> is not set, returns the maximum date, otherwise the period end date
     /// </summary>
     [IgnoreDataMember]
     public DateTime NativeEndDateValue => this.endDate is null ? Eternity.NativeEndDateValue : this.endDate.Value;
@@ -349,13 +349,13 @@ public partial struct Period : IDeserializationCallback
     #region Public.Static.Property
 
     /// <summary>
-    /// Предоставляет экземпляр бесконечного периода
+    /// Provides an instance of an infinite period
     /// </summary>
     public static readonly Period Eternity = new(DateTime.MinValue.ToSqlDateTime(),
                                                  DateTime.MaxValue.ToSqlDateTime());
 
     /// <summary>
-    /// Предоставляет экземпляр пустого периода
+    /// Provides an instance of an empty period
     /// </summary>
     public static readonly Period Empty = new(DateTime.MaxValue.ToSqlDateTime(),
                                               DateTime.MinValue.ToSqlDateTime());

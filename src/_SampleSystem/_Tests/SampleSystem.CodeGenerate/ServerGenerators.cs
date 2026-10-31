@@ -176,7 +176,7 @@ public partial class ServerGenerators
     public void GenerateBLLCoreTest() => this.GenerateBLLCore().ToList();
 
     /// <summary>
-    ///     Кастомная генерация BLL-слоя
+    ///     Custom generation of the BLL layer
     /// </summary>
     /// <returns></returns>
     private IEnumerable<GeneratedFileInfo> GenerateBLLCore()

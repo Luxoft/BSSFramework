@@ -1,7 +1,7 @@
 ﻿namespace Framework.BLL.Domain.ServiceRole;
 
 /// <summary>
-/// Атрибут для приёма изменений объекта через интеграцию (так же дополнительно управляет IntegrationSaveModelType-моделями)
+/// Attribute for accepting object changes through integration (also additionally controls IntegrationSaveModelType models)
 /// </summary>
 public class BLLIntegrationSaveRoleAttribute : BLLServiceRoleAttribute, IAllowCreateAttribute, ICountTypeContainer
 {
@@ -9,7 +9,7 @@ public class BLLIntegrationSaveRoleAttribute : BLLServiceRoleAttribute, IAllowCr
     public bool AllowCreate { get; set; } = true;
 
     /// <summary>
-    /// Сохранение единственного объекта и/или коллекции объектов
+    /// Saving a single object and/or a collection of objects
     /// </summary>
     public CountType CountType { get; set; } = CountType.Single;
 }

@@ -5,7 +5,7 @@ namespace Framework.Database;
 public interface IDAL<TDomainObject, TIdent> : IAuditDAL<TDomainObject, TIdent>
 {
     /// <summary>
-    /// Предоставляет Queryable в контексте Read
+    /// Provides Queryable in the Read context
     /// </summary>
     /// <returns></returns>
     IQueryable<TDomainObject> GetQueryable(LockRole lockRole, FetchRule<TDomainObject>? fetchRule = null);

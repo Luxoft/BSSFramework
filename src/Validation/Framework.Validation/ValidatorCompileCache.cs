@@ -29,15 +29,15 @@ public class ValidatorCompileCache
     }
 
     /// <summary>
-    /// Поддержка null-объектов (будет возвращаться Success)
+    /// Support for null objects (Success will be returned)
     /// </summary>
     public virtual bool AllowNullSource { get; } = true;
 
     /// <summary>
-    /// Получение результата валидации
+    /// Getting the validation result
     /// </summary>
-    /// <typeparam name="TSource">Тип объекта</typeparam>
-    /// <param name="context">Контекст</param>
+    /// <typeparam name="TSource">Object type</typeparam>
+    /// <param name="context">Context</param>
     /// <returns></returns>
     public ValidationResult GetValidationResult<TSource>(IValidationContextBase<TSource> context)
     {

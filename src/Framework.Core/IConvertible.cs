@@ -1,13 +1,13 @@
 ﻿namespace Framework.Core;
 
 /// <summary>
-/// Интерфейс конвертации объекта в другой тип
+/// Interface for converting an object to another type
 /// </summary>
-/// <typeparam name="TOut">Тип в который конверитуерся объект</typeparam>
+/// <typeparam name="TOut">Type the object is converted to</typeparam>
 public interface IConvertible<out TOut>
 {
     /// <summary>
-    /// Метод конвертации
+    /// Conversion method
     /// </summary>
     /// <returns></returns>
     TOut Convert();

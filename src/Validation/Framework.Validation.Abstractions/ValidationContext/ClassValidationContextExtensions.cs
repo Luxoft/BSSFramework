@@ -6,7 +6,7 @@ namespace Framework.Validation;
 public static class ClassValidationContextExtensions
 {
     /// <summary>
-    /// Получение имени типа объекта валидации
+    /// Getting the validation object type name
     /// </summary>
     /// <typeparam name="TSource"></typeparam>
     /// <param name="context"></param>
@@ -19,13 +19,13 @@ public static class ClassValidationContextExtensions
     }
 
     /// <summary>
-    ///     Выполняет преобразование исходного IClassValidationContext к типу IClassValidationContext от TExpectedSource.
+    ///     Converts the source IClassValidationContext to an IClassValidationContext of TExpectedSource.
     /// </summary>
-    /// <typeparam name="TBaseSource">Тип исходного контекста.</typeparam>
-    /// <typeparam name="TExpectedSource">Тип результирующего контекста.</typeparam>
-    /// <param name="context">Исходный контекст.</param>
-    /// <returns>Результат преобразования.</returns>
-    /// <exception cref="ArgumentNullException">Аргумент <paramref name="context" /> равен null.</exception>
+    /// <typeparam name="TBaseSource">Source context type.</typeparam>
+    /// <typeparam name="TExpectedSource">Resulting context type.</typeparam>
+    /// <param name="context">Source context.</param>
+    /// <returns>Conversion result.</returns>
+    /// <exception cref="ArgumentNullException">Argument <paramref name="context" /> is null.</exception>
     public static IClassValidationContext<TExpectedSource> Box<TBaseSource, TExpectedSource>(
         this IClassValidationContext<TBaseSource> context)
         where TBaseSource : TExpectedSource
@@ -36,17 +36,17 @@ public static class ClassValidationContextExtensions
     }
 
     /// <summary>
-    ///     Выполняет преобразование исходного IClassValidationContext к типу IClassValidationContext от TExpectedSource.
+    ///     Converts the source IClassValidationContext to an IClassValidationContext of TExpectedSource.
     /// </summary>
-    /// <typeparam name="TBaseSource">Тип исходного контекста.</typeparam>
-    /// <typeparam name="TExpectedSource">Тип результирующего контекста.</typeparam>
-    /// <param name="context">Исходный контекст.</param>
-    /// <param name="convertSource">Функция преобразования.</param>
-    /// <returns>Экземпляр <see cref="IClassValidationContext{TSource}"/></returns>
-    /// <exception cref="ArgumentNullException">Аргумент
+    /// <typeparam name="TBaseSource">Source context type.</typeparam>
+    /// <typeparam name="TExpectedSource">Resulting context type.</typeparam>
+    /// <param name="context">Source context.</param>
+    /// <param name="convertSource">Conversion function.</param>
+    /// <returns>Instance of <see cref="IClassValidationContext{TSource}"/></returns>
+    /// <exception cref="ArgumentNullException">Argument
     /// <paramref name="context"/>
-    /// или
-    /// <paramref name="convertSource"/> равен null.
+    /// or
+    /// <paramref name="convertSource"/> is null.
     /// </exception>
     public static IClassValidationContext<TExpectedSource> Cast<TBaseSource, TExpectedSource>(
         this IClassValidationContext<TBaseSource> context,

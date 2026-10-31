@@ -3,12 +3,12 @@
 namespace SampleSystem.CodeGenerate.Configurations.Services;
 
 /// <summary>
-/// Кастомные идентификаторы генерируемых фасадных методов
+/// Custom identifiers of generated facade methods
 /// </summary>
 public static class SampleSystemMethodIdentityType
 {
     /// <summary>
-    /// Идентификатор генерации фасадных методов по ComplexChange-модели
+    /// Identifier of facade method generation by a ComplexChange model
     /// </summary>
     public static readonly MethodIdentityType ComplexChange = new(nameof(ComplexChange));
 }

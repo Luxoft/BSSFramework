@@ -118,18 +118,18 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         this.GetUnsecureQueryable(buildFetchRule.ToFetchRule());
 
     /// <summary>
-    /// Получение IQueryable без учёта безопасности
+    /// Getting IQueryable without security
     /// </summary>
-    /// <param name="lockRole">Тип блокировки</param>
-    /// <param name="fetchRule">Подгружаемые свойства</param>
+    /// <param name="lockRole">Lock type</param>
+    /// <param name="fetchRule">Properties to fetch</param>
     /// <returns></returns>
     public IQueryable<TDomainObject> GetUnsecureQueryable(FetchRule<TDomainObject>? fetchRule, LockRole lockRole = LockRole.None) => this.Dal.GetQueryable(lockRole, fetchRule);
 
     /// <summary>
-    /// Получение IQueryable с учётом безопасности
+    /// Getting IQueryable with security
     /// </summary>
-    /// <param name="lockRole">Тип блокировки</param>
-    /// <param name="fetchRule">Подгружаемые свойства</param>
+    /// <param name="lockRole">Lock type</param>
+    /// <param name="fetchRule">Properties to fetch</param>
     /// <returns></returns>
     public IQueryable<TDomainObject> GetSecureQueryable(FetchRule<TDomainObject>? fetchRule = null, LockRole lockRole = LockRole.None) => this.ProcessSecurity(this.GetUnsecureQueryable(fetchRule, lockRole));
 
@@ -148,18 +148,18 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     }
 
     /// <summary>
-    /// Выполняет поиск доменного объекта по условию.
+    /// Searches for a domain object by condition.
     /// </summary>
-    /// <param name="filter">Выражение, определяющее условие поиска.</param>
-    /// <param name="getNotFoundException">Делегат, возвращающий исключение, которое необходимо бросить, если объект не найден.</param>
-    /// <param name="fetchRule">Пути, определяющие выгрузку графа.</param>
-    /// <returns>Объект, найденный по условию.</returns>
-    /// <exception cref="ArgumentNullException">Аргумент
+    /// <param name="filter">Expression that defines the search condition.</param>
+    /// <param name="getNotFoundException">Delegate that returns the exception to throw if the object is not found.</param>
+    /// <param name="fetchRule">Paths that define the graph fetch.</param>
+    /// <returns>The object found by the condition.</returns>
+    /// <exception cref="ArgumentNullException">Argument
     /// <paramref name="filter"/>
     /// or
     /// <paramref name="getNotFoundException"/>
     /// </exception>
-    /// <exception cref="InvalidOperationException">По заданному условию найден более чем один объект.</exception>
+    /// <exception cref="InvalidOperationException">More than one object was found for the given condition.</exception>
     public TDomainObject GetObjectBy(
         Expression<Func<TDomainObject, bool>> filter,
         Func<Exception> getNotFoundException,
@@ -172,19 +172,19 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     }
 
     /// <summary>
-    /// Выполняет поиск доменного объекта по условию.
+    /// Searches for a domain object by condition.
     /// </summary>
-    /// <param name="lockRole">Экземпляр <see cref="LockRole"/>, определяющий запрашиваемую блокировку.</param>
-    /// <param name="filter">Выражение, определяющее условие поиска.</param>
-    /// <param name="fetchRule">Пути, определяющие выгрузку графа.</param>
+    /// <param name="lockRole">Instance of <see cref="LockRole"/> that defines the requested lock.</param>
+    /// <param name="filter">Expression that defines the search condition.</param>
+    /// <param name="fetchRule">Paths that define the graph fetch.</param>
     /// <param name="throwOnNotFound">
-    ///   Когда передано <c>true</c> будет выброшено <see cref="BusinessLogicException"/>.
-    ///   если объект по условию не найден.
+    ///   When <c>true</c> is passed, <see cref="BusinessLogicException"/> will be thrown.
+    ///   if the object is not found by the condition.
     /// </param>
-    /// <returns>Экземпляр найденного объекта или null, если объект не найден.</returns>
-    /// <exception cref="BusinessLogicException">Если параметр throwOnNotFound задан как true и объект не найден.</exception>
-    /// <exception cref="InvalidOperationException">По заданному условию найден более чем один объект.</exception>
-    [Obsolete("Эта перегрузка метода будет удалёна в следующих версиях. Используйте вместо неё другие перегрузки.")]
+    /// <returns>Instance of the found object, or null if the object is not found.</returns>
+    /// <exception cref="BusinessLogicException">If the throwOnNotFound parameter is true and the object is not found.</exception>
+    /// <exception cref="InvalidOperationException">More than one object was found for the given condition.</exception>
+    [Obsolete("This method overload will be removed in future versions. Use the other overloads instead.")]
     public TDomainObject? GetObjectBy(
         LockRole lockRole,
         Expression<Func<TDomainObject, bool>> filter,
@@ -206,18 +206,18 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         this.GetObjectBy(filter, throwOnNotFound, buildFetchRule.ToFetchRule());
 
     /// <summary>
-    /// Выполняет поиск доменного объекта по условию.
+    /// Searches for a domain object by condition.
     /// </summary>
-    /// <param name="lockRole">Экземпляр <see cref="LockRole"/>, определяющий запрашиваемую блокировку.</param>
-    /// <param name="filter">Выражение, определяющее условие поиска.</param>
+    /// <param name="lockRole">Instance of <see cref="LockRole"/> that defines the requested lock.</param>
+    /// <param name="filter">Expression that defines the search condition.</param>
     /// <param name="throwOnNotFound">
-    ///   Когда передано <c>true</c> будет выброшено <see cref="BusinessLogicException"/>.
-    ///   если объект по условию не найден.
+    ///   When <c>true</c> is passed, <see cref="BusinessLogicException"/> will be thrown.
+    ///   if the object is not found by the condition.
     /// </param>
-    /// <param name="fetchRule">Пути, определяющие выгрузку графа.</param>
-    /// <returns>Экземпляр найденного объекта или null, если объект не найден.</returns>
-    /// <exception cref="BusinessLogicException">Если параметр throwOnNotFound задан как true и объект не найден.</exception>
-    /// <exception cref="InvalidOperationException">По заданному условию найден более чем один объект.</exception>
+    /// <param name="fetchRule">Paths that define the graph fetch.</param>
+    /// <returns>Instance of the found object, or null if the object is not found.</returns>
+    /// <exception cref="BusinessLogicException">If the throwOnNotFound parameter is true and the object is not found.</exception>
+    /// <exception cref="InvalidOperationException">More than one object was found for the given condition.</exception>
     public TDomainObject? GetObjectBy(
         LockRole lockRole,
         Expression<Func<TDomainObject, bool>> filter,

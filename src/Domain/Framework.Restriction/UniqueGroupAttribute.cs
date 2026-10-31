@@ -1,8 +1,8 @@
 ﻿namespace Framework.Restriction;
 
 /// <summary>
-///     Проверка на уникальность по набору полей. Генерация констрейнта на таблице. Применяется как на сам объект, так и на
-///     коллекции в нём.
+///     Uniqueness check by a set of fields. Generates a constraint on the table. Applied both to the object itself and to
+///     collections in it.
 /// </summary>
 /// <seealso cref="System.Attribute" />
 /// <seealso cref="Framework.Restriction.IUniqueAttribute" />
@@ -10,18 +10,18 @@
 public class UniqueGroupAttribute(string? key = null) : Attribute, IUniqueAttribute
 {
     /// <summary>
-    ///     Возвращает строковый ключ группы.
+    ///     Returns the string key of the group.
     /// </summary>
     /// <value>
-    ///     Строковый ключ группы.
+    ///     String key of the group.
     /// </value>
     public string? Key { get; } = key;
 
     /// <summary>
-    ///     Получает или возвращает флаг, указывающий на необходимость проверки уникальности путем запроса к БД.
+    ///     Gets or sets a flag indicating that uniqueness must be checked by querying the database.
     /// </summary>
     /// <value>
-    ///     <c>true</c> если необходимо проверять уникальность путем запроса к БД; в противном случае, <c>false</c>.
+    ///     <c>true</c> if uniqueness must be checked by querying the database; otherwise, <c>false</c>.
     /// </value>
     public bool UseDbEvaluation { get; set; }
 }

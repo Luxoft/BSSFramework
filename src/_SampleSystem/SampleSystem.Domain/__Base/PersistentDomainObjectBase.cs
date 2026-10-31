@@ -19,13 +19,13 @@ public abstract class PersistentDomainObjectBase : DomainObjectBase, IIdentityOb
     #endregion
 
     /// <summary>
-    /// ID доменного объекта
+    /// Domain object ID
     /// </summary>
     [CustomSerialization(CustomSerializationMode.ReadOnly)]
     public virtual Guid Id { get => this.id; set => this.id = value; }
 
     /// <summary>
-    /// Признак того, что класс еще не сохранен в базе
+    /// Flag indicating that the class has not been saved to the database yet
     /// </summary>
     [CustomSerialization(CustomSerializationMode.Ignore)]
     public virtual bool IsNew => this.Id == Guid.Empty;

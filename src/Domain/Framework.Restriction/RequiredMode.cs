@@ -1,19 +1,19 @@
 ﻿namespace Framework.Restriction;
 
 /// <summary>
-/// Дополнительные режимы валидации
+/// Additional validation modes
 /// </summary>
 public enum RequiredMode
 {
     Default,
 
     /// <summary>
-    /// Разрешает пустую строку, идёт проверка только на null-значение
+    /// Allows an empty string, only the null value is checked
     /// </summary>
     AllowEmptyString,
 
     /// <summary>
-    /// Требует, чтобы период был строго закрыт, т.е. Period.EndDate != null
+    /// Requires the period to be strictly closed, i.e. Period.EndDate != null
     /// </summary>
     ClosedPeriodEndDate
 }

@@ -1,12 +1,12 @@
 ﻿namespace Framework.Projection.Lambda.ProjectionSource;
 
 /// <summary>
-/// Источник проекций
+/// Projection source
 /// </summary>
 public interface IProjectionSource
 {
     /// <summary>
-    /// Получение списка проекций
+    /// Getting the list of projections
     /// </summary>
     /// <returns></returns>
     IEnumerable<IProjection> GetProjections();

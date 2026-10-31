@@ -2,17 +2,17 @@
 namespace Framework.Configuration.Domain;
 
 /// <summary>
-/// Состояние обработки очереди
+/// Queue processing state
 /// </summary>
 public class QueueProcessingState : DomainObjectBase
 {
     /// <summary>
-    /// Количество необработанных записей
+    /// Number of unprocessed records
     /// </summary>
     public int UnprocessedCount { get; set; }
 
     /// <summary>
-    /// Время обработки последней записи
+    /// Processing time of the last record
     /// </summary>
     public DateTime? LastProcessedItemDateTime { get; set; }
 }

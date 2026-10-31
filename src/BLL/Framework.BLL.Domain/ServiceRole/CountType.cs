@@ -1,23 +1,23 @@
 ﻿namespace Framework.BLL.Domain.ServiceRole;
 
 /// <summary>
-/// Флаг размерностей "1 или больше"
+/// Flag of the "1 or more" dimensions
 /// </summary>
 [Flags]
 public enum CountType
 {
     /// <summary>
-    /// Единица
+    /// One
     /// </summary>
     Single = 1,
 
     /// <summary>
-    /// Коллеция
+    /// Collection
     /// </summary>
     Many = 2,
 
     /// <summary>
-    /// Всё вместе
+    /// All together
     /// </summary>
     Both = Single + Many
 }

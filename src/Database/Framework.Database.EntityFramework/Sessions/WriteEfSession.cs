@@ -43,10 +43,18 @@ public class WriteEfSession : IEfSession
 
     public void AsReadOnly() => throw new InvalidOperationException("Writable session already created");
 
+    /// <summary>
+    /// No-op: the session is already writable (a write transaction is opened in the constructor).
+    /// </summary>
     public void AsWritable()
     {
     }
 
+    /// <summary>
+    /// Completes the session: on success flushes (with the full commit-time listener cycle) and commits,
+    /// after <see cref="AsFault"/> rolls back instead. Idempotent. Disposes the DbContext in both cases,
+    /// so the session can't be used afterwards.
+    /// </summary>
     public async Task CloseAsync(CancellationToken ct)
     {
         if (this.Closed)
@@ -79,6 +87,11 @@ public class WriteEfSession : IEfSession
 
     public async Task FlushAsync(CancellationToken ct) => await this.FlushAsync(false, ct);
 
+    /// <summary>
+    /// Emulates NHibernate's automatic versioning for <see cref="long"/> concurrency tokens, which EF Core doesn't increment itself.
+    /// A modified entity gets Version + 1 unless the caller changed the version explicitly.
+    /// Must be called right before every SaveChanges, after the changes were collected.
+    /// </summary>
     private void IncrementConcurrencyVersionTokens()
     {
         foreach (var entry in this.NativeSession.ChangeTracker.Entries())
@@ -114,6 +127,13 @@ public class WriteEfSession : IEfSession
         }
     }
 
+    /// <summary>
+    /// Saves changes and notifies <see cref="IDBSessionEventListener"/>s.
+    /// Listeners may modify entities in OnFlushed, so the save is repeated until a pass produces no changes.
+    /// With <paramref name="withCompleteTransaction"/> (commit time) the sequence is:
+    /// OnBeforeTransactionCompleted (may still change data, saved afterwards) → OnAfterTransactionCompleted
+    /// (changing data is forbidden: a final save must find no changes, otherwise <see cref="InvalidOperationException"/>).
+    /// </summary>
     private async Task FlushAsync(bool withCompleteTransaction, CancellationToken ct)
     {
         try
@@ -182,7 +202,7 @@ public class WriteEfSession : IEfSession
 
                 await this.NativeSession
                           .SaveChangesAsync(
-                              ct); // Флашим для того, чтобы проверить, что никто ничего не менял в объектах после AfterTransactionCompleted-евента
+                              ct); // Flush to verify that nobody changed anything in the objects after the AfterTransactionCompleted event
 
                 if (!finalChanges.IsEmpty)
                 {

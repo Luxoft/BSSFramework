@@ -3,10 +3,10 @@
 namespace Framework.Projection.Lambda;
 
 /// <summary>
-/// Проекционное свойство на одиночный элемент
+/// Projection property for a single element
 /// </summary>
-/// <typeparam name="TDomainObject">Доменный объект</typeparam>
-/// <typeparam name="TElement">Тип элемента</typeparam>
+/// <typeparam name="TDomainObject">Domain object</typeparam>
+/// <typeparam name="TElement">Element type</typeparam>
 public class ProjectionSingleProperty<TDomainObject, TElement>(
     Expression<Func<TDomainObject, TElement>> path,
     string? name,

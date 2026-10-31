@@ -3,7 +3,7 @@
 public interface IRevisionService
 {
     /// <summary>
-    /// Получение текущей ревизии из аудита (пока возвращает 0, если вызван до флаша сессии)
+    /// Getting the current revision from the audit (returns 0 for now if called before the session flush)
     /// </summary>
     /// <returns></returns>
     long GetCurrentRevision();

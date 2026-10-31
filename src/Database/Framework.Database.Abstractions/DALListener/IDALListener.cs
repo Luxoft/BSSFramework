@@ -1,7 +1,7 @@
 ﻿namespace Framework.Database.DALListener;
 
 /// <summary>
-/// Потребитель DAL-евентов
+/// Consumer of DAL events
 /// </summary>
 public interface IDALListener
 {

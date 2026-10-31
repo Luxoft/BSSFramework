@@ -1,16 +1,16 @@
 ﻿namespace Framework.Projection;
 
 /// <summary>
-/// Атрибут указывающий, что данный тип является фильтром для проекции
+/// Attribute indicating that this type is a projection filter
 /// </summary>
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 public class ProjectionFilterAttribute : Attribute
 {
     /// <summary>
-    /// Конструктор
+    /// Constructor
     /// </summary>
-    /// <param name="filterType">Тип фильтра</param>
-    /// <param name="target">Применимость фильтра</param>
+    /// <param name="filterType">Filter type</param>
+    /// <param name="target">Filter applicability</param>
     public ProjectionFilterAttribute(Type filterType, ProjectionFilterTargets target)
     {
         this.FilterType = filterType ?? throw new ArgumentNullException(nameof(filterType));
@@ -18,12 +18,12 @@ public class ProjectionFilterAttribute : Attribute
     }
 
     /// <summary>
-    /// Тип фильтра
+    /// Filter type
     /// </summary>
     public Type FilterType { get; }
 
     /// <summary>
-    /// Применимость фильтра
+    /// Filter applicability
     /// </summary>
     public ProjectionFilterTargets Target { get; }
 }

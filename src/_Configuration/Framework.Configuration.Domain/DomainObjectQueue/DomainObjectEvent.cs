@@ -5,7 +5,7 @@ using Framework.Restriction;
 namespace Framework.Configuration.Domain;
 
 /// <summary>
-/// Событие над объектом (Save, Remove etc), сохраняемое в базу.
+/// Event on an object (Save, Remove etc) saved to the database.
 /// </summary>
 [NotAuditedClass]
 public class DomainObjectEvent : AuditPersistentDomainObjectBase

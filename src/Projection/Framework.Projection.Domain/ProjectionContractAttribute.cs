@@ -1,15 +1,15 @@
 ﻿namespace Framework.Projection;
 
 /// <summary>
-/// Атрибут указывающий, что данный интерфейс является проекцией
+/// Attribute indicating that this interface is a projection
 /// </summary>
 [AttributeUsage(AttributeTargets.Interface)]
 public class ProjectionContractAttribute : Attribute
 {
     /// <summary>
-    /// Конструктор
+    /// Constructor
     /// </summary>
-    /// <param name="sourceType">Исходный тип, по которому будет строиться проекция</param>
+    /// <param name="sourceType">Source type the projection will be built from</param>
     public ProjectionContractAttribute(Type sourceType)
     {
         if (sourceType is null) throw new ArgumentNullException(nameof(sourceType));
@@ -28,7 +28,7 @@ public class ProjectionContractAttribute : Attribute
     }
 
     /// <summary>
-    /// Исходный тип, по которому будет строиться проекция
+    /// Source type the projection will be built from
     /// </summary>
     public Type SourceType { get; }
 }

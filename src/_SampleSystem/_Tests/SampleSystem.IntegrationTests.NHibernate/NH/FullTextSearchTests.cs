@@ -1,4 +1,6 @@
-﻿using Framework.AutomationCore.RootServiceProviderContainer;
+﻿using Anch.Testing.Xunit;
+
+using Framework.AutomationCore.RootServiceProviderContainer;
 
 using SampleSystem.IntegrationTests._Environment.TestData;
 
@@ -7,19 +9,19 @@ namespace SampleSystem.IntegrationTests.NH;
 public class FullTextSearchTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     /// <summary>
-    /// Тест предназначен для проверки работоспособности диалекта NHibernate,
-    /// использующего поиск по SQL Server Full Text Catalog.
-    /// Тест специально отключен, поскольку длительность построения каталога является неопределенной,
-    /// и тест использует ожидание для того, чтобы каталог (передположительно) был построен.
-    /// Тем не менее, сам тест хочется сохранить для оперативной проверки работы диалекта.
-    /// Для правильного прогона теста, необходимо в файле
+    /// The test is intended to verify that the NHibernate dialect works,
+    /// using search by the SQL Server Full Text Catalog.
+    /// The test is deliberately disabled because the duration of building the catalog is indeterminate,
+    /// and the test uses a wait so that the catalog is (presumably) built.
+    /// Nevertheless, the test itself is worth keeping for a quick check of the dialect.
+    /// To run the test correctly, in the file
     /// "/src/_SampleSystem/_Tests/SampleSystem.IntegrationTests/__Support/Scripts/SampleSystem/Sample.sql"
-    /// раскоментировать SQL код с заголовком "Create and populate Full Text Catalog".
+    /// uncomment the SQL code with the header "Create and populate Full Text Catalog".
     /// </summary>
-    [Fact(Skip = "Skip")]
-    public void FullTextContainsFunctionWorksCorrect()
+    [AnchFact(Skip = "Skip")]
+    public void FullTextContainsFunctionWorksCorrect(CancellationToken ct)
     {
-        Task.Delay(10000).Wait();
+        Task.Delay(10000, ct).Wait(ct);
 
         this.EvaluateRead(context =>
                           {

@@ -7,18 +7,18 @@ using Framework.Core.Helpers;
 namespace Framework.Core.Serialization;
 
 /// <summary>
-/// Сериализатор
+/// Serializer
 /// </summary>
-/// <typeparam name="TSerializedValue">Тип сериализованного значения</typeparam>
-/// <typeparam name="TValue">Сериализуемый тип</typeparam>
+/// <typeparam name="TSerializedValue">Serialized value type</typeparam>
+/// <typeparam name="TValue">Serializable type</typeparam>
 public interface ISerializer<TSerializedValue, TValue> :
         IParser<TSerializedValue, TValue>, IFormatter<TValue, TSerializedValue>;
 
 /// <summary>
-/// Сериализатор
+/// Serializer
 /// </summary>
-/// <typeparam name="TSerializedValue">Тип сериализованного значения</typeparam>
-/// <typeparam name="TValue">Сериализуемый тип</typeparam>
+/// <typeparam name="TSerializedValue">Serialized value type</typeparam>
+/// <typeparam name="TValue">Serializable type</typeparam>
 public class Serializer<TSerializedValue, TValue>(Func<TSerializedValue, TValue> deserializeFunc, Func<TValue, TSerializedValue> serializeFunc)
     : ISerializer<TSerializedValue, TValue>
 {
@@ -37,7 +37,7 @@ public class Serializer<TSerializedValue, TValue>(Func<TSerializedValue, TValue>
     public TSerializedValue Format(TValue value) => this.serializeFunc(value);
 
     /// <summary>
-    /// Сереализатор между типами по умолчанию
+    /// Default serializer between types
     /// </summary>
     public static Serializer<TSerializedValue, TValue> Default => DefaultHelper.Value;
 

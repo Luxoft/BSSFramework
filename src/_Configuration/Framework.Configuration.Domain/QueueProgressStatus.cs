@@ -1,22 +1,22 @@
 ﻿namespace Framework.Configuration.Domain;
 
 /// <summary>
-/// Статус обработки очереди объектов
+/// Object queue processing status
 /// </summary>
 public enum QueueProgressStatus
 {
     /// <summary>
-    /// Необработано
+    /// Not processed
     /// </summary>
     Unprocessed = 0,
 
     /// <summary>
-    /// В процессе обработки
+    /// In progress
     /// </summary>
     Processing = 1,
 
     /// <summary>
-    /// Обработано
+    /// Processed
     /// </summary>
     Processed = 2
 }

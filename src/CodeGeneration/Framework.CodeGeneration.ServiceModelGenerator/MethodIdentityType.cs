@@ -7,7 +7,7 @@ using Framework.Core;
 namespace Framework.CodeGeneration.ServiceModelGenerator;
 
 /// <summary>
-/// Идентификатор генерируемого фасадного метода (используется для политики DefaultServiceGeneratePolicy)
+/// Identifier of the generated facade method (used for DefaultServiceGeneratePolicy)
 /// </summary>
 public class MethodIdentityType(string name) : IEquatable<MethodIdentityType>
 {
@@ -73,72 +73,72 @@ public class MethodIdentityType(string name) : IEquatable<MethodIdentityType>
     public static readonly MethodIdentityType GetWithFormat = new(() => GetWithFormat!);
 
     /// <summary>
-    /// Получение объекта по идентификатору (для ViewDTOType)
+    /// Getting an object by identifier (for ViewDTOType)
     /// </summary>
     public static readonly MethodIdentityType GetSingleByIdentity = new(() => GetSingleByIdentity!);
 
     /// <summary>
-    /// Получение объекта по имени (для MainDTOType, требуется реализация <see cref="IVisualIdentityObject"/> )
+    /// Getting an object by name (for MainDTOType, requires implementation of <see cref="IVisualIdentityObject"/> )
     /// </summary>
     public static readonly MethodIdentityType GetSingleByName = new(() => GetSingleByName!);
 
     /// <summary>
-    /// Получение объекта по коду (для MainDTOType, требуется реализация <see cref="ICodeObject"/>)
+    /// Getting an object by code (for MainDTOType, requires implementation of <see cref="ICodeObject"/>)
     /// </summary>
     public static readonly MethodIdentityType GetSingleByCode = new(() => GetSingleByCode!);
 
     /// <summary>
-    /// Получение полного списка (для ViewDTOType, по умолчанию для проекций отключено)
+    /// Getting the full list (for ViewDTOType, disabled for projections by default)
     /// </summary>
     public static readonly MethodIdentityType GetList = new(() => GetList!);
 
     /// <summary>
-    /// Получение списка по фильтру (для ViewDTOType, по умолчанию для проекций отключено)
+    /// Getting a list by filter (for ViewDTOType, disabled for projections by default)
     /// </summary>
     public static readonly MethodIdentityType GetListByFilter = new(() => GetListByFilter!);
 
     /// <summary>
-    /// Получение списка по идентификаторам (для ViewDTOType, по умолчанию для проекций отключено)
+    /// Getting a list by identifiers (for ViewDTOType, disabled for projections by default)
     /// </summary>
     public static readonly MethodIdentityType GetListByIdents = new(() => GetListByIdents!);
 
     /// <summary>
-    /// Получение полного списка по зависимой Security-операции (для ViewDTOType, по умолчанию для проекций отключено, требуются зависимые Security-операции)
+    /// Getting the full list by a dependent Security operation (for ViewDTOType, disabled for projections by default, dependent Security operations are required)
     /// </summary>
     public static readonly MethodIdentityType GetListByOperation = new(() => GetListByOperation!);
 
     /// <summary>
-    /// Получение дерева по зависимой Security-операции (для ViewDTOType, по умолчанию отключено для проекций, требуются релизация IHierarchicalPersistentDomainObjectBase и зависимые Security-операции)
+    /// Getting a tree by a dependent Security operation (for ViewDTOType, disabled for projections by default, requires implementation of IHierarchicalPersistentDomainObjectBase and dependent Security operations)
     /// </summary>
     public static readonly MethodIdentityType GetTreeByOperation = new(() => GetTreeByOperation!);
 
     /// <summary>
-    /// Получение объекта по фильтру (только для проекций)
+    /// Getting an object by filter (only for projections)
     /// </summary>
     public static readonly MethodIdentityType GetSingleByFilter = new(() => GetSingleByFilter!);
 
     /// <summary>
-    /// Получение OData-списка (для ViewDTOType)
+    /// Getting an OData list (for ViewDTOType)
     /// </summary>
     public static readonly MethodIdentityType GetODataListByQueryString = new(() => GetODataListByQueryString!);
 
     /// <summary>
-    /// Получение OData-списка по дополнительному фильтру (для ViewDTOType, по умолчанию только для проекций)
+    /// Getting an OData list by an additional filter (for ViewDTOType, by default only for projections)
     /// </summary>
     public static readonly MethodIdentityType GetODataListByQueryStringWithFilter = new(() => GetODataListByQueryStringWithFilter!);
 
     /// <summary>
-    /// Получение OData-списка по зависимой Security-операции (для ViewDTOType, по умолчанию только для проекций, требуются зависимые Security-операции)
+    /// Getting an OData list by a dependent Security operation (for ViewDTOType, by default only for projections, dependent Security operations are required)
     /// </summary>
     public static readonly MethodIdentityType GetODataListByQueryStringWithOperation = new(() => GetODataListByQueryStringWithOperation!);
 
     /// <summary>
-    /// Получение OData-дерева по зависимой Security-операции (для ViewDTOType, по умолчанию только для проекций, требуются зависимые Security-операции)
+    /// Getting an OData tree by a dependent Security operation (for ViewDTOType, by default only for projections, dependent Security operations are required)
     /// </summary>
     public static readonly MethodIdentityType GetODataTreeByQueryStringWithOperation = new(() => GetODataTreeByQueryStringWithOperation!);
 
     /// <summary>
-    /// Получение OData-дерева по зависимой Security-операции (для ViewDTOType, по умолчанию только для проекций, требуются релизация IHierarchicalPersistentDomainObjectBase и зависимые Security-операции)
+    /// Getting an OData tree by a dependent Security operation (for ViewDTOType, by default only for projections, requires implementation of IHierarchicalPersistentDomainObjectBase and dependent Security operations)
     /// </summary>
     public static readonly MethodIdentityType GetODataTreeByQueryStringWithFilter = new(() => GetODataTreeByQueryStringWithFilter!);
 

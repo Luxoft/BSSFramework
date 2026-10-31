@@ -11,12 +11,12 @@ using Index = Microsoft.SqlServer.Management.Smo.Index;
 namespace Framework.Database.NHibernate.DBGenerator.ScriptGenerators.ScriptGeneratorStrategy;
 
 /// <summary>
-/// Создает Index, PrimaryKey и ForeignKey, если их еще нету, для колонок всех доменных типов. Если в доменом объекте полей не должны принимать значниея null, то колонка также будет не Nullable
+/// Creates an Index, PrimaryKey and ForeignKey if they do not exist yet for the columns of all domain types. If fields in a domain object must not accept null values, the column will also be non-Nullable
 /// </summary>
 internal class ChangeIndexesStrategy(DatabaseScriptGeneratorStrategyInfo parameter) : ScriptGeneratorStrategyBase(parameter)
 {
     /// <summary>
-    /// Мод применяемого миграционого скрипта
+    /// Mode of the applied migration script
     /// </summary>
     public override ApplyMigrationDbScriptMode ApplyMigrationDbScriptMode => ApplyMigrationDbScriptMode.ChangeIndexies;
 
@@ -50,7 +50,7 @@ internal class ChangeIndexesStrategy(DatabaseScriptGeneratorStrategyInfo paramet
     }
 
     /// <summary>
-    /// Модификации базы данных по определенной стратегии
+    /// Database modifications using a specific strategy
     /// </summary>
     protected override void ExecuteBase()
     {

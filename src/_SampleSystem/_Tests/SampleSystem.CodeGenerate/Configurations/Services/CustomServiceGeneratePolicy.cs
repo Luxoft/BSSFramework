@@ -12,7 +12,7 @@ using SampleSystem.Domain.MU;
 namespace SampleSystem.CodeGenerate.Configurations.Services;
 
 /// <summary>
-/// Кастомная политика для управления генерацией фасадных методов (пример для обработки генерируемых методов по ComplexChange-модели)
+/// Custom policy for controlling facade method generation (an example of handling methods generated from a ComplexChange model)
 /// </summary>
 public class CustomServiceGeneratePolicy(IServiceModelGenerationEnvironment generationEnvironment) : DefaultServiceGeneratePolicy(generationEnvironment)
 {

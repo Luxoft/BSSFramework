@@ -4,7 +4,7 @@ using Framework.Restriction;
 namespace SampleSystem.Domain.Models.Change._Base;
 
 /// <summary>
-/// Базовая произвольная модель для изменений объектов (пример, для которого будет расширена генерация)
+/// Base arbitrary model for object changes (an example for which generation will be extended)
 /// </summary>
 /// <typeparam name="TDomainObject"></typeparam>
 [DirectMode(DirectMode.In)]

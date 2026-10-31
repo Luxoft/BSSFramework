@@ -139,7 +139,7 @@ public static class BaseCodeDomHelper
     }
 
     /// <summary>
-    /// Генерирование конструктора для UpdateDTO на основе разницы двух StrictDTO
+    /// Generating a constructor for UpdateDTO based on the difference between two StrictDTOs
     /// </summary>
     /// <returns></returns>
     public static CodeConstructor GenerateUpdateFromDiffStrictConstructor<TFileFactory>(

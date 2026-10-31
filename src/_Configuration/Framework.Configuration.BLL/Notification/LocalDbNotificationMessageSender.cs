@@ -9,7 +9,7 @@ using Framework.Notification.DTO;
 namespace Framework.Configuration.BLL.Notification;
 
 /// <summary>
-/// Sender для отправки нотификакий в локальную бд
+/// Sender for sending notifications to the local db
 /// </summary>
 public class LocalDbNotificationMessageSender(
     [DisabledSecurity] IRepository<DomainObjectNotification> domainObjectNotificationRepository)

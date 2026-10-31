@@ -3,7 +3,7 @@
 namespace SampleSystem.Subscriptions.Metadata.Examples.IndividualLetters;
 
 /// <summary>
-/// Пример подписки с отправкой индивидуального письма каждому адресату
+/// Example of a subscription sending an individual letter to each addressee
 /// </summary>
 public class IndividualLettersSubscription : IndividualLettersSubscriptionBase
 {

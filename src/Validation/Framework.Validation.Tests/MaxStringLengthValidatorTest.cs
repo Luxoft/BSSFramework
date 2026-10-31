@@ -33,7 +33,7 @@ public class MaxStringLengthValidatorTest
     [InlineData("")]
     [InlineData("a")]
     [InlineData("abcde")]
-    public void GetValidationResult_StringValidator_ValueNullOrShorterThanMax_NoErrors(string value)
+    public void GetValidationResult_StringValidator_ValueNullOrShorterThanMax_NoErrors(string? value)
     {
         // Arrange
         var validator = new MaxLengthValidator.StringMaxLengthValidator<DomainObject>(MaxLength);

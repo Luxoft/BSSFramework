@@ -47,6 +47,10 @@ public static class AnonymousTypeBuilderExtensions
         return new FuncAnonymousTypeBuilder<TMap>(map => anonymousTypeBuilder.GetAnonymousType(map.SwitchName(getNewName(map))));
     }
 
+    /// <summary>
+    /// Caches generated types per map so equal maps yield the same <see cref="Type"/> (required: each dynamic type is distinct).
+    /// Not thread-safe - apply <see cref="WithLock{TMap}"/> after it.
+    /// </summary>
     public static IAnonymousTypeBuilder<TMap> WithCache<TMap>(this IAnonymousTypeBuilder<TMap> anonymousTypeBuilder, IEqualityComparer<TMap>? equalityComparer = null)
             where TMap : notnull
     {

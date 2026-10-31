@@ -3,27 +3,27 @@
 namespace Framework.BLL.Domain.DTO;
 
 /// <summary>
-/// Атрибут сгенерированного типа
+/// Generated type attribute
 /// </summary>
 public class DTOFileTypeAttribute(Type domainType, string name, DTORole role) : Attribute
 {
     /// <summary>
-    /// Доменный тип
+    /// Domain type
     /// </summary>
     public Type DomainType { get; } = domainType;
 
     /// <summary>
-    /// Генерируемый тип
+    /// Generated type
     /// </summary>
     public string Name { get; } = name;
 
     /// <summary>
-    /// Роль
+    /// Role
     /// </summary>
     public DTORole Role { get; } = role;
 
     /// <summary>
-    /// Дополнительные данные генерации
+    /// Additional generation data
     /// </summary>
     public string? ExternalData { get; init; }
 }

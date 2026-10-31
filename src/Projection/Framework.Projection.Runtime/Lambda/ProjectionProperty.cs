@@ -8,7 +8,7 @@ using Framework.Core;
 namespace Framework.Projection.Lambda;
 
 /// <summary>
-/// Проекционное свойство
+/// Projection property
 /// </summary>
 public abstract class ProjectionProperty<TExpression, TElement> : IProjectionProperty
     where TExpression : LambdaExpression
@@ -16,13 +16,13 @@ public abstract class ProjectionProperty<TExpression, TElement> : IProjectionPro
     private readonly Lazy<Projection<TElement>>? lazyElementProjection;
 
     /// <summary>
-    /// Конструктор
+    /// Constructor
     /// </summary>
-    /// <param name="path">Путь до свойства</param>
-    /// <param name="name">Имя свойства</param>
-    /// <param name="getPropProjection">Тип проекции свойства</param>
-    /// <param name="ignoreSerialization">Игноририрование сериализации</param>
-    /// <param name="attributes">Дополнительные атрибуты свойства</param>
+    /// <param name="path">Path to the property</param>
+    /// <param name="name">Property name</param>
+    /// <param name="getPropProjection">Property projection type</param>
+    /// <param name="ignoreSerialization">Ignore serialization</param>
+    /// <param name="attributes">Additional property attributes</param>
     protected ProjectionProperty(TExpression path, string? name, Func<Projection<TElement>>? getPropProjection, bool ignoreSerialization, IEnumerable<Attribute> attributes)
     {
         this.Expression = path ?? throw new ArgumentNullException(nameof(path));
@@ -42,7 +42,7 @@ public abstract class ProjectionProperty<TExpression, TElement> : IProjectionPro
     public ProjectionPropertyRole Role { get; } = ProjectionPropertyRole.Default;
 
     /// <summary>
-    /// Expression-путь до свойства
+    /// Expression path to the property
     /// </summary>
     public TExpression Expression { get; }
 
@@ -58,22 +58,22 @@ public abstract class ProjectionProperty<TExpression, TElement> : IProjectionPro
     public abstract Type SourceType { get; }
 
     /// <summary>
-    /// Проекция на тип свойства
+    /// Projection onto the property type
     /// </summary>
     public Type ElementType { get; }
 
     /// <summary>
-    /// Тип коллекции
+    /// Collection type
     /// </summary>
     public abstract Type? CollectionType { get; }
 
     /// <summary>
-    /// Свойство является коллекцией
+    /// The property is a collection
     /// </summary>
     public bool IsCollection => this.CollectionType is not null;
 
     /// <summary>
-    /// Свойство имеет Nullable-тип
+    /// The property has a Nullable type
     /// </summary>
     public bool IsNullable { get; }
 

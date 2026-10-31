@@ -6,7 +6,7 @@ using Microsoft.SqlServer.Management.Smo;
 namespace Framework.Database.NHibernate.DBGenerator.ScriptGenerators.ScriptGeneratorStrategy;
 
 /// <summary>
-/// Предоставляет доступ к параметрам, необходимым для генерации основной базы данных, и хранит списки добавленных и удаленных колонок
+/// Provides access to the parameters required to generate the main database and keeps lists of added and removed columns
 /// </summary>
 public struct DatabaseScriptGeneratorStrategyInfo
 {

@@ -6,7 +6,7 @@ using Framework.Restriction;
 namespace Framework.Authorization.Domain;
 
 /// <summary>
-///     Идентификатор (логин) пользователя в системе
+///     User identifier (login) in the system
 /// </summary>
 [DebuggerDisplay("{Name}, RunAs={RunAs}")]
 [UniqueGroup]
@@ -17,12 +17,12 @@ public class Principal : BaseDirectory, IMaster<Permission>
     private Principal? runAs;
 
     /// <summary>
-    ///     Коллекция пермиссий принципала
+    ///     Principal's permission collection
     /// </summary>
     public virtual IEnumerable<Permission> Permissions => this.permissions;
 
     /// <summary>
-    ///     Принципал, под которым сейчас работает пользователь
+    ///     Principal under which the user currently works
     /// </summary>
     public virtual Principal? RunAs
     {

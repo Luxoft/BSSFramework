@@ -4,9 +4,9 @@
 namespace SampleSystem.Domain;
 
 /// <summary>
-/// Базовый доменный объект
+/// Base domain object
 /// </summary>
 /// <remarks>
-/// Для базового доменного объекта генерятся ДТО
+/// DTOs are generated for the base domain object
 /// </remarks>
 public abstract class DomainObjectBase;

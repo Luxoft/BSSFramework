@@ -1,17 +1,17 @@
 ﻿namespace Framework.CodeGeneration.ProjectionGenerator;
 
 /// <summary>
-/// Тип проекции
+/// Projection type
 /// </summary>
 public enum FileType
 {
     /// <summary>
-    /// Обычная проекция
+    /// Regular projection
     /// </summary>
     Projection,
 
     /// <summary>
-    /// Базовая проекция с набором абстрактных кастомных свойств
+    /// Base projection with a set of abstract custom properties
     /// </summary>
     CustomProjectionBase
 }

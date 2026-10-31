@@ -8,24 +8,24 @@ using Framework.Projection.Lambda.Extensions;
 namespace Framework.Projection.Lambda;
 
 /// <summary>
-/// Ссылка на тип
+/// Type reference
 /// </summary>
 public abstract class TypeReferenceBase
 {
     /// <summary>
-    /// Попытка заменить проекцию
+    /// Attempt to replace a projection
     /// </summary>
-    /// <param name="mapFunc">Функтор</param>
+    /// <param name="mapFunc">Functor</param>
     /// <returns></returns>
     public abstract TypeReferenceBase TryOverrideElementProjection(Func<IProjection, IProjection> mapFunc);
 
     /// <summary>
-    /// Фиксированный тип
+    /// Fixed type
     /// </summary>
     public class FixedTypeReference(Type propertyType) : TypeReferenceBase
     {
         /// <summary>
-        /// Тип свойства
+        /// Property type
         /// </summary>
         public Type PropertyType { get; } = propertyType ?? throw new ArgumentNullException(nameof(propertyType));
 
@@ -40,7 +40,7 @@ public abstract class TypeReferenceBase
     }
 
     /// <summary>
-    /// Динамический тип
+    /// Dynamic type
     /// </summary>
     public class BuildTypeReference : TypeReferenceBase
     {
@@ -62,27 +62,27 @@ public abstract class TypeReferenceBase
         }
 
         /// <summary>
-        /// Тип элемента свойства
+        /// Property element type
         /// </summary>
         public Type ElementType { get; }
 
         /// <summary>
-        /// Тип коллекции
+        /// Collection type
         /// </summary>
         public Type? CollectionType { get; }
 
         /// <summary>
-        /// Свойство является коллекцией
+        /// The property is a collection
         /// </summary>
         public bool IsCollection => this.CollectionType is not null;
 
         /// <summary>
-        /// Свойство имеет Nullable-тип
+        /// The property has a Nullable type
         /// </summary>
         public bool IsNullable { get; }
 
         /// <summary>
-        /// Проекция на тип свойства
+        /// Projection onto the property type
         /// </summary>
         public IProjection? ElementProjection { get; }
 

@@ -67,15 +67,15 @@ public class NotificationExtractor<TDomainObject, TRenderingObject>(
     }
 
     /// <summary>
-    ///     Гарантирует, что для подписки с <see cref="ISubscription.AllowEmptyListOfRecipients" /> == <c>true</c>
-    ///     поток прямых получателей (To) будет содержать хотя бы один (пустой) элемент, даже если ни один
-    ///     источник прямых получателей (GetTo/роли) не вернул ни одного адресата.
+    ///     Guarantees that for a subscription with <see cref="ISubscription.AllowEmptyListOfRecipients" /> == <c>true</c>
+    ///     the stream of direct recipients (To) will contain at least one (empty) element even if none of the
+    ///     the source of direct recipients (GetTo/roles) returned no addressee.
     /// </summary>
     /// <remarks>
-    ///     Без этого, если при этом пусты ещё и CopyTo/ReplyTo, письмо вообще не формируется (группировка по
-    ///     DomainObjectVersions просто не получает ключа), и модификаторы письма вроде RedirectToSupportMailMessageModifier,
-    ///     подставляющие адрес поддержки в пустое поле To, не успевают отработать.
-    ///     Признак сознательно применяется только к прямым получателям (To) - к CopyTo/ReplyTo он не относится.
+    ///     Without this, if CopyTo/ReplyTo are also empty, the letter is not formed at all (grouping by
+    ///     DomainObjectVersions simply does not get a key), and letter modifiers such as RedirectToSupportMailMessageModifier,
+    ///     that substitute the support address into an empty To field do not get a chance to run.
+    ///     The flag is deliberately applied only to direct recipients (To) - it does not apply to CopyTo/ReplyTo.
     /// </remarks>
     private async IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> EnsureAtLeastOneTo(
         IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject>> resultTo,
@@ -132,12 +132,12 @@ public class NotificationExtractor<TDomainObject, TRenderingObject>(
     }
 
     /// <summary>
-    ///     Разбивает консолидированное письмо на индивидуальные, если подписка требует отправки индивидуальных писем.
+    ///     Splits a consolidated letter into individual ones if the subscription requires sending individual letters.
     /// </summary>
     /// <remarks>
-    ///     Каждый адресат доставки (<see cref="RecipientRole.To" /> или <see cref="RecipientRole.Copy" />) получает
-    ///     собственное письмо с сохранением своей роли. Адресаты <see cref="RecipientRole.ReplyTo" /> не являются
-    ///     адресатами доставки, поэтому попадают в каждое сформированное письмо.
+    ///     Each delivery addressee (<see cref="RecipientRole.To" /> or <see cref="RecipientRole.Copy" />) gets its
+    ///     its own letter, keeping its role. <see cref="RecipientRole.ReplyTo" /> addressees are not
+    ///     delivery addressees, so they go into every formed letter.
     /// </remarks>
     private IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject, NotificationRecipient>> SplitLetters(
         IAsyncEnumerable<NotificationMessageGenerationInfo<TRenderingObject, NotificationRecipient>> source) =>

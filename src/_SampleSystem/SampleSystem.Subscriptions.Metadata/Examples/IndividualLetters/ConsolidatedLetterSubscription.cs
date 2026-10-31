@@ -3,7 +3,7 @@
 namespace SampleSystem.Subscriptions.Metadata.Examples.IndividualLetters;
 
 /// <summary>
-/// Пример подписки с отправкой одного консолидированного письма на всех адресатов
+/// Example of a subscription sending one consolidated letter to all addressees
 /// </summary>
 public class ConsolidatedLetterSubscription : IndividualLettersSubscriptionBase
 {

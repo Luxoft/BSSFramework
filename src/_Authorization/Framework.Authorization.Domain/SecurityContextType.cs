@@ -1,12 +1,12 @@
 ﻿namespace Framework.Authorization.Domain;
 
 /// <summary>
-/// Описание доменных типов, в контексте которых выдаются права пользователю
+/// Description of domain types in whose context rights are granted to the user
 /// </summary>
 /// <remarks>
-/// В коде контекст описывается следующими сущностями:
+/// In code the context is described by the following entities:
 /// <seealso cref="SecurityContextType"/>
 /// <seealso cref="PermissionRestriction"/>
-/// Типы, в контексте которых выдаются права пользователю, записываются вручную на уровне SQL в базу конкретной системы
+/// Types in whose context rights are granted to the user are written manually at the SQL level into the database of a specific system
 /// </remarks>
 public class SecurityContextType : BaseDirectory;

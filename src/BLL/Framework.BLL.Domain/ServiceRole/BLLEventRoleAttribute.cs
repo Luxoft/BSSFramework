@@ -1,6 +1,6 @@
 ﻿namespace Framework.BLL.Domain.ServiceRole;
 
 /// <summary>
-/// Маркер объектов отправляющих евенты в интеграцию
+/// Marker of objects that send events to integration
 /// </summary>
 public class BLLEventRoleAttribute : Attribute;

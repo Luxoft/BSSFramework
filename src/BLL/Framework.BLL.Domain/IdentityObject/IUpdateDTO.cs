@@ -1,17 +1,17 @@
 ﻿namespace Framework.BLL.Domain.IdentityObject;
 
 /// <summary>
-/// Интерфейс для UpdateDTO
+/// Interface for UpdateDTO
 /// </summary>
 public interface IUpdateDTO
 {
     /// <summary>
-    /// DTO является пустой (проверять нужно после сжатия)
+    /// DTO is empty (should be checked after compression)
     /// </summary>
     bool IsEmpty { get; }
 
     /// <summary>
-    /// Сжатие полей
+    /// Field compression
     /// </summary>
     void Compress();
 }

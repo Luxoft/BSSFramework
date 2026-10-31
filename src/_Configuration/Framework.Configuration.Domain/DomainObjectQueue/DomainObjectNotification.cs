@@ -5,7 +5,7 @@ using Framework.Restriction;
 namespace Framework.Configuration.Domain;
 
 /// <summary>
-/// Нотификация хранимая в бд
+/// Notification stored in the db
 /// </summary>
 [NotAuditedClass]
 public class DomainObjectNotification : AuditPersistentDomainObjectBase

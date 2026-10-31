@@ -4,7 +4,7 @@ using Framework.Validation.Validators;
 namespace Framework.Tracking.Validation;
 
 /// <summary>
-/// Атрибут для проверки неизменяемости свойства
+/// Attribute for checking property immutability
 /// </summary>
 [AttributeUsage(AttributeTargets.Property)]
 public class FixedPropertyValidatorAttribute : PropertyValidatorAttribute

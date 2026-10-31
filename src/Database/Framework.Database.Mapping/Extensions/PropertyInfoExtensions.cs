@@ -9,9 +9,9 @@ namespace Framework.Database.Mapping.Extensions;
 public static class PropertyInfoExtensions
 {
     /// <summary>
-    /// Проверка свойства на персистентность
+    /// Check a property for persistence
     /// </summary>
-    /// <param name="propertyInfo">Свойство</param>
+    /// <param name="propertyInfo">Property</param>
     /// <returns></returns>
     public static bool IsPersistent(this PropertyInfo propertyInfo)
     {

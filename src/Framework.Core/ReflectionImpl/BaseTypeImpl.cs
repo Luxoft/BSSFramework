@@ -98,7 +98,7 @@ public class BaseTypeImpl : Type
     public override object[] GetCustomAttributes(Type attributeType, bool inherit) => throw new NotImplementedException();
 
     /// <summary>
-    /// Попытка извлечь реально скомпилированный тип по свойству AssemblyQualifiedName
+    /// Attempt to extract the actually compiled type by the AssemblyQualifiedName property
     /// </summary>
     /// <returns></returns>
     public Type? TryGetRealType()

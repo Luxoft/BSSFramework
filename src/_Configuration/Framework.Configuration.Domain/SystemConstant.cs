@@ -4,7 +4,7 @@ using Framework.Restriction;
 namespace Framework.Configuration.Domain;
 
 /// <summary>
-/// Константа системы
+/// System constant
 /// </summary>
 [UniqueGroup]
 [NotAuditedClass]
@@ -26,10 +26,10 @@ public class SystemConstant : AuditPersistentDomainObjectBase
     }
 
     /// <summary>
-    /// Конструктор
+    /// Constructor
     /// </summary>
-    /// <param name="code">Код</param>
-    /// <param name="type">Тип</param>
+    /// <param name="code">Code</param>
+    /// <param name="type">Type</param>
     public SystemConstant(string code, DomainType type)
     {
         this.code = code ?? throw new ArgumentNullException(nameof(code));
@@ -37,7 +37,7 @@ public class SystemConstant : AuditPersistentDomainObjectBase
     }
 
     /// <summary>
-    /// Тип константы
+    /// Constant type
     /// </summary>
     [Required]
     public virtual DomainType Type
@@ -47,7 +47,7 @@ public class SystemConstant : AuditPersistentDomainObjectBase
     }
 
     /// <summary>
-    /// Уникальное имя константы
+    /// Unique constant name
     /// </summary>
     [UniqueElement]
     [Required]
@@ -58,7 +58,7 @@ public class SystemConstant : AuditPersistentDomainObjectBase
     }
 
     /// <summary>
-    /// Значение константы
+    /// Constant value
     /// </summary>
     [MaxLength]
     public virtual string Value
@@ -68,7 +68,7 @@ public class SystemConstant : AuditPersistentDomainObjectBase
     }
 
     /// <summary>
-    /// Описание константы
+    /// Constant description
     /// </summary>
     [MaxLength]
     public virtual string Description
@@ -78,7 +78,7 @@ public class SystemConstant : AuditPersistentDomainObjectBase
     }
 
     /// <summary>
-    /// Признак изменения константы вручную
+    /// Flag of a manual constant change
     /// </summary>
     public virtual bool IsManual
     {

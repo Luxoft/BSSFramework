@@ -98,7 +98,7 @@ public static class CoreStringExtensions
     public static string Concat<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector) => source.Select(selector).Concat();
 
     /// <summary>
-    /// Переводит сроку в набор строк. По правилу:SendToApprove->Send to approve
+    /// Converts a string into a set of words. By the rule: SendToApprove->Send to approve
     /// </summary>
     /// <param name="source"></param>
     /// <returns></returns>

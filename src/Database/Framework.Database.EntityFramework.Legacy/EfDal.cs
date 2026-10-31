@@ -55,7 +55,7 @@ public class EfDal<TDomainObject, TIdent>(
 
     public TDomainObject Load(TIdent id) => asyncDal.Load(id);
 
-    public TDomainObject GetObjectByRevision(TIdent id, long revision) => auditReader.Find<TDomainObject>(id, revision);
+    public TDomainObject GetObjectByRevision(TIdent id, long revision) => auditReader.Find<TDomainObject>(id, revision)!;
 
     public IEnumerable<TDomainObject> GetObjectsByRevision(IEnumerable<TIdent> idCollection, long revisionNumber) =>
         auditReader.FindObjects<TDomainObject>(idCollection.Cast<object>(), revisionNumber);

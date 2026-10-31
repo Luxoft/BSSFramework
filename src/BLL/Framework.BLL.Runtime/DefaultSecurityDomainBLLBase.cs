@@ -7,10 +7,12 @@ using Framework.BLL.Default;
 namespace Framework.BLL;
 
 /// <summary>
-/// BLL с безопастностью
+/// BLL with security
 /// </summary>
-/// <typeparam name="TBLLContext"></typeparam>
-/// <typeparam name="TDomainObject"></typeparam>
+/// <typeparam name="TBLLContext">BLL context type</typeparam>
+/// <typeparam name="TPersistentDomainObjectBase">Base persistent domain object type</typeparam>
+/// <typeparam name="TDomainObject">Domain object type</typeparam>
+/// <typeparam name="TIdent">Identifier type</typeparam>
 public class DefaultSecurityDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent>(
     TBLLContext context,
     ISecurityProvider<TDomainObject> securityProvider)

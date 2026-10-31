@@ -5,7 +5,7 @@ using Framework.Projection.Lambda.Extensions;
 namespace Framework.Projection.Lambda;
 
 /// <inheritdoc />
-/// <typeparam name="TProperty">Тип свойства</typeparam>
+/// <typeparam name="TProperty">Property type</typeparam>
 public class ProjectionCustomProperty<TProperty> : IProjectionCustomProperty
 {
     private readonly Lazy<TypeReferenceBase> lazyType;

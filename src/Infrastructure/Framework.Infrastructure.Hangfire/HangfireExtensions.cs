@@ -13,8 +13,8 @@ namespace Framework.Infrastructure.Hangfire;
 public static class HangfireExtensions
 {
     /// <summary>
-    /// переключает регулярные джобы с шины на Hangfire.
-    /// (см. http://readthedocs/docs/iad-framework/en/master/KB/webApiUtils/webApiUtilsHangfire.html)
+    /// switches regular jobs from the bus to Hangfire.
+    /// (see http://readthedocs/docs/iad-framework/en/master/KB/webApiUtils/webApiUtilsHangfire.html)
     /// </summary>
     public static IServiceCollection AddHangfireBss(
         this IServiceCollection services,

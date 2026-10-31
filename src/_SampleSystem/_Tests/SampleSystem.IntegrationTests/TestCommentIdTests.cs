@@ -76,7 +76,7 @@ public abstract class TestCommentIdTests(IServiceProvider rootServiceProvider) :
         // Assert: the not-yet-saved comment must stay "new" (Id == default) until it is actually persisted,
         // regardless of any unrelated navigation lazy-loaded on the same session in the meantime.
 
-        Assert.Equal(true, isNew);
+        Assert.True(isNew);
 
         //Assert.Equal(Guid.Empty, idRightAfterAdd);
         //Assert.Equal(Guid.Empty, idAfterLazyNavigationAccess);

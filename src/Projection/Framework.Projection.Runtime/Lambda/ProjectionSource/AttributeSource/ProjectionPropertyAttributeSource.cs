@@ -10,15 +10,15 @@ using Framework.Database.Mapping;
 namespace Framework.Projection.Lambda.ProjectionSource.AttributeSource;
 
 /// <summary>
-/// Источник атрибутов для свойства проекции
+/// Attribute source for a projection property
 /// </summary>
 public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjectionProperty>
 {
     /// <summary>
-    /// Конструктор
+    /// Constructor
     /// </summary>
-    /// <param name="environment">Окружение</param>
-    /// <param name="projectionProperty">Свойство проекции</param>
+    /// <param name="environment">Environment</param>
+    /// <param name="projectionProperty">Projection property</param>
     public ProjectionPropertyAttributeSource(ProjectionLambdaEnvironment environment, IProjectionProperty projectionProperty)
         : base(environment, projectionProperty)
     {
@@ -40,27 +40,27 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
     }
 
     /// <summary>
-    /// Тип на основе которого строится проекция
+    /// Type on which the projection is based
     /// </summary>
     public Type SourceType => this.ProjectionValue.SourceType;
 
     /// <summary>
-    /// Свойство является виртуальным и раскрывается через сторонний доменный объект
+    /// The property is virtual and is expanded through a third-party domain object
     /// </summary>
     private bool IsExpand { get; }
 
     /// <summary>
-    /// Свойство является целиком композитным
+    /// The property is entirely composite
     /// </summary>
     private bool IsPureComposite { get; }
 
     /// <summary>
-    /// Базовый путь, состоящий из переходов между доменными объектами
+    /// Base path consisting of transitions between domain objects
     /// </summary>
     private PropertyPath ExpandPathHead { get; }
 
     /// <summary>
-    /// Остаточный путь, состоящий из переходов между неперсистентными объектами (примеры: Id, Name, Period.EndDate, Fio.LastName)
+    /// Remaining path consisting of transitions between non-persistent objects (examples: Id, Name, Period.EndDate, Fio.LastName)
     /// </summary>
     private PropertyPath CompositeTail { get; }
 

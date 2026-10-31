@@ -1,8 +1,8 @@
 ﻿namespace Framework.BLL.Domain.Serialization;
 
 /// <summary>
-/// Позволяет настраивать сериализацию свойств доменного типа в конкретный тип DTO
-/// По умолчанию для всех доменных типов генерируются все подходящие типы DTO, а также соответствующий мапинг из домена в ДТО или из ДТО в домен(в зависимости от вида ДТО - input или output).
+/// Allows configuring serialization of domain type properties into a specific DTO type
+/// By default, all suitable DTO types are generated for all domain types, along with the corresponding mapping from domain to DTO or from DTO to domain (depending on the DTO kind - input or output).
 /// <see href="confluence/display/IADFRAME/CustomSerializationAttribute"/>
 /// </summary>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct, AllowMultiple = true)]

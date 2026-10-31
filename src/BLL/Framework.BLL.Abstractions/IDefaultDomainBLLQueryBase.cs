@@ -35,17 +35,17 @@ public interface IDefaultDomainBLLQueryBase<in TPersistentDomainObjectBase, TDom
     TDomainObject GetNested(TDomainObject domainObject);
 
     /// <summary>
-    /// Получение дерева объектов
+    /// Getting an object tree
     /// </summary>
-    /// <param name="fetchRule">Подгружаемые свойства</param>
+    /// <param name="fetchRule">Properties to fetch</param>
     /// <returns></returns>
     List<HierarchicalNode<TDomainObject, TIdent>> GetTree(FetchRule<TDomainObject>? fetchRule = null);
 
     /// <summary>
-    /// Получение дерева объектов по OData-запросу
+    /// Getting an object tree by an OData query
     /// </summary>
-    /// <param name="selectOperation">OData-запрос</param>
-    /// <param name="fetchRule">Подгружаемые свойства</param>
+    /// <param name="selectOperation">OData query</param>
+    /// <param name="fetchRule">Properties to fetch</param>
     /// <returns></returns>
     SelectOperationResult<HierarchicalNode<TDomainObject, TIdent>> GetTreeByOData(SelectOperation<TDomainObject> selectOperation, FetchRule<TDomainObject>? fetchRule = null);
 }

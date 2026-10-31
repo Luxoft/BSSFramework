@@ -4,23 +4,23 @@ using Framework.Database.NHibernate.DBGenerator.Contracts;
 namespace Framework.Database.NHibernate.DBGenerator.ScriptGenerators.Support;
 
 /// <summary>
-/// Необходимая информация для генератора скриптов по модификации базы данных
+/// Information required by the database modification script generator
 /// </summary>
 public class DatabaseScriptGeneratorContext(DatabaseName databaseName, ISqlDatabaseFactory sqlDatabaseFactory, AssemblyMetadata assemblyMetadata)
     : IDatabaseScriptGeneratorContext
 {
     /// <summary>
-    /// Имя базы данных на которой будет выполнены скрипты
+    /// Name of the database on which the scripts will be executed
     /// </summary>
     public DatabaseName DatabaseName { get; } = databaseName ?? throw new ArgumentNullException(nameof(databaseName));
 
     /// <summary>
-    /// Экземпляр Sql сервера на ктором будет выполнены скрипты
+    /// SQL server instance on which the scripts will be executed
     /// </summary>
     public ISqlDatabaseFactory SqlDatabaseFactory { get; } = sqlDatabaseFactory ?? throw new ArgumentNullException(nameof(sqlDatabaseFactory));
 
     /// <summary>
-    /// Метаданные доменной модели по которой будут строится скрипты
+    /// Metadata of the domain model from which scripts will be built
     /// </summary>
     public AssemblyMetadata AssemblyMetadata { get; } = assemblyMetadata ?? throw new ArgumentNullException(nameof(assemblyMetadata));
 }

@@ -3,7 +3,7 @@
 namespace Framework.Database;
 
 /// <summary>
-/// Описание базы данных
+/// Database description
 /// </summary>
 public record DatabaseName(string Name, string Schema = "dbo")
 {

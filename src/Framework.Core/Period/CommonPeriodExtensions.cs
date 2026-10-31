@@ -6,84 +6,84 @@ using Anch.Core;
 namespace Framework.Core;
 
 /// <summary>
-/// Методы расширения для типов реализующих интерфейс Period
+/// Extension methods for types implementing the Period interface
 /// </summary>
 public static class CommonPeriodExtensions
 {
-    /// <param name="period">Период, в котором проверяется пересечение</param>
+    /// <param name="period">Period in which the intersection is checked</param>
     extension(Period period)
     {
         /// <summary>
-        /// Возвращает значение, указывающее, содержит ли указанный период <see cref="period"/> значение периода <see cref="target"/> переданного в качестве параметра
+        /// Returns a value indicating whether the specified period <paramref name="period"/> contains the <paramref name="target"/> period passed as a parameter
         /// </summary>
         /// <remarks>
-        /// Сравнение происходит с учетом ограничения sql базы данных
+        /// The comparison takes the sql database limit into account
         /// </remarks>
-        /// <param name="target">Период, с которым проверяется пересечение</param>
-        /// <returns>true, если дата начала и дата окончания переданного периода содержатся в указанном периоде, в противном случае — false</returns>
+        /// <param name="target">Period to check the intersection with</param>
+        /// <returns>true if the start and end dates of the given period are within the specified period; otherwise false</returns>
         public bool Contains(Period target)
             =>
                 period.Contains(target.StartDate) && period.Contains(target.EndDateValue);
 
         /// <summary>
-        /// Возвращает значение, указывающее, содержит ли указанный период <see cref="period"/> значение даты <see cref="date"/> переданной в качестве параметра
+        /// Returns a value indicating whether the specified period <paramref name="period"/> contains the <paramref name="date"/> date passed as a parameter
         /// </summary>
         /// <remarks>
-        /// Сравнение происходит с учетом ограничения sql базы данных
+        /// The comparison takes the sql database limit into account
         /// </remarks>
-        /// <param name="date">Дата, которую нужно проверить на вхождение в период</param>
-        /// <returns>true, если дата содержится в периоде, в противном случае — false</returns>
+        /// <param name="date">Date to check for inclusion in the period</param>
+        /// <returns>true if the date is within the period; otherwise false</returns>
         public bool Contains(DateTime date)
             => period.StartDate <= date && (period.EndDate == null || date <= period.EndDateValue);
     }
 
-    /// <param name="period">Период, в котором проверяется дата</param>
+    /// <param name="period">Period in which the date is checked</param>
     extension(Period period)
     {
         /// <summary>
-        /// Возвращает значение, указывающее, содержит ли указанный период <see cref="period"/> значение даты <see cref="date"/> переданной в качестве параметра
+        /// Returns a value indicating whether the specified period <paramref name="period"/> contains the <paramref name="date"/> date passed as a parameter
         /// </summary>
         /// <remarks>
-        /// Сравнение происходит с учетом ограничения sql базы данных
+        /// The comparison takes the sql database limit into account
         /// </remarks>
-        /// <param name="date">Дата, которую нужно проверить на вхождение в период</param>
-        /// <returns>true, если дата не является null и дата содержится в периоде, в противном случае — false</returns>
+        /// <param name="date">Date to check for inclusion in the period</param>
+        /// <returns>true if the date is not null and is within the period; otherwise false</returns>
         public bool ContainsExt(DateTime? date)
             => date.MaybeNullable(v => period.Contains(v));
 
         /// <summary>
-        /// Возвращает значение, указывающее, содержит ли указанный период <see cref="period"/> значение даты <see cref="date"/> переданной в качестве параметра
+        /// Returns a value indicating whether the specified period <paramref name="period"/> contains the <paramref name="date"/> date passed as a parameter
         /// </summary>
-        /// <param name="date">Дата, которую нужно проверить на вхождение в период</param>
-        /// <returns>true, если дата содержится в периоде, в противном случае — false</returns>
+        /// <param name="date">Date to check for inclusion in the period</param>
+        /// <returns>true if the date is within the period; otherwise false</returns>
         public bool NativeContains(DateTime date) => period.NativeStartDate <= date && (period.NativeEndDate is null || date <= period.NativeEndDateValue);
 
         /// <summary>
-        /// Возвращает значение, указывающее, содержит ли указанный период <see cref="period"/> значение даты <see cref="date"/> переданной в качестве параметра
+        /// Returns a value indicating whether the specified period <paramref name="period"/> contains the <paramref name="date"/> date passed as a parameter
         /// </summary>
-        /// <param name="date">Дата, которую нужно проверить на вхождение в период</param>
-        /// <returns>true, если дата не является null и дата содержится в периоде, в противном случае — false</returns>
+        /// <param name="date">Date to check for inclusion in the period</param>
+        /// <returns>true if the date is not null and is within the period; otherwise false</returns>
         public bool NativeContains(DateTime? date) => date.MaybeNullable(z => period.NativeContains(z));
 
         /// <summary>
-        /// Возвращает значение, указывающее, содержит ли указанный период <see cref="period"/>, без учета даты окончания периода, значение даты <see cref="date"/> переданной в качестве параметра
+        /// Returns a value indicating whether the specified period <paramref name="period"/>, excluding the period end date, contains the <paramref name="date"/> date passed as a parameter
         /// </summary>
         /// <remarks>
-        /// Сравнение происходит с учетом ограничения sql базы данных
+        /// The comparison takes the sql database limit into account
         /// </remarks>
-        /// <param name="date">Дата, которую нужно проверить на вхождение в период</param>
-        /// <returns>true, если дата содержится в периоде и не равна дате окончания периода, в противном случае — false</returns>
+        /// <param name="date">Date to check for inclusion in the period</param>
+        /// <returns>true if the date is within the period and is not equal to the period end date; otherwise false</returns>
         public bool ContainsWithoutEndDate(DateTime date) => period.StartDate <= date && (period.EndDate == null || date < period.EndDateValue);
 
         /// <summary>
-        /// Возвращает список дат в периоде, выравненный по рабочей части недели
-        /// (т.е. для недели возвращаются даты, соответсвуещие периоду с понедельника по пятницу)
+        /// Returns a list of dates in the period, aligned to the working part of the week
+        /// (i.e. for a week, dates corresponding to the period from Monday to Friday are returned)
         /// </summary>
         public IEnumerable<DateTime?> DatesByWorkingWeek()
         {
             if (period.EndDate == null)
             {
-                throw new ArgumentException("нельзя выполнить операцию для данного объекта");
+                throw new ArgumentException("this operation cannot be performed for the given object");
             }
 
             var result = new List<DateTime?>((period.EndDateValue - period.StartDate).Days);
@@ -104,9 +104,9 @@ public static class CommonPeriodExtensions
         }
 
         /// <summary>
-        /// Возвращает количество целых месяцев в периоде
+        /// Returns the number of whole months in the period
         /// </summary>
-        /// <returns>Если EndDate равен null или EndDate больше StartDate, то возвращает null, иначе количество месяцев</returns>
+        /// <returns>If EndDate is null or EndDate is greater than StartDate, returns null; otherwise the number of months</returns>
         public int? TotalMonths()
         {
             if (!period.EndDate.HasValue || period.EndDate < period.StartDate)
@@ -120,11 +120,11 @@ public static class CommonPeriodExtensions
         }
 
         /// <summary>
-        /// Возвращает строковое представление текущего периода <see cref="period"/> для региональных настроек <see cref="cultureInfo"/>
+        /// Returns the string representation of the current period <paramref name="period"/> for the regional settings <paramref name="cultureInfo"/>
         /// </summary>
-        /// <param name="cultureInfo">Региональные настройки, в которых необходимо отобразить период</param>
-        /// <param name="displayYear">Флаг, указывающий выводить ли строковом представлении периода год</param>
-        /// <returns>Строка, представляющая период в удобной для отображения форме</returns>
+        /// <param name="cultureInfo">Regional settings in which the period must be displayed</param>
+        /// <param name="displayYear">Flag indicating whether to output the year in the string representation of the period</param>
+        /// <returns>String representing the period in a display-friendly form</returns>
         public string ToDisplayName(CultureInfo cultureInfo, bool displayYear = false)
         {
             if (period.IsEmpty)
@@ -166,10 +166,10 @@ public static class CommonPeriodExtensions
         }
 
         /// <summary>
-        /// Возвращает строковое представление текущего периода <see cref="period"/> с региональными настройками принятыми в IAD
+        /// Returns the string representation of the current period <paramref name="period"/> with the regional settings adopted in IAD
         /// </summary>
-        /// <param name="displayYear">Флаг, указывающий выводить ли строковом представлении периода год</param>
-        /// <returns>Строка, представляющая период в удобной для отображения форме </returns>
+        /// <param name="displayYear">Flag indicating whether to output the year in the string representation of the period</param>
+        /// <returns>String representing the period in a display-friendly form </returns>
         public string ToDisplayName(bool displayYear = false)
         {
             if (period.IsEmpty)
@@ -208,40 +208,40 @@ public static class CommonPeriodExtensions
         }
 
         /// <summary>
-        /// Преобразует дату начала периода в строковое представление месяца и года в предложном падеже для Российского стандарта
+        /// Converts the period start date into a string representation of the month and year in the prepositional case for the Russian standard
         /// </summary>
-        /// <returns>Строка, содержащая полное имя месяца и год в предложном падеже</returns>
+        /// <returns>String containing the full month name and year in the prepositional case</returns>
         public string GetInMonthAndYearStrRus() => period.StartDate.GetInMonthAndYearStrRus();
 
         /// <summary>
-        /// Преобразует дату начала и конца периода в строковое описание интервала представленый месяцами и годом для Российского стандарта
+        /// Converts the start and end dates of the period into a string description of the interval represented by months and year for the Russian standard
         /// </summary>
-        /// <returns>Строка, содержащая содержащая имя месяца и год если период в одном месяце, иначе содержащяя имя начального и конечного месяца с годом</returns>
+        /// <returns>String containing the month name and year if the period is within one month, otherwise the names of the start and end months with the year</returns>
         public string GetMonthAndYearStrRus() =>
             period.IsWithinOneMonth
                 ? period.StartDate.GetMonthAndYearStrRus()
                 : $"{period.StartDate.GetMonthAndYearStrRus()} - {period.EndDateValue.GetMonthAndYearStrRus()}";
 
         /// <summary>
-        /// Преобразует дату начала и конца периода в строковое описание интервала представленый месяцами и годом
+        /// Converts the start and end dates of the period into a string description of the interval represented by months and year
         /// </summary>
-        /// <returns>Строка, содержащая содержащая имя месяца и год если период в одном месяце, иначе содержащяя имя начального и конечного месяца с годом</returns>
+        /// <returns>String containing the month name and year if the period is within one month, otherwise the names of the start and end months with the year</returns>
         public string GetMonthAndYearStr() =>
             period.IsWithinOneMonth
                 ? period.StartDate.GetMonthAndYearStr()
                 : $"{period.StartDate.GetMonthAndYearStr()} - {period.EndDateValue.GetMonthAndYearStr()}";
 
         /// <summary>
-        /// Возвращает неделю года, к которой относится дата начала периода для текущего стандарта
+        /// Returns the week of the year to which the period start date belongs for the current standard
         /// </summary>
-        /// <returns>Положительное целое число, представляющее неделю года, к которой относится дата начала периода для текущего стандарта</returns>
+        /// <returns>A positive integer representing the week of the year to which the period start date belongs for the current standard</returns>
         public int GetWeekNumber() => period.GetWeekNumber(Thread.CurrentThread.CurrentCulture.Name);
 
         /// <summary>
-        /// Возвращает неделю года, к которой относится дата начала периода для <see cref="isoCultureName"/> стандарта
+        /// Returns the week of the year to which the period start date belongs for the <paramref name="isoCultureName"/> standard
         /// </summary>
-        /// <param name="isoCultureName">Предварительно определенное имя CultureInfo, существующего объекта CultureInfo или имя языка и региональных параметров, свойственных только Windows, не учитывая регистр</param>
-        /// <returns>Положительное целое число, представляющее неделю года, к которой относится дата начала периода для указанного стандарта</returns>
+        /// <param name="isoCultureName">Predefined CultureInfo name, name of an existing CultureInfo object, or a Windows-only culture name, case-insensitive</param>
+        /// <returns>A positive integer representing the week of the year to which the period start date belongs for the specified standard</returns>
         public int GetWeekNumber(string isoCultureName)
         {
             var cultureInfo = new CultureInfo(isoCultureName);
@@ -251,9 +251,9 @@ public static class CommonPeriodExtensions
         }
 
         /// <summary>
-        /// Преобразует дату начала и конца периода в короткое строковое описание интервала представленый месяцами и годом
+        /// Converts the start and end dates of the period into a short string description of the interval represented by months and year
         /// </summary>
-        /// <returns>Строка, содержащая содержащая номер месяца и год если период в одном месяце, иначе содержащяя намера начального и конечного месяца с годом</returns>
+        /// <returns>String containing the month number and year if the period is within one month, otherwise the numbers of the start and end months with the year</returns>
         public string ToExtraShortString()
         {
             if (period.IsEmpty)
@@ -271,10 +271,10 @@ public static class CommonPeriodExtensions
         }
 
         /// <summary>
-        /// Преобразует дату начала и конца периода в короткое строковое описание интервала представленый месяцами и годом для <see cref="cultureInfo"/> региональных параметров
+        /// Converts the start and end dates of the period into a short string description of the interval represented by months and year for the <paramref name="cultureInfo"/> regional settings
         /// </summary>
-        /// <param name="cultureInfo">Предоставляет сведения об определенном языке и региональных параметрах используемое для форматирование дат периода</param>
-        /// <returns>Строка, содержащая содержащая номер месяца и год если период в одном месяце, иначе содержащяя намера начального и конечного месяца с годом</returns>
+        /// <param name="cultureInfo">Provides information about a specific language and regional settings used to format period dates</param>
+        /// <returns>String containing the month number and year if the period is within one month, otherwise the numbers of the start and end months with the year</returns>
         public string ToExtraShortString(CultureInfo cultureInfo)
         {
             if (period.IsEmpty)
@@ -293,16 +293,16 @@ public static class CommonPeriodExtensions
         }
 
         /// <summary>
-        /// Преобразует дату начала и конца периода в строковое описание интервала представленый месяцами и годом для Римского стандарта
+        /// Converts the start and end dates of the period into a string description of the interval represented by months and year for the Roman standard
         /// </summary>
-        /// <returns>Строка, содержащая содержащая римский номер месяца и год если период в одном месяце, иначе содержащяя римские номера начального и конечного месяца с годом</returns>
+        /// <returns>String containing the Roman month numeral and year if the period is within one month, otherwise the Roman numerals of the start and end months with the year</returns>
         public string GetMonthAndYearStrRoman() => MonthFormatter.GetMonthAndYearStrRoman(period);
 
         /// <summary>
-        /// Возвращает формат даты для <see cref="cultureInfo"/> региональных параметров содержащий только месяц и год
+        /// Returns the date format for the <paramref name="cultureInfo"/> regional settings containing only month and year
         /// </summary>
-        /// <param name="cultureInfo">Предоставляет сведения об определенном языке и региональных параметрах используемое для форматирование дат периода</param>
-        /// <returns>Строка, представляющая формат даты, в указанных региональных параметрах, для вывода только месяца и года</returns>
+        /// <param name="cultureInfo">Provides information about a specific language and regional settings used to format period dates</param>
+        /// <returns>String representing the date format in the specified regional settings for displaying only the month and year</returns>
         public string GetDayAndMonthDateFormat(CultureInfo cultureInfo)
         {
             var format = cultureInfo.DateTimeFormat;

@@ -1,7 +1,7 @@
 ﻿namespace SampleSystem.Domain.Employee;
 
 /// <summary>
-/// Специальная деталь для проверки OneToOne-связи
+/// Special detail for checking a OneToOne relation
 /// </summary>
 public class IMRequestDetail : AuditPersistentDomainObjectBase
 {

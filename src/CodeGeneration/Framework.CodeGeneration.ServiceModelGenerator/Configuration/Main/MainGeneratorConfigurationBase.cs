@@ -17,7 +17,7 @@ using Framework.Projection;
 namespace Framework.CodeGeneration.ServiceModelGenerator.Configuration.Main;
 
 /// <summary>
-/// Конфигурация для генерации основного фасада системы
+/// Configuration for generating the main facade of the system
 /// </summary>
 /// <typeparam name="TEnvironment"></typeparam>
 public abstract class MainGeneratorConfigurationBase<TEnvironment>(TEnvironment environment)

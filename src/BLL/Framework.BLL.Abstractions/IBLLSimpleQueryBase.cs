@@ -3,7 +3,7 @@
 public interface IBLLSimpleQueryBase<out TDomainObject>
 {
     /// <summary>
-    /// Получение IQueryable без учёта безопасности
+    /// Getting IQueryable without security
     /// </summary>
     /// <returns></returns>
     IQueryable<TDomainObject> GetUnsecureQueryable();

@@ -11,14 +11,14 @@ using Framework.Validation.Validators;
 namespace Framework.Validation.Map;
 
 /// <summary>
-/// Метаданные валидируемого свойства
+/// Metadata of a validated property
 /// </summary>
 public abstract class PropertyValidationMap : IPropertyValidationMap, IValidatorCollection<IPropertyValidator>
 {
     /// <summary>
-    /// Конструктор
+    /// Constructor
     /// </summary>
-    /// <param name="property">Свойство</param>
+    /// <param name="property">Property</param>
     protected PropertyValidationMap(PropertyInfo property)
     {
         this.Property = property ?? throw new ArgumentNullException(nameof(property));
@@ -41,12 +41,12 @@ public abstract class PropertyValidationMap : IPropertyValidationMap, IValidator
     public abstract bool IsCollection { get; }
 
     /// <summary>
-    /// Метаданные типа свойства
+    /// Property type metadata
     /// </summary>
     protected abstract IClassValidationMap BasePropertyTypeMap { get; }
 
     /// <summary>
-    /// Метаданные типа
+    /// Type metadata
     /// </summary>
     protected abstract IClassValidationMap BaseReflectedTypeMap { get; }
 
@@ -62,18 +62,18 @@ public abstract class PropertyValidationMap : IPropertyValidationMap, IValidator
 }
 
 /// <summary>
-/// Метаданные валидируемого свойства
+/// Metadata of a validated property
 /// </summary>
-/// <typeparam name="TSource">Тип объекта</typeparam>
-/// <typeparam name="TProperty">Тип свойства</typeparam>
+/// <typeparam name="TSource">Object type</typeparam>
+/// <typeparam name="TProperty">Property type</typeparam>
 public abstract class PropertyValidationMap<TSource, TProperty> : PropertyValidationMap, IPropertyValidationMap<TSource, TProperty>
 {
     /// <summary>
-    /// Конструктор
+    /// Constructor
     /// </summary>
-    /// <param name="property">Свойство</param>
-    /// <param name="reflectedTypeMap">Метаданные типа</param>
-    /// <param name="validators">Валидаторы</param>
+    /// <param name="property">Property</param>
+    /// <param name="reflectedTypeMap">Type metadata</param>
+    /// <param name="validators">Validators</param>
     protected PropertyValidationMap(PropertyInfo property, IClassValidationMap<TSource> reflectedTypeMap, IEnumerable<IPropertyValidator<TSource, TProperty>> validators)
             : base(property)
     {
@@ -101,10 +101,10 @@ public abstract class PropertyValidationMap<TSource, TProperty> : PropertyValida
 }
 
 /// <summary>
-/// Метаданные валидируемого одиночного-свойства
+/// Metadata of a validated single property
 /// </summary>
-/// <typeparam name="TSource">Валидируемый тип</typeparam>
-/// <typeparam name="TProperty">Тип свойства</typeparam>
+/// <typeparam name="TSource">Validated type</typeparam>
+/// <typeparam name="TProperty">Property type</typeparam>
 public class SinglePropertyValidationMap<TSource, TProperty>(
     PropertyInfo property,
     IClassValidationMap<TSource> reflectedTypeMap,
@@ -133,11 +133,11 @@ public class SinglePropertyValidationMap<TSource, TProperty>(
 }
 
 /// <summary>
-/// Метаданные валидируемого свойства-коллекции
+/// Metadata of a validated collection property
 /// </summary>
-/// <typeparam name="TSource">Валидируемый тип</typeparam>
-/// <typeparam name="TProperty">Тип свойства</typeparam>
-/// <typeparam name="TElement">Тип элемента коллекции</typeparam>
+/// <typeparam name="TSource">Validated type</typeparam>
+/// <typeparam name="TProperty">Property type</typeparam>
+/// <typeparam name="TElement">Collection element type</typeparam>
 public class CollectionPropertyValidationMap<TSource, TProperty, TElement>(
     PropertyInfo property,
     IClassValidationMap<TSource> reflectedTypeMap,

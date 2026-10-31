@@ -5,7 +5,7 @@ using Framework.Core;
 namespace Framework.Projection.Lambda;
 
 /// <summary>
-/// Метаданные проекции
+/// Projection metadata
 /// </summary>
 /// <typeparam name="TDomainObject"></typeparam>
 public class Projection<TDomainObject> : IProjection
@@ -19,10 +19,10 @@ public class Projection<TDomainObject> : IProjection
     private readonly IReadOnlyList<IProjectionProperty> properties = new List<IProjectionProperty>();
 
     /// <summary>
-    /// Конструктор
+    /// Constructor
     /// </summary>
-    /// <param name="name">Имя проекции</param>
-    /// <param name="bllView">Генерация BLL и фасадных методов</param>
+    /// <param name="name">Projection name</param>
+    /// <param name="bllView">Generation of BLL and facade methods</param>
     public Projection(string name, bool bllView = false)
     {
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Value cannot be null or whitespace.", nameof(name));
@@ -32,10 +32,10 @@ public class Projection<TDomainObject> : IProjection
     }
 
     /// <summary>
-    /// Конструктор
+    /// Constructor
     /// </summary>
-    /// <param name="getName">Получение имени проекции</param>
-    /// <param name="bllView">Генерация BLL и фасадных методов</param>
+    /// <param name="getName">Getting the projection name</param>
+    /// <param name="bllView">Generation of BLL and facade methods</param>
     public Projection(Expression<Func<Projection<TDomainObject>>> getName, bool bllView = false)
         : this(getName.GetInstanceMemberName(), bllView)
     {
@@ -69,13 +69,13 @@ public class Projection<TDomainObject> : IProjection
     public ProjectionRole Role { get; } = ProjectionRole.Default;
 
     /// <summary>
-    /// Добавление в проекцию свойства
+    /// Add a property to the projection
     /// </summary>
     /// <typeparam name="TProperty"></typeparam>
-    /// <param name="path">Путь до свойства</param>
-    /// <param name="name">Имя свойства</param>
-    /// <param name="ignoreSerialization">Отключение сериализации в DTO</param>
-    /// <param name="propertyAttributes">Дополнительные атрибуты свойства</param>
+    /// <param name="path">Path to the property</param>
+    /// <param name="name">Property name</param>
+    /// <param name="ignoreSerialization">Disable serialization in DTO</param>
+    /// <param name="propertyAttributes">Additional property attributes</param>
     /// <returns></returns>
     public Projection<TDomainObject> Property<TProperty>(
         Expression<Func<TDomainObject, TProperty>> path,
@@ -89,14 +89,14 @@ public class Projection<TDomainObject> : IProjection
     }
 
     /// <summary>
-    /// Добавление в проекцию свойства
+    /// Add a property to the projection
     /// </summary>
     /// <typeparam name="TProperty"></typeparam>
-    /// <param name="path">Путь до свойства</param>
-    /// <param name="getPropProjection">Проекция на тип свойства</param>
-    /// <param name="name">Имя свойства</param>
-    /// <param name="ignoreSerialization">Отключение сериализации в DTO</param>
-    /// <param name="propertyAttributes">Дополнительные атрибуты свойства</param>
+    /// <param name="path">Path to the property</param>
+    /// <param name="getPropProjection">Projection onto the property type</param>
+    /// <param name="name">Property name</param>
+    /// <param name="ignoreSerialization">Disable serialization in DTO</param>
+    /// <param name="propertyAttributes">Additional property attributes</param>
     /// <returns></returns>
     public Projection<TDomainObject> Property<TProperty>(
         Expression<Func<TDomainObject, TProperty>> path,
@@ -112,14 +112,14 @@ public class Projection<TDomainObject> : IProjection
     }
 
     /// <summary>
-    /// Добавление в проекцию коллекционного свойства
+    /// Add a collection property to the projection
     /// </summary>
     /// <typeparam name="TProperty"></typeparam>
-    /// <param name="path">Путь до свойства</param>
-    /// <param name="getPropProjection">Проекция на тип свойства</param>
-    /// <param name="name">Имя свойства</param>
-    /// <param name="ignoreSerialization">Отключение сериализации в DTO</param>
-    /// <param name="propertyAttributes">Дополнительные атрибуты свойства</param>
+    /// <param name="path">Path to the property</param>
+    /// <param name="getPropProjection">Projection onto the property type</param>
+    /// <param name="name">Property name</param>
+    /// <param name="ignoreSerialization">Disable serialization in DTO</param>
+    /// <param name="propertyAttributes">Additional property attributes</param>
     /// <returns></returns>
     public Projection<TDomainObject> Property<TProperty>(
         Expression<Func<TDomainObject, IEnumerable<TProperty>>> path,
@@ -142,13 +142,13 @@ public class Projection<TDomainObject> : IProjection
     }
 
     /// <summary>
-    /// Добавление в проекцию расчётного свойства
+    /// Add a calculated property to the projection
     /// </summary>
-    /// <typeparam name="TProperty">Тип свойства</typeparam>
-    /// <param name="name">Имя свойства</param>
-    /// <param name="getPropProjection">Проекция на тип свойства</param>
-    /// <param name="fetchs">Прокачиваемые свойства</param>
-    /// <param name="propertyAttributes">Дополнительные атрибуты свойства</param>
+    /// <typeparam name="TProperty">Property type</typeparam>
+    /// <param name="name">Property name</param>
+    /// <param name="getPropProjection">Projection onto the property type</param>
+    /// <param name="fetchs">Properties to fetch</param>
+    /// <param name="propertyAttributes">Additional property attributes</param>
     /// <returns></returns>
     public Projection<TDomainObject> CustomProperty<TProperty>(
         string name,
@@ -165,14 +165,14 @@ public class Projection<TDomainObject> : IProjection
     }
 
     /// <summary>
-    /// Добавление в проекцию расчётного свойства
+    /// Add a calculated property to the projection
     /// </summary>
-    /// <typeparam name="TProperty">Тип свойства</typeparam>
-    /// <param name="name">Имя свойства</param>
-    /// <param name="writable">Доступна запись в свойство</param>
-    /// <param name="getPropProjection">Проекция на тип свойства</param>
-    /// <param name="fetchs">Прокачиваемые свойства</param>
-    /// <param name="propertyAttributes">Дополнительные атрибуты свойства</param>
+    /// <typeparam name="TProperty">Property type</typeparam>
+    /// <param name="name">Property name</param>
+    /// <param name="writable">Property is writable</param>
+    /// <param name="getPropProjection">Projection onto the property type</param>
+    /// <param name="fetchs">Properties to fetch</param>
+    /// <param name="propertyAttributes">Additional property attributes</param>
     /// <returns></returns>
     public Projection<TDomainObject> CustomProperty<TProperty>(
         string name,
@@ -200,13 +200,13 @@ public class Projection<TDomainObject> : IProjection
 
 
     /// <summary>
-    /// Добавление в проекцию расчётного свойства
+    /// Add a calculated property to the projection
     /// </summary>
-    /// <typeparam name="TProperty">Тип свойства</typeparam>
-    /// <param name="path">Путь к свойству</param>
-    /// <param name="getPropProjection">Проекция на тип свойства</param>
-    /// <param name="fetchs">Прокачиваемые свойства</param>
-    /// <param name="propertyAttributes">Дополнительные атрибуты свойства</param>
+    /// <typeparam name="TProperty">Property type</typeparam>
+    /// <param name="path">Path to the property</param>
+    /// <param name="getPropProjection">Projection onto the property type</param>
+    /// <param name="fetchs">Properties to fetch</param>
+    /// <param name="propertyAttributes">Additional property attributes</param>
     /// <returns></returns>
     public Projection<TDomainObject> CustomProperty<TProperty>(
         Expression<Func<TDomainObject, TProperty>> path,
@@ -227,14 +227,14 @@ public class Projection<TDomainObject> : IProjection
     }
 
     /// <summary>
-    /// Добавление в проекцию расчётного свойства
+    /// Add a calculated property to the projection
     /// </summary>
-    /// <typeparam name="TProperty">Тип свойства</typeparam>
-    /// <param name="path">Путь к свойству</param>
-    /// <param name="writable">Доступна запись в свойство</param>
-    /// <param name="getPropProjection">Проекция на тип свойства</param>
-    /// <param name="fetchs">Прокачиваемые свойства</param>
-    /// <param name="propertyAttributes">Дополнительные атрибуты свойства</param>
+    /// <typeparam name="TProperty">Property type</typeparam>
+    /// <param name="path">Path to the property</param>
+    /// <param name="writable">Property is writable</param>
+    /// <param name="getPropProjection">Projection onto the property type</param>
+    /// <param name="fetchs">Properties to fetch</param>
+    /// <param name="propertyAttributes">Additional property attributes</param>
     /// <returns></returns>
     public Projection<TDomainObject> CustomProperty<TProperty>(
         Expression<Func<TDomainObject, TProperty>> path,
@@ -257,15 +257,15 @@ public class Projection<TDomainObject> : IProjection
     }
 
     /// <summary>
-    /// Добавление в проекцию коллекционного расчётного свойства
+    /// Add a collection calculated property to the projection
     /// </summary>
-    /// <typeparam name="TProperty">Тип свойства</typeparam>
-    /// <param name="name">Имя свойства</param>
-    /// <param name="writable">Доступна запись в свойство</param>
-    /// <param name="getPropProjection">Проекция на тип свойства</param>
-    /// <param name="collectionType">Тип коллекции у проекции</param>
-    /// <param name="fetchs">Прокачиваемые свойства</param>
-    /// <param name="propertyAttributes">Дополнительные атрибуты свойства</param>
+    /// <typeparam name="TProperty">Property type</typeparam>
+    /// <param name="name">Property name</param>
+    /// <param name="writable">Property is writable</param>
+    /// <param name="getPropProjection">Projection onto the property type</param>
+    /// <param name="collectionType">Projection collection type</param>
+    /// <param name="fetchs">Properties to fetch</param>
+    /// <param name="propertyAttributes">Additional property attributes</param>
     /// <returns></returns>
     public Projection<TDomainObject> CustomManyProperty<TProperty>(
         string name,
@@ -293,12 +293,12 @@ public class Projection<TDomainObject> : IProjection
     }
 
     /// <summary>
-    /// Добавление в проекцию коллекционного расчётного свойства
+    /// Add a collection calculated property to the projection
     /// </summary>
-    /// <typeparam name="TProperty">Тип свойства</typeparam>
-    /// <param name="name">Имя свойства</param>
-    /// <param name="writable">Доступна запись в свойство</param>
-    /// <param name="getPropProjection">Проекция на тип свойства</param>
+    /// <typeparam name="TProperty">Property type</typeparam>
+    /// <param name="name">Property name</param>
+    /// <param name="writable">Property is writable</param>
+    /// <param name="getPropProjection">Projection onto the property type</param>
     /// <returns></returns>
     public Projection<TDomainObject> CustomManyProperty<TProperty>(string name, bool writable, Func<Projection<TProperty>>? getPropProjection)
     {
@@ -311,11 +311,11 @@ public class Projection<TDomainObject> : IProjection
     }
 
     /// <summary>
-    /// Добавление в проекцию коллекционного расчётного свойства
+    /// Add a collection calculated property to the projection
     /// </summary>
-    /// <typeparam name="TProperty">Тип свойства</typeparam>
-    /// <param name="name">Имя свойства</param>
-    /// <param name="writable">Доступна запись в свойство</param>
+    /// <typeparam name="TProperty">Property type</typeparam>
+    /// <param name="name">Property name</param>
+    /// <param name="writable">Property is writable</param>
     /// <returns></returns>
     public Projection<TDomainObject> CustomManyProperty<TProperty>(string name, bool writable)
     {
@@ -328,10 +328,10 @@ public class Projection<TDomainObject> : IProjection
     }
 
     /// <summary>
-    /// Копия проекции с новым именем
+    /// Copy of the projection with a new name
     /// </summary>
-    /// <param name="name">Имя проекции</param>
-    /// <param name="bllView">Генерация BLL и фасадных методов</param>
+    /// <param name="name">Projection name</param>
+    /// <param name="bllView">Generation of BLL and facade methods</param>
     /// <returns></returns>
     public Projection<TDomainObject> OverrideHeader(string name, bool? bllView = null)
     {
@@ -347,16 +347,16 @@ public class Projection<TDomainObject> : IProjection
     }
 
     /// <summary>
-    /// Копия проекции с новым именем
+    /// Copy of the projection with a new name
     /// </summary>
-    /// <param name="getName">Получение имени проекции</param>
-    /// <param name="bllView">Генерация BLL и фасадных методов</param>
+    /// <param name="getName">Getting the projection name</param>
+    /// <param name="bllView">Generation of BLL and facade methods</param>
     /// <returns></returns>
     public Projection<TDomainObject> OverrideHeader(Expression<Func<Projection<TDomainObject>>> getName, bool? bllView = null) =>
         this.OverrideHeader(getName.GetInstanceMemberName(), bllView);
 
     /// <summary>
-    /// Добавление всех свойств из другой проекции, кроме заголовков
+    /// Add all properties from another projection except headers
     /// </summary>
     /// <param name="propertiesSource"></param>
     /// <returns></returns>
@@ -370,10 +370,10 @@ public class Projection<TDomainObject> : IProjection
             this.projectionAttributes.Concat(propertiesSource.projectionAttributes));
 
     /// <summary>
-    /// Добавление фильтра, по которому выгружаюстя проекционные объекты
+    /// Add a filter by which projection objects are fetched
     /// </summary>
-    /// <param name="filterType">Тип фильтра</param>
-    /// <param name="target">Применимость фильтра</param>
+    /// <param name="filterType">Filter type</param>
+    /// <param name="target">Filter applicability</param>
     /// <returns></returns>
     public Projection<TDomainObject> Filter(Type filterType, ProjectionFilterTargets target = ProjectionFilterTargets.OData)
     {
@@ -389,17 +389,17 @@ public class Projection<TDomainObject> : IProjection
     }
 
     /// <summary>
-    /// Добавление фильтра, по которому выгружаюстя проекционные объекты
+    /// Add a filter by which projection objects are fetched
     /// </summary>
-    /// <typeparam name="TFilter">Тип фильтра</typeparam>
-    /// <param name="target">Применимость фильтра</param>
+    /// <typeparam name="TFilter">Filter type</typeparam>
+    /// <param name="target">Filter applicability</param>
     /// <returns></returns>
     public Projection<TDomainObject> Filter<TFilter>(ProjectionFilterTargets target = ProjectionFilterTargets.OData) => this.Filter(typeof(TFilter), target);
 
     /// <summary>
-    /// Добавление пользовательского атрибута
+    /// Add a custom attribute
     /// </summary>
-    /// <param name="attribute">Пользовательский атрибут</param>
+    /// <param name="attribute">Custom attribute</param>
     /// <returns></returns>
     public Projection<TDomainObject> Attribute(Attribute attribute)
     {

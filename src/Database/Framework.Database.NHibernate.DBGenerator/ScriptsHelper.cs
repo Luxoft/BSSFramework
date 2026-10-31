@@ -4,15 +4,15 @@ using Microsoft.SqlServer.Management.Common;
 
 namespace Framework.Database.NHibernate.DBGenerator;
 
-/// <summary> Вспомогательный класс для работы со скриптами </summary>
+/// <summary> Helper class for working with scripts </summary>
 internal static class ScriptsHelper
 {
-    /// <summary> Ключевое слово "GO" </summary>
+    /// <summary> The "GO" keyword </summary>
     public const string KeywordGo = "GO";
 
-    /// <summary> Получить скрипты для пакетного выполнения </summary>
-    /// <param name="capturedSql">Источник скриптов</param>
-    /// <param name="clearCapturedSql">Очистить источник скриптов</param>
+    /// <summary> Get scripts for batch execution </summary>
+    /// <param name="capturedSql">Script source</param>
+    /// <param name="clearCapturedSql">Clear the script source</param>
     public static string GetScriptForBatchExecuting(this CapturedSql capturedSql, bool clearCapturedSql = true)
     {
         if (capturedSql is null)
@@ -25,9 +25,9 @@ internal static class ScriptsHelper
         return result;
     }
 
-    /// <summary> Получить скрипты для пакетного выполнения </summary>
-    /// <param name="capturedSql">Источник скриптов</param>
-    /// <param name="clearCapturedSql">Очистить источник скриптов</param>
+    /// <summary> Get scripts for batch execution </summary>
+    /// <param name="capturedSql">Script source</param>
+    /// <param name="clearCapturedSql">Clear the script source</param>
     public static List<string> GetScriptsForBatchExecuting(this CapturedSql capturedSql, bool clearCapturedSql = true)
     {
         var result = GetScriptsForBatchExecutingInternal(capturedSql).ToList();
@@ -35,8 +35,8 @@ internal static class ScriptsHelper
         return result;
     }
 
-    /// <summary> Получить скрипты для пакетного выполнения </summary>
-    /// <param name="capturedSql">Источник скриптов</param>
+    /// <summary> Get scripts for batch execution </summary>
+    /// <param name="capturedSql">Script source</param>
     private static IEnumerable<string> GetScriptsForBatchExecutingInternal(CapturedSql capturedSql)
     {
         if (capturedSql is null)
@@ -47,9 +47,9 @@ internal static class ScriptsHelper
         return capturedSql.Text.Cast<string>().SelectMany(z => new[] { z, KeywordGo });
     }
 
-    /// <summary> Выполнить попытку очистить источник скриптов </summary>
-    /// <param name="capturedSql">Источник скриптов</param>
-    /// <param name="clear">Очистить</param>
+    /// <summary> Try to clear the script source </summary>
+    /// <param name="capturedSql">Script source</param>
+    /// <param name="clear">Clear</param>
     private static void TryClearCapturedSql(CapturedSql capturedSql, bool clear)
     {
         if (capturedSql is null)

@@ -1,8 +1,8 @@
 ﻿namespace Framework.Database.Mapping;
 
 /// <summary>
-/// Указание, что маппинг по данному объекту будет сгенерён отдельно об базового класса, но с его полями (требует соответствия имени таблицы).
-/// Как независимый объект. т.е. иерархия не соблюдается.
+/// Indicates that the mapping for this object will be generated separately from the base class, but with its fields (requires the table name to match).
+/// As an independent object, i.e. the hierarchy is not observed.
 /// </summary>
 [AttributeUsage(AttributeTargets.Class)]
 public class InlineBaseTypeMappingAttribute : Attribute;

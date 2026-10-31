@@ -14,6 +14,10 @@ public class NamedLockInitializer<TGenericNamedLock>(
     : INamedLockInitializer
     where TGenericNamedLock : new()
 {
+    /// <summary>
+    /// Synchronizes the lock table with <see cref="INamedLockSource"/> by name: missing locks are inserted, locks that are no longer
+    /// declared are DELETED. Not safe to run concurrently from several application instances (both may try to insert the same name).
+    /// </summary>
     public async Task Initialize(CancellationToken ct)
     {
         var getNameFunc = genericNamedLockTypeInfo.NamePath.Compile();

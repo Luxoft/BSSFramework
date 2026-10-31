@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Framework.Tracking.Validation;
 
 /// <summary>
-/// Валидатор проверки неизменяемости свойства
+/// Property immutability validator
 /// </summary>
 public class FixedPropertyValidator : IDynamicPropertyValidator
 {
@@ -29,7 +29,7 @@ public class FixedPropertyValidator : IDynamicPropertyValidator
 }
 
 /// <summary>
-/// Валидатор проверки неизменяемости свойства
+/// Property immutability validator
 /// </summary>
 public class FixedPropertyValidator<TSource, TProperty, TPersistentDomainObjectBase>(Expression<Func<TSource, TProperty>> propertyPath)
     : IPropertyValidator<TSource, TProperty>

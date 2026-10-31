@@ -1,10 +1,10 @@
 ﻿namespace Framework.BLL.Domain.Attributes;
 
 /// <summary>
-/// Аттрибут, описывающий интеграционную версию объекта.
-/// Применяется в логике получения и обработки данных по интеграции.
+/// Attribute describing the integration version of an object.
+/// Used in the logic of receiving and processing integration data.
 /// </summary>
-/// <seealso cref="IntegrationVersion.rst" />
+/// <seealso href="IntegrationVersion.rst" />
 [AttributeUsage(AttributeTargets.Property)]
 public class IntegrationVersionAttribute : Attribute
 {

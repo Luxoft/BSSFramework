@@ -37,10 +37,10 @@ public static class CoreExpressionExtensions
     }
 
     /// <summary>
-    /// Получение имени мембера (поле или свойство)
+    /// Getting the member name (field or property)
     /// </summary>
     /// <typeparam name="TFunc"></typeparam>
-    /// <param name="expr">Выражение</param>
+    /// <param name="expr">Expression</param>
     /// <returns></returns>
     public static string GetInstanceMemberName<TFunc>(this Expression<TFunc> expr)
     {
@@ -81,10 +81,10 @@ public static class CoreExpressionExtensions
     }
 
     /// <summary>
-    /// Получение имени мембера (поле или свойство)
+    /// Getting the member name (field or property)
     /// </summary>
     /// /// <typeparam name="T"></typeparam>
-    /// <param name="expr">Выражение</param>
+    /// <param name="expr">Expression</param>
     /// <returns></returns>
     public static string GetStaticMemberName<T>(this Expression<Func<T>> expr)
     {

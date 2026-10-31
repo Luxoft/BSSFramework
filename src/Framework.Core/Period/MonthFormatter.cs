@@ -22,45 +22,45 @@ public static class MonthFormatter
     ];
 
     /// <summary>
-    /// Преобразует значение аргумента <see cref="date"/> в строковое представление месяца и года в предложном падеже для Российского стандарта
+    /// Converts the value of the <paramref name="date"/> argument into a string representation of the month and year in the prepositional case for the Russian standard
     /// </summary>
-    /// <param name="date">Дата и время</param>
-    /// <returns>Строка, содержащая полное имя месяца и год в предложном падеже</returns>
+    /// <param name="date">Date and time</param>
+    /// <returns>String containing the full month name and year in the prepositional case</returns>
     public static string GetInMonthAndYearStrRus(this DateTime date) => $"{RusInMonths[date.Month - 1]} {date.Year} г.";
 
     /// <summary>
-    /// Преобразует значение аргумента <see cref="date"/> в строковое представление месяца и года для Российского стандарта
+    /// Converts the value of the <paramref name="date"/> argument into a string representation of the month and year for the Russian standard
     /// </summary>
-    /// <param name="date">Дата и время</param>
-    /// <returns>Строка, содержащая полное имя месяца и год</returns>
+    /// <param name="date">Date and time</param>
+    /// <returns>String containing the full month name and year</returns>
     public static string GetMonthAndYearStrRus(this DateTime date) => $"{RusDateTimeFormat.GetMonthName(date.Month)} {date.Year} г.";
 
     /// <summary>
-    /// Преобразует значение аргумента <see cref="date"/> в строковое представление месяца и года для Английского стандарта
+    /// Converts the value of the <paramref name="date"/> argument into a string representation of the month and year for the English standard
     /// </summary>
-    /// <param name="date">Дата и время</param>
-    /// <returns>Строка, содержащая полное имя месяца и год</returns>
+    /// <param name="date">Date and time</param>
+    /// <returns>String containing the full month name and year</returns>
     public static string GetMonthAndYearStr(this DateTime date) => $"{EngDateTimeFormat.GetMonthName(date.Month)} {date.Year}";
 
     /// <summary>
-    /// Преобразует значение аргумента <see cref="date"/> в строковое представление месяца для Английского стандарта
+    /// Converts the value of the <paramref name="date"/> argument into a string representation of the month for the English standard
     /// </summary>
-    /// <param name="date">Дата и время</param>
-    /// <returns>Строка, содержащая полное имя месяца</returns>
+    /// <param name="date">Date and time</param>
+    /// <returns>String containing the full month name</returns>
     public static string GetMonthStr(this DateTime date) => EngDateTimeFormat.GetMonthName(date.Month);
 
     /// <summary>
-    /// Преобразует значение аргумента <see cref="date"/> в строковое представление месяца и года для Римского стандарта
+    /// Converts the value of the <paramref name="date"/> argument into a string representation of the month and year for the Roman standard
     /// </summary>
-    /// <param name="date">Дата и время</param>
-    /// <returns>Строка, содержащая римский номер месяца и год</returns>
+    /// <param name="date">Date and time</param>
+    /// <returns>String containing the Roman numeral of the month and the year</returns>
     public static string GetMonthAndYearStrRoman(this DateTime date) => $"{RomanMonths[date.Month - 1]}'{date:yy}";
 
     /// <summary>
-    /// Преобразует значение аргумента <see cref="period"/> в строковое представление интервала месяцев и года для Римского стандарта
+    /// Converts the value of the <paramref name="period"/> argument into a string representation of the month interval and year for the Roman standard
     /// </summary>
-    /// <param name="period">Период, который начинается и заканчивается в одинаковом году </param>
-    /// <returns>Строка, содержащая римские номера месяцев начало и конца периода и год на дату начала периода</returns>
+    /// <param name="period">Period that starts and ends in the same year </param>
+    /// <returns>String containing the Roman numerals of the start and end months of the period and the year of the period start date</returns>
     public static string GetMonthAndYearStrRoman(Period period) =>
         period.IsWithinOneMonth
             ? period.StartDate.GetMonthAndYearStrRoman()

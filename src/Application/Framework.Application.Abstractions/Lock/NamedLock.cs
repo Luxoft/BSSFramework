@@ -1,7 +1,7 @@
 ﻿namespace Framework.Application.Lock;
 
 /// <summary>
-/// Операция для объекта, на котором можно сделать пессимистическую блокировку
+/// Operation for an object on which a pessimistic lock can be taken
 /// </summary>
 public record NamedLock(string Name, Type? DomainType = null)
 {

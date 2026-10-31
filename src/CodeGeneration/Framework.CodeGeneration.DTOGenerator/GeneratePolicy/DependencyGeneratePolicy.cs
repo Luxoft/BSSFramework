@@ -30,8 +30,8 @@ public class DependencyGeneratePolicy : CachedGeneratePolicy<RoleFileType>
 
         var elementMap = this.Maps.SingleOrDefault(map => map.DomainType == elementType && map.FileType == elementFileType);
 
-        var usedInTypes = this.Maps.Where(map => (ownerFileType is null || map.FileType == ownerFileType)) // Выкидываем лишние MAP-ы
-                              .Where(map => map != elementMap) // Выкидываем Map текущего элемента
+        var usedInTypes = this.Maps.Where(map => (ownerFileType is null || map.FileType == ownerFileType)) // Discard unneeded MAP entries
+                              .Where(map => map != elementMap) // Discard unneeded Map entries of the current element
                               .Where(map => map.UsedDetailRole(elementType, elementFileType, detailFlag) && this.Used(map.DomainType, map.FileType));
 
         return usedInTypes.Any();

@@ -4,20 +4,20 @@
 namespace Framework.Validation;
 
 /// <summary>
-/// Контекст валидации
+/// Validation context
 /// </summary>
 public interface IValidationContext : IValidationContextBase, IServiceProviderContainer;
 
 /// <summary>
-/// Контекст валидации
+/// Validation context
 /// </summary>
-/// <typeparam name="TSource">Тип объекта</typeparam>
+/// <typeparam name="TSource">Object type</typeparam>
 public interface IValidationContext<out TSource> : IValidationContextBase<TSource>, IValidationContext;
 
 /// <summary>
-/// Контекст валидации
+/// Validation context
 /// </summary>
-/// <typeparam name="TSource">Тип объекта</typeparam>
-/// <typeparam name="TValidationMap">Метаданные</typeparam>
+/// <typeparam name="TSource">Object type</typeparam>
+/// <typeparam name="TValidationMap">Metadata</typeparam>
 public interface IValidationContext<out TSource, out TValidationMap> : IValidationContext<TSource>, IValidationContextBase<TSource, TValidationMap>
         where TValidationMap : class;

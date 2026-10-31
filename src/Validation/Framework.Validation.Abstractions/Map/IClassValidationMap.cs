@@ -3,34 +3,34 @@
 namespace Framework.Validation.Map;
 
 /// <summary>
-/// Метаданные валидируемого типа
+/// Metadata of a validated type
 /// </summary>
 public interface IClassValidationMap
 {
     /// <summary>
-    /// Имя валидируемого тип
+    /// Validated type name
     /// </summary>
     string TypeName { get; }
 
     /// <summary>
-    /// Валидируемый тип
+    /// Validated type
     /// </summary>
     Type Type { get; }
 
     /// <summary>
-    /// Список валидируемых свойств
+    /// List of validated properties
     /// </summary>
     IReadOnlyCollection<IPropertyValidationMap> PropertyMaps { get; }
 }
 
 /// <summary>
-/// Метаданные валидируемого типа
+/// Metadata of a validated type
 /// </summary>
-/// <typeparam name="TSource">Валидируемый тип</typeparam>
+/// <typeparam name="TSource">Validated type</typeparam>
 public interface IClassValidationMap<in TSource> : IClassValidationMap, IValidatorCollection<IClassValidator<TSource>>
 {
     /// <summary>
-    /// Список валидируемых свойств
+    /// List of validated properties
     /// </summary>
     new IReadOnlyCollection<IPropertyValidationMap<TSource>> PropertyMaps { get; }
 }

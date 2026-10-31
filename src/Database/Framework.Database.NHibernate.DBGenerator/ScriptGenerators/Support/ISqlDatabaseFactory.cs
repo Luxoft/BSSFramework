@@ -3,27 +3,26 @@
 namespace Framework.Database.NHibernate.DBGenerator.ScriptGenerators.Support;
 
 /// <summary>
-/// Создает объект, который подключается к экземпляру SQL сервера и умеет создавать базу даных
+/// Creates an object that connects to an SQL server instance and can create a database
 /// </summary>
 public interface ISqlDatabaseFactory
 {
     /// <summary>
-    /// Экземпляр SQL сервера
+    /// SQL server instance
     /// </summary>
     Server Server { get; }
 
     /// <summary>
-    /// Возвращает базу данных из экземпляра SQL сервера <see cref="Server"/> с именем <paramref name="databaseName"/>
+    /// Returns a database from the SQL server instance <see cref="Server"/> with the name <paramref name="databaseName"/>
     /// </summary>
-    /// <param name="databaseName">Имя базы данных</param>
-    /// <returns>База данных</returns>
+    /// <param name="databaseName">Database name</param>
+    /// <returns>Database</returns>
     Microsoft.SqlServer.Management.Smo.Database? GetDatabase(DatabaseName databaseName);
 
     /// <summary>
-    /// Возвращает базу данных или создает новую если такой нет из экземпляра SQL сервера <see cref="Server"/> с именем <paramref name="databaseName"/>
+    /// Returns a database or creates a new one if none exists from the SQL server instance <see cref="Server"/> with the name <paramref name="databaseName"/>
     /// </summary>
-    /// <param name="databaseName">Имя базы данных</param>
-    /// <param name="schemaName">Имя схемы</param>
-    /// <returns>База данных</returns>
+    /// <param name="databaseName">Database name</param>
+    /// <returns>Database</returns>
     Microsoft.SqlServer.Management.Smo.Database GetOrCreateDatabase(DatabaseName databaseName);
 }

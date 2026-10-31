@@ -3,21 +3,21 @@
 namespace Framework.BLL.DTOMapping.MergeItemData;
 
 /// <summary>
-/// Создание или обновление элемента
+/// Creating or updating an element
 /// </summary>
-/// <typeparam name="TValue">Элемент</typeparam>
-/// <typeparam name="TIdentity">Идент элемента</typeparam>
+/// <typeparam name="TValue">Element</typeparam>
+/// <typeparam name="TIdentity">Element identifier</typeparam>
 [DataContract(Name = "SaveItemData{0}Of{1}", Namespace = "Framework.Persistent")]
 public class SaveItemData<TValue, TIdentity> : UpdateItemData<TValue, TIdentity>
 {
     /// <summary>
-    /// Конструктор
+    /// Constructor
     /// </summary>
-    /// <param name="value">Сохраняемый элемент</param>
+    /// <param name="value">Element to save</param>
     public SaveItemData(TValue value) => this.Value = value;
 
     /// <summary>
-    /// Сохраняемый элемент
+    /// Element to save
     /// </summary>
     [DataMember]
     public TValue Value { get; private set; }

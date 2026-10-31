@@ -11,7 +11,7 @@ public interface IDALObject
     Type Type { get; }
 
     /// <summary>
-    /// Числовой идентификатор, определающий порядок применения/изменения/получения данной сущности
+    /// Numeric identifier that determines the order of applying/changing/retrieving this entity
     /// </summary>
     long ApplyIndex { get; }
 }

@@ -3,7 +3,7 @@
 namespace Framework.Core.AnonymousTypeBuilder;
 
 /// <summary>
-/// Фабрика создания <see cref="AnonymousTypeBuilderStorage"/>. Кэширует создаваемые значения
+/// Factory for creating <see cref="AnonymousTypeBuilderStorage"/>. Caches the created values
 /// </summary>
 public class AnonymousTypeBuilderStorageFactory
 {

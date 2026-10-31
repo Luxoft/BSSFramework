@@ -1,12 +1,12 @@
 ﻿namespace Framework.Validation.Map;
 
 /// <summary>
-/// Текущая позиция валидации
+/// Current validation position
 /// </summary>
 public record ValidationState(IValidationState? Parent, IPropertyValidationMap PropertyMap, object Source) : IValidationState
 {
     /// <summary>
-    /// Валидируемый тип
+    /// Validated type
     /// </summary>
     public IClassValidationMap SourceTypeMap => this.PropertyMap.ReflectedTypeMap;
 }

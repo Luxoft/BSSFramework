@@ -3,15 +3,15 @@
 namespace Framework.Projection.Lambda.ProjectionSource.AttributeSource;
 
 /// <summary>
-/// Источник атрибутов для кастомного свойства проекции
+/// Attribute source for a custom projection property
 /// </summary>
 public class ProjectionCustomPropertyAttributeSource : AttributeSourceBase<IProjectionCustomProperty>
 {
     /// <summary>
-    /// Конструктор
+    /// Constructor
     /// </summary>
-    /// <param name="environment">Окружение</param>
-    /// <param name="customProjectionProperty">Кастомное свойство проекции</param>
+    /// <param name="environment">Environment</param>
+    /// <param name="customProjectionProperty">Custom projection property</param>
     public ProjectionCustomPropertyAttributeSource(ProjectionLambdaEnvironment environment, IProjectionCustomProperty customProjectionProperty)
         : base(environment, customProjectionProperty)
     {

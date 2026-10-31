@@ -5,9 +5,9 @@ using Framework.Restriction;
 namespace SampleSystem.Domain.Models.Change._Base;
 
 /// <summary>
-/// Общий тип для базовой модели для изменения коллекции объектов
+/// Common type for the base model for changing a collection of objects
 /// </summary>
-/// <typeparam name="TDomainObject">Тип изменяемого объекта</typeparam>
+/// <typeparam name="TDomainObject">Type of the object being changed</typeparam>
 [DirectMode(DirectMode.In | DirectMode.Out)]
 public abstract class DomainObjectMassChangeModel<TDomainObject> : DomainObjectBase, IDomainObjectMassChangeModel<TDomainObject>
         where TDomainObject : PersistentDomainObjectBase

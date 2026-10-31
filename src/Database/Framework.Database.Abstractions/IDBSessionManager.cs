@@ -3,14 +3,14 @@
 public interface IDBSessionManager
 {
     /// <summary>
-    /// Попытка закрыть текущую бд-сессию (если она существует) и вызывать механизм сброса евентов в DALListener-ы
+    /// Attempt to close the current db session (if it exists) and invoke the mechanism of flushing events to DALListeners
     /// </summary>
     /// <param name="ct"></param>
     /// <returns></returns>
     Task TryCloseDbSessionAsync(CancellationToken ct);
 
     /// <summary>
-    ///  Попытка промаркировать текущую бд-сессию (если она существует), что случилась ошибка и ничего в базу записывать не нужно.
+    ///  Attempt to mark the current db session (if it exists) that an error occurred and nothing should be written to the database.
     /// </summary>
     void TryFaultDbSession();
 }

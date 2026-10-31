@@ -3,7 +3,7 @@
 namespace Framework.Projection.Lambda.ProjectionSource;
 
 /// <summary>
-/// Источник проекций, проекции набираются по Projection полям рефлексией
+/// Projection source; projections are collected by reflection over Projection fields
 /// </summary>
 public abstract class ProjectionSource : IProjectionSource
 {

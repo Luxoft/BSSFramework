@@ -1,12 +1,12 @@
 ﻿namespace Framework.BLL.Domain.ServiceRole;
 
 /// <summary>
-/// Атрибут разрешающий создание объекта
+/// Attribute allowing object creation
 /// </summary>
 public interface IAllowCreateAttribute
 {
     /// <summary>
-    /// Разрешение создавать объект
+    /// Permission to create an object
     /// </summary>
     bool AllowCreate { get; }
 }

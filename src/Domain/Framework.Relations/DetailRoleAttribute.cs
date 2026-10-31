@@ -1,11 +1,11 @@
 ﻿namespace Framework.Relations;
 
 /// <summary>
-/// Признак, является ли свойство деталью объекта
-/// Если свойство - деталь, то она сохраняется в базу данных вместе с сохранением master-объекта,
-/// а также в Rich DTO оно тоже Rich(соответственно из Full DTO оно пропадает).
+/// Flag indicating whether the property is a detail of the object
+/// If a property is a detail, it is saved to the database together with saving the master object,
+/// and also in Rich DTO it is Rich as well (accordingly it disappears from Full DTO).
 ///
-/// Если коллекция помечена атрибутом DetailRole(false) то она не является деталью объекта и не сохраняется в бд при изменении master-объекта.
+/// If a collection is marked with the DetailRole(false) attribute, it is not a detail of the object and is not saved to the db when the master object changes.
 ///
 /// <see href="confluence/display/IADFRAME/DetailRoleAttribute"/>
 /// </summary>

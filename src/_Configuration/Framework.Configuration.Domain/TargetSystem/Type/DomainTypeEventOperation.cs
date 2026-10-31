@@ -5,7 +5,7 @@ using Framework.Relations;
 namespace Framework.Configuration.Domain;
 
 /// <summary>
-///  Операция доменного типа
+///  Domain type operation
 /// </summary>
 [NotAuditedClass]
 public class DomainTypeEventOperation : BaseDirectory, IDetail<DomainType>
@@ -17,9 +17,9 @@ public class DomainTypeEventOperation : BaseDirectory, IDetail<DomainType>
     }
 
     /// <summary>
-    /// Конструктор
+    /// Constructor
     /// </summary>
-    /// <param name="domainType">Доменный тип</param>
+    /// <param name="domainType">Domain type</param>
     public DomainTypeEventOperation(DomainType domainType)
     {
         this.domainType = domainType ?? throw new ArgumentNullException(nameof(domainType));
@@ -27,7 +27,7 @@ public class DomainTypeEventOperation : BaseDirectory, IDetail<DomainType>
     }
 
     /// <summary>
-    /// Доменный тип
+    /// Domain type
     /// </summary>
     public virtual DomainType DomainType => this.domainType;
 

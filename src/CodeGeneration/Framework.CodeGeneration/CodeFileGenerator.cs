@@ -5,7 +5,7 @@ using Framework.FileGeneration;
 namespace Framework.CodeGeneration;
 
 /// <summary>
-/// Генератор cs-файлов с кодом
+/// Generator of cs files with code
 /// </summary>
 /// <typeparam name="TConfiguration"></typeparam>
 public abstract class CodeFileGenerator<TConfiguration>(TConfiguration configuration)

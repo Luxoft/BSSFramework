@@ -6,7 +6,7 @@ using SampleSystem.Domain.Models.Custom;
 namespace SampleSystem.Subscriptions.Metadata.Examples.IndividualLetters;
 
 /// <summary>
-/// Базовая подписка примера, демонстрирующего работу признака SendIndividualLetters
+/// Base example subscription demonstrating the SendIndividualLetters flag
 /// </summary>
 public abstract class IndividualLettersSubscriptionBase : Subscription<DateModel, IndividualLettersTemplate>
 {

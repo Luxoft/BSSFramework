@@ -6,14 +6,15 @@ namespace Framework.Configuration.BLL;
 public partial interface IDomainObjectModificationBLL
 {
     /// <summary>
-    /// Обработка модификаций хранимых в базе
+    /// Processing of modifications stored in the database
     /// </summary>
-    /// <param name="limit">Ограничение на количество обработанных модификаций</param>
-    /// <returns>Количество обработанных модификаций</returns>
+    /// <param name="limit">Limit on the number of processed modifications</param>
+    /// <param name="ct">Cancellation token</param>
+    /// <returns>Number of processed modifications</returns>
     Task<ITryResult<int>> ProcessAsync(int limit = 1000, CancellationToken ct = default);
 
     /// <summary>
-    /// Получение состояния обработки очереди
+    /// Getting the queue processing state
     /// </summary>
     /// <returns></returns>
     QueueProcessingState GetProcessingState();

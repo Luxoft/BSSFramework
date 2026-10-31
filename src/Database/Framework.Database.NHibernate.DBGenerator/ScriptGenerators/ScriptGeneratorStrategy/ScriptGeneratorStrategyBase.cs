@@ -8,7 +8,7 @@ using Microsoft.SqlServer.Management.Smo;
 namespace Framework.Database.NHibernate.DBGenerator.ScriptGenerators.ScriptGeneratorStrategy;
 
 /// <summary>
-/// Базовый класс для генерации части скрипта модификации базы данных
+/// Base class for generating a part of the database modification script
 /// </summary>
 public abstract class ScriptGeneratorStrategyBase(DatabaseScriptGeneratorStrategyInfo parameter)
 {
@@ -16,14 +16,14 @@ public abstract class ScriptGeneratorStrategyBase(DatabaseScriptGeneratorStrateg
     protected readonly Server Server = parameter.Context.GetServer();
 
     /// <summary>
-    /// Мод применяемого миграционого скрипта
+    /// Mode of the applied migration script
     /// </summary>
     public abstract ApplyMigrationDbScriptMode ApplyMigrationDbScriptMode { get; }
 
     /// <summary>
-    /// Генерирует SQL скрипт по алгоритму реализованному в конкретной стратегии
+    /// Generates an SQL script using the algorithm implemented in a specific strategy
     /// </summary>
-    /// <returns>Функция возвращающая коллекцию SQL команд</returns>
+    /// <returns>Function returning a collection of SQL commands</returns>
     public Func<IEnumerable<string>> Execute() =>
         () =>
         {
@@ -33,16 +33,16 @@ public abstract class ScriptGeneratorStrategyBase(DatabaseScriptGeneratorStrateg
         };
 
     /// <summary>
-    /// Модификации базы данных по определенной стратегии
+    /// Database modifications using a specific strategy
     /// </summary>
     protected abstract void ExecuteBase();
 
     /// <summary>
-    /// Ищет колонку с именем <paramref name="sqlMapping.Name"/> в таблицы <paramref name="table"/>
+    /// Searches for a column named <paramref name="sqlMapping.Name"/> in the table <paramref name="table"/>
     /// </summary>
-    /// <param name="table">Таблица в которой будет искатся колонка</param>
-    /// <param name="sqlMapping">Информация о колонке</param>
-    /// <returns>Найденная колонка иначе null</returns>
+    /// <param name="table">Table in which the column will be searched</param>
+    /// <param name="sqlMapping">Column information</param>
+    /// <returns>The found column, otherwise null</returns>
     protected Column? GetColumn(Table table, SqlFieldMappingInfo sqlMapping)
     {
         var fieldName = sqlMapping.Name;

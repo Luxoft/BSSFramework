@@ -1,13 +1,13 @@
 ﻿namespace Framework.Validation.Map;
 
 /// <summary>
-/// Коллекция валидаторов
+/// Validator collection
 /// </summary>
-/// <typeparam name="T">Тип валидатора</typeparam>
+/// <typeparam name="T">Validator type</typeparam>
 public interface IValidatorCollection<out T>
 {
     /// <summary>
-    /// Валидаторы
+    /// Validators
     /// </summary>
     IReadOnlyCollection<T> Validators { get; }
 }

@@ -7,7 +7,7 @@ using Framework.Restriction;
 namespace Framework.Configuration.Domain;
 
 /// <summary>
-/// Описание доменного типа целевой системы
+/// Target system domain type description
 /// </summary>
 [NotAuditedClass]
 public class DomainType : BaseDirectory, IDetail<TargetSystem>, IMaster<DomainTypeEventOperation>
@@ -23,9 +23,9 @@ public class DomainType : BaseDirectory, IDetail<TargetSystem>, IMaster<DomainTy
     }
 
     /// <summary>
-    /// Конструктор доменного типа целовой системы
+    /// Target system domain type constructor
     /// </summary>
-    /// <param name="targetSystem">Целевая система</param>
+    /// <param name="targetSystem">Target system</param>
     public DomainType(TargetSystem targetSystem)
     {
         this.targetSystem = targetSystem ?? throw new ArgumentNullException(nameof(targetSystem));
@@ -33,24 +33,24 @@ public class DomainType : BaseDirectory, IDetail<TargetSystem>, IMaster<DomainTy
     }
 
     /// <summary>
-    /// Целевая система
+    /// Target system
     /// </summary>
     public virtual TargetSystem TargetSystem => this.targetSystem;
 
     /// <summary>
-    /// Операции доменного типа
+    /// Domain type operations
     /// </summary>
     [UniqueGroup]
     public virtual IEnumerable<DomainTypeEventOperation> EventOperations => this.eventOperations;
 
     /// <summary>
-    /// Пространство имен
+    /// Namespace
     /// </summary>
     [UniqueElement]
     public virtual string Namespace { get => this.@namespace; set => this.@namespace = value; }
 
     /// <summary>
-    /// Полное имя типа
+    /// Full type name
     /// </summary>
     public virtual string FullTypeName =>
         string.IsNullOrEmpty(this.Namespace)

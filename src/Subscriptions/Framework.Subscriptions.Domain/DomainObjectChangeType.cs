@@ -1,28 +1,28 @@
 ﻿namespace Framework.Subscriptions.Domain;
 
 /// <summary>
-/// Описывает тип изменения доменного объекта для которого должна срабатывать подписка.
+/// Describes the type of domain object change for which the subscription should fire.
 /// </summary>
 [Flags]
 public enum DomainObjectChangeType
 {
     /// <summary>
-    /// Создание доменного объекта.
+    /// Domain object creation.
     /// </summary>
     Create = 1,
 
     /// <summary>
-    /// Изменение доменного объекта.
+    /// Domain object change.
     /// </summary>
     Update = 2,
 
     /// <summary>
-    /// Удаление доменного объекта.
+    /// Domain object deletion.
     /// </summary>
     Delete = 4,
 
     /// <summary>
-    /// Любое изменение.
+    /// Any change.
     /// </summary>
     Any = Create | Update | Delete
 }

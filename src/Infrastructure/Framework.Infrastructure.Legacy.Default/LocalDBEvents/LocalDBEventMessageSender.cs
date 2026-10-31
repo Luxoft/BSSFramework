@@ -11,7 +11,7 @@ using Framework.Database.EnversAudit;
 namespace Framework.Infrastructure.LocalDBEvents;
 
 /// <summary>
-/// Класс для отправки доменных евентов в локальную бд
+/// Class for sending domain events to the local db
 /// </summary>
 /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
 public class LocalDBEventMessageSender<TPersistentDomainObjectBase>(

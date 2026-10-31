@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Framework.BLL.Events.SubscriptionManager;
 
 /// <summary>
-/// Класс для описания правил подписок на доменные евенты
+/// Class for describing subscription rules for domain events
 /// </summary>
 /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
 public abstract class EventsSubscriptionManager<TPersistentDomainObjectBase> : IEventOperationReceiver

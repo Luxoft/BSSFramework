@@ -22,7 +22,7 @@ public class ChangeDefaultInitializedValueStrategyTest
 
         // Assert
         var clippedScript = SkipDefaultTemplate(resultScript).ToList();
-        Assert.Equal(0, clippedScript.Count);
+        Assert.Empty(clippedScript);
     }
 
     [Fact]
@@ -45,7 +45,7 @@ public class ChangeDefaultInitializedValueStrategyTest
 
         // Assert
         var clippedScript = SkipDefaultTemplate(resultScript).ToList();
-        Assert.Equal(0, clippedScript.Count);
+        Assert.Empty(clippedScript);
     }
 
     [Fact]
@@ -68,7 +68,6 @@ public class ChangeDefaultInitializedValueStrategyTest
 
         // Assert
         var clippedScript = SkipDefaultTemplate(resultScript).ToList();
-        Assert.Equal(1, clippedScript.Count);
         Assert.Equal($"update Object set [test]=0{Environment.NewLine}", clippedScript.Single());
     }
 

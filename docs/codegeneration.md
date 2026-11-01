@@ -1,0 +1,113 @@
+# Code generation
+
+A significant part of the code of a BSS Framework application is not written by hand. Generators read the **domain model** (types with attributes) and the **generation environment configuration**, and write C# files, `*.hbm.xml` and the DB schema. The result is **committed to the repository**.
+
+> Rule: `*.Generated.cs`, `Generated.*` projects and `*.hbm.xml` are not edited by hand. Change the model or the generator and run regeneration.
+
+## What is generated
+
+| Artifact | Generator (`src/CodeGeneration/…`) | Output location (SampleSystem example) |
+|---|---|---|
+| Projections (`Projection`) | `Framework.CodeGeneration.ProjectionGenerator` | `SampleSystem.Domain.Projections`, `SampleSystem.Domain.LegacyProjections` |
+| Base BLL (`BLLCore`) | `BLLCoreGenerator` | `SampleSystem.BLL.Core/_Generated` |
+| BLL, validators, fetch rules | `BLLGenerator` | `SampleSystem.BLL/_Generated` |
+| DTOs and mapping services | `DTOGenerator`, `DTOGenerator.Server` | `SampleSystem.Generated.DTO` |
+| Audit DTOs | `DTOGenerator.Audit` | `SampleSystem.Generated.DTO` (`*.Audit.Generated.cs`) |
+| NHibernate mapping (`*.hbm.xml`) | `Framework.Database.NHibernate.DALGenerator` | `SampleSystem.Generated.DAL.NHibernate/Mapping` |
+| WebApi controllers | `ServiceModelGenerator`, `WebApiGenerator` | `SampleSystem.WebApiCore/Controllers/_Generated` |
+
+Base tools: `Framework.CodeDom` (wrappers over `System.CodeDom`) and `Framework.FileGeneration` (file writing, tracking New / Modified / Unchanged state, checkout via `ICheckOutService`).
+
+Entity Framework mapping is in `SampleSystem.Generated.DAL.EntityFramework/Mapping`. The project belongs to `Generated.*`, so it is also not edited by hand.
+
+## Where the information comes from
+
+1. **Domain types.** Entities, descendants of `PersistentDomainObjectBase` / `AuditPersistentDomainObjectBase`, with attributes (see below).
+2. **Generation environment.** The class `ServerGenerationEnvironment : CodeGenerationEnvironment<…>` (`src/_SampleSystem/_Tests/SampleSystem.CodeGenerate/Configurations/`). It contains:
+   - configurations of each generator (`BLLCore`, `BLL`, `ServerDTO`, `MainService`, `QueryService`, `IntegrationService`, `AuditService`, `DAL`, `MainProjection`, `LegacyProjection`, `AuditDTO`);
+   - projection sources (`SampleSystemProjectionSource`);
+   - assemblies with domain objects (`GetDomainObjectAssemblies`);
+   - hierarchical types (`IsHierarchical`);
+   - security rule types (`SecurityRuleTypeList`);
+   - extended attributes added to types without editing the classes themselves (`GetExtendedAttributeSources`).
+3. **Model attributes.**
+
+| Attribute | Effect |
+|---|---|
+| `[BLLViewRole]`, `[BLLSaveRole]`, `[BLLRemoveRole]` | Which BLL and service methods are generated (`Max = MainDTOType.FullDTO`, `SaveType = BLLSaveType.Both`) |
+| `[BLLIntegrationSaveRole]`, `[BLLIntegrationRemoveRole]` | Integration API methods |
+| `[BLLProjectionViewRole]` | Reading projections |
+| `[DTOFileType]`, `[CustomSerialization]` | Which DTOs exist and how they are serialized |
+| `[FetchPath]`, `[ExpandPath]`, `[IgnoreFetch]` | Rules for loading and expanding relations |
+| `[DependencySecurity]` | Security via a dependent object |
+| `[NotPersistentField]`, `[AutoMapping]`, `[MappingPriority]` | ORM mapping parameters |
+| `[UniqueGroup]`, `[Required]`, `[MaxLength]` | Constraints: go into the DB schema and validation |
+
+## Running generation
+
+Generators are implemented as xUnit tests. A test calls `ServerGenerators.GenerateMain()` and writes files relative to the repository root (the path is determined from the current directory up to the `/src` segment).
+
+| What | Project |
+|---|---|
+| SampleSystem | `src/_SampleSystem/_Tests/SampleSystem.CodeGenerate` |
+| Authorization | `src/_Authorization/Framework.Authorization.TestGenerate` |
+| Configuration | `src/_Configuration/Framework.Configuration.TestGenerate` |
+
+Full regeneration:
+
+```bash
+dotnet test --project src/_SampleSystem/_Tests/SampleSystem.CodeGenerate
+dotnet test --project src/_Authorization/Framework.Authorization.TestGenerate
+dotnet test --project src/_Configuration/Framework.Configuration.TestGenerate
+```
+
+`ServerGenerators` has separate methods for each artifact (`GenerateBLLTest`, `GenerateServerDTOTest`, `GenerateDALTest`, `GenerateMainWebApiNetCoreTest`, `GenerateMainProjectionsTest`, etc.). To regenerate only part, filter tests by method name (in xUnit v3 / Microsoft.Testing.Platform this is `--filter-method`):
+
+```bash
+dotnet test --project src/_SampleSystem/_Tests/SampleSystem.CodeGenerate --filter-method "*GenerateServerDTOTest"
+```
+
+After the run, look at `git status` and `git diff`: the changes must match your edit. Commit them together with the original edit.
+
+## Up-to-date check in CI
+
+The tests `SampleSystem.CheckGenTests/GenerationTests` rerun all three generators and fail if at least one new or modified file appears:
+
+```
+Repo do not have actual versions of autogenerated source code
+New files are: …
+Modified files are: …
+```
+
+If the test fails:
+
+1. Run generation (see above).
+2. Commit the changes to the generated files.
+3. If the changes are unexpected, make sure you are working with the latest `main` and that the domain model has no accidental edits.
+
+`CsprojValidationTests` also checks project conventions there: `PackageId` must equal `Luxoft.<ProjectName>` (or not be set at all).
+
+## DB schema
+
+The schema is created not by code generation but by FluentMigrator migrations.
+
+| Project | Purpose |
+|---|---|
+| `src/Database/Framework.Database.NHibernate.DBGenerator` | Library for generating the schema from the NHibernate model |
+| `SampleSystem.DbGenerate` | Shared manual migrations (`AddAncestorChildViews`, `InitNumberInDomainObjectEventMigration`) |
+| `SampleSystem.DbGenerate.NHibernate` | `DbGeneratorTest`, `SampleSystemDBGenerator`, `UseSchemeUpdateTest` |
+| `SampleSystem.DbGenerate.EntityFramework` | `DbGeneratorTest`; the `AddProjectionViews` migration |
+
+Tests of these projects:
+
+- `GenerateLocal` creates a local empty DB (`SampleSystem_ef_empty`) on server `.`;
+- `RegenerateEfAndDiffWithNHibernate` recreates the schema for EF and compares it with the NHibernate schema. The test guarantees that both ORMs produce the same structure;
+- integration tests call `GenerateAllDb` when preparing the environment (see [integrationtests.md](integrationtests.md)).
+
+SQL Server is required to run them (see the same document).
+
+## How to extend
+
+- **New entity.** Add a class to `SampleSystem.Domain`, place the attributes, and if necessary register a projection in `SampleSystemProjectionSource`. Run generation (BLL, DTO, DAL, controllers) and the DB migration.
+- **New behavior for all entities.** Change the corresponding generator or generation policy (`*GeneratePolicy`) in `src/CodeGeneration`, then regenerate all three systems: `_Authorization`, `_Configuration`, `_SampleSystem`.
+- **New application system on the framework.** Copy the structure of `_Configuration` or `_SampleSystem`: a `*.TestGenerate` (or `*.CodeGenerate`) project with a `CodeGenerationEnvironment` descendant, plus `*.Domain`, `*.Generated.*`, `*.BLL`, `*.WebApi` projects.

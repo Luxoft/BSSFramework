@@ -2,9 +2,9 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
-    <Anch>3.9.3</Anch>
+    <Anch>3.9.4</Anch>
     <BssPlatform>[1.6.2]</BssPlatform>
-    <DotNet>10.0.13</DotNet>
+    <DotNet>10.0.14</DotNet>
   </PropertyGroup>
   <!-- DotNet -->
   <ItemGroup>
@@ -74,7 +74,7 @@
     <PackageVersion Include="Microsoft.Data.SqlClient" Version="[6.1.4]" />
     <PackageVersion Include="Microsoft.SqlServer.SqlManagementObjects" Version="181.37.1" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
-    <PackageVersion Include="NHibernate" Version="5.7.0" />
+    <PackageVersion Include="NHibernate" Version="5.7.1" />
     <PackageVersion Include="NHibernate.Envers" Version="5.7.0" />
     <PackageVersion Include="Swashbuckle.AspNetCore.SwaggerGen" Version="[7.2.0]" />
   </ItemGroup>

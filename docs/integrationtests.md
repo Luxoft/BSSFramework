@@ -1,62 +1,62 @@
-# Интеграционные тесты
+# Integration tests
 
-Интеграционные тесты проверяют фреймворк на референсном приложении `_SampleSystem` с реальной базой SQL Server. Каждый тест вызывает WebApi-контроллеры напрямую через DI, без HTTP.
+Integration tests verify the framework on the reference application `_SampleSystem` with a real SQL Server database. Each test calls the WebApi controllers directly through DI, without HTTP.
 
-## Структура проектов
+## Project structure
 
-Все проекты лежат в `src/_SampleSystem/_Tests/`.
+All projects are in `src/_SampleSystem/_Tests/`.
 
-| Проект | Назначение |
+| Project | Purpose |
 |---|---|
-| `SampleSystem.IntegrationTests` | Абстрактные тестовые классы (`EmployeeTests`, `SecurityRuleTests`, …) и общее окружение (`_Environment/`). Запускать нельзя: тут нет точки входа |
-| `SampleSystem.IntegrationTests.EntityFramework` | Запуск тех же тестов на Entity Framework. Для каждого абстрактного класса есть наследник `*Impl` |
-| `SampleSystem.IntegrationTests.NHibernate` | Запуск тех же тестов на NHibernate |
-| `SampleSystem.DbGenerate` | Общие миграции FluentMigrator (`AddAncestorChildViews`, …) |
-| `SampleSystem.DbGenerate.EntityFramework` / `.NHibernate` | Генерация пустой схемы БД для конкретного ORM |
+| `SampleSystem.IntegrationTests` | Abstract test classes (`EmployeeTests`, `SecurityRuleTests`, …) and the shared environment (`_Environment/`). Cannot be run: it has no entry point |
+| `SampleSystem.IntegrationTests.EntityFramework` | Runs the same tests on Entity Framework. Each abstract class has an `*Impl` subclass |
+| `SampleSystem.IntegrationTests.NHibernate` | Runs the same tests on NHibernate |
+| `SampleSystem.DbGenerate` | Shared FluentMigrator migrations (`AddAncestorChildViews`, …) |
+| `SampleSystem.DbGenerate.EntityFramework` / `.NHibernate` | Generation of an empty DB schema for a specific ORM |
 
-Паттерн «абстрактный тест + `*Impl`» гарантирует, что оба ORM проходят один и тот же набор проверок:
+The "abstract test + `*Impl`" pattern ensures both ORMs pass the same set of checks:
 
 ```csharp
-// SampleSystem.IntegrationTests (общий)
+// SampleSystem.IntegrationTests (shared)
 public abstract class EmployeeTests(IServiceProvider rootServiceProvider) : TestBase(rootServiceProvider)
 {
     [Fact]
     public void AddNewEmployee_CheckEmployeeSaved() { /* ... */ }
 }
 
-// SampleSystem.IntegrationTests.EntityFramework (и аналогично в .NHibernate)
+// SampleSystem.IntegrationTests.EntityFramework (and similarly in .NHibernate)
 public class EmployeeTestsImpl(IServiceProvider rootServiceProvider) : EmployeeTests(rootServiceProvider);
 ```
 
-Чтобы добавить новый тест, создайте абстрактный класс в `SampleSystem.IntegrationTests` и по наследнику в каждом из двух ORM-проектов.
+To add a new test, create an abstract class in `SampleSystem.IntegrationTests` and a subclass in each of the two ORM projects.
 
-## Требования
+## Requirements
 
-- .NET SDK 10 (см. `global.json`: раннер `Microsoft.Testing.Platform`).
-- SQL Server. В CI используется контейнер `mcr.microsoft.com/mssql/server:2019-latest` (Express) с `sa` / `P@ssw0rd` на порту 1433.
+- .NET SDK 10 (see `global.json`: runner `Microsoft.Testing.Platform`).
+- SQL Server. CI uses the container `mcr.microsoft.com/mssql/server:2019-latest` (Express) with `sa` / `P@ssw0rd` on port 1433.
 
-Локально поднять такой же контейнер можно так:
+You can start the same container locally like this:
 
 ```bash
 docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=P@ssw0rd" -e "MSSQL_PID=Express" -p 1433:1433 -d --name sqlexpress mcr.microsoft.com/mssql/server:2019-latest
 ```
 
-## Запуск
+## Running
 
 ```bash
 dotnet test --project src/_SampleSystem/_Tests/SampleSystem.IntegrationTests.EntityFramework
 dotnet test --project src/_SampleSystem/_Tests/SampleSystem.IntegrationTests.NHibernate
 ```
 
-## Настройки
+## Settings
 
-Настройки читаются в `TestEnvironment` из следующих источников. Более поздний источник перекрывает предыдущий:
+Settings are read in `TestEnvironment` from the following sources. A later source overrides an earlier one:
 
-1. `testAppSettings.json` рядом с тестовой сборкой (обязателен);
-2. `<MachineName>.testAppSettings.json` (необязателен, для локальных переопределений, не коммитьте его);
-3. переменные окружения с префиксом `SampleSystem_`.
+1. `testAppSettings.json` next to the test assembly (required);
+2. `<MachineName>.testAppSettings.json` (optional, for local overrides, do not commit it);
+3. environment variables with the `SampleSystem_` prefix.
 
-Пример `testAppSettings.json`:
+Example `testAppSettings.json`:
 
 ```json
 {
@@ -71,46 +71,46 @@ dotnet test --project src/_SampleSystem/_Tests/SampleSystem.IntegrationTests.NHi
 }
 ```
 
-Секция `AutomationFrameworkSettings` (`Framework.AutomationCore.AutomationFrameworkSettings`):
+The `AutomationFrameworkSettings` section (`Framework.AutomationCore.AutomationFrameworkSettings`):
 
-| Параметр | По умолчанию | Описание |
+| Parameter | Default | Description |
 |---|---|---|
-| `IntegrationTestUserName` | `IntegrationTestRootUser` | Пользователь, от имени которого выполняются тесты (получает роль администратора) |
-| `DatabaseInitMode` | `RebuildSnapshot` | Режим подготовки БД (enum `Anch.Testing.Database.DatabaseInitMode`; при `RebuildSnapshot` схема пересоздаётся и сохраняется снимок) |
-| `TestsParallelize` | `true` | Параллельный запуск тестов (каждый получает копию БД из снимка) |
-| `DatabaseCollation` | пусто | Collation создаваемой БД |
-| `BackupPath` | пусто | Каталог SQL Server для снимков. На Linux обычно `/var/opt/mssql/data` |
-| `SecondaryDatabases` | `[]` | Дополнительные БД |
-| `LocalAdmins` | `[]` | Логины, которым при инициализации выдаётся роль `Administrator` |
+| `IntegrationTestUserName` | `IntegrationTestRootUser` | The user on whose behalf tests run (receives the administrator role) |
+| `DatabaseInitMode` | `RebuildSnapshot` | DB preparation mode (enum `Anch.Testing.Database.DatabaseInitMode`; with `RebuildSnapshot` the schema is recreated and a snapshot is saved) |
+| `TestsParallelize` | `true` | Parallel test execution (each test gets a copy of the DB from the snapshot) |
+| `DatabaseCollation` | empty | Collation of the created DB |
+| `BackupPath` | empty | SQL Server directory for snapshots. On Linux usually `/var/opt/mssql/data` |
+| `SecondaryDatabases` | `[]` | Additional databases |
+| `LocalAdmins` | `[]` | Logins that are given the `Administrator` role during initialization |
 
-Строка подключения должна указывать на сервер, где у пользователя есть права создавать БД. В `Data Source=.` вместо точки подставьте свой экземпляр, если SQL Server не локальный.
+The connection string must point to a server where the user has rights to create databases. In `Data Source=.` replace the dot with your instance if SQL Server is not local.
 
-## Как устроено окружение
+## How the environment works
 
-Базовый класс `Framework.AutomationCore.BssTestEnvironment` строит `IServiceProvider` со всеми сервисами приложения (`AddGeneralDependencyInjection`) и подключает инфраструктуру тестирования БД из пакета `Anch.Testing.*`:
+The base class `Framework.AutomationCore.BssTestEnvironment` builds an `IServiceProvider` with all application services (`AddGeneralDependencyInjection`) and plugs in the DB testing infrastructure from the `Anch.Testing.*` packages:
 
-1. **Пустая схема.** `EmptySchemaInitializer` создаёт БД через `DbGeneratorTest.GenerateAllDb` (миграции FluentMigrator) и выполняет SQL-скрипты из `__Support/Scripts/SampleSystem`.
-2. **Тестовые данные.** `TestDataInitializer` вызывает `SampleSystemInitializer`, назначает роли (`SetAdminRoleAsync`), создаёт `Employee` для пользователя тестов и заполняет справочники (`FillMainData`).
-3. **Снимок.** При `DatabaseInitMode = RebuildSnapshot` результат сохраняется как снимок БД (`BackupPath`), а параллельность тестов регулируется `TestsParallelize`. Детали реализации находятся в пакетах `Anch.Testing.Database*`.
-4. **Очистка.** После тестов срабатывает `BssCleanupTestEnvironmentHook`.
+1. **Empty schema.** `EmptySchemaInitializer` creates the DB via `DbGeneratorTest.GenerateAllDb` (FluentMigrator migrations) and runs the SQL scripts from `__Support/Scripts/SampleSystem`.
+2. **Test data.** `TestDataInitializer` calls `SampleSystemInitializer`, assigns roles (`SetAdminRoleAsync`), creates an `Employee` for the test user and fills the reference data (`FillMainData`).
+3. **Snapshot.** With `DatabaseInitMode = RebuildSnapshot` the result is saved as a DB snapshot (`BackupPath`), and test parallelism is controlled by `TestsParallelize`. Implementation details are in the `Anch.Testing.Database*` packages.
+4. **Cleanup.** After the tests `BssCleanupTestEnvironmentHook` runs.
 
-Сборка подключается атрибутом `[assembly: AnchTestFramework<EntityFrameworkTestEnvironment>]`, а в NHibernate-проекте аналогичным классом с `NHibernate`-расширением.
+The assembly is wired up with the attribute `[assembly: AnchTestFramework<EntityFrameworkTestEnvironment>]`, and the NHibernate project uses an analogous class with the `NHibernate` extension.
 
-Провайдер собирается с `ValidateScopes` и `ValidateOnBuild`, поэтому ошибки регистрации в DI проявляются на старте тестов. Дополнительно работает `DuplicateServiceUsageValidator`.
+The provider is built with `ValidateScopes` and `ValidateOnBuild`, so DI registration errors show up at test startup. `DuplicateServiceUsageValidator` also runs.
 
-## Написание теста
+## Writing a test
 
-Наследуйтесь от `TestBase` (`SampleSystem.IntegrationTests._Environment.TestData`). Он даёт:
+Inherit from `TestBase` (`SampleSystem.IntegrationTests._Environment.TestData`). It provides:
 
-- `MainWebApi`, `MainAuditWebApi`: обёртки над контроллерами;
-- `GetControllerEvaluator<T>(principalName)`: вызов произвольного контроллера от имени заданного пользователя;
-- `DataManager`: быстрое создание тестовых сущностей (`SaveEmployee`, `SaveCountry`, …);
-- `AuthManager`: выдача ролей и прав (`For(name).SetRoleAsync(...)`);
-- `ActualConnectionString`: строка подключения к БД текущего теста, нужна для прямых SQL-проверок.
+- `MainWebApi`, `MainAuditWebApi`: wrappers over the controllers;
+- `GetControllerEvaluator<T>(principalName)`: call any controller on behalf of a given user;
+- `DataManager`: quick creation of test entities (`SaveEmployee`, `SaveCountry`, …);
+- `AuthManager`: granting roles and permissions (`For(name).SetRoleAsync(...)`);
+- `ActualConnectionString`: the connection string of the current test's DB, needed for direct SQL checks.
 
-Атрибут `[AnchFact]` (`Anch.Testing.Xunit`) нужен для асинхронных тестов, которым необходим `CancellationToken`. В остальных случаях подойдёт обычный `[Fact]`.
+The `[AnchFact]` attribute (`Anch.Testing.Xunit`) is needed for async tests that require a `CancellationToken`. Otherwise a plain `[Fact]` is enough.
 
-Тест строится по схеме Arrange / Act / Assert:
+A test follows the Arrange / Act / Assert pattern:
 
 ```csharp
 [Fact]
@@ -130,13 +130,13 @@ public void AddNewEmployee_CheckEmployeeSaved()
 
 ## CI
 
-Workflow `.github/workflows/integration-tests.yml` запускается на push в `main`, на pull request и вручную (`workflow_dispatch`). Он поднимает SQL Server в Docker, собирает решение и последовательно запускает EF- и NHibernate-тесты.
+The workflow `.github/workflows/integration-tests.yml` runs on push to `main`, on pull requests and manually (`workflow_dispatch`). It starts SQL Server in Docker, builds the solution and runs the EF and NHibernate tests sequentially.
 
-## Частые проблемы
+## Common problems
 
-| Симптом | Причина |
+| Symptom | Cause |
 |---|---|
-| Ошибка подключения к БД | SQL Server не запущен или неверна строка подключения в `testAppSettings.json` |
-| Ошибка на снимках / прав доступа | Неверный `BackupPath`: каталог должен быть доступен процессу SQL Server на запись |
-| Падают только на одном ORM | Тест вскрыл различие в поведении EF и NHibernate, это и есть цель двух наборов |
-| Падение на старте с ошибкой DI | Сработал `ValidateOnBuild` или `DuplicateServiceUsageValidator`: проверьте регистрации |
+| DB connection error | SQL Server is not running or the connection string in `testAppSettings.json` is wrong |
+| Snapshot / access rights error | Wrong `BackupPath`: the directory must be writable by the SQL Server process |
+| Fails on only one ORM | The test exposed a difference in EF and NHibernate behavior, which is the purpose of having two sets |
+| Failure on startup with a DI error | `ValidateOnBuild` or `DuplicateServiceUsageValidator` triggered: check the registrations |

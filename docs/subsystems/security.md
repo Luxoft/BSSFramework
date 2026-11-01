@@ -1,30 +1,30 @@
-# Безопасность (Role & Context Base Security)
+# Security (Role & Context Base Security)
 
-Модель доступа в BSS Framework строится на ролях и контекстах:
+The access model in BSS Framework is built on roles and contexts:
 
-- **Роль** (`SecurityRole`) определяет, *что* пользователь может делать.
-- **Контекст** (`ISecurityContext`, например `BusinessUnit`, `Location`) определяет, *над какими объектами*.
-- **Разрешение (permission)** связывает пользователя (principal) с ролью и ограничениями по контекстам. Например, «роль SE Manager для бизнес-юнита X и его потомков».
-- **Операция** (`SecurityOperation`) — атомарное действие (`EmployeeView`, `EmployeeEdit`). Роль включает набор операций.
-- **Правило** (`SecurityRule`) — условие доступа к доменному типу: набор ролей или операций, которые должны быть у пользователя.
+- A **role** (`SecurityRole`) defines *what* a user can do.
+- A **context** (`ISecurityContext`, e.g. `BusinessUnit`, `Location`) defines *over which objects*.
+- A **permission** links a user (principal) with a role and context restrictions. For example, "the SE Manager role for business unit X and its descendants".
+- An **operation** (`SecurityOperation`) is an atomic action (`EmployeeView`, `EmployeeEdit`). A role includes a set of operations.
+- A **rule** (`SecurityRule`) is a condition for accessing a domain type: a set of roles or operations the user must have.
 
-Реализация находится в пакетах `Anch.SecuritySystem*` (внешняя зависимость), а BSS Framework подключает её, встраивает в BLL / репозитории и генерирует безопасные запросы. Здесь описана **настройка** в приложении. Подробности алгоритмов смотрите в документации `Anch.SecuritySystem`.
+The implementation is in the `Anch.SecuritySystem*` packages (an external dependency); BSS Framework wires it in, embeds it into the BLL / repositories and generates secure queries. This document describes **configuration** in an application. For algorithm details see the `Anch.SecuritySystem` documentation.
 
-Все примеры взяты из `src/_SampleSystem/SampleSystem.Security` и `SampleSystem.Security.Abstract`.
+All examples are taken from `src/_SampleSystem/SampleSystem.Security` and `SampleSystem.Security.Abstract`.
 
-## Где что определяется
+## Where things are defined
 
-| Что | Где | Пример |
+| What | Where | Example |
 |---|---|---|
-| Идентификаторы ролей, операций, правил (константы) | `SampleSystem.Security.Abstract` | `SampleSystemSecurityRole.SeManager`, `SampleSystemSecurityOperation.EmployeeView` |
-| Регистрация контекстов, ролей, правил, виртуальных прав | `SampleSystem.Security/SampleSystemSecuritySystemExtensions.cs` | `AddSecurityContexts`, `AddSecurityRoles`, … |
-| Подключение к приложению | `SampleSystem.ServiceEnvironment/DependencyInjection/SampleSystemGeneralDependencyInjectionExtensions.cs` | `AddSecuritySystem(...)` |
+| Identifiers of roles, operations, rules (constants) | `SampleSystem.Security.Abstract` | `SampleSystemSecurityRole.SeManager`, `SampleSystemSecurityOperation.EmployeeView` |
+| Registration of contexts, roles, rules, virtual permissions | `SampleSystem.Security/SampleSystemSecuritySystemExtensions.cs` | `AddSecurityContexts`, `AddSecurityRoles`, … |
+| Wiring into the application | `SampleSystem.ServiceEnvironment/DependencyInjection/SampleSystemGeneralDependencyInjectionExtensions.cs` | `AddSecuritySystem(...)` |
 
-Идентификаторы лежат в отдельном проекте `*.Abstract`, чтобы их могли использовать генераторы кода и клиентские проекты без зависимости от рантайма.
+Identifiers live in a separate `*.Abstract` project so that code generators and client projects can use them without depending on the runtime.
 
-## Контексты
+## Contexts
 
-Контекст — это доменный тип, помеченный `ISecurityContext`, с постоянным `Guid`:
+A context is a domain type marked with `ISecurityContext`, with a permanent `Guid`:
 
 ```csharp
 settings.AddSecurityContext<BusinessUnit>(
@@ -36,14 +36,14 @@ settings.AddSecurityContext<BusinessUnit>(
         v => v.DeepLevel))
 ```
 
-- `Guid` хранится в БД вместе с разрешениями, **его нельзя менять** после выпуска.
-- `SetHierarchicalInfo` описывает иерархию контекста: родителя, таблицы / представления предков и уровень вложенности. Благодаря этому право на родителя распространяется на потомков.
-- Для неиерархического контекста достаточно `SetDisplayFunc` (как для `Employee`, отображается по `Login`).
-- Иерархические типы нужно также указать в `ServerGenerationEnvironment.IsHierarchical` (см. [codegeneration.md](../codegeneration.md)).
+- The `Guid` is stored in the DB together with permissions, **it must not be changed** after release.
+- `SetHierarchicalInfo` describes the context hierarchy: the parent, the ancestor tables / views and the nesting level. Thanks to this, a permission on a parent extends to its descendants.
+- For a non-hierarchical context `SetDisplayFunc` is enough (as for `Employee`, displayed by `Login`).
+- Hierarchical types must also be listed in `ServerGenerationEnvironment.IsHierarchical` (see [codegeneration.md](../codegeneration.md)).
 
-Таблицы предков (`*AncestorLink`) поддерживаются именованными блокировками (`AddNamedLocks(...AddManual(typeof(BusinessUnitAncestorLink)))`).
+Ancestor tables (`*AncestorLink`) are maintained by named locks (`AddNamedLocks(...AddManual(typeof(BusinessUnitAncestorLink)))`).
 
-## Роли
+## Roles
 
 ```csharp
 .AddSecurityRole(
@@ -55,21 +55,21 @@ settings.AddSecurityContext<BusinessUnit>(
     })
 ```
 
-Параметры `SecurityRoleInfo` (по примерам в `SampleSystem.Security`):
+`SecurityRoleInfo` parameters (from the examples in `SampleSystem.Security`):
 
-| Параметр | Смысл |
+| Parameter | Meaning |
 |---|---|
-| `Guid` (конструктор) | Постоянный идентификатор роли |
-| `Operations` | Операции, которые даёт роль |
-| `Children` | Вложенные роли (роль включает права дочерних) |
-| `IsVirtual` | Виртуальная роль (не выдаётся напрямую, вычисляется) |
-| `Restriction` | Какие контексты роль требует или допускает: `SecurityPathRestriction.Create<BusinessUnit>(required: true, filter: …).Add<Location>(true)` |
+| `Guid` (constructor) | Permanent role identifier |
+| `Operations` | Operations the role grants |
+| `Children` | Nested roles (a role includes the rights of its children) |
+| `IsVirtual` | Virtual role (not granted directly, computed) |
+| `Restriction` | Which contexts the role requires or allows: `SecurityPathRestriction.Create<BusinessUnit>(required: true, filter: …).Add<Location>(true)` |
 
-Роль `SecurityRole.Administrator` в SampleSystem получает все операции приложения. `SecurityRole.SystemIntegration` предназначена для интеграционных вызовов.
+In SampleSystem the `SecurityRole.Administrator` role gets all operations of the application. `SecurityRole.SystemIntegration` is intended for integration calls.
 
-## Правила
+## Rules
 
-Правило описывает условие доступа к доменному типу:
+A rule describes the condition for accessing a domain type:
 
 ```csharp
 settings.AddSecurityRule(
@@ -77,11 +77,11 @@ settings.AddSecurityRule(
     SecurityRule.View.ToDomain<Employee>());
 ```
 
-- `SecurityRule.View` / `Edit` / `Disabled` — встроенные правила.
-- `.ToDomain<T>()` и `.And((T v) => v.Prop)` привязывают правило к типу и дополнительному условию на объект.
-- Репозиторий с проверкой доступа создаётся так: `businessUnitRepository.Create(SecurityRule.View)`. Репозиторий без проверки получается через `[DisabledSecurity] IRepository<T>` (используйте для системных задач и джобов).
+- `SecurityRule.View` / `Edit` / `Disabled` are built-in rules.
+- `.ToDomain<T>()` and `.And((T v) => v.Prop)` bind the rule to a type and to an extra condition on the object.
+- A repository with access checks is created like this: `businessUnitRepository.Create(SecurityRule.View)`. A repository without checks is obtained via `[DisabledSecurity] IRepository<T>` (use it for system tasks and jobs).
 
-## Операции с расширением по иерархии
+## Operations with hierarchy expansion
 
 ```csharp
 .AddSecurityOperation(
@@ -89,11 +89,11 @@ settings.AddSecurityRule(
     new SecurityOperationInfo { CustomExpandType = HierarchicalExpandType.All })
 ```
 
-`CustomExpandType` задаёт, как право на узел иерархии распространяется на потомков и предков.
+`CustomExpandType` defines how a permission on a hierarchy node extends to descendants and ancestors.
 
-## Виртуальные разрешения
+## Virtual permissions
 
-Если право можно вывести из данных приложения, а не из таблицы разрешений, используйте виртуальное разрешение:
+If a permission can be derived from application data rather than from the permissions table, use a virtual permission:
 
 ```csharp
 settings.AddVirtualPermission<Employee, BusinessUnitEmployeeRole>(
@@ -104,11 +104,11 @@ settings.AddVirtualPermission<Employee, BusinessUnitEmployeeRole>(
                   v => v.AddFilter(link => link.Role == BusinessUnitEmployeeRoleType.Manager)));
 ```
 
-Здесь любой сотрудник, связанный с бизнес-юнитом ролью `Manager`, считается обладателем `SeManager` для этого юнита.
+Here any employee linked to a business unit with the `Manager` role is considered to hold `SeManager` for that unit.
 
-## Подключение к приложению
+## Wiring into the application
 
-В `AddGeneralDependencyInjection` всё собирается в один вызов:
+In `AddGeneralDependencyInjection` everything is assembled in a single call:
 
 ```csharp
 rootSettings.AddSecuritySystem(securitySettings => securitySettings
@@ -127,17 +127,17 @@ rootSettings.AddSecuritySystem(securitySettings => securitySettings
     .AddPrincipalManagementListener<SamplePrincipalManagementListener>());
 ```
 
-Ключевые точки:
+Key points:
 
-- `AddUserSource<Employee>` связывает пользователей безопасности с доменной сущностью. Фильтр отсекает неактивных.
-- `SetSecurityAdministratorRule` задаёт роль, которая может управлять разрешениями.
-- `AddAuthorizationSystem` и `AddConfigurationSecurity` подключают встроенные подсистемы `_Authorization` и `_Configuration`.
-- `AddPrincipalManagementListener` позволяет реагировать на изменения принципалов (см. `SamplePrincipalManagementListener`).
-- В Swagger клиентские правила публикуются через `AddClientSecurityRule("SampleSystemSecurityRule")`.
+- `AddUserSource<Employee>` links security users to a domain entity. The filter excludes inactive ones.
+- `SetSecurityAdministratorRule` sets the role that can manage permissions.
+- `AddAuthorizationSystem` and `AddConfigurationSecurity` plug in the built-in `_Authorization` and `_Configuration` subsystems.
+- `AddPrincipalManagementListener` lets you react to principal changes (see `SamplePrincipalManagementListener`).
+- In Swagger, client rules are published via `AddClientSecurityRule("SampleSystemSecurityRule")`.
 
-## Безопасность на уровне свойств
+## Property-level security
 
-Доступ можно ограничить не только к типу, но и к отдельному свойству: атрибутами `[ViewDomainObject]` и `[EditDomainObject]`. Их можно поставить прямо на модель или добавить снаружи через расширенные атрибуты окружения генерации (`GetExtendedAttributeSources`), не трогая класс:
+Access can be restricted not only to a type but to an individual property: with the `[ViewDomainObject]` and `[EditDomainObject]` attributes. They can be placed directly on the model or added from outside via the generation environment's extended attributes (`GetExtendedAttributeSources`), without touching the class:
 
 ```csharp
 .Add<Employee>(b => b.AddProperty(
@@ -146,13 +146,13 @@ rootSettings.AddSecuritySystem(securitySettings => securitySettings
             .AddAttribute(new EditDomainObjectAttribute(SampleSystemSecurityOperation.EmployeeEdit))))
 ```
 
-Атрибуты учитываются при генерации DTO и сервисов.
+The attributes are taken into account when generating DTOs and services.
 
-## Безопасность в запросах и DTO
+## Security in queries and DTOs
 
-- Доменные типы, зависящие от контекста, объявляют это на уровне модели, чтобы фильтрация попала в запрос и в БД (например, `[DependencySecurity]` для проекций).
-- Тесты, которые проверяют сценарии (`SecurityRuleTests`, `SecurityPathTests`, `RestrictionRoleTests`, `DependencySecurityTests`, `VirtualPermissionTests` и др.), лежат в `src/_SampleSystem/_Tests/SampleSystem.IntegrationTests` и служат лучшими примерами.
+- Domain types that depend on a context declare this at the model level so that filtering reaches the query and the DB (for example, `[DependencySecurity]` for projections).
+- Tests that check scenarios (`SecurityRuleTests`, `SecurityPathTests`, `RestrictionRoleTests`, `DependencySecurityTests`, `VirtualPermissionTests`, etc.) are in `src/_SampleSystem/_Tests/SampleSystem.IntegrationTests` and are the best examples.
 
-## Тесты и права
+## Tests and permissions
 
-В интеграционных тестах роли выдаются через `AuthManager`: `this.AuthManager.For("user").SetRoleAsync(role, ct)` / `SetAdminRoleAsync(ct)` (см. [integrationtests.md](../integrationtests.md)).
+In integration tests roles are granted via `AuthManager`: `this.AuthManager.For("user").SetRoleAsync(role, ct)` / `SetAdminRoleAsync(ct)` (see [integrationtests.md](../integrationtests.md)).

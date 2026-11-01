@@ -1,17 +1,17 @@
-# Уведомления и подписки
+# Notifications and subscriptions
 
-Две связанные подсистемы:
+Two related subsystems:
 
-- **Notification** (`src/Notification`) — отправка писем: очередь, обработка получателей и тестовых окружений, SMTP.
-- **Subscriptions** (`src/Subscriptions`) — правила «при изменении доменного объекта X отправить письмо Y»: кому, с каким шаблоном и при каком условии.
+- **Notification** (`src/Notification`) — sending emails: queue, processing of recipients and test environments, SMTP.
+- **Subscriptions** (`src/Subscriptions`) — rules of the form "when domain object X changes, send email Y": to whom, with which template and under what condition.
 
-Подписки описываются кодом (code-first) и реагируют на изменения через DAL-листенер `SubscriptionDALListener`. Готовое уведомление уходит в Notification.
+Subscriptions are described in code (code-first) and react to changes through the DAL listener `SubscriptionDALListener`. A ready notification goes to Notification.
 
-## Подписка
+## Subscription
 
-Подписка — класс, наследующий `Subscription<TDomainObject, TRenderingObject>` (`Framework.Subscriptions.Metadata`). `TRenderingObject` — модель для шаблона письма. Часто это сам доменный объект.
+A subscription is a class inheriting `Subscription<TDomainObject, TRenderingObject>` (`Framework.Subscriptions.Metadata`). `TRenderingObject` is the model for the email template. Often it is the domain object itself.
 
-Пример `SampleSystem.Subscriptions.Metadata/Country/Create/CountryCreateSubscription.cs`:
+Example `SampleSystem.Subscriptions.Metadata/Country/Create/CountryCreateSubscription.cs`:
 
 ```csharp
 public class CountryCreateSubscription : Subscription<Domain.Directories.Country, _Country_Create_MessageTemplate_cshtml>
@@ -34,35 +34,35 @@ public class CountryCreateSubscription : Subscription<Domain.Directories.Country
 }
 ```
 
-### Что можно переопределить
+### What can be overridden
 
-Контракт `ISubscription<TDomainObject, TRenderingObject>`:
+The contract `ISubscription<TDomainObject, TRenderingObject>`:
 
-| Член | Назначение |
+| Member | Purpose |
 |---|---|
-| `DomainObjectChangeType` | Когда срабатывает подписка: `Create`, `Update`, `Delete` или `Any` (флаги) |
-| `IsProcessed(...)` | Дополнительное условие: подписку надо обработать для этих версий объекта? |
-| `ConvertToRenderingObject(...)` | Преобразование доменного объекта в модель для шаблона |
-| `GetTo` / `GetCopyTo` / `GetReplyTo` | Получатели: основные, копия, Reply-To |
-| `GetNotificationFilterGroups(...)` | Группы фильтров получателей по ролям безопасности |
-| `GetMessage(...)` | Тема и тело письма (по умолчанию из шаблона) |
-| `GetAttachments(...)` | Вложения |
-| `Sender` | Адрес отправителя |
-| `SendIndividualLetters` | `true` — отдельное письмо каждому получателю To / Copy вместо общего. ReplyTo добавляется в каждое письмо |
-| `InlineAttachments` | Встраивать вложения из шаблона |
-| `AllowEmptyListOfRecipients` | Разрешить отправку без получателей (например, для тестов) |
-| `RecipientMergeType` | Как объединять получателей разных источников: `Union`, `Intersect`, `LeftExceptRight`, `RightExceptLeft` |
-| `SecurityRule` | Правило безопасности для выбора получателей по ролям |
+| `DomainObjectChangeType` | When the subscription fires: `Create`, `Update`, `Delete` or `Any` (flags) |
+| `IsProcessed(...)` | An extra condition: should the subscription be processed for these object versions? |
+| `ConvertToRenderingObject(...)` | Converts the domain object into the template model |
+| `GetTo` / `GetCopyTo` / `GetReplyTo` | Recipients: primary, copy, Reply-To |
+| `GetNotificationFilterGroups(...)` | Recipient filter groups by security roles |
+| `GetMessage(...)` | Email subject and body (from the template by default) |
+| `GetAttachments(...)` | Attachments |
+| `Sender` | Sender address |
+| `SendIndividualLetters` | `true` — a separate email for each To / Copy recipient instead of a shared one. ReplyTo is added to every email |
+| `InlineAttachments` | Embed attachments from the template |
+| `AllowEmptyListOfRecipients` | Allow sending without recipients (for example, for tests) |
+| `RecipientMergeType` | How to combine recipients from different sources: `Union`, `Intersect`, `LeftExceptRight`, `RightExceptLeft` |
+| `SecurityRule` | Security rule for selecting recipients by roles |
 
-Версии объекта приходят в `DomainObjectVersions<T>` (предыдущая и текущая): сравнивайте их, чтобы решить, нужно ли письмо.
+Object versions arrive in `DomainObjectVersions<T>` (previous and current): compare them to decide whether an email is needed.
 
-Получателей можно указать строкой с email через запятую или точку с запятой (`new("a@x.com; b@x.com", versions)`): адреса очищаются и дедуплицируются без учёта регистра. Для других типов получателей есть `NotificationMessageGenerationInfo<TRenderingObject, TRecipient>`.
+Recipients can be specified as a string of emails separated by commas or semicolons (`new("a@x.com; b@x.com", versions)`): addresses are cleaned and deduplicated case-insensitively. For other recipient types there is `NotificationMessageGenerationInfo<TRenderingObject, TRecipient>`.
 
-### Шаблон письма
+### Email template
 
-Рядом с подпиской лежит Razor-шаблон `MessageTemplate.cshtml` и сгенерированный по нему `MessageTemplate.generated.cs` (`RazorTemplate`). Класс шаблона и указывается вторым параметром `Subscription<…>`. Файл `.generated.cs` создаётся инструментом Razor-генерации, руками его править нельзя.
+Next to the subscription lie a Razor template `MessageTemplate.cshtml` and the `MessageTemplate.generated.cs` generated from it (`RazorTemplate`). The template class is what is passed as the second parameter of `Subscription<…>`. The `.generated.cs` file is created by the Razor generation tool and must not be edited by hand.
 
-### Структура проекта метаданных
+### Metadata project structure
 
 ```
 SampleSystem.Subscriptions.Metadata/
@@ -74,56 +74,56 @@ SampleSystem.Subscriptions.Metadata/
   DomainChangedByRecipients/NotPersistentCustomModel/...
 ```
 
-Принято группировать по доменному типу и типу изменения: `<Тип>/<Create|Update|…>/`.
+The convention is to group by domain type and change type: `<Type>/<Create|Update|…>/`.
 
-## Подключение
+## Wiring
 
-В `AddGeneralDependencyInjection`:
+In `AddGeneralDependencyInjection`:
 
 ```csharp
 .AddSubscriptions(
-    (Employee e) => e.Email,                                              // как получить email сотрудника
-    [typeof(EmployeeUpdateSubscription).Assembly],                        // сборки с подписками
-    new("SampleSystem@luxoft.com", "SampleSystem"))                       // адрес и имя отправителя по умолчанию
-.AddSubscriptionManagers()                                                // см. ниже
+    (Employee e) => e.Email,                                              // how to get an employee's email
+    [typeof(EmployeeUpdateSubscription).Assembly],                        // assemblies with subscriptions
+    new("SampleSystem@luxoft.com", "SampleSystem"))                       // default sender address and name
+.AddSubscriptionManagers()                                                // see below
 .AddLegacyNotification(configuration, hostEnvironment)
 ```
 
-Дополнительно регистрируется листенер `SubscriptionDALListener`:
+The `SubscriptionDALListener` listener is additionally registered:
 
 ```csharp
 settings.AddListener<SubscriptionDALListener>()
 ```
 
-`AddLegacyNotification` в SampleSystem вызывает `settings.AddNotification(configuration, isProduction)` и подменяет отправитель на `LocalDbNotificationMessageSender`, который складывает письма в локальную БД вместо реальной отправки. Для продакшена оставьте реализацию по умолчанию (SMTP).
+In SampleSystem, `AddLegacyNotification` calls `settings.AddNotification(configuration, isProduction)` and replaces the sender with `LocalDbNotificationMessageSender`, which puts emails into a local DB instead of actually sending them. For production, keep the default implementation (SMTP).
 
-## Отправка письма
+## Sending an email
 
-Цепочка в `Framework.Notification.Runtime`:
+The chain in `Framework.Notification.Runtime`:
 
-1. `RootNotificationMessageSender` принимает `Notification`. Если получателей нет, пишет предупреждение и перенаправляет письмо на поддержку.
-2. `IActualNotificationProcessor` → `ActualMailMessageProcessor`: клонирует сообщение и применяет цепочку `IMailMessageModifier` **в порядке регистрации в DI**. Каждый видит результат предыдущего, поэтому порядок важен (например, перенаправление на тестовый адрес должно идти раньше всего, что опирается на итоговых получателей).
-3. Внутренний отправитель (по ключу `RootNotificationMessageSender.InnerKey`): SMTP (`SmtpNotificationMessageSender`) или свой.
-4. `ISentNotificationLogger` фиксирует факт отправки.
+1. `RootNotificationMessageSender` receives a `Notification`. If there are no recipients, it logs a warning and redirects the email to support.
+2. `IActualNotificationProcessor` → `ActualMailMessageProcessor`: clones the message and applies the chain of `IMailMessageModifier` **in DI registration order**. Each sees the result of the previous one, so order matters (for example, redirecting to a test address must come before anything that relies on the final recipients).
+3. The inner sender (by key `RootNotificationMessageSender.InnerKey`): SMTP (`SmtpNotificationMessageSender`) or your own.
+4. `ISentNotificationLogger` records the fact of sending.
 
-Готовые модификаторы (`MailMessageModifier/`):
+Ready-made modifiers (`MailMessageModifier/`):
 
-| Модификатор | Что делает |
+| Modifier | What it does |
 |---|---|
-| `RedirectToSupportMailMessageModifier` | Если нет ни одного получателя (To / CC / Bcc), добавляет `DefaultReceiverEmails`. Должен идти после модификаторов, меняющих список получателей |
-| `RedirectToTestAddress` | Если заданы `TestEmails`, удаляет всех реальных получателей (To / CC / Bcc / ReplyTo) и отправляет только на тестовые адреса. Исходных получателей вставляет в начало тела письма (тело считается HTML) |
-| `RewriteReceiversMailMessageModifier` | Заменяет адреса по правилам `RewriteReceiversSettings`. **Если задано хотя бы одно правило, получатели без подходящего правила отбрасываются.** Без правил письмо не меняется |
-| `SubjectCleanerMailMessageModifier` | Заменяет переводы строк в теме на пробелы и обрезает тему до `MaxSubjectLength` |
-| `GdprMailMessageModifier` | Вырезает из тела секции `<!--GDPR-->…<!--/GDPR-->` (регистр не важен, вложенные секции обрабатываются изнутри). Незакрытая секция остаётся в тексте |
-| `HtmlMarkerMessageModifier` | Ставит `IsBodyHtml = true`, если тело начинается с `<html` |
+| `RedirectToSupportMailMessageModifier` | If there is no recipient at all (To / CC / Bcc), adds `DefaultReceiverEmails`. Must come after modifiers that change the recipient list |
+| `RedirectToTestAddress` | If `TestEmails` is set, removes all real recipients (To / CC / Bcc / ReplyTo) and sends only to the test addresses. Inserts the original recipients at the start of the body (the body is treated as HTML) |
+| `RewriteReceiversMailMessageModifier` | Replaces addresses by the `RewriteReceiversSettings` rules. **If at least one rule is set, recipients without a matching rule are dropped.** Without rules the email is unchanged |
+| `SubjectCleanerMailMessageModifier` | Replaces line breaks in the subject with spaces and truncates the subject to `MaxSubjectLength` |
+| `GdprMailMessageModifier` | Cuts `<!--GDPR-->…<!--/GDPR-->` sections out of the body (case-insensitive, nested sections are processed from the inside). An unclosed section stays in the text |
+| `HtmlMarkerMessageModifier` | Sets `IsBodyHtml = true` if the body starts with `<html` |
 
-Свой модификатор: реализуйте `IMailMessageModifier` и зарегистрируйте в DI (позиция в порядке регистрации определяет момент его вызова).
+For your own modifier: implement `IMailMessageModifier` and register it in DI (its position in the registration order determines when it is called).
 
-> Чтобы секция шаблона не попала в письмо, оберните её в `<!--GDPR-->…<!--/GDPR-->`, при условии что `GdprMailMessageModifier` зарегистрирован в вашем приложении.
+> To keep a template section out of the email, wrap it in `<!--GDPR-->…<!--/GDPR-->`, provided `GdprMailMessageModifier` is registered in your application.
 
-## Конфигурация
+## Configuration
 
-Пример из `appsettings.json` SampleSystem:
+Example from SampleSystem's `appsettings.json`:
 
 ```json
 "SmtpSettings": {
@@ -143,26 +143,26 @@ settings.AddListener<SubscriptionDALListener>()
 
 `SmtpSettings`:
 
-| Параметр | Смысл |
+| Parameter | Meaning |
 |---|---|
-| `SmtpEnabled` | `false` — не отправлять на SMTP-сервер (для разработки) |
-| `OutputFolder` | Каталог, куда складываются письма |
-| `Server`, `Port` | SMTP-сервер, порт по умолчанию 25 |
-| `DefaultReceiverEmails` | Адреса для писем без получателей (когда пустой список допустим) |
-| `TestEmails` | Тестовые адреса для окружений, отличных от production |
-| `MaxSubjectLength` | Максимальная длина темы, по умолчанию без ограничения |
+| `SmtpEnabled` | `false` — do not send to the SMTP server (for development) |
+| `OutputFolder` | Directory where emails are saved |
+| `Server`, `Port` | SMTP server, default port 25 |
+| `DefaultReceiverEmails` | Addresses for emails without recipients (when an empty list is allowed) |
+| `TestEmails` | Test addresses for non-production environments |
+| `MaxSubjectLength` | Maximum subject length, unlimited by default |
 
-`RewriteReceiversSettings.RewriteRules`: список правил `From` → `To[]`.
+`RewriteReceiversSettings.RewriteRules`: a list of `From` → `To[]` rules.
 
-## Менеджеры подписок
+## Subscription managers
 
-`AddSubscriptionManager<T>()` регистрирует «менеджеры подписок» приложения (в SampleSystem: `ExampleSampleSystemEventsSubscriptionManager`, `ExampleSampleSystemAribaEventsSubscriptionManager`). Они относятся к старому API (блок `// Legacy` в DI-композиции, см. [legacy.md](../legacy.md)). Для новых подписок используйте классы `Subscription<,>`.
+`AddSubscriptionManager<T>()` registers the application's "subscription managers" (in SampleSystem: `ExampleSampleSystemEventsSubscriptionManager`, `ExampleSampleSystemAribaEventsSubscriptionManager`). They belong to the old API (the `// Legacy` block in the DI composition, see [legacy.md](../legacy.md)). For new subscriptions use `Subscription<,>` classes.
 
-## Отправка по расписанию
+## Scheduled sending
 
-Джоб `ISendNotificationsJob` (`Framework.Configuration.BLL.Jobs`) вызывает `DomainObjectModification.ProcessAsync(1000, ct)`, то есть обрабатывает накопленные изменения доменных объектов пачками по 1000 штук. В хосте он регистрируется с `Cron.Never()`: запускается вручную или по расписанию из `Hangfire:JobTimings` (см. [jobs.md](jobs.md)).
+The job `ISendNotificationsJob` (`Framework.Configuration.BLL.Jobs`) calls `DomainObjectModification.ProcessAsync(1000, ct)`, i.e. it processes accumulated domain object changes in batches of 1000. In the host it is registered with `Cron.Never()`: it is run manually or on the schedule from `Hangfire:JobTimings` (see [jobs.md](jobs.md)).
 
-## Тесты
+## Tests
 
-- Юнит-тесты: `src/Notification/Framework.Notification.Tests`.
-- Интеграционные: `SubscriptionCustomNotPersistentModelTests`, `NotificationCountryTests`, `GetNotificationPrincipalsByHierarchicalContextTests`, а также каталог `Subscriptions_Metadata` в `SampleSystem.IntegrationTests`.
+- Unit tests: `src/Notification/Framework.Notification.Tests`.
+- Integration: `SubscriptionCustomNotPersistentModelTests`, `NotificationCountryTests`, `GetNotificationPrincipalsByHierarchicalContextTests`, and the `Subscriptions_Metadata` directory in `SampleSystem.IntegrationTests`.

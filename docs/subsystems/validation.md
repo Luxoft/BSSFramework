@@ -1,10 +1,10 @@
-# Валидация
+# Validation
 
-Валидация доменных объектов описывается **атрибутами на модели** и **классовыми валидаторами**. Фреймворк собирает из них карту валидации (`ValidationMap`), генерирует валидаторы в BLL и вызывает их при сохранении.
+Validation of domain objects is described by **attributes on the model** and **class validators**. The framework builds a validation map (`ValidationMap`) from them, generates validators in the BLL and calls them on save.
 
-Проекты: `src/Validation/Framework.Validation.Abstractions` (контракты), `Framework.Validation` (реализация), `Framework.Validation.Domain`, `src/BLL/Framework.BLL.Validation`. Тесты: `Framework.Validation.Tests`.
+Projects: `src/Validation/Framework.Validation.Abstractions` (contracts), `Framework.Validation` (implementation), `Framework.Validation.Domain`, `src/BLL/Framework.BLL.Validation`. Tests: `Framework.Validation.Tests`.
 
-## Контракты
+## Contracts
 
 ```csharp
 public interface IValidator
@@ -14,33 +14,33 @@ public interface IValidator
 }
 ```
 
-`ValidationResult` содержит успех или набор ошибок. `ValidationResult.Success` — успешный результат, `ValidationResult.CreateError(message)` — ошибка.
+`ValidationResult` holds success or a set of errors. `ValidationResult.Success` is a successful result, `ValidationResult.CreateError(message)` is an error.
 
-`operationContext` — числовой контекст операции, который передаётся во все контексты валидации (`IClassValidationContext`, `IPropertyValidationContext`). По умолчанию `int.MaxValue`.
+`operationContext` is a numeric operation context that is passed to all validation contexts (`IClassValidationContext`, `IPropertyValidationContext`). Defaults to `int.MaxValue`.
 
-## Атрибуты свойств
+## Property attributes
 
-Ограничения из `Framework.Restriction` участвуют и в валидации, и в схеме БД:
+Restrictions from `Framework.Restriction` take part both in validation and in the DB schema:
 
-| Атрибут | Эффект |
+| Attribute | Effect |
 |---|---|
-| `[Required]` | Значение обязательно (режим `RequiredMode`) |
-| `[MaxLength(n)]` | Максимальная длина строки |
-| `[UniqueGroup]`, `[UniqueElement]` | Уникальность по группе полей или элементу |
+| `[Required]` | The value is mandatory (mode `RequiredMode`) |
+| `[MaxLength(n)]` | Maximum string length |
+| `[UniqueGroup]`, `[UniqueElement]` | Uniqueness by a group of fields or an element |
 
-Атрибуты валидации (`Framework.Validation.Attributes`):
+Validation attributes (`Framework.Validation.Attributes`):
 
-| Атрибут | Проверка |
+| Attribute | Check |
 |---|---|
-| `[RequiredValidator]`, `[RequiredGroupValidator]` | Обязательность поля или хотя бы одного из группы |
-| `[MaxLengthValidator]` | Длина строки |
-| `[EnglishAlphabetValidator]`, `[NumberAlphabetValidator]` | Допустимый алфавит |
-| `[IntValueValidator]`, `[Int64ValueValidator]`, `[SignValidator]` | Диапазон и знак числа |
-| `[AnyElementsValidator]`, `[UniqueCollectionValidator]` | Непустая коллекция, уникальность элементов |
-| `[ExpandValidation]` | Рекурсивная проверка вложенного объекта |
-| `[PropertyValidationMode(...)]` | Режим для свойства: `Disabled`, `Auto`, `Enabled` |
+| `[RequiredValidator]`, `[RequiredGroupValidator]` | A field, or at least one field of a group, is required |
+| `[MaxLengthValidator]` | String length |
+| `[EnglishAlphabetValidator]`, `[NumberAlphabetValidator]` | Allowed alphabet |
+| `[IntValueValidator]`, `[Int64ValueValidator]`, `[SignValidator]` | Number range and sign |
+| `[AnyElementsValidator]`, `[UniqueCollectionValidator]` | Non-empty collection, uniqueness of elements |
+| `[ExpandValidation]` | Recursive check of a nested object |
+| `[PropertyValidationMode(...)]` | Mode for a property: `Disabled`, `Auto`, `Enabled` |
 
-`PropertyValidationMode` управляет тем, проверяется ли свойство. `Auto` выбирает режим по внутренним политикам фреймворка, `Enabled` и `Disabled` принудительны:
+`PropertyValidationMode` controls whether a property is checked. `Auto` picks the mode according to the framework's internal policies, `Enabled` and `Disabled` are forced:
 
 ```csharp
 [PropertyValidationMode(true)]
@@ -50,11 +50,11 @@ public virtual DateTime ValidateVirtualProp { get; set; }
 public virtual string CellPhone { get; set; }
 ```
 
-Атрибут применяется к свойствам. Конструктор принимает `bool` либо `PropertyValidationMode mode` и необязательный `deepMode`. Режим `mode` относится к самому свойству (по умолчанию проверка отключена для простых виртуальных свойств). `deepMode` относится к вложенным объектам (по умолчанию включена только для Detail-свойств).
+The attribute applies to properties. The constructor takes a `bool`, or a `PropertyValidationMode mode` and an optional `deepMode`. `mode` refers to the property itself (by default checking is disabled for simple virtual properties). `deepMode` refers to nested objects (by default enabled only for Detail properties).
 
-## Глобальные валидаторы для всех типов
+## Global validators for all types
 
-Классовые атрибуты можно добавить сразу всем типам через `ExtendedAttributeSource` в окружении генерации (`ServerGenerationEnvironment.GetExtendedAttributeSources`):
+Class attributes can be added to all types at once via `ExtendedAttributeSource` in the generation environment (`ServerGenerationEnvironment.GetExtendedAttributeSources`):
 
 ```csharp
 .Add<DomainObjectBase>(tb => tb.AddAttribute<AvailableDecimalValidatorAttribute>()
@@ -63,18 +63,18 @@ public virtual string CellPhone { get; set; }
                                .AddAttribute<DefaultStringMaxLengthValidatorAttribute>())
 ```
 
-| Атрибут | Правило |
+| Attribute | Rule |
 |---|---|
-| `DefaultStringMaxLengthValidatorAttribute` | Ограничение длины для всех строк без явного `[MaxLength]` |
-| `AvailableDecimalValidatorAttribute` | Проверка допустимых значений `decimal` |
-| `AvailableDateTimeValidatorAttribute` | Проверка допустимых значений дат |
-| `AvailablePeriodValidatorAttribute` | Проверка допустимых значений периодов |
+| `DefaultStringMaxLengthValidatorAttribute` | Length limit for all strings without an explicit `[MaxLength]` |
+| `AvailableDecimalValidatorAttribute` | Check of allowed `decimal` values |
+| `AvailableDateTimeValidatorAttribute` | Check of allowed date values |
+| `AvailablePeriodValidatorAttribute` | Check of allowed period values |
 
-Точные границы допустимых значений смотрите в `Framework.Validation/Validators/DynamicClass/Available`.
+For the exact bounds of allowed values see `Framework.Validation/Validators/DynamicClass/Available`.
 
-## Собственный классовый валидатор
+## Custom class validator
 
-1. Реализуйте `IClassValidator<T>`:
+1. Implement `IClassValidator<T>`:
 
 ```csharp
 public sealed class EmployeeValidator : IClassValidator<Employee>
@@ -95,7 +95,7 @@ public sealed class EmployeeValidator : IClassValidator<Employee>
 }
 ```
 
-2. Создайте атрибут-фабрику:
+2. Create a factory attribute:
 
 ```csharp
 public sealed class EmployeeValidatorAttribute : ClassValidatorAttribute
@@ -104,12 +104,12 @@ public sealed class EmployeeValidatorAttribute : ClassValidatorAttribute
 }
 ```
 
-3. Подключите атрибут к типу. Можно поставить его прямо на класс, как в примере из SampleSystem, через расширенные атрибуты в окружении генерации (`.Add<Employee>(b => b.AddAttribute<EmployeeValidatorAttribute>())`).
-4. Запустите генерацию (см. [codegeneration.md](../codegeneration.md)): валидатор попадёт в сгенерированную `ValidationMap` (`*.ValidationMap.Generated.cs`, `*.Validator.Generated.cs` в `SampleSystem.BLL/_Generated`).
+3. Attach the attribute to the type. You can put it directly on the class, as in the SampleSystem example, via extended attributes in the generation environment (`.Add<Employee>(b => b.AddAttribute<EmployeeValidatorAttribute>())`).
+4. Run generation (see [codegeneration.md](../codegeneration.md)): the validator will end up in the generated `ValidationMap` (`*.ValidationMap.Generated.cs`, `*.Validator.Generated.cs` in `SampleSystem.BLL/_Generated`).
 
-Код валидатора лежит в отдельном проекте (`SampleSystem.Validation`), чтобы его могли использовать и генераторы, и рантайм.
+The validator code lives in a separate project (`SampleSystem.Validation`) so that both generators and the runtime can use it.
 
-## Тесты
+## Tests
 
-- Юнит-тесты фреймворка: `src/Validation/Framework.Validation.Tests`.
-- Интеграционные: `ValidationTests`, `FixedPropertyValidatorTests`, `UniqueGroupTests` в `SampleSystem.IntegrationTests`.
+- Framework unit tests: `src/Validation/Framework.Validation.Tests`.
+- Integration: `ValidationTests`, `FixedPropertyValidatorTests`, `UniqueGroupTests` in `SampleSystem.IntegrationTests`.

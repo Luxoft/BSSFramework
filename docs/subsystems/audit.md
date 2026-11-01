@@ -1,23 +1,23 @@
-# Аудит данных
+# Data audit
 
-Фреймворк поддерживает два независимых механизма аудита. Они решают разные задачи, и их можно использовать вместе.
+The framework supports two independent audit mechanisms. They solve different problems and can be used together.
 
-| | Inline-аудит | Envers-аудит (история версий) |
+| | Inline audit | Envers audit (version history) |
 |---|---|---|
-| Что хранит | Кто и когда создал / изменил объект: поля прямо в строке сущности | Полную историю изменений: копия строки на каждую ревизию |
-| Где хранится | Колонки той же таблицы (`CreateDate`, `CreatedBy`, `ModifyDate`, `ModifiedBy`) | Отдельные таблицы аудита и таблица ревизий, отдельный `DbContext` / схема |
-| Читается | Как обычные поля | Через audit-контроллеры (`mainAuditApi/…`) и `Audit`-DTO |
-| ORM | NHibernate и EF | NHibernate (`NHibernate.Envers`) и EF (собственная реализация `Framework.Database.EntityFramework.EnversAudit`) |
+| What it stores | Who created / modified the object and when: fields directly in the entity row | The full change history: a copy of the row for each revision |
+| Where it is stored | Columns of the same table (`CreateDate`, `CreatedBy`, `ModifyDate`, `ModifiedBy`) | Separate audit tables and a revisions table, a separate `DbContext` / schema |
+| Read | Like regular fields | Through audit controllers (`mainAuditApi/…`) and `Audit` DTOs |
+| ORM | NHibernate and EF | NHibernate (`NHibernate.Envers`) and EF (own implementation `Framework.Database.EntityFramework.EnversAudit`) |
 
-## Inline-аудит
+## Inline audit
 
-### Модель
+### Model
 
-Сущность наследует `AuditPersistentDomainObjectBase`. Он добавляет поля `CreateDate`, `CreatedBy`, `ModifyDate`, `ModifiedBy`, `Active` и `Version` (`IVersionObject<long>`). Сеттеры `protected internal`: прикладной код их не заполняет, это делает фреймворк при сохранении.
+The entity inherits `AuditPersistentDomainObjectBase`. It adds the fields `CreateDate`, `CreatedBy`, `ModifyDate`, `ModifiedBy`, `Active` and `Version` (`IVersionObject<long>`). The setters are `protected internal`: application code does not fill them, the framework does it on save.
 
-### Настройка
+### Setup
 
-Настройка находится в `SampleSystem.ServiceEnvironment/DependencyInjection/SampleSystemInlineAuditSetup.cs`:
+The setup is in `SampleSystem.ServiceEnvironment/DependencyInjection/SampleSystemInlineAuditSetup.cs`:
 
 ```csharp
 public static IInlineAuditSetup AddSampleSystemInlineAudit(this IInlineAuditSetup rootSetup) =>
@@ -33,63 +33,63 @@ public static IInlineAuditSetup AddSampleSystemInlineAudit(this IInlineAuditSetu
         });
 ```
 
-- `AddDefault<TBase>(createDate, createdBy, modifyDate, modifiedBy)` задаёт стандартные поля для всех наследников базового класса.
-- `For<T>(...)` добавляет к конкретному типу собственные поля с резолверами значений.
-- `InlineAuditAction` (`Create`, `Modify`) определяет момент, когда поле заполняется.
-- Значение поля вычисляет `IAuditValueResolver<T>`. Готовые реализации: `NowAuditValueResolver` (текущее время), `CurrentUserAuditValueResolver` (текущий пользователь); можно написать свой.
+- `AddDefault<TBase>(createDate, createdBy, modifyDate, modifiedBy)` sets the standard fields for all descendants of the base class.
+- `For<T>(...)` adds custom fields with value resolvers to a specific type.
+- `InlineAuditAction` (`Create`, `Modify`) determines when the field is filled.
+- The field value is computed by `IAuditValueResolver<T>`. Ready-made implementations: `NowAuditValueResolver` (current time), `CurrentUserAuditValueResolver` (current user); you can write your own.
 
-### Подключение к ORM
+### Wiring to the ORM
 
-В EF (`SampleSystemEntityFrameworkExtension`):
+In EF (`SampleSystemEntityFrameworkExtension`):
 
 ```csharp
 options.AddInlineAudit(s => s.SetSetupType<SampleSystemInlineAuditSetup>())
 ```
 
-Тип `SampleSystemInlineAuditSetup` реализует `IInlineAuditExtensionInnerSetup` и вызывает `AddSampleSystemInlineAudit()`. В NHibernate (`SampleSystemNHibernateExtension`) то же самое: `.AddInlineAudit(rootSetup => rootSetup.AddSampleSystemInlineAudit())`.
+The type `SampleSystemInlineAuditSetup` implements `IInlineAuditExtensionInnerSetup` and calls `AddSampleSystemInlineAudit()`. NHibernate (`SampleSystemNHibernateExtension`) does the same: `.AddInlineAudit(rootSetup => rootSetup.AddSampleSystemInlineAudit())`.
 
-## Envers-аудит
+## Envers audit
 
-Хранит версии каждого изменения: запись ревизии (кто, когда) и копию изменённых данных в таблицах аудита.
+Stores versions of every change: a revision record (who, when) and a copy of the changed data in audit tables.
 
-### Что аудируется
+### What is audited
 
-- В EF это все сущности, кроме проекций и типов с `[NotAuditedClass]`:
+- In EF it is all entities except projections and types with `[NotAuditedClass]`:
 
 ```csharp
 setup.SetFilter(et => !et.ClrType.IsProjection() && !et.ClrType.HasAttribute<NotAuditedClassAttribute>());
 ```
 
-- Тип аудита в SampleSystem описан в `SampleSystem.AuditDomain` (`BusinessUnitAudit`, `SampleSystemAuditRevisionEntity`), а маппинг сгенерирован (`Mapping/Envers`).
-- Исключить сущность из аудита: `[NotAuditedClass]` из `Framework.Database.Mapping`.
+- The audit type in SampleSystem is described in `SampleSystem.AuditDomain` (`BusinessUnitAudit`, `SampleSystemAuditRevisionEntity`), and the mapping is generated (`Mapping/Envers`).
+- To exclude an entity from audit: `[NotAuditedClass]` from `Framework.Database.Mapping`.
 
-### Подключение (EF)
+### Wiring (EF)
 
 ```csharp
 .AddDbContext<SampleSystemDbContext>((sp, options) => options
     .UseSqlServer(...)
     .AddEnversAudit(s => s.SetSetupType<SampleSystemEnversAuditSetup>()))
 
-.AddDbContext<SampleSystemEnversAuditDbContext>(...)       // отдельный контекст для чтения аудита
+.AddDbContext<SampleSystemEnversAuditDbContext>(...)       // a separate context for reading audit
 
 .AddEntityFramework<SampleSystemDbContext>(s => s.AddEnversAudit()
                                                  .AddSecondaryContext<SampleSystemEnversAuditDbContext>());
 ```
 
-Контекст `SampleSystemDbContext` реализует `IEnversAuditDbContext`, а `SampleSystemEnversAuditDbContext` содержит конфигурации таблиц аудита (`BusinessUnitAuditMap`, `SampleSystemAuditRevisionEntityMap`).
+`SampleSystemDbContext` implements `IEnversAuditDbContext`, and `SampleSystemEnversAuditDbContext` contains the audit table configurations (`BusinessUnitAuditMap`, `SampleSystemAuditRevisionEntityMap`).
 
-### Чтение истории
+### Reading history
 
-Для чтения используются audit-контроллеры и audit-DTO, которые генерируются отдельно (`AuditDTOGeneratorConfiguration`, `AuditServiceGeneratorConfiguration`, маршрут `mainAuditApi/[controller]/[action]`, см. [codegeneration.md](../codegeneration.md)). В коде чтение выполняет `IEfAuditReader` (EF).
+Reading uses audit controllers and audit DTOs, which are generated separately (`AuditDTOGeneratorConfiguration`, `AuditServiceGeneratorConfiguration`, route `mainAuditApi/[controller]/[action]`, see [codegeneration.md](../codegeneration.md)). In code, reading is done by `IEfAuditReader` (EF).
 
-### Схема БД
+### DB schema
 
-Таблицы аудита создаются при генерации схемы (для NHibernate: `AuditDBGenerator/AuditDatabaseScriptGenerator`). Для миграций и сравнения схем см. раздел «Схема БД» в [codegeneration.md](../codegeneration.md).
+Audit tables are created during schema generation (for NHibernate: `AuditDBGenerator/AuditDatabaseScriptGenerator`). For migrations and schema comparison see the "DB schema" section in [codegeneration.md](../codegeneration.md).
 
 ## Tracking
 
-`Framework.Tracking` (контракты в `Framework.Tracking.Abstractions`: `ITrackingService<T>`, `TrackingResult<T>`, `TrackingProperty`, `GetChangesMode`) определяет, какие персистентные свойства объекта изменились в текущей сессии: имя свойства, старое и новое значение. Используйте его в BLL и валидаторах, когда нужно знать, что именно поменялось, без обращения к аудиту. Тесты находятся в `Framework.Tracking.Tests`.
+`Framework.Tracking` (contracts in `Framework.Tracking.Abstractions`: `ITrackingService<T>`, `TrackingResult<T>`, `TrackingProperty`, `GetChangesMode`) determines which persistent properties of an object changed in the current session: property name, old and new value. Use it in the BLL and validators when you need to know exactly what changed, without going to audit. Tests are in `Framework.Tracking.Tests`.
 
-## Тесты
+## Tests
 
-Интеграционные тесты: `AuditTests`, `EnversTests`, `EnversBug1676`, `InlineAuditTests` (`SampleSystem.IntegrationTests`).
+Integration tests: `AuditTests`, `EnversTests`, `EnversBug1676`, `InlineAuditTests` (`SampleSystem.IntegrationTests`).

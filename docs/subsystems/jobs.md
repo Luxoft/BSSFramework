@@ -1,10 +1,10 @@
-# Фоновые задачи (Jobs)
+# Background jobs (Jobs)
 
-Фоновые задачи построены на [Hangfire](https://www.hangfire.io/) с хранилищем в SQL Server. Фреймворк добавляет к нему DI, выполнение от имени заданного пользователя, расписание из конфигурации и единый контракт `IJob`.
+Background jobs are built on [Hangfire](https://www.hangfire.io/) with SQL Server storage. The framework adds DI, execution on behalf of a given user, a schedule from configuration, and a single `IJob` contract.
 
-Проекты: `src/Application/Framework.Application.Abstractions/Jobs` (контракты), `src/Infrastructure/Framework.Infrastructure.Hangfire` (интеграция).
+Projects: `src/Application/Framework.Application.Abstractions/Jobs` (contracts), `src/Infrastructure/Framework.Infrastructure.Hangfire` (integration).
 
-## Контракт
+## Contract
 
 ```csharp
 public interface IJob
@@ -13,7 +13,7 @@ public interface IJob
 }
 ```
 
-Пример из `SampleSystem.ServiceEnvironment/Jobs/SampleJob.cs`:
+Example from `SampleSystem.ServiceEnvironment/Jobs/SampleJob.cs`:
 
 ```csharp
 [DisableConcurrentExecution(timeoutInSeconds: 1000)]
@@ -30,14 +30,14 @@ public class SampleJob(
 }
 ```
 
-- Зависимости внедряются через конструктор, как у любого сервиса.
-- Атрибуты Hangfire (`[DisableConcurrentExecution]`) работают как обычно.
-- `[DisabledSecurity]` отключает проверку прав в репозитории: для системных задач это обычно нужно (см. [security.md](security.md)).
-- Задача выполняется через `MiddlewareJob` и `IJobServiceEvaluator`; пользователь для проверки прав задаётся `JobImpersonateData` (настройка `RunAs`).
+- Dependencies are injected via the constructor, like for any service.
+- Hangfire attributes (`[DisableConcurrentExecution]`) work as usual.
+- `[DisabledSecurity]` disables permission checks in the repository: system jobs usually need this (see [security.md](security.md)).
+- A job is executed via `MiddlewareJob` and `IJobServiceEvaluator`; the user for permission checks is set by `JobImpersonateData` (the `RunAs` setting).
 
-## Регистрация
+## Registration
 
-Регистрация идёт в хосте (`GenericProgram.Main`):
+Registration happens in the host (`GenericProgram.Main`):
 
 ```csharp
 builder.Services.AddHangfireBss(
@@ -48,19 +48,19 @@ builder.Services.AddHangfireBss(
 
 `JobSettings`:
 
-| Параметр | Смысл |
+| Parameter | Meaning |
 |---|---|
-| `Name` | Техническое имя джоба и ключ расписания в конфигурации. По умолчанию выводится из имени типа: у интерфейса отбрасывается префикс `I`, у всех отбрасывается суффикс `Job` (`SampleJob` → `Sample`, `ISendNotificationsJob` → `SendNotifications`) |
-| `DisplayName` | Отображаемое имя (в Hangfire Dashboard). По умолчанию имя типа |
-| `CronTiming` | Cron-выражение; `Cron.Never()` — только ручной запуск. Если не задано, берётся из `Hangfire:JobTimings` по `Name`; если и там нет, при регистрации выбрасывается исключение |
+| `Name` | Technical job name and the schedule key in configuration. By default derived from the type name: for an interface the `I` prefix is dropped, and for all types the `Job` suffix is dropped (`SampleJob` → `Sample`, `ISendNotificationsJob` → `SendNotifications`) |
+| `DisplayName` | Display name (in the Hangfire Dashboard). Defaults to the type name |
+| `CronTiming` | Cron expression; `Cron.Never()` means manual run only. If not set, it is taken from `Hangfire:JobTimings` by `Name`; if it is not there either, an exception is thrown at registration |
 
-Джоб можно зарегистрировать как класс (`AddJob<SampleJob>`) или как интерфейс с лямбдой вызова (`AddJob<ISendNotificationsJob>((job, ct) => job.ExecuteAsync(ct), …)`). Для классов фреймворк сам регистрирует тип в DI (scoped).
+A job can be registered as a class (`AddJob<SampleJob>`) or as an interface with an invocation lambda (`AddJob<ISendNotificationsJob>((job, ct) => job.ExecuteAsync(ct), …)`). For classes the framework registers the type in DI itself (scoped).
 
-Для тестов джобы регистрируются из сборки целиком: `AddJobs([typeof(SampleJob).Assembly])`, а пользователь джоба задаётся через `JobImpersonateData` (`.AddSingleton(new JobImpersonateData("sampleSystemTestJob"))`).
+For tests, jobs are registered from a whole assembly: `AddJobs([typeof(SampleJob).Assembly])`, and the job user is set via `JobImpersonateData` (`.AddSingleton(new JobImpersonateData("sampleSystemTestJob"))`).
 
-## Конфигурация
+## Configuration
 
-Секция `Hangfire` в `appsettings.json` (`BssHangfireSettings`):
+The `Hangfire` section in `appsettings.json` (`BssHangfireSettings`):
 
 ```json
 "Hangfire": {
@@ -72,24 +72,24 @@ builder.Services.AddHangfireBss(
 }
 ```
 
-| Параметр | Смысл |
+| Parameter | Meaning |
 |---|---|
-| `Enabled` | Включает Hangfire. При `false` не регистрируются ни сервер Hangfire, ни джобы, ни `JobImpersonateData` |
-| `RunAs` | Логин пользователя, от имени которого выполняются задачи (регистрируется как `JobImpersonateData`) |
-| `JobTimings` | Расписание задач: `Name` джоба (см. выше) и cron-выражение `Schedule` |
+| `Enabled` | Enables Hangfire. When `false`, neither the Hangfire server, nor the jobs, nor `JobImpersonateData` are registered |
+| `RunAs` | Login of the user on whose behalf jobs run (registered as `JobImpersonateData`) |
+| `JobTimings` | Job schedule: the job `Name` (see above) and the cron expression `Schedule` |
 
-Рекуррентные задачи регистрируются в Hangfire при старте (`RunJobs`: `AddOrUpdate(name, job, cron)`). Расписание из конфигурации применяется при каждом запуске приложения.
+Recurring jobs are registered in Hangfire at startup (`RunJobs`: `AddOrUpdate(name, job, cron)`). The schedule from configuration is applied on every application start.
 
-Хранилище использует строку подключения `DefaultConnection`; имя можно поменять через `SetConnectionStringName`.
+The storage uses the `DefaultConnection` connection string; the name can be changed via `SetConnectionStringName`.
 
 ## Dashboard
 
-Доступ к Hangfire Dashboard ограничен администраторами (`AdminHangfireAuthorization`): проверка идёт через систему безопасности для текущего пользователя без учёта run-as.
+Access to the Hangfire Dashboard is restricted to administrators (`AdminHangfireAuthorization`): the check goes through the security system for the current user, ignoring run-as.
 
-## Именованные блокировки
+## Named locks
 
-Для взаимного исключения на уровне данных (а не процессов) используются именованные блокировки: `INamedLockService.LockAsync(namedLock, lockRole, ct)`. В SampleSystem они регистрируются в `AddNamedLocks` (в том числе вручную для `BusinessUnitAncestorLink`, `ManagementUnitAncestorLink`, `LocationAncestorLink`).
+For mutual exclusion at the data level (rather than between processes), named locks are used: `INamedLockService.LockAsync(namedLock, lockRole, ct)`. In SampleSystem they are registered in `AddNamedLocks` (including manually for `BusinessUnitAncestorLink`, `ManagementUnitAncestorLink`, `LocationAncestorLink`).
 
-## Тесты
+## Tests
 
-`JobTests` в `SampleSystem.IntegrationTests`.
+`JobTests` in `SampleSystem.IntegrationTests`.

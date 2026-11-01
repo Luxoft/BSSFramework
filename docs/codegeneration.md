@@ -1,59 +1,59 @@
-# Кодогенерация
+# Code generation
 
-Значительная часть кода приложения на BSS Framework не пишется руками. Генераторы читают **доменную модель** (типы с атрибутами) и **конфигурацию окружения генерации** и пишут C#-файлы, `*.hbm.xml` и схему БД. Результат **коммитится в репозиторий**.
+A significant part of the code of a BSS Framework application is not written by hand. Generators read the **domain model** (types with attributes) and the **generation environment configuration**, and write C# files, `*.hbm.xml` and the DB schema. The result is **committed to the repository**.
 
-> Правило: `*.Generated.cs`, проекты `Generated.*` и `*.hbm.xml` руками не правятся. Меняйте модель или генератор и запускайте регенерацию.
+> Rule: `*.Generated.cs`, `Generated.*` projects and `*.hbm.xml` are not edited by hand. Change the model or the generator and run regeneration.
 
-## Что генерируется
+## What is generated
 
-| Артефакт | Генератор (`src/CodeGeneration/…`) | Куда пишет (на примере SampleSystem) |
+| Artifact | Generator (`src/CodeGeneration/…`) | Output location (SampleSystem example) |
 |---|---|---|
-| Проекции (`Projection`) | `Framework.CodeGeneration.ProjectionGenerator` | `SampleSystem.Domain.Projections`, `SampleSystem.Domain.LegacyProjections` |
-| Базовая BLL (`BLLCore`) | `BLLCoreGenerator` | `SampleSystem.BLL.Core/_Generated` |
-| BLL, валидаторы, fetch-правила | `BLLGenerator` | `SampleSystem.BLL/_Generated` |
-| DTO и сервисы маппинга | `DTOGenerator`, `DTOGenerator.Server` | `SampleSystem.Generated.DTO` |
-| Audit-DTO | `DTOGenerator.Audit` | `SampleSystem.Generated.DTO` (`*.Audit.Generated.cs`) |
-| Маппинг NHibernate (`*.hbm.xml`) | `Framework.Database.NHibernate.DALGenerator` | `SampleSystem.Generated.DAL.NHibernate/Mapping` |
-| WebApi-контроллеры | `ServiceModelGenerator`, `WebApiGenerator` | `SampleSystem.WebApiCore/Controllers/_Generated` |
+| Projections (`Projection`) | `Framework.CodeGeneration.ProjectionGenerator` | `SampleSystem.Domain.Projections`, `SampleSystem.Domain.LegacyProjections` |
+| Base BLL (`BLLCore`) | `BLLCoreGenerator` | `SampleSystem.BLL.Core/_Generated` |
+| BLL, validators, fetch rules | `BLLGenerator` | `SampleSystem.BLL/_Generated` |
+| DTOs and mapping services | `DTOGenerator`, `DTOGenerator.Server` | `SampleSystem.Generated.DTO` |
+| Audit DTOs | `DTOGenerator.Audit` | `SampleSystem.Generated.DTO` (`*.Audit.Generated.cs`) |
+| NHibernate mapping (`*.hbm.xml`) | `Framework.Database.NHibernate.DALGenerator` | `SampleSystem.Generated.DAL.NHibernate/Mapping` |
+| WebApi controllers | `ServiceModelGenerator`, `WebApiGenerator` | `SampleSystem.WebApiCore/Controllers/_Generated` |
 
-Базовые инструменты: `Framework.CodeDom` (обёртки над `System.CodeDom`) и `Framework.FileGeneration` (запись файлов, учёт состояния New / Modified / Unchanged, чекаут через `ICheckOutService`).
+Base tools: `Framework.CodeDom` (wrappers over `System.CodeDom`) and `Framework.FileGeneration` (file writing, tracking New / Modified / Unchanged state, checkout via `ICheckOutService`).
 
-Маппинг Entity Framework лежит в `SampleSystem.Generated.DAL.EntityFramework/Mapping`. Проект относится к `Generated.*`, поэтому тоже не правится руками.
+Entity Framework mapping is in `SampleSystem.Generated.DAL.EntityFramework/Mapping`. The project belongs to `Generated.*`, so it is also not edited by hand.
 
-## Откуда берётся информация
+## Where the information comes from
 
-1. **Доменные типы.** Сущности, наследники `PersistentDomainObjectBase` / `AuditPersistentDomainObjectBase`, с атрибутами (см. ниже).
-2. **Окружение генерации.** Класс `ServerGenerationEnvironment : CodeGenerationEnvironment<…>` (`src/_SampleSystem/_Tests/SampleSystem.CodeGenerate/Configurations/`). В нём:
-   - конфигурации каждого генератора (`BLLCore`, `BLL`, `ServerDTO`, `MainService`, `QueryService`, `IntegrationService`, `AuditService`, `DAL`, `MainProjection`, `LegacyProjection`, `AuditDTO`);
-   - источники проекций (`SampleSystemProjectionSource`);
-   - сборки с доменными объектами (`GetDomainObjectAssemblies`);
-   - иерархические типы (`IsHierarchical`);
-   - типы правил безопасности (`SecurityRuleTypeList`);
-   - расширенные атрибуты, которые добавляются типам без правки самих классов (`GetExtendedAttributeSources`).
-3. **Атрибуты модели.**
+1. **Domain types.** Entities, descendants of `PersistentDomainObjectBase` / `AuditPersistentDomainObjectBase`, with attributes (see below).
+2. **Generation environment.** The class `ServerGenerationEnvironment : CodeGenerationEnvironment<…>` (`src/_SampleSystem/_Tests/SampleSystem.CodeGenerate/Configurations/`). It contains:
+   - configurations of each generator (`BLLCore`, `BLL`, `ServerDTO`, `MainService`, `QueryService`, `IntegrationService`, `AuditService`, `DAL`, `MainProjection`, `LegacyProjection`, `AuditDTO`);
+   - projection sources (`SampleSystemProjectionSource`);
+   - assemblies with domain objects (`GetDomainObjectAssemblies`);
+   - hierarchical types (`IsHierarchical`);
+   - security rule types (`SecurityRuleTypeList`);
+   - extended attributes added to types without editing the classes themselves (`GetExtendedAttributeSources`).
+3. **Model attributes.**
 
-| Атрибут | Эффект |
+| Attribute | Effect |
 |---|---|
-| `[BLLViewRole]`, `[BLLSaveRole]`, `[BLLRemoveRole]` | Какие методы BLL и сервисов генерируются (`Max = MainDTOType.FullDTO`, `SaveType = BLLSaveType.Both`) |
-| `[BLLIntegrationSaveRole]`, `[BLLIntegrationRemoveRole]` | Методы интеграционного API |
-| `[BLLProjectionViewRole]` | Чтение проекций |
-| `[DTOFileType]`, `[CustomSerialization]` | Какие DTO и как сериализуются |
-| `[FetchPath]`, `[ExpandPath]`, `[IgnoreFetch]` | Правила подгрузки и раскрытия связей |
-| `[DependencySecurity]` | Безопасность по зависимому объекту |
-| `[NotPersistentField]`, `[AutoMapping]`, `[MappingPriority]` | Параметры маппинга ORM |
-| `[UniqueGroup]`, `[Required]`, `[MaxLength]` | Ограничения: попадают в схему БД и в валидацию |
+| `[BLLViewRole]`, `[BLLSaveRole]`, `[BLLRemoveRole]` | Which BLL and service methods are generated (`Max = MainDTOType.FullDTO`, `SaveType = BLLSaveType.Both`) |
+| `[BLLIntegrationSaveRole]`, `[BLLIntegrationRemoveRole]` | Integration API methods |
+| `[BLLProjectionViewRole]` | Reading projections |
+| `[DTOFileType]`, `[CustomSerialization]` | Which DTOs exist and how they are serialized |
+| `[FetchPath]`, `[ExpandPath]`, `[IgnoreFetch]` | Rules for loading and expanding relations |
+| `[DependencySecurity]` | Security via a dependent object |
+| `[NotPersistentField]`, `[AutoMapping]`, `[MappingPriority]` | ORM mapping parameters |
+| `[UniqueGroup]`, `[Required]`, `[MaxLength]` | Constraints: go into the DB schema and validation |
 
-## Запуск генерации
+## Running generation
 
-Генераторы реализованы как xUnit-тесты. Тест вызывает `ServerGenerators.GenerateMain()` и записывает файлы относительно корня репозитория (путь определяется по текущему каталогу до сегмента `/src`).
+Generators are implemented as xUnit tests. A test calls `ServerGenerators.GenerateMain()` and writes files relative to the repository root (the path is determined from the current directory up to the `/src` segment).
 
-| Что | Проект |
+| What | Project |
 |---|---|
 | SampleSystem | `src/_SampleSystem/_Tests/SampleSystem.CodeGenerate` |
 | Authorization | `src/_Authorization/Framework.Authorization.TestGenerate` |
 | Configuration | `src/_Configuration/Framework.Configuration.TestGenerate` |
 
-Полная регенерация:
+Full regeneration:
 
 ```bash
 dotnet test --project src/_SampleSystem/_Tests/SampleSystem.CodeGenerate
@@ -61,17 +61,17 @@ dotnet test --project src/_Authorization/Framework.Authorization.TestGenerate
 dotnet test --project src/_Configuration/Framework.Configuration.TestGenerate
 ```
 
-В `ServerGenerators` есть отдельные методы для каждого артефакта (`GenerateBLLTest`, `GenerateServerDTOTest`, `GenerateDALTest`, `GenerateMainWebApiNetCoreTest`, `GenerateMainProjectionsTest` и др.). Чтобы перегенерировать только часть, отфильтруйте тесты по имени метода (в xUnit v3 / Microsoft.Testing.Platform это `--filter-method`):
+`ServerGenerators` has separate methods for each artifact (`GenerateBLLTest`, `GenerateServerDTOTest`, `GenerateDALTest`, `GenerateMainWebApiNetCoreTest`, `GenerateMainProjectionsTest`, etc.). To regenerate only part, filter tests by method name (in xUnit v3 / Microsoft.Testing.Platform this is `--filter-method`):
 
 ```bash
 dotnet test --project src/_SampleSystem/_Tests/SampleSystem.CodeGenerate --filter-method "*GenerateServerDTOTest"
 ```
 
-После запуска посмотрите `git status` и `git diff`: изменения должны соответствовать вашей правке. Закоммитьте их вместе с исходной правкой.
+After the run, look at `git status` and `git diff`: the changes must match your edit. Commit them together with the original edit.
 
-## Проверка актуальности в CI
+## Up-to-date check in CI
 
-Тесты `SampleSystem.CheckGenTests/GenerationTests` повторно запускают все три генератора и падают, если появился хотя бы один новый или изменённый файл:
+The tests `SampleSystem.CheckGenTests/GenerationTests` rerun all three generators and fail if at least one new or modified file appears:
 
 ```
 Repo do not have actual versions of autogenerated source code
@@ -79,35 +79,35 @@ New files are: …
 Modified files are: …
 ```
 
-Если тест упал:
+If the test fails:
 
-1. Запустите генерацию (см. выше).
-2. Закоммитьте изменения в сгенерированных файлах.
-3. Если изменения неожиданны, проверьте, что вы работаете с актуальным `main`, а в доменной модели нет случайных правок.
+1. Run generation (see above).
+2. Commit the changes to the generated files.
+3. If the changes are unexpected, make sure you are working with the latest `main` and that the domain model has no accidental edits.
 
-Там же `CsprojValidationTests` проверяет конвенции проектов: `PackageId` должен быть равен `Luxoft.<ИмяПроекта>` (или не задаваться вовсе).
+`CsprojValidationTests` also checks project conventions there: `PackageId` must equal `Luxoft.<ProjectName>` (or not be set at all).
 
-## Схема БД
+## DB schema
 
-Схему создаёт не кодогенерация, а миграции FluentMigrator.
+The schema is created not by code generation but by FluentMigrator migrations.
 
-| Проект | Назначение |
+| Project | Purpose |
 |---|---|
-| `src/Database/Framework.Database.NHibernate.DBGenerator` | Библиотека генерации схемы по модели NHibernate |
-| `SampleSystem.DbGenerate` | Общие ручные миграции (`AddAncestorChildViews`, `InitNumberInDomainObjectEventMigration`) |
+| `src/Database/Framework.Database.NHibernate.DBGenerator` | Library for generating the schema from the NHibernate model |
+| `SampleSystem.DbGenerate` | Shared manual migrations (`AddAncestorChildViews`, `InitNumberInDomainObjectEventMigration`) |
 | `SampleSystem.DbGenerate.NHibernate` | `DbGeneratorTest`, `SampleSystemDBGenerator`, `UseSchemeUpdateTest` |
-| `SampleSystem.DbGenerate.EntityFramework` | `DbGeneratorTest`; миграция `AddProjectionViews` |
+| `SampleSystem.DbGenerate.EntityFramework` | `DbGeneratorTest`; the `AddProjectionViews` migration |
 
-Тесты этих проектов:
+Tests of these projects:
 
-- `GenerateLocal` создаёт локальную пустую БД (`SampleSystem_ef_empty`) на сервере `.`;
-- `RegenerateEfAndDiffWithNHibernate` пересоздаёт схему для EF и сравнивает её со схемой NHibernate. Тест гарантирует, что оба ORM дают одинаковую структуру;
-- интеграционные тесты вызывают `GenerateAllDb` при подготовке окружения (см. [integrationtests.md](integrationtests.md)).
+- `GenerateLocal` creates a local empty DB (`SampleSystem_ef_empty`) on server `.`;
+- `RegenerateEfAndDiffWithNHibernate` recreates the schema for EF and compares it with the NHibernate schema. The test guarantees that both ORMs produce the same structure;
+- integration tests call `GenerateAllDb` when preparing the environment (see [integrationtests.md](integrationtests.md)).
 
-Для запуска нужен SQL Server (см. тот же документ).
+SQL Server is required to run them (see the same document).
 
-## Как расширять
+## How to extend
 
-- **Новая сущность.** Добавьте класс в `SampleSystem.Domain`, расставьте атрибуты, при необходимости зарегистрируйте проекцию в `SampleSystemProjectionSource`. Запустите генерацию (BLL, DTO, DAL, контроллеры) и миграцию БД.
-- **Новое поведение для всех сущностей.** Поменяйте соответствующий генератор или политику генерации (`*GeneratePolicy`) в `src/CodeGeneration`, затем регенерируйте все три системы: `_Authorization`, `_Configuration`, `_SampleSystem`.
-- **Новая прикладная система на фреймворке.** Скопируйте структуру `_Configuration` или `_SampleSystem`: проект `*.TestGenerate` (или `*.CodeGenerate`) с наследником `CodeGenerationEnvironment`, проекты `*.Domain`, `*.Generated.*`, `*.BLL`, `*.WebApi`.
+- **New entity.** Add a class to `SampleSystem.Domain`, place the attributes, and if necessary register a projection in `SampleSystemProjectionSource`. Run generation (BLL, DTO, DAL, controllers) and the DB migration.
+- **New behavior for all entities.** Change the corresponding generator or generation policy (`*GeneratePolicy`) in `src/CodeGeneration`, then regenerate all three systems: `_Authorization`, `_Configuration`, `_SampleSystem`.
+- **New application system on the framework.** Copy the structure of `_Configuration` or `_SampleSystem`: a `*.TestGenerate` (or `*.CodeGenerate`) project with a `CodeGenerationEnvironment` descendant, plus `*.Domain`, `*.Generated.*`, `*.BLL`, `*.WebApi` projects.

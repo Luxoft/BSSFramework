@@ -1,9 +1,10 @@
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 using Framework.Database.DALExceptions;
 
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Framework.Database.EntityFramework.SqlExceptionProcessors;
 
@@ -60,7 +61,7 @@ internal class UniqueIndexSqlProcessor(IDalValidationIdentitySource dalValidatio
             var uniqueIndex = entityType.GetIndexes()
                                         .FirstOrDefault(index => index.IsUnique && string.Equals(index.GetDatabaseName(), indexNameValue, StringComparison.InvariantCultureIgnoreCase));
 
-            columnNames = uniqueIndex?.Properties.Select(property => property.GetColumnName());
+            columnNames = uniqueIndex?.Properties.OfType<IReadOnlyProperty>().Select(property => property.GetColumnName());
         }
 
         if (columnNames is null)

@@ -2,9 +2,9 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
-    <Anch>3.9.4</Anch>
+    <Anch>4.0.1.2</Anch>
     <BssPlatform>[1.6.2]</BssPlatform>
-    <DotNet>10.0.14</DotNet>
+    <DotNet>11.0.0</DotNet>
   </PropertyGroup>
   <!-- DotNet -->
   <ItemGroup>
@@ -16,7 +16,6 @@
     <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="$(DotNet)" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="$(DotNet)" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(DotNet)" />
-    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="$(DotNet)" />
     <PackageVersion Include="Microsoft.Extensions.Options" Version="$(DotNet)" />
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="$(DotNet)" />
     <PackageVersion Include="System.CodeDom" Version="$(DotNet)" />
@@ -62,7 +61,7 @@
   <ItemGroup>
     <PackageVersion Include="CommandLineParser" Version="2.9.1" />
     <PackageVersion Include="FluentMigrator.Extensions.SqlServer" Version="8.0.1" />
-    <PackageVersion Include="MediatR" Version="14.2.0" />
+    <PackageVersion Include="MediatR" Version="14.3.0" />
     <PackageVersion Include="FluentValidation" Version="12.2.0" />
     <PackageVersion Include="FluentMigrator" Version="8.0.1" />
     <PackageVersion Include="FluentMigrator.Runner" Version="8.0.1" />
@@ -80,8 +79,8 @@
   </ItemGroup>
   <!-- Tests -->
   <ItemGroup>
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.11.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.12.0" />
     <PackageVersion Include="NSubstitute" Version="6.2.0" />
-    <PackageVersion Include="xunit.v3" Version="4.0.2" />
+    <PackageVersion Include="xunit.v3" Version="4.0.3" />
   </ItemGroup>
 </Project>

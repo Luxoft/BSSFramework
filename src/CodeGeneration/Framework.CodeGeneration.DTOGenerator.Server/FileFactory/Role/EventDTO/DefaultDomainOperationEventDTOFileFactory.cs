@@ -57,6 +57,7 @@ public class DefaultDomainOperationEventDTOFileFactory<TConfiguration> : DTOFile
             Type = fieldTypeRef,
             Name = this.DomainType!.Name.ToStartLowerCase(),
             Attributes = MemberAttributes.Private,
+            InitExpression = new CodeSnippetExpression("null!")
         };
 
         var fieldMemberRef = new CodeThisReferenceExpression().ToFieldReference(field);

@@ -14,6 +14,7 @@ using Framework.CodeGeneration.DTOGenerator.PropertyAssigner;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Mapping;
 using Framework.Core;
+using Framework.Core.ReflectionImpl;
 using Framework.Database.Attributes;
 using Framework.FileGeneration.Configuration;
 
@@ -251,12 +252,38 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
 
         var fieldTypeRef = this.CodeTypeReferenceService.GetCodeTypeReference(property, true);
 
+        var isNullable = this.IsNullableAnnotated(property);
+
         return new CodeMemberField
         {
             Name = fieldName,
-            Type = fieldTypeRef,
+            Type = isNullable ? fieldTypeRef.ToNullableAnnotatedReference() : fieldTypeRef,
             InitExpression = this.GetFieldInitExpression(fieldTypeRef, property)
+                             ?? (!isNullable && this.IsNonNullableReferenceField(property) ? new CodeSnippetExpression("null!") : null)
         };
+    }
+
+    /// <summary>
+    /// A reference-type field that is not annotated as nullable (needs a null-forgiving initializer to avoid CS8618, runtime value stays null)
+    /// </summary>
+    protected virtual bool IsNonNullableReferenceField(PropertyInfo property) =>
+        !property.PropertyType.IsValueType
+        && !this.CodeTypeReferenceService.IsOptional(property)
+        && (this.Configuration.IdentityIsReference || this.CodeTypeReferenceService.IsCollection(property) || this.CodeTypeReferenceService.GetFileType(property) != BaseFileType.IdentityDTO);
+
+    /// <summary>
+    /// Reads the compiler-emitted nullable metadata (NullableContext/Nullable attributes) of the domain property
+    /// </summary>
+    protected virtual bool IsNullableAnnotated(PropertyInfo property)
+    {
+        // Maybe<T> already expresses optionality, and the identity DTO is a struct (T? would be Nullable<T>)
+        if (this.CodeTypeReferenceService.IsOptional(property)
+            || (!this.Configuration.IdentityIsReference && !this.CodeTypeReferenceService.IsCollection(property) && this.CodeTypeReferenceService.GetFileType(property) == BaseFileType.IdentityDTO))
+        {
+            return false;
+        }
+
+        return property.IsNullableReference();
     }
 
     protected virtual CodeExpression? GetFieldInitExpression(CodeTypeReference codeTypeReference, PropertyInfo property) => null;

@@ -118,7 +118,8 @@ public class ServerPrimitiveDTOMappingServiceBaseFileFactory<TConfiguration> : F
             new CodeThisReferenceExpression().ToMethodReferenceExpression("GetById", domainObjectGenericParameter.ToTypeReference())
                                              .ToMethodInvokeExpression(
                                                  mappingObjectMethodParameter.ToVariableReferenceExpression().ToPropertyReference(this.Configuration.Environment.IdentityProperty),
-                                                 IdCheckMode.CheckAll.ToPrimitiveExpression()));
+                                                 IdCheckMode.CheckAll.ToPrimitiveExpression())
+                                             .ToNullForgivingExpression());
 
         return new CodeMemberMethod
         {

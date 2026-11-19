@@ -84,6 +84,54 @@ public static class CodeTypeReferenceExtensions
         return new CodeTypeReference(typeof(Nullable<>)) { TypeArguments = { typeArgument } };
     }
 
+    /// <summary>
+    /// Marks a reference type as annotated with nullable (<c>T?</c>); the mark is rendered by <c>CSharpCodeDomRenderer</c>
+    /// </summary>
+    public static CodeTypeReference WithNullableAnnotation(this CodeTypeReference typeReference, bool isNullable = true)
+    {
+        if (typeReference is null) throw new ArgumentNullException(nameof(typeReference));
+
+        typeReference.UserData[ExtendRenderConst.NullableAnnotation] = isNullable;
+
+        return typeReference;
+    }
+
+    /// <summary>
+    /// Creates a copy of the reference marked as nullable-annotated (the source reference stays unchanged, so it can still be used in expressions like <c>new T()</c>)
+    /// </summary>
+    public static CodeTypeReference ToNullableAnnotatedReference(this CodeTypeReference typeReference)
+    {
+        if (typeReference is null) throw new ArgumentNullException(nameof(typeReference));
+
+        var result = new CodeTypeReference
+        {
+            ArrayElementType = typeReference.ArrayElementType,
+            ArrayRank = typeReference.ArrayRank,
+            BaseType = typeReference.BaseType,
+            Options = typeReference.Options
+        };
+
+        result.TypeArguments.AddRange(typeReference.TypeArguments);
+
+        result.UserData.CopyFrom(typeReference.UserData);
+
+        return result.WithNullableAnnotation();
+    }
+
+    public static CodeExpression ToNullForgivingExpression(this CodeExpression expression)
+    {
+        if (expression is null) throw new ArgumentNullException(nameof(expression));
+
+        return new CodeNullForgivingExpression(expression);
+    }
+
+    public static bool HasNullableAnnotation(this CodeTypeReference typeReference)
+    {
+        if (typeReference is null) throw new ArgumentNullException(nameof(typeReference));
+
+        return typeReference.UserData[ExtendRenderConst.NullableAnnotation] is true;
+    }
+
     public static CodeTypeReference ToListReference(this CodeTypeReference typeArgument)
     {
         if (typeArgument is null) throw new ArgumentNullException(nameof(typeArgument));

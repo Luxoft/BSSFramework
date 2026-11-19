@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+#nullable enable
+
 namespace SampleSystem.Domain.Projections
 {
     
@@ -53,11 +55,11 @@ namespace SampleSystem.Domain.Projections
     public partial class BusinessUnitProgramClass : SampleSystem.Domain.Projections.CustomBusinessUnitProgramClassBase
     {
         
-        private SampleSystem.Domain.Projections.BusinessUnitProgramClass_AutoProp_BusinessUnitType businessUnitType_Auto;
+        private SampleSystem.Domain.Projections.BusinessUnitProgramClass_AutoProp_BusinessUnitType? businessUnitType_Auto;
         
         private bool isNewBusiness;
         
-        private string name;
+        private string name = null!;
         
         private System.DateTime? periodEndDate;
         
@@ -69,7 +71,7 @@ namespace SampleSystem.Domain.Projections
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.AutoNode)]
         [Framework.Database.Mapping.MappingAttribute(ColumnName="businessUnitTypeId")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual SampleSystem.Domain.Projections.BusinessUnitProgramClass_AutoProp_BusinessUnitType BusinessUnitType_Auto
+        public virtual SampleSystem.Domain.Projections.BusinessUnitProgramClass_AutoProp_BusinessUnitType? BusinessUnitType_Auto
         {
             get
             {
@@ -144,19 +146,19 @@ namespace SampleSystem.Domain.Projections
     public partial class CustomCompanyLegalEntity : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
-        private string aribaStatusDescription;
+        private string aribaStatusDescription = null!;
         
         private SampleSystem.Domain.Ariba.AribaStatusType? aribaStatusType;
         
-        private SampleSystem.Domain.Projections.CustomTestObjForNested baseObj;
+        private SampleSystem.Domain.Projections.CustomTestObjForNested? baseObj;
         
-        private string code;
+        private string code = null!;
         
-        private SampleSystem.Domain.Projections.CustomTestObjForNested currentObj;
+        private SampleSystem.Domain.Projections.CustomTestObjForNested? currentObj;
         
-        private string name;
+        private string name = null!;
         
-        private string nameEnglish;
+        private string nameEnglish = null!;
         
         protected CustomCompanyLegalEntity()
         {
@@ -187,7 +189,7 @@ namespace SampleSystem.Domain.Projections
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
         [Framework.Database.Mapping.MappingAttribute(ColumnName="baseObjId", ExternalTableName="LegalEntityBase")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual SampleSystem.Domain.Projections.CustomTestObjForNested BaseObj
+        public virtual SampleSystem.Domain.Projections.CustomTestObjForNested? BaseObj
         {
             get
             {
@@ -210,7 +212,7 @@ namespace SampleSystem.Domain.Projections
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
         [Framework.Database.Mapping.MappingAttribute(ColumnName="currentObjId")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual SampleSystem.Domain.Projections.CustomTestObjForNested CurrentObj
+        public virtual SampleSystem.Domain.Projections.CustomTestObjForNested? CurrentObj
         {
             get
             {
@@ -247,7 +249,7 @@ namespace SampleSystem.Domain.Projections
     public partial class CustomTestObjForNested : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
-        private string name;
+        private string name = null!;
         
         private System.DateTime periodStartDateXXX;
         
@@ -284,7 +286,7 @@ namespace SampleSystem.Domain.Projections
     public partial class EmployeeWithBuPeriod : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
-        private SampleSystem.Domain.Projections.EmployeeWithBuPeriod_AutoProp_CoreBusinessUnit coreBusinessUnit_Auto;
+        private SampleSystem.Domain.Projections.EmployeeWithBuPeriod_AutoProp_CoreBusinessUnit? coreBusinessUnit_Auto;
         
         protected EmployeeWithBuPeriod()
         {
@@ -305,7 +307,7 @@ namespace SampleSystem.Domain.Projections
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.AutoNode)]
         [Framework.Database.Mapping.MappingAttribute(ColumnName="coreBusinessUnitId")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual SampleSystem.Domain.Projections.EmployeeWithBuPeriod_AutoProp_CoreBusinessUnit CoreBusinessUnit_Auto
+        public virtual SampleSystem.Domain.Projections.EmployeeWithBuPeriod_AutoProp_CoreBusinessUnit? CoreBusinessUnit_Auto
         {
             get
             {
@@ -345,9 +347,9 @@ namespace SampleSystem.Domain.Projections
     public partial class HerBusinessUnit : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
-        private string name;
+        private string name = null!;
         
-        private SampleSystem.Domain.Projections.HerBusinessUnit parent;
+        private SampleSystem.Domain.Projections.HerBusinessUnit? parent;
         
         protected HerBusinessUnit()
         {
@@ -367,7 +369,7 @@ namespace SampleSystem.Domain.Projections
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
         [Framework.Database.Mapping.MappingAttribute(ColumnName="parentId")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual SampleSystem.Domain.Projections.HerBusinessUnit Parent
+        public virtual SampleSystem.Domain.Projections.HerBusinessUnit? Parent
         {
             get
             {
@@ -382,9 +384,9 @@ namespace SampleSystem.Domain.Projections
     public partial class MiniBusinessUnitEmployeeRole : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
-        private SampleSystem.Domain.Projections.TestBusinessUnit businessUnit;
+        private SampleSystem.Domain.Projections.TestBusinessUnit businessUnit = null!;
         
-        private SampleSystem.Domain.Projections.VisualEmployee employee;
+        private SampleSystem.Domain.Projections.VisualEmployee employee = null!;
         
         protected MiniBusinessUnitEmployeeRole()
         {
@@ -517,13 +519,13 @@ namespace SampleSystem.Domain.Projections
     public partial class TestBusinessUnit : SampleSystem.Domain.Projections.CustomTestBusinessUnitBase
     {
         
-        private System.Collections.Generic.ICollection<SampleSystem.Domain.Projections.MiniBusinessUnitEmployeeRole> businessUnitEmployeeRoles;
+        private System.Collections.Generic.ICollection<SampleSystem.Domain.Projections.MiniBusinessUnitEmployeeRole> businessUnitEmployeeRoles = null!;
         
-        private SampleSystem.Domain.Projections.HerBusinessUnit her;
+        private SampleSystem.Domain.Projections.HerBusinessUnit her = null!;
         
-        private string name;
+        private string name = null!;
         
-        private SampleSystem.Domain.Projections.TestBusinessUnit_AutoProp_Parent parent_Auto;
+        private SampleSystem.Domain.Projections.TestBusinessUnit_AutoProp_Parent? parent_Auto;
         
         private System.DateTime? periodEndDate;
         
@@ -569,7 +571,7 @@ namespace SampleSystem.Domain.Projections
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.AutoNode)]
         [Framework.Database.Mapping.MappingAttribute(ColumnName="parentId")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual SampleSystem.Domain.Projections.TestBusinessUnit_AutoProp_Parent Parent_Auto
+        public virtual SampleSystem.Domain.Projections.TestBusinessUnit_AutoProp_Parent? Parent_Auto
         {
             get
             {
@@ -656,7 +658,7 @@ namespace SampleSystem.Domain.Projections
     public partial class TestBusinessUnitType : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
-        private string name;
+        private string name = null!;
         
         protected TestBusinessUnitType()
         {
@@ -693,7 +695,7 @@ namespace SampleSystem.Domain.Projections
     public partial class TestCustomContextSecurityObjProjection : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
-        private string name;
+        private string name = null!;
         
         protected TestCustomContextSecurityObjProjection()
         {
@@ -718,11 +720,11 @@ namespace SampleSystem.Domain.Projections
     public partial class TestDepartment : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
-        private SampleSystem.Domain.Projections.TestLocation location;
+        private SampleSystem.Domain.Projections.TestLocation location = null!;
         
-        private SampleSystem.Domain.Projections.TestDepartment_AutoProp_Location location_Auto;
+        private SampleSystem.Domain.Projections.TestDepartment_AutoProp_Location location_Auto = null!;
         
-        private string name;
+        private string name = null!;
         
         protected TestDepartment()
         {
@@ -754,7 +756,7 @@ namespace SampleSystem.Domain.Projections
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
         [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("Location_Auto.BinaryData_Last_LocationBinaryData")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual byte[] LocationBinaryData
+        public virtual byte[]? LocationBinaryData
         {
             get
             {
@@ -780,7 +782,7 @@ namespace SampleSystem.Domain.Projections
     public partial class TestDepartment_AutoProp_Location : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
-        private byte[] binaryData_Last_LocationBinaryData;
+        private byte[]? binaryData_Last_LocationBinaryData;
         
         protected TestDepartment_AutoProp_Location()
         {
@@ -790,7 +792,7 @@ namespace SampleSystem.Domain.Projections
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.LastAutoNode)]
         [Framework.Database.Mapping.MappingAttribute(ColumnName="binaryData")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual byte[] BinaryData_Last_LocationBinaryData
+        public virtual byte[]? BinaryData_Last_LocationBinaryData
         {
             get
             {
@@ -825,19 +827,19 @@ namespace SampleSystem.Domain.Projections
     public partial class TestEmployee : SampleSystem.Domain.Projections.CustomTestEmployeeBase
     {
         
-        private SampleSystem.Domain.Projections.BusinessUnitIdentity coreBusinessUnit;
+        private SampleSystem.Domain.Projections.BusinessUnitIdentity? coreBusinessUnit;
         
-        private SampleSystem.Domain.Projections.TestEmployee_AutoProp_CoreBusinessUnit coreBusinessUnit_Auto;
+        private SampleSystem.Domain.Projections.TestEmployee_AutoProp_CoreBusinessUnit? coreBusinessUnit_Auto;
         
-        private string login;
+        private string login = null!;
         
-        private string nameEngFirstName;
+        private string nameEngFirstName = null!;
         
-        private SampleSystem.Domain.Projections.TestEmployee_AutoProp_Position position_Auto;
+        private SampleSystem.Domain.Projections.TestEmployee_AutoProp_Position? position_Auto;
         
-        private SampleSystem.Domain.Projections.TestEmployee_AutoProp_Ppm ppm_Auto;
+        private SampleSystem.Domain.Projections.TestEmployee_AutoProp_Ppm? ppm_Auto;
         
-        private SampleSystem.Domain.Projections.TestEmployee_AutoProp_Role role_Auto;
+        private SampleSystem.Domain.Projections.TestEmployee_AutoProp_Role? role_Auto;
         
         protected TestEmployee()
         {
@@ -857,7 +859,7 @@ namespace SampleSystem.Domain.Projections
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
         [Framework.Database.Mapping.MappingAttribute(ColumnName="coreBusinessUnitId")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual SampleSystem.Domain.Projections.BusinessUnitIdentity CoreBusinessUnit
+        public virtual SampleSystem.Domain.Projections.BusinessUnitIdentity? CoreBusinessUnit
         {
             get
             {
@@ -869,7 +871,7 @@ namespace SampleSystem.Domain.Projections
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.AutoNode)]
         [Framework.Database.Mapping.MappingAttribute(ColumnName="coreBusinessUnitId")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual SampleSystem.Domain.Projections.TestEmployee_AutoProp_CoreBusinessUnit CoreBusinessUnit_Auto
+        public virtual SampleSystem.Domain.Projections.TestEmployee_AutoProp_CoreBusinessUnit? CoreBusinessUnit_Auto
         {
             get
             {
@@ -880,7 +882,7 @@ namespace SampleSystem.Domain.Projections
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
         [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("CoreBusinessUnit_Auto.Name_Last_CoreBusinessUnitName")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual string CoreBusinessUnitName
+        public virtual string? CoreBusinessUnitName
         {
             get
             {
@@ -927,7 +929,7 @@ namespace SampleSystem.Domain.Projections
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.AutoNode)]
         [Framework.Database.Mapping.MappingAttribute(ColumnName="positionId")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual SampleSystem.Domain.Projections.TestEmployee_AutoProp_Position Position_Auto
+        public virtual SampleSystem.Domain.Projections.TestEmployee_AutoProp_Position? Position_Auto
         {
             get
             {
@@ -939,7 +941,7 @@ namespace SampleSystem.Domain.Projections
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
         [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("Position_Auto.Name_Last_PositionName")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual string PositionName
+        public virtual string? PositionName
         {
             get
             {
@@ -951,7 +953,7 @@ namespace SampleSystem.Domain.Projections
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.AutoNode)]
         [Framework.Database.Mapping.MappingAttribute(ColumnName="ppmId")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual SampleSystem.Domain.Projections.TestEmployee_AutoProp_Ppm Ppm_Auto
+        public virtual SampleSystem.Domain.Projections.TestEmployee_AutoProp_Ppm? Ppm_Auto
         {
             get
             {
@@ -962,7 +964,7 @@ namespace SampleSystem.Domain.Projections
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
         [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("Ppm_Auto.NameNativeMiddleName_Last_PpmNameNativeMiddleName")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual string PpmNameNativeMiddleName
+        public virtual string? PpmNameNativeMiddleName
         {
             get
             {
@@ -974,7 +976,7 @@ namespace SampleSystem.Domain.Projections
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.AutoNode)]
         [Framework.Database.Mapping.MappingAttribute(ColumnName="roleId")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual SampleSystem.Domain.Projections.TestEmployee_AutoProp_Role Role_Auto
+        public virtual SampleSystem.Domain.Projections.TestEmployee_AutoProp_Role? Role_Auto
         {
             get
             {
@@ -996,7 +998,7 @@ namespace SampleSystem.Domain.Projections
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
         [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("Role_Auto.Name_Last_RoleName")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual string RoleName
+        public virtual string? RoleName
         {
             get
             {
@@ -1011,11 +1013,11 @@ namespace SampleSystem.Domain.Projections
     public partial class TestEmployee_AutoProp_CoreBusinessUnit : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
-        private string name_Last_CoreBusinessUnitName;
+        private string name_Last_CoreBusinessUnitName = null!;
         
         private System.DateTime? periodEndDate_Last_BuEndDate;
         
-        private System.Collections.Generic.ICollection<SampleSystem.Domain.Projections.VisualProject> projects_Last_CoreBusinessUnitProjects;
+        private System.Collections.Generic.ICollection<SampleSystem.Domain.Projections.VisualProject> projects_Last_CoreBusinessUnitProjects = null!;
         
         protected TestEmployee_AutoProp_CoreBusinessUnit()
         {
@@ -1063,7 +1065,7 @@ namespace SampleSystem.Domain.Projections
     public partial class TestEmployee_AutoProp_Position : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
-        private string name_Last_PositionName;
+        private string name_Last_PositionName = null!;
         
         protected TestEmployee_AutoProp_Position()
         {
@@ -1088,7 +1090,7 @@ namespace SampleSystem.Domain.Projections
     public partial class TestEmployee_AutoProp_Ppm : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
-        private string nameNativeMiddleName_Last_PpmNameNativeMiddleName;
+        private string nameNativeMiddleName_Last_PpmNameNativeMiddleName = null!;
         
         protected TestEmployee_AutoProp_Ppm()
         {
@@ -1113,7 +1115,7 @@ namespace SampleSystem.Domain.Projections
     public partial class TestEmployee_AutoProp_Role : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
-        private string name_Last_RoleName;
+        private string name_Last_RoleName = null!;
         
         protected TestEmployee_AutoProp_Role()
         {
@@ -1139,9 +1141,9 @@ namespace SampleSystem.Domain.Projections
     public partial class TestIMRequest : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
-        private string message;
+        private string message = null!;
         
-        private SampleSystem.Domain.Projections.TestIMRequestDetail oneToOneDetail;
+        private SampleSystem.Domain.Projections.TestIMRequestDetail oneToOneDetail = null!;
         
         protected TestIMRequest()
         {
@@ -1180,7 +1182,7 @@ namespace SampleSystem.Domain.Projections
     public partial class TestIMRequestDetail : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
-        private SampleSystem.Domain.Projections.TestIMRequest request;
+        private SampleSystem.Domain.Projections.TestIMRequest request = null!;
         
         protected TestIMRequestDetail()
         {
@@ -1206,9 +1208,9 @@ namespace SampleSystem.Domain.Projections
     public partial class TestLocation : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
-        private string name;
+        private string name = null!;
         
-        private SampleSystem.Domain.Projections.TestLocationCollectionProperties parent;
+        private SampleSystem.Domain.Projections.TestLocationCollectionProperties? parent;
         
         protected TestLocation()
         {
@@ -1229,7 +1231,7 @@ namespace SampleSystem.Domain.Projections
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.MissedParent)]
         [Framework.Database.Mapping.MappingAttribute(ColumnName="parentId")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual SampleSystem.Domain.Projections.TestLocationCollectionProperties Parent
+        public virtual SampleSystem.Domain.Projections.TestLocationCollectionProperties? Parent
         {
             get
             {
@@ -1282,9 +1284,9 @@ namespace SampleSystem.Domain.Projections
     public partial class TestLocationCollectionProperties : SampleSystem.Domain.Projections.CustomTestLocationCollectionPropertiesBase
     {
         
-        private System.Collections.Generic.ICollection<SampleSystem.Domain.Projections.TestLocation> children;
+        private System.Collections.Generic.ICollection<SampleSystem.Domain.Projections.TestLocation> children = null!;
         
-        private string name;
+        private string name = null!;
         
         protected TestLocationCollectionProperties()
         {
@@ -1319,7 +1321,7 @@ namespace SampleSystem.Domain.Projections
     public partial class TestSecurityObjItemProjection : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
-        private string name;
+        private string name = null!;
         
         protected TestSecurityObjItemProjection()
         {
@@ -1343,9 +1345,9 @@ namespace SampleSystem.Domain.Projections
     public partial class VisualEmployee : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
-        private SampleSystem.Domain.Inline.FioShort nameEng;
+        private SampleSystem.Domain.Inline.FioShort nameEng = null!;
         
-        private string nameEngFirstName;
+        private string nameEngFirstName = null!;
         
         protected VisualEmployee()
         {
@@ -1381,9 +1383,9 @@ namespace SampleSystem.Domain.Projections
     public partial class VisualProject : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
-        private SampleSystem.Domain.Projections.TestEmployee_AutoProp_CoreBusinessUnit businessUnit;
+        private SampleSystem.Domain.Projections.TestEmployee_AutoProp_CoreBusinessUnit businessUnit = null!;
         
-        private string code;
+        private string code = null!;
         
         protected VisualProject()
         {

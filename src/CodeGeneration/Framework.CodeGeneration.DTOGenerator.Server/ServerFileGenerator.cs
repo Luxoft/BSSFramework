@@ -1,4 +1,5 @@
 ﻿using Framework.BLL.Domain.Serialization.Extensions;
+using Framework.CodeDom.Rendering;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory;
@@ -19,6 +20,8 @@ public class ServerFileGenerator(IServerDTOGeneratorConfiguration<IServerDTOGene
 public class ServerFileGenerator<TConfiguration>(TConfiguration configuration) : FileGenerator<TConfiguration>(configuration)
     where TConfiguration : class, IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>
 {
+    public override CodeDomRenderer Renderer { get; } = CodeDomRenderer.CSharp.WithNullableAnnotations(true);
+
     protected override ICodeFileFactory<DTOFileType> GetIdentityDTOFileFactory(Type domainType) => new DefaultServerIdentityDTOFileFactory<TConfiguration>(this.Configuration, domainType);
 
     protected virtual ICodeFileFactory<DTOFileType> GetVisualDTOFileFactory(Type domainType)

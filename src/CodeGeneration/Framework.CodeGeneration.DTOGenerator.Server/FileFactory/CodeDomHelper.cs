@@ -293,6 +293,7 @@ internal static class CodeDomHelper
                                new CodeThisReferenceExpression()
                                        .ToMethodReferenceExpression($"{nameof(IDTOMappingService<object, object>.GetById)}", fileFactory.DomainType!.ToTypeReference())
                                        .ToMethodInvokeExpression(parameterIdExpr)
+                                       .ToNullForgivingExpression()
                                        .ToMethodReturnStatement()
                        },
         };
@@ -318,6 +319,7 @@ internal static class CodeDomHelper
                                new CodeThisReferenceExpression()
                                        .ToMethodReferenceExpression($"{nameof(IDTOMappingService<object, object>.GetById)}", fileFactory.DomainType!.ToTypeReference())
                                        .ToMethodInvokeExpression(parameterIdExpr, IdCheckMode.SkipEmpty.ToPrimitiveExpression(), LockRole.Update.ToPrimitiveExpression())
+                                       .ToNullForgivingExpression()
                                        .ToMethodReturnStatement()
                        },
         };

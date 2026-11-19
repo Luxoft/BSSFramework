@@ -5,6 +5,11 @@ namespace Framework.Core.ReflectionImpl;
 
 public abstract class BasePropertyInfoImpl : PropertyInfo
 {
+    /// <summary>
+    /// The reference-type property is nullable (synthetic properties have no compiler-emitted nullable metadata)
+    /// </summary>
+    public virtual bool IsNullableReferenceType => false;
+
     public override object[] GetCustomAttributes(bool inherit) => throw new NotImplementedException();
 
     public override bool IsDefined(Type attributeType, bool inherit) => throw new NotImplementedException();

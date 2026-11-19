@@ -44,6 +44,8 @@ internal class GeneratedProperty : BasePropertyInfoImpl, IWrappingObject
 
 
 
+    public override bool IsNullableReferenceType => this.projectionProperty.IsNullableReference;
+
     public override Type PropertyType => this.lazyPropertyType.Value;
 
     public override Type ReflectedType { get; }

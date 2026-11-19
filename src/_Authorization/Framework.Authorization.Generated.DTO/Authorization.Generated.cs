@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+#nullable enable
+
 namespace Framework.Authorization.Generated.DTO
 {
     
@@ -245,7 +247,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                target.DelegateFromPermission = default(Framework.Authorization.Generated.DTO.PermissionIdentityDTO);
+                target.DelegateFromPermission = default(Framework.Authorization.Generated.DTO.PermissionIdentityDTO)!;
             }
         }
         
@@ -265,7 +267,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                target.Principal = default(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO);
+                target.Principal = default(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO)!;
             }
         }
         
@@ -285,7 +287,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                target.Role = default(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO);
+                target.Role = default(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO)!;
             }
         }
         
@@ -305,7 +307,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                target.SecurityContextType = default(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO);
+                target.SecurityContextType = default(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO)!;
             }
         }
         
@@ -325,7 +327,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                target.SecurityContextType = default(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO);
+                target.SecurityContextType = default(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO)!;
             }
         }
         
@@ -345,7 +347,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                target.RunAs = default(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO);
+                target.RunAs = default(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO)!;
             }
         }
         
@@ -377,7 +379,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                target.DelegateFromPermission = default(Framework.Authorization.Generated.DTO.PermissionIdentityDTO);
+                target.DelegateFromPermission = default(Framework.Authorization.Generated.DTO.PermissionIdentityDTO)!;
             }
         }
         
@@ -425,7 +427,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                target.Permission = null;
+                target.Permission = null!;
             }
         }
         
@@ -727,12 +729,12 @@ namespace Framework.Authorization.Generated.DTO
             return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO)) && identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO) == other.GetType()) && this.Equals(((Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO)(other)));
         }
         
-        public bool Equals(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO other)
+        public bool Equals(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO? other)
         {
             return !object.ReferenceEquals(other, null) && (this._id == other.Id);
         }
@@ -833,12 +835,12 @@ namespace Framework.Authorization.Generated.DTO
             return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Authorization.Generated.DTO.PermissionIdentityDTO)) && identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(Framework.Authorization.Generated.DTO.PermissionIdentityDTO) == other.GetType()) && this.Equals(((Framework.Authorization.Generated.DTO.PermissionIdentityDTO)(other)));
         }
         
-        public bool Equals(Framework.Authorization.Generated.DTO.PermissionIdentityDTO other)
+        public bool Equals(Framework.Authorization.Generated.DTO.PermissionIdentityDTO? other)
         {
             return !object.ReferenceEquals(other, null) && (this._id == other.Id);
         }
@@ -939,12 +941,12 @@ namespace Framework.Authorization.Generated.DTO
             return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO)) && identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO) == other.GetType()) && this.Equals(((Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO)(other)));
         }
         
-        public bool Equals(Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO other)
+        public bool Equals(Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO? other)
         {
             return !object.ReferenceEquals(other, null) && (this._id == other.Id);
         }
@@ -1045,12 +1047,12 @@ namespace Framework.Authorization.Generated.DTO
             return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO)) && identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO) == other.GetType()) && this.Equals(((Framework.Authorization.Generated.DTO.PrincipalIdentityDTO)(other)));
         }
         
-        public bool Equals(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO other)
+        public bool Equals(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO? other)
         {
             return !object.ReferenceEquals(other, null) && (this._id == other.Id);
         }
@@ -1151,12 +1153,12 @@ namespace Framework.Authorization.Generated.DTO
             return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO)) && identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO) == other.GetType()) && this.Equals(((Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO)(other)));
         }
         
-        public bool Equals(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO other)
+        public bool Equals(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO? other)
         {
             return !object.ReferenceEquals(other, null) && (this._id == other.Id);
         }
@@ -1247,9 +1249,9 @@ namespace Framework.Authorization.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -1277,7 +1279,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -1290,7 +1292,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -1345,7 +1347,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class BusinessRoleVisualDTO : Framework.Authorization.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public BusinessRoleVisualDTO()
         {
@@ -1387,9 +1389,9 @@ namespace Framework.Authorization.Generated.DTO
     public partial class BusinessRoleSimpleDTO : Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO>
     {
         
-        private string _description;
+        private string _description = null!;
         
-        private string _name;
+        private string _name = null!;
         
         public BusinessRoleSimpleDTO()
         {
@@ -1641,7 +1643,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class BusinessRoleSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        private Framework.Authorization.Generated.DTO.BusinessRoleEventRichDTO businessRole;
+        private Framework.Authorization.Generated.DTO.BusinessRoleEventRichDTO businessRole = null!;
         
         public BusinessRoleSaveEventDTO()
         {
@@ -1671,7 +1673,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class BusinessRoleRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        private Framework.Authorization.Generated.DTO.BusinessRoleEventRichDTO businessRole;
+        private Framework.Authorization.Generated.DTO.BusinessRoleEventRichDTO businessRole = null!;
         
         public BusinessRoleRemoveEventDTO()
         {
@@ -1703,17 +1705,17 @@ namespace Framework.Authorization.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private string _description;
+        private string _description = null!;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         public BusinessRoleEventRichDTO()
         {
@@ -1738,7 +1740,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -1777,7 +1779,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -1823,17 +1825,17 @@ namespace Framework.Authorization.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private string _description;
+        private string _description = null!;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         public BusinessRoleEventSimpleDTO()
         {
@@ -1858,7 +1860,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -1897,7 +1899,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -1965,7 +1967,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class ChangePermissionDelegatesModelFullDTO : Framework.Authorization.Generated.DTO.ChangePermissionDelegatesModelSimpleDTO
     {
         
-        private Framework.Authorization.Generated.DTO.PermissionSimpleDTO _delegateFromPermission;
+        private Framework.Authorization.Generated.DTO.PermissionSimpleDTO _delegateFromPermission = null!;
         
         public ChangePermissionDelegatesModelFullDTO()
         {
@@ -2037,7 +2039,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class ChangePermissionDelegatesModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.ChangePermissionDelegatesModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.ChangePermissionDelegatesModel>
     {
         
-        private Framework.Authorization.Generated.DTO.PermissionIdentityDTO _delegateFromPermission;
+        private Framework.Authorization.Generated.DTO.PermissionIdentityDTO _delegateFromPermission = null!;
         
         private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.DelegateToItemModelStrictDTO> _items = new System.Collections.Generic.List<Framework.Authorization.Generated.DTO.DelegateToItemModelStrictDTO>();
         
@@ -2131,7 +2133,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class ChangePermissionDelegatesModelSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        private Framework.Authorization.Generated.DTO.ChangePermissionDelegatesModelEventRichDTO changePermissionDelegatesModel;
+        private Framework.Authorization.Generated.DTO.ChangePermissionDelegatesModelEventRichDTO changePermissionDelegatesModel = null!;
         
         public ChangePermissionDelegatesModelSaveEventDTO()
         {
@@ -2161,7 +2163,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class ChangePermissionDelegatesModelRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        private Framework.Authorization.Generated.DTO.ChangePermissionDelegatesModelEventRichDTO changePermissionDelegatesModel;
+        private Framework.Authorization.Generated.DTO.ChangePermissionDelegatesModelEventRichDTO changePermissionDelegatesModel = null!;
         
         public ChangePermissionDelegatesModelRemoveEventDTO()
         {
@@ -2191,9 +2193,9 @@ namespace Framework.Authorization.Generated.DTO
     public partial class ChangePermissionDelegatesModelEventRichDTO
     {
         
-        private Framework.Authorization.Generated.DTO.PermissionEventSimpleDTO _delegateFromPermission;
+        private Framework.Authorization.Generated.DTO.PermissionEventSimpleDTO _delegateFromPermission = null!;
         
-        private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.DelegateToItemModelEventRichDTO> _items;
+        private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.DelegateToItemModelEventRichDTO> _items = null!;
         
         public ChangePermissionDelegatesModelEventRichDTO()
         {
@@ -2275,7 +2277,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class DelegateToItemModelFullDTO : Framework.Authorization.Generated.DTO.DelegateToItemModelSimpleDTO
     {
         
-        private Framework.Authorization.Generated.DTO.PrincipalSimpleDTO _principal;
+        private Framework.Authorization.Generated.DTO.PrincipalSimpleDTO _principal = null!;
         
         public DelegateToItemModelFullDTO()
         {
@@ -2311,7 +2313,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class DelegateToItemModelRichDTO : Framework.Authorization.Generated.DTO.DelegateToItemModelFullDTO
     {
         
-        private Framework.Authorization.Generated.DTO.PermissionRichDTO _permission;
+        private Framework.Authorization.Generated.DTO.PermissionRichDTO _permission = null!;
         
         public DelegateToItemModelRichDTO()
         {
@@ -2347,9 +2349,9 @@ namespace Framework.Authorization.Generated.DTO
     public partial class DelegateToItemModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.DelegateToItemModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, Framework.Authorization.Domain.DelegateToItemModel>
     {
         
-        private Framework.Authorization.Generated.DTO.PermissionStrictDTO _permission;
+        private Framework.Authorization.Generated.DTO.PermissionStrictDTO _permission = null!;
         
-        private Framework.Authorization.Generated.DTO.PrincipalIdentityDTO _principal;
+        private Framework.Authorization.Generated.DTO.PrincipalIdentityDTO _principal = null!;
         
         public DelegateToItemModelStrictDTO()
         {
@@ -2441,7 +2443,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class DelegateToItemModelSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        private Framework.Authorization.Generated.DTO.DelegateToItemModelEventRichDTO delegateToItemModel;
+        private Framework.Authorization.Generated.DTO.DelegateToItemModelEventRichDTO delegateToItemModel = null!;
         
         public DelegateToItemModelSaveEventDTO()
         {
@@ -2471,7 +2473,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class DelegateToItemModelRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        private Framework.Authorization.Generated.DTO.DelegateToItemModelEventRichDTO delegateToItemModel;
+        private Framework.Authorization.Generated.DTO.DelegateToItemModelEventRichDTO delegateToItemModel = null!;
         
         public DelegateToItemModelRemoveEventDTO()
         {
@@ -2501,9 +2503,9 @@ namespace Framework.Authorization.Generated.DTO
     public partial class DelegateToItemModelEventRichDTO
     {
         
-        private Framework.Authorization.Generated.DTO.PermissionEventRichDTO _permission;
+        private Framework.Authorization.Generated.DTO.PermissionEventRichDTO _permission = null!;
         
-        private Framework.Authorization.Generated.DTO.PrincipalEventSimpleDTO _principal;
+        private Framework.Authorization.Generated.DTO.PrincipalEventSimpleDTO _principal = null!;
         
         public DelegateToItemModelEventRichDTO()
         {
@@ -2563,7 +2565,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionSimpleDTO : Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PermissionIdentityDTO>
     {
         
-        private string _comment;
+        private string _comment = null!;
         
         private Framework.Core.Period _period = Framework.Core.Period.Eternity;
         
@@ -2629,9 +2631,9 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionFullDTO : Framework.Authorization.Generated.DTO.PermissionSimpleDTO
     {
         
-        private Framework.Authorization.Generated.DTO.PrincipalSimpleDTO _principal;
+        private Framework.Authorization.Generated.DTO.PrincipalSimpleDTO _principal = null!;
         
-        private Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO _role;
+        private Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO _role = null!;
         
         public PermissionFullDTO()
         {
@@ -2739,7 +2741,7 @@ namespace Framework.Authorization.Generated.DTO
         
         private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO> _restrictions = new System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO>();
         
-        private Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO _role;
+        private Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO _role = null!;
         
         public PermissionStrictDTO()
         {
@@ -2922,7 +2924,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        private Framework.Authorization.Generated.DTO.PermissionEventRichDTO permission;
+        private Framework.Authorization.Generated.DTO.PermissionEventRichDTO permission = null!;
         
         public PermissionSaveEventDTO()
         {
@@ -2952,7 +2954,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        private Framework.Authorization.Generated.DTO.PermissionEventRichDTO permission;
+        private Framework.Authorization.Generated.DTO.PermissionEventRichDTO permission = null!;
         
         public PermissionRemoveEventDTO()
         {
@@ -2982,25 +2984,25 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionEventRichDTO
     {
         
-        private string _comment;
+        private string _comment = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
         private Framework.Core.Period _period;
         
-        private Framework.Authorization.Generated.DTO.PrincipalEventSimpleDTO _principal;
+        private Framework.Authorization.Generated.DTO.PrincipalEventSimpleDTO _principal = null!;
         
-        private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionRestrictionEventRichDTO> _restrictions;
+        private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionRestrictionEventRichDTO> _restrictions = null!;
         
-        private Framework.Authorization.Generated.DTO.BusinessRoleEventSimpleDTO _role;
+        private Framework.Authorization.Generated.DTO.BusinessRoleEventSimpleDTO _role = null!;
         
         public PermissionEventRichDTO()
         {
@@ -3038,7 +3040,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -3064,7 +3066,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -3147,15 +3149,15 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionEventSimpleDTO
     {
         
-        private string _comment;
+        private string _comment = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -3197,7 +3199,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -3223,7 +3225,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -3321,7 +3323,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionDirectFilterModelFullDTO : Framework.Authorization.Generated.DTO.PermissionDirectFilterModelSimpleDTO
     {
         
-        private Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO _securityContextType;
+        private Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO _securityContextType = null!;
         
         public PermissionDirectFilterModelFullDTO()
         {
@@ -3380,7 +3382,7 @@ namespace Framework.Authorization.Generated.DTO
         
         private System.Guid _securityContextId;
         
-        private Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO _securityContextType;
+        private Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO _securityContextType = null!;
         
         private bool _strongDirect;
         
@@ -3487,7 +3489,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionDirectFilterModelSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        private Framework.Authorization.Generated.DTO.PermissionDirectFilterModelEventRichDTO permissionDirectFilterModel;
+        private Framework.Authorization.Generated.DTO.PermissionDirectFilterModelEventRichDTO permissionDirectFilterModel = null!;
         
         public PermissionDirectFilterModelSaveEventDTO()
         {
@@ -3517,7 +3519,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionDirectFilterModelRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        private Framework.Authorization.Generated.DTO.PermissionDirectFilterModelEventRichDTO permissionDirectFilterModel;
+        private Framework.Authorization.Generated.DTO.PermissionDirectFilterModelEventRichDTO permissionDirectFilterModel = null!;
         
         public PermissionDirectFilterModelRemoveEventDTO()
         {
@@ -3549,7 +3551,7 @@ namespace Framework.Authorization.Generated.DTO
         
         private System.Guid _securityContextId;
         
-        private Framework.Authorization.Generated.DTO.SecurityContextTypeEventSimpleDTO _securityContextType;
+        private Framework.Authorization.Generated.DTO.SecurityContextTypeEventSimpleDTO _securityContextType = null!;
         
         private bool _strongDirect;
         
@@ -3705,9 +3707,9 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionRestrictionFullDTO : Framework.Authorization.Generated.DTO.PermissionRestrictionSimpleDTO
     {
         
-        private Framework.Authorization.Generated.DTO.PermissionSimpleDTO _permission;
+        private Framework.Authorization.Generated.DTO.PermissionSimpleDTO _permission = null!;
         
-        private Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO _securityContextType;
+        private Framework.Authorization.Generated.DTO.SecurityContextTypeSimpleDTO _securityContextType = null!;
         
         public PermissionRestrictionFullDTO()
         {
@@ -3781,7 +3783,7 @@ namespace Framework.Authorization.Generated.DTO
         
         private System.Guid _securityContextId;
         
-        private Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO _securityContextType;
+        private Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO _securityContextType = null!;
         
         public PermissionRestrictionStrictDTO()
         {
@@ -3938,7 +3940,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionRestrictionSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        private Framework.Authorization.Generated.DTO.PermissionRestrictionEventRichDTO permissionRestriction;
+        private Framework.Authorization.Generated.DTO.PermissionRestrictionEventRichDTO permissionRestriction = null!;
         
         public PermissionRestrictionSaveEventDTO()
         {
@@ -3968,7 +3970,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionRestrictionRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        private Framework.Authorization.Generated.DTO.PermissionRestrictionEventRichDTO permissionRestriction;
+        private Framework.Authorization.Generated.DTO.PermissionRestrictionEventRichDTO permissionRestriction = null!;
         
         public PermissionRestrictionRemoveEventDTO()
         {
@@ -4000,19 +4002,19 @@ namespace Framework.Authorization.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private Framework.Authorization.Generated.DTO.PermissionEventSimpleDTO _permission;
+        private Framework.Authorization.Generated.DTO.PermissionEventSimpleDTO _permission = null!;
         
         private System.Guid _securityContextId;
         
-        private Framework.Authorization.Generated.DTO.SecurityContextTypeEventSimpleDTO _securityContextType;
+        private Framework.Authorization.Generated.DTO.SecurityContextTypeEventSimpleDTO _securityContextType = null!;
         
         public PermissionRestrictionEventRichDTO()
         {
@@ -4037,7 +4039,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -4063,7 +4065,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -4135,11 +4137,11 @@ namespace Framework.Authorization.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -4168,7 +4170,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -4194,7 +4196,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -4238,7 +4240,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PrincipalVisualDTO : Framework.Authorization.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PrincipalIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public PrincipalVisualDTO()
         {
@@ -4280,7 +4282,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PrincipalSimpleDTO : Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PrincipalIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public PrincipalSimpleDTO()
         {
@@ -4331,7 +4333,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PrincipalFullDTO : Framework.Authorization.Generated.DTO.PrincipalSimpleDTO
     {
         
-        private Framework.Authorization.Generated.DTO.PrincipalSimpleDTO _runAs;
+        private Framework.Authorization.Generated.DTO.PrincipalSimpleDTO? _runAs;
         
         public PrincipalFullDTO()
         {
@@ -4344,7 +4346,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.PrincipalSimpleDTO RunAs
+        public Framework.Authorization.Generated.DTO.PrincipalSimpleDTO? RunAs
         {
             get
             {
@@ -4409,7 +4411,7 @@ namespace Framework.Authorization.Generated.DTO
         
         private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionStrictDTO> _permissions = new System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionStrictDTO>();
         
-        private Framework.Authorization.Generated.DTO.PrincipalIdentityDTO _runAs;
+        private Framework.Authorization.Generated.DTO.PrincipalIdentityDTO? _runAs;
         
         public PrincipalStrictDTO()
         {
@@ -4546,7 +4548,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.PrincipalIdentityDTO RunAs
+        public Framework.Authorization.Generated.DTO.PrincipalIdentityDTO? RunAs
         {
             get
             {
@@ -4579,7 +4581,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PrincipalSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        private Framework.Authorization.Generated.DTO.PrincipalEventRichDTO principal;
+        private Framework.Authorization.Generated.DTO.PrincipalEventRichDTO principal = null!;
         
         public PrincipalSaveEventDTO()
         {
@@ -4609,7 +4611,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PrincipalRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        private Framework.Authorization.Generated.DTO.PrincipalEventRichDTO principal;
+        private Framework.Authorization.Generated.DTO.PrincipalEventRichDTO principal = null!;
         
         public PrincipalRemoveEventDTO()
         {
@@ -4641,19 +4643,19 @@ namespace Framework.Authorization.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
-        private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionEventRichDTO> _permissions;
+        private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionEventRichDTO> _permissions = null!;
         
-        private Framework.Authorization.Generated.DTO.PrincipalEventSimpleDTO _runAs;
+        private Framework.Authorization.Generated.DTO.PrincipalEventSimpleDTO? _runAs;
         
         public PrincipalEventRichDTO()
         {
@@ -4678,7 +4680,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -4704,7 +4706,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -4756,7 +4758,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Authorization.Generated.DTO.PrincipalEventSimpleDTO RunAs
+        public Framework.Authorization.Generated.DTO.PrincipalEventSimpleDTO? RunAs
         {
             get
             {
@@ -4776,15 +4778,15 @@ namespace Framework.Authorization.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         public PrincipalEventSimpleDTO()
         {
@@ -4809,7 +4811,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -4835,7 +4837,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -4879,7 +4881,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class SecurityContextTypeVisualDTO : Framework.Authorization.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public SecurityContextTypeVisualDTO()
         {
@@ -4921,7 +4923,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class SecurityContextTypeSimpleDTO : Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public SecurityContextTypeSimpleDTO()
         {
@@ -5145,7 +5147,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class SecurityContextTypeSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        private Framework.Authorization.Generated.DTO.SecurityContextTypeEventRichDTO securityContextType;
+        private Framework.Authorization.Generated.DTO.SecurityContextTypeEventRichDTO securityContextType = null!;
         
         public SecurityContextTypeSaveEventDTO()
         {
@@ -5175,7 +5177,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class SecurityContextTypeRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        private Framework.Authorization.Generated.DTO.SecurityContextTypeEventRichDTO securityContextType;
+        private Framework.Authorization.Generated.DTO.SecurityContextTypeEventRichDTO securityContextType = null!;
         
         public SecurityContextTypeRemoveEventDTO()
         {
@@ -5207,15 +5209,15 @@ namespace Framework.Authorization.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         public SecurityContextTypeEventRichDTO()
         {
@@ -5240,7 +5242,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -5266,7 +5268,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -5312,15 +5314,15 @@ namespace Framework.Authorization.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         public SecurityContextTypeEventSimpleDTO()
         {
@@ -5345,7 +5347,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -5371,7 +5373,7 @@ namespace Framework.Authorization.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -5439,7 +5441,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class UpdatePermissionDelegatesModelFullDTO : Framework.Authorization.Generated.DTO.UpdatePermissionDelegatesModelSimpleDTO
     {
         
-        private Framework.Authorization.Generated.DTO.PermissionSimpleDTO _delegateFromPermission;
+        private Framework.Authorization.Generated.DTO.PermissionSimpleDTO _delegateFromPermission = null!;
         
         public UpdatePermissionDelegatesModelFullDTO()
         {
@@ -5528,7 +5530,7 @@ namespace Framework.Authorization.Generated.DTO
         
         private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.DelegateToItemModelStrictDTO> _addItems = new System.Collections.Generic.List<Framework.Authorization.Generated.DTO.DelegateToItemModelStrictDTO>();
         
-        private Framework.Authorization.Generated.DTO.PermissionIdentityDTO _delegateFromPermission;
+        private Framework.Authorization.Generated.DTO.PermissionIdentityDTO _delegateFromPermission = null!;
         
         private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionIdentityDTO> _removeItems = new System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionIdentityDTO>();
         
@@ -5635,7 +5637,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class UpdatePermissionDelegatesModelSaveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        private Framework.Authorization.Generated.DTO.UpdatePermissionDelegatesModelEventRichDTO updatePermissionDelegatesModel;
+        private Framework.Authorization.Generated.DTO.UpdatePermissionDelegatesModelEventRichDTO updatePermissionDelegatesModel = null!;
         
         public UpdatePermissionDelegatesModelSaveEventDTO()
         {
@@ -5665,7 +5667,7 @@ namespace Framework.Authorization.Generated.DTO
     public partial class UpdatePermissionDelegatesModelRemoveEventDTO : Framework.Authorization.Generated.DTO.EventDTOBase
     {
         
-        private Framework.Authorization.Generated.DTO.UpdatePermissionDelegatesModelEventRichDTO updatePermissionDelegatesModel;
+        private Framework.Authorization.Generated.DTO.UpdatePermissionDelegatesModelEventRichDTO updatePermissionDelegatesModel = null!;
         
         public UpdatePermissionDelegatesModelRemoveEventDTO()
         {
@@ -5695,11 +5697,11 @@ namespace Framework.Authorization.Generated.DTO
     public partial class UpdatePermissionDelegatesModelEventRichDTO
     {
         
-        private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.DelegateToItemModelEventRichDTO> _addItems;
+        private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.DelegateToItemModelEventRichDTO> _addItems = null!;
         
-        private Framework.Authorization.Generated.DTO.PermissionEventSimpleDTO _delegateFromPermission;
+        private Framework.Authorization.Generated.DTO.PermissionEventSimpleDTO _delegateFromPermission = null!;
         
-        private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionEventSimpleDTO> _removeItems;
+        private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionEventSimpleDTO> _removeItems = null!;
         
         public UpdatePermissionDelegatesModelEventRichDTO()
         {
@@ -6542,7 +6544,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                mappingObject.DelegateFromPermission = null;
+                mappingObject.DelegateFromPermission = null!;
             }
         }
         
@@ -6559,7 +6561,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                domainObject.DelegateFromPermission = null;
+                domainObject.DelegateFromPermission = null!;
             }
             if (!object.ReferenceEquals(mappingObject.Items, null))
             {
@@ -6575,7 +6577,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                mappingObject.DelegateFromPermission = null;
+                mappingObject.DelegateFromPermission = null!;
             }
             mappingObject.Items = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTOList(domainObject.Items, this);
         }
@@ -6596,7 +6598,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                mappingObject.Principal = null;
+                mappingObject.Principal = null!;
             }
         }
         
@@ -6608,7 +6610,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                mappingObject.Permission = null;
+                mappingObject.Permission = null!;
             }
         }
         
@@ -6620,7 +6622,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                domainObject.Permission = null;
+                domainObject.Permission = null!;
             }
             if (!object.Equals(mappingObject.Principal, default(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO)))
             {
@@ -6628,7 +6630,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                domainObject.Principal = null;
+                domainObject.Principal = null!;
             }
         }
         
@@ -6640,7 +6642,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                mappingObject.Permission = null;
+                mappingObject.Permission = null!;
             }
             if (!object.ReferenceEquals(domainObject.Principal, null))
             {
@@ -6648,7 +6650,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                mappingObject.Principal = null;
+                mappingObject.Principal = null!;
             }
         }
         
@@ -6674,7 +6676,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                mappingObject.Principal = null;
+                mappingObject.Principal = null!;
             }
             if (!object.ReferenceEquals(domainObject.Role, null))
             {
@@ -6682,7 +6684,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                mappingObject.Role = null;
+                mappingObject.Role = null!;
             }
         }
         
@@ -6706,7 +6708,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                domainObject.Role = null;
+                domainObject.Role = null!;
             }
         }
         
@@ -6725,7 +6727,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                mappingObject.Principal = null;
+                mappingObject.Principal = null!;
             }
             mappingObject.Restrictions = Framework.Authorization.Generated.DTO.LambdaHelper.ToRichEventDTOList(domainObject.Restrictions, this);
             if (!object.ReferenceEquals(domainObject.Role, null))
@@ -6734,7 +6736,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                mappingObject.Role = null;
+                mappingObject.Role = null!;
             }
         }
         
@@ -6763,7 +6765,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                mappingObject.SecurityContextType = null;
+                mappingObject.SecurityContextType = null!;
             }
         }
         
@@ -6780,7 +6782,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                domainObject.SecurityContextType = null;
+                domainObject.SecurityContextType = null!;
             }
             domainObject.StrongDirect = mappingObject.StrongDirect;
         }
@@ -6794,7 +6796,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                mappingObject.SecurityContextType = null;
+                mappingObject.SecurityContextType = null!;
             }
             mappingObject.StrongDirect = domainObject.StrongDirect;
         }
@@ -6818,7 +6820,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                mappingObject.Permission = null;
+                mappingObject.Permission = null!;
             }
             if (!object.ReferenceEquals(domainObject.SecurityContextType, null))
             {
@@ -6826,7 +6828,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                mappingObject.SecurityContextType = null;
+                mappingObject.SecurityContextType = null!;
             }
         }
         
@@ -6843,7 +6845,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                domainObject.SecurityContextType = null;
+                domainObject.SecurityContextType = null!;
             }
         }
         
@@ -6860,7 +6862,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                mappingObject.Permission = null;
+                mappingObject.Permission = null!;
             }
             mappingObject.SecurityContextId = domainObject.SecurityContextId;
             if (!object.ReferenceEquals(domainObject.SecurityContextType, null))
@@ -6869,7 +6871,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                mappingObject.SecurityContextType = null;
+                mappingObject.SecurityContextType = null!;
             }
         }
         
@@ -7022,7 +7024,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                mappingObject.DelegateFromPermission = null;
+                mappingObject.DelegateFromPermission = null!;
             }
         }
         
@@ -7044,7 +7046,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                domainObject.DelegateFromPermission = null;
+                domainObject.DelegateFromPermission = null!;
             }
             if (!object.ReferenceEquals(mappingObject.RemoveItems, null))
             {
@@ -7061,7 +7063,7 @@ namespace Framework.Authorization.Generated.DTO
             }
             else
             {
-                mappingObject.DelegateFromPermission = null;
+                mappingObject.DelegateFromPermission = null!;
             }
             mappingObject.RemoveItems = Framework.Authorization.Generated.DTO.LambdaHelper.ToSimpleEventDTOList(domainObject.RemoveItems, this);
         }
@@ -7072,7 +7074,7 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual Framework.Authorization.Domain.BusinessRole ToBusinessRole(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdentityDTO)
         {
-            return this.GetById<Framework.Authorization.Domain.BusinessRole>(businessRoleIdentityDTO.Id);
+            return this.GetById<Framework.Authorization.Domain.BusinessRole>(businessRoleIdentityDTO.Id)!;
         }
         
         public virtual Framework.Authorization.Domain.BusinessRole ToBusinessRole(Framework.Authorization.Generated.DTO.BusinessRoleStrictDTO businessRoleStrictDTO)
@@ -7106,7 +7108,7 @@ namespace Framework.Authorization.Generated.DTO
             where TMappingObject : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, TDomainObject, System.Guid>
             where TDomainObject : Framework.Authorization.Domain.PersistentDomainObjectBase
         {
-            TDomainObject domainObject = this.GetById<TDomainObject>(mappingObject.Id, Framework.BLL.IdCheckMode.CheckAll);
+            TDomainObject domainObject = this.GetById<TDomainObject>(mappingObject.Id, Framework.BLL.IdCheckMode.CheckAll)!;
             this.MapToDomainObject(mappingObject, domainObject);
             return domainObject;
         }
@@ -7131,7 +7133,7 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual Framework.Authorization.Domain.Permission ToPermission(Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdentityDTO)
         {
-            return this.GetById<Framework.Authorization.Domain.Permission>(permissionIdentityDTO.Id);
+            return this.GetById<Framework.Authorization.Domain.Permission>(permissionIdentityDTO.Id)!;
         }
         
         public virtual Framework.Authorization.Domain.Permission ToPermission(Framework.Authorization.Generated.DTO.PermissionStrictDTO permissionStrictDTO)
@@ -7163,7 +7165,7 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual Framework.Authorization.Domain.PermissionRestriction ToPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionIdentityDTO permissionRestrictionIdentityDTO)
         {
-            return this.GetById<Framework.Authorization.Domain.PermissionRestriction>(permissionRestrictionIdentityDTO.Id);
+            return this.GetById<Framework.Authorization.Domain.PermissionRestriction>(permissionRestrictionIdentityDTO.Id)!;
         }
         
         public virtual Framework.Authorization.Domain.PermissionRestriction ToPermissionRestriction(Framework.Authorization.Generated.DTO.PermissionRestrictionStrictDTO permissionRestrictionStrictDTO)
@@ -7190,7 +7192,7 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual Framework.Authorization.Domain.Principal ToPrincipal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdentityDTO)
         {
-            return this.GetById<Framework.Authorization.Domain.Principal>(principalIdentityDTO.Id);
+            return this.GetById<Framework.Authorization.Domain.Principal>(principalIdentityDTO.Id)!;
         }
         
         public virtual Framework.Authorization.Domain.Principal ToPrincipal(Framework.Authorization.Generated.DTO.PrincipalStrictDTO principalStrictDTO)
@@ -7212,7 +7214,7 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual Framework.Authorization.Domain.SecurityContextType ToSecurityContextType(Framework.Authorization.Generated.DTO.SecurityContextTypeIdentityDTO securityContextTypeIdentityDTO)
         {
-            return this.GetById<Framework.Authorization.Domain.SecurityContextType>(securityContextTypeIdentityDTO.Id);
+            return this.GetById<Framework.Authorization.Domain.SecurityContextType>(securityContextTypeIdentityDTO.Id)!;
         }
         
         public virtual Framework.Authorization.Domain.SecurityContextType ToSecurityContextType(Framework.Authorization.Generated.DTO.SecurityContextTypeStrictDTO securityContextTypeStrictDTO)

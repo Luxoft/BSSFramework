@@ -4,8 +4,11 @@ using System.Reflection;
 using Anch.Core;
 
 using Framework.CodeDom.Extensions;
+using Framework.CodeGeneration.DTOGenerator.Extensions;
+using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.PropertyAssigner;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
+using Framework.Core.ReflectionImpl;
 
 namespace Framework.CodeGeneration.DTOGenerator.Server.PropertyAssigner.Security.DomainObjectToSecurity;
 
@@ -16,6 +19,12 @@ public abstract class DomainObjectToSecurityPropertyAssignerBase<TConfiguration>
     protected abstract CodeExpression GetCondition(PropertyInfo property, bool isEdit);
 
 
+    private bool IsNullableResult(PropertyInfo property) =>
+        property.IsNullableReference()
+        && (this.Configuration.IdentityIsReference
+            || this.CodeTypeReferenceService!.IsCollection(property)
+            || this.CodeTypeReferenceService.GetFileType(property) != BaseFileType.IdentityDTO);
+
     private CodeExpression GetCreateSecurityValueExpression(PropertyInfo property, CodeExpression resultVarDeclRef)
     {
         if (property is null) throw new ArgumentNullException(nameof(property));
@@ -23,7 +32,7 @@ public abstract class DomainObjectToSecurityPropertyAssignerBase<TConfiguration>
 
         return typeof(Maybe).ToTypeReferenceExpression()
                             .ToMethodReferenceExpression(nameof(Maybe.Return))
-                            .ToMethodInvokeExpression(resultVarDeclRef);
+                            .ToMethodInvokeExpression(this.IsNullableResult(property) ? resultVarDeclRef.ToNullForgivingExpression() : resultVarDeclRef);
     }
 
     protected sealed override CodeStatement GetSecurityAssignStatement(PropertyInfo property, CodeExpression sourcePropertyRef, CodeExpression targetPropertyRef)
@@ -34,7 +43,7 @@ public abstract class DomainObjectToSecurityPropertyAssignerBase<TConfiguration>
 
         var targetPropertyTypeRef = this.CodeTypeReferenceService!.GetCodeTypeReference(property);
 
-        var resultVarDecl = targetPropertyTypeRef.ToVariableDeclarationStatement("result" + property.Name);
+        var resultVarDecl = (this.IsNullableResult(property) ? targetPropertyTypeRef.ToNullableAnnotatedReference() : targetPropertyTypeRef).ToVariableDeclarationStatement("result" + property.Name);
         var resultVarDeclRef = resultVarDecl.ToVariableReferenceExpression();
 
 

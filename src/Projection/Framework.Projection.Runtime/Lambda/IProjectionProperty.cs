@@ -41,6 +41,11 @@ public interface IProjectionProperty : IProjectionAttributeProvider
     TypeReferenceBase.BuildTypeReference Type { get; }
 
     /// <summary>
+    /// Projection property is a nullable reference (by the nullable metadata of the source path)
+    /// </summary>
+    bool IsNullableReference { get; }
+
+    /// <summary>
     /// Disable serialization of the property in DTO
     /// </summary>
     bool IgnoreSerialization { get; }

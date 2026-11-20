@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+#nullable enable
+
 namespace SampleSystem.Domain.Projections
 {
     
@@ -35,11 +37,11 @@ namespace SampleSystem.Domain.Projections
     public partial class SecurityEmployee : SampleSystem.Domain.PersistentDomainObjectBase, Anch.SecuritySystem.ISecurityContext, SampleSystem.Domain.Employee.IEmployeeSecurity<SampleSystem.Domain.Projections.SecurityBusinessUnit, SampleSystem.Domain.Projections.SecurityHRDepartment, SampleSystem.Domain.Projections.SecurityLocation>, SampleSystem.Domain.BU.IBusinessUnitSecurityElement<SampleSystem.Domain.Projections.SecurityBusinessUnit>, SampleSystem.Domain.HRDepartment.IDepartmentSecurityElement<SampleSystem.Domain.Projections.SecurityHRDepartment>, SampleSystem.Domain.Employee.IEmployeeSecurityElement<SampleSystem.Domain.Projections.SecurityEmployee, SampleSystem.Domain.Projections.SecurityBusinessUnit, SampleSystem.Domain.Projections.SecurityHRDepartment, SampleSystem.Domain.Projections.SecurityLocation>, SampleSystem.Domain.Employee.IEmployeeSecurityElement<SampleSystem.Domain.Projections.SecurityEmployee>
     {
         
-        private SampleSystem.Domain.Projections.SecurityBusinessUnit businessUnit_Security;
+        private SampleSystem.Domain.Projections.SecurityBusinessUnit? businessUnit_Security;
         
-        private SampleSystem.Domain.Projections.SecurityHRDepartment department_Security;
+        private SampleSystem.Domain.Projections.SecurityHRDepartment? department_Security;
         
-        private string login_Security;
+        private string login_Security = null!;
         
         protected SecurityEmployee()
         {
@@ -50,7 +52,7 @@ namespace SampleSystem.Domain.Projections
         {
             get
             {
-                return this.BusinessUnit_Security;
+                return this.BusinessUnit_Security!;
             }
         }
         
@@ -58,7 +60,7 @@ namespace SampleSystem.Domain.Projections
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Security)]
         [Framework.Database.Mapping.MappingAttribute(ColumnName="coreBusinessUnitId")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual SampleSystem.Domain.Projections.SecurityBusinessUnit BusinessUnit_Security
+        public virtual SampleSystem.Domain.Projections.SecurityBusinessUnit? BusinessUnit_Security
         {
             get
             {
@@ -71,7 +73,7 @@ namespace SampleSystem.Domain.Projections
         {
             get
             {
-                return this.Department_Security;
+                return this.Department_Security!;
             }
         }
         
@@ -79,7 +81,7 @@ namespace SampleSystem.Domain.Projections
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Security)]
         [Framework.Database.Mapping.MappingAttribute(ColumnName="hRDepartmentId")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual SampleSystem.Domain.Projections.SecurityHRDepartment Department_Security
+        public virtual SampleSystem.Domain.Projections.SecurityHRDepartment? Department_Security
         {
             get
             {
@@ -124,7 +126,7 @@ namespace SampleSystem.Domain.Projections
     public partial class SecurityHRDepartment : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Directories.ILocationSecurityElement<SampleSystem.Domain.Projections.SecurityLocation>
     {
         
-        private SampleSystem.Domain.Projections.SecurityLocation location_Security;
+        private SampleSystem.Domain.Projections.SecurityLocation location_Security = null!;
         
         protected SecurityHRDepartment()
         {
@@ -170,9 +172,9 @@ namespace SampleSystem.Domain.Projections
     public partial class TestLegacyEmployee : SampleSystem.Domain.Projections.SecurityEmployee
     {
         
-        private string login;
+        private string login = null!;
         
-        private SampleSystem.Domain.Projections.TestLegacyEmployee_AutoProp_Role role_Auto;
+        private SampleSystem.Domain.Projections.TestLegacyEmployee_AutoProp_Role? role_Auto;
         
         protected TestLegacyEmployee()
         {
@@ -194,7 +196,7 @@ namespace SampleSystem.Domain.Projections
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.AutoNode)]
         [Framework.Database.Mapping.MappingAttribute(ColumnName="roleId")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual SampleSystem.Domain.Projections.TestLegacyEmployee_AutoProp_Role Role_Auto
+        public virtual SampleSystem.Domain.Projections.TestLegacyEmployee_AutoProp_Role? Role_Auto
         {
             get
             {
@@ -216,7 +218,7 @@ namespace SampleSystem.Domain.Projections
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
         [Framework.BLL.Domain.Persistent.Attributes.ExpandPathAttribute("Role_Auto.Name_Last_RoleName")]
         [Framework.Database.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual string RoleName
+        public virtual string? RoleName
         {
             get
             {
@@ -230,7 +232,7 @@ namespace SampleSystem.Domain.Projections
     public partial class TestLegacyEmployee_AutoProp_Role : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
-        private string name_Last_RoleName;
+        private string name_Last_RoleName = null!;
         
         protected TestLegacyEmployee_AutoProp_Role()
         {

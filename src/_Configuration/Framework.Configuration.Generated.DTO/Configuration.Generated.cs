@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+#nullable enable
+
 namespace Framework.Configuration.Generated.DTO
 {
     
@@ -391,7 +393,7 @@ namespace Framework.Configuration.Generated.DTO
             }
             else
             {
-                target.Operation = default(Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO);
+                target.Operation = default(Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO)!;
             }
         }
         
@@ -411,7 +413,7 @@ namespace Framework.Configuration.Generated.DTO
             }
             else
             {
-                target.DomainType = default(Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO);
+                target.DomainType = default(Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO)!;
             }
         }
         
@@ -455,7 +457,7 @@ namespace Framework.Configuration.Generated.DTO
             }
             else
             {
-                target.Operation = default(Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO);
+                target.Operation = default(Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO)!;
             }
         }
         
@@ -487,7 +489,7 @@ namespace Framework.Configuration.Generated.DTO
             }
             else
             {
-                target.TargetSystem = default(Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO);
+                target.TargetSystem = default(Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO)!;
             }
         }
         
@@ -1104,12 +1106,12 @@ namespace Framework.Configuration.Generated.DTO
             return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Configuration.Generated.DTO.DomainObjectEventIdentityDTO)) && identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(Framework.Configuration.Generated.DTO.DomainObjectEventIdentityDTO) == other.GetType()) && this.Equals(((Framework.Configuration.Generated.DTO.DomainObjectEventIdentityDTO)(other)));
         }
         
-        public bool Equals(Framework.Configuration.Generated.DTO.DomainObjectEventIdentityDTO other)
+        public bool Equals(Framework.Configuration.Generated.DTO.DomainObjectEventIdentityDTO? other)
         {
             return !object.ReferenceEquals(other, null) && (this._id == other.Id);
         }
@@ -1210,12 +1212,12 @@ namespace Framework.Configuration.Generated.DTO
             return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Configuration.Generated.DTO.DomainObjectModificationIdentityDTO)) && identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(Framework.Configuration.Generated.DTO.DomainObjectModificationIdentityDTO) == other.GetType()) && this.Equals(((Framework.Configuration.Generated.DTO.DomainObjectModificationIdentityDTO)(other)));
         }
         
-        public bool Equals(Framework.Configuration.Generated.DTO.DomainObjectModificationIdentityDTO other)
+        public bool Equals(Framework.Configuration.Generated.DTO.DomainObjectModificationIdentityDTO? other)
         {
             return !object.ReferenceEquals(other, null) && (this._id == other.Id);
         }
@@ -1316,12 +1318,12 @@ namespace Framework.Configuration.Generated.DTO
             return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Configuration.Generated.DTO.DomainObjectNotificationIdentityDTO)) && identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(Framework.Configuration.Generated.DTO.DomainObjectNotificationIdentityDTO) == other.GetType()) && this.Equals(((Framework.Configuration.Generated.DTO.DomainObjectNotificationIdentityDTO)(other)));
         }
         
-        public bool Equals(Framework.Configuration.Generated.DTO.DomainObjectNotificationIdentityDTO other)
+        public bool Equals(Framework.Configuration.Generated.DTO.DomainObjectNotificationIdentityDTO? other)
         {
             return !object.ReferenceEquals(other, null) && (this._id == other.Id);
         }
@@ -1422,12 +1424,12 @@ namespace Framework.Configuration.Generated.DTO
             return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO)) && identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO) == other.GetType()) && this.Equals(((Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO)(other)));
         }
         
-        public bool Equals(Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO other)
+        public bool Equals(Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO? other)
         {
             return !object.ReferenceEquals(other, null) && (this._id == other.Id);
         }
@@ -1528,12 +1530,12 @@ namespace Framework.Configuration.Generated.DTO
             return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO)) && identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO) == other.GetType()) && this.Equals(((Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO)(other)));
         }
         
-        public bool Equals(Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO other)
+        public bool Equals(Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO? other)
         {
             return !object.ReferenceEquals(other, null) && (this._id == other.Id);
         }
@@ -1634,12 +1636,12 @@ namespace Framework.Configuration.Generated.DTO
             return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Configuration.Generated.DTO.SentMessageIdentityDTO)) && identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(Framework.Configuration.Generated.DTO.SentMessageIdentityDTO) == other.GetType()) && this.Equals(((Framework.Configuration.Generated.DTO.SentMessageIdentityDTO)(other)));
         }
         
-        public bool Equals(Framework.Configuration.Generated.DTO.SentMessageIdentityDTO other)
+        public bool Equals(Framework.Configuration.Generated.DTO.SentMessageIdentityDTO? other)
         {
             return !object.ReferenceEquals(other, null) && (this._id == other.Id);
         }
@@ -1740,12 +1742,12 @@ namespace Framework.Configuration.Generated.DTO
             return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Configuration.Generated.DTO.SequenceIdentityDTO)) && identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(Framework.Configuration.Generated.DTO.SequenceIdentityDTO) == other.GetType()) && this.Equals(((Framework.Configuration.Generated.DTO.SequenceIdentityDTO)(other)));
         }
         
-        public bool Equals(Framework.Configuration.Generated.DTO.SequenceIdentityDTO other)
+        public bool Equals(Framework.Configuration.Generated.DTO.SequenceIdentityDTO? other)
         {
             return !object.ReferenceEquals(other, null) && (this._id == other.Id);
         }
@@ -1846,12 +1848,12 @@ namespace Framework.Configuration.Generated.DTO
             return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO)) && identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO) == other.GetType()) && this.Equals(((Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO)(other)));
         }
         
-        public bool Equals(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO other)
+        public bool Equals(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO? other)
         {
             return !object.ReferenceEquals(other, null) && (this._id == other.Id);
         }
@@ -1952,12 +1954,12 @@ namespace Framework.Configuration.Generated.DTO
             return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO)) && identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO) == other.GetType()) && this.Equals(((Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO)(other)));
         }
         
-        public bool Equals(Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO other)
+        public bool Equals(Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO? other)
         {
             return !object.ReferenceEquals(other, null) && (this._id == other.Id);
         }
@@ -2048,9 +2050,9 @@ namespace Framework.Configuration.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -2078,7 +2080,7 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -2091,7 +2093,7 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -2126,17 +2128,17 @@ namespace Framework.Configuration.Generated.DTO
         
         private System.Guid _domainObjectId;
         
-        private string _hostName;
+        private string? _hostName;
         
         private System.DateTime? _processDate;
         
-        private string _queueTag;
+        private string _queueTag = null!;
         
         private long _revision;
         
-        private string _serializeData;
+        private string _serializeData = null!;
         
-        private string _serializeType;
+        private string _serializeType = null!;
         
         private int _size;
         
@@ -2171,7 +2173,7 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string HostName
+        public string? HostName
         {
             get
             {
@@ -2305,7 +2307,7 @@ namespace Framework.Configuration.Generated.DTO
     public partial class DomainObjectEventFullDTO : Framework.Configuration.Generated.DTO.DomainObjectEventSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectEvent, System.Guid>
     {
         
-        private Framework.Configuration.Generated.DTO.DomainTypeEventOperationSimpleDTO _operation;
+        private Framework.Configuration.Generated.DTO.DomainTypeEventOperationSimpleDTO? _operation;
         
         public DomainObjectEventFullDTO()
         {
@@ -2318,7 +2320,7 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.DomainTypeEventOperationSimpleDTO Operation
+        public Framework.Configuration.Generated.DTO.DomainTypeEventOperationSimpleDTO? Operation
         {
             get
             {
@@ -2388,7 +2390,7 @@ namespace Framework.Configuration.Generated.DTO
         
         private System.Guid _id;
         
-        private Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO _operation;
+        private Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO? _operation;
         
         private string _queueTag = "";
         
@@ -2522,7 +2524,7 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO Operation
+        public Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO? Operation
         {
             get
             {
@@ -2743,7 +2745,7 @@ namespace Framework.Configuration.Generated.DTO
     public partial class DomainObjectModificationFullDTO : Framework.Configuration.Generated.DTO.DomainObjectModificationSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectModification, System.Guid>
     {
         
-        private Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO _domainType;
+        private Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO _domainType = null!;
         
         public DomainObjectModificationFullDTO()
         {
@@ -2824,7 +2826,7 @@ namespace Framework.Configuration.Generated.DTO
         
         private System.Guid _domainObjectId;
         
-        private Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO _domainType;
+        private Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO _domainType = null!;
         
         private System.Guid _id;
         
@@ -3045,11 +3047,11 @@ namespace Framework.Configuration.Generated.DTO
     public partial class DomainObjectNotificationSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectNotification, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainObjectNotification>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainObjectNotificationIdentityDTO>
     {
         
-        private string _hostName;
+        private string? _hostName;
         
         private System.DateTime? _processDate;
         
-        private string _serializeData;
+        private string _serializeData = null!;
         
         private int _size;
         
@@ -3071,7 +3073,7 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string HostName
+        public string? HostName
         {
             get
             {
@@ -3391,7 +3393,7 @@ namespace Framework.Configuration.Generated.DTO
     public partial class DomainTypeVisualDTO : Framework.Configuration.Generated.DTO.BasePersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainType, System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public DomainTypeVisualDTO()
         {
@@ -3438,11 +3440,11 @@ namespace Framework.Configuration.Generated.DTO
     public partial class DomainTypeSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainType, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainType>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO>
     {
         
-        private string _fullTypeName;
+        private string _fullTypeName = null!;
         
-        private string _name;
+        private string _name = null!;
         
-        private string _namespace;
+        private string _namespace = null!;
         
         public DomainTypeSimpleDTO()
         {
@@ -3529,7 +3531,7 @@ namespace Framework.Configuration.Generated.DTO
     public partial class DomainTypeFullDTO : Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainType, System.Guid>
     {
         
-        private Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO _targetSystem;
+        private Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO _targetSystem = null!;
         
         public DomainTypeFullDTO()
         {
@@ -3788,7 +3790,7 @@ namespace Framework.Configuration.Generated.DTO
     public partial class DomainTypeEventModelFullDTO : Framework.Configuration.Generated.DTO.DomainTypeEventModelSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventModel>
     {
         
-        private Framework.Configuration.Generated.DTO.DomainTypeEventOperationSimpleDTO _operation;
+        private Framework.Configuration.Generated.DTO.DomainTypeEventOperationSimpleDTO _operation = null!;
         
         public DomainTypeEventModelFullDTO()
         {
@@ -3879,7 +3881,7 @@ namespace Framework.Configuration.Generated.DTO
         
         private System.Collections.Generic.List<System.Guid> _domainObjectIdents = new System.Collections.Generic.List<System.Guid>();
         
-        private Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO _operation;
+        private Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO _operation = null!;
         
         private long? _revision;
         
@@ -3986,7 +3988,7 @@ namespace Framework.Configuration.Generated.DTO
     public partial class DomainTypeEventOperationVisualDTO : Framework.Configuration.Generated.DTO.BasePersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventOperation, System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public DomainTypeEventOperationVisualDTO()
         {
@@ -4033,7 +4035,7 @@ namespace Framework.Configuration.Generated.DTO
     public partial class DomainTypeEventOperationSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventOperation, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventOperation>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public DomainTypeEventOperationSimpleDTO()
         {
@@ -4094,7 +4096,7 @@ namespace Framework.Configuration.Generated.DTO
     public partial class DomainTypeEventOperationFullDTO : Framework.Configuration.Generated.DTO.DomainTypeEventOperationSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeEventOperation, System.Guid>
     {
         
-        private Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO _domainType;
+        private Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO _domainType = null!;
         
         public DomainTypeEventOperationFullDTO()
         {
@@ -4338,7 +4340,7 @@ namespace Framework.Configuration.Generated.DTO
     public partial class DomainTypeRootFilterModelFullDTO : Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeRootFilterModel>
     {
         
-        private Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO _targetSystem;
+        private Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO? _targetSystem;
         
         public DomainTypeRootFilterModelFullDTO()
         {
@@ -4351,7 +4353,7 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO TargetSystem
+        public Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO? TargetSystem
         {
             get
             {
@@ -4412,7 +4414,7 @@ namespace Framework.Configuration.Generated.DTO
     public partial class DomainTypeRootFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeRootFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.DomainTypeRootFilterModel>
     {
         
-        private Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO _targetSystem;
+        private Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO? _targetSystem;
         
         public DomainTypeRootFilterModelStrictDTO()
         {
@@ -4463,7 +4465,7 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO TargetSystem
+        public Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO? TargetSystem
         {
             get
             {
@@ -4705,25 +4707,25 @@ namespace Framework.Configuration.Generated.DTO
     public partial class SentMessageSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SentMessage, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SentMessage>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.SentMessageIdentityDTO>
     {
         
-        private string _comment;
+        private string _comment = null!;
         
         private System.Guid? _contextObjectId;
         
-        private string _contextObjectType;
+        private string _contextObjectType = null!;
         
-        private string _copy;
+        private string _copy = null!;
         
-        private string _from;
+        private string _from = null!;
         
-        private string _message;
+        private string _message = null!;
         
-        private string _replyTo;
+        private string _replyTo = null!;
         
-        private string _subject;
+        private string _subject = null!;
         
-        private string _templateName;
+        private string _templateName = null!;
         
-        private string _to;
+        private string _to = null!;
         
         public SentMessageSimpleDTO()
         {
@@ -5086,7 +5088,7 @@ namespace Framework.Configuration.Generated.DTO
     public partial class SequenceVisualDTO : Framework.Configuration.Generated.DTO.BasePersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.Sequence, System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.SequenceIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public SequenceVisualDTO()
         {
@@ -5133,7 +5135,7 @@ namespace Framework.Configuration.Generated.DTO
     public partial class SequenceSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.Sequence, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.Sequence>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.SequenceIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         private long _number;
         
@@ -5738,7 +5740,7 @@ namespace Framework.Configuration.Generated.DTO
     public partial class SystemConstantVisualDTO : Framework.Configuration.Generated.DTO.BasePersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstant, System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO>
     {
         
-        private string _code;
+        private string _code = null!;
         
         public SystemConstantVisualDTO()
         {
@@ -5785,13 +5787,13 @@ namespace Framework.Configuration.Generated.DTO
     public partial class SystemConstantSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstant, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstant>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO>
     {
         
-        private string _code;
+        private string _code = null!;
         
-        private string _description;
+        private string _description = null!;
         
         private bool _isManual;
         
-        private string _value;
+        private string _value = null!;
         
         public SystemConstantSimpleDTO()
         {
@@ -5891,7 +5893,7 @@ namespace Framework.Configuration.Generated.DTO
     public partial class SystemConstantFullDTO : Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.SystemConstant, System.Guid>
     {
         
-        private Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO _type;
+        private Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO _type = null!;
         
         public SystemConstantFullDTO()
         {
@@ -6283,7 +6285,7 @@ namespace Framework.Configuration.Generated.DTO
     public partial class TargetSystemVisualDTO : Framework.Configuration.Generated.DTO.BasePersistentDTO, Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.TargetSystem, System.Guid>, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public TargetSystemVisualDTO()
         {
@@ -6336,7 +6338,7 @@ namespace Framework.Configuration.Generated.DTO
         
         private bool _isRevision;
         
-        private string _name;
+        private string _name = null!;
         
         private bool _subscriptionEnabled;
         
@@ -8008,7 +8010,7 @@ namespace Framework.Configuration.Generated.DTO
             }
             else
             {
-                mappingObject.DomainType = null;
+                mappingObject.DomainType = null!;
             }
         }
         
@@ -8020,7 +8022,7 @@ namespace Framework.Configuration.Generated.DTO
             }
             else
             {
-                domainObject.DomainType = null;
+                domainObject.DomainType = null!;
             }
         }
         
@@ -8042,7 +8044,7 @@ namespace Framework.Configuration.Generated.DTO
             }
             else
             {
-                domainObject.DomainType = null;
+                domainObject.DomainType = null!;
             }
             domainObject.Processed = mappingObject.Processed;
             domainObject.Revision = mappingObject.Revision;
@@ -8114,7 +8116,7 @@ namespace Framework.Configuration.Generated.DTO
             }
             else
             {
-                mappingObject.TargetSystem = null;
+                mappingObject.TargetSystem = null!;
             }
         }
         
@@ -8153,7 +8155,7 @@ namespace Framework.Configuration.Generated.DTO
             }
             else
             {
-                mappingObject.Operation = null;
+                mappingObject.Operation = null!;
             }
         }
         
@@ -8165,7 +8167,7 @@ namespace Framework.Configuration.Generated.DTO
             }
             else
             {
-                domainObject.Operation = null;
+                domainObject.Operation = null!;
             }
         }
         
@@ -8188,7 +8190,7 @@ namespace Framework.Configuration.Generated.DTO
             }
             else
             {
-                domainObject.Operation = null;
+                domainObject.Operation = null!;
             }
             domainObject.Revision = mappingObject.Revision;
         }
@@ -8221,7 +8223,7 @@ namespace Framework.Configuration.Generated.DTO
             }
             else
             {
-                mappingObject.DomainType = null;
+                mappingObject.DomainType = null!;
             }
         }
         
@@ -8502,7 +8504,7 @@ namespace Framework.Configuration.Generated.DTO
             }
             else
             {
-                mappingObject.Type = null;
+                mappingObject.Type = null!;
             }
         }
         
@@ -8645,7 +8647,7 @@ namespace Framework.Configuration.Generated.DTO
             where TMappingObject : Framework.BLL.DTOMapping.MappingObject.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, TDomainObject, System.Guid>
             where TDomainObject : Framework.Configuration.Domain.PersistentDomainObjectBase
         {
-            TDomainObject domainObject = this.GetById<TDomainObject>(mappingObject.Id, Framework.BLL.IdCheckMode.CheckAll);
+            TDomainObject domainObject = this.GetById<TDomainObject>(mappingObject.Id, Framework.BLL.IdCheckMode.CheckAll)!;
             this.MapToDomainObject(mappingObject, domainObject);
             return domainObject;
         }
@@ -8670,12 +8672,12 @@ namespace Framework.Configuration.Generated.DTO
         
         public virtual Framework.Configuration.Domain.DomainObjectEvent ToDomainObjectEvent(Framework.Configuration.Generated.DTO.DomainObjectEventIdentityDTO domainObjectEventIdentityDTO)
         {
-            return this.GetById<Framework.Configuration.Domain.DomainObjectEvent>(domainObjectEventIdentityDTO.Id);
+            return this.GetById<Framework.Configuration.Domain.DomainObjectEvent>(domainObjectEventIdentityDTO.Id)!;
         }
         
         public virtual Framework.Configuration.Domain.DomainObjectEvent ToDomainObjectEvent(Framework.Configuration.Generated.DTO.DomainObjectEventSimpleDTO domainObjectEventSimpleDTO)
         {
-            return this.GetById<Framework.Configuration.Domain.DomainObjectEvent>(domainObjectEventSimpleDTO.Id);
+            return this.GetById<Framework.Configuration.Domain.DomainObjectEvent>(domainObjectEventSimpleDTO.Id)!;
         }
         
         public virtual Framework.Configuration.Domain.DomainObjectEvent ToDomainObjectEvent(Framework.Configuration.Generated.DTO.DomainObjectEventRichDTO domainObjectEventRichDTO)
@@ -8714,12 +8716,12 @@ namespace Framework.Configuration.Generated.DTO
         
         public virtual Framework.Configuration.Domain.DomainObjectModification ToDomainObjectModification(Framework.Configuration.Generated.DTO.DomainObjectModificationIdentityDTO domainObjectModificationIdentityDTO)
         {
-            return this.GetById<Framework.Configuration.Domain.DomainObjectModification>(domainObjectModificationIdentityDTO.Id);
+            return this.GetById<Framework.Configuration.Domain.DomainObjectModification>(domainObjectModificationIdentityDTO.Id)!;
         }
         
         public virtual Framework.Configuration.Domain.DomainObjectModification ToDomainObjectModification(Framework.Configuration.Generated.DTO.DomainObjectModificationSimpleDTO domainObjectModificationSimpleDTO)
         {
-            return this.GetById<Framework.Configuration.Domain.DomainObjectModification>(domainObjectModificationSimpleDTO.Id);
+            return this.GetById<Framework.Configuration.Domain.DomainObjectModification>(domainObjectModificationSimpleDTO.Id)!;
         }
         
         public virtual Framework.Configuration.Domain.DomainObjectModification ToDomainObjectModification(Framework.Configuration.Generated.DTO.DomainObjectModificationRichDTO domainObjectModificationRichDTO)
@@ -8758,12 +8760,12 @@ namespace Framework.Configuration.Generated.DTO
         
         public virtual Framework.Configuration.Domain.DomainObjectNotification ToDomainObjectNotification(Framework.Configuration.Generated.DTO.DomainObjectNotificationIdentityDTO domainObjectNotificationIdentityDTO)
         {
-            return this.GetById<Framework.Configuration.Domain.DomainObjectNotification>(domainObjectNotificationIdentityDTO.Id);
+            return this.GetById<Framework.Configuration.Domain.DomainObjectNotification>(domainObjectNotificationIdentityDTO.Id)!;
         }
         
         public virtual Framework.Configuration.Domain.DomainObjectNotification ToDomainObjectNotification(Framework.Configuration.Generated.DTO.DomainObjectNotificationSimpleDTO domainObjectNotificationSimpleDTO)
         {
-            return this.GetById<Framework.Configuration.Domain.DomainObjectNotification>(domainObjectNotificationSimpleDTO.Id);
+            return this.GetById<Framework.Configuration.Domain.DomainObjectNotification>(domainObjectNotificationSimpleDTO.Id)!;
         }
         
         public virtual Framework.Configuration.Domain.DomainObjectNotification ToDomainObjectNotification(Framework.Configuration.Generated.DTO.DomainObjectNotificationRichDTO domainObjectNotificationRichDTO)
@@ -8802,12 +8804,12 @@ namespace Framework.Configuration.Generated.DTO
         
         public virtual Framework.Configuration.Domain.DomainType ToDomainType(Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdentityDTO)
         {
-            return this.GetById<Framework.Configuration.Domain.DomainType>(domainTypeIdentityDTO.Id);
+            return this.GetById<Framework.Configuration.Domain.DomainType>(domainTypeIdentityDTO.Id)!;
         }
         
         public virtual Framework.Configuration.Domain.DomainType ToDomainType(Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO domainTypeSimpleDTO)
         {
-            return this.GetById<Framework.Configuration.Domain.DomainType>(domainTypeSimpleDTO.Id);
+            return this.GetById<Framework.Configuration.Domain.DomainType>(domainTypeSimpleDTO.Id)!;
         }
         
         public virtual Framework.Configuration.Domain.DomainType ToDomainType(Framework.Configuration.Generated.DTO.DomainTypeRichDTO domainTypeRichDTO)
@@ -8832,12 +8834,12 @@ namespace Framework.Configuration.Generated.DTO
         
         public virtual Framework.Configuration.Domain.DomainTypeEventOperation ToDomainTypeEventOperation(Framework.Configuration.Generated.DTO.DomainTypeEventOperationIdentityDTO domainTypeEventOperationIdentityDTO)
         {
-            return this.GetById<Framework.Configuration.Domain.DomainTypeEventOperation>(domainTypeEventOperationIdentityDTO.Id);
+            return this.GetById<Framework.Configuration.Domain.DomainTypeEventOperation>(domainTypeEventOperationIdentityDTO.Id)!;
         }
         
         public virtual Framework.Configuration.Domain.DomainTypeEventOperation ToDomainTypeEventOperation(Framework.Configuration.Generated.DTO.DomainTypeEventOperationSimpleDTO domainTypeEventOperationSimpleDTO)
         {
-            return this.GetById<Framework.Configuration.Domain.DomainTypeEventOperation>(domainTypeEventOperationSimpleDTO.Id);
+            return this.GetById<Framework.Configuration.Domain.DomainTypeEventOperation>(domainTypeEventOperationSimpleDTO.Id)!;
         }
         
         public virtual Framework.Configuration.Domain.DomainTypeEventOperation ToDomainTypeEventOperation(Framework.Configuration.Generated.DTO.DomainTypeEventOperationRichDTO domainTypeEventOperationRichDTO)
@@ -8872,12 +8874,12 @@ namespace Framework.Configuration.Generated.DTO
         
         public virtual Framework.Configuration.Domain.SentMessage ToSentMessage(Framework.Configuration.Generated.DTO.SentMessageIdentityDTO sentMessageIdentityDTO)
         {
-            return this.GetById<Framework.Configuration.Domain.SentMessage>(sentMessageIdentityDTO.Id);
+            return this.GetById<Framework.Configuration.Domain.SentMessage>(sentMessageIdentityDTO.Id)!;
         }
         
         public virtual Framework.Configuration.Domain.SentMessage ToSentMessage(Framework.Configuration.Generated.DTO.SentMessageSimpleDTO sentMessageSimpleDTO)
         {
-            return this.GetById<Framework.Configuration.Domain.SentMessage>(sentMessageSimpleDTO.Id);
+            return this.GetById<Framework.Configuration.Domain.SentMessage>(sentMessageSimpleDTO.Id)!;
         }
         
         public virtual Framework.Configuration.Domain.SentMessage ToSentMessage(Framework.Configuration.Generated.DTO.SentMessageRichDTO sentMessageRichDTO)
@@ -8892,12 +8894,12 @@ namespace Framework.Configuration.Generated.DTO
         
         public virtual Framework.Configuration.Domain.Sequence ToSequence(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdentityDTO)
         {
-            return this.GetById<Framework.Configuration.Domain.Sequence>(sequenceIdentityDTO.Id);
+            return this.GetById<Framework.Configuration.Domain.Sequence>(sequenceIdentityDTO.Id)!;
         }
         
         public virtual Framework.Configuration.Domain.Sequence ToSequence(Framework.Configuration.Generated.DTO.SequenceSimpleDTO sequenceSimpleDTO)
         {
-            return this.GetById<Framework.Configuration.Domain.Sequence>(sequenceSimpleDTO.Id);
+            return this.GetById<Framework.Configuration.Domain.Sequence>(sequenceSimpleDTO.Id)!;
         }
         
         public virtual Framework.Configuration.Domain.Sequence ToSequence(Framework.Configuration.Generated.DTO.SequenceRichDTO sequenceRichDTO)
@@ -8956,12 +8958,12 @@ namespace Framework.Configuration.Generated.DTO
         
         public virtual Framework.Configuration.Domain.SystemConstant ToSystemConstant(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentityDTO)
         {
-            return this.GetById<Framework.Configuration.Domain.SystemConstant>(systemConstantIdentityDTO.Id);
+            return this.GetById<Framework.Configuration.Domain.SystemConstant>(systemConstantIdentityDTO.Id)!;
         }
         
         public virtual Framework.Configuration.Domain.SystemConstant ToSystemConstant(Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO systemConstantSimpleDTO)
         {
-            return this.GetById<Framework.Configuration.Domain.SystemConstant>(systemConstantSimpleDTO.Id);
+            return this.GetById<Framework.Configuration.Domain.SystemConstant>(systemConstantSimpleDTO.Id)!;
         }
         
         public virtual Framework.Configuration.Domain.SystemConstant ToSystemConstant(Framework.Configuration.Generated.DTO.SystemConstantRichDTO systemConstantRichDTO)
@@ -9010,12 +9012,12 @@ namespace Framework.Configuration.Generated.DTO
         
         public virtual Framework.Configuration.Domain.TargetSystem ToTargetSystem(Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO targetSystemIdentityDTO)
         {
-            return this.GetById<Framework.Configuration.Domain.TargetSystem>(targetSystemIdentityDTO.Id);
+            return this.GetById<Framework.Configuration.Domain.TargetSystem>(targetSystemIdentityDTO.Id)!;
         }
         
         public virtual Framework.Configuration.Domain.TargetSystem ToTargetSystem(Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO targetSystemSimpleDTO)
         {
-            return this.GetById<Framework.Configuration.Domain.TargetSystem>(targetSystemSimpleDTO.Id);
+            return this.GetById<Framework.Configuration.Domain.TargetSystem>(targetSystemSimpleDTO.Id)!;
         }
         
         public virtual Framework.Configuration.Domain.TargetSystem ToTargetSystem(Framework.Configuration.Generated.DTO.TargetSystemRichDTO targetSystemRichDTO)

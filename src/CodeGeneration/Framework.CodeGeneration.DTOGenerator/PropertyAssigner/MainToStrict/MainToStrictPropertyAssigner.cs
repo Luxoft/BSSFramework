@@ -3,6 +3,7 @@ using System.Reflection;
 
 using Anch.Core;
 
+using Framework.CodeGeneration.DTOGenerator.Extensions;
 using Framework.CodeDom;
 using Framework.CodeDom.Extend;
 using Framework.CodeDom.Extensions;
@@ -42,6 +43,7 @@ public class MainToStrictPropertyAssigner<TConfiguration>(IDTOSource<TConfigurat
                                        this.Configuration.IdentityIsReference
 
                                                ? identityTypeRef.ToDefaultValueExpression()
+                                                                .ToNullForgivingExpression()
                                                                 .ToAssignStatement(targetPropertyRef)
 
                                                : identityTypeRef.ToTypeReferenceExpression()
@@ -63,7 +65,7 @@ public class MainToStrictPropertyAssigner<TConfiguration>(IDTOSource<TConfigurat
                                },
                     FalseStatements =
                                {
-                                       new CodePrimitiveExpression(null).ToAssignStatement(targetPropertyRef)
+                                       property.ToNullValueExpression().ToAssignStatement(targetPropertyRef)
                                }
                 };
             }
@@ -80,7 +82,7 @@ public class MainToStrictPropertyAssigner<TConfiguration>(IDTOSource<TConfigurat
                            },
                 FalseStatements =
                            {
-                                   new CodePrimitiveExpression(null).ToAssignStatement(targetPropertyRef)
+                                   property.ToNullValueExpression().ToAssignStatement(targetPropertyRef)
                            }
             };
         }

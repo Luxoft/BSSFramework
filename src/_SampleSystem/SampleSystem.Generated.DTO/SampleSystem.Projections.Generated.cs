@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+#nullable enable
+
 namespace SampleSystem.Generated.DTO
 {
     
@@ -16,7 +18,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestManualEmployeeProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>
     {
         
-        private string _login;
+        private string _login = null!;
         
         public TestManualEmployeeProjectionDTO()
         {
@@ -83,11 +85,11 @@ namespace SampleSystem.Generated.DTO
         
         private bool _isNewBusiness;
         
-        private string _name;
+        private string _name = null!;
         
-        private string _virtualName;
+        private string _virtualName = null!;
         
-        private string _virtualValue;
+        private string _virtualValue = null!;
         
         public BusinessUnitProgramClassProjectionDTO()
         {
@@ -166,19 +168,19 @@ namespace SampleSystem.Generated.DTO
     public partial class CustomCompanyLegalEntityProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO>
     {
         
-        private string _aribaStatusDescription;
+        private string _aribaStatusDescription = null!;
         
         private SampleSystem.Domain.Ariba.AribaStatusType? _aribaStatusType;
         
-        private SampleSystem.Generated.DTO.CustomTestObjForNestedProjectionDTO _baseObj;
+        private SampleSystem.Generated.DTO.CustomTestObjForNestedProjectionDTO? _baseObj;
         
         private Anch.Core.Maybe<string> _code;
         
-        private SampleSystem.Generated.DTO.CustomTestObjForNestedProjectionDTO _currentObj;
+        private SampleSystem.Generated.DTO.CustomTestObjForNestedProjectionDTO? _currentObj;
         
-        private string _name;
+        private string _name = null!;
         
-        private string _nameEnglish;
+        private string _nameEnglish = null!;
         
         public CustomCompanyLegalEntityProjectionDTO()
         {
@@ -217,7 +219,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.CustomTestObjForNestedProjectionDTO BaseObj
+        public SampleSystem.Generated.DTO.CustomTestObjForNestedProjectionDTO? BaseObj
         {
             get
             {
@@ -243,7 +245,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.CustomTestObjForNestedProjectionDTO CurrentObj
+        public SampleSystem.Generated.DTO.CustomTestObjForNestedProjectionDTO? CurrentObj
         {
             get
             {
@@ -296,7 +298,7 @@ namespace SampleSystem.Generated.DTO
     public partial class CustomTestObjForNestedProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         private System.DateTime _periodStartDateXXX;
         
@@ -391,9 +393,9 @@ namespace SampleSystem.Generated.DTO
     public partial class HerBusinessUnitProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
-        private SampleSystem.Generated.DTO.HerBusinessUnitProjectionDTO _parent;
+        private SampleSystem.Generated.DTO.HerBusinessUnitProjectionDTO? _parent;
         
         public HerBusinessUnitProjectionDTO()
         {
@@ -428,7 +430,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.HerBusinessUnitProjectionDTO Parent
+        public SampleSystem.Generated.DTO.HerBusinessUnitProjectionDTO? Parent
         {
             get
             {
@@ -446,7 +448,7 @@ namespace SampleSystem.Generated.DTO
     public partial class MiniBusinessUnitEmployeeRoleProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleIdentityDTO>
     {
         
-        private SampleSystem.Generated.DTO.VisualEmployeeProjectionDTO _employee;
+        private SampleSystem.Generated.DTO.VisualEmployeeProjectionDTO _employee = null!;
         
         public MiniBusinessUnitEmployeeRoleProjectionDTO()
         {
@@ -486,13 +488,13 @@ namespace SampleSystem.Generated.DTO
     public partial class NonPersistentContainerProjectionDTO : SampleSystem.Generated.DTO.BaseAbstractDTO
     {
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestLocationProjectionDTO> _locations;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestLocationProjectionDTO> _locations = null!;
         
-        private Framework.Core.Period[] _periodArray;
+        private Framework.Core.Period[] _periodArray = null!;
         
-        private SampleSystem.Generated.DTO.TestBusinessUnitProjectionDTO _testBU;
+        private SampleSystem.Generated.DTO.TestBusinessUnitProjectionDTO _testBU = null!;
         
-        private string _testString;
+        private string _testString = null!;
         
         public NonPersistentContainerProjectionDTO()
         {
@@ -562,17 +564,17 @@ namespace SampleSystem.Generated.DTO
     public partial class TestBusinessUnitProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitIdentityDTO>
     {
         
-        private string[][] _calcMatrix;
+        private string[][] _calcMatrix = null!;
         
-        private SampleSystem.Generated.DTO.TestBusinessUnitTypeProjectionDTO _calcProjectionProp;
+        private SampleSystem.Generated.DTO.TestBusinessUnitTypeProjectionDTO _calcProjectionProp = null!;
         
-        private string _calcProp;
+        private string _calcProp = null!;
         
-        private string _employees;
+        private string _employees = null!;
         
-        private string _herBusinessUnit_Full;
+        private string _herBusinessUnit_Full = null!;
         
-        private string _name;
+        private string _name = null!;
         
         private Framework.Core.Period? _parentPeriod;
         
@@ -722,7 +724,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestBusinessUnitTypeProjectionDTO : SampleSystem.Generated.DTO.BaseAbstractDTO
     {
         
-        private string _name;
+        private string _name = null!;
         
         public TestBusinessUnitTypeProjectionDTO()
         {
@@ -753,7 +755,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestCustomContextSecurityObjProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public TestCustomContextSecurityObjProjectionDTO()
         {
@@ -793,11 +795,11 @@ namespace SampleSystem.Generated.DTO
     public partial class TestDepartmentProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.HRDepartmentIdentityDTO>
     {
         
-        private SampleSystem.Generated.DTO.TestLocationProjectionDTO _location;
+        private SampleSystem.Generated.DTO.TestLocationProjectionDTO _location = null!;
         
-        private byte[] _locationBinaryData;
+        private byte[]? _locationBinaryData;
         
-        private string _name;
+        private string _name = null!;
         
         public TestDepartmentProjectionDTO()
         {
@@ -832,7 +834,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte[] LocationBinaryData
+        public byte[]? LocationBinaryData
         {
             get
             {
@@ -865,25 +867,25 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _buEndDate;
         
-        private SampleSystem.Generated.DTO.BusinessUnitIdentityProjectionDTO _coreBusinessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitIdentityProjectionDTO? _coreBusinessUnit;
         
-        private string _coreBusinessUnitName;
+        private string? _coreBusinessUnitName;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.VisualProjectProjectionDTO> _coreBusinessUnitProjects;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.VisualProjectProjectionDTO> _coreBusinessUnitProjects = null!;
         
         private Anch.Core.Maybe<string> _login;
         
-        private string _nameEngFirstName;
+        private string _nameEngFirstName = null!;
         
         private Anch.Core.Maybe<string> _positionName;
         
-        private string _positionNameOrRoleName;
+        private string _positionNameOrRoleName = null!;
         
-        private string _ppmNameNativeMiddleName;
+        private string? _ppmNameNativeMiddleName;
         
         private System.Guid? _roleId;
         
-        private string _roleName;
+        private string? _roleName;
         
         public TestEmployeeProjectionDTO()
         {
@@ -909,7 +911,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitIdentityProjectionDTO CoreBusinessUnit
+        public SampleSystem.Generated.DTO.BusinessUnitIdentityProjectionDTO? CoreBusinessUnit
         {
             get
             {
@@ -922,7 +924,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CoreBusinessUnitName
+        public string? CoreBusinessUnitName
         {
             get
             {
@@ -1009,7 +1011,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PpmNameNativeMiddleName
+        public string? PpmNameNativeMiddleName
         {
             get
             {
@@ -1035,7 +1037,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string RoleName
+        public string? RoleName
         {
             get
             {
@@ -1053,9 +1055,9 @@ namespace SampleSystem.Generated.DTO
     public partial class TestIMRequestProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.IMRequestIdentityDTO>
     {
         
-        private string _message;
+        private string _message = null!;
         
-        private SampleSystem.Generated.DTO.TestIMRequestDetailProjectionDTO _oneToOneDetail;
+        private SampleSystem.Generated.DTO.TestIMRequestDetailProjectionDTO _oneToOneDetail = null!;
         
         public TestIMRequestProjectionDTO()
         {
@@ -1137,7 +1139,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.Guid? _roleId;
         
-        private string _roleName;
+        private string? _roleName;
         
         public TestLegacyEmployeeProjectionDTO()
         {
@@ -1185,7 +1187,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string RoleName
+        public string? RoleName
         {
             get
             {
@@ -1203,7 +1205,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestLocationProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.LocationIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public TestLocationProjectionDTO()
         {
@@ -1243,17 +1245,17 @@ namespace SampleSystem.Generated.DTO
     public partial class TestLocationCollectionPropertiesProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.LocationIdentityDTO>
     {
         
-        private System.Guid[] _child_Identities;
+        private System.Guid[] _child_Identities = null!;
         
-        private Framework.Core.Period[] _child_Periods;
+        private Framework.Core.Period[] _child_Periods = null!;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestLocationProjectionDTO> _children;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestLocationProjectionDTO> _children = null!;
         
-        private System.DateTime[] _date_Intervals;
+        private System.DateTime[] _date_Intervals = null!;
         
-        private string _name;
+        private string _name = null!;
         
-        private string[] _security_Codes;
+        private string[] _security_Codes = null!;
         
         public TestLocationCollectionPropertiesProjectionDTO()
         {
@@ -1358,7 +1360,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecurityObjItemProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public TestSecurityObjItemProjectionDTO()
         {
@@ -1398,7 +1400,7 @@ namespace SampleSystem.Generated.DTO
     public partial class VisualEmployeeProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>
     {
         
-        private string _nameEngFirstName;
+        private string _nameEngFirstName = null!;
         
         public VisualEmployeeProjectionDTO()
         {
@@ -1438,7 +1440,7 @@ namespace SampleSystem.Generated.DTO
     public partial class VisualProjectProjectionDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.ProjectIdentityDTO>
     {
         
-        private string _code;
+        private string _code = null!;
         
         public VisualProjectProjectionDTO()
         {

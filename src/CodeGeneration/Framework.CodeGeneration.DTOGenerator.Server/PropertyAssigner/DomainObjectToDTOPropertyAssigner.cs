@@ -3,6 +3,7 @@ using System.Reflection;
 
 using Anch.Core;
 
+using Framework.CodeGeneration.DTOGenerator.Extensions;
 using Framework.CodeDom;
 using Framework.CodeDom.Extensions;
 using Framework.CodeGeneration.DTOGenerator.Configuration;
@@ -38,7 +39,7 @@ public class DomainObjectToDTOPropertyAssigner<TConfiguration>(IDTOSource<TConfi
                            },
                 FalseStatements =
                            {
-                                   new CodePrimitiveExpression(null).ToAssignStatement(targetPropertyRef)
+                                   property.ToNullValueExpression().ToAssignStatement(targetPropertyRef)
                            }
             };
         }

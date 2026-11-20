@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+#nullable enable
+
 namespace SampleSystem.Generated.DTO
 {
     
@@ -78,7 +80,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.AnotherSqlParserTestObjIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.AnotherSqlParserTestObjIdentityDTO)(other)));
         }
@@ -171,7 +173,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO)(other)));
         }
@@ -273,7 +275,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.BusinessUnitIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.BusinessUnitIdentityDTO)(other)));
         }
@@ -366,7 +368,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.BusinessUnitAncestorLinkIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.BusinessUnitAncestorLinkIdentityDTO)(other)));
         }
@@ -468,7 +470,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleIdentityDTO)(other)));
         }
@@ -570,7 +572,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO)(other)));
         }
@@ -672,7 +674,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO)(other)));
         }
@@ -765,7 +767,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.BusinessUnitToAncestorChildViewIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.BusinessUnitToAncestorChildViewIdentityDTO)(other)));
         }
@@ -867,7 +869,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.AddressIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.AddressIdentityDTO)(other)));
         }
@@ -969,7 +971,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.BusinessUnitTypeIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.BusinessUnitTypeIdentityDTO)(other)));
         }
@@ -1071,7 +1073,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeIdentityDTO)(other)));
         }
@@ -1173,7 +1175,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentIdentityDTO)(other)));
         }
@@ -1275,7 +1277,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToIdentityDTO)(other)));
         }
@@ -1377,7 +1379,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO)(other)));
         }
@@ -1479,7 +1481,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.CountryIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.CountryIdentityDTO)(other)));
         }
@@ -1581,7 +1583,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO)(other)));
         }
@@ -1683,7 +1685,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.LocationIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.LocationIdentityDTO)(other)));
         }
@@ -1776,7 +1778,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO)(other)));
         }
@@ -1869,7 +1871,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO)(other)));
         }
@@ -1971,7 +1973,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO)(other)));
         }
@@ -2064,7 +2066,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO)(other)));
         }
@@ -2166,7 +2168,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.EmployeeIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.EmployeeIdentityDTO)(other)));
         }
@@ -2268,7 +2270,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.EmployeeCellPhoneIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.EmployeeCellPhoneIdentityDTO)(other)));
         }
@@ -2370,7 +2372,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO)(other)));
         }
@@ -2472,7 +2474,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.EmployeePersonalCellPhoneIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.EmployeePersonalCellPhoneIdentityDTO)(other)));
         }
@@ -2574,7 +2576,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO)(other)));
         }
@@ -2676,7 +2678,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.EmployeePositionIdentityDTO)(other)));
         }
@@ -2778,7 +2780,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO)(other)));
         }
@@ -2880,7 +2882,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO)(other)));
         }
@@ -2982,7 +2984,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO)(other)));
         }
@@ -3084,7 +3086,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO)(other)));
         }
@@ -3186,7 +3188,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO)(other)));
         }
@@ -3288,7 +3290,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.EmployeeToEmployeeLinkIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.EmployeeToEmployeeLinkIdentityDTO)(other)));
         }
@@ -3390,7 +3392,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.IMRequestIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.IMRequestIdentityDTO)(other)));
         }
@@ -3492,7 +3494,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO)(other)));
         }
@@ -3594,7 +3596,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.InformationIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.InformationIdentityDTO)(other)));
         }
@@ -3687,7 +3689,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO)(other)));
         }
@@ -3780,7 +3782,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO)(other)));
         }
@@ -3873,7 +3875,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO)(other)));
         }
@@ -3975,7 +3977,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO)(other)));
         }
@@ -4068,7 +4070,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.Coefficient1676IdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.Coefficient1676IdentityDTO)(other)));
         }
@@ -4170,7 +4172,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.Location1676IdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.Location1676IdentityDTO)(other)));
         }
@@ -4272,7 +4274,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO)(other)));
         }
@@ -4365,7 +4367,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.ExtendedInlineAuditObjIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.ExtendedInlineAuditObjIdentityDTO)(other)));
         }
@@ -4467,7 +4469,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.PrincipalIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.PrincipalIdentityDTO)(other)));
         }
@@ -4569,7 +4571,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.Example1IdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.Example1IdentityDTO)(other)));
         }
@@ -4671,7 +4673,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.Example2IdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.Example2IdentityDTO)(other)));
         }
@@ -4773,7 +4775,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.HRDepartmentIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.HRDepartmentIdentityDTO)(other)));
         }
@@ -4875,7 +4877,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.HRDepartmentEmployeePositionIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.HRDepartmentEmployeePositionIdentityDTO)(other)));
         }
@@ -4977,7 +4979,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeIdentityDTO)(other)));
         }
@@ -5070,7 +5072,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.IntegrationVersionContainer1IdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.IntegrationVersionContainer1IdentityDTO)(other)));
         }
@@ -5163,7 +5165,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.IntegrationVersionContainer2IdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.IntegrationVersionContainer2IdentityDTO)(other)));
         }
@@ -5265,7 +5267,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.ManagementUnitIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.ManagementUnitIdentityDTO)(other)));
         }
@@ -5358,7 +5360,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.ManagementUnitAncestorLinkIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.ManagementUnitAncestorLinkIdentityDTO)(other)));
         }
@@ -5460,7 +5462,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkIdentityDTO)(other)));
         }
@@ -5562,7 +5564,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO)(other)));
         }
@@ -5655,7 +5657,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.ManagementUnitToAncestorChildViewIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.ManagementUnitToAncestorChildViewIdentityDTO)(other)));
         }
@@ -5757,7 +5759,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO)(other)));
         }
@@ -5850,7 +5852,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO)(other)));
         }
@@ -5943,7 +5945,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO)(other)));
         }
@@ -6045,7 +6047,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO)(other)));
         }
@@ -6138,7 +6140,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.ProjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.ProjectIdentityDTO)(other)));
         }
@@ -6240,7 +6242,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.SqlParserTestObjIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.SqlParserTestObjIdentityDTO)(other)));
         }
@@ -6342,7 +6344,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO)(other)));
         }
@@ -6444,7 +6446,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO)(other)));
         }
@@ -6546,7 +6548,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO)(other)));
         }
@@ -6648,7 +6650,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO)(other)));
         }
@@ -6750,7 +6752,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO)(other)));
         }
@@ -6852,7 +6854,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO)(other)));
         }
@@ -6954,7 +6956,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO)(other)));
         }
@@ -7056,7 +7058,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO)(other)));
         }
@@ -7158,7 +7160,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO)(other)));
         }
@@ -7260,7 +7262,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO)(other)));
         }
@@ -7353,7 +7355,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.ClassAIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.ClassAIdentityDTO)(other)));
         }
@@ -7446,7 +7448,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.ClassAChildIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.ClassAChildIdentityDTO)(other)));
         }
@@ -7539,7 +7541,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.ConcreteClassAIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.ConcreteClassAIdentityDTO)(other)));
         }
@@ -7632,7 +7634,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestCommentIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestCommentIdentityDTO)(other)));
         }
@@ -7725,7 +7727,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestCommentCategoryIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestCommentCategoryIdentityDTO)(other)));
         }
@@ -7818,7 +7820,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestCommentParentIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestCommentParentIdentityDTO)(other)));
         }
@@ -7920,7 +7922,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO)(other)));
         }
@@ -8013,7 +8015,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestJobObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestJobObjectIdentityDTO)(other)));
         }
@@ -8106,7 +8108,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestRelativeEmployeeChildObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestRelativeEmployeeChildObjectIdentityDTO)(other)));
         }
@@ -8199,7 +8201,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestRelativeEmployeeObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestRelativeEmployeeObjectIdentityDTO)(other)));
         }
@@ -8292,7 +8294,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectIdentityDTO)(other)));
         }
@@ -8385,7 +8387,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.ChildEntityIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.ChildEntityIdentityDTO)(other)));
         }
@@ -8478,7 +8480,7 @@ namespace SampleSystem.Generated.DTO
             return identity1.Equals(identity2);
         }
         
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.ParentEntityIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.ParentEntityIdentityDTO)(other)));
         }
@@ -8576,9 +8578,9 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -8621,7 +8623,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -8634,7 +8636,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -8678,7 +8680,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public BusinessUnitVisualDTO()
         {
@@ -8724,7 +8726,7 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Domain.Enums.BusinessUnitStatus _businessUnitStatus;
         
-        private string _businessUnitTypeName;
+        private string _businessUnitTypeName = null!;
         
         private decimal _commission;
         
@@ -8746,9 +8748,9 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _leastProjectStartDate;
         
-        private string _lobName;
+        private string? _lobName;
         
-        private string _name;
+        private string _name = null!;
         
         private bool _needSendBusinessUnitHasNoLinkedProjectsWarning;
         
@@ -8758,7 +8760,7 @@ namespace SampleSystem.Generated.DTO
         
         private Framework.Core.Period _period = Framework.Core.Period.Eternity;
         
-        private string _projectStartMailList;
+        private string? _projectStartMailList;
         
         private int _rank;
         
@@ -8956,7 +8958,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LobName
+        public string? LobName
         {
             get
             {
@@ -9034,7 +9036,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ProjectStartMailList
+        public string? ProjectStartMailList
         {
             get
             {
@@ -9071,11 +9073,11 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitFullDTO : SampleSystem.Generated.DTO.BusinessUnitSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _businessUnitForRent;
+        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO? _businessUnitForRent;
         
-        private SampleSystem.Generated.DTO.BusinessUnitTypeSimpleDTO _businessUnitType;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeSimpleDTO? _businessUnitType;
         
-        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _parent;
+        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO? _parent;
         
         public BusinessUnitFullDTO()
         {
@@ -9088,7 +9090,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitSimpleDTO BusinessUnitForRent
+        public SampleSystem.Generated.DTO.BusinessUnitSimpleDTO? BusinessUnitForRent
         {
             get
             {
@@ -9101,7 +9103,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitTypeSimpleDTO BusinessUnitType
+        public SampleSystem.Generated.DTO.BusinessUnitTypeSimpleDTO? BusinessUnitType
         {
             get
             {
@@ -9114,7 +9116,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitSimpleDTO Parent
+        public SampleSystem.Generated.DTO.BusinessUnitSimpleDTO? Parent
         {
             get
             {
@@ -9252,7 +9254,7 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Domain.Enums.BusinessUnitOptions _options;
         
-        private string _projectStartMailList;
+        private string? _projectStartMailList;
         
         private int _rank;
         
@@ -9575,7 +9577,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ProjectStartMailList
+        public string? ProjectStartMailList
         {
             get
             {
@@ -9695,9 +9697,9 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitEmployeeRoleFullDTO : SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _businessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _businessUnit = null!;
         
-        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _employee;
+        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _employee = null!;
         
         public BusinessUnitEmployeeRoleFullDTO()
         {
@@ -9984,9 +9986,9 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitHrDepartmentFullDTO : SampleSystem.Generated.DTO.BusinessUnitHrDepartmentSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _businessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _businessUnit = null!;
         
-        private SampleSystem.Generated.DTO.HRDepartmentSimpleDTO _hRDepartment;
+        private SampleSystem.Generated.DTO.HRDepartmentSimpleDTO _hRDepartment = null!;
         
         public BusinessUnitHrDepartmentFullDTO()
         {
@@ -10308,9 +10310,9 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitManagerCommissionLinkFullDTO : SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _businessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _businessUnit = null!;
         
-        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _manager;
+        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _manager = null!;
         
         public BusinessUnitManagerCommissionLinkFullDTO()
         {
@@ -10598,13 +10600,13 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Domain.Enums.AddressType _addressType;
         
-        private string _cityName;
+        private string _cityName = null!;
         
-        private string _regionName;
+        private string _regionName = null!;
         
-        private string _street;
+        private string _street = null!;
         
-        private string _zip;
+        private string _zip = null!;
         
         public AddressSimpleDTO()
         {
@@ -10707,9 +10709,9 @@ namespace SampleSystem.Generated.DTO
     public partial class AddressFullDTO : SampleSystem.Generated.DTO.AddressSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.CountrySimpleDTO _countryName;
+        private SampleSystem.Generated.DTO.CountrySimpleDTO _countryName = null!;
         
-        private SampleSystem.Generated.DTO.LegalEntityBaseSimpleDTO _legalEntity;
+        private SampleSystem.Generated.DTO.LegalEntityBaseSimpleDTO _legalEntity = null!;
         
         public AddressFullDTO()
         {
@@ -11018,7 +11020,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitTypeVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.BusinessUnitTypeIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public BusinessUnitTypeVisualDTO()
         {
@@ -11078,7 +11080,7 @@ namespace SampleSystem.Generated.DTO
         
         private bool _isAdministrative;
         
-        private string _name;
+        private string _name = null!;
         
         private bool _needVertical;
         
@@ -11945,7 +11947,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitTypeLinkWithPossibleFinancialProjectTypeFullDTO : SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitTypeSimpleDTO _businessUnitType;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeSimpleDTO _businessUnitType = null!;
         
         public BusinessUnitTypeLinkWithPossibleFinancialProjectTypeFullDTO()
         {
@@ -12224,9 +12226,9 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitTypeLinkWithPossibleParentFullDTO : SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitTypeSimpleDTO _businessUnitType;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeSimpleDTO _businessUnitType = null!;
         
-        private SampleSystem.Generated.DTO.BusinessUnitTypeSimpleDTO _possibleParent;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeSimpleDTO _possibleParent = null!;
         
         public BusinessUnitTypeLinkWithPossibleParentFullDTO()
         {
@@ -12518,9 +12520,9 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitTypeLinkWithTransferToFullDTO : SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitTypeSimpleDTO _businessUnitType;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeSimpleDTO _businessUnitType = null!;
         
-        private SampleSystem.Generated.DTO.BusinessUnitTypeSimpleDTO _transferTo;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeSimpleDTO _transferTo = null!;
         
         public BusinessUnitTypeLinkWithTransferToFullDTO()
         {
@@ -12774,7 +12776,7 @@ namespace SampleSystem.Generated.DTO
     public partial class CompanyLegalEntityVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public CompanyLegalEntityVisualDTO()
         {
@@ -12816,13 +12818,13 @@ namespace SampleSystem.Generated.DTO
     public partial class CompanyLegalEntitySimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO>
     {
         
-        private SampleSystem.Domain.Ariba.RevenueDocumentAribaStatus _aribaStatus;
+        private SampleSystem.Domain.Ariba.RevenueDocumentAribaStatus _aribaStatus = null!;
         
-        private string _code;
+        private string _code = null!;
         
-        private string _name;
+        private string _name = null!;
         
-        private string _nameEnglish;
+        private string _nameEnglish = null!;
         
         private SampleSystem.Domain.Enums.CompanyLegalEntityType _type;
         
@@ -12927,11 +12929,11 @@ namespace SampleSystem.Generated.DTO
     public partial class CompanyLegalEntityFullDTO : SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.TestObjForNestedSimpleDTO _baseObj;
+        private SampleSystem.Generated.DTO.TestObjForNestedSimpleDTO? _baseObj;
         
-        private SampleSystem.Generated.DTO.TestObjForNestedSimpleDTO _currentObj;
+        private SampleSystem.Generated.DTO.TestObjForNestedSimpleDTO? _currentObj;
         
-        private SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO _parent;
+        private SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO? _parent;
         
         public CompanyLegalEntityFullDTO()
         {
@@ -12944,7 +12946,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestObjForNestedSimpleDTO BaseObj
+        public SampleSystem.Generated.DTO.TestObjForNestedSimpleDTO? BaseObj
         {
             get
             {
@@ -12957,7 +12959,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestObjForNestedSimpleDTO CurrentObj
+        public SampleSystem.Generated.DTO.TestObjForNestedSimpleDTO? CurrentObj
         {
             get
             {
@@ -12970,7 +12972,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO Parent
+        public SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO? Parent
         {
             get
             {
@@ -13318,7 +13320,7 @@ namespace SampleSystem.Generated.DTO
     public partial class CountryVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.CountryIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public CountryVisualDTO()
         {
@@ -13360,13 +13362,13 @@ namespace SampleSystem.Generated.DTO
     public partial class CountrySimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.CountryIdentityDTO>
     {
         
-        private string _code;
+        private string _code = null!;
         
-        private string _culture;
+        private string _culture = null!;
         
-        private string _name;
+        private string _name = null!;
         
-        private string _nameNative;
+        private string _nameNative = null!;
         
         public CountrySimpleDTO()
         {
@@ -13712,11 +13714,11 @@ namespace SampleSystem.Generated.DTO
     public partial class LegalEntityBaseSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO>
     {
         
-        private SampleSystem.Domain.Ariba.RevenueDocumentAribaStatus _aribaStatus;
+        private SampleSystem.Domain.Ariba.RevenueDocumentAribaStatus _aribaStatus = null!;
         
-        private string _name;
+        private string _name = null!;
         
-        private string _nameEnglish;
+        private string _nameEnglish = null!;
         
         public LegalEntityBaseSimpleDTO()
         {
@@ -13787,7 +13789,7 @@ namespace SampleSystem.Generated.DTO
     public partial class LocationVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.LocationIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public LocationVisualDTO()
         {
@@ -13843,7 +13845,7 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Domain.Enums.LocationType _locationType;
         
-        private string _name;
+        private string _name = null!;
         
         public LocationSimpleDTO()
         {
@@ -13985,9 +13987,9 @@ namespace SampleSystem.Generated.DTO
     public partial class LocationFullDTO : SampleSystem.Generated.DTO.LocationSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.CountrySimpleDTO _country;
+        private SampleSystem.Generated.DTO.CountrySimpleDTO? _country;
         
-        private SampleSystem.Generated.DTO.LocationSimpleDTO _parent;
+        private SampleSystem.Generated.DTO.LocationSimpleDTO? _parent;
         
         public LocationFullDTO()
         {
@@ -14000,7 +14002,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.CountrySimpleDTO Country
+        public SampleSystem.Generated.DTO.CountrySimpleDTO? Country
         {
             get
             {
@@ -14013,7 +14015,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationSimpleDTO Parent
+        public SampleSystem.Generated.DTO.LocationSimpleDTO? Parent
         {
             get
             {
@@ -14036,7 +14038,7 @@ namespace SampleSystem.Generated.DTO
     public partial class LocationRichDTO : SampleSystem.Generated.DTO.LocationFullDTO
     {
         
-        private byte[] _binaryData;
+        private byte[]? _binaryData;
         
         private System.Collections.Generic.List<SampleSystem.Generated.DTO.LocationRichDTO> _children = new System.Collections.Generic.List<SampleSystem.Generated.DTO.LocationRichDTO>();
         
@@ -14051,7 +14053,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte[] BinaryData
+        public byte[]? BinaryData
         {
             get
             {
@@ -14089,7 +14091,7 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active = true;
         
-        private byte[] _binaryData;
+        private byte[]? _binaryData;
         
         private int _closeDate;
         
@@ -14201,7 +14203,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte[] BinaryData
+        public byte[]? BinaryData
         {
             get
             {
@@ -14376,7 +14378,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestObjForNestedSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         private Framework.Core.Period _period = Framework.Core.Period.Eternity;
         
@@ -14438,7 +14440,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeIdentityDTO>
     {
         
-        private string _accountName;
+        private string _accountName = null!;
         
         private int _age;
         
@@ -14448,7 +14450,7 @@ namespace SampleSystem.Generated.DTO
         
         private bool _canBePPM;
         
-        private string _cellPhone;
+        private string _cellPhone = null!;
         
         private Framework.Core.Period? _coreBusinessUnitPeriod;
         
@@ -14456,7 +14458,7 @@ namespace SampleSystem.Generated.DTO
         
         private Framework.Core.Period _educationDuration = Framework.Core.Period.Eternity;
         
-        private string _email;
+        private string _email = null!;
         
         private long _externalId;
         
@@ -14464,11 +14466,11 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _hireDate;
         
-        private string _interphone;
+        private string _interphone = null!;
         
         private bool _isCandidate;
         
-        private string _landlinephone;
+        private string _landlinephone = null!;
         
         private System.DateTime? _lastActionDate;
         
@@ -14476,13 +14478,13 @@ namespace SampleSystem.Generated.DTO
         
         private Anch.Core.Maybe<string> _login;
         
-        private string _mailAccountName;
+        private string _mailAccountName = null!;
         
-        private SampleSystem.Domain.Inline.FioShort _nameEng;
+        private SampleSystem.Domain.Inline.FioShort _nameEng = null!;
         
-        private SampleSystem.Domain.Inline.Fio _nameNative;
+        private SampleSystem.Domain.Inline.Fio _nameNative = null!;
         
-        private SampleSystem.Domain.Inline.Fio _nameRussian;
+        private SampleSystem.Domain.Inline.Fio _nameRussian = null!;
         
         private System.DateTime _nonValidateVirtualProp;
         
@@ -14909,27 +14911,27 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeFullDTO : SampleSystem.Generated.DTO.EmployeeSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _coreBusinessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO? _coreBusinessUnit;
         
-        private SampleSystem.Generated.DTO.HRDepartmentSimpleDTO _hRDepartment;
+        private SampleSystem.Generated.DTO.HRDepartmentSimpleDTO? _hRDepartment;
         
-        private SampleSystem.Generated.DTO.LocationSimpleDTO _location;
+        private SampleSystem.Generated.DTO.LocationSimpleDTO? _location;
         
-        private SampleSystem.Generated.DTO.ManagementUnitSimpleDTO _managementUnit;
+        private SampleSystem.Generated.DTO.ManagementUnitSimpleDTO? _managementUnit;
         
-        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _personalAssistant;
+        private SampleSystem.Generated.DTO.EmployeeSimpleDTO? _personalAssistant;
         
         private Anch.Core.Maybe<SampleSystem.Generated.DTO.EmployeePositionSimpleDTO> _position;
         
-        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _ppm;
+        private SampleSystem.Generated.DTO.EmployeeSimpleDTO? _ppm;
         
-        private SampleSystem.Generated.DTO.EmployeeRegistrationTypeSimpleDTO _registrationType;
+        private SampleSystem.Generated.DTO.EmployeeRegistrationTypeSimpleDTO? _registrationType;
         
-        private SampleSystem.Generated.DTO.EmployeeRoleSimpleDTO _role;
+        private SampleSystem.Generated.DTO.EmployeeRoleSimpleDTO? _role;
         
-        private SampleSystem.Generated.DTO.EmployeeRoleDegreeSimpleDTO _roleDegree;
+        private SampleSystem.Generated.DTO.EmployeeRoleDegreeSimpleDTO? _roleDegree;
         
-        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _vacationApprover;
+        private SampleSystem.Generated.DTO.EmployeeSimpleDTO? _vacationApprover;
         
         public EmployeeFullDTO()
         {
@@ -14942,7 +14944,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitSimpleDTO CoreBusinessUnit
+        public SampleSystem.Generated.DTO.BusinessUnitSimpleDTO? CoreBusinessUnit
         {
             get
             {
@@ -14955,7 +14957,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.HRDepartmentSimpleDTO HRDepartment
+        public SampleSystem.Generated.DTO.HRDepartmentSimpleDTO? HRDepartment
         {
             get
             {
@@ -14968,7 +14970,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationSimpleDTO Location
+        public SampleSystem.Generated.DTO.LocationSimpleDTO? Location
         {
             get
             {
@@ -14981,7 +14983,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitSimpleDTO ManagementUnit
+        public SampleSystem.Generated.DTO.ManagementUnitSimpleDTO? ManagementUnit
         {
             get
             {
@@ -14994,7 +14996,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeSimpleDTO PersonalAssistant
+        public SampleSystem.Generated.DTO.EmployeeSimpleDTO? PersonalAssistant
         {
             get
             {
@@ -15020,7 +15022,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeSimpleDTO Ppm
+        public SampleSystem.Generated.DTO.EmployeeSimpleDTO? Ppm
         {
             get
             {
@@ -15033,7 +15035,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRegistrationTypeSimpleDTO RegistrationType
+        public SampleSystem.Generated.DTO.EmployeeRegistrationTypeSimpleDTO? RegistrationType
         {
             get
             {
@@ -15046,7 +15048,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRoleSimpleDTO Role
+        public SampleSystem.Generated.DTO.EmployeeRoleSimpleDTO? Role
         {
             get
             {
@@ -15059,7 +15061,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRoleDegreeSimpleDTO RoleDegree
+        public SampleSystem.Generated.DTO.EmployeeRoleDegreeSimpleDTO? RoleDegree
         {
             get
             {
@@ -15072,7 +15074,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeSimpleDTO VacationApprover
+        public SampleSystem.Generated.DTO.EmployeeSimpleDTO? VacationApprover
         {
             get
             {
@@ -15204,11 +15206,11 @@ namespace SampleSystem.Generated.DTO
         
         private Anch.Core.Maybe<string> _login = Anch.Core.Maybe<string>.Nothing;
         
-        private SampleSystem.Domain.Inline.FioShort _nameEng;
+        private SampleSystem.Domain.Inline.FioShort _nameEng = null!;
         
-        private SampleSystem.Domain.Inline.Fio _nameNative;
+        private SampleSystem.Domain.Inline.Fio _nameNative = null!;
         
-        private SampleSystem.Domain.Inline.Fio _nameRussian;
+        private SampleSystem.Domain.Inline.Fio _nameRussian = null!;
         
         private System.DateTime _nonValidateVirtualProp;
         
@@ -16327,13 +16329,13 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeCellPhoneSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeCellPhoneIdentityDTO>
     {
         
-        private string _cityCode;
+        private string _cityCode = null!;
         
-        private string _countryCode;
+        private string _countryCode = null!;
         
-        private string _fullNumber;
+        private string _fullNumber = null!;
         
-        private string _number;
+        private string _number = null!;
         
         public EmployeeCellPhoneSimpleDTO()
         {
@@ -16423,7 +16425,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeCellPhoneFullDTO : SampleSystem.Generated.DTO.EmployeeCellPhoneSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _employee;
+        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _employee = null!;
         
         public EmployeeCellPhoneFullDTO()
         {
@@ -16835,7 +16837,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeInformationVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public EmployeeInformationVisualDTO()
         {
@@ -16877,11 +16879,11 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeInformationSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO>
     {
         
-        private string _email;
+        private string _email = null!;
         
-        private string _name;
+        private string _name = null!;
         
-        private string _personalEmail;
+        private string _personalEmail = null!;
         
         public EmployeeInformationSimpleDTO()
         {
@@ -16987,13 +16989,13 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePersonalCellPhoneSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneIdentityDTO>
     {
         
-        private string _cityCode;
+        private string _cityCode = null!;
         
-        private string _countryCode;
+        private string _countryCode = null!;
         
-        private string _fullNumber;
+        private string _fullNumber = null!;
         
-        private string _number;
+        private string _number = null!;
         
         public EmployeePersonalCellPhoneSimpleDTO()
         {
@@ -17083,7 +17085,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePersonalCellPhoneFullDTO : SampleSystem.Generated.DTO.EmployeePersonalCellPhoneSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _employee;
+        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _employee = null!;
         
         public EmployeePersonalCellPhoneFullDTO()
         {
@@ -17497,7 +17499,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePhotoSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO>
     {
         
-        private string _contentType;
+        private string _contentType = null!;
         
         private bool _isDefault;
         
@@ -17573,7 +17575,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePhotoFullDTO : SampleSystem.Generated.DTO.EmployeePhotoSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _employee;
+        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _employee = null!;
         
         public EmployeePhotoFullDTO()
         {
@@ -17604,7 +17606,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePhotoRichDTO : SampleSystem.Generated.DTO.EmployeePhotoFullDTO
     {
         
-        private byte[] _data;
+        private byte[] _data = null!;
         
         public EmployeePhotoRichDTO()
         {
@@ -17635,7 +17637,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePositionVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public EmployeePositionVisualDTO()
         {
@@ -17677,11 +17679,11 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePositionSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO>
     {
         
-        private string _englishName;
+        private string _englishName = null!;
         
         private long _externalId;
         
-        private string _name;
+        private string _name = null!;
         
         public EmployeePositionSimpleDTO()
         {
@@ -17753,7 +17755,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePositionFullDTO : SampleSystem.Generated.DTO.EmployeePositionSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.LocationSimpleDTO _location;
+        private SampleSystem.Generated.DTO.LocationSimpleDTO _location = null!;
         
         public EmployeePositionFullDTO()
         {
@@ -17800,7 +17802,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRegistrationTypeVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public EmployeeRegistrationTypeVisualDTO()
         {
@@ -17844,7 +17846,7 @@ namespace SampleSystem.Generated.DTO
         
         private long _externalId;
         
-        private string _name;
+        private string _name = null!;
         
         public EmployeeRegistrationTypeSimpleDTO()
         {
@@ -17935,7 +17937,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRoleVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public EmployeeRoleVisualDTO()
         {
@@ -17977,7 +17979,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRoleSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public EmployeeRoleSimpleDTO()
         {
@@ -18055,7 +18057,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRoleDegreeVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public EmployeeRoleDegreeVisualDTO()
         {
@@ -18097,7 +18099,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRoleDegreeSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public EmployeeRoleDegreeSimpleDTO()
         {
@@ -18175,7 +18177,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeSpecializationVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public EmployeeSpecializationVisualDTO()
         {
@@ -18217,7 +18219,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeSpecializationSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public EmployeeSpecializationSimpleDTO()
         {
@@ -18333,9 +18335,9 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeAndEmployeeSpecializationLinkFullDTO : SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _employee;
+        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _employee = null!;
         
-        private SampleSystem.Generated.DTO.EmployeeSpecializationSimpleDTO _specialization;
+        private SampleSystem.Generated.DTO.EmployeeSpecializationSimpleDTO _specialization = null!;
         
         public EmployeeAndEmployeeSpecializationLinkFullDTO()
         {
@@ -18783,9 +18785,9 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeToEmployeeLinkFullDTO : SampleSystem.Generated.DTO.EmployeeToEmployeeLinkSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _linkedEmployee;
+        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _linkedEmployee = null!;
         
-        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _owner;
+        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _owner = null!;
         
         public EmployeeToEmployeeLinkFullDTO()
         {
@@ -19180,7 +19182,7 @@ namespace SampleSystem.Generated.DTO
     public partial class IMRequestVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.IMRequestIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public IMRequestVisualDTO()
         {
@@ -19222,11 +19224,11 @@ namespace SampleSystem.Generated.DTO
     public partial class IMRequestSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.IMRequestIdentityDTO>
     {
         
-        private string _email;
+        private string _email = null!;
         
-        private string _message;
+        private string _message = null!;
         
-        private string _name;
+        private string _name = null!;
         
         public IMRequestSimpleDTO()
         {
@@ -19314,7 +19316,7 @@ namespace SampleSystem.Generated.DTO
     public partial class IMRequestRichDTO : SampleSystem.Generated.DTO.IMRequestFullDTO
     {
         
-        private SampleSystem.Generated.DTO.IMRequestDetailRichDTO _oneToOneDetail;
+        private SampleSystem.Generated.DTO.IMRequestDetailRichDTO _oneToOneDetail = null!;
         
         public IMRequestRichDTO()
         {
@@ -19378,7 +19380,7 @@ namespace SampleSystem.Generated.DTO
     public partial class IMRequestDetailFullDTO : SampleSystem.Generated.DTO.IMRequestDetailSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.IMRequestSimpleDTO _request;
+        private SampleSystem.Generated.DTO.IMRequestSimpleDTO _request = null!;
         
         public IMRequestDetailFullDTO()
         {
@@ -19425,7 +19427,7 @@ namespace SampleSystem.Generated.DTO
     public partial class InformationVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.InformationIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public InformationVisualDTO()
         {
@@ -19467,9 +19469,9 @@ namespace SampleSystem.Generated.DTO
     public partial class InformationSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.InformationIdentityDTO>
     {
         
-        private string _email;
+        private string _email = null!;
         
-        private string _name;
+        private string _name = null!;
         
         public InformationSimpleDTO()
         {
@@ -19608,7 +19610,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestRestrictionObjectFullDTO : SampleSystem.Generated.DTO.TestRestrictionObjectSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _businessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _businessUnit = null!;
         
         public TestRestrictionObjectFullDTO()
         {
@@ -19655,7 +19657,7 @@ namespace SampleSystem.Generated.DTO
     public partial class Location1676VisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.Location1676IdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public Location1676VisualDTO()
         {
@@ -19697,7 +19699,7 @@ namespace SampleSystem.Generated.DTO
     public partial class Location1676SimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.Location1676IdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public Location1676SimpleDTO()
         {
@@ -19790,7 +19792,7 @@ namespace SampleSystem.Generated.DTO
     public partial class WorkingCalendar1676VisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public WorkingCalendar1676VisualDTO()
         {
@@ -19832,7 +19834,7 @@ namespace SampleSystem.Generated.DTO
     public partial class WorkingCalendar1676SimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public WorkingCalendar1676SimpleDTO()
         {
@@ -19878,7 +19880,7 @@ namespace SampleSystem.Generated.DTO
     public partial class WorkingCalendar1676FullDTO : SampleSystem.Generated.DTO.WorkingCalendar1676SimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.Location1676SimpleDTO _location;
+        private SampleSystem.Generated.DTO.Location1676SimpleDTO _location = null!;
         
         public WorkingCalendar1676FullDTO()
         {
@@ -19927,7 +19929,7 @@ namespace SampleSystem.Generated.DTO
     public partial class PrincipalSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.PrincipalIdentityDTO>
     {
         
-        private string _externalId;
+        private string _externalId = null!;
         
         public PrincipalSimpleDTO()
         {
@@ -20793,7 +20795,7 @@ namespace SampleSystem.Generated.DTO
     public partial class Example2FullDTO : SampleSystem.Generated.DTO.Example2SimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.Example1SimpleDTO _parent;
+        private SampleSystem.Generated.DTO.Example1SimpleDTO _parent = null!;
         
         public Example2FullDTO()
         {
@@ -21175,7 +21177,7 @@ namespace SampleSystem.Generated.DTO
     public partial class HRDepartmentVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.HRDepartmentIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public HRDepartmentVisualDTO()
         {
@@ -21217,11 +21219,11 @@ namespace SampleSystem.Generated.DTO
     public partial class HRDepartmentSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.HRDepartmentIdentityDTO>
     {
         
-        private string _code;
+        private string _code = null!;
         
-        private string _codeNative;
+        private string _codeNative = null!;
         
-        private string _companyLegalEntityName;
+        private string _companyLegalEntityName = null!;
         
         private long _externalId;
         
@@ -21229,11 +21231,11 @@ namespace SampleSystem.Generated.DTO
         
         private bool _isProduction;
         
-        private string _locationName;
+        private string _locationName = null!;
         
-        private string _name;
+        private string _name = null!;
         
-        private string _nameNative;
+        private string _nameNative = null!;
         
         public HRDepartmentSimpleDTO()
         {
@@ -21388,15 +21390,15 @@ namespace SampleSystem.Generated.DTO
     public partial class HRDepartmentFullDTO : SampleSystem.Generated.DTO.HRDepartmentSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _approvedBy;
+        private SampleSystem.Generated.DTO.EmployeeSimpleDTO? _approvedBy;
         
         private Anch.Core.Maybe<SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO> _companyLegalEntity;
         
-        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _head;
+        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _head = null!;
         
-        private SampleSystem.Generated.DTO.LocationSimpleDTO _location;
+        private SampleSystem.Generated.DTO.LocationSimpleDTO _location = null!;
         
-        private SampleSystem.Generated.DTO.HRDepartmentSimpleDTO _parent;
+        private SampleSystem.Generated.DTO.HRDepartmentSimpleDTO? _parent;
         
         public HRDepartmentFullDTO()
         {
@@ -21409,7 +21411,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeSimpleDTO ApprovedBy
+        public SampleSystem.Generated.DTO.EmployeeSimpleDTO? ApprovedBy
         {
             get
             {
@@ -21461,7 +21463,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.HRDepartmentSimpleDTO Parent
+        public SampleSystem.Generated.DTO.HRDepartmentSimpleDTO? Parent
         {
             get
             {
@@ -22012,9 +22014,9 @@ namespace SampleSystem.Generated.DTO
     public partial class HRDepartmentEmployeePositionFullDTO : SampleSystem.Generated.DTO.HRDepartmentEmployeePositionSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.EmployeePositionSimpleDTO _employeePosition;
+        private SampleSystem.Generated.DTO.EmployeePositionSimpleDTO _employeePosition = null!;
         
-        private SampleSystem.Generated.DTO.HRDepartmentSimpleDTO _hrDepartment;
+        private SampleSystem.Generated.DTO.HRDepartmentSimpleDTO _hrDepartment = null!;
         
         public HRDepartmentEmployeePositionFullDTO()
         {
@@ -22321,9 +22323,9 @@ namespace SampleSystem.Generated.DTO
     public partial class HRDepartmentRoleEmployeeFullDTO : SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _employee;
+        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _employee = null!;
         
-        private SampleSystem.Generated.DTO.HRDepartmentSimpleDTO _hRDepartment;
+        private SampleSystem.Generated.DTO.HRDepartmentSimpleDTO _hRDepartment = null!;
         
         public HRDepartmentRoleEmployeeFullDTO()
         {
@@ -22639,7 +22641,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeEmailChangeModelSimpleDTO : SampleSystem.Generated.DTO.BaseAbstractDTO
     {
         
-        private string _email;
+        private string _email = null!;
         
         public EmployeeEmailChangeModelSimpleDTO()
         {
@@ -22676,7 +22678,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeEmailChangeModelFullDTO : SampleSystem.Generated.DTO.EmployeeEmailChangeModelSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _changingObject;
+        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _changingObject = null!;
         
         public EmployeeEmailChangeModelFullDTO()
         {
@@ -22829,7 +22831,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeEmailMassChangeModelSimpleDTO : SampleSystem.Generated.DTO.BaseAbstractDTO
     {
         
-        private string _email;
+        private string _email = null!;
         
         public EmployeeEmailMassChangeModelSimpleDTO()
         {
@@ -23019,7 +23021,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.Guid? _ancestorIdent;
         
-        private string _filterVirtualName;
+        private string? _filterVirtualName;
         
         public BusinessUnitProgramClassFilterModelStrictDTO()
         {
@@ -23039,7 +23041,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string FilterVirtualName
+        public string? FilterVirtualName
         {
             get
             {
@@ -23172,22 +23174,22 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitRootFilterModelStrictDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Filters.Root.BusinessUnitRootFilterModel>
     {
         
-        private System.DateTime[] _arrayDays;
+        private System.DateTime[]? _arrayDays;
         
-        private Framework.Core.Period[] _arrayPeriods;
+        private Framework.Core.Period[]? _arrayPeriods;
         
         private SampleSystem.Generated.DTO.EmployeeIdentityDTO _employee;
         
-        private System.Collections.Generic.List<System.DateTime> _listDays = new System.Collections.Generic.List<System.DateTime>();
+        private System.Collections.Generic.List<System.DateTime>? _listDays = new System.Collections.Generic.List<System.DateTime>();
         
-        private System.Collections.Generic.List<Framework.Core.Period> _listPeriods = new System.Collections.Generic.List<Framework.Core.Period>();
+        private System.Collections.Generic.List<Framework.Core.Period>? _listPeriods = new System.Collections.Generic.List<Framework.Core.Period>();
         
         public BusinessUnitRootFilterModelStrictDTO()
         {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime[] ArrayDays
+        public System.DateTime[]? ArrayDays
         {
             get
             {
@@ -23200,7 +23202,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period[] ArrayPeriods
+        public Framework.Core.Period[]? ArrayPeriods
         {
             get
             {
@@ -23226,7 +23228,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<System.DateTime> ListDays
+        public System.Collections.Generic.List<System.DateTime>? ListDays
         {
             get
             {
@@ -23239,7 +23241,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Framework.Core.Period> ListPeriods
+        public System.Collections.Generic.List<Framework.Core.Period>? ListPeriods
         {
             get
             {
@@ -23307,7 +23309,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.ManagementUnitIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public ManagementUnitVisualDTO()
         {
@@ -23355,7 +23357,7 @@ namespace SampleSystem.Generated.DTO
         
         private bool _isProduction;
         
-        private string _name;
+        private string _name = null!;
         
         private Framework.Core.Period _period = Framework.Core.Period.Eternity;
         
@@ -23460,7 +23462,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitFullDTO : SampleSystem.Generated.DTO.ManagementUnitSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.ManagementUnitSimpleDTO _parent;
+        private SampleSystem.Generated.DTO.ManagementUnitSimpleDTO? _parent;
         
         public ManagementUnitFullDTO()
         {
@@ -23473,7 +23475,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitSimpleDTO Parent
+        public SampleSystem.Generated.DTO.ManagementUnitSimpleDTO? Parent
         {
             get
             {
@@ -23859,9 +23861,9 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitAndBusinessUnitLinkFullDTO : SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _businessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _businessUnit = null!;
         
-        private SampleSystem.Generated.DTO.ManagementUnitSimpleDTO _managementUnit;
+        private SampleSystem.Generated.DTO.ManagementUnitSimpleDTO _managementUnit = null!;
         
         public ManagementUnitAndBusinessUnitLinkFullDTO()
         {
@@ -24168,9 +24170,9 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitAndHRDepartmentLinkFullDTO : SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.HRDepartmentSimpleDTO _hRDepartment;
+        private SampleSystem.Generated.DTO.HRDepartmentSimpleDTO _hRDepartment = null!;
         
-        private SampleSystem.Generated.DTO.ManagementUnitSimpleDTO _managementUnit;
+        private SampleSystem.Generated.DTO.ManagementUnitSimpleDTO _managementUnit = null!;
         
         public ManagementUnitAndHRDepartmentLinkFullDTO()
         {
@@ -24428,9 +24430,9 @@ namespace SampleSystem.Generated.DTO
         
         private bool _isProduction;
         
-        private SampleSystem.Domain.NhFluentMapping.MuComponent _muComponent;
+        private SampleSystem.Domain.NhFluentMapping.MuComponent _muComponent = null!;
         
-        private string _name;
+        private string _name = null!;
         
         private Framework.Core.Period _period = Framework.Core.Period.Eternity;
         
@@ -24689,9 +24691,9 @@ namespace SampleSystem.Generated.DTO
     public partial class SqlParserTestObjSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.SqlParserTestObjIdentityDTO>
     {
         
-        private string _notNullColumn;
+        private string _notNullColumn = null!;
         
-        private string _uniqueColumn;
+        private string _uniqueColumn = null!;
         
         public SqlParserTestObjSimpleDTO()
         {
@@ -24980,7 +24982,7 @@ namespace SampleSystem.Generated.DTO
     public partial class SqlParserTestObjContainerFullDTO : SampleSystem.Generated.DTO.SqlParserTestObjContainerSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.SqlParserTestObjSimpleDTO _includedObject;
+        private SampleSystem.Generated.DTO.SqlParserTestObjSimpleDTO _includedObject = null!;
         
         public SqlParserTestObjContainerFullDTO()
         {
@@ -25170,7 +25172,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestCustomContextSecurityObjVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public TestCustomContextSecurityObjVisualDTO()
         {
@@ -25212,7 +25214,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestCustomContextSecurityObjSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public TestCustomContextSecurityObjSimpleDTO()
         {
@@ -25294,7 +25296,7 @@ namespace SampleSystem.Generated.DTO
         
         private int _intVal;
         
-        private string _strVal;
+        private string _strVal = null!;
         
         public TestDefaultFieldsMappingObjSimpleDTO()
         {
@@ -25435,7 +25437,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestRootSecurityObjVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public TestRootSecurityObjVisualDTO()
         {
@@ -25477,7 +25479,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestRootSecurityObjSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public TestRootSecurityObjSimpleDTO()
         {
@@ -25523,11 +25525,11 @@ namespace SampleSystem.Generated.DTO
     public partial class TestRootSecurityObjFullDTO : SampleSystem.Generated.DTO.TestRootSecurityObjSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _businessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _businessUnit = null!;
         
-        private SampleSystem.Generated.DTO.LocationSimpleDTO _location;
+        private SampleSystem.Generated.DTO.LocationSimpleDTO _location = null!;
         
-        private SampleSystem.Generated.DTO.ManagementUnitFluentMappingSimpleDTO _managementUnitFluentMapping;
+        private SampleSystem.Generated.DTO.ManagementUnitFluentMappingSimpleDTO _managementUnitFluentMapping = null!;
         
         public TestRootSecurityObjFullDTO()
         {
@@ -25615,7 +25617,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecurityObjItemVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public TestSecurityObjItemVisualDTO()
         {
@@ -25657,7 +25659,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecurityObjItemSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public TestSecurityObjItemSimpleDTO()
         {
@@ -25703,7 +25705,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecurityObjItemFullDTO : SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.TestRootSecurityObjSimpleDTO _firstMaster;
+        private SampleSystem.Generated.DTO.TestRootSecurityObjSimpleDTO _firstMaster = null!;
         
         public TestSecurityObjItemFullDTO()
         {
@@ -25795,7 +25797,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecuritySubObjItemVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public TestSecuritySubObjItemVisualDTO()
         {
@@ -25837,7 +25839,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecuritySubObjItemSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public TestSecuritySubObjItemSimpleDTO()
         {
@@ -25883,7 +25885,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecuritySubObjItemFullDTO : SampleSystem.Generated.DTO.TestSecuritySubObjItemSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO _innerMaster;
+        private SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO _innerMaster = null!;
         
         public TestSecuritySubObjItemFullDTO()
         {
@@ -25930,7 +25932,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecuritySubObjItem2VisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public TestSecuritySubObjItem2VisualDTO()
         {
@@ -25972,7 +25974,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecuritySubObjItem2SimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public TestSecuritySubObjItem2SimpleDTO()
         {
@@ -26018,9 +26020,9 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecuritySubObjItem2FullDTO : SampleSystem.Generated.DTO.TestSecuritySubObjItem2SimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO _innerMaster;
+        private SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO _innerMaster = null!;
         
-        private SampleSystem.Generated.DTO.TestRootSecurityObjSimpleDTO _rootSecurityObj;
+        private SampleSystem.Generated.DTO.TestRootSecurityObjSimpleDTO _rootSecurityObj = null!;
         
         public TestSecuritySubObjItem2FullDTO()
         {
@@ -26080,7 +26082,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecuritySubObjItem3VisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public TestSecuritySubObjItem3VisualDTO()
         {
@@ -26122,7 +26124,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecuritySubObjItem3SimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public TestSecuritySubObjItem3SimpleDTO()
         {
@@ -26168,7 +26170,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecuritySubObjItem3FullDTO : SampleSystem.Generated.DTO.TestSecuritySubObjItem3SimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO _innerMaster;
+        private SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO _innerMaster = null!;
         
         public TestSecuritySubObjItem3FullDTO()
         {
@@ -26248,11 +26250,11 @@ namespace SampleSystem.Generated.DTO
     public partial class TestItemAuthObjectFullDTO : SampleSystem.Generated.DTO.TestItemAuthObjectSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _businessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _businessUnit = null!;
         
-        private SampleSystem.Generated.DTO.ManagementUnitSimpleDTO _managementUnit;
+        private SampleSystem.Generated.DTO.ManagementUnitSimpleDTO _managementUnit = null!;
         
-        private SampleSystem.Generated.DTO.TestPlainAuthObjectSimpleDTO _master;
+        private SampleSystem.Generated.DTO.TestPlainAuthObjectSimpleDTO _master = null!;
         
         public TestItemAuthObjectFullDTO()
         {
@@ -26325,7 +26327,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestPerformanceObjectVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public TestPerformanceObjectVisualDTO()
         {
@@ -26367,7 +26369,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestPerformanceObjectSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public TestPerformanceObjectSimpleDTO()
         {
@@ -26413,13 +26415,13 @@ namespace SampleSystem.Generated.DTO
     public partial class TestPerformanceObjectFullDTO : SampleSystem.Generated.DTO.TestPerformanceObjectSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _businessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitSimpleDTO _businessUnit = null!;
         
-        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _employee;
+        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _employee = null!;
         
-        private SampleSystem.Generated.DTO.LocationSimpleDTO _location;
+        private SampleSystem.Generated.DTO.LocationSimpleDTO _location = null!;
         
-        private SampleSystem.Generated.DTO.ManagementUnitSimpleDTO _managementUnit;
+        private SampleSystem.Generated.DTO.ManagementUnitSimpleDTO _managementUnit = null!;
         
         public TestPerformanceObjectFullDTO()
         {
@@ -26505,7 +26507,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestPlainAuthObjectVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public TestPlainAuthObjectVisualDTO()
         {
@@ -26547,7 +26549,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestPlainAuthObjectSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO>
     {
         
-        private string _name;
+        private string _name = null!;
         
         public TestPlainAuthObjectSimpleDTO()
         {
@@ -26593,9 +26595,9 @@ namespace SampleSystem.Generated.DTO
     public partial class TestPlainAuthObjectFullDTO : SampleSystem.Generated.DTO.TestPlainAuthObjectSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _employee;
+        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _employee = null!;
         
-        private SampleSystem.Generated.DTO.LocationSimpleDTO _location;
+        private SampleSystem.Generated.DTO.LocationSimpleDTO _location = null!;
         
         public TestPlainAuthObjectFullDTO()
         {
@@ -26672,7 +26674,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestImmutableObjSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.BLL.Domain.IdentityObject.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO>
     {
         
-        private string _testImmutablePrimitiveProperty;
+        private string _testImmutablePrimitiveProperty = null!;
         
         public TestImmutableObjSimpleDTO()
         {
@@ -26723,7 +26725,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestImmutableObjFullDTO : SampleSystem.Generated.DTO.TestImmutableObjSimpleDTO
     {
         
-        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _testImmutableRefProperty;
+        private SampleSystem.Generated.DTO.EmployeeSimpleDTO _testImmutableRefProperty = null!;
         
         public TestImmutableObjFullDTO()
         {

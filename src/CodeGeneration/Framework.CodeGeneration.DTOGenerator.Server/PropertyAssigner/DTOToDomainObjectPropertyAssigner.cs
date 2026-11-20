@@ -89,7 +89,7 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration>(IDTOSource<TConfi
 
                     FalseStatements =
                                {
-                                       new CodePrimitiveExpression(null).ToAssignStatement(targetPropertyRef)
+                                       property.ToNullValueExpression().ToAssignStatement(targetPropertyRef)
                                }
                 };
             }
@@ -103,7 +103,7 @@ public class DTOToDomainObjectPropertyAssigner<TConfiguration>(IDTOSource<TConfi
                                },
                     FalseStatements =
                                {
-                                       new CodePrimitiveExpression(null).ToAssignStatement(targetPropertyRef)
+                                       property.ToNullValueExpression().ToAssignStatement(targetPropertyRef)
                                }
                 };
             }

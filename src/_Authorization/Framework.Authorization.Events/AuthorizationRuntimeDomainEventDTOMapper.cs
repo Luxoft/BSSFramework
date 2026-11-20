@@ -20,7 +20,7 @@ public class AuthorizationRuntimeDomainEventDTOMapper(
             switch (dto)
             {
                 case PrincipalSaveEventDTO principalSave:
-                    principalSave.Principal.Permissions = null;
+                    principalSave.Principal.Permissions = null!;
                     break;
 
                 case PrincipalRemoveEventDTO principalRemove:

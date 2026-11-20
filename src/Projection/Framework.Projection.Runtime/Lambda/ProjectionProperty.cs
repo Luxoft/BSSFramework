@@ -4,6 +4,7 @@ using System.Reflection;
 using Anch.Core;
 
 using Framework.Core;
+using Framework.Core.ReflectionImpl;
 
 namespace Framework.Projection.Lambda;
 
@@ -76,6 +77,9 @@ public abstract class ProjectionProperty<TExpression, TElement> : IProjectionPro
     /// The property has a Nullable type
     /// </summary>
     public bool IsNullable { get; }
+
+    /// <inheritdoc />
+    public bool IsNullableReference => this.Path.IsNullableReferenceResult(this.IsCollection);
 
     /// <inheritdoc />
     public IReadOnlyList<Attribute> Attributes { get; }

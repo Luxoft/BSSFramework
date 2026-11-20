@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+#nullable enable
+
 namespace SampleSystem.Generated.DTO
 {
     
@@ -22,13 +24,13 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Domain.Enums.BusinessUnitStatus _businessUnitStatus;
         
-        private string _businessUnitTypeName;
+        private string _businessUnitTypeName = null!;
         
         private decimal _commission;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private int _deepLevel;
         
@@ -50,11 +52,11 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _leastProjectStartDate;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private bool _needSendBusinessUnitHasNoLinkedProjectsWarning;
         
@@ -64,7 +66,7 @@ namespace SampleSystem.Generated.DTO
         
         private Framework.Core.Period _period;
         
-        private string _projectStartMailList;
+        private string? _projectStartMailList;
         
         private int _rank;
         
@@ -156,7 +158,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -316,7 +318,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -407,7 +409,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ProjectStartMailList
+        public string? ProjectStartMailList
         {
             get
             {
@@ -450,23 +452,23 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private SampleSystem.Domain.Ariba.RevenueDocumentAribaStatus _aribaStatus;
+        private SampleSystem.Domain.Ariba.RevenueDocumentAribaStatus _aribaStatus = null!;
         
-        private string _code;
+        private string _code = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
-        private string _nameEnglish;
+        private string _nameEnglish = null!;
         
         private SampleSystem.Domain.Enums.CompanyLegalEntityType _type;
         
@@ -532,7 +534,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -575,7 +577,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -665,7 +667,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private int _deepLevel;
         
@@ -677,11 +679,11 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Domain.Enums.LocationType _locationType;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         public LocationIntegrationSimpleDTO()
         {
@@ -758,7 +760,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -853,7 +855,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -907,7 +909,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeIntegrationRichDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.Employee, System.Guid>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.Employee>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
-        private string _accountName;
+        private string _accountName = null!;
         
         private bool _active;
         
@@ -919,27 +921,27 @@ namespace SampleSystem.Generated.DTO
         
         private bool _canBePPM;
         
-        private string _cellPhone;
+        private string _cellPhone = null!;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeCellPhoneIntegrationRichDTO> _cellPhones;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeCellPhoneIntegrationRichDTO> _cellPhones = null!;
         
-        private SampleSystem.Generated.DTO.CompanyLegalEntityIntegrationSimpleDTO _companyLegalEntity;
+        private SampleSystem.Generated.DTO.CompanyLegalEntityIntegrationSimpleDTO? _companyLegalEntity;
         
-        private SampleSystem.Generated.DTO.BusinessUnitIntegrationSimpleDTO _coreBusinessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitIntegrationSimpleDTO? _coreBusinessUnit;
         
         private Framework.Core.Period? _coreBusinessUnitPeriod;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.DateTime? _dismissDate;
         
         private Framework.Core.Period _educationDuration;
         
-        private string _email;
+        private string _email = null!;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkIntegrationRichDTO> _employeeToEmployeeLinks;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkIntegrationRichDTO> _employeeToEmployeeLinks = null!;
         
         private long _externalId;
         
@@ -947,61 +949,61 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _hireDate;
         
-        private SampleSystem.Generated.DTO.HRDepartmentIntegrationSimpleDTO _hRDepartment;
+        private SampleSystem.Generated.DTO.HRDepartmentIntegrationSimpleDTO? _hRDepartment;
         
         private System.Guid _id;
         
-        private string _interphone;
+        private string _interphone = null!;
         
         private bool _isCandidate;
         
-        private string _landlinephone;
+        private string _landlinephone = null!;
         
         private System.DateTime? _lastActionDate;
         
-        private SampleSystem.Generated.DTO.LocationIntegrationSimpleDTO _location;
+        private SampleSystem.Generated.DTO.LocationIntegrationSimpleDTO? _location;
         
         private int? _locationCode;
         
-        private string _login;
+        private string _login = null!;
         
-        private string _logonName;
+        private string _logonName = null!;
         
-        private string _mailAccountName;
+        private string _mailAccountName = null!;
         
-        private SampleSystem.Generated.DTO.ManagementUnitIntegrationSimpleDTO _managementUnit;
+        private SampleSystem.Generated.DTO.ManagementUnitIntegrationSimpleDTO? _managementUnit;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private SampleSystem.Domain.Inline.FioShort _nameEng;
+        private SampleSystem.Domain.Inline.FioShort _nameEng = null!;
         
-        private SampleSystem.Domain.Inline.Fio _nameNative;
+        private SampleSystem.Domain.Inline.Fio _nameNative = null!;
         
-        private SampleSystem.Domain.Inline.Fio _nameRussian;
+        private SampleSystem.Domain.Inline.Fio _nameRussian = null!;
         
         private System.DateTime _nonValidateVirtualProp;
         
-        private SampleSystem.Generated.DTO.EmployeeIntegrationSimpleDTO _personalAssistant;
+        private SampleSystem.Generated.DTO.EmployeeIntegrationSimpleDTO? _personalAssistant;
         
         private int? _pin;
         
         private System.DateTime? _plannedHireDate;
         
-        private SampleSystem.Generated.DTO.EmployeePositionIntegrationSimpleDTO _position;
+        private SampleSystem.Generated.DTO.EmployeePositionIntegrationSimpleDTO? _position;
         
-        private SampleSystem.Generated.DTO.EmployeeIntegrationSimpleDTO _ppm;
+        private SampleSystem.Generated.DTO.EmployeeIntegrationSimpleDTO? _ppm;
         
-        private SampleSystem.Generated.DTO.EmployeeRegistrationTypeIntegrationSimpleDTO _registrationType;
+        private SampleSystem.Generated.DTO.EmployeeRegistrationTypeIntegrationSimpleDTO? _registrationType;
         
-        private SampleSystem.Generated.DTO.EmployeeRoleIntegrationSimpleDTO _role;
+        private SampleSystem.Generated.DTO.EmployeeRoleIntegrationSimpleDTO? _role;
         
-        private SampleSystem.Generated.DTO.EmployeeRoleDegreeIntegrationSimpleDTO _roleDegree;
+        private SampleSystem.Generated.DTO.EmployeeRoleDegreeIntegrationSimpleDTO? _roleDegree;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIntegrationRichDTO> _specializations;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIntegrationRichDTO> _specializations = null!;
         
-        private SampleSystem.Generated.DTO.EmployeeIntegrationSimpleDTO _vacationApprover;
+        private SampleSystem.Generated.DTO.EmployeeIntegrationSimpleDTO? _vacationApprover;
         
         private System.DateTime _validateVirtualProp;
         
@@ -1121,7 +1123,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.CompanyLegalEntityIntegrationSimpleDTO CompanyLegalEntity
+        public SampleSystem.Generated.DTO.CompanyLegalEntityIntegrationSimpleDTO? CompanyLegalEntity
         {
             get
             {
@@ -1134,7 +1136,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitIntegrationSimpleDTO CoreBusinessUnit
+        public SampleSystem.Generated.DTO.BusinessUnitIntegrationSimpleDTO? CoreBusinessUnit
         {
             get
             {
@@ -1173,7 +1175,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -1277,7 +1279,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.HRDepartmentIntegrationSimpleDTO HRDepartment
+        public SampleSystem.Generated.DTO.HRDepartmentIntegrationSimpleDTO? HRDepartment
         {
             get
             {
@@ -1372,7 +1374,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationIntegrationSimpleDTO Location
+        public SampleSystem.Generated.DTO.LocationIntegrationSimpleDTO? Location
         {
             get
             {
@@ -1437,7 +1439,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitIntegrationSimpleDTO ManagementUnit
+        public SampleSystem.Generated.DTO.ManagementUnitIntegrationSimpleDTO? ManagementUnit
         {
             get
             {
@@ -1450,7 +1452,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -1528,7 +1530,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeIntegrationSimpleDTO PersonalAssistant
+        public SampleSystem.Generated.DTO.EmployeeIntegrationSimpleDTO? PersonalAssistant
         {
             get
             {
@@ -1567,7 +1569,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeePositionIntegrationSimpleDTO Position
+        public SampleSystem.Generated.DTO.EmployeePositionIntegrationSimpleDTO? Position
         {
             get
             {
@@ -1580,7 +1582,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeIntegrationSimpleDTO Ppm
+        public SampleSystem.Generated.DTO.EmployeeIntegrationSimpleDTO? Ppm
         {
             get
             {
@@ -1593,7 +1595,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRegistrationTypeIntegrationSimpleDTO RegistrationType
+        public SampleSystem.Generated.DTO.EmployeeRegistrationTypeIntegrationSimpleDTO? RegistrationType
         {
             get
             {
@@ -1606,7 +1608,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRoleIntegrationSimpleDTO Role
+        public SampleSystem.Generated.DTO.EmployeeRoleIntegrationSimpleDTO? Role
         {
             get
             {
@@ -1619,7 +1621,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRoleDegreeIntegrationSimpleDTO RoleDegree
+        public SampleSystem.Generated.DTO.EmployeeRoleDegreeIntegrationSimpleDTO? RoleDegree
         {
             get
             {
@@ -1645,7 +1647,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeIntegrationSimpleDTO VacationApprover
+        public SampleSystem.Generated.DTO.EmployeeIntegrationSimpleDTO? VacationApprover
         {
             get
             {
@@ -1704,7 +1706,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeIntegrationSimpleDTO : Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Employee.Employee>, Framework.Application.Domain.IIdentityObject<System.Guid>
     {
         
-        private string _accountName;
+        private string _accountName = null!;
         
         private bool _active;
         
@@ -1716,19 +1718,19 @@ namespace SampleSystem.Generated.DTO
         
         private bool _canBePPM;
         
-        private string _cellPhone;
+        private string _cellPhone = null!;
         
         private Framework.Core.Period? _coreBusinessUnitPeriod;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.DateTime? _dismissDate;
         
         private Framework.Core.Period _educationDuration;
         
-        private string _email;
+        private string _email = null!;
         
         private long _externalId;
         
@@ -1738,31 +1740,31 @@ namespace SampleSystem.Generated.DTO
         
         private System.Guid _id;
         
-        private string _interphone;
+        private string _interphone = null!;
         
         private bool _isCandidate;
         
-        private string _landlinephone;
+        private string _landlinephone = null!;
         
         private System.DateTime? _lastActionDate;
         
         private int? _locationCode;
         
-        private string _login;
+        private string _login = null!;
         
-        private string _logonName;
+        private string _logonName = null!;
         
-        private string _mailAccountName;
+        private string _mailAccountName = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private SampleSystem.Domain.Inline.FioShort _nameEng;
+        private SampleSystem.Domain.Inline.FioShort _nameEng = null!;
         
-        private SampleSystem.Domain.Inline.Fio _nameNative;
+        private SampleSystem.Domain.Inline.Fio _nameNative = null!;
         
-        private SampleSystem.Domain.Inline.Fio _nameRussian;
+        private SampleSystem.Domain.Inline.Fio _nameRussian = null!;
         
         private System.DateTime _nonValidateVirtualProp;
         
@@ -1901,7 +1903,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -2126,7 +2128,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -2273,25 +2275,25 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private string _cityCode;
+        private string _cityCode = null!;
         
-        private string _countryCode;
+        private string _countryCode = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private SampleSystem.Generated.DTO.EmployeeIntegrationSimpleDTO _employee;
+        private SampleSystem.Generated.DTO.EmployeeIntegrationSimpleDTO _employee = null!;
         
-        private string _fullNumber;
+        private string _fullNumber = null!;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _number;
+        private string _number = null!;
         
         public EmployeeCellPhoneIntegrationRichDTO()
         {
@@ -2355,7 +2357,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -2424,7 +2426,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -2482,19 +2484,19 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private string _englishName;
+        private string _englishName = null!;
         
         private long _externalId;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         public EmployeePositionIntegrationSimpleDTO()
         {
@@ -2532,7 +2534,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -2601,7 +2603,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -2659,17 +2661,17 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private long _externalId;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         public EmployeeRegistrationTypeIntegrationSimpleDTO()
         {
@@ -2707,7 +2709,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -2763,7 +2765,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -2821,15 +2823,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         public EmployeeRoleIntegrationSimpleDTO()
         {
@@ -2867,7 +2869,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -2910,7 +2912,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -2968,15 +2970,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         public EmployeeRoleDegreeIntegrationSimpleDTO()
         {
@@ -3014,7 +3016,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -3057,7 +3059,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -3115,15 +3117,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         public EmployeeSpecializationIntegrationSimpleDTO()
         {
@@ -3161,7 +3163,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -3204,7 +3206,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -3262,17 +3264,17 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private SampleSystem.Generated.DTO.EmployeeIntegrationSimpleDTO _employee;
+        private SampleSystem.Generated.DTO.EmployeeIntegrationSimpleDTO _employee = null!;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private SampleSystem.Generated.DTO.EmployeeSpecializationIntegrationSimpleDTO _specialization;
+        private SampleSystem.Generated.DTO.EmployeeSpecializationIntegrationSimpleDTO _specialization = null!;
         
         public EmployeeAndEmployeeSpecializationLinkIntegrationRichDTO()
         {
@@ -3310,7 +3312,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -3366,7 +3368,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -3424,19 +3426,19 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private SampleSystem.Domain.Enums.EmployeeLinkType _employeeLinkType;
         
         private System.Guid _id;
         
-        private SampleSystem.Generated.DTO.EmployeeIntegrationSimpleDTO _linkedEmployee;
+        private SampleSystem.Generated.DTO.EmployeeIntegrationSimpleDTO _linkedEmployee = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private SampleSystem.Generated.DTO.EmployeeIntegrationSimpleDTO _owner;
+        private SampleSystem.Generated.DTO.EmployeeIntegrationSimpleDTO _owner = null!;
         
         public EmployeeToEmployeeLinkIntegrationRichDTO()
         {
@@ -3474,7 +3476,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -3543,7 +3545,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -3599,15 +3601,15 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private string _code;
+        private string _code = null!;
         
-        private string _codeNative;
+        private string _codeNative = null!;
         
-        private string _companyLegalEntityName;
+        private string _companyLegalEntityName = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private long _externalId;
         
@@ -3617,15 +3619,15 @@ namespace SampleSystem.Generated.DTO
         
         private bool _isProduction;
         
-        private string _locationName;
+        private string _locationName = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
-        private string _nameNative;
+        private string _nameNative = null!;
         
         public HRDepartmentIntegrationSimpleDTO()
         {
@@ -3702,7 +3704,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -3797,7 +3799,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -3868,17 +3870,17 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
         private long _integrationVersion;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         public IntegrationVersionContainer1IntegrationRichDTO()
         {
@@ -3916,7 +3918,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -3972,7 +3974,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -4035,17 +4037,17 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
         private long _integrationVersion;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         public IntegrationVersionContainer1IntegrationSimpleDTO()
         {
@@ -4083,7 +4085,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -4139,7 +4141,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -4197,17 +4199,17 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
         private long _integrationVersion;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         public IntegrationVersionContainer2IntegrationRichDTO()
         {
@@ -4245,7 +4247,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -4301,7 +4303,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -4360,7 +4362,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeCustomIntegrationSaveModelIntegrationRichDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Integration.EmployeeCustomIntegrationSaveModel>
     {
         
-        private SampleSystem.Generated.DTO.EmployeeIntegrationRichDTO _savingObject;
+        private SampleSystem.Generated.DTO.EmployeeIntegrationRichDTO _savingObject = null!;
         
         public EmployeeCustomIntegrationSaveModelIntegrationRichDTO()
         {
@@ -4400,9 +4402,9 @@ namespace SampleSystem.Generated.DTO
     public partial class IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel>, Framework.BLL.DTOMapping.MappingObject.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel>
     {
         
-        private string _customName;
+        private string _customName = null!;
         
-        private SampleSystem.Generated.DTO.IntegrationVersionContainer1IntegrationSimpleDTO _savingObject;
+        private SampleSystem.Generated.DTO.IntegrationVersionContainer1IntegrationSimpleDTO _savingObject = null!;
         
         public IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO()
         {
@@ -4461,7 +4463,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private int _deepLevel;
         
@@ -4469,11 +4471,11 @@ namespace SampleSystem.Generated.DTO
         
         private bool _isProduction;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private Framework.Core.Period _period;
         
@@ -4526,7 +4528,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -4595,7 +4597,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -4666,17 +4668,17 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _testImmutablePrimitiveProperty;
+        private string _testImmutablePrimitiveProperty = null!;
         
-        private SampleSystem.Generated.DTO.EmployeeIntegrationSimpleDTO _testImmutableRefProperty;
+        private SampleSystem.Generated.DTO.EmployeeIntegrationSimpleDTO _testImmutableRefProperty = null!;
         
         public TestImmutableObjIntegrationRichDTO()
         {
@@ -4714,7 +4716,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -4757,7 +4759,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {

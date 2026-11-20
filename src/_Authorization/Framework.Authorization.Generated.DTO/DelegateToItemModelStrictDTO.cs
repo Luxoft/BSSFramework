@@ -4,5 +4,5 @@ namespace Framework.Authorization.Generated.DTO;
 
 public partial class DelegateToItemModelStrictDTO
 {
-    internal Permission DelegatedFromPermission;
+    internal Permission DelegatedFromPermission = null!;
 }

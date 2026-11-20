@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+#nullable enable
+
 namespace SampleSystem.Generated.DTO
 {
     
@@ -1330,7 +1332,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.CountryName = null;
+                mappingObject.CountryName = null!;
             }
             if (!object.ReferenceEquals(domainObject.LegalEntity, null))
             {
@@ -1338,7 +1340,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.LegalEntity = null;
+                mappingObject.LegalEntity = null!;
             }
         }
         
@@ -1357,7 +1359,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.CountryName = null;
+                domainObject.CountryName = null!;
             }
             domainObject.RegionName = mappingObject.RegionName;
             domainObject.Street = mappingObject.Street;
@@ -1375,7 +1377,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.CountryName = null;
+                mappingObject.CountryName = null!;
             }
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
@@ -1386,7 +1388,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.LegalEntity = null;
+                mappingObject.LegalEntity = null!;
             }
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
@@ -1771,7 +1773,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Ancestor = null;
+                mappingObject.Ancestor = null!;
             }
             if (!object.ReferenceEquals(domainObject.Child, null))
             {
@@ -1779,7 +1781,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Child = null;
+                mappingObject.Child = null!;
             }
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
@@ -1802,7 +1804,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.BusinessUnit = null;
+                mappingObject.BusinessUnit = null!;
             }
             if (!object.ReferenceEquals(domainObject.Employee, null))
             {
@@ -1810,7 +1812,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Employee = null;
+                mappingObject.Employee = null!;
             }
         }
         
@@ -1827,7 +1829,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.Employee = null;
+                domainObject.Employee = null!;
             }
             domainObject.Role = mappingObject.Role;
         }
@@ -1841,7 +1843,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.BusinessUnit = null;
+                mappingObject.BusinessUnit = null!;
             }
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
@@ -1851,7 +1853,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Employee = null;
+                mappingObject.Employee = null!;
             }
             mappingObject.Id = domainObject.Id;
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
@@ -1872,7 +1874,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.BusinessUnit = null;
+                mappingObject.BusinessUnit = null!;
             }
             if (!object.ReferenceEquals(domainObject.HRDepartment, null))
             {
@@ -1880,7 +1882,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.HRDepartment = null;
+                mappingObject.HRDepartment = null!;
             }
         }
         
@@ -1897,7 +1899,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.BusinessUnit = null;
+                domainObject.BusinessUnit = null!;
             }
             if (!object.Equals(mappingObject.HRDepartment, default(SampleSystem.Generated.DTO.HRDepartmentIdentityDTO)))
             {
@@ -1905,7 +1907,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.HRDepartment = null;
+                domainObject.HRDepartment = null!;
             }
         }
         
@@ -1918,7 +1920,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.BusinessUnit = null;
+                mappingObject.BusinessUnit = null!;
             }
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
@@ -1928,7 +1930,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.HRDepartment = null;
+                mappingObject.HRDepartment = null!;
             }
             mappingObject.Id = domainObject.Id;
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
@@ -1954,7 +1956,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.BusinessUnit = null;
+                mappingObject.BusinessUnit = null!;
             }
             if (!object.ReferenceEquals(domainObject.Manager, null))
             {
@@ -1962,7 +1964,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Manager = null;
+                mappingObject.Manager = null!;
             }
         }
         
@@ -1979,7 +1981,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.BusinessUnit = null;
+                domainObject.BusinessUnit = null!;
             }
             domainObject.Commission = mappingObject.Commission;
             if (!object.Equals(mappingObject.Manager, default(SampleSystem.Generated.DTO.EmployeeIdentityDTO)))
@@ -1988,7 +1990,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.Manager = null;
+                domainObject.Manager = null!;
             }
             domainObject.Period = mappingObject.Period;
         }
@@ -2002,7 +2004,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.BusinessUnit = null;
+                mappingObject.BusinessUnit = null!;
             }
             mappingObject.Commission = domainObject.Commission;
             mappingObject.CreateDate = domainObject.CreateDate;
@@ -2014,7 +2016,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Manager = null;
+                mappingObject.Manager = null!;
             }
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
@@ -2083,7 +2085,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.ChildOrAncestor = null;
+                mappingObject.ChildOrAncestor = null!;
             }
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
@@ -2096,7 +2098,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Source = null;
+                mappingObject.Source = null!;
             }
             mappingObject.Version = domainObject.Version;
         }
@@ -2244,7 +2246,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.BusinessUnitType = null;
+                mappingObject.BusinessUnitType = null!;
             }
         }
         
@@ -2261,7 +2263,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.BusinessUnitType = null;
+                domainObject.BusinessUnitType = null!;
             }
             domainObject.FinancialProjectType = mappingObject.FinancialProjectType;
         }
@@ -2275,7 +2277,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.BusinessUnitType = null;
+                mappingObject.BusinessUnitType = null!;
             }
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
@@ -2298,7 +2300,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.BusinessUnitType = null;
+                mappingObject.BusinessUnitType = null!;
             }
             if (!object.ReferenceEquals(domainObject.PossibleParent, null))
             {
@@ -2306,7 +2308,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.PossibleParent = null;
+                mappingObject.PossibleParent = null!;
             }
         }
         
@@ -2323,7 +2325,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.BusinessUnitType = null;
+                domainObject.BusinessUnitType = null!;
             }
             if (!object.Equals(mappingObject.PossibleParent, default(SampleSystem.Generated.DTO.BusinessUnitTypeIdentityDTO)))
             {
@@ -2331,7 +2333,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.PossibleParent = null;
+                domainObject.PossibleParent = null!;
             }
         }
         
@@ -2344,7 +2346,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.BusinessUnitType = null;
+                mappingObject.BusinessUnitType = null!;
             }
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
@@ -2357,7 +2359,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.PossibleParent = null;
+                mappingObject.PossibleParent = null!;
             }
             mappingObject.Version = domainObject.Version;
         }
@@ -2374,7 +2376,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.BusinessUnitType = null;
+                mappingObject.BusinessUnitType = null!;
             }
             if (!object.ReferenceEquals(domainObject.TransferTo, null))
             {
@@ -2382,7 +2384,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.TransferTo = null;
+                mappingObject.TransferTo = null!;
             }
         }
         
@@ -2399,7 +2401,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.BusinessUnitType = null;
+                domainObject.BusinessUnitType = null!;
             }
             if (!object.Equals(mappingObject.TransferTo, default(SampleSystem.Generated.DTO.BusinessUnitTypeIdentityDTO)))
             {
@@ -2407,7 +2409,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.TransferTo = null;
+                domainObject.TransferTo = null!;
             }
         }
         
@@ -2420,7 +2422,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.BusinessUnitType = null;
+                mappingObject.BusinessUnitType = null!;
             }
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
@@ -2433,7 +2435,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.TransferTo = null;
+                mappingObject.TransferTo = null!;
             }
             mappingObject.Version = domainObject.Version;
         }
@@ -2452,7 +2454,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Parent = null;
+                mappingObject.Parent = null!;
             }
             mappingObject.Version = domainObject.Version;
         }
@@ -2480,7 +2482,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Parent = null;
+                mappingObject.Parent = null!;
             }
         }
         
@@ -2496,7 +2498,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Location = null;
+                mappingObject.Location = null!;
             }
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
@@ -2884,7 +2886,7 @@ namespace SampleSystem.Generated.DTO
             }
             if (this.HasAccess(domainObject, SampleSystem.Security.SampleSystemSecurityOperation.EmployeePositionView))
             {
-                SampleSystem.Generated.DTO.EmployeePositionSimpleDTO resultPosition;
+                SampleSystem.Generated.DTO.EmployeePositionSimpleDTO? resultPosition;
                 if (!object.ReferenceEquals(domainObject.Position, null))
                 {
                     resultPosition = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject.Position, this);
@@ -2893,7 +2895,7 @@ namespace SampleSystem.Generated.DTO
                 {
                     resultPosition = null;
                 }
-                mappingObject.Position = Anch.Core.Maybe.Return(resultPosition);
+                mappingObject.Position = Anch.Core.Maybe.Return(resultPosition!);
             }
             else
             {
@@ -3727,7 +3729,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Employee = null;
+                mappingObject.Employee = null!;
             }
             if (!object.ReferenceEquals(domainObject.Specialization, null))
             {
@@ -3735,7 +3737,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Specialization = null;
+                mappingObject.Specialization = null!;
             }
         }
         
@@ -3752,7 +3754,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.Employee = null;
+                domainObject.Employee = null!;
             }
             if (!object.Equals(mappingObject.Specialization, default(SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO)))
             {
@@ -3760,7 +3762,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.Specialization = null;
+                domainObject.Specialization = null!;
             }
         }
         
@@ -3775,7 +3777,7 @@ namespace SampleSystem.Generated.DTO
                 }
                 else
                 {
-                    domainObject.Employee = null;
+                    domainObject.Employee = null!;
                 }
             }
             if (mappingObject.Specialization.HasValue)
@@ -3786,7 +3788,7 @@ namespace SampleSystem.Generated.DTO
                 }
                 else
                 {
-                    domainObject.Specialization = null;
+                    domainObject.Specialization = null!;
                 }
             }
         }
@@ -3802,7 +3804,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Employee = null;
+                mappingObject.Employee = null!;
             }
             mappingObject.Id = domainObject.Id;
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
@@ -3813,7 +3815,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Specialization = null;
+                mappingObject.Specialization = null!;
             }
         }
         
@@ -3825,7 +3827,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.Employee = null;
+                domainObject.Employee = null!;
             }
             if (!object.Equals(mappingObject.Specialization, default(SampleSystem.Generated.DTO.EmployeeSpecializationIntegrationSimpleDTO)))
             {
@@ -3833,7 +3835,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.Specialization = null;
+                domainObject.Specialization = null!;
             }
         }
         
@@ -3848,7 +3850,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Employee = null;
+                mappingObject.Employee = null!;
             }
             mappingObject.Id = domainObject.Id;
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
@@ -3859,7 +3861,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Specialization = null;
+                mappingObject.Specialization = null!;
             }
             mappingObject.Version = domainObject.Version;
         }
@@ -3880,7 +3882,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Employee = null;
+                mappingObject.Employee = null!;
             }
         }
         
@@ -3926,7 +3928,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Employee = null;
+                mappingObject.Employee = null!;
             }
             mappingObject.FullNumber = domainObject.FullNumber;
             mappingObject.Id = domainObject.Id;
@@ -3955,7 +3957,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Employee = null;
+                mappingObject.Employee = null!;
             }
             mappingObject.FullNumber = domainObject.FullNumber;
             mappingObject.Id = domainObject.Id;
@@ -3974,7 +3976,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.PrimaryChangingObject = null;
+                domainObject.PrimaryChangingObject = null!;
             }
             if (!object.ReferenceEquals(mappingObject.SecondaryChangingObjects, null))
             {
@@ -3991,7 +3993,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.PrimaryChangingObject = null;
+                mappingObject.PrimaryChangingObject = null!;
             }
             mappingObject.SecondaryChangingObjects = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTOList(domainObject.SecondaryChangingObjects, this);
         }
@@ -4010,7 +4012,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.SavingObject = null;
+                mappingObject.SavingObject = null!;
             }
         }
         
@@ -4022,7 +4024,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.SavingObject = null;
+                domainObject.SavingObject = null!;
             }
         }
         
@@ -4034,7 +4036,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.SavingObject = null;
+                mappingObject.SavingObject = null!;
             }
         }
         
@@ -4051,7 +4053,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.ChangingObject = null;
+                mappingObject.ChangingObject = null!;
             }
         }
         
@@ -4067,7 +4069,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.ChangingObject = null;
+                domainObject.ChangingObject = null!;
             }
             domainObject.Email = mappingObject.Email;
         }
@@ -4080,7 +4082,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.ChangingObject = null;
+                mappingObject.ChangingObject = null!;
             }
             mappingObject.Email = domainObject.Email;
         }
@@ -4172,7 +4174,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Employee = null;
+                mappingObject.Employee = null!;
             }
         }
         
@@ -4218,7 +4220,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Employee = null;
+                mappingObject.Employee = null!;
             }
             mappingObject.FullNumber = domainObject.FullNumber;
             mappingObject.Id = domainObject.Id;
@@ -4243,7 +4245,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Employee = null;
+                mappingObject.Employee = null!;
             }
         }
         
@@ -4265,7 +4267,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Employee = null;
+                mappingObject.Employee = null!;
             }
             mappingObject.Id = domainObject.Id;
             mappingObject.IsDefault = domainObject.IsDefault;
@@ -4295,7 +4297,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Location = null;
+                mappingObject.Location = null!;
             }
         }
         
@@ -4337,7 +4339,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Location = null;
+                mappingObject.Location = null!;
             }
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
@@ -4617,7 +4619,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.LinkedEmployee = null;
+                mappingObject.LinkedEmployee = null!;
             }
             if (!object.ReferenceEquals(domainObject.Owner, null))
             {
@@ -4625,7 +4627,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Owner = null;
+                mappingObject.Owner = null!;
             }
         }
         
@@ -4643,7 +4645,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.LinkedEmployee = null;
+                domainObject.LinkedEmployee = null!;
             }
         }
         
@@ -4662,7 +4664,7 @@ namespace SampleSystem.Generated.DTO
                 }
                 else
                 {
-                    domainObject.LinkedEmployee = null;
+                    domainObject.LinkedEmployee = null!;
                 }
             }
         }
@@ -4680,7 +4682,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.LinkedEmployee = null;
+                mappingObject.LinkedEmployee = null!;
             }
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
@@ -4690,7 +4692,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Owner = null;
+                mappingObject.Owner = null!;
             }
         }
         
@@ -4703,7 +4705,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.LinkedEmployee = null;
+                domainObject.LinkedEmployee = null!;
             }
         }
         
@@ -4720,7 +4722,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.LinkedEmployee = null;
+                mappingObject.LinkedEmployee = null!;
             }
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
@@ -4730,7 +4732,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Owner = null;
+                mappingObject.Owner = null!;
             }
             mappingObject.Version = domainObject.Version;
         }
@@ -4858,7 +4860,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Parent = null;
+                mappingObject.Parent = null!;
             }
         }
         
@@ -4902,7 +4904,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Parent = null;
+                mappingObject.Parent = null!;
             }
             mappingObject.Version = domainObject.Version;
         }
@@ -5012,7 +5014,7 @@ namespace SampleSystem.Generated.DTO
                 }
                 else
                 {
-                    resultCompanyLegalEntity = null;
+                    resultCompanyLegalEntity = null!;
                 }
                 mappingObject.CompanyLegalEntity = Anch.Core.Maybe.Return(resultCompanyLegalEntity);
             }
@@ -5026,7 +5028,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Head = null;
+                mappingObject.Head = null!;
             }
             if (!object.ReferenceEquals(domainObject.Location, null))
             {
@@ -5034,7 +5036,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Location = null;
+                mappingObject.Location = null!;
             }
             if (!object.ReferenceEquals(domainObject.Parent, null))
             {
@@ -5084,7 +5086,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.Head = null;
+                domainObject.Head = null!;
             }
             if (!object.ReferenceEquals(mappingObject.HrDepartmentRoleEmployees, null))
             {
@@ -5116,7 +5118,7 @@ namespace SampleSystem.Generated.DTO
                     }
                     else
                     {
-                        domainObject.CompanyLegalEntity = null;
+                        domainObject.CompanyLegalEntity = null!;
                     }
                 }
                 else
@@ -5177,7 +5179,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.CompanyLegalEntity = null;
+                mappingObject.CompanyLegalEntity = null!;
             }
             mappingObject.CompanyLegalEntityName = domainObject.CompanyLegalEntityName;
             mappingObject.CreateDate = domainObject.CreateDate;
@@ -5190,7 +5192,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Head = null;
+                mappingObject.Head = null!;
             }
             mappingObject.HrDepartmentRoleEmployees = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTOList(domainObject.HrDepartmentRoleEmployees, this);
             mappingObject.Id = domainObject.Id;
@@ -5202,7 +5204,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Location = null;
+                mappingObject.Location = null!;
             }
             mappingObject.LocationName = domainObject.LocationName;
             mappingObject.ManagementUnits = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTOList(domainObject.ManagementUnits, this);
@@ -5253,7 +5255,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.EmployeePosition = null;
+                mappingObject.EmployeePosition = null!;
             }
             if (!object.ReferenceEquals(domainObject.HrDepartment, null))
             {
@@ -5261,7 +5263,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.HrDepartment = null;
+                mappingObject.HrDepartment = null!;
             }
         }
         
@@ -5278,7 +5280,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.EmployeePosition = null;
+                domainObject.EmployeePosition = null!;
             }
             if (!object.Equals(mappingObject.HrDepartment, default(SampleSystem.Generated.DTO.HRDepartmentIdentityDTO)))
             {
@@ -5286,7 +5288,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.HrDepartment = null;
+                domainObject.HrDepartment = null!;
             }
         }
         
@@ -5301,7 +5303,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.EmployeePosition = null;
+                mappingObject.EmployeePosition = null!;
             }
             if (!object.ReferenceEquals(domainObject.HrDepartment, null))
             {
@@ -5309,7 +5311,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.HrDepartment = null;
+                mappingObject.HrDepartment = null!;
             }
             mappingObject.Id = domainObject.Id;
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
@@ -5330,7 +5332,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Employee = null;
+                mappingObject.Employee = null!;
             }
             if (!object.ReferenceEquals(domainObject.HRDepartment, null))
             {
@@ -5338,7 +5340,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.HRDepartment = null;
+                mappingObject.HRDepartment = null!;
             }
         }
         
@@ -5355,7 +5357,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.Employee = null;
+                domainObject.Employee = null!;
             }
             domainObject.HRDepartmentEmployeeRoleType = mappingObject.HRDepartmentEmployeeRoleType;
         }
@@ -5371,7 +5373,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Employee = null;
+                mappingObject.Employee = null!;
             }
             if (!object.ReferenceEquals(domainObject.HRDepartment, null))
             {
@@ -5379,7 +5381,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.HRDepartment = null;
+                mappingObject.HRDepartment = null!;
             }
             mappingObject.HRDepartmentEmployeeRoleType = domainObject.HRDepartmentEmployeeRoleType;
             mappingObject.Id = domainObject.Id;
@@ -5412,7 +5414,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.OneToOneDetail = null;
+                mappingObject.OneToOneDetail = null!;
             }
         }
         
@@ -5433,7 +5435,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.OneToOneDetail = null;
+                mappingObject.OneToOneDetail = null!;
             }
             mappingObject.Version = domainObject.Version;
         }
@@ -5464,7 +5466,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Request = null;
+                mappingObject.Request = null!;
             }
         }
         
@@ -5486,7 +5488,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Request = null;
+                mappingObject.Request = null!;
             }
             mappingObject.Version = domainObject.Version;
         }
@@ -5531,7 +5533,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Details = null;
+                mappingObject.Details = null!;
             }
             mappingObject.DurationMonths = domainObject.DurationMonths;
             if (!object.ReferenceEquals(domainObject.Employee, null))
@@ -5540,7 +5542,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Employee = null;
+                mappingObject.Employee = null!;
             }
             if (!object.ReferenceEquals(domainObject.Self, null))
             {
@@ -5651,7 +5653,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.SavingObject = null;
+                mappingObject.SavingObject = null!;
             }
         }
         
@@ -5664,7 +5666,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.SavingObject = null;
+                domainObject.SavingObject = null!;
             }
         }
         
@@ -5677,7 +5679,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.SavingObject = null;
+                mappingObject.SavingObject = null!;
             }
         }
         
@@ -5963,7 +5965,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Ancestor = null;
+                mappingObject.Ancestor = null!;
             }
             if (!object.ReferenceEquals(domainObject.Child, null))
             {
@@ -5971,7 +5973,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Child = null;
+                mappingObject.Child = null!;
             }
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
@@ -5990,7 +5992,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.ChildOrAncestor = null;
+                mappingObject.ChildOrAncestor = null!;
             }
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
@@ -6003,7 +6005,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Source = null;
+                mappingObject.Source = null!;
             }
             mappingObject.Version = domainObject.Version;
         }
@@ -6132,7 +6134,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Ancestor = null;
+                mappingObject.Ancestor = null!;
             }
             if (!object.ReferenceEquals(domainObject.Child, null))
             {
@@ -6140,7 +6142,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Child = null;
+                mappingObject.Child = null!;
             }
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
@@ -6163,7 +6165,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.BusinessUnit = null;
+                mappingObject.BusinessUnit = null!;
             }
             if (!object.ReferenceEquals(domainObject.ManagementUnit, null))
             {
@@ -6171,7 +6173,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.ManagementUnit = null;
+                mappingObject.ManagementUnit = null!;
             }
         }
         
@@ -6188,7 +6190,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.BusinessUnit = null;
+                domainObject.BusinessUnit = null!;
             }
             domainObject.EqualBU = mappingObject.EqualBU;
             if (!object.Equals(mappingObject.ManagementUnit, default(SampleSystem.Generated.DTO.ManagementUnitIdentityDTO)))
@@ -6197,7 +6199,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.ManagementUnit = null;
+                domainObject.ManagementUnit = null!;
             }
         }
         
@@ -6210,7 +6212,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.BusinessUnit = null;
+                mappingObject.BusinessUnit = null!;
             }
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
@@ -6223,7 +6225,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.ManagementUnit = null;
+                mappingObject.ManagementUnit = null!;
             }
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
@@ -6242,7 +6244,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.HRDepartment = null;
+                mappingObject.HRDepartment = null!;
             }
             if (!object.ReferenceEquals(domainObject.ManagementUnit, null))
             {
@@ -6250,7 +6252,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.ManagementUnit = null;
+                mappingObject.ManagementUnit = null!;
             }
         }
         
@@ -6267,7 +6269,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.HRDepartment = null;
+                domainObject.HRDepartment = null!;
             }
             if (!object.Equals(mappingObject.ManagementUnit, default(SampleSystem.Generated.DTO.ManagementUnitIdentityDTO)))
             {
@@ -6275,7 +6277,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.ManagementUnit = null;
+                domainObject.ManagementUnit = null!;
             }
         }
         
@@ -6290,7 +6292,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.HRDepartment = null;
+                mappingObject.HRDepartment = null!;
             }
             mappingObject.Id = domainObject.Id;
             mappingObject.LinkedBusinessUnits = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTOList(domainObject.LinkedBusinessUnits, this);
@@ -6300,7 +6302,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.ManagementUnit = null;
+                mappingObject.ManagementUnit = null!;
             }
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
@@ -6365,7 +6367,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.ChildOrAncestor = null;
+                mappingObject.ChildOrAncestor = null!;
             }
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
@@ -6378,7 +6380,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Source = null;
+                mappingObject.Source = null!;
             }
             mappingObject.Version = domainObject.Version;
         }
@@ -6391,7 +6393,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Employee = null;
+                mappingObject.Employee = null!;
             }
         }
         
@@ -6405,7 +6407,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.TestBU = null;
+                mappingObject.TestBU = null!;
             }
             mappingObject.TestString = domainObject.TestString;
         }
@@ -6504,7 +6506,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.BusinessUnit = null;
+                mappingObject.BusinessUnit = null!;
             }
             mappingObject.Code = domainObject.Code;
             mappingObject.CreateDate = domainObject.CreateDate;
@@ -6549,7 +6551,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Role = null;
+                mappingObject.Role = null!;
             }
             if (!object.ReferenceEquals(domainObject.RoleDegree, null))
             {
@@ -6557,7 +6559,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.RoleDegree = null;
+                mappingObject.RoleDegree = null!;
             }
             mappingObject.Version = domainObject.Version;
         }
@@ -6625,7 +6627,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.IncludedObject = null;
+                mappingObject.IncludedObject = null!;
             }
         }
         
@@ -6638,7 +6640,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.IncludedObject = null;
+                domainObject.IncludedObject = null!;
             }
         }
         
@@ -6654,7 +6656,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.IncludedObject = null;
+                mappingObject.IncludedObject = null!;
             }
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
@@ -6670,7 +6672,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.CalcProjectionProp = null;
+                mappingObject.CalcProjectionProp = null!;
             }
             mappingObject.CalcProp = domainObject.CalcProp;
             mappingObject.Employees = domainObject.Employees;
@@ -6700,7 +6702,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Parent = null;
+                mappingObject.Parent = null!;
             }
             mappingObject.Text = domainObject.Text;
             mappingObject.Version = domainObject.Version;
@@ -6739,7 +6741,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Category = null;
+                mappingObject.Category = null!;
             }
             mappingObject.Comments = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTOList(domainObject.Comments, this);
             mappingObject.CreateDate = domainObject.CreateDate;
@@ -6827,7 +6829,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Location = null;
+                mappingObject.Location = null!;
             }
             mappingObject.LocationBinaryData = domainObject.LocationBinaryData;
             mappingObject.Name = domainObject.Name;
@@ -6859,9 +6861,9 @@ namespace SampleSystem.Generated.DTO
             mappingObject.NameEngFirstName = domainObject.NameEngFirstName;
             if (this.HasAccess(domainObject, SampleSystem.Security.SampleSystemSecurityOperation.EmployeePositionView))
             {
-                string resultPositionName;
+                string? resultPositionName;
                 resultPositionName = domainObject.PositionName;
-                mappingObject.PositionName = Anch.Core.Maybe.Return(resultPositionName);
+                mappingObject.PositionName = Anch.Core.Maybe.Return(resultPositionName!);
             }
             else
             {
@@ -6912,7 +6914,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Employee = null;
+                mappingObject.Employee = null!;
             }
             mappingObject.Id = domainObject.Id;
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
@@ -6933,7 +6935,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.TestImmutableRefProperty = null;
+                mappingObject.TestImmutableRefProperty = null!;
             }
         }
         
@@ -6951,7 +6953,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.TestImmutableRefProperty = null;
+                domainObject.TestImmutableRefProperty = null!;
             }
         }
         
@@ -6970,7 +6972,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.TestImmutableRefProperty = null;
+                mappingObject.TestImmutableRefProperty = null!;
             }
         }
         
@@ -6983,7 +6985,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                domainObject.TestImmutableRefProperty = null;
+                domainObject.TestImmutableRefProperty = null!;
             }
         }
         
@@ -7002,7 +7004,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.TestImmutableRefProperty = null;
+                mappingObject.TestImmutableRefProperty = null!;
             }
             mappingObject.Version = domainObject.Version;
         }
@@ -7016,7 +7018,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.OneToOneDetail = null;
+                mappingObject.OneToOneDetail = null!;
             }
         }
         
@@ -7036,7 +7038,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.BusinessUnit = null;
+                mappingObject.BusinessUnit = null!;
             }
             if (!object.ReferenceEquals(domainObject.ManagementUnit, null))
             {
@@ -7044,7 +7046,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.ManagementUnit = null;
+                mappingObject.ManagementUnit = null!;
             }
             if (!object.ReferenceEquals(domainObject.Master, null))
             {
@@ -7052,7 +7054,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Master = null;
+                mappingObject.Master = null!;
             }
         }
         
@@ -7069,7 +7071,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.BusinessUnit = null;
+                mappingObject.BusinessUnit = null!;
             }
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
@@ -7080,7 +7082,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.ManagementUnit = null;
+                mappingObject.ManagementUnit = null!;
             }
             if (!object.ReferenceEquals(domainObject.Master, null))
             {
@@ -7088,7 +7090,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Master = null;
+                mappingObject.Master = null!;
             }
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
@@ -7210,7 +7212,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.BusinessUnit = null;
+                mappingObject.BusinessUnit = null!;
             }
             if (!object.ReferenceEquals(domainObject.Employee, null))
             {
@@ -7218,7 +7220,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Employee = null;
+                mappingObject.Employee = null!;
             }
             if (!object.ReferenceEquals(domainObject.Location, null))
             {
@@ -7226,7 +7228,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Location = null;
+                mappingObject.Location = null!;
             }
             if (!object.ReferenceEquals(domainObject.ManagementUnit, null))
             {
@@ -7234,7 +7236,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.ManagementUnit = null;
+                mappingObject.ManagementUnit = null!;
             }
         }
         
@@ -7251,7 +7253,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.BusinessUnit = null;
+                mappingObject.BusinessUnit = null!;
             }
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
@@ -7261,7 +7263,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Employee = null;
+                mappingObject.Employee = null!;
             }
             mappingObject.Id = domainObject.Id;
             if (!object.ReferenceEquals(domainObject.Location, null))
@@ -7270,7 +7272,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Location = null;
+                mappingObject.Location = null!;
             }
             if (!object.ReferenceEquals(domainObject.ManagementUnit, null))
             {
@@ -7278,7 +7280,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.ManagementUnit = null;
+                mappingObject.ManagementUnit = null!;
             }
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
@@ -7304,7 +7306,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Employee = null;
+                mappingObject.Employee = null!;
             }
             if (!object.ReferenceEquals(domainObject.Location, null))
             {
@@ -7312,7 +7314,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Location = null;
+                mappingObject.Location = null!;
             }
         }
         
@@ -7332,7 +7334,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Employee = null;
+                mappingObject.Employee = null!;
             }
             mappingObject.Id = domainObject.Id;
             mappingObject.Items = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTOList(domainObject.Items, this);
@@ -7342,7 +7344,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Location = null;
+                mappingObject.Location = null!;
             }
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
@@ -7373,7 +7375,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Employee = null;
+                mappingObject.Employee = null!;
             }
             mappingObject.Id = domainObject.Id;
             if (!object.ReferenceEquals(domainObject.Master, null))
@@ -7382,7 +7384,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Master = null;
+                mappingObject.Master = null!;
             }
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
@@ -7400,7 +7402,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.EmployeeRef1 = null;
+                mappingObject.EmployeeRef1 = null!;
             }
             if (!object.ReferenceEquals(domainObject.EmployeeRef2, null))
             {
@@ -7408,7 +7410,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.EmployeeRef2 = null;
+                mappingObject.EmployeeRef2 = null!;
             }
             mappingObject.Id = domainObject.Id;
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
@@ -7452,7 +7454,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.BusinessUnit = null;
+                mappingObject.BusinessUnit = null!;
             }
         }
         
@@ -7469,7 +7471,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.BusinessUnit = null;
+                mappingObject.BusinessUnit = null!;
             }
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
@@ -7498,7 +7500,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.BusinessUnit = null;
+                mappingObject.BusinessUnit = null!;
             }
             if (!object.ReferenceEquals(domainObject.Location, null))
             {
@@ -7506,7 +7508,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Location = null;
+                mappingObject.Location = null!;
             }
             if (!object.ReferenceEquals(domainObject.ManagementUnitFluentMapping, null))
             {
@@ -7514,7 +7516,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.ManagementUnitFluentMapping = null;
+                mappingObject.ManagementUnitFluentMapping = null!;
             }
         }
         
@@ -7532,7 +7534,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.BusinessUnit = null;
+                mappingObject.BusinessUnit = null!;
             }
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
@@ -7544,7 +7546,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Location = null;
+                mappingObject.Location = null!;
             }
             if (!object.ReferenceEquals(domainObject.ManagementUnitFluentMapping, null))
             {
@@ -7552,7 +7554,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.ManagementUnitFluentMapping = null;
+                mappingObject.ManagementUnitFluentMapping = null!;
             }
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
@@ -7590,7 +7592,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.FirstMaster = null;
+                mappingObject.FirstMaster = null!;
             }
         }
         
@@ -7612,7 +7614,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.FirstMaster = null;
+                mappingObject.FirstMaster = null!;
             }
             mappingObject.Id = domainObject.Id;
             mappingObject.Items = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTOList(domainObject.Items, this);
@@ -7659,7 +7661,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.InnerMaster = null;
+                mappingObject.InnerMaster = null!;
             }
         }
         
@@ -7679,7 +7681,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.InnerMaster = null;
+                mappingObject.InnerMaster = null!;
             }
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
@@ -7705,7 +7707,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.InnerMaster = null;
+                mappingObject.InnerMaster = null!;
             }
             if (!object.ReferenceEquals(domainObject.RootSecurityObj, null))
             {
@@ -7713,7 +7715,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.RootSecurityObj = null;
+                mappingObject.RootSecurityObj = null!;
             }
         }
         
@@ -7733,7 +7735,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.InnerMaster = null;
+                mappingObject.InnerMaster = null!;
             }
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
@@ -7744,7 +7746,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.RootSecurityObj = null;
+                mappingObject.RootSecurityObj = null!;
             }
             mappingObject.Version = domainObject.Version;
         }
@@ -7767,7 +7769,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.InnerMaster = null;
+                mappingObject.InnerMaster = null!;
             }
         }
         
@@ -7787,7 +7789,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.InnerMaster = null;
+                mappingObject.InnerMaster = null!;
             }
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
@@ -7844,7 +7846,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Location = null;
+                mappingObject.Location = null!;
             }
         }
         
@@ -7864,7 +7866,7 @@ namespace SampleSystem.Generated.DTO
             }
             else
             {
-                mappingObject.Location = null;
+                mappingObject.Location = null!;
             }
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
@@ -7874,7 +7876,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.Directories.Address ToAddress(SampleSystem.Generated.DTO.AddressIdentityDTO addressIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Directories.Address>(addressIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Directories.Address>(addressIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Directories.Address ToAddress(SampleSystem.Generated.DTO.AddressStrictDTO addressStrictDTO)
@@ -7894,17 +7896,17 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.AnotherSqlParserTestObj ToAnotherSqlParserTestObj(SampleSystem.Generated.DTO.AnotherSqlParserTestObjIdentityDTO anotherSqlParserTestObjIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.AnotherSqlParserTestObj>(anotherSqlParserTestObjIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.AnotherSqlParserTestObj>(anotherSqlParserTestObjIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.AuthPerformanceObject ToAuthPerformanceObject(SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO authPerformanceObjectIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.AuthPerformanceObject>(authPerformanceObjectIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.AuthPerformanceObject>(authPerformanceObjectIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.BU.BusinessUnit ToBusinessUnit(SampleSystem.Generated.DTO.BusinessUnitIdentityDTO businessUnitIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.BU.BusinessUnit>(businessUnitIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.BU.BusinessUnit>(businessUnitIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.BU.BusinessUnit ToBusinessUnit(SampleSystem.Generated.DTO.BusinessUnitStrictDTO businessUnitStrictDTO)
@@ -7926,17 +7928,17 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.BU.BusinessUnit ToBusinessUnit(SampleSystem.Generated.DTO.BusinessUnitIntegrationSimpleDTO businessUnitSimpleIntegrationDTO)
         {
-            return this.GetById<SampleSystem.Domain.BU.BusinessUnit>(businessUnitSimpleIntegrationDTO.Id);
+            return this.GetById<SampleSystem.Domain.BU.BusinessUnit>(businessUnitSimpleIntegrationDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.BU.BusinessUnitAncestorLink ToBusinessUnitAncestorLink(SampleSystem.Generated.DTO.BusinessUnitAncestorLinkIdentityDTO businessUnitAncestorLinkIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.BU.BusinessUnitAncestorLink>(businessUnitAncestorLinkIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.BU.BusinessUnitAncestorLink>(businessUnitAncestorLinkIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.BU.BusinessUnitEmployeeRole ToBusinessUnitEmployeeRole(SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleIdentityDTO businessUnitEmployeeRoleIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.BU.BusinessUnitEmployeeRole>(businessUnitEmployeeRoleIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.BU.BusinessUnitEmployeeRole>(businessUnitEmployeeRoleIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.BU.BusinessUnitEmployeeRole ToBusinessUnitEmployeeRole(SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleStrictDTO businessUnitEmployeeRoleStrictDTO)
@@ -7951,7 +7953,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.BU.BusinessUnitHrDepartment ToBusinessUnitHrDepartment(SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.BU.BusinessUnitHrDepartment>(businessUnitHrDepartmentIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.BU.BusinessUnitHrDepartment>(businessUnitHrDepartmentIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.BU.BusinessUnitHrDepartment ToBusinessUnitHrDepartment(SampleSystem.Generated.DTO.BusinessUnitHrDepartmentStrictDTO businessUnitHrDepartmentStrictDTO)
@@ -7978,7 +7980,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink ToBusinessUnitManagerCommissionLink(SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO businessUnitManagerCommissionLinkIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink>(businessUnitManagerCommissionLinkIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink>(businessUnitManagerCommissionLinkIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.BU.BusinessUnitManagerCommissionLink ToBusinessUnitManagerCommissionLink(SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkStrictDTO businessUnitManagerCommissionLinkStrictDTO)
@@ -8015,12 +8017,12 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.BU.BusinessUnitToAncestorChildView ToBusinessUnitToAncestorChildView(SampleSystem.Generated.DTO.BusinessUnitToAncestorChildViewIdentityDTO businessUnitToAncestorChildViewIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.BU.BusinessUnitToAncestorChildView>(businessUnitToAncestorChildViewIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.BU.BusinessUnitToAncestorChildView>(businessUnitToAncestorChildViewIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Directories.BusinessUnitType ToBusinessUnitType(SampleSystem.Generated.DTO.BusinessUnitTypeIdentityDTO businessUnitTypeIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Directories.BusinessUnitType>(businessUnitTypeIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Directories.BusinessUnitType>(businessUnitTypeIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Directories.BusinessUnitType ToBusinessUnitType(SampleSystem.Generated.DTO.BusinessUnitTypeStrictDTO businessUnitTypeStrictDTO)
@@ -8042,7 +8044,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleFinancialProjectType ToBusinessUnitTypeLinkWithPossibleFinancialProjectType(SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeIdentityDTO businessUnitTypeLinkWithPossibleFinancialProjectTypeIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleFinancialProjectType>(businessUnitTypeLinkWithPossibleFinancialProjectTypeIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleFinancialProjectType>(businessUnitTypeLinkWithPossibleFinancialProjectTypeIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleFinancialProjectType ToBusinessUnitTypeLinkWithPossibleFinancialProjectType(SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeStrictDTO businessUnitTypeLinkWithPossibleFinancialProjectTypeStrictDTO)
@@ -8069,7 +8071,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleParent ToBusinessUnitTypeLinkWithPossibleParent(SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentIdentityDTO businessUnitTypeLinkWithPossibleParentIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleParent>(businessUnitTypeLinkWithPossibleParentIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleParent>(businessUnitTypeLinkWithPossibleParentIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithPossibleParent ToBusinessUnitTypeLinkWithPossibleParent(SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentStrictDTO businessUnitTypeLinkWithPossibleParentStrictDTO)
@@ -8096,7 +8098,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithTransferTo ToBusinessUnitTypeLinkWithTransferTo(SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToIdentityDTO businessUnitTypeLinkWithTransferToIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithTransferTo>(businessUnitTypeLinkWithTransferToIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithTransferTo>(businessUnitTypeLinkWithTransferToIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Directories.BusinessUnitTypeLinkWithTransferTo ToBusinessUnitTypeLinkWithTransferTo(SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToStrictDTO businessUnitTypeLinkWithTransferToStrictDTO)
@@ -8123,27 +8125,27 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.UniqueByParent.ChildEntity ToChildEntity(SampleSystem.Generated.DTO.ChildEntityIdentityDTO childEntityIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.UniqueByParent.ChildEntity>(childEntityIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.UniqueByParent.ChildEntity>(childEntityIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.TestForceAbstract.ClassA ToClassA(SampleSystem.Generated.DTO.ClassAIdentityDTO classAIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.TestForceAbstract.ClassA>(classAIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.TestForceAbstract.ClassA>(classAIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.TestForceAbstract.ClassAChild ToClassAChild(SampleSystem.Generated.DTO.ClassAChildIdentityDTO classAChildIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.TestForceAbstract.ClassAChild>(classAChildIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.TestForceAbstract.ClassAChild>(classAChildIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.EnversBug1676.Coefficient1676 ToCoefficient1676(SampleSystem.Generated.DTO.Coefficient1676IdentityDTO coefficient1676IdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.EnversBug1676.Coefficient1676>(coefficient1676IdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.EnversBug1676.Coefficient1676>(coefficient1676IdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Directories.CompanyLegalEntity ToCompanyLegalEntity(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO companyLegalEntityIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Directories.CompanyLegalEntity>(companyLegalEntityIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Directories.CompanyLegalEntity>(companyLegalEntityIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Directories.CompanyLegalEntity ToCompanyLegalEntity(SampleSystem.Generated.DTO.CompanyLegalEntityStrictDTO companyLegalEntityStrictDTO)
@@ -8165,17 +8167,17 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.Directories.CompanyLegalEntity ToCompanyLegalEntity(SampleSystem.Generated.DTO.CompanyLegalEntityIntegrationSimpleDTO companyLegalEntitySimpleIntegrationDTO)
         {
-            return this.GetById<SampleSystem.Domain.Directories.CompanyLegalEntity>(companyLegalEntitySimpleIntegrationDTO.Id);
+            return this.GetById<SampleSystem.Domain.Directories.CompanyLegalEntity>(companyLegalEntitySimpleIntegrationDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.TestForceAbstract.ConcreteClassA ToConcreteClassA(SampleSystem.Generated.DTO.ConcreteClassAIdentityDTO concreteClassAIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.TestForceAbstract.ConcreteClassA>(concreteClassAIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.TestForceAbstract.ConcreteClassA>(concreteClassAIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Directories.Country ToCountry(SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Directories.Country>(countryIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Directories.Country>(countryIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Directories.Country ToCountry(SampleSystem.Generated.DTO.CountryStrictDTO countryStrictDTO)
@@ -8199,7 +8201,7 @@ namespace SampleSystem.Generated.DTO
             where TMappingObject : Framework.BLL.DTOMapping.MappingObject.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, TDomainObject, System.Guid>
             where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase
         {
-            TDomainObject domainObject = this.GetById<TDomainObject>(mappingObject.Id, Framework.BLL.IdCheckMode.CheckAll);
+            TDomainObject domainObject = this.GetById<TDomainObject>(mappingObject.Id, Framework.BLL.IdCheckMode.CheckAll)!;
             this.MapToDomainObject(mappingObject, domainObject);
             return domainObject;
         }
@@ -8224,7 +8226,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.Employee.Employee ToEmployee(SampleSystem.Generated.DTO.EmployeeIdentityDTO employeeIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Employee.Employee>(employeeIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Employee.Employee>(employeeIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Employee.Employee ToEmployee(SampleSystem.Generated.DTO.EmployeeStrictDTO employeeStrictDTO)
@@ -8280,12 +8282,12 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.Employee.Employee ToEmployee(SampleSystem.Generated.DTO.EmployeeIntegrationSimpleDTO employeeSimpleIntegrationDTO)
         {
-            return this.GetById<SampleSystem.Domain.Employee.Employee>(employeeSimpleIntegrationDTO.Id);
+            return this.GetById<SampleSystem.Domain.Employee.Employee>(employeeSimpleIntegrationDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink ToEmployeeAndEmployeeSpecializationLink(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkIdentityDTO employeeAndEmployeeSpecializationLinkIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink>(employeeAndEmployeeSpecializationLinkIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink>(employeeAndEmployeeSpecializationLinkIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeAndEmployeeSpecializationLink ToEmployeeAndEmployeeSpecializationLink(SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkStrictDTO employeeAndEmployeeSpecializationLinkStrictDTO)
@@ -8320,7 +8322,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.Employee.EmployeeCellPhone ToEmployeeCellPhone(SampleSystem.Generated.DTO.EmployeeCellPhoneIdentityDTO employeeCellPhoneIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Employee.EmployeeCellPhone>(employeeCellPhoneIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Employee.EmployeeCellPhone>(employeeCellPhoneIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Employee.EmployeeCellPhone ToEmployeeCellPhone(SampleSystem.Generated.DTO.EmployeeCellPhoneStrictDTO employeeCellPhoneStrictDTO)
@@ -8380,12 +8382,12 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.Employee.EmployeeInformation ToEmployeeInformation(SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO employeeInformationIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Employee.EmployeeInformation>(employeeInformationIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Employee.EmployeeInformation>(employeeInformationIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Employee.EmployeePersonalCellPhone ToEmployeePersonalCellPhone(SampleSystem.Generated.DTO.EmployeePersonalCellPhoneIdentityDTO employeePersonalCellPhoneIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Employee.EmployeePersonalCellPhone>(employeePersonalCellPhoneIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Employee.EmployeePersonalCellPhone>(employeePersonalCellPhoneIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Employee.EmployeePersonalCellPhone ToEmployeePersonalCellPhone(SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO employeePersonalCellPhoneStrictDTO)
@@ -8410,47 +8412,47 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.Employee.EmployeePhoto ToEmployeePhoto(SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Employee.EmployeePhoto>(employeePhotoIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Employee.EmployeePhoto>(employeePhotoIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Employee.EmployeePosition ToEmployeePosition(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Employee.EmployeePosition>(employeePositionIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Employee.EmployeePosition>(employeePositionIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Employee.EmployeePosition ToEmployeePosition(SampleSystem.Generated.DTO.EmployeePositionIntegrationSimpleDTO employeePositionSimpleIntegrationDTO)
         {
-            return this.GetById<SampleSystem.Domain.Employee.EmployeePosition>(employeePositionSimpleIntegrationDTO.Id);
+            return this.GetById<SampleSystem.Domain.Employee.EmployeePosition>(employeePositionSimpleIntegrationDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Employee.EmployeeRegistrationType ToEmployeeRegistrationType(SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO employeeRegistrationTypeIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Employee.EmployeeRegistrationType>(employeeRegistrationTypeIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Employee.EmployeeRegistrationType>(employeeRegistrationTypeIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Employee.EmployeeRegistrationType ToEmployeeRegistrationType(SampleSystem.Generated.DTO.EmployeeRegistrationTypeIntegrationSimpleDTO employeeRegistrationTypeSimpleIntegrationDTO)
         {
-            return this.GetById<SampleSystem.Domain.Employee.EmployeeRegistrationType>(employeeRegistrationTypeSimpleIntegrationDTO.Id);
+            return this.GetById<SampleSystem.Domain.Employee.EmployeeRegistrationType>(employeeRegistrationTypeSimpleIntegrationDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Employee.EmployeeRole ToEmployeeRole(SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO employeeRoleIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Employee.EmployeeRole>(employeeRoleIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Employee.EmployeeRole>(employeeRoleIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Employee.EmployeeRole ToEmployeeRole(SampleSystem.Generated.DTO.EmployeeRoleIntegrationSimpleDTO employeeRoleSimpleIntegrationDTO)
         {
-            return this.GetById<SampleSystem.Domain.Employee.EmployeeRole>(employeeRoleSimpleIntegrationDTO.Id);
+            return this.GetById<SampleSystem.Domain.Employee.EmployeeRole>(employeeRoleSimpleIntegrationDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Employee.EmployeeRoleDegree ToEmployeeRoleDegree(SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Employee.EmployeeRoleDegree>(employeeRoleDegreeIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Employee.EmployeeRoleDegree>(employeeRoleDegreeIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Employee.EmployeeRoleDegree ToEmployeeRoleDegree(SampleSystem.Generated.DTO.EmployeeRoleDegreeIntegrationSimpleDTO employeeRoleDegreeSimpleIntegrationDTO)
         {
-            return this.GetById<SampleSystem.Domain.Employee.EmployeeRoleDegree>(employeeRoleDegreeSimpleIntegrationDTO.Id);
+            return this.GetById<SampleSystem.Domain.Employee.EmployeeRoleDegree>(employeeRoleDegreeSimpleIntegrationDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Models.Filters.Root.EmployeeRootFilterModel ToEmployeeRootFilterModel(SampleSystem.Generated.DTO.EmployeeRootFilterModelStrictDTO employeeRootFilterModelStrictDTO)
@@ -8460,17 +8462,17 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.Employee.EmployeeSpecialization ToEmployeeSpecialization(SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Employee.EmployeeSpecialization>(employeeSpecializationIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Employee.EmployeeSpecialization>(employeeSpecializationIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Employee.EmployeeSpecialization ToEmployeeSpecialization(SampleSystem.Generated.DTO.EmployeeSpecializationIntegrationSimpleDTO employeeSpecializationSimpleIntegrationDTO)
         {
-            return this.GetById<SampleSystem.Domain.Employee.EmployeeSpecialization>(employeeSpecializationSimpleIntegrationDTO.Id);
+            return this.GetById<SampleSystem.Domain.Employee.EmployeeSpecialization>(employeeSpecializationSimpleIntegrationDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink ToEmployeeToEmployeeLink(SampleSystem.Generated.DTO.EmployeeToEmployeeLinkIdentityDTO employeeToEmployeeLinkIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink>(employeeToEmployeeLinkIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink>(employeeToEmployeeLinkIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Employee.EmpoloyeeLink.EmployeeToEmployeeLink ToEmployeeToEmployeeLink(SampleSystem.Generated.DTO.EmployeeToEmployeeLinkStrictDTO employeeToEmployeeLinkStrictDTO)
@@ -8505,7 +8507,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.ForUpdate.Example1 ToExample1(SampleSystem.Generated.DTO.Example1IdentityDTO example1IdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.ForUpdate.Example1>(example1IdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.ForUpdate.Example1>(example1IdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.ForUpdate.Example1 ToExample1(SampleSystem.Generated.DTO.Example1StrictDTO example1StrictDTO)
@@ -8544,7 +8546,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.ForUpdate.Example2 ToExample2(SampleSystem.Generated.DTO.Example2IdentityDTO example2IdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.ForUpdate.Example2>(example2IdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.ForUpdate.Example2>(example2IdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.ForUpdate.Example2 ToExample2(SampleSystem.Generated.DTO.Example2StrictDTO example2StrictDTO)
@@ -8569,12 +8571,12 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.ExtendedInlineAuditObj ToExtendedInlineAuditObj(SampleSystem.Generated.DTO.ExtendedInlineAuditObjIdentityDTO extendedInlineAuditObjIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.ExtendedInlineAuditObj>(extendedInlineAuditObjIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.ExtendedInlineAuditObj>(extendedInlineAuditObjIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.NLock.GenericNamedLock ToGenericNamedLock(SampleSystem.Generated.DTO.GenericNamedLockIdentityDTO genericNamedLockIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.NLock.GenericNamedLock>(genericNamedLockIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.NLock.GenericNamedLock>(genericNamedLockIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel ToHierarchicalBusinessUnitFilterModel(SampleSystem.Generated.DTO.HierarchicalBusinessUnitFilterModelStrictDTO hierarchicalBusinessUnitFilterModelStrictDTO)
@@ -8584,7 +8586,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.HRDepartment.HRDepartment ToHRDepartment(SampleSystem.Generated.DTO.HRDepartmentIdentityDTO hRDepartmentIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.HRDepartment.HRDepartment>(hRDepartmentIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.HRDepartment.HRDepartment>(hRDepartmentIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.HRDepartment.HRDepartment ToHRDepartment(SampleSystem.Generated.DTO.HRDepartmentStrictDTO hRDepartmentStrictDTO)
@@ -8606,12 +8608,12 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.HRDepartment.HRDepartment ToHRDepartment(SampleSystem.Generated.DTO.HRDepartmentIntegrationSimpleDTO hRDepartmentSimpleIntegrationDTO)
         {
-            return this.GetById<SampleSystem.Domain.HRDepartment.HRDepartment>(hRDepartmentSimpleIntegrationDTO.Id);
+            return this.GetById<SampleSystem.Domain.HRDepartment.HRDepartment>(hRDepartmentSimpleIntegrationDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.HRDepartment.HRDepartmentEmployeePosition ToHRDepartmentEmployeePosition(SampleSystem.Generated.DTO.HRDepartmentEmployeePositionIdentityDTO hRDepartmentEmployeePositionIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.HRDepartment.HRDepartmentEmployeePosition>(hRDepartmentEmployeePositionIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.HRDepartment.HRDepartmentEmployeePosition>(hRDepartmentEmployeePositionIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.HRDepartment.HRDepartmentEmployeePosition ToHRDepartmentEmployeePosition(SampleSystem.Generated.DTO.HRDepartmentEmployeePositionStrictDTO hRDepartmentEmployeePositionStrictDTO)
@@ -8638,7 +8640,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.HRDepartment.HRDepartmentRoleEmployee ToHRDepartmentRoleEmployee(SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeIdentityDTO hRDepartmentRoleEmployeeIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.HRDepartment.HRDepartmentRoleEmployee>(hRDepartmentRoleEmployeeIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.HRDepartment.HRDepartmentRoleEmployee>(hRDepartmentRoleEmployeeIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.HRDepartment.HRDepartmentRoleEmployee ToHRDepartmentRoleEmployee(SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeStrictDTO hRDepartmentRoleEmployeeStrictDTO)
@@ -8653,27 +8655,27 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.Employee.IMRequest ToIMRequest(SampleSystem.Generated.DTO.IMRequestIdentityDTO iMRequestIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Employee.IMRequest>(iMRequestIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Employee.IMRequest>(iMRequestIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Employee.IMRequestDetail ToIMRequestDetail(SampleSystem.Generated.DTO.IMRequestDetailIdentityDTO iMRequestDetailIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Employee.IMRequestDetail>(iMRequestDetailIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Employee.IMRequestDetail>(iMRequestDetailIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Employee.Information ToInformation(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Employee.Information>(informationIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Employee.Information>(informationIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Employee.InsuranceDetail ToInsuranceDetail(SampleSystem.Generated.DTO.InsuranceDetailIdentityDTO insuranceDetailIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Employee.InsuranceDetail>(insuranceDetailIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Employee.InsuranceDetail>(insuranceDetailIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 ToIntegrationVersionContainer1(SampleSystem.Generated.DTO.IntegrationVersionContainer1IdentityDTO integrationVersionContainer1IdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>(integrationVersionContainer1IdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>(integrationVersionContainer1IdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 ToIntegrationVersionContainer1(SampleSystem.Generated.DTO.IntegrationVersionContainer1IntegrationRichDTO integrationVersionContainer1RichIntegrationDTO)
@@ -8695,7 +8697,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1 ToIntegrationVersionContainer1(SampleSystem.Generated.DTO.IntegrationVersionContainer1IntegrationSimpleDTO integrationVersionContainer1SimpleIntegrationDTO)
         {
-            return this.GetById<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>(integrationVersionContainer1SimpleIntegrationDTO.Id, Framework.BLL.IdCheckMode.SkipEmpty, Framework.Database.LockRole.Update);
+            return this.GetById<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer1>(integrationVersionContainer1SimpleIntegrationDTO.Id, Framework.BLL.IdCheckMode.SkipEmpty, Framework.Database.LockRole.Update)!;
         }
         
         public virtual SampleSystem.Domain.Models.Integration.IntegrationVersionContainer1CustomIntegrationSaveModel ToIntegrationVersionContainer1CustomIntegrationSaveModel(SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO integrationVersionContainer1CustomIntegrationSaveModelRichIntegrationDTO)
@@ -8705,7 +8707,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2 ToIntegrationVersionContainer2(SampleSystem.Generated.DTO.IntegrationVersionContainer2IdentityDTO integrationVersionContainer2IdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>(integrationVersionContainer2IdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2>(integrationVersionContainer2IdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.IntegrationVersions.IntegrationVersionContainer2 ToIntegrationVersionContainer2(SampleSystem.Generated.DTO.IntegrationVersionContainer2IntegrationRichDTO integrationVersionContainer2RichIntegrationDTO)
@@ -8727,12 +8729,12 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.Directories.LegalEntityBase ToLegalEntityBase(SampleSystem.Generated.DTO.LegalEntityBaseIdentityDTO legalEntityBaseIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Directories.LegalEntityBase>(legalEntityBaseIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Directories.LegalEntityBase>(legalEntityBaseIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Directories.Location ToLocation(SampleSystem.Generated.DTO.LocationIdentityDTO locationIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Directories.Location>(locationIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Directories.Location>(locationIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Directories.Location ToLocation(SampleSystem.Generated.DTO.LocationStrictDTO locationStrictDTO)
@@ -8754,27 +8756,27 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.Directories.Location ToLocation(SampleSystem.Generated.DTO.LocationIntegrationSimpleDTO locationSimpleIntegrationDTO)
         {
-            return this.GetById<SampleSystem.Domain.Directories.Location>(locationSimpleIntegrationDTO.Id);
+            return this.GetById<SampleSystem.Domain.Directories.Location>(locationSimpleIntegrationDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.EnversBug1676.Location1676 ToLocation1676(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676IdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.EnversBug1676.Location1676>(location1676IdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.EnversBug1676.Location1676>(location1676IdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Directories.LocationAncestorLink ToLocationAncestorLink(SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO locationAncestorLinkIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Directories.LocationAncestorLink>(locationAncestorLinkIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Directories.LocationAncestorLink>(locationAncestorLinkIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Directories.LocationToAncestorChildView ToLocationToAncestorChildView(SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO locationToAncestorChildViewIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Directories.LocationToAncestorChildView>(locationToAncestorChildViewIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Directories.LocationToAncestorChildView>(locationToAncestorChildViewIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.MU.ManagementUnit ToManagementUnit(SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.MU.ManagementUnit>(managementUnitIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.MU.ManagementUnit>(managementUnitIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.MU.ManagementUnit ToManagementUnit(SampleSystem.Generated.DTO.ManagementUnitStrictDTO managementUnitStrictDTO)
@@ -8796,17 +8798,17 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.MU.ManagementUnit ToManagementUnit(SampleSystem.Generated.DTO.ManagementUnitIntegrationSimpleDTO managementUnitSimpleIntegrationDTO)
         {
-            return this.GetById<SampleSystem.Domain.MU.ManagementUnit>(managementUnitSimpleIntegrationDTO.Id);
+            return this.GetById<SampleSystem.Domain.MU.ManagementUnit>(managementUnitSimpleIntegrationDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.MU.ManagementUnitAncestorLink ToManagementUnitAncestorLink(SampleSystem.Generated.DTO.ManagementUnitAncestorLinkIdentityDTO managementUnitAncestorLinkIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.MU.ManagementUnitAncestorLink>(managementUnitAncestorLinkIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.MU.ManagementUnitAncestorLink>(managementUnitAncestorLinkIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink ToManagementUnitAndBusinessUnitLink(SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkIdentityDTO managementUnitAndBusinessUnitLinkIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink>(managementUnitAndBusinessUnitLinkIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink>(managementUnitAndBusinessUnitLinkIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.MU.ManagementUnitAndBusinessUnitLink ToManagementUnitAndBusinessUnitLink(SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkStrictDTO managementUnitAndBusinessUnitLinkStrictDTO)
@@ -8838,7 +8840,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink ToManagementUnitAndHRDepartmentLink(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO managementUnitAndHRDepartmentLinkIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>(managementUnitAndHRDepartmentLinkIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink>(managementUnitAndHRDepartmentLinkIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.MU.ManagementUnitAndHRDepartmentLink ToManagementUnitAndHRDepartmentLink(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO managementUnitAndHRDepartmentLinkStrictDTO)
@@ -8870,17 +8872,17 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping ToManagementUnitFluentMapping(SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO managementUnitFluentMappingIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping>(managementUnitFluentMappingIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.NhFluentMapping.ManagementUnitFluentMapping>(managementUnitFluentMappingIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.MU.ManagementUnitToAncestorChildView ToManagementUnitToAncestorChildView(SampleSystem.Generated.DTO.ManagementUnitToAncestorChildViewIdentityDTO managementUnitToAncestorChildViewIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.MU.ManagementUnitToAncestorChildView>(managementUnitToAncestorChildViewIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.MU.ManagementUnitToAncestorChildView>(managementUnitToAncestorChildViewIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.NoSecurityObject ToNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO noSecurityObjectIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.NoSecurityObject>(noSecurityObjectIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.NoSecurityObject>(noSecurityObjectIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.NoSecurityObject ToNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectStrictDTO noSecurityObjectStrictDTO)
@@ -8902,12 +8904,12 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.UniqueByParent.ParentEntity ToParentEntity(SampleSystem.Generated.DTO.ParentEntityIdentityDTO parentEntityIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.UniqueByParent.ParentEntity>(parentEntityIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.UniqueByParent.ParentEntity>(parentEntityIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.ExternalPrincipal.Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalIdentityDTO principalIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.ExternalPrincipal.Principal>(principalIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.ExternalPrincipal.Principal>(principalIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.ExternalPrincipal.Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO principalStrictDTO)
@@ -8929,17 +8931,17 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.Projects.Project ToProject(SampleSystem.Generated.DTO.ProjectIdentityDTO projectIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Projects.Project>(projectIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Projects.Project>(projectIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.NhFluentMapping.PureFluentMappingObject ToPureFluentMappingObject(SampleSystem.Generated.DTO.PureFluentMappingObjectIdentityDTO pureFluentMappingObjectIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.NhFluentMapping.PureFluentMappingObject>(pureFluentMappingObjectIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.NhFluentMapping.PureFluentMappingObject>(pureFluentMappingObjectIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Employee.RoleRoleDegreeLink ToRoleRoleDegreeLink(SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO roleRoleDegreeLinkIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Employee.RoleRoleDegreeLink>(roleRoleDegreeLinkIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Employee.RoleRoleDegreeLink>(roleRoleDegreeLinkIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel ToSingleEmployeeFilterModel(SampleSystem.Generated.DTO.SingleEmployeeFilterModelStrictDTO singleEmployeeFilterModelStrictDTO)
@@ -8949,7 +8951,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.SqlParserTestObj ToSqlParserTestObj(SampleSystem.Generated.DTO.SqlParserTestObjIdentityDTO sqlParserTestObjIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.SqlParserTestObj>(sqlParserTestObjIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.SqlParserTestObj>(sqlParserTestObjIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.SqlParserTestObj ToSqlParserTestObj(SampleSystem.Generated.DTO.SqlParserTestObjStrictDTO sqlParserTestObjStrictDTO)
@@ -8971,7 +8973,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.SqlParserTestObjContainer ToSqlParserTestObjContainer(SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO sqlParserTestObjContainerIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.SqlParserTestObjContainer>(sqlParserTestObjContainerIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.SqlParserTestObjContainer>(sqlParserTestObjContainerIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.SqlParserTestObjContainer ToSqlParserTestObjContainer(SampleSystem.Generated.DTO.SqlParserTestObjContainerStrictDTO sqlParserTestObjContainerStrictDTO)
@@ -8993,22 +8995,22 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.TestIdComment.TestComment ToTestComment(SampleSystem.Generated.DTO.TestCommentIdentityDTO testCommentIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.TestIdComment.TestComment>(testCommentIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.TestIdComment.TestComment>(testCommentIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.TestIdComment.TestCommentCategory ToTestCommentCategory(SampleSystem.Generated.DTO.TestCommentCategoryIdentityDTO testCommentCategoryIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.TestIdComment.TestCommentCategory>(testCommentCategoryIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.TestIdComment.TestCommentCategory>(testCommentCategoryIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.TestIdComment.TestCommentParent ToTestCommentParent(SampleSystem.Generated.DTO.TestCommentParentIdentityDTO testCommentParentIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.TestIdComment.TestCommentParent>(testCommentParentIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.TestIdComment.TestCommentParent>(testCommentParentIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.TestCustomContextSecurityObj ToTestCustomContextSecurityObj(SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.TestCustomContextSecurityObj>(testCustomContextSecurityObjIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.TestCustomContextSecurityObj>(testCustomContextSecurityObjIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.TestDefaultFieldsMappingObj ToTestDefaultFieldsMappingObj(SampleSystem.Generated.DTO.TestDefaultFieldsMappingObjStrictDTO testDefaultFieldsMappingObjStrictDTO)
@@ -9023,12 +9025,12 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.Employee.TestExceptObject ToTestExceptObject(SampleSystem.Generated.DTO.TestExceptObjectIdentityDTO testExceptObjectIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Employee.TestExceptObject>(testExceptObjectIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Employee.TestExceptObject>(testExceptObjectIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.TestImmutableObj ToTestImmutableObj(SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.TestImmutableObj>(testImmutableObjIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.TestImmutableObj>(testImmutableObjIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.TestImmutableObj ToTestImmutableObj(SampleSystem.Generated.DTO.TestImmutableObjStrictDTO testImmutableObjStrictDTO)
@@ -9067,82 +9069,82 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.TestDeserializedAuth.TestItemAuthObject ToTestItemAuthObject(SampleSystem.Generated.DTO.TestItemAuthObjectIdentityDTO testItemAuthObjectIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.TestDeserializedAuth.TestItemAuthObject>(testItemAuthObjectIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.TestDeserializedAuth.TestItemAuthObject>(testItemAuthObjectIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.TestJobObject ToTestJobObject(SampleSystem.Generated.DTO.TestJobObjectIdentityDTO testJobObjectIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.TestJobObject>(testJobObjectIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.TestJobObject>(testJobObjectIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Directories.TestObjForNested ToTestObjForNested(SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO testObjForNestedIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Directories.TestObjForNested>(testObjForNestedIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Directories.TestObjForNested>(testObjForNestedIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Directories.TestObjForNestedBase ToTestObjForNestedBase(SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO testObjForNestedBaseIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Directories.TestObjForNestedBase>(testObjForNestedBaseIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Directories.TestObjForNestedBase>(testObjForNestedBaseIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject ToTestPerformanceObject(SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject>(testPerformanceObjectIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.TestDeserializedAuth.TestPerformanceObject>(testPerformanceObjectIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject ToTestPlainAuthObject(SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject>(testPlainAuthObjectIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.TestDeserializedAuth.TestPlainAuthObject>(testPlainAuthObjectIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.TestRelativeEmployeeChildObject ToTestRelativeEmployeeChildObject(SampleSystem.Generated.DTO.TestRelativeEmployeeChildObjectIdentityDTO testRelativeEmployeeChildObjectIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.TestRelativeEmployeeChildObject>(testRelativeEmployeeChildObjectIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.TestRelativeEmployeeChildObject>(testRelativeEmployeeChildObjectIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.TestRelativeEmployeeObject ToTestRelativeEmployeeObject(SampleSystem.Generated.DTO.TestRelativeEmployeeObjectIdentityDTO testRelativeEmployeeObjectIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.TestRelativeEmployeeObject>(testRelativeEmployeeObjectIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.TestRelativeEmployeeObject>(testRelativeEmployeeObjectIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.TestRelativeEmployeeParentObject ToTestRelativeEmployeeParentObject(SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectIdentityDTO testRelativeEmployeeParentObjectIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.TestRelativeEmployeeParentObject>(testRelativeEmployeeParentObjectIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.TestRelativeEmployeeParentObject>(testRelativeEmployeeParentObjectIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.Employee.TestRestrictionObject ToTestRestrictionObject(SampleSystem.Generated.DTO.TestRestrictionObjectIdentityDTO testRestrictionObjectIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.Employee.TestRestrictionObject>(testRestrictionObjectIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.Employee.TestRestrictionObject>(testRestrictionObjectIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.TestDependency.TestRootSecurityObj ToTestRootSecurityObj(SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO testRootSecurityObjIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.TestDependency.TestRootSecurityObj>(testRootSecurityObjIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.TestDependency.TestRootSecurityObj>(testRootSecurityObjIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.TestDependency.TestSecurityObjItem ToTestSecurityObjItem(SampleSystem.Generated.DTO.TestSecurityObjItemIdentityDTO testSecurityObjItemIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.TestDependency.TestSecurityObjItem>(testSecurityObjItemIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.TestDependency.TestSecurityObjItem>(testSecurityObjItemIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.TestDependency.TestSecuritySubObjItem ToTestSecuritySubObjItem(SampleSystem.Generated.DTO.TestSecuritySubObjItemIdentityDTO testSecuritySubObjItemIdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem>(testSecuritySubObjItemIdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem>(testSecuritySubObjItemIdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2 ToTestSecuritySubObjItem2(SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO testSecuritySubObjItem2IdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2>(testSecuritySubObjItem2IdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem2>(testSecuritySubObjItem2IdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3 ToTestSecuritySubObjItem3(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3IdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3>(testSecuritySubObjItem3IdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.TestDependency.TestSecuritySubObjItem3>(testSecuritySubObjItem3IdentityDTO.Id)!;
         }
         
         public virtual SampleSystem.Domain.EnversBug1676.WorkingCalendar1676 ToWorkingCalendar1676(SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676IdentityDTO)
         {
-            return this.GetById<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>(workingCalendar1676IdentityDTO.Id);
+            return this.GetById<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>(workingCalendar1676IdentityDTO.Id)!;
         }
     }
     

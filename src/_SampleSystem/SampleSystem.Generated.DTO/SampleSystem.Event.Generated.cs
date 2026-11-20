@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+#nullable enable
+
 namespace SampleSystem.Generated.DTO
 {
     
@@ -234,7 +236,7 @@ namespace SampleSystem.Generated.DTO
     public partial class AnotherSqlParserTestObjSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.AnotherSqlParserTestObjEventRichDTO anotherSqlParserTestObj;
+        private SampleSystem.Generated.DTO.AnotherSqlParserTestObjEventRichDTO anotherSqlParserTestObj = null!;
         
         public AnotherSqlParserTestObjSaveEventDTO()
         {
@@ -264,7 +266,7 @@ namespace SampleSystem.Generated.DTO
     public partial class AnotherSqlParserTestObjRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.AnotherSqlParserTestObjEventRichDTO anotherSqlParserTestObj;
+        private SampleSystem.Generated.DTO.AnotherSqlParserTestObjEventRichDTO anotherSqlParserTestObj = null!;
         
         public AnotherSqlParserTestObjRemoveEventDTO()
         {
@@ -298,17 +300,17 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _notNullColumn;
+        private string _notNullColumn = null!;
         
-        private string _uniqueColumn;
+        private string _uniqueColumn = null!;
         
         private long _version;
         
@@ -348,7 +350,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -374,7 +376,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -444,7 +446,7 @@ namespace SampleSystem.Generated.DTO
     public partial class AuthPerformanceObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.AuthPerformanceObjectEventRichDTO authPerformanceObject;
+        private SampleSystem.Generated.DTO.AuthPerformanceObjectEventRichDTO authPerformanceObject = null!;
         
         public AuthPerformanceObjectSaveEventDTO()
         {
@@ -474,7 +476,7 @@ namespace SampleSystem.Generated.DTO
     public partial class AuthPerformanceObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.AuthPerformanceObjectEventRichDTO authPerformanceObject;
+        private SampleSystem.Generated.DTO.AuthPerformanceObjectEventRichDTO authPerformanceObject = null!;
         
         public AuthPerformanceObjectRemoveEventDTO()
         {
@@ -506,21 +508,21 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO? _businessUnit;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO? _employee;
         
         private System.Guid _id;
         
-        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _location;
+        private SampleSystem.Generated.DTO.LocationEventSimpleDTO? _location;
         
-        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _managementUnit;
+        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO? _managementUnit;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -549,7 +551,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO? BusinessUnit
         {
             get
             {
@@ -575,7 +577,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -588,7 +590,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO? Employee
         {
             get
             {
@@ -614,7 +616,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Location
+        public SampleSystem.Generated.DTO.LocationEventSimpleDTO? Location
         {
             get
             {
@@ -627,7 +629,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO ManagementUnit
+        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO? ManagementUnit
         {
             get
             {
@@ -640,7 +642,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -684,7 +686,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventRichDTO businessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventRichDTO businessUnit = null!;
         
         public BusinessUnitSaveEventDTO()
         {
@@ -714,7 +716,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventRichDTO businessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventRichDTO businessUnit = null!;
         
         public BusinessUnitRemoveEventDTO()
         {
@@ -744,37 +746,37 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitEventRichDTO
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _account;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO? _account;
         
         private System.Guid _accountId;
         
-        private string _accountName;
+        private string? _accountName;
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _accountOrDivision;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO? _accountOrDivision;
         
         private System.Guid _accountOrDivisionId;
         
-        private string _accountOrDivisionName;
+        private string? _accountOrDivisionName;
         
         private bool _active;
         
         private bool _allowedForFilterRole;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleEventRichDTO> _businessUnitEmployeeRoles;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleEventRichDTO> _businessUnitEmployeeRoles = null!;
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnitForRent;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO? _businessUnitForRent;
         
         private SampleSystem.Domain.Enums.BusinessUnitStatus _businessUnitStatus;
         
-        private SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO _businessUnitType;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO? _businessUnitType;
         
-        private string _businessUnitTypeName;
+        private string _businessUnitTypeName = null!;
         
         private decimal _commission;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private int _deepLevel;
         
@@ -796,27 +798,27 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _leastProjectStartDate;
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _lob;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO? _lob;
         
         private System.Guid _lobId;
         
-        private string _lobName;
+        private string? _lobName;
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _lobOrService;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO? _lobOrService;
         
         private System.Guid _lobOrServiceId;
         
-        private string _lobOrServiceName;
+        private string? _lobOrServiceName;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkEventRichDTO> _managementUnits;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkEventRichDTO> _managementUnits = null!;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkEventRichDTO> _managerCommissions;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkEventRichDTO> _managerCommissions = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private bool _needSendBusinessUnitHasNoLinkedProjectsWarning;
         
@@ -824,15 +826,15 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Domain.Enums.BusinessUnitOptions _options;
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _parent;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO? _parent;
         
         private Framework.Core.Period _period;
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _program;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO? _program;
         
-        private string _programName;
+        private string? _programName;
         
-        private string _projectStartMailList;
+        private string? _projectStartMailList;
         
         private int _rank;
         
@@ -848,7 +850,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO Account
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO? Account
         {
             get
             {
@@ -874,7 +876,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AccountName
+        public string? AccountName
         {
             get
             {
@@ -887,7 +889,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO AccountOrDivision
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO? AccountOrDivision
         {
             get
             {
@@ -913,7 +915,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AccountOrDivisionName
+        public string? AccountOrDivisionName
         {
             get
             {
@@ -965,7 +967,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnitForRent
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO? BusinessUnitForRent
         {
             get
             {
@@ -991,7 +993,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO BusinessUnitType
+        public SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO? BusinessUnitType
         {
             get
             {
@@ -1043,7 +1045,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -1186,7 +1188,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO Lob
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO? Lob
         {
             get
             {
@@ -1212,7 +1214,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LobName
+        public string? LobName
         {
             get
             {
@@ -1225,7 +1227,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO LobOrService
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO? LobOrService
         {
             get
             {
@@ -1251,7 +1253,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LobOrServiceName
+        public string? LobOrServiceName
         {
             get
             {
@@ -1290,7 +1292,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -1368,7 +1370,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO Parent
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO? Parent
         {
             get
             {
@@ -1394,7 +1396,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO Program
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO? Program
         {
             get
             {
@@ -1407,7 +1409,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ProgramName
+        public string? ProgramName
         {
             get
             {
@@ -1420,7 +1422,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ProjectStartMailList
+        public string? ProjectStartMailList
         {
             get
             {
@@ -1466,11 +1468,11 @@ namespace SampleSystem.Generated.DTO
         
         private System.Guid _accountId;
         
-        private string _accountName;
+        private string? _accountName;
         
         private System.Guid _accountOrDivisionId;
         
-        private string _accountOrDivisionName;
+        private string? _accountOrDivisionName;
         
         private bool _active;
         
@@ -1478,13 +1480,13 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Domain.Enums.BusinessUnitStatus _businessUnitStatus;
         
-        private string _businessUnitTypeName;
+        private string _businessUnitTypeName = null!;
         
         private decimal _commission;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private int _deepLevel;
         
@@ -1508,17 +1510,17 @@ namespace SampleSystem.Generated.DTO
         
         private System.Guid _lobId;
         
-        private string _lobName;
+        private string? _lobName;
         
         private System.Guid _lobOrServiceId;
         
-        private string _lobOrServiceName;
+        private string? _lobOrServiceName;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private bool _needSendBusinessUnitHasNoLinkedProjectsWarning;
         
@@ -1528,9 +1530,9 @@ namespace SampleSystem.Generated.DTO
         
         private Framework.Core.Period _period;
         
-        private string _programName;
+        private string? _programName;
         
-        private string _projectStartMailList;
+        private string? _projectStartMailList;
         
         private int _rank;
         
@@ -1559,7 +1561,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AccountName
+        public string? AccountName
         {
             get
             {
@@ -1585,7 +1587,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AccountOrDivisionName
+        public string? AccountOrDivisionName
         {
             get
             {
@@ -1676,7 +1678,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -1832,7 +1834,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LobName
+        public string? LobName
         {
             get
             {
@@ -1858,7 +1860,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LobOrServiceName
+        public string? LobOrServiceName
         {
             get
             {
@@ -1871,7 +1873,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -1962,7 +1964,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ProgramName
+        public string? ProgramName
         {
             get
             {
@@ -1975,7 +1977,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ProjectStartMailList
+        public string? ProjectStartMailList
         {
             get
             {
@@ -2019,7 +2021,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitAncestorLinkSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitAncestorLinkEventRichDTO businessUnitAncestorLink;
+        private SampleSystem.Generated.DTO.BusinessUnitAncestorLinkEventRichDTO businessUnitAncestorLink = null!;
         
         public BusinessUnitAncestorLinkSaveEventDTO()
         {
@@ -2049,7 +2051,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitAncestorLinkRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitAncestorLinkEventRichDTO businessUnitAncestorLink;
+        private SampleSystem.Generated.DTO.BusinessUnitAncestorLinkEventRichDTO businessUnitAncestorLink = null!;
         
         public BusinessUnitAncestorLinkRemoveEventDTO()
         {
@@ -2081,17 +2083,17 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _ancestor;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _ancestor = null!;
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _child;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _child = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -2159,7 +2161,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -2185,7 +2187,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -2229,7 +2231,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitEmployeeRoleSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleEventRichDTO businessUnitEmployeeRole;
+        private SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleEventRichDTO businessUnitEmployeeRole = null!;
         
         public BusinessUnitEmployeeRoleSaveEventDTO()
         {
@@ -2259,7 +2261,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitEmployeeRoleRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleEventRichDTO businessUnitEmployeeRole;
+        private SampleSystem.Generated.DTO.BusinessUnitEmployeeRoleEventRichDTO businessUnitEmployeeRole = null!;
         
         public BusinessUnitEmployeeRoleRemoveEventDTO()
         {
@@ -2291,17 +2293,17 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee = null!;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -2358,7 +2360,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -2397,7 +2399,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -2454,7 +2456,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitHrDepartmentSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitHrDepartmentEventRichDTO businessUnitHrDepartment;
+        private SampleSystem.Generated.DTO.BusinessUnitHrDepartmentEventRichDTO businessUnitHrDepartment = null!;
         
         public BusinessUnitHrDepartmentSaveEventDTO()
         {
@@ -2484,7 +2486,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitHrDepartmentRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitHrDepartmentEventRichDTO businessUnitHrDepartment;
+        private SampleSystem.Generated.DTO.BusinessUnitHrDepartmentEventRichDTO businessUnitHrDepartment = null!;
         
         public BusinessUnitHrDepartmentRemoveEventDTO()
         {
@@ -2516,17 +2518,17 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO _hRDepartment;
+        private SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO _hRDepartment = null!;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -2581,7 +2583,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -2620,7 +2622,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -2664,7 +2666,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitManagerCommissionLinkSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkEventRichDTO businessUnitManagerCommissionLink;
+        private SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkEventRichDTO businessUnitManagerCommissionLink = null!;
         
         public BusinessUnitManagerCommissionLinkSaveEventDTO()
         {
@@ -2694,7 +2696,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitManagerCommissionLinkRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkEventRichDTO businessUnitManagerCommissionLink;
+        private SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkEventRichDTO businessUnitManagerCommissionLink = null!;
         
         public BusinessUnitManagerCommissionLinkRemoveEventDTO()
         {
@@ -2726,19 +2728,19 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit = null!;
         
         private decimal _commission;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _manager;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _manager = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -2808,7 +2810,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -2847,7 +2849,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -2904,7 +2906,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitToAncestorChildViewSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitToAncestorChildViewEventRichDTO businessUnitToAncestorChildView;
+        private SampleSystem.Generated.DTO.BusinessUnitToAncestorChildViewEventRichDTO businessUnitToAncestorChildView = null!;
         
         public BusinessUnitToAncestorChildViewSaveEventDTO()
         {
@@ -2934,7 +2936,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitToAncestorChildViewRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitToAncestorChildViewEventRichDTO businessUnitToAncestorChildView;
+        private SampleSystem.Generated.DTO.BusinessUnitToAncestorChildViewEventRichDTO businessUnitToAncestorChildView = null!;
         
         public BusinessUnitToAncestorChildViewRemoveEventDTO()
         {
@@ -2966,19 +2968,19 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _childOrAncestor;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _childOrAncestor = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _source;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _source = null!;
         
         private long _version;
         
@@ -3031,7 +3033,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -3057,7 +3059,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -3114,7 +3116,7 @@ namespace SampleSystem.Generated.DTO
     public partial class AddressSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.AddressEventRichDTO address;
+        private SampleSystem.Generated.DTO.AddressEventRichDTO address = null!;
         
         public AddressSaveEventDTO()
         {
@@ -3144,7 +3146,7 @@ namespace SampleSystem.Generated.DTO
     public partial class AddressRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.AddressEventRichDTO address;
+        private SampleSystem.Generated.DTO.AddressEventRichDTO address = null!;
         
         public AddressRemoveEventDTO()
         {
@@ -3178,29 +3180,29 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Domain.Enums.AddressType _addressType;
         
-        private string _cityName;
+        private string _cityName = null!;
         
-        private SampleSystem.Generated.DTO.CountryEventSimpleDTO _countryName;
+        private SampleSystem.Generated.DTO.CountryEventSimpleDTO _countryName = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private SampleSystem.Generated.DTO.LegalEntityBaseEventSimpleDTO _legalEntity;
+        private SampleSystem.Generated.DTO.LegalEntityBaseEventSimpleDTO _legalEntity = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _regionName;
+        private string _regionName = null!;
         
-        private string _street;
+        private string _street = null!;
         
         private long _version;
         
-        private string _zip;
+        private string _zip = null!;
         
         public AddressEventRichDTO()
         {
@@ -3277,7 +3279,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -3316,7 +3318,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -3399,7 +3401,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitTypeSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitTypeEventRichDTO businessUnitType;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeEventRichDTO businessUnitType = null!;
         
         public BusinessUnitTypeSaveEventDTO()
         {
@@ -3429,7 +3431,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitTypeRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitTypeEventRichDTO businessUnitType;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeEventRichDTO businessUnitType = null!;
         
         public BusinessUnitTypeRemoveEventDTO()
         {
@@ -3479,23 +3481,23 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
         private bool _isAdministrative;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private bool _needVertical;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeEventRichDTO> _possibleFinancialProjectTypes;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeEventRichDTO> _possibleFinancialProjectTypes = null!;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentEventRichDTO> _possibleParents;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentEventRichDTO> _possibleParents = null!;
         
         private SampleSystem.Domain.Enums.PossibleStartDate? _possibleStartDate;
         
@@ -3509,7 +3511,7 @@ namespace SampleSystem.Generated.DTO
         
         private bool _transferBOConfirm;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToEventRichDTO> _transferTo;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToEventRichDTO> _transferTo = null!;
         
         private long _version;
         
@@ -3653,7 +3655,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -3692,7 +3694,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -3899,17 +3901,17 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
         private bool _isAdministrative;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private bool _needVertical;
         
@@ -4067,7 +4069,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -4106,7 +4108,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -4254,7 +4256,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitTypeLinkWithPossibleFinancialProjectTypeSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeEventRichDTO businessUnitTypeLinkWithPossibleFinancialProjectType;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeEventRichDTO businessUnitTypeLinkWithPossibleFinancialProjectType = null!;
         
         public BusinessUnitTypeLinkWithPossibleFinancialProjectTypeSaveEventDTO()
         {
@@ -4284,7 +4286,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitTypeLinkWithPossibleFinancialProjectTypeRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeEventRichDTO businessUnitTypeLinkWithPossibleFinancialProjectType;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleFinancialProjectTypeEventRichDTO businessUnitTypeLinkWithPossibleFinancialProjectType = null!;
         
         public BusinessUnitTypeLinkWithPossibleFinancialProjectTypeRemoveEventDTO()
         {
@@ -4316,17 +4318,17 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO _businessUnitType;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO _businessUnitType = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private SampleSystem.Domain.Enums.FinancialProjectType _financialProjectType;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -4381,7 +4383,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -4420,7 +4422,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -4464,7 +4466,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitTypeLinkWithPossibleParentSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentEventRichDTO businessUnitTypeLinkWithPossibleParent;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentEventRichDTO businessUnitTypeLinkWithPossibleParent = null!;
         
         public BusinessUnitTypeLinkWithPossibleParentSaveEventDTO()
         {
@@ -4494,7 +4496,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitTypeLinkWithPossibleParentRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentEventRichDTO businessUnitTypeLinkWithPossibleParent;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithPossibleParentEventRichDTO businessUnitTypeLinkWithPossibleParent = null!;
         
         public BusinessUnitTypeLinkWithPossibleParentRemoveEventDTO()
         {
@@ -4526,19 +4528,19 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO _businessUnitType;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO _businessUnitType = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO _possibleParent;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO _possibleParent = null!;
         
         private long _version;
         
@@ -4591,7 +4593,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -4617,7 +4619,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -4674,7 +4676,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitTypeLinkWithTransferToSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToEventRichDTO businessUnitTypeLinkWithTransferTo;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToEventRichDTO businessUnitTypeLinkWithTransferTo = null!;
         
         public BusinessUnitTypeLinkWithTransferToSaveEventDTO()
         {
@@ -4704,7 +4706,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitTypeLinkWithTransferToRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToEventRichDTO businessUnitTypeLinkWithTransferTo;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeLinkWithTransferToEventRichDTO businessUnitTypeLinkWithTransferTo = null!;
         
         public BusinessUnitTypeLinkWithTransferToRemoveEventDTO()
         {
@@ -4736,19 +4738,19 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO _businessUnitType;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO _businessUnitType = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO _transferTo;
+        private SampleSystem.Generated.DTO.BusinessUnitTypeEventSimpleDTO _transferTo = null!;
         
         private long _version;
         
@@ -4801,7 +4803,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -4827,7 +4829,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -4884,7 +4886,7 @@ namespace SampleSystem.Generated.DTO
     public partial class CompanyLegalEntitySaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.CompanyLegalEntityEventRichDTO companyLegalEntity;
+        private SampleSystem.Generated.DTO.CompanyLegalEntityEventRichDTO companyLegalEntity = null!;
         
         public CompanyLegalEntitySaveEventDTO()
         {
@@ -4914,7 +4916,7 @@ namespace SampleSystem.Generated.DTO
     public partial class CompanyLegalEntityRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.CompanyLegalEntityEventRichDTO companyLegalEntity;
+        private SampleSystem.Generated.DTO.CompanyLegalEntityEventRichDTO companyLegalEntity = null!;
         
         public CompanyLegalEntityRemoveEventDTO()
         {
@@ -4946,31 +4948,31 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.AddressEventRichDTO> _addresses;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.AddressEventRichDTO> _addresses = null!;
         
-        private SampleSystem.Domain.Ariba.RevenueDocumentAribaStatus _aribaStatus;
+        private SampleSystem.Domain.Ariba.RevenueDocumentAribaStatus _aribaStatus = null!;
         
-        private SampleSystem.Generated.DTO.TestObjForNestedEventSimpleDTO _baseObj;
+        private SampleSystem.Generated.DTO.TestObjForNestedEventSimpleDTO? _baseObj;
         
-        private string _code;
+        private string _code = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private SampleSystem.Generated.DTO.TestObjForNestedEventSimpleDTO _currentObj;
+        private SampleSystem.Generated.DTO.TestObjForNestedEventSimpleDTO? _currentObj;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
-        private string _nameEnglish;
+        private string _nameEnglish = null!;
         
-        private SampleSystem.Generated.DTO.CompanyLegalEntityEventSimpleDTO _parent;
+        private SampleSystem.Generated.DTO.CompanyLegalEntityEventSimpleDTO? _parent;
         
         private SampleSystem.Domain.Enums.CompanyLegalEntityType _type;
         
@@ -5025,7 +5027,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestObjForNestedEventSimpleDTO BaseObj
+        public SampleSystem.Generated.DTO.TestObjForNestedEventSimpleDTO? BaseObj
         {
             get
             {
@@ -5064,7 +5066,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -5077,7 +5079,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestObjForNestedEventSimpleDTO CurrentObj
+        public SampleSystem.Generated.DTO.TestObjForNestedEventSimpleDTO? CurrentObj
         {
             get
             {
@@ -5103,7 +5105,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -5155,7 +5157,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.CompanyLegalEntityEventSimpleDTO Parent
+        public SampleSystem.Generated.DTO.CompanyLegalEntityEventSimpleDTO? Parent
         {
             get
             {
@@ -5201,23 +5203,23 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private SampleSystem.Domain.Ariba.RevenueDocumentAribaStatus _aribaStatus;
+        private SampleSystem.Domain.Ariba.RevenueDocumentAribaStatus _aribaStatus = null!;
         
-        private string _code;
+        private string _code = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
-        private string _nameEnglish;
+        private string _nameEnglish = null!;
         
         private SampleSystem.Domain.Enums.CompanyLegalEntityType _type;
         
@@ -5285,7 +5287,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -5311,7 +5313,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -5394,7 +5396,7 @@ namespace SampleSystem.Generated.DTO
     public partial class CountrySaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.CountryEventRichDTO country;
+        private SampleSystem.Generated.DTO.CountryEventRichDTO country = null!;
         
         public CountrySaveEventDTO()
         {
@@ -5424,7 +5426,7 @@ namespace SampleSystem.Generated.DTO
     public partial class CountryRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.CountryEventRichDTO country;
+        private SampleSystem.Generated.DTO.CountryEventRichDTO country = null!;
         
         public CountryRemoveEventDTO()
         {
@@ -5456,23 +5458,23 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private string _code;
+        private string _code = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private string _culture;
+        private string _culture = null!;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
-        private string _nameNative;
+        private string _nameNative = null!;
         
         private long _version;
         
@@ -5525,7 +5527,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -5564,7 +5566,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -5636,23 +5638,23 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private string _code;
+        private string _code = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private string _culture;
+        private string _culture = null!;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
-        private string _nameNative;
+        private string _nameNative = null!;
         
         private long _version;
         
@@ -5705,7 +5707,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -5744,7 +5746,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -5814,7 +5816,7 @@ namespace SampleSystem.Generated.DTO
     public partial class LegalEntityBaseSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.LegalEntityBaseEventRichDTO legalEntityBase;
+        private SampleSystem.Generated.DTO.LegalEntityBaseEventRichDTO legalEntityBase = null!;
         
         public LegalEntityBaseSaveEventDTO()
         {
@@ -5844,7 +5846,7 @@ namespace SampleSystem.Generated.DTO
     public partial class LegalEntityBaseRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.LegalEntityBaseEventRichDTO legalEntityBase;
+        private SampleSystem.Generated.DTO.LegalEntityBaseEventRichDTO legalEntityBase = null!;
         
         public LegalEntityBaseRemoveEventDTO()
         {
@@ -5876,25 +5878,25 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.AddressEventRichDTO> _addresses;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.AddressEventRichDTO> _addresses = null!;
         
-        private SampleSystem.Domain.Ariba.RevenueDocumentAribaStatus _aribaStatus;
+        private SampleSystem.Domain.Ariba.RevenueDocumentAribaStatus _aribaStatus = null!;
         
-        private SampleSystem.Generated.DTO.TestObjForNestedEventSimpleDTO _baseObj;
+        private SampleSystem.Generated.DTO.TestObjForNestedEventSimpleDTO? _baseObj;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
-        private string _nameEnglish;
+        private string _nameEnglish = null!;
         
         private long _version;
         
@@ -5947,7 +5949,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.TestObjForNestedEventSimpleDTO BaseObj
+        public SampleSystem.Generated.DTO.TestObjForNestedEventSimpleDTO? BaseObj
         {
             get
             {
@@ -5973,7 +5975,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -5999,7 +6001,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -6071,21 +6073,21 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private SampleSystem.Domain.Ariba.RevenueDocumentAribaStatus _aribaStatus;
+        private SampleSystem.Domain.Ariba.RevenueDocumentAribaStatus _aribaStatus = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
-        private string _nameEnglish;
+        private string _nameEnglish = null!;
         
         private long _version;
         
@@ -6138,7 +6140,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -6164,7 +6166,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -6234,7 +6236,7 @@ namespace SampleSystem.Generated.DTO
     public partial class LocationSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.LocationEventRichDTO location;
+        private SampleSystem.Generated.DTO.LocationEventRichDTO location = null!;
         
         public LocationSaveEventDTO()
         {
@@ -6264,7 +6266,7 @@ namespace SampleSystem.Generated.DTO
     public partial class LocationRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.LocationEventRichDTO location;
+        private SampleSystem.Generated.DTO.LocationEventRichDTO location = null!;
         
         public LocationRemoveEventDTO()
         {
@@ -6296,9 +6298,9 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private byte[] _binaryData;
+        private byte[]? _binaryData;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.LocationEventRichDTO> _children;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.LocationEventRichDTO> _children = null!;
         
         private int _closeDate;
         
@@ -6306,11 +6308,11 @@ namespace SampleSystem.Generated.DTO
         
         private bool _containsOnlyInactiveChildren;
         
-        private SampleSystem.Generated.DTO.CountryEventSimpleDTO _country;
+        private SampleSystem.Generated.DTO.CountryEventSimpleDTO? _country;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private int _deepLevel;
         
@@ -6322,13 +6324,13 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Domain.Enums.LocationType _locationType;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
-        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _parent;
+        private SampleSystem.Generated.DTO.LocationEventSimpleDTO? _parent;
         
         private long _version;
         
@@ -6355,7 +6357,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte[] BinaryData
+        public byte[]? BinaryData
         {
             get
             {
@@ -6420,7 +6422,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.CountryEventSimpleDTO Country
+        public SampleSystem.Generated.DTO.CountryEventSimpleDTO? Country
         {
             get
             {
@@ -6446,7 +6448,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -6524,7 +6526,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -6563,7 +6565,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Parent
+        public SampleSystem.Generated.DTO.LocationEventSimpleDTO? Parent
         {
             get
             {
@@ -6604,7 +6606,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private int _deepLevel;
         
@@ -6616,11 +6618,11 @@ namespace SampleSystem.Generated.DTO
         
         private SampleSystem.Domain.Enums.LocationType _locationType;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -6699,7 +6701,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -6777,7 +6779,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -6834,7 +6836,7 @@ namespace SampleSystem.Generated.DTO
     public partial class LocationAncestorLinkSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.LocationAncestorLinkEventRichDTO locationAncestorLink;
+        private SampleSystem.Generated.DTO.LocationAncestorLinkEventRichDTO locationAncestorLink = null!;
         
         public LocationAncestorLinkSaveEventDTO()
         {
@@ -6864,7 +6866,7 @@ namespace SampleSystem.Generated.DTO
     public partial class LocationAncestorLinkRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.LocationAncestorLinkEventRichDTO locationAncestorLink;
+        private SampleSystem.Generated.DTO.LocationAncestorLinkEventRichDTO locationAncestorLink = null!;
         
         public LocationAncestorLinkRemoveEventDTO()
         {
@@ -6896,17 +6898,17 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _ancestor;
+        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _ancestor = null!;
         
-        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _child;
+        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _child = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -6974,7 +6976,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -7000,7 +7002,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -7044,7 +7046,7 @@ namespace SampleSystem.Generated.DTO
     public partial class LocationToAncestorChildViewSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.LocationToAncestorChildViewEventRichDTO locationToAncestorChildView;
+        private SampleSystem.Generated.DTO.LocationToAncestorChildViewEventRichDTO locationToAncestorChildView = null!;
         
         public LocationToAncestorChildViewSaveEventDTO()
         {
@@ -7074,7 +7076,7 @@ namespace SampleSystem.Generated.DTO
     public partial class LocationToAncestorChildViewRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.LocationToAncestorChildViewEventRichDTO locationToAncestorChildView;
+        private SampleSystem.Generated.DTO.LocationToAncestorChildViewEventRichDTO locationToAncestorChildView = null!;
         
         public LocationToAncestorChildViewRemoveEventDTO()
         {
@@ -7106,19 +7108,19 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _childOrAncestor;
+        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _childOrAncestor = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _source;
+        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _source = null!;
         
         private long _version;
         
@@ -7171,7 +7173,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -7197,7 +7199,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -7254,7 +7256,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestObjForNestedSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestObjForNestedEventRichDTO testObjForNested;
+        private SampleSystem.Generated.DTO.TestObjForNestedEventRichDTO testObjForNested = null!;
         
         public TestObjForNestedSaveEventDTO()
         {
@@ -7284,7 +7286,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestObjForNestedRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestObjForNestedEventRichDTO testObjForNested;
+        private SampleSystem.Generated.DTO.TestObjForNestedEventRichDTO testObjForNested = null!;
         
         public TestObjForNestedRemoveEventDTO()
         {
@@ -7318,15 +7320,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private Framework.Core.Period _period;
         
@@ -7368,7 +7370,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -7394,7 +7396,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -7468,15 +7470,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private Framework.Core.Period _period;
         
@@ -7518,7 +7520,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -7544,7 +7546,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -7614,7 +7616,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestObjForNestedBaseSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestObjForNestedBaseEventRichDTO testObjForNestedBase;
+        private SampleSystem.Generated.DTO.TestObjForNestedBaseEventRichDTO testObjForNestedBase = null!;
         
         public TestObjForNestedBaseSaveEventDTO()
         {
@@ -7644,7 +7646,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestObjForNestedBaseRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestObjForNestedBaseEventRichDTO testObjForNestedBase;
+        private SampleSystem.Generated.DTO.TestObjForNestedBaseEventRichDTO testObjForNestedBase = null!;
         
         public TestObjForNestedBaseRemoveEventDTO()
         {
@@ -7678,15 +7680,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private Framework.Core.Period _period;
         
@@ -7728,7 +7730,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -7754,7 +7756,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -7824,7 +7826,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeEventRichDTO employee;
+        private SampleSystem.Generated.DTO.EmployeeEventRichDTO employee = null!;
         
         public EmployeeSaveEventDTO()
         {
@@ -7854,7 +7856,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeCustomActionEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeEventRichDTO employee;
+        private SampleSystem.Generated.DTO.EmployeeEventRichDTO employee = null!;
         
         public EmployeeCustomActionEventDTO()
         {
@@ -7884,7 +7886,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeEventRichDTO
     {
         
-        private string _accountName;
+        private string _accountName = null!;
         
         private bool _active;
         
@@ -7896,27 +7898,27 @@ namespace SampleSystem.Generated.DTO
         
         private bool _canBePPM;
         
-        private string _cellPhone;
+        private string _cellPhone = null!;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeCellPhoneEventRichDTO> _cellPhones;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeCellPhoneEventRichDTO> _cellPhones = null!;
         
-        private SampleSystem.Generated.DTO.CompanyLegalEntityEventSimpleDTO _companyLegalEntity;
+        private SampleSystem.Generated.DTO.CompanyLegalEntityEventSimpleDTO? _companyLegalEntity;
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _coreBusinessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO? _coreBusinessUnit;
         
         private Framework.Core.Period? _coreBusinessUnitPeriod;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.DateTime? _dismissDate;
         
         private Framework.Core.Period _educationDuration;
         
-        private string _email;
+        private string _email = null!;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkEventRichDTO> _employeeToEmployeeLinks;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeToEmployeeLinkEventRichDTO> _employeeToEmployeeLinks = null!;
         
         private long _externalId;
         
@@ -7924,61 +7926,61 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _hireDate;
         
-        private SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO _hRDepartment;
+        private SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO? _hRDepartment;
         
         private System.Guid _id;
         
-        private string _interphone;
+        private string _interphone = null!;
         
         private bool _isCandidate;
         
-        private string _landlinephone;
+        private string _landlinephone = null!;
         
         private System.DateTime? _lastActionDate;
         
-        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _location;
+        private SampleSystem.Generated.DTO.LocationEventSimpleDTO? _location;
         
         private int? _locationCode;
         
-        private string _login;
+        private string _login = null!;
         
-        private string _logonName;
+        private string _logonName = null!;
         
-        private string _mailAccountName;
+        private string _mailAccountName = null!;
         
-        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _managementUnit;
+        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO? _managementUnit;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private SampleSystem.Domain.Inline.FioShort _nameEng;
+        private SampleSystem.Domain.Inline.FioShort _nameEng = null!;
         
-        private SampleSystem.Domain.Inline.Fio _nameNative;
+        private SampleSystem.Domain.Inline.Fio _nameNative = null!;
         
-        private SampleSystem.Domain.Inline.Fio _nameRussian;
+        private SampleSystem.Domain.Inline.Fio _nameRussian = null!;
         
         private System.DateTime _nonValidateVirtualProp;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _personalAssistant;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO? _personalAssistant;
         
         private int? _pin;
         
         private System.DateTime? _plannedHireDate;
         
-        private SampleSystem.Generated.DTO.EmployeePositionEventSimpleDTO _position;
+        private SampleSystem.Generated.DTO.EmployeePositionEventSimpleDTO? _position;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _ppm;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO? _ppm;
         
-        private SampleSystem.Generated.DTO.EmployeeRegistrationTypeEventSimpleDTO _registrationType;
+        private SampleSystem.Generated.DTO.EmployeeRegistrationTypeEventSimpleDTO? _registrationType;
         
-        private SampleSystem.Generated.DTO.EmployeeRoleEventSimpleDTO _role;
+        private SampleSystem.Generated.DTO.EmployeeRoleEventSimpleDTO? _role;
         
-        private SampleSystem.Generated.DTO.EmployeeRoleDegreeEventSimpleDTO _roleDegree;
+        private SampleSystem.Generated.DTO.EmployeeRoleDegreeEventSimpleDTO? _roleDegree;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkEventRichDTO> _specializations;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkEventRichDTO> _specializations = null!;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _vacationApprover;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO? _vacationApprover;
         
         private System.DateTime _validateVirtualProp;
         
@@ -8100,7 +8102,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.CompanyLegalEntityEventSimpleDTO CompanyLegalEntity
+        public SampleSystem.Generated.DTO.CompanyLegalEntityEventSimpleDTO? CompanyLegalEntity
         {
             get
             {
@@ -8113,7 +8115,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO CoreBusinessUnit
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO? CoreBusinessUnit
         {
             get
             {
@@ -8152,7 +8154,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -8256,7 +8258,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO HRDepartment
+        public SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO? HRDepartment
         {
             get
             {
@@ -8334,7 +8336,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Location
+        public SampleSystem.Generated.DTO.LocationEventSimpleDTO? Location
         {
             get
             {
@@ -8399,7 +8401,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO ManagementUnit
+        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO? ManagementUnit
         {
             get
             {
@@ -8412,7 +8414,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -8490,7 +8492,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO PersonalAssistant
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO? PersonalAssistant
         {
             get
             {
@@ -8529,7 +8531,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeePositionEventSimpleDTO Position
+        public SampleSystem.Generated.DTO.EmployeePositionEventSimpleDTO? Position
         {
             get
             {
@@ -8542,7 +8544,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Ppm
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO? Ppm
         {
             get
             {
@@ -8555,7 +8557,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRegistrationTypeEventSimpleDTO RegistrationType
+        public SampleSystem.Generated.DTO.EmployeeRegistrationTypeEventSimpleDTO? RegistrationType
         {
             get
             {
@@ -8568,7 +8570,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRoleEventSimpleDTO Role
+        public SampleSystem.Generated.DTO.EmployeeRoleEventSimpleDTO? Role
         {
             get
             {
@@ -8581,7 +8583,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRoleDegreeEventSimpleDTO RoleDegree
+        public SampleSystem.Generated.DTO.EmployeeRoleDegreeEventSimpleDTO? RoleDegree
         {
             get
             {
@@ -8607,7 +8609,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO VacationApprover
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO? VacationApprover
         {
             get
             {
@@ -8664,7 +8666,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeEventSimpleDTO
     {
         
-        private string _accountName;
+        private string _accountName = null!;
         
         private bool _active;
         
@@ -8676,19 +8678,19 @@ namespace SampleSystem.Generated.DTO
         
         private bool _canBePPM;
         
-        private string _cellPhone;
+        private string _cellPhone = null!;
         
         private Framework.Core.Period? _coreBusinessUnitPeriod;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.DateTime? _dismissDate;
         
         private Framework.Core.Period _educationDuration;
         
-        private string _email;
+        private string _email = null!;
         
         private long _externalId;
         
@@ -8698,31 +8700,31 @@ namespace SampleSystem.Generated.DTO
         
         private System.Guid _id;
         
-        private string _interphone;
+        private string _interphone = null!;
         
         private bool _isCandidate;
         
-        private string _landlinephone;
+        private string _landlinephone = null!;
         
         private System.DateTime? _lastActionDate;
         
         private int? _locationCode;
         
-        private string _login;
+        private string _login = null!;
         
-        private string _logonName;
+        private string _logonName = null!;
         
-        private string _mailAccountName;
+        private string _mailAccountName = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private SampleSystem.Domain.Inline.FioShort _nameEng;
+        private SampleSystem.Domain.Inline.FioShort _nameEng = null!;
         
-        private SampleSystem.Domain.Inline.Fio _nameNative;
+        private SampleSystem.Domain.Inline.Fio _nameNative = null!;
         
-        private SampleSystem.Domain.Inline.Fio _nameRussian;
+        private SampleSystem.Domain.Inline.Fio _nameRussian = null!;
         
         private System.DateTime _nonValidateVirtualProp;
         
@@ -8863,7 +8865,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -9071,7 +9073,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -9219,7 +9221,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeCellPhoneSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeCellPhoneEventRichDTO employeeCellPhone;
+        private SampleSystem.Generated.DTO.EmployeeCellPhoneEventRichDTO employeeCellPhone = null!;
         
         public EmployeeCellPhoneSaveEventDTO()
         {
@@ -9249,7 +9251,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeCellPhoneRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeCellPhoneEventRichDTO employeeCellPhone;
+        private SampleSystem.Generated.DTO.EmployeeCellPhoneEventRichDTO employeeCellPhone = null!;
         
         public EmployeeCellPhoneRemoveEventDTO()
         {
@@ -9281,25 +9283,25 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private string _cityCode;
+        private string _cityCode = null!;
         
-        private string _countryCode;
+        private string _countryCode = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee = null!;
         
-        private string _fullNumber;
+        private string _fullNumber = null!;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _number;
+        private string _number = null!;
         
         private long _version;
         
@@ -9365,7 +9367,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -9417,7 +9419,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -9474,7 +9476,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeInformationSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeInformationEventRichDTO employeeInformation;
+        private SampleSystem.Generated.DTO.EmployeeInformationEventRichDTO employeeInformation = null!;
         
         public EmployeeInformationSaveEventDTO()
         {
@@ -9504,7 +9506,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeInformationRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeInformationEventRichDTO employeeInformation;
+        private SampleSystem.Generated.DTO.EmployeeInformationEventRichDTO employeeInformation = null!;
         
         public EmployeeInformationRemoveEventDTO()
         {
@@ -9538,19 +9540,19 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private string _email;
+        private string _email = null!;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
-        private string _personalEmail;
+        private string _personalEmail = null!;
         
         private long _version;
         
@@ -9590,7 +9592,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -9629,7 +9631,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -9699,7 +9701,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePersonalCellPhoneSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeePersonalCellPhoneEventRichDTO employeePersonalCellPhone;
+        private SampleSystem.Generated.DTO.EmployeePersonalCellPhoneEventRichDTO employeePersonalCellPhone = null!;
         
         public EmployeePersonalCellPhoneSaveEventDTO()
         {
@@ -9729,7 +9731,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePersonalCellPhoneRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeePersonalCellPhoneEventRichDTO employeePersonalCellPhone;
+        private SampleSystem.Generated.DTO.EmployeePersonalCellPhoneEventRichDTO employeePersonalCellPhone = null!;
         
         public EmployeePersonalCellPhoneRemoveEventDTO()
         {
@@ -9761,25 +9763,25 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private string _cityCode;
+        private string _cityCode = null!;
         
-        private string _countryCode;
+        private string _countryCode = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee = null!;
         
-        private string _fullNumber;
+        private string _fullNumber = null!;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _number;
+        private string _number = null!;
         
         private long _version;
         
@@ -9845,7 +9847,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -9897,7 +9899,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -9954,7 +9956,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePhotoSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeePhotoEventRichDTO employeePhoto;
+        private SampleSystem.Generated.DTO.EmployeePhotoEventRichDTO employeePhoto = null!;
         
         public EmployeePhotoSaveEventDTO()
         {
@@ -9984,7 +9986,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePhotoRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeePhotoEventRichDTO employeePhoto;
+        private SampleSystem.Generated.DTO.EmployeePhotoEventRichDTO employeePhoto = null!;
         
         public EmployeePhotoRemoveEventDTO()
         {
@@ -10016,21 +10018,21 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private string _contentType;
+        private string _contentType = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private byte[] _data;
+        private byte[] _data = null!;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee = null!;
         
         private System.Guid _id;
         
         private bool _isDefault;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -10087,7 +10089,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -10152,7 +10154,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -10209,7 +10211,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePositionSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeePositionEventRichDTO employeePosition;
+        private SampleSystem.Generated.DTO.EmployeePositionEventRichDTO employeePosition = null!;
         
         public EmployeePositionSaveEventDTO()
         {
@@ -10239,7 +10241,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeePositionRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeePositionEventRichDTO employeePosition;
+        private SampleSystem.Generated.DTO.EmployeePositionEventRichDTO employeePosition = null!;
         
         public EmployeePositionRemoveEventDTO()
         {
@@ -10273,21 +10275,21 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private string _englishName;
+        private string _englishName = null!;
         
         private long _externalId;
         
         private System.Guid _id;
         
-        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _location;
+        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _location = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -10327,7 +10329,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -10392,7 +10394,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -10453,19 +10455,19 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private string _englishName;
+        private string _englishName = null!;
         
         private long _externalId;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -10505,7 +10507,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -10557,7 +10559,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -10614,7 +10616,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRegistrationTypeSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeRegistrationTypeEventRichDTO employeeRegistrationType;
+        private SampleSystem.Generated.DTO.EmployeeRegistrationTypeEventRichDTO employeeRegistrationType = null!;
         
         public EmployeeRegistrationTypeSaveEventDTO()
         {
@@ -10644,7 +10646,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRegistrationTypeRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeRegistrationTypeEventRichDTO employeeRegistrationType;
+        private SampleSystem.Generated.DTO.EmployeeRegistrationTypeEventRichDTO employeeRegistrationType = null!;
         
         public EmployeeRegistrationTypeRemoveEventDTO()
         {
@@ -10678,17 +10680,17 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private long _externalId;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -10728,7 +10730,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -10767,7 +10769,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -10828,17 +10830,17 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private long _externalId;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -10878,7 +10880,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -10917,7 +10919,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -10974,7 +10976,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRoleSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeRoleEventRichDTO employeeRole;
+        private SampleSystem.Generated.DTO.EmployeeRoleEventRichDTO employeeRole = null!;
         
         public EmployeeRoleSaveEventDTO()
         {
@@ -11004,7 +11006,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRoleRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeRoleEventRichDTO employeeRole;
+        private SampleSystem.Generated.DTO.EmployeeRoleEventRichDTO employeeRole = null!;
         
         public EmployeeRoleRemoveEventDTO()
         {
@@ -11038,15 +11040,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -11086,7 +11088,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -11112,7 +11114,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -11173,15 +11175,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -11221,7 +11223,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -11247,7 +11249,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -11304,7 +11306,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRoleDegreeSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeRoleDegreeEventRichDTO employeeRoleDegree;
+        private SampleSystem.Generated.DTO.EmployeeRoleDegreeEventRichDTO employeeRoleDegree = null!;
         
         public EmployeeRoleDegreeSaveEventDTO()
         {
@@ -11334,7 +11336,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRoleDegreeRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeRoleDegreeEventRichDTO employeeRoleDegree;
+        private SampleSystem.Generated.DTO.EmployeeRoleDegreeEventRichDTO employeeRoleDegree = null!;
         
         public EmployeeRoleDegreeRemoveEventDTO()
         {
@@ -11368,15 +11370,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -11416,7 +11418,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -11442,7 +11444,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -11503,15 +11505,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -11551,7 +11553,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -11577,7 +11579,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -11634,7 +11636,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeSpecializationSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeSpecializationEventRichDTO employeeSpecialization;
+        private SampleSystem.Generated.DTO.EmployeeSpecializationEventRichDTO employeeSpecialization = null!;
         
         public EmployeeSpecializationSaveEventDTO()
         {
@@ -11664,7 +11666,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeSpecializationRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeSpecializationEventRichDTO employeeSpecialization;
+        private SampleSystem.Generated.DTO.EmployeeSpecializationEventRichDTO employeeSpecialization = null!;
         
         public EmployeeSpecializationRemoveEventDTO()
         {
@@ -11698,15 +11700,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -11746,7 +11748,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -11772,7 +11774,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -11833,15 +11835,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -11881,7 +11883,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -11907,7 +11909,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -11964,7 +11966,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeAndEmployeeSpecializationLinkSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkEventRichDTO employeeAndEmployeeSpecializationLink;
+        private SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkEventRichDTO employeeAndEmployeeSpecializationLink = null!;
         
         public EmployeeAndEmployeeSpecializationLinkSaveEventDTO()
         {
@@ -11994,7 +11996,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeAndEmployeeSpecializationLinkRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkEventRichDTO employeeAndEmployeeSpecializationLink;
+        private SampleSystem.Generated.DTO.EmployeeAndEmployeeSpecializationLinkEventRichDTO employeeAndEmployeeSpecializationLink = null!;
         
         public EmployeeAndEmployeeSpecializationLinkRemoveEventDTO()
         {
@@ -12028,17 +12030,17 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee = null!;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private SampleSystem.Generated.DTO.EmployeeSpecializationEventSimpleDTO _specialization;
+        private SampleSystem.Generated.DTO.EmployeeSpecializationEventSimpleDTO _specialization = null!;
         
         private long _version;
         
@@ -12078,7 +12080,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -12117,7 +12119,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -12174,7 +12176,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeToEmployeeLinkSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeToEmployeeLinkEventRichDTO employeeToEmployeeLink;
+        private SampleSystem.Generated.DTO.EmployeeToEmployeeLinkEventRichDTO employeeToEmployeeLink = null!;
         
         public EmployeeToEmployeeLinkSaveEventDTO()
         {
@@ -12204,7 +12206,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeToEmployeeLinkRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeToEmployeeLinkEventRichDTO employeeToEmployeeLink;
+        private SampleSystem.Generated.DTO.EmployeeToEmployeeLinkEventRichDTO employeeToEmployeeLink = null!;
         
         public EmployeeToEmployeeLinkRemoveEventDTO()
         {
@@ -12238,19 +12240,19 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private SampleSystem.Domain.Enums.EmployeeLinkType _employeeLinkType;
         
         private System.Guid _id;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _linkedEmployee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _linkedEmployee = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _owner;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _owner = null!;
         
         private long _version;
         
@@ -12290,7 +12292,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -12342,7 +12344,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -12399,7 +12401,7 @@ namespace SampleSystem.Generated.DTO
     public partial class IMRequestSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.IMRequestEventRichDTO iMRequest;
+        private SampleSystem.Generated.DTO.IMRequestEventRichDTO iMRequest = null!;
         
         public IMRequestSaveEventDTO()
         {
@@ -12429,7 +12431,7 @@ namespace SampleSystem.Generated.DTO
     public partial class IMRequestRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.IMRequestEventRichDTO iMRequest;
+        private SampleSystem.Generated.DTO.IMRequestEventRichDTO iMRequest = null!;
         
         public IMRequestRemoveEventDTO()
         {
@@ -12463,21 +12465,21 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private string _email;
+        private string _email = null!;
         
         private System.Guid _id;
         
-        private string _message;
+        private string _message = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
-        private SampleSystem.Generated.DTO.IMRequestDetailEventRichDTO _oneToOneDetail;
+        private SampleSystem.Generated.DTO.IMRequestDetailEventRichDTO _oneToOneDetail = null!;
         
         private long _version;
         
@@ -12517,7 +12519,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -12569,7 +12571,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -12643,19 +12645,19 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private string _email;
+        private string _email = null!;
         
         private System.Guid _id;
         
-        private string _message;
+        private string _message = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -12695,7 +12697,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -12747,7 +12749,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -12804,7 +12806,7 @@ namespace SampleSystem.Generated.DTO
     public partial class IMRequestDetailSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.IMRequestDetailEventRichDTO iMRequestDetail;
+        private SampleSystem.Generated.DTO.IMRequestDetailEventRichDTO iMRequestDetail = null!;
         
         public IMRequestDetailSaveEventDTO()
         {
@@ -12834,7 +12836,7 @@ namespace SampleSystem.Generated.DTO
     public partial class IMRequestDetailRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.IMRequestDetailEventRichDTO iMRequestDetail;
+        private SampleSystem.Generated.DTO.IMRequestDetailEventRichDTO iMRequestDetail = null!;
         
         public IMRequestDetailRemoveEventDTO()
         {
@@ -12868,15 +12870,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private SampleSystem.Generated.DTO.IMRequestEventSimpleDTO _request;
+        private SampleSystem.Generated.DTO.IMRequestEventSimpleDTO _request = null!;
         
         private long _version;
         
@@ -12916,7 +12918,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -12942,7 +12944,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -12999,7 +13001,7 @@ namespace SampleSystem.Generated.DTO
     public partial class InformationSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.InformationEventRichDTO information;
+        private SampleSystem.Generated.DTO.InformationEventRichDTO information = null!;
         
         public InformationSaveEventDTO()
         {
@@ -13029,7 +13031,7 @@ namespace SampleSystem.Generated.DTO
     public partial class InformationRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.InformationEventRichDTO information;
+        private SampleSystem.Generated.DTO.InformationEventRichDTO information = null!;
         
         public InformationRemoveEventDTO()
         {
@@ -13063,17 +13065,17 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private string _email;
+        private string _email = null!;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -13113,7 +13115,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -13152,7 +13154,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -13209,7 +13211,7 @@ namespace SampleSystem.Generated.DTO
     public partial class InsuranceSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.InsuranceEventRichDTO insurance;
+        private SampleSystem.Generated.DTO.InsuranceEventRichDTO insurance = null!;
         
         public InsuranceSaveEventDTO()
         {
@@ -13239,7 +13241,7 @@ namespace SampleSystem.Generated.DTO
     public partial class InsuranceRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.InsuranceEventRichDTO insurance;
+        private SampleSystem.Generated.DTO.InsuranceEventRichDTO insurance = null!;
         
         public InsuranceRemoveEventDTO()
         {
@@ -13269,13 +13271,13 @@ namespace SampleSystem.Generated.DTO
     public partial class InsuranceEventRichDTO
     {
         
-        private SampleSystem.Generated.DTO.InsuranceDetailEventRichDTO _details;
+        private SampleSystem.Generated.DTO.InsuranceDetailEventRichDTO _details = null!;
         
         private int _durationMonths;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee = null!;
         
-        private SampleSystem.Generated.DTO.InsuranceEventSimpleDTO _self;
+        private SampleSystem.Generated.DTO.InsuranceEventSimpleDTO? _self;
         
         private decimal _totalIncome;
         
@@ -13332,7 +13334,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.InsuranceEventSimpleDTO Self
+        public SampleSystem.Generated.DTO.InsuranceEventSimpleDTO? Self
         {
             get
             {
@@ -13464,7 +13466,7 @@ namespace SampleSystem.Generated.DTO
     public partial class InsuranceDetailSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.InsuranceDetailEventRichDTO insuranceDetail;
+        private SampleSystem.Generated.DTO.InsuranceDetailEventRichDTO insuranceDetail = null!;
         
         public InsuranceDetailSaveEventDTO()
         {
@@ -13494,7 +13496,7 @@ namespace SampleSystem.Generated.DTO
     public partial class InsuranceDetailRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.InsuranceDetailEventRichDTO insuranceDetail;
+        private SampleSystem.Generated.DTO.InsuranceDetailEventRichDTO insuranceDetail = null!;
         
         public InsuranceDetailRemoveEventDTO()
         {
@@ -13530,27 +13532,27 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _birthDate;
         
-        private string _cellPhone;
+        private string? _cellPhone;
         
         private decimal _cost;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private SampleSystem.Domain.Inline.Fio _fio;
+        private SampleSystem.Domain.Inline.Fio _fio = null!;
         
         private System.Guid _id;
         
-        private string _landlinePhone;
+        private string? _landlinePhone;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _registrationAddress;
+        private string? _registrationAddress;
         
-        private string _residentalAddress;
+        private string? _residentalAddress;
         
         private long _version;
         
@@ -13603,7 +13605,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CellPhone
+        public string? CellPhone
         {
             get
             {
@@ -13642,7 +13644,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -13681,7 +13683,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LandlinePhone
+        public string? LandlinePhone
         {
             get
             {
@@ -13694,7 +13696,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -13720,7 +13722,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string RegistrationAddress
+        public string? RegistrationAddress
         {
             get
             {
@@ -13733,7 +13735,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ResidentalAddress
+        public string? ResidentalAddress
         {
             get
             {
@@ -13764,7 +13766,7 @@ namespace SampleSystem.Generated.DTO
     public partial class RoleRoleDegreeLinkSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.RoleRoleDegreeLinkEventRichDTO roleRoleDegreeLink;
+        private SampleSystem.Generated.DTO.RoleRoleDegreeLinkEventRichDTO roleRoleDegreeLink = null!;
         
         public RoleRoleDegreeLinkSaveEventDTO()
         {
@@ -13794,7 +13796,7 @@ namespace SampleSystem.Generated.DTO
     public partial class RoleRoleDegreeLinkRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.RoleRoleDegreeLinkEventRichDTO roleRoleDegreeLink;
+        private SampleSystem.Generated.DTO.RoleRoleDegreeLinkEventRichDTO roleRoleDegreeLink = null!;
         
         public RoleRoleDegreeLinkRemoveEventDTO()
         {
@@ -13826,21 +13828,21 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private SampleSystem.Generated.DTO.EmployeeRoleEventSimpleDTO _anotherRole;
+        private SampleSystem.Generated.DTO.EmployeeRoleEventSimpleDTO? _anotherRole;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private SampleSystem.Generated.DTO.EmployeeRoleEventSimpleDTO _role;
+        private SampleSystem.Generated.DTO.EmployeeRoleEventSimpleDTO _role = null!;
         
-        private SampleSystem.Generated.DTO.EmployeeRoleDegreeEventSimpleDTO _roleDegree;
+        private SampleSystem.Generated.DTO.EmployeeRoleDegreeEventSimpleDTO _roleDegree = null!;
         
         private long _version;
         
@@ -13867,7 +13869,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeRoleEventSimpleDTO AnotherRole
+        public SampleSystem.Generated.DTO.EmployeeRoleEventSimpleDTO? AnotherRole
         {
             get
             {
@@ -13893,7 +13895,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -13919,7 +13921,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -13989,7 +13991,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestExceptObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestExceptObjectEventRichDTO testExceptObject;
+        private SampleSystem.Generated.DTO.TestExceptObjectEventRichDTO testExceptObject = null!;
         
         public TestExceptObjectSaveEventDTO()
         {
@@ -14019,7 +14021,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestExceptObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestExceptObjectEventRichDTO testExceptObject;
+        private SampleSystem.Generated.DTO.TestExceptObjectEventRichDTO testExceptObject = null!;
         
         public TestExceptObjectRemoveEventDTO()
         {
@@ -14053,13 +14055,13 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee = null!;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -14101,7 +14103,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -14140,7 +14142,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -14184,7 +14186,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestRestrictionObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestRestrictionObjectEventRichDTO testRestrictionObject;
+        private SampleSystem.Generated.DTO.TestRestrictionObjectEventRichDTO testRestrictionObject = null!;
         
         public TestRestrictionObjectSaveEventDTO()
         {
@@ -14214,7 +14216,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestRestrictionObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestRestrictionObjectEventRichDTO testRestrictionObject;
+        private SampleSystem.Generated.DTO.TestRestrictionObjectEventRichDTO testRestrictionObject = null!;
         
         public TestRestrictionObjectRemoveEventDTO()
         {
@@ -14246,15 +14248,15 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -14311,7 +14313,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -14337,7 +14339,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -14394,7 +14396,7 @@ namespace SampleSystem.Generated.DTO
     public partial class Coefficient1676SaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.Coefficient1676EventRichDTO coefficient1676;
+        private SampleSystem.Generated.DTO.Coefficient1676EventRichDTO coefficient1676 = null!;
         
         public Coefficient1676SaveEventDTO()
         {
@@ -14424,7 +14426,7 @@ namespace SampleSystem.Generated.DTO
     public partial class Coefficient1676RemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.Coefficient1676EventRichDTO coefficient1676;
+        private SampleSystem.Generated.DTO.Coefficient1676EventRichDTO coefficient1676 = null!;
         
         public Coefficient1676RemoveEventDTO()
         {
@@ -14458,13 +14460,13 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private SampleSystem.Generated.DTO.Location1676EventSimpleDTO _location;
+        private SampleSystem.Generated.DTO.Location1676EventSimpleDTO _location = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -14508,7 +14510,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -14547,7 +14549,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -14604,7 +14606,7 @@ namespace SampleSystem.Generated.DTO
     public partial class Location1676SaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.Location1676EventRichDTO location1676;
+        private SampleSystem.Generated.DTO.Location1676EventRichDTO location1676 = null!;
         
         public Location1676SaveEventDTO()
         {
@@ -14634,7 +14636,7 @@ namespace SampleSystem.Generated.DTO
     public partial class Location1676RemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.Location1676EventRichDTO location1676;
+        private SampleSystem.Generated.DTO.Location1676EventRichDTO location1676 = null!;
         
         public Location1676RemoveEventDTO()
         {
@@ -14666,19 +14668,19 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.WorkingCalendar1676EventRichDTO> _calendar;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.WorkingCalendar1676EventRichDTO> _calendar = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -14731,7 +14733,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -14757,7 +14759,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -14818,15 +14820,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -14866,7 +14868,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -14892,7 +14894,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -14949,7 +14951,7 @@ namespace SampleSystem.Generated.DTO
     public partial class WorkingCalendar1676SaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.WorkingCalendar1676EventRichDTO workingCalendar1676;
+        private SampleSystem.Generated.DTO.WorkingCalendar1676EventRichDTO workingCalendar1676 = null!;
         
         public WorkingCalendar1676SaveEventDTO()
         {
@@ -14979,7 +14981,7 @@ namespace SampleSystem.Generated.DTO
     public partial class WorkingCalendar1676RemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.WorkingCalendar1676EventRichDTO workingCalendar1676;
+        private SampleSystem.Generated.DTO.WorkingCalendar1676EventRichDTO workingCalendar1676 = null!;
         
         public WorkingCalendar1676RemoveEventDTO()
         {
@@ -15013,17 +15015,17 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private SampleSystem.Generated.DTO.Location1676EventSimpleDTO _location;
+        private SampleSystem.Generated.DTO.Location1676EventSimpleDTO _location = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -15063,7 +15065,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -15102,7 +15104,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -15159,7 +15161,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ExtendedInlineAuditObjSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ExtendedInlineAuditObjEventRichDTO extendedInlineAuditObj;
+        private SampleSystem.Generated.DTO.ExtendedInlineAuditObjEventRichDTO extendedInlineAuditObj = null!;
         
         public ExtendedInlineAuditObjSaveEventDTO()
         {
@@ -15189,7 +15191,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ExtendedInlineAuditObjRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ExtendedInlineAuditObjEventRichDTO extendedInlineAuditObj;
+        private SampleSystem.Generated.DTO.ExtendedInlineAuditObjEventRichDTO extendedInlineAuditObj = null!;
         
         public ExtendedInlineAuditObjRemoveEventDTO()
         {
@@ -15223,15 +15225,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _createdByEmployee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO? _createdByEmployee;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _modifiedByEmployee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO? _modifiedByEmployee;
         
         private System.DateTime? _modifyDate;
         
@@ -15273,7 +15275,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -15286,7 +15288,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO CreatedByEmployee
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO? CreatedByEmployee
         {
             get
             {
@@ -15312,7 +15314,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -15325,7 +15327,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO ModifiedByEmployee
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO? ModifiedByEmployee
         {
             get
             {
@@ -15369,7 +15371,7 @@ namespace SampleSystem.Generated.DTO
     public partial class PrincipalSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.PrincipalEventRichDTO principal;
+        private SampleSystem.Generated.DTO.PrincipalEventRichDTO principal = null!;
         
         public PrincipalSaveEventDTO()
         {
@@ -15399,7 +15401,7 @@ namespace SampleSystem.Generated.DTO
     public partial class PrincipalRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.PrincipalEventRichDTO principal;
+        private SampleSystem.Generated.DTO.PrincipalEventRichDTO principal = null!;
         
         public PrincipalRemoveEventDTO()
         {
@@ -15433,13 +15435,13 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private string _externalId;
+        private string _externalId = null!;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -15481,7 +15483,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -15520,7 +15522,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -15564,7 +15566,7 @@ namespace SampleSystem.Generated.DTO
     public partial class Example1SaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.Example1EventRichDTO example1;
+        private SampleSystem.Generated.DTO.Example1EventRichDTO example1 = null!;
         
         public Example1SaveEventDTO()
         {
@@ -15594,7 +15596,7 @@ namespace SampleSystem.Generated.DTO
     public partial class Example1RemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.Example1EventRichDTO example1;
+        private SampleSystem.Generated.DTO.Example1EventRichDTO example1 = null!;
         
         public Example1RemoveEventDTO()
         {
@@ -15628,7 +15630,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _field1;
         
@@ -15638,9 +15640,9 @@ namespace SampleSystem.Generated.DTO
         
         private System.Guid _id;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.Example2EventRichDTO> _items2;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.Example2EventRichDTO> _items2 = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -15682,7 +15684,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -15760,7 +15762,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -15808,7 +15810,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _field1;
         
@@ -15818,7 +15820,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -15860,7 +15862,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -15925,7 +15927,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -15969,7 +15971,7 @@ namespace SampleSystem.Generated.DTO
     public partial class Example2SaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.Example2EventRichDTO example2;
+        private SampleSystem.Generated.DTO.Example2EventRichDTO example2 = null!;
         
         public Example2SaveEventDTO()
         {
@@ -15999,7 +16001,7 @@ namespace SampleSystem.Generated.DTO
     public partial class Example2RemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.Example2EventRichDTO example2;
+        private SampleSystem.Generated.DTO.Example2EventRichDTO example2 = null!;
         
         public Example2RemoveEventDTO()
         {
@@ -16033,7 +16035,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _field1;
         
@@ -16041,11 +16043,11 @@ namespace SampleSystem.Generated.DTO
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private SampleSystem.Generated.DTO.Example1EventSimpleDTO _parent;
+        private SampleSystem.Generated.DTO.Example1EventSimpleDTO _parent = null!;
         
         private long _version;
         
@@ -16085,7 +16087,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -16137,7 +16139,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -16194,7 +16196,7 @@ namespace SampleSystem.Generated.DTO
     public partial class HRDepartmentSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.HRDepartmentEventRichDTO hRDepartment;
+        private SampleSystem.Generated.DTO.HRDepartmentEventRichDTO hRDepartment = null!;
         
         public HRDepartmentSaveEventDTO()
         {
@@ -16224,7 +16226,7 @@ namespace SampleSystem.Generated.DTO
     public partial class HRDepartmentRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.HRDepartmentEventRichDTO hRDepartment;
+        private SampleSystem.Generated.DTO.HRDepartmentEventRichDTO hRDepartment = null!;
         
         public HRDepartmentRemoveEventDTO()
         {
@@ -16256,29 +16258,29 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _approvedBy;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO? _approvedBy;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitHrDepartmentEventRichDTO> _businessUnitHrDepartments;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitHrDepartmentEventRichDTO> _businessUnitHrDepartments = null!;
         
-        private string _code;
+        private string _code = null!;
         
-        private string _codeNative;
+        private string _codeNative = null!;
         
-        private SampleSystem.Generated.DTO.CompanyLegalEntityEventSimpleDTO _companyLegalEntity;
+        private SampleSystem.Generated.DTO.CompanyLegalEntityEventSimpleDTO _companyLegalEntity = null!;
         
-        private string _companyLegalEntityName;
+        private string _companyLegalEntityName = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.HRDepartmentEmployeePositionEventRichDTO> _employeePositions;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.HRDepartmentEmployeePositionEventRichDTO> _employeePositions = null!;
         
         private long _externalId;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _head;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _head = null!;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeEventRichDTO> _hrDepartmentRoleEmployees;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeEventRichDTO> _hrDepartmentRoleEmployees = null!;
         
         private System.Guid _id;
         
@@ -16286,21 +16288,21 @@ namespace SampleSystem.Generated.DTO
         
         private bool _isProduction;
         
-        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _location;
+        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _location = null!;
         
-        private string _locationName;
+        private string _locationName = null!;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkEventRichDTO> _managementUnits;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkEventRichDTO> _managementUnits = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
-        private string _nameNative;
+        private string _nameNative = null!;
         
-        private SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO _parent;
+        private SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO? _parent;
         
         private long _version;
         
@@ -16327,7 +16329,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO ApprovedBy
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO? ApprovedBy
         {
             get
             {
@@ -16418,7 +16420,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -16561,7 +16563,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -16613,7 +16615,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO Parent
+        public SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO? Parent
         {
             get
             {
@@ -16646,15 +16648,15 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private string _code;
+        private string _code = null!;
         
-        private string _codeNative;
+        private string _codeNative = null!;
         
-        private string _companyLegalEntityName;
+        private string _companyLegalEntityName = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private long _externalId;
         
@@ -16664,15 +16666,15 @@ namespace SampleSystem.Generated.DTO
         
         private bool _isProduction;
         
-        private string _locationName;
+        private string _locationName = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
-        private string _nameNative;
+        private string _nameNative = null!;
         
         private long _version;
         
@@ -16751,7 +16753,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -16829,7 +16831,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -16899,7 +16901,7 @@ namespace SampleSystem.Generated.DTO
     public partial class HRDepartmentEmployeePositionSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.HRDepartmentEmployeePositionEventRichDTO hRDepartmentEmployeePosition;
+        private SampleSystem.Generated.DTO.HRDepartmentEmployeePositionEventRichDTO hRDepartmentEmployeePosition = null!;
         
         public HRDepartmentEmployeePositionSaveEventDTO()
         {
@@ -16929,7 +16931,7 @@ namespace SampleSystem.Generated.DTO
     public partial class HRDepartmentEmployeePositionRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.HRDepartmentEmployeePositionEventRichDTO hRDepartmentEmployeePosition;
+        private SampleSystem.Generated.DTO.HRDepartmentEmployeePositionEventRichDTO hRDepartmentEmployeePosition = null!;
         
         public HRDepartmentEmployeePositionRemoveEventDTO()
         {
@@ -16963,15 +16965,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private SampleSystem.Generated.DTO.EmployeePositionEventSimpleDTO _employeePosition;
+        private SampleSystem.Generated.DTO.EmployeePositionEventSimpleDTO _employeePosition = null!;
         
-        private SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO _hrDepartment;
+        private SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO _hrDepartment = null!;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -17013,7 +17015,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -17065,7 +17067,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -17109,7 +17111,7 @@ namespace SampleSystem.Generated.DTO
     public partial class HRDepartmentRoleEmployeeSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeEventRichDTO hRDepartmentRoleEmployee;
+        private SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeEventRichDTO hRDepartmentRoleEmployee = null!;
         
         public HRDepartmentRoleEmployeeSaveEventDTO()
         {
@@ -17139,7 +17141,7 @@ namespace SampleSystem.Generated.DTO
     public partial class HRDepartmentRoleEmployeeRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeEventRichDTO hRDepartmentRoleEmployee;
+        private SampleSystem.Generated.DTO.HRDepartmentRoleEmployeeEventRichDTO hRDepartmentRoleEmployee = null!;
         
         public HRDepartmentRoleEmployeeRemoveEventDTO()
         {
@@ -17173,17 +17175,17 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee = null!;
         
-        private SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO _hRDepartment;
+        private SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO _hRDepartment = null!;
         
         private SampleSystem.Domain.Enums.HRDepartmentEmployeeRoleType _hRDepartmentEmployeeRoleType;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -17225,7 +17227,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -17290,7 +17292,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -17334,7 +17336,7 @@ namespace SampleSystem.Generated.DTO
     public partial class IntegrationVersionContainer1SaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.IntegrationVersionContainer1EventRichDTO integrationVersionContainer1;
+        private SampleSystem.Generated.DTO.IntegrationVersionContainer1EventRichDTO integrationVersionContainer1 = null!;
         
         public IntegrationVersionContainer1SaveEventDTO()
         {
@@ -17364,7 +17366,7 @@ namespace SampleSystem.Generated.DTO
     public partial class IntegrationVersionContainer1RemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.IntegrationVersionContainer1EventRichDTO integrationVersionContainer1;
+        private SampleSystem.Generated.DTO.IntegrationVersionContainer1EventRichDTO integrationVersionContainer1 = null!;
         
         public IntegrationVersionContainer1RemoveEventDTO()
         {
@@ -17398,15 +17400,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -17446,7 +17448,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -17472,7 +17474,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -17533,15 +17535,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -17581,7 +17583,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -17607,7 +17609,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -17664,7 +17666,7 @@ namespace SampleSystem.Generated.DTO
     public partial class IntegrationVersionContainer2SaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.IntegrationVersionContainer2EventRichDTO integrationVersionContainer2;
+        private SampleSystem.Generated.DTO.IntegrationVersionContainer2EventRichDTO integrationVersionContainer2 = null!;
         
         public IntegrationVersionContainer2SaveEventDTO()
         {
@@ -17694,7 +17696,7 @@ namespace SampleSystem.Generated.DTO
     public partial class IntegrationVersionContainer2RemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.IntegrationVersionContainer2EventRichDTO integrationVersionContainer2;
+        private SampleSystem.Generated.DTO.IntegrationVersionContainer2EventRichDTO integrationVersionContainer2 = null!;
         
         public IntegrationVersionContainer2RemoveEventDTO()
         {
@@ -17728,15 +17730,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -17776,7 +17778,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -17802,7 +17804,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -17859,7 +17861,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeComplexChangeModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeComplexChangeModelEventRichDTO employeeComplexChangeModel;
+        private SampleSystem.Generated.DTO.EmployeeComplexChangeModelEventRichDTO employeeComplexChangeModel = null!;
         
         public EmployeeComplexChangeModelSaveEventDTO()
         {
@@ -17889,7 +17891,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeComplexChangeModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeComplexChangeModelEventRichDTO employeeComplexChangeModel;
+        private SampleSystem.Generated.DTO.EmployeeComplexChangeModelEventRichDTO employeeComplexChangeModel = null!;
         
         public EmployeeComplexChangeModelRemoveEventDTO()
         {
@@ -17919,11 +17921,11 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeComplexChangeModelEventRichDTO
     {
         
-        private string _email;
+        private string _email = null!;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _primaryChangingObject;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _primaryChangingObject = null!;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeEventSimpleDTO> _secondaryChangingObjects;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeEventSimpleDTO> _secondaryChangingObjects = null!;
         
         public EmployeeComplexChangeModelEventRichDTO()
         {
@@ -17979,7 +17981,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeEmailChangeModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeEmailChangeModelEventRichDTO employeeEmailChangeModel;
+        private SampleSystem.Generated.DTO.EmployeeEmailChangeModelEventRichDTO employeeEmailChangeModel = null!;
         
         public EmployeeEmailChangeModelSaveEventDTO()
         {
@@ -18009,7 +18011,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeEmailChangeModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeEmailChangeModelEventRichDTO employeeEmailChangeModel;
+        private SampleSystem.Generated.DTO.EmployeeEmailChangeModelEventRichDTO employeeEmailChangeModel = null!;
         
         public EmployeeEmailChangeModelRemoveEventDTO()
         {
@@ -18039,9 +18041,9 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeEmailChangeModelEventRichDTO
     {
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _changingObject;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _changingObject = null!;
         
-        private string _email;
+        private string _email = null!;
         
         public EmployeeEmailChangeModelEventRichDTO()
         {
@@ -18084,7 +18086,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeEmailMassChangeModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelEventRichDTO employeeEmailMassChangeModel;
+        private SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelEventRichDTO employeeEmailMassChangeModel = null!;
         
         public EmployeeEmailMassChangeModelSaveEventDTO()
         {
@@ -18114,7 +18116,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeEmailMassChangeModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelEventRichDTO employeeEmailMassChangeModel;
+        private SampleSystem.Generated.DTO.EmployeeEmailMassChangeModelEventRichDTO employeeEmailMassChangeModel = null!;
         
         public EmployeeEmailMassChangeModelRemoveEventDTO()
         {
@@ -18144,9 +18146,9 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeEmailMassChangeModelEventRichDTO
     {
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeEventSimpleDTO> _changingObjects;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeEventSimpleDTO> _changingObjects = null!;
         
-        private string _email;
+        private string _email = null!;
         
         public EmployeeEmailMassChangeModelEventRichDTO()
         {
@@ -18189,7 +18191,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestUnpersistentObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestUnpersistentObjectEventRichDTO testUnpersistentObject;
+        private SampleSystem.Generated.DTO.TestUnpersistentObjectEventRichDTO testUnpersistentObject = null!;
         
         public TestUnpersistentObjectSaveEventDTO()
         {
@@ -18219,7 +18221,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestUnpersistentObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestUnpersistentObjectEventRichDTO testUnpersistentObject;
+        private SampleSystem.Generated.DTO.TestUnpersistentObjectEventRichDTO testUnpersistentObject = null!;
         
         public TestUnpersistentObjectRemoveEventDTO()
         {
@@ -18249,9 +18251,9 @@ namespace SampleSystem.Generated.DTO
     public partial class TestUnpersistentObjectEventRichDTO
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO? _businessUnit;
         
-        private string _value1;
+        private string? _value1;
         
         private int _value2;
         
@@ -18265,7 +18267,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO? BusinessUnit
         {
             get
             {
@@ -18278,7 +18280,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Value1
+        public string? Value1
         {
             get
             {
@@ -18309,7 +18311,7 @@ namespace SampleSystem.Generated.DTO
     public partial class DateModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.DateModelEventRichDTO dateModel;
+        private SampleSystem.Generated.DTO.DateModelEventRichDTO dateModel = null!;
         
         public DateModelSaveEventDTO()
         {
@@ -18339,7 +18341,7 @@ namespace SampleSystem.Generated.DTO
     public partial class DateModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.DateModelEventRichDTO dateModel;
+        private SampleSystem.Generated.DTO.DateModelEventRichDTO dateModel = null!;
         
         public DateModelRemoveEventDTO()
         {
@@ -18429,7 +18431,7 @@ namespace SampleSystem.Generated.DTO
     public partial class NoRecipientModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.NoRecipientModelEventRichDTO noRecipientModel;
+        private SampleSystem.Generated.DTO.NoRecipientModelEventRichDTO noRecipientModel = null!;
         
         public NoRecipientModelSaveEventDTO()
         {
@@ -18459,7 +18461,7 @@ namespace SampleSystem.Generated.DTO
     public partial class NoRecipientModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.NoRecipientModelEventRichDTO noRecipientModel;
+        private SampleSystem.Generated.DTO.NoRecipientModelEventRichDTO noRecipientModel = null!;
         
         public NoRecipientModelRemoveEventDTO()
         {
@@ -18549,7 +18551,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeCustomEventModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeCustomEventModelEventRichDTO employeeCustomEventModel;
+        private SampleSystem.Generated.DTO.EmployeeCustomEventModelEventRichDTO employeeCustomEventModel = null!;
         
         public EmployeeCustomEventModelSaveEventDTO()
         {
@@ -18579,7 +18581,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeCustomEventModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeCustomEventModelEventRichDTO employeeCustomEventModel;
+        private SampleSystem.Generated.DTO.EmployeeCustomEventModelEventRichDTO employeeCustomEventModel = null!;
         
         public EmployeeCustomEventModelRemoveEventDTO()
         {
@@ -18611,7 +18613,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.Guid _id;
         
-        private string _login;
+        private string? _login;
         
         public EmployeeCustomEventModelEventRichDTO()
         {
@@ -18636,7 +18638,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Login
+        public string? Login
         {
             get
             {
@@ -18654,7 +18656,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitProgramClassFilterModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitProgramClassFilterModelEventRichDTO businessUnitProgramClassFilterModel;
+        private SampleSystem.Generated.DTO.BusinessUnitProgramClassFilterModelEventRichDTO businessUnitProgramClassFilterModel = null!;
         
         public BusinessUnitProgramClassFilterModelSaveEventDTO()
         {
@@ -18684,7 +18686,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitProgramClassFilterModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitProgramClassFilterModelEventRichDTO businessUnitProgramClassFilterModel;
+        private SampleSystem.Generated.DTO.BusinessUnitProgramClassFilterModelEventRichDTO businessUnitProgramClassFilterModel = null!;
         
         public BusinessUnitProgramClassFilterModelRemoveEventDTO()
         {
@@ -18716,7 +18718,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.Guid? _ancestorIdent;
         
-        private string _filterVirtualName;
+        private string? _filterVirtualName;
         
         public BusinessUnitProgramClassFilterModelEventRichDTO()
         {
@@ -18741,7 +18743,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string FilterVirtualName
+        public string? FilterVirtualName
         {
             get
             {
@@ -18759,7 +18761,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeFilterModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeFilterModelEventRichDTO employeeFilterModel;
+        private SampleSystem.Generated.DTO.EmployeeFilterModelEventRichDTO employeeFilterModel = null!;
         
         public EmployeeFilterModelSaveEventDTO()
         {
@@ -18789,7 +18791,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeFilterModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeFilterModelEventRichDTO employeeFilterModel;
+        private SampleSystem.Generated.DTO.EmployeeFilterModelEventRichDTO employeeFilterModel = null!;
         
         public EmployeeFilterModelRemoveEventDTO()
         {
@@ -18834,7 +18836,7 @@ namespace SampleSystem.Generated.DTO
     public partial class GuidBasedFilterModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.GuidBasedFilterModelEventRichDTO guidBasedFilterModel;
+        private SampleSystem.Generated.DTO.GuidBasedFilterModelEventRichDTO guidBasedFilterModel = null!;
         
         public GuidBasedFilterModelSaveEventDTO()
         {
@@ -18864,7 +18866,7 @@ namespace SampleSystem.Generated.DTO
     public partial class GuidBasedFilterModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.GuidBasedFilterModelEventRichDTO guidBasedFilterModel;
+        private SampleSystem.Generated.DTO.GuidBasedFilterModelEventRichDTO guidBasedFilterModel = null!;
         
         public GuidBasedFilterModelRemoveEventDTO()
         {
@@ -18894,13 +18896,13 @@ namespace SampleSystem.Generated.DTO
     public partial class GuidBasedFilterModelEventRichDTO
     {
         
-        private System.Collections.Generic.List<System.Guid> _businessUnits;
+        private System.Collections.Generic.List<System.Guid>? _businessUnits;
         
         private System.Guid? _employeeIdent;
         
-        private System.Collections.Generic.List<System.Guid> _employeeLocations;
+        private System.Collections.Generic.List<System.Guid>? _employeeLocations;
         
-        private string _searchFilter;
+        private string? _searchFilter;
         
         public GuidBasedFilterModelEventRichDTO()
         {
@@ -18912,7 +18914,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<System.Guid> BusinessUnits
+        public System.Collections.Generic.List<System.Guid>? BusinessUnits
         {
             get
             {
@@ -18938,7 +18940,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<System.Guid> EmployeeLocations
+        public System.Collections.Generic.List<System.Guid>? EmployeeLocations
         {
             get
             {
@@ -18951,7 +18953,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string SearchFilter
+        public string? SearchFilter
         {
             get
             {
@@ -18969,7 +18971,7 @@ namespace SampleSystem.Generated.DTO
     public partial class HierarchicalBusinessUnitFilterModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.HierarchicalBusinessUnitFilterModelEventRichDTO hierarchicalBusinessUnitFilterModel;
+        private SampleSystem.Generated.DTO.HierarchicalBusinessUnitFilterModelEventRichDTO hierarchicalBusinessUnitFilterModel = null!;
         
         public HierarchicalBusinessUnitFilterModelSaveEventDTO()
         {
@@ -18999,7 +19001,7 @@ namespace SampleSystem.Generated.DTO
     public partial class HierarchicalBusinessUnitFilterModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.HierarchicalBusinessUnitFilterModelEventRichDTO hierarchicalBusinessUnitFilterModel;
+        private SampleSystem.Generated.DTO.HierarchicalBusinessUnitFilterModelEventRichDTO hierarchicalBusinessUnitFilterModel = null!;
         
         public HierarchicalBusinessUnitFilterModelRemoveEventDTO()
         {
@@ -19044,7 +19046,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestEmployeeFilterSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestEmployeeFilterEventRichDTO testEmployeeFilter;
+        private SampleSystem.Generated.DTO.TestEmployeeFilterEventRichDTO testEmployeeFilter = null!;
         
         public TestEmployeeFilterSaveEventDTO()
         {
@@ -19074,7 +19076,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestEmployeeFilterRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestEmployeeFilterEventRichDTO testEmployeeFilter;
+        private SampleSystem.Generated.DTO.TestEmployeeFilterEventRichDTO testEmployeeFilter = null!;
         
         public TestEmployeeFilterRemoveEventDTO()
         {
@@ -19104,7 +19106,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestEmployeeFilterEventRichDTO
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO? _businessUnit;
         
         private SampleSystem.Domain.Models.Filters.Projection.SampleStruct _sampleStruct;
         
@@ -19120,7 +19122,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO? BusinessUnit
         {
             get
             {
@@ -19164,7 +19166,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitRootFilterModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitRootFilterModelEventRichDTO businessUnitRootFilterModel;
+        private SampleSystem.Generated.DTO.BusinessUnitRootFilterModelEventRichDTO businessUnitRootFilterModel = null!;
         
         public BusinessUnitRootFilterModelSaveEventDTO()
         {
@@ -19194,7 +19196,7 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitRootFilterModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.BusinessUnitRootFilterModelEventRichDTO businessUnitRootFilterModel;
+        private SampleSystem.Generated.DTO.BusinessUnitRootFilterModelEventRichDTO businessUnitRootFilterModel = null!;
         
         public BusinessUnitRootFilterModelRemoveEventDTO()
         {
@@ -19224,15 +19226,15 @@ namespace SampleSystem.Generated.DTO
     public partial class BusinessUnitRootFilterModelEventRichDTO
     {
         
-        private System.DateTime[] _arrayDays;
+        private System.DateTime[]? _arrayDays;
         
-        private Framework.Core.Period[] _arrayPeriods;
+        private Framework.Core.Period[]? _arrayPeriods;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO? _employee;
         
-        private System.Collections.Generic.List<System.DateTime> _listDays;
+        private System.Collections.Generic.List<System.DateTime>? _listDays;
         
-        private System.Collections.Generic.List<Framework.Core.Period> _listPeriods;
+        private System.Collections.Generic.List<Framework.Core.Period>? _listPeriods;
         
         public BusinessUnitRootFilterModelEventRichDTO()
         {
@@ -19244,7 +19246,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime[] ArrayDays
+        public System.DateTime[]? ArrayDays
         {
             get
             {
@@ -19257,7 +19259,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Period[] ArrayPeriods
+        public Framework.Core.Period[]? ArrayPeriods
         {
             get
             {
@@ -19270,7 +19272,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO? Employee
         {
             get
             {
@@ -19283,7 +19285,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<System.DateTime> ListDays
+        public System.Collections.Generic.List<System.DateTime>? ListDays
         {
             get
             {
@@ -19296,7 +19298,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Framework.Core.Period> ListPeriods
+        public System.Collections.Generic.List<Framework.Core.Period>? ListPeriods
         {
             get
             {
@@ -19314,7 +19316,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRootFilterModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeRootFilterModelEventRichDTO employeeRootFilterModel;
+        private SampleSystem.Generated.DTO.EmployeeRootFilterModelEventRichDTO employeeRootFilterModel = null!;
         
         public EmployeeRootFilterModelSaveEventDTO()
         {
@@ -19344,7 +19346,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeRootFilterModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeRootFilterModelEventRichDTO employeeRootFilterModel;
+        private SampleSystem.Generated.DTO.EmployeeRootFilterModelEventRichDTO employeeRootFilterModel = null!;
         
         public EmployeeRootFilterModelRemoveEventDTO()
         {
@@ -19389,7 +19391,7 @@ namespace SampleSystem.Generated.DTO
     public partial class SingleEmployeeFilterModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.SingleEmployeeFilterModelEventRichDTO singleEmployeeFilterModel;
+        private SampleSystem.Generated.DTO.SingleEmployeeFilterModelEventRichDTO singleEmployeeFilterModel = null!;
         
         public SingleEmployeeFilterModelSaveEventDTO()
         {
@@ -19419,7 +19421,7 @@ namespace SampleSystem.Generated.DTO
     public partial class SingleEmployeeFilterModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.SingleEmployeeFilterModelEventRichDTO singleEmployeeFilterModel;
+        private SampleSystem.Generated.DTO.SingleEmployeeFilterModelEventRichDTO singleEmployeeFilterModel = null!;
         
         public SingleEmployeeFilterModelRemoveEventDTO()
         {
@@ -19464,7 +19466,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeCustomIntegrationSaveModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelEventRichDTO employeeCustomIntegrationSaveModel;
+        private SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelEventRichDTO employeeCustomIntegrationSaveModel = null!;
         
         public EmployeeCustomIntegrationSaveModelSaveEventDTO()
         {
@@ -19494,7 +19496,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeCustomIntegrationSaveModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelEventRichDTO employeeCustomIntegrationSaveModel;
+        private SampleSystem.Generated.DTO.EmployeeCustomIntegrationSaveModelEventRichDTO employeeCustomIntegrationSaveModel = null!;
         
         public EmployeeCustomIntegrationSaveModelRemoveEventDTO()
         {
@@ -19524,7 +19526,7 @@ namespace SampleSystem.Generated.DTO
     public partial class EmployeeCustomIntegrationSaveModelEventRichDTO
     {
         
-        private SampleSystem.Generated.DTO.EmployeeEventRichDTO _savingObject;
+        private SampleSystem.Generated.DTO.EmployeeEventRichDTO _savingObject = null!;
         
         public EmployeeCustomIntegrationSaveModelEventRichDTO()
         {
@@ -19554,7 +19556,7 @@ namespace SampleSystem.Generated.DTO
     public partial class IntegrationVersionContainer1CustomIntegrationSaveModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO integrationVersionContainer1CustomIntegrationSaveModel;
+        private SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO integrationVersionContainer1CustomIntegrationSaveModel = null!;
         
         public IntegrationVersionContainer1CustomIntegrationSaveModelSaveEventDTO()
         {
@@ -19584,7 +19586,7 @@ namespace SampleSystem.Generated.DTO
     public partial class IntegrationVersionContainer1CustomIntegrationSaveModelRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO integrationVersionContainer1CustomIntegrationSaveModel;
+        private SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO integrationVersionContainer1CustomIntegrationSaveModel = null!;
         
         public IntegrationVersionContainer1CustomIntegrationSaveModelRemoveEventDTO()
         {
@@ -19614,9 +19616,9 @@ namespace SampleSystem.Generated.DTO
     public partial class IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO
     {
         
-        private string _customName;
+        private string _customName = null!;
         
-        private SampleSystem.Generated.DTO.IntegrationVersionContainer1EventSimpleDTO _savingObject;
+        private SampleSystem.Generated.DTO.IntegrationVersionContainer1EventSimpleDTO _savingObject = null!;
         
         public IntegrationVersionContainer1CustomIntegrationSaveModelEventRichDTO()
         {
@@ -19659,7 +19661,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ManagementUnitEventRichDTO managementUnit;
+        private SampleSystem.Generated.DTO.ManagementUnitEventRichDTO managementUnit = null!;
         
         public ManagementUnitSaveEventDTO()
         {
@@ -19689,7 +19691,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ManagementUnitEventRichDTO managementUnit;
+        private SampleSystem.Generated.DTO.ManagementUnitEventRichDTO managementUnit = null!;
         
         public ManagementUnitRemoveEventDTO()
         {
@@ -19721,29 +19723,29 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkEventRichDTO> _businessUnits;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkEventRichDTO> _businessUnits = null!;
         
         private SampleSystem.Domain.Enums.BusinessUnitStatus _businessUnitStatus;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private int _deepLevel;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkEventRichDTO> _hRDepartments;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkEventRichDTO> _hRDepartments = null!;
         
         private System.Guid _id;
         
         private bool _isProduction;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
-        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _parent;
+        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO? _parent;
         
         private Framework.Core.Period _period;
         
@@ -19811,7 +19813,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -19876,7 +19878,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -19915,7 +19917,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO Parent
+        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO? Parent
         {
             get
             {
@@ -19965,7 +19967,7 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private int _deepLevel;
         
@@ -19973,11 +19975,11 @@ namespace SampleSystem.Generated.DTO
         
         private bool _isProduction;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private Framework.Core.Period _period;
         
@@ -20032,7 +20034,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -20084,7 +20086,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -20154,7 +20156,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitAncestorLinkSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ManagementUnitAncestorLinkEventRichDTO managementUnitAncestorLink;
+        private SampleSystem.Generated.DTO.ManagementUnitAncestorLinkEventRichDTO managementUnitAncestorLink = null!;
         
         public ManagementUnitAncestorLinkSaveEventDTO()
         {
@@ -20184,7 +20186,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitAncestorLinkRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ManagementUnitAncestorLinkEventRichDTO managementUnitAncestorLink;
+        private SampleSystem.Generated.DTO.ManagementUnitAncestorLinkEventRichDTO managementUnitAncestorLink = null!;
         
         public ManagementUnitAncestorLinkRemoveEventDTO()
         {
@@ -20216,17 +20218,17 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _ancestor;
+        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _ancestor = null!;
         
-        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _child;
+        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _child = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -20294,7 +20296,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -20320,7 +20322,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -20364,7 +20366,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitAndBusinessUnitLinkSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkEventRichDTO managementUnitAndBusinessUnitLink;
+        private SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkEventRichDTO managementUnitAndBusinessUnitLink = null!;
         
         public ManagementUnitAndBusinessUnitLinkSaveEventDTO()
         {
@@ -20394,7 +20396,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitAndBusinessUnitLinkRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkEventRichDTO managementUnitAndBusinessUnitLink;
+        private SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkEventRichDTO managementUnitAndBusinessUnitLink = null!;
         
         public ManagementUnitAndBusinessUnitLinkRemoveEventDTO()
         {
@@ -20426,21 +20428,21 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private bool _equalBU;
         
         private System.Guid _id;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO> _linkedHRDepartments;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO> _linkedHRDepartments = null!;
         
-        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _managementUnit;
+        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _managementUnit = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -20495,7 +20497,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -20560,7 +20562,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -20604,7 +20606,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitAndHRDepartmentLinkSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkEventRichDTO managementUnitAndHRDepartmentLink;
+        private SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkEventRichDTO managementUnitAndHRDepartmentLink = null!;
         
         public ManagementUnitAndHRDepartmentLinkSaveEventDTO()
         {
@@ -20634,7 +20636,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitAndHRDepartmentLinkRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkEventRichDTO managementUnitAndHRDepartmentLink;
+        private SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkEventRichDTO managementUnitAndHRDepartmentLink = null!;
         
         public ManagementUnitAndHRDepartmentLinkRemoveEventDTO()
         {
@@ -20668,17 +20670,17 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO _hRDepartment;
+        private SampleSystem.Generated.DTO.HRDepartmentEventSimpleDTO _hRDepartment = null!;
         
         private System.Guid _id;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO> _linkedBusinessUnits;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO> _linkedBusinessUnits = null!;
         
-        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _managementUnit;
+        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _managementUnit = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -20720,7 +20722,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -20785,7 +20787,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -20829,7 +20831,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitToAncestorChildViewSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ManagementUnitToAncestorChildViewEventRichDTO managementUnitToAncestorChildView;
+        private SampleSystem.Generated.DTO.ManagementUnitToAncestorChildViewEventRichDTO managementUnitToAncestorChildView = null!;
         
         public ManagementUnitToAncestorChildViewSaveEventDTO()
         {
@@ -20859,7 +20861,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitToAncestorChildViewRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ManagementUnitToAncestorChildViewEventRichDTO managementUnitToAncestorChildView;
+        private SampleSystem.Generated.DTO.ManagementUnitToAncestorChildViewEventRichDTO managementUnitToAncestorChildView = null!;
         
         public ManagementUnitToAncestorChildViewRemoveEventDTO()
         {
@@ -20891,19 +20893,19 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _childOrAncestor;
+        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _childOrAncestor = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _source;
+        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _source = null!;
         
         private long _version;
         
@@ -20956,7 +20958,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -20982,7 +20984,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -21039,7 +21041,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitFluentMappingSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ManagementUnitFluentMappingEventRichDTO managementUnitFluentMapping;
+        private SampleSystem.Generated.DTO.ManagementUnitFluentMappingEventRichDTO managementUnitFluentMapping = null!;
         
         public ManagementUnitFluentMappingSaveEventDTO()
         {
@@ -21069,7 +21071,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ManagementUnitFluentMappingRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ManagementUnitFluentMappingEventRichDTO managementUnitFluentMapping;
+        private SampleSystem.Generated.DTO.ManagementUnitFluentMappingEventRichDTO managementUnitFluentMapping = null!;
         
         public ManagementUnitFluentMappingRemoveEventDTO()
         {
@@ -21105,21 +21107,21 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
         private bool _isProduction;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private SampleSystem.Domain.NhFluentMapping.MuComponent _muComponent;
+        private SampleSystem.Domain.NhFluentMapping.MuComponent _muComponent = null!;
         
-        private string _name;
+        private string _name = null!;
         
-        private SampleSystem.Generated.DTO.ManagementUnitFluentMappingEventSimpleDTO _parent;
+        private SampleSystem.Generated.DTO.ManagementUnitFluentMappingEventSimpleDTO? _parent;
         
         private Framework.Core.Period _period;
         
@@ -21174,7 +21176,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -21213,7 +21215,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -21265,7 +21267,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.ManagementUnitFluentMappingEventSimpleDTO Parent
+        public SampleSystem.Generated.DTO.ManagementUnitFluentMappingEventSimpleDTO? Parent
         {
             get
             {
@@ -21315,19 +21317,19 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
         private bool _isProduction;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private SampleSystem.Domain.NhFluentMapping.MuComponent _muComponent;
+        private SampleSystem.Domain.NhFluentMapping.MuComponent _muComponent = null!;
         
-        private string _name;
+        private string _name = null!;
         
         private Framework.Core.Period _period;
         
@@ -21382,7 +21384,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -21421,7 +21423,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -21504,7 +21506,7 @@ namespace SampleSystem.Generated.DTO
     public partial class PureFluentMappingObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.PureFluentMappingObjectEventRichDTO pureFluentMappingObject;
+        private SampleSystem.Generated.DTO.PureFluentMappingObjectEventRichDTO pureFluentMappingObject = null!;
         
         public PureFluentMappingObjectSaveEventDTO()
         {
@@ -21534,7 +21536,7 @@ namespace SampleSystem.Generated.DTO
     public partial class PureFluentMappingObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.PureFluentMappingObjectEventRichDTO pureFluentMappingObject;
+        private SampleSystem.Generated.DTO.PureFluentMappingObjectEventRichDTO pureFluentMappingObject = null!;
         
         public PureFluentMappingObjectRemoveEventDTO()
         {
@@ -21639,7 +21641,7 @@ namespace SampleSystem.Generated.DTO
     public partial class GenericNamedLockSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.GenericNamedLockEventRichDTO genericNamedLock;
+        private SampleSystem.Generated.DTO.GenericNamedLockEventRichDTO genericNamedLock = null!;
         
         public GenericNamedLockSaveEventDTO()
         {
@@ -21669,7 +21671,7 @@ namespace SampleSystem.Generated.DTO
     public partial class GenericNamedLockRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.GenericNamedLockEventRichDTO genericNamedLock;
+        private SampleSystem.Generated.DTO.GenericNamedLockEventRichDTO genericNamedLock = null!;
         
         public GenericNamedLockRemoveEventDTO()
         {
@@ -21703,15 +21705,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -21751,7 +21753,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -21777,7 +21779,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -21834,7 +21836,7 @@ namespace SampleSystem.Generated.DTO
     public partial class NoSecurityObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.NoSecurityObjectEventRichDTO noSecurityObject;
+        private SampleSystem.Generated.DTO.NoSecurityObjectEventRichDTO noSecurityObject = null!;
         
         public NoSecurityObjectSaveEventDTO()
         {
@@ -21864,7 +21866,7 @@ namespace SampleSystem.Generated.DTO
     public partial class NoSecurityObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.NoSecurityObjectEventRichDTO noSecurityObject;
+        private SampleSystem.Generated.DTO.NoSecurityObjectEventRichDTO noSecurityObject = null!;
         
         public NoSecurityObjectRemoveEventDTO()
         {
@@ -21898,11 +21900,11 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -21944,7 +21946,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -21970,7 +21972,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -22014,7 +22016,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ProjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ProjectEventRichDTO project;
+        private SampleSystem.Generated.DTO.ProjectEventRichDTO project = null!;
         
         public ProjectSaveEventDTO()
         {
@@ -22044,7 +22046,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ProjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ProjectEventRichDTO project;
+        private SampleSystem.Generated.DTO.ProjectEventRichDTO project = null!;
         
         public ProjectRemoveEventDTO()
         {
@@ -22076,19 +22078,19 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit = null!;
         
-        private string _code;
+        private string _code = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.DateTime? _endDate;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -22162,7 +22164,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -22201,7 +22203,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -22284,7 +22286,7 @@ namespace SampleSystem.Generated.DTO
     public partial class SqlParserTestObjSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.SqlParserTestObjEventRichDTO sqlParserTestObj;
+        private SampleSystem.Generated.DTO.SqlParserTestObjEventRichDTO sqlParserTestObj = null!;
         
         public SqlParserTestObjSaveEventDTO()
         {
@@ -22314,7 +22316,7 @@ namespace SampleSystem.Generated.DTO
     public partial class SqlParserTestObjRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.SqlParserTestObjEventRichDTO sqlParserTestObj;
+        private SampleSystem.Generated.DTO.SqlParserTestObjEventRichDTO sqlParserTestObj = null!;
         
         public SqlParserTestObjRemoveEventDTO()
         {
@@ -22348,17 +22350,17 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _notNullColumn;
+        private string _notNullColumn = null!;
         
-        private string _uniqueColumn;
+        private string _uniqueColumn = null!;
         
         private long _version;
         
@@ -22398,7 +22400,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -22424,7 +22426,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -22498,17 +22500,17 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _notNullColumn;
+        private string _notNullColumn = null!;
         
-        private string _uniqueColumn;
+        private string _uniqueColumn = null!;
         
         private long _version;
         
@@ -22548,7 +22550,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -22574,7 +22576,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -22644,7 +22646,7 @@ namespace SampleSystem.Generated.DTO
     public partial class SqlParserTestObjContainerSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.SqlParserTestObjContainerEventRichDTO sqlParserTestObjContainer;
+        private SampleSystem.Generated.DTO.SqlParserTestObjContainerEventRichDTO sqlParserTestObjContainer = null!;
         
         public SqlParserTestObjContainerSaveEventDTO()
         {
@@ -22674,7 +22676,7 @@ namespace SampleSystem.Generated.DTO
     public partial class SqlParserTestObjContainerRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.SqlParserTestObjContainerEventRichDTO sqlParserTestObjContainer;
+        private SampleSystem.Generated.DTO.SqlParserTestObjContainerEventRichDTO sqlParserTestObjContainer = null!;
         
         public SqlParserTestObjContainerRemoveEventDTO()
         {
@@ -22708,13 +22710,13 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private SampleSystem.Generated.DTO.SqlParserTestObjEventSimpleDTO _includedObject;
+        private SampleSystem.Generated.DTO.SqlParserTestObjEventSimpleDTO _includedObject = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -22756,7 +22758,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -22795,7 +22797,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -22839,7 +22841,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestCustomContextSecurityObjSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestCustomContextSecurityObjEventRichDTO testCustomContextSecurityObj;
+        private SampleSystem.Generated.DTO.TestCustomContextSecurityObjEventRichDTO testCustomContextSecurityObj = null!;
         
         public TestCustomContextSecurityObjSaveEventDTO()
         {
@@ -22869,7 +22871,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestCustomContextSecurityObjRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestCustomContextSecurityObjEventRichDTO testCustomContextSecurityObj;
+        private SampleSystem.Generated.DTO.TestCustomContextSecurityObjEventRichDTO testCustomContextSecurityObj = null!;
         
         public TestCustomContextSecurityObjRemoveEventDTO()
         {
@@ -22903,15 +22905,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -22951,7 +22953,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -22977,7 +22979,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -23034,7 +23036,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestDefaultFieldsMappingObjSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestDefaultFieldsMappingObjEventRichDTO testDefaultFieldsMappingObj;
+        private SampleSystem.Generated.DTO.TestDefaultFieldsMappingObjEventRichDTO testDefaultFieldsMappingObj = null!;
         
         public TestDefaultFieldsMappingObjSaveEventDTO()
         {
@@ -23064,7 +23066,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestDefaultFieldsMappingObjRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestDefaultFieldsMappingObjEventRichDTO testDefaultFieldsMappingObj;
+        private SampleSystem.Generated.DTO.TestDefaultFieldsMappingObjEventRichDTO testDefaultFieldsMappingObj = null!;
         
         public TestDefaultFieldsMappingObjRemoveEventDTO()
         {
@@ -23098,7 +23100,7 @@ namespace SampleSystem.Generated.DTO
         
         private int _intVal;
         
-        private string _strVal;
+        private string _strVal = null!;
         
         public TestDefaultFieldsMappingObjEventRichDTO()
         {
@@ -23154,7 +23156,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestRootSecurityObjSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestRootSecurityObjEventRichDTO testRootSecurityObj;
+        private SampleSystem.Generated.DTO.TestRootSecurityObjEventRichDTO testRootSecurityObj = null!;
         
         public TestRootSecurityObjSaveEventDTO()
         {
@@ -23184,7 +23186,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestRootSecurityObjRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestRootSecurityObjEventRichDTO testRootSecurityObj;
+        private SampleSystem.Generated.DTO.TestRootSecurityObjEventRichDTO testRootSecurityObj = null!;
         
         public TestRootSecurityObjRemoveEventDTO()
         {
@@ -23216,25 +23218,25 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecurityObjItemEventRichDTO> _items;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecurityObjItemEventRichDTO> _items = null!;
         
-        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _location;
+        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _location = null!;
         
-        private SampleSystem.Generated.DTO.ManagementUnitFluentMappingEventSimpleDTO _managementUnitFluentMapping;
+        private SampleSystem.Generated.DTO.ManagementUnitFluentMappingEventSimpleDTO _managementUnitFluentMapping = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -23287,7 +23289,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -23352,7 +23354,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -23413,15 +23415,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -23461,7 +23463,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -23487,7 +23489,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -23544,7 +23546,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecurityObjItemSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestSecurityObjItemEventRichDTO testSecurityObjItem;
+        private SampleSystem.Generated.DTO.TestSecurityObjItemEventRichDTO testSecurityObjItem = null!;
         
         public TestSecurityObjItemSaveEventDTO()
         {
@@ -23574,7 +23576,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecurityObjItemRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestSecurityObjItemEventRichDTO testSecurityObjItem;
+        private SampleSystem.Generated.DTO.TestSecurityObjItemEventRichDTO testSecurityObjItem = null!;
         
         public TestSecurityObjItemRemoveEventDTO()
         {
@@ -23608,23 +23610,23 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private SampleSystem.Generated.DTO.TestRootSecurityObjEventSimpleDTO _firstMaster;
+        private SampleSystem.Generated.DTO.TestRootSecurityObjEventSimpleDTO _firstMaster = null!;
         
         private System.Guid _id;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItemEventRichDTO> _items;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItemEventRichDTO> _items = null!;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItem2EventRichDTO> _items2;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItem2EventRichDTO> _items2 = null!;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItem3EventRichDTO> _items3;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestSecuritySubObjItem3EventRichDTO> _items3 = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -23664,7 +23666,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -23742,7 +23744,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -23803,15 +23805,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -23851,7 +23853,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -23877,7 +23879,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -23934,7 +23936,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecuritySubObjItemSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestSecuritySubObjItemEventRichDTO testSecuritySubObjItem;
+        private SampleSystem.Generated.DTO.TestSecuritySubObjItemEventRichDTO testSecuritySubObjItem = null!;
         
         public TestSecuritySubObjItemSaveEventDTO()
         {
@@ -23964,7 +23966,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecuritySubObjItemRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestSecuritySubObjItemEventRichDTO testSecuritySubObjItem;
+        private SampleSystem.Generated.DTO.TestSecuritySubObjItemEventRichDTO testSecuritySubObjItem = null!;
         
         public TestSecuritySubObjItemRemoveEventDTO()
         {
@@ -23998,17 +24000,17 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private SampleSystem.Generated.DTO.TestSecurityObjItemEventSimpleDTO _innerMaster;
+        private SampleSystem.Generated.DTO.TestSecurityObjItemEventSimpleDTO _innerMaster = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -24048,7 +24050,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -24087,7 +24089,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -24144,7 +24146,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecuritySubObjItem2SaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestSecuritySubObjItem2EventRichDTO testSecuritySubObjItem2;
+        private SampleSystem.Generated.DTO.TestSecuritySubObjItem2EventRichDTO testSecuritySubObjItem2 = null!;
         
         public TestSecuritySubObjItem2SaveEventDTO()
         {
@@ -24174,7 +24176,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecuritySubObjItem2RemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestSecuritySubObjItem2EventRichDTO testSecuritySubObjItem2;
+        private SampleSystem.Generated.DTO.TestSecuritySubObjItem2EventRichDTO testSecuritySubObjItem2 = null!;
         
         public TestSecuritySubObjItem2RemoveEventDTO()
         {
@@ -24208,19 +24210,19 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private SampleSystem.Generated.DTO.TestSecurityObjItemEventSimpleDTO _innerMaster;
+        private SampleSystem.Generated.DTO.TestSecurityObjItemEventSimpleDTO _innerMaster = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
-        private SampleSystem.Generated.DTO.TestRootSecurityObjEventSimpleDTO _rootSecurityObj;
+        private SampleSystem.Generated.DTO.TestRootSecurityObjEventSimpleDTO _rootSecurityObj = null!;
         
         private long _version;
         
@@ -24260,7 +24262,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -24299,7 +24301,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -24369,7 +24371,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecuritySubObjItem3SaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestSecuritySubObjItem3EventRichDTO testSecuritySubObjItem3;
+        private SampleSystem.Generated.DTO.TestSecuritySubObjItem3EventRichDTO testSecuritySubObjItem3 = null!;
         
         public TestSecuritySubObjItem3SaveEventDTO()
         {
@@ -24399,7 +24401,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestSecuritySubObjItem3RemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestSecuritySubObjItem3EventRichDTO testSecuritySubObjItem3;
+        private SampleSystem.Generated.DTO.TestSecuritySubObjItem3EventRichDTO testSecuritySubObjItem3 = null!;
         
         public TestSecuritySubObjItem3RemoveEventDTO()
         {
@@ -24433,17 +24435,17 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private SampleSystem.Generated.DTO.TestSecurityObjItemEventSimpleDTO _innerMaster;
+        private SampleSystem.Generated.DTO.TestSecurityObjItemEventSimpleDTO _innerMaster = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -24483,7 +24485,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -24522,7 +24524,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -24579,7 +24581,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestItemAuthObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestItemAuthObjectEventRichDTO testItemAuthObject;
+        private SampleSystem.Generated.DTO.TestItemAuthObjectEventRichDTO testItemAuthObject = null!;
         
         public TestItemAuthObjectSaveEventDTO()
         {
@@ -24609,7 +24611,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestItemAuthObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestItemAuthObjectEventRichDTO testItemAuthObject;
+        private SampleSystem.Generated.DTO.TestItemAuthObjectEventRichDTO testItemAuthObject = null!;
         
         public TestItemAuthObjectRemoveEventDTO()
         {
@@ -24641,19 +24643,19 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _managementUnit;
+        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _managementUnit = null!;
         
-        private SampleSystem.Generated.DTO.TestPlainAuthObjectEventSimpleDTO _master;
+        private SampleSystem.Generated.DTO.TestPlainAuthObjectEventSimpleDTO _master = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -24708,7 +24710,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -24760,7 +24762,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -24804,7 +24806,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestPerformanceObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestPerformanceObjectEventRichDTO testPerformanceObject;
+        private SampleSystem.Generated.DTO.TestPerformanceObjectEventRichDTO testPerformanceObject = null!;
         
         public TestPerformanceObjectSaveEventDTO()
         {
@@ -24834,7 +24836,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestPerformanceObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestPerformanceObjectEventRichDTO testPerformanceObject;
+        private SampleSystem.Generated.DTO.TestPerformanceObjectEventRichDTO testPerformanceObject = null!;
         
         public TestPerformanceObjectRemoveEventDTO()
         {
@@ -24866,25 +24868,25 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit;
+        private SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO _businessUnit = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee = null!;
         
         private System.Guid _id;
         
-        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _location;
+        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _location = null!;
         
-        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _managementUnit;
+        private SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO _managementUnit = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -24937,7 +24939,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -25002,7 +25004,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -25059,7 +25061,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestPlainAuthObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestPlainAuthObjectEventRichDTO testPlainAuthObject;
+        private SampleSystem.Generated.DTO.TestPlainAuthObjectEventRichDTO testPlainAuthObject = null!;
         
         public TestPlainAuthObjectSaveEventDTO()
         {
@@ -25089,7 +25091,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestPlainAuthObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestPlainAuthObjectEventRichDTO testPlainAuthObject;
+        private SampleSystem.Generated.DTO.TestPlainAuthObjectEventRichDTO testPlainAuthObject = null!;
         
         public TestPlainAuthObjectRemoveEventDTO()
         {
@@ -25123,21 +25125,21 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee = null!;
         
         private System.Guid _id;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestItemAuthObjectEventRichDTO> _items;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestItemAuthObjectEventRichDTO> _items = null!;
         
-        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _location;
+        private SampleSystem.Generated.DTO.LocationEventSimpleDTO _location = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -25177,7 +25179,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -25242,7 +25244,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -25303,15 +25305,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -25351,7 +25353,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -25377,7 +25379,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -25434,7 +25436,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ClassASaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ClassAEventRichDTO classA;
+        private SampleSystem.Generated.DTO.ClassAEventRichDTO classA = null!;
         
         public ClassASaveEventDTO()
         {
@@ -25464,7 +25466,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ClassARemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ClassAEventRichDTO classA;
+        private SampleSystem.Generated.DTO.ClassAEventRichDTO classA = null!;
         
         public ClassARemoveEventDTO()
         {
@@ -25494,7 +25496,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ClassAEventRichDTO
     {
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.ClassAChildEventRichDTO> _child;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.ClassAChildEventRichDTO> _child = null!;
         
         private System.Guid _id;
         
@@ -25599,7 +25601,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ClassAChildSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ClassAChildEventRichDTO classAChild;
+        private SampleSystem.Generated.DTO.ClassAChildEventRichDTO classAChild = null!;
         
         public ClassAChildSaveEventDTO()
         {
@@ -25629,7 +25631,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ClassAChildRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ClassAChildEventRichDTO classAChild;
+        private SampleSystem.Generated.DTO.ClassAChildEventRichDTO classAChild = null!;
         
         public ClassAChildRemoveEventDTO()
         {
@@ -25663,7 +25665,7 @@ namespace SampleSystem.Generated.DTO
         
         private bool _isFake;
         
-        private SampleSystem.Generated.DTO.ClassAEventSimpleDTO _parent;
+        private SampleSystem.Generated.DTO.ClassAEventSimpleDTO _parent = null!;
         
         public ClassAChildEventRichDTO()
         {
@@ -25719,7 +25721,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ConcreteClassASaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ConcreteClassAEventRichDTO concreteClassA;
+        private SampleSystem.Generated.DTO.ConcreteClassAEventRichDTO concreteClassA = null!;
         
         public ConcreteClassASaveEventDTO()
         {
@@ -25749,7 +25751,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ConcreteClassARemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ConcreteClassAEventRichDTO concreteClassA;
+        private SampleSystem.Generated.DTO.ConcreteClassAEventRichDTO concreteClassA = null!;
         
         public ConcreteClassARemoveEventDTO()
         {
@@ -25781,7 +25783,7 @@ namespace SampleSystem.Generated.DTO
         
         private int _age;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.ClassAChildEventRichDTO> _child;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.ClassAChildEventRichDTO> _child = null!;
         
         private System.Guid _id;
         
@@ -25854,7 +25856,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestCommentSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestCommentEventRichDTO testComment;
+        private SampleSystem.Generated.DTO.TestCommentEventRichDTO testComment = null!;
         
         public TestCommentSaveEventDTO()
         {
@@ -25884,7 +25886,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestCommentRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestCommentEventRichDTO testComment;
+        private SampleSystem.Generated.DTO.TestCommentEventRichDTO testComment = null!;
         
         public TestCommentRemoveEventDTO()
         {
@@ -25918,17 +25920,17 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private SampleSystem.Generated.DTO.TestCommentParentEventSimpleDTO _parent;
+        private SampleSystem.Generated.DTO.TestCommentParentEventSimpleDTO _parent = null!;
         
-        private string _text;
+        private string _text = null!;
         
         private long _version;
         
@@ -25968,7 +25970,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -25994,7 +25996,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -26064,7 +26066,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestCommentCategorySaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestCommentCategoryEventRichDTO testCommentCategory;
+        private SampleSystem.Generated.DTO.TestCommentCategoryEventRichDTO testCommentCategory = null!;
         
         public TestCommentCategorySaveEventDTO()
         {
@@ -26094,7 +26096,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestCommentCategoryRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestCommentCategoryEventRichDTO testCommentCategory;
+        private SampleSystem.Generated.DTO.TestCommentCategoryEventRichDTO testCommentCategory = null!;
         
         public TestCommentCategoryRemoveEventDTO()
         {
@@ -26128,15 +26130,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -26176,7 +26178,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -26202,7 +26204,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -26263,15 +26265,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -26311,7 +26313,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -26337,7 +26339,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -26394,7 +26396,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestCommentParentSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestCommentParentEventRichDTO testCommentParent;
+        private SampleSystem.Generated.DTO.TestCommentParentEventRichDTO testCommentParent = null!;
         
         public TestCommentParentSaveEventDTO()
         {
@@ -26424,7 +26426,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestCommentParentRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestCommentParentEventRichDTO testCommentParent;
+        private SampleSystem.Generated.DTO.TestCommentParentEventRichDTO testCommentParent = null!;
         
         public TestCommentParentRemoveEventDTO()
         {
@@ -26456,21 +26458,21 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private SampleSystem.Generated.DTO.TestCommentCategoryEventSimpleDTO _category;
+        private SampleSystem.Generated.DTO.TestCommentCategoryEventSimpleDTO _category = null!;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestCommentEventRichDTO> _comments;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestCommentEventRichDTO> _comments = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -26536,7 +26538,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -26562,7 +26564,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -26623,15 +26625,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _name;
+        private string _name = null!;
         
         private long _version;
         
@@ -26671,7 +26673,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -26697,7 +26699,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -26754,7 +26756,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestImmutableObjSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestImmutableObjEventRichDTO testImmutableObj;
+        private SampleSystem.Generated.DTO.TestImmutableObjEventRichDTO testImmutableObj = null!;
         
         public TestImmutableObjSaveEventDTO()
         {
@@ -26784,7 +26786,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestImmutableObjRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestImmutableObjEventRichDTO testImmutableObj;
+        private SampleSystem.Generated.DTO.TestImmutableObjEventRichDTO testImmutableObj = null!;
         
         public TestImmutableObjRemoveEventDTO()
         {
@@ -26818,17 +26820,17 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private string _testImmutablePrimitiveProperty;
+        private string _testImmutablePrimitiveProperty = null!;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _testImmutableRefProperty;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _testImmutableRefProperty = null!;
         
         private long _version;
         
@@ -26868,7 +26870,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -26894,7 +26896,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -26964,7 +26966,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestJobObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestJobObjectEventRichDTO testJobObject;
+        private SampleSystem.Generated.DTO.TestJobObjectEventRichDTO testJobObject = null!;
         
         public TestJobObjectSaveEventDTO()
         {
@@ -26994,7 +26996,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestJobObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestJobObjectEventRichDTO testJobObject;
+        private SampleSystem.Generated.DTO.TestJobObjectEventRichDTO testJobObject = null!;
         
         public TestJobObjectRemoveEventDTO()
         {
@@ -27028,11 +27030,11 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -27074,7 +27076,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -27100,7 +27102,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -27144,7 +27146,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestObjSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestObjEventRichDTO testObj;
+        private SampleSystem.Generated.DTO.TestObjEventRichDTO testObj = null!;
         
         public TestObjSaveEventDTO()
         {
@@ -27174,7 +27176,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestObjRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestObjEventRichDTO testObj;
+        private SampleSystem.Generated.DTO.TestObjEventRichDTO testObj = null!;
         
         public TestObjRemoveEventDTO()
         {
@@ -27204,7 +27206,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestObjEventRichDTO
     {
         
-        private SampleSystem.Domain.Inline.Fio _fS;
+        private SampleSystem.Domain.Inline.Fio _fS = null!;
         
         public TestObjEventRichDTO()
         {
@@ -27234,7 +27236,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestRelativeEmployeeChildObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestRelativeEmployeeChildObjectEventRichDTO testRelativeEmployeeChildObject;
+        private SampleSystem.Generated.DTO.TestRelativeEmployeeChildObjectEventRichDTO testRelativeEmployeeChildObject = null!;
         
         public TestRelativeEmployeeChildObjectSaveEventDTO()
         {
@@ -27264,7 +27266,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestRelativeEmployeeChildObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestRelativeEmployeeChildObjectEventRichDTO testRelativeEmployeeChildObject;
+        private SampleSystem.Generated.DTO.TestRelativeEmployeeChildObjectEventRichDTO testRelativeEmployeeChildObject = null!;
         
         public TestRelativeEmployeeChildObjectRemoveEventDTO()
         {
@@ -27298,15 +27300,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employee = null!;
         
         private System.Guid _id;
         
-        private SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectEventSimpleDTO _master;
+        private SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectEventSimpleDTO _master = null!;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -27348,7 +27350,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -27400,7 +27402,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -27444,7 +27446,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestRelativeEmployeeObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestRelativeEmployeeObjectEventRichDTO testRelativeEmployeeObject;
+        private SampleSystem.Generated.DTO.TestRelativeEmployeeObjectEventRichDTO testRelativeEmployeeObject = null!;
         
         public TestRelativeEmployeeObjectSaveEventDTO()
         {
@@ -27474,7 +27476,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestRelativeEmployeeObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestRelativeEmployeeObjectEventRichDTO testRelativeEmployeeObject;
+        private SampleSystem.Generated.DTO.TestRelativeEmployeeObjectEventRichDTO testRelativeEmployeeObject = null!;
         
         public TestRelativeEmployeeObjectRemoveEventDTO()
         {
@@ -27508,15 +27510,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employeeRef1;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employeeRef1 = null!;
         
-        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employeeRef2;
+        private SampleSystem.Generated.DTO.EmployeeEventSimpleDTO _employeeRef2 = null!;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -27558,7 +27560,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -27610,7 +27612,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -27654,7 +27656,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestRelativeEmployeeParentObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectEventRichDTO testRelativeEmployeeParentObject;
+        private SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectEventRichDTO testRelativeEmployeeParentObject = null!;
         
         public TestRelativeEmployeeParentObjectSaveEventDTO()
         {
@@ -27684,7 +27686,7 @@ namespace SampleSystem.Generated.DTO
     public partial class TestRelativeEmployeeParentObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectEventRichDTO testRelativeEmployeeParentObject;
+        private SampleSystem.Generated.DTO.TestRelativeEmployeeParentObjectEventRichDTO testRelativeEmployeeParentObject = null!;
         
         public TestRelativeEmployeeParentObjectRemoveEventDTO()
         {
@@ -27716,15 +27718,15 @@ namespace SampleSystem.Generated.DTO
         
         private bool _active;
         
-        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestRelativeEmployeeChildObjectEventRichDTO> _children;
+        private System.Collections.Generic.List<SampleSystem.Generated.DTO.TestRelativeEmployeeChildObjectEventRichDTO> _children = null!;
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -27779,7 +27781,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -27805,7 +27807,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -27853,11 +27855,11 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -27899,7 +27901,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -27925,7 +27927,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -27969,7 +27971,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ChildEntitySaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ChildEntityEventRichDTO childEntity;
+        private SampleSystem.Generated.DTO.ChildEntityEventRichDTO childEntity = null!;
         
         public ChildEntitySaveEventDTO()
         {
@@ -27999,7 +28001,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ChildEntityRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ChildEntityEventRichDTO childEntity;
+        private SampleSystem.Generated.DTO.ChildEntityEventRichDTO childEntity = null!;
         
         public ChildEntityRemoveEventDTO()
         {
@@ -28033,15 +28035,15 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
-        private SampleSystem.Generated.DTO.ParentEntityEventSimpleDTO _parent;
+        private SampleSystem.Generated.DTO.ParentEntityEventSimpleDTO _parent = null!;
         
         private long _version;
         
@@ -28081,7 +28083,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -28107,7 +28109,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -28164,7 +28166,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ParentEntitySaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ParentEntityEventRichDTO parentEntity;
+        private SampleSystem.Generated.DTO.ParentEntityEventRichDTO parentEntity = null!;
         
         public ParentEntitySaveEventDTO()
         {
@@ -28194,7 +28196,7 @@ namespace SampleSystem.Generated.DTO
     public partial class ParentEntityRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
     {
         
-        private SampleSystem.Generated.DTO.ParentEntityEventRichDTO parentEntity;
+        private SampleSystem.Generated.DTO.ParentEntityEventRichDTO parentEntity = null!;
         
         public ParentEntityRemoveEventDTO()
         {
@@ -28228,11 +28230,11 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -28274,7 +28276,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -28300,7 +28302,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {
@@ -28348,11 +28350,11 @@ namespace SampleSystem.Generated.DTO
         
         private System.DateTime? _createDate;
         
-        private string _createdBy;
+        private string? _createdBy;
         
         private System.Guid _id;
         
-        private string _modifiedBy;
+        private string? _modifiedBy;
         
         private System.DateTime? _modifyDate;
         
@@ -28394,7 +28396,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy
+        public string? CreatedBy
         {
             get
             {
@@ -28420,7 +28422,7 @@ namespace SampleSystem.Generated.DTO
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy
+        public string? ModifiedBy
         {
             get
             {

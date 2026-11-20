@@ -9,7 +9,7 @@ public class TestLegacyEmployeeMap : IEntityTypeConfiguration<TestLegacyEmployee
 {
     public void Configure(EntityTypeBuilder<TestLegacyEmployee> builder)
     {
-        builder.HasBaseType((Type)null);
+        builder.HasBaseType((Type?)null);
         builder.ToView(nameof(TestLegacyEmployee));
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedNever();

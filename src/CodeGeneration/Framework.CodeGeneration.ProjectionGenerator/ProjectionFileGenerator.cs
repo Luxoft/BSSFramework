@@ -1,4 +1,5 @@
-﻿using Framework.CodeGeneration.ProjectionGenerator.Configuration;
+﻿using Framework.CodeDom.Rendering;
+using Framework.CodeGeneration.ProjectionGenerator.Configuration;
 using Framework.CodeGeneration.ProjectionGenerator.Extensions;
 using Framework.CodeGeneration.ProjectionGenerator.FileFactory;
 
@@ -10,6 +11,8 @@ public class ProjectionFileGenerator(IProjectionGeneratorConfiguration<IProjecti
 public class ProjectionFileGenerator<TConfiguration>(TConfiguration configuration) : CodeFileGenerator<TConfiguration>(configuration)
     where TConfiguration : class, IProjectionGeneratorConfiguration<IProjectionGenerationEnvironment>
 {
+    public override CodeDomRenderer Renderer { get; } = CodeDomRenderer.CSharp.WithNullableAnnotations(true);
+
     protected override IEnumerable<ICodeFile> GetInternalFileGenerators()
     {
         foreach (var projectionType in this.Configuration.DomainTypes)

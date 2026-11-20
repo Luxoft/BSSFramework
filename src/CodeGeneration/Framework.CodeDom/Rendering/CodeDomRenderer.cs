@@ -33,8 +33,8 @@ public abstract class CodeDomRenderer :
 
     protected abstract string Render(CodeBinaryOperatorType @operator);
 
-    public static readonly CodeDomRenderer CSharp = new CSharpCodeDomRenderer(new CSharpCodeProvider(new Dictionary<string, string>
-                                                                                  {
-                                                                                          {"CompilerVersion", "v4.0"}
-                                                                                  }));
+    public static readonly CSharpCodeDomRenderer CSharp = new (new CSharpCodeProvider(new Dictionary<string, string>
+                                                                                        {
+                                                                                            {"CompilerVersion", "v4.0"}
+                                                                                        }), false);
 }

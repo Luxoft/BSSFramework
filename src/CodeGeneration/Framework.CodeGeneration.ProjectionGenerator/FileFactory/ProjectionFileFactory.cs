@@ -11,6 +11,7 @@ using Framework.CodeGeneration.FileFactory;
 using Framework.CodeGeneration.ProjectionGenerator.Configuration;
 using Framework.CodeGeneration.ProjectionGenerator.Extensions;
 using Framework.Core;
+using Framework.Core.ReflectionImpl;
 using Framework.Database.Mapping;
 using Framework.FileGeneration.Configuration;
 using Framework.Projection;
@@ -75,6 +76,8 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
 
         foreach (var property in this.GetProperties(false))
         {
+            var isNullable = property.IsNullableReference();
+
             var propertyTypeRef = property.PropertyType.ToTypeReference();
 
             var attributes = this.Configuration.GetPropertyAttributeDeclarations(property).ToArray();
@@ -107,12 +110,19 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
                                     ? typeof(ICollection<>).MakeGenericType(property.PropertyType.GetCollectionElementType()!)
                                     : property.PropertyType;
 
-                var genField = new CodeMemberField { Name = property.Name.ToStartLowerCase(), Type = fieldType.ToTypeReference() };
+                var genField = new CodeMemberField
+                {
+                    Name = property.Name.ToStartLowerCase(),
+                    Type = isNullable ? fieldType.ToTypeReference().ToNullableAnnotatedReference() : fieldType.ToTypeReference(),
+
+                    // Non-nullable reference fields are filled by the ORM, so the initial null is suppressed
+                    InitExpression = fieldType.IsValueType || isNullable ? null : new CodePrimitiveExpression(null).ToNullForgivingExpression()
+                };
 
                 var genProp = new CodeMemberProperty
                 {
                     Name = property.Name,
-                    Type = propertyTypeRef,
+                    Type = isNullable ? propertyTypeRef.ToNullableAnnotatedReference() : propertyTypeRef,
                     Attributes = MemberAttributes.Public,
                     GetStatements = { new CodeThisReferenceExpression().ToFieldReference(genField).ToMethodReturnStatement() }
                 };
@@ -158,6 +168,10 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
 
         var propertyPath = this.Configuration.Environment.PropertyPathService.TryGetExpandPath(property)!;
 
+        var isNullable = property.IsNullableReference();
+
+        var hasMaybeAccess = false;
+
         var getExpr = propertyPath.Aggregate(
 
             new { Expression = (CodeExpression)new CodeThisReferenceExpression(), IsRef = false },
@@ -166,6 +180,8 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
             {
                 if (state.IsRef)
                 {
+                    hasMaybeAccess = true;
+
                     return new { Expression = (CodeExpression)state.Expression.ToMaybePropertyReference(propNode), IsRef = true };
                 }
                 else
@@ -194,9 +210,9 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
         var prop = new CodeMemberProperty
         {
             Name = property.Name,
-            Type = property.PropertyType.ToTypeReference(),
+            Type = isNullable ? property.PropertyType.ToTypeReference().ToNullableAnnotatedReference() : property.PropertyType.ToTypeReference(),
             Attributes = MemberAttributes.Public,
-            GetStatements = { getExpr.ToMethodReturnStatement() },
+            GetStatements = { ((hasMaybeAccess || propertyPath.IsNullableReferenceResult()) && !isNullable && !property.PropertyType.IsValueType && !property.PropertyType.IsCollection() ? getExpr.ToNullForgivingExpression() : getExpr).ToMethodReturnStatement() },
         };
 
         if (withAttr)

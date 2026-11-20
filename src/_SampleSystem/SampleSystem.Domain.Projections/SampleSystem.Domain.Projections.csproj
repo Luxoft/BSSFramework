@@ -13,4 +13,8 @@
     <ProjectReference Include="..\SampleSystem.Security.Abstract\SampleSystem.Security.Abstract.csproj" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <NoWarn>$(NoWarn);CS0649</NoWarn>
+  </PropertyGroup>
+
 </Project>

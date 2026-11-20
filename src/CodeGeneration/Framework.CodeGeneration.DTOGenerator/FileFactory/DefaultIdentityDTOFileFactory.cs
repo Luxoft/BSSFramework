@@ -212,7 +212,7 @@ public class DefaultIdentityDTOFileFactory<TConfiguration>(TConfiguration config
             Name = "Equals",
             Attributes = MemberAttributes.Override | MemberAttributes.Public,
             ReturnType = new CodeTypeReference(typeof(bool)),
-            Parameters = { new CodeParameterDeclarationExpression(typeof(object), operatorOtherName) },
+            Parameters = { new CodeParameterDeclarationExpression(typeof(object).ToTypeReference().WithNullableAnnotation(), operatorOtherName) },
             Statements =
                              {
                                      new CodeBooleanAndOperatorExpression (
@@ -242,7 +242,12 @@ public class DefaultIdentityDTOFileFactory<TConfiguration>(TConfiguration config
             Name = "Equals",
             Attributes = MemberAttributes.Final | MemberAttributes.Public,
             ReturnType = new CodeTypeReference(typeof(bool)),
-            Parameters = { this.CurrentReference.ToParameterDeclarationExpression(operatorOtherName) },
+            Parameters =
+                             {
+                                 this.Configuration.IdentityIsReference
+                                     ? new CodeParameterDeclarationExpression(this.CurrentReference.ToNullableAnnotatedReference(), operatorOtherName)
+                                     : this.CurrentReference.ToParameterDeclarationExpression(operatorOtherName)
+                             },
             Statements =
                              {
                                      this.Configuration.IdentityIsReference

@@ -4,6 +4,7 @@ using System.Reflection;
 using Anch.Core;
 
 using Framework.Core;
+using Framework.Core.ReflectionImpl;
 using Framework.Projection.Lambda.Extensions;
 
 namespace Framework.Projection.Lambda.ProjectionBuilder;
@@ -51,6 +52,8 @@ internal class ProjectionPropertyBuilder : IProjectionProperty
     public bool IsCollection => this.CollectionType is not null;
 
     public bool IsNullable { get; set; }
+
+    public bool IsNullableReference => this.Path.IsNullableReferenceResult(this.IsCollection);
 
     public Type ElementType { get; }
 

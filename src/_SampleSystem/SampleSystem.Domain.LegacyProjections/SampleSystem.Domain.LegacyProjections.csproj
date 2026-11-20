@@ -8,4 +8,8 @@
     <ProjectReference Include="..\SampleSystem.Domain.Models\SampleSystem.Domain.Models.csproj" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <NoWarn>$(NoWarn);CS0649</NoWarn>
+  </PropertyGroup>
+
 </Project>

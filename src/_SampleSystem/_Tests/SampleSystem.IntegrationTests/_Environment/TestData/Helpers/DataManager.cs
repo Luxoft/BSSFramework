@@ -121,14 +121,12 @@ public partial class DataManager
             bool active = true,
             bool canBeLinkedToClient = false)
     {
-        name = name ?? TextRandomizer.UniqueString("Type");
+        name ??= TextRandomizer.UniqueString("Type");
 
-        BusinessUnitType? type = null;
-
-        this.EvaluateWrite(
+        var type = this.EvaluateWrite(
                            context =>
                            {
-                               type = (context.Logics.BusinessUnitType.GetById(this.GetGuid(id)) ??
+                               var type = (context.Logics.BusinessUnitType.GetById(this.GetGuid(id)) ??
                                        context.Logics.BusinessUnitType.GetByName(name)) ?? new BusinessUnitType();
 
                                type.Active = active;
@@ -157,6 +155,8 @@ public partial class DataManager
                                {
                                    context.Logics.BusinessUnitType.Save(type);
                                }
+
+                               return type;
                            });
 
         if (possibleParents is null && transferTo is null && currentTypeInPossibleParents == false &&
@@ -168,7 +168,7 @@ public partial class DataManager
         var businessUnitTypeController = this.RootServiceProvider.GetDefaultControllerEvaluator<BusinessUnitTypeController>();
         var buTypeStrict = new BusinessUnitTypeStrictDTO(businessUnitTypeController.Evaluate(c => c.GetFullBusinessUnitType(type.ToIdentityDTO())));
 
-        possibleParents = possibleParents ?? [];
+        possibleParents ??= [];
         possibleParents.Add(type.ToIdentityDTO());
 
         var possibleParentsList =

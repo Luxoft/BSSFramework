@@ -14,4 +14,8 @@
     <ProjectReference Include="..\..\Domain\Framework.Relations\Framework.Relations.csproj" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <NoWarn>$(NoWarn);CS0649</NoWarn>
+  </PropertyGroup>
+
 </Project>

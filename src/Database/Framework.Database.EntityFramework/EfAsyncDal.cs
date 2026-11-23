@@ -74,12 +74,17 @@ public class EfAsyncDal<TDomainObject, TIdent>(
 
         var schema = entityType.GetSchema();
 
-        var fullTableName = schema is null ? $"[{tableName}]" : $"[{schema}].[{tableName}]";
+        var fullTableName = schema is null ? QuoteIdentifier(tableName) : $"{QuoteIdentifier(schema)}.{QuoteIdentifier(tableName)}";
+
+        // Identifiers come from the EF model (not user input) and are quoted; the id value is passed as a SQL parameter.
+        var sql = $"SELECT * FROM {fullTableName} WITH (UPDLOCK) WHERE Id = {{0}}";
 
         await nativeSession.Set<TDomainObject>()
-                  .FromSqlRaw($"SELECT * FROM {fullTableName} WITH (UPDLOCK) WHERE Id = {{0}}", identityInfo.Id.Getter(domainObject))
+                  .FromSqlRaw(sql, identityInfo.Id.Getter(domainObject))
                   .ToListAsync(ct);
     }
+
+    private static string QuoteIdentifier(string identifier) => $"[{identifier.Replace("]", "]]")}]";
 
     private void CheckWrite()
     {

@@ -40,6 +40,11 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
 
     protected virtual bool AllowCreate { get; } = true;
 
+    /// <summary>
+    /// Modifiers of the generated single-parameter ToDomainObject method (Simple DTO makes it virtual, Rich DTO overrides it)
+    /// </summary>
+    protected virtual MemberAttributes ToDomainObjectMethodAttributes { get; } = MemberAttributes.Public | MemberAttributes.Final;
+
 
     public IEnumerable<PropertyInfo> GetProperties(bool isWritable) => this.Configuration.GetDomainTypeProperties(this.DomainType!, this.FileType, isWritable);
 
@@ -220,7 +225,7 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
         {
             if (this.IsPersistent())
             {
-                yield return this.GetToDomainObjectMethod();
+                yield return this.GetToDomainObjectMethod(this.ToDomainObjectMethodAttributes);
 
                 if (this.AllowCreate && this.DomainType!.HasDefaultConstructor())
                 {
@@ -231,7 +236,7 @@ public abstract class DTOFileFactory<TConfiguration, TFileType>(TConfiguration c
             {
                 if (this.DomainType!.HasDefaultConstructor())
                 {
-                    yield return this.GetToDomainObjectMethod();
+                    yield return this.GetToDomainObjectMethod(this.ToDomainObjectMethodAttributes);
                 }
             }
         }

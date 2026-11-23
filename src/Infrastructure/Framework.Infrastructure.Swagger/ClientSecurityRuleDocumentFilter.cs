@@ -1,7 +1,8 @@
 ﻿using Anch.SecuritySystem.SecurityRuleInfo;
 
-using Microsoft.OpenApi.Any;
-using Microsoft.OpenApi.Models;
+using System.Text.Json.Nodes;
+
+using Microsoft.OpenApi;
 
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -18,13 +19,18 @@ public class ClientSecurityRuleDocumentFilter(IClientSecurityRuleInfoSource sour
 
         var schema = new OpenApiSchema
         {
-            Type = "integer",
-            Enum = Enumerable.Range(0, ruleNames.Length).Select(IOpenApiAny (v) => new OpenApiInteger(v)).ToList(),
+            Type = JsonSchemaType.Integer,
+            Enum = Enumerable.Range(0, ruleNames.Length).Select(JsonNode (v) => JsonValue.Create(v)).ToList(),
         };
 
-        var apiNames = new OpenApiArray();
-        apiNames.AddRange(ruleNames.Select(v => new OpenApiString(v)));
-        schema.Extensions["x-enumNames"] = apiNames;
+        var apiNames = new JsonArray();
+        foreach (var name in ruleNames)
+        {
+            apiNames.Add(name);
+        }
+
+        schema.Extensions ??= new Dictionary<string, IOpenApiExtension>();
+        schema.Extensions["x-enumNames"] = new JsonNodeExtension(apiNames);
 
         return schema;
     }

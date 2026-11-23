@@ -6,6 +6,7 @@ using NHibernate.Hql.Ast;
 using NHibernate.Linq;
 using NHibernate.Linq.Functions;
 using NHibernate.Linq.Visitors;
+using NHibernate.Util;
 
 namespace Framework.Database.NHibernate.Dialect;
 
@@ -17,7 +18,7 @@ public class AddDaysGenerator : BaseHqlGeneratorForMethod
     /// <summary>
     /// Creates new generator instance
     /// </summary>
-    public AddDaysGenerator() => this.SupportedMethods = [ReflectionHelper.GetMethodDefinition<DateTime?>(d => d!.Value.AddDays(0))];
+    public AddDaysGenerator() => this.SupportedMethods = [ReflectHelper.GetMethodDefinition<DateTime?>(d => d!.Value.AddDays(0))];
 
     /// <summary>
     /// Creates new <see cref="HqlTreeNode"/> node that represents AddDays method call

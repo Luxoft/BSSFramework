@@ -16,7 +16,6 @@
     <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="$(DotNet)" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="$(DotNet)" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(DotNet)" />
-    <PackageVersion Include="Microsoft.Extensions.Options" Version="$(DotNet)" />
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="$(DotNet)" />
     <PackageVersion Include="System.CodeDom" Version="$(DotNet)" />
     <PackageVersion Include="System.Reflection.Context" Version="$(DotNet)" />
@@ -61,21 +60,21 @@
   <ItemGroup>
     <PackageVersion Include="CommandLineParser" Version="2.9.1" />
     <PackageVersion Include="FluentMigrator.Extensions.SqlServer" Version="8.0.1" />
-    <PackageVersion Include="MediatR" Version="14.3.0" />
+    <PackageVersion Include="MediatR" Version="15.0.0" />
     <PackageVersion Include="FluentValidation" Version="12.2.0" />
     <PackageVersion Include="FluentMigrator" Version="8.0.1" />
-    <PackageVersion Include="FluentMigrator.Runner" Version="8.0.1" />
+    <PackageVersion Include="FluentMigrator.Runner.SqlServer" Version="8.0.1" />
     <PackageVersion Include="FluentNHibernate" Version="3.5.0" />
     <PackageVersion Include="Hangfire.AspNetCore" Version="1.8.25" />
     <PackageVersion Include="Hangfire.SqlServer" Version="1.8.25" />
-    <PackageVersion Include="MartinCostello.SqlLocalDb" Version="[5.0.1]" />
-    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="5.9.0" />
-    <PackageVersion Include="Microsoft.Data.SqlClient" Version="[6.1.4]" />
-    <PackageVersion Include="Microsoft.SqlServer.SqlManagementObjects" Version="181.37.1" />
+    <PackageVersion Include="MartinCostello.SqlLocalDb" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="5.12.0" />
+    <PackageVersion Include="Microsoft.Data.SqlClient" Version="7.1.2" />
+    <PackageVersion Include="Microsoft.SqlServer.SqlManagementObjects" Version="181.46.0" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageVersion Include="NHibernate" Version="5.7.1" />
     <PackageVersion Include="NHibernate.Envers" Version="5.7.0" />
-    <PackageVersion Include="Swashbuckle.AspNetCore.SwaggerGen" Version="[7.2.0]" />
+    <PackageVersion Include="Swashbuckle.AspNetCore.SwaggerGen" Version="11.0.1" />
   </ItemGroup>
   <!-- Tests -->
   <ItemGroup>

@@ -105,7 +105,9 @@ public class DbGeneratorTest
     private void GenerateConfigurationDatabase(
         string serverName,
         DatabaseName mainDatabaseName,
+#pragma warning disable CS0618 // Obsolete API is intentionally used here
         DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnCopySchemeDatabase,
+#pragma warning restore CS0618
         bool preserveSchemaDatabase = false,
         DbUserCredential? credential = null)
     {
@@ -131,7 +133,9 @@ public class DbGeneratorTest
         string serverName,
         DatabaseName mainDatabaseName,
         AuditDatabaseName auditDatabaseName,
+#pragma warning disable CS0618 // Obsolete API is intentionally used here
         DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnCopySchemeDatabase,
+#pragma warning restore CS0618
         bool preserveSchemaDatabase = false,
         DbUserCredential? credential = null)
     {

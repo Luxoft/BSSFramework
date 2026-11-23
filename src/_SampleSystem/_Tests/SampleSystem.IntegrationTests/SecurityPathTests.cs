@@ -34,7 +34,7 @@ public abstract class SecurityPathTests(IServiceProvider rootServiceProvider) : 
 
                                        var employeeBll = context.Logics.EmployeeFactory.Create(securityProvider);
 
-                                       return employeeBll.GetById(employeeIdentity.Id).ToIdentityDTO();
+                                       return employeeBll.GetById(employeeIdentity.Id, true)!.ToIdentityDTO();
                                    });
 
         // Assert

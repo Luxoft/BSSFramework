@@ -74,6 +74,7 @@ class AuditDBScriptGeneratorBuilder : IAuditDBScriptGeneratorBuilder
         var migrationBuilder = this.migrationBuilder.Build(mode);
         var combined = new[] { auditDatabaseScriptGenerator, migrationBuilder }.Combine();
 
+#pragma warning disable CS0618 // Obsolete API is intentionally used here
         switch (mode)
         {
             case DBGenerateScriptMode.AppliedOnCopySchemeDatabase:
@@ -92,6 +93,7 @@ class AuditDBScriptGeneratorBuilder : IAuditDBScriptGeneratorBuilder
                     break;
                 }
         }
+#pragma warning restore CS0618
 
         return new ReplaceDatabaseNameDecorator(context => nextMappingSettings.First().AuditDatabase!, result);
     }

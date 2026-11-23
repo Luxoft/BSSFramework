@@ -11,4 +11,8 @@
     <ProjectReference Include="..\..\Projection\Framework.Projection.Domain\Framework.Projection.Domain.csproj" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <NoWarn>$(NoWarn);CS0649</NoWarn>
+  </PropertyGroup>
+
 </Project>

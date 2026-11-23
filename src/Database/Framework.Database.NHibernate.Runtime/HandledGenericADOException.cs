@@ -1,6 +1,4 @@
-﻿using System.Runtime.Serialization;
-
-using NHibernate;
+﻿using NHibernate;
 
 namespace Framework.Database.NHibernate;
 
@@ -14,7 +12,6 @@ public class HandledGenericAdoException : ADOException
     {
 
     }
-    public HandledGenericAdoException(SerializationInfo info, StreamingContext context) : base(info, context) { }
     public HandledGenericAdoException(string message, Exception innerException, string sql, ValueTuple<string, object> unTypeObjectInfo) : base(message, innerException, sql)
     {
         this.EntityName = unTypeObjectInfo.Item1;

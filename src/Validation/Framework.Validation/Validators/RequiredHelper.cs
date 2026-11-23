@@ -62,7 +62,7 @@ public static class RequiredHelper
         switch (mode)
         {
             case RequiredMode.Default:
-                return !value.IsNullOrWhiteSpace();
+                return !string.IsNullOrWhiteSpace(value);
 
             case RequiredMode.AllowEmptyString:
                 return value is not null;

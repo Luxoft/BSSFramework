@@ -282,7 +282,7 @@ internal class AuditSqlScriptGenerator
             }
 
             var useUniqueConstraint = column.Unique && dialect.SupportsUnique
-                                                    && (!column.IsNullable || dialect.SupportsNotNullUnique);
+                                                    && (!column.IsNullable || dialect.SupportsNullInUnique);
             if (useUniqueConstraint)
             {
                 alter.Append(" unique");

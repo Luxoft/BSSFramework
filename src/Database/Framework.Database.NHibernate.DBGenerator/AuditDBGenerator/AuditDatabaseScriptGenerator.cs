@@ -111,7 +111,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
 
         cfg.BuildMappings();
 
-        var mapping = cfg.BuildMapping();
+        var mapping = cfg.BuildMapping(dialect);
 
         IConnectionHelper auditConnectionHelper = new ManagedProviderConnectionHelper(cfg.Properties);
 

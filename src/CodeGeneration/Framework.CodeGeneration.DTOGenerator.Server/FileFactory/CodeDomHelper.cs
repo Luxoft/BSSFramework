@@ -111,7 +111,9 @@ internal static class CodeDomHelper
     }
 
 
-    public static CodeMemberMethod GetToDomainObjectMethod(this IFileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>> fileFactory)
+    public static CodeMemberMethod GetToDomainObjectMethod(
+        this IFileFactory<IServerDTOGeneratorConfiguration<IServerDTOGenerationEnvironment>> fileFactory,
+        MemberAttributes attributes = MemberAttributes.Public | MemberAttributes.Final)
     {
         var mappingServiceParameter = fileFactory.GetMappingServiceParameter();
         var mappingServiceParameterRefExpr = mappingServiceParameter.ToVariableReferenceExpression();
@@ -119,7 +121,7 @@ internal static class CodeDomHelper
         return new CodeMemberMethod
         {
             Name = fileFactory.Configuration.ToDomainObjectMethodName,
-            Attributes = MemberAttributes.Public | MemberAttributes.Final,
+            Attributes = attributes,
             Parameters = { mappingServiceParameter },
             ReturnType = fileFactory.DomainType!.ToTypeReference(),
             Statements =

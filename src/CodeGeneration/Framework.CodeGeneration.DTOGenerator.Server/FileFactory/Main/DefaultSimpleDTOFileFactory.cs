@@ -23,6 +23,9 @@ public class DefaultSimpleDTOFileFactory<TConfiguration>(TConfiguration configur
 
     protected override bool AllowCreate { get; } = false;
 
+    // Without Final the method is generated as virtual, so Rich DTO can override it
+    protected override MemberAttributes ToDomainObjectMethodAttributes { get; } = MemberAttributes.Public;
+
 
     protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {

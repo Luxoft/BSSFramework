@@ -81,5 +81,5 @@ public class SignValidator : IPropertyValidator<object, object>
             template,
             context.GetPropertyName(),
             context.GetSourceTypeName(),
-            name.IsNullOrWhiteSpace() ? string.Empty : $":'{name}'");
+            string.IsNullOrWhiteSpace(name) ? string.Empty : $":'{name}'");
 }

@@ -2290,7 +2290,7 @@ namespace Framework.Configuration.Generated.DTO
             mappingService.MapDomainObjectEvent(this, domainObject);
         }
         
-        public Framework.Configuration.Domain.DomainObjectEvent ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        public virtual Framework.Configuration.Domain.DomainObjectEvent ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return mappingService.ToDomainObjectEvent(this);
         }
@@ -2365,7 +2365,7 @@ namespace Framework.Configuration.Generated.DTO
             mappingService.MapDomainObjectEvent(this, domainObject);
         }
         
-        public Framework.Configuration.Domain.DomainObjectEvent ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        public override Framework.Configuration.Domain.DomainObjectEvent ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return mappingService.ToDomainObjectEvent(this);
         }
@@ -2728,7 +2728,7 @@ namespace Framework.Configuration.Generated.DTO
             mappingService.MapDomainObjectModification(this, domainObject);
         }
         
-        public Framework.Configuration.Domain.DomainObjectModification ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        public virtual Framework.Configuration.Domain.DomainObjectModification ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return mappingService.ToDomainObjectModification(this);
         }
@@ -2803,7 +2803,7 @@ namespace Framework.Configuration.Generated.DTO
             mappingService.MapDomainObjectModification(this, domainObject);
         }
         
-        public Framework.Configuration.Domain.DomainObjectModification ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        public override Framework.Configuration.Domain.DomainObjectModification ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return mappingService.ToDomainObjectModification(this);
         }
@@ -3151,7 +3151,7 @@ namespace Framework.Configuration.Generated.DTO
             mappingService.MapDomainObjectNotification(this, domainObject);
         }
         
-        public Framework.Configuration.Domain.DomainObjectNotification ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        public virtual Framework.Configuration.Domain.DomainObjectNotification ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return mappingService.ToDomainObjectNotification(this);
         }
@@ -3211,7 +3211,7 @@ namespace Framework.Configuration.Generated.DTO
             mappingService.MapDomainObjectNotification(this, domainObject);
         }
         
-        public Framework.Configuration.Domain.DomainObjectNotification ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        public override Framework.Configuration.Domain.DomainObjectNotification ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return mappingService.ToDomainObjectNotification(this);
         }
@@ -3514,7 +3514,7 @@ namespace Framework.Configuration.Generated.DTO
             mappingService.MapDomainType(this, domainObject);
         }
         
-        public Framework.Configuration.Domain.DomainType ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        public virtual Framework.Configuration.Domain.DomainType ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return mappingService.ToDomainType(this);
         }
@@ -3604,7 +3604,7 @@ namespace Framework.Configuration.Generated.DTO
             mappingService.MapDomainType(this, domainObject);
         }
         
-        public Framework.Configuration.Domain.DomainType ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        public override Framework.Configuration.Domain.DomainType ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return mappingService.ToDomainType(this);
         }
@@ -4079,7 +4079,7 @@ namespace Framework.Configuration.Generated.DTO
             mappingService.MapDomainTypeEventOperation(this, domainObject);
         }
         
-        public Framework.Configuration.Domain.DomainTypeEventOperation ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        public virtual Framework.Configuration.Domain.DomainTypeEventOperation ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return mappingService.ToDomainTypeEventOperation(this);
         }
@@ -4154,7 +4154,7 @@ namespace Framework.Configuration.Generated.DTO
             mappingService.MapDomainTypeEventOperation(this, domainObject);
         }
         
-        public Framework.Configuration.Domain.DomainTypeEventOperation ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        public override Framework.Configuration.Domain.DomainTypeEventOperation ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return mappingService.ToDomainTypeEventOperation(this);
         }
@@ -4886,7 +4886,7 @@ namespace Framework.Configuration.Generated.DTO
             mappingService.MapSentMessage(this, domainObject);
         }
         
-        public Framework.Configuration.Domain.SentMessage ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        public virtual Framework.Configuration.Domain.SentMessage ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return mappingService.ToSentMessage(this);
         }
@@ -4946,7 +4946,7 @@ namespace Framework.Configuration.Generated.DTO
             mappingService.MapSentMessage(this, domainObject);
         }
         
-        public Framework.Configuration.Domain.SentMessage ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        public override Framework.Configuration.Domain.SentMessage ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return mappingService.ToSentMessage(this);
         }
@@ -5194,7 +5194,7 @@ namespace Framework.Configuration.Generated.DTO
             mappingService.MapSequence(this, domainObject);
         }
         
-        public Framework.Configuration.Domain.Sequence ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        public virtual Framework.Configuration.Domain.Sequence ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return mappingService.ToSequence(this);
         }
@@ -5254,7 +5254,7 @@ namespace Framework.Configuration.Generated.DTO
             mappingService.MapSequence(this, domainObject);
         }
         
-        public Framework.Configuration.Domain.Sequence ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        public override Framework.Configuration.Domain.Sequence ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return mappingService.ToSequence(this);
         }
@@ -5876,7 +5876,7 @@ namespace Framework.Configuration.Generated.DTO
             mappingService.MapSystemConstant(this, domainObject);
         }
         
-        public Framework.Configuration.Domain.SystemConstant ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        public virtual Framework.Configuration.Domain.SystemConstant ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return mappingService.ToSystemConstant(this);
         }
@@ -5951,7 +5951,7 @@ namespace Framework.Configuration.Generated.DTO
             mappingService.MapSystemConstant(this, domainObject);
         }
         
-        public Framework.Configuration.Domain.SystemConstant ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        public override Framework.Configuration.Domain.SystemConstant ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return mappingService.ToSystemConstant(this);
         }
@@ -6436,7 +6436,7 @@ namespace Framework.Configuration.Generated.DTO
             mappingService.MapTargetSystem(this, domainObject);
         }
         
-        public Framework.Configuration.Domain.TargetSystem ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        public virtual Framework.Configuration.Domain.TargetSystem ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return mappingService.ToTargetSystem(this);
         }
@@ -6511,7 +6511,7 @@ namespace Framework.Configuration.Generated.DTO
             mappingService.MapTargetSystem(this, domainObject);
         }
         
-        public Framework.Configuration.Domain.TargetSystem ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
+        public override Framework.Configuration.Domain.TargetSystem ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return mappingService.ToTargetSystem(this);
         }

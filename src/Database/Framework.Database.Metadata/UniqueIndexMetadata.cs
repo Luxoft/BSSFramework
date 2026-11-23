@@ -29,7 +29,7 @@ public class UniqueIndexMetadata
     {
         get
         {
-            if (this._name.IsNullOrWhiteSpace())
+            if (string.IsNullOrWhiteSpace(this._name))
             {
                 return "UIX_" + this._fields.Select(z => z.Name).OrderBy(z => z).Join("_") + this._domainTypeMetadata.DomainType.Name;
             }

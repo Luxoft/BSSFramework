@@ -2,6 +2,7 @@
 using System.Reflection;
 
 using Framework.CodeDom.Extensions;
+using Framework.CodeGeneration.DTOGenerator.Extensions;
 using Framework.CodeGeneration.DTOGenerator.FileTypes;
 using Framework.CodeGeneration.DTOGenerator.Server.Configuration;
 using Framework.CodeGeneration.DTOGenerator.Server.FileFactory.Main.Base;
@@ -17,6 +18,9 @@ public class DefaultRichDTOFileFactory<TConfiguration>(TConfiguration configurat
 
 
     protected override bool HasToDomainObjectMethod => this.HasMapToDomainObjectMethod;
+
+    // Simple DTO (base of Rich) declares this method only for persistent types
+    protected override MemberAttributes ToDomainObjectMethodAttributes => this.IsPersistent() ? MemberAttributes.Public | MemberAttributes.Override : MemberAttributes.Public | MemberAttributes.Final;
 
 
     public override IEnumerable<CodeMemberMethod> GetServerMappingServiceMethods()

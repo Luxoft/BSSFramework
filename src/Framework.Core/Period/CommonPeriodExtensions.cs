@@ -145,7 +145,7 @@ public static class CommonPeriodExtensions
 
             if (period.StartDate.Month != period.EndDateValue.Month)
             {
-                var shortFormat = period.GetDayAndMonthDateFormat(cultureInfo);
+                var shortFormat = CommonPeriodExtensions.GetDayAndMonthDateFormat(period, cultureInfo);
 
                 return period.ProcessYear($"{period.StartDate.ToString(shortFormat, cultureInfo)}-{period.EndDateValue.ToString(shortFormat, cultureInfo)}", displayYear);
             }
@@ -235,7 +235,7 @@ public static class CommonPeriodExtensions
         /// Returns the week of the year to which the period start date belongs for the current standard
         /// </summary>
         /// <returns>A positive integer representing the week of the year to which the period start date belongs for the current standard</returns>
-        public int GetWeekNumber() => period.GetWeekNumber(Thread.CurrentThread.CurrentCulture.Name);
+        public int GetWeekNumber() => CommonPeriodExtensions.GetWeekNumber(period, Thread.CurrentThread.CurrentCulture.Name);
 
         /// <summary>
         /// Returns the week of the year to which the period start date belongs for the <paramref name="isoCultureName"/> standard
@@ -266,7 +266,7 @@ public static class CommonPeriodExtensions
                 return period.ToString();
             }
 
-            var shortFormat = period.GetDayAndMonthDateFormat(Thread.CurrentThread.CurrentCulture);
+            var shortFormat = CommonPeriodExtensions.GetDayAndMonthDateFormat(period, Thread.CurrentThread.CurrentCulture);
             return $"{period.StartDate.ToString(shortFormat)}-{period.EndDateValue.ToString(shortFormat)}";
         }
 
@@ -287,7 +287,7 @@ public static class CommonPeriodExtensions
                 return period.ToDisplayName(cultureInfo, true);
             }
 
-            var shortFormat = period.GetDayAndMonthDateFormat(cultureInfo);
+            var shortFormat = CommonPeriodExtensions.GetDayAndMonthDateFormat(period, cultureInfo);
 
             return $"{period.StartDate.ToString(shortFormat, cultureInfo)}-{period.EndDateValue.ToString(shortFormat, cultureInfo)}";
         }

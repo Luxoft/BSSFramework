@@ -6,7 +6,8 @@
 
   <ItemGroup>
     <PackageReference Include="CommandLineParser" />
-    <PackageReference Include="FluentMigrator.Runner" />
+    <PackageReference Include="FluentMigrator.Runner.SqlServer" />
+    <PackageReference Include="Microsoft.Data.SqlClient" />
   </ItemGroup>
 
   <ItemGroup>

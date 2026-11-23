@@ -48,7 +48,7 @@ class MainDBScriptGeneratorBuilder : DatabaseScriptGeneratorContainer, IMainDBSc
         return this;
     }
 
-    public IMigrationScriptGeneratorBuilder MigrationBuilder => base.MigrationBuilder;
+    public new IMigrationScriptGeneratorBuilder MigrationBuilder => base.MigrationBuilder;
 
     public IMainDBScriptGeneratorBuilder WithPreserveSchemaDatabase()
     {
@@ -59,6 +59,7 @@ class MainDBScriptGeneratorBuilder : DatabaseScriptGeneratorContainer, IMainDBSc
     public override IDatabaseScriptGenerator Build(DBGenerateScriptMode mode)
     {
         var combined = new[] { this.GetCombined(), this.MigrationDbScriptGeneratorBuilder.Build(mode) }.Combine();
+#pragma warning disable CS0618 // Obsolete API is intentionally used here
         switch (mode)
         {
             case DBGenerateScriptMode.AppliedOnCopySchemeDatabase:
@@ -75,6 +76,7 @@ class MainDBScriptGeneratorBuilder : DatabaseScriptGeneratorContainer, IMainDBSc
                     return combined;
                 }
         }
+#pragma warning restore CS0618
 
     }
 

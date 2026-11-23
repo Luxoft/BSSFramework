@@ -25,9 +25,11 @@ internal class SqlExceptionProcessorInterceptor : IExceptionExpander
         this.dalValidationIdentitySource = dalValidationIdentitySource;
         var connectionString = ((SessionFactoryImpl)factory).ConnectionProvider.GetConnection().ConnectionString;
 
+#pragma warning disable CS0618 // Obsolete API is intentionally used here
         var parser = new StringParser();
         var defaultDataSourceResult = parser.Add(new StringPattern().WithStart("Data Source=").WithEnd(";"));
         var defaultInitialCatalogResult = parser.Add(new StringPattern().WithStart("Initial Catalog=").WithEnd(";"));
+#pragma warning restore CS0618
         var parseResult = parser.Evaluate(connectionString);
         var defaultDataSourceName = parseResult.GetResultFor(defaultDataSourceResult);
         var defaultInitialCatalog = parseResult.GetResultFor(defaultInitialCatalogResult);

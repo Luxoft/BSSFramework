@@ -98,7 +98,7 @@ public abstract class SqlParserTests(IServiceProvider rootServiceProvider) : Tes
         var fullEmployee = employeeController.Evaluate(c => c.GetFullEmployee(employeeIdentity));
 
         // Act
-        var ex = Record.Exception(() => hRDepartmentController.Evaluate(c => c.RemoveHRDepartment(fullEmployee.HRDepartment.Identity)));
+        var ex = Record.Exception(() => hRDepartmentController.Evaluate(c => c.RemoveHRDepartment(fullEmployee.HRDepartment!.Identity)));
 
         // Assert
         var removeLinkedObjectsException = Assert.IsType<RemoveLinkedObjectsDALException>(ex);
